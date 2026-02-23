@@ -60,7 +60,7 @@ async function main() {
     <div class="stars" aria-hidden="true"></div>
     <main class="page-frame">
       <header class="retro-header">
-        <p class="smallline">――語りえぬものについては、沈黙せねばならない。</p>
+        <p class="smallline">覚醒していることが、すでに異常なのだ。</p>
         <h1>日記ページ</h1>
         <p class="tagline">意識の残骸を、ここに置いていく。</p>
         <marquee behavior="scroll" direction="left" scrollamount="5">
