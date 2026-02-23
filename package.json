@@ -1,0 +1,10 @@
+{
+    "name": "waddy-guesthouse-90s",
+    "private": true,
+    "scripts": {
+        "build:diary": "node scripts/build-diary.mjs"
+    },
+    "devDependencies": {
+        "marked": "^15.0.0"
+    }
+}
