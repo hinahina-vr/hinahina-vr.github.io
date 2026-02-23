@@ -500,3 +500,30 @@ body.diary-despair .retro-footer {
     transform: translateX(-1px);
   }
 }
+
+/* ひなの所感 — ドラッグで見える隠しテキスト */
+body.diary-despair .entry-list li hr {
+  border: none;
+  border-top: 1px solid rgba(40, 8, 16, 0.4);
+  margin: 16px 0 8px;
+}
+
+body.diary-despair .entry-list li hr~p {
+  color: rgba(8, 2, 4, 0.95);
+  transition: none;
+  cursor: default;
+}
+
+body.diary-despair .entry-list li hr~p::selection {
+  color: #d08080;
+  background: rgba(80, 15, 25, 0.5);
+}
+
+body.diary-despair .entry-list li hr~p strong {
+  color: inherit;
+}
+
+body.diary-despair .entry-list li hr~p strong::selection {
+  color: #e06060;
+  background: rgba(80, 15, 25, 0.5);
+}
