@@ -8,6 +8,7 @@ GitHub Pages ユーザーサイト方式（`hinahina-vr.github.io`）での公�
 ```text
 waddy-guesthouse-90s/
   index.html
+  videos.html
   styles.css
   main.js
   assets/
@@ -47,3 +48,4 @@ python -m http.server 8000
 - `#visitor-counter`: ページ読み込みごとにランダム値を表示
 - `#update-log`: 更新履歴表示領域
 - サーバー通信はありません。
+- `videos.html`: YouTube動画紹介コーナーページ
