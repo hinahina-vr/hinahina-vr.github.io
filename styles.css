@@ -190,6 +190,12 @@ marquee {
   font-size: 1rem;
 }
 
+.video-meta {
+  margin: 0 0 8px;
+  color: #8ef7ff;
+  font-size: 0.85rem;
+}
+
 .video-frame {
   position: relative;
   width: 100%;
