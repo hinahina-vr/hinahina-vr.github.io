@@ -1,5 +1,5 @@
 {
-    "name": "waddy-guesthouse-90s",
+    "name": "wdddie-guesthouse",
     "private": true,
     "scripts": {
         "build:diary": "node scripts/build-diary.mjs"

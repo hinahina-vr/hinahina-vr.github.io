@@ -6,7 +6,7 @@ GitHub Pages ユーザーサイト方式（`hinahina-vr.github.io`）での公�
 ## ファイル構成
 
 ```text
-waddy-guesthouse-90s/
+wdddie-guesthouse/
   index.html
   videos.html
   diary.html
