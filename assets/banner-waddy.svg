@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="176" height="62" viewBox="0 0 176 62">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#123d8f" />
+      <stop offset="100%" stop-color="#6a167f" />
+    </linearGradient>
+  </defs>
+  <rect width="176" height="62" fill="#09112d" />
+  <rect x="2" y="2" width="172" height="58" fill="url(#g1)" stroke="#7beaff" stroke-width="2" />
+  <text x="11" y="27" font-family="Verdana, sans-serif" font-size="13" fill="#fff5a3">ワディーゲストハウス</text>
+  <text x="11" y="46" font-family="Verdana, sans-serif" font-size="10" fill="#d5f9ff">Retro Personal Web</text>
+</svg>

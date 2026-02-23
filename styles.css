@@ -1,0 +1,226 @@
+:root {
+  --bg-navy: #05062b;
+  --bg-panel: #10154f;
+  --line-neon: #00d1ff;
+  --line-hot: #ff00b8;
+  --text-main: #f8f8ff;
+  --text-sub: #b8ccff;
+  --shadow-neon: 0 0 6px rgba(0, 209, 255, 0.85);
+  --shadow-hot: 0 0 7px rgba(255, 0, 184, 0.9);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "MS PGothic", Verdana, "Courier New", monospace;
+  color: var(--text-main);
+  background-color: var(--bg-navy);
+  background-image: url("./assets/tile-grid.svg");
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 8% 20%, rgba(255, 255, 255, 0.8) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1px),
+    radial-gradient(circle at 75% 22%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1px),
+    radial-gradient(circle at 88% 82%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1px);
+  background-size: 280px 220px;
+  opacity: 0.6;
+  animation: twinkle 3s linear infinite;
+}
+
+.page-frame {
+  position: relative;
+  z-index: 2;
+  width: min(980px, 94vw);
+  margin: 18px auto 30px;
+  padding: 12px;
+  border: 4px solid var(--line-neon);
+  box-shadow: var(--shadow-neon), var(--shadow-hot), inset 0 0 18px rgba(0, 0, 0, 0.55);
+  background: linear-gradient(180deg, rgba(12, 20, 73, 0.95), rgba(7, 11, 49, 0.92));
+}
+
+.retro-header {
+  margin-bottom: 14px;
+  padding: 12px;
+  border: 3px solid var(--line-hot);
+  background: linear-gradient(90deg, rgba(15, 24, 89, 0.88), rgba(36, 12, 83, 0.92));
+  box-shadow: var(--shadow-hot);
+}
+
+.retro-header h1 {
+  margin: 6px 0;
+  letter-spacing: 0.14em;
+  text-shadow: var(--shadow-neon), var(--shadow-hot);
+  font-size: clamp(1.5rem, 4.2vw, 2.5rem);
+}
+
+.smallline {
+  margin: 0;
+  color: #8ef7ff;
+  font-size: 0.82rem;
+}
+
+.tagline {
+  margin: 4px 0 10px;
+  color: #ffe17f;
+}
+
+.blink {
+  font-weight: 700;
+  color: #ff56de;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+marquee {
+  display: block;
+  border: 2px groove #9fd7ff;
+  padding: 6px 4px;
+  color: #91fff1;
+  background: rgba(3, 7, 31, 0.92);
+}
+
+.panel {
+  margin: 0 0 14px;
+  padding: 12px;
+  border: 3px solid var(--line-neon);
+  background: rgba(15, 20, 70, 0.9);
+}
+
+.panel h2 {
+  margin: 0 0 10px;
+  padding: 4px 8px;
+  font-size: 1.1rem;
+  color: #fff6a0;
+  border: 2px solid #72e7ff;
+  background: linear-gradient(90deg, #00375a, #5f1468);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.counter-line {
+  margin-top: 10px;
+  color: var(--text-sub);
+}
+
+#visitor-counter {
+  display: inline-block;
+  min-width: 88px;
+  padding: 2px 8px;
+  margin: 0 4px;
+  border: 2px inset #9bb6d4;
+  background: #05060f;
+  color: #90ff73;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.08em;
+}
+
+.link-list {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.link-list a {
+  display: inline-flex;
+  border: 2px outset #9fd7ff;
+  transition: transform 0.2s ease;
+}
+
+.link-list a:focus-visible,
+.link-list a:hover {
+  transform: translateY(-2px);
+}
+
+.link-list img {
+  display: block;
+  width: 88px;
+  height: 31px;
+}
+
+.thanks-rule {
+  margin: 12px 0 0;
+  color: #ffd87f;
+  font-weight: 700;
+  text-shadow: 0 0 4px rgba(255, 216, 127, 0.5);
+}
+
+#update-log {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.7;
+}
+
+#update-log li time {
+  color: #8df6ff;
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.banner-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.banner-grid img {
+  width: 176px;
+  height: 62px;
+  border: 2px ridge #86ccff;
+  background: #091028;
+}
+
+.retro-footer {
+  border: 2px solid #73beff;
+  text-align: center;
+  padding: 10px 8px;
+  color: #95c5ff;
+  background: rgba(5, 9, 35, 0.86);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-frame {
+    width: 96vw;
+    padding: 10px;
+    border-width: 3px;
+  }
+
+  .panel {
+    padding: 10px;
+  }
+
+  .banner-grid img {
+    width: min(100%, 240px);
+    height: auto;
+    aspect-ratio: 88 / 31;
+  }
+
+  .link-list {
+    gap: 8px;
+  }
+}
