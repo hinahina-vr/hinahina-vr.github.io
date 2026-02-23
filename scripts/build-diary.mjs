@@ -37,14 +37,18 @@ async function main() {
   // 日付の新しい順にソート
   entries.sort((a, b) => b.date.localeCompare(a.date));
 
+  const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
+
   const entryListItems = entries
-    .map(
-      (e) => `          <li>
-            <p class="entry-date">${e.date}</p>
+    .map((e) => {
+      const d = new Date(e.date + "T00:00:00+09:00");
+      const dow = WEEKDAYS[d.getDay()];
+      return `          <li>
+            <p class="entry-date">${e.date}（${dow}）</p>
             <h3 class="entry-title">${e.title}</h3>
             ${e.html}
-          </li>`
-    )
+          </li>`;
+    })
     .join("\n");
 
   const html = `<!doctype html>
