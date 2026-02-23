@@ -68,7 +68,7 @@ async function main() {
         <h1>日記ページ</h1>
         <p class="tagline">やがて澱みに還る、ある意識の記録。</p>
         <marquee behavior="scroll" direction="left" scrollamount="5">
-          ★ この世界は、まだ終わっていない ★
+          ★ <a href="./diary-hina.html" style="color: inherit; text-decoration: none;">この世界は、まだ終わっていない</a> ★
         </marquee>
       </header>
 
