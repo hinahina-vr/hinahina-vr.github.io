@@ -4,7 +4,8 @@
     "scripts": {
         "build:diary": "node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
-        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs"
+        "build:dialogue": "node scripts/build-dialogue.mjs",
+        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs"
     },
     "devDependencies": {
         "marked": "^15.0.0"
