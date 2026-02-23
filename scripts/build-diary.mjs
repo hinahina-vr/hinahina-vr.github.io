@@ -11,43 +11,43 @@ const OUT_FILE = join(import.meta.dirname, "..", "diary.html");
 
 // ファイル名 "YYYY-MM-DD_タイトル.md" から日付とタイトルを抽出
 function parseFilename(filename) {
-    const base = basename(filename, ".md");
-    const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
-    if (!match) return null;
-    return { date: match[1], title: match[2] };
+  const base = basename(filename, ".md");
+  const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
+  if (!match) return null;
+  return { date: match[1], title: match[2] };
 }
 
 async function main() {
-    const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
+  const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
 
-    const entries = [];
-    for (const file of files) {
-        const meta = parseFilename(file);
-        if (!meta) {
-            console.warn(`⚠ skip: ${file} (invalid name format)`);
-            continue;
-        }
-        const raw = await readFile(join(DIARY_DIR, file), "utf-8");
-        // 最初の # 見出し行を除去（タイトルはファイル名から取得するため）
-        const body = raw.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
-        const html = await marked.parse(body);
-        entries.push({ ...meta, html });
+  const entries = [];
+  for (const file of files) {
+    const meta = parseFilename(file);
+    if (!meta) {
+      console.warn(`⚠ skip: ${file} (invalid name format)`);
+      continue;
     }
+    const raw = await readFile(join(DIARY_DIR, file), "utf-8");
+    // 最初の # 見出し行を除去（タイトルはファイル名から取得するため）
+    const body = raw.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
+    const html = await marked.parse(body);
+    entries.push({ ...meta, html });
+  }
 
-    // 日付の新しい順にソート
-    entries.sort((a, b) => b.date.localeCompare(a.date));
+  // 日付の新しい順にソート
+  entries.sort((a, b) => b.date.localeCompare(a.date));
 
-    const entryListItems = entries
-        .map(
-            (e) => `          <li>
+  const entryListItems = entries
+    .map(
+      (e) => `          <li>
             <p class="entry-date">${e.date}</p>
             <h3 class="entry-title">${e.title}</h3>
             ${e.html}
           </li>`
-        )
-        .join("\n");
+    )
+    .join("\n");
 
-    const html = `<!doctype html>
+  const html = `<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -56,15 +56,15 @@ async function main() {
     <meta name="description" content="ワディーゲストハウスの日記ページ。活動メモと近況ログ。" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="diary-despair">
     <div class="stars" aria-hidden="true"></div>
     <main class="page-frame">
       <header class="retro-header">
-        <p class="smallline">Daily Log</p>
+        <p class="smallline">――語りえぬものについては、沈黙せねばならない。</p>
         <h1>日記ページ</h1>
-        <p class="tagline">制作メモと近況の記録</p>
+        <p class="tagline">意識の残骸を、ここに置いていく。</p>
         <marquee behavior="scroll" direction="left" scrollamount="5">
-          ★ 更新は不定期です ★
+          ★ この世界は、まだ終わっていない ★
         </marquee>
       </header>
 
@@ -91,11 +91,11 @@ ${entryListItems}
 </html>
 `;
 
-    await writeFile(OUT_FILE, html, "utf-8");
-    console.log(`✓ diary.html generated (${entries.length} entries)`);
+  await writeFile(OUT_FILE, html, "utf-8");
+  console.log(`✓ diary.html generated (${entries.length} entries)`);
 }
 
 main().catch((err) => {
-    console.error(err);
-    process.exit(1);
+  console.error(err);
+  process.exit(1);
 });
