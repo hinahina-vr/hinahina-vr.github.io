@@ -212,6 +212,55 @@ marquee {
   color: #8ff2ff;
 }
 
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.entry-list li {
+  border: 2px solid #7ddfff;
+  background: rgba(8, 13, 46, 0.95);
+  padding: 10px;
+}
+
+.entry-date {
+  margin: 0 0 6px;
+  color: #8ef7ff;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.entry-title {
+  margin: 0 0 8px;
+  color: #ffe89d;
+  font-size: 1.06rem;
+}
+
+.guide-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-card {
+  border: 2px solid #7ddfff;
+  background: rgba(8, 13, 46, 0.95);
+  padding: 10px;
+}
+
+.guide-card h3 {
+  margin: 0 0 8px;
+  color: #ffe89d;
+}
+
+.guide-card ul {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
 #update-log {
   margin: 0;
   padding-left: 18px;

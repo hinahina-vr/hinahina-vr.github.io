@@ -9,6 +9,8 @@ GitHub Pages ユーザーサイト方式（`hinahina-vr.github.io`）での公�
 waddy-guesthouse-90s/
   index.html
   videos.html
+  diary.html
+  galge-guide.html
   styles.css
   main.js
   assets/
@@ -48,3 +50,5 @@ python -m http.server 8000
 - `#update-log`: 更新履歴表示領域
 - サーバー通信はありません。
 - `videos.html`: YouTube動画紹介コーナーページ
+- `diary.html`: 日記ページ
+- `galge-guide.html`: ギャルゲ攻略ページ
