@@ -17,7 +17,6 @@ waddy-guesthouse-90s/
     button-x.svg
     button-github.svg
     banner-waddy.svg
-    banner-retro.svg
     under-construction.svg
 ```
 
