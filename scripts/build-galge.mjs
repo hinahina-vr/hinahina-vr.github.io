@@ -73,7 +73,7 @@ async function main() {
     <meta name="description" content="プレイしたギャルゲ・ビジュアルノベルの感想をまとめています。" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="diary-despair">
     <div class="stars" aria-hidden="true"></div>
     <main class="page-frame">
       <header class="retro-header">
