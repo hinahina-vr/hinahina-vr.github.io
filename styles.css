@@ -352,35 +352,50 @@ marquee {
 }
 
 /* ============================================================
-   日記ページ専用 — 絶望の世界テーマ（青の深淵）
+   日記ページ専用 — 絶望の世界テーマ（深淵）
    ============================================================ */
 body.diary-despair {
-  background-color: #030508;
-  background-image: none;
-  animation: bg-breathe 8s ease-in-out infinite;
+  background-color: #050210;
+  background-image:
+    linear-gradient(135deg,
+      #050210 0%, #0a0328 20%, #12053a 40%,
+      #080230 60%, #05011a 80%, #050210 100%);
+  background-size: 400% 400%;
+  animation: bg-abyss 12s ease-in-out infinite;
 }
 
-/* 脈動する背景 — 暗闇の中で何かが蠢く */
-@keyframes bg-breathe {
+/* うねる深淵の背景 */
+@keyframes bg-abyss {
+  0% {
+    background-position: 0% 50%;
+  }
 
-  0%,
-  100% {
-    background-color: #030508;
+  25% {
+    background-position: 100% 0%;
   }
 
   50% {
-    background-color: #050810;
+    background-position: 50% 100%;
+  }
+
+  75% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }
 
 body.diary-despair .stars {
   background-image:
-    radial-gradient(circle at 12% 30%, rgba(30, 80, 180, 0.4) 0 1px, transparent 1px),
-    radial-gradient(circle at 55% 65%, rgba(20, 50, 120, 0.35) 0 1px, transparent 1px),
-    radial-gradient(circle at 80% 15%, rgba(40, 100, 200, 0.25) 0 1px, transparent 1px),
-    radial-gradient(circle at 35% 85%, rgba(10, 30, 100, 0.45) 0 1px, transparent 1px);
-  background-size: 320px 250px;
-  animation: twinkle-despair 6s ease-in-out infinite;
+    radial-gradient(circle at 12% 30%, rgba(80, 40, 200, 0.6) 0 1.5px, transparent 1.5px),
+    radial-gradient(circle at 55% 65%, rgba(120, 20, 180, 0.5) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 15%, rgba(60, 100, 255, 0.45) 0 1.5px, transparent 1.5px),
+    radial-gradient(circle at 35% 85%, rgba(150, 0, 200, 0.4) 0 1px, transparent 1px),
+    radial-gradient(circle at 65% 40%, rgba(0, 180, 255, 0.3) 0 1px, transparent 1px);
+  background-size: 280px 220px;
+  animation: twinkle-despair 4s ease-in-out infinite;
 }
 
 /* スキャンライン + ビネットオーバーレイ */
@@ -394,9 +409,9 @@ body.diary-despair::before {
     repeating-linear-gradient(0deg,
       transparent,
       transparent 2px,
-      rgba(0, 10, 30, 0.08) 2px,
-      rgba(0, 10, 30, 0.08) 4px);
-  animation: scanline-flicker 0.15s infinite;
+      rgba(100, 0, 180, 0.06) 2px,
+      rgba(100, 0, 180, 0.06) 4px);
+  animation: scanline-flicker 0.1s infinite;
 }
 
 body.diary-despair::after {
@@ -406,9 +421,9 @@ body.diary-despair::after {
   pointer-events: none;
   z-index: 9998;
   background: radial-gradient(ellipse at center,
-      transparent 50%,
-      rgba(0, 5, 15, 0.4) 75%,
-      rgba(0, 3, 10, 0.85) 100%);
+      transparent 40%,
+      rgba(20, 0, 40, 0.5) 70%,
+      rgba(5, 0, 15, 0.9) 100%);
 }
 
 @keyframes scanline-flicker {
@@ -426,105 +441,115 @@ body.diary-despair::after {
 }
 
 body.diary-despair .page-frame {
-  border-color: #0a1a3a;
-  box-shadow: 0 0 12px rgba(20, 60, 120, 0.4), 0 0 40px rgba(10, 30, 80, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.85);
-  background: linear-gradient(180deg, rgba(5, 8, 18, 0.97), rgba(3, 5, 12, 0.98));
+  border-color: #2a0a5a;
+  box-shadow: 0 0 15px rgba(80, 0, 180, 0.4), 0 0 50px rgba(40, 0, 100, 0.25), inset 0 0 30px rgba(0, 0, 0, 0.85);
+  background: linear-gradient(180deg, rgba(8, 3, 20, 0.97), rgba(4, 2, 12, 0.98));
 }
 
 body.diary-despair .retro-header {
-  border-color: #0c2050;
-  background: linear-gradient(90deg, rgba(3, 6, 20, 0.95), rgba(8, 12, 35, 0.9));
-  box-shadow: 0 0 10px rgba(20, 50, 100, 0.4);
-  animation: header-pulse 6s ease-in-out infinite;
+  border-color: #3a0a6b;
+  background: linear-gradient(90deg, rgba(10, 2, 30, 0.95), rgba(20, 5, 50, 0.9));
+  box-shadow: 0 0 15px rgba(100, 0, 200, 0.4);
+  animation: header-pulse 4s ease-in-out infinite;
 }
 
 @keyframes header-pulse {
 
   0%,
   100% {
-    box-shadow: 0 0 10px rgba(20, 50, 100, 0.3);
+    box-shadow: 0 0 15px rgba(80, 0, 160, 0.3);
+    border-color: #3a0a6b;
   }
 
   50% {
-    box-shadow: 0 0 20px rgba(30, 70, 140, 0.5), 0 0 40px rgba(15, 40, 90, 0.2);
+    box-shadow: 0 0 30px rgba(120, 0, 255, 0.5), 0 0 60px rgba(80, 0, 180, 0.25);
+    border-color: #5a1a9b;
   }
 }
 
 body.diary-despair .retro-header h1 {
-  color: #b0c8e8;
-  text-shadow: 0 0 8px rgba(40, 100, 180, 0.5), 0 0 20px rgba(20, 60, 120, 0.3);
+  color: #d0c0ff;
+  text-shadow: 0 0 10px rgba(140, 60, 255, 0.7), 0 0 30px rgba(80, 0, 200, 0.4), 0 0 60px rgba(60, 0, 150, 0.2);
   letter-spacing: 0.25em;
-  animation: title-glitch 12s infinite;
+  animation: title-glitch 8s infinite;
 }
 
 @keyframes title-glitch {
 
   0%,
-  92%,
+  88%,
   100% {
     transform: translateX(0);
-    text-shadow: 0 0 8px rgba(40, 100, 180, 0.5), 0 0 20px rgba(20, 60, 120, 0.3);
+    text-shadow: 0 0 10px rgba(140, 60, 255, 0.7), 0 0 30px rgba(80, 0, 200, 0.4);
     filter: none;
   }
 
-  93% {
-    transform: translateX(-3px) skewX(-0.5deg);
-    text-shadow: -2px 0 rgba(0, 180, 255, 0.7), 2px 0 rgba(100, 0, 200, 0.5);
-    filter: brightness(1.3);
+  89% {
+    transform: translateX(-4px) skewX(-1deg);
+    text-shadow: -3px 0 #00ffff, 3px 0 #ff00ff;
+    filter: brightness(1.5);
   }
 
-  94% {
-    transform: translateX(2px) skewX(0.3deg);
-    text-shadow: 2px 0 rgba(0, 180, 255, 0.5), -2px 0 rgba(100, 0, 200, 0.7);
-    filter: brightness(0.8);
+  90% {
+    transform: translateX(3px) skewX(0.5deg);
+    text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff;
+    filter: brightness(0.6);
   }
 
-  95% {
-    transform: translateX(-1px);
-    text-shadow: 0 0 8px rgba(40, 100, 180, 0.5);
+  91% {
+    transform: translateX(-2px) skewX(-0.3deg);
+    text-shadow: -1px 0 #ff0080, 1px 0 #00ff80;
+    filter: brightness(1.8) hue-rotate(30deg);
+  }
+
+  92% {
+    transform: translateX(0);
+    text-shadow: 0 0 10px rgba(140, 60, 255, 0.7);
     filter: none;
   }
 }
 
 body.diary-despair .smallline {
-  color: #405880;
+  color: #7050a0;
 }
 
 body.diary-despair .tagline {
-  color: #3a5070;
+  color: #6040a0;
   font-style: italic;
+  text-shadow: 0 0 8px rgba(100, 0, 200, 0.2);
 }
 
 body.diary-despair marquee {
-  border-color: #0a1a30;
-  color: #304060;
-  background: rgba(2, 4, 10, 0.95);
-  animation: glitch-text 6s infinite;
+  border-color: #2a0a50;
+  color: #8060c0;
+  background: rgba(5, 2, 15, 0.95);
+  animation: glitch-text 4s infinite;
+  text-shadow: 0 0 4px rgba(120, 0, 255, 0.3);
 }
 
 body.diary-despair .panel {
-  border-color: #0a1530;
-  background: rgba(3, 5, 12, 0.92);
+  border-color: #1a0840;
+  background: rgba(5, 2, 15, 0.92);
 }
 
 body.diary-despair .panel h2 {
-  color: #8a9ab8;
-  border-color: #152545;
-  background: linear-gradient(90deg, #040810, #08102a);
-  text-shadow: 0 0 6px rgba(40, 80, 160, 0.3);
+  color: #c090ff;
+  border-color: #3a1570;
+  background: linear-gradient(90deg, #0a0320, #18083a);
+  text-shadow: 0 0 8px rgba(140, 60, 255, 0.4);
 }
 
 body.diary-despair .entry-list li {
-  border-color: #081020;
-  background: rgba(3, 5, 10, 0.95);
+  border-color: #120530;
+  background: rgba(5, 2, 12, 0.95);
   transition: all 0.3s ease;
   position: relative;
 }
 
 body.diary-despair .entry-list li:hover {
-  border-color: #1a3060;
-  box-shadow: 0 0 15px rgba(20, 60, 130, 0.25), inset 0 0 20px rgba(10, 30, 70, 0.15);
-  animation: entry-tremble 0.08s infinite;
+  border-color: #4a1a8a;
+  box-shadow: 0 0 20px rgba(80, 0, 180, 0.3), inset 0 0 20px rgba(40, 0, 100, 0.15);
+  animation: entry-tremble 0.06s infinite;
 }
 
 @keyframes entry-tremble {
@@ -563,43 +588,44 @@ body.diary-despair .entry-list li::before {
 
 body.diary-despair .entry-list li:hover::before {
   opacity: 1;
-  border-color: rgba(30, 80, 160, 0.3);
+  border-color: rgba(120, 40, 255, 0.35);
 }
 
 @keyframes border-pulse {
 
   0%,
   100% {
-    border-color: rgba(30, 80, 160, 0.1);
+    border-color: rgba(80, 20, 200, 0.1);
   }
 
   50% {
-    border-color: rgba(50, 120, 200, 0.35);
+    border-color: rgba(140, 60, 255, 0.3);
   }
 }
 
 body.diary-despair .entry-date {
-  color: #304868;
+  color: #5040a0;
   font-family: "Courier New", monospace;
   letter-spacing: 0.12em;
+  text-shadow: 0 0 4px rgba(100, 0, 200, 0.15);
 }
 
 body.diary-despair .entry-title {
-  color: #8098b8;
-  text-shadow: 0 0 4px rgba(30, 70, 150, 0.2);
+  color: #b090e0;
+  text-shadow: 0 0 6px rgba(120, 40, 255, 0.25);
 }
 
 /* テキストのじわじわアニメーション */
 body.diary-despair .entry-list li p {
-  color: #6878a0;
+  color: #7868b0;
   line-height: 1.9;
   animation: text-emerge 1.5s ease-out both;
 }
 
 @keyframes text-emerge {
   from {
-    opacity: 0.3;
-    filter: blur(1px);
+    opacity: 0.2;
+    filter: blur(2px);
   }
 
   to {
@@ -609,70 +635,76 @@ body.diary-despair .entry-list li p {
 }
 
 body.diary-despair .entry-list li strong {
-  color: #5090d0;
-  text-shadow: 0 0 6px rgba(40, 100, 200, 0.4);
+  color: #a060ff;
+  text-shadow: 0 0 8px rgba(140, 40, 255, 0.5);
 }
 
 body.diary-despair .back-link {
-  color: #a0b8d0;
-  background: linear-gradient(180deg, #081020, #050810);
-  border-color: #102040;
+  color: #c0b0e0;
+  background: linear-gradient(180deg, #100530, #080218);
+  border-color: #2a0a60;
 }
 
 body.diary-despair .back-link:hover {
-  background: linear-gradient(180deg, #0c1830, #081020);
-  box-shadow: 0 0 8px rgba(25, 60, 120, 0.4);
+  background: linear-gradient(180deg, #1a0840, #100530);
+  box-shadow: 0 0 12px rgba(100, 20, 200, 0.4);
 }
 
 body.diary-despair .retro-footer {
-  border-color: #081020;
-  color: #304060;
-  background: rgba(2, 3, 8, 0.9);
+  border-color: #120530;
+  color: #4a3070;
+  background: rgba(3, 1, 8, 0.9);
 }
 
 @keyframes twinkle-despair {
 
   0%,
   100% {
-    opacity: 0.2;
+    opacity: 0.3;
   }
 
   50% {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 }
 
 @keyframes glitch-text {
 
   0%,
-  90%,
+  85%,
   100% {
     opacity: 1;
     transform: translateX(0);
     filter: none;
   }
 
-  91% {
-    opacity: 0.6;
-    transform: translateX(-3px);
-    filter: hue-rotate(40deg);
+  86% {
+    opacity: 0.5;
+    transform: translateX(-4px);
+    filter: hue-rotate(90deg) brightness(1.5);
   }
 
-  92% {
+  87% {
     opacity: 0.9;
-    transform: translateX(4px);
-    filter: hue-rotate(-20deg);
+    transform: translateX(5px);
+    filter: hue-rotate(-45deg);
   }
 
-  93% {
-    opacity: 0.3;
-    transform: translateX(-1px);
-    filter: hue-rotate(60deg) brightness(1.5);
+  88% {
+    opacity: 0.2;
+    transform: translateX(-2px);
+    filter: hue-rotate(120deg) brightness(2);
   }
 
-  94% {
-    opacity: 0.8;
-    transform: translateX(2px);
+  89% {
+    opacity: 1;
+    transform: translateX(3px);
+    filter: hue-rotate(-90deg) brightness(0.5);
+  }
+
+  90% {
+    opacity: 0.7;
+    transform: translateX(0);
     filter: none;
   }
 }
@@ -680,19 +712,19 @@ body.diary-despair .retro-footer {
 /* ひなの所感 — ドラッグで見える隠しテキスト */
 body.diary-despair .entry-list li hr {
   border: none;
-  border-top: 1px solid rgba(8, 16, 40, 0.4);
+  border-top: 1px solid rgba(20, 5, 50, 0.4);
   margin: 16px 0 8px;
 }
 
 body.diary-despair .entry-list li hr~p {
-  color: rgba(3, 5, 10, 0.95);
+  color: rgba(5, 2, 12, 0.95);
   transition: none;
   cursor: default;
 }
 
 body.diary-despair .entry-list li hr~p::selection {
-  color: #6090c0;
-  background: rgba(15, 40, 80, 0.5);
+  color: #a080e0;
+  background: rgba(40, 15, 80, 0.5);
 }
 
 body.diary-despair .entry-list li hr~p strong {
@@ -700,26 +732,26 @@ body.diary-despair .entry-list li hr~p strong {
 }
 
 body.diary-despair .entry-list li hr~p strong::selection {
-  color: #70a0d0;
-  background: rgba(15, 40, 80, 0.5);
+  color: #c090ff;
+  background: rgba(40, 15, 80, 0.5);
 }
 
 /* ギャルゲ感想ページの隠しテキスト */
 body.diary-despair .guide-card hr {
   border: none;
-  border-top: 1px solid rgba(8, 16, 40, 0.4);
+  border-top: 1px solid rgba(20, 5, 50, 0.4);
   margin: 16px 0 8px;
 }
 
 body.diary-despair .guide-card hr~p {
-  color: rgba(3, 5, 10, 0.95);
+  color: rgba(5, 2, 12, 0.95);
   transition: none;
   cursor: default;
 }
 
 body.diary-despair .guide-card hr~p::selection {
-  color: #6090c0;
-  background: rgba(15, 40, 80, 0.5);
+  color: #a080e0;
+  background: rgba(40, 15, 80, 0.5);
 }
 
 body.diary-despair .guide-card hr~p strong {
@@ -727,6 +759,6 @@ body.diary-despair .guide-card hr~p strong {
 }
 
 body.diary-despair .guide-card hr~p strong::selection {
-  color: #70a0d0;
-  background: rgba(15, 40, 80, 0.5);
+  color: #c090ff;
+  background: rgba(40, 15, 80, 0.5);
 }
