@@ -60,6 +60,36 @@ function parseDialogue(body) {
     // 空行
     if (line.trim() === "") continue;
 
+    // 画像行
+    if (line.trim().match(/^!\[.*\]\(.*\)$/)) {
+      if (currentBlock && currentSection) currentSection.blocks.push(currentBlock);
+      currentBlock = null;
+      if (currentSection) currentSection.blocks.push({ type: 'image', raw: line.trim() });
+      continue;
+    }
+
+    // テーブル行
+    if (line.trim().startsWith('|')) {
+      if (currentBlock && currentSection) currentSection.blocks.push(currentBlock);
+      currentBlock = null;
+      // Collect consecutive table lines
+      const lastBlock = currentSection ? currentSection.blocks[currentSection.blocks.length - 1] : null;
+      if (lastBlock && lastBlock.type === 'table') {
+        lastBlock.lines.push(line.trim());
+      } else if (currentSection) {
+        currentSection.blocks.push({ type: 'table', lines: [line.trim()] });
+      }
+      continue;
+    }
+
+    // 引用行
+    if (line.trim().startsWith('>')) {
+      if (currentBlock && currentSection) currentSection.blocks.push(currentBlock);
+      currentBlock = null;
+      if (currentSection) currentSection.blocks.push({ type: 'quote', text: line.trim().replace(/^>\s*/, '') });
+      continue;
+    }
+
     // 続きの段落
     if (currentBlock) {
       currentBlock.paragraphs.push(line.trim());
@@ -76,12 +106,35 @@ function speakerClass(name) {
   return "other";
 }
 
-function escapeHtml(str) {
-  return str
+function renderInline(str) {
+  let s = str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  // Markdown images: ![alt](src)
+  s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;margin:12px 0;border-radius:4px;">');
+  return s;
+}
+
+function renderTable(lines) {
+  let html = '<table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;">';
+  for (let i = 0; i < lines.length; i++) {
+    const cells = lines[i].split('|').filter((_, j, a) => j > 0 && j < a.length - 1).map(c => c.trim());
+    // Skip separator row (|---|---|)
+    if (cells.every(c => /^[-:]+$/.test(c))) continue;
+    const tag = i === 0 ? 'th' : 'td';
+    const style = tag === 'th'
+      ? 'style="border-bottom:1px solid #555;padding:4px 8px;color:#e0c8a0;text-align:left;"'
+      : 'style="padding:4px 8px;border-bottom:1px solid #333;"';
+    html += '<tr>' + cells.map(c => `<${tag} ${style}>${renderInline(c)}</${tag}>`).join('') + '</tr>';
+  }
+  html += '</table>';
+  return html;
+}
+
+function escapeHtml(str) {
+  return renderInline(str);
 }
 
 async function main() {
@@ -125,6 +178,18 @@ async function main() {
       contentHtml += `\n<div class="section-divider">― ${escapeHtml(section.title)} ―</div>\n`;
 
       for (const block of section.blocks) {
+        if (block.type === 'table') {
+          contentHtml += renderTable(block.lines) + '\n';
+          continue;
+        }
+        if (block.type === 'image') {
+          contentHtml += `<div style="text-align:center;margin:16px 0;">${renderInline(block.raw)}</div>\n`;
+          continue;
+        }
+        if (block.type === 'quote') {
+          contentHtml += `<blockquote style="border-left:3px solid #e0c8a0;margin:12px 0;padding:4px 16px;color:#aaa;font-style:italic;">${renderInline(block.text)}</blockquote>\n`;
+          continue;
+        }
         const cls = speakerClass(block.speaker);
         const label = block.speaker;
         const bodyHtml = block.paragraphs.map((p) => escapeHtml(p)).join("<br>\n");
