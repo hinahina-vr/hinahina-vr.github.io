@@ -16,7 +16,7 @@ function parseFilename(filename) {
   const base = basename(filename, ".md");
   const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
   if (!match) return null;
-  return { date: match[1], month: match[1].slice(0, 7), title: match[2] };
+  return { date: match[1], month: match[1].slice(0, 7), title: match[2], slug: base };
 }
 
 function formatDate(dateStr) {
@@ -32,18 +32,18 @@ function formatMonthLabel(monthKey) {
 
 // エントリのHTML（全文表示）
 function renderFullEntry(e) {
-  return `          <li>
+  return `          <li id="${e.slug}">
             <p class="entry-date">${formatDate(e.date)}</p>
             <h3 class="entry-title">${e.title}</h3>
             ${e.html}
           </li>`;
 }
 
-// バックナンバー用のタイトルのみ表示（月別ページへのリンク付き）
+// バックナンバー用のタイトルのみ表示（月別ページの各エントリへのリンク付き）
 function renderTitleOnly(e, monthKey) {
   return `              <li>
                 <span class="backnum-date">${e.date}</span>
-                <a href="./diary-${monthKey}.html" class="backnum-title">${e.title}</a>
+                <a href="./diary-${monthKey}.html#${e.slug}" class="backnum-title">${e.title}</a>
               </li>`;
 }
 
