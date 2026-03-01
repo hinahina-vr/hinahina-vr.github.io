@@ -33,6 +33,16 @@ python -m http.server 8000
 または任意の静的サーバーを利用してください。  
 `http://localhost:8000` で確認できます。
 
+## 対談から動画台本(YAML)を生成
+
+`dialogue/*.md` から各回ごとの動画台本を `video-scripts/*.yaml` に出力できます。
+
+```bash
+npm run build:video-scripts
+```
+
+形式は `realize-video-gen/scripts/examples/sample-script.yaml` 互換の `version/video/avatar/voice/scenes` 構成です。
+
 ## GitHub Pages 公開手順 (ユーザーサイト方式)
 
 1. GitHub で `hinahina-vr.github.io` リポジトリを作成（未作成なら）。  

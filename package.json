@@ -5,8 +5,9 @@
         "build:diary": "node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
         "build:dialogue": "node scripts/build-dialogue.mjs",
+        "build:video-scripts": "node scripts/build-video-scripts.mjs",
         "build:diary-hina": "node scripts/build-diary-hina.mjs",
-        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs"
+        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-video-scripts.mjs"
     },
     "devDependencies": {
         "marked": "^15.0.0"

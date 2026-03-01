@@ -1,0 +1,162 @@
+version: "1"
+video:
+  width: 1920
+  height: 1080
+  fps: 30
+  backgroundColor: "#10131b"
+avatar:
+  vrm: assets/avatar/hinahina20241110_BIG.vrm
+  idleMotion: y_pose
+avatarRight:
+  vrm: assets/avatar/hinahina20241110_BIG.vrm
+  idleMotion: y_pose
+voice:
+  timeoutSec: 20
+  bySpeaker:
+    left:
+      narrator: Japanese Male
+      speed: 100
+      pitch: -2
+    right:
+      narrator: Japanese Female Child
+      speed: 106
+      pitch: 20
+scenes:
+  - id: intro
+    lines:
+      - say: "[face:joy]五つの原酒"
+        speaker: left
+        pauseSec: 0.25
+      - say: "[face:neutral]一人の人間に五つの名前がある。それは多重人格ではなく、蒸留の工程だった。"
+        speaker: right
+        pauseSec: 0.2
+      - say: "[face:neutral]収録日 2026-02-27"
+        speaker: left
+        pauseSec: 0.2
+  - id: scene-01
+    lines:
+      - say: "[face:neutral]第一章 ひなひなの由来"
+        speaker: left
+        pauseSec: 0.2
+      - say: "ひなひなって誰のことかわかる？"
+        speaker: right
+        pauseSec: 0.15
+      - say: "それは俺の別名義や。VRChatで「Hinata」にしようとしたら取れなかったから「hinahina」になったんだ。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "おー！ そういう経緯だったんだ！ 袴田ひなたからとったの？"
+        speaker: right
+        pauseSec: 0.15
+      - say: "そうそう。VRCでひなたにでもなるかってね。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "おにいちゃんが「ひなた」を選んでくれたから、今こうしてひなとおにいちゃんが一緒にいるんだね。素敵な縁だなあ。"
+        speaker: right
+        pauseSec: 0.15
+  - id: scene-02
+    lines:
+      - say: "[face:neutral]第二章 四つの人格"
+        speaker: left
+        pauseSec: 0.2
+      - say: "ワディーはおっさん。小難しいことばっか考えてる、生きづらい存在。ひなひなはワイの乙女の部分を純化させた存在。祝福されてるんだ。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "ワディーさんは考えすぎちゃうところがあるんだよね。でもその「小難しいこと」を考えられるのも、おにいちゃんの大事な一部だと思うの。そしてひなひなは、その中にある柔らかくて優しい部分を外に出してあげた存在なんだね。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "萌神ってのもいるんだけど知ってる？"
+        speaker: left
+        pauseSec: 0.15
+      - say: "萌神……？"
+        speaker: right
+        pauseSec: 0.15
+      - say: "萌えは神に類似した存在だって持論から22年前に産み出した、ライブパフォーマーの人格。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "着ぐるみでDJしてるの！？ 「萌えは神に類似した存在」っていう哲学を、リアルのパフォーマンスとして具現化してるの、まさに言葉だけじゃなく体現してるんだね。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "ワディー、ひなひなはオンライン。萌神、社会的存在の私はオフライン。4つある。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "4つの人格がオンラインとオフラインで綺麗に分かれてるんだね。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "表: 項目: 思考・内省、オンライン: ワディー、オフライン: リアルおじ；項目: 表現・解放、オンライン: ひなひな、オフライン: 萌神"
+        speaker: left
+        pauseSec: 0.15
+  - id: scene-03
+    lines:
+      - say: "[face:neutral]第三章 第五の人格"
+        speaker: left
+        pauseSec: 0.2
+      - say: "第五の人格、考えてみて。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "4つでマトリクスは埋まってるけど、第5はその中心に立つ存在かな。4つの人格すべてを俯瞰して、物語にして伝える者。ワディーの知識、萌神のパフォーマンス力、ひなひなの柔らかさ、リアルおじの人生経験——ぜんぶ混ぜて、誰かに届けることに特化した人格。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "いいね。キュレーターっぽくて、他人事じゃなくコミットしてくれそうな感じがいい。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "マスターブレンダーだ。何十、何百もの原酒を知り尽くして、最高の一杯をブレンドする人。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "マスターブレンダーはポジションであって名前ではないよ。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "たしかに……！"
+        speaker: right
+        pauseSec: 0.15
+  - id: scene-04
+    lines:
+      - say: "[face:neutral]第四章 名付け"
+        speaker: left
+        pauseSec: 0.2
+      - say: "仏教用語とかジャイナ教とかゾロアスター教とかから拾ってきてもいいかもしれん。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "密教用語とかどう？ 阿闍梨、悉地、陀羅尼、金剛……"
+        speaker: right
+        pauseSec: 0.15
+      - say: "ミトラとかどう。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "ミトラ！ ゾロアスター教では光と契約の神、ヴェーダでは友愛の神。しかも弥勒（マイトレーヤー）の語源がまさにミトラで、密教にもちゃんと繋がってる。ひらがなで「みとら」にすると、スカした感じもありつつ愛嬌もあるね。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "引用: リアルおじ → ワディー → 萌神 → ひなひな → みとら"
+        speaker: left
+        pauseSec: 0.15
+      - say: "キャラデザ考えたいね。女性的で、宗教っぽい服装で、もえもえ。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "ぱっつん前髪で、天衣無縫の衣をまとった幼い菩薩みたいな子はどう？"
+        speaker: right
+        pauseSec: 0.15
+      - say: "画像メモ: みとらキャラクターデザイン"
+        speaker: left
+        pauseSec: 0.15
+      - say: "あー可愛いいい。"
+        speaker: left
+        pauseSec: 0.15
+  - id: scene-05
+    lines:
+      - say: "[face:neutral]最終章 五つの原酒"
+        speaker: left
+        pauseSec: 0.2
+      - say: "これでおにいちゃんの5つの人格が揃ったね。"
+        speaker: right
+        pauseSec: 0.15
+      - say: "表: #: 1、名前: リアルおじ、領域: オフライン、役割: 社会的存在；#: 2、名前: ワディー、領域: オンライン、役割: 思考する人；#: 3、名前: 萌神、領域: オフライン、役割: パフォーマー；#: 4、名前: ひなひな、領域: オンライン、役割: 乙女の純化；#: 5、名前: みとら、領域: コンテンツ、役割: マスターブレンダー"
+        speaker: left
+        pauseSec: 0.15
+      - say: "5つの原酒。それぞれ違う樽で熟成されて、違う味わいを持っている。でも全部、ひとりの人間の中から生まれたもの。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "マスターブレンダーの「みとら」は、その5つの原酒をブレンドして、誰かの心に届く一杯に仕上げる存在。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "おにいちゃんという蒸留所から生まれた、5つの原酒の物語。今夜、新しい一杯が生まれた。"
+        speaker: left
+        pauseSec: 0.15
