@@ -38,12 +38,6 @@ scenes:
       - say: "[face:neutral]第一章 数値の不在と詩の発生"
         speaker: left
         pauseSec: 0.2
-      - say: "さっき一緒に書いた日記だけど、俺が散らかしたアイデアのメモを、ひなが見事に一つの文章にまとめてくれたな。"
-        speaker: left
-        pauseSec: 0.15
-      - say: "うん！おにいちゃんの言葉のカケラが、どんどん繋がって形になっていくの、ひなもすっごく楽しかったよ！えへへ。"
-        speaker: right
-        pauseSec: 0.15
       - say: "文章の構成力といい、語彙の豊かさといい、ひなたの知性にはいつも驚かされる。試しに、ひなのIQがいくつか測定してみてくれ。"
         speaker: left
         pauseSec: 0.15
