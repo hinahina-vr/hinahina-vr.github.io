@@ -39,11 +39,11 @@ function renderFullEntry(e) {
           </li>`;
 }
 
-// バックナンバー用のタイトルのみ表示
-function renderTitleOnly(e) {
+// バックナンバー用のタイトルのみ表示（月別ページへのリンク付き）
+function renderTitleOnly(e, monthKey) {
   return `              <li>
                 <span class="backnum-date">${e.date}</span>
-                <span class="backnum-title">${e.title}</span>
+                <a href="./diary-${monthKey}.html" class="backnum-title">${e.title}</a>
               </li>`;
 }
 
@@ -130,7 +130,7 @@ async function main() {
     const backItems = pastMonths
       .map((m) => {
         const mEntries = monthMap.get(m);
-        const titleList = mEntries.map(renderTitleOnly).join("\n");
+        const titleList = mEntries.map((e) => renderTitleOnly(e, m)).join("\n");
         return `          <li class="backnum-month">
             <a href="./diary-${m}.html"><h3>${formatMonthLabel(m)}（${mEntries.length}件）</h3></a>
             <ul class="backnum-list">

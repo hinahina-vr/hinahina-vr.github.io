@@ -812,6 +812,14 @@ body.diary-despair .backnum-date {
 
 body.diary-despair .backnum-title {
   color: #7060a0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+body.diary-despair .backnum-title:hover {
+  color: #b090e0;
+  text-decoration: underline;
+  text-shadow: 0 0 6px rgba(120, 40, 255, 0.3);
 }
 
 body.diary-despair .backnum-nav {
