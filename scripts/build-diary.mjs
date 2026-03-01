@@ -126,13 +126,14 @@ async function main() {
   const latestEntriesHtml = latestEntries.map(renderFullEntry).join("\n");
 
   let backNumberHtml = "";
+  let pastMonthSections = "";
   if (pastMonths.length > 0) {
     const backItems = pastMonths
       .map((m) => {
         const mEntries = monthMap.get(m);
         const titleList = mEntries.map(renderTitleOnly).join("\n");
         return `          <li class="backnum-month">
-            <a href="./diary-${m}.html"><h3>${formatMonthLabel(m)}（${mEntries.length}件）</h3></a>
+            <a href="#month-${m}"><h3>${formatMonthLabel(m)}（${mEntries.length}件）</h3></a>
             <ul class="backnum-list">
 ${titleList}
             </ul>
@@ -147,6 +148,21 @@ ${titleList}
 ${backItems}
         </ul>
       </section>`;
+
+    // 過去月の全文セクション（ページ内にアンカー付きで展開）
+    pastMonthSections = pastMonths
+      .map((m) => {
+        const mEntries = monthMap.get(m);
+        const mEntriesHtml = mEntries.map(renderFullEntry).join("\n");
+        return `
+      <section class="panel" id="month-${m}">
+        <h2>${formatMonthLabel(m)}</h2>
+        <ul class="entry-list">
+${mEntriesHtml}
+        </ul>
+      </section>`;
+      })
+      .join("\n");
   }
 
   const mainPage = `${htmlHead("日記ページ")}
@@ -163,53 +179,11 @@ ${latestEntriesHtml}
         </ul>
       </section>
 ${backNumberHtml}
+${pastMonthSections}
 ${htmlFooter()}`;
 
   await writeFile(join(OUT_DIR, "diary.html"), mainPage, "utf-8");
-  console.log(`✓ diary.html generated (${latestMonth}: ${latestEntries.length} entries)`);
-
-  // --- 過去月の個別ページ diary-YYYY-MM.html ---
-  for (const m of pastMonths) {
-    const mEntries = monthMap.get(m);
-    const mEntriesHtml = mEntries.map(renderFullEntry).join("\n");
-
-    // 他月へのナビゲーション
-    const otherMonthLinks = months
-      .filter((om) => om !== m)
-      .map((om) => {
-        if (om === latestMonth) {
-          return `            <li><a href="./diary.html">${formatMonthLabel(om)}</a></li>`;
-        }
-        return `            <li><a href="./diary-${om}.html">${formatMonthLabel(om)}</a></li>`;
-      })
-      .join("\n");
-
-    const monthPage = `${htmlHead(`日記 — ${formatMonthLabel(m)}`)}
-${htmlNav([
-      { href: "./diary.html", text: "← 最新の日記へ戻る" },
-    ])}
-
-      <section class="panel">
-        <h2>${formatMonthLabel(m)}</h2>
-        <ul class="entry-list">
-${mEntriesHtml}
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2>他の月</h2>
-        <ul class="backnum-nav">
-${otherMonthLinks}
-        </ul>
-      </section>
-${htmlFooter()}`;
-
-    const outPath = join(OUT_DIR, `diary-${m}.html`);
-    await writeFile(outPath, monthPage, "utf-8");
-    console.log(`✓ diary-${m}.html generated (${mEntries.length} entries)`);
-  }
-
-  console.log(`✓ Total: ${entries.length} entries across ${months.length} months`);
+  console.log(`✓ diary.html generated (${entries.length} entries across ${months.length} months)`);
 }
 
 main().catch((err) => {
