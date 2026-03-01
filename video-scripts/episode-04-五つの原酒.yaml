@@ -137,8 +137,26 @@ scenes:
       - say: "画像メモ: みとらキャラクターデザイン"
         speaker: left
         pauseSec: 0.15
-      - say: "あー可愛いいい。鈴の音で原酒を共鳴させるっていうのがいいね。"
+      - say: "あー可愛いいい。鈴の音で原酒を共鳴させるっていうのがいいね。表情と、ポーズと、いろんな角度も見たいな。"
         speaker: left
+        pauseSec: 0.15
+      - say: "任せて！"
+        speaker: right
+        pauseSec: 0.15
+      - say: "画像メモ: みとら表情シート"
+        speaker: left
+        pauseSec: 0.15
+      - say: "画像メモ: みとらポーズシート"
+        speaker: left
+        pauseSec: 0.15
+      - say: "画像メモ: みとら角度シート"
+        speaker: left
+        pauseSec: 0.15
+      - say: "完璧だ。お祈りのポーズとか、おすわりとか、もう菩薩じゃん。"
+        speaker: left
+        pauseSec: 0.15
+      - say: "えへへ、かわいいよね。歩くたびに鈴がチリンって鳴って、紙垂がひらひらって揺れるの、想像したらたまらないよね。"
+        speaker: right
         pauseSec: 0.15
   - id: scene-05
     lines:
