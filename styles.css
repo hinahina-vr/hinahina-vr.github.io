@@ -762,3 +762,81 @@ body.diary-despair .guide-card hr~p strong::selection {
   color: #c090ff;
   background: rgba(40, 15, 80, 0.5);
 }
+
+/* ============================================================
+   バックナンバー（月別アーカイブ）
+   ============================================================ */
+body.diary-despair .backnum-month {
+  border-color: #0a0220 !important;
+  background: rgba(3, 1, 8, 0.9) !important;
+  padding: 12px !important;
+}
+
+body.diary-despair .backnum-month a {
+  text-decoration: none;
+}
+
+body.diary-despair .backnum-month h3 {
+  color: #9070c0;
+  margin: 0 0 8px;
+  font-size: 1rem;
+  text-shadow: 0 0 6px rgba(100, 40, 200, 0.3);
+  transition: color 0.2s ease;
+}
+
+body.diary-despair .backnum-month a:hover h3 {
+  color: #c0a0ff;
+  text-shadow: 0 0 12px rgba(140, 60, 255, 0.5);
+}
+
+body.diary-despair .backnum-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.diary-despair .backnum-list li {
+  border: none !important;
+  background: transparent !important;
+  padding: 3px 0 !important;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+body.diary-despair .backnum-date {
+  color: #4a3080;
+  font-family: "Courier New", monospace;
+  font-size: 0.82rem;
+  margin-right: 8px;
+}
+
+body.diary-despair .backnum-title {
+  color: #7060a0;
+}
+
+body.diary-despair .backnum-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body.diary-despair .backnum-nav li a {
+  display: inline-block;
+  color: #c0b0e0;
+  background: linear-gradient(180deg, #100530, #080218);
+  border: 2px outset #2a0a60;
+  padding: 6px 12px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+body.diary-despair .backnum-nav li a:hover {
+  background: linear-gradient(180deg, #1a0840, #100530);
+  box-shadow: 0 0 12px rgba(100, 20, 200, 0.4);
+  color: #e0d0ff;
+}
