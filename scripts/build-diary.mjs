@@ -9,12 +9,12 @@ import { marked } from "marked";
 
 // 他キャラの日記ディレクトリとページの定義
 const CROSS_LINK_TARGETS = [
-  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨", color: "#a0a0a0" },
-  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひなの日記", emoji: "♥", color: "#ff69b4" },
-  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★", color: "#d0a030" },
   { dir: "diary-hina", page: "diary-hina.html", label: "ひなたの日記", emoji: "🎀", color: "#e8879a" },
-  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔", color: "#50b070" },
   { dir: "diary-multi", page: "diary-multi.html", label: "マルチの日記", emoji: "✿", color: "#7ab89a" },
+  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔", color: "#50b070" },
+  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひなの日記", emoji: "♥", color: "#ff69b4" },
+  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨", color: "#a0a0a0" },
+  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★", color: "#d0a030" },
   { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8" },
 ];
 
