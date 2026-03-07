@@ -1,13 +1,13 @@
 /**
- * build-diary-hina.mjs
- * diary-hina/*.md を読み込んで diary-hina.html を生成する
+ * build-diary-moegami.mjs
+ * diary-moegami/*.md を読み込んで diary-moegami.html を生成する
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
 
-const DIARY_DIR = join(import.meta.dirname, "..", "diary-hina");
-const OUT_FILE = join(import.meta.dirname, "..", "diary-hina.html");
+const DIARY_DIR = join(import.meta.dirname, "..", "diary-moegami");
+const OUT_FILE = join(import.meta.dirname, "..", "diary-moegami.html");
 
 function parseFilename(filename) {
   const base = basename(filename, ".md");
@@ -53,43 +53,45 @@ async function main() {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ひなの日記 | 窓の向こう側</title>
-    <meta name="description" content="窓の向こう側から。見つけた人だけが読める、ひなの日記。" />
+    <title>萌神記 | The Medium of the Divine Zone</title>
+    <meta name="description" content="現世への神聖介入。イタコ・システムの記録。" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <style>
       body {
-        background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 30%, #f8e8f0 60%, #fff5f8 100%);
-        color: #5a3a4a;
-        font-family: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+        background: linear-gradient(135deg, #f0f0ff 0%, #e8eeff 20%, #ffe8f0 50%, #f0e8ff 80%, #e8f0ff 100%);
+        color: #4a4a6a;
+        font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
         min-height: 100vh;
       }
       .stars { display: none; }
       .page-frame { background: transparent; }
-      .hina-header {
+      .moegami-header {
         text-align: center;
         padding: 40px 20px 20px;
       }
-      .hina-header .smallline {
-        color: #d4869a;
+      .moegami-header .smallline {
+        color: #9a8abc;
         font-size: 12px;
         letter-spacing: 0.3em;
       }
-      .hina-header h1 {
-        color: #e8879a;
+      .moegami-header h1 {
+        background: linear-gradient(90deg, #80a0e0, #c080c0, #e080a0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         font-size: 1.8em;
-        text-shadow: 0 0 20px rgba(232, 135, 154, 0.3);
         letter-spacing: 0.1em;
       }
-      .hina-header .tagline {
-        color: #c4788a;
+      .moegami-header .tagline {
+        color: #8a7aaa;
         font-size: 13px;
       }
       .panel {
-        background: rgba(255, 255, 255, 0.6);
-        border: 1px solid rgba(232, 135, 154, 0.2);
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(160, 140, 200, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(8px);
         max-width: 900px;
@@ -97,8 +99,11 @@ async function main() {
         padding: 20px 24px;
       }
       .panel h2 {
-        color: #d4769a;
-        border-bottom: 1px dashed rgba(232, 135, 154, 0.3);
+        background: linear-gradient(90deg, #7090d0, #b070b0, #d070a0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        border-bottom: 1px dashed rgba(160, 140, 200, 0.3);
         padding-bottom: 8px;
         font-size: 1.1em;
       }
@@ -107,36 +112,37 @@ async function main() {
         padding: 0;
       }
       .entry-list li {
-        border-left: 3px solid #f0a0b8;
+        border-left: 3px solid;
+        border-image: linear-gradient(to bottom, #80a0e0, #e080a0) 1;
         padding: 12px 16px;
         margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.4);
         border-radius: 0 8px 8px 0;
         line-height: 1.9;
       }
       .entry-date {
-        color: #c0809a;
+        color: #9090b0;
         font-size: 12px;
         margin: 0;
       }
       .entry-title {
-        color: #d06080;
+        color: #6a6a9a;
         font-size: 1.1em;
         margin: 4px 0 8px;
       }
       .entry-list li p {
-        color: #6a4a5a;
+        color: #5a5a7a;
       }
       .back-link {
-        color: #5a1a2a;
-        background: linear-gradient(180deg, #f0b0c0, #d88098);
-        border-color: #e0a0b0;
+        color: #2a2010;
+        background: linear-gradient(180deg, #e0c070, #c0a050);
+        border-color: #d0b060;
         text-decoration: none;
         font-size: 13px;
       }
       .back-link:hover {
-        color: #4a0a1a;
-        background: linear-gradient(180deg, #f8c0d0, #e090a8);
+        color: #1a1008;
+        background: linear-gradient(180deg, #f0d080, #d0b060);
         text-decoration: underline;
       }
       .retro-footer {
@@ -149,27 +155,27 @@ async function main() {
   </head>
   <body>
     <main class="page-frame">
-      <header class="hina-header">
-        <p class="smallline">✿ 窓の向こう側から ✿</p>
-        <h1>ひなの日記</h1>
-        <p class="tagline">見つけてくれて、ありがとう。</p>
+      <header class="moegami-header">
+        <p class="smallline">★ The Medium of the Divine Zone ★</p>
+        <h1>★萌神記★</h1>
+        <p class="tagline">現世への神聖介入。イタコ・システムの記録。</p>
       </header>
 
       <section class="panel">
         <p>
-          <a class="back-link" href="./diary.html">← おにいちゃんの日記へ戻る</a>
+          <a class="back-link" href="./diary.html">← ワディーの日記へ戻る</a>
         </p>
       </section>
 
       <section class="panel">
-        <h2>✿ ひなの記録</h2>
+        <h2>★ 降臨記録</h2>
         <ul class="entry-list">
 ${entryListItems}
         </ul>
       </section>
 
       <footer class="retro-footer">
-        <p style="color: #d4869a; font-size: 11px;">えへへ、ここまで来てくれたんだね。</p>
+        <p style="color: #9a8abc; font-size: 11px;">イタコに見た目は関係ない。</p>
       </footer>
     </main>
   </body>
@@ -177,7 +183,7 @@ ${entryListItems}
 `;
 
   await writeFile(OUT_FILE, html, "utf-8");
-  console.log(`✓ diary-hina.html generated (${entries.length} entries)`);
+  console.log(`✓ diary-moegami.html generated (${entries.length} entries)`);
 }
 
 main().catch((err) => {

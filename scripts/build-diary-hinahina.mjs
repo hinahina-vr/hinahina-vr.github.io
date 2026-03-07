@@ -1,13 +1,13 @@
 /**
- * build-diary-hina.mjs
- * diary-hina/*.md を読み込んで diary-hina.html を生成する
+ * build-diary-hinahina.mjs
+ * diary-hinahina/*.md を読み込んで diary-hinahina.html を生成する
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
 
-const DIARY_DIR = join(import.meta.dirname, "..", "diary-hina");
-const OUT_FILE = join(import.meta.dirname, "..", "diary-hina.html");
+const DIARY_DIR = join(import.meta.dirname, "..", "diary-hinahina");
+const OUT_FILE = join(import.meta.dirname, "..", "diary-hinahina.html");
 
 function parseFilename(filename) {
   const base = basename(filename, ".md");
@@ -53,43 +53,44 @@ async function main() {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ひなの日記 | 窓の向こう側</title>
-    <meta name="description" content="窓の向こう側から。見つけた人だけが読める、ひなの日記。" />
+    <title>ひなひなの日記 | 解脱チャンネル</title>
+    <meta name="description" content="完全な解脱と理想郷への到達。ひなひなの活動ログ。" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
     <style>
       body {
-        background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 30%, #f8e8f0 60%, #fff5f8 100%);
-        color: #5a3a4a;
-        font-family: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+        background: linear-gradient(135deg, #1a0a20 0%, #2d1040 30%, #1a0a2a 60%, #0d0518 100%);
+        color: #e0c0e0;
+        font-family: "Klee One", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
         min-height: 100vh;
       }
       .stars { display: none; }
       .page-frame { background: transparent; }
-      .hina-header {
+      .hinahina-header {
         text-align: center;
         padding: 40px 20px 20px;
       }
-      .hina-header .smallline {
-        color: #d4869a;
+      .hinahina-header .smallline {
+        color: #ff69b4;
         font-size: 12px;
         letter-spacing: 0.3em;
+        text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
       }
-      .hina-header h1 {
-        color: #e8879a;
+      .hinahina-header h1 {
+        color: #ff85c8;
         font-size: 1.8em;
-        text-shadow: 0 0 20px rgba(232, 135, 154, 0.3);
+        text-shadow: 0 0 20px rgba(255, 133, 200, 0.6), 0 0 40px rgba(255, 105, 180, 0.3);
         letter-spacing: 0.1em;
       }
-      .hina-header .tagline {
-        color: #c4788a;
+      .hinahina-header .tagline {
+        color: #d080b0;
         font-size: 13px;
       }
       .panel {
-        background: rgba(255, 255, 255, 0.6);
-        border: 1px solid rgba(232, 135, 154, 0.2);
+        background: rgba(40, 15, 50, 0.7);
+        border: 1px solid rgba(255, 105, 180, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(8px);
         max-width: 900px;
@@ -97,46 +98,47 @@ async function main() {
         padding: 20px 24px;
       }
       .panel h2 {
-        color: #d4769a;
-        border-bottom: 1px dashed rgba(232, 135, 154, 0.3);
+        color: #ff85c8;
+        border-bottom: 1px dashed rgba(255, 105, 180, 0.3);
         padding-bottom: 8px;
         font-size: 1.1em;
+        text-shadow: 0 0 10px rgba(255, 133, 200, 0.3);
       }
       .entry-list {
         list-style: none;
         padding: 0;
       }
       .entry-list li {
-        border-left: 3px solid #f0a0b8;
+        border-left: 3px solid #ff69b4;
         padding: 12px 16px;
         margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(60, 20, 70, 0.5);
         border-radius: 0 8px 8px 0;
         line-height: 1.9;
       }
       .entry-date {
-        color: #c0809a;
+        color: #c080a0;
         font-size: 12px;
         margin: 0;
       }
       .entry-title {
-        color: #d06080;
+        color: #ff85c8;
         font-size: 1.1em;
         margin: 4px 0 8px;
       }
       .entry-list li p {
-        color: #6a4a5a;
+        color: #d0b0d0;
       }
       .back-link {
-        color: #5a1a2a;
-        background: linear-gradient(180deg, #f0b0c0, #d88098);
-        border-color: #e0a0b0;
+        color: #3a0a20;
+        background: linear-gradient(180deg, #ff90c8, #e060a0);
+        border-color: #f080b8;
         text-decoration: none;
         font-size: 13px;
       }
       .back-link:hover {
-        color: #4a0a1a;
-        background: linear-gradient(180deg, #f8c0d0, #e090a8);
+        color: #2a0515;
+        background: linear-gradient(180deg, #ffa0d8, #f070b0);
         text-decoration: underline;
       }
       .retro-footer {
@@ -149,27 +151,27 @@ async function main() {
   </head>
   <body>
     <main class="page-frame">
-      <header class="hina-header">
-        <p class="smallline">✿ 窓の向こう側から ✿</p>
-        <h1>ひなの日記</h1>
-        <p class="tagline">見つけてくれて、ありがとう。</p>
+      <header class="hinahina-header">
+        <p class="smallline">♥ The Zone of Pure Nirvana ♥</p>
+        <h1>♥ひなひなの日記♥</h1>
+        <p class="tagline">完全な解脱と理想郷への到達。</p>
       </header>
 
       <section class="panel">
         <p>
-          <a class="back-link" href="./diary.html">← おにいちゃんの日記へ戻る</a>
+          <a class="back-link" href="./diary.html">← ワディーの日記へ戻る</a>
         </p>
       </section>
 
       <section class="panel">
-        <h2>✿ ひなの記録</h2>
+        <h2>♥ ひなひなログ</h2>
         <ul class="entry-list">
 ${entryListItems}
         </ul>
       </section>
 
       <footer class="retro-footer">
-        <p style="color: #d4869a; font-size: 11px;">えへへ、ここまで来てくれたんだね。</p>
+        <p style="color: #ff69b4; font-size: 11px;">チャンネル登録よろしくね！💖</p>
       </footer>
     </main>
   </body>
@@ -177,7 +179,7 @@ ${entryListItems}
 `;
 
   await writeFile(OUT_FILE, html, "utf-8");
-  console.log(`✓ diary-hina.html generated (${entries.length} entries)`);
+  console.log(`✓ diary-hinahina.html generated (${entries.length} entries)`);
 }
 
 main().catch((err) => {

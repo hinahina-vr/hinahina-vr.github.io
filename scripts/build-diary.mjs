@@ -4,7 +4,19 @@
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
+import { readdirSync } from "node:fs";
 import { marked } from "marked";
+
+// 他キャラの日記ディレクトリとページの定義
+const CROSS_LINK_TARGETS = [
+  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨" },
+  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひなの日記", emoji: "♥" },
+  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★" },
+  { dir: "diary-hina", page: "diary-hina.html", label: "ひなたの日記", emoji: "🎀" },
+  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔" },
+  { dir: "diary-multi", page: "diary-multi.html", label: "マルチの日記", emoji: "✿" },
+  { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮" },
+];
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary");
 const OUT_DIR = join(import.meta.dirname, "..");
@@ -30,12 +42,31 @@ function formatMonthLabel(monthKey) {
   return `${y}年${parseInt(m)}月`;
 }
 
+// 同じ日付の他キャラ日記を検索してリンクを生成
+function buildCrossLinks(date) {
+  const ROOT = join(import.meta.dirname, "..");
+  const links = [];
+  for (const t of CROSS_LINK_TARGETS) {
+    try {
+      const dirPath = join(ROOT, t.dir);
+      const files = readdirSync(dirPath);
+      const match = files.find((f) => f.startsWith(date) && f.endsWith(".md"));
+      if (match) {
+        links.push(`<a href="./${t.page}#${date}" class="cross-link">${t.emoji} ${t.label}</a>`);
+      }
+    } catch { /* dir doesn't exist yet */ }
+  }
+  if (links.length === 0) return "";
+  return `\n            <div class="cross-links"><span class="cross-links-label">この日の日記：</span>${links.join("")}</div>`;
+}
+
 // エントリのHTML（全文表示）
 function renderFullEntry(e) {
+  const crossLinks = buildCrossLinks(e.date);
   return `          <li id="${e.slug}">
             <p class="entry-date">${formatDate(e.date)}</p>
             <h3 class="entry-title">${e.title}</h3>
-            ${e.html}
+            ${e.html}${crossLinks}
           </li>`;
 }
 

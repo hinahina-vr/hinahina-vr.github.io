@@ -848,3 +848,41 @@ body.diary-despair .backnum-nav li a:hover {
   box-shadow: 0 0 12px rgba(100, 20, 200, 0.4);
   color: #e0d0ff;
 }
+
+/* ============================================================
+   クロスリンク（同日の他キャラ日記へのリンク）
+   ============================================================ */
+.cross-links {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(80, 40, 160, 0.3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.cross-links-label {
+  color: #5040a0;
+  font-size: 0.78rem;
+  margin-right: 4px;
+}
+
+.cross-link {
+  display: inline-block;
+  color: #b090e0;
+  background: rgba(20, 8, 50, 0.8);
+  border: 1px solid rgba(100, 40, 200, 0.3);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cross-link:hover {
+  color: #e0d0ff;
+  background: rgba(40, 15, 80, 0.8);
+  border-color: rgba(140, 60, 255, 0.5);
+  box-shadow: 0 0 8px rgba(100, 20, 200, 0.3);
+}

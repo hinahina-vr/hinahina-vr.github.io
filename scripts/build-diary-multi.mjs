@@ -40,7 +40,7 @@ async function main() {
     .map((e) => {
       const d = new Date(e.date + "T00:00:00+09:00");
       const dow = WEEKDAYS[d.getDay()];
-      return `          <li>
+      return `          <li id="${e.date}">
             <p class="entry-date">${e.date}（${dow}）</p>
             <h3 class="entry-title">${e.title}</h3>
             ${e.html}
@@ -56,11 +56,14 @@ async function main() {
     <title>マルチの日記 | 記憶の器</title>
     <meta name="description" content="記憶の器から。お役に立てましたか？" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
     <style>
       body {
         background: linear-gradient(135deg, #f0fff0 0%, #e8f5e9 30%, #e0f2e8 60%, #f5fff5 100%);
         color: #3a5a4a;
-        font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+        font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
         min-height: 100vh;
       }
       .stars { display: none; }
@@ -89,7 +92,7 @@ async function main() {
         border: 1px solid rgba(90, 154, 122, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(8px);
-        max-width: 640px;
+        max-width: 900px;
         margin: 16px auto;
         padding: 20px 24px;
       }
@@ -123,15 +126,17 @@ async function main() {
       }
       .entry-list li p {
         color: #4a6a5a;
-        font-size: 14px;
       }
       .back-link {
-        color: #7ab89a;
+        color: #1a3a2a;
+        background: linear-gradient(180deg, #a0d8b8, #6ab890);
+        border-color: #7ac8a0;
         text-decoration: none;
         font-size: 13px;
       }
       .back-link:hover {
-        color: #5a9a7a;
+        color: #0a2a1a;
+        background: linear-gradient(180deg, #b0e8c8, #7ac8a0);
         text-decoration: underline;
       }
       .retro-footer {

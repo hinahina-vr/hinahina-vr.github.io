@@ -8,7 +8,12 @@
         "build:video-scripts": "node scripts/build-video-scripts.mjs",
         "build:diary-hina": "node scripts/build-diary-hina.mjs",
         "build:diary-multi": "node scripts/build-diary-multi.mjs",
-        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-video-scripts.mjs"
+        "build:diary-hinahina": "node scripts/build-diary-hinahina.mjs",
+        "build:diary-oji": "node scripts/build-diary-oji.mjs",
+        "build:diary-moegami": "node scripts/build-diary-moegami.mjs",
+        "build:diary-dejiko": "node scripts/build-diary-dejiko.mjs",
+        "build:diary-mitra": "node scripts/build-diary-mitra.mjs",
+        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-video-scripts.mjs"
     },
     "devDependencies": {
         "marked": "^15.0.0"
