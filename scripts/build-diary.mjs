@@ -9,13 +9,13 @@ import { marked } from "marked";
 
 // 他キャラの日記ディレクトリとページの定義
 const CROSS_LINK_TARGETS = [
-  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨" },
-  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひなの日記", emoji: "♥" },
-  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★" },
-  { dir: "diary-hina", page: "diary-hina.html", label: "ひなたの日記", emoji: "🎀" },
-  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔" },
-  { dir: "diary-multi", page: "diary-multi.html", label: "マルチの日記", emoji: "✿" },
-  { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮" },
+  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨", color: "#a0a0a0" },
+  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひなの日記", emoji: "♥", color: "#ff69b4" },
+  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★", color: "#d0a030" },
+  { dir: "diary-hina", page: "diary-hina.html", label: "ひなたの日記", emoji: "🎀", color: "#e8879a" },
+  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔", color: "#50b070" },
+  { dir: "diary-multi", page: "diary-multi.html", label: "マルチの日記", emoji: "✿", color: "#7ab89a" },
+  { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8" },
 ];
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary");
@@ -52,7 +52,7 @@ function buildCrossLinks(date) {
       const files = readdirSync(dirPath);
       const match = files.find((f) => f.startsWith(date) && f.endsWith(".md"));
       if (match) {
-        links.push(`<a href="./${t.page}#${date}" class="cross-link">${t.emoji} ${t.label}</a>`);
+        links.push(`<a href="./${t.page}#${date}" class="cross-link" style="color:${t.color};border-color:${t.color}">${t.emoji} ${t.label}</a>`);
       }
     } catch { /* dir doesn't exist yet */ }
   }
