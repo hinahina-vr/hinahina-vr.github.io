@@ -622,6 +622,13 @@ body.diary-despair .entry-list li p {
   animation: text-emerge 1.5s ease-out both;
 }
 
+body.diary-despair .entry-list li img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 12px 0;
+}
+
 @keyframes text-emerge {
   from {
     opacity: 0.2;
@@ -717,7 +724,7 @@ body.diary-despair .entry-list li hr {
 }
 
 body.diary-despair .entry-list li hr~p {
-  color: rgba(120, 100, 170, 0.75);
+  color: #7868b0;
   transition: none;
   cursor: default;
 }
