@@ -13,7 +13,11 @@
         "build:diary-moegami": "node scripts/build-diary-moegami.mjs",
         "build:diary-dejiko": "node scripts/build-diary-dejiko.mjs",
         "build:diary-mitra": "node scripts/build-diary-mitra.mjs",
-        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-video-scripts.mjs"
+        "build:diary-ayu": "node scripts/build-diary-ayu.mjs",
+        "build:diary-rem": "node scripts/build-diary-rem.mjs",
+        "build:diary-ruriko": "node scripts/build-diary-ruriko.mjs",
+        "build:diary-tsumugi": "node scripts/build-diary-tsumugi.mjs",
+        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-video-scripts.mjs"
     },
     "devDependencies": {
         "marked": "^15.0.0"
