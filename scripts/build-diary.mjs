@@ -20,6 +20,8 @@ const CROSS_LINK_TARGETS = [
   { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨", color: "#a0a0a0" },
   { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★", color: "#d0a030" },
   { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8" },
+  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここの日記", emoji: "🐧", color: "#4080c0" },
+  { dir: "diary-mii", page: "diary-mii.html", label: "みぃの日記", emoji: "🌼", color: "#e0a820" },
 ];
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary");
