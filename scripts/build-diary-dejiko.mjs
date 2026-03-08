@@ -159,6 +159,10 @@ async function main() {
       </header>
 
       <section class="panel">
+        <p style="color: #50b070; font-size: 13px; line-height: 1.8; margin: 0;">🔔 デ・ジ・キャラット（でじこ） ── 「Di Gi Charat」（1999年）の主人公。デジキャラット星のお姫様。語尾は「にょ」、目からビームが出る。</p>
+      </section>
+
+      <section class="panel">
         <p>
           <a class="back-link" href="./diary.html">← ワディーの日記へ戻るにょ</a>
         </p>

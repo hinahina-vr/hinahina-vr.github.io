@@ -156,6 +156,10 @@ async function main() {
       </header>
 
       <section class="panel">
+        <p style="color: #d4869a; font-size: 13px; line-height: 1.8; margin: 0;">🎀 袴田ひなた ── 「ロウきゅーぶ！」（2011年）のヒロイン。小学生バスケ少女。一人称は「ひな」、おにいちゃんが大好き。</p>
+      </section>
+
+      <section class="panel">
         <p>
           <a class="back-link" href="./diary.html">← おにいちゃんの日記へ戻る</a>
         </p>

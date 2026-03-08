@@ -156,6 +156,10 @@ async function main() {
       </header>
 
       <section class="panel">
+        <p style="color: #7ab89a; font-size: 13px; line-height: 1.8; margin: 0;">✿ HMX-12 マルチ ── 「ToHeart」（Leaf, 1997年）のヒロイン。メイドロボ試作機。口癖は「はわわ」。一生懸命で健気な子。</p>
+      </section>
+
+      <section class="panel">
         <p>
           <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
         </p>

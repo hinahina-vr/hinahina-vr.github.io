@@ -12,6 +12,8 @@ const CROSS_LINK_TARGETS = [
   { dir: "diary-hina", page: "diary-hina.html", label: "ひなたの日記", emoji: "🎀", color: "#e8879a" },
   { dir: "diary-multi", page: "diary-multi.html", label: "マルチの日記", emoji: "✿", color: "#7ab89a" },
   { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔", color: "#50b070" },
+  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここの日記", emoji: "🐧", color: "#4080c0" },
+  { dir: "diary-mii", page: "diary-mii.html", label: "みぃの日記", emoji: "🌼", color: "#e0a820" },
   { dir: "diary-ayu", page: "diary-ayu.html", label: "あゆの日記", emoji: "❄", color: "#6090c0" },
   { dir: "diary-rem", page: "diary-rem.html", label: "レムの日記", emoji: "✦", color: "#5080d0" },
   { dir: "diary-ruriko", page: "diary-ruriko.html", label: "瑠璃子の日記", emoji: "💧", color: "#6050a0" },
@@ -20,8 +22,6 @@ const CROSS_LINK_TARGETS = [
   { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨", color: "#a0a0a0" },
   { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★", color: "#d0a030" },
   { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8" },
-  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここの日記", emoji: "🐧", color: "#4080c0" },
-  { dir: "diary-mii", page: "diary-mii.html", label: "みぃの日記", emoji: "🌼", color: "#e0a820" },
 ];
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary");

@@ -10,45 +10,45 @@ const DIARY_DIR = join(import.meta.dirname, "..", "diary-ayu");
 const OUT_FILE = join(import.meta.dirname, "..", "diary-ayu.html");
 
 function parseFilename(filename) {
-    const base = basename(filename, ".md");
-    const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
-    if (!match) return null;
-    return { date: match[1], title: match[2] };
+  const base = basename(filename, ".md");
+  const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
+  if (!match) return null;
+  return { date: match[1], title: match[2] };
 }
 
 async function main() {
-    const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
+  const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
 
-    const entries = [];
-    for (const file of files) {
-        const meta = parseFilename(file);
-        if (!meta) {
-            console.warn(`⚠ skip: ${file} (invalid name format)`);
-            continue;
-        }
-        const raw = await readFile(join(DIARY_DIR, file), "utf-8");
-        const body = raw.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
-        const html = await marked.parse(body);
-        entries.push({ ...meta, html });
+  const entries = [];
+  for (const file of files) {
+    const meta = parseFilename(file);
+    if (!meta) {
+      console.warn(`⚠ skip: ${file} (invalid name format)`);
+      continue;
     }
+    const raw = await readFile(join(DIARY_DIR, file), "utf-8");
+    const body = raw.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
+    const html = await marked.parse(body);
+    entries.push({ ...meta, html });
+  }
 
-    entries.sort((a, b) => b.date.localeCompare(a.date));
+  entries.sort((a, b) => b.date.localeCompare(a.date));
 
-    const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
+  const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
-    const entryListItems = entries
-        .map((e) => {
-            const d = new Date(e.date + "T00:00:00+09:00");
-            const dow = WEEKDAYS[d.getDay()];
-            return `          <li id="${e.date}">
+  const entryListItems = entries
+    .map((e) => {
+      const d = new Date(e.date + "T00:00:00+09:00");
+      const dow = WEEKDAYS[d.getDay()];
+      return `          <li id="${e.date}">
             <p class="entry-date">${e.date}（${dow}）</p>
             <h3 class="entry-title">${e.title}</h3>
             ${e.html}
           </li>`;
-        })
-        .join("\n");
+    })
+    .join("\n");
 
-    const html = `<!doctype html>
+  const html = `<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -162,6 +162,10 @@ async function main() {
       </header>
 
       <section class="panel">
+        <p style="color: #6090c0; font-size: 13px; line-height: 1.8; margin: 0;">❄ 月宮あゆ ── 「Kanon」（1999年）のヒロイン。一人称はボク、口癖は「うぐぅ」。たい焼きが大好き。</p>
+      </section>
+
+      <section class="panel">
         <p>
           <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
         </p>
@@ -182,11 +186,11 @@ ${entryListItems}
 </html>
 `;
 
-    await writeFile(OUT_FILE, html, "utf-8");
-    console.log(`✓ diary-ayu.html generated (${entries.length} entries)`);
+  await writeFile(OUT_FILE, html, "utf-8");
+  console.log(`✓ diary-ayu.html generated (${entries.length} entries)`);
 }
 
 main().catch((err) => {
-    console.error(err);
-    process.exit(1);
+  console.error(err);
+  process.exit(1);
 });

@@ -158,6 +158,10 @@ async function main() {
       </header>
 
       <section class="panel">
+        <p style="color: #ff69b4; font-size: 13px; line-height: 1.8; margin: 0;">♥ ひなひな ── ワディーのシミュラクル（分身人格）。脱力系。「あるんだ。」「やっていきましょう」が口癖。</p>
+      </section>
+
+      <section class="panel">
         <p>
           <a class="back-link" href="./diary.html">← ワディーの日記へ戻る</a>
         </p>
