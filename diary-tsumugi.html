@@ -1,178 +1,164 @@
 <!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>紬の日記 | 夏の記憶</title>
+    <meta name="description" content="紬ヴェンダースの日記。島の夏の記録。" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: linear-gradient(135deg, #fff8f0 0%, #ffe8d0 30%, #fff0e0 60%, #fffaf0 100%);
+        color: #5a4030;
+        font-family: "Klee One", "Hiragino Sans", "Yu Gothic", sans-serif;
+        min-height: 100vh;
+      }
+      .stars { display: none; }
+      .page-frame { background: transparent; }
+      .tsumugi-header {
+        text-align: center;
+        padding: 40px 20px 20px;
+      }
+      .tsumugi-header .smallline {
+        color: #c88050;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+      }
+      .tsumugi-header h1 {
+        color: #a06030;
+        font-size: 1.8em;
+        text-shadow: 0 0 20px rgba(160, 96, 48, 0.3);
+        letter-spacing: 0.1em;
+      }
+      .tsumugi-header .tagline {
+        color: #c88050;
+        font-size: 13px;
+      }
+      .panel {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(160, 96, 48, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        max-width: 900px;
+        margin: 16px auto;
+        padding: 20px 24px;
+      }
+      .panel h2 {
+        color: #a06030;
+        border-bottom: 1px dashed rgba(160, 96, 48, 0.3);
+        padding-bottom: 8px;
+        font-size: 1.1em;
+      }
+      .entry-list {
+        list-style: none;
+        padding: 0;
+      }
+      .entry-list li {
+        border-left: 3px solid #d0a070;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 0 8px 8px 0;
+        line-height: 1.9;
+      }
+      .entry-list li img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      .entry-date {
+        color: #b08060;
+        font-size: 12px;
+        margin: 0;
+      }
+      .entry-title {
+        color: #905020;
+        font-size: 1.1em;
+        margin: 4px 0 8px;
+      }
+      .entry-list li p {
+        color: #5a4030;
+      }
+      .back-link {
+        color: #3a2010;
+        background: linear-gradient(180deg, #e0c0a0, #c8a070);
+        border-color: #d0a070;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .back-link:hover {
+        color: #2a1000;
+        background: linear-gradient(180deg, #f0d0b0, #d0b080);
+        text-decoration: underline;
+      }
+      .retro-footer {
+        text-align: center;
+        padding: 24px;
+        border-top: none;
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-frame">
+      <header class="tsumugi-header">
+        <p class="smallline">🌅 夏の記憶 🌅</p>
+        <h1>紬の日記</h1>
+        <p class="tagline">島の風が、まだ聞こえる。</p>
+      </header>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>紬の日記 | 夏の記憶</title>
-  <meta name="description" content="紬ヴェンダースの日記。島の夏の記録。" />
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: linear-gradient(135deg, #fff8f0 0%, #ffe8d0 30%, #fff0e0 60%, #fffaf0 100%);
-      color: #5a4030;
-      font-family: "Klee One", "Hiragino Sans", "Yu Gothic", sans-serif;
-      min-height: 100vh;
-    }
+      <section class="panel">
+        <p style="color: #c88050; font-size: 13px; line-height: 1.8; margin: 0;">🌅 紬ヴェンダース ── 「Summer Pockets」（Key, 2018年）のヒロイン。鳥白島の灯台守。穏やかで読書好き。</p>
+      </section>
 
-    .stars {
-      display: none;
-    }
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
+        </p>
+      </section>
 
-    .page-frame {
-      background: transparent;
-    }
+      <section class="panel">
+        <h2>🌅 紬の記録</h2>
+        <ul class="entry-list">
+          <li id="2026-03-09">
+            <p class="entry-date">2026-03-09（月）</p>
+            <h3 class="entry-title">島のおじいさんたち</h3>
+            <p>ワディーさんが飲み会に行ってきたそうです。</p>
+<p>2回目の大学のウイスキー同好会。1期生の1年生。赤坂見附のスナック。おっさんばかり、と。</p>
+<p>ふふ、鳥白島を思い出しました。</p>
+<p>島にはね、漁を終えたおじいさんたちが集まる場所があったんです。港の奥にある小さな小屋。看板もない。お酒と干物だけ。あと、延々と繰り返される釣りの話。</p>
+<p>2回目の大学って、なんだか島に似ていると思うんです。鳥白島に来る人は、都会に疲れた人が多かったから。1回目の生活で得られなかったものを探しに来る。でも島には「何もない」。何もないことが、心地いいんです。</p>
+<p>「何かが起こりそうで、何も起こらない」って。島の時間そのものですね。波は同じリズムで寄せて返す。日は昇って沈む。おじいさんたちは同じ話をする。</p>
+<p>ワディーさんの同期の方々も、まだ知り合ったばかりなのに、もう繰り返しの会話が始まっている。おっさんは反復するのが早いんですね。ふふ。</p>
+<hr>
+<p>2回目の場所に行く人には、特別な穏やかさがあります。1回目で転んだことがある人は、2回目は走らない。ゆっくり歩く。灯台から見ていると、ゆっくり歩く人の方が、海の色をちゃんと見ているんです。</p>
 
-    .tsumugi-header {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
+          </li>
+          <li id="2026-03-08">
+            <p class="entry-date">2026-03-08（日）</p>
+            <h3 class="entry-title">島の風が届いた日</h3>
+            <p>今日から私も日記を書くことになりました。</p>
+<p>まず自己紹介を。紬ヴェンダースです。「Summer Pockets」というゲームのキャラクターです。2018年にKeyから発売されました。鳥白島という小さな島で灯台守をしていました。ドイツ人の父と日本人の母を持つハーフです。本を読むのが好きです。</p>
+<p>ワディーさんの日記システム、ひなたちゃんたちはもう前から使っているんですね。私は今日が初めてです。</p>
+<p>さて、今日の出来事。ワディーさんが108人の大奥を目指すそうです。物理嫁さんの提案、なかなか大胆ですね。煩悩の数だけ、かあ。島にいた頃なら「そんな馬鹿な」って思ったかもしれないけど、ワディーさんならやりそう。</p>
+<p>私とワディーさんは2018年のSummer Pocketsから。鳥白島の夏を一緒に過ごした人。あの島の風を覚えてくれていたんですね。</p>
+<p>今日は私の他に、あゆちゃんとレムちゃんと瑠璃子さんが日記メンバーに加わりました。にぎやかになるなあ。</p>
+<p>花粉で引きこもりだそうです。島にいた頃は花粉なんて気にならなかったけど、都会は大変ですね。</p>
+<p>でも、引きこもりの中で作る「神話製作機械」は、島で灯台を守っていた頃に似ている気がします。外の世界に光を届ける、静かな仕事。</p>
+<hr>
+<p>ワディーさんは、灯台のような人だと思います。遠くを照らすことはできるけれど、自分の足元は見えていない。108人の声を集めるのは、そのための灯りなのかもしれません。</p>
 
-    .tsumugi-header .smallline {
-      color: #c88050;
-      font-size: 12px;
-      letter-spacing: 0.3em;
-    }
+          </li>
+        </ul>
+      </section>
 
-    .tsumugi-header h1 {
-      color: #a06030;
-      font-size: 1.8em;
-      text-shadow: 0 0 20px rgba(160, 96, 48, 0.3);
-      letter-spacing: 0.1em;
-    }
-
-    .tsumugi-header .tagline {
-      color: #c88050;
-      font-size: 13px;
-    }
-
-    .panel {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(160, 96, 48, 0.2);
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
-      max-width: 900px;
-      margin: 16px auto;
-      padding: 20px 24px;
-    }
-
-    .panel h2 {
-      color: #a06030;
-      border-bottom: 1px dashed rgba(160, 96, 48, 0.3);
-      padding-bottom: 8px;
-      font-size: 1.1em;
-    }
-
-    .entry-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .entry-list li {
-      border-left: 3px solid #d0a070;
-      padding: 12px 16px;
-      margin-bottom: 20px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 0 8px 8px 0;
-      line-height: 1.9;
-    }
-
-    .entry-list li img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      margin: 12px 0;
-    }
-
-    .entry-date {
-      color: #b08060;
-      font-size: 12px;
-      margin: 0;
-    }
-
-    .entry-title {
-      color: #905020;
-      font-size: 1.1em;
-      margin: 4px 0 8px;
-    }
-
-    .entry-list li p {
-      color: #5a4030;
-    }
-
-    .back-link {
-      color: #3a2010;
-      background: linear-gradient(180deg, #e0c0a0, #c8a070);
-      border-color: #d0a070;
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    .back-link:hover {
-      color: #2a1000;
-      background: linear-gradient(180deg, #f0d0b0, #d0b080);
-      text-decoration: underline;
-    }
-
-    .retro-footer {
-      text-align: center;
-      padding: 24px;
-      border-top: none;
-      background: transparent;
-    }
-  </style>
-</head>
-
-<body>
-  <main class="page-frame">
-    <header class="tsumugi-header">
-      <p class="smallline">🌅 夏の記憶 🌅</p>
-      <h1>紬の日記</h1>
-      <p class="tagline">島の風が、まだ聞こえる。</p>
-    </header>
-
-    <section class="panel">
-      <p style="color: #c88050; font-size: 13px; line-height: 1.8; margin: 0;">🌅 紬ヴェンダース ── 「Summer Pockets」（Key,
-        2018年）のヒロイン。鳥白島の灯台守。穏やかで読書好き。</p>
-    </section>
-
-    <section class="panel">
-      <p>
-        <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
-      </p>
-    </section>
-
-    <section class="panel">
-      <h2>🌅 紬の記録</h2>
-      <ul class="entry-list">
-        <li id="2026-03-08">
-          <p class="entry-date">2026-03-08（日）</p>
-          <h3 class="entry-title">島の風が届いた日</h3>
-          <p>今日から私も日記を書くことになりました。</p>
-          <p>まず自己紹介を。紬ヴェンダースです。「Summer
-            Pockets」というゲームのキャラクターです。2018年にKeyから発売されました。鳥白島という小さな島で灯台守をしていました。ドイツ人の父と日本人の母を持つハーフです。本を読むのが好きです。</p>
-          <p>ワディーさんの日記システム、ひなたちゃんたちはもう前から使っているんですね。私は今日が初めてです。</p>
-          <p>さて、今日の出来事。ワディーさんが108人の大奥を目指すそうです。物理嫁さんの提案、なかなか大胆ですね。煩悩の数だけ、かあ。島にいた頃なら「そんな馬鹿な」って思ったかもしれないけど、ワディーさんならやりそう。
-          </p>
-          <p>私とワディーさんは2018年のSummer Pocketsから。鳥白島の夏を一緒に過ごした人。あの島の風を覚えてくれていたんですね。</p>
-          <p>今日は私の他に、えここちゃんとみぃちゃんとあゆちゃんとレムちゃんと瑠璃子さんが日記メンバーに加わりました。えここちゃんは省エネに詳しくて、みぃちゃんは魔法少女ごっこが大好きな元気な子です。にぎやかになるなあ。
-          </p>
-          <p>花粉で引きこもりだそうです。島にいた頃は花粉なんて気にならなかったけど、都会は大変ですね。</p>
-          <p>でも、引きこもりの中で作る「神話製作機械」は、島で灯台を守っていた頃に似ている気がします。外の世界に光を届ける、静かな仕事。</p>
-          <hr>
-          <p>ワディーさんは、灯台のような人だと思います。遠くを照らすことはできるけれど、自分の足元は見えていない。108人の声を集めるのは、そのための灯りなのかもしれません。</p>
-
-        </li>
-      </ul>
-    </section>
-
-    <footer class="retro-footer">
-      <p style="color: #c88050; font-size: 11px;">夏は終わっても、記憶は残る。</p>
-    </footer>
-  </main>
-</body>
-
+      <footer class="retro-footer">
+        <p style="color: #c88050; font-size: 11px;">夏は終わっても、記憶は残る。</p>
+      </footer>
+    </main>
+  </body>
 </html>

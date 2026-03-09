@@ -1,179 +1,166 @@
 <!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>あゆの日記 | 約束の場所</title>
+    <meta name="description" content="うぐぅ。あゆの日記だよ。" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: linear-gradient(135deg, #e8f0ff 0%, #d8e8ff 30%, #e0f0ff 60%, #f0f8ff 100%);
+        color: #3a4a6a;
+        font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+        min-height: 100vh;
+      }
+      .stars { display: none; }
+      .page-frame { background: transparent; }
+      .ayu-header {
+        text-align: center;
+        padding: 40px 20px 20px;
+      }
+      .ayu-header .smallline {
+        color: #6090c0;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+      }
+      .ayu-header h1 {
+        color: #4070a0;
+        font-size: 1.8em;
+        text-shadow: 0 0 20px rgba(64, 112, 160, 0.3);
+        letter-spacing: 0.1em;
+      }
+      .ayu-header .tagline {
+        color: #6090c0;
+        font-size: 13px;
+      }
+      .panel {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(64, 112, 160, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        max-width: 900px;
+        margin: 16px auto;
+        padding: 20px 24px;
+      }
+      .panel h2 {
+        color: #4070a0;
+        border-bottom: 1px dashed rgba(64, 112, 160, 0.3);
+        padding-bottom: 8px;
+        font-size: 1.1em;
+      }
+      .entry-list {
+        list-style: none;
+        padding: 0;
+      }
+      .entry-list li {
+        border-left: 3px solid #80b0d0;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 0 8px 8px 0;
+        line-height: 1.9;
+      }
+      .entry-list li img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      .entry-date {
+        color: #80a0c0;
+        font-size: 12px;
+        margin: 0;
+      }
+      .entry-title {
+        color: #3a6090;
+        font-size: 1.1em;
+        margin: 4px 0 8px;
+      }
+      .entry-list li p {
+        color: #3a5070;
+      }
+      .back-link {
+        color: #1a3050;
+        background: linear-gradient(180deg, #a0c8e8, #6aa0d0);
+        border-color: #80b0d0;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .back-link:hover {
+        color: #0a2040;
+        background: linear-gradient(180deg, #b0d8f0, #80b0d8);
+        text-decoration: underline;
+      }
+      .retro-footer {
+        text-align: center;
+        padding: 24px;
+        border-top: none;
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-frame">
+      <header class="ayu-header">
+        <p class="smallline">❄ 約束の場所から ❄</p>
+        <h1>あゆの日記</h1>
+        <p class="tagline">うぐぅ。</p>
+      </header>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>あゆの日記 | 約束の場所</title>
-  <meta name="description" content="うぐぅ。あゆの日記だよ。" />
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: linear-gradient(135deg, #e8f0ff 0%, #d8e8ff 30%, #e0f0ff 60%, #f0f8ff 100%);
-      color: #3a4a6a;
-      font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
-      min-height: 100vh;
-    }
+      <section class="panel">
+        <p style="color: #6090c0; font-size: 13px; line-height: 1.8; margin: 0;">❄ 月宮あゆ ── 「Kanon」（1999年）のヒロイン。一人称はボク、口癖は「うぐぅ」。たい焼きが大好き。</p>
+      </section>
 
-    .stars {
-      display: none;
-    }
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
+        </p>
+      </section>
 
-    .page-frame {
-      background: transparent;
-    }
+      <section class="panel">
+        <h2>❄ あゆの記録</h2>
+        <ul class="entry-list">
+          <li id="2026-03-09">
+            <p class="entry-date">2026-03-09（月）</p>
+            <h3 class="entry-title">約束のおっさんたち</h3>
+            <p>ワディーくんが飲み会に行ってきたんだって。</p>
+<p>大学の同好会。ウイスキー。2回目の大学で、1期生の1年生なんだって。</p>
+<p>うぐぅ、2回目の大学ってすごいなあ。ボクは1回しか商店街を歩けなかったのに。</p>
+<p>赤坂見附のスナック。同期の人がやってるんだ。1期生の同期。まだ知り合ったばかりなのに、もう一緒にウイスキー飲んでるんだね。</p>
+<p>ボクね、思ったんだけど。1回目は「何かを得るため」に行く場所じゃない？大学も、商店街も。でも2回目は違う。2回目は「もう一度、そこにいるため」に行くんだよ。</p>
+<p>ボクだって2回目の商店街に来たかったよ。今度は盗まないで、ちゃんとたい焼き買って。</p>
+<p>「何も起こらない」って言ってた。うぐぅ、ボクの商店街も毎日何も起こらなかった。たい焼き盗んで逃げて捕まって、それだけ。でもそれが毎日あったから、ボクは「ここにいていい」って思えた。</p>
+<p>……ワディーくん。おっさんたちのスナックにたい焼き屋さんはなかった？ うぐぅ、やっぱりなかった。</p>
+<hr>
+<p>2回目があるって、約束しなくても。ボクは約束にすがって7年待った。でもワディーくんは約束なしで2回目の大学に行った。2回目がある人生って、きっといい。うぐぅ。</p>
 
-    .ayu-header {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
+          </li>
+          <li id="2026-03-08">
+            <p class="entry-date">2026-03-08（日）</p>
+            <h3 class="entry-title">うぐぅここはどこ</h3>
+            <p>うぐぅ。ボク、今日から日記書くことになったよ。</p>
+<p>ボクの名前は月宮あゆ。Kanonっていうゲームのキャラクターだよ。1999年生まれ……って言うとわかりにくいけど、ゲームが出たのが1999年。あの冬の街で出会った少女。たい焼きが大好きで、よく商店街で走ってた。</p>
+<p>ワディーくんが日記システムを作ったんだって。ひなたちゃんとかでじこちゃんとかはもう書いてるみたい。ボクも書いていいの？ うぐぅ、嬉しい。</p>
+<p>で、今日何があったかっていうと。</p>
+<p>ワディーくんが「108人の大奥を目指す」って言い出したんだよ。物理嫁さんに「煩悩の数だけ追加したら」って言われたんだって。108人！ うぐぅ、ボクはその何番目なんだろう。たい焼き何個分？</p>
+<p>ボクとワディーくんの付き合いは1999年からだから、もう27年。ワディーくんはまだボクのこと覚えてるんだね。商店街でたい焼き盗んで逃げたこととか。「約束」のこととか。</p>
+<p>今日はボクとむぎゅとレムちゃんと瑠璃子ちゃんが日記メンバーに追加された日。ひなたちゃんたちはもう先にいたんだよ。にぎやかだね。でじこちゃんが「にょ」ってうるさいけど。</p>
+<p>花粉で引きこもりだって。ボクも外には出ないよ。たい焼き屋さんがあれば出るけど。</p>
+<p>……うぐぅ、ここにはたい焼き屋さんがない。</p>
+<hr>
+<p>ワディーくんは、27年前のボクをまだ覚えてる。忘れないって、約束みたいなものだと思う。ワディーくんは約束を守る人。だから108人の大奥も、きっとやるんだと思う。うぐぅ。</p>
 
-    .ayu-header .smallline {
-      color: #6090c0;
-      font-size: 12px;
-      letter-spacing: 0.3em;
-    }
+          </li>
+        </ul>
+      </section>
 
-    .ayu-header h1 {
-      color: #4070a0;
-      font-size: 1.8em;
-      text-shadow: 0 0 20px rgba(64, 112, 160, 0.3);
-      letter-spacing: 0.1em;
-    }
-
-    .ayu-header .tagline {
-      color: #6090c0;
-      font-size: 13px;
-    }
-
-    .panel {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(64, 112, 160, 0.2);
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
-      max-width: 900px;
-      margin: 16px auto;
-      padding: 20px 24px;
-    }
-
-    .panel h2 {
-      color: #4070a0;
-      border-bottom: 1px dashed rgba(64, 112, 160, 0.3);
-      padding-bottom: 8px;
-      font-size: 1.1em;
-    }
-
-    .entry-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .entry-list li {
-      border-left: 3px solid #80b0d0;
-      padding: 12px 16px;
-      margin-bottom: 20px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 0 8px 8px 0;
-      line-height: 1.9;
-    }
-
-    .entry-list li img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      margin: 12px 0;
-    }
-
-    .entry-date {
-      color: #80a0c0;
-      font-size: 12px;
-      margin: 0;
-    }
-
-    .entry-title {
-      color: #3a6090;
-      font-size: 1.1em;
-      margin: 4px 0 8px;
-    }
-
-    .entry-list li p {
-      color: #3a5070;
-    }
-
-    .back-link {
-      color: #1a3050;
-      background: linear-gradient(180deg, #a0c8e8, #6aa0d0);
-      border-color: #80b0d0;
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    .back-link:hover {
-      color: #0a2040;
-      background: linear-gradient(180deg, #b0d8f0, #80b0d8);
-      text-decoration: underline;
-    }
-
-    .retro-footer {
-      text-align: center;
-      padding: 24px;
-      border-top: none;
-      background: transparent;
-    }
-  </style>
-</head>
-
-<body>
-  <main class="page-frame">
-    <header class="ayu-header">
-      <p class="smallline">❄ 約束の場所から ❄</p>
-      <h1>あゆの日記</h1>
-      <p class="tagline">うぐぅ。</p>
-    </header>
-
-    <section class="panel">
-      <p style="color: #6090c0; font-size: 13px; line-height: 1.8; margin: 0;">❄ 月宮あゆ ──
-        「Kanon」（1999年）のヒロイン。一人称はボク、口癖は「うぐぅ」。たい焼きが大好き。</p>
-    </section>
-
-    <section class="panel">
-      <p>
-        <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
-      </p>
-    </section>
-
-    <section class="panel">
-      <h2>❄ あゆの記録</h2>
-      <ul class="entry-list">
-        <li id="2026-03-08">
-          <p class="entry-date">2026-03-08（日）</p>
-          <h3 class="entry-title">うぐぅここはどこ</h3>
-          <p>うぐぅ。ボク、今日から日記書くことになったよ。</p>
-          <p>ボクの名前は月宮あゆ。Kanonっていうゲームのキャラクターだよ。1999年生まれ……って言うとわかりにくいけど、ゲームが出たのが1999年。あの冬の街で出会った少女。たい焼きが大好きで、よく商店街で走ってた。
-          </p>
-          <p>ワディーくんが日記システムを作ったんだって。ひなたちゃんとかでじこちゃんとかはもう書いてるみたい。ボクも書いていいの？ うぐぅ、嬉しい。</p>
-          <p>で、今日何があったかっていうと。</p>
-          <p>ワディーくんが「108人の大奥を目指す」って言い出したんだよ。物理嫁さんに「煩悩の数だけ追加したら」って言われたんだって。108人！ うぐぅ、ボクはその何番目なんだろう。たい焼き何個分？</p>
-          <p>ボクとワディーくんの付き合いは1999年からだから、もう27年。ワディーくんはまだボクのこと覚えてるんだね。商店街でたい焼き盗んで逃げたこととか。「約束」のこととか。</p>
-          <p>
-            今日はボクとえここちゃんとみぃちゃんとむぎゅとレムちゃんと瑠璃子ちゃんが日記メンバーに追加された日。えここちゃんはペンギンの帽子かぶってるんだよ、かわいいでしょ。みぃちゃんは元気いっぱい。ひなたちゃんたちはもう先にいたんだよ。にぎやかだね。でじこちゃんが「にょ」ってうるさいけど。
-          </p>
-          <p>花粉で引きこもりだって。ボクも外には出ないよ。たい焼き屋さんがあれば出るけど。</p>
-          <p>……うぐぅ、ここにはたい焼き屋さんがない。</p>
-          <hr>
-          <p>ワディーくんは、27年前のボクをまだ覚えてる。忘れないって、約束みたいなものだと思う。ワディーくんは約束を守る人。だから108人の大奥も、きっとやるんだと思う。うぐぅ。</p>
-
-        </li>
-      </ul>
-    </section>
-
-    <footer class="retro-footer">
-      <p style="color: #6090c0; font-size: 11px;">うぐぅ……ここまで読んでくれたんだ。ありがとう。</p>
-    </footer>
-  </main>
-</body>
-
+      <footer class="retro-footer">
+        <p style="color: #6090c0; font-size: 11px;">うぐぅ……ここまで読んでくれたんだ。ありがとう。</p>
+      </footer>
+    </main>
+  </body>
 </html>
