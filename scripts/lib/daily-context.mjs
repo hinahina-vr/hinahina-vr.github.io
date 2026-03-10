@@ -1,5 +1,7 @@
-import { access, mkdir, readdir, readFile } from "node:fs/promises";
-import { basename, join, relative } from "node:path";
+import { access, cp, mkdir, readdir, readFile, rm } from "node:fs/promises";
+import { basename, dirname, join, relative } from "node:path";
+import os from "node:os";
+import { spawn } from "node:child_process";
 
 export const ROOT_DIR = join(import.meta.dirname, "..", "..");
 export const DIARY_DIR = join(ROOT_DIR, "diary");
@@ -9,6 +11,7 @@ export const DAILY_CONTEXT_DIR = join(LOCAL_DIR, "daily-context");
 export const RAW_DIR = join(DAILY_CONTEXT_DIR, "raw");
 export const DEBUG_DIR = join(DAILY_CONTEXT_DIR, "debug");
 export const CONFIG_PATH = join(ROOT_DIR, "daily-context.config.json");
+export const SYSTEM_CHROME_USER_DATA_DIR = join(os.homedir(), "AppData", "Local", "Google", "Chrome", "User Data");
 
 export const DAILY_CONTEXT_START = "<!-- daily-context:start -->";
 export const DAILY_CONTEXT_END = "<!-- daily-context:end -->";
@@ -58,7 +61,10 @@ export async function loadDailyContextConfig() {
     throw new Error(`Invalid daily context config: ${CONFIG_PATH}`);
   }
 
-  return config;
+  return {
+    browserChannel: "chrome",
+    ...config,
+  };
 }
 
 export function getDateStringInTimeZone(date = new Date(), timeZone = "Asia/Tokyo") {
@@ -156,6 +162,112 @@ export async function resolveMainDiaryFile({ date, file }) {
     relPath: `diary/${files[0]}`,
     date,
   };
+}
+
+export async function getChromeProfileInfo() {
+  const localStatePath = join(SYSTEM_CHROME_USER_DATA_DIR, "Local State");
+  if (!(await pathExists(localStatePath))) {
+    throw new Error(`Chrome Local State not found: ${localStatePath}`);
+  }
+
+  const localState = JSON.parse(await readFile(localStatePath, "utf-8"));
+  const profile = localState?.profile;
+  const profileDirectory = profile?.last_used ?? "Default";
+  const profileName = profile?.info_cache?.[profileDirectory]?.name ?? profileDirectory;
+
+  return {
+    userDataDir: SYSTEM_CHROME_USER_DATA_DIR,
+    localStatePath,
+    profileDirectory,
+    profileName,
+  };
+}
+
+export async function seedAuthProfileFromChrome() {
+  const chrome = await getChromeProfileInfo();
+  const sourceProfileDir = join(chrome.userDataDir, chrome.profileDirectory);
+  const sourceCookiesPath = join(sourceProfileDir, "Network", "Cookies");
+  const destProfileDir = join(AUTH_DIR, chrome.profileDirectory);
+  const destCookiesPath = join(destProfileDir, "Network", "Cookies");
+
+  if (!(await pathExists(sourceProfileDir))) {
+    throw new Error(`Chrome profile not found: ${sourceProfileDir}`);
+  }
+
+  await rm(AUTH_DIR, { recursive: true, force: true });
+  await ensureDir(AUTH_DIR);
+  await cp(chrome.localStatePath, join(AUTH_DIR, "Local State"));
+  await cp(sourceProfileDir, destProfileDir, {
+    recursive: true,
+    force: true,
+    filter: (src) => {
+      const normalized = src.replace(/\\/g, "/");
+      if (/\/(Network|Safe Browsing Network)\/.*Cookies(-journal)?$/i.test(normalized)) return false;
+      if (/\/(History|History-journal|Login Data|Login Data For Account|Login Data-journal|Web Data|Web Data-journal|Visited Links|Current Session|Current Tabs|Last Session|Last Tabs|LOCK|SingletonCookie|SingletonLock|SingletonSocket)$/i.test(normalized)) return false;
+      return !/\/(Cache|Code Cache|GPUCache|Service Worker|ShaderCache|GrShaderCache|GraphiteDawnCache|Crashpad|DawnGraphiteCache|DawnWebGPUCache|Sessions)\b/i.test(normalized);
+    },
+  });
+  await backupSqliteFile(sourceCookiesPath, destCookiesPath);
+
+  return {
+    ...chrome,
+    seededAuthDir: AUTH_DIR,
+  };
+}
+
+async function backupSqliteFile(sourcePath, destinationPath) {
+  if (!(await pathExists(sourcePath))) return;
+
+  await ensureDir(dirname(destinationPath));
+
+  const pythonScript = [
+    "import pathlib, sqlite3, sys",
+    "src = pathlib.Path(sys.argv[1])",
+    "dst = pathlib.Path(sys.argv[2])",
+    "dst.parent.mkdir(parents=True, exist_ok=True)",
+    "src_uri = 'file:' + src.resolve().as_posix() + '?mode=ro'",
+    "src_db = sqlite3.connect(src_uri, uri=True, timeout=5)",
+    "dst_db = sqlite3.connect(str(dst))",
+    "src_db.backup(dst_db)",
+    "dst_db.close()",
+    "src_db.close()",
+  ].join("; ");
+
+  const runners = [
+    { command: "python", args: ["-c", pythonScript, sourcePath, destinationPath] },
+    { command: "py", args: ["-3", "-c", pythonScript, sourcePath, destinationPath] },
+  ];
+
+  let lastError = null;
+  for (const runner of runners) {
+    try {
+      await runCommand(runner.command, runner.args);
+      return;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError ?? new Error(`Failed to back up sqlite file: ${sourcePath}`);
+}
+
+async function runCommand(command, args) {
+  await new Promise((resolve, reject) => {
+    const child = spawn(command, args, { stdio: ["ignore", "ignore", "pipe"], windowsHide: true });
+    let stderr = "";
+
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString();
+    });
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+      reject(new Error(`${command} exited with code ${code}: ${stderr.trim()}`));
+    });
+  });
 }
 
 export function renderDailyContextBlock(normalized) {

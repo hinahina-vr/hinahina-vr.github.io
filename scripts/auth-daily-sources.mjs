@@ -1,5 +1,5 @@
 import { chromium } from "playwright";
-import { AUTH_DIR, ensureDir, loadDailyContextConfig } from "./lib/daily-context.mjs";
+import { AUTH_DIR, ensureDir, getChromeProfileInfo, loadDailyContextConfig, seedAuthProfileFromChrome } from "./lib/daily-context.mjs";
 
 function normalizeWhitespace(value) {
   return value.replace(/\s+/g, " ").trim().toLowerCase();
@@ -41,10 +41,13 @@ async function waitForLogin(page, sourceName, timeoutMs = 240000) {
 async function main() {
   const config = await loadDailyContextConfig();
   await ensureDir(AUTH_DIR);
+  const chromeProfile = await seedAuthProfileFromChrome().catch(async () => getChromeProfileInfo());
 
   const context = await chromium.launchPersistentContext(AUTH_DIR, {
+    channel: config.browserChannel,
     headless: false,
     viewport: { width: 1440, height: 960 },
+    args: [`--profile-directory=${chromeProfile.profileDirectory}`],
   });
 
   try {
@@ -54,7 +57,7 @@ async function main() {
     const xPage = await context.newPage();
     await xPage.goto(`https://x.com/${config.xHandle}`, { waitUntil: "domcontentloaded", timeout: 45000 });
 
-    console.log("[daily-context] Swarm と X を開きました。必要ならブラウザでログインしてください。");
+    console.log(`[daily-context] Chrome プロファイル '${chromeProfile.profileName}' のコピーを開きました。必要ならブラウザでログインしてください。`);
     console.log("[daily-context] ログイン状態を最大4分待機して自動保存します。");
 
     const status = await Promise.all([

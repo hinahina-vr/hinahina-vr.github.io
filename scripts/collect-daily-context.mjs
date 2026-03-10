@@ -15,6 +15,7 @@ import {
   pathExists,
   renderDailyContextBlock,
   resolveMainDiaryFile,
+  seedAuthProfileFromChrome,
   upsertDailyContextBlock,
 } from "./lib/daily-context.mjs";
 
@@ -389,9 +390,7 @@ async function collectAndWrite(options) {
     return;
   }
 
-  if (!(await pathExists(AUTH_DIR))) {
-    throw new Error(`Missing auth profile: ${AUTH_DIR}. Run npm run auth:daily-sources`);
-  }
+  await seedAuthProfileFromChrome();
 
   await ensureDir(DAILY_CONTEXT_DIR);
   await ensureDir(RAW_DIR);
@@ -402,6 +401,7 @@ async function collectAndWrite(options) {
 
   try {
     context = await chromium.launchPersistentContext(AUTH_DIR, {
+      channel: config.browserChannel,
       headless: !options.headed,
       viewport: { width: 1440, height: 960 },
     });

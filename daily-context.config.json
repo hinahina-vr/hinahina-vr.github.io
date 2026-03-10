@@ -1,5 +1,6 @@
 {
   "timezone": "Asia/Tokyo",
   "swarmHistoryUrl": "https://ja.swarmapp.com/history",
-  "xHandle": "hinahina_vr"
+  "xHandle": "hinahina_vr",
+  "browserChannel": "chrome"
 }
