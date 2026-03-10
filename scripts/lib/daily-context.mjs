@@ -215,6 +215,20 @@ export async function seedAuthProfileFromChrome() {
   };
 }
 
+export async function cleanupAuthProfileLocks(profileRoot = AUTH_DIR) {
+  const names = [
+    "lockfile",
+    "SingletonCookie",
+    "SingletonLock",
+    "SingletonSocket",
+    "DevToolsActivePort",
+  ];
+
+  for (const name of names) {
+    await rm(join(profileRoot, name), { force: true }).catch(() => {});
+  }
+}
+
 async function backupSqliteFile(sourcePath, destinationPath) {
   if (!(await pathExists(sourcePath))) return;
 
@@ -271,7 +285,9 @@ async function runCommand(command, args) {
 }
 
 export function renderDailyContextBlock(normalized) {
-  const swarmLines = normalized.sources.swarm.items.length > 0
+  const swarmLines = normalized.sources.swarm.status === "error"
+    ? [`- 取得できず: ${clipText(normalized.sources.swarm.note || "不明なエラー", 120)}`]
+    : normalized.sources.swarm.items.length > 0
     ? normalized.sources.swarm.items.flatMap((item) => {
       const details = [formatTimeInTimeZone(item.checkedInAt, normalized.timezone)];
       if (item.venueArea) details.push(item.venueArea);
@@ -282,9 +298,11 @@ export function renderDailyContextBlock(normalized) {
     })
     : ["- 該当なし"];
 
-  const xLines = normalized.sources.x.items
-    .filter((item) => item.kind !== "repost")
-    .map((item) => `- ${formatTimeInTimeZone(item.postedAt, normalized.timezone)} ${item.kind}: ${clipText(item.text || "(本文なし)", 120)}`);
+  const xLines = normalized.sources.x.status === "error"
+    ? [`- 取得できず: ${clipText(normalized.sources.x.note || "不明なエラー", 120)}`]
+    : normalized.sources.x.items
+      .filter((item) => item.kind !== "repost")
+      .map((item) => `- ${formatTimeInTimeZone(item.postedAt, normalized.timezone)} ${item.kind}: ${clipText(item.text || "(本文なし)", 120)}`);
 
   const topicLines = normalized.candidateTopics.length > 0
     ? normalized.candidateTopics.map((topic) => `- ${topic}`)

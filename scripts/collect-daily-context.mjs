@@ -8,6 +8,7 @@ import {
   RAW_DIR,
   addDays,
   buildCandidateTopics,
+  cleanupAuthProfileLocks,
   ensureDir,
   getDateStringForValue,
   getDateStringInTimeZone,
@@ -15,9 +16,10 @@ import {
   pathExists,
   renderDailyContextBlock,
   resolveMainDiaryFile,
-  seedAuthProfileFromChrome,
   upsertDailyContextBlock,
 } from "./lib/daily-context.mjs";
+
+const DEFAULT_CDP_URL = "http://127.0.0.1:9222";
 
 function parseArgs(argv) {
   const options = {
@@ -25,6 +27,8 @@ function parseArgs(argv) {
     headed: false,
     date: null,
     file: null,
+    existingChrome: false,
+    cdpUrl: DEFAULT_CDP_URL,
   };
 
   for (let index = 2; index < argv.length; index += 1) {
@@ -49,6 +53,16 @@ function parseArgs(argv) {
       index += 1;
       continue;
     }
+    if (arg === "--existing-chrome") {
+      options.existingChrome = true;
+      continue;
+    }
+    if (arg === "--cdp-url") {
+      if (!argv[index + 1]) throw new Error("--cdp-url requires a value");
+      options.cdpUrl = argv[index + 1];
+      index += 1;
+      continue;
+    }
 
     if (/^\d{4}-\d{2}-\d{2}$/.test(arg) && !options.date) {
       options.date = arg;
@@ -62,6 +76,10 @@ function parseArgs(argv) {
 
     if (arg === "headed") {
       options.headed = true;
+      continue;
+    }
+    if (arg === "existing-chrome") {
+      options.existingChrome = true;
       continue;
     }
 
@@ -104,13 +122,19 @@ function isLoginErrorText(sourceName, url, bodyText) {
     return url.includes("/i/flow/login")
       || condensed.includes("sign in to x")
       || condensed.includes("join x today")
-      || condensed.includes("happening now");
+      || condensed.includes("happening now")
+      || condensed.includes("xにログイン")
+      || condensed.includes("アカウント作成");
   }
 
   return /login|signin/.test(url)
     || condensed.includes("log in")
     || condensed.includes("sign in")
     || condensed.includes("join foursquare");
+}
+
+function isXLoginRedirect(page) {
+  return page.url().includes("/i/flow/login");
 }
 
 async function assertLoggedIn(page, sourceName) {
@@ -321,7 +345,16 @@ async function extractXSnapshot(page) {
 async function collectXForDate(page, date, timeZone, config) {
   await page.goto(buildXSearchUrl(config.xHandle, date), { waitUntil: "domcontentloaded", timeout: 45000 });
   await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
-  await assertLoggedIn(page, "x");
+  if (isXLoginRedirect(page)) {
+    await page.goto(`https://x.com/${config.xHandle}/with_replies`, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+  }
+
+  const xBodyText = await page.locator("body").innerText().catch(() => "");
+  const xArticleCount = await page.locator("article[data-testid='tweet']").count().catch(() => 0);
+  if (xArticleCount === 0 && isLoginErrorText("x", page.url().toLowerCase(), xBodyText)) {
+    throw new Error("X timeline could not be accessed from the current Chrome session");
+  }
 
   const collected = [];
   let stagnantPasses = 0;
@@ -379,6 +412,52 @@ async function updateDiaryFile(targetFile, normalized) {
   await writeFile(targetFile.absPath, updated, "utf-8");
 }
 
+async function openCollectionSession(options, config) {
+  if (options.existingChrome) {
+    const browser = await chromium.connectOverCDP(options.cdpUrl);
+    const context = browser.contexts()[0];
+    if (!context) {
+      throw new Error(`No default browser context found at ${options.cdpUrl}`);
+    }
+
+    const swarmPage = await context.newPage();
+    const xPage = await context.newPage();
+
+    return {
+      swarmPage,
+      xPage,
+      close: async () => {
+        await swarmPage.close().catch(() => {});
+        await xPage.close().catch(() => {});
+      },
+    };
+  }
+
+  if (!(await pathExists(AUTH_DIR))) {
+    throw new Error(`Missing auth profile: ${AUTH_DIR}. Run npm run auth:daily-sources`);
+  }
+  await cleanupAuthProfileLocks();
+
+  const context = await chromium.launchPersistentContext(AUTH_DIR, {
+    channel: config.browserChannel,
+    headless: !options.headed,
+    ignoreDefaultArgs: ["--enable-automation"],
+    viewport: { width: 1440, height: 960 },
+    args: ["--disable-blink-features=AutomationControlled"],
+  });
+
+  const swarmPage = context.pages()[0] ?? await context.newPage();
+  const xPage = await context.newPage();
+
+  return {
+    swarmPage,
+    xPage,
+    close: async () => {
+      await context.close().catch(() => {});
+    },
+  };
+}
+
 async function collectAndWrite(options) {
   const config = await loadDailyContextConfig();
   const fileDate = options.file ? basename(options.file).match(/^(\d{4}-\d{2}-\d{2})_/u)?.[1] : null;
@@ -390,27 +469,49 @@ async function collectAndWrite(options) {
     return;
   }
 
-  await seedAuthProfileFromChrome();
-
   await ensureDir(DAILY_CONTEXT_DIR);
   await ensureDir(RAW_DIR);
 
-  let context;
   let swarmPage;
   let xPage;
+  let session;
 
   try {
-    context = await chromium.launchPersistentContext(AUTH_DIR, {
-      channel: config.browserChannel,
-      headless: !options.headed,
-      viewport: { width: 1440, height: 960 },
-    });
+    session = await openCollectionSession(options, config);
+    swarmPage = session.swarmPage;
+    xPage = session.xPage;
 
-    swarmPage = context.pages()[0] ?? await context.newPage();
-    const swarm = await collectSwarmForDate(swarmPage, date, config.timezone, config);
+    let swarm;
+    try {
+      swarm = await collectSwarmForDate(swarmPage, date, config.timezone, config);
+      swarm = { status: "ok", note: null, ...swarm };
+    } catch (error) {
+      await saveDebugArtifacts(swarmPage, `swarm-${date}`, error);
+      swarm = {
+        status: "error",
+        note: error.message,
+        sourceUrl: swarmPage?.url?.() ?? config.swarmHistoryUrl,
+        items: [],
+      };
+    }
 
-    xPage = await context.newPage();
-    const x = await collectXForDate(xPage, date, config.timezone, config);
+    let x;
+    try {
+      x = await collectXForDate(xPage, date, config.timezone, config);
+      x = { status: "ok", note: null, ...x };
+    } catch (error) {
+      await saveDebugArtifacts(xPage, `x-${date}`, error);
+      x = {
+        status: "error",
+        note: error.message,
+        sourceUrl: xPage?.url?.() ?? `https://x.com/${config.xHandle}`,
+        items: [],
+      };
+    }
+
+    if (swarm.status === "error" && x.status === "error") {
+      throw new Error(`All sources failed: swarm=${swarm.note}; x=${x.note}`);
+    }
 
     const normalized = {
       date,
@@ -428,12 +529,16 @@ async function collectAndWrite(options) {
     const swarmRaw = {
       date,
       collectedAt: normalized.generatedAt,
+      status: swarm.status,
+      note: swarm.note,
       sourceUrl: swarm.sourceUrl,
       items: swarm.items,
     };
     const xRaw = {
       date,
       collectedAt: normalized.generatedAt,
+      status: x.status,
+      note: x.note,
       sourceUrl: x.sourceUrl,
       items: x.items,
     };
@@ -450,7 +555,7 @@ async function collectAndWrite(options) {
     await saveDebugArtifacts(xPage, `x-${date}`, error);
     throw error;
   } finally {
-    await context?.close().catch(() => {});
+    await session?.close().catch(() => {});
   }
 }
 
@@ -459,9 +564,11 @@ async function main() {
 
   try {
     await collectAndWrite(options);
+    if (options.existingChrome) process.exit(0);
   } catch (error) {
     if (options.bestEffort) {
       console.warn(`[daily-context] skipped: ${error.message}`);
+      if (options.existingChrome) process.exit(0);
       return;
     }
 

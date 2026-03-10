@@ -98,7 +98,9 @@ async function main() {
         padding: 20px 24px;
       }
       .panel h2 {
-        color: #c8a0e8;
+        background: none;
+        border: none;
+        text-shadow: none;
         border-bottom: 1px dashed rgba(160, 120, 200, 0.3);
         padding-bottom: 8px;
         font-size: 1.1em;
