@@ -19,7 +19,13 @@
         "build:diary-tsumugi": "node scripts/build-diary-tsumugi.mjs",
         "build:diary-ecoko": "node scripts/build-diary-ecoko.mjs",
         "build:diary-mii": "node scripts/build-diary-mii.mjs",
-        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-video-scripts.mjs"
+        "build:diary-kud": "node scripts/build-diary-kud.mjs",
+        "build:diary-feiris": "node scripts/build-diary-feiris.mjs",
+        "build:diary-kotomi": "node scripts/build-diary-kotomi.mjs",
+        "build:diary-minagi": "node scripts/build-diary-minagi.mjs",
+        "build:diary-kiku8": "node scripts/build-diary-kiku8.mjs",
+        "build:diary-mint": "node scripts/build-diary-mint.mjs",
+        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-diary-kud.mjs && node scripts/build-diary-feiris.mjs && node scripts/build-diary-kotomi.mjs && node scripts/build-diary-minagi.mjs && node scripts/build-diary-kiku8.mjs && node scripts/build-diary-mint.mjs && node scripts/build-video-scripts.mjs"
     },
     "devDependencies": {
         "marked": "^15.0.0"

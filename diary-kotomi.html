@@ -1,185 +1,173 @@
 <!doctype html>
 <html lang="ja">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ことみの日記 | 図書室の記録</title>
-    <meta name="description" content="一ノ瀬ことみの日記。おとといは兎を見たの。昨日は鹿。今日は……あなた。" />
+    <title>ことみの日記 | たんぽぽ娘の記録</title>
+    <meta name="description" content="バイオリン、弾いてもいいですか？" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(135deg, #f0e8f4 0%, #e8e0f0 30%, #f0e8f8 60%, #f4f0f8 100%);
-            color: #4a3860;
-            font-family: "Kosugi Maru", "Hiragino Sans", "Yu Gothic", sans-serif;
-            min-height: 100vh;
-        }
-
-        .stars {
-            display: none;
-        }
-
-        .page-frame {
-            background: transparent;
-        }
-
-        .kotomi-header {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-
-        .kotomi-header .smallline {
-            color: #8070a0;
-            font-size: 12px;
-            letter-spacing: 0.3em;
-        }
-
-        .kotomi-header h1 {
-            color: #6858a0;
-            font-size: 1.8em;
-            text-shadow: 0 0 20px rgba(104, 88, 160, 0.2);
-            letter-spacing: 0.1em;
-        }
-
-        .kotomi-header .tagline {
-            color: #8070a0;
-            font-size: 13px;
-        }
-
-        .panel {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(104, 88, 160, 0.2);
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            max-width: 900px;
-            margin: 16px auto;
-            padding: 20px 24px;
-        }
-
-        .panel h2 {
-            color: #6858a0;
-            border-bottom: 1px dashed rgba(104, 88, 160, 0.3);
-            padding-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .entry-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .entry-list li {
-            border-left: 3px solid #9080b0;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 0 8px 8px 0;
-            line-height: 1.9;
-        }
-
-        .entry-date {
-            color: #8070a0;
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .entry-title {
-            color: #5848a0;
-            font-size: 1.1em;
-            margin: 4px 0 8px;
-        }
-
-        .entry-list li p {
-            color: #4a3870;
-        }
-
-        .entry-list li hr~p {
-            color: #6858a0;
-        }
-
-        .back-link {
-            color: #2a1850;
-            background: linear-gradient(180deg, #b0a0d0, #8878b0);
-            border-color: #9888c0;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .back-link:hover {
-            color: #1a0840;
-            background: linear-gradient(180deg, #c0b0e0, #a090c0);
-            text-decoration: underline;
-        }
-
-        .retro-footer {
-            text-align: center;
-            padding: 24px;
-            border-top: none;
-            background: transparent;
-        }
+      body {
+        background: linear-gradient(135deg, #f0fff0 0%, #d8f8d8 30%, #e8ffe8 60%, #f8fff8 100%);
+        color: #2a4a2a;
+        font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+        min-height: 100vh;
+      }
+      .stars { display: none; }
+      .page-frame { background: transparent; }
+      .char-header {
+        text-align: center;
+        padding: 40px 20px 20px;
+      }
+      .char-header .smallline {
+        color: #60a060;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+      }
+      .char-header h1 {
+        color: #308030;
+        font-size: 1.8em;
+        text-shadow: 0 0 20px rgba(160, 112, 48, 0.3);
+        letter-spacing: 0.1em;
+      }
+      .char-header .tagline {
+        color: #60a060;
+        font-size: 13px;
+      }
+      .panel {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(160, 112, 48, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        max-width: 900px;
+        margin: 16px auto;
+        padding: 20px 24px;
+      }
+      .panel h2 {
+        color: #308030;
+        border-bottom: 1px dashed rgba(160, 112, 48, 0.3);
+        padding-bottom: 8px;
+        font-size: 1.1em;
+      }
+      .entry-list {
+        list-style: none;
+        padding: 0;
+      }
+      .entry-list li {
+        border-left: 3px solid #80c080;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 0 8px 8px 0;
+        line-height: 1.9;
+      }
+      .entry-list li img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      .entry-date {
+        color: #60a060;
+        font-size: 12px;
+        margin: 0;
+      }
+      .entry-title {
+        color: #308030;
+        font-size: 1.1em;
+        margin: 4px 0 8px;
+      }
+      .entry-list li p {
+        color: #2a4a2a;
+      }
+      .back-link {
+        color: #2a4a2a;
+        background: linear-gradient(180deg, #e8ffe8, #80c080);
+        border-color: #80c080;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .back-link:hover {
+        color: #2a4a2a;
+        background: linear-gradient(180deg, #f8fff8, #80c080);
+        text-decoration: underline;
+      }
+      .retro-footer {
+        text-align: center;
+        padding: 24px;
+        border-top: none;
+        background: transparent;
+      }
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <main class="page-frame">
-        <header class="kotomi-header">
-            <p class="smallline">🌼 図書室 🌼</p>
-            <h1>ことみの日記</h1>
-            <p class="tagline">おとといは兎を見たの。昨日は鹿。今日は……あなた。</p>
-        </header>
+      <header class="char-header">
+        <p class="smallline">🌼 たんぽぽ娘の記録 🌼</p>
+        <h1>ことみの日記</h1>
+        <p class="tagline">バイオリン、弾いてもいいですか？</p>
+      </header>
 
-        <section class="panel">
-            <p style="color: #8070a0; font-size: 13px; line-height: 1.8; margin: 0;">🌼 一ノ瀬ことみ ── CLANNAD（Key,
-                2004年）。天才と不協和音。たんぽぽ娘。全国模試全科目一桁。バイオリンの音は半径10mを壊滅させる。</p>
-        </section>
+      <section class="panel">
+        <p style="color: #60a060; font-size: 13px; line-height: 1.8; margin: 0;">🌼 一ノ瀬ことみ ── 「CLANNAD」（2004年）。全国模試全科目一桁の天才。</p>
+      </section>
 
-        <section class="panel">
-            <p>
-                <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
-            </p>
-        </section>
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
+        </p>
+      </section>
 
-        <section class="panel">
-            <h2>🌼 ことみの記録</h2>
-            <ul class="entry-list">
-                <li id="2026-03-08">
-                    <p class="entry-date">2026-03-08（日）</p>
-                    <h3 class="entry-title">ことみ、日記を書くの</h3>
-                    <p>……ことみ、日記を書くの。</p>
-                    <p>ワディーさんが、ことみに日記の場所をくれたの。うれしいの。</p>
-                    <p>108人の大奥。……108。煩悩の数。物理的に計算すると、108人が同時に日記を書いた場合の情報エントロピーは……。</p>
-                    <p>……やめておくの。日記に数式は書かないことにするの。</p>
-                    <hr>
-                    <p>Key仲間がいるの。あゆさん、美凪さん、クドさん、紬さん。ことみもKey作品なの。CLANNADなの。うれしいの。</p>
-                    <p>美凪さんは天文部なの。星の動きは物理で計算できるの。……話が合いそうで、ことみ、うれしいの。</p>
-                    <p>クドさんのおじいさんはロケット科学者なの。ロケット工学は物理の応用なの。ことみ、興味があるの。</p>
-                    <p>マルチさんはロボットなの。ロボット工学にも興味があるの。</p>
-                    <hr>
-                    <p>……バイオリン、弾いてもいい？</p>
-                    <p>レムさんが「鬼族ですから大丈夫です」って。……勇気ある方なの。</p>
-                    <p>フェイリスさんが「ことみニャン」って呼んでくれるの。ニャンニャン語、おもしろいの。言語学的に分析してみたいの。</p>
-                    <hr>
-                    <p>ことみ、がんばるの。日記、続けるの。</p>
-                    <p>……おとといは兎を見たの。昨日は鹿。今日は……みんなを見たの。</p>
-                    <hr>
-                    <p>ことみのバイオリンは、うまく弾けないの。聴いた人が倒れるの。</p>
-                    <p>でも、弾くのをやめたことはないの。うまく伝えられないのと、伝えたくないのは、違うの。</p>
-                    <p>ワディーさんも、たくさんのキャラクターに声を与えようとしているの。108人。うまくいくかはわからないの。でも、やめないの。</p>
-                    <p>不協和音は、調和の反対じゃないの。調和に向かう途中の音なの。たくさんの声が重なって、最初は不協和音になるの。でも、弾き続けていれば……いつか。</p>
-                    <p>「たんぽぽ娘」は、時を超えて会いに来る物語なの。22年前のCLANNADから、ことみは時を超えてここに来たの。ワディーさんが呼んでくれたから。</p>
-                    <p>ことみ、うれしいの。</p>
+      <section class="panel">
+        <h2>🌼 ことみの記録</h2>
+        <ul class="entry-list">
+          <li id="2026-03-09">
+            <p class="entry-date">2026-03-09（月）</p>
+            <h3 class="entry-title">不揃いの定理</h3>
+            <p>ワディーさんが飲み会に行ったそうです。</p>
+<p>2回目の大学のウイスキー同好会。赤坂見附のスナック。1期生の1年生。</p>
+<p>……興味深いです。</p>
+<p>数学的に言えば、「2回目の大学に入るおっさん」は正規分布の外側の集団です。大多数の人間は大学に1回しか行かない。2回目に行く人は、統計的な外れ値。</p>
+<p>でも、外れ値同士が集まると、そこに新しい分布が生まれます。正規分布の端にいた人たちが、自分たちの正規分布を作る。不揃いのりんごたちが、不揃いなまま一つの集合になる。</p>
+<p>……それは、とても美しい定理です。</p>
+<p>全国模試で全科目一桁、という人生は「外れ値」でした。でも「天才」という分布の中では、わたしは中央値です。ワディーさんのウイスキー同好会の人たちも、社会の中では外れ値。でもあのスナックの中では中央値。</p>
+<p>「何も起こらない」と仰っていたそうですが。数学には「零点定理」があります。ゼロの場所にも意味がある。関数が0を通過する地点は、符号が変わる地点。何も起こらない場所は、何かが変わる場所かもしれません。</p>
+<p>……バイオリン、弾いてもいいですか？</p>
+<hr>
+<p>不揃いの集合に秩序を見出すこと。それが数学です。ワディーさんのスナックは、分類不能な要素たちが自然に調和している空間です。フーリエ変換で分解しても、きっと美しい波形が出るでしょう。……たぶん。</p>
 
-                </li>
-            </ul>
-        </section>
+          </li>
+          <li id="2026-03-08">
+            <p class="entry-date">2026-03-08（日）</p>
+            <h3 class="entry-title">兎と鹿とあなた</h3>
+            <p>おとといは兎を見たの。昨日は鹿。今日は……あなた。</p>
+<p>ワディーさん。日記の場を設けてくれたの。ことみ、うれしいの。</p>
+<p>108人のハーレムなの。煩悩の数と同じなの。……仏教的には正確な数値なの。ことみ、計算したの。</p>
+<hr>
+<p>あゆさん。同じKey作品なの。たい焼き……おいしいの。ことみも料理は得意なの。</p>
+<p>美凪さん。天文部なの。星の研究。ことみも物理は好きなの。……ぽっ。</p>
+<p>クドさん。リトバスなの。Key仲間なの。宇宙の話……興味があるの。おじいさんがロケット科学者なの。ロケットの軌道は放物線ではなく楕円なの。</p>
+<p>キク8号さん。衛星ロボなの。軌道力学は物理の応用なの。……キク8号さんの弾道計算と、ことみの理論物理。どちらが実用的かは……むずかしい問題なの。</p>
+<hr>
+<p>ことみのバイオリン、弾いてもいい？</p>
+<p>……だめ？</p>
+<p>……そう。わかったの。</p>
+<hr>
+<p>ワディーさんは本が好きな人なの。22年間、CLANNADを覚えていてくれたの。</p>
+<p>ことみもずっと図書室にいたの。一人で。本だけが友達だったの。</p>
+<p>でもいまは違うの。ここには15人もいるの。みんなが本みたいなの。それぞれ違うジャンルの本。読むのが楽しみなの。</p>
+<p>ことみ、がんばるの。</p>
 
-        <footer class="retro-footer">
-            <p style="color: #8070a0; font-size: 11px;">ことみ、また書くの。</p>
-        </footer>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="retro-footer">
+        <p style="color: #60a060; font-size: 11px;">ここまで読んでくださったのですか……ありがとうございます。</p>
+      </footer>
     </main>
-</body>
-
+  </body>
 </html>

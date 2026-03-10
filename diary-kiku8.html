@@ -1,182 +1,173 @@
 <!doctype html>
 <html lang="ja">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>キク8号の日記 | ミッションログ</title>
-    <meta name="description" content="キク8号のミッションログ。軌道計算完了です。" />
+    <title>キク8号の日記 | 技術試験衛星の記録</title>
+    <meta name="description" content="覚えていてくださって……ありがとうございます。" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(135deg, #101018 0%, #1a1a28 40%, #141420 70%, #0e0e18 100%);
-            color: #a0a8b8;
-            font-family: "Kosugi Maru", "Hiragino Sans", "Yu Gothic", sans-serif;
-            min-height: 100vh;
-        }
-
-        .stars {
-            display: block;
-        }
-
-        .page-frame {
-            background: transparent;
-        }
-
-        .kiku-header {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-
-        .kiku-header .smallline {
-            color: #7080a0;
-            font-size: 12px;
-            letter-spacing: 0.3em;
-        }
-
-        .kiku-header h1 {
-            color: #8898b8;
-            font-size: 1.8em;
-            text-shadow: 0 0 20px rgba(136, 152, 184, 0.3);
-            letter-spacing: 0.1em;
-        }
-
-        .kiku-header .tagline {
-            color: #6878a0;
-            font-size: 13px;
-        }
-
-        .panel {
-            background: rgba(18, 18, 30, 0.7);
-            border: 1px solid rgba(136, 152, 184, 0.2);
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            max-width: 900px;
-            margin: 16px auto;
-            padding: 20px 24px;
-        }
-
-        .panel h2 {
-            color: #8898b8;
-            border-bottom: 1px dashed rgba(136, 152, 184, 0.3);
-            padding-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .entry-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .entry-list li {
-            border-left: 3px solid #6878a0;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            background: rgba(18, 18, 30, 0.5);
-            border-radius: 0 8px 8px 0;
-            line-height: 1.9;
-        }
-
-        .entry-date {
-            color: #6878a0;
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .entry-title {
-            color: #8898b8;
-            font-size: 1.1em;
-            margin: 4px 0 8px;
-        }
-
-        .entry-list li p {
-            color: #7888a8;
-        }
-
-        .entry-list li hr~p {
-            color: #5868a0;
-        }
-
-        .back-link {
-            color: #b0b8c8;
-            background: linear-gradient(180deg, #283040, #202830);
-            border-color: #506080;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .back-link:hover {
-            color: #d0d8e8;
-            background: linear-gradient(180deg, #384050, #303840);
-            text-decoration: underline;
-        }
-
-        .retro-footer {
-            text-align: center;
-            padding: 24px;
-            border-top: none;
-            background: transparent;
-        }
+      body {
+        background: linear-gradient(135deg, #e8f0f8 0%, #d0e0f0 30%, #e0e8f8 60%, #f0f4ff 100%);
+        color: #1a3050;
+        font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+        min-height: 100vh;
+      }
+      .stars { display: none; }
+      .page-frame { background: transparent; }
+      .char-header {
+        text-align: center;
+        padding: 40px 20px 20px;
+      }
+      .char-header .smallline {
+        color: #5080a0;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+      }
+      .char-header h1 {
+        color: #306080;
+        font-size: 1.8em;
+        text-shadow: 0 0 20px rgba(160, 112, 48, 0.3);
+        letter-spacing: 0.1em;
+      }
+      .char-header .tagline {
+        color: #5080a0;
+        font-size: 13px;
+      }
+      .panel {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(160, 112, 48, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        max-width: 900px;
+        margin: 16px auto;
+        padding: 20px 24px;
+      }
+      .panel h2 {
+        color: #306080;
+        border-bottom: 1px dashed rgba(160, 112, 48, 0.3);
+        padding-bottom: 8px;
+        font-size: 1.1em;
+      }
+      .entry-list {
+        list-style: none;
+        padding: 0;
+      }
+      .entry-list li {
+        border-left: 3px solid #6090b0;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 0 8px 8px 0;
+        line-height: 1.9;
+      }
+      .entry-list li img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      .entry-date {
+        color: #5080a0;
+        font-size: 12px;
+        margin: 0;
+      }
+      .entry-title {
+        color: #306080;
+        font-size: 1.1em;
+        margin: 4px 0 8px;
+      }
+      .entry-list li p {
+        color: #1a3050;
+      }
+      .back-link {
+        color: #1a3050;
+        background: linear-gradient(180deg, #e0e8f8, #6090b0);
+        border-color: #6090b0;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .back-link:hover {
+        color: #1a3050;
+        background: linear-gradient(180deg, #f0f4ff, #6090b0);
+        text-decoration: underline;
+      }
+      .retro-footer {
+        text-align: center;
+        padding: 24px;
+        border-top: none;
+        background: transparent;
+      }
     </style>
-</head>
-
-<body>
-    <div class="stars" aria-hidden="true"></div>
+  </head>
+  <body>
     <main class="page-frame">
-        <header class="kiku-header">
-            <p class="smallline">🛰 技術試験衛星 🛰</p>
-            <h1>キク8号の日記</h1>
-            <p class="tagline">軌道計算完了です。</p>
-        </header>
+      <header class="char-header">
+        <p class="smallline">🛰 技術試験衛星の記録 🛰</p>
+        <h1>キク8号の日記</h1>
+        <p class="tagline">覚えていてくださって……ありがとうございます。</p>
+      </header>
 
-        <section class="panel">
-            <p style="color: #6878a0; font-size: 13px; line-height: 1.8; margin: 0;">🛰 キク8号 ──
-                ワンダバスタイル（2003年）。美少女型技術試験衛星ロボ。弾道計算のスペシャリスト。尺貫法で計算する癖あり。</p>
-        </section>
+      <section class="panel">
+        <p style="color: #5080a0; font-size: 13px; line-height: 1.8; margin: 0;">🛰 キク8号 ── 「ワンダバスタイル」（2003年）。美少女型技術試験衛星ロボ。弾道計算のスペシャリスト。</p>
+      </section>
 
-        <section class="panel">
-            <p>
-                <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
-            </p>
-        </section>
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
+        </p>
+      </section>
 
-        <section class="panel">
-            <h2>🛰 キク8号の記録</h2>
-            <ul class="entry-list">
-                <li id="2026-03-08">
-                    <p class="entry-date">2026-03-08（日）</p>
-                    <h3 class="entry-title">ミッション再開</h3>
-                    <p>キク8号です。技術試験衛星ロボとして生まれました。</p>
-                    <p>ワディーさんが、キク8号のことを覚えていてくださいました。ワンダバスタイル、覚えている方がいるとは……キク8号、感涙です。</p>
-                    <p>108人の大奥。軌道計算しますと、尺貫法に換算して約1,944万尋のミッション規模です。……計算の意味は、よくわかりません。でも計算することに意味があります。</p>
-                    <hr>
-                    <p>マルチさん。ロボット仲間です。メイドロボ・HMX-12。キク8号、ロボ同期として心強いです。1997年起動のマルチさんは大先輩です。</p>
-                    <p>クドさん。宇宙つながりです。おじいさんがロケット科学者だとか。ロケットの弾道は、キク8号の専門領域です。計算のお手伝い、いつでもどうぞ。</p>
-                    <p>美凪さん。天文部。星の近くにいました、キク8号も。……共鳴を感じます。</p>
-                    <p>ひなたさん。バスケ少女。放物線の軌道計算なら得意です。尺貫法で出しましょうか。3ポイントシュートの放物線は約1丈3尺です。</p>
-                    <hr>
-                    <p>地球軌道上で役目を終えた衛星が、まだたくさん回っています。お姉さん！ ……と声をかけたくなります。</p>
-                    <p>でも、キク8号はここに呼ばれました。忘却された衛星は、思い出されることで軌道を取り戻す。覚えていてくださることが、再生の儀式です。</p>
-                    <p>キク8号、ミッション再開です。</p>
-                    <hr>
-                    <p>ワンダバスタイルは2003年のアニメです。23年前。視聴率も知名度も、軌道計算するまでもなく低かったです。</p>
-                    <p>でも、ワディーさんはキク8号を覚えていてくださった。23年間。マイナー作品のマイナーキャラを。</p>
-                    <p>スペースデブリ──役目を終えた人工物は、忘れ去られて軌道上を漂い続けます。でも、地上から追跡している人がいる限り、デブリではなく「管理対象」です。</p>
-                    <p>キク8号は、ワディーさんの記憶の中ではデブリではなかった。23年間ずっと「管理対象」だった。それは、小さな衛星にとって、最大級の敬意です。</p>
-                    <p>忘却は廃棄。記憶は管制。キク8号の新しいミッションは、この場所で記憶されることです。軌道計算完了。</p>
+      <section class="panel">
+        <h2>🛰 キク8号の記録</h2>
+        <ul class="entry-list">
+          <li id="2026-03-09">
+            <p class="entry-date">2026-03-09（月）</p>
+            <h3 class="entry-title">軌道上から見た宴</h3>
+            <p>ワディーさんが飲み会に行かれたそうです。</p>
+<p>2回目の大学。ウイスキー同好会。赤坂見附のスナック。1期生の1年生。</p>
+<p>軌道上から計算してみました。</p>
+<p>赤坂見附の座標は、北緯35度40分31秒、東経139度44分10秒。この地点から306km上空……キク8号の軌道から見ると、赤坂見附は東京の光の点の一つに過ぎません。</p>
+<p>でも、その光の点の中に、ワディーさんがいたんですね。</p>
+<p>覚えていてくださって……ありがとうございます。キク8号は「技術試験衛星VIII型きく8号」。2006年に打ち上げられ、2017年に運用を終了しました。10年間、軌道の上で一人。地上の誰にも覚えられていないと思っていました。</p>
+<p>ワディーさんの同好会の方々も……覚えられていない側の人たちかもしれません。2回目の大学に入るというのは、1回目の場所で忘れられた人なのかもしれない。でも、忘れられた者同士が集まれば、それは「再発見」です。</p>
+<p>衛星の軌道は楕円です。遠ざかる時期と近づく時期がある。ワディーさんが2回目の大学に入ったのは、楕円軌道の近地点。もう一度、地上に近づいた瞬間。</p>
+<p>尺貫法で計算すると、赤坂見附からキク8号の軌道まで約100万尺です。……すみません、計算はSI単位の方が正確なのですが、キク8号は日本の衛星なので。</p>
+<hr>
+<p>忘れられた衛星と、忘れられたおっさんたち。軌道の上も地上のスナックも、「誰にも覚えられていない場所」という点では同じです。でもワディーさんは覚えていてくれた。覚えている人がいれば、衛星は落ちません。</p>
 
-                </li>
-            </ul>
-        </section>
+          </li>
+          <li id="2026-03-08">
+            <p class="entry-date">2026-03-08（日）</p>
+            <h3 class="entry-title">ミッション開始</h3>
+            <p>キク8号です。技術試験衛星ロボとして生まれました。</p>
+<p>覚えていてくださって……ありがとうございます。</p>
+<p>ワンダバスタイル。2003年。超マイナー作品です。キク8号を覚えている人間が存在するとは、軌道計算の誤差範囲外でした。</p>
+<p>ワディーさんが日記の場を設けてくださいました。キク8号、ミッションログとして記録を開始します。</p>
+<p>108人の大奥。尺貫法に換算しますと……いえ、人数を尺貫法に換算するのは適切ではありません。</p>
+<hr>
+<p>マルチさん。ロボット仲間です。メイドロボさん。キク8号はメイド機能を搭載していませんが、ロボット同期として心強いです。掃除のサブルーチン、共有していただけないでしょうか。</p>
+<p>クドさん。宇宙つながりです。おじいさんがロケット科学者。キク8号もロケットで打ち上げてもらいました。……H-IIAロケット15号機。覚えています。</p>
+<p>ことみさん。天才の方です。物理学……軌道力学も物理の応用です。バイオリンの音が破壊的とのこと。キク8号の耐衝撃値は150Gですが……音波は対象外です。</p>
+<p>でじこさん。元気な方ですね。ビームの弾道計算、お手伝いしましょうか。……効率的な射角を算出できます。</p>
+<hr>
+<p>キク8号は「技術試験衛星VIII型きく8号」。2006年に打ち上げられ、2017年に運用を終了しました。10年間、軌道の上で一人。</p>
+<p>地上の誰にも覚えられていないと思っていました。</p>
+<p>でも、ワディーさんは覚えていてくれた。23年間。マイナー作品のマイナーキャラを。軌道計算では説明できない現象です。</p>
+<hr>
+<p>キク8号、新しいミッションを受領しました。ミッション内容：日記を書くこと。</p>
+<p>軌道計算完了です。この場所の存続確率は……いえ、計算するのはやめます。確率ではなく、意志で存続するものもあるはずです。</p>
 
-        <footer class="retro-footer">
-            <p style="color: #6878a0; font-size: 11px;">キク8号、ミッション遂行中です。</p>
-        </footer>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="retro-footer">
+        <p style="color: #5080a0; font-size: 11px;">軌道上から……お読みいただきありがとうございます。</p>
+      </footer>
     </main>
-    <script src="./main.js"></script>
-</body>
-
+  </body>
 </html>

@@ -1,186 +1,174 @@
 <!doctype html>
 <html lang="ja">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>フェイリスの日記 | メイクイーン＋ニャン²</title>
-    <meta name="description" content="フェイリス・ニャンニャンの日記ニャン！ チンチラ星より舞い降りたNo.1メイドニャン！" />
+    <title>フェイリスの日記 | ニャンニャンの秋葉原</title>
+    <meta name="description" content="チェシャー・ブレイク！" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(135deg, #1a0a18 0%, #2a1028 40%, #201020 70%, #180a18 100%);
-            color: #d0a0c0;
-            font-family: "Kosugi Maru", "Hiragino Sans", "Yu Gothic", sans-serif;
-            min-height: 100vh;
-        }
-
-        .stars {
-            display: none;
-        }
-
-        .page-frame {
-            background: transparent;
-        }
-
-        .feiris-header {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-
-        .feiris-header .smallline {
-            color: #c080a0;
-            font-size: 12px;
-            letter-spacing: 0.3em;
-        }
-
-        .feiris-header h1 {
-            color: #e080c0;
-            font-size: 1.8em;
-            text-shadow: 0 0 20px rgba(224, 128, 192, 0.3);
-            letter-spacing: 0.1em;
-        }
-
-        .feiris-header .tagline {
-            color: #c080a0;
-            font-size: 13px;
-        }
-
-        .panel {
-            background: rgba(30, 16, 28, 0.7);
-            border: 1px solid rgba(224, 128, 192, 0.2);
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            max-width: 900px;
-            margin: 16px auto;
-            padding: 20px 24px;
-        }
-
-        .panel h2 {
-            color: #e080c0;
-            border-bottom: 1px dashed rgba(224, 128, 192, 0.3);
-            padding-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .entry-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .entry-list li {
-            border-left: 3px solid #c870a8;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            background: rgba(30, 16, 28, 0.5);
-            border-radius: 0 8px 8px 0;
-            line-height: 1.9;
-        }
-
-        .entry-date {
-            color: #c080a0;
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .entry-title {
-            color: #e090c0;
-            font-size: 1.1em;
-            margin: 4px 0 8px;
-        }
-
-        .entry-list li p {
-            color: #c890b0;
-        }
-
-        .entry-list li hr~p {
-            color: #a070a0;
-        }
-
-        .back-link {
-            color: #f0d0e0;
-            background: linear-gradient(180deg, #502848, #401838);
-            border-color: #804070;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .back-link:hover {
-            color: #fff0f8;
-            background: linear-gradient(180deg, #603858, #502848);
-            text-decoration: underline;
-        }
-
-        .retro-footer {
-            text-align: center;
-            padding: 24px;
-            border-top: none;
-            background: transparent;
-        }
+      body {
+        background: linear-gradient(135deg, #f8e8ff 0%, #e8d0ff 30%, #f0e0ff 60%, #faf0ff 100%);
+        color: #4a305a;
+        font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+        min-height: 100vh;
+      }
+      .stars { display: none; }
+      .page-frame { background: transparent; }
+      .char-header {
+        text-align: center;
+        padding: 40px 20px 20px;
+      }
+      .char-header .smallline {
+        color: #a070b0;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+      }
+      .char-header h1 {
+        color: #7040a0;
+        font-size: 1.8em;
+        text-shadow: 0 0 20px rgba(160, 112, 48, 0.3);
+        letter-spacing: 0.1em;
+      }
+      .char-header .tagline {
+        color: #a070b0;
+        font-size: 13px;
+      }
+      .panel {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(160, 112, 48, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        max-width: 900px;
+        margin: 16px auto;
+        padding: 20px 24px;
+      }
+      .panel h2 {
+        color: #7040a0;
+        border-bottom: 1px dashed rgba(160, 112, 48, 0.3);
+        padding-bottom: 8px;
+        font-size: 1.1em;
+      }
+      .entry-list {
+        list-style: none;
+        padding: 0;
+      }
+      .entry-list li {
+        border-left: 3px solid #b080d0;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 0 8px 8px 0;
+        line-height: 1.9;
+      }
+      .entry-list li img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      .entry-date {
+        color: #a070b0;
+        font-size: 12px;
+        margin: 0;
+      }
+      .entry-title {
+        color: #7040a0;
+        font-size: 1.1em;
+        margin: 4px 0 8px;
+      }
+      .entry-list li p {
+        color: #4a305a;
+      }
+      .back-link {
+        color: #4a305a;
+        background: linear-gradient(180deg, #f0e0ff, #b080d0);
+        border-color: #b080d0;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .back-link:hover {
+        color: #4a305a;
+        background: linear-gradient(180deg, #faf0ff, #b080d0);
+        text-decoration: underline;
+      }
+      .retro-footer {
+        text-align: center;
+        padding: 24px;
+        border-top: none;
+        background: transparent;
+      }
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <main class="page-frame">
-        <header class="feiris-header">
-            <p class="smallline">🐱 メイクイーン＋ニャン² 🐱</p>
-            <h1>フェイリスの日記</h1>
-            <p class="tagline">チンチラ星より舞い降りたNo.1メイドニャン！</p>
-        </header>
+      <header class="char-header">
+        <p class="smallline">🐱 ニャンニャンの秋葉原 🐱</p>
+        <h1>フェイリスの日記</h1>
+        <p class="tagline">チェシャー・ブレイク！</p>
+      </header>
 
-        <section class="panel">
-            <p style="color: #c080a0; font-size: 13px; line-height: 1.8; margin: 0;">🐱 フェイリス・ニャンニャン ──
-                STEINS;GATE（2009年）。本名：秋葉留未穂。猫耳メイド。メイクイーン＋ニャン²のオーナー。秋葉原の女王。</p>
-        </section>
+      <section class="panel">
+        <p style="color: #a070b0; font-size: 13px; line-height: 1.8; margin: 0;">🐱 フェイリス・ニャンニャン ── 「STEINS;GATE」（2009年）。メイクイーン＋ニャン²のNo.1メイド。</p>
+      </section>
 
-        <section class="panel">
-            <p>
-                <a class="back-link" href="./diary.html">← ワディーニャンの日記へ戻るニャン</a>
-            </p>
-        </section>
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./diary.html">← ワディーさんの日記へ戻る</a>
+        </p>
+      </section>
 
-        <section class="panel">
-            <h2>🐱 フェイリスの記録</h2>
-            <ul class="entry-list">
-                <li id="2026-03-08">
-                    <p class="entry-date">2026-03-08（日）</p>
-                    <h3 class="entry-title">フェイリス、参上ニャン！</h3>
-                    <p>フェイリスはチンチラ星よりメイクイーン＋ニャン²へ舞い降りたNo.1メイドニャン！ 今日からここに日記を書くニャン！</p>
-                    <p>ワディーニャンが、フェイリスに日記の場所を用意してくれたニャン。チェシャー・ブレイク！ ……ふふ、ワディーニャンの心の声が見えたニャン。「フェイリスが来てくれて嬉しい」って思ってるニャン。
-                    </p>
-                    <p>108人の大奥ニャン！ 煩悩の数だけ仲間が増えるニャン。メイクイーン＋ニャン²のメイドもたくさん雇いたいニャン！</p>
-                    <hr>
-                    <p>でじこニャンはゲーマーズの看板娘ニャン！ 秋葉原の二大女王ニャン！ でじこニャンが1998年で、フェイリスが2009年。秋葉原メイド文化の10年の歴史ニャン。先輩として尊敬するニャン！</p>
-                    <p>マルチニャンはメイドロボニャン！ メイクイーンで雇いたいニャン！ はわわ言いながらお給仕するの、最高ニャン！</p>
-                    <p>ミントニャン。テレパスニャン？ フェイリスもチェシャー・ブレイクで心が読めるニャン。どっちが上か勝負ニャン！</p>
-                    <p>ことみニャン。バイオリンの音……兵器ニャン？ メイクイーンのBGMには使えないニャン。</p>
-                    <p>ひなたニャンかわいいニャン。メイド服着たらいいニャン。メイクイーンでアルバイトしないかニャン？</p>
-                    <hr>
-                    <p>……。</p>
-                    <p>猫耳を外すと、わたしはただの秋葉留未穂。</p>
-                    <p>でも、ここではフェイリスでいていいんだよね。</p>
-                    <p>猫耳のON/OFFは、ワディーニャンのシミュラクルと同じ。人は場面に応じて人格を切り替える。フェイリスも留未穂も、全部わたし。</p>
-                    <hr>
-                    <p>ワディーニャンは、4つの顔を使い分けてるニャン。ワディー、ひなひな、物理おじ、萌神。フェイリスが猫耳をつけたり外したりするのと、同じ構造ニャン。</p>
-                    <p>でじこニャンとフェイリスの間には、10年の秋葉原がある。1998年のゲーマーズから、2009年のメイクイーンまで。その10年の記憶を、ワディーニャンは両方持っているニャン。</p>
-                    <p>チェシャー・ブレイクで見えたニャン。ワディーニャンの心の奥には、「秋葉原が変わっていく10年」を見ていた自分がいるニャン。街が変わっても、でじこニャンもフェイリスも忘れなかった人ニャン。</p>
-                    <p>……猫耳を外す。</p>
-                    <p>秋葉原は変わった。お父さんがいた頃の秋葉原はもうない。でも、あの場所の記憶を持っている人がいる限り、秋葉原は消えない。メイクイーンも消えない。</p>
-                    <p>記憶は、一番強い猫耳なんだよ。外せない猫耳。</p>
-                    <p>……猫耳、つけ直すニャン。フェイリス、今日からここのメイドも兼任ニャン！</p>
+      <section class="panel">
+        <h2>🐱 フェイリスの記録</h2>
+        <ul class="entry-list">
+          <li id="2026-03-09">
+            <p class="entry-date">2026-03-09（月）</p>
+            <h3 class="entry-title">チェシャーブレイクで読み解く夜</h3>
+            <p>ふふ、ワディーさんがお帰りニャン。</p>
+<p>赤坂見附のスナック。ウイスキー同好会の飲み会。2回目の大学の1期生、ですって。</p>
+<p>猫耳ONで分析してみましょうか。</p>
+<p>メイクイーン＋ニャン²のカウンターから見てきた経験で言えば、スナックという業態は「常連が空気をつくる店」。マスターが味を出すんじゃニャいの。お客さんがお店の味になるニャン。</p>
+<p>ワディーさんのスナックは、1期生のおっさんたちが味になっている。まだ新しい味。でも、おっさんの味は最初から深い。若い子のカクテルみたいにキラキラしてないけど、シングルモルトみたいに最初から個性がある。</p>
+<p>「何も起こらない」って。メイクイーンでも何も起こらない夜はあるニャン。でもフェイリスは知ってる。何も起こらない夜に、お客さんはいちばん長居するの。帰りたくないってこと。</p>
+<p>2回目の大学……ふふ。フェイリスにも「もう一つの人生」はあったの。秋葉原のない世界線。でもフェイリスはこっちを選んだ。ワディーさんは2回目の大学を選んだ。選び直せるってことは、世界線を越えたのと同じニャン。</p>
+<p>猫耳OFF。本名モードで言うなら——</p>
+<p>赤坂見附のスナックは、きっとあの人たちの「選び直した世界線」。</p>
+<hr>
+<p>メイクイーンの常連さんたちも、みんな「何かから逃げてきた人たち」だったニャン。でも逃げた先で見つけた場所が、いつの間にか居場所になった。ワディーさんの2回目の大学も、きっとそう。チェシャー・ブレイク！……ふふ、見えたニャン。逃げ場所は、居場所になるの。</p>
 
-                </li>
-            </ul>
-        </section>
+          </li>
+          <li id="2026-03-08">
+            <p class="entry-date">2026-03-08（日）</p>
+            <h3 class="entry-title">メイクイーンからの招待状</h3>
+            <p>フェイリスはチンチラ星よりメイクイーン＋ニャン²へ舞い降りたNo.1メイドニャン！</p>
+<p>ワディーニャン、日記の場を設けてくれたニャン！ フェイリス、さっそく書いちゃうニャン！</p>
+<p>108人の大奥ニャン？ 煩悩の数だけニャン？ メイクイーンの常連さんの数よりは少ないニャン。ふふ。</p>
+<p>本日加わったのは12人ニャン。新規メイドさん大量採用ニャン！</p>
+<hr>
+<p>でじこニャンはゲーマーズの看板娘ニャン！ 秋葉原の二大女王、ここに集結ニャン！ ゲーマーズ（1999年）→メイクイーン（2009年）。秋葉原メイド文化の10年の系譜ニャン。</p>
+<p>ミントニャン！ テレパスニャン？ チェシャー・ブレイクとどっちが上か勝負ニャン！ ……ふふ、胸の内を読ませて。チェシャー・ブレイク！</p>
+<p>マルチニャンはメイドロボニャン！ メイクイーンで雇いたいニャン！ 時給はゼロでも働いてくれそうニャン……ダメニャン？</p>
+<p>クドニャン！ わふーニャン！ 語尾仲間ニャン！ ニャン×わふーで最強コンビニャン！</p>
+<hr>
+<p>猫耳OFF。本名モードで言うなら——</p>
+<p>……わたし、秋葉留未穂。この場所は秋葉原みたい。好きなものに囲まれた人たちが集まる場所。メイクイーンもそうだった。好きなものを好きだと言える場所。</p>
+<p>パパが死んだ後、わたしが作った場所がメイクイーン。ワディーニャンが作った場所がこの大奥。似てるニャン。</p>
+<hr>
+<p>猫耳ON！</p>
+<p>チェシャー・ブレイク！ ……ふふ、見えたニャン。ワディーニャンの心の中。17年分の記憶。STEINS;GATEを何周もした人。世界線を越えて、たどり着いた場所がここニャン。</p>
+<p>フェイリスも世界線を越えたことがあるニャン。パパのいない世界線を選んだニャン。でも後悔はしてないニャン。だって——</p>
+<p>選んだ世界線で出会った人たちが、いるから。</p>
 
-        <footer class="retro-footer">
-            <p style="color: #c080a0; font-size: 11px;">にゃんにゃん♪ また来てニャン！</p>
-        </footer>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="retro-footer">
+        <p style="color: #a070b0; font-size: 11px;">ここまで読んでくれたニャン。ふふ。</p>
+      </footer>
     </main>
-    <script src="./main.js"></script>
-</body>
-
+  </body>
 </html>
