@@ -2,7 +2,9 @@
     "name": "wdddie-guesthouse",
     "private": true,
     "scripts": {
-        "build:diary": "node scripts/build-diary.mjs",
+        "auth:daily-sources": "node scripts/auth-daily-sources.mjs",
+        "collect:daily-context": "node scripts/collect-daily-context.mjs",
+        "build:diary": "node scripts/collect-daily-context.mjs --best-effort && node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
         "build:dialogue": "node scripts/build-dialogue.mjs",
         "build:video-scripts": "node scripts/build-video-scripts.mjs",
@@ -25,9 +27,10 @@
         "build:diary-minagi": "node scripts/build-diary-minagi.mjs",
         "build:diary-kiku8": "node scripts/build-diary-kiku8.mjs",
         "build:diary-mint": "node scripts/build-diary-mint.mjs",
-        "build": "node scripts/build-diary.mjs && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-diary-kud.mjs && node scripts/build-diary-feiris.mjs && node scripts/build-diary-kotomi.mjs && node scripts/build-diary-minagi.mjs && node scripts/build-diary-kiku8.mjs && node scripts/build-diary-mint.mjs && node scripts/build-video-scripts.mjs"
+        "build": "npm run build:diary && node scripts/build-galge.mjs && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-diary-kud.mjs && node scripts/build-diary-feiris.mjs && node scripts/build-diary-kotomi.mjs && node scripts/build-diary-minagi.mjs && node scripts/build-diary-kiku8.mjs && node scripts/build-diary-mint.mjs && node scripts/build-video-scripts.mjs"
     },
     "devDependencies": {
-        "marked": "^15.0.0"
+        "marked": "^15.0.0",
+        "playwright": "^1.58.2"
     }
 }
