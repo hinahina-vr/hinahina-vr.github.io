@@ -172,6 +172,23 @@ marquee {
   transform: translateY(-1px);
 }
 
+/* リンクホバー色反転（全体） */
+.entry-list li a,
+.cross-link {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.entry-list li a:hover,
+.cross-link:hover {
+  background-color: currentColor;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: #fff;
+  color: #fff !important;
+  border-radius: 3px;
+  padding: 0 4px;
+}
+
 .video-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

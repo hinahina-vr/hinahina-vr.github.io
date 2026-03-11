@@ -176,65 +176,26 @@ async function extractSwarmSnapshot(page) {
       }
     };
 
-    const containers = new Set();
-    const venueSelector = "a[href*='/v/'], a[href*='foursquare.com/v/'], a[href*='swarmapp.com/c/']";
-
-    for (const timeEl of document.querySelectorAll("time")) {
-      let container = timeEl.parentElement;
-      for (let depth = 0; container && depth < 6; depth += 1) {
-        if (container.querySelector(venueSelector)) {
-          containers.add(container);
-          break;
-        }
-        container = container.parentElement;
-      }
-    }
-
-    for (const link of document.querySelectorAll(venueSelector)) {
-      let container = link.parentElement;
-      for (let depth = 0; container && depth < 5; depth += 1) {
-        const text = normalize(container.innerText);
-        if (text.length > 0 && text.length < 600) {
-          containers.add(container);
-          break;
-        }
-        container = container.parentElement;
-      }
-    }
-
-    return [...containers].map((container) => {
-      const timeEl = container.querySelector("time");
-      const timeText = normalize(timeEl?.textContent);
-      const datetime = timeEl?.getAttribute("datetime") ?? null;
-      const links = [...container.querySelectorAll("a[href]")].map((link) => ({
-        href: absoluteUrl(link.getAttribute("href")),
-        text: normalize(link.textContent),
-      }));
-      const venueLink = links.find((link) => /\/v\/|foursquare\.com\/v\//i.test(link.href || "")) ?? null;
-      const sourceLink = links.find((link) => /swarmapp\.com\/c\/|\/checkin\//i.test(link.href || "")) ?? venueLink;
-      const areaLink = links.find((link) => link.text && link.text !== venueLink?.text && !/\/c\/|\/checkin\//i.test(link.href || ""));
-      const lines = container.innerText.split(/\n+/).map(normalize).filter(Boolean);
-      const filteredLines = lines.filter((line) => {
-        if (!line) return false;
-        if (line === timeText) return false;
-        if (line === venueLink?.text) return false;
-        if (line === areaLink?.text) return false;
-        if (/^(check in|checked in|with \d+|friends?|likes?)$/i.test(line)) return false;
-        if (/^\d{1,2}:\d{2}/.test(line)) return false;
-        return true;
-      });
+    return [...document.querySelectorAll("#history .activity")].map((activity) => {
+      const venueLink = activity.querySelector(".activity-checkinInfo-venue a[href]");
+      const address = activity.querySelector(".activity-venueAddress .global");
+      const timestamp = activity.querySelector(".timestamp[data-created-at]");
+      const sourceLink = activity.querySelector("a.activity-lastSeenTime[href]")
+        ?? activity.querySelector("a[href*='/checkin/'], a[href*='/user/'][href*='/checkin/']");
+      const shoutNode = activity.querySelector(".activity-shout, .activity-message, .activity-comment");
+      const createdAt = timestamp?.getAttribute("data-created-at");
 
       return {
-        datetime,
-        timeText,
-        venueName: venueLink?.text ?? null,
-        venueArea: areaLink?.text ?? null,
-        venueUrl: venueLink?.href ?? null,
-        sourceUrl: sourceLink?.href ?? window.location.href,
-        shout: filteredLines[0] ?? null,
-        rawText: normalize(container.innerText),
+        createdAt,
+        timeText: normalize(timestamp?.textContent),
+        venueName: normalize(venueLink?.textContent) || null,
+        venueArea: normalize(address?.textContent) || null,
+        venueUrl: absoluteUrl(venueLink?.getAttribute("href")),
+        sourceUrl: absoluteUrl(sourceLink?.getAttribute("href")) ?? window.location.href,
+        shout: normalize(shoutNode?.textContent) || null,
+        rawText: normalize(activity.innerText),
       };
-    }).filter((item) => item.venueName || item.rawText);
+    }).filter((item) => item.venueName || item.createdAt || item.rawText);
   });
 }
 
@@ -250,7 +211,7 @@ async function collectSwarmForDate(page, date, timeZone, config) {
     const snapshot = await extractSwarmSnapshot(page);
     const items = snapshot
       .map((item) => {
-        const checkedInAt = item.datetime ? new Date(item.datetime).toISOString() : null;
+        const checkedInAt = item.createdAt ? new Date(Number(item.createdAt) * 1000).toISOString() : null;
         if (!checkedInAt) return null;
         if (getDateStringForValue(checkedInAt, timeZone) !== date) return null;
         return {
