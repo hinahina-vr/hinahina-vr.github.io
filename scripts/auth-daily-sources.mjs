@@ -1,81 +1,88 @@
-import { chromium } from "playwright";
-import { rm } from "node:fs/promises";
-import { AUTH_DIR, cleanupAuthProfileLocks, ensureDir, loadDailyContextConfig } from "./lib/daily-context.mjs";
+import { basename } from "node:path";
+import { spawn } from "node:child_process";
+import {
+  CHROME_DEBUG_PROFILE_DIR,
+  ensureDir,
+  loadDailyContextConfig,
+  pathExists,
+} from "./lib/daily-context.mjs";
 
-function normalizeWhitespace(value) {
-  return value.replace(/\s+/g, " ").trim().toLowerCase();
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function looksLoggedOut(sourceName, url, bodyText) {
-  const condensed = normalizeWhitespace(bodyText);
-
-  if (sourceName === "x") {
-    return url.includes("/i/flow/login")
-      || condensed.includes("sign in to x")
-      || condensed.includes("join x today")
-      || condensed.includes("happening now");
-  }
-
-  return /login|signin/.test(url)
-    || condensed.includes("log in")
-    || condensed.includes("sign in")
-    || condensed.includes("join foursquare");
+function runDetached(command, args) {
+  const child = spawn(command, args, {
+    detached: true,
+    stdio: "ignore",
+    windowsHide: false,
+  });
+  child.unref();
 }
 
-async function waitForLogin(page, sourceName, timeoutMs = 240000) {
-  const start = Date.now();
+async function waitForDevTools(browserDebugUrl, timeoutMs = 30000) {
+  const deadline = Date.now() + timeoutMs;
+  const endpoint = `${browserDebugUrl.replace(/\/$/, "")}/json/version`;
 
-  while (Date.now() - start < timeoutMs) {
-    const url = page.url().toLowerCase();
-    const bodyText = await page.locator("body").innerText().catch(() => "");
-
-    if (!looksLoggedOut(sourceName, url, bodyText)) {
-      return true;
-    }
-
-    await page.waitForTimeout(1500);
+  while (Date.now() < deadline) {
+    try {
+      const response = await fetch(endpoint);
+      if (response.ok) return true;
+    } catch {}
+    await wait(1000);
   }
 
   return false;
 }
 
+function getDebugPort(browserDebugUrl) {
+  return new URL(browserDebugUrl).port || "9222";
+}
+
 async function main() {
   const config = await loadDailyContextConfig();
-  await rm(AUTH_DIR, { recursive: true, force: true });
-  await ensureDir(AUTH_DIR);
-  await cleanupAuthProfileLocks();
 
-  const context = await chromium.launchPersistentContext(AUTH_DIR, {
-    channel: config.browserChannel,
-    headless: false,
-    ignoreDefaultArgs: ["--enable-automation"],
-    viewport: { width: 1440, height: 960 },
-    args: ["--disable-blink-features=AutomationControlled"],
-  });
-
-  try {
-    const swarmPage = context.pages()[0] ?? await context.newPage();
-    await swarmPage.goto(config.swarmHistoryUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
-
-    const xPage = await context.newPage();
-    await xPage.goto(`https://x.com/${config.xHandle}`, { waitUntil: "domcontentloaded", timeout: 45000 });
-
-    console.log("[daily-context] Chrome を開きました。このウィンドウで Swarm と X にログインしてください。");
-    console.log("[daily-context] ログイン状態を最大4分待機して自動保存します。");
-
-    const status = await Promise.all([
-      waitForLogin(swarmPage, "swarm"),
-      waitForLogin(xPage, "x"),
-    ]);
-
-    if (status.some((ok) => !ok)) {
-      throw new Error("Timed out waiting for login completion");
-    }
-  } finally {
-    await context.close();
+  if (!(await pathExists(config.browserExecutablePath))) {
+    throw new Error(`Browser executable not found: ${config.browserExecutablePath}`);
   }
 
-  console.log(`[daily-context] 認証状態を保存しました: ${AUTH_DIR}`);
+  await ensureDir(CHROME_DEBUG_PROFILE_DIR);
+
+  const endpoint = `${config.browserDebugUrl.replace(/\/$/, "")}/json/version`;
+  const debugPort = getDebugPort(config.browserDebugUrl);
+
+  try {
+    const response = await fetch(endpoint);
+    if (response.ok) {
+      console.log(`[daily-context] Chrome debug session is already available: ${config.browserDebugUrl}`);
+      console.log("[daily-context] その Chrome で Swarm と X にログインしたあと、npm run collect:daily-context を実行してください。");
+      return;
+    }
+  } catch {}
+
+  console.log("[daily-context] 通常 Chrome を別プロファイルで起動します。");
+  console.log(`[daily-context] profile: ${CHROME_DEBUG_PROFILE_DIR}`);
+  console.log("[daily-context] このウィンドウは普段使いの Chrome とは別で、remote debugging 専用です。");
+
+  runDetached(config.browserExecutablePath, [
+    `--remote-debugging-port=${debugPort}`,
+    "--remote-allow-origins=*",
+    `--user-data-dir=${CHROME_DEBUG_PROFILE_DIR}`,
+    "--new-window",
+    "--no-first-run",
+    "--no-default-browser-check",
+    config.swarmHistoryUrl,
+    `https://x.com/${config.xHandle}`,
+  ]);
+
+  const ready = await waitForDevTools(config.browserDebugUrl);
+  if (!ready) {
+    throw new Error(`Chrome DevTools endpoint did not come up at ${config.browserDebugUrl}`);
+  }
+
+  console.log(`[daily-context] 通常 Chrome を起動しました: ${config.browserDebugUrl}`);
+  console.log("[daily-context] この Chrome で Swarm と X にログインしてください。");
+  console.log("[daily-context] ログイン後に npm run collect:daily-context を実行してください。");
 }
 
 main().catch((error) => {

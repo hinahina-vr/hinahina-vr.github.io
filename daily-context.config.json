@@ -2,5 +2,7 @@
   "timezone": "Asia/Tokyo",
   "swarmHistoryUrl": "https://ja.swarmapp.com/history",
   "xHandle": "hinahina_vr",
-  "browserChannel": "chrome"
+  "browserEngine": "chrome",
+  "browserExecutablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "browserDebugUrl": "http://127.0.0.1:9222"
 }

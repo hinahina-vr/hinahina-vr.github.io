@@ -2,33 +2,26 @@ import { readFile, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 import { chromium } from "playwright";
 import {
-  AUTH_DIR,
   DAILY_CONTEXT_DIR,
   DEBUG_DIR,
   RAW_DIR,
   addDays,
   buildCandidateTopics,
-  cleanupAuthProfileLocks,
   ensureDir,
   getDateStringForValue,
   getDateStringInTimeZone,
   loadDailyContextConfig,
-  pathExists,
   renderDailyContextBlock,
   resolveMainDiaryFile,
   upsertDailyContextBlock,
 } from "./lib/daily-context.mjs";
 
-const DEFAULT_CDP_URL = "http://127.0.0.1:9222";
-
 function parseArgs(argv) {
   const options = {
     bestEffort: false,
-    headed: false,
     date: null,
     file: null,
-    existingChrome: false,
-    cdpUrl: DEFAULT_CDP_URL,
+    cdpUrl: null,
   };
 
   for (let index = 2; index < argv.length; index += 1) {
@@ -38,7 +31,6 @@ function parseArgs(argv) {
       continue;
     }
     if (arg === "--headed") {
-      options.headed = true;
       continue;
     }
     if (arg === "--date") {
@@ -54,7 +46,6 @@ function parseArgs(argv) {
       continue;
     }
     if (arg === "--existing-chrome") {
-      options.existingChrome = true;
       continue;
     }
     if (arg === "--cdp-url") {
@@ -75,11 +66,9 @@ function parseArgs(argv) {
     }
 
     if (arg === "headed") {
-      options.headed = true;
       continue;
     }
     if (arg === "existing-chrome") {
-      options.existingChrome = true;
       continue;
     }
 
@@ -353,7 +342,7 @@ async function collectXForDate(page, date, timeZone, config) {
   const xBodyText = await page.locator("body").innerText().catch(() => "");
   const xArticleCount = await page.locator("article[data-testid='tweet']").count().catch(() => 0);
   if (xArticleCount === 0 && isLoginErrorText("x", page.url().toLowerCase(), xBodyText)) {
-    throw new Error("X timeline could not be accessed from the current Chrome session");
+    throw new Error("X timeline could not be accessed from the current browser session");
   }
 
   const collected = [];
@@ -413,47 +402,27 @@ async function updateDiaryFile(targetFile, normalized) {
 }
 
 async function openCollectionSession(options, config) {
-  if (options.existingChrome) {
-    const browser = await chromium.connectOverCDP(options.cdpUrl);
-    const context = browser.contexts()[0];
-    if (!context) {
-      throw new Error(`No default browser context found at ${options.cdpUrl}`);
-    }
-
-    const swarmPage = await context.newPage();
-    const xPage = await context.newPage();
-
-    return {
-      swarmPage,
-      xPage,
-      close: async () => {
-        await swarmPage.close().catch(() => {});
-        await xPage.close().catch(() => {});
-      },
-    };
+  const cdpUrl = options.cdpUrl ?? config.browserDebugUrl;
+  let browser;
+  try {
+    browser = await chromium.connectOverCDP(cdpUrl);
+  } catch (error) {
+    throw new Error(`Could not connect to the normal Chrome session at ${cdpUrl}. Run npm run auth:daily-sources first. ${error.message}`);
+  }
+  const context = browser.contexts()[0];
+  if (!context) {
+    throw new Error(`No default browser context found at ${cdpUrl}. Run npm run auth:daily-sources first.`);
   }
 
-  if (!(await pathExists(AUTH_DIR))) {
-    throw new Error(`Missing auth profile: ${AUTH_DIR}. Run npm run auth:daily-sources`);
-  }
-  await cleanupAuthProfileLocks();
-
-  const context = await chromium.launchPersistentContext(AUTH_DIR, {
-    channel: config.browserChannel,
-    headless: !options.headed,
-    ignoreDefaultArgs: ["--enable-automation"],
-    viewport: { width: 1440, height: 960 },
-    args: ["--disable-blink-features=AutomationControlled"],
-  });
-
-  const swarmPage = context.pages()[0] ?? await context.newPage();
+  const swarmPage = await context.newPage();
   const xPage = await context.newPage();
 
   return {
     swarmPage,
     xPage,
     close: async () => {
-      await context.close().catch(() => {});
+      await swarmPage.close().catch(() => {});
+      await xPage.close().catch(() => {});
     },
   };
 }
@@ -564,12 +533,11 @@ async function main() {
 
   try {
     await collectAndWrite(options);
-    if (options.existingChrome) process.exit(0);
+    process.exit(0);
   } catch (error) {
     if (options.bestEffort) {
       console.warn(`[daily-context] skipped: ${error.message}`);
-      if (options.existingChrome) process.exit(0);
-      return;
+      process.exit(0);
     }
 
     console.error("[daily-context] failed");
