@@ -102,16 +102,10 @@ function htmlHead(title) {
     <meta name="description" content="ワディーゲストハウスの日記ページ。活動メモと近況ログ。" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body class="diary-despair">
-    <div class="stars" aria-hidden="true"></div>
+  <body>
     <main class="page-frame">
       <header class="retro-header">
-        <p class="smallline">意識を持ったこと――それが生命の原罪だった。</p>
         <h1>${title}</h1>
-        <p class="tagline">やがて澱みに還る、ある意識の記録。</p>
-        <marquee behavior="scroll" direction="left" scrollamount="5">
-          ★ <a href="./diary-hina.html" style="color: inherit; text-decoration: none;">この世界は、まだ終わっていない</a> ★
-        </marquee>
       </header>`;
 }
 
