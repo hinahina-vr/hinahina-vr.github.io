@@ -405,42 +405,13 @@ body.diary-despair {
 }
 
 body.diary-despair .stars {
-  background-image:
-    radial-gradient(circle at 12% 30%, rgba(80, 40, 200, 0.6) 0 1.5px, transparent 1.5px),
-    radial-gradient(circle at 55% 65%, rgba(120, 20, 180, 0.5) 0 1px, transparent 1px),
-    radial-gradient(circle at 80% 15%, rgba(60, 100, 255, 0.45) 0 1.5px, transparent 1.5px),
-    radial-gradient(circle at 35% 85%, rgba(150, 0, 200, 0.4) 0 1px, transparent 1px),
-    radial-gradient(circle at 65% 40%, rgba(0, 180, 255, 0.3) 0 1px, transparent 1px);
-  background-size: 280px 220px;
-  animation: twinkle-despair 4s ease-in-out infinite;
+  display: none;
 }
 
 /* スキャンライン + ビネットオーバーレイ */
-body.diary-despair::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background:
-    repeating-linear-gradient(0deg,
-      transparent,
-      transparent 2px,
-      rgba(100, 0, 180, 0.06) 2px,
-      rgba(100, 0, 180, 0.06) 4px);
-  animation: scanline-flicker 0.1s infinite;
-}
-
+body.diary-despair::before,
 body.diary-despair::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  background: radial-gradient(ellipse at center,
-      transparent 40%,
-      rgba(20, 0, 40, 0.5) 70%,
-      rgba(5, 0, 15, 0.9) 100%);
+  display: none;
 }
 
 @keyframes scanline-flicker {
@@ -566,7 +537,6 @@ body.diary-despair .entry-list li {
 body.diary-despair .entry-list li:hover {
   border-color: #4a1a8a;
   box-shadow: 0 0 20px rgba(80, 0, 180, 0.3), inset 0 0 20px rgba(40, 0, 100, 0.15);
-  animation: entry-tremble 0.06s infinite;
 }
 
 @keyframes entry-tremble {
@@ -634,9 +604,8 @@ body.diary-despair .entry-title {
 
 /* テキストのじわじわアニメーション */
 body.diary-despair .entry-list li p {
-  color: #7868b0;
+  color: #c0b8d8;
   line-height: 1.9;
-  animation: text-emerge 1.5s ease-out both;
 }
 
 body.diary-despair .entry-list li img {
