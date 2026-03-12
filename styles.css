@@ -180,6 +180,14 @@ marquee {
   border-radius: 3px;
 }
 
+.cross-link {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
 .entry-list li a:hover,
 .cross-link:hover {
   background-color: currentColor;
