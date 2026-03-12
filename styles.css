@@ -176,17 +176,15 @@ marquee {
 .entry-list li a,
 .cross-link {
   transition: color 0.2s ease, background-color 0.2s ease;
+  padding: 0 4px;
+  border-radius: 3px;
 }
 
 .entry-list li a:hover,
 .cross-link:hover {
   background-color: currentColor;
-  -webkit-background-clip: unset;
-  background-clip: unset;
-  -webkit-text-fill-color: #fff;
-  color: #fff !important;
+  -webkit-text-fill-color: #0a0320;
   border-radius: 3px;
-  padding: 0 4px;
 }
 
 .video-grid {
@@ -247,6 +245,19 @@ marquee {
   border: 2px solid #7ddfff;
   background: rgba(8, 13, 46, 0.95);
   padding: 10px;
+  min-width: 0;
+}
+
+.entry-list li img {
+  max-width: 100%;
+  height: auto;
+}
+
+.cross-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-top: 10px;
 }
 
 .entry-date {
@@ -432,6 +443,7 @@ body.diary-despair .page-frame {
   border-color: #2a0a5a;
   box-shadow: 0 0 15px rgba(80, 0, 180, 0.4), 0 0 50px rgba(40, 0, 100, 0.25), inset 0 0 30px rgba(0, 0, 0, 0.85);
   background: linear-gradient(180deg, rgba(8, 3, 20, 0.97), rgba(4, 2, 12, 0.98));
+  overflow: hidden;
 }
 
 body.diary-despair .retro-header {
