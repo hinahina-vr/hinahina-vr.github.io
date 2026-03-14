@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body class="diary-despair">
+  <body>
     <main class="page-frame">
       <header class="char-header">
         <p class="smallline">🛰 技術試験衛星の記録 🛰</p>

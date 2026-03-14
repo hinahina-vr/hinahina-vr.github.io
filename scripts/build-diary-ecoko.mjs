@@ -159,7 +159,7 @@ async function main() {
       }
     </style>
   </head>
-  <body class="diary-despair">
+  <body>
     <main class="page-frame">
       <header class="ecoko-header">
         <p class="smallline">🐧 えっこあいす☆ 🐧</p>

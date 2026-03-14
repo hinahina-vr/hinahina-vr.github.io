@@ -159,7 +159,7 @@ async function main() {
       }
     </style>
   </head>
-  <body class="diary-despair">
+  <body>
     <main class="page-frame">
       <header class="mitra-header">
         <p class="smallline">🔮 みとらの記録 🔮</p>

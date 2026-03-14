@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body class="diary-despair">
+  <body>
     <main class="page-frame">
       <header class="ruriko-header">
         <p class="smallline">💧 雫の記録 💧</p>

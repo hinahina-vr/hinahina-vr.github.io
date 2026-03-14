@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body class="diary-despair">
+  <body>
     <main class="page-frame">
       <header class="char-header">
         <p class="smallline">🌼 たんぽぽ娘の記録 🌼</p>
