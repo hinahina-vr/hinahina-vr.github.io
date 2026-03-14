@@ -10,37 +10,37 @@ import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 
 // 他キャラの日記ディレクトリとページの定義
 const CROSS_LINK_TARGETS = [
-  { dir: "diary-hina", page: "diary-hina.html", label: "ひなたの日記", emoji: "🎀", color: "#e8879a" },
-  { dir: "diary-multi", page: "diary-multi.html", label: "マルチの日記", emoji: "✿", color: "#7ab89a" },
-  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこの日記", emoji: "🔔", color: "#50b070" },
-  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここの日記", emoji: "🐧", color: "#4080c0" },
-  { dir: "diary-ayu", page: "diary-ayu.html", label: "あゆの日記", emoji: "❄", color: "#6090c0" },
-  { dir: "diary-mii", page: "diary-mii.html", label: "みぃの日記", emoji: "🌼", color: "#e0a820" },
-  { dir: "diary-ruriko", page: "diary-ruriko.html", label: "瑠璃子の日記", emoji: "💧", color: "#6050a0" },
-  { dir: "diary-rem", page: "diary-rem.html", label: "レムの日記", emoji: "✦", color: "#5080d0" },
-  { dir: "diary-tsumugi", page: "diary-tsumugi.html", label: "紬の日記", emoji: "🌅", color: "#c88050" },
-  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひなの日記", emoji: "♥", color: "#ff69b4" },
-  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじの日記", emoji: "⌨", color: "#a0a0a0" },
-  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神記", emoji: "★", color: "#d0a030" },
-  { dir: "diary-kud", page: "diary-kud.html", label: "クドの日記", emoji: "☀", color: "#c09050" },
-  { dir: "diary-feiris", page: "diary-feiris.html", label: "フェイリスの日記", emoji: "🐱", color: "#9060c0" },
-  { dir: "diary-kotomi", page: "diary-kotomi.html", label: "ことみの日記", emoji: "🌼", color: "#50a050" },
-  { dir: "diary-minagi", page: "diary-minagi.html", label: "美凪の日記", emoji: "🌟", color: "#6060c0" },
-  { dir: "diary-kiku8", page: "diary-kiku8.html", label: "キク8号の日記", emoji: "🛰", color: "#4080a0" },
-  { dir: "diary-mint", page: "diary-mint.html", label: "ミントの日記", emoji: "🫖", color: "#409070" },
-  { dir: "diary-tama", page: "diary-tama.html", label: "たまちゃんの日記", emoji: "🌸", color: "#d06090" },
-  { dir: "diary-kukuri", page: "diary-kukuri.html", label: "ククリの日記", emoji: "✨", color: "#6050c0" },
-  { dir: "diary-sharo", page: "diary-sharo.html", label: "シャロの日記", emoji: "☕", color: "#8a6a40" },
-  { dir: "diary-nemurin", page: "diary-nemurin.html", label: "ねむりんの日記", emoji: "💤", color: "#9070b0" },
-  { dir: "diary-hinako", page: "diary-hinako.html", label: "ヒナの日記", emoji: "🐣", color: "#c09030" },
-  { dir: "diary-kyoko", page: "diary-kyoko.html", label: "京子の日記", emoji: "🎉", color: "#d06030" },
-  { dir: "diary-mayuki", page: "diary-mayuki.html", label: "真雪の日記", emoji: "❄", color: "#4080c0" },
-  { dir: "diary-mitsuba", page: "diary-mitsuba.html", label: "みつばの日記", emoji: "🎭", color: "#606038" },
-  { dir: "diary-ana", page: "diary-ana.html", label: "アナの日記", emoji: "🇬🇧", color: "#408040" },
-  { dir: "diary-astarotte", page: "diary-astarotte.html", label: "ロッテの日記", emoji: "👑", color: "#c04080" },
-  { dir: "diary-hazuki", page: "diary-hazuki.html", label: "葉月の日記", emoji: "💥", color: "#d04028" },
-  { dir: "diary-rin", page: "diary-rin.html", label: "りんの日記", emoji: "🔥", color: "#606060" },
-  { dir: "diary-rizel", page: "diary-rizel.html", label: "りぜるの日記", emoji: "💕", color: "#d04090" },
+  { dir: "diary-hina", page: "diary-hina.html", label: "ひなた", emoji: "🎀", color: "#e8879a" },
+  { dir: "diary-multi", page: "diary-multi.html", label: "マルチ", emoji: "✿", color: "#7ab89a" },
+  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこ", emoji: "🔔", color: "#50b070" },
+  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここ", emoji: "🐧", color: "#4080c0" },
+  { dir: "diary-ayu", page: "diary-ayu.html", label: "あゆ", emoji: "❄", color: "#6090c0" },
+  { dir: "diary-mii", page: "diary-mii.html", label: "みぃ", emoji: "🌼", color: "#e0a820" },
+  { dir: "diary-ruriko", page: "diary-ruriko.html", label: "瑠璃子", emoji: "💧", color: "#6050a0" },
+  { dir: "diary-rem", page: "diary-rem.html", label: "レム", emoji: "✦", color: "#5080d0" },
+  { dir: "diary-tsumugi", page: "diary-tsumugi.html", label: "紬", emoji: "🌅", color: "#c88050" },
+  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひな", emoji: "♥", color: "#ff69b4" },
+  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじ", emoji: "⌨", color: "#a0a0a0" },
+  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神", emoji: "★", color: "#d0a030" },
+  { dir: "diary-kud", page: "diary-kud.html", label: "クド", emoji: "☀", color: "#c09050" },
+  { dir: "diary-feiris", page: "diary-feiris.html", label: "フェイリス", emoji: "🐱", color: "#9060c0" },
+  { dir: "diary-kotomi", page: "diary-kotomi.html", label: "ことみ", emoji: "🌼", color: "#50a050" },
+  { dir: "diary-minagi", page: "diary-minagi.html", label: "美凪", emoji: "🌟", color: "#6060c0" },
+  { dir: "diary-kiku8", page: "diary-kiku8.html", label: "キク8号", emoji: "🛰", color: "#4080a0" },
+  { dir: "diary-mint", page: "diary-mint.html", label: "ミント", emoji: "🫖", color: "#409070" },
+  { dir: "diary-tama", page: "diary-tama.html", label: "たまちゃん", emoji: "🌸", color: "#d06090" },
+  { dir: "diary-kukuri", page: "diary-kukuri.html", label: "ククリ", emoji: "✨", color: "#6050c0" },
+  { dir: "diary-sharo", page: "diary-sharo.html", label: "シャロ", emoji: "☕", color: "#8a6a40" },
+  { dir: "diary-nemurin", page: "diary-nemurin.html", label: "ねむりん", emoji: "💤", color: "#9070b0" },
+  { dir: "diary-hinako", page: "diary-hinako.html", label: "ヒナ", emoji: "🐣", color: "#c09030" },
+  { dir: "diary-kyoko", page: "diary-kyoko.html", label: "京子", emoji: "🎉", color: "#d06030" },
+  { dir: "diary-mayuki", page: "diary-mayuki.html", label: "真雪", emoji: "❄", color: "#4080c0" },
+  { dir: "diary-mitsuba", page: "diary-mitsuba.html", label: "みつば", emoji: "🎭", color: "#606038" },
+  { dir: "diary-ana", page: "diary-ana.html", label: "アナ", emoji: "🇬🇧", color: "#408040" },
+  { dir: "diary-astarotte", page: "diary-astarotte.html", label: "ロッテ", emoji: "👑", color: "#c04080" },
+  { dir: "diary-hazuki", page: "diary-hazuki.html", label: "葉月", emoji: "💥", color: "#d04028" },
+  { dir: "diary-rin", page: "diary-rin.html", label: "りん", emoji: "🔥", color: "#606060" },
+  { dir: "diary-rizel", page: "diary-rizel.html", label: "りぜる", emoji: "💕", color: "#d04090" },
   { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8" },
 ];
 
@@ -83,7 +83,7 @@ function buildCrossLinks(date) {
     } catch { /* dir doesn't exist yet */ }
   }
   if (links.length === 0) return "";
-  return `\n            <div class="cross-links"><span class="cross-links-label">この日の日記：</span>${links.join("")}</div>`;
+  return `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>${links.join("")}</div>`;
 }
 
 // エントリのHTML（全文表示）
