@@ -896,22 +896,23 @@ body.diary-despair .backnum-nav li a:hover {
 }
 
 .cross-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 8px;
+  align-items: center;
+  margin-bottom: 6px;
 }
 
 .cross-group-label {
-  grid-column: 1 / -1;
   color: #6858a0;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
-  padding: 2px 0;
+  min-width: 70px;
+  flex-shrink: 0;
 }
 
 .cross-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
@@ -919,8 +920,8 @@ body.diary-despair .backnum-nav li a:hover {
   background: linear-gradient(180deg, rgba(30, 12, 60, 0.9), rgba(12, 4, 28, 0.95));
   border: 2px outset rgba(80, 30, 160, 0.35);
   border-radius: 5px;
-  padding: 8px 10px;
-  font-size: 0.92rem;
+  padding: 6px 12px;
+  font-size: 0.88rem;
   text-decoration: none;
   transition: border-color 0.12s ease;
   cursor: pointer;
