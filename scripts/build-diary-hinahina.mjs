@@ -165,8 +165,13 @@ async function main() {
         <p style="color: #d080b0; font-size: 12px; margin: 4px 0 0; padding-left: 12px; border-left: 2px solid rgba(255,105,180,0.3);">
         管轄（風の遊び人）：<a href="./diary-hina.html" style="color:#e8879a;">🎀 ひなた</a> ·
         <a href="./diary-ayu.html" style="color:#6490dc;">❄ あゆ</a> ·
-        <a href="./diary-kud.html" style="color:#68a8d0;">🐶 クド</a> ·
-        <a href="./diary-mii.html" style="color:#f0b450;">🌼 みぃ</a>
+        <a href="./diary-kud.html" style="color:#68a8d0;">☀ クド</a> ·
+        <a href="./diary-mii.html" style="color:#f0b450;">🌼 みぃ</a> ·
+        <a href="./diary-kukuri.html" style="color:#6050c0;">✨ ククリ</a> ·
+        <a href="./diary-kyoko.html" style="color:#d06030;">🎉 京子</a> ·
+        <a href="./diary-hinako.html" style="color:#c09030;">🐣 雛子</a> ·
+        <a href="./diary-rizel.html" style="color:#d04090;">💕 りぜる</a> ·
+        <a href="./diary-nemurin.html" style="color:#9070b0;">💤 ねむりん</a>
         </p>
       </section>
 
