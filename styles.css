@@ -900,15 +900,16 @@ body.diary-despair .backnum-nav li a:hover {
   flex-wrap: wrap;
   gap: 5px;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .cross-group-label {
+  display: block;
+  width: 100%;
   color: #6858a0;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
-  min-width: 70px;
-  flex-shrink: 0;
+  margin-bottom: 2px;
 }
 
 .cross-link {
