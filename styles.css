@@ -886,16 +886,28 @@ body.diary-despair .backnum-nav li a:hover {
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px dashed rgba(80, 40, 160, 0.3);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 6px;
 }
 
 .cross-links-label {
-  grid-column: 1 / -1;
+  display: block;
   color: #5040a0;
   font-size: 0.8rem;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
+}
+
+.cross-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.cross-group-label {
+  grid-column: 1 / -1;
+  color: #6858a0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 2px 0;
 }
 
 .cross-link {
@@ -905,23 +917,19 @@ body.diary-despair .backnum-nav li a:hover {
   gap: 4px;
   color: #d0c0e8;
   background: linear-gradient(180deg, rgba(30, 12, 60, 0.9), rgba(12, 4, 28, 0.95));
-  border: 2px outset rgba(100, 40, 200, 0.45);
+  border: 2px outset rgba(80, 30, 160, 0.35);
   border-radius: 5px;
   padding: 8px 10px;
   font-size: 0.92rem;
-  font-weight: 700;
   text-decoration: none;
-  transition: all 0.12s ease;
+  transition: border-color 0.12s ease;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .cross-link:hover {
-  color: #fff;
-  background: linear-gradient(180deg, rgba(55, 22, 110, 0.95), rgba(30, 10, 60, 0.98));
-  border-color: rgba(160, 80, 255, 0.65);
-  box-shadow: 0 0 14px rgba(120, 40, 255, 0.45), inset 0 1px 0 rgba(255,255,255,0.1);
-  transform: translateY(-1px);
+  border-color: currentColor;
+  border-style: solid;
 }
 
 .cross-link:active {

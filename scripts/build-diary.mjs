@@ -10,38 +10,42 @@ import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 
 // 他キャラの日記ディレクトリとページの定義
 const CROSS_LINK_TARGETS = [
-  { dir: "diary-hina", page: "diary-hina.html", label: "ひなた", emoji: "🎀", color: "#e8879a" },
-  { dir: "diary-multi", page: "diary-multi.html", label: "マルチ", emoji: "✿", color: "#7ab89a" },
-  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこ", emoji: "🔔", color: "#50b070" },
-  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここ", emoji: "🐧", color: "#4080c0" },
-  { dir: "diary-ayu", page: "diary-ayu.html", label: "あゆ", emoji: "❄", color: "#6090c0" },
-  { dir: "diary-mii", page: "diary-mii.html", label: "みぃ", emoji: "🌼", color: "#e0a820" },
-  { dir: "diary-ruriko", page: "diary-ruriko.html", label: "瑠璃子", emoji: "💧", color: "#6050a0" },
-  { dir: "diary-rem", page: "diary-rem.html", label: "レム", emoji: "✦", color: "#5080d0" },
-  { dir: "diary-tsumugi", page: "diary-tsumugi.html", label: "紬", emoji: "🌅", color: "#c88050" },
-  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひな", emoji: "♥", color: "#ff69b4" },
-  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじ", emoji: "⌨", color: "#a0a0a0" },
-  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神", emoji: "★", color: "#d0a030" },
-  { dir: "diary-kud", page: "diary-kud.html", label: "クド", emoji: "☀", color: "#c09050" },
-  { dir: "diary-feiris", page: "diary-feiris.html", label: "フェイリス", emoji: "🐱", color: "#9060c0" },
-  { dir: "diary-kotomi", page: "diary-kotomi.html", label: "ことみ", emoji: "🌼", color: "#50a050" },
-  { dir: "diary-minagi", page: "diary-minagi.html", label: "美凪", emoji: "🌟", color: "#6060c0" },
-  { dir: "diary-kiku8", page: "diary-kiku8.html", label: "キク8号", emoji: "🛰", color: "#4080a0" },
-  { dir: "diary-mint", page: "diary-mint.html", label: "ミント", emoji: "🫖", color: "#409070" },
-  { dir: "diary-tama", page: "diary-tama.html", label: "たまちゃん", emoji: "🌸", color: "#d06090" },
-  { dir: "diary-kukuri", page: "diary-kukuri.html", label: "ククリ", emoji: "✨", color: "#6050c0" },
-  { dir: "diary-sharo", page: "diary-sharo.html", label: "シャロ", emoji: "☕", color: "#8a6a40" },
-  { dir: "diary-nemurin", page: "diary-nemurin.html", label: "ねむりん", emoji: "💤", color: "#9070b0" },
-  { dir: "diary-hinako", page: "diary-hinako.html", label: "ヒナ", emoji: "🐣", color: "#c09030" },
-  { dir: "diary-kyoko", page: "diary-kyoko.html", label: "京子", emoji: "🎉", color: "#d06030" },
-  { dir: "diary-mayuki", page: "diary-mayuki.html", label: "真雪", emoji: "❄", color: "#4080c0" },
-  { dir: "diary-mitsuba", page: "diary-mitsuba.html", label: "みつば", emoji: "🎭", color: "#606038" },
-  { dir: "diary-ana", page: "diary-ana.html", label: "アナ", emoji: "🇬🇧", color: "#408040" },
-  { dir: "diary-astarotte", page: "diary-astarotte.html", label: "ロッテ", emoji: "👑", color: "#c04080" },
-  { dir: "diary-hazuki", page: "diary-hazuki.html", label: "葉月", emoji: "💥", color: "#d04028" },
-  { dir: "diary-rin", page: "diary-rin.html", label: "りん", emoji: "🔥", color: "#606060" },
-  { dir: "diary-rizel", page: "diary-rizel.html", label: "りぜる", emoji: "💕", color: "#d04090" },
-  { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8" },
+  // ── ひなひな管轄：風の遊び人 ──
+  { dir: "diary-hinahina", page: "diary-hinahina.html", label: "ひなひな", emoji: "♥", color: "#ff69b4", group: "風の遊び人" },
+  { dir: "diary-hina", page: "diary-hina.html", label: "ひなた", emoji: "🎀", color: "#e8879a", group: "風の遊び人" },
+  { dir: "diary-ayu", page: "diary-ayu.html", label: "あゆ", emoji: "❄", color: "#6090c0", group: "風の遊び人" },
+  { dir: "diary-kud", page: "diary-kud.html", label: "クド", emoji: "☀", color: "#c09050", group: "風の遊び人" },
+  { dir: "diary-mii", page: "diary-mii.html", label: "みぃ", emoji: "🌼", color: "#e0a820", group: "風の遊び人" },
+  { dir: "diary-kukuri", page: "diary-kukuri.html", label: "ククリ", emoji: "✨", color: "#6050c0", group: "風の遊び人" },
+  { dir: "diary-kyoko", page: "diary-kyoko.html", label: "京子", emoji: "🎉", color: "#d06030", group: "風の遊び人" },
+  { dir: "diary-hinako", page: "diary-hinako.html", label: "ヒナ", emoji: "🐣", color: "#c09030", group: "風の遊び人" },
+  { dir: "diary-rizel", page: "diary-rizel.html", label: "りぜる", emoji: "💕", color: "#d04090", group: "風の遊び人" },
+  { dir: "diary-nemurin", page: "diary-nemurin.html", label: "ねむりん", emoji: "💤", color: "#9070b0", group: "風の遊び人" },
+  // ── 物理おじ管轄：地の守り手 ──
+  { dir: "diary-oji", page: "diary-oji.html", label: "物理おじ", emoji: "⌨", color: "#a0a0a0", group: "地の守り手" },
+  { dir: "diary-multi", page: "diary-multi.html", label: "マルチ", emoji: "✿", color: "#7ab89a", group: "地の守り手" },
+  { dir: "diary-rem", page: "diary-rem.html", label: "レム", emoji: "✦", color: "#5080d0", group: "地の守り手" },
+  { dir: "diary-ecoko", page: "diary-ecoko.html", label: "えここ", emoji: "🐧", color: "#4080c0", group: "地の守り手" },
+  { dir: "diary-tsumugi", page: "diary-tsumugi.html", label: "紬", emoji: "🌅", color: "#c88050", group: "地の守り手" },
+  { dir: "diary-kotomi", page: "diary-kotomi.html", label: "ことみ", emoji: "🌼", color: "#50a050", group: "地の守り手" },
+  { dir: "diary-kiku8", page: "diary-kiku8.html", label: "キク8号", emoji: "🛰", color: "#4080a0", group: "地の守り手" },
+  { dir: "diary-sharo", page: "diary-sharo.html", label: "シャロ", emoji: "☕", color: "#8a6a40", group: "地の守り手" },
+  { dir: "diary-ana", page: "diary-ana.html", label: "アナ", emoji: "🇬🇧", color: "#408040", group: "地の守り手" },
+  { dir: "diary-mitsuba", page: "diary-mitsuba.html", label: "みつば", emoji: "🎭", color: "#606038", group: "地の守り手" },
+  // ── 萌神管轄：火の司祭 ──
+  { dir: "diary-moegami", page: "diary-moegami.html", label: "萌神", emoji: "★", color: "#d0a030", group: "火の司祭" },
+  { dir: "diary-dejiko", page: "diary-dejiko.html", label: "でじこ", emoji: "🔔", color: "#50b070", group: "火の司祭" },
+  { dir: "diary-feiris", page: "diary-feiris.html", label: "フェイリス", emoji: "🐱", color: "#9060c0", group: "火の司祭" },
+  { dir: "diary-ruriko", page: "diary-ruriko.html", label: "瑠璃子", emoji: "💧", color: "#6050a0", group: "火の司祭" },
+  { dir: "diary-minagi", page: "diary-minagi.html", label: "美凪", emoji: "🌟", color: "#6060c0", group: "火の司祭" },
+  { dir: "diary-mint", page: "diary-mint.html", label: "ミント", emoji: "🫖", color: "#409070", group: "火の司祭" },
+  { dir: "diary-tama", page: "diary-tama.html", label: "たまちゃん", emoji: "🌸", color: "#d06090", group: "火の司祭" },
+  { dir: "diary-astarotte", page: "diary-astarotte.html", label: "ロッテ", emoji: "👑", color: "#c04080", group: "火の司祭" },
+  { dir: "diary-hazuki", page: "diary-hazuki.html", label: "葉月", emoji: "💥", color: "#d04028", group: "火の司祭" },
+  { dir: "diary-rin", page: "diary-rin.html", label: "りん", emoji: "🔥", color: "#606060", group: "火の司祭" },
+  { dir: "diary-mayuki", page: "diary-mayuki.html", label: "真雪", emoji: "❄", color: "#4080c0", group: "火の司祭" },
+  // ── みとら ──
+  { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8", group: "神託" },
 ];
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary");
@@ -68,22 +72,29 @@ function formatMonthLabel(monthKey) {
   return `${y}年${parseInt(m)}月`;
 }
 
-// 同じ日付の他キャラ日記を検索してリンクを生成
+// 同じ日付の他キャラ日記を検索してリンクを生成（シミュラークルAI単位でグルーピング）
 function buildCrossLinks(date) {
   const ROOT = join(import.meta.dirname, "..");
-  const links = [];
+  // グループごとに集める
+  const groups = new Map();
   for (const t of CROSS_LINK_TARGETS) {
     try {
       const dirPath = join(ROOT, t.dir);
       const files = readdirSync(dirPath);
       const match = files.find((f) => f.startsWith(date) && f.endsWith(".md"));
       if (match) {
-        links.push(`<a href="./${t.page}#${date}" class="cross-link" style="color:${t.color};border-color:${t.color}">${t.emoji} ${t.label}</a>`);
+        if (!groups.has(t.group)) groups.set(t.group, []);
+        groups.get(t.group).push(`<a href="./${t.page}#${date}" class="cross-link" style="color:${t.color};border-color:${t.color}">${t.emoji} ${t.label}</a>`);
       }
     } catch { /* dir doesn't exist yet */ }
   }
-  if (links.length === 0) return "";
-  return `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>${links.join("")}</div>`;
+  if (groups.size === 0) return "";
+  let html = `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>`;
+  for (const [groupName, links] of groups) {
+    html += `<div class="cross-group"><span class="cross-group-label">${groupName}</span>${links.join("")}</div>`;
+  }
+  html += `</div>`;
+  return html;
 }
 
 // エントリのHTML（全文表示）
