@@ -256,6 +256,15 @@ marquee {
   min-width: 0;
 }
 
+.entry-list li p {
+  line-height: 2.1;
+  margin: 0 0 1.2em;
+}
+
+.entry-list li p:last-of-type {
+  margin-bottom: 0;
+}
+
 .entry-list li img {
   max-width: 100%;
   height: auto;
@@ -628,7 +637,12 @@ body.diary-despair .entry-title {
 /* テキストのじわじわアニメーション */
 body.diary-despair .entry-list li p {
   color: #c0b8d8;
-  line-height: 1.9;
+  line-height: 2.1;
+  margin: 0 0 1.2em;
+}
+
+body.diary-despair .entry-list li p:last-of-type {
+  margin-bottom: 0;
 }
 
 body.diary-despair .entry-list li img {

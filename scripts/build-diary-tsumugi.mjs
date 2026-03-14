@@ -5,6 +5,7 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
+import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-tsumugi");
 const OUT_FILE = join(import.meta.dirname, "..", "diary-tsumugi.html");
@@ -27,7 +28,8 @@ async function main() {
       continue;
     }
     const raw = await readFile(join(DIARY_DIR, file), "utf-8");
-    const body = raw.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
+    const cleaned = stripDailyContextBlock(raw);
+    const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
     const html = await marked.parse(body);
     entries.push({ ...meta, html });
   }
