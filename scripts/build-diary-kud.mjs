@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="kud-header">
         <p class="smallline">☀ わふーの太陽 ☀</p>

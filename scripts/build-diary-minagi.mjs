@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="char-header">
         <p class="smallline">🌟 天文部部長の記録 🌟</p>

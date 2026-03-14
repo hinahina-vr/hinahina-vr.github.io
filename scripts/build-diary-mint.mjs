@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="char-header">
         <p class="smallline">🫖 テレパスの令嬢 🫖</p>

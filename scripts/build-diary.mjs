@@ -102,7 +102,7 @@ function htmlHead(title) {
     <meta name="description" content="ワディーゲストハウスの日記ページ。活動メモと近況ログ。" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="retro-header">
         <h1>${title}</h1>

@@ -150,7 +150,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="multi-header">
         <p class="smallline">✿ 記憶の器から ✿</p>

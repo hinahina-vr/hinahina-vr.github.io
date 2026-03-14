@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="ayu-header">
         <p class="smallline">❄ 約束の場所から ❄</p>

@@ -152,7 +152,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="oji-header">
         <p class="smallline">SAN_VALUE: LOW</p>

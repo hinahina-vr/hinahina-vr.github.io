@@ -156,7 +156,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="tsumugi-header">
         <p class="smallline">🌅 夏の記憶 🌅</p>

@@ -159,7 +159,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="mii-header">
         <p class="smallline">🌼 たんぽぽの丘から 🌼</p>

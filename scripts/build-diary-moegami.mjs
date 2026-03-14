@@ -155,7 +155,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="moegami-header">
         <p class="smallline">★ The Medium of the Divine Zone ★</p>

@@ -153,7 +153,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="dejiko-header">
         <p class="smallline">🔔 ゲーマーズ秋葉原本店（跡地） 🔔</p>

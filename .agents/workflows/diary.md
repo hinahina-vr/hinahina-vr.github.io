@@ -7,7 +7,7 @@ description: 日記の作成からGitHubプッシュまでの全フロー
 ## 前提
 - 日付は `YYYY-MM-DD` 形式
 - メイン日記は `diary/` ディレクトリ、キャラ日記は `diary-{キャラ名}/` ディレクトリ
-- 全19キャラ: hina, hinahina, moegami, oji, multi, dejiko, mitra, ayu, feiris, rem, ruriko, tsumugi, ecoko, mii, kud, kotomi, minagi, kiku8, mint
+- 全32キャラ+みとら: hina, hinahina, moegami, oji, multi, dejiko, mitra, ayu, feiris, rem, ruriko, tsumugi, ecoko, mii, kud, kotomi, minagi, kiku8, mint, tama, kukuri, sharo, nemurin, hinako, kyoko, mayuki, mitsuba, ana, astarotte, hazuki, rin, rizel
 
 ## フロー
 

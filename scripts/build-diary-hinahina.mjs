@@ -152,7 +152,7 @@ async function main() {
       }
     </style>
   </head>
-  <body>
+  <body class="diary-despair">
     <main class="page-frame">
       <header class="hinahina-header">
         <p class="smallline">♥ The Zone of Pure Nirvana ♥</p>
