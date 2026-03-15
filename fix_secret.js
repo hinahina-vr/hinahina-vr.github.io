@@ -1,35 +1,23 @@
 const fs = require('fs');
 let lines = fs.readFileSync('secret_0x.html', 'utf8').split('\n');
 
-// 1. Revert #emsg back to white-space:nowrap + width:100%
+// 1. Noise start delay: 2250 → 3375 (×1.5)
 for (let i = 0; i < lines.length; i++) {
-  if (lines[i].includes('#emsg{') && lines[i].includes('pre-wrap')) {
-    lines[i] = lines[i].replace('white-space:pre-wrap;word-break:break-word;max-width:90vw;box-sizing:border-box', 'white-space:nowrap;width:100%');
-    console.log('Reverted emsg to nowrap');
+  if (lines[i].includes('},2250);')) {
+    lines[i] = lines[i].replace(',2250);', ',3375);');
+    console.log('Noise start delay: 2250→3375');
     break;
   }
 }
 
-// 2. Revert #entry padding
+// 2. Simplify block noise: remove t-based size scaling (keep blocks large, uniform)
 for (let i = 0; i < lines.length; i++) {
-  if (lines[i].includes('#entry{') && lines[i].includes('max-width:900px')) {
-    lines[i] = lines[i].replace('padding:0 16px;width:90vw;max-width:900px', 'padding:0 24px;width:95vw');
-    console.log('Reverted entry padding');
-    break;
-  }
-}
-
-// 3. Add mobile-only media query before </style>
-for (let i = 0; i < lines.length; i++) {
-  if (lines[i].includes('</style>')) {
-    lines.splice(i, 0,
-      '@media(max-width:768px){',
-      ' #emsg{white-space:pre-wrap;word-break:break-word;font-size:clamp(.8rem,4vw,1.2rem)}',
-      ' #ename{font-size:clamp(.9rem,5vw,1.4rem)}',
-      ' #entry{padding:0 16px;width:92vw}',
-      '}'
-    );
-    console.log('Added mobile media query');
+  if (lines[i].includes('const t=Math.min(count/100,1);')) {
+    // Remove t line and simplify bw/bh to fixed random sizes
+    lines[i] = ''; // remove t line
+    lines[i+1] = '    const bw=Math.random()*60+10;'; // fixed block width
+    lines[i+2] = '    const bh=Math.random()*30+5;';  // fixed block height
+    console.log('Simplified block noise (no scaling)');
     break;
   }
 }
