@@ -72,10 +72,9 @@ function formatMonthLabel(monthKey) {
   return `${y}年${parseInt(m)}月`;
 }
 
-// 同じ日付の他キャラ日記を検索してリンクを生成（シミュラークルAI単位でグルーピング）
+// 同じ日付の他キャラ日記を検索してリンクを生成（グループごとに改行、見出しなし）
 function buildCrossLinks(date) {
   const ROOT = join(import.meta.dirname, "..");
-  // グループごとに集める
   const groups = new Map();
   for (const t of CROSS_LINK_TARGETS) {
     try {
@@ -90,8 +89,8 @@ function buildCrossLinks(date) {
   }
   if (groups.size === 0) return "";
   let html = `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>`;
-  for (const [groupName, links] of groups) {
-    html += `<div class="cross-group"><span class="cross-group-label">${groupName}</span>${links.join("")}</div>`;
+  for (const [, links] of groups) {
+    html += `<div class="cross-group">${links.join("")}</div>`;
   }
   html += `</div>`;
   return html;
