@@ -1,147 +1,31 @@
 const fs = require('fs');
 let lines = fs.readFileSync('secret_0x.html', 'utf8').split('\n');
 
-// Find and replace the entire kongou section (190-250)
-let startIdx = -1, endIdx = -1;
+// 1. Noise start delay: 1500 → 2250 (×1.5)
 for (let i = 0; i < lines.length; i++) {
-  if (lines[i].includes('// === Kongoushinkai mystical orbs ===')) startIdx = i;
-  if (startIdx >= 0 && lines[i].trim() === '}' && lines[i-1] && lines[i-1].includes('requestAnimationFrame(drawKongou)')) {
-    endIdx = i;
+  if (lines[i].includes('},1500);') && lines[i-1] && lines[i-1].includes(',1800);')) {
+    lines[i] = lines[i].replace(',1500);', ',2250);');
+    console.log('Noise start delay: 1500→2250');
     break;
   }
 }
 
-if (startIdx >= 0 && endIdx >= 0) {
-  const newCode = [
-    '// === Kongoushinkai: Cosmic Torrent of Life ===',
-    'let kongouActive=false;',
-    'const kStreams=[];const kStars=[];const kNebula=[];const kPillars=[];',
-    'function initKongou(){',
-    ' kStreams.length=0;kStars.length=0;kNebula.length=0;kPillars.length=0;',
-    ' const w=pc.width,h=pc.height;',
-    ' // Energy streams - flowing sine wave trails',
-    ' for(let i=0;i<8;i++){',
-    '  kStreams.push({',
-    '   y:Math.random()*h,baseX:Math.random()*w,',
-    '   amp:Math.random()*120+60,freq:Math.random()*0.008+0.003,',
-    '   speed:Math.random()*2+1.5,phase:Math.random()*Math.PI*2,',
-    '   width:Math.random()*3+1,',
-    '   hue:Math.floor(Math.random()*60+240),',
-    '   len:Math.floor(Math.random()*80+60),',
-    '   trail:[],',
-    '  });',
-    ' }',
-    ' // Rushing stars',
-    ' for(let i=0;i<120;i++){',
-    '  kStars.push({',
-    '   x:Math.random()*w,y:Math.random()*h,',
-    '   vx:(Math.random()-0.3)*3,vy:(Math.random()-0.5)*1.5,',
-    '   size:Math.random()*2.5+0.5,',
-    '   brightness:Math.random(),',
-    '   phase:Math.random()*Math.PI*2,',
-    '   speed:Math.random()*3+1,',
-    '  });',
-    ' }',
-    ' // Nebula clouds - large glowing masses',
-    ' for(let i=0;i<6;i++){',
-    '  kNebula.push({',
-    '   x:Math.random()*w,y:Math.random()*h,',
-    '   r:Math.random()*200+100,',
-    '   dx:(Math.random()-0.5)*0.4,dy:(Math.random()-0.5)*0.3,',
-    '   phase:Math.random()*Math.PI*2,',
-    '   hue:Math.floor(Math.random()*80+220),',
-    '   sat:Math.floor(Math.random()*40+60),',
-    '  });',
-    ' }',
-    ' // Light pillars - vertical energy columns',
-    ' for(let i=0;i<4;i++){',
-    '  kPillars.push({',
-    '   x:Math.random()*w,',
-    '   width:Math.random()*60+20,',
-    '   phase:Math.random()*Math.PI*2,',
-    '   speed:Math.random()*0.02+0.01,',
-    '   hue:Math.floor(Math.random()*40+260),',
-    '   drift:(Math.random()-0.5)*0.3,',
-    '  });',
-    ' }',
-    '}',
-    'function drawKongou(){',
-    ' if(!kongouActive)return;',
-    ' const w=pc.width,h=pc.height;',
-    ' const t=Date.now()*0.001;',
-    ' // Semi-transparent clear for motion trails',
-    " px.fillStyle='rgba(10,10,46,0.15)';",
-    ' px.fillRect(0,0,w,h);',
-    ' // 1. Nebula clouds',
-    ' for(const n of kNebula){',
-    '  n.x+=n.dx;n.y+=n.dy;',
-    '  if(n.x<-200)n.x=w+200;if(n.x>w+200)n.x=-200;',
-    '  if(n.y<-200)n.y=h+200;if(n.y>h+200)n.y=-200;',
-    '  const pulse=Math.sin(t*1.5+n.phase)*0.4+0.6;',
-    '  const g=px.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*pulse);',
-    "  g.addColorStop(0,'hsla('+n.hue+','+n.sat+'%,50%,'+(0.15*pulse)+')');",
-    "  g.addColorStop(0.4,'hsla('+n.hue+','+n.sat+'%,30%,'+(0.08*pulse)+')');",
-    "  g.addColorStop(1,'hsla('+n.hue+','+n.sat+'%,10%,0)');",
-    '  px.beginPath();px.arc(n.x,n.y,n.r*pulse,0,Math.PI*2);',
-    '  px.fillStyle=g;px.fill();',
-    ' }',
-    ' // 2. Light pillars',
-    ' for(const p of kPillars){',
-    '  p.x+=p.drift;',
-    '  if(p.x<-100)p.x=w+100;if(p.x>w+100)p.x=-100;',
-    '  const intensity=Math.sin(t*p.speed*50+p.phase)*0.5+0.5;',
-    '  const g=px.createLinearGradient(p.x-p.width/2,0,p.x+p.width/2,0);',
-    "  g.addColorStop(0,'hsla('+p.hue+',70%,60%,0)');",
-    "  g.addColorStop(0.5,'hsla('+p.hue+',70%,60%,'+(0.12*intensity)+')');",
-    "  g.addColorStop(1,'hsla('+p.hue+',70%,60%,0)');",
-    '  px.fillStyle=g;px.fillRect(p.x-p.width,0,p.width*2,h);',
-    ' }',
-    ' // 3. Energy streams',
-    ' for(const s of kStreams){',
-    '  const cx=s.baseX+Math.sin(t*0.5+s.phase)*100;',
-    '  s.trail.push({x:cx+Math.sin(t*s.freq*100+s.phase)*s.amp,y:s.y});',
-    '  s.y-=s.speed;',
-    '  if(s.y<-20){s.y=h+20;s.trail.length=0;}',
-    '  if(s.trail.length>s.len)s.trail.shift();',
-    '  if(s.trail.length>2){',
-    '   px.beginPath();',
-    '   px.moveTo(s.trail[0].x,s.trail[0].y);',
-    '   for(let i=1;i<s.trail.length;i++){',
-    '    const p=s.trail[i],pp=s.trail[i-1];',
-    '    px.quadraticCurveTo(pp.x,pp.y,(pp.x+p.x)/2,(pp.y+p.y)/2);',
-    '   }',
-    "   px.strokeStyle='hsla('+s.hue+',80%,70%,0.6)';",
-    '   px.lineWidth=s.width;',
-    "   px.shadowColor='hsla('+s.hue+',90%,60%,0.8)';",
-    '   px.shadowBlur=15;',
-    '   px.stroke();',
-    '   px.shadowBlur=0;',
-    '  }',
-    ' }',
-    ' // 4. Rushing stars',
-    ' for(const s of kStars){',
-    '  s.x+=s.vx;s.y+=s.vy;',
-    '  if(s.x<0)s.x=w;if(s.x>w)s.x=0;',
-    '  if(s.y<0)s.y=h;if(s.y>h)s.y=0;',
-    '  const flicker=Math.sin(t*s.speed*3+s.phase)*0.3+0.7;',
-    '  const a=s.brightness*flicker;',
-    '  px.beginPath();',
-    '  px.arc(s.x,s.y,s.size*flicker,0,Math.PI*2);',
-    "  px.fillStyle='rgba(200,180,255,'+(a*0.8)+')';",
-    '  px.fill();',
-    '  // Glow',
-    '  if(s.size>1.5){',
-    '   px.beginPath();',
-    '   px.arc(s.x,s.y,s.size*3*flicker,0,Math.PI*2);',
-    "   px.fillStyle='rgba(160,140,220,'+(a*0.15)+')';",
-    '   px.fill();',
-    '  }',
-    ' }',
-    ' requestAnimationFrame(drawKongou);',
-    '}',
-  ];
-  lines.splice(startIdx, endIdx - startIdx + 1, ...newCode);
-  console.log('Replaced kongou with cosmic torrent effect');
+// 2. Light pillar drift: 0.3 → 2.0 (much more horizontal movement)
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes("drift:(Math.random()-0.5)*0.3")) {
+    lines[i] = lines[i].replace("drift:(Math.random()-0.5)*0.3", "drift:(Math.random()-0.5)*2.0+((Math.random()>0.5)?0.5:-0.5)");
+    console.log('Pillar drift: 0.3→2.0');
+    break;
+  }
+}
+
+// 3. Add sinusoidal horizontal oscillation to pillar movement in drawKongou
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('p.x+=p.drift;') && lines[i+1] && lines[i+1].includes('p.x<-100')) {
+    lines[i] = '  p.x+=p.drift+Math.sin(t*0.8+p.phase)*1.5;';
+    console.log('Added pillar horizontal oscillation');
+    break;
+  }
 }
 
 fs.writeFileSync('secret_0x.html', lines.join('\n'), 'utf8');
