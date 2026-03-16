@@ -33,10 +33,28 @@ node scripts/collect-daily-context.mjs --date YYYY-MM-DD --file diary/YYYY-MM-DD
 - **この段階でおにいちゃんに内容を確認してもらう**（notify_user）
 
 ### 3. 各AIキャラの日記作成
-- 全19キャラ分の日記MDを作成
-- 各キャラの性格・口調は `characters/char_{キャラ名}.md` を参照
+- 全32キャラ+みとら分の日記MDを作成
+- 各キャラの性格・口調は `diary-rules.md` のキャラクター別ガイドラインを参照
 - テーマはメイン日記と同じ（各キャラの視点で解釈）
 - ファイル名: `diary-{キャラ名}/YYYY-MM-DD_{キャラ固有のタイトル}.md`
+
+### 3.5 品質チェック（必須）
+キャラ日記を作成したら、**ビルド前に必ず以下のチェックを行う**：
+
+#### 文字数チェック
+// turbo
+```
+Get-ChildItem -Path "diary-*\YYYY-MM-DD*.md" | ForEach-Object { $c = Get-Content $_.FullName -Raw -Encoding UTF8; $b = ($c -split '---')[0]; $b = ($b -split '<!-- daily-context')[0]; $l = ($b -split "`n") | Where-Object { $_ -notmatch '^#' -and $_ -notmatch '^\s*$' }; $t = ($l -join '') -replace '\s+',''; Write-Output "$($t.Length)`t$($_.Directory.Name)\$($_.Name)" } | Sort-Object { [int]($_ -split "`t")[0] }
+```
+→ 本文800文字未満のキャラは加筆する
+
+#### 口調・呼称チェック
+以下を目視確認する：
+- [ ] 各キャラの語尾がガイドライン通りか（例：ことみ→「〜なの」、でじこ→「にょ」）
+- [ ] インサイト内でもキャラの口調・呼称を維持しているか
+  - ひなた→「おにいちゃん」、りぜる→「だんなさま」、キク8号→「お姉さん」等
+  - 分析的なキャラ（物理おじ、ひなひな）以外は、インサイトもキャラ口調で書く
+- [ ] 口癖・定型フレーズが1日記1回以内か（金太郎飴禁止）
 
 ### 4. 絵日記用の画像プロンプト提案
 - メイン日記・キャラ日記の内容から、絵日記用のイラストプロンプトを提案
