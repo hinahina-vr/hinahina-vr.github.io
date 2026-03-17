@@ -1,5 +1,6 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
+import { tmpdir } from "node:os";
 import { chromium } from "playwright";
 import {
   DAILY_CONTEXT_DIR,
@@ -11,10 +12,17 @@ import {
   getDateStringForValue,
   getDateStringInTimeZone,
   loadDailyContextConfig,
+  pathExists,
   renderDailyContextBlock,
   resolveMainDiaryFile,
   upsertDailyContextBlock,
 } from "./lib/daily-context.mjs";
+import {
+  cloneJson,
+  createSkippedHealthSource,
+  normalizeHealthExport,
+} from "./lib/health-context.mjs";
+import { buildAdbArgs, runCommand } from "./lib/adb.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -22,6 +30,9 @@ function parseArgs(argv) {
     date: null,
     file: null,
     cdpUrl: null,
+    skipHealth: false,
+    healthFile: null,
+    adbSerial: null,
   };
 
   for (let index = 2; index < argv.length; index += 1) {
@@ -30,7 +41,7 @@ function parseArgs(argv) {
       options.bestEffort = true;
       continue;
     }
-    if (arg === "--headed") {
+    if (arg === "--headed" || arg === "--existing-chrome") {
       continue;
     }
     if (arg === "--date") {
@@ -45,12 +56,25 @@ function parseArgs(argv) {
       index += 1;
       continue;
     }
-    if (arg === "--existing-chrome") {
-      continue;
-    }
     if (arg === "--cdp-url") {
       if (!argv[index + 1]) throw new Error("--cdp-url requires a value");
       options.cdpUrl = argv[index + 1];
+      index += 1;
+      continue;
+    }
+    if (arg === "--skip-health") {
+      options.skipHealth = true;
+      continue;
+    }
+    if (arg === "--health-file") {
+      if (!argv[index + 1]) throw new Error("--health-file requires a value");
+      options.healthFile = argv[index + 1];
+      index += 1;
+      continue;
+    }
+    if (arg === "--adb-serial") {
+      if (!argv[index + 1]) throw new Error("--adb-serial requires a value");
+      options.adbSerial = argv[index + 1];
       index += 1;
       continue;
     }
@@ -65,10 +89,7 @@ function parseArgs(argv) {
       continue;
     }
 
-    if (arg === "headed") {
-      continue;
-    }
-    if (arg === "existing-chrome") {
+    if (arg === "headed" || arg === "existing-chrome") {
       continue;
     }
 
@@ -124,6 +145,34 @@ function isLoginErrorText(sourceName, url, bodyText) {
 
 function isXLoginRedirect(page) {
   return page.url().includes("/i/flow/login");
+}
+
+function buildSwarmErrorSource(note, config, existing) {
+  if (existing) return cloneJson(existing);
+  return {
+    status: "error",
+    note,
+    sourceUrl: config.swarmHistoryUrl,
+    items: [],
+  };
+}
+
+function buildXErrorSource(note, config, existing) {
+  if (existing) return cloneJson(existing);
+  return {
+    status: "error",
+    note,
+    sourceUrl: `https://x.com/${config.xHandle}`,
+    items: [],
+  };
+}
+
+function buildHealthErrorSource(note, config, existing) {
+  if (existing) return cloneJson(existing);
+  const source = createSkippedHealthSource(config.health, note);
+  source.status = "error";
+  source.note = note;
+  return source;
 }
 
 async function assertLoggedIn(page, sourceName) {
@@ -351,6 +400,11 @@ async function collectXForDate(page, date, timeZone, config) {
   };
 }
 
+async function readJson(path) {
+  const raw = await readFile(path, "utf-8");
+  return JSON.parse(raw);
+}
+
 async function writeJson(path, value) {
   await writeFile(path, JSON.stringify(value, null, 2), "utf-8");
 }
@@ -388,6 +442,116 @@ async function openCollectionSession(options, config) {
   };
 }
 
+async function loadExistingDailyContext(date) {
+  const path = join(DAILY_CONTEXT_DIR, `${date}.json`);
+  if (!(await pathExists(path))) return null;
+
+  try {
+    return await readJson(path);
+  } catch (error) {
+    console.warn(`[daily-context] existing context for ${date} could not be read: ${error.message}`);
+    return null;
+  }
+}
+
+function resolveHealthAdbCommand(config) {
+  return config.health.adbPath || "adb";
+}
+
+async function runAdb(config, options, args, commandOptions = {}) {
+  const command = resolveHealthAdbCommand(config);
+  return runCommand(command, buildAdbArgs(args, options.adbSerial), commandOptions);
+}
+
+async function waitForDeviceExport(config, options, devicePath, timeoutMs = 30000) {
+  const deadline = Date.now() + timeoutMs;
+
+  while (Date.now() < deadline) {
+    try {
+      await runAdb(config, options, ["shell", "ls", devicePath], {
+        timeoutMs: 5000,
+      });
+      return;
+    } catch {}
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+  }
+
+  throw new Error(`Timed out waiting for device export: ${devicePath}`);
+}
+
+async function collectHealthPayloadFromDevice(date, config, options) {
+  const exportDir = config.health.exportDirOnDevice.replace(/\/+$/, "");
+  const devicePath = `${exportDir}/${date}.json`;
+  const action = `${config.health.androidPackage}.EXPORT_HEALTH`;
+  const component = `${config.health.androidPackage}/.ExportHealthReceiver`;
+
+  await runAdb(config, options, ["shell", "rm", "-f", devicePath], {
+    timeoutMs: 15000,
+    acceptExitCodes: [0, 1],
+  }).catch(() => {});
+
+  await runAdb(config, options, [
+    "shell",
+    "am",
+    "broadcast",
+    "-a",
+    action,
+    "-n",
+    component,
+    "--es",
+    "date",
+    date,
+  ], {
+    timeoutMs: 15000,
+  });
+
+  await waitForDeviceExport(config, options, devicePath);
+
+  const tempDir = await mkdtemp(join(tmpdir(), "ooku-health-"));
+  const localPath = join(tempDir, `${date}.json`);
+
+  try {
+    await runAdb(config, options, ["pull", devicePath, localPath], {
+      timeoutMs: 30000,
+    });
+    return await readJson(localPath);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true }).catch(() => {});
+  }
+}
+
+async function collectHealthForDate(date, config, options) {
+  if (!config.health.enabled) {
+    return {
+      source: {
+        ...createSkippedHealthSource(config.health, "health disabled in config"),
+        status: "disabled",
+      },
+      raw: null,
+    };
+  }
+
+  if (options.skipHealth) {
+    return {
+      source: createSkippedHealthSource(config.health, "health 取得をスキップ (--skip-health)"),
+      raw: null,
+    };
+  }
+
+  const payload = options.healthFile
+    ? await readJson(options.healthFile)
+    : await collectHealthPayloadFromDevice(date, config, options);
+
+  return {
+    source: normalizeHealthExport(payload, {
+      date,
+      timezone: config.timezone,
+      config: config.health,
+    }),
+    raw: payload,
+  };
+}
+
 async function collectAndWrite(options) {
   const config = await loadDailyContextConfig();
   const fileDate = options.file ? basename(options.file).match(/^(\d{4}-\d{2}-\d{2})_/u)?.[1] : null;
@@ -402,46 +566,90 @@ async function collectAndWrite(options) {
   await ensureDir(DAILY_CONTEXT_DIR);
   await ensureDir(RAW_DIR);
 
+  const existingContext = await loadExistingDailyContext(date);
+  const existingSources = existingContext?.sources ?? {};
+
+  let health;
+  let healthRawPayload = null;
+  try {
+    const collected = await collectHealthForDate(date, config, options);
+    health = collected.source;
+    healthRawPayload = collected.raw;
+  } catch (error) {
+    if (existingSources.health?.status === "ok") {
+      console.warn(`[daily-context] health failed for ${date}, reusing existing data: ${error.message}`);
+      health = cloneJson(existingSources.health);
+    } else {
+      health = buildHealthErrorSource(error.message, config, null);
+    }
+  }
+
+  if ((options.skipHealth || !config.health.enabled) && existingSources.health?.status === "ok") {
+    health = cloneJson(existingSources.health);
+  }
+
+  let swarm;
+  let x;
+  let swarmRawPayload = null;
+  let xRawPayload = null;
   let swarmPage;
   let xPage;
   let session;
 
+  const reuseExistingBrowserSources = Boolean(options.healthFile && existingSources.swarm && existingSources.x);
+
   try {
-    session = await openCollectionSession(options, config);
-    swarmPage = session.swarmPage;
-    xPage = session.xPage;
+    if (reuseExistingBrowserSources) {
+      swarm = cloneJson(existingSources.swarm);
+      x = cloneJson(existingSources.x);
+    } else {
+      try {
+        session = await openCollectionSession(options, config);
+        swarmPage = session.swarmPage;
+        xPage = session.xPage;
+      } catch (error) {
+        if (existingSources.swarm || existingSources.x || health.status === "ok") {
+          console.warn(`[daily-context] browser session unavailable for ${date}: ${error.message}`);
+          swarm = buildSwarmErrorSource(error.message, config, existingSources.swarm);
+          x = buildXErrorSource(error.message, config, existingSources.x);
+        } else {
+          throw error;
+        }
+      }
 
-    let swarm;
-    try {
-      swarm = await collectSwarmForDate(swarmPage, date, config.timezone, config);
-      swarm = { status: "ok", note: null, ...swarm };
-    } catch (error) {
-      await saveDebugArtifacts(swarmPage, `swarm-${date}`, error);
-      swarm = {
-        status: "error",
-        note: error.message,
-        sourceUrl: swarmPage?.url?.() ?? config.swarmHistoryUrl,
-        items: [],
-      };
+      if (session) {
+        try {
+          const swarmCollected = await collectSwarmForDate(swarmPage, date, config.timezone, config);
+          swarm = { status: "ok", note: null, ...swarmCollected };
+          swarmRawPayload = swarmCollected;
+        } catch (error) {
+          await saveDebugArtifacts(swarmPage, `swarm-${date}`, error);
+          if (existingSources.swarm?.status === "ok") {
+            console.warn(`[daily-context] swarm failed for ${date}, reusing existing data: ${error.message}`);
+            swarm = cloneJson(existingSources.swarm);
+          } else {
+            swarm = buildSwarmErrorSource(error.message, config, null);
+          }
+        }
+
+        try {
+          const xCollected = await collectXForDate(xPage, date, config.timezone, config);
+          x = { status: "ok", note: null, ...xCollected };
+          xRawPayload = xCollected;
+        } catch (error) {
+          await saveDebugArtifacts(xPage, `x-${date}`, error);
+          if (existingSources.x?.status === "ok") {
+            console.warn(`[daily-context] x failed for ${date}, reusing existing data: ${error.message}`);
+            x = cloneJson(existingSources.x);
+          } else {
+            x = buildXErrorSource(error.message, config, null);
+          }
+        }
+      }
     }
 
-    let x;
-    try {
-      x = await collectXForDate(xPage, date, config.timezone, config);
-      x = { status: "ok", note: null, ...x };
-    } catch (error) {
-      await saveDebugArtifacts(xPage, `x-${date}`, error);
-      x = {
-        status: "error",
-        note: error.message,
-        sourceUrl: xPage?.url?.() ?? `https://x.com/${config.xHandle}`,
-        items: [],
-      };
-    }
-
-    if (swarm.status === "error" && x.status === "error") {
-      throw new Error(`All sources failed: swarm=${swarm.note}; x=${x.note}`);
-    }
+    swarm ??= buildSwarmErrorSource("Swarm data unavailable", config, existingSources.swarm);
+    x ??= buildXErrorSource("X data unavailable", config, existingSources.x);
 
     const normalized = {
       date,
@@ -450,9 +658,14 @@ async function collectAndWrite(options) {
       sources: {
         swarm,
         x,
+        health,
       },
       candidateTopics: [],
     };
+
+    if (swarm.status === "error" && x.status === "error" && health.status !== "ok") {
+      throw new Error(`All sources failed: swarm=${swarm.note}; x=${x.note}; health=${health.note}`);
+    }
 
     normalized.candidateTopics = buildCandidateTopics(normalized);
 
@@ -463,6 +676,7 @@ async function collectAndWrite(options) {
       note: swarm.note,
       sourceUrl: swarm.sourceUrl,
       items: swarm.items,
+      payload: swarmRawPayload,
     };
     const xRaw = {
       date,
@@ -471,15 +685,28 @@ async function collectAndWrite(options) {
       note: x.note,
       sourceUrl: x.sourceUrl,
       items: x.items,
+      payload: xRawPayload,
+    };
+    const healthRaw = {
+      date,
+      collectedAt: normalized.generatedAt,
+      status: health.status,
+      note: health.note,
+      source: health.source,
+      exportedAt: health.exportedAt,
+      device: health.device,
+      summary: health.summary,
+      payload: healthRawPayload,
     };
 
     await writeJson(join(RAW_DIR, `${date}.swarm.json`), swarmRaw);
     await writeJson(join(RAW_DIR, `${date}.x.json`), xRaw);
+    await writeJson(join(RAW_DIR, `${date}.health.json`), healthRaw);
     await writeJson(join(DAILY_CONTEXT_DIR, `${date}.json`), normalized);
     await updateDiaryFile(targetFile, normalized);
 
     console.log(`[daily-context] updated ${targetFile.relPath}`);
-    console.log(`[daily-context] Swarm ${swarm.items.length}件 / X ${x.items.length}件`);
+    console.log(`[daily-context] Swarm ${swarm.items?.length ?? 0}件 / X ${x.items?.length ?? 0}件 / Health ${health.status}`);
   } catch (error) {
     await saveDebugArtifacts(swarmPage, `swarm-${date}`, error);
     await saveDebugArtifacts(xPage, `x-${date}`, error);

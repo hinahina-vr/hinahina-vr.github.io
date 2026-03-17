@@ -1,5 +1,10 @@
 import { access, mkdir, readdir, readFile } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
+import {
+  buildHealthCandidateTopics,
+  mergeHealthConfig,
+  renderHealthSourceLines,
+} from "./health-context.mjs";
 
 export const ROOT_DIR = join(import.meta.dirname, "..", "..");
 export const DIARY_DIR = join(ROOT_DIR, "diary");
@@ -67,6 +72,8 @@ export async function loadDailyContextConfig() {
     browserDebugUrl: DEFAULT_BROWSER_DEBUG_URL,
     ...config,
   };
+
+  normalized.health = mergeHealthConfig(normalized.health);
 
   if (normalized.browserEngine !== "chrome") {
     throw new Error(`Unsupported browserEngine: ${normalized.browserEngine}. Only chrome is supported.`);
@@ -191,6 +198,7 @@ export function renderDailyContextBlock(normalized) {
     : normalized.sources.x.items
       .filter((item) => item.kind !== "repost")
       .map((item) => `- ${formatTimeInTimeZone(item.postedAt, normalized.timezone)} ${item.kind}: ${clipText(item.text || "(本文なし)", 120)}`);
+  const healthLines = renderHealthSourceLines(normalized.sources.health);
 
   const topicLines = normalized.candidateTopics.length > 0
     ? normalized.candidateTopics.map((topic) => `- ${topic}`)
@@ -206,6 +214,9 @@ export function renderDailyContextBlock(normalized) {
     "### X",
     ...(xLines.length > 0 ? xLines : ["- 該当なし"]),
     "",
+    "### Health",
+    ...healthLines,
+    "",
     "### 話題候補",
     ...topicLines,
     DAILY_CONTEXT_END,
@@ -216,26 +227,27 @@ export function renderDailyContextBlock(normalized) {
 
 export function buildCandidateTopics({ sources }) {
   const topics = [];
+  const baseTopics = [];
   const seen = new Set();
 
   const addTopic = (value) => {
     const topic = cleanText(value);
     if (!topic || seen.has(topic)) return;
     seen.add(topic);
-    topics.push(topic);
+    baseTopics.push(topic);
   };
 
   for (const item of sources.swarm.items) {
     if (item.venueName) addTopic(`${item.venueName}に行った`);
     if (item.venueArea && item.venueName) addTopic(`${item.venueArea}で${item.venueName}に立ち寄った`);
     if (item.shout) addTopic(clipText(item.shout, 48));
-    if (topics.length >= 4) break;
+    if (baseTopics.length >= 4) break;
   }
 
   for (const item of sources.x.items) {
     if (item.kind === "repost" || !item.text) continue;
     addTopic(clipText(item.text, 52));
-    if (topics.length >= 6) break;
+    if (baseTopics.length >= 6) break;
   }
 
   if (sources.swarm.items.length > 0 && sources.x.items.some((item) => item.kind !== "repost")) {
@@ -243,5 +255,8 @@ export function buildCandidateTopics({ sources }) {
     addTopic(venueName ? `${venueName}での外出とXの投稿が重なった日` : "外出とXの投稿が重なった日");
   }
 
+  const healthTopics = buildHealthCandidateTopics(sources.health);
+  topics.push(...baseTopics.slice(0, Math.max(0, 6 - healthTopics.length)));
+  topics.push(...healthTopics);
   return topics.slice(0, 6);
 }

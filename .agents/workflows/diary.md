@@ -18,18 +18,26 @@ npm run auth:daily-sources
 ```
 → おにいちゃんにChromeでX（とSwarm）にログインしてもらう
 
+健康データも取り込む日は、先に Android 端末で `tools/ooku-health-exporter-android/` をセットアップし、`HMS Core` / `HUAWEI Health` / companion app の権限付与を 1 回済ませておく。
+
 ログイン確認後：
 ```
 node scripts/collect-daily-context.mjs --date YYYY-MM-DD --file diary/YYYY-MM-DD_タイトル.md --cdp-url http://127.0.0.1:9222
 ```
-→ Swarm・Xのデータを `<!-- daily-context:start -->` ～ `<!-- daily-context:end -->` ブロックに自動挿入
+→ Swarm・X・Health のデータを `<!-- daily-context:start -->` ～ `<!-- daily-context:end -->` ブロックに自動挿入
 
-自動取得が失敗した場合は、Xのプロフィールページ（https://x.com/hinahina_vr）を直接確認し、手動でdaily-contextブロックを記述する。
+補足:
+- `--skip-health` を付けると健康データ取得を明示的に飛ばす
+- `--health-file path/to/YYYY-MM-DD.json` を付けると companion app の JSON を手動 import できる
+- `--adb-serial SERIAL` を付けると複数端末接続時に対象 Android を固定できる
+
+自動取得が失敗した場合は、Xのプロフィールページ（https://x.com/hinahina_vr）を直接確認し、必要なら `--health-file` を使って health JSON だけ手動で差し込む。`daily-context` は観測値のメモであり、Health の数値を診断や断定に使わない。
 
 ### 2. メイン日記の本文作成
-- daily-contextブロックのXポスト・Swarmデータをもとに本文を執筆
+- daily-contextブロックのXポスト・Swarm・Health要約をもとに本文を執筆
 - 文体はおにいちゃんの指示に従う（例: 村上春樹風など）
 - `### 文体メモ` セクションをdaily-contextブロック内に追加し、どんな文体で書いたか記録する
+- Health の数値は「よく眠れた」「よく歩いた」などの観測事実としてだけ扱い、医療的な診断や断定に変換しない
 - **この段階でおにいちゃんに内容を確認してもらう**（notify_user）
 
 ### 3. 各AIキャラの日記作成

@@ -4,5 +4,17 @@
   "xHandle": "hinahina_vr",
   "browserEngine": "chrome",
   "browserExecutablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-  "browserDebugUrl": "http://127.0.0.1:9222"
+  "browserDebugUrl": "http://127.0.0.1:9222",
+  "health": {
+    "enabled": true,
+    "source": "huawei-health-kit-android",
+    "adbPath": "adb",
+    "androidPackage": "io.waddy.ookuhealthexporter",
+    "exportDirOnDevice": "/sdcard/Download/OokuHealth",
+    "defaultMetrics": [
+      "sleep",
+      "activity",
+      "vitals"
+    ]
+  }
 }

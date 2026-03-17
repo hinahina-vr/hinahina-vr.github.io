@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Ooku Health Exporter</string>
+  <string name="title_main">Ooku Health Exporter</string>
+  <string name="description_main">Huawei Health Kit から睡眠・活動量・生体情報の日次サマリーを取り出し、PC 側の日記パイプラインに渡します。</string>
+  <string name="action_authorize">Authorize Huawei ID / Health Kit</string>
+  <string name="action_export_today">Export today</string>
+  <string name="action_export_date">Export date</string>
+  <string name="label_last_status">Last export status</string>
+</resources>

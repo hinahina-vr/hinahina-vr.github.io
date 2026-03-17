@@ -12,6 +12,5 @@
 
 **手順の要点:**
 1. まず `npm run auth:daily-sources` でChromeを起動し、ユーザーにXログインしてもらう
-2. `collect-daily-context.mjs` でX・Swarmデータを自動収集する
+2. `collect-daily-context.mjs` でX・Swarm・Healthデータを自動収集する
 3. 自動収集されたデータを元に日記を作成する（手動でSwarm/Xデータを捏造しない）
-

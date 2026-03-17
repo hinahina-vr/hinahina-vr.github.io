@@ -1,2 +1,7 @@
 node_modules/
 .local/
+tools/ooku-health-exporter-android/.gradle/
+tools/ooku-health-exporter-android/.idea/
+tools/ooku-health-exporter-android/local.properties
+tools/ooku-health-exporter-android/app/agconnect-services.json
+tools/ooku-health-exporter-android/app/build/

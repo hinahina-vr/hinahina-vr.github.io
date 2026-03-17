@@ -185,6 +185,7 @@ ${entryListItems}
         <p style="color: #a070b0; font-size: 11px;">ここまで読んでくれたニャン。ふふ。</p>
       </footer>
     </main>
+    <script src="./galge-launcher.js"></script>
   </body>
 </html>
 `;

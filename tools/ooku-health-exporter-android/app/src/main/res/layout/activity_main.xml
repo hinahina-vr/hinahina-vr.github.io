@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+      android:id="@+id/titleText"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/title_main"
+      android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/descriptionText"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:text="@string/description_main"
+      android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/titleText" />
+
+    <Button
+      android:id="@+id/authButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="@string/action_authorize"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/descriptionText" />
+
+    <Button
+      android:id="@+id/exportTodayButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:text="@string/action_export_today"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/authButton" />
+
+    <Button
+      android:id="@+id/exportDateButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:text="@string/action_export_date"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/exportTodayButton" />
+
+    <TextView
+      android:id="@+id/statusLabel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="@string/label_last_status"
+      android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/exportDateButton" />
+
+    <TextView
+      android:id="@+id/statusText"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:minHeight="120dp"
+      android:padding="16dp"
+      android:background="@android:color/darker_gray"
+      android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/statusLabel" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

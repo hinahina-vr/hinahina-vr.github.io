@@ -4,6 +4,7 @@
     "scripts": {
         "auth:daily-sources": "node scripts/auth-daily-sources.mjs",
         "collect:daily-context": "node scripts/collect-daily-context.mjs",
+        "test:daily-context-health": "node tests/daily-context-health.test.mjs",
         "build:diary": "node scripts/collect-daily-context.mjs --best-effort && node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
         "build:dialogue": "node scripts/build-dialogue.mjs",
