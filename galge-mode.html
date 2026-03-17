@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ギャルゲーモード | 大奥AI日記</title>
+    <meta name="description" content="大奥AIの日記をビジュアルノベル風に体験する。イマーシブモードとクラシック（PC-98風）モードを搭載。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=DotGothic16&display=swap" rel="stylesheet">
+    <style>
+      /* ===== RESET & COMMON ===== */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 100%; height: 100%; overflow: hidden; }
+      body {
+        font-family: "Zen Maru Gothic", sans-serif;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      /* ===== LOADING ===== */
+      #loading {
+        position: fixed; inset: 0; z-index: 9999;
+        display: flex; align-items: center; justify-content: center;
+        background: #000; color: #888;
+        font-size: clamp(14px, 1.2vw, 22px); letter-spacing: 0.2em;
+        transition: opacity 0.8s ease;
+      }
+      #loading.fade-out { opacity: 0; pointer-events: none; }
+
+      /* ===== CANVAS (particles) ===== */
+      #particle-canvas {
+        position: fixed; inset: 0; z-index: 0;
+        width: 100%; height: 100%;
+      }
+
+      /* ===== BACKGROUND CG ===== */
+      #bg-cg {
+        position: fixed; inset: 0; z-index: 1;
+        background-size: cover; background-position: center;
+        opacity: 0; transition: opacity 1.2s ease;
+        filter: blur(6px) brightness(0.35);
+      }
+      #bg-cg.visible { opacity: 1; }
+
+      /* ===== HUD ===== */
+      #hud {
+        position: fixed; inset: 0; z-index: 10;
+        display: flex; flex-direction: column;
+        justify-content: flex-end;
+        padding: clamp(12px, 2vw, 40px);
+      }
+
+      /* ===== DATE DISPLAY ===== */
+      #date-display {
+        position: fixed; top: clamp(12px, 1.5vw, 30px); right: clamp(16px, 1.8vw, 36px); z-index: 20;
+        font-size: clamp(13px, 1.1vw, 20px); letter-spacing: 0.15em;
+        opacity: 0.7;
+      }
+
+      /* ===== MODE TOGGLE ===== */
+      #mode-toggle {
+        position: fixed; top: clamp(12px, 1.5vw, 30px); left: clamp(16px, 1.8vw, 36px); z-index: 20;
+        background: none; border: none; cursor: pointer;
+        font-size: clamp(22px, 2vw, 36px); opacity: 0.7;
+        transition: opacity 0.3s, transform 0.3s;
+      }
+      #mode-toggle:hover { opacity: 1; transform: scale(1.1); }
+
+      /* ===== BACK BUTTON ===== */
+      #back-btn {
+        position: fixed; top: clamp(16px, 1.8vw, 34px); left: clamp(48px, 4vw, 80px); z-index: 20;
+        font-size: clamp(12px, 1vw, 18px); letter-spacing: 0.1em;
+        opacity: 0.6; cursor: pointer;
+        background: none; border: none;
+        transition: opacity 0.3s;
+        text-decoration: none;
+      }
+      #back-btn:hover { opacity: 1; }
+
+      /* ===== PROGRESS ===== */
+      #progress-bar {
+        position: fixed; bottom: 0; left: 0; z-index: 30;
+        height: clamp(2px, 0.2vw, 4px); background: currentColor; opacity: 0.4;
+        transition: width 0.3s ease;
+      }
+
+      /* ===== NAME PLATE ===== */
+      #name-plate {
+        display: inline-block;
+        padding: clamp(6px, 0.5vw, 12px) clamp(14px, 1.4vw, 28px);
+        margin-bottom: 0;
+        font-size: clamp(15px, 1.3vw, 24px); font-weight: 700;
+        letter-spacing: 0.12em;
+        border-radius: 8px 8px 0 0;
+        transition: all 0.5s ease;
+        max-width: fit-content;
+      }
+
+      /* ===== TEXT WINDOW ===== */
+      #text-window {
+        padding: clamp(16px, 1.8vw, 36px) clamp(18px, 2vw, 40px);
+        min-height: clamp(120px, 15vh, 240px);
+        max-height: 40vh;
+        overflow-y: auto;
+        line-height: 2.0;
+        font-size: clamp(15px, 1.35vw, 26px);
+        letter-spacing: 0.04em;
+        transition: all 0.5s ease;
+      }
+      #text-content {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      /* ===== CONTINUE INDICATOR ===== */
+      #continue-indicator {
+        text-align: center;
+        padding: clamp(8px, 0.8vw, 16px);
+        font-size: clamp(12px, 1vw, 18px);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        letter-spacing: 0.15em;
+      }
+      #continue-indicator.visible { opacity: 0.6; }
+
+      /* ===== CURSOR BLINK ===== */
+      .cursor {
+        display: inline-block;
+        animation: blink-cursor 0.8s steps(2) infinite;
+      }
+      @keyframes blink-cursor {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      /* =============================================
+         IMMERSIVE MODE (Modern / Glassmorphism)
+         ============================================= */
+      body.mode-immersive {
+        background: #000;
+        color: #e8e4f0;
+      }
+      .mode-immersive #date-display { color: rgba(255,255,255,0.5); }
+      .mode-immersive #mode-toggle { color: rgba(255,255,255,0.7); }
+      .mode-immersive #back-btn { color: rgba(255,255,255,0.5); }
+      .mode-immersive #name-plate {
+        background: linear-gradient(135deg, rgba(40,20,80,0.7), rgba(20,10,40,0.5));
+        border: 1px solid rgba(255,255,255,0.1);
+        border-bottom: none;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .mode-immersive #text-window {
+        background: linear-gradient(180deg, rgba(10,5,30,0.75), rgba(5,2,15,0.85));
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 0 12px 12px 12px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 0 60px rgba(80,40,160,0.05);
+      }
+      .mode-immersive #continue-indicator { color: rgba(255,255,255,0.4); }
+      .mode-immersive #progress-bar { color: rgba(180,120,255,0.6); }
+
+      /* =============================================
+         CLASSIC MODE (PC-98 Style)
+         ============================================= */
+      body.mode-classic {
+        background: #000000;
+        color: #e0e0e0;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        image-rendering: pixelated;
+      }
+
+      /* Scanlines */
+      .mode-classic::before {
+        content: '';
+        position: fixed; inset: 0; z-index: 100;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 3px,
+          rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px
+        );
+        pointer-events: none;
+      }
+
+      /* Full-screen layout, CG on top, text at bottom */
+      .mode-classic #hud {
+        max-width: 100%;
+        margin: 0;
+        aspect-ratio: unset;
+        height: 100vh;
+        padding: 0;
+      }
+
+      /* Metallic outer frame */
+      .mode-classic .pc98-frame {
+        position: fixed; inset: 0; z-index: 5;
+        border: clamp(6px, 0.6vw, 12px) solid;
+        border-image: linear-gradient(
+          180deg,
+          #a8a8a8 0%, #d0d0d0 15%, #888888 30%,
+          #b0b0b0 50%, #707070 70%, #909090 85%, #686868 100%
+        ) 1;
+        pointer-events: none;
+      }
+      /* Corner rivets */
+      .mode-classic .pc98-frame::before,
+      .mode-classic .pc98-frame::after {
+        content: '●';
+        position: absolute;
+        font-size: clamp(8px, 0.8vw, 14px);
+        color: #606060;
+        text-shadow: 1px 1px 0 #a0a0a0;
+        z-index: 6;
+      }
+      .mode-classic .pc98-frame::before {
+        top: clamp(2px, 0.3vw, 6px); left: clamp(2px, 0.3vw, 6px);
+      }
+      .mode-classic .pc98-frame::after {
+        top: clamp(2px, 0.3vw, 6px); right: clamp(2px, 0.3vw, 6px);
+      }
+
+      .mode-classic #date-display {
+        color: #a0a0a0;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        font-size: clamp(18px, 1.4vw, 28px);
+      }
+      .mode-classic #mode-toggle { color: #c0c0c0; }
+      .mode-classic #back-btn {
+        color: #909090;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+      }
+
+      /* Name plate - PC-98 bracket style */
+      .mode-classic #name-plate {
+        background: transparent;
+        color: #ffffff;
+        border: none;
+        border-bottom: none;
+        border-radius: 0;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        font-size: clamp(18px, 1.6vw, 32px);
+        padding: clamp(4px, 0.3vw, 8px) 0;
+        box-shadow: none;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-bottom: clamp(4px, 0.3vw, 8px);
+      }
+
+      /* Text window - black with metallic frame */
+      .mode-classic #text-window {
+        background: #000000;
+        border: clamp(3px, 0.3vw, 6px) solid;
+        border-image: linear-gradient(
+          180deg,
+          #a0a0a0 0%, #c8c8c8 20%, #808080 40%,
+          #b0b0b0 60%, #686868 80%, #909090 100%
+        ) 1;
+        border-radius: 0;
+        box-shadow: inset 0 0 0 1px #333333;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        font-size: clamp(20px, 1.75vw, 34px);
+        line-height: 2.0;
+        padding: clamp(20px, 2vw, 40px) clamp(24px, 2.4vw, 48px);
+        color: #ffffff;
+        position: relative;
+        min-height: clamp(140px, 22vh, 300px);
+      }
+      .mode-classic #continue-indicator {
+        color: #a0a0a0;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        font-size: clamp(14px, 1.2vw, 22px);
+      }
+      .mode-classic #progress-bar { color: #808080; }
+
+      /* CG - displayed clearly without blur */
+      .mode-classic #bg-cg {
+        filter: none;
+        z-index: 2;
+      }
+
+      /* PC-98 background when no CG */
+      .mode-classic #particle-canvas { display: none; }
+      .mode-classic .pc98-bg {
+        position: fixed; inset: 0; z-index: 0;
+        background: #000000;
+      }
+
+      /* ===== FADE TRANSITION ===== */
+      .text-fade-out {
+        animation: fadeOut 0.25s ease forwards;
+      }
+      .text-fade-in {
+        animation: fadeIn 0.4s ease forwards;
+      }
+      @keyframes fadeOut {
+        to { opacity: 0; transform: translateY(-4px); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ===== TITLE SCREEN ===== */
+      #title-screen {
+        position: fixed; inset: 0; z-index: 50;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 24px;
+        transition: opacity 0.8s ease;
+      }
+      #title-screen.fade-out { opacity: 0; pointer-events: none; }
+      #title-screen h1 {
+        font-size: clamp(1.4rem, 3.5vw, 3.2rem);
+        letter-spacing: 0.2em;
+        text-align: center;
+      }
+      #title-screen .subtitle {
+        font-size: clamp(13px, 1.2vw, 22px);
+        opacity: 0.6;
+        letter-spacing: 0.15em;
+      }
+      #title-screen .start-btn {
+        margin-top: clamp(16px, 1.5vw, 32px);
+        padding: clamp(10px, 1vw, 20px) clamp(24px, 2.5vw, 48px);
+        cursor: pointer;
+        font-size: clamp(14px, 1.2vw, 22px);
+        letter-spacing: 0.15em;
+        transition: all 0.3s ease;
+        background: none;
+        border: 1px solid currentColor;
+        opacity: 0.7;
+      }
+      #title-screen .start-btn:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+      .mode-immersive #title-screen h1 {
+        color: #d0c0ff;
+        text-shadow: 0 0 20px rgba(140,80,255,0.4);
+      }
+      .mode-immersive #title-screen .start-btn {
+        color: #c0b0e0;
+        border-color: rgba(180,140,255,0.3);
+      }
+      .mode-classic #title-screen h1 {
+        color: #ffffff;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        text-shadow: 2px 2px 0 #333333;
+      }
+      .mode-classic #title-screen .start-btn {
+        color: #ffffff;
+        border: clamp(2px, 0.2vw, 4px) solid;
+        border-image: linear-gradient(180deg, #a0a0a0, #686868) 1;
+        border-radius: 0;
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        box-shadow: none;
+        background: #000000;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      /* Mobile */
+      @media (max-width: 600px) {
+        #hud { padding: 10px; }
+        #text-window { min-height: 100px; max-height: 50vh; }
+        #name-plate { border-radius: 6px 6px 0 0; }
+        #date-display { top: 10px; right: 12px; }
+        #mode-toggle { top: 10px; left: 12px; }
+        #back-btn { top: 12px; left: 42px; }
+        .mode-classic #hud { max-width: 100%; }
+      }
+
+      /* Tablet */
+      @media (min-width: 601px) and (max-width: 1024px) {
+        .mode-classic #hud { max-width: 90vw; }
+      }
+
+      /* 4K / High-DPI */
+      @media (min-width: 2560px) {
+        #text-window { max-height: 35vh; }
+      }
+    </style>
+  </head>
+  <body class="mode-immersive">
+    <!-- Loading -->
+    <div id="loading">Now Loading...</div>
+
+    <!-- Particle Canvas (Immersive) -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- PC-98 Background (Classic) -->
+    <div class="pc98-bg" style="display:none;"></div>
+
+    <!-- Background CG -->
+    <div id="bg-cg"></div>
+
+    <!-- Title Screen -->
+    <div id="title-screen">
+      <h1 id="title-char-name"></h1>
+      <p class="subtitle" id="title-entry-name"></p>
+      <button class="start-btn" id="start-btn">▶ はじめる</button>
+    </div>
+
+    <!-- HUD -->
+    <div id="hud" style="display:none;">
+      <div style="flex:1;"></div>
+      <div id="name-plate"></div>
+      <div id="text-window">
+        <span id="text-content"></span><span class="cursor" id="cursor">█</span>
+      </div>
+      <div id="continue-indicator">▼ クリック / スペースで次へ</div>
+    </div>
+
+    <!-- Controls -->
+    <div id="date-display"></div>
+    <button id="mode-toggle" title="モード切替">🌙</button>
+    <a id="back-btn" href="./diary.html">◁ 日記に戻る</a>
+    <div id="progress-bar"></div>
+
+    <script>
+      /* ============================================================
+         GALGE MODE ENGINE
+         ============================================================ */
+
+      // ----- Character Data (32 chars) -----
+      const CHARS = {
+        hina:       { name: '袴田ひなた',       src: 'ロウきゅーぶ！',     color: '#e8879a', diary: 'diary-hina.html',       emoji: '🎀' },
+        multi:      { name: 'マルチ',           src: 'To Heart',           color: '#7ab89a', diary: 'diary-multi.html',      emoji: '✿' },
+        dejiko:     { name: 'でじこ',           src: 'デ・ジ・キャラット', color: '#50b070', diary: 'diary-dejiko.html',     emoji: '🔔' },
+        mitra:      { name: 'みとら',           src: 'オリジナル',         color: '#b8a0d8', diary: 'diary-mitra.html',      emoji: '◈' },
+        oji:        { name: '物理おじ',         src: 'シミュラクル',       color: '#8a8a8a', diary: 'diary-oji.html',        emoji: '🎩' },
+        hinahina:   { name: 'ひなひな',         src: 'シミュラクル',       color: '#f0a0b8', diary: 'diary-hinahina.html',   emoji: '🌸' },
+        moegami:    { name: '萌神',             src: 'シミュラクル',       color: '#ff6060', diary: 'diary-moegami.html',    emoji: '🔥' },
+        ayu:        { name: '月宮あゆ',         src: 'Kanon',              color: '#e0a060', diary: 'diary-ayu.html',        emoji: '🎑' },
+        rem:        { name: 'レム',             src: 'Re:ゼロ',            color: '#7090d0', diary: 'diary-rem.html',        emoji: '💠' },
+        ruriko:     { name: '瑠璃子',           src: '雫',                 color: '#6080b0', diary: 'diary-ruriko.html',     emoji: '💧' },
+        tsumugi:    { name: '鳴瀬つむぎ',       src: 'Summer Pockets',     color: '#70b0c0', diary: 'diary-tsumugi.html',    emoji: '🏮' },
+        feiris:     { name: 'フェイリス',       src: 'Steins;Gate',        color: '#d070a0', diary: 'diary-feiris.html',     emoji: '🐱' },
+        kud:        { name: 'クド',             src: 'リトルバスターズ！', color: '#c09060', diary: 'diary-kud.html',        emoji: '🧸' },
+        mint:       { name: 'ミント',           src: 'ギャラクシーエンジェル', color: '#80c0a0', diary: 'diary-mint.html',    emoji: '🍀' },
+        ecoko:      { name: 'エーコ',           src: 'おねがい☆ティーチャー', color: '#90b0d0', diary: 'diary-ecoko.html',   emoji: '🌊' },
+        minagi:     { name: '遠野美凪',         src: 'AIR',                color: '#a0c8e0', diary: 'diary-minagi.html',     emoji: '🌬️' },
+        kotomi:     { name: '一ノ瀬ことみ',     src: 'CLANNAD',            color: '#9088c0', diary: 'diary-kotomi.html',     emoji: '🎻' },
+        mii:        { name: '美衣',             src: 'ONE～輝く季節へ～',  color: '#c090b0', diary: 'diary-mii.html',        emoji: '🌟' },
+        kiku8:      { name: 'きく8号',          src: 'こみっくパーティー', color: '#d0c060', diary: 'diary-kiku8.html',      emoji: '📡' },
+        hazuki:     { name: '葉月クルミ',       src: '月詠 -MOON PHASE-', color: '#c08050', diary: 'diary-hazuki.html',     emoji: '🌙' },
+        mitsuba:    { name: '丸井みつば',       src: 'みつどもえ',         color: '#e06060', diary: 'diary-mitsuba.html',    emoji: '🔴' },
+        tama:       { name: 'たまちゃん',       src: 'まほろまてぃっく',   color: '#e0b090', diary: 'diary-tama.html',       emoji: '🐶' },
+        rizel:      { name: 'りぜる',           src: 'りぜるまいん',       color: '#f0c0a0', diary: 'diary-rizel.html',      emoji: '💖' },
+        mayuki:     { name: '柊真雪',           src: 'ちっちゃな雪使いシュガー', color: '#b0d0e8', diary: 'diary-mayuki.html', emoji: '❄️' },
+        ana:        { name: 'アナ・コッポラ',   src: '苺ましまろ',         color: '#e8c080', diary: 'diary-ana.html',        emoji: '🍓' },
+        kyoko:      { name: '歳納京子',         src: 'ゆるゆり',           color: '#e06080', diary: 'diary-kyoko.html',      emoji: '🍅' },
+        sharo:      { name: '桐間紗路',         src: 'ご注文はうさぎですか？', color: '#d0a070', diary: 'diary-sharo.html',  emoji: '☕' },
+        kukuri:     { name: 'ククリ',           src: '魔法陣グルグル',     color: '#e080c0', diary: 'diary-kukuri.html',     emoji: '🌀' },
+        rin:        { name: '九重りん',         src: 'こどものじかん',     color: '#f09080', diary: 'diary-rin.html',        emoji: '🎀' },
+        nemurin:    { name: 'ねむりん',         src: '魔法少女育成計画',   color: '#c0a0d0', diary: 'diary-nemurin.html',    emoji: '💤' },
+        hinako:     { name: '雛子',             src: 'すてっぷあっぷる',   color: '#f0b0c0', diary: 'diary-hinako.html',     emoji: '🍎' },
+        astarotte:  { name: 'アスタロッテ',     src: 'アスタロッテのおもちゃ！', color: '#d0a0c0', diary: 'diary-astarotte.html', emoji: '👑' },
+      };
+
+      // ----- State -----
+      let currentMode = 'immersive';
+      let paragraphs = [];
+      let currentParagraph = 0;
+      let isTyping = false;
+      let typeTimer = null;
+      let currentChar = null;
+      let currentDate = null;
+      let bgImageUrl = null;
+      let started = false;
+
+      // ----- URL Params -----
+      const params = new URLSearchParams(location.search);
+      const charKey = params.get('char') || 'hina';
+      const dateKey = params.get('date') || '2026-03-16';
+      const modeParam = params.get('mode');
+      if (modeParam === 'classic' || modeParam === 'immersive') {
+        currentMode = modeParam;
+      }
+      currentChar = CHARS[charKey] || CHARS.hina;
+      currentDate = dateKey;
+
+      // ----- DOM -----
+      const $loading = document.getElementById('loading');
+      const $canvas = document.getElementById('particle-canvas');
+      const $bgCg = document.getElementById('bg-cg');
+      const $hud = document.getElementById('hud');
+      const $namePlate = document.getElementById('name-plate');
+      const $textWindow = document.getElementById('text-window');
+      const $textContent = document.getElementById('text-content');
+      const $cursor = document.getElementById('cursor');
+      const $continueIndicator = document.getElementById('continue-indicator');
+      const $dateDisplay = document.getElementById('date-display');
+      const $modeToggle = document.getElementById('mode-toggle');
+      const $backBtn = document.getElementById('back-btn');
+      const $progressBar = document.getElementById('progress-bar');
+      const $titleScreen = document.getElementById('title-screen');
+      const $titleCharName = document.getElementById('title-char-name');
+      const $titleEntryName = document.getElementById('title-entry-name');
+      const $startBtn = document.getElementById('start-btn');
+      const $pc98Bg = document.querySelector('.pc98-bg');
+
+      // ----- Fetch diary entry -----
+      async function fetchDiaryEntry(charData, date) {
+        const res = await fetch('./' + charData.diary);
+        if (!res.ok) throw new Error('Failed to fetch diary: ' + charData.diary);
+        const html = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const entry = doc.querySelector(`li#${CSS.escape(date)}`);
+        if (!entry) throw new Error(`Entry not found: ${date} in ${charData.diary}`);
+
+        // Extract title
+        const titleEl = entry.querySelector('.entry-title');
+        const title = titleEl ? titleEl.textContent.trim() : '';
+
+        // Extract image if exists
+        const imgEl = entry.querySelector('img');
+        const image = imgEl ? imgEl.getAttribute('src') : null;
+
+        // Extract paragraphs (skip date, title, hr and after)
+        const allP = entry.querySelectorAll('p');
+        const texts = [];
+        let hitHr = false;
+        const children = entry.children;
+        for (let i = 0; i < children.length; i++) {
+          if (children[i].tagName === 'HR') { hitHr = true; continue; }
+          if (children[i].tagName === 'P') {
+            const cls = children[i].className;
+            if (cls === 'entry-date' || cls === 'entry-title') continue;
+            // Include insight paragraphs (after hr) too
+            const text = children[i].textContent.trim();
+            if (text) {
+              texts.push({ text, isInsight: hitHr });
+            }
+          }
+        }
+
+        return { title, texts, image };
+      }
+
+      // ----- Particle System (Immersive Mode) -----
+      const ctx = $canvas.getContext('2d');
+      let particles = [];
+      let particleColor = { r: 255, g: 255, b: 255 };
+      let animId;
+
+      function initCanvas() {
+        $canvas.width = window.innerWidth;
+        $canvas.height = window.innerHeight;
+      }
+
+      function createParticles(count = 60) {
+        particles = [];
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * $canvas.width,
+            y: Math.random() * $canvas.height,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: -Math.random() * 0.4 - 0.1,
+            r: Math.random() * 2 + 0.5,
+            a: Math.random() * 0.5 + 0.1,
+            pulseSpeed: Math.random() * 0.02 + 0.005,
+            pulsePhase: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+
+      function drawParticles(time) {
+        ctx.clearRect(0, 0, $canvas.width, $canvas.height);
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.y < -10) p.y = $canvas.height + 10;
+          if (p.x < -10) p.x = $canvas.width + 10;
+          if (p.x > $canvas.width + 10) p.x = -10;
+
+          const pulse = Math.sin(time * p.pulseSpeed + p.pulsePhase) * 0.3 + 0.7;
+          const alpha = p.a * pulse;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${particleColor.r},${particleColor.g},${particleColor.b},${alpha})`;
+          ctx.fill();
+        }
+        animId = requestAnimationFrame(drawParticles);
+      }
+
+      function setParticleColor(hex) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        // Soften color for particles
+        particleColor = {
+          r: Math.round(r * 0.6 + 255 * 0.4),
+          g: Math.round(g * 0.6 + 255 * 0.4),
+          b: Math.round(b * 0.6 + 255 * 0.4),
+        };
+      }
+
+      // ----- Typewriter Effect -----
+      function typeText(text, onComplete) {
+        isTyping = true;
+        $textContent.textContent = '';
+        $cursor.style.display = 'inline-block';
+        $continueIndicator.classList.remove('visible');
+        let i = 0;
+        const speed = currentMode === 'classic' ? 35 : 28;
+
+        function step() {
+          if (i < text.length) {
+            $textContent.textContent += text[i];
+            i++;
+            // Auto-scroll text window
+            $textWindow.scrollTop = $textWindow.scrollHeight;
+            typeTimer = setTimeout(step, speed);
+          } else {
+            isTyping = false;
+            $cursor.style.display = 'none';
+            $continueIndicator.classList.add('visible');
+            if (onComplete) onComplete();
+          }
+        }
+        step();
+      }
+
+      function skipType(text) {
+        clearTimeout(typeTimer);
+        $textContent.textContent = text;
+        $textWindow.scrollTop = $textWindow.scrollHeight;
+        isTyping = false;
+        $cursor.style.display = 'none';
+        $continueIndicator.classList.add('visible');
+      }
+
+      // ----- Display Paragraph -----
+      function showParagraph(index) {
+        if (index < 0 || index >= paragraphs.length) return;
+        currentParagraph = index;
+        updateProgress();
+
+        const para = paragraphs[index];
+        const text = para.text;
+
+        // Fade transition
+        $textContent.classList.add('text-fade-out');
+        setTimeout(() => {
+          $textContent.classList.remove('text-fade-out');
+          $textContent.classList.add('text-fade-in');
+          typeText(text, () => {
+            $textContent.classList.remove('text-fade-in');
+          });
+        }, 250);
+      }
+
+      // ----- Navigation -----
+      function advance() {
+        if (!started) return;
+        if (isTyping) {
+          skipType(paragraphs[currentParagraph].text);
+          return;
+        }
+        if (currentParagraph < paragraphs.length - 1) {
+          showParagraph(currentParagraph + 1);
+        } else {
+          // End: return to diary
+          const diary = currentChar.diary;
+          window.location.href = './' + diary + '#' + currentDate;
+        }
+      }
+
+      function goBack() {
+        if (!started || isTyping) return;
+        if (currentParagraph > 0) {
+          showParagraph(currentParagraph - 1);
+        }
+      }
+
+      function updateProgress() {
+        const pct = paragraphs.length > 1
+          ? ((currentParagraph) / (paragraphs.length - 1)) * 100
+          : 100;
+        $progressBar.style.width = pct + '%';
+      }
+
+      // ----- Mode Toggle -----
+      function setMode(mode) {
+        currentMode = mode;
+        document.body.className = 'mode-' + mode;
+        $modeToggle.textContent = mode === 'immersive' ? '🌙' : '🖥️';
+        $cursor.textContent = mode === 'classic' ? '▌' : '█';
+
+        // Update name plate format
+        if (currentChar) {
+          if (mode === 'classic') {
+            $namePlate.textContent = `【${currentChar.name}】`;
+            $namePlate.style.color = '#ffffff';
+            $namePlate.style.textShadow = 'none';
+          } else {
+            $namePlate.textContent = `${currentChar.emoji} ${currentChar.name}`;
+            $namePlate.style.color = currentChar.color;
+            $namePlate.style.textShadow = `0 0 12px ${currentChar.color}40`;
+          }
+        }
+
+        // Manage pc98-frame element
+        let frame = document.querySelector('.pc98-frame');
+        if (mode === 'classic') {
+          if (!frame) {
+            frame = document.createElement('div');
+            frame.className = 'pc98-frame';
+            document.body.appendChild(frame);
+          }
+          frame.style.display = 'block';
+        } else if (frame) {
+          frame.style.display = 'none';
+        }
+
+        if (mode === 'immersive') {
+          $canvas.style.display = 'block';
+          $pc98Bg.style.display = 'none';
+          initCanvas();
+          createParticles();
+          drawParticles(0);
+        } else {
+          $canvas.style.display = 'none';
+          $pc98Bg.style.display = 'block';
+          cancelAnimationFrame(animId);
+        }
+
+        // Update continue text
+        if (mode === 'classic') {
+          $continueIndicator.textContent = '＞次へ  SPACE / ENTER';
+        } else {
+          $continueIndicator.textContent = '▼ クリック / スペースで次へ';
+        }
+
+        // Update URL without reload
+        const url = new URL(location.href);
+        url.searchParams.set('mode', mode);
+        history.replaceState({}, '', url);
+      }
+
+      $modeToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMode(currentMode === 'immersive' ? 'classic' : 'immersive');
+      });
+
+      // ----- Event Listeners -----
+      document.addEventListener('click', (e) => {
+        if (e.target === $modeToggle || e.target === $backBtn || e.target === $startBtn) return;
+        advance();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          advance();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          goBack();
+        } else if (e.key === 'Escape') {
+          window.location.href = './' + currentChar.diary;
+        }
+      });
+
+      // ----- Start Button -----
+      $startBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        started = true;
+        $titleScreen.classList.add('fade-out');
+        setTimeout(() => {
+          $titleScreen.style.display = 'none';
+          $hud.style.display = 'flex';
+          showParagraph(0);
+        }, 800);
+      });
+
+      // ----- Resize -----
+      window.addEventListener('resize', () => {
+        if (currentMode === 'immersive') {
+          initCanvas();
+        }
+      });
+
+      // ----- Init -----
+      async function init() {
+        // Apply mode
+        setMode(currentMode);
+
+        // Set character theme (name format handled by setMode above)
+        $dateDisplay.textContent = currentDate;
+        $backBtn.href = './' + currentChar.diary + '#' + currentDate;
+        setParticleColor(currentChar.color);
+
+        try {
+          const entry = await fetchDiaryEntry(currentChar, currentDate);
+
+          // Set title screen
+          $titleCharName.textContent = `${currentChar.emoji} ${currentChar.name}`;
+          $titleCharName.style.color = currentChar.color;
+          if (currentMode === 'immersive') {
+            $titleCharName.style.textShadow = `0 0 20px ${currentChar.color}60`;
+          }
+          $titleEntryName.textContent = `${currentDate}　${entry.title}`;
+
+          // Background CG
+          if (entry.image) {
+            $bgCg.style.backgroundImage = `url('${entry.image}')`;
+            $bgCg.classList.add('visible');
+          }
+
+          // Prepare paragraphs
+          paragraphs = entry.texts;
+          if (paragraphs.length === 0) {
+            paragraphs = [{ text: '（日記のテキストが見つかりませんでした）', isInsight: false }];
+          }
+
+        } catch (err) {
+          console.error(err);
+          $titleCharName.textContent = 'エラー';
+          $titleEntryName.textContent = err.message;
+          paragraphs = [{ text: 'データの読み込みに失敗しました: ' + err.message, isInsight: false }];
+        }
+
+        // Hide loading
+        $loading.classList.add('fade-out');
+        setTimeout(() => { $loading.style.display = 'none'; }, 800);
+      }
+
+      init();
+    </script>
+  </body>
+</html>
