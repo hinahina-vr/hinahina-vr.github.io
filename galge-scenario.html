@@ -107,7 +107,7 @@
         max-height: 40vh;
         overflow-y: auto;
         line-height: 2.0;
-        font-size: clamp(15px, 1.35vw, 26px);
+        font-size: clamp(24px, 2.5vw, 44px);
         letter-spacing: 0.04em;
         transition: all 0.5s ease;
       }
@@ -179,7 +179,7 @@
         border-image: linear-gradient(180deg,#a0a0a0 0%,#c8c8c8 20%,#808080 40%,#b0b0b0 60%,#686868 80%,#909090 100%) 1;
         border-radius:0; box-shadow:inset 0 0 0 1px #333;
         font-family: "DotGothic16","MS Gothic",monospace;
-        font-size: clamp(20px,1.75vw,34px); line-height:2.0;
+        font-size: clamp(28px,2.8vw,44px); line-height:2.0;
         padding: clamp(20px,2vw,40px) clamp(24px,2.4vw,48px);
         color: #fff; min-height: clamp(140px,22vh,300px);
       }
@@ -875,6 +875,13 @@
 
         // Update expression tag
         $expressionTag.textContent = step.expression || '';
+
+        // Update text color to match character
+        if (currentMode === 'immersive' && !isNarrator && charData.color) {
+          $textContent.style.color = charData.color;
+        } else {
+          $textContent.style.color = '';
+        }
 
         // Update atmosphere from bg metadata
         if (step.bg) setAtmosphere(step.bg);
