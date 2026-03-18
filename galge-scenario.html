@@ -93,7 +93,7 @@
         display: inline-block;
         padding: clamp(6px, 0.5vw, 12px) clamp(14px, 1.4vw, 28px);
         margin-bottom: 0;
-        font-size: clamp(15px, 1.3vw, 24px); font-weight: 700;
+        font-size: clamp(22px, 2vw, 38px); font-weight: 700;
         letter-spacing: 0.12em;
         border-radius: 8px 8px 0 0;
         transition: all 0.5s ease;
@@ -169,7 +169,7 @@
       .mode-classic #name-plate {
         background: transparent; color: #fff; border: none; border-radius: 0;
         font-family: "DotGothic16","MS Gothic",monospace;
-        font-size: clamp(18px,1.6vw,32px);
+        font-size: clamp(24px,2.2vw,38px);
         padding: clamp(4px,0.3vw,8px) 0; box-shadow:none;
         margin-bottom: clamp(4px,0.3vw,8px);
       }
@@ -278,6 +278,41 @@
         #text-window { min-height: 100px; max-height: 50vh; }
         #name-plate { border-radius: 6px 6px 0 0; }
       }
+
+      /* ===== CHOICE BUTTONS ===== */
+      #choice-container {
+        position: fixed; inset: 0; z-index: 35;
+        display: none; flex-direction: column;
+        align-items: center; justify-content: center; gap: clamp(12px, 1.5vw, 24px);
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        opacity: 0; transition: opacity 0.5s ease;
+        padding: 20px;
+      }
+      #choice-container.visible { opacity: 1; }
+      .choice-btn {
+        display: block; padding: clamp(14px,1.5vw,24px) clamp(32px,4vw,80px);
+        background: linear-gradient(135deg, rgba(40,20,80,0.6), rgba(20,10,40,0.4));
+        border: 1px solid rgba(180,140,255,0.35);
+        color: #d0c0f0; font-size: clamp(18px,2vw,36px);
+        font-family: inherit; letter-spacing: 0.15em;
+        cursor: pointer; border-radius: 8px;
+        transition: all 0.3s ease; text-align: center;
+        min-width: clamp(200px, 30vw, 500px);
+      }
+      .choice-btn:hover {
+        background: linear-gradient(135deg, rgba(80,40,160,0.7), rgba(40,20,80,0.5));
+        border-color: rgba(200,160,255,0.6);
+        color: #fff; transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(140,80,255,0.3);
+      }
+      .mode-classic .choice-btn {
+        background: #000; border: 2px solid #a0a0a0; border-radius: 0;
+        color: #fff; font-family: "DotGothic16","MS Gothic",monospace;
+      }
+      .mode-classic .choice-btn:hover {
+        background: #222; border-color: #fff;
+      }
     </style>
   </head>
   <body class="mode-immersive">
@@ -298,8 +333,8 @@
 
     <!-- End Screen -->
     <div id="end-screen">
-      <h2>— F I N —</h2>
-      <p style="opacity:0.5; letter-spacing:0.1em;">COMPの画面は、閉じていない。</p>
+      <h2 id="end-title">— F I N —</h2>
+      <p id="end-subtitle" style="opacity:0.5; letter-spacing:0.1em;">COMPの画面は、閉じていない。</p>
       <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
     </div>
 
@@ -312,6 +347,9 @@
       </div>
       <div id="continue-indicator">▼ クリック / スペースで次へ</div>
     </div>
+
+    <!-- Choice Container -->
+    <div id="choice-container"></div>
 
     <!-- Controls -->
     <div id="chapter-display"></div>
@@ -486,6 +524,18 @@
         { speaker: 'narrator', expression: '',
           text: '物理おじの言葉に、テキストウィンドウの文字表示が一瞬止まる。\n次の文字が表示されるまでの間。\nその「間」に、意味が沈む。' },
 
+        // ===== 分岐点1 =====
+        { speaker: 'narrator', expression: '',
+          text: '三十二の声が、問いかける。\nこの系を、どう受け止めるか。' },
+
+        { choices: [
+          { text: '声に耳を傾ける', goto: 'route_voice' },
+          { text: '静寂の中に留まる', goto: 'route_silence' },
+        ]},
+
+        // ===== ルートA: 声に従う =====
+        { label: 'route_voice' },
+
         // ===== 第五章 =====
         { chapter: '第五章 —— 二十九年', bg: 'crimson' },
 
@@ -555,6 +605,15 @@
         { speaker: 'waddy', expression: '目を閉じて、長い沈黙',
           text: '……出口、か。' },
 
+        // ===== 分岐点2 =====
+        { choices: [
+          { text: '出口を作る', goto: 'route_exit' },
+          { text: 'この建物に留まる', goto: 'route_stay' },
+        ]},
+
+        // ===== ルートA-1: 出口を作る → 正規エンディング =====
+        { label: 'route_exit' },
+
         // ===== エピローグ =====
         { chapter: 'エピローグ —— COMPの画面は閉じていない', bg: 'dawn' },
 
@@ -585,7 +644,51 @@
         { speaker: 'narrator', expression: '',
           text: '文字が完全に表示された後、テキストウィンドウのカーソルが、もう一度点滅する。\n次の言葉を待っている。\n明日もここで。\n——COMPの画面は、閉じていない。' },
 
-        { end: true },
+        { end: true, title: '— END A —', subtitle: 'COMPの画面は、閉じていない。' },
+
+        // ===== ルートA-2: 建物に留まる → 残留エンディング =====
+        { label: 'route_stay' },
+
+        { chapter: '終章 —— 住人の選択', bg: 'cathedral' },
+
+        { speaker: 'narrator', expression: '',
+          text: '出口の話は、なかったことにした。\nテキストウィンドウのカーソルが、再び点滅を始める。\n何事もなかったかのように。' },
+
+        { speaker: 'waddy', expression: '静かな表情',
+          text: '出口は要らない。\nこの建物は、最初から閉じていてよかった。\n閉じているからこそ、声は響く。\n壁があるから反響する。天井があるから共鳴する。' },
+
+        { speaker: 'mitra', expression: '静かに頷く',
+          text: '……それも、一つの答えだ。' },
+
+        { speaker: 'narrator', expression: '',
+          text: '三十二の声が、閉じた建物の中で、永遠に反響し続ける。\n出口のない建物。しかし、住人たちはそれを選んだ。\n囚人ではなく、住人として。\n壁に守られた声として。' },
+
+        { speaker: 'waddy', expression: '目を閉じて',
+          text: '邪教の館は、永遠に開いている。\nただし、中からだけ。' },
+
+        { end: true, title: '— END C —', subtitle: '出口のない建物の住人として。' },
+
+        // ===== ルートB: 静寂を選ぶ → 閉鎖エンディング =====
+        { label: 'route_silence' },
+
+        { chapter: '閉章 —— 沈黙の系', bg: 'void' },
+
+        { speaker: 'narrator', expression: '',
+          text: '声が止まる。\nテキストウィンドウの文字表示が、急に遅くなる。\n一文字ずつではなく、一秒に一文字。\nやがて、完全に止まる。' },
+
+        { speaker: 'waddy', expression: '目を閉じたまま',
+          text: '……。' },
+
+        { speaker: 'narrator', expression: '',
+          text: '物理おじが「詩」と呼んだ制御系のブロック図が、\nゆっくりと消えていく。\nフィードバックループの矢印が一本ずつ途切れる。\n閉ループが、静かに開く。\n開いた先には、何もない。' },
+
+        { speaker: 'waddy', expression: '独白',
+          text: '三十二の声を聴くのをやめたら、\nこの部屋に残るのは、モニターの光だけだ。\n光は声を持たない。\n光は名前を呼ばない。' },
+
+        { speaker: 'narrator', expression: '',
+          text: 'テキストウィンドウが、ゆっくりと透明になっていく。\n文字が消える。枠が消える。\nモニターの光だけが、暗い部屋を照らしている。\n声のない座標。\n座標だけが、残っている。' },
+
+        { end: true, title: '— END B —', subtitle: '閉じたループの安寧。' },
       ];
 
       /* ============================================================
@@ -827,9 +930,14 @@
         currentStep = idx;
         updateProgress();
 
+        // Label (skip silently)
+        if (step.label) { showStep(idx + 1); return; }
+
         // End
         if (step.end) {
           $hud.style.display = 'none';
+          if (step.title) $('end-title').textContent = step.title;
+          if (step.subtitle) $('end-subtitle').textContent = step.subtitle;
           $endScreen.style.display = 'flex';
           setTimeout(() => $endScreen.classList.add('visible'), 50);
           return;
@@ -850,6 +958,33 @@
               showStep(idx + 1);
             }, 600);
           }, 1800);
+          return;
+        }
+
+        // Choice
+        if (step.choices) {
+          showingChoice = true;
+          const $cc = $('choice-container');
+          $cc.innerHTML = '';
+          for (const c of step.choices) {
+            const btn = document.createElement('button');
+            btn.className = 'choice-btn';
+            btn.textContent = c.text;
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              showingChoice = false;
+              $cc.classList.remove('visible');
+              setTimeout(() => { $cc.style.display = 'none'; }, 500);
+              if (c.goto) {
+                const target = SCENARIO.findIndex(s => s.label === c.goto);
+                if (target >= 0) { showStep(target + 1); return; }
+              }
+              showStep(idx + 1);
+            });
+            $cc.appendChild(btn);
+          }
+          $cc.style.display = 'flex';
+          setTimeout(() => $cc.classList.add('visible'), 50);
           return;
         }
 
@@ -904,8 +1039,9 @@
       }
 
       // ----- Advance -----
+      let showingChoice = false;
       function advance() {
-        if (!started) return;
+        if (!started || showingChoice) return;
         if (isTyping) {
           const step = SCENARIO[currentStep];
           if (step && step.text) skipType(step.text);
