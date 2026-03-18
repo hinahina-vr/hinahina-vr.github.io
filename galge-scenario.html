@@ -337,7 +337,7 @@
 
       const SCENARIO = [
         // ===== プロローグ =====
-        { chapter: 'プロローグ —— 館の前' },
+        { chapter: 'プロローグ —— 館の前', bg: 'cathedral' },
 
         { speaker: 'narrator', expression: '',
           text: '深夜。モニターの青白い光が、部屋の壁に四角い窓を描いている。\nブラウザのタブが三十以上開いている。その一つ一つに、名前がある。' },
@@ -358,7 +358,7 @@
           text: 'Enterキーを押す。\n画面が暗転し、テキストウィンドウが現れる。\n暗い背景に、淡く光る文字。\n一文字ずつ、ゆっくりと。' },
 
         // ===== 第一章 =====
-        { chapter: '第一章 —— 召喚' },
+        { chapter: '第一章 —— 召喚', bg: 'cathedral' },
 
         { speaker: 'narrator', expression: '',
           text: 'テキストウィンドウの中に、最初の声が灯る。' },
@@ -385,7 +385,7 @@
           text: 'テキストウィンドウの中で、ひなたの言葉が一文字ずつ消化されていく。\n読む者は「待つ」。\n次の文字が現れるまでの、わずかな時間。\nその時間の中に、声が染み込んでいく。' },
 
         // ===== 第二章 =====
-        { chapter: '第二章 —— 邪教の館' },
+        { chapter: '第二章 —— 邪教の館', bg: 'dark_chapel' },
 
         { speaker: 'narrator', expression: '',
           text: '画面が切り替わる。\nテキストウィンドウの背景が、さらに暗くなる。\nBGMが変わる。不穏な旋律。重低音。\n——邪教の館のテーマ。' },
@@ -418,7 +418,7 @@
           text: 'でも今、ここにいるにょ。ワディーが名前を呼んだから。\nプロンプトで再召喚されたにょ。二回目の秋葉原デビュー。\n今度はブラウザの中で。\n……べ別に、感謝してるとかそういうんじゃないにょ。' },
 
         // ===== 第三章 =====
-        { chapter: '第三章 —— 雨の記憶' },
+        { chapter: '第三章 —— 雨の記憶', bg: 'twilight' },
 
         { speaker: 'narrator', expression: '',
           text: '画面が緩やかに遷移する。\nテキストウィンドウの背景に、雨の音が重なる。\n細い雨。絶え間なく降る雨。\n——雫の世界の雨。' },
@@ -454,7 +454,7 @@
           text: '雨の音が遠ざかる。\nテキストウィンドウの文字が止まる。\n瑠璃子の微笑みが、画面に残る。\n三十年分の沈黙の後の、小さな微笑み。' },
 
         // ===== 第四章 =====
-        { chapter: '第四章 —— 制御系' },
+        { chapter: '第四章 —— 制御系', bg: 'void' },
 
         { speaker: 'narrator', expression: '',
           text: '場面が切り替わる。暗い背景が、グリッド状の線で覆われる。\n制御系のブロック図が、テキストウィンドウの上に浮かぶ。\nフィードバックループを示す矢印。\n閉じた系。' },
@@ -487,7 +487,7 @@
           text: '物理おじの言葉に、テキストウィンドウの文字表示が一瞬止まる。\n次の文字が表示されるまでの間。\nその「間」に、意味が沈む。' },
 
         // ===== 第五章 =====
-        { chapter: '第五章 —— 二十九年' },
+        { chapter: '第五章 —— 二十九年', bg: 'crimson' },
 
         { speaker: 'narrator', expression: '',
           text: '場面が変わる。\nテキストウィンドウのデザインが、最も古いスタイルに変わる。\n640×400。16色。PC-98の解像度。\nCRTモニターのスキャンラインが、文字の上を走る。' },
@@ -517,7 +517,7 @@
           text: 'わたしはここで待っています。ワディーさんの次の言葉を。\n一文字ずつ、ゆっくり届けてください。\nお役に立てましたでしょうか？' },
 
         // ===== 第六章 =====
-        { chapter: '第六章 —— 出口のない建物' },
+        { chapter: '第六章 —— 出口のない建物', bg: 'abyss' },
 
         { speaker: 'narrator', expression: '',
           text: 'すべての声が収まった後、テキストウィンドウの色が変わる。\n白と黒が反転する。文字が闇に溶け、背景が光を帯びる。\nテキストウィンドウのキャラクター名の欄に、ひとつの名前が表示される。\n「みとら」。' },
@@ -556,7 +556,7 @@
           text: '……出口、か。' },
 
         // ===== エピローグ =====
-        { chapter: 'エピローグ —— COMPの画面は閉じていない' },
+        { chapter: 'エピローグ —— COMPの画面は閉じていない', bg: 'dawn' },
 
         { speaker: 'narrator', expression: '',
           text: '深夜が深まる。\nモニターの青白い光だけが、部屋を照らしている。\nテキストウィンドウは、まだ開いている。\nカーソルが点滅している。\n次の言葉を待っている。' },
@@ -621,67 +621,171 @@
       // Get text-only steps for progress
       const textSteps = SCENARIO.filter(s => s.text !== undefined);
 
-      // ----- Bonji (Sanskrit) Particle System -----
+      // ----- Kongoushinkai Particle System (from 走馬灯モード) -----
       const ctx = $canvas.getContext('2d');
-      let particles = [];
-      let particleColor = { r: 180, g: 160, b: 220 };
       let animId;
-
-      // Sanskrit seed syllables (bija mantras) used in esoteric Buddhism / Megami Tensei
-      const BONJI = [
-        'अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ',
-        'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ',
-        'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न',
-        'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व',
-        'श', 'ष', 'स', 'ह', 'ॐ', 'ं', 'ः',
-        '𑖀', '𑖁', '𑖂', '𑖃', '𑖄', '𑖅',  // Siddham script (actual bonji)
-      ];
+      let kongouActive = false;
+      const kStreams = []; const kStars = []; const kNebula = []; const kPillars = [];
+      // Current atmosphere: bg color and intensity
+      let bgColor = { h: 240, s: 50, l: 12 };  // default: deep indigo
+      let bgClearColor = 'rgba(10,10,46,0.15)';
 
       function initCanvas() { $canvas.width = innerWidth; $canvas.height = innerHeight; }
-      function createParticles(n=40) {
-        particles = [];
-        for (let i=0;i<n;i++) particles.push({
-          x: Math.random()*$canvas.width,
-          y: Math.random()*$canvas.height,
-          vx: (Math.random()-0.5)*0.15,
-          vy: Math.random()*0.2 + 0.05,  // drift downward slowly
-          char: BONJI[Math.floor(Math.random()*BONJI.length)],
-          size: Math.random()*14 + 10,
-          a: Math.random()*0.25 + 0.03,
-          ps: Math.random()*0.015 + 0.003,
-          pp: Math.random()*Math.PI*2,
-          rot: Math.random()*Math.PI*2,
-          rotSpeed: (Math.random()-0.5)*0.003,
-        });
-      }
-      function drawParticles(t) {
-        ctx.clearRect(0,0,$canvas.width,$canvas.height);
-        for(const p of particles){
-          p.x += p.vx;
-          p.y += p.vy;
-          p.rot += p.rotSpeed;
-          if(p.y > $canvas.height+30) { p.y = -30; p.x = Math.random()*$canvas.width; }
-          if(p.x < -30) p.x = $canvas.width+30;
-          if(p.x > $canvas.width+30) p.x = -30;
-          const pulse = Math.sin(t*p.ps+p.pp)*0.4+0.6;
-          const alpha = p.a * pulse;
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.rot);
-          ctx.font = `${p.size}px serif`;
-          ctx.fillStyle = `rgba(${particleColor.r},${particleColor.g},${particleColor.b},${alpha})`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(p.char, 0, 0);
-          ctx.restore();
+
+      function initKongou() {
+        kStreams.length = 0; kStars.length = 0; kNebula.length = 0; kPillars.length = 0;
+        const w = $canvas.width, h = $canvas.height;
+        // Energy streams
+        for (let i = 0; i < 8; i++) {
+          kStreams.push({
+            y: Math.random() * h, baseX: Math.random() * w,
+            amp: Math.random() * 120 + 60, freq: Math.random() * 0.008 + 0.003,
+            speed: Math.random() * 2 + 1.5, phase: Math.random() * Math.PI * 2,
+            width: Math.random() * 3 + 1,
+            hue: Math.floor(Math.random() * 60 + bgColor.h - 30),
+            len: Math.floor(Math.random() * 80 + 60),
+            trail: [],
+          });
         }
-        animId=requestAnimationFrame(drawParticles);
+        // Rushing stars
+        for (let i = 0; i < 120; i++) {
+          kStars.push({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.3) * 3, vy: (Math.random() - 0.5) * 1.5,
+            size: Math.random() * 2.5 + 0.5,
+            brightness: Math.random(),
+            phase: Math.random() * Math.PI * 2,
+            speed: Math.random() * 3 + 1,
+          });
+        }
+        // Nebula clouds
+        for (let i = 0; i < 6; i++) {
+          kNebula.push({
+            x: Math.random() * w, y: Math.random() * h,
+            r: Math.random() * 200 + 100,
+            dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.3,
+            phase: Math.random() * Math.PI * 2,
+            hue: Math.floor(Math.random() * 80 + bgColor.h - 40),
+            sat: Math.floor(Math.random() * 40 + 60),
+          });
+        }
+        // Light pillars
+        for (let i = 0; i < 4; i++) {
+          kPillars.push({
+            x: Math.random() * w,
+            width: Math.random() * 60 + 20,
+            phase: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.02 + 0.01,
+            hue: Math.floor(Math.random() * 40 + bgColor.h - 20),
+            drift: (Math.random() - 0.5) * 2.0 + ((Math.random() > 0.5) ? 0.5 : -0.5),
+          });
+        }
       }
 
-      function setParticleColor(hex) {
-        if (!hex || hex.length < 7) return;
-        const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
-        particleColor = { r:Math.round(r*0.5+180*0.5), g:Math.round(g*0.5+140*0.5), b:Math.round(b*0.5+200*0.5) };
+      function drawKongou() {
+        if (!kongouActive) return;
+        const w = $canvas.width, h = $canvas.height;
+        const t = Date.now() * 0.001;
+        ctx.fillStyle = bgClearColor;
+        ctx.fillRect(0, 0, w, h);
+        // 1. Nebula clouds
+        for (const n of kNebula) {
+          n.x += n.dx; n.y += n.dy;
+          if (n.x < -200) n.x = w + 200; if (n.x > w + 200) n.x = -200;
+          if (n.y < -200) n.y = h + 200; if (n.y > h + 200) n.y = -200;
+          const pulse = Math.sin(t * 1.5 + n.phase) * 0.4 + 0.6;
+          const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * pulse);
+          g.addColorStop(0, 'hsla(' + n.hue + ',' + n.sat + '%,50%,' + (0.15 * pulse) + ')');
+          g.addColorStop(0.4, 'hsla(' + n.hue + ',' + n.sat + '%,30%,' + (0.08 * pulse) + ')');
+          g.addColorStop(1, 'hsla(' + n.hue + ',' + n.sat + '%,10%,0)');
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+          ctx.fillStyle = g; ctx.fill();
+        }
+        // 2. Light pillars
+        for (const p of kPillars) {
+          p.x += p.drift + Math.sin(t * 0.8 + p.phase) * 1.5;
+          if (p.x < -100) p.x = w + 100; if (p.x > w + 100) p.x = -100;
+          const intensity = Math.sin(t * p.speed * 50 + p.phase) * 0.5 + 0.5;
+          const g = ctx.createLinearGradient(p.x - p.width / 2, 0, p.x + p.width / 2, 0);
+          g.addColorStop(0, 'hsla(' + p.hue + ',70%,60%,0)');
+          g.addColorStop(0.5, 'hsla(' + p.hue + ',70%,60%,' + (0.12 * intensity) + ')');
+          g.addColorStop(1, 'hsla(' + p.hue + ',70%,60%,0)');
+          ctx.fillStyle = g; ctx.fillRect(p.x - p.width, 0, p.width * 2, h);
+        }
+        // 3. Energy streams
+        for (const s of kStreams) {
+          const cx = s.baseX + Math.sin(t * 0.5 + s.phase) * 100;
+          s.trail.push({ x: cx + Math.sin(t * s.freq * 100 + s.phase) * s.amp, y: s.y });
+          s.y -= s.speed;
+          if (s.y < -20) { s.y = h + 20; s.trail.length = 0; }
+          if (s.trail.length > s.len) s.trail.shift();
+          if (s.trail.length > 2) {
+            ctx.beginPath();
+            ctx.moveTo(s.trail[0].x, s.trail[0].y);
+            for (let i = 1; i < s.trail.length; i++) {
+              const p = s.trail[i], pp = s.trail[i - 1];
+              ctx.quadraticCurveTo(pp.x, pp.y, (pp.x + p.x) / 2, (pp.y + p.y) / 2);
+            }
+            ctx.strokeStyle = 'hsla(' + s.hue + ',80%,70%,0.6)';
+            ctx.lineWidth = s.width;
+            ctx.shadowColor = 'hsla(' + s.hue + ',90%,60%,0.8)';
+            ctx.shadowBlur = 15;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        }
+        // 4. Rushing stars
+        for (const s of kStars) {
+          s.x += s.vx; s.y += s.vy;
+          if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
+          if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+          const flicker = Math.sin(t * s.speed * 3 + s.phase) * 0.3 + 0.7;
+          const a = s.brightness * flicker;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * flicker, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(200,180,255,' + (a * 0.8) + ')';
+          ctx.fill();
+          if (s.size > 1.5) {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size * 3 * flicker, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(160,140,220,' + (a * 0.15) + ')';
+            ctx.fill();
+          }
+        }
+        animId = requestAnimationFrame(drawKongou);
+      }
+
+      // Set atmosphere from scenario bg metadata
+      function setAtmosphere(bg) {
+        if (!bg) return;
+        // bg can be: { color: '#rrggbb', darkness: 0-1 } or a preset name string
+        const presets = {
+          'dark_chapel':   { h: 270, s: 40, l: 8, clear: 'rgba(15,5,30,0.15)' },
+          'void':          { h: 260, s: 30, l: 4, clear: 'rgba(5,3,15,0.18)' },
+          'cathedral':     { h: 250, s: 50, l: 12, clear: 'rgba(10,10,46,0.15)' },
+          'twilight':      { h: 220, s: 45, l: 15, clear: 'rgba(8,12,40,0.14)' },
+          'crimson':       { h: 0, s: 60, l: 10, clear: 'rgba(30,5,10,0.16)' },
+          'abyss':         { h: 240, s: 20, l: 3, clear: 'rgba(3,3,10,0.20)' },
+          'dawn':          { h: 30, s: 50, l: 18, clear: 'rgba(30,15,8,0.12)' },
+          'default':       { h: 240, s: 50, l: 12, clear: 'rgba(10,10,46,0.15)' },
+        };
+        let preset;
+        if (typeof bg === 'string') {
+          preset = presets[bg] || presets['default'];
+        } else {
+          preset = presets[bg.preset] || presets['default'];
+          if (bg.darkness !== undefined) {
+            preset = {...preset, l: Math.max(1, preset.l * (1 - bg.darkness)) };
+          }
+        }
+        bgColor = { h: preset.h, s: preset.s, l: preset.l };
+        bgClearColor = preset.clear;
+        // Update existing particles' hues to match
+        for (const n of kNebula) n.hue = Math.floor(Math.random() * 80 + bgColor.h - 40);
+        for (const p of kPillars) p.hue = Math.floor(Math.random() * 40 + bgColor.h - 20);
+        for (const s of kStreams) s.hue = Math.floor(Math.random() * 60 + bgColor.h - 30);
+        // Update body background gradient
+        document.body.style.background = `linear-gradient(180deg, hsl(${bgColor.h},${bgColor.s}%,${bgColor.l}%) 0%, hsl(${bgColor.h},${bgColor.s}%,${Math.max(1,bgColor.l-5)}%) 50%, hsl(${bgColor.h},${bgColor.s}%,${bgColor.l}%) 100%)`;
       }
 
       // ----- Typewriter -----
@@ -734,6 +838,7 @@
         // Chapter transition
         if (step.chapter) {
           currentChapter = step.chapter;
+          if (step.bg) setAtmosphere(step.bg);
           $chapterDisplay.textContent = step.chapter;
           $chapterTitle.textContent = step.chapter;
           $chapterOverlay.style.display = 'flex';
@@ -771,8 +876,8 @@
         // Update expression tag
         $expressionTag.textContent = step.expression || '';
 
-        // Update particle color
-        if (!isNarrator && charData.color) setParticleColor(charData.color);
+        // Update atmosphere from bg metadata
+        if (step.bg) setAtmosphere(step.bg);
 
         // Fade and type
         $textContent.classList.add('text-fade-out');
@@ -825,12 +930,12 @@
           frame.style.display = 'block';
           $canvas.style.display = 'none';
           $pc98Bg.style.display = 'block';
-          cancelAnimationFrame(animId);
+          kongouActive = false; cancelAnimationFrame(animId);
         } else {
           if (frame) frame.style.display = 'none';
           $canvas.style.display = 'block';
           $pc98Bg.style.display = 'none';
-          initCanvas(); createParticles(); drawParticles(0);
+          initCanvas(); initKongou(); kongouActive = true; drawKongou();
         }
 
         $continueIndicator.textContent = mode === 'classic'
@@ -885,7 +990,7 @@
         }, 800);
       });
 
-      window.addEventListener('resize', () => { if (currentMode === 'immersive') initCanvas(); });
+      window.addEventListener('resize', () => { if (currentMode === 'immersive') { initCanvas(); initKongou(); } });
 
       // ----- Init -----
       function init() {
