@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "lineBreakReplacement": " / ",
+  "commaReplacement": "，",
+  "tabReplacement": " ",
+  "defaultAudioFormat": "wav",
+  "defaultVoiceIdPadding": 3,
+  "generatedRoot": "voicepeak/generated",
+  "runtimeAudioRoot": "assets/voices/scenarios",
+  "scenarios": {
+    "2026-03-18_声の座標": {
+      "source": "scenarios/2026-03-18_声の座標.json",
+      "audioNamespace": "2026-03-18_声の座標",
+      "voiceIdStrategy": "speaker-sequence",
+      "speakers": {
+        "narrator": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "waddy": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "hina": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "multi": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "dejiko": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "ruriko": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "oji": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "mitra": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" }
+      }
+    },
+    "2026-03-19_選択肢のある建物": {
+      "source": "scenarios/2026-03-19_選択肢のある建物.json",
+      "audioNamespace": "2026-03-19_選択肢のある建物",
+      "voiceIdStrategy": "speaker-sequence",
+      "speakers": {
+        "narrator": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "waddy": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "hina": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "multi": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "dejiko": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "ruriko": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "tsumugi": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "oji": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "rin": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" },
+        "mitra": { "voicepeakNarrator": "ナレーター名を入力", "preset": "" }
+      }
+    }
+  }
+}

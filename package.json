@@ -8,6 +8,7 @@
         "build:diary": "node scripts/collect-daily-context.mjs --best-effort && node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
         "build:galge-runtime": "node scripts/build-galge-runtime.mjs",
+        "build:voicepeak-files": "node scripts/build-voicepeak-files.mjs",
         "build:dialogue": "node scripts/build-dialogue.mjs",
         "build:video-scripts": "node scripts/build-video-scripts.mjs",
         "check:scenario-audio": "node scripts/check-scenario-audio.mjs",
