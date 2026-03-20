@@ -3,345 +3,723 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>声の座標 | ビジュアルノベル</title>
-    <meta name="description" content="声の座標 ─ 在ることの残響。三十二の声が響く群像哲学ノベル。" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=DotGothic16&display=swap" rel="stylesheet">
+    <title>ビジュアルノベル | ワディーゲストハウス</title>
+    <meta
+      name="description"
+      content="シナリオJSONを読み込む静的ビジュアルノベルランタイム。ユーザーアップロードのVRMと静的音声に対応。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=DotGothic16&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      /* ===== RESET ===== */
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { width: 100%; height: 100%; overflow: hidden; }
       body {
         font-family: "Zen Maru Gothic", sans-serif;
-        cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
-        background: #000;
-        color: #e0e0e0;
+        cursor: pointer;
+        background:
+          radial-gradient(circle at top, rgba(88, 65, 160, 0.32), transparent 30%),
+          linear-gradient(180deg, #110818 0%, #050309 52%, #110818 100%);
+        color: #ece7ff;
       }
+      button, input { font: inherit; }
+      [hidden] { display: none !important; }
 
-      /* ===== LOADING ===== */
       #loading {
-        position: fixed; inset: 0; z-index: 9999;
-        display: flex; align-items: center; justify-content: center;
-        background: #000; color: #888;
-        font-size: clamp(14px, 1.2vw, 22px); letter-spacing: 0.2em;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #030205;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: clamp(14px, 1.2vw, 22px);
+        letter-spacing: 0.2em;
         transition: opacity 0.8s ease;
       }
       #loading.fade-out { opacity: 0; pointer-events: none; }
 
-      /* ===== CANVAS (particles) ===== */
-      #particle-canvas {
-        position: fixed; inset: 0; z-index: 0;
-        width: 100%; height: 100%;
+      #particle-canvas,
+      #avatar-stage {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
       }
 
-      /* ===== HUD ===== */
+      #particle-canvas { z-index: 0; }
+      .pc98-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: none;
+        background:
+          linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(0, 0, 0, 1)),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.02) 0,
+            rgba(255, 255, 255, 0.02) 2px,
+            transparent 2px,
+            transparent 4px
+          );
+      }
+      .pc98-frame {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        display: none;
+        pointer-events: none;
+        border: clamp(6px, 0.6vw, 12px) solid;
+        border-image:
+          linear-gradient(
+            180deg,
+            #a8a8a8 0%,
+            #d0d0d0 15%,
+            #888 30%,
+            #b0b0b0 50%,
+            #707070 70%,
+            #909090 85%,
+            #686868 100%
+          )
+          1;
+      }
+
+      #avatar-stage-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 6;
+        pointer-events: none;
+        opacity: 0.12;
+        transition: opacity 0.25s ease;
+      }
+      #avatar-stage-shell.is-visible { opacity: 1; }
+      #avatar-stage-shell.is-disabled { display: none; }
+      #avatar-stage {
+        z-index: 0;
+        background:
+          radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.14), transparent 28%),
+          linear-gradient(180deg, transparent 0%, rgba(2, 1, 4, 0.22) 70%, rgba(2, 1, 4, 0.52) 100%);
+      }
+      #avatar-stage-placeholder {
+        position: absolute;
+        right: clamp(18px, 2vw, 36px);
+        bottom: clamp(130px, 18vh, 220px);
+        max-width: min(44vw, 420px);
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        background: rgba(8, 6, 16, 0.6);
+        color: rgba(255, 255, 255, 0.55);
+        font-size: clamp(11px, 0.85vw, 14px);
+        letter-spacing: 0.1em;
+        backdrop-filter: blur(8px);
+      }
+      #avatar-stage-shell.is-visible #avatar-stage-placeholder {
+        opacity: 0;
+      }
+      body:not(.runtime-started) #avatar-stage-shell {
+        opacity: 0;
+      }
+      body:not(.runtime-started) #chapter-display,
+      body:not(.runtime-started) #expression-tag,
+      body:not(.runtime-started) #mini-model-summary,
+      body:not(.runtime-started) #settings-btn,
+      body:not(.runtime-started) #voice-toggle {
+        display: none;
+      }
+
+      #title-screen,
+      #end-screen,
+      #chapter-overlay,
+      #choice-container,
+      #settings-modal {
+        position: fixed;
+        inset: 0;
+      }
+
+      #title-screen {
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        transition: opacity 0.8s ease;
+      }
+      #title-screen.fade-out { opacity: 0; pointer-events: none; }
+      .title-card {
+        width: min(720px, 100%);
+        padding: clamp(24px, 4vw, 48px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 28px;
+        background:
+          linear-gradient(180deg, rgba(18, 12, 32, 0.88), rgba(8, 6, 16, 0.92)),
+          radial-gradient(circle at top, rgba(186, 145, 255, 0.14), transparent 32%);
+        box-shadow:
+          0 28px 80px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        text-align: center;
+      }
+      #title-screen h1 {
+        font-size: clamp(1.8rem, 4vw, 3.4rem);
+        letter-spacing: 0.25em;
+        color: #dac7ff;
+        text-shadow: 0 0 24px rgba(167, 118, 255, 0.28);
+      }
+      #title-screen .subtitle {
+        margin-top: 10px;
+        font-size: clamp(12px, 1vw, 18px);
+        letter-spacing: 0.14em;
+        opacity: 0.68;
+      }
+      .title-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 14px;
+        margin-top: 22px;
+      }
+      .title-chip {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: clamp(11px, 0.9vw, 14px);
+        letter-spacing: 0.08em;
+      }
+      .title-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: clamp(24px, 3vw, 36px);
+      }
+      #title-screen .start-btn,
+      .utility-btn,
+      .settings-btn,
+      #settings-close {
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+      }
+      #title-screen .start-btn,
+      .utility-btn,
+      .settings-btn,
+      #settings-close {
+        padding: 12px 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(196, 163, 255, 0.24);
+        background: linear-gradient(180deg, rgba(26, 17, 46, 0.88), rgba(11, 8, 22, 0.9));
+        color: #efe7ff;
+        letter-spacing: 0.12em;
+      }
+      #title-screen .start-btn:hover,
+      .utility-btn:hover,
+      .settings-btn:hover,
+      #settings-close:hover {
+        opacity: 1;
+        transform: translateY(-1px);
+        border-color: rgba(220, 194, 255, 0.42);
+      }
+      #title-screen .start-btn {
+        min-width: 220px;
+        font-size: clamp(15px, 1.1vw, 20px);
+      }
+      #runtime-warning {
+        margin-top: 16px;
+        color: #ffd7a6;
+        font-size: clamp(11px, 0.9vw, 14px);
+        letter-spacing: 0.1em;
+      }
+
       #hud {
-        position: fixed; inset: 0; z-index: 10;
-        display: none; flex-direction: column;
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: none;
+        flex-direction: column;
         justify-content: flex-end;
-        padding: clamp(12px, 2vw, 40px);
+        padding: clamp(12px, 2vw, 38px);
       }
-
-      /* ===== CHAPTER DISPLAY ===== */
-      #chapter-display {
-        position: fixed; top: clamp(12px, 1.5vw, 30px); right: clamp(16px, 1.8vw, 36px); z-index: 20;
-        font-size: clamp(13px, 1.1vw, 20px); letter-spacing: 0.15em;
-        opacity: 0.7; color: rgba(255,255,255,0.5);
-      }
-
-      /* ===== MODE TOGGLE ===== */
-      #mode-toggle {
-        position: fixed; top: clamp(12px, 1.5vw, 30px); left: clamp(16px, 1.8vw, 36px); z-index: 20;
-        background: none; border: none; cursor: pointer;
-        font-size: clamp(22px, 2vw, 36px); opacity: 0.7;
-        transition: opacity 0.3s, transform 0.3s;
-        color: rgba(255,255,255,0.7);
-      }
-      #mode-toggle:hover { opacity: 1; transform: scale(1.1); }
-
-      /* ===== BACK BUTTON ===== */
-      #back-btn {
-        position: fixed; top: clamp(16px, 1.8vw, 34px); left: clamp(48px, 4vw, 80px); z-index: 20;
-        font-size: clamp(12px, 1vw, 18px); letter-spacing: 0.1em;
-        opacity: 0.6; cursor: pointer;
-        background: none; border: none;
-        transition: opacity 0.3s;
-        text-decoration: none; color: rgba(255,255,255,0.5);
-      }
-      #back-btn:hover { opacity: 1; }
-
-      /* ===== PROGRESS ===== */
-      #progress-bar {
-        position: fixed; bottom: 0; left: 0; z-index: 30;
-        height: clamp(2px, 0.2vw, 4px); background: rgba(180,120,255,0.6);
-        transition: width 0.3s ease;
-      }
-
-      /* ===== EXPRESSION TAG ===== */
-      #expression-tag {
-        position: fixed; top: clamp(42px, 3.5vw, 64px); right: clamp(16px, 1.8vw, 36px); z-index: 20;
-        font-size: clamp(11px, 0.9vw, 16px); letter-spacing: 0.1em;
-        opacity: 0.4; color: rgba(255,255,255,0.5);
-        font-style: italic;
-      }
-
-      /* ===== NAME PLATE ===== */
       #name-plate {
         display: inline-block;
-        padding: clamp(6px, 0.5vw, 12px) clamp(14px, 1.4vw, 28px);
         margin-bottom: 0;
-        font-size: clamp(22px, 2vw, 38px); font-weight: 700;
+        padding: clamp(6px, 0.5vw, 12px) clamp(14px, 1.3vw, 24px);
+        border-radius: 12px 12px 0 0;
+        font-size: clamp(22px, 2vw, 38px);
+        font-weight: 700;
         letter-spacing: 0.12em;
-        border-radius: 8px 8px 0 0;
-        transition: all 0.5s ease;
-        max-width: fit-content;
+        background: linear-gradient(135deg, rgba(45, 24, 82, 0.74), rgba(24, 12, 40, 0.56));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: none;
+        backdrop-filter: blur(12px);
       }
-
-      /* ===== TEXT WINDOW ===== */
       #text-window {
-        padding: clamp(16px, 1.8vw, 36px) clamp(18px, 2vw, 40px);
-        min-height: clamp(120px, 15vh, 240px);
-        max-height: 40vh;
+        padding: clamp(18px, 1.8vw, 34px) clamp(20px, 2vw, 38px);
+        min-height: clamp(130px, 16vh, 240px);
+        max-height: 42vh;
         overflow-y: auto;
-        line-height: 2.0;
-        font-size: clamp(24px, 2.5vw, 44px);
+        border-radius: 0 16px 16px 16px;
+        line-height: 2;
+        font-size: clamp(24px, 2.35vw, 44px);
         letter-spacing: 0.04em;
-        transition: all 0.5s ease;
+        background:
+          linear-gradient(180deg, rgba(12, 7, 30, 0.82), rgba(5, 3, 15, 0.88)),
+          radial-gradient(circle at top, rgba(126, 88, 188, 0.08), transparent 32%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+        backdrop-filter: blur(18px);
       }
       #text-content {
         white-space: pre-wrap;
         word-break: break-word;
       }
-
-      /* ===== CONTINUE ===== */
       #continue-indicator {
+        padding: 10px 0 4px;
         text-align: center;
-        padding: clamp(8px, 0.8vw, 16px);
-        font-size: clamp(12px, 1vw, 18px);
-        opacity: 0; transition: opacity 0.4s ease;
-        letter-spacing: 0.15em; color: rgba(255,255,255,0.4);
+        color: rgba(255, 255, 255, 0.44);
+        font-size: clamp(12px, 1vw, 16px);
+        letter-spacing: 0.15em;
+        opacity: 0;
+        transition: opacity 0.25s ease;
       }
-      #continue-indicator.visible { opacity: 0.6; }
-
-      /* ===== CURSOR ===== */
+      #continue-indicator.visible { opacity: 0.8; }
       .cursor { display: inline-block; animation: blink-cursor 0.8s steps(2) infinite; }
-      @keyframes blink-cursor { 0% {opacity:1} 50% {opacity:0} }
+      @keyframes blink-cursor { 0% { opacity: 1; } 50% { opacity: 0; } }
 
-      /* ===== IMMERSIVE MODE ===== */
-      body.mode-immersive { background: #000; color: #e8e4f0; }
-      .mode-immersive #name-plate {
-        background: linear-gradient(135deg, rgba(40,20,80,0.7), rgba(20,10,40,0.5));
-        border: 1px solid rgba(255,255,255,0.1); border-bottom: none;
-        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      }
-      .mode-immersive #text-window {
-        background: linear-gradient(180deg, rgba(10,5,30,0.75), rgba(5,2,15,0.85));
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 0 12px 12px 12px;
-        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 0 60px rgba(80,40,160,0.05);
-      }
-
-      /* ===== CLASSIC MODE ===== */
-      body.mode-classic {
-        background: #000; color: #e0e0e0;
-        font-family: "DotGothic16", "MS Gothic", monospace;
-        image-rendering: pixelated;
-      }
-      .mode-classic::before {
-        content: ''; position: fixed; inset: 0; z-index: 100;
-        background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px);
-        pointer-events: none;
-      }
-      .mode-classic #hud { max-width:100%; margin:0; height:100vh; padding:0; }
-      .mode-classic .pc98-frame {
-        position: fixed; inset: 0; z-index: 5;
-        border: clamp(6px, 0.6vw, 12px) solid;
-        border-image: linear-gradient(180deg, #a8a8a8 0%, #d0d0d0 15%, #888 30%, #b0b0b0 50%, #707070 70%, #909090 85%, #686868 100%) 1;
-        pointer-events: none;
-      }
-      .mode-classic #chapter-display { color: #a0a0a0; font-family: "DotGothic16", "MS Gothic", monospace; font-size: clamp(18px,1.4vw,28px); }
-      .mode-classic #mode-toggle { color: #c0c0c0; }
-      .mode-classic #back-btn { color: #909090; font-family: "DotGothic16","MS Gothic",monospace; }
-      .mode-classic #name-plate {
-        background: transparent; color: #fff; border: none; border-radius: 0;
-        font-family: "DotGothic16","MS Gothic",monospace;
-        font-size: clamp(24px,2.2vw,38px);
-        padding: clamp(4px,0.3vw,8px) 0; box-shadow:none;
-        margin-bottom: clamp(4px,0.3vw,8px);
-      }
-      .mode-classic #text-window {
-        background: #000;
-        border: clamp(3px,0.3vw,6px) solid;
-        border-image: linear-gradient(180deg,#a0a0a0 0%,#c8c8c8 20%,#808080 40%,#b0b0b0 60%,#686868 80%,#909090 100%) 1;
-        border-radius:0; box-shadow:inset 0 0 0 1px #333;
-        font-family: "DotGothic16","MS Gothic",monospace;
-        font-size: clamp(28px,2.8vw,44px); line-height:2.0;
-        padding: clamp(20px,2vw,40px) clamp(24px,2.4vw,48px);
-        color: #fff; min-height: clamp(140px,22vh,300px);
-      }
-      .mode-classic #continue-indicator { color:#a0a0a0; font-family:"DotGothic16","MS Gothic",monospace; font-size:clamp(14px,1.2vw,22px); }
-      .mode-classic #expression-tag { font-family:"DotGothic16","MS Gothic",monospace; }
-      .mode-classic #particle-canvas { display: none; }
-      .mode-classic .pc98-bg { position:fixed;inset:0;z-index:0;background:#000; }
-
-      /* ===== FADE ===== */
-      .text-fade-out { animation: fadeOut 0.25s ease forwards; }
-      .text-fade-in  { animation: fadeIn 0.4s ease forwards; }
-      @keyframes fadeOut { to { opacity:0; transform:translateY(-4px); } }
-      @keyframes fadeIn  { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
-
-      /* ===== TITLE SCREEN ===== */
-      #title-screen {
-        position: fixed; inset: 0; z-index: 50;
-        display: flex; flex-direction: column;
-        align-items: center; justify-content: center; gap: 16px;
-        transition: opacity 0.8s ease;
-      }
-      #title-screen.fade-out { opacity: 0; pointer-events: none; }
-      #title-screen h1 {
-        font-size: clamp(1.4rem, 3.5vw, 3.2rem);
-        letter-spacing: 0.25em; text-align:center;
-        color: #d0c0ff; text-shadow: 0 0 30px rgba(140,80,255,0.4);
-      }
-      #title-screen .subtitle {
-        font-size: clamp(12px, 1vw, 18px); opacity:0.5; letter-spacing:0.12em;
-      }
-      #title-screen .start-btn {
-        margin-top: clamp(24px, 2vw, 48px);
-        padding: clamp(10px, 1vw, 20px) clamp(28px, 3vw, 56px);
-        cursor: pointer; font-size: clamp(14px, 1.2vw, 22px);
-        letter-spacing: 0.15em; transition: all 0.3s ease;
-        background: none; border: 1px solid rgba(180,140,255,0.3);
-        opacity: 0.7; color: #c0b0e0;
-      }
-      #title-screen .start-btn:hover { opacity: 1; transform: translateY(-2px); }
-      .mode-classic #title-screen h1 {
-        font-family: "DotGothic16","MS Gothic",monospace;
-        color: #fff; text-shadow: 2px 2px 0 #333;
-      }
-      .mode-classic #title-screen .start-btn {
-        color:#fff; border:clamp(2px,0.2vw,4px) solid;
-        border-image: linear-gradient(180deg,#a0a0a0,#686868) 1;
-        border-radius:0; font-family:"DotGothic16","MS Gothic",monospace;
-        background:#000;
-      }
-      .mode-classic #title-screen .subtitle {
-        font-family:"DotGothic16","MS Gothic",monospace;
-      }
-
-      /* ===== CHAPTER TRANSITION ===== */
-      #chapter-overlay {
-        position: fixed; inset: 0; z-index: 40;
-        display: none; align-items: center; justify-content: center;
-        background: #000; opacity: 0;
-        transition: opacity 0.6s ease;
-      }
-      #chapter-overlay.visible { opacity: 1; }
-      #chapter-overlay h2 {
-        font-size: clamp(1.2rem, 2.8vw, 2.8rem);
-        letter-spacing: 0.2em; color: #c0b0e0;
-        text-shadow: 0 0 20px rgba(140,80,255,0.3);
-      }
-      .mode-classic #chapter-overlay h2 {
-        font-family:"DotGothic16","MS Gothic",monospace;
-        color: #fff; text-shadow: 2px 2px 0 #333;
-      }
-
-      /* ===== END SCREEN ===== */
-      #end-screen {
-        position: fixed; inset: 0; z-index: 50;
-        display: none; flex-direction: column;
-        align-items: center; justify-content: center; gap: 20px;
-        background: #000; opacity: 0;
-        transition: opacity 1.2s ease;
-      }
-      #end-screen.visible { opacity: 1; }
-      #end-screen h2 {
-        font-size: clamp(1.4rem, 3vw, 3rem);
-        letter-spacing: 0.3em; color: #c0b0e0;
-        text-shadow: 0 0 20px rgba(140,80,255,0.3);
-      }
-      #end-screen .back-link {
-        margin-top: 16px; color: rgba(255,255,255,0.4);
-        font-size: clamp(12px,1vw,18px); letter-spacing: 0.1em;
-        text-decoration: none; transition: opacity 0.3s;
-      }
-      #end-screen .back-link:hover { opacity: 1; color: rgba(255,255,255,0.7); }
-
-      /* ===== RESPONSIVE ===== */
-      @media (orientation: portrait) {
-        #hud { padding: 10px; }
-        #text-window { min-height: 100px; max-height: 50vh; font-size: clamp(13px, 3.5vw, 20px); }
-        #name-plate { border-radius: 6px 6px 0 0; font-size: clamp(12px, 3vw, 18px); }
-        .choice-btn { font-size: clamp(13px, 3.5vw, 18px); min-width: 70vw; }
-      }
-
-      /* ===== CHOICE BUTTONS ===== */
       #choice-container {
-        position: fixed; inset: 0; z-index: 35;
-        display: none; flex-direction: column;
-        align-items: center; justify-content: center; gap: clamp(12px, 1.5vw, 24px);
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-        opacity: 0; transition: opacity 0.5s ease;
+        z-index: 35;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(12px, 1.5vw, 22px);
         padding: 20px;
+        background: rgba(0, 0, 0, 0.62);
+        backdrop-filter: blur(8px);
+        opacity: 0;
+        transition: opacity 0.4s ease;
       }
       #choice-container.visible { opacity: 1; }
       .choice-btn {
-        display: block; padding: clamp(14px,1.5vw,24px) clamp(32px,4vw,80px);
-        background: linear-gradient(135deg, rgba(40,20,80,0.6), rgba(20,10,40,0.4));
-        border: 1px solid rgba(180,140,255,0.35);
-        color: #d0c0f0; font-size: clamp(18px,2vw,36px);
-        font-family: inherit; letter-spacing: 0.15em;
-        cursor: pointer; border-radius: 8px;
-        transition: all 0.3s ease; text-align: center;
-        min-width: clamp(200px, 30vw, 500px);
+        min-width: min(560px, 86vw);
+        padding: clamp(14px, 1.5vw, 22px) clamp(28px, 4vw, 64px);
+        border-radius: 14px;
+        border: 1px solid rgba(196, 163, 255, 0.3);
+        background: linear-gradient(135deg, rgba(38, 22, 72, 0.84), rgba(17, 10, 34, 0.92));
+        color: #eadfff;
+        font-size: clamp(18px, 2vw, 34px);
+        letter-spacing: 0.13em;
       }
       .choice-btn:hover {
-        background: linear-gradient(135deg, rgba(80,40,160,0.7), rgba(40,20,80,0.5));
-        border-color: rgba(200,160,255,0.6);
-        color: #fff; transform: scale(1.03);
-        box-shadow: 0 0 20px rgba(140,80,255,0.3);
+        transform: scale(1.02);
+        border-color: rgba(231, 214, 255, 0.46);
       }
-      .mode-classic .choice-btn {
-        background: #000; border: 2px solid #a0a0a0; border-radius: 0;
-        color: #fff; font-family: "DotGothic16","MS Gothic",monospace;
+
+      #chapter-display,
+      #expression-tag,
+      #mini-model-summary,
+      #settings-btn,
+      #voice-toggle,
+      #mode-toggle,
+      #back-btn {
+        position: fixed;
+        z-index: 20;
       }
-      .mode-classic .choice-btn:hover {
-        background: #222; border-color: #fff;
+      #chapter-display {
+        top: clamp(14px, 1.8vw, 28px);
+        right: clamp(18px, 2vw, 36px);
+        max-width: min(42vw, 420px);
+        text-align: right;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: clamp(12px, 1vw, 18px);
+        letter-spacing: 0.12em;
+      }
+      #expression-tag {
+        top: clamp(42px, 4vw, 68px);
+        right: clamp(18px, 2vw, 36px);
+        max-width: min(38vw, 360px);
+        text-align: right;
+        color: rgba(255, 255, 255, 0.46);
+        font-size: clamp(11px, 0.85vw, 15px);
+        font-style: italic;
+      }
+      #mini-model-summary {
+        right: clamp(18px, 2vw, 36px);
+        bottom: clamp(28px, 3vh, 42px);
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(8, 6, 16, 0.64);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.68);
+        font-size: clamp(11px, 0.85vw, 14px);
+        letter-spacing: 0.1em;
+        backdrop-filter: blur(8px);
+      }
+      #settings-btn,
+      #voice-toggle {
+        top: clamp(92px, 8vw, 124px);
+      }
+      #settings-btn { right: clamp(18px, 2vw, 36px); }
+      #voice-toggle { right: clamp(146px, 12vw, 188px); }
+      .utility-btn {
+        padding: 10px 14px;
+        font-size: clamp(11px, 0.9vw, 14px);
+      }
+      #mode-toggle {
+        top: clamp(14px, 1.8vw, 28px);
+        left: clamp(18px, 2vw, 36px);
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: clamp(22px, 1.8vw, 32px);
+      }
+      #back-btn {
+        top: clamp(18px, 2vw, 32px);
+        left: clamp(54px, 4.5vw, 84px);
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.58);
+        text-decoration: none;
+        font-size: clamp(12px, 1vw, 18px);
+        letter-spacing: 0.1em;
+      }
+      #progress-bar {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 30;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #8f6ae4, #f0d4ff);
+        transition: width 0.3s ease;
+      }
+
+      #chapter-overlay,
+      #end-screen {
+        z-index: 40;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+      #chapter-overlay.visible,
+      #end-screen.visible { opacity: 1; }
+      #chapter-overlay h2,
+      #end-screen h2 {
+        font-size: clamp(1.4rem, 3vw, 3rem);
+        letter-spacing: 0.22em;
+        color: #d9cbff;
+      }
+      #end-subtitle {
+        margin-top: 12px;
+        opacity: 0.6;
+        letter-spacing: 0.1em;
+      }
+      .back-link {
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+      }
+
+      #settings-modal {
+        z-index: 60;
+      }
+      #settings-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+      }
+      #settings-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(960px, calc(100vw - 28px));
+        max-height: min(88vh, 920px);
+        transform: translate(-50%, -46%);
+        overflow: hidden;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background:
+          linear-gradient(180deg, rgba(18, 12, 32, 0.96), rgba(8, 6, 16, 0.98)),
+          radial-gradient(circle at top, rgba(186, 145, 255, 0.14), transparent 32%);
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+        opacity: 0;
+        transition: opacity 0.16s ease, transform 0.16s ease;
+      }
+      #settings-modal.visible #settings-dialog {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+      #settings-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 24px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      #settings-header h2 {
+        font-size: clamp(1rem, 1.5vw, 1.4rem);
+        letter-spacing: 0.14em;
+      }
+      #settings-meta {
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: clamp(11px, 0.9vw, 14px);
+        letter-spacing: 0.08em;
+      }
+      #settings-warning-list {
+        margin-top: 12px;
+        padding-left: 18px;
+        color: #ffd7a6;
+        font-size: clamp(11px, 0.85vw, 13px);
+      }
+      #settings-list {
+        max-height: calc(88vh - 150px);
+        padding: 18px 24px 24px;
+        overflow: auto;
+      }
+      .settings-row {
+        padding: 16px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .settings-row + .settings-row,
+      .settings-fallback-actions {
+        margin-top: 12px;
+      }
+      .settings-row-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: baseline;
+      }
+      .settings-row-title {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .settings-row-status {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 13px;
+      }
+      .settings-row-status.has-model { color: #cfe7c6; }
+      .settings-row-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .settings-btn {
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+      }
+      .settings-btn.secondary {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .settings-btn:disabled {
+        opacity: 0.45;
+        cursor: default;
+        transform: none;
+      }
+      .settings-inline-field {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+      .settings-inline-field input {
+        width: 78px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(5, 5, 10, 0.6);
+        color: inherit;
+      }
+      .settings-fallback-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .text-fade-out { animation: fadeOut 0.25s ease forwards; }
+      .text-fade-in { animation: fadeIn 0.4s ease forwards; }
+      @keyframes fadeOut {
+        to { opacity: 0; transform: translateY(-4px); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      body.mode-classic {
+        font-family: "DotGothic16", "MS Gothic", monospace;
+        background: #000;
+        color: #fff;
+        image-rendering: pixelated;
+      }
+      body.mode-classic::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        pointer-events: none;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 3px,
+            rgba(0, 0, 0, 0.14) 3px,
+            rgba(0, 0, 0, 0.14) 4px
+          );
+      }
+      .mode-classic #title-screen h1,
+      .mode-classic #chapter-overlay h2,
+      .mode-classic #end-screen h2,
+      .mode-classic #name-plate,
+      .mode-classic #text-window,
+      .mode-classic #chapter-display,
+      .mode-classic #expression-tag,
+      .mode-classic #back-btn,
+      .mode-classic .title-chip,
+      .mode-classic .choice-btn,
+      .mode-classic #settings-dialog,
+      .mode-classic #settings-close,
+      .mode-classic .settings-btn,
+      .mode-classic .utility-btn {
+        font-family: "DotGothic16", "MS Gothic", monospace;
+      }
+      .mode-classic #particle-canvas { display: none; }
+      .mode-classic .pc98-bg { display: block; }
+      .mode-classic #name-plate {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 6px 0;
+        margin-bottom: 4px;
+      }
+      .mode-classic #text-window,
+      .mode-classic .choice-btn,
+      .mode-classic .title-card,
+      .mode-classic #settings-dialog,
+      .mode-classic .utility-btn,
+      .mode-classic #title-screen .start-btn,
+      .mode-classic .settings-btn,
+      .mode-classic #settings-close {
+        border-radius: 0;
+        background: #000;
+        border: 2px solid #9a9a9a;
+        box-shadow: none;
+      }
+      .mode-classic #text-window {
+        backdrop-filter: none;
+      }
+      .mode-classic #avatar-stage-shell { opacity: 0.8; }
+      .mode-classic #avatar-stage-placeholder,
+      .mode-classic #mini-model-summary {
+        border-radius: 0;
+        background: rgba(0, 0, 0, 0.86);
+        border: 2px solid #7f7f7f;
+      }
+      .mode-classic #mode-toggle,
+      .mode-classic #back-btn,
+      .mode-classic #chapter-display,
+      .mode-classic #expression-tag {
+        color: #d0d0d0;
+      }
+
+      @media (max-width: 960px) {
+        #settings-btn,
+        #voice-toggle {
+          top: auto;
+          bottom: 86px;
+        }
+        #voice-toggle { right: 18px; }
+        #settings-btn { right: 126px; }
+        #mini-model-summary {
+          left: 18px;
+          right: auto;
+          bottom: 86px;
+        }
+        #avatar-stage-placeholder {
+          right: 18px;
+          bottom: 170px;
+        }
+      }
+
+      @media (orientation: portrait) {
+        #hud { padding: 10px; }
+        #text-window {
+          min-height: 110px;
+          max-height: 46vh;
+          font-size: clamp(14px, 4vw, 22px);
+        }
+        #name-plate { font-size: clamp(14px, 4vw, 22px); }
+        .choice-btn { min-width: 88vw; font-size: clamp(14px, 3.8vw, 20px); }
+        #settings-dialog {
+          width: calc(100vw - 16px);
+        }
+        #settings-list {
+          padding: 16px;
+        }
       }
     </style>
   </head>
   <body class="mode-immersive">
     <div id="loading">Now Loading...</div>
     <canvas id="particle-canvas"></canvas>
-    <div class="pc98-bg" style="display:none;"></div>
+    <div class="pc98-bg"></div>
 
-    <!-- Title Screen -->
-    <div id="title-screen">
-      <h1>声の座標</h1>
-      <p class="subtitle">─ 在ることの残響 ─</p>
-      <p class="subtitle" style="opacity:0.35; font-size:clamp(10px,0.8vw,14px);">群像哲学ノベル</p>
-      <button class="start-btn" id="start-btn">▶ はじめる</button>
+    <div id="avatar-stage-shell" aria-hidden="true">
+      <canvas id="avatar-stage"></canvas>
+      <div id="avatar-stage-placeholder">モデル未設定</div>
     </div>
 
-    <!-- Chapter Transition -->
+    <div id="title-screen">
+      <section class="title-card">
+        <h1>ビジュアルノベル</h1>
+        <p class="subtitle">─ シナリオを読み込み中 ─</p>
+        <p class="subtitle">群像哲学ノベル</p>
+
+        <div class="title-meta">
+          <p class="title-chip" id="title-model-summary">モデル設定済み 0 / 0</p>
+        </div>
+
+        <div class="title-actions">
+          <button class="start-btn" id="start-btn" type="button">▶ はじめる</button>
+          <button class="utility-btn" id="title-settings-btn" type="button">モデル設定</button>
+          <button class="utility-btn" id="title-voice-toggle" type="button">🔊 音声ON</button>
+        </div>
+
+        <p id="runtime-warning" hidden></p>
+      </section>
+    </div>
+
     <div id="chapter-overlay"><h2 id="chapter-title"></h2></div>
 
-    <!-- End Screen -->
     <div id="end-screen">
       <h2 id="end-title">— F I N —</h2>
-      <p id="end-subtitle" style="opacity:0.5; letter-spacing:0.1em;">COMPの画面は、閉じていない。</p>
+      <p id="end-subtitle">COMPの画面は、閉じていない。</p>
       <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
     </div>
 
-    <!-- HUD -->
     <div id="hud">
-      <div style="flex:1;"></div>
+      <div style="flex: 1"></div>
       <div id="name-plate"></div>
       <div id="text-window">
         <span id="text-content"></span><span class="cursor" id="cursor">█</span>
@@ -349,507 +727,35 @@
       <div id="continue-indicator">▼ クリック / スペースで次へ</div>
     </div>
 
-    <!-- Choice Container -->
     <div id="choice-container"></div>
 
-    <!-- Controls -->
     <div id="chapter-display"></div>
     <div id="expression-tag"></div>
-    <button id="mode-toggle" title="モード切替">🌙</button>
+    <button id="mode-toggle" title="モード切替" type="button">🌙</button>
     <a id="back-btn" href="./diary.html">◁ 戻る</a>
+    <button class="utility-btn" id="settings-btn" type="button">モデル設定</button>
+    <button class="utility-btn" id="voice-toggle" type="button">🔊 音声ON</button>
+    <div id="mini-model-summary">モデル設定済み 0 / 0</div>
     <div id="progress-bar"></div>
 
-    <script>
-      /* ============================================================
-         SCENARIO LOADER — JSON from scenarios/ directory
-         ============================================================ */
-      let CHARS = {};
-      let SCENARIO = [];
+    <div id="settings-modal" hidden>
+      <div id="settings-backdrop"></div>
+      <section id="settings-dialog" aria-modal="true" role="dialog" aria-labelledby="settings-title">
+        <header id="settings-header">
+          <div>
+            <h2 id="settings-title">モデル設定</h2>
+            <div id="settings-meta">
+              <p id="settings-summary">専用モデル 0 / 0</p>
+              <p id="fallback-status">共有フォールバック: 未設定</p>
+            </div>
+            <ul id="settings-warning-list"></ul>
+          </div>
+          <button id="settings-close" type="button">閉じる</button>
+        </header>
+        <div id="settings-list"></div>
+      </section>
+    </div>
 
-      async function loadScenario() {
-        const params = new URLSearchParams(location.search);
-        const name = params.get('scenario') || '2026-03-18_声の座標';
-        const url = `./scenarios/${encodeURIComponent(name)}.json`;
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-          const data = await res.json();
-          CHARS = data.chars || {};
-          SCENARIO = data.scenario || [];
-          // Update title screen from metadata
-          if (data.title) {
-            document.querySelector('#title-screen h1').textContent = data.title;
-            document.title = `${data.title} | ビジュアルノベル`;
-          }
-          if (data.subtitle) {
-            document.querySelector('#title-screen .subtitle').textContent = data.subtitle;
-          }
-          if (data.genre) {
-            const genreEl = document.querySelector('#title-screen .subtitle:nth-of-type(2)');
-            if (genreEl) genreEl.textContent = data.genre;
-          }
-          return true;
-        } catch (e) {
-          console.error('Scenario load failed:', e);
-          document.querySelector('#loading').textContent =
-            `シナリオの読み込みに失敗しました: ${name}.json`;
-          return false;
-        }
-      }
-
-      /* ============================================================
-         ENGINE
-         ============================================================ */
-      let currentMode = 'immersive';
-      let currentStep = 0;
-      let isTyping = false;
-      let typeTimer = null;
-      let started = false;
-      let currentChapter = '';
-
-      // DOM
-      const $ = id => document.getElementById(id);
-      const $loading = $('loading');
-      const $canvas = $('particle-canvas');
-      const $hud = $('hud');
-      const $namePlate = $('name-plate');
-      const $textContent = $('text-content');
-      const $cursor = $('cursor');
-      const $continueIndicator = $('continue-indicator');
-      const $chapterDisplay = $('chapter-display');
-      const $expressionTag = $('expression-tag');
-      const $modeToggle = $('mode-toggle');
-      const $progressBar = $('progress-bar');
-      const $titleScreen = $('title-screen');
-      const $startBtn = $('start-btn');
-      const $pc98Bg = document.querySelector('.pc98-bg');
-      const $chapterOverlay = $('chapter-overlay');
-      const $chapterTitle = $('chapter-title');
-      const $endScreen = $('end-screen');
-
-      // Get text-only steps for progress (recalculated after load)
-      let textSteps = [];
-
-      // ----- Kongoushinkai Particle System (from 走馬灯モード) -----
-      const ctx = $canvas.getContext('2d');
-      let animId;
-      let kongouActive = false;
-      const kStreams = []; const kStars = []; const kNebula = []; const kPillars = [];
-      // Current atmosphere: bg color and intensity
-      let bgColor = { h: 240, s: 50, l: 12 };  // default: deep indigo
-      let bgClearColor = 'rgba(10,10,46,0.15)';
-
-      function initCanvas() { $canvas.width = innerWidth; $canvas.height = innerHeight; }
-
-      function initKongou() {
-        kStreams.length = 0; kStars.length = 0; kNebula.length = 0; kPillars.length = 0;
-        const w = $canvas.width, h = $canvas.height;
-        // Energy streams
-        for (let i = 0; i < 8; i++) {
-          kStreams.push({
-            y: Math.random() * h, baseX: Math.random() * w,
-            amp: Math.random() * 120 + 60, freq: Math.random() * 0.008 + 0.003,
-            speed: Math.random() * 2 + 1.5, phase: Math.random() * Math.PI * 2,
-            width: Math.random() * 3 + 1,
-            hue: Math.floor(Math.random() * 60 + bgColor.h - 30),
-            len: Math.floor(Math.random() * 80 + 60),
-            trail: [],
-          });
-        }
-        // Rushing stars
-        for (let i = 0; i < 120; i++) {
-          kStars.push({
-            x: Math.random() * w, y: Math.random() * h,
-            vx: (Math.random() - 0.3) * 3, vy: (Math.random() - 0.5) * 1.5,
-            size: Math.random() * 2.5 + 0.5,
-            brightness: Math.random(),
-            phase: Math.random() * Math.PI * 2,
-            speed: Math.random() * 3 + 1,
-          });
-        }
-        // Nebula clouds
-        for (let i = 0; i < 6; i++) {
-          kNebula.push({
-            x: Math.random() * w, y: Math.random() * h,
-            r: Math.random() * 200 + 100,
-            dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.3,
-            phase: Math.random() * Math.PI * 2,
-            hue: Math.floor(Math.random() * 80 + bgColor.h - 40),
-            sat: Math.floor(Math.random() * 40 + 60),
-          });
-        }
-        // Light pillars
-        for (let i = 0; i < 4; i++) {
-          kPillars.push({
-            x: Math.random() * w,
-            width: Math.random() * 60 + 20,
-            phase: Math.random() * Math.PI * 2,
-            speed: Math.random() * 0.02 + 0.01,
-            hue: Math.floor(Math.random() * 40 + bgColor.h - 20),
-            drift: (Math.random() - 0.5) * 2.0 + ((Math.random() > 0.5) ? 0.5 : -0.5),
-          });
-        }
-      }
-
-      function drawKongou() {
-        if (!kongouActive) return;
-        const w = $canvas.width, h = $canvas.height;
-        const t = Date.now() * 0.001;
-        ctx.fillStyle = bgClearColor;
-        ctx.fillRect(0, 0, w, h);
-        // 1. Nebula clouds
-        for (const n of kNebula) {
-          n.x += n.dx; n.y += n.dy;
-          if (n.x < -200) n.x = w + 200; if (n.x > w + 200) n.x = -200;
-          if (n.y < -200) n.y = h + 200; if (n.y > h + 200) n.y = -200;
-          const pulse = Math.sin(t * 1.5 + n.phase) * 0.4 + 0.6;
-          const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * pulse);
-          g.addColorStop(0, 'hsla(' + n.hue + ',' + n.sat + '%,50%,' + (0.15 * pulse) + ')');
-          g.addColorStop(0.4, 'hsla(' + n.hue + ',' + n.sat + '%,30%,' + (0.08 * pulse) + ')');
-          g.addColorStop(1, 'hsla(' + n.hue + ',' + n.sat + '%,10%,0)');
-          ctx.beginPath(); ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-          ctx.fillStyle = g; ctx.fill();
-        }
-        // 2. Light pillars
-        for (const p of kPillars) {
-          p.x += p.drift + Math.sin(t * 0.8 + p.phase) * 1.5;
-          if (p.x < -100) p.x = w + 100; if (p.x > w + 100) p.x = -100;
-          const intensity = Math.sin(t * p.speed * 50 + p.phase) * 0.5 + 0.5;
-          const g = ctx.createLinearGradient(p.x - p.width / 2, 0, p.x + p.width / 2, 0);
-          g.addColorStop(0, 'hsla(' + p.hue + ',70%,60%,0)');
-          g.addColorStop(0.5, 'hsla(' + p.hue + ',70%,60%,' + (0.12 * intensity) + ')');
-          g.addColorStop(1, 'hsla(' + p.hue + ',70%,60%,0)');
-          ctx.fillStyle = g; ctx.fillRect(p.x - p.width, 0, p.width * 2, h);
-        }
-        // 3. Energy streams
-        for (const s of kStreams) {
-          const cx = s.baseX + Math.sin(t * 0.5 + s.phase) * 100;
-          s.trail.push({ x: cx + Math.sin(t * s.freq * 100 + s.phase) * s.amp, y: s.y });
-          s.y -= s.speed;
-          if (s.y < -20) { s.y = h + 20; s.trail.length = 0; }
-          if (s.trail.length > s.len) s.trail.shift();
-          if (s.trail.length > 2) {
-            ctx.beginPath();
-            ctx.moveTo(s.trail[0].x, s.trail[0].y);
-            for (let i = 1; i < s.trail.length; i++) {
-              const p = s.trail[i], pp = s.trail[i - 1];
-              ctx.quadraticCurveTo(pp.x, pp.y, (pp.x + p.x) / 2, (pp.y + p.y) / 2);
-            }
-            ctx.strokeStyle = 'hsla(' + s.hue + ',80%,70%,0.6)';
-            ctx.lineWidth = s.width;
-            ctx.shadowColor = 'hsla(' + s.hue + ',90%,60%,0.8)';
-            ctx.shadowBlur = 15;
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-          }
-        }
-        // 4. Rushing stars
-        for (const s of kStars) {
-          s.x += s.vx; s.y += s.vy;
-          if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
-          if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
-          const flicker = Math.sin(t * s.speed * 3 + s.phase) * 0.3 + 0.7;
-          const a = s.brightness * flicker;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * flicker, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(200,180,255,' + (a * 0.8) + ')';
-          ctx.fill();
-          if (s.size > 1.5) {
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.size * 3 * flicker, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(160,140,220,' + (a * 0.15) + ')';
-            ctx.fill();
-          }
-        }
-        animId = requestAnimationFrame(drawKongou);
-      }
-
-      // Set atmosphere from scenario bg metadata
-      function setAtmosphere(bg) {
-        if (!bg) return;
-        // bg can be: { color: '#rrggbb', darkness: 0-1 } or a preset name string
-        const presets = {
-          'dark_chapel':   { h: 270, s: 40, l: 8, clear: 'rgba(15,5,30,0.15)' },
-          'void':          { h: 260, s: 30, l: 4, clear: 'rgba(5,3,15,0.18)' },
-          'cathedral':     { h: 250, s: 50, l: 12, clear: 'rgba(10,10,46,0.15)' },
-          'twilight':      { h: 220, s: 45, l: 15, clear: 'rgba(8,12,40,0.14)' },
-          'crimson':       { h: 0, s: 60, l: 10, clear: 'rgba(30,5,10,0.16)' },
-          'abyss':         { h: 240, s: 20, l: 3, clear: 'rgba(3,3,10,0.20)' },
-          'dawn':          { h: 30, s: 50, l: 18, clear: 'rgba(30,15,8,0.12)' },
-          'default':       { h: 240, s: 50, l: 12, clear: 'rgba(10,10,46,0.15)' },
-        };
-        let preset;
-        if (typeof bg === 'string') {
-          preset = presets[bg] || presets['default'];
-        } else {
-          preset = presets[bg.preset] || presets['default'];
-          if (bg.darkness !== undefined) {
-            preset = {...preset, l: Math.max(1, preset.l * (1 - bg.darkness)) };
-          }
-        }
-        bgColor = { h: preset.h, s: preset.s, l: preset.l };
-        bgClearColor = preset.clear;
-        // Update existing particles' hues to match
-        for (const n of kNebula) n.hue = Math.floor(Math.random() * 80 + bgColor.h - 40);
-        for (const p of kPillars) p.hue = Math.floor(Math.random() * 40 + bgColor.h - 20);
-        for (const s of kStreams) s.hue = Math.floor(Math.random() * 60 + bgColor.h - 30);
-        // Update body background gradient
-        document.body.style.background = `linear-gradient(180deg, hsl(${bgColor.h},${bgColor.s}%,${bgColor.l}%) 0%, hsl(${bgColor.h},${bgColor.s}%,${Math.max(1,bgColor.l-5)}%) 50%, hsl(${bgColor.h},${bgColor.s}%,${bgColor.l}%) 100%)`;
-      }
-
-      // ----- Typewriter -----
-      function typeText(text, onDone) {
-        isTyping = true;
-        $textContent.textContent = '';
-        $cursor.style.display = 'inline-block';
-        $continueIndicator.classList.remove('visible');
-        let i = 0;
-        const speed = currentMode === 'classic' ? 35 : 28;
-        function step() {
-          if (i < text.length) {
-            $textContent.textContent += text[i]; i++;
-            $('text-window').scrollTop = $('text-window').scrollHeight;
-            typeTimer = setTimeout(step, speed);
-          } else {
-            isTyping = false;
-            $cursor.style.display = 'none';
-            $continueIndicator.classList.add('visible');
-            if (onDone) onDone();
-          }
-        }
-        step();
-      }
-
-      function skipType(text) {
-        clearTimeout(typeTimer);
-        $textContent.textContent = text;
-        $('text-window').scrollTop = $('text-window').scrollHeight;
-        isTyping = false;
-        $cursor.style.display = 'none';
-        $continueIndicator.classList.add('visible');
-      }
-
-      // ----- Show Step -----
-      function showStep(idx) {
-        if (idx >= SCENARIO.length) return;
-        const step = SCENARIO[idx];
-        currentStep = idx;
-        updateProgress();
-
-        // Label (skip silently)
-        if (step.label) { showStep(idx + 1); return; }
-
-        // End
-        if (step.end) {
-          $hud.style.display = 'none';
-          if (step.title) $('end-title').textContent = step.title;
-          if (step.subtitle) $('end-subtitle').textContent = step.subtitle;
-          $endScreen.style.display = 'flex';
-          setTimeout(() => $endScreen.classList.add('visible'), 50);
-          return;
-        }
-
-        // Chapter transition
-        if (step.chapter) {
-          currentChapter = step.chapter;
-          if (step.bg) setAtmosphere(step.bg);
-          $chapterDisplay.textContent = step.chapter;
-          $chapterTitle.textContent = step.chapter;
-          $chapterOverlay.style.display = 'flex';
-          setTimeout(() => $chapterOverlay.classList.add('visible'), 50);
-          setTimeout(() => {
-            $chapterOverlay.classList.remove('visible');
-            setTimeout(() => {
-              $chapterOverlay.style.display = 'none';
-              showStep(idx + 1);
-            }, 600);
-          }, 1800);
-          return;
-        }
-
-        // Choice
-        if (step.choices) {
-          showingChoice = true;
-          const $cc = $('choice-container');
-          $cc.innerHTML = '';
-          for (const c of step.choices) {
-            const btn = document.createElement('button');
-            btn.className = 'choice-btn';
-            btn.textContent = c.text;
-            btn.addEventListener('click', (e) => {
-              e.stopPropagation();
-              showingChoice = false;
-              $cc.classList.remove('visible');
-              setTimeout(() => { $cc.style.display = 'none'; }, 500);
-              if (c.goto) {
-                const target = SCENARIO.findIndex(s => s.label === c.goto);
-                if (target >= 0) { showStep(target + 1); return; }
-              }
-              showStep(idx + 1);
-            });
-            $cc.appendChild(btn);
-          }
-          $cc.style.display = 'flex';
-          setTimeout(() => $cc.classList.add('visible'), 50);
-          return;
-        }
-
-        // Text step
-        const charData = CHARS[step.speaker] || CHARS.narrator;
-        const isNarrator = step.speaker === 'narrator';
-
-        // Update name plate
-        if (isNarrator) {
-          $namePlate.style.display = 'none';
-        } else {
-          $namePlate.style.display = 'inline-block';
-          if (currentMode === 'classic') {
-            $namePlate.textContent = `【${charData.name}】`;
-            $namePlate.style.color = '#ffffff';
-            $namePlate.style.textShadow = 'none';
-          } else {
-            $namePlate.textContent = `${charData.emoji} ${charData.name}`;
-            $namePlate.style.color = charData.color;
-            $namePlate.style.textShadow = `0 0 12px ${charData.color}40`;
-          }
-        }
-
-        // Update expression tag
-        $expressionTag.textContent = step.expression || '';
-
-        // Update text color to match character
-        if (currentMode === 'immersive' && !isNarrator && charData.color) {
-          $textContent.style.color = charData.color;
-        } else {
-          $textContent.style.color = '';
-        }
-
-        // Update atmosphere from bg metadata
-        if (step.bg) setAtmosphere(step.bg);
-
-        // Fade and type
-        $textContent.classList.add('text-fade-out');
-        setTimeout(() => {
-          $textContent.classList.remove('text-fade-out');
-          $textContent.classList.add('text-fade-in');
-          typeText(step.text, () => {
-            $textContent.classList.remove('text-fade-in');
-          });
-        }, 250);
-      }
-
-      function updateProgress() {
-        const textIdx = SCENARIO.slice(0, currentStep + 1).filter(s => s.text !== undefined).length;
-        const pct = textSteps.length > 1 ? (textIdx / textSteps.length) * 100 : 0;
-        $progressBar.style.width = pct + '%';
-      }
-
-      // ----- Advance -----
-      let showingChoice = false;
-      function advance() {
-        if (!started || showingChoice) return;
-        if (isTyping) {
-          const step = SCENARIO[currentStep];
-          if (step && step.text) skipType(step.text);
-          return;
-        }
-        // Find next text/chapter/end step
-        let next = currentStep + 1;
-        if (next < SCENARIO.length) showStep(next);
-      }
-
-      function goBack() {
-        if (!started || isTyping) return;
-        // Find previous text step
-        let prev = currentStep - 1;
-        while (prev >= 0 && SCENARIO[prev].chapter) prev--;
-        if (prev >= 0) showStep(prev);
-      }
-
-      // ----- Mode Toggle -----
-      function setMode(mode) {
-        currentMode = mode;
-        document.body.className = 'mode-' + mode;
-        $modeToggle.textContent = mode === 'immersive' ? '🌙' : '🖥️';
-        $cursor.textContent = mode === 'classic' ? '▌' : '█';
-
-        let frame = document.querySelector('.pc98-frame');
-        if (mode === 'classic') {
-          if (!frame) { frame = document.createElement('div'); frame.className='pc98-frame'; document.body.appendChild(frame); }
-          frame.style.display = 'block';
-          $canvas.style.display = 'none';
-          $pc98Bg.style.display = 'block';
-          kongouActive = false; cancelAnimationFrame(animId);
-        } else {
-          if (frame) frame.style.display = 'none';
-          $canvas.style.display = 'block';
-          $pc98Bg.style.display = 'none';
-          initCanvas(); initKongou(); kongouActive = true; drawKongou();
-        }
-
-        $continueIndicator.textContent = mode === 'classic'
-          ? '＞次へ  SPACE / ENTER'
-          : '▼ クリック / スペースで次へ';
-
-        // Re-render current name plate if showing
-        if (started && currentStep < SCENARIO.length) {
-          const step = SCENARIO[currentStep];
-          if (step && step.speaker && step.speaker !== 'narrator') {
-            const cd = CHARS[step.speaker];
-            if (cd) {
-              if (mode === 'classic') {
-                $namePlate.textContent = `【${cd.name}】`;
-                $namePlate.style.color = '#ffffff';
-                $namePlate.style.textShadow = 'none';
-              } else {
-                $namePlate.textContent = `${cd.emoji} ${cd.name}`;
-                $namePlate.style.color = cd.color;
-                $namePlate.style.textShadow = `0 0 12px ${cd.color}40`;
-              }
-            }
-          }
-        }
-      }
-
-      $modeToggle.addEventListener('click', e => {
-        e.stopPropagation();
-        setMode(currentMode === 'immersive' ? 'classic' : 'immersive');
-      });
-
-      // ----- Events -----
-      document.addEventListener('click', e => {
-        if (e.target === $modeToggle || e.target === $startBtn || e.target.closest('#back-btn') || e.target.closest('#end-screen a')) return;
-        advance();
-      });
-
-      document.addEventListener('keydown', e => {
-        if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') { e.preventDefault(); advance(); }
-        else if (e.key === 'ArrowLeft') { e.preventDefault(); goBack(); }
-        else if (e.key === 'Escape') { location.href = './diary.html'; }
-      });
-
-      $startBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        started = true;
-        $titleScreen.classList.add('fade-out');
-        setTimeout(() => {
-          $titleScreen.style.display = 'none';
-          $hud.style.display = 'flex';
-          showStep(0);
-        }, 800);
-      });
-
-      window.addEventListener('resize', () => { if (currentMode === 'immersive') { initCanvas(); initKongou(); } });
-
-      // ----- Init -----
-      async function init() {
-        const ok = await loadScenario();
-        if (!ok) return;
-        textSteps = SCENARIO.filter(s => s.text !== undefined);
-        setMode(currentMode);
-        setTimeout(() => { $loading.classList.add('fade-out'); setTimeout(() => $loading.style.display='none', 800); }, 500);
-      }
-      init();
-    </script>
+    <script src="./assets/galge-runtime.bundle.js" defer></script>
   </body>
 </html>

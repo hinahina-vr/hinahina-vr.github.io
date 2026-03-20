@@ -556,12 +556,24 @@ async function collectAndWrite(options) {
   const config = await loadDailyContextConfig();
   const fileDate = options.file ? basename(options.file).match(/^(\d{4}-\d{2}-\d{2})_/u)?.[1] : null;
   const date = options.date ?? fileDate ?? getDateStringInTimeZone(new Date(), config.timezone);
-  const targetFile = await resolveMainDiaryFile({ date, file: options.file });
 
-  if (!targetFile) {
-    console.warn(`[daily-context] main diary not found for ${date}; skipped.`);
-    return;
+  // Target: drafts/ directory instead of diary/
+  const DRAFTS_DIR = join(import.meta.dirname, "..", "drafts");
+  await ensureDir(DRAFTS_DIR);
+  const draftFileName = `${date}_下書き.md`;
+  const draftAbsPath = join(DRAFTS_DIR, draftFileName);
+
+  // Create draft file if it doesn't exist
+  if (!(await pathExists(draftAbsPath))) {
+    const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n`;
+    await writeFile(draftAbsPath, draftContent, "utf-8");
   }
+
+  const targetFile = {
+    absPath: draftAbsPath,
+    relPath: `drafts/${draftFileName}`,
+    date,
+  };
 
   await ensureDir(DAILY_CONTEXT_DIR);
   await ensureDir(RAW_DIR);
