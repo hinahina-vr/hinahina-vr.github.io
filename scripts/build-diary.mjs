@@ -154,7 +154,7 @@ function htmlFooter() {
 }
 
 async function main() {
-  const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
+  const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md") && !f.includes("下書き"));
 
   const entries = [];
   for (const file of files) {
