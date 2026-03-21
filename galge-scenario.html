@@ -131,8 +131,8 @@
       body:not(.runtime-started) #mini-model-summary,
       body:not(.runtime-started) #settings-btn,
       body:not(.runtime-started) #voice-toggle,
-      body:not(.runtime-started) #speech-toggle,
-      body:not(.runtime-started) #speech-status {
+      body:not(.runtime-started) #api-client-id,
+      body:not(.runtime-started) #api-status {
         display: none;
       }
 
@@ -327,8 +327,8 @@
       #mini-model-summary,
       #settings-btn,
       #voice-toggle,
-      #speech-toggle,
-      #speech-status,
+      #api-client-id,
+      #api-status,
       #mode-toggle,
       #back-btn {
         position: fixed;
@@ -365,16 +365,14 @@
         backdrop-filter: blur(8px);
       }
       #settings-btn,
-      #voice-toggle,
-      #speech-toggle {
+      #voice-toggle {
         top: clamp(92px, 8vw, 124px);
       }
       #settings-btn { right: clamp(18px, 2vw, 36px); }
       #voice-toggle { right: clamp(146px, 12vw, 188px); }
-      #speech-toggle { right: clamp(278px, 23vw, 344px); }
-      #speech-status {
+      #api-client-id,
+      #api-status {
         left: clamp(18px, 2vw, 36px);
-        bottom: clamp(28px, 3vh, 42px);
         max-width: min(40vw, 420px);
         padding: 8px 14px;
         border-radius: 999px;
@@ -385,14 +383,18 @@
         letter-spacing: 0.08em;
         backdrop-filter: blur(8px);
       }
+      #api-client-id {
+        left: auto;
+        right: clamp(18px, 2vw, 36px);
+        max-width: min(40vw, 420px);
+        bottom: clamp(28px, 3vh, 42px);
+      }
+      #api-status {
+        bottom: clamp(28px, 3vh, 42px);
+      }
       .utility-btn {
         padding: 10px 14px;
         font-size: clamp(11px, 0.9vw, 14px);
-      }
-      .utility-btn:disabled {
-        opacity: 0.45;
-        cursor: default;
-        transform: none;
       }
       #mode-toggle {
         top: clamp(14px, 1.8vw, 28px);
@@ -669,24 +671,28 @@
 
       @media (max-width: 960px) {
         #settings-btn,
-        #voice-toggle,
-        #speech-toggle {
+        #voice-toggle {
           top: auto;
           bottom: 86px;
         }
         #voice-toggle { right: 18px; }
         #settings-btn { right: 126px; }
-        #speech-toggle { right: 234px; }
         #mini-model-summary {
           left: auto;
           right: 18px;
           bottom: 86px;
         }
-        #speech-status {
+        #api-status {
           left: 18px;
           right: auto;
           bottom: 86px;
           max-width: calc(100vw - 268px);
+        }
+        #api-client-id {
+          left: 18px;
+          right: auto;
+          bottom: 128px;
+          max-width: calc(100vw - 36px);
         }
         #avatar-stage-placeholder {
           right: 18px;
@@ -730,17 +736,17 @@
 
         <div class="title-meta">
           <p class="title-chip" id="title-model-summary">モデル設定済み 0 / 0</p>
+          <p class="title-chip" id="title-api-client-id">API client: --</p>
         </div>
 
         <div class="title-actions">
           <button class="start-btn" id="start-btn" type="button">▶ はじめる</button>
           <button class="utility-btn" id="title-settings-btn" type="button">モデル設定</button>
           <button class="utility-btn" id="title-voice-toggle" type="button">🔊 音声ON</button>
-          <button class="utility-btn" id="title-speech-toggle" type="button">🎤 音声入力</button>
         </div>
 
         <p id="runtime-warning" hidden></p>
-        <p class="subtitle" id="title-speech-status">音声入力待機</p>
+        <p class="subtitle" id="title-api-status">発話API 未設定</p>
       </section>
     </div>
 
@@ -769,9 +775,9 @@
     <a id="back-btn" href="./diary.html">◁ 戻る</a>
     <button class="utility-btn" id="settings-btn" type="button">モデル設定</button>
     <button class="utility-btn" id="voice-toggle" type="button">🔊 音声ON</button>
-    <button class="utility-btn" id="speech-toggle" type="button">🎤 音声入力</button>
     <div id="mini-model-summary">モデル設定済み 0 / 0</div>
-    <div id="speech-status">音声入力待機</div>
+    <div id="api-client-id">API client: --</div>
+    <div id="api-status">発話API 未設定</div>
     <div id="progress-bar"></div>
 
     <div id="settings-modal" hidden>

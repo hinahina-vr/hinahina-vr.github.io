@@ -9,6 +9,7 @@
         "build:galge": "node scripts/build-galge.mjs",
         "build:galge-runtime": "node scripts/build-galge-runtime.mjs",
         "build:voicepeak-files": "node scripts/build-voicepeak-files.mjs",
+        "serve:galge-message-api": "node scripts/serve-galge-message-api.mjs",
         "build:dialogue": "node scripts/build-dialogue.mjs",
         "build:video-scripts": "node scripts/build-video-scripts.mjs",
         "check:scenario-audio": "node scripts/check-scenario-audio.mjs",
