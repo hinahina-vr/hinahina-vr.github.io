@@ -289,10 +289,13 @@
   }
   function deriveScenarioName() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("scenario") || "2026-03-18_声の座標";
+    return params.get("scenario") || null;
   }
   async function loadScenarioDefinition() {
     const scenarioName = deriveScenarioName();
+    if (!scenarioName) {
+      throw new Error("scenario パラメータが指定されていません。URLに ?scenario=シナリオ名 を追加してください。");
+    }
     const warnings = [];
     const url = `./scenarios/${encodeURIComponent(scenarioName)}.json`;
     const response = await fetch(url);
