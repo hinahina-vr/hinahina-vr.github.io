@@ -25,6 +25,8 @@ export class VoiceController {
     this.audioCache = new LRUCache(MAX_AUDIO_CACHE);
     this.levelData = new Float32Array(ANALYSER_SIZE);
     this.muted = false;
+    this.speechSynthesisActive = false;
+    this.speechSynthesisStartedAt = 0;
   }
 
   async ensureAudioContext() {
@@ -79,9 +81,19 @@ export class VoiceController {
       }
       this.currentSource = null;
     }
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    this.speechSynthesisActive = false;
   }
 
   getLevel() {
+    if (this.speechSynthesisActive) {
+      const elapsed = (performance.now() - this.speechSynthesisStartedAt) / 1000;
+      const level = 0.15 + Math.abs(Math.sin(elapsed * 8.2)) * 0.55;
+      return clamp(level, 0, 1);
+    }
+
     if (!this.analyser) {
       return 0;
     }
@@ -174,6 +186,46 @@ export class VoiceController {
     source.start(0);
     this.currentSource = source;
     return true;
+  }
+
+  async speakText(text, options = {}) {
+    if (this.muted || !String(text || "").trim()) {
+      return false;
+    }
+
+    if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
+      return false;
+    }
+
+    this.stopCurrent();
+    const utterance = new SpeechSynthesisUtterance(String(text).trim());
+    utterance.lang = options.lang || "ja-JP";
+    utterance.rate = Number.isFinite(options.rate) ? options.rate : 1;
+    utterance.pitch = Number.isFinite(options.pitch) ? options.pitch : 1;
+
+    const voices = window.speechSynthesis.getVoices?.() || [];
+    const preferredVoice =
+      voices.find((voice) => voice.lang?.toLowerCase().startsWith("ja")) || voices[0];
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+    }
+
+    return new Promise((resolve) => {
+      utterance.onstart = () => {
+        this.speechSynthesisActive = true;
+        this.speechSynthesisStartedAt = performance.now();
+      };
+      utterance.onend = () => {
+        this.speechSynthesisActive = false;
+        resolve(true);
+      };
+      utterance.onerror = (error) => {
+        console.warn("speech synthesis error:", error);
+        this.speechSynthesisActive = false;
+        resolve(false);
+      };
+      window.speechSynthesis.speak(utterance);
+    });
   }
 
   async prefetchSteps(scenario, steps) {
