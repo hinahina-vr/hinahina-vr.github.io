@@ -286,14 +286,17 @@
       }
       #name-plate {
         display: inline-block;
-        margin-bottom: 8px;
+        margin-bottom: -1px;
+        position: relative;
+        z-index: 2;
         padding: clamp(6px, 0.5vw, 12px) clamp(16px, 1.5vw, 24px);
-        border-radius: 12px;
+        border-radius: 12px 12px 0 0;
         font-size: clamp(22px, 2vw, 38px);
         font-weight: 700;
         letter-spacing: 0.12em;
         background: linear-gradient(135deg, rgba(45, 24, 82, 0.74), rgba(24, 12, 40, 0.56));
         border: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: none;
         backdrop-filter: blur(12px);
       }
       #text-window {
@@ -392,12 +395,12 @@
         padding: 4px 10px;
         pointer-events: none;
       }
-      #settings-btn { right: 12px; top: 38px; }
-      #mode-toggle { right: 12px; top: 64px; }
+      #settings-btn { right: 12px; top: 12px; }
+      #mode-toggle { right: 12px; top: 100px; }
       #sound-settings-btn {
-        top: auto;
-        bottom: 12px;
-        right: clamp(146px, 12vw, 188px);
+        top: 56px;
+        bottom: auto;
+        right: 12px;
       }
       #chapter-display,
       #expression-tag,
@@ -408,8 +411,8 @@
         z-index: 20;
       }
       #chapter-display {
-        top: clamp(14px, 1.8vw, 28px);
-        right: clamp(18px, 2vw, 36px);
+        top: 140px;
+        right: 12px;
         max-width: min(42vw, 420px);
         text-align: right;
         color: rgba(255, 255, 255, 0.62);
@@ -417,8 +420,8 @@
         letter-spacing: 0.12em;
       }
       #expression-tag {
-        top: clamp(42px, 4vw, 68px);
-        right: clamp(18px, 2vw, 36px);
+        top: 164px;
+        right: 12px;
         max-width: min(38vw, 360px);
         text-align: right;
         color: rgba(255, 255, 255, 0.46);
@@ -461,14 +464,24 @@
         font-size: clamp(22px, 1.8vw, 32px);
       }
       #back-btn {
-        top: clamp(18px, 2vw, 32px);
-        left: clamp(54px, 4.5vw, 84px);
-        background: none;
-        border: none;
-        color: rgba(255, 255, 255, 0.58);
+        top: clamp(12px, 1.8vw, 24px);
+        left: clamp(18px, 2vw, 36px);
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: 1px solid rgba(196, 163, 255, 0.24);
+        background: linear-gradient(180deg, rgba(26, 17, 46, 0.88), rgba(11, 8, 22, 0.9));
+        color: #efe7ff;
         text-decoration: none;
-        font-size: clamp(12px, 1vw, 18px);
+        font-size: clamp(13px, 1vw, 16px);
         letter-spacing: 0.1em;
+        backdrop-filter: blur(2px);
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      #back-btn:hover {
+        background: rgba(80, 40, 120, 0.45);
+        color: #ffffff;
+        border-color: rgba(220, 194, 255, 0.42);
       }
       #progress-bar {
         position: fixed;
@@ -689,8 +702,9 @@
 
       #volume-popup {
         position: fixed;
-        bottom: 60px;
-        right: clamp(100px, 10vw, 180px);
+        bottom: auto;
+        top: 56px;
+        right: 170px;
         z-index: 150;
         display: none;
         flex-direction: column;
