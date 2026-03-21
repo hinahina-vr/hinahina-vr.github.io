@@ -221,7 +221,8 @@
       };
 
       const params = new URLSearchParams(window.location.search);
-      const date = params.get("date");
+      const hash = window.location.hash.replace(/^#/, "");
+      const date = params.get("date") || hash || null;
       const dreams = DREAM_REGISTRY[date];
 
       document.getElementById("date-label").textContent = date || "";
