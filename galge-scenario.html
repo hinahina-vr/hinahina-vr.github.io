@@ -882,30 +882,28 @@
       }
 
       @media (max-width: 960px) {
-        #settings-btn,
-        #sound-settings-btn,
-        #mode-toggle {
-          top: auto;
-          bottom: 86px;
-        }
-        #sound-settings-btn { right: 18px; }
-        #mode-toggle { right: 126px; }
-        #settings-btn { right: 234px; }
+        #back-btn { top: 16px; left: 18px; }
+        #mode-toggle { top: 54px; left: 18px; right: auto; bottom: auto; }
+        #settings-btn { top: 94px; left: 18px; right: auto; bottom: auto; }
+        #sound-settings-btn { top: 134px; left: 18px; right: auto; bottom: auto; }
         #mini-model-summary {
-          left: auto;
-          right: 18px;
-          bottom: 86px;
+          left: 18px;
+          right: auto;
+          top: 174px;
+          bottom: auto;
         }
         #api-status {
           left: 18px;
           right: auto;
-          bottom: 86px;
-          max-width: calc(100vw - 268px);
+          top: 200px;
+          bottom: auto;
+          max-width: calc(100vw - 36px);
         }
         #api-client-id {
           left: 18px;
           right: auto;
-          bottom: 128px;
+          top: 230px;
+          bottom: auto;
           max-width: calc(100vw - 36px);
         }
         #avatar-stage-placeholder {
@@ -913,8 +911,10 @@
           bottom: 170px;
         }
         #volume-popup {
-          right: 18px;
-          bottom: 128px;
+          left: 18px;
+          top: 174px;
+          right: auto;
+          bottom: auto;
         }
       }
 
@@ -1051,7 +1051,7 @@
       <div id="text-window">
         <span id="text-content"></span><span class="cursor" id="cursor">█</span>
       </div>
-      <div id="continue-indicator">▼ クリック / スペースで次へ</div>
+      <div id="continue-indicator">▼ タップ / クリック / スペースで次へ</div>
     </div>
 
     <div id="choice-container"></div>
