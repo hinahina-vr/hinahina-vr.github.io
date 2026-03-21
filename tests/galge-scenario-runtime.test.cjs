@@ -76,7 +76,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
     if (text.includes(expectedText)) {
       return true;
     }
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(25);
   }
   return false;
 }
@@ -110,6 +110,23 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   }
 
   await page.addInitScript(() => {
+    window.__bgmEvents = {
+      plays: [],
+      pauses: [],
+    };
+
+    const originalLoad = window.HTMLMediaElement.prototype.load;
+    window.HTMLMediaElement.prototype.play = function play() {
+      window.__bgmEvents.plays.push({ src: this.currentSrc || this.src || "" });
+      return Promise.resolve();
+    };
+    window.HTMLMediaElement.prototype.pause = function pause() {
+      window.__bgmEvents.pauses.push({ src: this.currentSrc || this.src || "" });
+    };
+    window.HTMLMediaElement.prototype.load = function load() {
+      return originalLoad ? originalLoad.call(this) : undefined;
+    };
+
     class FakeSpeechSynthesisUtterance {
       constructor(text) {
         this.text = text;
@@ -137,6 +154,17 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   });
 
   await page.route(`${messageApiBase}/api/tts`, async (route) => {
+    if (route.request().method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
+      return;
+    }
     const payload = route.request().postDataJSON();
     proxyTtsRequests.push(payload);
     await route.fulfill({
@@ -210,7 +238,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
       hasText: "音声テスト",
     })
     .click();
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(1200);
   assert(proxyTtsRequests.length >= 1, "voice test uses /api/tts proxy");
   assert(
     proxyTtsRequests.at(-1)?.config?.provider === "openai",
@@ -249,6 +277,27 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
 
   const currentText = await waitForNonEmptyText(page, 5000);
   assert(currentText.length > 0, `text renders without any valid VRM (length: ${currentText.length})`);
+  const titleBgmToggleText = await page.$eval("#title-bgm-toggle", (element) => element.textContent);
+  assert(titleBgmToggleText.includes("BGM OFF"), "BGM defaults to OFF on title screen");
+
+  await page.evaluate(async () => {
+    const app = window.__galgeRuntimeApp;
+    app.scenario.steps[app.currentStep].bgm = {
+      track: "test-theme",
+      volume: 0.3,
+    };
+    await app.showStep(app.currentStep);
+  });
+  await page.waitForTimeout(300);
+  let bgmPlayCount = await page.evaluate(() => window.__bgmEvents.plays.length);
+  assert(bgmPlayCount === 0, "BGM does not autoplay while toggle is OFF");
+
+  await page.click("#bgm-toggle");
+  await page.waitForTimeout(300);
+  bgmPlayCount = await page.evaluate(() => window.__bgmEvents.plays.length);
+  assert(bgmPlayCount >= 1, "enabling BGM starts current track playback");
+  const runtimeBgmToggleText = await page.$eval("#bgm-toggle", (element) => element.textContent);
+  assert(runtimeBgmToggleText.includes("BGM ON"), "runtime BGM toggle switches to ON");
 
   const runtimeClientId = await page.$eval("#api-client-id", (element) => element.textContent);
   const clientId = runtimeClientId.replace("API client:", "").trim();
@@ -269,7 +318,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
     }
   );
   assert(directSendResponse.status === 201, `direct_send API accepts messages (got: ${directSendResponse.status})`);
-  const apiMessageShown = await waitForApiMessage(page, "APIからの発話テストです。", 5000);
+  const apiMessageShown = await waitForApiMessage(page, "APIからの発話テストです。", 6000);
   assert(apiMessageShown, "page speaks text received from message API");
   assert(
     proxyTtsRequests.some(

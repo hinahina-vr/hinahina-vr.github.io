@@ -13,6 +13,7 @@
         "build:dialogue": "node scripts/build-dialogue.mjs",
         "build:video-scripts": "node scripts/build-video-scripts.mjs",
         "check:scenario-audio": "node scripts/check-scenario-audio.mjs",
+        "download:youtube-mp3": "node scripts/download-youtube-mp3.mjs",
         "build:diary-hina": "node scripts/build-diary-hina.mjs",
         "build:diary-multi": "node scripts/build-diary-multi.mjs",
         "build:diary-hinahina": "node scripts/build-diary-hinahina.mjs",
@@ -54,6 +55,7 @@
     },
     "dependencies": {
         "@pixiv/three-vrm": "^3.4.0",
-        "three": "^0.167.1"
+        "three": "^0.167.1",
+        "yt-dlp-wrap": "^2.3.12"
     }
 }

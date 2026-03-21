@@ -1,3 +1,4 @@
+import { BGMController } from "./bgm-controller.js";
 import { resolveEmotion } from "./emotion-resolver.js";
 import { loadScenarioDefinition } from "./scenario-loader.js";
 import { MessageApiReceiver } from "./message-api-receiver.js";
@@ -17,6 +18,7 @@ class GalgeRuntimeApp {
     this.typeTimer = null;
     this.started = false;
     this.showingChoice = false;
+    this.isAdvancing = false;
     this.currentChapter = "";
     this.textSteps = [];
     this.scenario = null;
@@ -52,12 +54,15 @@ class GalgeRuntimeApp {
     this.$settingsBtn = this.$("settings-btn");
     this.$titleVoiceToggle = this.$("title-voice-toggle");
     this.$voiceToggle = this.$("voice-toggle");
+    this.$titleBgmToggle = this.$("title-bgm-toggle");
+    this.$bgmToggle = this.$("bgm-toggle");
     this.$titleApiClientId = this.$("title-api-client-id");
     this.$titleApiStatus = this.$("title-api-status");
     this.$apiClientId = this.$("api-client-id");
     this.$apiStatus = this.$("api-status");
 
     this.voiceController = new VoiceController();
+    this.bgmController = new BGMController();
     this.assetStore = new VRMAssetStore();
     this.vrmStage = new VRMStage({
       host: this.$("avatar-stage-shell"),
@@ -191,6 +196,16 @@ class GalgeRuntimeApp {
       this.toggleMute();
     });
 
+    this.$titleBgmToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleBgm();
+    });
+
+    this.$bgmToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleBgm();
+    });
+
     this.$startBtn.addEventListener("click", async (event) => {
       event.stopPropagation();
       await this.startExperience();
@@ -238,6 +253,7 @@ class GalgeRuntimeApp {
     });
 
     this.updateVoiceToggle();
+    this.updateBgmToggle();
     this.updateMessageApiUI({
       message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
       clientId: this.messageApiReceiver.getClientId(),
@@ -271,6 +287,20 @@ class GalgeRuntimeApp {
     this.updateVoiceToggle();
   }
 
+  updateBgmToggle() {
+    const text = this.bgmController.isEnabled() ? "🎵 BGM ON" : "🎵 BGM OFF";
+    this.$bgmToggle.textContent = text;
+    this.$titleBgmToggle.textContent = text;
+  }
+
+  toggleBgm() {
+    this.bgmController.setEnabled(!this.bgmController.isEnabled());
+    this.updateBgmToggle();
+    if (this.started) {
+      this.syncBgmForIndex(this.currentStep);
+    }
+  }
+
   updateMessageApiUI({ message, clientId, apiBase, configured }) {
     this.voiceController.setProxyBase(apiBase);
     const clientLabel = `API client: ${clientId}`;
@@ -291,6 +321,27 @@ class GalgeRuntimeApp {
       speakerKey,
       allowBrowserFallback: true,
     });
+  }
+
+  findActiveBgmCue(index) {
+    if (!this.scenario?.steps?.length) {
+      return null;
+    }
+
+    let activeCue = null;
+    const safeIndex = Math.min(index, this.scenario.steps.length - 1);
+    for (let stepIndex = 0; stepIndex <= safeIndex; stepIndex += 1) {
+      const cue = this.scenario.steps[stepIndex]?.bgm;
+      if (cue) {
+        activeCue = cue.stop ? { stop: true } : cue;
+      }
+    }
+    return activeCue;
+  }
+
+  syncBgmForIndex(index) {
+    const cue = this.findActiveBgmCue(index);
+    this.bgmController.setCue(this.scenario?.bgmNamespace || this.scenario?.audioNamespace || "", cue);
   }
 
   initCanvas() {
@@ -716,6 +767,7 @@ class GalgeRuntimeApp {
     this.renderToken += 1;
     const token = this.renderToken;
     this.updateProgress();
+    this.syncBgmForIndex(index);
 
     if (step.kind === "label") {
       await this.showStep(index + 1);
@@ -724,6 +776,11 @@ class GalgeRuntimeApp {
 
     if (step.kind === "bg") {
       this.setAtmosphere(step.bg);
+      await this.showStep(index + 1);
+      return;
+    }
+
+    if (step.kind === "bgm") {
       await this.showStep(index + 1);
       return;
     }
@@ -984,6 +1041,7 @@ class GalgeRuntimeApp {
     if (
       !this.started ||
       this.showingChoice ||
+      this.isAdvancing ||
       !this.$("settings-modal").hidden ||
       this.$chapterOverlay.style.display === "flex" ||
       this.$endScreen.style.display === "flex"
@@ -1002,7 +1060,10 @@ class GalgeRuntimeApp {
     this.voiceController.stopCurrent();
     const nextIndex = this.currentStep + 1;
     if (nextIndex < this.scenario.steps.length) {
-      this.showStep(nextIndex);
+      this.isAdvancing = true;
+      this.showStep(nextIndex).finally(() => {
+        this.isAdvancing = false;
+      });
     }
   }
 
@@ -1010,6 +1071,7 @@ class GalgeRuntimeApp {
     if (
       !this.started ||
       this.isTyping ||
+      this.isAdvancing ||
       !this.$("settings-modal").hidden ||
       this.$chapterOverlay.style.display === "flex" ||
       this.$endScreen.style.display === "flex"
@@ -1026,7 +1088,22 @@ class GalgeRuntimeApp {
       previousIndex -= 1;
     }
     if (previousIndex >= 0) {
-      this.showStep(previousIndex);
+      // Apply the most recent bg before the target text step
+      for (let i = previousIndex - 1; i >= 0; i -= 1) {
+        const s = this.scenario.steps[i];
+        if (s.kind === "bg") {
+          this.setAtmosphere(s.bg);
+          break;
+        }
+        if (s.kind === "text" && s.bg) {
+          this.setAtmosphere(s.bg);
+          break;
+        }
+      }
+      this.isAdvancing = true;
+      this.showStep(previousIndex).finally(() => {
+        this.isAdvancing = false;
+      });
     }
   }
 }

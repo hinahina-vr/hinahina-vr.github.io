@@ -130,6 +130,7 @@
       body:not(.runtime-started) #expression-tag,
       body:not(.runtime-started) #mini-model-summary,
       body:not(.runtime-started) #settings-btn,
+      body:not(.runtime-started) #bgm-toggle,
       body:not(.runtime-started) #voice-toggle,
       body:not(.runtime-started) #api-client-id,
       body:not(.runtime-started) #api-status {
@@ -326,6 +327,7 @@
       #expression-tag,
       #mini-model-summary,
       #settings-btn,
+      #bgm-toggle,
       #voice-toggle,
       #api-client-id,
       #api-status,
@@ -365,11 +367,13 @@
         backdrop-filter: blur(8px);
       }
       #settings-btn,
+      #bgm-toggle,
       #voice-toggle {
         top: clamp(92px, 8vw, 124px);
       }
       #settings-btn { right: clamp(18px, 2vw, 36px); }
-      #voice-toggle { right: clamp(146px, 12vw, 188px); }
+      #bgm-toggle { right: clamp(146px, 12vw, 188px); }
+      #voice-toggle { right: clamp(274px, 22vw, 340px); }
       #api-client-id,
       #api-status {
         left: clamp(18px, 2vw, 36px);
@@ -719,12 +723,14 @@
 
       @media (max-width: 960px) {
         #settings-btn,
+        #bgm-toggle,
         #voice-toggle {
           top: auto;
           bottom: 86px;
         }
         #voice-toggle { right: 18px; }
-        #settings-btn { right: 126px; }
+        #bgm-toggle { right: 126px; }
+        #settings-btn { right: 234px; }
         #mini-model-summary {
           left: auto;
           right: 18px;
@@ -790,6 +796,7 @@
         <div class="title-actions">
           <button class="start-btn" id="start-btn" type="button">▶ はじめる</button>
           <button class="utility-btn" id="title-settings-btn" type="button">モデル設定</button>
+          <button class="utility-btn" id="title-bgm-toggle" type="button">🎵 BGM OFF</button>
           <button class="utility-btn" id="title-voice-toggle" type="button">🔊 音声ON</button>
         </div>
 
@@ -822,6 +829,7 @@
     <button id="mode-toggle" title="モード切替" type="button">🌙</button>
     <a id="back-btn" href="./diary.html">◁ 戻る</a>
     <button class="utility-btn" id="settings-btn" type="button">モデル設定</button>
+    <button class="utility-btn" id="bgm-toggle" type="button">🎵 BGM OFF</button>
     <button class="utility-btn" id="voice-toggle" type="button">🔊 音声ON</button>
     <div id="mini-model-summary">モデル設定済み 0 / 0</div>
     <div id="api-client-id">API client: --</div>

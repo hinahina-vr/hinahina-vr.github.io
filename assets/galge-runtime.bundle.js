@@ -3,6 +3,104 @@
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
+  // src/galge-runtime/bgm-controller.js
+  var BGM_ENABLED_STORAGE_KEY = "galgeRuntimeBgmEnabled";
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+  function encodePathSegment(pathPart) {
+    return pathPart.split("/").filter(Boolean).map((segment) => encodeURIComponent(segment)).join("/");
+  }
+  function isDirectPath(track) {
+    return /^(?:\.{1,2}\/|\/|https?:\/\/)/.test(track);
+  }
+  var BGMController = class {
+    constructor() {
+      this.enabled = window.localStorage.getItem(BGM_ENABLED_STORAGE_KEY) === "1";
+      this.audio = new Audio();
+      this.audio.loop = true;
+      this.audio.preload = "none";
+      this.currentNamespace = "";
+      this.currentCue = null;
+      this.currentSrc = "";
+    }
+    isEnabled() {
+      return this.enabled;
+    }
+    setEnabled(nextEnabled) {
+      this.enabled = Boolean(nextEnabled);
+      window.localStorage.setItem(BGM_ENABLED_STORAGE_KEY, this.enabled ? "1" : "0");
+      if (!this.enabled) {
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        return;
+      }
+      this.syncPlayback();
+    }
+    resolveSource(namespace, cue) {
+      if (!cue || cue.stop) {
+        return "";
+      }
+      if (cue.src) {
+        return cue.src;
+      }
+      const track = String(cue.track || "").trim();
+      if (!track) {
+        return "";
+      }
+      if (isDirectPath(track)) {
+        return track;
+      }
+      const normalizedTrack = track.toLowerCase().endsWith(".mp3") ? track : `${track}.mp3`;
+      return `./assets/bgm/scenarios/${encodeURIComponent(namespace)}/${encodePathSegment(normalizedTrack)}`;
+    }
+    setCue(namespace, cue) {
+      this.currentNamespace = namespace || "";
+      this.currentCue = cue || null;
+      this.syncPlayback();
+    }
+    clearCue() {
+      this.currentCue = null;
+      this.currentSrc = "";
+      this.audio.pause();
+      this.audio.removeAttribute("src");
+      this.audio.load();
+    }
+    syncPlayback() {
+      if (!this.currentCue || this.currentCue.stop) {
+        this.clearCue();
+        return;
+      }
+      const nextSrc = this.resolveSource(this.currentNamespace, this.currentCue);
+      if (!nextSrc) {
+        this.clearCue();
+        return;
+      }
+      this.audio.loop = this.currentCue.loop !== false;
+      this.audio.volume = clamp(
+        Number.isFinite(this.currentCue.volume) ? this.currentCue.volume : 0.45,
+        0,
+        1
+      );
+      if (this.currentSrc !== nextSrc) {
+        this.currentSrc = nextSrc;
+        this.audio.src = nextSrc;
+      }
+      if (!this.enabled) {
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        return;
+      }
+      this.audio.play().catch((error) => {
+        console.warn("bgm play failed:", error);
+      });
+    }
+    stop() {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+    }
+  };
+
   // src/galge-runtime/emotion-resolver.js
   var VALID_EMOTIONS = /* @__PURE__ */ new Set([
     "neutral",
@@ -39,6 +137,48 @@
   function asString(value, fallback = "") {
     return typeof value === "string" ? value : fallback;
   }
+  function normalizeBgmCue(bgm, stepIndex, warnings) {
+    if (bgm == null) {
+      return null;
+    }
+    if (typeof bgm === "string") {
+      const value = bgm.trim();
+      if (!value) {
+        return null;
+      }
+      if (value === "stop" || value === "none" || value === "off") {
+        return { stop: true };
+      }
+      return {
+        track: value,
+        src: null,
+        volume: 0.45,
+        loop: true,
+        stop: false
+      };
+    }
+    if (typeof bgm !== "object" || Array.isArray(bgm)) {
+      warnings.push(`step[${stepIndex}] の bgm が無効です。`);
+      return null;
+    }
+    if (bgm.stop === true) {
+      return { stop: true };
+    }
+    const track = asString(bgm.track).trim();
+    const src = asString(bgm.src).trim();
+    if (!track && !src) {
+      warnings.push(`step[${stepIndex}] の bgm に track か src がありません。`);
+      return null;
+    }
+    const volume = Number(bgm.volume);
+    return {
+      track: track || null,
+      src: src || null,
+      volume: Number.isFinite(volume) ? volume : 0.45,
+      loop: bgm.loop !== false,
+      stop: false
+    };
+  }
   function normalizeChoice(choice, stepIndex, warnings) {
     const text = asString(choice?.text).trim();
     const gotoLabel = asString(choice?.goto).trim();
@@ -68,7 +208,8 @@
       expression: asString(step.expression),
       emotion,
       voiceId: asString(step.voiceId).trim() || null,
-      bg: step.bg ?? null
+      bg: step.bg ?? null,
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
     };
   }
   function normalizeStep(step, stepIndex, warnings, chars) {
@@ -80,25 +221,45 @@
       return {
         kind: "chapter",
         chapter: asString(step.chapter),
-        bg: step.bg ?? null
+        bg: step.bg ?? null,
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
     if (step.choices) {
       const choices = Array.isArray(step.choices) ? step.choices.map((choice) => normalizeChoice(choice, stepIndex, warnings)).filter(Boolean) : [];
-      return { kind: "choices", choices };
+      return {
+        kind: "choices",
+        choices,
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
     }
     if (step.label) {
-      return { kind: "label", label: asString(step.label).trim() };
+      return {
+        kind: "label",
+        label: asString(step.label).trim(),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
     }
     if (step.end) {
       return {
         kind: "end",
         title: asString(step.title, "— F I N —"),
-        subtitle: asString(step.subtitle)
+        subtitle: asString(step.subtitle),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
+    if (step.bgm && !Object.prototype.hasOwnProperty.call(step, "text") && !step.bg) {
+      return {
+        kind: "bgm",
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
     if (step.bg && !Object.prototype.hasOwnProperty.call(step, "text")) {
-      return { kind: "bg", bg: step.bg };
+      return {
+        kind: "bg",
+        bg: step.bg,
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
     }
     if (Object.prototype.hasOwnProperty.call(step, "text")) {
       return normalizeTextStep(step, stepIndex, warnings, chars);
@@ -152,6 +313,7 @@
       scenarioName,
       id,
       audioNamespace: asString(raw.audioNamespace).trim() || id,
+      bgmNamespace: asString(raw.bgmNamespace).trim() || asString(raw.audioNamespace).trim() || id,
       title: asString(raw.title, scenarioName),
       subtitle: asString(raw.subtitle),
       genre: asString(raw.genre),
@@ -975,7 +1137,7 @@
   var MAX_AUDIO_CACHE = 12;
   var MAX_DYNAMIC_AUDIO_CACHE = 8;
   var ANALYSER_SIZE = 2048;
-  function clamp(value, min, max) {
+  function clamp2(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
   function buildAudioCandidates(audioNamespace, speaker, voiceId) {
@@ -1008,7 +1170,7 @@
       this.audioCache = new LRUCache(MAX_AUDIO_CACHE);
       this.dynamicAudioCache = new LRUCache(MAX_DYNAMIC_AUDIO_CACHE);
       this.levelData = new Float32Array(ANALYSER_SIZE);
-      this.muted = false;
+      this.muted = true;
       this.speechSynthesisActive = false;
       this.speechSynthesisStartedAt = 0;
       this.proxyBase = "";
@@ -1080,7 +1242,7 @@
       if (this.speechSynthesisActive) {
         const elapsed = (performance.now() - this.speechSynthesisStartedAt) / 1e3;
         const level = 0.15 + Math.abs(Math.sin(elapsed * 8.2)) * 0.55;
-        return clamp(level, 0, 1);
+        return clamp2(level, 0, 1);
       }
       if (!this.analyser) {
         return 0;
@@ -1091,7 +1253,7 @@
         peak = Math.max(peak, Math.abs(this.levelData[index]));
       }
       const cooked = 1 / (1 + Math.exp(-45 * peak + 5));
-      return clamp(cooked, 0, 1);
+      return clamp2(cooked, 0, 1);
     }
     async fetchAudioBuffer(url) {
       const response = await fetch(url);
@@ -1737,7 +1899,7 @@
     const uuid = _lut[d0 & 255] + _lut[d0 >> 8 & 255] + _lut[d0 >> 16 & 255] + _lut[d0 >> 24 & 255] + "-" + _lut[d1 & 255] + _lut[d1 >> 8 & 255] + "-" + _lut[d1 >> 16 & 15 | 64] + _lut[d1 >> 24 & 255] + "-" + _lut[d2 & 63 | 128] + _lut[d2 >> 8 & 255] + "-" + _lut[d2 >> 16 & 255] + _lut[d2 >> 24 & 255] + _lut[d3 & 255] + _lut[d3 >> 8 & 255] + _lut[d3 >> 16 & 255] + _lut[d3 >> 24 & 255];
     return uuid.toLowerCase();
   }
-  function clamp2(value, min, max) {
+  function clamp3(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
   function euclideanModulo(n, m) {
@@ -1883,7 +2045,7 @@
     DEG2RAD,
     RAD2DEG,
     generateUUID,
-    clamp: clamp2,
+    clamp: clamp3,
     euclideanModulo,
     mapLinear,
     inverseLerp,
@@ -2107,7 +2269,7 @@
       const denominator = Math.sqrt(this.lengthSq() * v.lengthSq());
       if (denominator === 0) return Math.PI / 2;
       const theta = this.dot(v) / denominator;
-      return Math.acos(clamp2(theta, -1, 1));
+      return Math.acos(clamp3(theta, -1, 1));
     }
     distanceTo(v) {
       return Math.sqrt(this.distanceToSquared(v));
@@ -3638,7 +3800,7 @@
       return this.normalize();
     }
     angleTo(q) {
-      return 2 * Math.acos(Math.abs(clamp2(this.dot(q), -1, 1)));
+      return 2 * Math.acos(Math.abs(clamp3(this.dot(q), -1, 1)));
     }
     rotateTowards(q, step) {
       const angle = this.angleTo(q);
@@ -4107,7 +4269,7 @@
       const denominator = Math.sqrt(this.lengthSq() * v.lengthSq());
       if (denominator === 0) return Math.PI / 2;
       const theta = this.dot(v) / denominator;
-      return Math.acos(clamp2(theta, -1, 1));
+      return Math.acos(clamp3(theta, -1, 1));
     }
     distanceTo(v) {
       return Math.sqrt(this.distanceToSquared(v));
@@ -5713,7 +5875,7 @@
       const m31 = te[2], m32 = te[6], m33 = te[10];
       switch (order) {
         case "XYZ":
-          this._y = Math.asin(clamp2(m13, -1, 1));
+          this._y = Math.asin(clamp3(m13, -1, 1));
           if (Math.abs(m13) < 0.9999999) {
             this._x = Math.atan2(-m23, m33);
             this._z = Math.atan2(-m12, m11);
@@ -5723,7 +5885,7 @@
           }
           break;
         case "YXZ":
-          this._x = Math.asin(-clamp2(m23, -1, 1));
+          this._x = Math.asin(-clamp3(m23, -1, 1));
           if (Math.abs(m23) < 0.9999999) {
             this._y = Math.atan2(m13, m33);
             this._z = Math.atan2(m21, m22);
@@ -5733,7 +5895,7 @@
           }
           break;
         case "ZXY":
-          this._x = Math.asin(clamp2(m32, -1, 1));
+          this._x = Math.asin(clamp3(m32, -1, 1));
           if (Math.abs(m32) < 0.9999999) {
             this._y = Math.atan2(-m31, m33);
             this._z = Math.atan2(-m12, m22);
@@ -5743,7 +5905,7 @@
           }
           break;
         case "ZYX":
-          this._y = Math.asin(-clamp2(m31, -1, 1));
+          this._y = Math.asin(-clamp3(m31, -1, 1));
           if (Math.abs(m31) < 0.9999999) {
             this._x = Math.atan2(m32, m33);
             this._z = Math.atan2(m21, m11);
@@ -5753,7 +5915,7 @@
           }
           break;
         case "YZX":
-          this._z = Math.asin(clamp2(m21, -1, 1));
+          this._z = Math.asin(clamp3(m21, -1, 1));
           if (Math.abs(m21) < 0.9999999) {
             this._x = Math.atan2(-m23, m22);
             this._y = Math.atan2(-m31, m11);
@@ -5763,7 +5925,7 @@
           }
           break;
         case "XZY":
-          this._z = Math.asin(-clamp2(m12, -1, 1));
+          this._z = Math.asin(-clamp3(m12, -1, 1));
           if (Math.abs(m12) < 0.9999999) {
             this._x = Math.atan2(m32, m22);
             this._y = Math.atan2(m13, m11);
@@ -6791,8 +6953,8 @@
     }
     setHSL(h, s, l, colorSpace = ColorManagement.workingColorSpace) {
       h = euclideanModulo(h, 1);
-      s = clamp2(s, 0, 1);
-      l = clamp2(l, 0, 1);
+      s = clamp3(s, 0, 1);
+      l = clamp3(l, 0, 1);
       if (s === 0) {
         this.r = this.g = this.b = l;
       } else {
@@ -6914,7 +7076,7 @@
     }
     getHex(colorSpace = SRGBColorSpace) {
       ColorManagement.fromWorkingColorSpace(_color.copy(this), colorSpace);
-      return Math.round(clamp2(_color.r * 255, 0, 255)) * 65536 + Math.round(clamp2(_color.g * 255, 0, 255)) * 256 + Math.round(clamp2(_color.b * 255, 0, 255));
+      return Math.round(clamp3(_color.r * 255, 0, 255)) * 65536 + Math.round(clamp3(_color.g * 255, 0, 255)) * 256 + Math.round(clamp3(_color.b * 255, 0, 255));
     }
     getHexString(colorSpace = SRGBColorSpace) {
       return ("000000" + this.getHex(colorSpace).toString(16)).slice(-6);
@@ -20774,7 +20936,7 @@ void main() {
       this.ior = 1.5;
       Object.defineProperty(this, "reflectivity", {
         get: function() {
-          return clamp2(2.5 * (this.ior - 1) / (this.ior + 1), 0, 1);
+          return clamp3(2.5 * (this.ior - 1) / (this.ior + 1), 0, 1);
         },
         set: function(reflectivity) {
           this.ior = (1 + 0.4 * reflectivity) / (1 - 0.4 * reflectivity);
@@ -32034,7 +32196,7 @@ void main() {
       window.setTimeout(resolve, ms);
     });
   }
-  function clamp3(value, min, max) {
+  function clamp4(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
   function isSameModelRecord(left, right) {
@@ -32118,7 +32280,7 @@ void main() {
           this.nextBlinkAt = this.elapsed + 2 + Math.random() * 2.5;
         } else {
           const fold = phase < 0.5 ? phase * 2 : (1 - phase) * 2;
-          this.blinkWeight = clamp3(fold, 0, 1);
+          this.blinkWeight = clamp4(fold, 0, 1);
         }
       } else {
         this.blinkWeight = 0;
@@ -32136,7 +32298,7 @@ void main() {
       }
       const { entry } = this.currentEntry;
       const manager = entry.vrm.expressionManager;
-      const lipSyncLevel = clamp3(this.getLipSyncLevel(), 0, 1);
+      const lipSyncLevel = clamp4(this.getLipSyncLevel(), 0, 1);
       if (manager) {
         for (const emotion of EMOTION_KEYS) {
           manager.setValue(emotion, emotion === this.currentEmotion ? 1 : 0);
@@ -32392,6 +32554,7 @@ void main() {
       this.typeTimer = null;
       this.started = false;
       this.showingChoice = false;
+      this.isAdvancing = false;
       this.currentChapter = "";
       this.textSteps = [];
       this.scenario = null;
@@ -32426,11 +32589,14 @@ void main() {
       this.$settingsBtn = this.$("settings-btn");
       this.$titleVoiceToggle = this.$("title-voice-toggle");
       this.$voiceToggle = this.$("voice-toggle");
+      this.$titleBgmToggle = this.$("title-bgm-toggle");
+      this.$bgmToggle = this.$("bgm-toggle");
       this.$titleApiClientId = this.$("title-api-client-id");
       this.$titleApiStatus = this.$("title-api-status");
       this.$apiClientId = this.$("api-client-id");
       this.$apiStatus = this.$("api-status");
       this.voiceController = new VoiceController();
+      this.bgmController = new BGMController();
       this.assetStore = new VRMAssetStore();
       this.vrmStage = new VRMStage({
         host: this.$("avatar-stage-shell"),
@@ -32550,6 +32716,14 @@ void main() {
         event.stopPropagation();
         this.toggleMute();
       });
+      this.$titleBgmToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleBgm();
+      });
+      this.$bgmToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleBgm();
+      });
       this.$startBtn.addEventListener("click", async (event) => {
         event.stopPropagation();
         await this.startExperience();
@@ -32583,6 +32757,7 @@ void main() {
         this.vrmStage.resize();
       });
       this.updateVoiceToggle();
+      this.updateBgmToggle();
       this.updateMessageApiUI({
         message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
         clientId: this.messageApiReceiver.getClientId(),
@@ -32612,6 +32787,18 @@ void main() {
       this.voiceController.setMuted(!this.voiceController.isMuted());
       this.updateVoiceToggle();
     }
+    updateBgmToggle() {
+      const text = this.bgmController.isEnabled() ? "🎵 BGM ON" : "🎵 BGM OFF";
+      this.$bgmToggle.textContent = text;
+      this.$titleBgmToggle.textContent = text;
+    }
+    toggleBgm() {
+      this.bgmController.setEnabled(!this.bgmController.isEnabled());
+      this.updateBgmToggle();
+      if (this.started) {
+        this.syncBgmForIndex(this.currentStep);
+      }
+    }
     updateMessageApiUI({ message, clientId, apiBase, configured }) {
       this.voiceController.setProxyBase(apiBase);
       const clientLabel = `API client: ${clientId}`;
@@ -32629,6 +32816,24 @@ void main() {
         speakerKey,
         allowBrowserFallback: true
       });
+    }
+    findActiveBgmCue(index) {
+      if (!this.scenario?.steps?.length) {
+        return null;
+      }
+      let activeCue = null;
+      const safeIndex = Math.min(index, this.scenario.steps.length - 1);
+      for (let stepIndex = 0; stepIndex <= safeIndex; stepIndex += 1) {
+        const cue = this.scenario.steps[stepIndex]?.bgm;
+        if (cue) {
+          activeCue = cue.stop ? { stop: true } : cue;
+        }
+      }
+      return activeCue;
+    }
+    syncBgmForIndex(index) {
+      const cue = this.findActiveBgmCue(index);
+      this.bgmController.setCue(this.scenario?.bgmNamespace || this.scenario?.audioNamespace || "", cue);
     }
     initCanvas() {
       this.$canvas.width = window.innerWidth;
@@ -32904,12 +33109,17 @@ void main() {
       this.renderToken += 1;
       const token = this.renderToken;
       this.updateProgress();
+      this.syncBgmForIndex(index);
       if (step.kind === "label") {
         await this.showStep(index + 1);
         return;
       }
       if (step.kind === "bg") {
         this.setAtmosphere(step.bg);
+        await this.showStep(index + 1);
+        return;
+      }
+      if (step.kind === "bgm") {
         await this.showStep(index + 1);
         return;
       }
@@ -33134,7 +33344,7 @@ void main() {
       }
     }
     advance() {
-      if (!this.started || this.showingChoice || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
+      if (!this.started || this.showingChoice || this.isAdvancing || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
         return;
       }
       if (this.isTyping) {
@@ -33147,11 +33357,14 @@ void main() {
       this.voiceController.stopCurrent();
       const nextIndex = this.currentStep + 1;
       if (nextIndex < this.scenario.steps.length) {
-        this.showStep(nextIndex);
+        this.isAdvancing = true;
+        this.showStep(nextIndex).finally(() => {
+          this.isAdvancing = false;
+        });
       }
     }
     goBack() {
-      if (!this.started || this.isTyping || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
+      if (!this.started || this.isTyping || this.isAdvancing || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
         return;
       }
       this.voiceController.stopCurrent();
@@ -33163,7 +33376,21 @@ void main() {
         previousIndex -= 1;
       }
       if (previousIndex >= 0) {
-        this.showStep(previousIndex);
+        for (let i = previousIndex - 1; i >= 0; i -= 1) {
+          const s = this.scenario.steps[i];
+          if (s.kind === "bg") {
+            this.setAtmosphere(s.bg);
+            break;
+          }
+          if (s.kind === "text" && s.bg) {
+            this.setAtmosphere(s.bg);
+            break;
+          }
+        }
+        this.isAdvancing = true;
+        this.showStep(previousIndex).finally(() => {
+          this.isAdvancing = false;
+        });
       }
     }
   };

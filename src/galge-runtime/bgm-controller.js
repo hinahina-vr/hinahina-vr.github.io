@@ -1,0 +1,120 @@
+const BGM_ENABLED_STORAGE_KEY = "galgeRuntimeBgmEnabled";
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function encodePathSegment(pathPart) {
+  return pathPart
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
+function isDirectPath(track) {
+  return /^(?:\.{1,2}\/|\/|https?:\/\/)/.test(track);
+}
+
+export class BGMController {
+  constructor() {
+    this.enabled = window.localStorage.getItem(BGM_ENABLED_STORAGE_KEY) === "1";
+    this.audio = new Audio();
+    this.audio.loop = true;
+    this.audio.preload = "none";
+    this.currentNamespace = "";
+    this.currentCue = null;
+    this.currentSrc = "";
+  }
+
+  isEnabled() {
+    return this.enabled;
+  }
+
+  setEnabled(nextEnabled) {
+    this.enabled = Boolean(nextEnabled);
+    window.localStorage.setItem(BGM_ENABLED_STORAGE_KEY, this.enabled ? "1" : "0");
+    if (!this.enabled) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      return;
+    }
+    this.syncPlayback();
+  }
+
+  resolveSource(namespace, cue) {
+    if (!cue || cue.stop) {
+      return "";
+    }
+
+    if (cue.src) {
+      return cue.src;
+    }
+
+    const track = String(cue.track || "").trim();
+    if (!track) {
+      return "";
+    }
+
+    if (isDirectPath(track)) {
+      return track;
+    }
+
+    const normalizedTrack = track.toLowerCase().endsWith(".mp3") ? track : `${track}.mp3`;
+    return `./assets/bgm/scenarios/${encodeURIComponent(namespace)}/${encodePathSegment(normalizedTrack)}`;
+  }
+
+  setCue(namespace, cue) {
+    this.currentNamespace = namespace || "";
+    this.currentCue = cue || null;
+    this.syncPlayback();
+  }
+
+  clearCue() {
+    this.currentCue = null;
+    this.currentSrc = "";
+    this.audio.pause();
+    this.audio.removeAttribute("src");
+    this.audio.load();
+  }
+
+  syncPlayback() {
+    if (!this.currentCue || this.currentCue.stop) {
+      this.clearCue();
+      return;
+    }
+
+    const nextSrc = this.resolveSource(this.currentNamespace, this.currentCue);
+    if (!nextSrc) {
+      this.clearCue();
+      return;
+    }
+
+    this.audio.loop = this.currentCue.loop !== false;
+    this.audio.volume = clamp(
+      Number.isFinite(this.currentCue.volume) ? this.currentCue.volume : 0.45,
+      0,
+      1
+    );
+
+    if (this.currentSrc !== nextSrc) {
+      this.currentSrc = nextSrc;
+      this.audio.src = nextSrc;
+    }
+
+    if (!this.enabled) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      return;
+    }
+
+    this.audio.play().catch((error) => {
+      console.warn("bgm play failed:", error);
+    });
+  }
+
+  stop() {
+    this.audio.pause();
+    this.audio.currentTime = 0;
+  }
+}

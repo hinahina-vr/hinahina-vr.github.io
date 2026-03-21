@@ -8,6 +8,55 @@ function asString(value, fallback = "") {
   return typeof value === "string" ? value : fallback;
 }
 
+function normalizeBgmCue(bgm, stepIndex, warnings) {
+  if (bgm == null) {
+    return null;
+  }
+
+  if (typeof bgm === "string") {
+    const value = bgm.trim();
+    if (!value) {
+      return null;
+    }
+    if (value === "stop" || value === "none" || value === "off") {
+      return { stop: true };
+    }
+    return {
+      track: value,
+      src: null,
+      volume: 0.45,
+      loop: true,
+      stop: false,
+    };
+  }
+
+  if (typeof bgm !== "object" || Array.isArray(bgm)) {
+    warnings.push(`step[${stepIndex}] の bgm が無効です。`);
+    return null;
+  }
+
+  if (bgm.stop === true) {
+    return { stop: true };
+  }
+
+  const track = asString(bgm.track).trim();
+  const src = asString(bgm.src).trim();
+  if (!track && !src) {
+    warnings.push(`step[${stepIndex}] の bgm に track か src がありません。`);
+    return null;
+  }
+
+  const volume = Number(bgm.volume);
+
+  return {
+    track: track || null,
+    src: src || null,
+    volume: Number.isFinite(volume) ? volume : 0.45,
+    loop: bgm.loop !== false,
+    stop: false,
+  };
+}
+
 function normalizeChoice(choice, stepIndex, warnings) {
   const text = asString(choice?.text).trim();
   const gotoLabel = asString(choice?.goto).trim();
@@ -43,6 +92,7 @@ function normalizeTextStep(step, stepIndex, warnings, chars) {
     emotion,
     voiceId: asString(step.voiceId).trim() || null,
     bg: step.bg ?? null,
+    bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
   };
 }
 
@@ -57,6 +107,7 @@ function normalizeStep(step, stepIndex, warnings, chars) {
       kind: "chapter",
       chapter: asString(step.chapter),
       bg: step.bg ?? null,
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
     };
   }
 
@@ -66,11 +117,19 @@ function normalizeStep(step, stepIndex, warnings, chars) {
           .map((choice) => normalizeChoice(choice, stepIndex, warnings))
           .filter(Boolean)
       : [];
-    return { kind: "choices", choices };
+    return {
+      kind: "choices",
+      choices,
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
   }
 
   if (step.label) {
-    return { kind: "label", label: asString(step.label).trim() };
+    return {
+      kind: "label",
+      label: asString(step.label).trim(),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
   }
 
   if (step.end) {
@@ -78,11 +137,23 @@ function normalizeStep(step, stepIndex, warnings, chars) {
       kind: "end",
       title: asString(step.title, "— F I N —"),
       subtitle: asString(step.subtitle),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
+  if (step.bgm && !Object.prototype.hasOwnProperty.call(step, "text") && !step.bg) {
+    return {
+      kind: "bgm",
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
     };
   }
 
   if (step.bg && !Object.prototype.hasOwnProperty.call(step, "text")) {
-    return { kind: "bg", bg: step.bg };
+    return {
+      kind: "bg",
+      bg: step.bg,
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
   }
 
   if (Object.prototype.hasOwnProperty.call(step, "text")) {
@@ -151,6 +222,7 @@ export async function loadScenarioDefinition() {
     scenarioName,
     id,
     audioNamespace: asString(raw.audioNamespace).trim() || id,
+    bgmNamespace: asString(raw.bgmNamespace).trim() || asString(raw.audioNamespace).trim() || id,
     title: asString(raw.title, scenarioName),
     subtitle: asString(raw.subtitle),
     genre: asString(raw.genre),
