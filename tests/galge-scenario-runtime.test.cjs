@@ -2,6 +2,33 @@ const { chromium } = require("playwright");
 const { spawn } = require("child_process");
 const path = require("path");
 
+function createSilentWavBuffer() {
+  const sampleRate = 24000;
+  const numChannels = 1;
+  const bitsPerSample = 16;
+  const durationSamples = 2400;
+  const blockAlign = numChannels * (bitsPerSample / 8);
+  const byteRate = sampleRate * blockAlign;
+  const dataSize = durationSamples * blockAlign;
+  const buffer = Buffer.alloc(44 + dataSize);
+
+  buffer.write("RIFF", 0);
+  buffer.writeUInt32LE(36 + dataSize, 4);
+  buffer.write("WAVE", 8);
+  buffer.write("fmt ", 12);
+  buffer.writeUInt32LE(16, 16);
+  buffer.writeUInt16LE(1, 20);
+  buffer.writeUInt16LE(numChannels, 22);
+  buffer.writeUInt32LE(sampleRate, 24);
+  buffer.writeUInt32LE(byteRate, 28);
+  buffer.writeUInt16LE(blockAlign, 32);
+  buffer.writeUInt16LE(bitsPerSample, 34);
+  buffer.write("data", 36);
+  buffer.writeUInt32LE(dataSize, 40);
+
+  return buffer;
+}
+
 async function isVisible(page, selector) {
   return page.$eval(selector, (element) => {
     const style = window.getComputedStyle(element);
@@ -68,6 +95,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   const baseUrl = "http://127.0.0.1:8181";
   const messageApiBase = `http://127.0.0.1:${apiPort}`;
   const dummyVrmPath = path.join(__dirname, "fixtures", "invalid-model.vrm");
+  const proxyTtsRequests = [];
   let passed = 0;
   let failed = 0;
 
@@ -106,6 +134,19 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
       },
       cancel() {},
     };
+  });
+
+  await page.route(`${messageApiBase}/api/tts`, async (route) => {
+    const payload = route.request().postDataJSON();
+    proxyTtsRequests.push(payload);
+    await route.fulfill({
+      status: 200,
+      headers: {
+        "Content-Type": "audio/wav",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: createSilentWavBuffer(),
+    });
   });
 
   console.log("\n=== galge-scenario runtime test ===");
@@ -156,6 +197,26 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   assert(scenarioRows.includes("hinahina"), "dynamic settings rows include hinahina");
   assert(scenarioRows.includes("waddy"), "dynamic settings rows include waddy");
 
+  await page.selectOption('select[data-speaker-voice-provider="hinahina"]', "openai");
+  await page.waitForTimeout(200);
+  const hinahinaProviderValue = await page.$eval(
+    'select[data-speaker-voice-provider="hinahina"]',
+    (element) => element.value
+  );
+  assert(hinahinaProviderValue === "openai", "speaker voice provider can be changed via settings");
+
+  await page
+    .locator('.settings-row[data-speaker-key="hinahina"] .settings-voice-section button', {
+      hasText: "音声テスト",
+    })
+    .click();
+  await page.waitForTimeout(500);
+  assert(proxyTtsRequests.length >= 1, "voice test uses /api/tts proxy");
+  assert(
+    proxyTtsRequests.at(-1)?.config?.provider === "openai",
+    "voice test forwards configured provider"
+  );
+
   await page.setInputFiles('input[data-speaker-file="hinahina"]', dummyVrmPath);
   await page.waitForTimeout(400);
   const hinahinaStatus = await page.$eval(
@@ -173,6 +234,11 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
     (element) => element.textContent
   );
   assert(persistedStatus.includes("専用モデルあり"), "uploaded model persists via IndexedDB");
+  const persistedProvider = await page.$eval(
+    'select[data-speaker-voice-provider="hinahina"]',
+    (element) => element.value
+  );
+  assert(persistedProvider === "openai", "speaker voice provider persists via IndexedDB");
   await page.click("#settings-close");
   await page.waitForTimeout(200);
 
@@ -205,6 +271,13 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   assert(directSendResponse.status === 201, `direct_send API accepts messages (got: ${directSendResponse.status})`);
   const apiMessageShown = await waitForApiMessage(page, "APIからの発話テストです。", 5000);
   assert(apiMessageShown, "page speaks text received from message API");
+  assert(
+    proxyTtsRequests.some(
+      (payload) =>
+        payload?.text === "APIからの発話テストです。" && payload?.config?.provider === "openai"
+    ),
+    "direct_send speech uses configured speaker TTS provider"
+  );
 
   await page.click("#mode-toggle");
   await page.waitForTimeout(300);

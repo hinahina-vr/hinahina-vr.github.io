@@ -279,6 +279,325 @@
     }
   };
 
+  // src/galge-runtime/voice-api-config.js
+  var PROVIDER_DEFINITIONS = [
+    {
+      key: "browser",
+      label: "Browser TTS",
+      proxyRequired: false,
+      fields: [
+        {
+          key: "lang",
+          label: "lang",
+          type: "text",
+          defaultValue: "ja-JP",
+          placeholder: "ja-JP"
+        },
+        {
+          key: "rate",
+          label: "rate",
+          type: "number",
+          defaultValue: 1,
+          min: 0.25,
+          max: 4,
+          step: 0.1
+        },
+        {
+          key: "pitch",
+          label: "pitch",
+          type: "number",
+          defaultValue: 1,
+          min: 0,
+          max: 2,
+          step: 0.1
+        }
+      ]
+    },
+    {
+      key: "voicevox",
+      label: "VOICEVOX",
+      proxyRequired: true,
+      fields: [
+        {
+          key: "serverUrl",
+          label: "server",
+          type: "url",
+          defaultValue: "http://127.0.0.1:50021",
+          placeholder: "http://127.0.0.1:50021"
+        },
+        {
+          key: "speaker",
+          label: "speaker",
+          type: "number",
+          defaultValue: 1,
+          min: 0,
+          step: 1
+        },
+        {
+          key: "speed",
+          label: "speed",
+          type: "number",
+          defaultValue: 1,
+          min: 0.5,
+          max: 2,
+          step: 0.1
+        },
+        {
+          key: "pitch",
+          label: "pitch",
+          type: "number",
+          defaultValue: 0,
+          min: -0.15,
+          max: 0.15,
+          step: 0.01
+        },
+        {
+          key: "intonation",
+          label: "intonation",
+          type: "number",
+          defaultValue: 1,
+          min: 0,
+          max: 2,
+          step: 0.1
+        }
+      ]
+    },
+    {
+      key: "openai",
+      label: "OpenAI TTS",
+      proxyRequired: true,
+      fields: [
+        {
+          key: "apiKey",
+          label: "apiKey",
+          type: "password",
+          defaultValue: "",
+          placeholder: "sk-..."
+        },
+        {
+          key: "baseUrl",
+          label: "baseUrl",
+          type: "url",
+          defaultValue: "https://api.openai.com/v1",
+          placeholder: "https://api.openai.com/v1"
+        },
+        {
+          key: "model",
+          label: "model",
+          type: "text",
+          defaultValue: "gpt-4o-mini-tts",
+          placeholder: "gpt-4o-mini-tts"
+        },
+        {
+          key: "voice",
+          label: "voice",
+          type: "text",
+          defaultValue: "shimmer",
+          placeholder: "shimmer"
+        },
+        {
+          key: "speed",
+          label: "speed",
+          type: "number",
+          defaultValue: 1,
+          min: 0.25,
+          max: 4,
+          step: 0.1
+        },
+        {
+          key: "format",
+          label: "format",
+          type: "select",
+          defaultValue: "mp3",
+          options: [
+            { value: "mp3", label: "mp3" },
+            { value: "wav", label: "wav" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "azure",
+      label: "Azure OpenAI TTS",
+      proxyRequired: true,
+      fields: [
+        {
+          key: "apiKey",
+          label: "apiKey",
+          type: "password",
+          defaultValue: "",
+          placeholder: "azure-openai-key"
+        },
+        {
+          key: "endpoint",
+          label: "endpoint",
+          type: "url",
+          defaultValue: "",
+          placeholder: "https://your-resource.openai.azure.com"
+        },
+        {
+          key: "deployment",
+          label: "deployment",
+          type: "text",
+          defaultValue: "tts",
+          placeholder: "tts"
+        },
+        {
+          key: "apiVersion",
+          label: "apiVersion",
+          type: "text",
+          defaultValue: "2025-04-01-preview",
+          placeholder: "2025-04-01-preview"
+        },
+        {
+          key: "model",
+          label: "model",
+          type: "text",
+          defaultValue: "tts-1",
+          placeholder: "tts-1"
+        },
+        {
+          key: "voice",
+          label: "voice",
+          type: "text",
+          defaultValue: "alloy",
+          placeholder: "alloy"
+        },
+        {
+          key: "speed",
+          label: "speed",
+          type: "number",
+          defaultValue: 1,
+          min: 0.25,
+          max: 4,
+          step: 0.1
+        },
+        {
+          key: "format",
+          label: "format",
+          type: "select",
+          defaultValue: "mp3",
+          options: [
+            { value: "mp3", label: "mp3" },
+            { value: "wav", label: "wav" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "openai_compatible",
+      label: "OpenAI互換TTS",
+      proxyRequired: true,
+      fields: [
+        {
+          key: "apiKey",
+          label: "apiKey",
+          type: "password",
+          defaultValue: "",
+          placeholder: "optional"
+        },
+        {
+          key: "baseUrl",
+          label: "baseUrl",
+          type: "url",
+          defaultValue: "http://127.0.0.1:8000/v1",
+          placeholder: "http://127.0.0.1:8000/v1"
+        },
+        {
+          key: "model",
+          label: "model",
+          type: "text",
+          defaultValue: "tts-1",
+          placeholder: "tts-1"
+        },
+        {
+          key: "voice",
+          label: "voice",
+          type: "text",
+          defaultValue: "alloy",
+          placeholder: "alloy"
+        },
+        {
+          key: "speed",
+          label: "speed",
+          type: "number",
+          defaultValue: 1,
+          min: 0.25,
+          max: 4,
+          step: 0.1
+        },
+        {
+          key: "format",
+          label: "format",
+          type: "select",
+          defaultValue: "mp3",
+          options: [
+            { value: "mp3", label: "mp3" },
+            { value: "wav", label: "wav" }
+          ]
+        },
+        {
+          key: "headersJson",
+          label: "headersJson",
+          type: "textarea",
+          defaultValue: "",
+          placeholder: '{"X-API-Key":"..."}'
+        }
+      ]
+    }
+  ];
+  function cloneValue(value) {
+    return JSON.parse(JSON.stringify(value));
+  }
+  function getVoiceApiProviderDefinitions() {
+    return PROVIDER_DEFINITIONS.map((definition) => cloneValue(definition));
+  }
+  function getVoiceApiProviderDefinition(providerKey) {
+    return PROVIDER_DEFINITIONS.find((definition) => definition.key === providerKey) || PROVIDER_DEFINITIONS[0];
+  }
+  function isProxyVoiceApiProvider(providerKey) {
+    return Boolean(getVoiceApiProviderDefinition(providerKey)?.proxyRequired);
+  }
+  function createDefaultVoiceApiConfig(providerKey = "browser") {
+    const provider = getVoiceApiProviderDefinition(providerKey);
+    const settings = {};
+    for (const field of provider.fields) {
+      settings[field.key] = cloneValue(field.defaultValue);
+    }
+    return {
+      provider: provider.key,
+      settings
+    };
+  }
+  function coerceValue(field, value) {
+    if (field.type === "number") {
+      const numericValue = Number(value);
+      return Number.isFinite(numericValue) ? numericValue : field.defaultValue;
+    }
+    return typeof value === "string" ? value : field.defaultValue;
+  }
+  function normalizeVoiceApiConfig(config) {
+    if (!config || typeof config !== "object") {
+      return null;
+    }
+    const provider = getVoiceApiProviderDefinition(config.provider);
+    const sourceSettings = config.settings && typeof config.settings === "object" && !Array.isArray(config.settings) ? config.settings : {};
+    const settings = {};
+    for (const field of provider.fields) {
+      settings[field.key] = coerceValue(field, sourceSettings[field.key]);
+    }
+    return {
+      provider: provider.key,
+      settings
+    };
+  }
+  function getVoiceApiStatusLabel(config) {
+    if (!config) {
+      return "未設定";
+    }
+    return getVoiceApiProviderDefinition(config.provider).label;
+  }
+
   // src/galge-runtime/settings-panel.js
   function formatSpeakerLabel(speakerKey, charData) {
     if (!charData) {
@@ -300,7 +619,8 @@
       closeButton,
       backdrop,
       onModelChange,
-      onSummaryChange
+      onSummaryChange,
+      onVoiceTest
     }) {
       this.assetStore = assetStore;
       this.modal = modal;
@@ -312,6 +632,7 @@
       this.backdrop = backdrop;
       this.onModelChange = onModelChange;
       this.onSummaryChange = onSummaryChange;
+      this.onVoiceTest = onVoiceTest;
       this.scenario = null;
       this.closeButton.addEventListener("click", () => this.close());
       this.backdrop.addEventListener("click", () => this.close());
@@ -352,6 +673,7 @@
       const speakerKeys = Object.keys(chars);
       const nonNarratorKeys = speakerKeys.filter((speakerKey) => speakerKey !== "narrator");
       const modelRecords = await this.assetStore.getSpeakerModels(speakerKeys);
+      const voiceConfigs = await this.assetStore.getSpeakerVoiceConfigs(speakerKeys);
       const fallbackRecord = await this.assetStore.getSharedFallbackModel();
       const dedicatedCount = nonNarratorKeys.filter((speakerKey) => Boolean(modelRecords[speakerKey])).length;
       this.summary.textContent = `専用モデル ${dedicatedCount} / ${nonNarratorKeys.length}`;
@@ -374,11 +696,18 @@
         const title = document.createElement("div");
         title.className = "settings-row-title";
         title.textContent = formatSpeakerLabel(speakerKey, charData);
+        const statusGroup = document.createElement("div");
+        statusGroup.className = "settings-row-meta";
         const status = document.createElement("span");
         status.className = `settings-row-status${record ? " has-model" : ""}`;
         status.textContent = formatStatus(record);
+        const voiceStatus = document.createElement("span");
+        voiceStatus.className = `settings-row-status${voiceConfigs[speakerKey] ? " has-model" : ""}`;
+        voiceStatus.textContent = `音声API: ${getVoiceApiStatusLabel(voiceConfigs[speakerKey])}`;
         header.appendChild(title);
-        header.appendChild(status);
+        statusGroup.appendChild(status);
+        statusGroup.appendChild(voiceStatus);
+        header.appendChild(statusGroup);
         const controls = document.createElement("div");
         controls.className = "settings-row-controls";
         const input = document.createElement("input");
@@ -466,6 +795,121 @@
         row.appendChild(header);
         row.appendChild(controls);
         row.appendChild(input);
+        const voiceSection = document.createElement("div");
+        voiceSection.className = "settings-voice-section";
+        const voiceHeading = document.createElement("div");
+        voiceHeading.className = "settings-section-heading";
+        voiceHeading.textContent = "音声出力API";
+        const activeVoiceConfig = voiceConfigs[speakerKey] || null;
+        const activeProvider = getVoiceApiProviderDefinition(activeVoiceConfig?.provider || "browser");
+        const voiceControls = document.createElement("div");
+        voiceControls.className = "settings-row-controls";
+        const providerLabel = document.createElement("label");
+        providerLabel.className = "settings-inline-field";
+        providerLabel.textContent = "provider";
+        const providerSelect = document.createElement("select");
+        providerSelect.dataset.speakerVoiceProvider = speakerKey;
+        for (const provider of getVoiceApiProviderDefinitions()) {
+          const option = document.createElement("option");
+          option.value = provider.key;
+          option.textContent = provider.label;
+          option.selected = provider.key === activeProvider.key;
+          providerSelect.appendChild(option);
+        }
+        providerSelect.addEventListener("change", async () => {
+          await this.assetStore.saveSpeakerVoiceConfig(
+            speakerKey,
+            createDefaultVoiceApiConfig(providerSelect.value)
+          );
+          await this.render();
+        });
+        providerLabel.appendChild(providerSelect);
+        voiceControls.appendChild(providerLabel);
+        const testButton = document.createElement("button");
+        testButton.type = "button";
+        testButton.className = "settings-btn secondary";
+        testButton.textContent = "音声テスト";
+        testButton.addEventListener("click", async () => {
+          const config = await this.assetStore.getSpeakerVoiceConfig(speakerKey) || createDefaultVoiceApiConfig(providerSelect.value);
+          await this.onVoiceTest?.({
+            speakerKey,
+            speakerLabel: formatSpeakerLabel(speakerKey, charData),
+            config
+          });
+        });
+        voiceControls.appendChild(testButton);
+        const clearVoiceButton = document.createElement("button");
+        clearVoiceButton.type = "button";
+        clearVoiceButton.className = "settings-btn secondary";
+        clearVoiceButton.textContent = "音声設定削除";
+        clearVoiceButton.disabled = !activeVoiceConfig;
+        clearVoiceButton.addEventListener("click", async () => {
+          await this.assetStore.deleteSpeakerVoiceConfig(speakerKey);
+          await this.render();
+        });
+        voiceControls.appendChild(clearVoiceButton);
+        voiceSection.appendChild(voiceHeading);
+        voiceSection.appendChild(voiceControls);
+        const providerNote = document.createElement("p");
+        providerNote.className = "settings-provider-note";
+        providerNote.textContent = isProxyVoiceApiProvider(activeProvider.key) ? "OpenAI / Azure / VOICEVOX はローカルの /api/tts プロキシ経由で発話します。" : "Browser TTS はこのブラウザの speechSynthesis を使います。";
+        voiceSection.appendChild(providerNote);
+        const providerFields = document.createElement("div");
+        providerFields.className = "settings-field-grid";
+        const sourceConfig = activeVoiceConfig || createDefaultVoiceApiConfig(activeProvider.key);
+        for (const field of activeProvider.fields) {
+          const fieldLabel = document.createElement("label");
+          fieldLabel.className = `settings-inline-field${field.type === "textarea" ? " is-block" : ""}`;
+          fieldLabel.textContent = field.label;
+          let fieldInput = null;
+          if (field.type === "select") {
+            fieldInput = document.createElement("select");
+            for (const optionDef of field.options || []) {
+              const option = document.createElement("option");
+              option.value = optionDef.value;
+              option.textContent = optionDef.label;
+              option.selected = optionDef.value === sourceConfig.settings[field.key];
+              fieldInput.appendChild(option);
+            }
+          } else if (field.type === "textarea") {
+            fieldInput = document.createElement("textarea");
+            fieldInput.rows = 3;
+            fieldInput.value = String(sourceConfig.settings[field.key] ?? "");
+          } else {
+            fieldInput = document.createElement("input");
+            fieldInput.type = field.type;
+            fieldInput.value = String(sourceConfig.settings[field.key] ?? "");
+            if (field.min !== void 0) {
+              fieldInput.min = String(field.min);
+            }
+            if (field.max !== void 0) {
+              fieldInput.max = String(field.max);
+            }
+            if (field.step !== void 0) {
+              fieldInput.step = String(field.step);
+            }
+          }
+          if (field.placeholder) {
+            fieldInput.placeholder = field.placeholder;
+          }
+          fieldInput.dataset.speakerVoiceField = `${speakerKey}:${field.key}`;
+          fieldInput.addEventListener("change", async () => {
+            const current = await this.assetStore.getSpeakerVoiceConfig(speakerKey) || createDefaultVoiceApiConfig(activeProvider.key);
+            const nextSettings = {
+              ...current.settings,
+              [field.key]: field.type === "number" ? Number(fieldInput.value) : String(fieldInput.value)
+            };
+            await this.assetStore.saveSpeakerVoiceConfig(speakerKey, {
+              provider: activeProvider.key,
+              settings: nextSettings
+            });
+            await this.render();
+          });
+          fieldLabel.appendChild(fieldInput);
+          providerFields.appendChild(fieldLabel);
+        }
+        voiceSection.appendChild(providerFields);
+        row.appendChild(voiceSection);
         this.list.appendChild(row);
       }
       const fallbackActions = document.createElement("div");
@@ -526,6 +970,7 @@
 
   // src/galge-runtime/voice-controller.js
   var MAX_AUDIO_CACHE = 12;
+  var MAX_DYNAMIC_AUDIO_CACHE = 8;
   var ANALYSER_SIZE = 2048;
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
@@ -537,6 +982,18 @@
     const basePath = `./assets/voices/scenarios/${safeNamespace}/${safeSpeaker}/${safeVoiceId}`;
     return [`${basePath}.wav`, `${basePath}.mp3`];
   }
+  function stableStringify(value) {
+    if (Array.isArray(value)) {
+      return `[${value.map((item) => stableStringify(item)).join(",")}]`;
+    }
+    if (value && typeof value === "object") {
+      return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify(value[key])}`).join(",")}}`;
+    }
+    return JSON.stringify(value);
+  }
+  function normalizeProxyBase(base) {
+    return typeof base === "string" ? base.trim().replace(/\/+$/, "") : "";
+  }
   var VoiceController = class {
     constructor() {
       this.audioContext = null;
@@ -544,11 +1001,17 @@
       this.masterGain = null;
       this.currentSource = null;
       this.currentPlaybackToken = 0;
+      this.currentRequestToken = 0;
       this.audioCache = new LRUCache(MAX_AUDIO_CACHE);
+      this.dynamicAudioCache = new LRUCache(MAX_DYNAMIC_AUDIO_CACHE);
       this.levelData = new Float32Array(ANALYSER_SIZE);
       this.muted = false;
       this.speechSynthesisActive = false;
       this.speechSynthesisStartedAt = 0;
+      this.proxyBase = "";
+    }
+    setProxyBase(base) {
+      this.proxyBase = normalizeProxyBase(base);
     }
     async ensureAudioContext() {
       if (this.audioContext) {
@@ -581,8 +1044,7 @@
         this.stopCurrent();
       }
     }
-    stopCurrent() {
-      this.currentPlaybackToken += 1;
+    stopPlayback() {
       if (this.currentSource) {
         try {
           this.currentSource.stop();
@@ -600,6 +1062,16 @@
         window.speechSynthesis.cancel();
       }
       this.speechSynthesisActive = false;
+    }
+    stopCurrent() {
+      this.currentRequestToken += 1;
+      this.currentPlaybackToken += 1;
+      this.stopPlayback();
+    }
+    beginRequest() {
+      this.currentRequestToken += 1;
+      this.stopPlayback();
+      return this.currentRequestToken;
     }
     getLevel() {
       if (this.speechSynthesisActive) {
@@ -660,65 +1132,179 @@
       this.audioCache.set(cacheKey, resolved);
       return resolved;
     }
-    async playStep(scenario, step) {
-      if (this.muted || !step.voiceId) {
-        return false;
+    getProxyEndpoint() {
+      return this.proxyBase ? `${this.proxyBase}/api/tts` : "";
+    }
+    async fetchProxyTtsBuffer(text, voiceConfig) {
+      const endpoint = this.getProxyEndpoint();
+      if (!endpoint) {
+        return null;
       }
-      const buffer = await this.resolveAudioBuffer(
-        scenario.audioNamespace,
-        step.speaker,
-        step.voiceId
-      );
-      if (!buffer) {
+      await this.ensureAudioContext();
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "audio/*,application/json"
+        },
+        body: JSON.stringify({
+          text,
+          config: voiceConfig
+        })
+      });
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => "");
+        throw new Error(`TTS proxy HTTP ${response.status}: ${errorText}`.trim());
+      }
+      const arrayBuffer = await response.arrayBuffer();
+      if (!arrayBuffer.byteLength) {
+        return null;
+      }
+      return this.audioContext.decodeAudioData(arrayBuffer.slice(0));
+    }
+    async resolveDynamicTtsBuffer(text, voiceConfig) {
+      const normalizedConfig = normalizeVoiceApiConfig(voiceConfig);
+      if (!normalizedConfig || normalizedConfig.provider === "browser") {
+        return null;
+      }
+      const cacheKey = `tts:${normalizedConfig.provider}:${stableStringify(
+        normalizedConfig.settings
+      )}:${text}`;
+      const cached = this.dynamicAudioCache.get(cacheKey);
+      if (cached !== void 0) {
+        return cached;
+      }
+      const pending = this.fetchProxyTtsBuffer(text, normalizedConfig);
+      const eviction = this.dynamicAudioCache.set(cacheKey, pending);
+      if (eviction) {
+        this.dynamicAudioCache.delete(eviction.evictedKey);
+      }
+      const resolved = await pending.catch((error) => {
+        this.dynamicAudioCache.delete(cacheKey);
+        throw error;
+      });
+      this.dynamicAudioCache.set(cacheKey, resolved);
+      return resolved;
+    }
+    async playAudioBuffer(buffer, requestToken, awaitEnd = false) {
+      if (!buffer || requestToken !== this.currentRequestToken) {
         return false;
       }
       await this.unlock();
-      this.stopCurrent();
-      const playbackToken = this.currentPlaybackToken;
-      const source = this.audioContext.createBufferSource();
-      source.buffer = buffer;
-      source.connect(this.masterGain);
-      source.onended = () => {
-        if (playbackToken === this.currentPlaybackToken && this.currentSource === source) {
-          this.currentSource = null;
-        }
-      };
-      source.start(0);
-      this.currentSource = source;
-      return true;
-    }
-    async speakText(text, options = {}) {
-      if (this.muted || !String(text || "").trim()) {
+      if (requestToken !== this.currentRequestToken) {
         return false;
       }
+      return new Promise((resolve) => {
+        const playbackToken = ++this.currentPlaybackToken;
+        const source = this.audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(this.masterGain);
+        source.onended = () => {
+          if (playbackToken === this.currentPlaybackToken && this.currentSource === source) {
+            this.currentSource = null;
+          }
+          resolve(true);
+        };
+        this.currentSource = source;
+        source.start(0);
+        if (!awaitEnd) {
+          resolve(true);
+        }
+      });
+    }
+    async playStep(scenario, step, options = {}) {
+      if (this.muted) {
+        return false;
+      }
+      const requestToken = this.beginRequest();
+      const voiceConfig = normalizeVoiceApiConfig(options.voiceConfig);
+      let buffer = null;
+      if (step.voiceId) {
+        buffer = await this.resolveAudioBuffer(scenario.audioNamespace, step.speaker, step.voiceId);
+      }
+      if (requestToken !== this.currentRequestToken) {
+        return false;
+      }
+      if (buffer) {
+        return this.playAudioBuffer(buffer, requestToken, false);
+      }
+      if (voiceConfig) {
+        return this.speakText(step.text, {
+          lang: "ja-JP",
+          voiceConfig,
+          allowBrowserFallback: voiceConfig.provider === "browser"
+        });
+      }
+      return false;
+    }
+    async speakWithSpeechSynthesis(text, options = {}) {
       if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
         return false;
       }
-      this.stopCurrent();
+      const requestToken = this.beginRequest();
       const utterance = new SpeechSynthesisUtterance(String(text).trim());
       utterance.lang = options.lang || "ja-JP";
       utterance.rate = Number.isFinite(options.rate) ? options.rate : 1;
       utterance.pitch = Number.isFinite(options.pitch) ? options.pitch : 1;
       const voices = window.speechSynthesis.getVoices?.() || [];
-      const preferredVoice = voices.find((voice) => voice.lang?.toLowerCase().startsWith("ja")) || voices[0];
+      const preferredVoice = voices.find((voice) => voice.lang?.toLowerCase().startsWith(utterance.lang.toLowerCase())) || voices.find((voice) => voice.lang?.toLowerCase().startsWith("ja")) || voices[0];
       if (preferredVoice) {
         utterance.voice = preferredVoice;
       }
       return new Promise((resolve) => {
         utterance.onstart = () => {
+          if (requestToken !== this.currentRequestToken) {
+            return;
+          }
           this.speechSynthesisActive = true;
           this.speechSynthesisStartedAt = performance.now();
         };
         utterance.onend = () => {
-          this.speechSynthesisActive = false;
-          resolve(true);
+          if (requestToken === this.currentRequestToken) {
+            this.speechSynthesisActive = false;
+          }
+          resolve(requestToken === this.currentRequestToken);
         };
         utterance.onerror = (error) => {
           console.warn("speech synthesis error:", error);
-          this.speechSynthesisActive = false;
+          if (requestToken === this.currentRequestToken) {
+            this.speechSynthesisActive = false;
+          }
           resolve(false);
         };
         window.speechSynthesis.speak(utterance);
+      });
+    }
+    async speakText(text, options = {}) {
+      const trimmedText = String(text || "").trim();
+      if (this.muted || !trimmedText) {
+        return false;
+      }
+      const voiceConfig = normalizeVoiceApiConfig(options.voiceConfig);
+      if (voiceConfig && voiceConfig.provider !== "browser") {
+        const requestToken = this.beginRequest();
+        try {
+          const buffer = await this.resolveDynamicTtsBuffer(trimmedText, voiceConfig);
+          if (requestToken !== this.currentRequestToken) {
+            return false;
+          }
+          if (buffer) {
+            return this.playAudioBuffer(buffer, requestToken, true);
+          }
+        } catch (error) {
+          console.warn("proxy tts failed:", error);
+        }
+        if (!options.allowBrowserFallback) {
+          if (isProxyVoiceApiProvider(voiceConfig.provider) && !this.getProxyEndpoint()) {
+            console.warn("proxy tts skipped: /api/tts is not configured");
+          }
+          return false;
+        }
+      }
+      return this.speakWithSpeechSynthesis(trimmedText, {
+        lang: voiceConfig?.settings?.lang || options.lang || "ja-JP",
+        rate: Number.isFinite(voiceConfig?.settings?.rate) ? voiceConfig.settings.rate : options.rate,
+        pitch: Number.isFinite(voiceConfig?.settings?.pitch) ? voiceConfig.settings.pitch : options.pitch
       });
     }
     async prefetchSteps(scenario, steps) {
@@ -733,8 +1319,9 @@
 
   // src/galge-runtime/vrm-asset-store.js
   var DB_NAME = "waddyGalgeAssets";
-  var DB_VERSION = 1;
+  var DB_VERSION = 2;
   var SPEAKER_STORE = "speakerModels";
+  var SPEAKER_VOICE_STORE = "speakerVoiceConfigs";
   var META_STORE = "appMeta";
   var SHARED_FALLBACK_KEY = "sharedFallbackModel";
   function promisifyRequest(request) {
@@ -768,6 +1355,9 @@
             if (!db.objectStoreNames.contains(SPEAKER_STORE)) {
               db.createObjectStore(SPEAKER_STORE, { keyPath: "speakerKey" });
             }
+            if (!db.objectStoreNames.contains(SPEAKER_VOICE_STORE)) {
+              db.createObjectStore(SPEAKER_VOICE_STORE, { keyPath: "speakerKey" });
+            }
             if (!db.objectStoreNames.contains(META_STORE)) {
               db.createObjectStore(META_STORE, { keyPath: "key" });
             }
@@ -789,6 +1379,53 @@
         speakerKeys.map(async (speakerKey) => [speakerKey, await this.getSpeakerModel(speakerKey)])
       );
       return Object.fromEntries(pairs);
+    }
+    async getSpeakerVoiceConfig(speakerKey) {
+      const db = await this.open();
+      const tx = db.transaction(SPEAKER_VOICE_STORE, "readonly");
+      const store = tx.objectStore(SPEAKER_VOICE_STORE);
+      const record = await promisifyRequest(store.get(speakerKey));
+      if (!record) {
+        return null;
+      }
+      const config = normalizeVoiceApiConfig(record);
+      return config ? {
+        speakerKey,
+        ...config,
+        updatedAt: record.updatedAt || 0
+      } : null;
+    }
+    async getSpeakerVoiceConfigs(speakerKeys) {
+      const pairs = await Promise.all(
+        speakerKeys.map(async (speakerKey) => [
+          speakerKey,
+          await this.getSpeakerVoiceConfig(speakerKey)
+        ])
+      );
+      return Object.fromEntries(pairs);
+    }
+    async saveSpeakerVoiceConfig(speakerKey, config) {
+      const normalized = normalizeVoiceApiConfig(config);
+      if (!normalized) {
+        return null;
+      }
+      const record = {
+        speakerKey,
+        provider: normalized.provider,
+        settings: normalized.settings,
+        updatedAt: Date.now()
+      };
+      const db = await this.open();
+      await withTransaction(db, [SPEAKER_VOICE_STORE], "readwrite", (tx) => {
+        tx.objectStore(SPEAKER_VOICE_STORE).put(record);
+      });
+      return record;
+    }
+    async deleteSpeakerVoiceConfig(speakerKey) {
+      const db = await this.open();
+      await withTransaction(db, [SPEAKER_VOICE_STORE], "readwrite", (tx) => {
+        tx.objectStore(SPEAKER_VOICE_STORE).delete(speakerKey);
+      });
     }
     async saveSpeakerModel(speakerKey, file) {
       const db = await this.open();
@@ -31812,6 +32449,9 @@ void main() {
         },
         onSummaryChange: (summary) => {
           this.updateModelSummary(summary);
+        },
+        onVoiceTest: async ({ speakerKey, speakerLabel, config }) => {
+          await this.playVoiceTest(speakerKey, speakerLabel, config);
         }
       });
       this.messageApiReceiver = new MessageApiReceiver({
@@ -31882,6 +32522,9 @@ void main() {
       const text = `モデル設定済み ${summary.dedicatedCount} / ${summary.relevantCount}`;
       this.$titleModelSummary.textContent = text;
       this.$miniModelSummary.textContent = text;
+    }
+    async getSpeakerVoiceConfig(speakerKey) {
+      return this.assetStore.getSpeakerVoiceConfig(speakerKey);
     }
     bindEvents() {
       this.$modeToggle.addEventListener("click", (event) => {
@@ -31967,12 +32610,22 @@ void main() {
       this.updateVoiceToggle();
     }
     updateMessageApiUI({ message, clientId, apiBase, configured }) {
+      this.voiceController.setProxyBase(apiBase);
       const clientLabel = `API client: ${clientId}`;
       const statusLabel = configured ? `${message}${apiBase ? ` (${apiBase})` : ""}` : "発話API 未設定 (?messageApiBase=http://127.0.0.1:8182)";
       this.$titleApiClientId.textContent = clientLabel;
       this.$apiClientId.textContent = clientLabel;
       this.$titleApiStatus.textContent = statusLabel;
       this.$apiStatus.textContent = statusLabel;
+    }
+    async playVoiceTest(speakerKey, speakerLabel, config) {
+      const text = `${speakerLabel}の音声テストです。`;
+      await this.voiceController.speakText(text, {
+        lang: "ja-JP",
+        voiceConfig: config,
+        speakerKey,
+        allowBrowserFallback: true
+      });
     }
     initCanvas() {
       this.$canvas.width = window.innerWidth;
@@ -32046,14 +32699,13 @@ void main() {
         crimson: { h: 0, s: 60, l: 10, clear: "rgba(30,5,10,0.16)" },
         abyss: { h: 240, s: 20, l: 3, clear: "rgba(3,3,10,0.20)" },
         dawn: { h: 30, s: 50, l: 18, clear: "rgba(30,15,8,0.12)" },
+        station: { h: 35, s: 40, l: 14, clear: "rgba(20,12,8,0.14)" },
+        station_night: { h: 220, s: 35, l: 8, clear: "rgba(6,8,22,0.16)" },
+        akihabara: { h: 280, s: 50, l: 12, clear: "rgba(18,8,30,0.14)" },
         default: { h: 240, s: 50, l: 12, clear: "rgba(10,10,46,0.15)" }
       };
-      let preset = null;
-      if (typeof bg === "string") {
-        preset = presets[bg] || presets.default;
-      } else {
-        preset = presets[bg.preset] || presets.default;
-      }
+      const bgKey = typeof bg === "string" ? bg : bg.preset || "default";
+      const preset = presets[bgKey] || presets.default;
       this.bgColor = { h: preset.h, s: preset.s, l: preset.l };
       this.bgClearColor = preset.clear;
       for (const nebula of this.kNebula) {
@@ -32066,6 +32718,45 @@ void main() {
         stream.hue = Math.floor(Math.random() * 60 + this.bgColor.h - 30);
       }
       document.body.style.background = `linear-gradient(180deg, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 0%, hsl(${this.bgColor.h},${this.bgColor.s}%,${Math.max(1, this.bgColor.l - 5)}%) 50%, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 100%)`;
+      const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
+      const imgPath = `./scenarios/bg/${bgImageKey}.jpg`;
+      this._showBgImage(imgPath);
+    }
+    _showBgImage(src) {
+      let el = document.getElementById("scene-bg-img");
+      if (!el) {
+        el = document.createElement("img");
+        el.id = "scene-bg-img";
+        Object.assign(el.style, {
+          position: "fixed",
+          inset: "0",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: "1",
+          pointerEvents: "none",
+          opacity: "0",
+          transition: "opacity 0.8s ease"
+        });
+        document.body.insertBefore(el, document.body.firstChild);
+      }
+      if (el.dataset.currentSrc === src) {
+        return;
+      }
+      el.style.opacity = "0";
+      const img = new Image();
+      img.onload = () => {
+        el.src = src;
+        el.dataset.currentSrc = src;
+        requestAnimationFrame(() => {
+          el.style.opacity = "0.55";
+        });
+      };
+      img.onerror = () => {
+        el.style.opacity = "0";
+        el.dataset.currentSrc = "";
+      };
+      img.src = src;
     }
     setMode(mode) {
       this.currentMode = mode;
@@ -32321,7 +33012,8 @@ void main() {
       }
       this.voiceController.stopCurrent();
       this.voiceController.prefetchSteps(this.scenario, this.collectPrefetchSteps(index)).catch(() => null);
-      this.voiceController.playStep(this.scenario, step).catch((error) => {
+      const voiceConfig = await this.getSpeakerVoiceConfig(step.speaker);
+      this.voiceController.playStep(this.scenario, step, { voiceConfig }).catch((error) => {
         console.warn("voice playback failed:", error);
       });
       this.$textContent.classList.add("text-fade-out");
@@ -32411,7 +33103,13 @@ void main() {
           this.$textContent.style.color = "";
         }
       }
-      await this.voiceController.speakText(text, { lang: "ja-JP" });
+      const voiceConfig = await this.getSpeakerVoiceConfig(speaker);
+      await this.voiceController.speakText(text, {
+        lang: "ja-JP",
+        voiceConfig,
+        speakerKey: speaker,
+        allowBrowserFallback: true
+      });
       if (snapshot && this.started && this.currentStep === snapshot.stepIndex && this.renderToken === snapshot.renderToken && !this.showingChoice) {
         this.restoreTextWindowSnapshot(snapshot);
         await this.refreshCurrentStage(null);

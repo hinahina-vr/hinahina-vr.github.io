@@ -1,6 +1,9 @@
 const DB_NAME = "waddyGalgeAssets";
-const DB_VERSION = 1;
+import { normalizeVoiceApiConfig } from "./voice-api-config.js";
+
+const DB_VERSION = 2;
 const SPEAKER_STORE = "speakerModels";
+const SPEAKER_VOICE_STORE = "speakerVoiceConfigs";
 const META_STORE = "appMeta";
 const SHARED_FALLBACK_KEY = "sharedFallbackModel";
 
@@ -39,6 +42,9 @@ export class VRMAssetStore {
           if (!db.objectStoreNames.contains(SPEAKER_STORE)) {
             db.createObjectStore(SPEAKER_STORE, { keyPath: "speakerKey" });
           }
+          if (!db.objectStoreNames.contains(SPEAKER_VOICE_STORE)) {
+            db.createObjectStore(SPEAKER_VOICE_STORE, { keyPath: "speakerKey" });
+          }
           if (!db.objectStoreNames.contains(META_STORE)) {
             db.createObjectStore(META_STORE, { keyPath: "key" });
           }
@@ -63,6 +69,62 @@ export class VRMAssetStore {
       speakerKeys.map(async (speakerKey) => [speakerKey, await this.getSpeakerModel(speakerKey)])
     );
     return Object.fromEntries(pairs);
+  }
+
+  async getSpeakerVoiceConfig(speakerKey) {
+    const db = await this.open();
+    const tx = db.transaction(SPEAKER_VOICE_STORE, "readonly");
+    const store = tx.objectStore(SPEAKER_VOICE_STORE);
+    const record = await promisifyRequest(store.get(speakerKey));
+    if (!record) {
+      return null;
+    }
+    const config = normalizeVoiceApiConfig(record);
+    return config
+      ? {
+          speakerKey,
+          ...config,
+          updatedAt: record.updatedAt || 0,
+        }
+      : null;
+  }
+
+  async getSpeakerVoiceConfigs(speakerKeys) {
+    const pairs = await Promise.all(
+      speakerKeys.map(async (speakerKey) => [
+        speakerKey,
+        await this.getSpeakerVoiceConfig(speakerKey),
+      ])
+    );
+    return Object.fromEntries(pairs);
+  }
+
+  async saveSpeakerVoiceConfig(speakerKey, config) {
+    const normalized = normalizeVoiceApiConfig(config);
+    if (!normalized) {
+      return null;
+    }
+
+    const record = {
+      speakerKey,
+      provider: normalized.provider,
+      settings: normalized.settings,
+      updatedAt: Date.now(),
+    };
+
+    const db = await this.open();
+    await withTransaction(db, [SPEAKER_VOICE_STORE], "readwrite", (tx) => {
+      tx.objectStore(SPEAKER_VOICE_STORE).put(record);
+    });
+
+    return record;
+  }
+
+  async deleteSpeakerVoiceConfig(speakerKey) {
+    const db = await this.open();
+    await withTransaction(db, [SPEAKER_VOICE_STORE], "readwrite", (tx) => {
+      tx.objectStore(SPEAKER_VOICE_STORE).delete(speakerKey);
+    });
   }
 
   async saveSpeakerModel(speakerKey, file) {

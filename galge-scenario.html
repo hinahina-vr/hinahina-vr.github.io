@@ -27,7 +27,7 @@
           linear-gradient(180deg, #110818 0%, #050309 52%, #110818 100%);
         color: #ece7ff;
       }
-      button, input { font: inherit; }
+      button, input, select, textarea { font: inherit; }
       [hidden] { display: none !important; }
 
       #loading {
@@ -530,6 +530,12 @@
         gap: 16px;
         align-items: baseline;
       }
+      .settings-row-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px 14px;
+      }
       .settings-row-title {
         font-weight: 700;
         letter-spacing: 0.08em;
@@ -544,6 +550,28 @@
         flex-wrap: wrap;
         gap: 10px;
         margin-top: 14px;
+      }
+      .settings-voice-section {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .settings-section-heading {
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .settings-provider-note {
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .settings-field-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
       }
       .settings-btn {
         padding: 10px 14px;
@@ -577,6 +605,26 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         background: rgba(5, 5, 10, 0.6);
         color: inherit;
+      }
+      .settings-inline-field select,
+      .settings-inline-field textarea {
+        width: 100%;
+        min-width: 140px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(5, 5, 10, 0.6);
+        color: inherit;
+      }
+      .settings-inline-field.is-block {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .settings-inline-field.is-block textarea {
+        width: 100%;
+        min-height: 84px;
+        resize: vertical;
       }
       .settings-fallback-actions {
         display: flex;

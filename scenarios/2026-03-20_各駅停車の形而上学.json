@@ -265,7 +265,7 @@
     ]},
 
     { "label": "route_last_train" },
-    { "bg": "station" },
+    { "bg": "station_night" },
 
     { "speaker": "narrator", "expression": "",
       "text": "駅に戻る。\n夜のプラットホーム。各駅停車がまだ走っている。\n終電にはまだ少し早い。" },

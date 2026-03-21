@@ -81,6 +81,9 @@ class GalgeRuntimeApp {
       onSummaryChange: (summary) => {
         this.updateModelSummary(summary);
       },
+      onVoiceTest: async ({ speakerKey, speakerLabel, config }) => {
+        await this.playVoiceTest(speakerKey, speakerLabel, config);
+      },
     });
 
     this.messageApiReceiver = new MessageApiReceiver({
@@ -156,6 +159,10 @@ class GalgeRuntimeApp {
     const text = `モデル設定済み ${summary.dedicatedCount} / ${summary.relevantCount}`;
     this.$titleModelSummary.textContent = text;
     this.$miniModelSummary.textContent = text;
+  }
+
+  async getSpeakerVoiceConfig(speakerKey) {
+    return this.assetStore.getSpeakerVoiceConfig(speakerKey);
   }
 
   bindEvents() {
@@ -265,6 +272,7 @@ class GalgeRuntimeApp {
   }
 
   updateMessageApiUI({ message, clientId, apiBase, configured }) {
+    this.voiceController.setProxyBase(apiBase);
     const clientLabel = `API client: ${clientId}`;
     const statusLabel = configured
       ? `${message}${apiBase ? ` (${apiBase})` : ""}`
@@ -273,6 +281,16 @@ class GalgeRuntimeApp {
     this.$apiClientId.textContent = clientLabel;
     this.$titleApiStatus.textContent = statusLabel;
     this.$apiStatus.textContent = statusLabel;
+  }
+
+  async playVoiceTest(speakerKey, speakerLabel, config) {
+    const text = `${speakerLabel}の音声テストです。`;
+    await this.voiceController.speakText(text, {
+      lang: "ja-JP",
+      voiceConfig: config,
+      speakerKey,
+      allowBrowserFallback: true,
+    });
   }
 
   initCanvas() {
@@ -468,15 +486,14 @@ class GalgeRuntimeApp {
       crimson: { h: 0, s: 60, l: 10, clear: "rgba(30,5,10,0.16)" },
       abyss: { h: 240, s: 20, l: 3, clear: "rgba(3,3,10,0.20)" },
       dawn: { h: 30, s: 50, l: 18, clear: "rgba(30,15,8,0.12)" },
+      station: { h: 35, s: 40, l: 14, clear: "rgba(20,12,8,0.14)" },
+      station_night: { h: 220, s: 35, l: 8, clear: "rgba(6,8,22,0.16)" },
+      akihabara: { h: 280, s: 50, l: 12, clear: "rgba(18,8,30,0.14)" },
       default: { h: 240, s: 50, l: 12, clear: "rgba(10,10,46,0.15)" },
     };
 
-    let preset = null;
-    if (typeof bg === "string") {
-      preset = presets[bg] || presets.default;
-    } else {
-      preset = presets[bg.preset] || presets.default;
-    }
+    const bgKey = typeof bg === "string" ? bg : (bg.preset || "default");
+    const preset = presets[bgKey] || presets.default;
 
     this.bgColor = { h: preset.h, s: preset.s, l: preset.l };
     this.bgClearColor = preset.clear;
@@ -491,6 +508,52 @@ class GalgeRuntimeApp {
     }
 
     document.body.style.background = `linear-gradient(180deg, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 0%, hsl(${this.bgColor.h},${this.bgColor.s}%,${Math.max(1, this.bgColor.l - 5)}%) 50%, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 100%)`;
+
+    // Background image support
+    const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
+    const imgPath = `./scenarios/bg/${bgImageKey}.jpg`;
+    this._showBgImage(imgPath);
+  }
+
+  _showBgImage(src) {
+    let el = document.getElementById("scene-bg-img");
+    if (!el) {
+      el = document.createElement("img");
+      el.id = "scene-bg-img";
+      Object.assign(el.style, {
+        position: "fixed",
+        inset: "0",
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        zIndex: "1",
+        pointerEvents: "none",
+        opacity: "0",
+        transition: "opacity 0.8s ease",
+      });
+      document.body.insertBefore(el, document.body.firstChild);
+    }
+
+    if (el.dataset.currentSrc === src) {
+      return;
+    }
+
+    // Fade out, swap, fade in
+    el.style.opacity = "0";
+    const img = new Image();
+    img.onload = () => {
+      el.src = src;
+      el.dataset.currentSrc = src;
+      requestAnimationFrame(() => {
+        el.style.opacity = "0.55";
+      });
+    };
+    img.onerror = () => {
+      // No bg image for this scene — hide it
+      el.style.opacity = "0";
+      el.dataset.currentSrc = "";
+    };
+    img.src = src;
   }
 
   setMode(mode) {
@@ -775,7 +838,8 @@ class GalgeRuntimeApp {
 
     this.voiceController.stopCurrent();
     this.voiceController.prefetchSteps(this.scenario, this.collectPrefetchSteps(index)).catch(() => null);
-    this.voiceController.playStep(this.scenario, step).catch((error) => {
+    const voiceConfig = await this.getSpeakerVoiceConfig(step.speaker);
+    this.voiceController.playStep(this.scenario, step, { voiceConfig }).catch((error) => {
       console.warn("voice playback failed:", error);
     });
 
@@ -879,7 +943,13 @@ class GalgeRuntimeApp {
       }
     }
 
-    await this.voiceController.speakText(text, { lang: "ja-JP" });
+    const voiceConfig = await this.getSpeakerVoiceConfig(speaker);
+    await this.voiceController.speakText(text, {
+      lang: "ja-JP",
+      voiceConfig,
+      speakerKey: speaker,
+      allowBrowserFallback: true,
+    });
 
     if (
       snapshot &&

@@ -1,3 +1,11 @@
+import {
+  createDefaultVoiceApiConfig,
+  getVoiceApiProviderDefinition,
+  getVoiceApiProviderDefinitions,
+  getVoiceApiStatusLabel,
+  isProxyVoiceApiProvider,
+} from "./voice-api-config.js";
+
 function formatSpeakerLabel(speakerKey, charData) {
   if (!charData) {
     return speakerKey;
@@ -21,6 +29,7 @@ export class SettingsPanel {
     backdrop,
     onModelChange,
     onSummaryChange,
+    onVoiceTest,
   }) {
     this.assetStore = assetStore;
     this.modal = modal;
@@ -32,6 +41,7 @@ export class SettingsPanel {
     this.backdrop = backdrop;
     this.onModelChange = onModelChange;
     this.onSummaryChange = onSummaryChange;
+    this.onVoiceTest = onVoiceTest;
     this.scenario = null;
 
     this.closeButton.addEventListener("click", () => this.close());
@@ -80,6 +90,7 @@ export class SettingsPanel {
     const speakerKeys = Object.keys(chars);
     const nonNarratorKeys = speakerKeys.filter((speakerKey) => speakerKey !== "narrator");
     const modelRecords = await this.assetStore.getSpeakerModels(speakerKeys);
+    const voiceConfigs = await this.assetStore.getSpeakerVoiceConfigs(speakerKeys);
     const fallbackRecord = await this.assetStore.getSharedFallbackModel();
     const dedicatedCount = nonNarratorKeys.filter((speakerKey) => Boolean(modelRecords[speakerKey])).length;
 
@@ -111,12 +122,21 @@ export class SettingsPanel {
       title.className = "settings-row-title";
       title.textContent = formatSpeakerLabel(speakerKey, charData);
 
+      const statusGroup = document.createElement("div");
+      statusGroup.className = "settings-row-meta";
+
       const status = document.createElement("span");
       status.className = `settings-row-status${record ? " has-model" : ""}`;
       status.textContent = formatStatus(record);
 
+      const voiceStatus = document.createElement("span");
+      voiceStatus.className = `settings-row-status${voiceConfigs[speakerKey] ? " has-model" : ""}`;
+      voiceStatus.textContent = `音声API: ${getVoiceApiStatusLabel(voiceConfigs[speakerKey])}`;
+
       header.appendChild(title);
-      header.appendChild(status);
+      statusGroup.appendChild(status);
+      statusGroup.appendChild(voiceStatus);
+      header.appendChild(statusGroup);
 
       const controls = document.createElement("div");
       controls.className = "settings-row-controls";
@@ -215,6 +235,146 @@ export class SettingsPanel {
       row.appendChild(header);
       row.appendChild(controls);
       row.appendChild(input);
+
+      const voiceSection = document.createElement("div");
+      voiceSection.className = "settings-voice-section";
+
+      const voiceHeading = document.createElement("div");
+      voiceHeading.className = "settings-section-heading";
+      voiceHeading.textContent = "音声出力API";
+
+      const activeVoiceConfig = voiceConfigs[speakerKey] || null;
+      const activeProvider = getVoiceApiProviderDefinition(activeVoiceConfig?.provider || "browser");
+
+      const voiceControls = document.createElement("div");
+      voiceControls.className = "settings-row-controls";
+
+      const providerLabel = document.createElement("label");
+      providerLabel.className = "settings-inline-field";
+      providerLabel.textContent = "provider";
+
+      const providerSelect = document.createElement("select");
+      providerSelect.dataset.speakerVoiceProvider = speakerKey;
+      for (const provider of getVoiceApiProviderDefinitions()) {
+        const option = document.createElement("option");
+        option.value = provider.key;
+        option.textContent = provider.label;
+        option.selected = provider.key === activeProvider.key;
+        providerSelect.appendChild(option);
+      }
+      providerSelect.addEventListener("change", async () => {
+        await this.assetStore.saveSpeakerVoiceConfig(
+          speakerKey,
+          createDefaultVoiceApiConfig(providerSelect.value)
+        );
+        await this.render();
+      });
+      providerLabel.appendChild(providerSelect);
+      voiceControls.appendChild(providerLabel);
+
+      const testButton = document.createElement("button");
+      testButton.type = "button";
+      testButton.className = "settings-btn secondary";
+      testButton.textContent = "音声テスト";
+      testButton.addEventListener("click", async () => {
+        const config =
+          (await this.assetStore.getSpeakerVoiceConfig(speakerKey)) ||
+          createDefaultVoiceApiConfig(providerSelect.value);
+        await this.onVoiceTest?.({
+          speakerKey,
+          speakerLabel: formatSpeakerLabel(speakerKey, charData),
+          config,
+        });
+      });
+      voiceControls.appendChild(testButton);
+
+      const clearVoiceButton = document.createElement("button");
+      clearVoiceButton.type = "button";
+      clearVoiceButton.className = "settings-btn secondary";
+      clearVoiceButton.textContent = "音声設定削除";
+      clearVoiceButton.disabled = !activeVoiceConfig;
+      clearVoiceButton.addEventListener("click", async () => {
+        await this.assetStore.deleteSpeakerVoiceConfig(speakerKey);
+        await this.render();
+      });
+      voiceControls.appendChild(clearVoiceButton);
+
+      voiceSection.appendChild(voiceHeading);
+      voiceSection.appendChild(voiceControls);
+
+      const providerNote = document.createElement("p");
+      providerNote.className = "settings-provider-note";
+      providerNote.textContent = isProxyVoiceApiProvider(activeProvider.key)
+        ? "OpenAI / Azure / VOICEVOX はローカルの /api/tts プロキシ経由で発話します。"
+        : "Browser TTS はこのブラウザの speechSynthesis を使います。";
+      voiceSection.appendChild(providerNote);
+
+      const providerFields = document.createElement("div");
+      providerFields.className = "settings-field-grid";
+
+      const sourceConfig = activeVoiceConfig || createDefaultVoiceApiConfig(activeProvider.key);
+      for (const field of activeProvider.fields) {
+        const fieldLabel = document.createElement("label");
+        fieldLabel.className = `settings-inline-field${
+          field.type === "textarea" ? " is-block" : ""
+        }`;
+        fieldLabel.textContent = field.label;
+
+        let fieldInput = null;
+        if (field.type === "select") {
+          fieldInput = document.createElement("select");
+          for (const optionDef of field.options || []) {
+            const option = document.createElement("option");
+            option.value = optionDef.value;
+            option.textContent = optionDef.label;
+            option.selected = optionDef.value === sourceConfig.settings[field.key];
+            fieldInput.appendChild(option);
+          }
+        } else if (field.type === "textarea") {
+          fieldInput = document.createElement("textarea");
+          fieldInput.rows = 3;
+          fieldInput.value = String(sourceConfig.settings[field.key] ?? "");
+        } else {
+          fieldInput = document.createElement("input");
+          fieldInput.type = field.type;
+          fieldInput.value = String(sourceConfig.settings[field.key] ?? "");
+          if (field.min !== undefined) {
+            fieldInput.min = String(field.min);
+          }
+          if (field.max !== undefined) {
+            fieldInput.max = String(field.max);
+          }
+          if (field.step !== undefined) {
+            fieldInput.step = String(field.step);
+          }
+        }
+
+        if (field.placeholder) {
+          fieldInput.placeholder = field.placeholder;
+        }
+        fieldInput.dataset.speakerVoiceField = `${speakerKey}:${field.key}`;
+        fieldInput.addEventListener("change", async () => {
+          const current =
+            (await this.assetStore.getSpeakerVoiceConfig(speakerKey)) ||
+            createDefaultVoiceApiConfig(activeProvider.key);
+          const nextSettings = {
+            ...current.settings,
+            [field.key]:
+              field.type === "number" ? Number(fieldInput.value) : String(fieldInput.value),
+          };
+          await this.assetStore.saveSpeakerVoiceConfig(speakerKey, {
+            provider: activeProvider.key,
+            settings: nextSettings,
+          });
+          await this.render();
+        });
+
+        fieldLabel.appendChild(fieldInput);
+        providerFields.appendChild(fieldLabel);
+      }
+
+      voiceSection.appendChild(providerFields);
+      row.appendChild(voiceSection);
       this.list.appendChild(row);
     }
 
