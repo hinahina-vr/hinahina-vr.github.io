@@ -30,6 +30,18 @@
       button, input, select, textarea { font: inherit; }
       [hidden] { display: none !important; }
 
+      /* 不要なUI要素を非表示化する用 */
+      #runtime-warning,
+      #title-api-status,
+      #title-model-summary,
+      #title-api-client-id,
+      #mini-model-summary,
+      #api-client-id,
+      #api-status {
+        display: none !important;
+      }
+
+
       #loading {
         position: fixed;
         inset: 0;
