@@ -1156,6 +1156,58 @@
       </section>
     </div>
 
+    <script>
+      // バンドル読み込みに依存しないモード切替ロジック
+      document.addEventListener("DOMContentLoaded", function () {
+        var IMMERSIVE = "mode-immersive";
+        var CLASSIC   = "mode-classic";
+
+        function getCurrentMode() {
+          return document.body.classList.contains(CLASSIC) ? "classic" : "immersive";
+        }
+
+        function toggleMode() {
+          var next = getCurrentMode() === "immersive" ? "classic" : "immersive";
+          document.body.classList.remove(IMMERSIVE, CLASSIC);
+          document.body.classList.add("mode-" + next);
+
+          // 全てのモード切替ボタンのアイコンを更新
+          var icon = next === "immersive" ? "🌙" : "🖥️";
+          document.querySelectorAll("#mode-toggle .btn-icon, #title-mode-toggle-btn .btn-icon").forEach(function (el) {
+            el.textContent = icon;
+          });
+
+          // PC98フレームの表示切替
+          var frame = document.querySelector(".pc98-frame");
+          var canvas = document.getElementById("particle-canvas");
+          var pc98bg = document.querySelector(".pc98-bg");
+          if (next === "classic") {
+            if (!frame) {
+              frame = document.createElement("div");
+              frame.className = "pc98-frame";
+              document.body.appendChild(frame);
+            }
+            frame.style.display = "block";
+            if (canvas) canvas.style.display = "none";
+            if (pc98bg) pc98bg.style.display = "block";
+          } else {
+            if (frame) frame.style.display = "none";
+            if (canvas) canvas.style.display = "block";
+            if (pc98bg) pc98bg.style.display = "none";
+          }
+        }
+
+        document.getElementById("mode-toggle") && document.getElementById("mode-toggle").addEventListener("click", function (e) {
+          e.stopPropagation();
+          toggleMode();
+        });
+        document.getElementById("title-mode-toggle-btn") && document.getElementById("title-mode-toggle-btn").addEventListener("click", function (e) {
+          e.stopPropagation();
+          toggleMode();
+        });
+      });
+    </script>
     <script src="./assets/galge-runtime.bundle.js" defer></script>
+
   </body>
 </html>
