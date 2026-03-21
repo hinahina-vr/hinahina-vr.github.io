@@ -153,7 +153,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
     };
   });
 
-  await page.route(`${messageApiBase}/api/tts`, async (route) => {
+  await page.route("**/api/tts*", async (route) => {
     if (route.request().method() === "OPTIONS") {
       await route.fulfill({
         status: 204,
@@ -286,7 +286,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
       track: "test-theme",
       volume: 0.3,
     };
-    await app.showStep(app.currentStep);
+    app.syncBgmForIndex(app.currentStep);
   });
   await page.waitForTimeout(300);
   let bgmPlayCount = await page.evaluate(() => window.__bgmEvents.plays.length);
@@ -320,6 +320,7 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   assert(directSendResponse.status === 201, `direct_send API accepts messages (got: ${directSendResponse.status})`);
   const apiMessageShown = await waitForApiMessage(page, "APIからの発話テストです。", 6000);
   assert(apiMessageShown, "page speaks text received from message API");
+  await page.waitForTimeout(800);
   assert(
     proxyTtsRequests.some(
       (payload) =>

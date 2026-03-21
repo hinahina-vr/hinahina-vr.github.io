@@ -1170,7 +1170,7 @@
       this.audioCache = new LRUCache(MAX_AUDIO_CACHE);
       this.dynamicAudioCache = new LRUCache(MAX_DYNAMIC_AUDIO_CACHE);
       this.levelData = new Float32Array(ANALYSER_SIZE);
-      this.muted = true;
+      this.muted = false;
       this.speechSynthesisActive = false;
       this.speechSynthesisStartedAt = 0;
       this.proxyBase = "";
@@ -33282,6 +33282,10 @@ void main() {
       const text = String(messageData?.message || "").trim();
       if (!text) {
         return;
+      }
+      const currentScenarioStep = this.scenario.steps[this.currentStep];
+      if (this.isTyping && currentScenarioStep?.kind === "text") {
+        this.skipType(currentScenarioStep.text);
       }
       const snapshot = this.started ? this.captureTextWindowSnapshot() : null;
       const speaker = typeof messageData?.speaker === "string" && this.scenario.chars[messageData.speaker] ? messageData.speaker : this.scenario.steps[this.currentStep]?.kind === "text" ? this.scenario.steps[this.currentStep].speaker : "narrator";

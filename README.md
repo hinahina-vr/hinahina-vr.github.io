@@ -43,20 +43,6 @@ npm run build:video-scripts
 
 形式は `realize-video-gen/scripts/examples/sample-script.yaml` 互換の `version/video/avatar/voice/scenes` 構成です。
 
-## YouTube を mp3 で保存
-
-YouTube URL から音声だけを `mp3` で保存できます。初回実行時に `yt-dlp` を `.local/tools/yt-dlp/` へ自動取得し、出力は `.local/youtube-mp3/` に保存します。`ffmpeg` は PATH に入っている前提です。
-
-```bash
-npm run download:youtube-mp3 -- https://www.youtube.com/watch?v=tmaW7w1calE
-```
-
-保存先を変えたいとき:
-
-```bash
-npm run download:youtube-mp3 -- --output-dir .\tmp\music https://www.youtube.com/watch?v=tmaW7w1calE
-```
-
 ## GitHub Pages 公開手順 (ユーザーサイト方式)
 
 1. GitHub で `hinahina-vr.github.io` リポジトリを作成（未作成なら）。  

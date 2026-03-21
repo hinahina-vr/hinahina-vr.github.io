@@ -960,6 +960,11 @@ class GalgeRuntimeApp {
       return;
     }
 
+    const currentScenarioStep = this.scenario.steps[this.currentStep];
+    if (this.isTyping && currentScenarioStep?.kind === "text") {
+      this.skipType(currentScenarioStep.text);
+    }
+
     const snapshot = this.started ? this.captureTextWindowSnapshot() : null;
     const speaker =
       typeof messageData?.speaker === "string" && this.scenario.chars[messageData.speaker]
