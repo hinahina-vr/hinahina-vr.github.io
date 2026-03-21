@@ -249,6 +249,34 @@
         transform: translateY(-1px);
         border-color: rgba(220, 194, 255, 0.42);
       }
+
+      /* クラシックモード（PC98風）のタイトル画面スタイル */
+      body.mode-classic .title-card {
+        background: #000;
+        border: 2px solid #aaa;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      body.mode-classic #title-screen h1,
+      body.mode-classic #title-screen .subtitle,
+      body.mode-classic .title-chip,
+      body.mode-classic .utility-btn,
+      body.mode-classic .settings-btn,
+      body.mode-classic #title-screen .start-btn {
+        font-family: 'PixelMplus12', 'DotGothic16', 'ＭＳ ゴシック', 'MS Gothic', monospace;
+      }
+      body.mode-classic #title-screen h1 {
+        text-shadow: none;
+      }
+      body.mode-classic .title-chip,
+      body.mode-classic .utility-btn,
+      body.mode-classic .settings-btn,
+      body.mode-classic #title-screen .start-btn {
+        border-radius: 0;
+        border: 1px solid #aaa;
+        background: #000;
+        box-shadow: none;
+      }
       #title-screen .start-btn {
         min-width: clamp(240px, 40vw, 320px);
         padding: 18px 36px;

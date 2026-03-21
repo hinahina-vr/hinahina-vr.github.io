@@ -158,7 +158,7 @@ async function main() {
   let totalSections = 0;
 
   for (let i = 0; i < dialogues.length; i++) {
-    const { meta, sections } = dialogues[i];
+    const { meta, sections, file } = dialogues[i];
     totalSections += sections.length;
 
     // 対談間の区切り
@@ -196,6 +196,11 @@ async function main() {
         contentHtml += `<div class="talk-${cls}"><span class="talk-name">${escapeHtml(label)}</span>：${bodyHtml}</div>\n`;
       }
     }
+
+    const scenarioId = `dialogue_${file.replace(/\.md$/, "")}`;
+    contentHtml += `\n<div style="text-align:center; margin:48px 0 24px;">
+  <a href="./galge-scenario.html?scenario=${encodeURIComponent(scenarioId)}" style="display:inline-block; padding:14px 48px; background:linear-gradient(135deg, rgba(30,10,60,0.8), rgba(10,5,25,0.9)); border:1px solid rgba(160,100,220,0.4); color:#c0a0e0; text-decoration:none; letter-spacing:0.3em; font-size:16px; transition:all 0.3s ease; border-radius: 8px;">▶ 魔界へ</a>
+</div>\n`;
 
     // 各対談の日付
     if (meta.date) {
