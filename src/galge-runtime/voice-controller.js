@@ -45,7 +45,7 @@ export class VoiceController {
     this.audioCache = new LRUCache(MAX_AUDIO_CACHE);
     this.dynamicAudioCache = new LRUCache(MAX_DYNAMIC_AUDIO_CACHE);
     this.levelData = new Float32Array(ANALYSER_SIZE);
-    this.muted = false;
+    this.muted = true;
     this.speechSynthesisActive = false;
     this.speechSynthesisStartedAt = 0;
     this.proxyBase = "";
