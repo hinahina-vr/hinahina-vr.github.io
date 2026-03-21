@@ -12,7 +12,7 @@
     "mitra":     { "name": "みとら",      "color": "#c0c0c0", "emoji": "🌘" }
   },
   "scenario": [
-    { "bg": "station", "bgm": { "src": "./assets/bgm/wasurenagusa.mp3", "volume": 0.25, "loop": true } },
+    { "bg": "station", "bgm": { "src": "./assets/bgm/wasurenagusa.mp3", "volume": 0.10, "loop": true } },
 
     { "speaker": "narrator", "expression": "",
       "text": "プラットホーム。黄色い車体が滑り込んでくる。\n総武線。各駅停車。\n新宿から秋葉原まで。乗り換えなし。\nワディーが座席に沈む。窓の外を、夕暮れの街が流れていく。" },
