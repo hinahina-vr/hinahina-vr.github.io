@@ -54,6 +54,7 @@ class GalgeRuntimeApp {
     this.$miniModelSummary = this.$("mini-model-summary");
     this.$runtimeWarning = this.$("runtime-warning");
     this.$titleSettingsBtn = this.$("title-settings-btn");
+    this.$titleModeToggleBtn = this.$("title-mode-toggle-btn");
     this.$settingsBtn = this.$("settings-btn");
     this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
     this.$soundSettingsBtn = this.$("sound-settings-btn");
@@ -189,6 +190,13 @@ class GalgeRuntimeApp {
       this.settingsPanel.open();
     });
 
+    if (this.$titleModeToggleBtn) {
+      this.$titleModeToggleBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.setMode(this.currentMode === "immersive" ? "classic" : "immersive");
+      });
+    }
+
     this.$settingsBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       this.settingsPanel.open();
@@ -240,6 +248,8 @@ class GalgeRuntimeApp {
     document.addEventListener("click", (event) => {
       if (
         event.target === this.$modeToggle ||
+        event.target === this.$titleModeToggleBtn ||
+        event.target.closest("#title-mode-toggle-btn") ||
         event.target === this.$startBtn ||
         event.target === this.$settingsBtn ||
         event.target === this.$titleSettingsBtn ||
@@ -705,6 +715,10 @@ class GalgeRuntimeApp {
     document.body.classList.remove("mode-immersive", "mode-classic");
     document.body.classList.add(`mode-${mode}`);
     this.$modeToggle.textContent = mode === "immersive" ? "🌙" : "🖥️";
+    if (this.$titleModeToggleBtn) {
+      const icon = this.$titleModeToggleBtn.querySelector(".btn-icon");
+      if (icon) icon.textContent = mode === "immersive" ? "🌙" : "🖥️";
+    }
     this.$cursor.textContent = mode === "classic" ? "▌" : "█";
 
     let frame = document.querySelector(".pc98-frame");
