@@ -33100,7 +33100,7 @@ void main() {
         this.drawKongou();
       }
       const isMobile = window.innerWidth <= 960;
-      this.$continueIndicator.textContent = mode === "classic" ? "＞次へ  SPACE / ENTER" : isMobile ? "▼ タップ / スペースで次へ" : "▼ クリック / スペースで次へ";
+      this.$continueIndicator.textContent = mode === "classic" ? "＞次へ  SPACE / ENTER" : isMobile ? "▼ タップで次へ" : "▼ クリック / スペースで次へ";
       const currentStep = this.scenario?.steps?.[this.currentStep];
       if (this.started && currentStep?.kind === "text" && currentStep.speaker !== "narrator") {
         const charData = this.getCharData(currentStep.speaker);
