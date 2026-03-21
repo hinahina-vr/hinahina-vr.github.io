@@ -324,7 +324,8 @@ export class VoiceController {
       });
     }
 
-    return false;
+    // No voice config — fall back to browser speech synthesis
+    return this.speakWithSpeechSynthesis(step.text, { lang: "ja-JP" });
   }
 
   async speakWithSpeechSynthesis(text, options = {}) {

@@ -1420,7 +1420,7 @@
           allowBrowserFallback: voiceConfig.provider === "browser"
         });
       }
-      return false;
+      return this.speakWithSpeechSynthesis(step.text, { lang: "ja-JP" });
     }
     async speakWithSpeechSynthesis(text, options = {}) {
       if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
