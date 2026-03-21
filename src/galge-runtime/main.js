@@ -732,7 +732,7 @@ class GalgeRuntimeApp {
     }
 
     this.$continueIndicator.textContent =
-      mode === "classic" ? "＞次へ  SPACE / ENTER" : "▼ クリック / スペースで次へ";
+      mode === "classic" ? "＞次へ  SPACE / ENTER" : "▼ タップ / クリック / スペースで次へ";
 
     const currentStep = this.scenario?.steps?.[this.currentStep];
     if (this.started && currentStep?.kind === "text" && currentStep.speaker !== "narrator") {
