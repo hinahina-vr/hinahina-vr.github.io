@@ -883,9 +883,11 @@
 
       @media (max-width: 960px) {
         #back-btn { top: 16px; left: 18px; }
-        #mode-toggle { top: 54px; left: 18px; right: auto; bottom: auto; }
-        #settings-btn { top: 94px; left: 18px; right: auto; bottom: auto; }
-        #sound-settings-btn { top: 134px; left: 18px; right: auto; bottom: auto; }
+        #mode-toggle { display: none !important; }
+        #settings-btn { top: 16px; right: 18px; left: auto; bottom: auto; }
+        #sound-settings-btn { top: 56px; right: 18px; left: auto; bottom: auto; }
+        #chapter-display { top: 100px; right: 18px; }
+        #expression-tag { top: 124px; right: 18px; }
         #mini-model-summary {
           left: 18px;
           right: auto;
@@ -911,9 +913,9 @@
           bottom: 170px;
         }
         #volume-popup {
-          left: 18px;
-          top: 174px;
-          right: auto;
+          left: auto;
+          right: 140px;
+          top: 56px;
           bottom: auto;
         }
       }
