@@ -1,6 +1,8 @@
 import { resolveEmotion } from "./emotion-resolver.js";
 import { loadScenarioDefinition } from "./scenario-loader.js";
 import { SettingsPanel } from "./settings-panel.js";
+import { resolveSpeechCommand } from "./speech-command.js";
+import { SpeechInputController } from "./speech-input-controller.js";
 import { VoiceController } from "./voice-controller.js";
 import { VRMAssetStore } from "./vrm-asset-store.js";
 import { VRMStage } from "./vrm-stage.js";
@@ -51,6 +53,10 @@ class GalgeRuntimeApp {
     this.$settingsBtn = this.$("settings-btn");
     this.$titleVoiceToggle = this.$("title-voice-toggle");
     this.$voiceToggle = this.$("voice-toggle");
+    this.$titleSpeechToggle = this.$("title-speech-toggle");
+    this.$speechToggle = this.$("speech-toggle");
+    this.$titleSpeechStatus = this.$("title-speech-status");
+    this.$speechStatus = this.$("speech-status");
 
     this.voiceController = new VoiceController();
     this.assetStore = new VRMAssetStore();
@@ -75,6 +81,15 @@ class GalgeRuntimeApp {
       },
       onSummaryChange: (summary) => {
         this.updateModelSummary(summary);
+      },
+    });
+
+    this.speechInput = new SpeechInputController({
+      onTranscript: (transcript) => {
+        this.handleSpeechTranscript(transcript);
+      },
+      onStatusChange: ({ message, buttonText, supported }) => {
+        this.updateSpeechInputUI({ message, buttonText, supported });
       },
     });
 
@@ -164,24 +179,24 @@ class GalgeRuntimeApp {
       this.toggleMute();
     });
 
+    this.$titleSpeechToggle.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      await this.toggleSpeechListening();
+    });
+
     this.$voiceToggle.addEventListener("click", (event) => {
       event.stopPropagation();
       this.toggleMute();
     });
 
+    this.$speechToggle.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      await this.toggleSpeechListening();
+    });
+
     this.$startBtn.addEventListener("click", async (event) => {
       event.stopPropagation();
-      await this.voiceController.unlock().catch((error) => {
-        console.warn("audio unlock failed:", error);
-      });
-      this.started = true;
-      document.body.classList.add("runtime-started");
-      this.$titleScreen.classList.add("fade-out");
-      window.setTimeout(() => {
-        this.$titleScreen.style.display = "none";
-        this.$hud.style.display = "flex";
-        this.showStep(0);
-      }, 800);
+      await this.startExperience();
     });
 
     document.addEventListener("click", (event) => {
@@ -226,6 +241,27 @@ class GalgeRuntimeApp {
     });
 
     this.updateVoiceToggle();
+    this.updateSpeechInputUI({
+      message: this.speechInput.isSupported()
+        ? "音声入力待機"
+        : "このブラウザでは音声入力を使えません。",
+      buttonText: this.speechInput.getButtonText(),
+      supported: this.speechInput.isSupported(),
+    });
+  }
+
+  async startExperience() {
+    await this.voiceController.unlock().catch((error) => {
+      console.warn("audio unlock failed:", error);
+    });
+    this.started = true;
+    document.body.classList.add("runtime-started");
+    this.$titleScreen.classList.add("fade-out");
+    window.setTimeout(() => {
+      this.$titleScreen.style.display = "none";
+      this.$hud.style.display = "flex";
+      this.showStep(0);
+    }, 800);
   }
 
   updateVoiceToggle() {
@@ -234,9 +270,29 @@ class GalgeRuntimeApp {
     this.$titleVoiceToggle.textContent = text;
   }
 
+  updateSpeechInputUI({ message, buttonText, supported }) {
+    const titleText = buttonText || this.speechInput.getButtonText();
+    const statusText = message || "音声入力待機";
+    this.$titleSpeechToggle.textContent = titleText;
+    this.$speechToggle.textContent = titleText;
+    this.$titleSpeechToggle.disabled = !supported;
+    this.$speechToggle.disabled = !supported;
+    this.$titleSpeechStatus.textContent = statusText;
+    this.$speechStatus.textContent = statusText;
+  }
+
   toggleMute() {
     this.voiceController.setMuted(!this.voiceController.isMuted());
     this.updateVoiceToggle();
+  }
+
+  async toggleSpeechListening() {
+    await this.speechInput.toggleListening();
+    this.updateSpeechInputUI({
+      message: this.speechInput.isListening() ? "話してください。" : "音声入力待機",
+      buttonText: this.speechInput.getButtonText(),
+      supported: this.speechInput.isSupported(),
+    });
   }
 
   initCanvas() {
@@ -459,7 +515,8 @@ class GalgeRuntimeApp {
 
   setMode(mode) {
     this.currentMode = mode;
-    document.body.className = `mode-${mode}`;
+    document.body.classList.remove("mode-immersive", "mode-classic");
+    document.body.classList.add(`mode-${mode}`);
     this.$modeToggle.textContent = mode === "immersive" ? "🌙" : "🖥️";
     this.$cursor.textContent = mode === "classic" ? "▌" : "█";
 
@@ -753,6 +810,133 @@ class GalgeRuntimeApp {
         this.$textContent.classList.remove("text-fade-in");
       });
     }, 240);
+  }
+
+  getVisibleChoiceButtons() {
+    return Array.from(this.$choiceContainer.querySelectorAll(".choice-btn"));
+  }
+
+  chooseByIndex(index) {
+    const buttons = this.getVisibleChoiceButtons();
+    const button = buttons[index];
+    if (!button) {
+      return false;
+    }
+    button.click();
+    return true;
+  }
+
+  async handleSpeechTranscript(transcript) {
+    const command = resolveSpeechCommand({
+      transcript,
+      started: this.started,
+      showingChoice: this.showingChoice,
+      choiceTexts: this.getVisibleChoiceButtons().map((button) => button.textContent || ""),
+      settingsOpen: !this.$("settings-modal").hidden,
+    });
+
+    if (!command) {
+      this.updateSpeechInputUI({
+        message: `認識: ${transcript}`,
+        buttonText: this.speechInput.getButtonText(),
+        supported: this.speechInput.isSupported(),
+      });
+      return;
+    }
+
+    switch (command.type) {
+      case "start":
+        await this.startExperience();
+        this.updateSpeechInputUI({
+          message: "音声コマンド: はじめる",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "open-settings":
+        this.settingsPanel.open();
+        this.updateSpeechInputUI({
+          message: "音声コマンド: 設定を開く",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "close-settings":
+        this.settingsPanel.close();
+        this.updateSpeechInputUI({
+          message: "音声コマンド: 設定を閉じる",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "advance":
+        this.advance();
+        this.updateSpeechInputUI({
+          message: "音声コマンド: 次へ",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "back":
+        this.goBack();
+        this.updateSpeechInputUI({
+          message: "音声コマンド: 戻る",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "choose":
+        if (this.chooseByIndex(command.index)) {
+          this.updateSpeechInputUI({
+            message: `音声コマンド: 選択肢 ${command.index + 1}`,
+            buttonText: this.speechInput.getButtonText(),
+            supported: this.speechInput.isSupported(),
+          });
+        }
+        return;
+      case "mode-classic":
+        this.setMode("classic");
+        this.updateSpeechInputUI({
+          message: "音声コマンド: クラシック",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "mode-immersive":
+        this.setMode("immersive");
+        this.updateSpeechInputUI({
+          message: "音声コマンド: イマーシブ",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "mute-on":
+        if (!this.voiceController.isMuted()) {
+          this.toggleMute();
+        }
+        this.updateSpeechInputUI({
+          message: "音声コマンド: 音声OFF",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      case "mute-off":
+        if (this.voiceController.isMuted()) {
+          this.toggleMute();
+        }
+        this.updateSpeechInputUI({
+          message: "音声コマンド: 音声ON",
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+        return;
+      default:
+        this.updateSpeechInputUI({
+          message: `認識: ${transcript}`,
+          buttonText: this.speechInput.getButtonText(),
+          supported: this.speechInput.isSupported(),
+        });
+    }
   }
 
   advance() {
