@@ -33147,10 +33147,16 @@ void main() {
       }
       if (step.kind === "bg") {
         this.setAtmosphere(step.bg);
+        if (step.bgm) {
+          this.bgmController.setCue(this.scenario.audioNamespace, step.bgm);
+        }
         await this.showStep(index + 1);
         return;
       }
       if (step.kind === "bgm") {
+        if (step.bgm) {
+          this.bgmController.setCue(this.scenario.audioNamespace, step.bgm);
+        }
         await this.showStep(index + 1);
         return;
       }
