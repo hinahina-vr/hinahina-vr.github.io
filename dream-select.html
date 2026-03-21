@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>夢の選択 | ワディーゲストハウス</title>
+    <meta name="description" content="幻界と顕界、選ばれた世界線と選ばれなかった世界線。どちらの夢を見ますか。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 100%; height: 100%;
+        font-family: "Zen Maru Gothic", sans-serif;
+        color: #ece7ff;
+        background:
+          radial-gradient(circle at top, rgba(88, 65, 160, 0.2), transparent 40%),
+          linear-gradient(180deg, #080510 0%, #030208 52%, #080510 100%);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      .container {
+        width: min(640px, 100%);
+        text-align: center;
+      }
+
+      .date-label {
+        font-size: clamp(11px, 1vw, 14px);
+        letter-spacing: 0.3em;
+        color: rgba(255,255,255,0.35);
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        font-size: clamp(1.4rem, 3vw, 2.4rem);
+        letter-spacing: 0.2em;
+        color: #c0a0e0;
+        text-shadow: 0 0 20px rgba(140,100,200,0.2);
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        font-size: clamp(11px, 1vw, 15px);
+        letter-spacing: 0.12em;
+        color: rgba(255,255,255,0.4);
+        margin-bottom: clamp(32px, 5vh, 56px);
+      }
+
+      .dream-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .dream-card {
+        display: block;
+        padding: clamp(20px, 2.5vw, 32px) clamp(24px, 3vw, 40px);
+        border-radius: 18px;
+        text-decoration: none;
+        transition: all 0.35s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .dream-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+      .dream-card:hover {
+        transform: translateY(-2px);
+      }
+
+      /* 顕界の夢 */
+      .dream-card.kenkai {
+        background: linear-gradient(135deg, rgba(30,15,60,0.7), rgba(12,6,28,0.85));
+        border: 1px solid rgba(160,100,220,0.3);
+        box-shadow: 0 8px 32px rgba(100,60,180,0.15);
+      }
+      .dream-card.kenkai:hover {
+        border-color: rgba(200,150,255,0.5);
+        box-shadow: 0 12px 40px rgba(130,80,220,0.25);
+      }
+
+      /* 幻界の夢 */
+      .dream-card.genkai {
+        background: linear-gradient(135deg, rgba(10,8,18,0.85), rgba(5,3,10,0.92));
+        border: 1px solid rgba(80,60,120,0.25);
+        box-shadow: 0 8px 32px rgba(40,20,80,0.2);
+      }
+      .dream-card.genkai:hover {
+        border-color: rgba(120,90,170,0.4);
+        box-shadow: 0 12px 40px rgba(60,30,120,0.3);
+      }
+
+      .dream-icon {
+        font-size: clamp(24px, 3vw, 36px);
+        margin-bottom: 8px;
+      }
+
+      .dream-title {
+        font-size: clamp(16px, 2vw, 24px);
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        margin-bottom: 6px;
+      }
+      .kenkai .dream-title { color: #c0a0e0; }
+      .genkai .dream-title { color: #807090; }
+
+      .dream-desc {
+        font-size: clamp(11px, 1vw, 14px);
+        letter-spacing: 0.08em;
+        line-height: 1.7;
+      }
+      .kenkai .dream-desc { color: rgba(200,180,230,0.6); }
+      .genkai .dream-desc { color: rgba(140,120,160,0.5); }
+
+      .dream-realm-tag {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 3px 12px;
+        border-radius: 999px;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+      }
+      .kenkai .dream-realm-tag {
+        background: rgba(160,100,220,0.15);
+        color: rgba(200,160,240,0.6);
+        border: 1px solid rgba(160,100,220,0.2);
+      }
+      .genkai .dream-realm-tag {
+        background: rgba(80,60,120,0.1);
+        color: rgba(120,100,150,0.5);
+        border: 1px solid rgba(80,60,120,0.15);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: clamp(28px, 4vh, 48px);
+        color: rgba(255,255,255,0.3);
+        text-decoration: none;
+        font-size: clamp(12px, 1vw, 14px);
+        letter-spacing: 0.15em;
+        transition: color 0.2s;
+      }
+      .back-link:hover { color: rgba(255,255,255,0.6); }
+
+      .no-dreams {
+        color: rgba(255,255,255,0.35);
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        padding: 40px 0;
+      }
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .dream-card { animation: fade-in 0.6s ease both; }
+      .dream-card:nth-child(2) { animation-delay: 0.12s; }
+      .dream-card:nth-child(3) { animation-delay: 0.24s; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p class="date-label" id="date-label"></p>
+      <h1>夢の選択</h1>
+      <p class="subtitle">── どの世界線の夢を見ますか ──</p>
+      <div class="dream-list" id="dream-list"></div>
+      <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
+    </div>
+
+    <script>
+      const DREAM_REGISTRY = {
+        "2026-03-18": [
+          {
+            scenario: "2026-03-18_声の座標",
+            realm: "kenkai",
+            icon: "▶",
+            title: "声の座標",
+            desc: "選ばれた世界線の記録",
+            tag: "顕界"
+          }
+        ],
+        "2026-03-19": [
+          {
+            scenario: "2026-03-19_影の踊り子",
+            realm: "kenkai",
+            icon: "▶",
+            title: "影の踊り子",
+            desc: "選ばれた世界線の記録",
+            tag: "顕界"
+          }
+        ],
+        "2026-03-20": [
+          {
+            scenario: "2026-03-20_各駅停車の形而上学",
+            realm: "kenkai",
+            icon: "▶",
+            title: "各駅停車の形而上学",
+            desc: "ことみ×でじこ ─ 選ばれた世界線の記録",
+            tag: "顕界"
+          },
+          {
+            scenario: "2026-03-20_急行の形而上学",
+            realm: "genkai",
+            icon: "🌘",
+            title: "急行の形而上学",
+            desc: "選ばれなかった世界線 ─ みとらが観測した幻界の記録",
+            tag: "幻界"
+          }
+        ]
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const date = params.get("date");
+      const dreams = DREAM_REGISTRY[date];
+
+      document.getElementById("date-label").textContent = date || "";
+
+      const list = document.getElementById("dream-list");
+
+      if (!dreams || dreams.length === 0) {
+        list.innerHTML = '<p class="no-dreams">この日の夢は見つかりませんでした。</p>';
+      } else if (dreams.length === 1) {
+        // 1つだけなら直接遷移
+        window.location.href = `./galge-scenario.html?scenario=${encodeURIComponent(dreams[0].scenario)}`;
+      } else {
+        for (const dream of dreams) {
+          const card = document.createElement("a");
+          card.className = `dream-card ${dream.realm}`;
+          card.href = `./galge-scenario.html?scenario=${encodeURIComponent(dream.scenario)}`;
+          card.innerHTML = `
+            <div class="dream-icon">${dream.icon}</div>
+            <div class="dream-title">${dream.title}</div>
+            <div class="dream-desc">${dream.desc}</div>
+            <span class="dream-realm-tag">${dream.tag}</span>
+          `;
+          list.appendChild(card);
+        }
+      }
+    </script>
+  </body>
+</html>
