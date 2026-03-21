@@ -81,6 +81,10 @@ function normalizeStep(step, stepIndex, warnings, chars) {
     };
   }
 
+  if (step.bg && !Object.prototype.hasOwnProperty.call(step, "text")) {
+    return { kind: "bg", bg: step.bg };
+  }
+
   if (Object.prototype.hasOwnProperty.call(step, "text")) {
     return normalizeTextStep(step, stepIndex, warnings, chars);
   }

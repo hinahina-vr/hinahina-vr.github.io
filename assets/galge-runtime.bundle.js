@@ -97,6 +97,9 @@
         subtitle: asString(step.subtitle)
       };
     }
+    if (step.bg && !Object.prototype.hasOwnProperty.call(step, "text")) {
+      return { kind: "bg", bg: step.bg };
+    }
     if (Object.prototype.hasOwnProperty.call(step, "text")) {
       return normalizeTextStep(step, stepIndex, warnings, chars);
     }
@@ -32902,6 +32905,11 @@ void main() {
       const token = this.renderToken;
       this.updateProgress();
       if (step.kind === "label") {
+        await this.showStep(index + 1);
+        return;
+      }
+      if (step.kind === "bg") {
+        this.setAtmosphere(step.bg);
         await this.showStep(index + 1);
         return;
       }

@@ -722,6 +722,12 @@ class GalgeRuntimeApp {
       return;
     }
 
+    if (step.kind === "bg") {
+      this.setAtmosphere(step.bg);
+      await this.showStep(index + 1);
+      return;
+    }
+
     if (step.kind === "end") {
       this.voiceController.stopCurrent();
       this.vrmStage.hide();
