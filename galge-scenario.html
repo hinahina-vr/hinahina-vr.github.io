@@ -484,7 +484,9 @@
         font-size: clamp(11px, 0.9vw, 14px);
       }
       #mode-toggle {
-        display: none !important;
+        display: block;
+        top: 100px;
+        right: 12px;
       }
       #back-btn {
         top: clamp(12px, 1.8vw, 24px);
@@ -934,7 +936,7 @@
         .utility-btn .btn-text { display: none; }
         .utility-btn .btn-icon { margin-right: 0; font-size: 20px; }
         #back-btn { top: 16px; left: 18px; }
-        #mode-toggle { display: none !important; }
+        #mode-toggle { top: 116px; right: 18px; left: auto; bottom: auto; }
         #settings-btn { top: 16px; right: 18px; left: auto; bottom: auto; }
         #sound-settings-btn { top: 72px; right: 18px; left: auto; bottom: auto; }
         #chapter-display { top: 132px; right: 18px; }
@@ -1113,7 +1115,7 @@
 
     <div id="chapter-display"></div>
     <div id="expression-tag"></div>
-    <button id="mode-toggle" title="モード切替" type="button">🌙</button>
+    <button class="utility-btn" id="mode-toggle" title="表示モード切替" type="button"><span class="btn-icon">🌙</span><span class="btn-text">表示切替</span></button>
     <a id="back-btn" href="./diary.html">◁ 戻る</a>
     <button class="utility-btn" id="settings-btn" type="button" title="モデル設定"><span class="btn-icon">🎭</span><span class="btn-text">モデル設定</span></button>
     <button class="utility-btn" id="sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
