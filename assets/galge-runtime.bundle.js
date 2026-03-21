@@ -32772,8 +32772,11 @@ void main() {
         await this.startExperience();
       });
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$startBtn || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$voiceToggle || event.target === this.$titleVoiceToggle || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
+        if (event.target === this.$modeToggle || event.target === this.$startBtn || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
           return;
+        }
+        if (this.$volumePopup.classList.contains("visible")) {
+          this.closeSoundPopup();
         }
         this.advance();
       });
