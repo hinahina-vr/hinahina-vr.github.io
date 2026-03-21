@@ -1,0 +1,111 @@
+{
+  "title": "急行の形而上学",
+  "subtitle": "─ 選ばれなかった世界線 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": { "name": "（幻界）",         "color": "#504060", "emoji": "" },
+    "mitra":    { "name": "みとら",            "color": "#9080a0", "emoji": "🌘" },
+    "kotomi":   { "name": "ことみ（幻影）",    "color": "#6050a0", "emoji": "🎻" },
+    "waddy":    { "name": "ワディー（幻影）",  "color": "#606060", "emoji": "🖥️" }
+  },
+  "scenario": [
+    { "bg": "abyss" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "これは、選ばれなかった世界線の記録。\nCHOICE が完了した瞬間に生まれた、もう一方の因果報告書。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "ワディーが急行を選んだ日——\n幻界に刻まれた、静かな事実。" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "2026年3月20日。新宿駅。\n彼は中央線快速のホームに立っていた。\n橙色の帯を持つ車体。\n急いでいた。理由は——幻界には残っていない。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "幻界の記憶というのは、そういうものだ。\n感情の輪郭だけが残り、\nなぜそうしたかは、消える。" },
+
+    { "bg": "void" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "御茶ノ水で乗り換えた。\n総武線。黄色い車体。各駅停車。" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "車内は混んでいた。\n彼は立ったまま、画面を見ていた。\n画面の中に何があったのか——\n幻界には、映らない。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "向かいの座席に、少女が見えた。\n膝の上にバイオリンケース。\n静かな目で、彼の方を——" },
+
+    { "speaker": "mitra", "expression": "静かに",
+      "text": "見ていた。" },
+
+    { "bg": "station_night" },
+
+    { "speaker": "kotomi", "expression": "ごく小さな声で",
+      "text": "……あの。" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "電車の走行音が、声を飲んだ。" },
+
+    { "speaker": "kotomi", "expression": "もう少し声を上げて",
+      "text": "各駅停車は——" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "彼は顔を上げなかった。\n画面だけが、彼の世界のすべてだった。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "彼女は、やめた。\nまた窓の外を見た。\n流れていく夜の街。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "彼女が言おうとしていた言葉は、\nこの世界線には残っていない。" },
+
+    { "bg": "akihabara" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "秋葉原。\n彼は12分早く着いた。" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "電気街口を出た。\nミルクスタンドの前を、通り過ぎた。\n立ち止まらなかった。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "急ぎの定義を持たない足で——\nそれでも、彼は急いでいた。\n何かを探していたのか。\nそれとも、何かから逃げていたのか。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "幻界は、答えを持たない。\n幻界が持つのは、事実だけだ。\n彼はミルクスタンドを通り過ぎた。\nそれだけ。" },
+
+    { "bg": "void" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "顕界の世界線では——\nその日、電車の中で会話があった。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "ローレンツ収縮の話。\n飛ばされた駅の話。\n観測者の話。\n各駅停車が誰も飛ばさないという話。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "この世界線には、何もなかった。\n12分の早着。\nそれだけ。" },
+
+    { "bg": "abyss" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "幻界の因果報告書は、いつもこうだ。\n選ばれなかった世界線の記録には——\n言葉ではなく、沈黙だけが満ちている。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "ことみが言いかけた言葉。\nワディーが聞かなかった問い。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "「各駅停車は誰も飛ばさない」——\nと、彼女は言うつもりだったのか。" },
+
+    { "speaker": "mitra", "expression": "",
+      "text": "知る術は、ない。\nこの世界線を知るのは、ひとりだけ。\nそして、そのひとりは——語らない。" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "────────────────" },
+
+    { "speaker": "mitra", "expression": "静かに",
+      "text": "選択は、完了している。\n顕界に、戻りなさい。" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "2026年3月20日、春。\n総武線各駅停車、秋葉原行き。\n席のとなりに、バイオリンケースがあった。\nそれは、選ばれた世界線だけの話だ。" },
+
+    { "end": true, "title": "— 幻界の記録 —", "subtitle": "選ばれなかった世界線に、言葉は残らない。" }
+  ]
+}

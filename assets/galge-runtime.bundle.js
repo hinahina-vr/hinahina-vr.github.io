@@ -32609,6 +32609,7 @@ void main() {
       this.$miniModelSummary = this.$("mini-model-summary");
       this.$runtimeWarning = this.$("runtime-warning");
       this.$titleSettingsBtn = this.$("title-settings-btn");
+      this.$titleModeToggleBtn = this.$("title-mode-toggle-btn");
       this.$settingsBtn = this.$("settings-btn");
       this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
       this.$soundSettingsBtn = this.$("sound-settings-btn");
@@ -32732,6 +32733,12 @@ void main() {
         event.stopPropagation();
         this.settingsPanel.open();
       });
+      if (this.$titleModeToggleBtn) {
+        this.$titleModeToggleBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          this.setMode(this.currentMode === "immersive" ? "classic" : "immersive");
+        });
+      }
       this.$settingsBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         this.settingsPanel.open();
@@ -32772,7 +32779,7 @@ void main() {
         await this.startExperience();
       });
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$startBtn || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
+        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
           return;
         }
         if (this.$volumePopup.classList.contains("visible")) {
@@ -33075,6 +33082,10 @@ void main() {
       document.body.classList.remove("mode-immersive", "mode-classic");
       document.body.classList.add(`mode-${mode}`);
       this.$modeToggle.textContent = mode === "immersive" ? "🌙" : "🖥️";
+      if (this.$titleModeToggleBtn) {
+        const icon = this.$titleModeToggleBtn.querySelector(".btn-icon");
+        if (icon) icon.textContent = mode === "immersive" ? "🌙" : "🖥️";
+      }
       this.$cursor.textContent = mode === "classic" ? "▌" : "█";
       let frame = document.querySelector(".pc98-frame");
       if (mode === "classic") {

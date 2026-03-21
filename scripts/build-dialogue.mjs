@@ -199,7 +199,7 @@ async function main() {
 
     const scenarioId = `dialogue_${file.replace(/\.md$/, "")}`;
     contentHtml += `\n<div style="text-align:center; margin:48px 0 24px;">
-  <a href="./galge-scenario.html?scenario=${encodeURIComponent(scenarioId)}" style="display:inline-block; padding:14px 48px; background:linear-gradient(135deg, rgba(30,10,60,0.8), rgba(10,5,25,0.9)); border:1px solid rgba(160,100,220,0.4); color:#c0a0e0; text-decoration:none; letter-spacing:0.3em; font-size:16px; transition:all 0.3s ease; border-radius: 8px;">▶ 魔界へ</a>
+  <a href="./galge-scenario.html?scenario=${encodeURIComponent(scenarioId)}" style="display:inline-block; padding:14px 48px; background:linear-gradient(135deg, rgba(30,10,60,0.8), rgba(10,5,25,0.9)); border:1px solid rgba(160,100,220,0.4); color:#c0a0e0; text-decoration:none; letter-spacing:0.3em; font-size:16px; transition:all 0.3s ease; border-radius: 8px;">▶ 夢を見る</a>
 </div>\n`;
 
     // 各対談の日付
