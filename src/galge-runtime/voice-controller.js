@@ -92,6 +92,16 @@ export class VoiceController {
     }
   }
 
+  getVolume() {
+    return this.masterGain ? this.masterGain.gain.value : 1;
+  }
+
+  setVolume(v) {
+    if (this.masterGain) {
+      this.masterGain.gain.value = Math.min(1, Math.max(0, v));
+    }
+  }
+
   stopPlayback() {
     if (this.currentSource) {
       try {

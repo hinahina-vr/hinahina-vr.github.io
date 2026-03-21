@@ -130,8 +130,7 @@
       body:not(.runtime-started) #expression-tag,
       body:not(.runtime-started) #mini-model-summary,
       body:not(.runtime-started) #settings-btn,
-      body:not(.runtime-started) #bgm-toggle,
-      body:not(.runtime-started) #voice-toggle,
+      body:not(.runtime-started) #sound-settings-btn,
       body:not(.runtime-started) #api-client-id,
       body:not(.runtime-started) #api-status {
         display: none;
@@ -327,11 +326,47 @@
       #expression-tag,
       #mini-model-summary,
       #settings-btn,
-      #bgm-toggle,
-      #voice-toggle,
+      #sound-settings-btn,
+      #mode-toggle {
+        position: fixed;
+        top: 12px;
+        z-index: 100;
+        padding: 6px 12px;
+        border: 1px solid rgba(200,160,224,0.3);
+        border-radius: 4px;
+        background: rgba(16,8,24,0.7);
+        color: #c0a0e0;
+        font-size: 12px;
+        font-family: "MS Gothic", "MS ゴシック", monospace;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        backdrop-filter: blur(2px);
+        letter-spacing: 0.1em;
+      }
+      #settings-btn:hover,
+      #mode-toggle:hover,
+      #sound-settings-btn:hover,
+      #mini-model-summary:hover {
+        background: rgba(80, 40, 120, 0.45);
+        color: #ffffff;
+      }
+      #mini-model-summary {
+        right: 12px;
+        font-size: 11px;
+        padding: 4px 10px;
+        pointer-events: none;
+      }
+      #settings-btn { right: 12px; top: 38px; }
+      #mode-toggle { right: 12px; top: 64px; }
+      #sound-settings-btn {
+        top: auto;
+        bottom: 12px;
+        right: clamp(146px, 12vw, 188px);
+      }
+      #chapter-display,
+      #expression-tag,
       #api-client-id,
       #api-status,
-      #mode-toggle,
       #back-btn {
         position: fixed;
         z-index: 20;
@@ -354,26 +389,6 @@
         font-size: clamp(11px, 0.85vw, 15px);
         font-style: italic;
       }
-      #mini-model-summary {
-        right: clamp(18px, 2vw, 36px);
-        bottom: clamp(28px, 3vh, 42px);
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(8, 6, 16, 0.64);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.68);
-        font-size: clamp(11px, 0.85vw, 14px);
-        letter-spacing: 0.1em;
-        backdrop-filter: blur(8px);
-      }
-      #settings-btn,
-      #bgm-toggle,
-      #voice-toggle {
-        top: clamp(92px, 8vw, 124px);
-      }
-      #settings-btn { right: clamp(18px, 2vw, 36px); }
-      #bgm-toggle { right: clamp(146px, 12vw, 188px); }
-      #voice-toggle { right: clamp(274px, 22vw, 340px); }
       #api-client-id,
       #api-status {
         left: clamp(18px, 2vw, 36px);
@@ -635,6 +650,107 @@
         justify-content: flex-end;
       }
 
+      #volume-popup {
+        position: fixed;
+        bottom: 60px;
+        right: clamp(100px, 10vw, 180px);
+        z-index: 150;
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 20px;
+        border-radius: 10px;
+        background: rgba(12, 6, 20, 0.92);
+        border: 1px solid rgba(200, 160, 224, 0.25);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        min-width: 260px;
+      }
+      #volume-popup.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .vol-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .vol-toggle {
+        width: 40px;
+        height: 22px;
+        border-radius: 11px;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.2s ease;
+        flex-shrink: 0;
+        padding: 0;
+      }
+      .vol-toggle::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s ease;
+      }
+      .vol-toggle.on {
+        background: #7c4dff;
+      }
+      .vol-toggle.on::after {
+        transform: translateX(18px);
+      }
+      .vol-toggle.off {
+        background: #444;
+      }
+      .vol-label {
+        color: #c0a0e0;
+        font-size: 12px;
+        width: 32px;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+      }
+      .vol-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        flex: 1;
+        height: 5px;
+        background: rgba(200, 160, 224, 0.2);
+        outline: none;
+        border-radius: 3px;
+      }
+      .vol-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #c0a0e0;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+      .vol-slider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #c0a0e0;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+      .vol-value {
+        color: rgba(200, 160, 224, 0.7);
+        font-size: 11px;
+        width: 28px;
+        text-align: right;
+        flex-shrink: 0;
+      }
+
       .text-fade-out { animation: fadeOut 0.25s ease forwards; }
       .text-fade-in { animation: fadeIn 0.4s ease forwards; }
       @keyframes fadeOut {
@@ -721,15 +837,24 @@
         color: #d0d0d0;
       }
 
+      .mode-classic #mini-model-summary {
+        right: 18px;
+      }
+
+      .mode-classic #sound-settings-btn {
+        bottom: 18px;
+        right: 18px;
+      }
+
       @media (max-width: 960px) {
         #settings-btn,
-        #bgm-toggle,
-        #voice-toggle {
+        #sound-settings-btn,
+        #mode-toggle {
           top: auto;
           bottom: 86px;
         }
-        #voice-toggle { right: 18px; }
-        #bgm-toggle { right: 126px; }
+        #sound-settings-btn { right: 18px; }
+        #mode-toggle { right: 126px; }
         #settings-btn { right: 234px; }
         #mini-model-summary {
           left: auto;
@@ -751,6 +876,10 @@
         #avatar-stage-placeholder {
           right: 18px;
           bottom: 170px;
+        }
+        #volume-popup {
+          right: 18px;
+          bottom: 128px;
         }
       }
 
@@ -857,8 +986,7 @@
         <div class="title-actions">
           <button class="start-btn" id="start-btn" type="button">▶ はじめる</button>
           <button class="utility-btn" id="title-settings-btn" type="button">モデル設定</button>
-          <button class="utility-btn" id="title-bgm-toggle" type="button">🎵 BGM OFF</button>
-          <button class="utility-btn" id="title-voice-toggle" type="button">🔊 音声ON</button>
+          <button class="utility-btn" id="title-sound-settings-btn" type="button">🔊 音量設定</button>
         </div>
 
         <p id="runtime-warning" hidden></p>
@@ -890,8 +1018,21 @@
     <button id="mode-toggle" title="モード切替" type="button">🌙</button>
     <a id="back-btn" href="./diary.html">◁ 戻る</a>
     <button class="utility-btn" id="settings-btn" type="button">モデル設定</button>
-    <button class="utility-btn" id="bgm-toggle" type="button">🎵 BGM OFF</button>
-    <button class="utility-btn" id="voice-toggle" type="button">🔊 音声ON</button>
+    <button class="utility-btn" id="sound-settings-btn" type="button">🔊 音量設定</button>
+    <div id="volume-popup">
+      <div class="vol-row">
+        <button class="vol-toggle off" id="bgm-toggle" type="button" title="BGM ON/OFF"></button>
+        <span class="vol-label">BGM</span>
+        <input type="range" class="vol-slider" id="bgm-slider" min="0" max="100" value="10">
+        <span class="vol-value" id="bgm-value">10</span>
+      </div>
+      <div class="vol-row">
+        <button class="vol-toggle on" id="voice-toggle" type="button" title="発話 ON/OFF"></button>
+        <span class="vol-label">発話</span>
+        <input type="range" class="vol-slider" id="voice-slider" min="0" max="100" value="100">
+        <span class="vol-value" id="voice-value">100</span>
+      </div>
+    </div>
     <div id="mini-model-summary">モデル設定済み 0 / 0</div>
     <div id="api-client-id">API client: --</div>
     <div id="api-status">発話API 未設定</div>

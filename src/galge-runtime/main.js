@@ -55,10 +55,15 @@ class GalgeRuntimeApp {
     this.$runtimeWarning = this.$("runtime-warning");
     this.$titleSettingsBtn = this.$("title-settings-btn");
     this.$settingsBtn = this.$("settings-btn");
-    this.$titleVoiceToggle = this.$("title-voice-toggle");
-    this.$voiceToggle = this.$("voice-toggle");
-    this.$titleBgmToggle = this.$("title-bgm-toggle");
+    this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
+    this.$soundSettingsBtn = this.$("sound-settings-btn");
+    this.$volumePopup = this.$("volume-popup");
     this.$bgmToggle = this.$("bgm-toggle");
+    this.$bgmSlider = this.$("bgm-slider");
+    this.$bgmValue = this.$("bgm-value");
+    this.$voiceToggle = this.$("voice-toggle");
+    this.$voiceSlider = this.$("voice-slider");
+    this.$voiceValue = this.$("voice-value");
     this.$titleApiClientId = this.$("title-api-client-id");
     this.$titleApiStatus = this.$("title-api-status");
     this.$apiClientId = this.$("api-client-id");
@@ -189,9 +194,19 @@ class GalgeRuntimeApp {
       this.settingsPanel.open();
     });
 
-    this.$titleVoiceToggle.addEventListener("click", (event) => {
+    this.$titleSoundSettingsBtn.addEventListener("click", (event) => {
       event.stopPropagation();
-      this.toggleMute();
+      this.toggleSoundPopup();
+    });
+
+    this.$soundSettingsBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleSoundPopup();
+    });
+
+    this.$bgmToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleBgm();
     });
 
     this.$voiceToggle.addEventListener("click", (event) => {
@@ -199,14 +214,22 @@ class GalgeRuntimeApp {
       this.toggleMute();
     });
 
-    this.$titleBgmToggle.addEventListener("click", (event) => {
+    this.$bgmSlider.addEventListener("input", (event) => {
       event.stopPropagation();
-      this.toggleBgm();
+      const v = parseInt(this.$bgmSlider.value, 10);
+      this.$bgmValue.textContent = v;
+      this.bgmController.setVolume(v / 100);
     });
 
-    this.$bgmToggle.addEventListener("click", (event) => {
+    this.$voiceSlider.addEventListener("input", (event) => {
       event.stopPropagation();
-      this.toggleBgm();
+      const v = parseInt(this.$voiceSlider.value, 10);
+      this.$voiceValue.textContent = v;
+      this.voiceController.setVolume(v / 100);
+    });
+
+    this.$volumePopup.addEventListener("click", (event) => {
+      event.stopPropagation();
     });
 
     this.$startBtn.addEventListener("click", async (event) => {
@@ -309,9 +332,8 @@ class GalgeRuntimeApp {
   }
 
   updateVoiceToggle() {
-    const text = this.voiceController.isMuted() ? "🔇 音声OFF" : "🔊 音声ON";
-    this.$voiceToggle.textContent = text;
-    this.$titleVoiceToggle.textContent = text;
+    const muted = this.voiceController.isMuted();
+    this.$voiceToggle.className = `vol-toggle ${muted ? "off" : "on"}`;
   }
 
   toggleMute() {
@@ -320,9 +342,8 @@ class GalgeRuntimeApp {
   }
 
   updateBgmToggle() {
-    const text = this.bgmController.isEnabled() ? "🎵 BGM ON" : "🎵 BGM OFF";
-    this.$bgmToggle.textContent = text;
-    this.$titleBgmToggle.textContent = text;
+    const enabled = this.bgmController.isEnabled();
+    this.$bgmToggle.className = `vol-toggle ${enabled ? "on" : "off"}`;
   }
 
   toggleBgm() {
@@ -331,6 +352,26 @@ class GalgeRuntimeApp {
     if (this.started) {
       this.syncBgmForIndex(this.currentStep);
     }
+  }
+
+  toggleSoundPopup() {
+    if (this.$volumePopup.classList.contains("visible")) {
+      this.closeSoundPopup();
+    } else {
+      this.$volumePopup.style.display = "flex";
+      window.requestAnimationFrame(() => {
+        this.$volumePopup.classList.add("visible");
+      });
+    }
+  }
+
+  closeSoundPopup() {
+    this.$volumePopup.classList.remove("visible");
+    window.setTimeout(() => {
+      if (!this.$volumePopup.classList.contains("visible")) {
+        this.$volumePopup.style.display = "none";
+      }
+    }, 300);
   }
 
   updateMessageApiUI({ message, clientId, apiBase, configured }) {
@@ -612,7 +653,7 @@ class GalgeRuntimeApp {
         zIndex: "1",
         pointerEvents: "none",
         opacity: "0",
-        transition: "opacity 0.8s ease",
+        transition: "opacity 1.6s ease",
       });
       document.body.insertBefore(el, document.body.firstChild);
     }

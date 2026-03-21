@@ -117,4 +117,15 @@ export class BGMController {
     this.audio.pause();
     this.audio.currentTime = 0;
   }
+
+  getVolume() {
+    return this.audio.volume;
+  }
+
+  setVolume(v) {
+    this.audio.volume = clamp(v, 0, 1);
+    if (this.currentCue) {
+      this.currentCue.volume = this.audio.volume;
+    }
+  }
 }
