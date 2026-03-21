@@ -33014,10 +33014,11 @@ void main() {
       }
       document.body.style.background = `linear-gradient(180deg, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 0%, hsl(${this.bgColor.h},${this.bgColor.s}%,${Math.max(1, this.bgColor.l - 5)}%) 50%, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 100%)`;
       const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
-      const imgPath = `./scenarios/bg/${bgImageKey}.jpg`;
-      this._showBgImage(imgPath);
+      const scenarioDir = this.scenario.scenarioName || "";
+      const baseDir = scenarioDir ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}` : `./scenarios/bg`;
+      this._showBgImage(`${baseDir}/${bgImageKey}.png`, `${baseDir}/${bgImageKey}.jpg`);
     }
-    _showBgImage(src) {
+    _showBgImage(src, fallbackSrc) {
       let el = document.getElementById("scene-bg-img");
       if (!el) {
         el = document.createElement("img");
@@ -33048,8 +33049,24 @@ void main() {
         });
       };
       img.onerror = () => {
-        el.style.opacity = "0";
-        el.dataset.currentSrc = "";
+        if (fallbackSrc) {
+          const fb = new Image();
+          fb.onload = () => {
+            el.src = fallbackSrc;
+            el.dataset.currentSrc = fallbackSrc;
+            requestAnimationFrame(() => {
+              el.style.opacity = "0.55";
+            });
+          };
+          fb.onerror = () => {
+            el.style.opacity = "0";
+            el.dataset.currentSrc = "";
+          };
+          fb.src = fallbackSrc;
+        } else {
+          el.style.opacity = "0";
+          el.dataset.currentSrc = "";
+        }
       };
       img.src = src;
     }
