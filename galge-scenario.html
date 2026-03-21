@@ -210,10 +210,16 @@
       }
       .title-actions {
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: clamp(24px, 3vw, 36px);
+      }
+      .title-actions-sub {
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 12px;
-        margin-top: clamp(24px, 3vw, 36px);
       }
       #title-screen .start-btn,
       .utility-btn,
@@ -242,8 +248,23 @@
         border-color: rgba(220, 194, 255, 0.42);
       }
       #title-screen .start-btn {
-        min-width: 220px;
-        font-size: clamp(15px, 1.1vw, 20px);
+        min-width: clamp(240px, 40vw, 320px);
+        padding: 18px 36px;
+        font-size: clamp(20px, 1.8vw, 28px);
+        font-weight: 700;
+        border-radius: 999px;
+        border: 2px solid rgba(220, 180, 255, 0.4);
+        background: linear-gradient(135deg, rgba(82, 45, 145, 0.9), rgba(45, 18, 90, 0.95));
+        box-shadow: 0 8px 32px rgba(120, 60, 220, 0.4);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        color: #fdfbff;
+      }
+      #title-screen .start-btn:hover {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.03);
+        border-color: rgba(240, 210, 255, 0.8);
+        box-shadow: 0 12px 40px rgba(160, 90, 255, 0.6);
+        background: linear-gradient(135deg, rgba(100, 60, 170, 0.95), rgba(60, 28, 110, 0.98));
       }
       #runtime-warning {
         margin-top: 16px;
@@ -901,7 +922,7 @@
         #title-screen h1 { font-size: clamp(1.4rem, 7vw, 2.4rem); }
         #title-screen .subtitle { font-size: clamp(11px, 3.5vw, 16px); }
         .title-chip { font-size: clamp(10px, 3vw, 12px); padding: 6px 12px; }
-        #title-screen .start-btn { font-size: clamp(14px, 4vw, 18px); min-width: 180px; }
+        #title-screen .start-btn { font-size: clamp(18px, 5vw, 24px); min-width: 240px; padding: 16px 24px; }
         .title-card { padding: 24px 16px; }
 
         #hud { padding: 10px; }
@@ -1005,8 +1026,10 @@
 
         <div class="title-actions">
           <button class="start-btn" id="start-btn" type="button">▶ はじめる</button>
-          <button class="utility-btn" id="title-settings-btn" type="button">モデル設定</button>
-          <button class="utility-btn" id="title-sound-settings-btn" type="button">🔊 音量設定</button>
+          <div class="title-actions-sub">
+            <button class="utility-btn" id="title-settings-btn" type="button">モデル設定</button>
+            <button class="utility-btn" id="title-sound-settings-btn" type="button">🔊 音量設定</button>
+          </div>
         </div>
 
         <p id="runtime-warning" hidden></p>
