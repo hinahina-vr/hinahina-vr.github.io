@@ -32558,6 +32558,9 @@ void main() {
       this.started = false;
       this.showingChoice = false;
       this.isAdvancing = false;
+      this.ctrlSkipTimer = null;
+      this.backlog = [];
+      this.backlogOpen = false;
       this.currentChapter = "";
       this.textSteps = [];
       this.scenario = null;
@@ -32738,6 +32741,10 @@ void main() {
         this.advance();
       });
       document.addEventListener("keydown", (event) => {
+        if (event.key === "Control" && !event.repeat) {
+          this.startCtrlSkip();
+          return;
+        }
         if (event.key === " " || event.key === "Enter" || event.key === "ArrowRight") {
           event.preventDefault();
           this.advance();
@@ -32745,11 +32752,32 @@ void main() {
           event.preventDefault();
           this.goBack();
         } else if (event.key === "Escape") {
+          if (this.backlogOpen) {
+            this.closeBacklog();
+            return;
+          }
           if (!this.$("settings-modal").hidden) {
             this.settingsPanel.close();
             return;
           }
           window.location.href = "./diary.html";
+        }
+      });
+      document.addEventListener("keyup", (event) => {
+        if (event.key === "Control") {
+          this.stopCtrlSkip();
+        }
+      });
+      document.addEventListener("wheel", (event) => {
+        if (!this.started || !this.$("settings-modal").hidden) {
+          return;
+        }
+        if (event.deltaY < 0) {
+          if (!this.backlogOpen) {
+            this.openBacklog();
+          }
+        } else if (event.deltaY > 0 && !this.backlogOpen) {
+          this.advance();
         }
       });
       window.addEventListener("resize", () => {
@@ -33193,6 +33221,7 @@ void main() {
       if (step.kind !== "text") {
         return;
       }
+      this.addToBacklog(step);
       const charData = this.getCharData(step.speaker);
       const isNarrator = step.speaker === "narrator";
       const emotion = resolveEmotion(step.emotion, step.expression);
@@ -33399,6 +33428,116 @@ void main() {
           this.isAdvancing = false;
         });
       }
+    }
+    addToBacklog(step) {
+      const charData = this.getCharData(step.speaker);
+      this.backlog.push({
+        speaker: step.speaker,
+        name: charData.name,
+        color: charData.color || "#d0d0d0",
+        emoji: charData.emoji || "",
+        text: step.text
+      });
+    }
+    startCtrlSkip() {
+      if (!this.started || this.ctrlSkipTimer || this.backlogOpen) {
+        return;
+      }
+      const tick = () => {
+        if (this.showingChoice || this.$endScreen.style.display === "flex") {
+          this.stopCtrlSkip();
+          return;
+        }
+        const step = this.scenario.steps[this.currentStep];
+        if (this.isTyping && step?.kind === "text") {
+          this.skipType(step.text);
+        }
+        if (!this.isAdvancing) {
+          const nextIndex = this.currentStep + 1;
+          if (nextIndex < this.scenario.steps.length) {
+            this.isAdvancing = true;
+            this.showStep(nextIndex).finally(() => {
+              this.isAdvancing = false;
+            });
+          } else {
+            this.stopCtrlSkip();
+            return;
+          }
+        }
+        this.ctrlSkipTimer = window.setTimeout(tick, 80);
+      };
+      tick();
+    }
+    stopCtrlSkip() {
+      if (this.ctrlSkipTimer) {
+        window.clearTimeout(this.ctrlSkipTimer);
+        this.ctrlSkipTimer = null;
+      }
+    }
+    openBacklog() {
+      if (this.backlogOpen || this.backlog.length === 0) {
+        return;
+      }
+      this.backlogOpen = true;
+      let el = document.getElementById("backlog-panel");
+      if (!el) {
+        el = document.createElement("div");
+        el.id = "backlog-panel";
+        el.innerHTML = `
+        <div id="backlog-header">
+          <span>バックログ</span>
+          <button id="backlog-close" type="button">✕ 閉じる</button>
+        </div>
+        <div id="backlog-content"></div>
+      `;
+        document.body.appendChild(el);
+        el.querySelector("#backlog-close").addEventListener("click", (event) => {
+          event.stopPropagation();
+          this.closeBacklog();
+        });
+        el.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+        el.addEventListener("wheel", (event) => {
+          event.stopPropagation();
+        });
+      }
+      const content = el.querySelector("#backlog-content");
+      content.innerHTML = "";
+      for (const entry of this.backlog) {
+        const row = document.createElement("div");
+        row.className = "backlog-entry";
+        const nameEl = document.createElement("span");
+        nameEl.className = "backlog-name";
+        nameEl.style.color = entry.color;
+        nameEl.textContent = entry.speaker === "narrator" ? "" : `${entry.emoji} ${entry.name}`.trim();
+        const textEl = document.createElement("span");
+        textEl.className = "backlog-text";
+        if (entry.speaker !== "narrator") {
+          textEl.style.color = entry.color;
+        }
+        textEl.textContent = entry.text;
+        if (entry.speaker !== "narrator") {
+          row.appendChild(nameEl);
+        }
+        row.appendChild(textEl);
+        content.appendChild(row);
+      }
+      el.style.display = "flex";
+      window.requestAnimationFrame(() => {
+        el.classList.add("visible");
+        content.scrollTop = content.scrollHeight;
+      });
+    }
+    closeBacklog() {
+      const el = document.getElementById("backlog-panel");
+      if (el) {
+        el.classList.remove("visible");
+        window.setTimeout(() => {
+          el.style.display = "none";
+        }, 300);
+      }
+      this.backlogOpen = false;
     }
   };
   window.addEventListener("DOMContentLoaded", () => {
