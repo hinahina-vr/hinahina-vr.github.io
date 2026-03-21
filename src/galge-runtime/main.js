@@ -860,27 +860,6 @@ class GalgeRuntimeApp {
     const isNarrator = step.speaker === "narrator";
     const emotion = resolveEmotion(step.emotion, step.expression);
 
-    if (isNarrator) {
-      this.$namePlate.style.display = "none";
-    } else {
-      this.$namePlate.style.display = "inline-block";
-      if (this.currentMode === "classic") {
-        this.$namePlate.textContent = `【${charData.name}】`;
-        this.$namePlate.style.color = "#ffffff";
-        this.$namePlate.style.textShadow = "none";
-      } else {
-        this.$namePlate.textContent = `${charData.emoji} ${charData.name}`.trim();
-        this.$namePlate.style.color = charData.color || "#ffffff";
-        this.$namePlate.style.textShadow = `0 0 12px ${charData.color || "#ffffff"}40`;
-      }
-    }
-
-    this.$expressionTag.textContent = step.expression || "";
-    if (this.currentMode === "immersive" && !isNarrator && charData.color) {
-      this.$textContent.style.color = charData.color;
-    } else {
-      this.$textContent.style.color = "";
-    }
     if (step.bg) {
       this.setAtmosphere(step.bg);
     }
@@ -911,6 +890,29 @@ class GalgeRuntimeApp {
       if (token !== this.renderToken) {
         return;
       }
+
+      // Update name plate and text color AFTER fade-out completes
+      if (isNarrator) {
+        this.$namePlate.style.display = "none";
+      } else {
+        this.$namePlate.style.display = "inline-block";
+        if (this.currentMode === "classic") {
+          this.$namePlate.textContent = `【${charData.name}】`;
+          this.$namePlate.style.color = "#ffffff";
+          this.$namePlate.style.textShadow = "none";
+        } else {
+          this.$namePlate.textContent = `${charData.emoji} ${charData.name}`.trim();
+          this.$namePlate.style.color = charData.color || "#ffffff";
+          this.$namePlate.style.textShadow = `0 0 12px ${charData.color || "#ffffff"}40`;
+        }
+      }
+      this.$expressionTag.textContent = step.expression || "";
+      if (this.currentMode === "immersive" && !isNarrator && charData.color) {
+        this.$textContent.style.color = charData.color;
+      } else {
+        this.$textContent.style.color = "";
+      }
+
       this.$textContent.classList.remove("text-fade-out");
       this.$textContent.classList.add("text-fade-in");
       this.typeText(step.text, () => {
