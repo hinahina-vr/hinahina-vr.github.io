@@ -6,6 +6,7 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
+import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-dejiko");
 const OUT_FILE = join(import.meta.dirname, "..", "diary-dejiko.html");
@@ -186,7 +187,7 @@ ${entryListItems}
 </html>
 `;
 
-  await writeFile(OUT_FILE, html, "utf-8");
+  await writeFile(OUT_FILE, injectSiteModeAssets(html), "utf-8");
   console.log(`✓ diary-dejiko.html generated (${entries.length} entries)`);
 }
 

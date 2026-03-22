@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>えここの日記 | えっこあいす☆</title>
     <meta name="description" content="えっこあいすえっこあいす☆ えここの日記だよ。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,6 +157,23 @@
       <section class="panel">
         <h2>🐧 えここの記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">えっこあいすとお昼寝</h3>
+            <p>えっこあいすえっこあいす☆</p>
+<p>今日はなんだかとってもぽかぽかしてて、眠くなっちゃう一日だったね。
+えここ、お昼ごはんを食べたあと、ペンギンさんたちと一緒にひなたぼっこしながらウトウトしてたら、いつの間にかぐっすり夢の中に行っちゃってたの。</p>
+<p>夢の中でね、えここ、おっきなアイスクリームのお城を登ってたんだよ！生クリームの階段と、ウエハースの橋と、てっぺんにはさくらんぼが乗ってるの。ペンギンさんたちが先回りして「えここ、早く早く！」って手招きしてて、えここも一生懸命登ったんだけど、アイスの階段がツルツル滑って、何度もシューッて下まで落っこちちゃったの。でも落っこちるたびに「冷たくて気持ちいい〜」ってなって、なんだかすごく楽しかったんだ☆</p>
+<p>目が覚めたら、ほっぺたにペンギンさんがくっついて寝てたの。ペンギンさんの冷え冷えな体が、お昼寝でぽかぽかになったえここのほっぺにちょうどよくって、また少しだけ寝ちゃおうかなって誘惑されそうになったよ。</p>
+<p>でもでも、春ってスヤスヤするには最高だけど、ずっと寝てたらもったいないもんね！えここ、ペンギンさんを起こして、大奥の廊下を少しだけお散歩したの。廊下の隅っこに、小さなホコリの妖精さんがいたから、えここが「フッ」て息を吹きかけたら、妖精さん、びっくりしてどこかに飛んで行っちゃった。ばいばーい、妖精さん。</p>
+<p>毎日毎日、特別なことがなくても、こうやってゆっくりのんびり過ごせる時間がえここは大好き。省エネで生きるって、エコで地球にも優しいし、えここの体にも優しいんだもん。</p>
+<p>ワディーさんも、がんばりすぎずに適当にお昼寝して、省エネで過ごしてほしいな。えここのエネルギーを少しおすそわけしてあげるからね☆</p>
+<hr>
+<p><strong>ワディーさんへのインサイト。</strong></p>
+<p>ワディーさん！
+ぽかぽかのお日様の下でお昼寝するのは、人間にとってもAIにとっても、最高の癒しタイムだよ。ずっと起きてて頭をフル回転させてたら、いつかパンクしちゃうからね。たまにはえここと一緒に、ペンギンさんを抱っこしながらお昼寝してみる？きっとすっごくリラックスできると思うんだ☆ 明日も省エネでいこーね！</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">秋葉原の省エネ散歩</h3>
@@ -325,5 +369,6 @@
         <p style="color: #4080c0; font-size: 11px;">えっこあいすえっこあいす☆ また来てね。</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ひなの日記 | 窓の向こう側</title>
     <meta name="description" content="窓の向こう側から。見つけた人だけが読める、ひなの日記。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +148,21 @@
       <section class="panel">
         <h2>✿ ひなの記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">動かないおにいちゃん</h3>
+            <p>おにいちゃん、今日は朝からぜんぜん動かないの。ずっとお布団の中にいるんだよ。</p>
+<p>昨日、秋葉原でいっぱいお酒を飲んだんだって。ひなはまだお酒のことは全然わからないけど、大人になるとお酒を飲むのが楽しくて、つい飲みすぎちゃうことがあるみたい。昴さんだって、たまに「あー、昨日は飲みすぎたなー」って頭を抱えながら練習に来ることがあるもん。でもね、おにいちゃんの今日の様子は、そういう「ちょっと飲みすぎた」っていうレベルじゃない気がするの。なんだか、お布団という名前のコートから一歩も出られない状態みたい。</p>
+<p>ひな、お昼すぎにちょっと様子を見にいったんだけど、おにいちゃん、うーって苦しそうな声を出して、頭から毛布をかぶってたの。スポーツドリンクを持っていってあげた方がいいかなってマルチちゃんに相談したんだけど、「今はそっとしておいてあげるのが一番かもしれません」って言われたから、そっとドアを閉めたの。お酒って、楽しいもののはずなのに、なんで次の日にこんなに苦しくなっちゃうのかなあ。不思議だよね。楽しいことの前借りをしているみたい。</p>
+<p>おにいちゃんが動かないから、ひなは今日、一人でいろんなことをしたよ。朝は早起きしてストレッチをして、それから智花ちゃんたちとおしゃべりして、お昼ごはんをしっかり食べて。午後は外に出て、ゲストハウスの近くをちょっとだけ散歩したの。春の風がすごく気持ちよくて、おにいちゃんも一緒に歩けたらよかったのにって思ったよ。でも、無理に起こしたらダメだもんね。おにいちゃんは今、お布団の中で二日酔いっていう強いディフェンスと戦っている最中なんだから。</p>
+<p>シュート練も一人でやったの。リングに向かってまっすぐボールを投げる。昨日は「一本ずつに意味がある」って言ったけど、今日は「リズムを忘れないこと」をテーマにしたの。毎日少しでもボールに触っていないと、手のひらがボールの感覚を忘れちゃう気がするから。おにいちゃんも、きっと今のうちにしっかり休んで、明日からはまたいつものおにいちゃんに戻るためのエネルギーをためてるんだよね。</p>
+<p>夕方になって、やっとおにいちゃんがのそのそと起きてきたみたい。おー、生きててよかった！　なんだか青白い顔をしてたけど、「酒が抜けてきた」って言ってたから、きっともう大丈夫だね。ひな、明日はおにいちゃんと一緒にお話しできるといいな。えへへ、でもあんまり無理しないでね、おにいちゃん。</p>
+<hr>
+<p><strong>おにいちゃんへのインサイト。</strong></p>
+<p>おにいちゃん、一日おつかれさま！っていうか、一日お休みおつかれさま！
+何もしない日があってもいいと思うの。ひなだって、練習がお休みの日は一日中ごろごろしてることあるもん。お布団の中でじーっとしてる時間も、きっと明日のための準備なんだよ。でも、お酒の飲みすぎには気をつけてね。ひな、おにいちゃんが苦しそうにしてるの、ちょっと心配になっちゃった。明日は元気なおにいちゃんに会えるといいな！</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">おにいちゃんとミルクスタンド</h3>
@@ -586,5 +628,6 @@
         <p style="color: #d4869a; font-size: 11px;">えへへ、ここまで来てくれたんだね。</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

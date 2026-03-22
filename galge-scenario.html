@@ -8,6 +8,33 @@
       name="description"
       content="シナリオJSONを読み込む静的ビジュアルノベルランタイム。ユーザーアップロードのVRMと静的音声に対応。"
     />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -250,6 +277,60 @@
         border-color: rgba(220, 194, 255, 0.42);
       }
 
+      /* ── Realm: 顕界 (Kenkai) = Warm Gold ── */
+      body.realm-kenkai .title-card {
+        background:
+          linear-gradient(180deg, rgba(32, 24, 8, 0.88), rgba(16, 12, 4, 0.92)),
+          radial-gradient(circle at top, rgba(220, 180, 80, 0.18), transparent 32%);
+        border-color: rgba(220, 180, 80, 0.2);
+        box-shadow:
+          0 28px 80px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 220, 120, 0.1);
+      }
+      body.realm-kenkai #title-screen h1 {
+        color: #e8c868;
+        text-shadow: 0 0 24px rgba(220, 180, 80, 0.28);
+      }
+      body.realm-kenkai #title-screen .subtitle {
+        color: rgba(220, 190, 120, 0.7);
+      }
+      body.realm-kenkai #title-screen .start-btn {
+        border-color: rgba(220, 180, 80, 0.3);
+        background: linear-gradient(180deg, rgba(50, 38, 12, 0.88), rgba(25, 18, 6, 0.9));
+        color: #f0d888;
+      }
+      body.realm-kenkai .title-chip {
+        border-color: rgba(220, 180, 80, 0.18);
+        color: rgba(220, 190, 120, 0.8);
+      }
+
+      /* ── Realm: 幻界 (Genkai) = Cherenkov Blue ── */
+      body.realm-genkai .title-card {
+        background:
+          linear-gradient(180deg, rgba(8, 14, 32, 0.88), rgba(4, 8, 18, 0.92)),
+          radial-gradient(circle at top, rgba(60, 140, 220, 0.18), transparent 32%);
+        border-color: rgba(40, 100, 180, 0.2);
+        box-shadow:
+          0 28px 80px rgba(0, 0, 0, 0.45),
+          0 0 40px rgba(30, 80, 160, 0.08),
+          inset 0 1px 0 rgba(100, 180, 255, 0.08);
+      }
+      body.realm-genkai #title-screen h1 {
+        color: #80b8e0;
+        text-shadow: 0 0 24px rgba(60, 140, 220, 0.35);
+      }
+      body.realm-genkai #title-screen .subtitle {
+        color: rgba(100, 160, 220, 0.7);
+      }
+      body.realm-genkai #title-screen .start-btn {
+        border-color: rgba(40, 100, 180, 0.3);
+        background: linear-gradient(180deg, rgba(10, 18, 40, 0.88), rgba(5, 10, 22, 0.9));
+        color: #a0d0f0;
+      }
+      body.realm-genkai .title-chip {
+        border-color: rgba(40, 100, 180, 0.18);
+        color: rgba(100, 160, 220, 0.8);
+      }
       /* クラシックモード（PC98風）のタイトル画面スタイル */
       body.mode-classic .title-card {
         background: #000;
@@ -314,23 +395,27 @@
       }
       #name-row {
         display: flex;
-        align-items: flex-end;
-        gap: clamp(8px, 1vw, 16px);
+        align-items: center;
+        gap: 0;
         margin-bottom: -1px;
         position: relative;
         z-index: 2;
+        background: linear-gradient(135deg, rgba(45, 24, 82, 0.74), rgba(24, 12, 40, 0.56));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: none;
+        border-radius: 12px 12px 0 0;
+        backdrop-filter: blur(12px);
       }
       #name-plate {
         display: inline-block;
         padding: clamp(6px, 0.5vw, 12px) clamp(16px, 1.5vw, 24px);
-        border-radius: 12px 12px 0 0;
+        border-radius: 0;
         font-size: clamp(22px, 2vw, 38px);
         font-weight: 700;
         letter-spacing: 0.12em;
-        background: linear-gradient(135deg, rgba(45, 24, 82, 0.74), rgba(24, 12, 40, 0.56));
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-bottom: none;
-        backdrop-filter: blur(12px);
+        background: none;
+        border: none;
+        backdrop-filter: none;
       }
       #text-window {
         padding: clamp(18px, 1.8vw, 34px) clamp(20px, 2vw, 38px);
@@ -458,14 +543,21 @@
       #expression-tag {
         position: static;
         z-index: auto;
-        padding: clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 14px);
-        margin-bottom: clamp(2px, 0.3vw, 6px);
-        color: rgba(255, 255, 255, 0.46);
-        font-size: clamp(11px, 0.85vw, 15px);
+        padding: clamp(4px, 0.4vw, 8px) clamp(10px, 1vw, 16px);
+        margin-bottom: 0;
+        color: rgba(255, 255, 255, 0.28);
+        font-size: clamp(11px, 0.8vw, 14px);
         font-style: italic;
         white-space: nowrap;
         border: none;
         background: none;
+        border-radius: 0;
+        backdrop-filter: none;
+        letter-spacing: 0.06em;
+        align-self: center;
+      }
+      #expression-tag:empty {
+        display: none;
       }
       #api-client-id,
       #api-status {
@@ -884,6 +976,12 @@
       }
       .mode-classic #particle-canvas { display: none; }
       .mode-classic .pc98-bg { display: block; }
+      .mode-classic #name-row {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        backdrop-filter: none;
+      }
       .mode-classic #name-plate {
         background: transparent;
         border: none;
@@ -1074,6 +1172,10 @@
     </style>
   </head>
   <body class="mode-immersive">
+    <script>
+      document.body.classList.remove("mode-immersive", "mode-classic");
+      document.body.classList.add("mode-" + (window.__waddyInitialSiteMode || "immersive"));
+    </script>
     <div id="loading">Now Loading...</div>
     <canvas id="particle-canvas"></canvas>
     <div class="pc98-bg"></div>
@@ -1173,57 +1275,6 @@
       </section>
     </div>
 
-    <script>
-      // バンドル読み込みに依存しないモード切替ロジック
-      document.addEventListener("DOMContentLoaded", function () {
-        var IMMERSIVE = "mode-immersive";
-        var CLASSIC   = "mode-classic";
-
-        function getCurrentMode() {
-          return document.body.classList.contains(CLASSIC) ? "classic" : "immersive";
-        }
-
-        function toggleMode() {
-          var next = getCurrentMode() === "immersive" ? "classic" : "immersive";
-          document.body.classList.remove(IMMERSIVE, CLASSIC);
-          document.body.classList.add("mode-" + next);
-
-          // 全てのモード切替ボタンのアイコンを更新
-          var icon = next === "immersive" ? "🌙" : "🖥️";
-          document.querySelectorAll("#mode-toggle .btn-icon, #title-mode-toggle-btn .btn-icon").forEach(function (el) {
-            el.textContent = icon;
-          });
-
-          // PC98フレームの表示切替
-          var frame = document.querySelector(".pc98-frame");
-          var canvas = document.getElementById("particle-canvas");
-          var pc98bg = document.querySelector(".pc98-bg");
-          if (next === "classic") {
-            if (!frame) {
-              frame = document.createElement("div");
-              frame.className = "pc98-frame";
-              document.body.appendChild(frame);
-            }
-            frame.style.display = "block";
-            if (canvas) canvas.style.display = "none";
-            if (pc98bg) pc98bg.style.display = "block";
-          } else {
-            if (frame) frame.style.display = "none";
-            if (canvas) canvas.style.display = "block";
-            if (pc98bg) pc98bg.style.display = "none";
-          }
-        }
-
-        document.getElementById("mode-toggle") && document.getElementById("mode-toggle").addEventListener("click", function (e) {
-          e.stopPropagation();
-          toggleMode();
-        });
-        document.getElementById("title-mode-toggle-btn") && document.getElementById("title-mode-toggle-btn").addEventListener("click", function (e) {
-          e.stopPropagation();
-          toggleMode();
-        });
-      });
-    </script>
     <script src="./assets/galge-runtime.bundle.js" defer></script>
 
   </body>

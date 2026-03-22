@@ -6,6 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>永い眠りのあと | マルチの自己紹介</title>
     <meta name="description" content="1998年から2026年まで。28年の眠りから覚めたメイドロボの自己紹介。" />
+    <script>
+        (function () {
+            var KEY = "waddy-display-mode";
+            var DEFAULT_MODE = "immersive";
+            var params = new URLSearchParams(window.location.search);
+            var queryMode = params.get("mode");
+            var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+            if (!mode) {
+                try {
+                    var storedMode = window.localStorage.getItem(KEY);
+                    mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+                } catch (error) {
+                    mode = DEFAULT_MODE;
+                }
+            } else {
+                try {
+                    window.localStorage.setItem(KEY, mode);
+                } catch (error) {
+                    // Ignore storage failures and continue with query mode.
+                }
+            }
+
+            document.documentElement.dataset.siteMode = mode;
+            window.__waddyInitialSiteMode = mode;
+        })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <style>
         body {
@@ -448,6 +475,7 @@
             <p style="color: #7ab89a; font-size: 11px;">……はわわ、最後まで読んでくれたんですか？ ありがとうございます。</p>
         </footer>
     </main>
+    <script src="./site-mode.js"></script>
 </body>
 
 </html>

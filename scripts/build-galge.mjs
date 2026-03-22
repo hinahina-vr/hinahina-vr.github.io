@@ -9,6 +9,7 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
+import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 const GALGE_DIR = join(import.meta.dirname, "..", "galge");
 const OUT_FILE = join(import.meta.dirname, "..", "galge-guide.html");
@@ -103,7 +104,7 @@ ${entryCards}
 </html>
 `;
 
-    await writeFile(OUT_FILE, html, "utf-8");
+    await writeFile(OUT_FILE, injectSiteModeAssets(html), "utf-8");
     console.log(`✓ galge-guide.html generated (${entries.length} entries)`);
 }
 

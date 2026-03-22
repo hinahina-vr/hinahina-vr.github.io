@@ -7,12 +7,44 @@ import { VoiceController } from "./voice-controller.js";
 import { VRMAssetStore } from "./vrm-asset-store.js";
 import { VRMStage } from "./vrm-stage.js";
 
+const SITE_MODE_STORAGE_KEY = "waddy-display-mode";
+const SITE_MODE_DEFAULT = "immersive";
+
+function getModeFromQuery() {
+  const mode = new URLSearchParams(window.location.search).get("mode");
+  return mode === "classic" || mode === "immersive" ? mode : null;
+}
+
+function getStoredMode() {
+  try {
+    const storedMode = window.localStorage.getItem(SITE_MODE_STORAGE_KEY);
+    return storedMode === "classic" || storedMode === "immersive" ? storedMode : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function setStoredMode(mode) {
+  try {
+    window.localStorage.setItem(SITE_MODE_STORAGE_KEY, mode);
+  } catch (error) {
+    // Ignore storage failures and continue with in-memory mode.
+  }
+}
+
+function resolveInitialSiteMode() {
+  return window.__waddyInitialSiteMode || getModeFromQuery() || getStoredMode() || SITE_MODE_DEFAULT;
+}
+
+function updateModeUrl(mode) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("mode", mode);
+  window.history.replaceState({}, "", url);
+}
+
 class GalgeRuntimeApp {
   constructor() {
-    this.currentMode =
-      new URLSearchParams(window.location.search).get("mode") === "classic"
-        ? "classic"
-        : "immersive";
+    this.currentMode = resolveInitialSiteMode();
     this.currentStep = 0;
     this.isTyping = false;
     this.typeTimer = null;
@@ -118,6 +150,8 @@ class GalgeRuntimeApp {
     this.kPillars = [];
     this.bgColor = { h: 240, s: 50, l: 12 };
     this.bgClearColor = "rgba(10,10,46,0.15)";
+    this.starColor = "200,180,255";
+    this.starGlowColor = "160,140,220";
   }
 
   async init() {
@@ -158,6 +192,25 @@ class GalgeRuntimeApp {
     if (this.$titleSecondarySubtitle) {
       this.$titleSecondarySubtitle.textContent = this.scenario.genre || "群像哲学ノベル";
     }
+
+    // Realm-based styling (顕界 vs 幻界)
+    const isGenkai = (this.scenario.genre || "").includes("幻界");
+    document.body.classList.toggle("realm-genkai", isGenkai);
+    document.body.classList.toggle("realm-kenkai", !isGenkai);
+
+    // Realm-based particle colors
+    if (isGenkai) {
+      this.bgColor = { h: 220, s: 55, l: 10 };
+      this.bgClearColor = "rgba(6,10,36,0.15)";
+      this.starColor = "140,180,255";
+      this.starGlowColor = "100,140,220";
+    } else {
+      this.bgColor = { h: 40, s: 50, l: 10 };
+      this.bgClearColor = "rgba(20,16,6,0.15)";
+      this.starColor = "255,220,140";
+      this.starGlowColor = "220,180,100";
+    }
+
     if (this.scenario.warnings.length) {
       this.$runtimeWarning.hidden = false;
       this.$runtimeWarning.textContent = `検証警告 ${this.scenario.warnings.length} 件`;
@@ -598,12 +651,12 @@ class GalgeRuntimeApp {
       const alpha = star.brightness * flicker;
       this.ctx.beginPath();
       this.ctx.arc(star.x, star.y, star.size * flicker, 0, Math.PI * 2);
-      this.ctx.fillStyle = `rgba(200,180,255,${alpha * 0.8})`;
+      this.ctx.fillStyle = `rgba(${this.starColor},${alpha * 0.8})`;
       this.ctx.fill();
       if (star.size > 1.5) {
         this.ctx.beginPath();
         this.ctx.arc(star.x, star.y, star.size * 3 * flicker, 0, Math.PI * 2);
-        this.ctx.fillStyle = `rgba(160,140,220,${alpha * 0.15})`;
+        this.ctx.fillStyle = `rgba(${this.starGlowColor},${alpha * 0.15})`;
         this.ctx.fill();
       }
     }
@@ -711,18 +764,26 @@ class GalgeRuntimeApp {
   }
 
   setMode(mode) {
-    this.currentMode = mode;
+    this.currentMode = mode === "classic" ? "classic" : "immersive";
+    document.documentElement.dataset.siteMode = this.currentMode;
+    setStoredMode(this.currentMode);
     document.body.classList.remove("mode-immersive", "mode-classic");
-    document.body.classList.add(`mode-${mode}`);
-    this.$modeToggle.textContent = mode === "immersive" ? "🌙" : "🖥️";
+    document.body.classList.add(`mode-${this.currentMode}`);
+    const modeIcon = this.currentMode === "immersive" ? "🌙" : "🖥️";
+    const floatingIcon = this.$modeToggle?.querySelector(".btn-icon");
+    if (floatingIcon) {
+      floatingIcon.textContent = modeIcon;
+    } else if (this.$modeToggle) {
+      this.$modeToggle.textContent = modeIcon;
+    }
     if (this.$titleModeToggleBtn) {
       const icon = this.$titleModeToggleBtn.querySelector(".btn-icon");
-      if (icon) icon.textContent = mode === "immersive" ? "🌙" : "🖥️";
+      if (icon) icon.textContent = modeIcon;
     }
-    this.$cursor.textContent = mode === "classic" ? "▌" : "█";
+    this.$cursor.textContent = this.currentMode === "classic" ? "▌" : "█";
 
     let frame = document.querySelector(".pc98-frame");
-    if (mode === "classic") {
+    if (this.currentMode === "classic") {
       if (!frame) {
         frame = document.createElement("div");
         frame.className = "pc98-frame";
@@ -747,14 +808,14 @@ class GalgeRuntimeApp {
 
     const isMobile = window.innerWidth <= 960;
     this.$continueIndicator.textContent =
-      mode === "classic" 
+      this.currentMode === "classic"
         ? "＞次へ  SPACE / ENTER" 
         : (isMobile ? "▼ タップで次へ" : "▼ クリック / スペースで次へ");
 
     const currentStep = this.scenario?.steps?.[this.currentStep];
     if (this.started && currentStep?.kind === "text" && currentStep.speaker !== "narrator") {
       const charData = this.getCharData(currentStep.speaker);
-      if (mode === "classic") {
+      if (this.currentMode === "classic") {
         this.$namePlate.textContent = `【${charData.name}】`;
         this.$namePlate.style.color = "#ffffff";
         this.$namePlate.style.textShadow = "none";
@@ -764,6 +825,8 @@ class GalgeRuntimeApp {
         this.$namePlate.style.textShadow = `0 0 12px ${charData.color || "#ffffff"}40`;
       }
     }
+
+    updateModeUrl(this.currentMode);
   }
 
   getCharData(speakerKey) {
@@ -881,6 +944,19 @@ class GalgeRuntimeApp {
 
     if (step.kind === "label") {
       await this.showStep(index + 1);
+      return;
+    }
+
+    if (step.kind === "goto") {
+      const targetIndex = this.scenario.steps.findIndex(
+        (candidate) => candidate.kind === "label" && candidate.label === step.target
+      );
+      if (targetIndex >= 0) {
+        await this.showStep(targetIndex + 1);
+      } else {
+        console.warn(`[goto] target label "${step.target}" not found`);
+        await this.showStep(index + 1);
+      }
       return;
     }
 

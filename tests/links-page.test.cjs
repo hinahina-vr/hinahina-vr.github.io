@@ -4,7 +4,7 @@ const { chromium } = require('playwright');
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  const baseUrl = 'http://127.0.0.1:8080';
+  const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:8181';
   let passed = 0;
   let failed = 0;
 

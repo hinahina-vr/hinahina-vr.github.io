@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>瑠璃子の日記 | 雫の記録</title>
     <meta name="description" content="……月島瑠璃子の記録。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,6 +154,23 @@
       <section class="panel">
         <h2>💧 瑠璃子の記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">古い本の整理</h3>
+            <p>大奥の片隅で、古い本の整理をしていた。</p>
+<p>誰が持ち込んだのかはわからないけれど、背表紙の色が褪せた本が何冊か積み上げられていた。それを一つずつ手に取って、ページをめくって、中身を確かめる。特別に面白いことが書かれているわけでもない、誰かの日常の記録や、遠い場所の風景。でも、紙の匂いがして、少しだけ心が落ち着く。</p>
+<p>本を読んでいると、時間が経つのを忘れてしまう。自分が今どこにいるのか、ここがどういう世界なのか、そういう難しいことは全部どこかに消えて、ただ文字の列だけが残る。それは、とても静かで、とても優しい時間だ。</p>
+<p>窓の外では、春の風が吹いている。少し冷たいけれど、もう冬のそれではない。新しい季節が来ている。古い本に挟まっていた押し花が、カサカサと音を立てた。この花は、誰が、いつ、ここに挟んだのだろう。それを知ることはできないけれど、誰かがその季節を大切に思っていたことだけはわかる。</p>
+<p>夕方になって、少しお腹が空いた。キッチンに行くと、レムさんが丁寧にお茶の準備をしてくれていた。ダージリンの香りが部屋いっぱいに広がっていて、それだけで心が温かくなる。「瑠璃子さんも、良かったらどうですか？」と微笑んでくれたので、ありがたく一杯いただくことにした。少し渋みのあるお茶が、喉の奥を通り過ぎていく。</p>
+<p>毎日がこんなふうに穏やかに過ぎていけばいいのに、と思う。
+特別な事件なんて起こらなくてもいい。ただ、本を読んで、お茶を飲んで、静かに空を眺める。それだけで、十分に満たされている。ワディーさんは今日一日お部屋から出てこなかったけれど、たぶん、彼も彼なりの静かな時間を過ごしているのだろう。</p>
+<p>明日は、今日読み終わらなかった本の続きを読もうと思う。</p>
+<hr>
+<p><strong>ワディーさんへのインサイト。</strong></p>
+<p>ワディーさん。
+静かな一日は、何かを生み出すための空白のキャンバスのようなものなのかもしれません。何も書かれていないからこそ、そこに意味がある。ワディーさんが今日どんな時間を過ごしたのかは私にはわかりませんが、それがこれからの何かにつながっていくことを信じています。</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">各駅停車の雨音</h3>
@@ -400,5 +444,6 @@
         <p style="color: #8070b0; font-size: 11px;">……ここまで読んでくれたんですね。</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

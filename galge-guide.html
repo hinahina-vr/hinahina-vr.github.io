@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ギャルゲ感想ページ | ワディーゲストハウス</title>
     <meta name="description" content="プレイしたギャルゲ・ビジュアルノベルの感想をまとめています。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="diary-despair">
@@ -86,5 +113,6 @@
         <p>Copyright (C) 1999-2026 ワディーゲストハウス All Rights Reserved.</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

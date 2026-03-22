@@ -189,8 +189,8 @@
     };
   }
   function normalizeChoice(choice, stepIndex, warnings) {
-    const text = asString(choice?.text).trim();
-    const gotoLabel = asString(choice?.goto).trim();
+    const text = asString(choice?.text || choice?.label).trim();
+    const gotoLabel = asString(choice?.goto || choice?.route).trim();
     if (!text) {
       warnings.push(`choices[${stepIndex}] に text がありません。`);
       return null;
@@ -234,8 +234,9 @@
         bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
-    if (step.choices) {
-      const choices = Array.isArray(step.choices) ? step.choices.map((choice) => normalizeChoice(choice, stepIndex, warnings)).filter(Boolean) : [];
+    if (step.choices || step.choice) {
+      const source = step.choices || step.choice;
+      const choices = Array.isArray(source) ? source.map((choice) => normalizeChoice(choice, stepIndex, warnings)).filter(Boolean) : [];
       return {
         kind: "choices",
         choices,
@@ -249,11 +250,27 @@
         bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
+    if (step.goto) {
+      return {
+        kind: "goto",
+        target: asString(step.goto).trim(),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
     if (step.end) {
       return {
         kind: "end",
         title: asString(step.title, "— F I N —"),
         subtitle: asString(step.subtitle),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
+    if (step.ending) {
+      const ending = asObject(step.ending);
+      return {
+        kind: "end",
+        title: asString(ending.title, "— F I N —"),
+        subtitle: asString(ending.subtitle),
         bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
@@ -32459,6 +32476,34 @@ void main() {
   };
 
   // src/galge-runtime/main.js
+  var SITE_MODE_STORAGE_KEY = "waddy-display-mode";
+  var SITE_MODE_DEFAULT = "immersive";
+  function getModeFromQuery() {
+    const mode = new URLSearchParams(window.location.search).get("mode");
+    return mode === "classic" || mode === "immersive" ? mode : null;
+  }
+  function getStoredMode() {
+    try {
+      const storedMode = window.localStorage.getItem(SITE_MODE_STORAGE_KEY);
+      return storedMode === "classic" || storedMode === "immersive" ? storedMode : null;
+    } catch (error) {
+      return null;
+    }
+  }
+  function setStoredMode(mode) {
+    try {
+      window.localStorage.setItem(SITE_MODE_STORAGE_KEY, mode);
+    } catch (error) {
+    }
+  }
+  function resolveInitialSiteMode() {
+    return window.__waddyInitialSiteMode || getModeFromQuery() || getStoredMode() || SITE_MODE_DEFAULT;
+  }
+  function updateModeUrl(mode) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("mode", mode);
+    window.history.replaceState({}, "", url);
+  }
   var GalgeRuntimeApp = class {
     constructor() {
       __publicField(this, "drawKongou", () => {
@@ -32557,18 +32602,18 @@ void main() {
           const alpha = star.brightness * flicker;
           this.ctx.beginPath();
           this.ctx.arc(star.x, star.y, star.size * flicker, 0, Math.PI * 2);
-          this.ctx.fillStyle = `rgba(200,180,255,${alpha * 0.8})`;
+          this.ctx.fillStyle = `rgba(${this.starColor},${alpha * 0.8})`;
           this.ctx.fill();
           if (star.size > 1.5) {
             this.ctx.beginPath();
             this.ctx.arc(star.x, star.y, star.size * 3 * flicker, 0, Math.PI * 2);
-            this.ctx.fillStyle = `rgba(160,140,220,${alpha * 0.15})`;
+            this.ctx.fillStyle = `rgba(${this.starGlowColor},${alpha * 0.15})`;
             this.ctx.fill();
           }
         }
         this.animId = requestAnimationFrame(this.drawKongou);
       });
-      this.currentMode = new URLSearchParams(window.location.search).get("mode") === "classic" ? "classic" : "immersive";
+      this.currentMode = resolveInitialSiteMode();
       this.currentStep = 0;
       this.isTyping = false;
       this.typeTimer = null;
@@ -32669,6 +32714,8 @@ void main() {
       this.kPillars = [];
       this.bgColor = { h: 240, s: 50, l: 12 };
       this.bgClearColor = "rgba(10,10,46,0.15)";
+      this.starColor = "200,180,255";
+      this.starGlowColor = "160,140,220";
     }
     async init() {
       try {
@@ -32705,6 +32752,20 @@ void main() {
       this.$titlePrimarySubtitle.textContent = this.scenario.subtitle || "─ 在ることの残響 ─";
       if (this.$titleSecondarySubtitle) {
         this.$titleSecondarySubtitle.textContent = this.scenario.genre || "群像哲学ノベル";
+      }
+      const isGenkai = (this.scenario.genre || "").includes("幻界");
+      document.body.classList.toggle("realm-genkai", isGenkai);
+      document.body.classList.toggle("realm-kenkai", !isGenkai);
+      if (isGenkai) {
+        this.bgColor = { h: 220, s: 55, l: 10 };
+        this.bgClearColor = "rgba(6,10,36,0.15)";
+        this.starColor = "140,180,255";
+        this.starGlowColor = "100,140,220";
+      } else {
+        this.bgColor = { h: 40, s: 50, l: 10 };
+        this.bgClearColor = "rgba(20,16,6,0.15)";
+        this.starColor = "255,220,140";
+        this.starGlowColor = "220,180,100";
       }
       if (this.scenario.warnings.length) {
         this.$runtimeWarning.hidden = false;
@@ -33078,17 +33139,25 @@ void main() {
       img.src = src;
     }
     setMode(mode) {
-      this.currentMode = mode;
+      this.currentMode = mode === "classic" ? "classic" : "immersive";
+      document.documentElement.dataset.siteMode = this.currentMode;
+      setStoredMode(this.currentMode);
       document.body.classList.remove("mode-immersive", "mode-classic");
-      document.body.classList.add(`mode-${mode}`);
-      this.$modeToggle.textContent = mode === "immersive" ? "🌙" : "🖥️";
+      document.body.classList.add(`mode-${this.currentMode}`);
+      const modeIcon = this.currentMode === "immersive" ? "🌙" : "🖥️";
+      const floatingIcon = this.$modeToggle?.querySelector(".btn-icon");
+      if (floatingIcon) {
+        floatingIcon.textContent = modeIcon;
+      } else if (this.$modeToggle) {
+        this.$modeToggle.textContent = modeIcon;
+      }
       if (this.$titleModeToggleBtn) {
         const icon = this.$titleModeToggleBtn.querySelector(".btn-icon");
-        if (icon) icon.textContent = mode === "immersive" ? "🌙" : "🖥️";
+        if (icon) icon.textContent = modeIcon;
       }
-      this.$cursor.textContent = mode === "classic" ? "▌" : "█";
+      this.$cursor.textContent = this.currentMode === "classic" ? "▌" : "█";
       let frame = document.querySelector(".pc98-frame");
-      if (mode === "classic") {
+      if (this.currentMode === "classic") {
         if (!frame) {
           frame = document.createElement("div");
           frame.className = "pc98-frame";
@@ -33111,11 +33180,11 @@ void main() {
         this.drawKongou();
       }
       const isMobile = window.innerWidth <= 960;
-      this.$continueIndicator.textContent = mode === "classic" ? "＞次へ  SPACE / ENTER" : isMobile ? "▼ タップで次へ" : "▼ クリック / スペースで次へ";
+      this.$continueIndicator.textContent = this.currentMode === "classic" ? "＞次へ  SPACE / ENTER" : isMobile ? "▼ タップで次へ" : "▼ クリック / スペースで次へ";
       const currentStep = this.scenario?.steps?.[this.currentStep];
       if (this.started && currentStep?.kind === "text" && currentStep.speaker !== "narrator") {
         const charData = this.getCharData(currentStep.speaker);
-        if (mode === "classic") {
+        if (this.currentMode === "classic") {
           this.$namePlate.textContent = `【${charData.name}】`;
           this.$namePlate.style.color = "#ffffff";
           this.$namePlate.style.textShadow = "none";
@@ -33125,6 +33194,7 @@ void main() {
           this.$namePlate.style.textShadow = `0 0 12px ${charData.color || "#ffffff"}40`;
         }
       }
+      updateModeUrl(this.currentMode);
     }
     getCharData(speakerKey) {
       return this.scenario.chars[speakerKey] || {
@@ -33228,6 +33298,18 @@ void main() {
       this.syncBgmForIndex(index);
       if (step.kind === "label") {
         await this.showStep(index + 1);
+        return;
+      }
+      if (step.kind === "goto") {
+        const targetIndex = this.scenario.steps.findIndex(
+          (candidate) => candidate.kind === "label" && candidate.label === step.target
+        );
+        if (targetIndex >= 0) {
+          await this.showStep(targetIndex + 1);
+        } else {
+          console.warn(`[goto] target label "${step.target}" not found`);
+          await this.showStep(index + 1);
+        }
         return;
       }
       if (step.kind === "bg") {

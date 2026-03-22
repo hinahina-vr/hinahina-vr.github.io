@@ -6,17 +6,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ワディーゲストハウス</title>
   <meta name="description" content="ワディーゲストハウスの個人サイト。YouTube / X / GitHubリンク集。" />
+  <script>
+    (function () {
+      var KEY = "waddy-display-mode";
+      var DEFAULT_MODE = "immersive";
+      var params = new URLSearchParams(window.location.search);
+      var queryMode = params.get("mode");
+      var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+      if (!mode) {
+        try {
+          var storedMode = window.localStorage.getItem(KEY);
+          mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+        } catch (error) {
+          mode = DEFAULT_MODE;
+        }
+      } else {
+        try {
+          window.localStorage.setItem(KEY, mode);
+        } catch (error) {
+          // Ignore storage failures and continue with query mode.
+        }
+      }
+
+      document.documentElement.dataset.siteMode = mode;
+      window.__waddyInitialSiteMode = mode;
+    })();
+  </script>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
   <div class="stars" aria-hidden="true"></div>
-  <main class="page-frame">
-    <header class="retro-header">
+  <main class="page-frame home-page">
+    <header class="retro-header hero-header">
+      <div class="hero-copy">
       <p class="smallline">Welcome to my cyber room since 1999</p>
       <h1>ワディーゲストハウス</h1>
-      <p class="tagline">ハイパーリンクの海にようこそ。<span class="blink">NEW!</span></p>
-      <marquee behavior="scroll" direction="left" scrollamount="5">
+      <p class="tagline">ハイパーリンクの海にようこそ。<span class="blink">IMMERSIVE READY</span></p>
+      <p class="hero-note">
+        動画制作、VR、配信まわりを横断しながら、日記、対談、ギャルゲー体験、人格設計までを一つの個人サイトに収めています。
+        ここはリンク集であり、神話製作機械の玄関でもあります。
+      </p>
+      <div class="hero-actions">
+        <a class="feature-link" href="./diary.html">日記を読む</a>
+        <a class="feature-link" href="./characters.html">住人を見る</a>
+        <a class="feature-link" href="./videos.html">動画を見る</a>
+      </div>
+      <p class="counter-line">
+        あなたは
+        <strong id="visitor-counter" aria-live="polite">00000000</strong>
+        人目の訪問者です。
+      </p>
+      </div>
+      <aside class="hero-status" aria-label="サイト案内">
+        <h2>Signal</h2>
+        <ul>
+          <li>
+            <span class="hero-label">人格</span>
+            <span class="hero-value">ワディー / ひなひな / 萌神 / リアルおじ</span>
+          </li>
+          <li>
+            <span class="hero-label">導線</span>
+            <span class="hero-value">Diary / Characters / Dialogue / Visual Novel</span>
+          </li>
+          <li>
+            <span class="hero-label">Mode</span>
+            <span class="hero-value">Immersive を既定、Classic に即時切替</span>
+          </li>
+        </ul>
+      </aside>
+      <marquee class="hero-marquee" behavior="scroll" direction="left" scrollamount="5">
         ★ ワディーゲストハウスへようこそ ★ YouTube / X / GitHub で活動中 ★
       </marquee>
     </header>
@@ -29,11 +89,6 @@
       </p>
       <p>
         わたくしには<a href="./simulacrum.html">4つの人格</a>があり、このサイトは「ワディー」の人格で運営しています。
-      </p>
-      <p class="counter-line">
-        あなたは
-        <strong id="visitor-counter" aria-live="polite">00000000</strong>
-        人目の訪問者です。
       </p>
     </section>
 
@@ -139,6 +194,7 @@
   </main>
 
   <script src="./main.js"></script>
+  <script src="./site-mode.js"></script>
 </body>
 
 </html>

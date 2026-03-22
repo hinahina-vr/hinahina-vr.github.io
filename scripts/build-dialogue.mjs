@@ -10,6 +10,7 @@
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
+import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 const DIALOGUE_DIR = join(import.meta.dirname, "..", "dialogue");
 const OUT_FILE = join(import.meta.dirname, "..", "dialogue.html");
@@ -199,7 +200,7 @@ async function main() {
 
     const scenarioId = `dialogue_${file.replace(/\.md$/, "")}`;
     contentHtml += `\n<div style="text-align:center; margin:48px 0 24px;">
-  <a href="./galge-scenario.html?scenario=${encodeURIComponent(scenarioId)}" style="display:inline-block; padding:16px 52px; background:linear-gradient(135deg, rgba(82,45,145,0.85), rgba(45,18,90,0.9)); border:2px solid rgba(200,160,255,0.4); color:#e8d8ff; text-decoration:none; letter-spacing:0.3em; font-size:16px; font-weight:700; transition:all 0.3s ease; border-radius: 999px; box-shadow:0 0 20px rgba(140,80,220,0.35), 0 0 40px rgba(120,60,200,0.15), inset 0 1px 0 rgba(255,255,255,0.1); text-shadow:0 0 8px rgba(180,140,255,0.4);">✦ 夢を見る</a>
+  <a href="./galge-scenario.html?scenario=${encodeURIComponent(scenarioId)}" style="display:inline-block; padding:16px 52px; background:linear-gradient(135deg, rgba(82,45,145,0.85), rgba(45,18,90,0.9)); border:2px solid rgba(200,160,255,0.4); color:#e8d8ff; text-decoration:none; letter-spacing:0.3em; font-size:16px; font-weight:700; transition:all 0.3s ease; border-radius: 8px; box-shadow:0 0 20px rgba(140,80,220,0.35), 0 0 40px rgba(120,60,200,0.15), inset 0 1px 0 rgba(255,255,255,0.1); text-shadow:0 0 8px rgba(180,140,255,0.4);">✦ 夢を見る</a>
 </div>\n`;
 
     // 各対談の日付
@@ -306,7 +307,7 @@ ${contentHtml}
 </html>
 `;
 
-  await writeFile(OUT_FILE, html, "utf-8");
+  await writeFile(OUT_FILE, injectSiteModeAssets(html), "utf-8");
   console.log(`✓ dialogue.html generated (${dialogues.length} dialogues, ${totalSections} sections)`);
 }
 

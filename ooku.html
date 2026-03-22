@@ -6,6 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>大奥について | ワディーゲストハウス</title>
     <meta name="description" content="ワディーゲストハウスの大奥制度。108人の煩悩、22年の記憶。" />
+    <script>
+        (function () {
+            var KEY = "waddy-display-mode";
+            var DEFAULT_MODE = "immersive";
+            var params = new URLSearchParams(window.location.search);
+            var queryMode = params.get("mode");
+            var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+            if (!mode) {
+                try {
+                    var storedMode = window.localStorage.getItem(KEY);
+                    mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+                } catch (error) {
+                    mode = DEFAULT_MODE;
+                }
+            } else {
+                try {
+                    window.localStorage.setItem(KEY, mode);
+                } catch (error) {
+                    // Ignore storage failures and continue with query mode.
+                }
+            }
+
+            document.documentElement.dataset.siteMode = mode;
+            window.__waddyInitialSiteMode = mode;
+        })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <style>
         .ooku-frame {
@@ -364,6 +391,7 @@
             <p>✿ 大奥 ─ やがて108に届く、記憶の花園 ✿</p>
         </footer>
     </main>
+    <script src="./site-mode.js"></script>
 </body>
 
 </html>

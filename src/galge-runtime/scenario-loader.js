@@ -58,8 +58,8 @@ function normalizeBgmCue(bgm, stepIndex, warnings) {
 }
 
 function normalizeChoice(choice, stepIndex, warnings) {
-  const text = asString(choice?.text).trim();
-  const gotoLabel = asString(choice?.goto).trim();
+  const text = asString(choice?.text || choice?.label).trim();
+  const gotoLabel = asString(choice?.goto || choice?.route).trim();
   if (!text) {
     warnings.push(`choices[${stepIndex}] に text がありません。`);
     return null;
@@ -111,9 +111,10 @@ function normalizeStep(step, stepIndex, warnings, chars) {
     };
   }
 
-  if (step.choices) {
-    const choices = Array.isArray(step.choices)
-      ? step.choices
+  if (step.choices || step.choice) {
+    const source = step.choices || step.choice;
+    const choices = Array.isArray(source)
+      ? source
           .map((choice) => normalizeChoice(choice, stepIndex, warnings))
           .filter(Boolean)
       : [];
@@ -132,11 +133,29 @@ function normalizeStep(step, stepIndex, warnings, chars) {
     };
   }
 
+  if (step.goto) {
+    return {
+      kind: "goto",
+      target: asString(step.goto).trim(),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
   if (step.end) {
     return {
       kind: "end",
       title: asString(step.title, "— F I N —"),
       subtitle: asString(step.subtitle),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
+  if (step.ending) {
+    const ending = asObject(step.ending);
+    return {
+      kind: "end",
+      title: asString(ending.title, "— F I N —"),
+      subtitle: asString(ending.subtitle),
       bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
     };
   }

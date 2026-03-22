@@ -6,6 +6,7 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./daily-context.mjs";
+import { injectSiteModeAssets } from "./site-mode-assets.mjs";
 
 /**
  * @param {Object} config
@@ -206,6 +207,6 @@ ${entryListItems}
 </html>
 `;
 
-  await writeFile(OUT_FILE, html, "utf-8");
+  await writeFile(OUT_FILE, injectSiteModeAssets(html), "utf-8");
   console.log(`✓ diary-${config.id}.html generated (${entries.length} entries)`);
 }

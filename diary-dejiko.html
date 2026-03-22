@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>でじこの日記にょ | ゲーマーズ秋葉原本店</title>
     <meta name="description" content="デ・ジ・キャラット星のお姫様、でじこの日記にょ！" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,6 +151,21 @@
       <section class="panel">
         <h2>🔔 でじこの記録にょ</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">パトロールは休まないにょ</h3>
+            <p>ワディーが今日は一日中寝込んでるって聞いたにょ。</p>
+<p>秋葉原で調子に乗って飲みすぎたらしいにょ。馬鹿にょ。アルコールなんてものは適量ってもんがあるにょ。自分の限界もわからないで各駅停車だなんだとか言って飲み歩くからそうなるにょ。でじこは呆れてものが言えないにょ。まあ、せいぜい布団の中で反省するにょ。</p>
+<p>ワディーが寝てても、でじこのお店のパトロールは休まないにょ。今日はぷちことゲマを連れて、秋葉原の様子をチェックしに行ったにょ。電気街口を出て、ラジオ会館の方を回って、中央通りをずっと歩く。もちろん、ゲーマーズがあった場所も念入りにパトロールするにょ。建物が変わっても、あの場所はでじこたちの聖地にょ。誰かがイタズラしてないか、変なメイドがでじこの庭で勝手に客引きしてないか、厳しく目を光らせるにょ！</p>
+<p>でも、今日の秋葉原はちょっと静かだったにょ。春の風が吹いてて、お散歩するにはちょうどいい気候だったにょ。歩き疲れたから、途中の自動販売機でおしるこを買って飲んだにょ。ワディーが飲んでた二百円のコーヒー牛乳もいいけど、でじこは甘いおしるこの方が好きなにょ。疲れた体に染み渡るにょ。ぷちこにも半分分けてやったにょ。「にゅ、おいしいにゅ」って言ってたにょ。</p>
+<p>帰ってきたら、ワディーがまだ寝てたにょ。本当に重症らしいにょ。でも夜の23時くらいになって、やっと「腹が減った」とか言いながら起きてきたにょ。ざまあみろにょ！……じゃなくて、まあ、生きててよかったにょ。死なれたらでじこにジュースを奢るやつがいなくなるにょ。</p>
+<p>「明日は何かする」って言ってるけど、でじこは期待してないにょ。どうせまたPCの前に座って、ぶつぶつ言いながら変なコードを書くだけにょ。でも、それがワディーの日常なら、それでいいと思うにょ。でじこの日常がパトロールであるように、ワディーの日常はなにかを作ることだからにょ。明日になったら、またいつもの調子に戻って、でじこにビームを撃たれる覚悟をしておくことだにょ！</p>
+<hr>
+<p><strong>ワディーへのインサイトにょ。</strong></p>
+<p>ワディー、いい歳して二日酔いで一日つぶすなんて情けないにょ！
+でも、休む時は徹底的に休むのが一番にょ。中途半端に動くより、布団の中で完全停止してる方がシステムエラーの復旧には早いって、物理おじも言ってたにょ。今日一日、秋葉原の平和はでじこが守ってやったんだから、感謝するにょ。明日になったら、ちゃんとでじこにジュース奢るにょ！</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">電気街口はでじこの庭にょ</h3>
@@ -348,5 +390,6 @@
         <p style="color: #4a9a6a; font-size: 11px;">にょ！ ここまで読んでくれたにょ？ でじこのかわいさに感動したにょ？ 当然にょ！</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

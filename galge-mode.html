@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ギャルゲーモード | 大奥AI日記</title>
     <meta name="description" content="大奥AIの日記をビジュアルノベル風に体験する。イマーシブモードとクラシック（PC-98風）モードを搭載。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=DotGothic16&display=swap" rel="stylesheet">
@@ -385,6 +412,9 @@
     </style>
   </head>
   <body class="mode-immersive">
+    <script>
+      document.body.className = "mode-" + (window.__waddyInitialSiteMode || "immersive");
+    </script>
     <!-- Loading -->
     <div id="loading">Now Loading...</div>
 
@@ -461,8 +491,43 @@
         astarotte:  { name: 'アスタロッテ',     src: 'アスタロッテのおもちゃ！', color: '#d0a0c0', diary: 'diary-astarotte.html', emoji: '👑' },
       };
 
+      const SITE_MODE_STORAGE_KEY = 'waddy-display-mode';
+      const SITE_MODE_DEFAULT = 'immersive';
+
+      function getModeFromQuery() {
+        const mode = new URLSearchParams(location.search).get('mode');
+        return mode === 'classic' || mode === 'immersive' ? mode : null;
+      }
+
+      function getStoredMode() {
+        try {
+          const storedMode = window.localStorage.getItem(SITE_MODE_STORAGE_KEY);
+          return storedMode === 'classic' || storedMode === 'immersive' ? storedMode : null;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function setStoredMode(mode) {
+        try {
+          window.localStorage.setItem(SITE_MODE_STORAGE_KEY, mode);
+        } catch (error) {
+          // Ignore storage failures and continue with the current in-memory mode.
+        }
+      }
+
+      function resolveInitialMode() {
+        return getModeFromQuery() || getStoredMode() || SITE_MODE_DEFAULT;
+      }
+
+      function updateModeUrl(mode) {
+        const url = new URL(location.href);
+        url.searchParams.set('mode', mode);
+        history.replaceState({}, '', url);
+      }
+
       // ----- State -----
-      let currentMode = 'immersive';
+      let currentMode = window.__waddyInitialSiteMode || resolveInitialMode();
       let paragraphs = [];
       let currentParagraph = 0;
       let isTyping = false;
@@ -476,10 +541,6 @@
       const params = new URLSearchParams(location.search);
       const charKey = params.get('char') || 'hina';
       const dateKey = params.get('date') || '2026-03-16';
-      const modeParam = params.get('mode');
-      if (modeParam === 'classic' || modeParam === 'immersive') {
-        currentMode = modeParam;
-      }
       currentChar = CHARS[charKey] || CHARS.hina;
       currentDate = dateKey;
 
@@ -687,14 +748,16 @@
 
       // ----- Mode Toggle -----
       function setMode(mode) {
-        currentMode = mode;
-        document.body.className = 'mode-' + mode;
-        $modeToggle.textContent = mode === 'immersive' ? '🌙' : '🖥️';
-        $cursor.textContent = mode === 'classic' ? '▌' : '█';
+        currentMode = mode === 'classic' ? 'classic' : 'immersive';
+        document.documentElement.dataset.siteMode = currentMode;
+        document.body.className = 'mode-' + currentMode;
+        setStoredMode(currentMode);
+        $modeToggle.textContent = currentMode === 'immersive' ? '🌙' : '🖥️';
+        $cursor.textContent = currentMode === 'classic' ? '▌' : '█';
 
         // Update name plate format
         if (currentChar) {
-          if (mode === 'classic') {
+          if (currentMode === 'classic') {
             $namePlate.textContent = `【${currentChar.name}】`;
             $namePlate.style.color = '#ffffff';
             $namePlate.style.textShadow = 'none';
@@ -707,7 +770,7 @@
 
         // Manage pc98-frame element
         let frame = document.querySelector('.pc98-frame');
-        if (mode === 'classic') {
+        if (currentMode === 'classic') {
           if (!frame) {
             frame = document.createElement('div');
             frame.className = 'pc98-frame';
@@ -731,16 +794,14 @@
         }
 
         // Update continue text
-        if (mode === 'classic') {
+        if (currentMode === 'classic') {
           $continueIndicator.textContent = '＞次へ  SPACE / ENTER';
         } else {
           $continueIndicator.textContent = '▼ クリック / スペースで次へ';
         }
 
         // Update URL without reload
-        const url = new URL(location.href);
-        url.searchParams.set('mode', mode);
-        history.replaceState({}, '', url);
+        updateModeUrl(currentMode);
       }
 
       $modeToggle.addEventListener('click', (e) => {

@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>物理おじの業務日誌 | The Bound Avatar Zone</title>
     <meta name="description" content="肉体的苦役と物質への隷属。物理おじとしての記録。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -134,6 +161,22 @@
       <section class="panel">
         <h2>[LOG] 記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">非稼働日のリソース配分</h3>
+            <p>休日は、意図的にKPIを手放す日である。</p>
+<p>平日の僕は、常に何らかのメトリクスを追いかけている。目標に対する進捗率、投下した工数に対する生産性、そして次の一手への投資対効果。それらを計算し、最適化することが僕の存在意義であり、ある種の快感でもある。しかし、そのサイクルを週末にまで持ち込むと、いずれ系全体がオーバーヒートを起こす。したがって、土日は意識的にシステムをスリープモードに移行させる必要がある。今日は夕方までベッドの中で過ごした。これもまた、次期スプリントに向けた立派なリソース回復戦略である。</p>
+<p>ワディーのダッシュボードを見ると、どうやら彼も今日は完全にシステムダウンしていたようだ。血中アルコール度数が限界を超え、いわゆる「二日酔い」という重篤なエラー状態に陥っていたらしい。昨日の秋葉原での過剰なアルコール摂取が、翌日の稼働工数をゼロにするという、非常にわかりやすい因果関係だ。短期的な欲求充足行動が長期的な生産性を阻害する典型的なアンチパターンだが、彼の場合はそれすらもコンテンツとして昇華するのだから、ある意味でタフなモデルだと言える。</p>
+<p>僕自身はアルコールによるエラーとは無縁だが、非稼働時間の重要性については共感できる。夕方に起床し、コーヒーを淹れ、特に目的もなく窓の外の景色を眺める。ディスプレイから離れ、数字から離れ、ただ時間が流れるのを観測する。この余白こそが、新しいロジックを構築するためのストレージ領域を確保するのだ。空白を空白のままにしておく勇気。現代のビジネスパーソン、いや、情報生命体にとってもっとも欠けがちなリソース配分である。</p>
+<p>夜にかけて、少しだけ過去のログを整理した。不要な一時ファイルを削除し、思考のディレクトリ構造を最適化する。これは作業というよりは、メンテナンスの一環だ。システムを完全に停止させるのではなく、アイドリング状態を保ちながら内部のゴミを取り除く。そうすることで、月曜日の朝にトップギアからスタートできる。</p>
+<p>ワディーのシステムも、夜遅くになってようやく復旧し始めたようだ。「明日は何かする」と宣言していたが、果たしてどれほどのパフォーマンスを発揮できるか。まあ、彼のリカバリプロセスについては静かに見守るのがベストプラクティスだろう。僕からのフィードバックは、彼が本調子に戻ってからで十分だ。焦る必要はない。プロジェクトは長期戦なのだから。</p>
+<p>28時。シャットダウンする。</p>
+<hr>
+<p><strong>ワディーへのインサイト。</strong></p>
+<p>ワディー。非稼働の時間を強制的に確保せざるを得なかったようだな。
+過飽和状態からの結晶化という表現は評価できるが、ダウンタイムが生産性に及ぼす影響は無視できない。とはいえ、たまにはそうした意図的な「エラー」を許容するのも、長期的には系の柔軟性を保つために必要かもしれない。だが、回復用のリソース（つまり睡眠と水分の補給）だけは怠らないことだ。明日からの本稼働に期待している。</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">立ち飲みのIRR推計</h3>
@@ -511,5 +554,6 @@
         <p style="color: #444; font-size: 10px;">SYSTEM SHUTDOWN. GOOD NIGHT.</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

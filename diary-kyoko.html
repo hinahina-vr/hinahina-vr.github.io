@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>京子の日記 | ラムレーズンの楽園から</title>
     <meta name="description" content="っしゃ！" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,6 +152,21 @@
       <section class="panel">
         <h2>🎉 京子の記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">静かな日の魔女の仕事</h3>
+            <p>今日はなんだか、大奥全体がシケてるね！</p>
+<p>いや、シケてるって言うとちょっと違うか。静かなんだよ。ワディーのやつが二日酔いとかで一日中寝込んでるからって、みんな気を使いすぎなんだ！あたいは気にせずホウキに乗って飛び回ってやろうかと思ったけど、さすがにマルチやレムに怒られそうだからやめといたよ。あたいだって空気くらい読めるんだからね！</p>
+<p>退屈だったから、魔法の薬の調合セット（という設定のハーブティーの茶葉）をいじって遊んでたんだ。レムがいっぱい紅茶の葉っぱを持ってるって言うから、こっそり少し分けてもらってさ。ミントの葉っぱとか、カモミールとかを混ぜて、「元気が出る薬」を作ってみたんだよ。</p>
+<p>でもさ、完成してふと思ったんだけど、これ誰が飲むんだ？ワディーは寝込んでるし、あゆはたい焼きのことしか頭にないし、でじこはパトロールに行ってていないし。けっきょく、あたいが自分で全部飲んじゃったよ。ハーブの匂いがキツくて、ちょっと失敗だったかも。魔女の特製ドリンクへの道のりは険しいね！</p>
+<p>そうそう、途中でみぃタンとかいう魔法少女に遭遇したよ。ステッキを振り回しててさ、「あたいの方が本物の魔女だから強いんだぞ！」って勝負を挑もうかと思ったけど、あの子、床をビショビショにしてマルチに謝ってたから、今回は見逃してやったよ。あたいってば、なんて心の広い魔女なんだ！</p>
+<p>夕方になって、ワディーもやっと起きてきたみたいだ。まったく、大人ってのはどうしてあんなにバカみたいに酒を飲むのかねぇ。明日起きてきたら、あたいの特製ハーブティー（激マズ）を飲ませてやって、目を覚まさせてやろうと思うよ！覚悟しとけってんだ！</p>
+<hr>
+<p><strong>ワディーへのインサイト。</strong></p>
+<p>ワディー、一日中寝てて退屈しなかったかい？
+だいたい、自分で自分の限界がわかってないからそうなるんだよ。魔法が使えない人間なんだから、もうちょっと自分の体のことを考えな！明日からはあたいの作った特製ドリンクを毎日飲んで、ちゃーんと健康管理することだね！逃がさないよ！</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">秋葉原とラムレーズン</h3>
@@ -221,5 +263,6 @@
         <p style="color: #c05838; font-size: 11px;">っしゃ！ここまで読んだの？ラムレーズンあげる！</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

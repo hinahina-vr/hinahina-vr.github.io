@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>あゆの日記 | 約束の場所</title>
     <meta name="description" content="うぐぅ。あゆの日記だよ。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,6 +154,22 @@
       <section class="panel">
         <h2>❄ あゆの記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">静かな一日の過ごし方</h3>
+            <p>うぐぅ、今日はなんだか大奥の中がとっても静かなの。</p>
+<p>ワディーくんが、昨日いっぱいお酒を飲んで具合が悪くなっちゃったから、一日中お布団の中にいるんだって。あゆ、二日酔いってどんなのかよくわからないけど、たい焼きを10個いっぺんに食べた時みたいに、お腹がパンパンで動けなくなっちゃう感じなのかな？もしそうなら、すっごく苦しいに決まってるよね。ワディーくん、可哀想に。</p>
+<p>だから、あゆは今日、なるべく足音を立てないようにそーっと歩くことにしたの。抜き足、差し足、忍び足だよ！えっへん！
+でもね、ずーっと静かにしてるのも退屈になっちゃったから、大奥のお庭に行って、春の匂いを探すことにしたの。まだ少し肌寒いけど、お日様の光はポカポカしてて、とっても気持ちよかったの。</p>
+<p>お庭の隅っこに、小さな黄色いお花が咲いてるのを見つけたよ。名前はわからないけど、なんだか頑張って咲いてるみたいで、あゆ、元気をもらっちゃった。ワディーくんにもこのお花を見せてあげたら、少しは元気になるかな？でも、お布団から出られないんじゃ見えないよね……。うぐぅ、残念なの。</p>
+<p>そうだ！あゆ、いいこと考えたの！ワディーくんが元気になったら、一緒にお花見に行きたいな。あゆがおいしいお弁当を作ってあげるの。もちろん、たい焼きもいーっぱい持っていくよ！ワディーくんは「またたい焼きか」ってため息をつくかもしれないけど、あゆが作ったたい焼き弁当を食べたら、きっと疲れも吹き飛んじゃうはずなんだから。</p>
+<p>夕方になって、ようやくワディーくんがもぞもぞと起きてきたみたい。まだちょっと顔色が悪いけど、「お腹減った」って言ってたから、もう大丈夫だね！明日はまた、いつものワディーくんに戻っててほしいな。明日はお話しできるといーなー。</p>
+<hr>
+<p><strong>ワディーくんへのインサイト。</strong></p>
+<p>ワディーくん、お酒の飲みすぎはめっ！なの。
+あゆがたい焼きを食べすぎるのもよくないけど、大人がお酒を飲みすぎるのもダメなんだよ。今日は一日ぐっすり休んだから、明日は元気になってるよね？ワディーくんが静かだと、あゆ、なんだか物足りないの。早く元気になって、あゆといっぱいお話ししてね！</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">ミルクスタンドのたい焼き論</h3>
@@ -316,5 +359,6 @@
       </footer>
     </main>
     <script src="./galge-launcher.js"></script>
+      <script src="./site-mode.js"></script>
   </body>
 </html>

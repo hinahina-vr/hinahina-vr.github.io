@@ -7,6 +7,7 @@ import { join, basename } from "node:path";
 import { readdirSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
+import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 // 他キャラの日記ディレクトリとページの定義
 const CROSS_LINK_TARGETS = [
@@ -227,7 +228,7 @@ ${latestEntriesHtml}
 ${backNumberHtml}
 ${htmlFooter()}`;
 
-  await writeFile(join(OUT_DIR, "diary.html"), mainPage, "utf-8");
+  await writeFile(join(OUT_DIR, "diary.html"), injectSiteModeAssets(mainPage), "utf-8");
   console.log(`✓ diary.html generated (${latestMonth}: ${latestEntries.length} entries)`);
 
   // --- 過去月の個別ページ diary-YYYY-MM.html ---
@@ -267,7 +268,7 @@ ${otherMonthLinks}
 ${htmlFooter()}`;
 
     const outPath = join(OUT_DIR, `diary-${m}.html`);
-    await writeFile(outPath, monthPage, "utf-8");
+    await writeFile(outPath, injectSiteModeAssets(monthPage), "utf-8");
     console.log(`✓ diary-${m}.html generated (${mEntries.length} entries)`);
   }
 

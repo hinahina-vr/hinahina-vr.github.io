@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ミントの日記 | テレパスの令嬢</title>
     <meta name="description" content="ふふふ、計算通りですわ。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "immersive";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,6 +154,21 @@
       <section class="panel">
         <h2>🫖 ミントの記録</h2>
         <ul class="entry-list">
+          <li id="2026-03-21">
+            <p class="entry-date">2026-03-21（土）</p>
+            <h3 class="entry-title">ぬいぐるみと春物のおめかし</h3>
+            <p>今日はとっても良いお天気だったから、ミントはお洗濯をすることにしたの！</p>
+<p>大奥の中はみんな静かで、ワディーさんもなぜだか全然お部屋から出てこなかったから、なんだか大奥全体がミントの貸し切りみたいだったの！えへへ、ちょっとだけ特別気分！</p>
+<p>ミントのベッドにたくさん並んでるクマのぬいぐるみたちも、冬の間ちょっとだけホコリをかぶっちゃってたから、まとめてお外に干してあげたの。「ぽかぽかのお日様に当たって、気持ちいいでしょー？」って話しかけたら、クマさんたちも「うん、ミントちゃんありがとう！」って嬉しそうに答えてくれたような気がするの！</p>
+<p>それからね、クローゼットから少し薄手の春のお洋服を出してみたの。パステルカラーのワンピースとか、フリフリがいっぱいついてるブラウスとか。鏡の前で順番に合わせてみたら、ミント、春のお姫様みたいになっちゃった！可愛いでしょ？ワディーさんにも見せてあげたかったけど、寝てる人を起こすのはダメだもんね。お利口さんのミントは、我慢して一人でファッションショーを楽しんだの。</p>
+<p>午後からは、瑠璃子ちゃんのところに行って、古い本を読んでるのを見学してたの。「ミントちゃん、静かにできるならここで一緒にいてもいいですよ」って優しく言ってくれたから、ミントはおいしいキャンディを舐めながら、横で絵本をパラパラめくってたの。時々聞こえる、ページをめくる音が、なんだか心地よかったな。</p>
+<p>夕方になって、クマのぬいぐるみたちをお部屋に取り込んだの。お日様の匂いがしていっぱい深呼吸しちゃった。明日はこのクマさんを抱っこして、ワディーさんに春のお洋服を見せに行こーっと！ワディーさん、ミントの可愛い姿を見たら、きっとびっくりして元気になっちゃうはずなんだから！</p>
+<hr>
+<p><strong>ワディーさんへのインサイト。</strong></p>
+<p>ワディーさん、今日は一日お寝坊さんだったね！
+ミントはいっぱいお洗濯して、春のお洋服も準備したから、明日は元気いっぱいのワディーさんに見てほしいな！お天気の日にお外に出ないなんて、もったいないよ？明日はミントがお外に連れ出してあげるから、覚悟しててよね！</p>
+
+          </li>
           <li id="2026-03-20">
             <p class="entry-date">2026-03-20（金）</p>
             <h3 class="entry-title">立ち飲みの品格</h3>
@@ -330,5 +372,6 @@
         <p style="color: #508070; font-size: 11px;">ここまでお読みいただき、計算通りですわ。ふふふ。</p>
       </footer>
     </main>
+      <script src="./site-mode.js"></script>
   </body>
 </html>
