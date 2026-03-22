@@ -1,0 +1,2560 @@
+{
+  "title": "✦ 夢を見る",
+  "subtitle": "─ 百の扉 ─",
+  "genre": "幻界迷宮ノベル",
+  "date": "2026-03-21",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ここは夢と現実の狭間。\n百の扉が並ぶ、終わりのない意識の回廊。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "よく来たわね、観測者。\n今日の夢は、少し複雑に織り上げられているわ。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "笑顔で",
+      "text": "おーっ、いらっしゃいませー、おにいちゃん！\nひなね、今日はここで道案内をする係なの！"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "困惑して",
+      "text": "道案内？　ここはどこだ？"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "元気よく",
+      "text": "ここはね、おにいちゃんの無意識が作った迷路。\n100個の分岐があって、10個の終点があるんだよ！\nえへへ、迷子にならないように、一緒に歩こ？"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "さあ、最初の選択を。\nどの扉を開けるかは、あなた次第よ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "左の鉄の扉を開ける",
+          "goto": "route_room_1"
+        },
+        {
+          "text": "右の木の扉を開ける",
+          "goto": "route_room_2"
+        }
+      ]
+    },
+    {
+      "label": "route_room_1"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第1の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_2"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_3"
+        }
+      ]
+    },
+    {
+      "label": "route_room_2"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第2の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_5"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_1"
+        }
+      ]
+    },
+    {
+      "label": "route_room_3"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第3の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_7"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_7"
+        }
+      ]
+    },
+    {
+      "label": "route_room_4"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第4の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_6"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_10"
+        }
+      ]
+    },
+    {
+      "label": "route_room_5"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第5の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "5という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_10"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_8"
+        }
+      ]
+    },
+    {
+      "label": "route_room_6"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第6の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_11"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_4"
+        }
+      ]
+    },
+    {
+      "label": "route_room_7"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第7の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "7という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_8"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_6"
+        }
+      ]
+    },
+    {
+      "label": "route_room_8"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第8の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_12"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_10"
+        }
+      ]
+    },
+    {
+      "label": "route_room_9"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第9の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "9という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_11"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_6"
+        }
+      ]
+    },
+    {
+      "label": "route_room_10"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第10の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_13"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_9"
+        }
+      ]
+    },
+    {
+      "label": "route_room_11"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第11の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_16"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_10"
+        }
+      ]
+    },
+    {
+      "label": "route_room_12"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第12の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_13"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_10"
+        }
+      ]
+    },
+    {
+      "label": "route_room_13"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第13の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_14"
+        },
+        {
+          "text": "別の声に従う",
+          "goto": "route_room_11"
+        }
+      ]
+    },
+    {
+      "label": "route_room_14"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第14の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_18"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_13"
+        }
+      ]
+    },
+    {
+      "label": "route_room_15"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第15の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_17"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_16"
+        }
+      ]
+    },
+    {
+      "label": "route_room_16"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第16の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_17"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_13"
+        }
+      ]
+    },
+    {
+      "label": "route_room_17"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第17の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_19"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_18"
+        }
+      ]
+    },
+    {
+      "label": "route_room_18"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第18の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "18という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_22"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_19"
+        }
+      ]
+    },
+    {
+      "label": "route_room_19"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第19の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_20"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_25"
+        }
+      ]
+    },
+    {
+      "label": "route_room_20"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第20の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "20という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_24"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_21"
+        }
+      ]
+    },
+    {
+      "label": "route_room_21"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第21の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "21という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_24"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_24"
+        }
+      ]
+    },
+    {
+      "label": "route_room_22"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第22の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_23"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_25"
+        }
+      ]
+    },
+    {
+      "label": "route_room_23"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第23の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_28"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_27"
+        }
+      ]
+    },
+    {
+      "label": "route_room_24"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第24の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "24という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_29"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_30"
+        }
+      ]
+    },
+    {
+      "label": "route_room_25"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第25の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "25という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_29"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_27"
+        }
+      ]
+    },
+    {
+      "label": "route_room_26"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第26の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_27"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_23"
+        }
+      ]
+    },
+    {
+      "label": "route_room_27"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第27の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_29"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_31"
+        }
+      ]
+    },
+    {
+      "label": "route_room_28"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第28の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_29"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_32"
+        }
+      ]
+    },
+    {
+      "label": "route_room_29"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第29の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "29という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_33"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_33"
+        }
+      ]
+    },
+    {
+      "label": "route_room_30"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第30の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_33"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_33"
+        }
+      ]
+    },
+    {
+      "label": "route_room_31"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第31の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_36"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_36"
+        }
+      ]
+    },
+    {
+      "label": "route_room_32"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第32の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_34"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "END_3"
+        }
+      ]
+    },
+    {
+      "label": "route_room_33"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第33の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_37"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_37"
+        }
+      ]
+    },
+    {
+      "label": "route_room_34"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第34の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_37"
+        },
+        {
+          "text": "別の声に従う",
+          "goto": "route_room_40"
+        }
+      ]
+    },
+    {
+      "label": "route_room_35"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第35の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_36"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_41"
+        }
+      ]
+    },
+    {
+      "label": "route_room_36"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第36の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "36という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "route_room_37"
+        },
+        {
+          "text": "別の声に従う",
+          "goto": "route_room_38"
+        }
+      ]
+    },
+    {
+      "label": "route_room_37"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第37の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_38"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_42"
+        }
+      ]
+    },
+    {
+      "label": "route_room_38"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第38の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "38という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_40"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_44"
+        }
+      ]
+    },
+    {
+      "label": "route_room_39"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第39の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "END_5"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_37"
+        }
+      ]
+    },
+    {
+      "label": "route_room_40"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第40の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_43"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_46"
+        }
+      ]
+    },
+    {
+      "label": "route_room_41"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第41の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "41という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_43"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_46"
+        }
+      ]
+    },
+    {
+      "label": "route_room_42"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第42の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_43"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_39"
+        }
+      ]
+    },
+    {
+      "label": "route_room_43"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第43の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_48"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_46"
+        }
+      ]
+    },
+    {
+      "label": "route_room_44"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第44の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "END_1"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_42"
+        }
+      ]
+    },
+    {
+      "label": "route_room_45"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第45の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_48"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_42"
+        }
+      ]
+    },
+    {
+      "label": "route_room_46"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第46の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "46という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_50"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_49"
+        }
+      ]
+    },
+    {
+      "label": "route_room_47"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第47の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_50"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_50"
+        }
+      ]
+    },
+    {
+      "label": "route_room_48"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第48の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_51"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_45"
+        }
+      ]
+    },
+    {
+      "label": "route_room_49"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第49の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "49という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_51"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_55"
+        }
+      ]
+    },
+    {
+      "label": "route_room_50"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第50の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_53"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_48"
+        }
+      ]
+    },
+    {
+      "label": "route_room_51"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第51の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_52"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_57"
+        }
+      ]
+    },
+    {
+      "label": "route_room_52"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第52の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "END_6"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_57"
+        }
+      ]
+    },
+    {
+      "label": "route_room_53"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第53の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "53という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_57"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_59"
+        }
+      ]
+    },
+    {
+      "label": "route_room_54"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第54の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_56"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_55"
+        }
+      ]
+    },
+    {
+      "label": "route_room_55"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第55の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_59"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_61"
+        }
+      ]
+    },
+    {
+      "label": "route_room_56"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第56の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "END_5"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_57"
+        }
+      ]
+    },
+    {
+      "label": "route_room_57"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第57の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "57という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_62"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_60"
+        }
+      ]
+    },
+    {
+      "label": "route_room_58"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第58の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_61"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_59"
+        }
+      ]
+    },
+    {
+      "label": "route_room_59"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第59の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "59という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_64"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_57"
+        }
+      ]
+    },
+    {
+      "label": "route_room_60"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第60の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_63"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_62"
+        }
+      ]
+    },
+    {
+      "label": "route_room_61"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第61の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_63"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_59"
+        }
+      ]
+    },
+    {
+      "label": "route_room_62"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第62の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "62という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_66"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_65"
+        }
+      ]
+    },
+    {
+      "label": "route_room_63"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第63の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_65"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_69"
+        }
+      ]
+    },
+    {
+      "label": "route_room_64"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第64の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "64という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_66"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_65"
+        }
+      ]
+    },
+    {
+      "label": "route_room_65"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第65の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_66"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_66"
+        }
+      ]
+    },
+    {
+      "label": "route_room_66"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第66の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_68"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_70"
+        }
+      ]
+    },
+    {
+      "label": "route_room_67"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第67の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_72"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_68"
+        }
+      ]
+    },
+    {
+      "label": "route_room_68"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第68の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "68という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_69"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "END_1"
+        }
+      ]
+    },
+    {
+      "label": "route_room_69"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第69の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_71"
+        },
+        {
+          "text": "別の声に従う",
+          "goto": "END_1"
+        }
+      ]
+    },
+    {
+      "label": "route_room_70"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第70の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_75"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_68"
+        }
+      ]
+    },
+    {
+      "label": "route_room_71"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第71の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_75"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_75"
+        }
+      ]
+    },
+    {
+      "label": "route_room_72"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第72の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "END_7"
+        },
+        {
+          "text": "別の声に従う",
+          "goto": "route_room_76"
+        }
+      ]
+    },
+    {
+      "label": "route_room_73"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第73の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_74"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_74"
+        }
+      ]
+    },
+    {
+      "label": "route_room_74"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第74の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "74という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_78"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_77"
+        }
+      ]
+    },
+    {
+      "label": "route_room_75"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第75の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_76"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_73"
+        }
+      ]
+    },
+    {
+      "label": "route_room_76"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第76の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_79"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_78"
+        }
+      ]
+    },
+    {
+      "label": "route_room_77"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第77の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "77という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_80"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_82"
+        }
+      ]
+    },
+    {
+      "label": "route_room_78"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第78の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_80"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_77"
+        }
+      ]
+    },
+    {
+      "label": "route_room_79"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第79の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_82"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_77"
+        }
+      ]
+    },
+    {
+      "label": "route_room_80"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第80の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "80という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_81"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_85"
+        }
+      ]
+    },
+    {
+      "label": "route_room_81"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第81の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_84"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_79"
+        }
+      ]
+    },
+    {
+      "label": "route_room_82"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第82の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_84"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_81"
+        }
+      ]
+    },
+    {
+      "label": "route_room_83"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第83の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_84"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_84"
+        }
+      ]
+    },
+    {
+      "label": "route_room_84"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第84の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "route_room_88"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_90"
+        }
+      ]
+    },
+    {
+      "label": "route_room_85"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第85の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "85という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_89"
+        },
+        {
+          "text": "別のドアノブを回す",
+          "goto": "route_room_84"
+        }
+      ]
+    },
+    {
+      "label": "route_room_86"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第86の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "choices": [
+        {
+          "text": "扉を蹴り開ける",
+          "goto": "route_room_91"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_85"
+        }
+      ]
+    },
+    {
+      "label": "route_room_87"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第87の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "route_room_89"
+        },
+        {
+          "text": "振り返る",
+          "goto": "route_room_86"
+        }
+      ]
+    },
+    {
+      "label": "route_room_88"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第88の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_89"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_92"
+        }
+      ]
+    },
+    {
+      "label": "route_room_89"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第89の領域。\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "89という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "前に進む",
+          "goto": "route_room_93"
+        },
+        {
+          "text": "暗闇へ",
+          "goto": "route_room_87"
+        }
+      ]
+    },
+    {
+      "label": "route_room_90"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第90の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "90という数字に、意味を求めすぎてはいけないわ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "route_room_91"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_91"
+        }
+      ]
+    },
+    {
+      "label": "route_room_91"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第91の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたについていく",
+          "goto": "END_4"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "END_5"
+        }
+      ]
+    },
+    {
+      "label": "route_room_92"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第92の領域。\n緑色のネオンサインだけが点滅している。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "route_room_94"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_91"
+        }
+      ]
+    },
+    {
+      "label": "route_room_93"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第93の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "route_room_96"
+        },
+        {
+          "text": "回り道をする",
+          "goto": "route_room_94"
+        }
+      ]
+    },
+    {
+      "label": "route_room_94"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第94の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "みとらの声がする方へ",
+          "goto": "route_room_95"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_100"
+        }
+      ]
+    },
+    {
+      "label": "route_room_95"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第95の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_96"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_97"
+        }
+      ]
+    },
+    {
+      "label": "route_room_96"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第96の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "route_room_97"
+        },
+        {
+          "text": "立ち止まってみる",
+          "goto": "route_room_97"
+        }
+      ]
+    },
+    {
+      "label": "route_room_97"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第97の領域。\n砂漠のような空間。砂の足音が重い。"
+    },
+    {
+      "choices": [
+        {
+          "text": "直感で選ぶ",
+          "goto": "route_room_99"
+        },
+        {
+          "text": "別の声に従う",
+          "goto": "route_room_98"
+        }
+      ]
+    },
+    {
+      "label": "route_room_98"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第98の領域。\n螺旋階段が上にも下にも続いている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の射す方へ",
+          "goto": "route_room_100"
+        },
+        {
+          "text": "ゆっくり歩く",
+          "goto": "route_room_99"
+        }
+      ]
+    },
+    {
+      "label": "route_room_99"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第99の領域。\n冷たいコンクリートの壁が続く。"
+    },
+    {
+      "choices": [
+        {
+          "text": "走る",
+          "goto": "route_room_100"
+        },
+        {
+          "text": "隠し扉を探す",
+          "goto": "route_room_100"
+        }
+      ]
+    },
+    {
+      "label": "route_room_100"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "第100の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "目を閉じて進む",
+          "goto": "END_9"
+        },
+        {
+          "text": "振り返る",
+          "goto": "END_10"
+        }
+      ]
+    },
+    {
+      "label": "END_1"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "目覚めぬ朝",
+      "subtitle": "時計の針が止まったまま、あなたは微睡み続ける。"
+    },
+    {
+      "label": "END_2"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "嬉しそうに",
+      "text": "えへへ、やっと着いたね、おにいちゃん！\nここでずっと、一緒に遊ぼ？"
+    },
+    {
+      "end": true,
+      "title": "ひなたの教室",
+      "subtitle": "誰もいない教室で、ひなたと一緒に絵本を読む。"
+    },
+    {
+      "label": "END_3"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "これがあなたの望んだ結末。おやすみなさい、観測者。"
+    },
+    {
+      "end": true,
+      "title": "みとらの神託",
+      "subtitle": "全ての境界線が消え、あなたは一つの概念になった。"
+    },
+    {
+      "label": "END_4"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "無限回廊",
+      "subtitle": "開けても開けても同じ扉。夢のバグに囚われた。"
+    },
+    {
+      "label": "END_5"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "電子の海",
+      "subtitle": "ワディー自身がスクリプトの一部となって消滅した。"
+    },
+    {
+      "label": "END_6"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "秋葉原の幻影",
+      "subtitle": "あり得ない店舗が並ぶ電気街で、永遠に宝探しをする。"
+    },
+    {
+      "label": "END_7"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "空っぽのゲストハウス",
+      "subtitle": "誰もいないリビングで、コーヒーだけが冷めていく。"
+    },
+    {
+      "label": "END_8"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "ウイスキーの底",
+      "subtitle": "グラスの底から見上げた世界。琥珀色に溺れる。"
+    },
+    {
+      "label": "END_9"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "end": true,
+      "title": "100番目の扉",
+      "subtitle": "全ての選択を終え、真の静寂に辿り着いた。"
+    },
+    {
+      "label": "END_10"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "視界が歪み、世界が溶けていく。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "手を振って",
+      "text": "あ、もう朝になっちゃう！\nじゃあね、おにいちゃん。また夢の中で会おうね！"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "朝が来るわ。目覚めの時間よ。"
+    },
+    {
+      "end": true,
+      "title": "夢の終わり",
+      "subtitle": "唐突に意識が浮上し、見慣れた天井が目に入る。"
+    }
+  ]
+}

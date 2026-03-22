@@ -18,105 +18,63 @@ const endings = [
 
 const rooms = [];
 for (let i = 1; i <= NUM_NODES; i++) {
-    // Determine links
     let choiceA, choiceB;
-    
-    // To ensure reachability to the end, overall trend should be forward, with some random jumps.
     if (i === NUM_NODES) {
         choiceA = { type: 'END', target: 'END_9' };
         choiceB = { type: 'END', target: 'END_10' };
     } else {
-        const jumpA = Math.floor(Math.random() * 5) + 1; // 1 to 5 forward
+        const jumpA = Math.floor(Math.random() * 5) + 1;
         let targetA = i + jumpA;
         if (targetA > NUM_NODES) targetA = NUM_NODES;
-        
-        // 10% chance to lead to an ending (except the last few endings which are reserved)
         if (Math.random() < 0.1 && i > 10) {
             choiceA = { type: 'END', target: endings[Math.floor(Math.random() * 8)].id };
         } else {
             choiceA = { type: 'NODE', target: targetA };
         }
 
-        const jumpB = Math.floor(Math.random() * 10) - 3; // -3 to +6
+        const jumpB = Math.floor(Math.random() * 10) - 3;
         let targetB = i + jumpB;
         if (targetB <= 0) targetB = 1;
         if (targetB > NUM_NODES) targetB = NUM_NODES;
         if (targetB === i) targetB = i + 1;
-        
         if (Math.random() < 0.1 && i > 10) {
             choiceB = { type: 'END', target: endings[Math.floor(Math.random() * 8)].id };
         } else {
             choiceB = { type: 'NODE', target: targetB };
         }
     }
-
     rooms.push({ id: i, choiceA, choiceB });
 }
 
-let md = `# ✦ 夢を見る ─ 百の扉 ─
+// JSON generation
+const scenarioJson = {
+    title: "✦ 夢を見る",
+    subtitle: "─ 百の扉 ─",
+    genre: "幻界迷宮ノベル",
+    date: "2026-03-21",
+    chars: {
+        narrator: { name: "", color: "#504060", emoji: "" },
+        mitra: { name: "みとら", color: "#9080a0", emoji: "🌘" },
+        hinata: { name: "ひなた", color: "#ffb6c1", emoji: "🌻" },
+        waddy: { name: "ワディー", color: "#606060", emoji: "🖥️" }
+    },
+    scenario: []
+};
 
-- **ジャンル**: 幻界迷宮ノベル
-- **日付**: 2026-03-21
-- **登場**: みとら、ひなた、ワディー
-- **舞台**: 夢の境界線
-- **テーマ**: 選択と迷子。100の分岐点を持つ複雑な幻界。
-
-**共通スタイル指定**:
-> \`retro PC-98 style visual novel background, 16-color palette aesthetic, pixel-art influenced, dark and desaturated, phantom world atmosphere, Japanese 1990s bishoujo game, monochrome, ghostly, endless corridor\`
-
----
-
-## 登場キャラクター
-
-| ID | 名前 | カラー | 絵文字 |
-|---|---|---|---|
-| narrator | （幻界） | #504060 | |
-| mitra | みとら | #9080a0 | 🌘 |
-| hinata | ひなた | #ffb6c1 | 🌻 |
-| waddy | ワディー | #606060 | 🖥️ |
-
----
-
-## スクリプト
-<!-- bg: abyss -->
-
-**（幻界）**
-ここは夢と現実の狭間。
-百の扉が並ぶ、終わりのない意識の回廊。
-
-**みとら**
-よく来たわね、観測者。
-今日の夢は、少し複雑に織り上げられているわ。
-
-**ひなた**
-おーっ、いらっしゃいませー、おにいちゃん！
-ひなね、今日はここで道案内をする係なの！
-
-**ワディー**
-道案内？　ここはどこだ？
-
-**ひなた**
-ここはね、おにいちゃんの無意識が作った迷路。
-100個の分岐があって、10個の終点があるんだよ！
-えへへ、迷子にならないように、一緒に歩こ？
-
-**みとら**
-さあ、最初の選択を。
-どの扉を開けるかは、あなた次第よ。
-
----
-
-## ▶ 選択肢: 始まりの扉
-
-- **A: 左の鉄の扉を開ける** → route_room_1（flag: dream_start）
-- **B: 右の木の扉を開ける** → route_room_2（flag: dream_start）
-
----
-`;
+scenarioJson.scenario.push({ bg: "abyss" });
+scenarioJson.scenario.push({ speaker: "narrator", expression: "", text: "ここは夢と現実の狭間。\n百の扉が並ぶ、終わりのない意識の回廊。" });
+scenarioJson.scenario.push({ speaker: "mitra", expression: "", text: "よく来たわね、観測者。\n今日の夢は、少し複雑に織り上げられているわ。" });
+scenarioJson.scenario.push({ speaker: "hinata", expression: "笑顔で", text: "おーっ、いらっしゃいませー、おにいちゃん！\nひなね、今日はここで道案内をする係なの！" });
+scenarioJson.scenario.push({ speaker: "waddy", expression: "困惑して", text: "道案内？　ここはどこだ？" });
+scenarioJson.scenario.push({ speaker: "hinata", expression: "元気よく", text: "ここはね、おにいちゃんの無意識が作った迷路。\n100個の分岐があって、10個の終点があるんだよ！\nえへへ、迷子にならないように、一緒に歩こ？" });
+scenarioJson.scenario.push({ speaker: "mitra", expression: "", text: "さあ、最初の選択を。\nどの扉を開けるかは、あなた次第よ。" });
+scenarioJson.scenario.push({ choices: [
+    { text: "左の鉄の扉を開ける", goto: "route_room_1" },
+    { text: "右の木の扉を開ける", goto: "route_room_2" }
+] });
 
 const actionTextsA = ["前に進む", "光の射す方へ", "ひなたについていく", "みとらの声がする方へ", "直感で選ぶ", "走る", "扉を蹴り開ける", "目を閉じて進む"];
 const actionTextsB = ["立ち止まってみる", "暗闇へ", "回り道をする", "別の声に従う", "振り返る", "隠し扉を探す", "ゆっくり歩く", "別のドアノブを回す"];
-
 const roomDesc = [
   "冷たいコンクリートの壁が続く。",
   "足元に水が張っている。ピチャ、ピチャという音が響く。",
@@ -135,48 +93,44 @@ const roomDesc = [
 ];
 
 rooms.forEach((room, index) => {
-    md += `## route_room_${room.id}\n\n`;
+    scenarioJson.scenario.push({ label: `route_room_${room.id}` });
     const desc = roomDesc[index % roomDesc.length];
-    
-    md += `**（幻界）**\n第${room.id}の領域。\n${desc}\n\n`;
+    scenarioJson.scenario.push({ speaker: "narrator", expression: "", text: `第${room.id}の領域。\n${desc}` });
     
     if (Math.random() < 0.3) {
-        md += `**ひなた**\nんー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！\n\n`;
+        scenarioJson.scenario.push({ speaker: "hinata", expression: "", text: "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！" });
     } else if (Math.random() < 0.3) {
-        md += `**みとら**\n ${room.id}という数字に、意味を求めすぎてはいけないわ。\n\n`;
+        scenarioJson.scenario.push({ speaker: "mitra", expression: "", text: `${room.id}という数字に、意味を求めすぎてはいけないわ。` });
     } else if (Math.random() < 0.3) {
-         md += `**ワディー**\n……道が合っているのか、誰にもわからないな。\n\n`;
+         scenarioJson.scenario.push({ speaker: "waddy", expression: "", text: "……道が合っているのか、誰にもわからないな。" });
     }
-    
-    md += `---\n\n`;
-    md += `## ▶ 選択肢: 領域${room.id}の分岐\n\n`;
     
     const textA = actionTextsA[Math.floor(Math.random() * actionTextsA.length)];
     const textB = actionTextsB[Math.floor(Math.random() * actionTextsB.length)];
-    
     const targetA = room.choiceA.type === 'END' ? room.choiceA.target : `route_room_${room.choiceA.target}`;
     const targetB = room.choiceB.type === 'END' ? room.choiceB.target : `route_room_${room.choiceB.target}`;
     
-    md += `- **A: ${textA}** → ${targetA}\n`;
-    md += `- **B: ${textB}** → ${targetB}\n`;
-    md += `\n---\n\n`;
+    scenarioJson.scenario.push({ choices: [
+        { text: textA, goto: targetA },
+        { text: textB, goto: targetB }
+    ] });
 });
 
 endings.forEach(end => {
-    md += `## ${end.id}\n\n`;
-    md += `**（幻界）**\n視界が歪み、世界が溶けていく。\n\n`;
+    scenarioJson.scenario.push({ label: end.id });
+    scenarioJson.scenario.push({ speaker: "narrator", expression: "", text: "視界が歪み、世界が溶けていく。" });
     
     if (end.id === 'END_2') {
-        md += `**ひなた**\nえへへ、やっと着いたね、おにいちゃん！\nここでずっと、一緒に遊ぼ？\n\n`;
+        scenarioJson.scenario.push({ speaker: "hinata", expression: "嬉しそうに", text: "えへへ、やっと着いたね、おにいちゃん！\nここでずっと、一緒に遊ぼ？" });
     } else if (end.id === 'END_3') {
-        md += `**みとら**\nこれがあなたの望んだ結末。おやすみなさい、観測者。\n\n`;
+        scenarioJson.scenario.push({ speaker: "mitra", expression: "", text: "これがあなたの望んだ結末。おやすみなさい、観測者。" });
     } else if (end.id === 'END_10') {
-        md += `**ひなた**\nあ、もう朝になっちゃう！\nじゃあね、おにいちゃん。また夢の中で会おうね！\n\n**みとら**\n朝が来るわ。目覚めの時間よ。\n\n`;
+        scenarioJson.scenario.push({ speaker: "hinata", expression: "手を振って", text: "あ、もう朝になっちゃう！\nじゃあね、おにいちゃん。また夢の中で会おうね！" });
+        scenarioJson.scenario.push({ speaker: "mitra", expression: "", text: "朝が来るわ。目覚めの時間よ。" });
     }
     
-    md += `> **— ${end.id}: ${end.title} —**\n`;
-    md += `> ${end.desc}\n\n---\n\n`;
+    scenarioJson.scenario.push({ end: true, title: end.title, subtitle: end.desc });
 });
 
-fs.writeFileSync('c:/Users/wdddi/workspace/waddy-guesthouse-90s/scenarios/2026-03-21_✦ 夢を見る.md', md, 'utf-8');
-console.log('Scenario file with 100 branches generated.');
+fs.writeFileSync('c:/Users/wdddi/workspace/waddy-guesthouse-90s/scenarios/2026-03-21_✦ 夢を見る.json', JSON.stringify(scenarioJson, null, 2), 'utf-8');
+console.log('JSON scenario Generated.');
