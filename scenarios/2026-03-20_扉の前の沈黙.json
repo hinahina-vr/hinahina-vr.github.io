@@ -1,0 +1,126 @@
+{
+  "title": "扉の前の沈黙",
+  "subtitle": "─ 選ばれなかった世界線 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinahina": {
+      "name": "ひなひな（幻影）",
+      "color": "#805070",
+      "emoji": "♥"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "これは、選ばれなかった世界線の記録。\n2026年3月20日。\nこの世界線のワディーは——Ivの扉を開けなかった。"
+    },
+    {
+      "bg": "akihabara"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "リバティーの前。\n裏通りの暗がりに、小さな看板が光っていた。\n「Iv」。ローマ数字の4。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "看板を見た。\nそれだけだった。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "顕界のワディーは、こう言っている。\n「名前に惹かれたら入る。それが俺の各駅停車だ」。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "この世界線のワディーは——\n名前に惹かれたが、入らなかった。\n惹かれることと、扉を開けることは——別の動作だ。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "hinahina",
+      "expression": "暗がりから",
+      "text": "ホーン？\n入らんの？"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ひなひなは顕界ではこの場面にいない。\nいないはずの声が聴こえるのは——幻界の性質だ。"
+    },
+    {
+      "speaker": "hinahina",
+      "expression": "首をかしげて",
+      "text": "名前がかっこいいから入るんじゃなかったの？\n各駅停車なのに通過しちゃうの？\nそれ、急行じゃん。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "各駅停車が駅を通過したとき——\nそれは各駅停車ではなくなる。\n快速になる。あるいは急行になる。\n名前が変わる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "名前が変わった電車に乗っている彼は——\nもう、各駅停車の乗客ではない。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "顕界では、扉の向こうにテキーラ観覧車があった。\nアニソンDJの低音振動があった。\nでじこが「にょ！！」と叫ぶ声があった。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "この世界線では、扉は閉じたままだ。\nテキーラは注がれず、\n低音は外に漏れず、\nでじこの叫びは——振動に変換されなかった。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "扉の前の沈黙。\n開けなかった扉の向こうに何があったか、\nこの世界線のワディーは知らない。\n知らないことを——知ることはできない。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "────────────────"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "選択は、完了している。\n顕界に、戻りなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2026年3月20日、春。\nIvの扉の向こうには音楽があった。\nそれは、扉を開けた世界線だけの話だ。"
+    },
+    {
+      "ending": {
+        "title": "扉の前の沈黙",
+        "subtitle": "選ばれなかった世界線の記録。"
+      }
+    }
+  ]
+}

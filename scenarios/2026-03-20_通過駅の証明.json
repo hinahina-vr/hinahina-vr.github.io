@@ -1,0 +1,121 @@
+{
+  "title": "通過駅の証明",
+  "subtitle": "─ 選ばれなかった世界線 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "dejiko": {
+      "name": "でじこ（幻影）",
+      "color": "#305030",
+      "emoji": "🐱"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "これは、選ばれなかった世界線の記録。\n2026年3月20日。\nこの世界線のワディーは——ミルクスタンドを通り過ぎた。"
+    },
+    {
+      "bg": "akihabara"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "電気街口を出た。\n高架下のミルクスタンドが見えた。\n瓶の牛乳が並んでいた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "立ち止まらなかった。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "顕界の世界線では、ここでコーヒー牛乳を飲んでいる。\n二百円の証明書を買っている。\n「秋葉原に来た」と言える証明書を。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "この世界線では——\n証明書を買わなかった。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "dejiko",
+      "expression": "薄れた声で",
+      "text": "にょ……。ミルクスタンド、行かないにょ？"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "呼ばれなかった声。\nでじこは、ミルクスタンドのコーヒー牛乳が好きだ。\n顕界では三人で瓶を傾けた。\nこの世界線では——一人で通り過ぎた。"
+    },
+    {
+      "speaker": "dejiko",
+      "expression": "消えかけて",
+      "text": "証明書がないにょ……。\n秋葉原に来たのに、証明書がないにょ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "証明書のない秋葉原。\n来たけれど来なかった街。\n通過駅。各駅停車が停まらなかった駅。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "停まらなければ、それは駅ではない。\n地図には載っている。\nでも、誰も降りなかった。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "顕界では三人の証明書が、三つの胃の中に消えた。\n消えた証明書。残らない記録。\nそれでも飲んだことは覚えている——と、ナレーションが言った。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "この世界線には、残らない記録すらない。\n飲まなかったものを覚えることはできない。\n通り過ぎたことだけが——記録される。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "────────────────"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "選択は、完了している。\n顕界に、戻りなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2026年3月20日、春。\nミルクスタンドのコーヒー牛乳は二百円だった。\nそれは、立ち止まった世界線だけの話だ。"
+    },
+    {
+      "ending": {
+        "title": "通過駅の証明",
+        "subtitle": "選ばれなかった世界線の記録。"
+      }
+    }
+  ]
+}
