@@ -1,0 +1,141 @@
+{
+  "title": "16小節の輪廻",
+  "subtitle": "─ 幻界の記録 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "feiris": {
+      "name": "フェイリス",
+      "color": "#d060a0",
+      "emoji": "🐱"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "これは、もう一つの世界線の記録。\n2026年3月20日。Ivのフロアに、別の猫がいた。"
+    },
+    {
+      "bg": "anison_club"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "Iv Akihabara。地下。\nDJブースから、二十年前のアニソンが流れている。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "カウンターに肘をついて",
+      "text": "ニャン♪　この曲、4回目だよ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "ハイボールを傾けて",
+      "text": "4回？　DJが同じ曲を回してるのか。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "猫耳を揺らして",
+      "text": "ううん。4回目の人生で聴いてるの。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "グラスを置いて",
+      "text": "……どういう意味だ。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "にっこり",
+      "text": "フェイリスはね、タイムリープの記憶があるのニャ。\nこの曲は1回目の人生でも聴いた。\n2回目でも聴いた。3回目でも。\n今が4回目。\n同じ曲なのに、毎回違う味がするの。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "真剣に",
+      "text": "それは——曲が変わったのか、お前が変わったのか。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "考えて",
+      "text": "両方かもしれないし、どっちでもないのかも。\nDJは同じレコードを回してる。\n針は同じ溝をなぞってる。\nでも——空気が毎回違うの。\n湿度とか、温度とか、隣にいる人の体温とか。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "グラスを回して",
+      "text": "16小節。アニソンのサビは大体16小節。\n16小節が終わるとまたAメロに戻る。\n戻るけど——戻った場所は、出発した場所と同じ？"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "少し考えて",
+      "text": "……輪廻か。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "嬉しそうに",
+      "text": "そう！　輪廻ニャ！\nサビの16小節は輪廻なの。\n同じメロディが回ってくるけど、\n回ってくるたびに——少しだけ、違うの。"
+    },
+    {
+      "speaker": "feiris",
+      "expression": "声を落として",
+      "text": "フェイリスの4回の人生も——16小節なのかもしれないニャ。\n同じ秋葉原に戻ってくる。同じ曲が流れてる。\nでも、隣にいる人が違う。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "フェイリスの時間は、円環ではなく螺旋だ。\n同じ場所に戻っているように見えて、\n一周ごとに少しだけ高くなっている。\nあるいは——少しだけ低くなっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "それが上昇なのか下降なのかは、\n螺旋の内側からは見えない。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "────────────────"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の記録は、ここまでだ。\n顕界に、戻りなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2026年3月20日、春。\nIvのフロアには音楽が流れていた。\n別の世界線では、同じ曲が別の意味で鳴っていた。"
+    },
+    {
+      "ending": {
+        "title": "16小節の輪廻",
+        "subtitle": "幻界の記録。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "title": "二百円の祈り",
+  "subtitle": "─ 幻界の記録 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "ayu": {
+      "name": "あゆ",
+      "color": "#e0a040",
+      "emoji": "🎒"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "これは、もう一つの世界線の記録。\n2026年3月20日。ミルクスタンドで、別の声が聴こえた。"
+    },
+    {
+      "bg": "akihabara"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "秋葉原駅高架下。ミルクスタンド。\n瓶のコーヒー牛乳。二百円。"
+    },
+    {
+      "speaker": "ayu",
+      "expression": "瓶を両手で持って",
+      "text": "うぐぅ……冷たい。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "自分の瓶を傾けて",
+      "text": "冬じゃないから、いいだろ。"
+    },
+    {
+      "speaker": "ayu",
+      "expression": "一口飲んで",
+      "text": "……おいしい。\nでもね、ボク、この味知ってる気がする。\n飲んだことあるのかな。ないのかな。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "少し考えて",
+      "text": "デジャヴか？"
+    },
+    {
+      "speaker": "ayu",
+      "expression": "首をかしげて",
+      "text": "デジャヴっていうのとは違う気がする。\n味って、記憶のどこかに住んでるじゃない？\n住所はわからないけど、確かにいるの。\n呼んでも出てこないけど、飲むと会えるの。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "瓶を見つめて",
+      "text": "味に記憶が住んでいる、か。"
+    },
+    {
+      "speaker": "ayu",
+      "expression": "目を閉じて",
+      "text": "うん。このコーヒー牛乳の中に、誰かがいるの。\n誰かわからないけど。\n……ボクが忘れた誰か。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "静かに",
+      "text": "忘れたことを覚えているのか。"
+    },
+    {
+      "speaker": "ayu",
+      "expression": "瓶の底を見て",
+      "text": "瓶の底に、沈んでるの。\n甘いのの下に、何かが沈んでるの。\n飲み干さないと見えないの。\nでも飲み干したら——もう、飲めないの。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "言葉を探して",
+      "text": "……二百円で、そこまでの体験ができるのか。"
+    },
+    {
+      "speaker": "ayu",
+      "expression": "少し笑って",
+      "text": "うぐぅ、ボクが大げさなだけかも。\nでもね——味って、祈りに似てると思うの。\n届くかわからないけど、口に含む。\n届いたかわからないけど、飲み込む。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "あゆの記憶は、いつも半分だけ存在している。\n覚えているのに忘れている。忘れているのに覚えている。\n瓶の中と瓶の外。\nその境界線に、彼女は立っている。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "────────────────"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の記録は、ここまでだ。\n顕界に、戻りなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2026年3月20日、春。\nミルクスタンドのコーヒー牛乳。二百円。\n別の世界線では、瓶の底に別のものが沈んでいた。"
+    },
+    {
+      "ending": {
+        "title": "二百円の祈り",
+        "subtitle": "幻界の記録。"
+      }
+    }
+  ]
+}

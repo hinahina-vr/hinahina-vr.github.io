@@ -1,0 +1,151 @@
+{
+  "title": "黄色い箱の独白",
+  "subtitle": "─ 幻界の記録 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "ruriko": {
+      "name": "瑠璃子",
+      "color": "#405080",
+      "emoji": "🌧"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "これは、もう一つの世界線の記録。\n2026年3月20日。総武線の車内で、別の会話があった。"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "総武線各駅停車。\n新宿から秋葉原まで。黄色い車体。\n窓の外に、雨が降り始めた。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "窓に指を添えて",
+      "text": "……雨。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "隣の席で",
+      "text": "予報は晴れだったんだがな。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "静かに",
+      "text": "予報が外れるのは、未来が確定していない証拠よ。\n確定しているのは過去だけ。\nこの電車が新宿を出たこと。それは確定している。\n秋葉原に着くかどうかは——まだ、確定していない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "苦笑して",
+      "text": "電車が途中で消えるのか。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "目を閉じて",
+      "text": "消えないとは限らない。\n電車は箱よ。黄色い箱。\n乗客は箱の中身。\n箱が壊れたら、中身は——散らばる。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "少し考えて",
+      "text": "箱か。棺桶みたいな話だな。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "首を振って",
+      "text": "棺桶は動かない。\n電車は動く。動く棺桶は——揺りかごに似ている。\n赤ん坊が眠る箱。死者が眠る箱。\nどちらも揺れる。どちらも閉じている。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "窓の雨を見つめて",
+      "text": "違いは、一つだけ。\n揺りかごの中身はいつか外に出る。\n棺桶の中身は——出ない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "黙って",
+      "text": "……。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "少し微笑んで",
+      "text": "各駅停車は揺りかごよ。\n一駅ごとに、ドアが開く。\n出たければ出られる。\nでも——出なければ、次の駅まで揺られ続ける。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "声を落として",
+      "text": "わたしは、出られなかった駅がある。\n出るべきだった駅で、ドアが開いたのに、降りなかった。\n座ったまま、動かなかった。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "静かに",
+      "text": "……それは、どこの駅だ。"
+    },
+    {
+      "speaker": "ruriko",
+      "expression": "目を伏せて",
+      "text": "忘れた。忘れたことだけ覚えている。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "瑠璃子の雨は、いつも彼女の内側に降っている。\n外の雨と内側の雨。\n窓硝子一枚で隔てられた二つの雨。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "黄色い箱の中で、二人は揺られていた。\n棺桶でも揺りかごでもない場所で。\nただの電車の中で。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "────────────────"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の記録は、ここまでだ。\n顕界に、戻りなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2026年3月20日、春。\n総武線各駅停車。窓の外に雨。\n黄色い箱の中で、別の声が響いていた。"
+    },
+    {
+      "ending": {
+        "title": "黄色い箱の独白",
+        "subtitle": "幻界の記録。"
+      }
+    }
+  ]
+}
