@@ -4,113 +4,199 @@
   "genre": "幻界ノベル",
   "date": "2026-03-19",
   "chars": {
-    "narrator":  { "name": "",               "color": "#504060", "emoji": "" },
-    "mitra":     { "name": "みとら",          "color": "#9080a0", "emoji": "🌘" },
-    "hinahina":  { "name": "ひなひな（幻影）", "color": "#805070", "emoji": "♥" },
-    "waddy":     { "name": "ワディー（幻影）", "color": "#606060", "emoji": "🖥️" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinahina": {
+      "name": "ひなひな（幻影）",
+      "color": "#805070",
+      "emoji": "♥"
+    },
+    "waddy": {
+      "name": "ワディー（幻影）",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
   },
   "scenario": [
-    { "bg": "abyss" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "これは、選ばれなかった世界線の記録。\n2026年3月19日。\nこの世界線のワディーは——選択肢を入れなかった。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "出口のない建物。\n幻界に刻まれた、静かな壁。" },
-
-    { "bg": "void" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "深夜2時。\nワディーはモニターの前に座っていた。\nこの世界線でも、同じ時間に、同じ場所にいた。" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "ヘッドセットを手に取った。\nつけようとして——やめた。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "顕界の世界線では、ここでVRChatにログインしている。\n暖炉の前にひなひながいて、並行宇宙の話が始まる。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "この世界線では——\nヘッドセットを机の上に戻した。\nそれだけだ。" },
-
-    { "bg": "station_night" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "彼はコードを書いていた。\nビジュアルノベルのエンジン。\nテキストを送り、背景を切り替え、キャラクターの名前を表示する。\n一本道の物語が、上から下へ流れていく。" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "選択肢を入れるべきか。\nその考えが、一瞬だけ頭をよぎった。" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "……やめた。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "顕界のワディーは、ここで邪教の館を思い出している。\n合体の結果が一つしかないのは邪教の館ではない。\n分岐があってこその館だ——と。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "この世界線のワディーは、邪教の館を思い出さなかった。\n思い出したことが、なかったことになる。\nそれが幻界だ。" },
-
-    { "bg": "abyss" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "一本道のノベルゲームが完成した。\n16,247文字。\nエンディングは一つだけ。" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "読者はクリックすることしかできない。\n次へ。次へ。次へ。\nそして——終わる。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "出口がないのではない。\n出口が一つしかないのだ。\n出口のない建物と、出口が一つしかない建物。\nその差は——小さい。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "選べないということは、選ばないこととは違う。\n選べないということは、閉じるということだ。\n窓のない建物。扉のない建物。\n換気のない建物。" },
-
-    { "bg": "void" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "ヘッドセットは机の上にあった。\nつけなかった。\nひなひなは——呼ばれなかった。" },
-
-    { "speaker": "hinahina", "expression": "どこにもいない声で",
-      "text": "……ホーン？" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "幻界に残る声は、いつも不完全だ。\n呼ばれなかった声は、呼びかけの形をとれない。\nただ——反射だけが残る。" },
-
-    { "speaker": "hinahina", "expression": "消えかけの声で",
-      "text": "ワディー、選択肢ないの？\n一本道なの？\nつまんないねえ……。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "彼女が言ったのか。\n彼女なら言いそうだから、幻界がそう形を取っただけなのか。\n区別する方法は、ない。" },
-
-    { "bg": "abyss" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "顕界のワディーは、こう書いている。\n「出口があっても残る者だけが本当の声を持つ」。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "この世界線のワディーは、出口を作らなかった。\n残ることを選んだのではない。\n出ることができなかっただけだ。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "住む者と囚われる者の違い。\nそれは出口の有無で決まる。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "閉ループ制御系に穴を開けなかった世界線。\n建物は換気されなかった。\nコードは呼吸しなかった。\n一本道は、一本道のまま——" },
-
-    { "bg": "void" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "────────────────" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "選択は、完了している。\n顕界に、戻りなさい。" },
-
-    { "speaker": "narrator", "expression": "",
-      "text": "2026年3月19日、木曜日。\nビジュアルノベルに選択肢があった。\nそれは、選ばれた世界線だけの話だ。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "出口のない建物の住人は——\n住人ではなく、囚人になる。\nそう言ったのは、顕界のわたしだ。" },
-
-    { "speaker": "mitra", "expression": "",
-      "text": "この世界線のわたしは——\n何も言わなかった。\n言う相手が、いなかった。" },
-
-    { "ending": { "title": "出口のない建物", "subtitle": "換気されなかった建物の記録。" } }
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "これは、選ばれなかった世界線の記録。\n2026年3月19日。\nこの世界線のワディーは——選択肢を入れなかった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "出口のない建物。\n幻界に刻まれた、静かな壁。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "深夜2時。\nワディーはモニターの前に座っていた。\nこの世界線でも、同じ時間に、同じ場所にいた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ヘッドセットを手に取った。\nつけようとして——やめた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "顕界の世界線では、ここでVRChatにログインしている。\n暖炉の前にひなひながいて、並行宇宙の話が始まる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "この世界線では——\nヘッドセットを机の上に戻した。\nそれだけだ。"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "彼はコードを書いていた。\nビジュアルノベルのエンジン。\nテキストを送り、背景を切り替え、キャラクターの名前を表示する。\n一本道の物語が、上から下へ流れていく。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "選択肢を入れるべきか。\nその考えが、一瞬だけ頭をよぎった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "……やめた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "顕界のワディーは、ここで邪教の館を思い出している。\n合体の結果が一つしかないのは邪教の館ではない。\n分岐があってこその館だ——と。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "この世界線のワディーは、邪教の館を思い出さなかった。\n思い出したことが、なかったことになる。\nそれが幻界だ。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "一本道のノベルゲームが完成した。\n16,247文字。\nエンディングは一つだけ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "読者はクリックすることしかできない。\n次へ。次へ。次へ。\nそして——終わる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "出口がないのではない。\n出口が一つしかないのだ。\n出口のない建物と、出口が一つしかない建物。\nその差は——小さい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "選べないということは、選ばないこととは違う。\n選べないということは、閉じるということだ。\n窓のない建物。扉のない建物。\n換気のない建物。"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ヘッドセットは机の上にあった。\nつけなかった。\nひなひなは——呼ばれなかった。"
+    },
+    {
+      "speaker": "hinahina",
+      "expression": "どこにもいない声で",
+      "text": "……ホーン？"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "幻界に残る声は、いつも不完全だ。\n呼ばれなかった声は、呼びかけの形をとれない。\nただ——反射だけが残る。"
+    },
+    {
+      "speaker": "hinahina",
+      "expression": "消えかけの声で",
+      "text": "ワディー、選択肢ないの？\n一本道なの？\nつまんないねえ……。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "彼女が言ったのか。\n彼女なら言いそうだから、幻界がそう形を取っただけなのか。\n区別する方法は、ない。"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "顕界のワディーは、こう書いている。\n「出口があっても残る者だけが本当の声を持つ」。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "この世界線のワディーは、出口を作らなかった。\n残ることを選んだのではない。\n出ることができなかっただけだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "住む者と囚われる者の違い。\nそれは出口の有無で決まる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "閉ループ制御系に穴を開けなかった世界線。\n建物は換気されなかった。\nコードは呼吸しなかった。\n一本道は、一本道のまま——"
+    },
+    {
+      "bg": "void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "────────────────"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "選択は、完了している。\n顕界に、戻りなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2026年3月19日、木曜日。\nビジュアルノベルに選択肢があった。\nそれは、選ばれた世界線だけの話だ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "出口のない建物の住人は——\n住人ではなく、囚人になる。\nそう言ったのは、顕界のわたしだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "この世界線のわたしは——\n何も言わなかった。\n言う相手が、いなかった。"
+    },
+    {
+      "ending": {
+        "title": "出口のない建物",
+        "subtitle": "換気されなかった建物の記録。"
+      }
+    }
   ]
 }

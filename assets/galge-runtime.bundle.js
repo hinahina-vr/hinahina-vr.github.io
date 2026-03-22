@@ -32555,6 +32555,7 @@ void main() {
         if (!this.kongouActive) {
           return;
         }
+        this._lerpColors();
         const width = this.$canvas.width;
         const height = this.$canvas.height;
         const time = Date.now() * 1e-3;
@@ -32763,6 +32764,15 @@ void main() {
       this.bgClearColor = "rgba(10,10,46,0.15)";
       this.starColor = "200,180,255";
       this.starGlowColor = "160,140,220";
+      this._colorCurrent = { h: 240, s: 50, l: 12 };
+      this._colorTarget = { h: 240, s: 50, l: 12 };
+      this._starCurrent = { r: 200, g: 180, b: 255 };
+      this._starTarget = { r: 200, g: 180, b: 255 };
+      this._starGlowCurrent = { r: 160, g: 140, b: 220 };
+      this._starGlowTarget = { r: 160, g: 140, b: 220 };
+      this._clearCurrent = { r: 10, g: 10, b: 46, a: 0.15 };
+      this._clearTarget = { r: 10, g: 10, b: 46, a: 0.15 };
+      this._colorFadeSpeed = 8e-3;
     }
     async init() {
       try {
@@ -32804,15 +32814,19 @@ void main() {
       document.body.classList.toggle("realm-genkai", isGenkai);
       document.body.classList.toggle("realm-kenkai", !isGenkai);
       if (isGenkai) {
-        this.bgColor = { h: 220, s: 55, l: 10 };
-        this.bgClearColor = "rgba(6,10,36,0.15)";
-        this.starColor = "140,180,255";
-        this.starGlowColor = "100,140,220";
+        this._setColorTarget(
+          { h: 220, s: 55, l: 10 },
+          { r: 6, g: 10, b: 36, a: 0.15 },
+          { r: 140, g: 180, b: 255 },
+          { r: 100, g: 140, b: 220 }
+        );
       } else {
-        this.bgColor = { h: 40, s: 50, l: 10 };
-        this.bgClearColor = "rgba(20,16,6,0.15)";
-        this.starColor = "255,220,140";
-        this.starGlowColor = "220,180,100";
+        this._setColorTarget(
+          { h: 40, s: 50, l: 10 },
+          { r: 20, g: 16, b: 6, a: 0.15 },
+          { r: 255, g: 220, b: 140 },
+          { r: 220, g: 180, b: 100 }
+        );
       }
       if (this.scenario.warnings.length) {
         this.$runtimeWarning.hidden = false;
@@ -33132,37 +33146,101 @@ void main() {
         });
       }
     }
+    // ── Color fade helpers ──
+    _parseRgba(str) {
+      const m = str.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/);
+      if (!m) return { r: 10, g: 10, b: 46, a: 0.15 };
+      return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== void 0 ? +m[4] : 1 };
+    }
+    _lerpVal(current, target, t) {
+      return current + (target - current) * t;
+    }
+    _setColorTarget(hsl, clear, star, starGlow) {
+      this._colorTarget = { ...hsl };
+      this._clearTarget = typeof clear === "string" ? this._parseRgba(clear) : { ...clear };
+      this._starTarget = { ...star };
+      this._starGlowTarget = { ...starGlow };
+    }
+    _setColorImmediate(hsl, clear, star, starGlow) {
+      this._colorTarget = { ...hsl };
+      this._colorCurrent = { ...hsl };
+      this.bgColor = { ...hsl };
+      const clearObj = typeof clear === "string" ? this._parseRgba(clear) : { ...clear };
+      this._clearTarget = { ...clearObj };
+      this._clearCurrent = { ...clearObj };
+      this.bgClearColor = `rgba(${clearObj.r},${clearObj.g},${clearObj.b},${clearObj.a})`;
+      this._starTarget = { ...star };
+      this._starCurrent = { ...star };
+      this.starColor = `${star.r},${star.g},${star.b}`;
+      this._starGlowTarget = { ...starGlow };
+      this._starGlowCurrent = { ...starGlow };
+      this.starGlowColor = `${starGlow.r},${starGlow.g},${starGlow.b}`;
+    }
+    _lerpColors() {
+      const t = this._colorFadeSpeed;
+      const threshold = 0.5;
+      const ch = this._colorCurrent;
+      const th = this._colorTarget;
+      ch.h = this._lerpVal(ch.h, th.h, t);
+      ch.s = this._lerpVal(ch.s, th.s, t);
+      ch.l = this._lerpVal(ch.l, th.l, t);
+      this.bgColor = { h: ch.h, s: ch.s, l: ch.l };
+      const cc = this._clearCurrent;
+      const tc = this._clearTarget;
+      cc.r = this._lerpVal(cc.r, tc.r, t);
+      cc.g = this._lerpVal(cc.g, tc.g, t);
+      cc.b = this._lerpVal(cc.b, tc.b, t);
+      cc.a = this._lerpVal(cc.a, tc.a, t);
+      this.bgClearColor = `rgba(${Math.round(cc.r)},${Math.round(cc.g)},${Math.round(cc.b)},${cc.a.toFixed(3)})`;
+      const sc = this._starCurrent;
+      const st = this._starTarget;
+      sc.r = this._lerpVal(sc.r, st.r, t);
+      sc.g = this._lerpVal(sc.g, st.g, t);
+      sc.b = this._lerpVal(sc.b, st.b, t);
+      this.starColor = `${Math.round(sc.r)},${Math.round(sc.g)},${Math.round(sc.b)}`;
+      const sgc = this._starGlowCurrent;
+      const sgt = this._starGlowTarget;
+      sgc.r = this._lerpVal(sgc.r, sgt.r, t);
+      sgc.g = this._lerpVal(sgc.g, sgt.g, t);
+      sgc.b = this._lerpVal(sgc.b, sgt.b, t);
+      this.starGlowColor = `${Math.round(sgc.r)},${Math.round(sgc.g)},${Math.round(sgc.b)}`;
+      for (const nebula of this.kNebula) {
+        const targetHue = Math.floor(Math.random() * 0.2 + this.bgColor.h - 0.1 + nebula.hue * 0.99);
+        nebula.hue = this._lerpVal(nebula.hue, this.bgColor.h + (nebula.hue - Math.round(nebula.hue / 80) * 80), t * 0.5);
+      }
+      for (const pillar of this.kPillars) {
+        pillar.hue = this._lerpVal(pillar.hue, this.bgColor.h + (pillar.hue - Math.round(pillar.hue / 40) * 40), t * 0.5);
+      }
+      for (const stream of this.kStreams) {
+        stream.hue = this._lerpVal(stream.hue, this.bgColor.h + (stream.hue - Math.round(stream.hue / 60) * 60), t * 0.5);
+      }
+      document.body.style.background = `linear-gradient(180deg, hsl(${Math.round(this.bgColor.h)},${Math.round(this.bgColor.s)}%,${Math.round(this.bgColor.l)}%) 0%, hsl(${Math.round(this.bgColor.h)},${Math.round(this.bgColor.s)}%,${Math.max(1, Math.round(this.bgColor.l) - 5)}%) 50%, hsl(${Math.round(this.bgColor.h)},${Math.round(this.bgColor.s)}%,${Math.round(this.bgColor.l)}%) 100%)`;
+    }
     setAtmosphere(bg) {
       if (!bg) {
         return;
       }
       const presets = {
-        dark_chapel: { h: 270, s: 40, l: 8, clear: "rgba(15,5,30,0.15)" },
-        void: { h: 260, s: 30, l: 4, clear: "rgba(5,3,15,0.18)" },
-        cathedral: { h: 250, s: 50, l: 12, clear: "rgba(10,10,46,0.15)" },
-        twilight: { h: 220, s: 45, l: 15, clear: "rgba(8,12,40,0.14)" },
-        crimson: { h: 0, s: 60, l: 10, clear: "rgba(30,5,10,0.16)" },
-        abyss: { h: 240, s: 20, l: 3, clear: "rgba(3,3,10,0.20)" },
-        dawn: { h: 30, s: 50, l: 18, clear: "rgba(30,15,8,0.12)" },
-        station: { h: 35, s: 40, l: 14, clear: "rgba(20,12,8,0.14)" },
-        station_night: { h: 220, s: 35, l: 8, clear: "rgba(6,8,22,0.16)" },
-        akihabara: { h: 280, s: 50, l: 12, clear: "rgba(18,8,30,0.14)" },
-        default: { h: 240, s: 50, l: 12, clear: "rgba(10,10,46,0.15)" }
+        dark_chapel: { h: 270, s: 40, l: 8, clear: "rgba(15,5,30,0.15)", star: { r: 200, g: 160, b: 240 }, glow: { r: 180, g: 140, b: 210 } },
+        void: { h: 260, s: 30, l: 4, clear: "rgba(5,3,15,0.18)", star: { r: 180, g: 160, b: 230 }, glow: { r: 150, g: 130, b: 200 } },
+        cathedral: { h: 250, s: 50, l: 12, clear: "rgba(10,10,46,0.15)", star: { r: 200, g: 180, b: 255 }, glow: { r: 160, g: 140, b: 220 } },
+        twilight: { h: 220, s: 45, l: 15, clear: "rgba(8,12,40,0.14)", star: { r: 160, g: 190, b: 250 }, glow: { r: 120, g: 150, b: 220 } },
+        crimson: { h: 0, s: 60, l: 10, clear: "rgba(30,5,10,0.16)", star: { r: 255, g: 160, b: 140 }, glow: { r: 220, g: 120, b: 100 } },
+        abyss: { h: 240, s: 20, l: 3, clear: "rgba(3,3,10,0.20)", star: { r: 170, g: 170, b: 200 }, glow: { r: 130, g: 130, b: 170 } },
+        dawn: { h: 30, s: 50, l: 18, clear: "rgba(30,15,8,0.12)", star: { r: 255, g: 220, b: 160 }, glow: { r: 230, g: 190, b: 130 } },
+        station: { h: 35, s: 40, l: 14, clear: "rgba(20,12,8,0.14)", star: { r: 250, g: 215, b: 150 }, glow: { r: 215, g: 175, b: 110 } },
+        station_night: { h: 220, s: 35, l: 8, clear: "rgba(6,8,22,0.16)", star: { r: 150, g: 180, b: 240 }, glow: { r: 110, g: 140, b: 200 } },
+        akihabara: { h: 280, s: 50, l: 12, clear: "rgba(18,8,30,0.14)", star: { r: 220, g: 170, b: 255 }, glow: { r: 180, g: 130, b: 220 } },
+        default: { h: 240, s: 50, l: 12, clear: "rgba(10,10,46,0.15)", star: { r: 200, g: 180, b: 255 }, glow: { r: 160, g: 140, b: 220 } }
       };
       const bgKey = typeof bg === "string" ? bg : bg.preset || "default";
       const preset = presets[bgKey] || presets.default;
-      this.bgColor = { h: preset.h, s: preset.s, l: preset.l };
-      this.bgClearColor = preset.clear;
-      for (const nebula of this.kNebula) {
-        nebula.hue = Math.floor(Math.random() * 80 + this.bgColor.h - 40);
-      }
-      for (const pillar of this.kPillars) {
-        pillar.hue = Math.floor(Math.random() * 40 + this.bgColor.h - 20);
-      }
-      for (const stream of this.kStreams) {
-        stream.hue = Math.floor(Math.random() * 60 + this.bgColor.h - 30);
-      }
-      document.body.style.background = `linear-gradient(180deg, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 0%, hsl(${this.bgColor.h},${this.bgColor.s}%,${Math.max(1, this.bgColor.l - 5)}%) 50%, hsl(${this.bgColor.h},${this.bgColor.s}%,${this.bgColor.l}%) 100%)`;
+      this._setColorTarget(
+        { h: preset.h, s: preset.s, l: preset.l },
+        preset.clear,
+        preset.star,
+        preset.glow
+      );
       const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
       const scenarioDir = this.scenario.scenarioName || "";
       const baseDir = scenarioDir ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}` : `./scenarios/bg`;
