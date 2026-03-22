@@ -195,7 +195,10 @@
       warnings.push(`choices[${stepIndex}] に text がありません。`);
       return null;
     }
-    return { text, goto: gotoLabel || null };
+    const flag = asString(choice?.flag).trim() || null;
+    const condition = asString(choice?.if).trim() || null;
+    const conditionNot = asString(choice?.ifNot).trim() || null;
+    return { text, goto: gotoLabel || null, flag, if: condition, ifNot: conditionNot };
   }
   function normalizeTextStep(step, stepIndex, warnings, chars) {
     const speaker = asString(step.speaker, "narrator").trim() || "narrator";
@@ -247,6 +250,31 @@
       return {
         kind: "label",
         label: asString(step.label).trim(),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
+    if (step.flag && !Object.prototype.hasOwnProperty.call(step, "text")) {
+      return {
+        kind: "flag",
+        flag: asString(step.flag).trim(),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
+    if (step.if && step.goto) {
+      return {
+        kind: "if",
+        condition: asString(step.if).trim(),
+        target: asString(step.goto).trim(),
+        elseTarget: asString(step.else).trim() || null,
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
+    if (step.ifNot && step.goto) {
+      return {
+        kind: "ifNot",
+        condition: asString(step.ifNot).trim(),
+        target: asString(step.goto).trim(),
+        elseTarget: asString(step.else).trim() || null,
         bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
@@ -32630,6 +32658,7 @@ void main() {
       this.textSteps = [];
       this.scenario = null;
       this.renderToken = 0;
+      this.flags = /* @__PURE__ */ new Set();
       this.$ = (id) => document.getElementById(id);
       this.$loading = this.$("loading");
       this.$canvas = this.$("particle-canvas");
@@ -33351,6 +33380,56 @@ void main() {
         }
         return;
       }
+      if (step.kind === "flag") {
+        this.flags.add(step.flag);
+        console.log(`[flag] set: ${step.flag}`, [...this.flags]);
+        await this.showStep(index + 1);
+        return;
+      }
+      if (step.kind === "if") {
+        const hasFlagValue = this.flags.has(step.condition);
+        if (hasFlagValue) {
+          const targetIndex = this.scenario.steps.findIndex(
+            (candidate) => candidate.kind === "label" && candidate.label === step.target
+          );
+          if (targetIndex >= 0) {
+            await this.showStep(targetIndex + 1);
+            return;
+          }
+        } else if (step.elseTarget) {
+          const elseIndex = this.scenario.steps.findIndex(
+            (candidate) => candidate.kind === "label" && candidate.label === step.elseTarget
+          );
+          if (elseIndex >= 0) {
+            await this.showStep(elseIndex + 1);
+            return;
+          }
+        }
+        await this.showStep(index + 1);
+        return;
+      }
+      if (step.kind === "ifNot") {
+        const hasFlagValue = this.flags.has(step.condition);
+        if (!hasFlagValue) {
+          const targetIndex = this.scenario.steps.findIndex(
+            (candidate) => candidate.kind === "label" && candidate.label === step.target
+          );
+          if (targetIndex >= 0) {
+            await this.showStep(targetIndex + 1);
+            return;
+          }
+        } else if (step.elseTarget) {
+          const elseIndex = this.scenario.steps.findIndex(
+            (candidate) => candidate.kind === "label" && candidate.label === step.elseTarget
+          );
+          if (elseIndex >= 0) {
+            await this.showStep(elseIndex + 1);
+            return;
+          }
+        }
+        await this.showStep(index + 1);
+        return;
+      }
       if (step.kind === "bg") {
         this.setAtmosphere(step.bg);
         if (step.bgm) {
@@ -33401,12 +33480,22 @@ void main() {
         this.voiceController.stopCurrent();
         this.$choiceContainer.innerHTML = "";
         for (const choice of step.choices) {
+          if (choice.if && !this.flags.has(choice.if)) {
+            continue;
+          }
+          if (choice.ifNot && this.flags.has(choice.ifNot)) {
+            continue;
+          }
           const button = document.createElement("button");
           button.className = "choice-btn";
           button.textContent = choice.text;
           button.addEventListener("click", (event) => {
             event.stopPropagation();
             this.showingChoice = false;
+            if (choice.flag) {
+              this.flags.add(choice.flag);
+              console.log(`[choice flag] set: ${choice.flag}`, [...this.flags]);
+            }
             this.$choiceContainer.classList.remove("visible");
             window.setTimeout(() => {
               this.$choiceContainer.style.display = "none";

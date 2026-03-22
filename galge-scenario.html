@@ -477,17 +477,64 @@
       #choice-container.visible { opacity: 1; }
       .choice-btn {
         min-width: min(560px, 86vw);
-        padding: clamp(14px, 1.5vw, 22px) clamp(28px, 4vw, 64px);
-        border-radius: 14px;
-        border: 1px solid rgba(196, 163, 255, 0.3);
-        background: linear-gradient(135deg, rgba(38, 22, 72, 0.84), rgba(17, 10, 34, 0.92));
-        color: #eadfff;
+        padding: clamp(16px, 1.8vw, 26px) clamp(32px, 4vw, 68px);
+        border-radius: 18px;
+        border: 1px solid rgba(196, 163, 255, 0.25);
+        background:
+          linear-gradient(135deg, rgba(60, 35, 110, 0.7), rgba(25, 14, 50, 0.85)),
+          radial-gradient(ellipse at 30% 0%, rgba(180, 140, 255, 0.12), transparent 60%);
+        color: #f0e8ff;
         font-size: clamp(18px, 2vw, 34px);
         letter-spacing: 0.13em;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow:
+          0 4px 20px rgba(100, 60, 180, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .choice-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        background: linear-gradient(
+          105deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.06) 45%,
+          rgba(255, 255, 255, 0.12) 50%,
+          rgba(255, 255, 255, 0.06) 55%,
+          transparent 70%
+        );
+        transform: translateX(-120%);
+        transition: transform 0.6s ease;
+        pointer-events: none;
+      }
+      .choice-btn:hover::before {
+        transform: translateX(120%);
       }
       .choice-btn:hover {
-        transform: scale(1.02);
-        border-color: rgba(231, 214, 255, 0.46);
+        transform: translateY(-3px) scale(1.02);
+        border-color: rgba(220, 190, 255, 0.6);
+        background:
+          linear-gradient(135deg, rgba(80, 50, 140, 0.8), rgba(40, 22, 70, 0.9)),
+          radial-gradient(ellipse at 30% 0%, rgba(200, 160, 255, 0.2), transparent 60%);
+        color: #fff;
+        box-shadow:
+          0 8px 32px rgba(120, 70, 220, 0.35),
+          0 0 24px rgba(160, 100, 255, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        text-shadow: 0 0 12px rgba(200, 170, 255, 0.4);
+      }
+      .choice-btn:active {
+        transform: translateY(0px) scale(0.98);
+        box-shadow:
+          0 2px 12px rgba(100, 60, 180, 0.3),
+          inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition-duration: 0.1s;
       }
 
       #chapter-display,

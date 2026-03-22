@@ -1,4 +1,28 @@
+const fs = require("node:fs");
 const { chromium } = require("playwright");
+
+function parseRgb(color) {
+  const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;
+}
+
+function luminance(rgb) {
+  const [r, g, b] = rgb.map((value) => {
+    const normalized = value / 255;
+    return normalized <= 0.03928
+      ? normalized / 12.92
+      : ((normalized + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(foreground, background) {
+  const fg = luminance(foreground);
+  const bg = luminance(background);
+  const lighter = Math.max(fg, bg);
+  const darker = Math.min(fg, bg);
+  return (lighter + 0.05) / (darker + 0.05);
+}
 
 (async () => {
   const browser = await chromium.launch();
@@ -32,7 +56,48 @@ const { chromium } = require("playwright");
   assert(htmlMode === "classic", `index.html 初回表示が classic であること (got: "${htmlMode}")`);
   assert(bodyClass.includes("mode-classic"), `body に mode-classic が付くこと (got: "${bodyClass}")`);
 
+  console.log("\n=== character diary classic surface ===");
+  await page.goto(`${baseUrl}/diary-mii.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForSelector(".entry-list li", { timeout: 5000 });
+  bodyClass = await page.getAttribute("body", "class");
+  const diaryEntryBackground = await page.$eval(".entry-list li", (el) => window.getComputedStyle(el).backgroundImage);
+  assert(bodyClass.includes("character-diary-page"), `character diary page class が付与されること (got: "${bodyClass}")`);
+  assert(!diaryEntryBackground.includes("0, 0, 0"), `classic の各キャラ日記が黒ベタ背景でないこと (got: "${diaryEntryBackground}")`);
+  const classicDiaryBackground = [247, 239, 219];
+  const diaryPages = fs
+    .readdirSync(process.cwd())
+    .filter((name) => /^diary-.*\.html$/.test(name) && !["diary-2026-02.html", "diary-waddy.html"].includes(name))
+    .sort();
+  for (const diaryPage of diaryPages) {
+    await page.goto(`${baseUrl}/${diaryPage}`, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector(".entry-list li", { timeout: 5000 });
+    bodyClass = await page.getAttribute("body", "class");
+    if (!bodyClass.includes("character-diary-page")) {
+      continue;
+    }
+    const [titleColor, dateColor, bodyColor, insightColor] = await Promise.all([
+      page.$eval(".entry-title", (el) => window.getComputedStyle(el).color),
+      page.$eval(".entry-date", (el) => window.getComputedStyle(el).color),
+      page.$eval(".entry-list li p:not(.entry-date)", (el) => window.getComputedStyle(el).color),
+      page
+        .$eval(".entry-list li hr ~ p", (el) => window.getComputedStyle(el).color)
+        .catch(() => null),
+    ]);
+    const titleContrast = contrastRatio(parseRgb(titleColor), classicDiaryBackground);
+    const dateContrast = contrastRatio(parseRgb(dateColor), classicDiaryBackground);
+    const bodyContrast = contrastRatio(parseRgb(bodyColor), classicDiaryBackground);
+    assert(titleContrast >= 4.5, `${diaryPage} のタイトルが classic でも読めること (contrast: ${titleContrast.toFixed(2)})`);
+    assert(dateContrast >= 4.5, `${diaryPage} の日付が classic でも読めること (contrast: ${dateContrast.toFixed(2)})`);
+    assert(bodyContrast >= 7, `${diaryPage} の本文が classic でも十分読めること (contrast: ${bodyContrast.toFixed(2)})`);
+    if (insightColor) {
+      const insightContrast = contrastRatio(parseRgb(insightColor), classicDiaryBackground);
+      assert(insightContrast >= 5, `${diaryPage} のインサイト段落が classic でも読めること (contrast: ${insightContrast.toFixed(2)})`);
+    }
+  }
+
   console.log("\n=== site mode persistence across pages ===");
+  await page.goto(`${baseUrl}/index.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForSelector("[data-site-mode-toggle]", { timeout: 5000 });
   await page.click("[data-site-mode-toggle]");
   await page.waitForTimeout(250);
   htmlMode = await page.getAttribute("html", "data-site-mode");
@@ -74,20 +139,28 @@ const { chromium } = require("playwright");
   assert(storedMode === "immersive", `query override 後に storage も immersive になること (got: "${storedMode}")`);
 
   console.log("\n=== dream select propagation ===");
+  await page.goto(`${baseUrl}/index.html?mode=classic`, { waitUntil: "domcontentloaded" });
+  await page.waitForSelector("[data-site-mode-toggle]", { timeout: 5000 });
+  storedMode = await page.evaluate(() => window.localStorage.getItem("waddy-display-mode"));
+  assert(storedMode === "classic", `dream-select 確認前に storage を classic に戻せること (got: "${storedMode}")`);
   await page.goto(`${baseUrl}/dream-select.html?date=2026-03-20`, { waitUntil: "domcontentloaded" });
   await page.waitForSelector("#mode-toggle", { timeout: 5000 });
-  await page.click("#mode-toggle");
-  await page.waitForTimeout(250);
+  htmlMode = await page.getAttribute("html", "data-site-mode");
+  storedMode = await page.evaluate(() => window.localStorage.getItem("waddy-display-mode"));
+  const dreamToggleDisabled = await page.$eval("#mode-toggle", (el) => el.disabled);
   const firstHref = await page.$eval(".scenario-card", (el) => el.getAttribute("href"));
-  assert(firstHref.includes("mode=classic"), `dream-select.html の遷移先に mode=classic が付くこと (got: "${firstHref}")`);
+  assert(htmlMode === "immersive", `dream-select.html が常に immersive で開くこと (got: "${htmlMode}")`);
+  assert(dreamToggleDisabled, "dream-select.html の mode toggle が無効化されること");
+  assert(storedMode === "classic", `dream-select.html が保存済み classic を上書きしないこと (got: "${storedMode}")`);
+  assert(firstHref.includes("mode=immersive"), `dream-select.html の遷移先に mode=immersive が付くこと (got: "${firstHref}")`);
   await Promise.all([
     page.waitForNavigation({ waitUntil: "domcontentloaded" }),
     page.click(".scenario-card"),
   ]);
   const currentUrl = page.url();
   const scenarioHtmlMode = await page.getAttribute("html", "data-site-mode");
-  assert(currentUrl.includes("mode=classic"), `galge-scenario.html への遷移 URL に mode=classic が含まれること (got: "${currentUrl}")`);
-  assert(scenarioHtmlMode === "classic", `galge-scenario.html でも classic が反映されること (got: "${scenarioHtmlMode}")`);
+  assert(currentUrl.includes("mode=immersive"), `galge-scenario.html への遷移 URL に mode=immersive が含まれること (got: "${currentUrl}")`);
+  assert(scenarioHtmlMode === "immersive", `galge-scenario.html でも immersive が反映されること (got: "${scenarioHtmlMode}")`);
 
   console.log(`\n=== 結果: ${passed} passed, ${failed} failed ===`);
   await browser.close();

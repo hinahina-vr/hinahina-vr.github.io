@@ -58,6 +58,7 @@ class GalgeRuntimeApp {
     this.textSteps = [];
     this.scenario = null;
     this.renderToken = 0;
+    this.flags = new Set();
 
     this.$ = (id) => document.getElementById(id);
     this.$loading = this.$("loading");
@@ -998,6 +999,59 @@ class GalgeRuntimeApp {
       return;
     }
 
+    if (step.kind === "flag") {
+      this.flags.add(step.flag);
+      console.log(`[flag] set: ${step.flag}`, [...this.flags]);
+      await this.showStep(index + 1);
+      return;
+    }
+
+    if (step.kind === "if") {
+      const hasFlagValue = this.flags.has(step.condition);
+      if (hasFlagValue) {
+        const targetIndex = this.scenario.steps.findIndex(
+          (candidate) => candidate.kind === "label" && candidate.label === step.target
+        );
+        if (targetIndex >= 0) {
+          await this.showStep(targetIndex + 1);
+          return;
+        }
+      } else if (step.elseTarget) {
+        const elseIndex = this.scenario.steps.findIndex(
+          (candidate) => candidate.kind === "label" && candidate.label === step.elseTarget
+        );
+        if (elseIndex >= 0) {
+          await this.showStep(elseIndex + 1);
+          return;
+        }
+      }
+      await this.showStep(index + 1);
+      return;
+    }
+
+    if (step.kind === "ifNot") {
+      const hasFlagValue = this.flags.has(step.condition);
+      if (!hasFlagValue) {
+        const targetIndex = this.scenario.steps.findIndex(
+          (candidate) => candidate.kind === "label" && candidate.label === step.target
+        );
+        if (targetIndex >= 0) {
+          await this.showStep(targetIndex + 1);
+          return;
+        }
+      } else if (step.elseTarget) {
+        const elseIndex = this.scenario.steps.findIndex(
+          (candidate) => candidate.kind === "label" && candidate.label === step.elseTarget
+        );
+        if (elseIndex >= 0) {
+          await this.showStep(elseIndex + 1);
+          return;
+        }
+      }
+      await this.showStep(index + 1);
+      return;
+    }
+
     if (step.kind === "bg") {
       this.setAtmosphere(step.bg);
       if (step.bgm) {
@@ -1052,12 +1106,24 @@ class GalgeRuntimeApp {
       this.voiceController.stopCurrent();
       this.$choiceContainer.innerHTML = "";
       for (const choice of step.choices) {
+        // Conditional visibility: skip choices whose condition is not met
+        if (choice.if && !this.flags.has(choice.if)) {
+          continue;
+        }
+        if (choice.ifNot && this.flags.has(choice.ifNot)) {
+          continue;
+        }
         const button = document.createElement("button");
         button.className = "choice-btn";
         button.textContent = choice.text;
         button.addEventListener("click", (event) => {
           event.stopPropagation();
           this.showingChoice = false;
+          // Set flag if choice has one
+          if (choice.flag) {
+            this.flags.add(choice.flag);
+            console.log(`[choice flag] set: ${choice.flag}`, [...this.flags]);
+          }
           this.$choiceContainer.classList.remove("visible");
           window.setTimeout(() => {
             this.$choiceContainer.style.display = "none";

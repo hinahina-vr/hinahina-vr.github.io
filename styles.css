@@ -184,12 +184,13 @@ body {
   height: 100%;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
+  will-change: opacity;
 }
 
 html[data-site-mode="immersive"] .site-mode-particles,
 body.mode-immersive .site-mode-particles {
-  opacity: 0.82;
+  opacity: 1;
 }
 
 html[data-site-mode="classic"] .site-mode-particles,
@@ -1292,17 +1293,17 @@ body.mode-classic .char-card {
   transform: none !important;
 }
 
-body.mode-classic .panel h2,
-body.mode-classic .feature-link,
-body.mode-classic .back-link,
-body.mode-classic .char-links a,
-body.mode-classic .cross-link,
-body.mode-classic .link-card-banner-link,
-body.mode-classic .link-card-banner,
-body.mode-classic .banner-grid img,
-body.mode-classic .simulacrum-chart,
-body.mode-classic .spec-table th,
-body.mode-classic .spec-table td {
+body.mode-classic:not(.character-diary-page) .panel h2,
+body.mode-classic:not(.character-diary-page) .feature-link,
+body.mode-classic:not(.character-diary-page) .back-link,
+body.mode-classic:not(.character-diary-page) .char-links a,
+body.mode-classic:not(.character-diary-page) .cross-link,
+body.mode-classic:not(.character-diary-page) .link-card-banner-link,
+body.mode-classic:not(.character-diary-page) .link-card-banner,
+body.mode-classic:not(.character-diary-page) .banner-grid img,
+body.mode-classic:not(.character-diary-page) .simulacrum-chart,
+body.mode-classic:not(.character-diary-page) .spec-table th,
+body.mode-classic:not(.character-diary-page) .spec-table td {
   border-radius: 0 !important;
 }
 
@@ -1323,13 +1324,13 @@ body.mode-classic .entry-list li {
   background: rgba(0, 0, 0, 0.9) !important;
 }
 
-body.mode-classic .char-card .char-name,
-body.mode-classic .link-card-title a,
-body.mode-classic .dialogue-title,
-body.mode-classic .section-divider,
-body.mode-classic .poem-section .section-title,
-body.mode-classic .persona-title,
-body.mode-classic .entry-title {
+body.mode-classic:not(.character-diary-page) .char-card .char-name,
+body.mode-classic:not(.character-diary-page) .link-card-title a,
+body.mode-classic:not(.character-diary-page) .dialogue-title,
+body.mode-classic:not(.character-diary-page) .section-divider,
+body.mode-classic:not(.character-diary-page) .poem-section .section-title,
+body.mode-classic:not(.character-diary-page) .persona-title,
+body.mode-classic:not(.character-diary-page) .entry-title {
   color: var(--card-title) !important;
   text-shadow: none !important;
 }
@@ -1353,18 +1354,60 @@ body.mode-classic .spec-table td {
   border-color: var(--card-border) !important;
 }
 
-body.mode-classic .dialogue-subtitle,
-body.mode-classic .dialogue-date,
-body.mode-classic .poem-whisper,
-body.mode-classic .persona-axis,
-body.mode-classic .char-card .char-title,
-body.mode-classic .entry-date {
+body.mode-classic:not(.character-diary-page) .dialogue-subtitle,
+body.mode-classic:not(.character-diary-page) .dialogue-date,
+body.mode-classic:not(.character-diary-page) .poem-whisper,
+body.mode-classic:not(.character-diary-page) .persona-axis,
+body.mode-classic:not(.character-diary-page) .char-card .char-title,
+body.mode-classic:not(.character-diary-page) .entry-date {
   color: var(--card-meta) !important;
 }
 
 body.mode-classic .dialogue-separator,
 body.mode-classic .poem-separator {
   color: var(--card-meta) !important;
+}
+
+body.character-diary-page.mode-classic .panel {
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.82), rgba(252, 246, 232, 0.76)) !important;
+  border-color: rgba(160, 136, 92, 0.32) !important;
+}
+
+body.character-diary-page.mode-classic .entry-list li {
+  background: linear-gradient(180deg, rgba(255, 251, 242, 0.9), rgba(247, 239, 219, 0.82)) !important;
+  border-color: rgba(176, 150, 88, 0.58) !important;
+}
+
+body.character-diary-page.mode-classic .panel h2 {
+  color: #4b341c !important;
+  border-bottom-color: rgba(112, 85, 50, 0.32) !important;
+  text-shadow: none !important;
+}
+
+body.character-diary-page.mode-classic .entry-title,
+body.character-diary-page.mode-classic .entry-list li :is(h1, h2, h3, h4) {
+  color: #68431f !important;
+  text-shadow: none !important;
+}
+
+body.character-diary-page.mode-classic .entry-date {
+  color: #705938 !important;
+  text-shadow: none !important;
+}
+
+body.character-diary-page.mode-classic .entry-list li p,
+body.character-diary-page.mode-classic .entry-list li li,
+body.character-diary-page.mode-classic .entry-list li blockquote {
+  color: #302416 !important;
+}
+
+body.character-diary-page.mode-classic .entry-list li hr ~ p,
+body.character-diary-page.mode-classic .entry-list li strong {
+  color: #54412b !important;
+}
+
+body.character-diary-page.mode-classic .entry-list li img {
+  box-shadow: none !important;
 }
 
 html[data-site-mode="classic"] body.diary-despair,

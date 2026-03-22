@@ -66,7 +66,10 @@ function normalizeChoice(choice, stepIndex, warnings) {
     warnings.push(`choices[${stepIndex}] に text がありません。`);
     return null;
   }
-  return { text, goto: gotoLabel || null };
+  const flag = asString(choice?.flag).trim() || null;
+  const condition = asString(choice?.if).trim() || null;
+  const conditionNot = asString(choice?.ifNot).trim() || null;
+  return { text, goto: gotoLabel || null, flag, if: condition, ifNot: conditionNot };
 }
 
 function normalizeTextStep(step, stepIndex, warnings, chars) {
@@ -131,6 +134,34 @@ function normalizeStep(step, stepIndex, warnings, chars) {
     return {
       kind: "label",
       label: asString(step.label).trim(),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
+  if (step.flag && !Object.prototype.hasOwnProperty.call(step, "text")) {
+    return {
+      kind: "flag",
+      flag: asString(step.flag).trim(),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
+  if (step.if && step.goto) {
+    return {
+      kind: "if",
+      condition: asString(step.if).trim(),
+      target: asString(step.goto).trim(),
+      elseTarget: asString(step.else).trim() || null,
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
+  if (step.ifNot && step.goto) {
+    return {
+      kind: "ifNot",
+      condition: asString(step.ifNot).trim(),
+      target: asString(step.goto).trim(),
+      elseTarget: asString(step.else).trim() || null,
       bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
     };
   }
