@@ -793,16 +793,20 @@ class GalgeRuntimeApp {
     sgc.b = this._lerpVal(sgc.b, sgt.b, t);
     this.starGlowColor = `${Math.round(sgc.r)},${Math.round(sgc.g)},${Math.round(sgc.b)}`;
 
-    // Also update nebula/pillar/stream hues toward target hue
+    // Smoothly transition nebula/pillar/stream hues toward new base hue
+    // Each element keeps a _hueOffset assigned at init; we lerp toward bgColor.h + offset
+    const baseH = this.bgColor.h;
     for (const nebula of this.kNebula) {
-      const targetHue = Math.floor(Math.random() * 0.2 + this.bgColor.h - 0.1 + nebula.hue * 0.99);
-      nebula.hue = this._lerpVal(nebula.hue, this.bgColor.h + (nebula.hue - Math.round(nebula.hue / 80) * 80), t * 0.5);
+      if (nebula._hueOffset === undefined) nebula._hueOffset = nebula.hue - baseH;
+      nebula.hue = this._lerpVal(nebula.hue, baseH + nebula._hueOffset, t);
     }
     for (const pillar of this.kPillars) {
-      pillar.hue = this._lerpVal(pillar.hue, this.bgColor.h + (pillar.hue - Math.round(pillar.hue / 40) * 40), t * 0.5);
+      if (pillar._hueOffset === undefined) pillar._hueOffset = pillar.hue - baseH;
+      pillar.hue = this._lerpVal(pillar.hue, baseH + pillar._hueOffset, t);
     }
     for (const stream of this.kStreams) {
-      stream.hue = this._lerpVal(stream.hue, this.bgColor.h + (stream.hue - Math.round(stream.hue / 60) * 60), t * 0.5);
+      if (stream._hueOffset === undefined) stream._hueOffset = stream.hue - baseH;
+      stream.hue = this._lerpVal(stream.hue, baseH + stream._hueOffset, t);
     }
 
     // Update body background gradient
