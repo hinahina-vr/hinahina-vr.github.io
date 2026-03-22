@@ -29,35 +29,41 @@ const { chromium } = require("playwright");
   await page.waitForSelector("[data-site-mode-toggle]", { timeout: 5000 });
   let htmlMode = await page.getAttribute("html", "data-site-mode");
   let bodyClass = await page.getAttribute("body", "class");
-  assert(htmlMode === "immersive", `index.html 初回表示が immersive であること (got: "${htmlMode}")`);
-  assert(bodyClass.includes("mode-immersive"), `body に mode-immersive が付くこと (got: "${bodyClass}")`);
+  assert(htmlMode === "classic", `index.html 初回表示が classic であること (got: "${htmlMode}")`);
+  assert(bodyClass.includes("mode-classic"), `body に mode-classic が付くこと (got: "${bodyClass}")`);
 
   console.log("\n=== site mode persistence across pages ===");
   await page.click("[data-site-mode-toggle]");
   await page.waitForTimeout(250);
   htmlMode = await page.getAttribute("html", "data-site-mode");
   let storedMode = await page.evaluate(() => window.localStorage.getItem("waddy-display-mode"));
-  assert(htmlMode === "classic", `トップで classic に切り替わること (got: "${htmlMode}")`);
-  assert(storedMode === "classic", `localStorage に classic が保存されること (got: "${storedMode}")`);
+  const particleCanvas = await page.$("[data-site-mode-particles]");
+  const particleOpacity = particleCanvas
+    ? await page.$eval("[data-site-mode-particles]", (el) => window.getComputedStyle(el).opacity)
+    : null;
+  assert(htmlMode === "immersive", `トップで immersive に切り替わること (got: "${htmlMode}")`);
+  assert(storedMode === "immersive", `localStorage に immersive が保存されること (got: "${storedMode}")`);
+  assert(particleCanvas !== null, "immersive 用の particle canvas が存在すること");
+  assert(Number(particleOpacity) > 0, `immersive で particle canvas が表示されること (got: "${particleOpacity}")`);
   await page.goto(`${baseUrl}/links.html`, { waitUntil: "domcontentloaded" });
   await page.waitForSelector("[data-site-mode-toggle]", { timeout: 5000 });
   htmlMode = await page.getAttribute("html", "data-site-mode");
   bodyClass = await page.getAttribute("body", "class");
-  assert(htmlMode === "classic", `links.html でも classic が維持されること (got: "${htmlMode}")`);
-  assert(bodyClass.includes("mode-classic"), `links.html の body が classic であること (got: "${bodyClass}")`);
+  assert(htmlMode === "immersive", `links.html でも immersive が維持されること (got: "${htmlMode}")`);
+  assert(bodyClass.includes("mode-immersive"), `links.html の body が immersive であること (got: "${bodyClass}")`);
 
   console.log("\n=== diary despair coexistence ===");
   await page.goto(`${baseUrl}/diary.html`, { waitUntil: "domcontentloaded" });
   await page.waitForLoadState("networkidle");
   bodyClass = await page.getAttribute("body", "class");
   assert(bodyClass.includes("diary-despair"), `diary.html に diary-despair が残ること (got: "${bodyClass}")`);
-  assert(bodyClass.includes("mode-classic"), `diary.html でも classic が共存すること (got: "${bodyClass}")`);
+  assert(bodyClass.includes("mode-immersive"), `diary.html でも immersive が共存すること (got: "${bodyClass}")`);
 
-  console.log("\n=== galge mode honors stored classic ===");
+  console.log("\n=== galge mode honors stored immersive ===");
   await page.goto(`${baseUrl}/galge-mode.html?char=hina&date=2026-03-16`, { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(400);
   bodyClass = await page.getAttribute("body", "class");
-  assert(bodyClass.includes("mode-classic"), `galge-mode.html が保存済み classic で開くこと (got: "${bodyClass}")`);
+  assert(bodyClass.includes("mode-immersive"), `galge-mode.html が保存済み immersive で開くこと (got: "${bodyClass}")`);
 
   console.log("\n=== query mode override ===");
   await page.goto(`${baseUrl}/index.html?mode=immersive`, { waitUntil: "domcontentloaded" });

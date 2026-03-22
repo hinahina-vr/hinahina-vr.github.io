@@ -292,12 +292,16 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   let bgmPlayCount = await page.evaluate(() => window.__bgmEvents.plays.length);
   assert(bgmPlayCount === 0, "BGM does not autoplay while toggle is OFF");
 
+  await page.click("#sound-settings-btn");
+  await page.waitForSelector("#volume-popup.visible");
   await page.click("#bgm-toggle");
   await page.waitForTimeout(300);
   bgmPlayCount = await page.evaluate(() => window.__bgmEvents.plays.length);
   assert(bgmPlayCount >= 1, "enabling BGM starts current track playback");
   const runtimeBgmToggleText = await page.$eval("#bgm-toggle", (element) => element.textContent);
   assert(runtimeBgmToggleText.includes("BGM ON"), "runtime BGM toggle switches to ON");
+  await page.click("#sound-settings-btn");
+  await page.waitForTimeout(200);
 
   const runtimeClientId = await page.$eval("#api-client-id", (element) => element.textContent);
   const clientId = runtimeClientId.replace("API client:", "").trim();
@@ -332,12 +336,12 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   await page.click("#mode-toggle");
   await page.waitForTimeout(300);
   let bodyClass = await page.$eval("body", (element) => element.className);
-  assert(bodyClass.includes("mode-classic"), `mode toggle switches to classic (got: "${bodyClass}")`);
+  assert(bodyClass.includes("mode-immersive"), `mode toggle switches to immersive (got: "${bodyClass}")`);
 
   await page.click("#mode-toggle");
   await page.waitForTimeout(300);
   bodyClass = await page.$eval("body", (element) => element.className);
-  assert(bodyClass.includes("mode-immersive"), `mode toggle switches back to immersive (got: "${bodyClass}")`);
+  assert(bodyClass.includes("mode-classic"), `mode toggle switches back to classic (got: "${bodyClass}")`);
 
   response = await page.goto(
     `${baseUrl}/galge-scenario.html?messageApiBase=${encodeURIComponent(messageApiBase)}`,

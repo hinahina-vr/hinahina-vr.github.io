@@ -1,5 +1,7 @@
 import { isValidEmotion } from "./emotion-resolver.js";
 
+const DEFAULT_SCENARIO_NAME = "2026-03-18_声の座標";
+
 function asObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};
 }
@@ -207,14 +209,11 @@ function normalizeChars(chars, warnings) {
 
 function deriveScenarioName() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("scenario") || null;
+  return params.get("scenario") || DEFAULT_SCENARIO_NAME;
 }
 
 export async function loadScenarioDefinition() {
   const scenarioName = deriveScenarioName();
-  if (!scenarioName) {
-    throw new Error("scenario パラメータが指定されていません。URLに ?scenario=シナリオ名 を追加してください。");
-  }
   const warnings = [];
   const url = `./scenarios/${encodeURIComponent(scenarioName)}.json`;
   const response = await fetch(url);

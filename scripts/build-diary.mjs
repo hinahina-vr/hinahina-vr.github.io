@@ -216,6 +216,7 @@ ${backItems}
 ${htmlNav([
     { href: "./index.html", text: "トップページへ戻る" },
     { href: "./videos.html", text: "動画紹介コーナーへ" },
+    { href: "./galge-mode.html", text: "ギャルゲーモードへ" },
     { href: "./galge-guide.html", text: "ギャルゲ攻略ページへ" },
   ])}
 

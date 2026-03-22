@@ -9,7 +9,7 @@
   <script>
     (function () {
       var KEY = "waddy-display-mode";
-      var DEFAULT_MODE = "immersive";
+      var DEFAULT_MODE = "classic";
       var params = new URLSearchParams(window.location.search);
       var queryMode = params.get("mode");
       var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
@@ -43,7 +43,7 @@
       <div class="hero-copy">
       <p class="smallline">Welcome to my cyber room since 1999</p>
       <h1>ワディーゲストハウス</h1>
-      <p class="tagline">ハイパーリンクの海にようこそ。<span class="blink">IMMERSIVE READY</span></p>
+      <p class="tagline">ハイパーリンクの海にようこそ。<span class="blink">CLASSIC DEFAULT</span></p>
       <p class="hero-note">
         動画制作、VR、配信まわりを横断しながら、日記、対談、ギャルゲー体験、人格設計までを一つの個人サイトに収めています。
         ここはリンク集であり、神話製作機械の玄関でもあります。
@@ -59,23 +59,6 @@
         人目の訪問者です。
       </p>
       </div>
-      <aside class="hero-status" aria-label="サイト案内">
-        <h2>Signal</h2>
-        <ul>
-          <li>
-            <span class="hero-label">人格</span>
-            <span class="hero-value">ワディー / ひなひな / 萌神 / リアルおじ</span>
-          </li>
-          <li>
-            <span class="hero-label">導線</span>
-            <span class="hero-value">Diary / Characters / Dialogue / Visual Novel</span>
-          </li>
-          <li>
-            <span class="hero-label">Mode</span>
-            <span class="hero-value">Immersive を既定、Classic に即時切替</span>
-          </li>
-        </ul>
-      </aside>
       <marquee class="hero-marquee" behavior="scroll" direction="left" scrollamount="5">
         ★ ワディーゲストハウスへようこそ ★ YouTube / X / GitHub で活動中 ★
       </marquee>

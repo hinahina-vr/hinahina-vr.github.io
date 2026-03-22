@@ -140,6 +140,7 @@
   }
 
   // src/galge-runtime/scenario-loader.js
+  var DEFAULT_SCENARIO_NAME = "2026-03-18_声の座標";
   function asObject(value) {
     return value && typeof value === "object" && !Array.isArray(value) ? value : {};
   }
@@ -315,13 +316,10 @@
   }
   function deriveScenarioName() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("scenario") || null;
+    return params.get("scenario") || DEFAULT_SCENARIO_NAME;
   }
   async function loadScenarioDefinition() {
     const scenarioName = deriveScenarioName();
-    if (!scenarioName) {
-      throw new Error("scenario パラメータが指定されていません。URLに ?scenario=シナリオ名 を追加してください。");
-    }
     const warnings = [];
     const url = `./scenarios/${encodeURIComponent(scenarioName)}.json`;
     const response = await fetch(url);
@@ -32477,7 +32475,7 @@ void main() {
 
   // src/galge-runtime/main.js
   var SITE_MODE_STORAGE_KEY = "waddy-display-mode";
-  var SITE_MODE_DEFAULT = "immersive";
+  var SITE_MODE_DEFAULT = "classic";
   function getModeFromQuery() {
     const mode = new URLSearchParams(window.location.search).get("mode");
     return mode === "classic" || mode === "immersive" ? mode : null;
@@ -32655,6 +32653,7 @@ void main() {
       this.$runtimeWarning = this.$("runtime-warning");
       this.$titleSettingsBtn = this.$("title-settings-btn");
       this.$titleModeToggleBtn = this.$("title-mode-toggle-btn");
+      this.$titleBgmToggle = this.$("title-bgm-toggle");
       this.$settingsBtn = this.$("settings-btn");
       this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
       this.$soundSettingsBtn = this.$("sound-settings-btn");
@@ -32800,6 +32799,12 @@ void main() {
           this.setMode(this.currentMode === "immersive" ? "classic" : "immersive");
         });
       }
+      if (this.$titleBgmToggle) {
+        this.$titleBgmToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          this.toggleBgm();
+        });
+      }
       this.$settingsBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         this.settingsPanel.open();
@@ -32840,7 +32845,7 @@ void main() {
         await this.startExperience();
       });
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
+        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
           return;
         }
         if (this.$volumePopup.classList.contains("visible")) {
@@ -32928,6 +32933,22 @@ void main() {
     updateBgmToggle() {
       const enabled = this.bgmController.isEnabled();
       this.$bgmToggle.className = `vol-toggle ${enabled ? "on" : "off"}`;
+      const runtimeLabel = enabled ? "BGM ON" : "BGM OFF";
+      this.$bgmToggle.setAttribute("aria-label", runtimeLabel);
+      const runtimeHiddenLabel = this.$bgmToggle.querySelector(".sr-only");
+      if (runtimeHiddenLabel) {
+        runtimeHiddenLabel.textContent = runtimeLabel;
+      }
+      if (this.$titleBgmToggle) {
+        const titleLabel = this.$titleBgmToggle.querySelector(".btn-text");
+        if (titleLabel) {
+          titleLabel.textContent = runtimeLabel;
+        } else {
+          this.$titleBgmToggle.textContent = runtimeLabel;
+        }
+        this.$titleBgmToggle.setAttribute("aria-label", runtimeLabel);
+        this.$titleBgmToggle.setAttribute("title", runtimeLabel);
+      }
     }
     toggleBgm() {
       this.bgmController.setEnabled(!this.bgmController.isEnabled());
@@ -32965,12 +32986,25 @@ void main() {
     }
     async playVoiceTest(speakerKey, speakerLabel, config) {
       const text = `${speakerLabel}の音声テストです。`;
-      await this.voiceController.speakText(text, {
-        lang: "ja-JP",
-        voiceConfig: config,
-        speakerKey,
-        allowBrowserFallback: true
+      const wasMuted = this.voiceController.isMuted();
+      if (wasMuted) {
+        this.voiceController.setMuted(false);
+      }
+      await this.voiceController.unlock().catch((error) => {
+        console.warn("audio unlock failed:", error);
       });
+      try {
+        await this.voiceController.speakText(text, {
+          lang: "ja-JP",
+          voiceConfig: config,
+          speakerKey,
+          allowBrowserFallback: true
+        });
+      } finally {
+        if (wasMuted) {
+          this.voiceController.setMuted(true);
+        }
+      }
     }
     findActiveBgmCue(index) {
       if (!this.scenario?.steps?.length) {
@@ -33531,12 +33565,22 @@ void main() {
         }
       }
       const voiceConfig = await this.getSpeakerVoiceConfig(speaker);
-      await this.voiceController.speakText(text, {
-        lang: "ja-JP",
-        voiceConfig,
-        speakerKey: speaker,
-        allowBrowserFallback: true
-      });
+      const wasMuted = this.voiceController.isMuted();
+      if (wasMuted) {
+        this.voiceController.setMuted(false);
+      }
+      try {
+        await this.voiceController.speakText(text, {
+          lang: "ja-JP",
+          voiceConfig,
+          speakerKey: speaker,
+          allowBrowserFallback: true
+        });
+      } finally {
+        if (wasMuted) {
+          this.voiceController.setMuted(true);
+        }
+      }
       if (snapshot && this.started && this.currentStep === snapshot.stepIndex && this.renderToken === snapshot.renderToken && !this.showingChoice) {
         this.restoreTextWindowSnapshot(snapshot);
         await this.refreshCurrentStage(null);

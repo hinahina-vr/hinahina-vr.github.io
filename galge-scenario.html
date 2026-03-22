@@ -11,7 +11,7 @@
     <script>
       (function () {
         var KEY = "waddy-display-mode";
-        var DEFAULT_MODE = "immersive";
+        var DEFAULT_MODE = "classic";
         var params = new URLSearchParams(window.location.search);
         var queryMode = params.get("mode");
         var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
@@ -268,6 +268,17 @@
       }
       .utility-btn .btn-icon { display: inline-block; margin-right: 4px; }
       .utility-btn .btn-text { display: inline-block; }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
       #title-screen .start-btn:hover,
       .utility-btn:hover,
       .settings-btn:hover,
@@ -584,9 +595,6 @@
       .utility-btn {
         padding: 10px 14px;
         font-size: clamp(11px, 0.9vw, 14px);
-      }
-      #mode-toggle {
-        display: none !important;
       }
       #back-btn {
         top: clamp(12px, 1.8vw, 24px);
@@ -1024,6 +1032,7 @@
       }
 
       .mode-classic #sound-settings-btn {
+        top: auto;
         bottom: 18px;
         right: 18px;
       }
@@ -1201,6 +1210,7 @@
           <div class="title-actions-sub">
             <button class="utility-btn" id="title-settings-btn" type="button" title="モデル設定"><span class="btn-icon">🎭</span><span class="btn-text">モデル設定</span></button>
             <button class="utility-btn" id="title-mode-toggle-btn" type="button" title="表示モード切替"><span class="btn-icon">🌙</span><span class="btn-text">表示切替</span></button>
+            <button class="utility-btn" id="title-bgm-toggle" type="button" title="BGM OFF"><span class="btn-icon">🎵</span><span class="btn-text">BGM OFF</span></button>
             <button class="utility-btn" id="title-sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
           </div>
         </div>
@@ -1240,7 +1250,7 @@
     <button class="utility-btn" id="sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
     <div id="volume-popup">
       <div class="vol-row">
-        <button class="vol-toggle off" id="bgm-toggle" type="button" title="BGM ON/OFF"></button>
+        <button class="vol-toggle off" id="bgm-toggle" type="button" title="BGM OFF"><span class="sr-only">BGM OFF</span></button>
         <span class="vol-label">BGM</span>
         <input type="range" class="vol-slider" id="bgm-slider" min="0" max="100" value="10">
         <span class="vol-value" id="bgm-value">10</span>

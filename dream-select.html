@@ -8,7 +8,7 @@
     <script>
       (function () {
         var KEY = "waddy-display-mode";
-        var DEFAULT_MODE = "immersive";
+        var DEFAULT_MODE = "classic";
         var params = new URLSearchParams(window.location.search);
         var queryMode = params.get("mode");
         var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
@@ -550,7 +550,7 @@
 
     <script>
       const SITE_MODE_STORAGE_KEY = "waddy-display-mode";
-      const SITE_MODE_DEFAULT = "immersive";
+      const SITE_MODE_DEFAULT = "classic";
       const SITE_MODE_VALUES = new Set(["immersive", "classic"]);
 
       function getModeFromQuery() {
@@ -600,6 +600,7 @@
         document.body.classList.remove("mode-immersive", "mode-classic");
         document.body.classList.add("mode-" + resolvedMode);
         updateModeToggle(resolvedMode);
+        syncScenarioLinks(resolvedMode);
 
         if (options.persist !== false) {
           setStoredMode(resolvedMode);
@@ -619,6 +620,21 @@
         params.set("scenario", scenario);
         params.set("mode", getCurrentMode());
         return "./galge-scenario.html?" + params.toString();
+      }
+
+      function syncScenarioLinks(mode) {
+        document.querySelectorAll('a[href*="galge-scenario.html"]').forEach(function (link) {
+          const rawHref = link.getAttribute("href");
+          if (!rawHref) {
+            return;
+          }
+          const url = new URL(rawHref, window.location.href);
+          if (!url.pathname.endsWith("/galge-scenario.html")) {
+            return;
+          }
+          url.searchParams.set("mode", mode);
+          link.setAttribute("href", "./galge-scenario.html?" + url.searchParams.toString());
+        });
       }
 
       applyMode(window.__waddyInitialSiteMode || resolveInitialMode(), {

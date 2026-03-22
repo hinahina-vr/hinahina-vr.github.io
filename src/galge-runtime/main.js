@@ -8,7 +8,7 @@ import { VRMAssetStore } from "./vrm-asset-store.js";
 import { VRMStage } from "./vrm-stage.js";
 
 const SITE_MODE_STORAGE_KEY = "waddy-display-mode";
-const SITE_MODE_DEFAULT = "immersive";
+const SITE_MODE_DEFAULT = "classic";
 
 function getModeFromQuery() {
   const mode = new URLSearchParams(window.location.search).get("mode");
@@ -87,6 +87,7 @@ class GalgeRuntimeApp {
     this.$runtimeWarning = this.$("runtime-warning");
     this.$titleSettingsBtn = this.$("title-settings-btn");
     this.$titleModeToggleBtn = this.$("title-mode-toggle-btn");
+    this.$titleBgmToggle = this.$("title-bgm-toggle");
     this.$settingsBtn = this.$("settings-btn");
     this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
     this.$soundSettingsBtn = this.$("sound-settings-btn");
@@ -250,6 +251,13 @@ class GalgeRuntimeApp {
       });
     }
 
+    if (this.$titleBgmToggle) {
+      this.$titleBgmToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleBgm();
+      });
+    }
+
     this.$settingsBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       this.settingsPanel.open();
@@ -304,6 +312,7 @@ class GalgeRuntimeApp {
         event.target === this.$titleModeToggleBtn ||
         event.target.closest("#title-mode-toggle-btn") ||
         event.target === this.$startBtn ||
+        event.target === this.$titleBgmToggle ||
         event.target === this.$settingsBtn ||
         event.target === this.$titleSettingsBtn ||
         event.target === this.$soundSettingsBtn ||
@@ -411,6 +420,22 @@ class GalgeRuntimeApp {
   updateBgmToggle() {
     const enabled = this.bgmController.isEnabled();
     this.$bgmToggle.className = `vol-toggle ${enabled ? "on" : "off"}`;
+    const runtimeLabel = enabled ? "BGM ON" : "BGM OFF";
+    this.$bgmToggle.setAttribute("aria-label", runtimeLabel);
+    const runtimeHiddenLabel = this.$bgmToggle.querySelector(".sr-only");
+    if (runtimeHiddenLabel) {
+      runtimeHiddenLabel.textContent = runtimeLabel;
+    }
+    if (this.$titleBgmToggle) {
+      const titleLabel = this.$titleBgmToggle.querySelector(".btn-text");
+      if (titleLabel) {
+        titleLabel.textContent = runtimeLabel;
+      } else {
+        this.$titleBgmToggle.textContent = runtimeLabel;
+      }
+      this.$titleBgmToggle.setAttribute("aria-label", runtimeLabel);
+      this.$titleBgmToggle.setAttribute("title", runtimeLabel);
+    }
   }
 
   toggleBgm() {
@@ -455,12 +480,25 @@ class GalgeRuntimeApp {
 
   async playVoiceTest(speakerKey, speakerLabel, config) {
     const text = `${speakerLabel}の音声テストです。`;
-    await this.voiceController.speakText(text, {
-      lang: "ja-JP",
-      voiceConfig: config,
-      speakerKey,
-      allowBrowserFallback: true,
+    const wasMuted = this.voiceController.isMuted();
+    if (wasMuted) {
+      this.voiceController.setMuted(false);
+    }
+    await this.voiceController.unlock().catch((error) => {
+      console.warn("audio unlock failed:", error);
     });
+    try {
+      await this.voiceController.speakText(text, {
+        lang: "ja-JP",
+        voiceConfig: config,
+        speakerKey,
+        allowBrowserFallback: true,
+      });
+    } finally {
+      if (wasMuted) {
+        this.voiceController.setMuted(true);
+      }
+    }
   }
 
   findActiveBgmCue(index) {
@@ -1208,12 +1246,22 @@ class GalgeRuntimeApp {
     }
 
     const voiceConfig = await this.getSpeakerVoiceConfig(speaker);
-    await this.voiceController.speakText(text, {
-      lang: "ja-JP",
-      voiceConfig,
-      speakerKey: speaker,
-      allowBrowserFallback: true,
-    });
+    const wasMuted = this.voiceController.isMuted();
+    if (wasMuted) {
+      this.voiceController.setMuted(false);
+    }
+    try {
+      await this.voiceController.speakText(text, {
+        lang: "ja-JP",
+        voiceConfig,
+        speakerKey: speaker,
+        allowBrowserFallback: true,
+      });
+    } finally {
+      if (wasMuted) {
+        this.voiceController.setMuted(true);
+      }
+    }
 
     if (
       snapshot &&

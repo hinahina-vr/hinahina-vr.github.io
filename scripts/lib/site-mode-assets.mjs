@@ -1,7 +1,7 @@
 const HEAD_BOOTSTRAP = `    <script>
       (function () {
         var KEY = "waddy-display-mode";
-        var DEFAULT_MODE = "immersive";
+        var DEFAULT_MODE = "classic";
         var params = new URLSearchParams(window.location.search);
         var queryMode = params.get("mode");
         var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;

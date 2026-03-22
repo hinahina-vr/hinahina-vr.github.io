@@ -88,21 +88,21 @@ const { chromium } = require('playwright');
   // === モード切替テスト ===
   console.log('\n=== モード切替テスト ===');
 
-  // Test 12: Default mode is immersive
+  // Test 12: Default mode is classic
   let bodyClass = await page.$eval('body', el => el.className);
-  assert(bodyClass.includes('mode-immersive'), `デフォルトがイマーシブモードであること (got: "${bodyClass}")`);
+  assert(bodyClass.includes('mode-classic'), `デフォルトがクラシックモードであること (got: "${bodyClass}")`);
 
-  // Test 13: Toggle to classic mode
+  // Test 13: Toggle to immersive mode
   await page.click('#mode-toggle');
   await page.waitForTimeout(300);
   bodyClass = await page.$eval('body', el => el.className);
-  assert(bodyClass.includes('mode-classic'), `トグル後にクラシックモードになること (got: "${bodyClass}")`);
+  assert(bodyClass.includes('mode-immersive'), `トグル後にイマーシブモードになること (got: "${bodyClass}")`);
 
-  // Test 14: Toggle back to immersive
+  // Test 14: Toggle back to classic
   await page.click('#mode-toggle');
   await page.waitForTimeout(300);
   bodyClass = await page.$eval('body', el => el.className);
-  assert(bodyClass.includes('mode-immersive'), `再トグル後にイマーシブモードに戻ること (got: "${bodyClass}")`);
+  assert(bodyClass.includes('mode-classic'), `再トグル後にクラシックモードに戻ること (got: "${bodyClass}")`);
 
   // === URL パラメータ mode=classic テスト ===
   console.log('\n=== URL パラメータテスト ===');

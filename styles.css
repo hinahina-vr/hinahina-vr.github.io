@@ -168,11 +168,33 @@ body {
 .stars {
   position: fixed;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
   background-image: var(--star-image);
   background-size: var(--star-size);
   opacity: var(--star-opacity);
   animation: twinkle var(--star-speed) linear infinite;
+}
+
+.site-mode-particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+html[data-site-mode="immersive"] .site-mode-particles,
+body.mode-immersive .site-mode-particles {
+  opacity: 0.82;
+}
+
+html[data-site-mode="classic"] .site-mode-particles,
+body.mode-classic .site-mode-particles {
+  opacity: 0;
 }
 
 .page-frame {
@@ -552,14 +574,10 @@ marquee {
 }
 
 .hero-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.92fr);
-  gap: 22px;
-  align-items: stretch;
+  display: block;
 }
 
-.hero-copy,
-.hero-status {
+.hero-copy {
   min-width: 0;
 }
 
@@ -577,56 +595,8 @@ marquee {
   margin: 10px 0 0;
 }
 
-.hero-status {
-  display: grid;
-  gap: 12px;
-  padding: 18px;
-  border: 1px solid var(--panel-border);
-  border-radius: calc(var(--card-radius) * 0.92);
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.hero-status h2 {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--smallline-color);
-  font-size: 0.82rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  text-shadow: none;
-}
-
-.hero-status ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 8px;
-}
-
-.hero-status li {
-  display: grid;
-  gap: 3px;
-}
-
-.hero-label {
-  font-size: 0.76rem;
-  letter-spacing: 0.16em;
-  color: var(--smallline-color);
-  text-transform: uppercase;
-}
-
-.hero-value {
-  color: var(--text-main);
-  font-weight: 700;
-}
-
 .hero-marquee {
-  grid-column: 1 / -1;
-  margin-top: 6px;
+  margin-top: 14px;
 }
 
 .link-card-list {
@@ -718,10 +688,6 @@ marquee {
 }
 
 @media (max-width: 860px) {
-  .hero-header {
-    grid-template-columns: 1fr;
-  }
-
   .site-mode-toggle {
     top: auto;
     right: 12px;
@@ -1319,8 +1285,7 @@ body.mode-classic .entry-list li,
 body.mode-classic .guide-card,
 body.mode-classic .video-card,
 body.mode-classic .link-card,
-body.mode-classic .char-card,
-body.mode-classic .hero-status {
+body.mode-classic .char-card {
   border-radius: 0 !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
@@ -1328,7 +1293,6 @@ body.mode-classic .hero-status {
 }
 
 body.mode-classic .panel h2,
-body.mode-classic .hero-status h2,
 body.mode-classic .feature-link,
 body.mode-classic .back-link,
 body.mode-classic .char-links a,
@@ -1382,7 +1346,6 @@ body.mode-classic .spec-table td {
   color: var(--text-main) !important;
 }
 
-body.mode-classic .hero-status,
 body.mode-classic .axis-explanation,
 body.mode-classic .spec-table th,
 body.mode-classic .spec-table td {
@@ -1390,8 +1353,6 @@ body.mode-classic .spec-table td {
   border-color: var(--card-border) !important;
 }
 
-body.mode-classic .hero-label,
-body.mode-classic .hero-status h2,
 body.mode-classic .dialogue-subtitle,
 body.mode-classic .dialogue-date,
 body.mode-classic .poem-whisper,
