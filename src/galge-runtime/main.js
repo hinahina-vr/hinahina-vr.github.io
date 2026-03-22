@@ -999,6 +999,14 @@ class GalgeRuntimeApp {
       return;
     }
 
+    if (step.kind === "loadScenario") {
+      console.log(`[loadScenario] redirecting to: ${step.scenario}`);
+      const url = new URL(window.location.href);
+      url.searchParams.set("scenario", step.scenario);
+      window.location.replace(url.toString());
+      return;
+    }
+
     if (step.kind === "flag") {
       this.flags.add(step.flag);
       console.log(`[flag] set: ${step.flag}`, [...this.flags]);

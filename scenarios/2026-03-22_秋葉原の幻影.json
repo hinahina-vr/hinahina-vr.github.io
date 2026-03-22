@@ -1,0 +1,84 @@
+{
+  "title": "秋葉原の幻影",
+  "subtitle": "─ 顕幻の交差路 GENKAI END 6 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-22",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ネオンサインが溢れている。\\nだが、一つとして知っている店がない。「ソフマップ」は「ハードマップ」になっていた。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "おー、おにいちゃん！　ここ秋葉原？\\nでもなんか……お店の名前がぜんぶ変だよ？"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "「ヨドバシカメラ」が「ヨドバシテレスコープ」になっている。\\n……ここは俺の知っている秋葉原じゃない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "通りを曲がるたびに、新しい店が現れる。\\n「まんだらけ」の看板は「まんだらけない」に変わっていた。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "あっ、見てみて！　「ゲーマーズじゃない」って書いてあるよ！\\nなにそれ、ゲーマーズなの？ 違うの？"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "否定形の店名か。存在を否定しながら存在している。\\n……哲学的だな、この夢のアキバは。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "中央通りは果てしなく続いている。\\nワディーとひなたは、見たことのないフィギュアと\\n聞いたことのないアニメのグッズを眺めながら歩き続けた。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "えへへ、でもなんか楽しいよ、おにいちゃん！\\n宝探しみたいでワクワクする！"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "ああ……不思議と、嫌じゃないな。\\n永遠に宝探しを続けるのも、悪くないかもしれない。"
+    },
+    {
+      "end": true,
+      "title": "GENKAI END 6",
+      "subtitle": "秋葉原の幻影",
+      "text": "あり得ない店舗が並ぶ電気街で、永遠に宝探しをする。"
+    }
+  ]
+}

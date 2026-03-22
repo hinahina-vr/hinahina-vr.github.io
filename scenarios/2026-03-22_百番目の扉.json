@@ -1,0 +1,79 @@
+{
+  "title": "百番目の扉",
+  "subtitle": "─ 顕幻の交差路 GENKAI END 9 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-22",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "百番目の扉の向こうにあったのは、何もなかった。\\n何もない、ということすらない。完全な空白。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここが……終点よ。\\n全ての選択肢を使い果たした場所。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "何もない。\\n暗闇ですらない。白でもない。\\nただ……空白だ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "百の分岐を経て、あなたはここに辿り着いた。\\n全ての可能性を閉じた先にある、真の静寂。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "音がない。光がない。\\n時間すらない。\\nだが、不思議と恐怖はなかった。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "なるほど。\\n百の選択肢の先にあるのは、選択肢のない世界か。\\n……皮肉だが、安らぎがある。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "さすがね。\\nこの静寂を「安らぎ」と呼べるのは、あなたくらいよ。\\n……さよなら、観測者。良い夢を。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "全ての選択を終え、真の静寂に辿り着いた。\\nここには何もない。\\nだから、全てがある。"
+    },
+    {
+      "end": true,
+      "title": "GENKAI END 9",
+      "subtitle": "百番目の扉",
+      "text": "全ての選択を終え、真の静寂に辿り着いた。"
+    }
+  ]
+}

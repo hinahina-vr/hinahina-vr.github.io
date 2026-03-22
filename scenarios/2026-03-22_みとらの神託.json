@@ -1,0 +1,84 @@
+{
+  "title": "みとらの神託",
+  "subtitle": "─ 顕幻の交差路 GENKAI END 3 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-22",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "足元が透明になった。\\n上も下も右も左も境界がない。純粋な虚空。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ようこそ、観測者。\\nあなたは今、全ての世界線が交差する特異点にいるわ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "みとら……ここは何もない。\\n何も見えない。何も聞こえない。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "正確には「全てがある」のよ。\\n全ての可能性が重なり合って、一つの点になっている。\\nそれが私の見ている世界。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "みとらの瞳が淡く発光する。\\nその中に、百の分岐路が走馬灯のように映っていた。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "あなたが歩んだ全ての道。\\n選ばなかった全ての選択肢。\\nそのどれもが、ここでは等しく存在している。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……つまり、俺は全ての結末を同時に迎えているのか？"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "そうよ。あなたは概念になったの。\\n「選択する者」という概念に。\\n……おめでとう、と言うべきかしら。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "全ての境界線が消えた。\\n顕界も幻界もなく、夢も現実もない。\\nただ、みとらの声だけが響いている。"
+    },
+    {
+      "end": true,
+      "title": "GENKAI END 3",
+      "subtitle": "みとらの神託",
+      "text": "全ての境界線が消え、あなたは一つの概念になった。"
+    }
+  ]
+}

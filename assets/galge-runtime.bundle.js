@@ -278,6 +278,13 @@
         bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
       };
     }
+    if (step.loadScenario) {
+      return {
+        kind: "loadScenario",
+        scenario: asString(step.loadScenario).trim(),
+        bgm: normalizeBgmCue(step.bgm, stepIndex, warnings)
+      };
+    }
     if (step.goto) {
       return {
         kind: "goto",
@@ -33378,6 +33385,13 @@ void main() {
           console.warn(`[goto] target label "${step.target}" not found`);
           await this.showStep(index + 1);
         }
+        return;
+      }
+      if (step.kind === "loadScenario") {
+        console.log(`[loadScenario] redirecting to: ${step.scenario}`);
+        const url = new URL(window.location.href);
+        url.searchParams.set("scenario", step.scenario);
+        window.location.replace(url.toString());
         return;
       }
       if (step.kind === "flag") {

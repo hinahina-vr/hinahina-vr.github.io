@@ -1,0 +1,94 @@
+{
+  "title": "ひなたの教室",
+  "subtitle": "─ 顕幻の交差路 GENKAI END 2 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-22",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "気がつくと、教室にいた。\\n黒板には何も書かれていない。窓の外は夕焼け色だった。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "あ、おにいちゃん！\\nここに来てくれたんだ。えへへ、ひな待ってたんだよー。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "ひなた……？\\nここは……学校か？ 何で俺がここに。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、わかんないけど、ここにはひなとおにいちゃんしかいないの。\\n二人きりの放課後だよ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ひなたは教卓の上に一冊の絵本を見つけた。\\n表紙には「おわらないゆめ」と書かれている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "ねねね、おにいちゃん！　この絵本、いっしょに読もうよ！\\nひなが読んであげるね。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ひなたがページをめくるたびに、教室の景色が変わっていく。\\n壁が森になり、床が草原になり、天井が空になった。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "おー、すごいすごい！\\n絵本の中に入っちゃったみたい！"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "いや、ひなた。俺たちが入ったんじゃない。\\n……絵本の方が、こっちを飲み込んだんだ。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "えへへ……いいよ。おにいちゃんがいるなら、どこでも楽しいもん。\\nずっとここにいよう？"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "誰もいない教室で、ひなたとワディーは絵本を読み続ける。\\nページは、いつまでも終わらなかった。"
+    },
+    {
+      "end": true,
+      "title": "GENKAI END 2",
+      "subtitle": "ひなたの教室",
+      "text": "誰もいない教室で、ひなたと一緒に絵本を読む。"
+    }
+  ]
+}

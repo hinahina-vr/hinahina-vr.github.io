@@ -166,6 +166,14 @@ function normalizeStep(step, stepIndex, warnings, chars) {
     };
   }
 
+  if (step.loadScenario) {
+    return {
+      kind: "loadScenario",
+      scenario: asString(step.loadScenario).trim(),
+      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+    };
+  }
+
   if (step.goto) {
     return {
       kind: "goto",

@@ -1,0 +1,89 @@
+{
+  "title": "ウイスキーの底",
+  "subtitle": "─ 顕幻の交差路 GENKAI END 8 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-22",
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#9080a0",
+      "emoji": "🌘"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#606060",
+      "emoji": "🖥️"
+    }
+  },
+  "scenario": [
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "世界が琥珀色に染まった。\\n上を見上げると、巨大な氷の塊がゆっくり回転していた。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……ここは、グラスの中か？\\nウイスキーの底。まさか、文字通りとはな。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "琥珀色の液体が全てを満たしている。\\nシングルモルトの香り。ピート。バニラ。焦がした樫の木。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "カリラ……いや、ラフロイグか？\\nここの色合いは……山崎のシェリーカスクだな。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "さすがね。グラスの底に落ちてもテイスティングを始めるなんて。\\nあなたらしいわ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "まあな。\\n溺れるなら好きな酒の中がいい。\\n水割りは勘弁だが。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "氷が溶ける音が響く。\\nカラン、と。\\nその一音が、この世界の時計代わりだった。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "氷が全て溶けたとき、あなたもこの世界に溶けるわ。\\n……最後の一杯を、楽しみなさい。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "最後の一杯か。\\n……悪くない。至高のラストオーダーだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "グラスの底から見上げた世界。\\n琥珀色に揺れる天井。\\nワディーは、香りに包まれて静かに溶けていった。"
+    },
+    {
+      "end": true,
+      "title": "GENKAI END 8",
+      "subtitle": "ウイスキーの底",
+      "text": "グラスの底から見上げた世界。琥珀色に溺れる。"
+    }
+  ]
+}
