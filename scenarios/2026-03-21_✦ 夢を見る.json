@@ -1,6 +1,6 @@
 {
   "title": "✦ 夢を見る",
-  "subtitle": "─ 百の扉 ─",
+  "subtitle": "─ 百の扉、千の幻影 ─",
   "genre": "幻界迷宮ノベル",
   "date": "2026-03-21",
   "chars": {
@@ -32,12 +32,12 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "ここは夢と現実の狭間。\n百の扉が並ぶ、終わりのない意識の回廊。"
+      "text": "ここは夢と現実の狭間。\n幾重にも分岐する、意識の樹海。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "よく来たわね、観測者。\n今日の夢は、少し複雑に織り上げられているわ。"
+      "text": "よく来たわね、観測者。\nあなたの選択一つで、世界は完全に枝分かれするわ。\n二度と同じ場所には戻れないかもしれない。"
     },
     {
       "speaker": "hinata",
@@ -52,22 +52,22 @@
     {
       "speaker": "hinata",
       "expression": "元気よく",
-      "text": "ここはね、おにいちゃんの無意識が作った迷路。\n100個の分岐があって、10個の終点があるんだよ！\nえへへ、迷子にならないように、一緒に歩こ？"
+      "text": "ここはね、おにいちゃんの無意識が作った迷路。\n今度こそ、選んだ道によって全く違う場所に繋がってるから！\nえへへ、一緒に迷子になろっか？"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "さあ、最初の選択を。\nどの扉を開けるかは、あなた次第よ。"
+      "text": "さあ、最初の選択を。\n右か、左か。"
     },
     {
       "choices": [
         {
-          "text": "左の鉄の扉を開ける",
-          "goto": "route_room_1"
+          "text": "光の射す左の扉へ",
+          "goto": "route_room_2"
         },
         {
-          "text": "右の木の扉を開ける",
-          "goto": "route_room_2"
+          "text": "漆黒の右の扉へ",
+          "goto": "route_room_3"
         }
       ]
     },
@@ -77,21 +77,21 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第1の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：1】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "走る",
+          "text": "明るい方へ",
           "goto": "route_room_2"
         },
         {
-          "text": "ゆっくり歩く",
+          "text": "強行突破する",
           "goto": "route_room_3"
         }
       ]
@@ -102,17 +102,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第2の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：2】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_5"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_4"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_1"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_5"
         }
       ]
     },
@@ -122,16 +127,21 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第3の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+      "text": "【深層深度：3】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_7"
+          "text": "明るい方へ",
+          "goto": "route_room_6"
         },
         {
-          "text": "暗闇へ",
+          "text": "かすかな光を追う",
           "goto": "route_room_7"
         }
       ]
@@ -142,17 +152,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第4の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+      "text": "【深層深度：4】\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "観測者の目で、真実を見極めなさい。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_6"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_8"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_10"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_9"
         }
       ]
     },
@@ -162,22 +177,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第5の領域。\n天井がなく、星のない夜空が広がっている。"
+      "text": "【深層深度：5】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "5という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
+          "text": "明るい方へ",
           "goto": "route_room_10"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_8"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_11"
         }
       ]
     },
@@ -187,22 +202,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第6の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+      "text": "【深層深度：6】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
     },
     {
       "speaker": "hinata",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_11"
+          "text": "ひなたを信じて進む",
+          "goto": "END_2"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_4"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_13"
         }
       ]
     },
@@ -212,22 +227,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第7の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+      "text": "【深層深度：7】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "7という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_8"
+          "text": "明るい方へ",
+          "goto": "route_room_14"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_6"
+          "text": "強行突破する",
+          "goto": "route_room_15"
         }
       ]
     },
@@ -237,22 +252,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第8の領域。\n緑色のネオンサインだけが点滅している。"
+      "text": "【深層深度：8】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "mitra",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_12"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_16"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_10"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_17"
         }
       ]
     },
@@ -262,22 +277,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第9の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+      "text": "【深層深度：9】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "hinata",
       "expression": "",
-      "text": "9という数字に、意味を求めすぎてはいけないわ。"
+      "text": "おー！　ここは広いねー。走ってみよっか！"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_11"
+          "text": "明るい方へ",
+          "goto": "route_room_18"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_6"
+          "text": "かすかな光を追う",
+          "goto": "route_room_19"
         }
       ]
     },
@@ -287,22 +302,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第10の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：10】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_13"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_20"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_9"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_21"
         }
       ]
     },
@@ -312,22 +327,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第11の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：11】\n古い本が山積みになった空間。インクと埃の匂いがする。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_16"
+          "text": "明るい方へ",
+          "goto": "route_room_22"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_10"
+          "text": "振り返らずに右へ",
+          "goto": "END_8"
         }
       ]
     },
@@ -337,17 +352,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第12の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：12】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "えへへ、ひなとおにいちゃん、二人きりの探検だねー。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_13"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_24"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_10"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_25"
         }
       ]
     },
@@ -357,22 +377,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第13の領域。\n砂漠のような空間。砂の足音が重い。"
+      "text": "【深層深度：13】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_14"
+          "text": "明るい方へ",
+          "goto": "route_room_26"
         },
         {
-          "text": "別の声に従う",
-          "goto": "route_room_11"
+          "text": "強行突破する",
+          "goto": "route_room_27"
         }
       ]
     },
@@ -382,17 +402,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第14の領域。\n螺旋階段が上にも下にも続いている。"
+      "text": "【深層深度：14】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "観測者の目で、真実を見極めなさい。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_18"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_28"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_13"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_29"
         }
       ]
     },
@@ -402,17 +427,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第15の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：15】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_17"
+          "text": "明るい方へ",
+          "goto": "route_room_30"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_16"
+          "text": "かすかな光を追う",
+          "goto": "route_room_31"
         }
       ]
     },
@@ -422,22 +452,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第16の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：16】\n天井がなく、星のない夜空が広がっている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "その選択が、別の可能性を消去する。それが並行世界のルールよ。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_17"
+          "text": "ひなたを信じて進む",
+          "goto": "END_6"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_13"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_33"
         }
       ]
     },
@@ -447,22 +477,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第17の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+      "text": "【深層深度：17】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_19"
+          "text": "明るい方へ",
+          "goto": "route_room_34"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_18"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_35"
         }
       ]
     },
@@ -472,22 +502,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第18の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+      "text": "【深層深度：18】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "hinata",
       "expression": "",
-      "text": "18という数字に、意味を求めすぎてはいけないわ。"
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_22"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_36"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_19"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_37"
         }
       ]
     },
@@ -497,17 +527,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第19の領域。\n天井がなく、星のない夜空が広がっている。"
+      "text": "【深層深度：19】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_20"
+          "text": "明るい方へ",
+          "goto": "route_room_38"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_25"
+          "text": "強行突破する",
+          "goto": "route_room_39"
         }
       ]
     },
@@ -517,22 +552,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第20の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+      "text": "【深層深度：20】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "20という数字に、意味を求めすぎてはいけないわ。"
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_24"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_40"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_21"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_41"
         }
       ]
     },
@@ -542,22 +577,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第21の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+      "text": "【深層深度：21】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "hinata",
       "expression": "",
-      "text": "21という数字に、意味を求めすぎてはいけないわ。"
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_24"
+          "text": "明るい方へ",
+          "goto": "route_room_42"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_24"
+          "text": "かすかな光を追う",
+          "goto": "route_room_10"
         }
       ]
     },
@@ -567,22 +602,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第22の領域。\n緑色のネオンサインだけが点滅している。"
+      "text": "【深層深度：22】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_23"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_44"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_25"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_45"
         }
       ]
     },
@@ -592,22 +627,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第23の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+      "text": "【深層深度：23】\n古い本が山積みになった空間。インクと埃の匂いがする。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_28"
+          "text": "明るい方へ",
+          "goto": "route_room_46"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_27"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_47"
         }
       ]
     },
@@ -617,22 +652,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第24の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：24】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "hinata",
       "expression": "",
-      "text": "24という数字に、意味を求めすぎてはいけないわ。"
+      "text": "おー！　ここは広いねー。走ってみよっか！"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_29"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_48"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_30"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_49"
         }
       ]
     },
@@ -642,22 +677,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第25の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：25】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "25という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_29"
+          "text": "明るい方へ",
+          "goto": "route_room_50"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_27"
+          "text": "強行突破する",
+          "goto": "route_room_51"
         }
       ]
     },
@@ -667,22 +702,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第26の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：26】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "その選択が、別の可能性を消去する。それが並行世界のルールよ。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_27"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_52"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_23"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_53"
         }
       ]
     },
@@ -692,22 +727,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第27の領域。\n砂漠のような空間。砂の足音が重い。"
+      "text": "【深層深度：27】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
     },
     {
       "speaker": "hinata",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "えへへ、ひなとおにいちゃん、二人きりの探検だねー。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_29"
+          "text": "明るい方へ",
+          "goto": "route_room_54"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_31"
+          "text": "かすかな光を追う",
+          "goto": "route_room_55"
         }
       ]
     },
@@ -717,17 +752,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第28の領域。\n螺旋階段が上にも下にも続いている。"
+      "text": "【深層深度：28】\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_29"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_56"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_32"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_57"
         }
       ]
     },
@@ -737,22 +777,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第29の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：29】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "29という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_33"
+          "text": "明るい方へ",
+          "goto": "route_room_58"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_33"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_59"
         }
       ]
     },
@@ -762,17 +802,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第30の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：30】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_33"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_60"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_33"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_61"
         }
       ]
     },
@@ -782,22 +827,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第31の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+      "text": "【深層深度：31】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_36"
+          "text": "明るい方へ",
+          "goto": "route_room_62"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_36"
+          "text": "強行突破する",
+          "goto": "route_room_63"
         }
       ]
     },
@@ -807,17 +852,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第32の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+      "text": "【深層深度：32】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_34"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_64"
         },
         {
-          "text": "暗闇へ",
-          "goto": "END_3"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_65"
         }
       ]
     },
@@ -827,22 +877,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第33の領域。\n天井がなく、星のない夜空が広がっている。"
+      "text": "【深層深度：33】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "hinata",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_37"
+          "text": "明るい方へ",
+          "goto": "route_room_66"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_37"
+          "text": "かすかな光を追う",
+          "goto": "route_room_67"
         }
       ]
     },
@@ -852,17 +902,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第34の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+      "text": "【深層深度：34】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "観測者の目で、真実を見極めなさい。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_37"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_68"
         },
         {
-          "text": "別の声に従う",
-          "goto": "route_room_40"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_69"
         }
       ]
     },
@@ -872,17 +927,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第35の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+      "text": "【深層深度：35】\n古い本が山積みになった空間。インクと埃の匂いがする。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_36"
+          "text": "明るい方へ",
+          "goto": "route_room_70"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_41"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_14"
         }
       ]
     },
@@ -892,22 +952,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第36の領域。\n緑色のネオンサインだけが点滅している。"
+      "text": "【深層深度：36】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "hinata",
       "expression": "",
-      "text": "36という数字に、意味を求めすぎてはいけないわ。"
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "光の射す方へ",
-          "goto": "route_room_37"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_72"
         },
         {
-          "text": "別の声に従う",
-          "goto": "route_room_38"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_73"
         }
       ]
     },
@@ -917,22 +977,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第37の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+      "text": "【深層深度：37】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_38"
+          "text": "明るい方へ",
+          "goto": "route_room_74"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_42"
+          "text": "強行突破する",
+          "goto": "route_room_75"
         }
       ]
     },
@@ -942,22 +1002,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第38の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：38】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "38という数字に、意味を求めすぎてはいけないわ。"
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_40"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_76"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_44"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_77"
         }
       ]
     },
@@ -967,22 +1027,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第39の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：39】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "hinata",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "おー！　ここは広いねー。走ってみよっか！"
     },
     {
       "choices": [
         {
-          "text": "光の射す方へ",
-          "goto": "END_5"
+          "text": "明るい方へ",
+          "goto": "route_room_78"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_37"
+          "text": "かすかな光を追う",
+          "goto": "route_room_79"
         }
       ]
     },
@@ -992,17 +1052,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第40の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：40】\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_43"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_80"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_46"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_81"
         }
       ]
     },
@@ -1012,22 +1077,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第41の領域。\n砂漠のような空間。砂の足音が重い。"
+      "text": "【深層深度：41】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "41という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_43"
+          "text": "明るい方へ",
+          "goto": "route_room_82"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_46"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_83"
         }
       ]
     },
@@ -1037,22 +1102,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第42の領域。\n螺旋階段が上にも下にも続いている。"
+      "text": "【深層深度：42】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "hinata",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "えへへ、ひなとおにいちゃん、二人きりの探検だねー。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_43"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_84"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_39"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_85"
         }
       ]
     },
@@ -1062,7 +1127,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第43の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：43】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
     },
     {
       "speaker": "waddy",
@@ -1072,12 +1137,12 @@
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_48"
+          "text": "明るい方へ",
+          "goto": "route_room_86"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_46"
+          "text": "強行突破する",
+          "goto": "route_room_87"
         }
       ]
     },
@@ -1087,22 +1152,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第44の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：44】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "観測者の目で、真実を見極めなさい。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "END_1"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_88"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_42"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_89"
         }
       ]
     },
@@ -1112,7 +1177,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第45の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+      "text": "【深層深度：45】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
       "speaker": "hinata",
@@ -1122,12 +1187,12 @@
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_48"
+          "text": "明るい方へ",
+          "goto": "route_room_90"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_42"
+          "text": "かすかな光を追う",
+          "goto": "route_room_91"
         }
       ]
     },
@@ -1137,22 +1202,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第46の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+      "text": "【深層深度：46】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "46という数字に、意味を求めすぎてはいけないわ。"
+      "text": "その選択が、別の可能性を消去する。それが並行世界のルールよ。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_50"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_92"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_49"
+          "text": "不気味な気配がする方へ",
+          "goto": "route_room_93"
         }
       ]
     },
@@ -1162,22 +1227,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第47の領域。\n天井がなく、星のない夜空が広がっている。"
+      "text": "【深層深度：47】\n古い本が山積みになった空間。インクと埃の匂いがする。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_50"
+          "text": "明るい方へ",
+          "goto": "route_room_94"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_50"
+          "text": "振り返らずに右へ",
+          "goto": "route_room_95"
         }
       ]
     },
@@ -1187,22 +1252,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第48の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+      "text": "【深層深度：48】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
     },
     {
       "speaker": "hinata",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_51"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_96"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_45"
+          "text": "一人で暗い道を進む",
+          "goto": "route_room_97"
         }
       ]
     },
@@ -1212,22 +1277,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第49の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+      "text": "【深層深度：49】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "49という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_51"
+          "text": "明るい方へ",
+          "goto": "route_room_98"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_55"
+          "text": "強行突破する",
+          "goto": "route_room_99"
         }
       ]
     },
@@ -1237,17 +1302,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第50の領域。\n緑色のネオンサインだけが点滅している。"
+      "text": "【深層深度：50】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_53"
+          "text": "ひなたを信じて進む",
+          "goto": "route_room_100"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_48"
+          "text": "目を閉じて飛び込む",
+          "goto": "END_10"
         }
       ]
     },
@@ -1257,17 +1327,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第51の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+      "text": "【深層深度：51】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_52"
+          "text": "明るい方へ",
+          "goto": "END_6"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_57"
+          "text": "かすかな光を追う",
+          "goto": "END_6"
         }
       ]
     },
@@ -1277,17 +1352,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第52の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：52】\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "END_6"
+          "text": "ひなたを信じて進む",
+          "goto": "END_2"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_57"
+          "text": "不気味な気配がする方へ",
+          "goto": "END_4"
         }
       ]
     },
@@ -1297,22 +1377,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第53の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：53】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "53という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_57"
+          "text": "明るい方へ",
+          "goto": "END_9"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_59"
+          "text": "振り返らずに右へ",
+          "goto": "END_7"
         }
       ]
     },
@@ -1322,17 +1402,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第54の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：54】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "おー！　ここは広いねー。走ってみよっか！"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_56"
+          "text": "ひなたを信じて進む",
+          "goto": "END_5"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_55"
+          "text": "一人で暗い道を進む",
+          "goto": "END_9"
         }
       ]
     },
@@ -1342,22 +1427,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第55の領域。\n砂漠のような空間。砂の足音が重い。"
+      "text": "【深層深度：55】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_59"
+          "text": "明るい方へ",
+          "goto": "END_4"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_61"
+          "text": "強行突破する",
+          "goto": "END_7"
         }
       ]
     },
@@ -1367,22 +1452,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第56の領域。\n螺旋階段が上にも下にも続いている。"
+      "text": "【深層深度：56】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "その選択が、別の可能性を消去する。それが並行世界のルールよ。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "END_5"
+          "text": "ひなたを信じて進む",
+          "goto": "END_10"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_57"
+          "text": "目を閉じて飛び込む",
+          "goto": "END_3"
         }
       ]
     },
@@ -1392,22 +1477,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第57の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：57】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "hinata",
       "expression": "",
-      "text": "57という数字に、意味を求めすぎてはいけないわ。"
+      "text": "えへへ、ひなとおにいちゃん、二人きりの探検だねー。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_62"
+          "text": "明るい方へ",
+          "goto": "END_3"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_60"
+          "text": "かすかな光を追う",
+          "goto": "END_9"
         }
       ]
     },
@@ -1417,22 +1502,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第58の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：58】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_61"
+          "text": "ひなたを信じて進む",
+          "goto": "END_2"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_59"
+          "text": "不気味な気配がする方へ",
+          "goto": "END_9"
         }
       ]
     },
@@ -1442,22 +1527,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第59の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+      "text": "【深層深度：59】\n古い本が山積みになった空間。インクと埃の匂いがする。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "59という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_64"
+          "text": "明るい方へ",
+          "goto": "END_3"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_57"
+          "text": "振り返らずに右へ",
+          "goto": "END_2"
         }
       ]
     },
@@ -1467,7 +1552,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第60の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+      "text": "【深層深度：60】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
     },
     {
       "speaker": "hinata",
@@ -1477,12 +1562,12 @@
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_63"
+          "text": "ひなたを信じて進む",
+          "goto": "END_6"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_62"
+          "text": "一人で暗い道を進む",
+          "goto": "END_5"
         }
       ]
     },
@@ -1492,17 +1577,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第61の領域。\n天井がなく、星のない夜空が広がっている。"
+      "text": "【深層深度：61】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_63"
+          "text": "明るい方へ",
+          "goto": "END_3"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_59"
+          "text": "強行突破する",
+          "goto": "END_8"
         }
       ]
     },
@@ -1512,22 +1602,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第62の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+      "text": "【深層深度：62】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "62という数字に、意味を求めすぎてはいけないわ。"
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_66"
+          "text": "ひなたを信じて進む",
+          "goto": "END_2"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_65"
+          "text": "目を閉じて飛び込む",
+          "goto": "END_7"
         }
       ]
     },
@@ -1537,17 +1627,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第63の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+      "text": "【深層深度：63】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_65"
+          "text": "明るい方へ",
+          "goto": "END_10"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_69"
+          "text": "かすかな光を追う",
+          "goto": "END_4"
         }
       ]
     },
@@ -1557,22 +1652,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第64の領域。\n緑色のネオンサインだけが点滅している。"
+      "text": "【深層深度：64】\n天井がなく、星のない夜空が広がっている。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "64という数字に、意味を求めすぎてはいけないわ。"
+      "text": "観測者の目で、真実を見極めなさい。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_66"
+          "text": "ひなたを信じて進む",
+          "goto": "END_10"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_65"
+          "text": "不気味な気配がする方へ",
+          "goto": "END_2"
         }
       ]
     },
@@ -1582,22 +1677,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第65の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+      "text": "【深層深度：65】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_66"
+          "text": "明るい方へ",
+          "goto": "END_6"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_66"
+          "text": "振り返らずに右へ",
+          "goto": "END_6"
         }
       ]
     },
@@ -1607,22 +1702,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第66の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：66】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "hinata",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_68"
+          "text": "ひなたを信じて進む",
+          "goto": "END_5"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_70"
+          "text": "一人で暗い道を進む",
+          "goto": "END_2"
         }
       ]
     },
@@ -1632,17 +1727,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第67の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：67】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_72"
+          "text": "明るい方へ",
+          "goto": "END_1"
         },
         {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_68"
+          "text": "強行突破する",
+          "goto": "END_7"
         }
       ]
     },
@@ -1652,22 +1752,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第68の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：68】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "68という数字に、意味を求めすぎてはいけないわ。"
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_69"
+          "text": "ひなたを信じて進む",
+          "goto": "END_7"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "END_1"
+          "text": "目を閉じて飛び込む",
+          "goto": "END_8"
         }
       ]
     },
@@ -1677,22 +1777,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第69の領域。\n砂漠のような空間。砂の足音が重い。"
+      "text": "【深層深度：69】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "hinata",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "おー！　ここは広いねー。走ってみよっか！"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_71"
+          "text": "明るい方へ",
+          "goto": "END_7"
         },
         {
-          "text": "別の声に従う",
-          "goto": "END_1"
+          "text": "かすかな光を追う",
+          "goto": "END_4"
         }
       ]
     },
@@ -1702,22 +1802,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第70の領域。\n螺旋階段が上にも下にも続いている。"
+      "text": "【深層深度：70】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_75"
+          "text": "ひなたを信じて進む",
+          "goto": "END_2"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_68"
+          "text": "不気味な気配がする方へ",
+          "goto": "END_8"
         }
       ]
     },
@@ -1727,22 +1827,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第71の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：71】\n古い本が山積みになった空間。インクと埃の匂いがする。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "waddy",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_75"
+          "text": "明るい方へ",
+          "goto": "END_8"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_75"
+          "text": "振り返らずに右へ",
+          "goto": "END_3"
         }
       ]
     },
@@ -1752,22 +1852,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第72の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：72】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
     },
     {
       "speaker": "hinata",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "えへへ、ひなとおにいちゃん、二人きりの探検だねー。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "END_7"
+          "text": "ひなたを信じて進む",
+          "goto": "END_4"
         },
         {
-          "text": "別の声に従う",
-          "goto": "route_room_76"
+          "text": "一人で暗い道を進む",
+          "goto": "END_10"
         }
       ]
     },
@@ -1777,7 +1877,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第73の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+      "text": "【深層深度：73】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
     },
     {
       "speaker": "waddy",
@@ -1787,12 +1887,12 @@
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_74"
+          "text": "明るい方へ",
+          "goto": "END_2"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_74"
+          "text": "強行突破する",
+          "goto": "END_6"
         }
       ]
     },
@@ -1802,22 +1902,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第74の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+      "text": "【深層深度：74】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "74という数字に、意味を求めすぎてはいけないわ。"
+      "text": "観測者の目で、真実を見極めなさい。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_78"
+          "text": "ひなたを信じて進む",
+          "goto": "END_9"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_77"
+          "text": "目を閉じて飛び込む",
+          "goto": "END_5"
         }
       ]
     },
@@ -1827,17 +1927,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第75の領域。\n天井がなく、星のない夜空が広がっている。"
+      "text": "【深層深度：75】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_76"
+          "text": "明るい方へ",
+          "goto": "END_7"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_73"
+          "text": "かすかな光を追う",
+          "goto": "END_10"
         }
       ]
     },
@@ -1847,17 +1952,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第76の領域。\n古い本が山積みになった空間。インクの匂いがする。"
+      "text": "【深層深度：76】\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "その選択が、別の可能性を消去する。それが並行世界のルールよ。"
     },
     {
       "choices": [
         {
-          "text": "ひなたについていく",
-          "goto": "route_room_79"
+          "text": "ひなたを信じて進む",
+          "goto": "END_1"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_78"
+          "text": "不気味な気配がする方へ",
+          "goto": "END_8"
         }
       ]
     },
@@ -1867,22 +1977,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第77の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
+      "text": "【深層深度：77】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
     },
     {
-      "speaker": "mitra",
+      "speaker": "waddy",
       "expression": "",
-      "text": "77という数字に、意味を求めすぎてはいけないわ。"
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_80"
+          "text": "明るい方へ",
+          "goto": "END_1"
         },
         {
-          "text": "暗闇へ",
-          "goto": "route_room_82"
+          "text": "振り返らずに右へ",
+          "goto": "END_2"
         }
       ]
     },
@@ -1892,17 +2002,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第78の領域。\n緑色のネオンサインだけが点滅している。"
+      "text": "【深層深度：78】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "route_room_80"
+          "text": "ひなたを信じて進む",
+          "goto": "END_9"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_77"
+          "text": "一人で暗い道を進む",
+          "goto": "END_2"
         }
       ]
     },
@@ -1912,17 +2027,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第79の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
+      "text": "【深層深度：79】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_82"
+          "text": "明るい方へ",
+          "goto": "END_6"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_77"
+          "text": "強行突破する",
+          "goto": "END_9"
         }
       ]
     },
@@ -1932,22 +2052,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第80の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：80】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "80という数字に、意味を求めすぎてはいけないわ。"
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_81"
+          "text": "ひなたを信じて進む",
+          "goto": "END_3"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_85"
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_32"
         }
       ]
     },
@@ -1957,22 +2077,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第81の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：81】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
     },
     {
-      "speaker": "waddy",
+      "speaker": "hinata",
       "expression": "",
-      "text": "……道が合っているのか、誰にもわからないな。"
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_84"
+          "text": "明るい方へ",
+          "goto": "END_7"
         },
         {
-          "text": "振り返る",
-          "goto": "route_room_79"
+          "text": "かすかな光を追う",
+          "goto": "END_7"
         }
       ]
     },
@@ -1982,17 +2102,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第82の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：82】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
     },
     {
       "choices": [
         {
-          "text": "前に進む",
-          "goto": "route_room_84"
+          "text": "ひなたを信じて進む",
+          "goto": "END_8"
         },
         {
-          "text": "回り道をする",
-          "goto": "route_room_81"
+          "text": "不気味な気配がする方へ",
+          "goto": "END_4"
         }
       ]
     },
@@ -2002,257 +2127,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第83の領域。\n砂漠のような空間。砂の足音が重い。"
-    },
-    {
-      "speaker": "hinata",
-      "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
-    },
-    {
-      "choices": [
-        {
-          "text": "前に進む",
-          "goto": "route_room_84"
-        },
-        {
-          "text": "振り返る",
-          "goto": "route_room_84"
-        }
-      ]
-    },
-    {
-      "label": "route_room_84"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第84の領域。\n螺旋階段が上にも下にも続いている。"
-    },
-    {
-      "choices": [
-        {
-          "text": "ひなたについていく",
-          "goto": "route_room_88"
-        },
-        {
-          "text": "隠し扉を探す",
-          "goto": "route_room_90"
-        }
-      ]
-    },
-    {
-      "label": "route_room_85"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第85の領域。\n冷たいコンクリートの壁が続く。"
-    },
-    {
-      "speaker": "mitra",
-      "expression": "",
-      "text": "85という数字に、意味を求めすぎてはいけないわ。"
-    },
-    {
-      "choices": [
-        {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_89"
-        },
-        {
-          "text": "別のドアノブを回す",
-          "goto": "route_room_84"
-        }
-      ]
-    },
-    {
-      "label": "route_room_86"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第86の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
-    },
-    {
-      "choices": [
-        {
-          "text": "扉を蹴り開ける",
-          "goto": "route_room_91"
-        },
-        {
-          "text": "暗闇へ",
-          "goto": "route_room_85"
-        }
-      ]
-    },
-    {
-      "label": "route_room_87"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第87の領域。\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
-    },
-    {
-      "choices": [
-        {
-          "text": "光の射す方へ",
-          "goto": "route_room_89"
-        },
-        {
-          "text": "振り返る",
-          "goto": "route_room_86"
-        }
-      ]
-    },
-    {
-      "label": "route_room_88"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第88の領域。\nどこからか、微かにバイオリンの音が聞こえる気がする。"
-    },
-    {
-      "choices": [
-        {
-          "text": "直感で選ぶ",
-          "goto": "route_room_89"
-        },
-        {
-          "text": "暗闇へ",
-          "goto": "route_room_92"
-        }
-      ]
-    },
-    {
-      "label": "route_room_89"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第89の領域。\n天井がなく、星のない夜空が広がっている。"
-    },
-    {
-      "speaker": "mitra",
-      "expression": "",
-      "text": "89という数字に、意味を求めすぎてはいけないわ。"
-    },
-    {
-      "choices": [
-        {
-          "text": "前に進む",
-          "goto": "route_room_93"
-        },
-        {
-          "text": "暗闇へ",
-          "goto": "route_room_87"
-        }
-      ]
-    },
-    {
-      "label": "route_room_90"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第90の領域。\n古い本が山積みになった空間。インクの匂いがする。"
-    },
-    {
-      "speaker": "mitra",
-      "expression": "",
-      "text": "90という数字に、意味を求めすぎてはいけないわ。"
-    },
-    {
-      "choices": [
-        {
-          "text": "目を閉じて進む",
-          "goto": "route_room_91"
-        },
-        {
-          "text": "回り道をする",
-          "goto": "route_room_91"
-        }
-      ]
-    },
-    {
-      "label": "route_room_91"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第91の領域。\n鏡の部屋。無数のワディーがこちらを見つめている。"
-    },
-    {
-      "speaker": "hinata",
-      "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
-    },
-    {
-      "choices": [
-        {
-          "text": "ひなたについていく",
-          "goto": "END_4"
-        },
-        {
-          "text": "隠し扉を探す",
-          "goto": "END_5"
-        }
-      ]
-    },
-    {
-      "label": "route_room_92"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第92の領域。\n緑色のネオンサインだけが点滅している。"
-    },
-    {
-      "speaker": "hinata",
-      "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
-    },
-    {
-      "choices": [
-        {
-          "text": "光の射す方へ",
-          "goto": "route_room_94"
-        },
-        {
-          "text": "隠し扉を探す",
-          "goto": "route_room_91"
-        }
-      ]
-    },
-    {
-      "label": "route_room_93"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第93の領域。\nひなたが前を歩いている。「おにいちゃん、こっちこっち！」"
-    },
-    {
-      "choices": [
-        {
-          "text": "光の射す方へ",
-          "goto": "route_room_96"
-        },
-        {
-          "text": "回り道をする",
-          "goto": "route_room_94"
-        }
-      ]
-    },
-    {
-      "label": "route_room_94"
-    },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "第94の領域。\nみとらが壁にもたれかかっている。「迷っているの？」"
+      "text": "【深層深度：83】\n古い本が山積みになった空間。インクと埃の匂いがする。"
     },
     {
       "speaker": "waddy",
@@ -2262,12 +2137,287 @@
     {
       "choices": [
         {
-          "text": "みとらの声がする方へ",
-          "goto": "route_room_95"
+          "text": "明るい方へ",
+          "goto": "END_8"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_100"
+          "text": "振り返らずに右へ",
+          "goto": "END_8"
+        }
+      ]
+    },
+    {
+      "label": "route_room_84"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：84】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "おー！　ここは広いねー。走ってみよっか！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたを信じて進む",
+          "goto": "END_3"
+        },
+        {
+          "text": "一人で暗い道を進む",
+          "goto": "END_5"
+        }
+      ]
+    },
+    {
+      "label": "route_room_85"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：85】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "明るい方へ",
+          "goto": "END_1"
+        },
+        {
+          "text": "強行突破する",
+          "goto": "END_2"
+        }
+      ]
+    },
+    {
+      "label": "route_room_86"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：86】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "その選択が、別の可能性を消去する。それが並行世界のルールよ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたを信じて進む",
+          "goto": "END_4"
+        },
+        {
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_37"
+        }
+      ]
+    },
+    {
+      "label": "route_room_87"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：87】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "えへへ、ひなとおにいちゃん、二人きりの探検だねー。"
+    },
+    {
+      "choices": [
+        {
+          "text": "明るい方へ",
+          "goto": "END_2"
+        },
+        {
+          "text": "かすかな光を追う",
+          "goto": "END_2"
+        }
+      ]
+    },
+    {
+      "label": "route_room_88"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：88】\n天井がなく、星のない夜空が広がっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたを信じて進む",
+          "goto": "END_8"
+        },
+        {
+          "text": "不気味な気配がする方へ",
+          "goto": "END_6"
+        }
+      ]
+    },
+    {
+      "label": "route_room_89"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：89】\n螺旋階段が上にも下にも続いている。永遠に登り続けるしかないのか。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "明るい方へ",
+          "goto": "END_6"
+        },
+        {
+          "text": "振り返らずに右へ",
+          "goto": "END_7"
+        }
+      ]
+    },
+    {
+      "label": "route_room_90"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：90】\n鏡の部屋。無数のワディーがこちらを見つめ、違う表情をしている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたを信じて進む",
+          "goto": "END_10"
+        },
+        {
+          "text": "一人で暗い道を進む",
+          "goto": "END_8"
+        }
+      ]
+    },
+    {
+      "label": "route_room_91"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：91】\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "明るい方へ",
+          "goto": "END_3"
+        },
+        {
+          "text": "強行突破する",
+          "goto": "END_7"
+        }
+      ]
+    },
+    {
+      "label": "route_room_92"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：92】\n秋葉原の路地裏に似ているが、看板の文字がすべて逆さまになっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "幻界の奥深くへ進んでいるわね。気をつけて。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたを信じて進む",
+          "goto": "END_3"
+        },
+        {
+          "text": "目を閉じて飛び込む",
+          "goto": "route_room_49"
+        }
+      ]
+    },
+    {
+      "label": "route_room_93"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：93】\nどこからか、微かにバイオリンの音が聞こえる気がする。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "むむっ、右の道、ちょっと怖い匂いがするかも……。"
+    },
+    {
+      "choices": [
+        {
+          "text": "明るい方へ",
+          "goto": "END_5"
+        },
+        {
+          "text": "かすかな光を追う",
+          "goto": "END_6"
+        }
+      ]
+    },
+    {
+      "label": "route_room_94"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "【深層深度：94】\n砂漠のような空間。砂の足音が重く、風が吹き荒れている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "観測者の目で、真実を見極めなさい。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ひなたを信じて進む",
+          "goto": "END_6"
+        },
+        {
+          "text": "不気味な気配がする方へ",
+          "goto": "END_10"
         }
       ]
     },
@@ -2277,17 +2427,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第95の領域。\n秋葉原の路地裏に似ているが、看板の文字が読めない。"
+      "text": "【深層深度：95】\n古い本が山積みになった空間。インクと埃の匂いがする。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_96"
+          "text": "明るい方へ",
+          "goto": "END_1"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_97"
+          "text": "振り返らずに右へ",
+          "goto": "END_2"
         }
       ]
     },
@@ -2297,22 +2452,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第96の領域。\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+      "text": "【深層深度：96】\n冷たいコンクリートの壁が続く。どこまでも無機質な廊下。"
     },
     {
       "speaker": "hinata",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "あっ、見て見て！　あそこになにかあるよ！……気のせいだったかも。"
     },
     {
       "choices": [
         {
-          "text": "光の射す方へ",
-          "goto": "route_room_97"
+          "text": "ひなたを信じて進む",
+          "goto": "END_5"
         },
         {
-          "text": "立ち止まってみる",
-          "goto": "route_room_97"
+          "text": "一人で暗い道を進む",
+          "goto": "END_10"
         }
       ]
     },
@@ -2322,17 +2477,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第97の領域。\n砂漠のような空間。砂の足音が重い。"
+      "text": "【深層深度：97】\n緑色のネオンサインだけが点滅している。バグったコンピュータの内部のようだ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "……道が合っているのか、誰にもわからないな。"
     },
     {
       "choices": [
         {
-          "text": "直感で選ぶ",
-          "goto": "route_room_99"
+          "text": "明るい方へ",
+          "goto": "END_1"
         },
         {
-          "text": "別の声に従う",
-          "goto": "route_room_98"
+          "text": "強行突破する",
+          "goto": "END_8"
         }
       ]
     },
@@ -2342,22 +2502,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第98の領域。\n螺旋階段が上にも下にも続いている。"
+      "text": "【深層深度：98】\n壁いっぱいに無数の時計が並び、それぞれ違う時間を刻んでいる。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "振り返っても無駄よ。道はすでに閉ざされているから。"
     },
     {
       "choices": [
         {
-          "text": "光の射す方へ",
-          "goto": "route_room_100"
+          "text": "ひなたを信じて進む",
+          "goto": "END_10"
         },
         {
-          "text": "ゆっくり歩く",
-          "goto": "route_room_99"
+          "text": "目を閉じて飛び込む",
+          "goto": "END_10"
         }
       ]
     },
@@ -2367,17 +2527,22 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第99の領域。\n冷たいコンクリートの壁が続く。"
+      "text": "【深層深度：99】\n甘い香りがする。コーヒー牛乳の匂いに似ている。"
+    },
+    {
+      "speaker": "hinata",
+      "expression": "",
+      "text": "おー！　ここは広いねー。走ってみよっか！"
     },
     {
       "choices": [
         {
-          "text": "走る",
-          "goto": "route_room_100"
+          "text": "明るい方へ",
+          "goto": "END_3"
         },
         {
-          "text": "隠し扉を探す",
-          "goto": "route_room_100"
+          "text": "かすかな光を追う",
+          "goto": "END_3"
         }
       ]
     },
@@ -2387,21 +2552,21 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "第100の領域。\n足元に水が張っている。ピチャ、ピチャという音が響く。"
+      "text": "【深層深度：100】\n天井がなく、星のない夜空が広がっている。"
     },
     {
-      "speaker": "hinata",
+      "speaker": "mitra",
       "expression": "",
-      "text": "んー、ここはなんだか不思議な感じがするね。おにいちゃん、気をつけて！"
+      "text": "分岐点よ。あなたの意志が試されているわ。"
     },
     {
       "choices": [
         {
-          "text": "目を閉じて進む",
-          "goto": "END_9"
+          "text": "ひなたを信じて進む",
+          "goto": "END_4"
         },
         {
-          "text": "振り返る",
+          "text": "不気味な気配がする方へ",
           "goto": "END_10"
         }
       ]
@@ -2412,7 +2577,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "end": true,
@@ -2425,7 +2590,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "speaker": "hinata",
@@ -2443,7 +2608,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "speaker": "mitra",
@@ -2461,7 +2626,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "end": true,
@@ -2474,7 +2639,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "end": true,
@@ -2487,7 +2652,12 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "驚き",
+      "text": "ここは……秋葉原？　いや、ゲーマーズの看板が……浮いている？"
     },
     {
       "end": true,
@@ -2500,7 +2670,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "end": true,
@@ -2513,7 +2683,12 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "ため息",
+      "text": "結局、酒に溺れる夢を見るのか……。"
     },
     {
       "end": true,
@@ -2526,12 +2701,12 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "end": true,
-      "title": "100番目の扉",
-      "subtitle": "全ての選択を終え、真の静寂に辿り着いた。"
+      "title": "特異点",
+      "subtitle": "すべての夢が収束する中心。世界線の記録者となる。"
     },
     {
       "label": "END_10"
@@ -2539,7 +2714,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "視界が歪み、世界が溶けていく。"
+      "text": "視界が歪み、世界が溶けていく……。"
     },
     {
       "speaker": "hinata",
