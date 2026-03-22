@@ -879,7 +879,7 @@
             scenario: "2026-03-20_各駅停車の形而上学",
             realm: "kenkai", icon: "🌕",
             title: "各駅停車の形而上学",
-            desc: "ことみ×でじこ ─ 選ばれた世界線の記録",
+            desc: "ことみ×でじこ×マルチ ─ フラグ蓄積型マルチエンディング",
             tag: "顕界",
             location: "各駅停車 ─ 全行程", order: 0
           },
@@ -889,7 +889,8 @@
             title: "急行の形而上学",
             desc: "ことみの声が届かなかった12分",
             tag: "幻界",
-            location: "総武線 ─ 各駅停車", order: 1
+            location: "総武線 ─ 選択肢①", order: 1,
+            route: "中央線で急いでいく → 確定"
           },
           {
             scenario: "2026-03-20_黄色い箱の独白",
@@ -897,7 +898,8 @@
             title: "黄色い箱の独白",
             desc: "瑠璃子×ワディー ─ 電車は棺か揺りかごか",
             tag: "幻界",
-            location: "総武線 ─ 各駅停車", order: 2
+            location: "総武線 ─ 選択肢①-b", order: 2,
+            route: "車内で黙る → silent_trainフラグ"
           },
           {
             scenario: "2026-03-20_二百円の祈り",
@@ -905,7 +907,8 @@
             title: "二百円の祈り",
             desc: "あゆ×ワディー ─ 瓶の底に沈んでいるもの",
             tag: "幻界",
-            location: "ミルクスタンド", order: 0
+            location: "ミルクスタンド ─ 選択肢②", order: 0,
+            route: "先を急ぐ → skipped_milkstandフラグ"
           },
           {
             scenario: "2026-03-20_煮込みの時間論",
@@ -913,7 +916,8 @@
             title: "煮込みの時間論",
             desc: "物理おじ×ワディー ─ もつ煮込みとPID制御",
             tag: "幻界",
-            location: "金子屋 ─ UDX", order: 0
+            location: "金子屋 ─ 選択肢③-b", order: 0,
+            route: "一人で飲む → solo_kanekoyaフラグ"
           },
           {
             scenario: "2026-03-20_16小節の輪廻",
@@ -921,7 +925,8 @@
             title: "16小節の輪廻",
             desc: "フェイリス×ワディー ─ DJとタイムリープ",
             tag: "幻界",
-            location: "Iv Akihabara", order: 0
+            location: "Iv Akihabara ─ 選択肢④-b", order: 0,
+            route: "先に出る → left_iv_earlyフラグ"
           },
           {
             scenario: "2026-03-20_包むということ",
@@ -929,7 +934,8 @@
             title: "包むということ",
             desc: "マルチ×ワディー ─ 餃子の皮と心のガワ",
             tag: "幻界",
-            location: "大阪王将 ─ 末広町", order: 0
+            location: "大阪王将 ─ 選択肢⑤", order: 0,
+            route: "外に出る → マルチと二人"
           }
         ]
       };
