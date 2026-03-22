@@ -3,145 +3,260 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>夢の選択 | ワディーゲストハウス</title>
-    <meta name="description" content="幻界と顕界、選ばれた世界線と選ばれなかった世界線。どちらの夢を見ますか。" />
+    <title>A.D.M.S. | ワディーゲストハウス</title>
+    <meta name="description" content="Auto Diverge Mapping System ─ 分岐する世界線の地図。" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet" />
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html, body {
-        width: 100%; height: 100%;
+        width: 100%; min-height: 100vh;
         font-family: "Zen Maru Gothic", sans-serif;
         color: #ece7ff;
         background:
-          radial-gradient(circle at top, rgba(88, 65, 160, 0.2), transparent 40%),
-          linear-gradient(180deg, #080510 0%, #030208 52%, #080510 100%);
+          radial-gradient(ellipse at 30% 20%, rgba(60,40,120,0.15), transparent 50%),
+          radial-gradient(ellipse at 70% 80%, rgba(40,20,80,0.12), transparent 50%),
+          linear-gradient(180deg, #050310 0%, #030208 100%);
       }
       body {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 24px;
+        padding: 24px 16px 48px;
       }
 
-      .container {
-        width: min(640px, 100%);
+      /* ── Header ── */
+      .header {
         text-align: center;
+        margin-bottom: clamp(24px, 4vh, 48px);
+        animation: fade-in 0.8s ease both;
       }
-
       .date-label {
         font-size: clamp(11px, 1vw, 14px);
         letter-spacing: 0.3em;
-        color: rgba(255,255,255,0.35);
-        margin-bottom: 12px;
-      }
-
-      h1 {
-        font-size: clamp(1.4rem, 3vw, 2.4rem);
-        letter-spacing: 0.2em;
-        color: #c0a0e0;
-        text-shadow: 0 0 20px rgba(140,100,200,0.2);
+        color: rgba(255,255,255,0.3);
         margin-bottom: 8px;
       }
-
+      h1 {
+        font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+        letter-spacing: 0.25em;
+        color: #c0a0e0;
+        text-shadow: 0 0 30px rgba(140,100,200,0.2);
+        margin-bottom: 4px;
+      }
       .subtitle {
-        font-size: clamp(11px, 1vw, 15px);
-        letter-spacing: 0.12em;
-        color: rgba(255,255,255,0.4);
-        margin-bottom: clamp(32px, 5vh, 56px);
+        font-size: clamp(10px, 0.9vw, 13px);
+        letter-spacing: 0.15em;
+        color: rgba(255,255,255,0.3);
       }
 
-      .dream-list {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .dream-card {
-        display: block;
-        padding: clamp(20px, 2.5vw, 32px) clamp(24px, 3vw, 40px);
-        border-radius: 18px;
-        text-decoration: none;
-        transition: all 0.35s ease;
+      /* ── Timeline Container ── */
+      .timeline {
         position: relative;
-        overflow: hidden;
+        width: min(720px, 100%);
       }
-      .dream-card::before {
+
+      /* ── Main trunk line (顕界) ── */
+      .trunk-line {
+        position: absolute;
+        left: 28px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg,
+          rgba(160,120,220,0.6) 0%,
+          rgba(120,80,180,0.4) 50%,
+          rgba(80,50,140,0.2) 100%);
+      }
+
+      /* ── Location Node (時系列ポイント) ── */
+      .location-group {
+        position: relative;
+        margin-bottom: 0;
+        animation: fade-in 0.6s ease both;
+      }
+      .location-group:last-child { margin-bottom: 0; }
+
+      .location-node {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .node-dot {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #c0a0e0, #6040a0);
+        border: 2px solid rgba(200,160,255,0.5);
+        box-shadow: 0 0 12px rgba(160,100,220,0.4), 0 0 24px rgba(140,80,200,0.15);
+        position: relative;
+        left: 21px;
+      }
+      .node-dot.kenkai {
+        background: radial-gradient(circle, #e0c0ff, #8060c0);
+        box-shadow: 0 0 16px rgba(200,150,255,0.5), 0 0 32px rgba(160,100,220,0.2);
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        left: 19px;
+      }
+
+      .location-label {
+        font-size: clamp(11px, 1vw, 13px);
+        letter-spacing: 0.15em;
+        color: rgba(255,255,255,0.4);
+        padding-left: 24px;
+      }
+      .location-label .time {
+        color: rgba(255,255,255,0.25);
+        margin-right: 8px;
+      }
+
+      /* ── Branch Lines ── */
+      .branches {
+        padding-left: 60px;
+        position: relative;
+      }
+      .branches::before {
         content: "";
         position: absolute;
-        inset: 0;
-        opacity: 0;
-        transition: opacity 0.35s ease;
-      }
-      .dream-card:hover {
-        transform: translateY(-2px);
-      }
-
-      /* 顕界の夢 */
-      .dream-card.kenkai {
-        background: linear-gradient(135deg, rgba(30,15,60,0.7), rgba(12,6,28,0.85));
-        border: 1px solid rgba(160,100,220,0.3);
-        box-shadow: 0 8px 32px rgba(100,60,180,0.15);
-      }
-      .dream-card.kenkai:hover {
-        border-color: rgba(200,150,255,0.5);
-        box-shadow: 0 12px 40px rgba(130,80,220,0.25);
+        left: 29px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: rgba(80,60,120,0.2);
       }
 
-      /* 幻界の夢 */
-      .dream-card.genkai {
-        background: linear-gradient(135deg, rgba(10,8,18,0.85), rgba(5,3,10,0.92));
-        border: 1px solid rgba(80,60,120,0.25);
-        box-shadow: 0 8px 32px rgba(40,20,80,0.2);
-      }
-      .dream-card.genkai:hover {
-        border-color: rgba(120,90,170,0.4);
-        box-shadow: 0 12px 40px rgba(60,30,120,0.3);
-      }
-
-      .dream-icon {
-        font-size: clamp(24px, 3vw, 36px);
-        margin-bottom: 8px;
+      /* ── Scenario Card ── */
+      .scenario-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+        margin: 4px 0;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
       }
 
-      .dream-title {
-        font-size: clamp(16px, 2vw, 24px);
+      /* Branch connector line */
+      .scenario-card::before {
+        content: "";
+        position: absolute;
+        left: -31px;
+        top: 50%;
+        width: 28px;
+        height: 2px;
+      }
+
+      .scenario-card.kenkai {
+        background: linear-gradient(135deg, rgba(40,20,80,0.5), rgba(20,10,40,0.6));
+        border: 1px solid rgba(180,120,255,0.3);
+      }
+      .scenario-card.kenkai::before {
+        background: linear-gradient(90deg, rgba(160,120,220,0.5), rgba(180,140,240,0.3));
+      }
+      .scenario-card.kenkai:hover {
+        background: linear-gradient(135deg, rgba(50,25,100,0.6), rgba(25,12,50,0.7));
+        border-color: rgba(220,170,255,0.5);
+        transform: translateX(4px);
+        box-shadow: 0 4px 24px rgba(140,80,220,0.2);
+      }
+
+      .scenario-card.genkai {
+        background: linear-gradient(135deg, rgba(15,10,25,0.6), rgba(8,5,15,0.7));
+        border: 1px solid rgba(70,50,100,0.25);
+      }
+      .scenario-card.genkai::before {
+        background: linear-gradient(90deg, rgba(80,60,120,0.3), rgba(60,40,90,0.15));
+      }
+      .scenario-card.genkai:hover {
+        background: linear-gradient(135deg, rgba(20,15,35,0.7), rgba(10,7,20,0.8));
+        border-color: rgba(100,70,140,0.4);
+        transform: translateX(4px);
+        box-shadow: 0 4px 24px rgba(80,40,140,0.15);
+      }
+
+      .card-icon {
+        font-size: 16px;
+        min-width: 20px;
+        text-align: center;
+      }
+
+      .card-body { flex: 1; min-width: 0; }
+
+      .card-title {
+        font-size: clamp(13px, 1.3vw, 16px);
         font-weight: 700;
-        letter-spacing: 0.15em;
-        margin-bottom: 6px;
+        letter-spacing: 0.1em;
+        margin-bottom: 2px;
       }
-      .kenkai .dream-title { color: #c0a0e0; }
-      .genkai .dream-title { color: #807090; }
+      .kenkai .card-title { color: #c0a0e0; }
+      .genkai .card-title { color: #807090; }
 
-      .dream-desc {
-        font-size: clamp(11px, 1vw, 14px);
-        letter-spacing: 0.08em;
-        line-height: 1.7;
+      .card-desc {
+        font-size: clamp(10px, 0.9vw, 12px);
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .kenkai .dream-desc { color: rgba(200,180,230,0.6); }
-      .genkai .dream-desc { color: rgba(140,120,160,0.5); }
+      .kenkai .card-desc { color: rgba(190,170,220,0.5); }
+      .genkai .card-desc { color: rgba(120,100,150,0.45); }
 
-      .dream-realm-tag {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 3px 12px;
-        border-radius: 999px;
-        font-size: 10px;
+      .card-tag {
+        font-size: 9px;
         letter-spacing: 0.2em;
+        padding: 2px 8px;
+        border-radius: 999px;
+        white-space: nowrap;
       }
-      .kenkai .dream-realm-tag {
+      .kenkai .card-tag {
         background: rgba(160,100,220,0.15);
         color: rgba(200,160,240,0.6);
         border: 1px solid rgba(160,100,220,0.2);
       }
-      .genkai .dream-realm-tag {
-        background: rgba(80,60,120,0.1);
-        color: rgba(120,100,150,0.5);
-        border: 1px solid rgba(80,60,120,0.15);
+      .genkai .card-tag {
+        background: rgba(60,40,90,0.15);
+        color: rgba(110,90,140,0.5);
+        border: 1px solid rgba(60,40,90,0.15);
       }
 
+      /* ── Terminal node (end of timeline) ── */
+      .terminal-node {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 0;
+        position: relative;
+        z-index: 2;
+      }
+      .terminal-dot {
+        width: 8px;
+        height: 8px;
+        min-width: 8px;
+        border-radius: 50%;
+        background: rgba(100,70,150,0.3);
+        border: 1px solid rgba(100,70,150,0.2);
+        position: relative;
+        left: 25px;
+      }
+      .terminal-label {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: rgba(255,255,255,0.2);
+        padding-left: 24px;
+      }
+
+      /* ── Back link ── */
       .back-link {
         display: inline-block;
         margin-top: clamp(28px, 4vh, 48px);
@@ -158,116 +273,140 @@
         font-size: 14px;
         letter-spacing: 0.1em;
         padding: 40px 0;
+        text-align: center;
       }
 
       @keyframes fade-in {
-        from { opacity: 0; transform: translateY(12px); }
+        from { opacity: 0; transform: translateY(8px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      .dream-card { animation: fade-in 0.6s ease both; }
-      .dream-card:nth-child(2) { animation-delay: 0.12s; }
-      .dream-card:nth-child(3) { animation-delay: 0.24s; }
+
+      /* Staggered animation */
+      .location-group:nth-child(1) { animation-delay: 0s; }
+      .location-group:nth-child(2) { animation-delay: 0.1s; }
+      .location-group:nth-child(3) { animation-delay: 0.2s; }
+      .location-group:nth-child(4) { animation-delay: 0.3s; }
+      .location-group:nth-child(5) { animation-delay: 0.4s; }
+      .location-group:nth-child(6) { animation-delay: 0.5s; }
+      .location-group:nth-child(7) { animation-delay: 0.6s; }
+      .location-group:nth-child(8) { animation-delay: 0.7s; }
+      .location-group:nth-child(n+9) { animation-delay: 0.8s; }
+
+      /* ── Pulse on main dot ── */
+      @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 12px rgba(160,100,220,0.4); }
+        50% { box-shadow: 0 0 20px rgba(180,120,240,0.6); }
+      }
+      .node-dot.kenkai { animation: pulse 3s ease-in-out infinite; }
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="header">
       <p class="date-label" id="date-label"></p>
-      <h1>夢の選択</h1>
-      <p class="subtitle">── どの世界線の夢を見ますか ──</p>
-      <div class="dream-list" id="dream-list"></div>
-      <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
+      <h1>A.D.M.S.</h1>
+      <p class="subtitle">Auto Diverge Mapping System ─ 分岐する世界線の地図</p>
     </div>
 
+    <div class="timeline" id="timeline"></div>
+
+    <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
+
     <script>
+      /**
+       * DREAM REGISTRY
+       * location: 時系列順の場所。同じlocationのシナリオは同じノードに束ねられる。
+       * order: location内の表示順（小さい方が上）
+       */
       const DREAM_REGISTRY = {
         "2026-03-18": [
           {
             scenario: "2026-03-18_声の座標",
-            realm: "kenkai",
-            icon: "▶",
+            realm: "kenkai", icon: "▶",
             title: "声の座標",
             desc: "選ばれた世界線の記録",
-            tag: "顕界"
+            tag: "顕界",
+            location: "神話製作機械", order: 0
           }
         ],
         "2026-03-19": [
           {
             scenario: "2026-03-19_影の踊り子",
-            realm: "kenkai",
-            icon: "▶",
+            realm: "kenkai", icon: "▶",
             title: "影の踊り子",
-            desc: "選ばれた世界線の記録",
-            tag: "顕界"
+            desc: "ワディー×ひなひな ─ 選ばれた世界線の記録",
+            tag: "顕界",
+            location: "VRChat ─ 深夜のラウンジ", order: 0
           },
           {
             scenario: "2026-03-19_出口のない建物",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "出口のない建物",
-            desc: "選ばれなかった世界線 ─ 選択肢を入れなかった建物の記録",
-            tag: "幻界"
+            desc: "選択肢を入れなかった建物の記録",
+            tag: "幻界",
+            location: "VRChat ─ 深夜のラウンジ", order: 1
           }
         ],
         "2026-03-20": [
           {
             scenario: "2026-03-20_各駅停車の形而上学",
-            realm: "kenkai",
-            icon: "▶",
+            realm: "kenkai", icon: "▶",
             title: "各駅停車の形而上学",
             desc: "ことみ×でじこ ─ 選ばれた世界線の記録",
-            tag: "顕界"
+            tag: "顕界",
+            location: "総武線 ─ 各駅停車", order: 0
           },
           {
             scenario: "2026-03-20_急行の形而上学",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "急行の形而上学",
-            desc: "急行を選んだ世界線 ─ ことみの声が届かなかった12分",
-            tag: "幻界"
+            desc: "ことみの声が届かなかった12分",
+            tag: "幻界",
+            location: "総武線 ─ 各駅停車", order: 1
           },
           {
             scenario: "2026-03-20_黄色い箱の独白",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "黄色い箱の独白",
             desc: "瑠璃子×ワディー ─ 電車は棺か揺りかごか",
-            tag: "幻界"
+            tag: "幻界",
+            location: "総武線 ─ 各駅停車", order: 2
           },
           {
             scenario: "2026-03-20_二百円の祈り",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "二百円の祈り",
             desc: "あゆ×ワディー ─ 瓶の底に沈んでいるもの",
-            tag: "幻界"
+            tag: "幻界",
+            location: "ミルクスタンド", order: 0
           },
           {
             scenario: "2026-03-20_煮込みの時間論",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "煮込みの時間論",
             desc: "物理おじ×ワディー ─ もつ煮込みとPID制御",
-            tag: "幻界"
+            tag: "幻界",
+            location: "金子屋 ─ UDX", order: 0
           },
           {
             scenario: "2026-03-20_16小節の輪廻",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "16小節の輪廻",
             desc: "フェイリス×ワディー ─ DJとタイムリープ",
-            tag: "幻界"
+            tag: "幻界",
+            location: "Iv Akihabara", order: 0
           },
           {
             scenario: "2026-03-20_包むということ",
-            realm: "genkai",
-            icon: "🌘",
+            realm: "genkai", icon: "🌘",
             title: "包むということ",
             desc: "マルチ×ワディー ─ 餃子の皮と心のガワ",
-            tag: "幻界"
+            tag: "幻界",
+            location: "大阪王将 ─ 末広町", order: 0
           }
         ]
       };
 
+      // ── Render ──
       const params = new URLSearchParams(window.location.search);
       const hash = window.location.hash.replace(/^#/, "");
       const date = params.get("date") || hash || null;
@@ -275,26 +414,81 @@
 
       document.getElementById("date-label").textContent = date || "";
 
-      const list = document.getElementById("dream-list");
+      const timeline = document.getElementById("timeline");
 
       if (!dreams || dreams.length === 0) {
-        list.innerHTML = '<p class="no-dreams">この日の夢は見つかりませんでした。</p>';
+        timeline.innerHTML = '<p class="no-dreams">この日の世界線は観測されていません。</p>';
       } else if (dreams.length === 1) {
         // 1つだけなら直接遷移
         window.location.href = `./galge-scenario.html?scenario=${encodeURIComponent(dreams[0].scenario)}`;
       } else {
-        for (const dream of dreams) {
-          const card = document.createElement("a");
-          card.className = `dream-card ${dream.realm}`;
-          card.href = `./galge-scenario.html?scenario=${encodeURIComponent(dream.scenario)}`;
-          card.innerHTML = `
-            <div class="dream-icon">${dream.icon}</div>
-            <div class="dream-title">${dream.title}</div>
-            <div class="dream-desc">${dream.desc}</div>
-            <span class="dream-realm-tag">${dream.tag}</span>
-          `;
-          list.appendChild(card);
+        // Group by location, preserving insertion order
+        const locationOrder = [];
+        const locationMap = new Map();
+        for (const d of dreams) {
+          const loc = d.location || "不明";
+          if (!locationMap.has(loc)) {
+            locationOrder.push(loc);
+            locationMap.set(loc, []);
+          }
+          locationMap.get(loc).push(d);
         }
+        // Sort within each location
+        for (const [, arr] of locationMap) {
+          arr.sort((a, b) => (a.order || 0) - (b.order || 0));
+        }
+
+        // Add trunk line
+        timeline.innerHTML = '<div class="trunk-line"></div>';
+
+        for (const loc of locationOrder) {
+          const items = locationMap.get(loc);
+          const hasKenkai = items.some(d => d.realm === "kenkai");
+
+          const group = document.createElement("div");
+          group.className = "location-group";
+
+          // Location node
+          group.innerHTML += `
+            <div class="location-node">
+              <div class="node-dot ${hasKenkai ? 'kenkai' : ''}"></div>
+              <span class="location-label">${loc}</span>
+            </div>
+          `;
+
+          // Branch cards
+          const branchDiv = document.createElement("div");
+          branchDiv.className = "branches";
+
+          for (const d of items) {
+            const card = document.createElement("a");
+            card.className = `scenario-card ${d.realm}`;
+            card.href = `./galge-scenario.html?scenario=${encodeURIComponent(d.scenario)}`;
+            card.innerHTML = `
+              <span class="card-icon">${d.icon}</span>
+              <div class="card-body">
+                <div class="card-title">${d.title}</div>
+                <div class="card-desc">${d.desc}</div>
+              </div>
+              <span class="card-tag">${d.tag}</span>
+            `;
+            branchDiv.appendChild(card);
+          }
+
+          group.appendChild(branchDiv);
+          timeline.appendChild(group);
+        }
+
+        // Terminal node
+        const terminal = document.createElement("div");
+        terminal.className = "location-group";
+        terminal.innerHTML = `
+          <div class="terminal-node">
+            <div class="terminal-dot"></div>
+            <span class="terminal-label">── 世界線の末端 ──</span>
+          </div>
+        `;
+        timeline.appendChild(terminal);
       }
     </script>
   </body>
