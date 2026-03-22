@@ -312,11 +312,16 @@
         justify-content: flex-end;
         padding: clamp(12px, 2vw, 38px);
       }
-      #name-plate {
-        display: inline-block;
+      #name-row {
+        display: flex;
+        align-items: flex-end;
+        gap: clamp(8px, 1vw, 16px);
         margin-bottom: -1px;
         position: relative;
         z-index: 2;
+      }
+      #name-plate {
+        display: inline-block;
         padding: clamp(6px, 0.5vw, 12px) clamp(16px, 1.5vw, 24px);
         border-radius: 12px 12px 0 0;
         font-size: clamp(22px, 2vw, 38px);
@@ -451,14 +456,16 @@
         letter-spacing: 0.12em;
       }
       #expression-tag {
-        top: 164px;
-        right: 12px;
-        max-width: min(38vw, 360px);
-        text-align: right;
+        position: static;
+        z-index: auto;
+        padding: clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 14px);
+        margin-bottom: clamp(2px, 0.3vw, 6px);
         color: rgba(255, 255, 255, 0.46);
         font-size: clamp(11px, 0.85vw, 15px);
         font-style: italic;
         white-space: nowrap;
+        border: none;
+        background: none;
       }
       #api-client-id,
       #api-status {
@@ -1111,7 +1118,10 @@
 
     <div id="hud">
       <div style="flex: 1"></div>
-      <div id="name-plate"></div>
+      <div id="name-row">
+        <div id="name-plate"></div>
+        <div id="expression-tag"></div>
+      </div>
       <div id="text-window">
         <span id="text-content"></span><span class="cursor" id="cursor">█</span>
       </div>
@@ -1121,7 +1131,7 @@
     <div id="choice-container"></div>
 
     <div id="chapter-display"></div>
-    <div id="expression-tag"></div>
+
     <button class="utility-btn" id="mode-toggle" title="表示モード切替" type="button"><span class="btn-icon">🌙</span><span class="btn-text">表示切替</span></button>
     <a id="back-btn" href="./diary.html">◁ 戻る</a>
     <button class="utility-btn" id="settings-btn" type="button" title="モデル設定"><span class="btn-icon">🎭</span><span class="btn-text">モデル設定</span></button>
