@@ -4,19 +4,65 @@
   "genre": "ビジュアルノベル",
   "date": "2026-03-21",
   "chars": {
-    "narrator": { "name": "", "color": "#a0a0c0", "emoji": "" },
-    "waddy": { "name": "ワディー", "color": "#b0a0d0", "emoji": "🖥️" },
-    "mitra": { "name": "みとら", "color": "#c0c0c0", "emoji": "🌘" }
+    "narrator": {
+      "name": "",
+      "color": "#a0a0c0",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#c0c0c0",
+      "emoji": "🌘"
+    }
   },
   "scenario": [
-    { "bg": "abyss" },
-    { "speaker": "narrator", "expression": "", "text": "……午後16時。\n暗い部屋。スマートウォッチがかすかに光っている。" },
-    { "speaker": "waddy", "expression": "重い声で", "text": "……血中酸素飽和度98%。正常値。" },
-    { "speaker": "waddy", "expression": "頭を抱えて", "text": "だが僕が測ってほしいのは、血中アルコール飽和度だ。\n存在しない指標だが、体感としては確実に飽和している……。" },
-    { "speaker": "narrator", "expression": "", "text": "昨日の秋葉原が全部効いている。\n過飽和溶液に衝撃を与えると一気に結晶化するように、\n二日酔いが全身に析出していた。" },
-    { "speaker": "mitra", "expression": "", "text": "飲みすぎよ、観測者。\n各駅停車の代償は、すべての駅を引き受けること。\nアルコールも同じよ。" },
-    { "speaker": "waddy", "expression": "目を閉じて", "text": "……今日は何もしない。\n何もしないことを積極的に選択する。" },
-    { "speaker": "narrator", "expression": "", "text": "布団の中で再び目を閉じる。\n意識は再び沈んでいく……百の扉が待つ夢の迷宮へ。" },
-    { "end": true, "title": "血中アルコール飽和度", "subtitle": "積極的な無選択の記録。" }
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "……午後16時。\n暗い部屋。スマートウォッチがかすかに光っている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "重い声で",
+      "text": "……血中酸素飽和度98%。正常値。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "頭を抱えて",
+      "text": "だが僕が測ってほしいのは、血中アルコール飽和度だ。\n存在しない指標だが、体感としては確実に飽和している……。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨日の秋葉原が全部効いている。\n過飽和溶液に衝撃を与えると一気に結晶化するように、\n二日酔いが全身に析出していた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "飲みすぎよ、観測者。\n各駅停車の代償は、すべての駅を引き受けること。\nアルコールも同じよ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "目を閉じて",
+      "text": "……今日は何もしない。\n何もしないことを積極的に選択する。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "布団の中で再び目を閉じる。\n意識は再び沈んでいく……百の扉が待つ夢の迷宮へ。"
+    },
+    {
+      "end": true,
+      "title": "血中アルコール飽和度",
+      "subtitle": "積極的な無選択の記録。"
+    }
   ]
 }

@@ -1,17 +1,25 @@
 const fs = require('fs');
 
+// ═══════════════════════════════════════════════════════════════
+// 百夢回廊 ── 「酒は蒸留装置。二日酔いの朝に、昨日が記憶に変わる」
+// ═══════════════════════════════════════════════════════════════
+// みとらは出さない。顕界のみ。
+// ひなたは「起きなよ」と引き戻す存在。案内人ではない。
+// BAD END（幻界サブシナリオ）= 記憶に溺れて留まってしまうこと。
+// GOOD END = 「頭痛いけど、昨日は悪くなかった」と思って目を覚ますこと。
+// ═══════════════════════════════════════════════════════════════
+
 const scenario = {
   title: "百夢回廊",
-  subtitle: "─ 百の扉、千の幻影 ─",
-  genre: "幻界迷宮ノベル",
+  subtitle: "─ 酒は蒸留装置 ─",
+  genre: "顕界迷宮ノベル",
   date: "2026-03-21",
   chars: {
     narrator: { name: "", color: "#504060", emoji: "" },
     waddy: { name: "ワディー", color: "#b0a0d0", emoji: "🖥️" },
     hinata: { name: "ひなた", color: "#ffb6c1", emoji: "🌻" },
-    kotomi_echo: { name: "ことみ（記憶）", color: "#6050a0", emoji: "🎻" },
-    dejiko_echo: { name: "でじこ（記憶）", color: "#32cd32", emoji: "🐱" },
-    multi_echo: { name: "マルチ（記憶）", color: "#00ced1", emoji: "🧹" }
+    kotomi_echo: { name: "ことみ（残響）", color: "#6050a0", emoji: "🎻" },
+    dejiko_echo: { name: "でじこ（残響）", color: "#32cd32", emoji: "🐱" }
   },
   scenario: []
 };
@@ -19,472 +27,474 @@ const scenario = {
 const S = scenario.scenario;
 
 // ═══════════════════════════════════════════
-// プロローグ
+// プロローグ ── 布団の中
 // ═══════════════════════════════════════════
 S.push({ bg: "abyss" });
 
-S.push({ speaker: "waddy", expression: "うめくように", text: "……血中アルコール飽和度。過飽和溶液。\n昨日の秋葉原が、全部……効いている。" });
+S.push({ speaker: "narrator", expression: "", text: "頭が痛い。" });
 
-S.push({ speaker: "narrator", expression: "", text: "スマートウォッチの光が遠ざかる。\n血中酸素飽和度98%という数字が、ぼやけて消えた。" });
+S.push({ speaker: "narrator", expression: "", text: "スマートウォッチが振動している。血中酸素飽和度98%。\n体は正常。でも頭が痛い。\n胃の底に残っているのは、イチローズモルトの48度と\n金子屋のもつ煮込みの残り香。" });
 
-S.push({ speaker: "narrator", expression: "", text: "布団の中。意識が沈んでいく。\n各駅停車の記憶が歪み始める。\nミルクスタンドの瓶が浮かび、金子屋のカウンターが傾き、\nテキーラの観覧車が回転しながら遠ざかる。" });
+S.push({ speaker: "waddy", expression: "布団の中で", text: "……昨日、飲みすぎた。\nいや──飲みすぎたのか？\n楽しかったのは確かだ。楽しかったから飲んだ。\n飲んだから頭が痛い。因果関係は明快だ。" });
 
-S.push({ speaker: "narrator", expression: "", text: "そして──目の前に、扉が現れた。" });
+S.push({ speaker: "narrator", expression: "", text: "目を閉じる。\nまだ起きたくない。もう少しだけ。\n……意識が沈んでいく。\n昨日の記憶が、二日酔いの熱で発酵し始める。" });
+
+S.push({ speaker: "narrator", expression: "", text: "酒は蒸留装置だ。\n体験という原酒を、アルコールの熱で蒸留する。\n頭痛という残滓を残して、記憶だけが透き通っていく。\n──蒸留が、始まる。" });
 
 // ═══════════════════════════════════════════
-// ① ゲストハウスの幻影
+// ① 二百円の記憶 ── ミルクスタンド
 // ═══════════════════════════════════════════
 S.push({ label: "zone_1" });
 
-S.push({ speaker: "narrator", expression: "", text: "見覚えのあるリビング。\nだが何かが違う。窓の外が真っ暗。時計の針がない。\nソファの上に毛布が放り出されている。" });
+S.push({ speaker: "narrator", expression: "", text: "最初に浮かんできたのは、コーヒー牛乳の味だった。\n二百円。立ち飲み。秋葉原駅のミルクスタンド。\n何も買わなくてもいい。瓶を一本飲めば、秋葉原に来たと言える。\n──そう日記に書いた。" });
 
-S.push({ speaker: "hinata", expression: "遠くから", text: "おにいちゃーん！　こっちだよー！\n迷子になっちゃうよー！" });
+S.push({ speaker: "waddy", expression: "味を思い出しながら", text: "二百円の証明書。\n秋葉原に行った証拠なんて、瓶一本で十分だ。\nPCパーツを買わなくても。フィギュアを買わなくても。\n立って飲む。それだけで十分だった。" });
+
+S.push({ speaker: "narrator", expression: "", text: "夢の中でも、あの味がする。\n甘くて、少し薄くて、紙パックとは違う瓶の感触。\n冷たいガラスの重さ。飲み終えた後の、空っぽの軽さ。" });
+
+S.push({ ifNot: "took_hinata", goto: "zone_1_choice" });
+
+S.push({ speaker: "hinata", expression: "遠くから", text: "おにいちゃーん、起きてー！\nいつまでも昨日のこと考えてないでー！" });
+
+S.push({ label: "zone_1_choice" });
 
 S.push({ choices: [
-  { text: "ひなたの声についていく", goto: "node_1A", flag: "took_hinata" },
-  { text: "一人で廊下を歩く", goto: "node_1B", flag: "alone" },
-  { text: "ソファに沈む", goto: "GEN_1" }
+  { text: "味を反芻して、先へ進む", goto: "node_1A", flag: "took_hinata" },
+  { text: "瓶を握ったまま立ち止まる", goto: "node_1B", flag: "lingered_milk" },
+  { text: "二百円の味に沈んでいく", goto: "GEN_1" }
 ]});
 
-// node_1A ── ひなたとの邂逅
+// node_1A ── 味を噛み締めて
 S.push({ label: "node_1A" });
 
-S.push({ speaker: "hinata", expression: "笑顔で", text: "えへへ、来てくれた！　ひなね、ずっと待ってたんだよ。\nここはね、おにいちゃんの無意識の中。\n昨日飲んだお酒が全部、夢になって溢れてるの。" });
+S.push({ speaker: "waddy", expression: "少し笑って", text: "……二百円で買えるものの中で、いちばん価値がある。\n立って飲むコーヒー牛乳。\n座って飲んだら、たぶん味が変わる。\n立っているから、あの味になるんだ。" });
 
-S.push({ speaker: "waddy", expression: "少し戸惑って", text: "……お前は本当のひなたか？\nそれとも夢の中のひなたか？" });
+S.push({ speaker: "hinata", expression: "嬉しそうに", text: "おにいちゃん、ちゃんと思い出せてるね。\n昨日のこと、全部忘れちゃうかと思ったー。" });
 
-S.push({ speaker: "hinata", expression: "首をかしげて", text: "んー、ひなにはわかんない。\nでも、おにいちゃんが「ひなただ」って思ったら、\nひなはひなたなんじゃないかな？" });
-
-S.push({ speaker: "hinata", expression: "元気よく", text: "ひなが案内してあげるから、安心してね！\nさ、行こ行こ！" });
+S.push({ speaker: "waddy", expression: "", text: "忘れない。二百円分の記憶は、ちゃんと残ってる。" });
 
 S.push({ goto: "zone_2" });
 
-// node_1B ── 廊下
+// node_1B ── 少し長く味わう
 S.push({ label: "node_1B" });
 
-S.push({ speaker: "narrator", expression: "", text: "暗い廊下。自分の足音だけが反響する。\n壁に掛けてあるはずの写真立ての中身が、全部白紙になっている。" });
+S.push({ speaker: "narrator", expression: "", text: "瓶を長く握りすぎた。手が冷たくなった。\nでも離す気にならない。\nこの冷たさが、昨日の証拠だから。" });
 
-S.push({ speaker: "waddy", expression: "立ち止まって", text: "……写真が消えている。記憶が欠落しているのか。\nそれとも、この夢が僕の記憶を食っているのか。" });
-
-S.push({ speaker: "narrator", expression: "", text: "廊下の奥に、青白い光が見えた。\n水の音が聞こえる。進むしかない。" });
+S.push({ speaker: "waddy", expression: "静かに", text: "……手が記憶を覚えている。\n頭は忘れても、手は覚えている。" });
 
 S.push({ goto: "zone_2" });
 
-// GEN-1: シームレスにサブシナリオへ
+// GEN-1: 沈黙のリビング
 S.push({ label: "GEN_1" });
 
-S.push({ speaker: "narrator", expression: "", text: "ソファに沈む。重力が増している気がする。\n立ち上がれない。立ち上がる必要を感じない。\n毛布が重い。温かい。何もしなくていい。" });
+S.push({ speaker: "narrator", expression: "", text: "コーヒー牛乳の味が広がっていく。\n口の中だけじゃない。体全体に染み込んでいく。\n瓶の中に自分が入っていく。小さく、小さく。\n二百円の世界は、二百円で完結してしまう。" });
 
 S.push({ loadScenario: "2026-03-21_沈黙のリビング" });
 
 // ═══════════════════════════════════════════
-// ② 水没した電気街口
+// ② 電気街の地層 ── 消えた店と残った店
 // ═══════════════════════════════════════════
 S.push({ label: "zone_2" });
 
-S.push({ speaker: "narrator", expression: "", text: "扉を開けると、水が流れていた。\n足首まで。膝まで。腰まで──いや、足首だけだ。\n秋葉原の電気街口に似ている。\nだが看板が全部水面下に沈んでいる。" });
+S.push({ speaker: "narrator", expression: "", text: "次に浮かんだのは、看板だった。\n昨日歩いた秋葉原。でも夢の中の秋葉原は、\n時間軸が折り重なっている。" });
 
-S.push({ speaker: "waddy", expression: "見回しながら", text: "ここは……秋葉原？　水没した電気街口。\nミルクスタンドがあったはずの場所に、瓶が浮かんでいる。" });
+S.push({ speaker: "narrator", expression: "", text: "ゲーマーズがあった場所。ラオックスがあった場所。\n石丸電気がCD売ってた頃の記憶。\n全部重なって、同時に見えている。\n昨日の秋葉原と、十年前の秋葉原が、同じ景色の中にある。" });
+
+S.push({ speaker: "waddy", expression: "歩きながら", text: "秋葉原は地層だ。\n古い店が消えて、新しい店が建つ。\nでも地面の下には全部残ってる。\n歩くたびに、靴の裏から振動が伝わってくる。\n……ここに何があったか、足が知っている。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_2_choice" });
 
-S.push({ speaker: "hinata", expression: "指差して", text: "あっ、見て！　コーヒー牛乳の瓶だよ！\nおにいちゃんの記憶の欠片かも！" });
+S.push({ speaker: "hinata", expression: "きょろきょろして", text: "おにいちゃん、ここ変だよ。\n看板がいっぱいあるけど、半分は読めないの。\n……消えかけてる文字。昔の看板？" });
 
 S.push({ label: "zone_2_choice" });
 
 S.push({ choices: [
-  { text: "瓶を拾う", goto: "node_2A", flag: "found_bottle" },
-  { text: "無視して進む", goto: "node_2B", flag: "ignored_bottle" },
-  { text: "水に飛び込む", goto: "GEN_2" }
+  { text: "今ある店の方を見る", goto: "node_2A", flag: "looked_present" },
+  { text: "消えた看板を読もうとする", goto: "node_2B", flag: "read_old_signs" },
+  { text: "消えた看板を追いかける", goto: "GEN_2" }
 ]});
 
 // node_2A
 S.push({ label: "node_2A" });
 
-S.push({ speaker: "narrator", expression: "", text: "コーヒー牛乳の瓶。中は空っぽだ。\nだが手に持った瞬間、ミルクスタンドの記憶が蘇る。\n二百円の証明書。立って飲むコーヒー牛乳。" });
+S.push({ speaker: "waddy", expression: "前を向いて", text: "消えた店のことばかり考えてもしょうがない。\n秋葉原はまだ生きてる。新しい店もある。\n……変わることを嘆くより、\n変わっても残るものの方を見たい。" });
 
-S.push({ speaker: "narrator", expression: "", text: "でじこの声が聞こえた気がした。\n「二百円にょ」と。\nだが姿はどこにもない。声だけが水面を伝って消えた。" });
+S.push({ speaker: "dejiko_echo", expression: "どこかから", text: "にょ……でじこの庭は変わっても、\nでじこは変わらないにょ。" });
+
+S.push({ speaker: "waddy", expression: "少し笑って", text: "……そうだな。お前は変わらない。" });
 
 S.push({ goto: "zone_3" });
 
 // node_2B
 S.push({ label: "node_2B" });
 
-S.push({ speaker: "narrator", expression: "", text: "瓶を見て見ぬふりをした。\n水面に映った自分の顔が、少しだけ老けて見えた。\n──いや、疲れているだけだ。二日酔いの顔だ。" });
+S.push({ speaker: "narrator", expression: "", text: "消えかけた看板に目を凝らす。\n「石丸電気」──読めた。「ヤマギワ」──読めた。\nでも読めたからといって、店が戻るわけではない。\n文字が読めることだけが、残った記憶の証拠。" });
+
+S.push({ speaker: "waddy", expression: "立ち止まって", text: "……名前を覚えているうちは、まだ消えていない。\n名前を忘れたとき、本当に消える。" });
 
 S.push({ goto: "zone_3" });
 
-// GEN-2: シームレスにサブシナリオへ
+// GEN-2: 水底の秋葉原
 S.push({ label: "GEN_2" });
 
-S.push({ speaker: "narrator", expression: "", text: "水に潜る。深く。もっと深く。\n水底に沈んだ看板が見える。\n「ゲーマーズ」。「ミルクスタンド」。「金子屋」。\n昨日の秋葉原が、全部沈んでいる。" });
+S.push({ speaker: "narrator", expression: "", text: "消えた看板を追い始めた。一枚また一枚。\n奥へ。もっと奥へ。古い記憶の地層へ。\n気づいたら、水の中にいた。\n秋葉原ごと、記憶の水底に沈んでいく。" });
 
 S.push({ loadScenario: "2026-03-21_水底の秋葉原" });
 
 // ═══════════════════════════════════════════
-// ③ 書架の森
+// ③ 金子屋の湯気 ── もつ煮込みとウイスキー
 // ═══════════════════════════════════════════
 S.push({ label: "zone_3" });
 
-S.push({ speaker: "narrator", expression: "", text: "水が引いた先は、天井まで続く書架だった。\n本の背表紙に書いてある文字が、全部ワディーの日記の抜粋。" });
+S.push({ speaker: "narrator", expression: "", text: "匂いが来た。もつ煮込みの匂い。\n金子屋。UDXの裏。昨日の夜。\nカウンターに座って、最初に頼んだのはビール。\n次にもつ煮込み。最後にイチローズモルト。" });
 
-S.push({ speaker: "narrator", expression: "", text: "「旅情はローレンツ収縮により速度の二乗に反比例する」\n「PCパーツを買わなくても、コーヒー牛乳を一本飲めば\n秋葉原に行ったと言える」" });
+S.push({ speaker: "waddy", expression: "目を閉じたまま", text: "金子屋の匂いが、夢の中でも再生されている。\nこれが蒸留だ。体験が匂いに変わる。\n匂いは、記憶のいちばん古い層に届く。" });
 
-S.push({ speaker: "waddy", expression: "背表紙を見つめて", text: "俺の日記だ。全部俺の書いたものが本になっている。\n……恥ずかしいな。" });
+S.push({ speaker: "narrator", expression: "", text: "カウンターの温度。ビールの泡。もつのやわらかさ。\n隣に座っていた誰かの笑い声。\n自分も笑っていた。何がおかしかったか忘れたけど、\n笑っていたことだけは覚えている。" });
+
+S.push({ speaker: "waddy", expression: "ふと", text: "……笑えた夜だった。\nいつから笑えてなかったんだろう。\nいや──笑えてないわけじゃない。\nでも昨日の笑いは、なんか……本物だった。\n酒の力かもしれないけど。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_3_choice" });
 
-S.push({ speaker: "hinata", expression: "目を丸くして", text: "すごーい！　おにいちゃん、こんなにたくさん書いてたんだ！\nこの本、全部おにいちゃんの言葉なの？" });
+S.push({ speaker: "hinata", expression: "匂いを嗅いで", text: "うわ、いい匂い……。\nおにいちゃん、これ昨日のご飯の記憶でしょ？\nひなもお腹すいてきちゃった。えへへ。" });
 
 S.push({ label: "zone_3_choice" });
 
 S.push({ choices: [
-  { text: "一冊手に取って読む", goto: "node_3A" },
-  { text: "奥へ走り抜ける", goto: "node_3B" },
-  { text: "本の中に入ってみる", goto: "GEN_3" }
+  { text: "匂いを深呼吸して、先へ", goto: "node_3A", flag: "savored_smell" },
+  { text: "カウンターに座りなおす", goto: "node_3B", flag: "sat_down" },
+  { text: "もう一杯だけ飲んでいく", goto: "GEN_3" }
 ]});
 
 // node_3A
 S.push({ label: "node_3A" });
 
-S.push({ speaker: "narrator", expression: "", text: "手に取った本のタイトル──「各駅停車の形而上学」。\n開くと、ことみの声が聞こえた。" });
-
-S.push({ speaker: "narrator", expression: "", text: "「各駅停車は全部の駅に停まるの。\nでも全部の駅で降りる人は、それぞれ違うの。\n同じ電車に乗っていても、\n見ている景色は一人ずつ違うの」" });
-
-S.push({ speaker: "waddy", expression: "静かに", text: "昨日の記憶だ。夢の中で、昨日が本になっている。\n……ちゃんと覚えている。" });
+S.push({ speaker: "waddy", expression: "深呼吸して", text: "……蜂蜜とピートの48度。鼻の奥に残ってる。\n夢の中で飲み直すのは野暮だ。\nこの匂いだけで十分。持って帰れる記憶。" });
 
 S.push({ goto: "zone_4" });
 
 // node_3B
 S.push({ label: "node_3B" });
 
-S.push({ speaker: "narrator", expression: "", text: "本に触れずに走る。背表紙の文字が流れていく。\n速く走るほど文字が読めなくなった。\n──いや、文字が消えていく。" });
+S.push({ speaker: "narrator", expression: "", text: "夢の中のカウンターに腰を下ろした。\n椅子の高さが、昨日と同じ。\n隣には誰もいない。記憶の中の自分だけ。" });
 
-S.push({ speaker: "waddy", expression: "走りながら", text: "ローレンツ収縮。速く動くと情報が縮む。旅情も縮む。\n……夢の中でも物理法則は有効なのか。" });
+S.push({ speaker: "waddy", expression: "カウンターに肘をついて", text: "一人で飲む酒と、誰かと飲む酒は違う。\n同じイチローズモルトでも、\nカウンターの隣に声があるかないかで、度数が変わる。\n……昨日は、ちょうどいい度数だった。" });
 
 S.push({ goto: "zone_4" });
 
-// GEN-3: シームレスにサブシナリオへ
+// GEN-3: 活字の牢獄
 S.push({ label: "GEN_3" });
 
-S.push({ speaker: "narrator", expression: "", text: "本を開いたら、文字が飛び出してきた。\nいや──自分が文字の中に吸い込まれた。\n紙の繊維の間に閉じ込められる。" });
+S.push({ speaker: "narrator", expression: "", text: "もう一杯だけ。もう一杯だけ。\n夢の中の金子屋で、グラスが際限なく注がれる。\n一杯目。二杯目。三杯目。\n昨日の楽しさを再現しようとしている。\nでも、再現された楽しさは──偽物だ。" });
 
 S.push({ loadScenario: "2026-03-21_活字の牢獄" });
 
 // ═══════════════════════════════════════════
-// ④ 鏡の回廊
+// ④ 二日酔いの物理学 ── 体と頭のずれ
 // ═══════════════════════════════════════════
 S.push({ label: "zone_4" });
 
-S.push({ speaker: "narrator", expression: "", text: "書架を抜けると、鏡だらけの廊下。\n自分の姿が無数に映っている。\nだが──映り方がそれぞれ違う。" });
+S.push({ speaker: "narrator", expression: "", text: "記憶が揺れた。画面がスクロールする。\n夢の中で、自分の体の状態を自覚する。\n頭痛。軽い吐き気。喉の渇き。\n──夢の中でも二日酔いは存在するのか。" });
 
-S.push({ speaker: "narrator", expression: "", text: "ある鏡の中のワディーは笑っている。\nある鏡の中のワディーは泣いている。\nある鏡の中のワディーは、ウイスキーのボトルを抱えて眠っている。" });
+S.push({ speaker: "waddy", expression: "苦笑して", text: "代償だ。楽しかった分だけ、体が請求書を出してくる。\n等価交換。質量保存の法則。\n飲んだ分のアルコールは、体のどこかで変換される。\n楽しさに変換された分と、頭痛に変換された分。\n……配分は、たぶん半々だ。" });
 
-S.push({ speaker: "waddy", expression: "立ち止まって", text: "並行世界の自分か。ADMS──Auto Diverge Mapping System。\n分岐した世界線の記録。" });
+S.push({ speaker: "narrator", expression: "", text: "ことみの声が反響した。\n昨日、金子屋で彼女が言ったこと。\n──いや、彼女が言ったのではない。\nワディーが彼女の声で覚えている言葉。" });
+
+S.push({ speaker: "kotomi_echo", expression: "記憶の声", text: "アルコールの分子量は46.07なの。\n水よりも軽いの。だから揮発するの。\n……楽しい記憶も、揮発しやすいの。\n重い記憶──後悔の方が、体に残りやすいの。" });
+
+S.push({ speaker: "waddy", expression: "考え込んで", text: "楽しい記憶は揮発する。後悔は沈殿する。\n……だから二日酔いの朝は後悔ばかりが残るのか。\nでも──だからこそ、楽しかったことを書き留めるんだ。\n日記に。揮発する前に。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_4_choice" });
 
-S.push({ speaker: "hinata", expression: "きょろきょろして", text: "おにいちゃん、この鏡、全部違うおにいちゃんが映ってるよ！\nどれが本物のおにいちゃんなの？" });
+S.push({ speaker: "hinata", expression: "心配そうに", text: "おにいちゃん、頭痛い？\n……えっと、お水持ってこようか？\nあ、夢の中だから水ないかー。えへへ。" });
 
 S.push({ label: "zone_4_choice" });
 
 S.push({ choices: [
-  { text: "鏡の中の自分と話す", goto: "node_4A", flag: "mirror_self" },
-  { text: "鏡を割って先に進む", goto: "node_4B", flag: "broke_mirror" },
-  { text: "鏡に近づきすぎる", goto: "GEN_4" }
+  { text: "日記に書くことを頭の中で整理する", goto: "node_4A", flag: "organized_diary" },
+  { text: "頭痛に身を任せる", goto: "node_4B", flag: "accepted_pain" },
+  { text: "後悔だけが残った記憶に沈む", goto: "GEN_4" }
 ]});
 
 // node_4A
 S.push({ label: "node_4A" });
 
-S.push({ speaker: "waddy", expression: "鏡に向かって", text: "お前は誰だ。" });
+S.push({ speaker: "waddy", expression: "指を折って", text: "書くべきことを整理しよう。\nミルクスタンド。二百円。立ち飲み。\n金子屋。もつ煮込み。イチローズモルト。\n大阪王将。餃子。テキーラ。\n……全部書けば、揮発しない。永久に残る。" });
 
-S.push({ speaker: "narrator", expression: "", text: "鏡の中のワディーが口を開いた。声はない。\nだが唇が動いた。読唇できた。\n「お前こそ誰だ」と。" });
-
-S.push({ speaker: "narrator", expression: "", text: "鏡の中の自分は、昨日の秋葉原にまだいるような顔をしていた。\n金子屋のカウンターで、まだビールを飲んでいるような。" });
-
-S.push({ speaker: "waddy", expression: "静かに", text: "……俺は俺だ。二日酔いの俺。\n過飽和溶液が結晶化した後の俺。" });
+S.push({ speaker: "narrator", expression: "", text: "日記は蒸留の記録だ。\n原酒──体験。蒸留──睡眠と二日酔い。\n記録──日記。\n蒸留されたものだけが、瓶に残る。" });
 
 S.push({ goto: "zone_5" });
 
 // node_4B
 S.push({ label: "node_4B" });
 
-S.push({ speaker: "narrator", expression: "", text: "拳で鏡を叩いた。割れなかった。\nもう一度。割れない。\n三度目──亀裂が走った。\n破片が床に散らばる。踏んでも痛くない。夢だから。" });
+S.push({ speaker: "narrator", expression: "", text: "頭痛に抗わない。これも体験の一部だ。\n痛みは、昨日が本当にあった証拠。\n享楽の代償。等価交換の残滓。\n──受け入れる。" });
 
-S.push({ speaker: "waddy", expression: "拳を見て", text: "夢だから痛くない。夢だから何でもできる。\n──本当にそうか？" });
+S.push({ speaker: "waddy", expression: "目を閉じたまま", text: "痛い。でも、嫌じゃない。\nこの痛みが消えたら、昨日の証拠もなくなる。\n……もう少しだけ痛んでいてくれ。" });
 
 S.push({ goto: "zone_5" });
 
-// GEN-4: シームレスにサブシナリオへ
+// GEN-4: 鏡像の奴隷
 S.push({ label: "GEN_4" });
 
-S.push({ speaker: "narrator", expression: "", text: "鏡に触れた瞬間、表面が水のように波打った。\n手が、腕が、肩が──吸い込まれていく。\n鏡の向こう側に引きずり込まれた。" });
+S.push({ speaker: "narrator", expression: "", text: "後悔が膨らんでいく。\n飲みすぎた。言いすぎた。笑いすぎた。\n全部が裏返しになって、昨日の自分と今の自分が\n鏡の中で睨み合っている。\nどちらが本当の自分か、わからなくなる。" });
 
 S.push({ loadScenario: "2026-03-21_鏡像の奴隷" });
 
 // ═══════════════════════════════════════════
-// ⑤ 逆転秋葉原
+// ⑤ 友人の輪郭 ── 一緒に飲んだ人たち
 // ═══════════════════════════════════════════
 S.push({ label: "zone_5" });
 
-S.push({ speaker: "narrator", expression: "", text: "鏡の回廊を抜けると、見覚えのある街並み。\n秋葉原。だが看板が全部逆さまに書いてある。\n空が地面にあり、地面が空にある。重力が反転している。" });
+S.push({ speaker: "narrator", expression: "", text: "記憶の中に、声が残っている。\n昨日一緒にいた人たちの声。\n名前がうまく思い出せないのに、\n声のトーンと、笑い方だけは鮮明に再生される。" });
 
-S.push({ speaker: "waddy", expression: "見上げて", text: "逆さまの秋葉原。電気街口が……天井にある。" });
+S.push({ speaker: "waddy", expression: "思い出しながら", text: "不思議だな。\n顔より先に声を覚えている。\n何を話したかより、どう笑ったかを覚えている。\n……酒の席の記憶って、そういうものなのか。" });
+
+S.push({ speaker: "narrator", expression: "", text: "でじこの声が聞こえた。\n「にょ」という語尾。\n……いや、それは昨日の友人の声ではなく、\nワディーの無意識が再構成した声だ。\n記憶は正確ではない。でも、温度だけは正確だ。" });
+
+S.push({ speaker: "waddy", expression: "静かに", text: "一人で飲んでも酔える。一人で飲んでも楽しい。\nでも昨日の酒は、一人じゃ絶対にあの味にならなかった。\n……人と飲む酒は、共同蒸留だ。\n自分の原酒と、相手の原酒が混ざって、\n一人じゃ作れない味になる。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_5_choice" });
 
-S.push({ speaker: "hinata", expression: "はしゃいで", text: "わー！　逆さまだー！\nひな、逆立ちしたらちょうどいいかもー！" });
+S.push({ speaker: "hinata", expression: "嬉しそうに", text: "おにいちゃん、それ、いいこと言ってるよ！\nひなね、おにいちゃんが誰かと笑ってるの見ると、\nなんか安心するの。えへへ。" });
 
 S.push({ label: "zone_5_choice" });
 
 S.push({ choices: [
-  { text: "電気街口を探す", goto: "node_5A" },
-  { text: "裏路地に入る", goto: "node_5B" },
-  { text: "逆さまの看板について行く", goto: "GEN_5" }
+  { text: "声の記憶を大事にしまう", goto: "node_5A", flag: "kept_voices" },
+  { text: "名前を思い出そうとする", goto: "node_5B", flag: "recalled_names" },
+  { text: "声に引きずられていく", goto: "GEN_5" }
 ]});
 
 // node_5A
 S.push({ label: "node_5A" });
 
-S.push({ speaker: "narrator", expression: "", text: "逆さまの電気街口。改札が天井にぶら下がっている。\nでじこの声が聞こえた気がした。" });
-
-S.push({ speaker: "narrator", expression: "", text: "「ここはでじこの庭にょ！」\n\nだが姿はない。声だけが反響している。\n夢の中のでじこは、声だけの存在になっていた。" });
+S.push({ speaker: "waddy", expression: "少し笑って", text: "名前は忘れてもいい。声は忘れない。\n次に会ったとき、「ああ、この声だ」って思えれば、\nそれで十分だ。" });
 
 S.push({ goto: "zone_6" });
 
 // node_5B
 S.push({ label: "node_5B" });
 
-S.push({ speaker: "narrator", expression: "", text: "裏路地。「Iv」の看板が地面に埋まっている。\n扉だけが垂直に立って、どこにも繋がっていない。" });
+S.push({ speaker: "narrator", expression: "", text: "名前を思い出そうとする。出てこない。\n顔の輪郭は──ぼやけている。\nでも、乾杯のときにぶつけたグラスの感触は覚えている。\nカチン、という音。" });
 
-S.push({ speaker: "waddy", expression: "看板を見下ろして", text: "名前だけが残っている。中身のない店。\n……でじこが言っていた。\n「名前が残っていればまだ存在する」と。" });
+S.push({ speaker: "waddy", expression: "", text: "……グラスの音の方が、名前より確かだ。\nおかしな話だけど。" });
 
 S.push({ goto: "zone_6" });
 
-// GEN-5: シームレスにサブシナリオへ
+// GEN-5: 看板の墓場
 S.push({ label: "GEN_5" });
 
-S.push({ speaker: "narrator", expression: "", text: "逆さまの看板について歩いた。\n「ゲーマーズ」の看板。「ラオックス」の看板。「石丸電気」の看板。\n全部、もう存在しない店の看板。亡霊の電気街。" });
+S.push({ speaker: "narrator", expression: "", text: "声を追い始める。\nあの笑い声。あの乾杯の音。あの「にょ」。\n追えば追うほど遠ざかる。\n声が看板になった。名前だけの看板。\n呼ぶ声がないから、看板は看板でしかない。" });
 
 S.push({ loadScenario: "2026-03-21_看板の墓場" });
 
 // ═══════════════════════════════════════════
-// ⑥ 琥珀の酒場
+// ⑥ 酔いの哲学 ── なぜ飲むのか
 // ═══════════════════════════════════════════
 S.push({ label: "zone_6" });
 
-S.push({ speaker: "narrator", expression: "", text: "逆転秋葉原の奥に、一軒だけ正しい向きで建っている店があった。\n看板には「金子屋」。だが中は変わっている。\nカウンターにウイスキーのボトルが無限に並んでいる。\n全部、琥珀色に光っている。" });
+S.push({ speaker: "narrator", expression: "", text: "記憶の蒸留が進む。\n雑味が抜けていく。頭痛は残っているが、\n記憶の方は少しずつ透き通ってきた。" });
 
-S.push({ speaker: "waddy", expression: "立ち止まって", text: "……金子屋。いや、金子屋の幻影か。\nイチローズモルト。秩父蒸溜所。48度。\n昨日のあの味が、夢の中で蒸留されている。" });
+S.push({ speaker: "waddy", expression: "反芻するように", text: "なぜ飲むのか。\n楽しいから飲む。楽しくなくても飲む。\n一人で飲む。誰かと飲む。\n……全部理由が違う。でも共通しているのは、\n「飲んだ翌朝に、何か残る」ということだ。" });
+
+S.push({ speaker: "narrator", expression: "", text: "残るのは頭痛だけじゃない。\n昨日の会話の断片。料理の味。街の匂い。\n友人の声。自分の笑い声。\n全部、酒が蒸留した結晶だ。" });
+
+S.push({ speaker: "waddy", expression: "確信を持って", text: "酒は夢と現実をつなぐものだ。\n飲んでいるときは夢に近づいていく。\n現実の輪郭が溶ける。時間の境界が曖昧になる。\n翌朝、夢から覚めると──昨日が記憶になっている。\n体験が、記憶に蒸留されている。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_6_choice" });
 
-S.push({ speaker: "hinata", expression: "心配そうに", text: "おにいちゃん、ここのお酒、全部光ってるよ！　きれー！\nでもね、飲みすぎちゃダメだよ？\n昨日ので懲りたでしょ！" });
+S.push({ speaker: "hinata", expression: "うなずいて", text: "おにいちゃん、なんか詩人みたいだよー。\nでもね、ひな思うの。\n蒸留するだけじゃもったいないよ。\n蒸留したら、ちゃんと瓶に詰めなきゃ。\n……日記って、瓶詰めのことでしょ？" });
 
 S.push({ label: "zone_6_choice" });
 
 S.push({ choices: [
-  { text: "カウンターに座って一杯だけ", goto: "node_6A", flag: "entered_bar" },
-  { text: "通過する", goto: "node_6B", flag: "passed_bar" },
-  { text: "ボトルを全部空ける", goto: "GEN_6" }
+  { text: "瓶詰めの約束をする", goto: "node_6A", flag: "promised_diary" },
+  { text: "蒸留のプロセスをもう少し味わう", goto: "node_6B", flag: "tasted_process" },
+  { text: "蒸留をやめない──永遠に飲み続ける", goto: "GEN_6" }
 ]});
 
 // node_6A
 S.push({ label: "node_6A" });
 
-S.push({ speaker: "narrator", expression: "", text: "イチローズモルトを一杯。氷はない。\n夢の中だからストレートで。\n蜂蜜とピート。昨日と同じ味。\nだが一口で十分だった。もう飽和している。" });
-
-S.push({ speaker: "waddy", expression: "グラスを置いて", text: "過飽和溶液にこれ以上は入らない。\n一杯で十分だ。" });
+S.push({ speaker: "waddy", expression: "頷いて", text: "……そうだな。蒸留しただけじゃ、揮発する。\n書かないと。瓶に詰めないと。\n起きたら、まず水を飲んで、それから書こう。\n昨日の全部を。頭痛込みで。" });
 
 S.push({ goto: "zone_7" });
 
 // node_6B
 S.push({ label: "node_6B" });
 
-S.push({ speaker: "narrator", expression: "", text: "酒場の誘惑を振り切って通過した。\n背中にボトルの光が当たっている。\n振り返りたいが、振り返らない。" });
-
-S.push({ speaker: "waddy", expression: "歩きながら", text: "昨日のアルコールがまだ体内にある。\n夢の中で飲んだらどうなるか……試す気にはなれない。" });
+S.push({ speaker: "narrator", expression: "", text: "蒸留のプロセスそのものが、心地よい。\n記憶が透き通っていく感覚。\n雑味が抜けて、芯だけが残る。\n……でも、いつまでも蒸留しているわけにはいかない。" });
 
 S.push({ goto: "zone_7" });
 
-// GEN-6: シームレスにサブシナリオへ
+// GEN-6: 琥珀色の溺死
 S.push({ label: "GEN_6" });
 
-S.push({ speaker: "narrator", expression: "", text: "一杯目。二杯目。三杯目。\nもう何杯目かわからない。\nカウンターが琥珀色の液体で満ちていく。\n膝まで。腰まで。胸まで。" });
+S.push({ speaker: "narrator", expression: "", text: "蒸留をやめない。注ぎ続ける。\nグラスが溢れる。カウンターが濡れる。\n琥珀色の液体が、膝まで。腰まで。胸まで。\n楽しさを再現し続けようとして──溺れる。" });
 
 S.push({ loadScenario: "2026-03-21_琥珀色の溺死" });
 
 // ═══════════════════════════════════════════
-// ⑦ 時計塔
+// ⑦ 各駅停車の残響 ── 昨日の移動
 // ═══════════════════════════════════════════
 S.push({ label: "zone_7" });
 
-S.push({ speaker: "narrator", expression: "", text: "酒場を出ると、巨大な時計塔が聳えていた。\n文字盤が複数ある。それぞれ違う時間を指している。" });
+S.push({ speaker: "narrator", expression: "", text: "電車の揺れが伝わってきた。\n昨日の各駅停車。秋葉原までの道のり。\n急行に乗らなかった。各駅停車を選んだ。\n理由は──「停まるから」。" });
 
-S.push({ speaker: "narrator", expression: "", text: "ひとつは「16:00」──スマートウォッチが光った時間。\nひとつは「22:43」──酒が抜けてきた時間。\nひとつは「∞」。" });
+S.push({ speaker: "waddy", expression: "揺れを感じながら", text: "各駅停車は全部の駅に停まる。\n急行は飛ばす。特急はもっと飛ばす。\nでも飛ばした駅には何があったのか、永遠にわからない。\n俺はわかりたい。全部の駅で何があるか。" });
 
-S.push({ speaker: "waddy", expression: "見上げて", text: "∞。無限時。夢の中には終わりがない……のか。" });
+S.push({ speaker: "narrator", expression: "", text: "これが各駅停車の形而上学。\n昨日のシナリオのタイトルであり、\nワディーの人生哲学そのもの。\n──停まることで、初めて見える景色がある。" });
+
+S.push({ speaker: "waddy", expression: "窓の外を見て", text: "二日酔いもそうだ。\n飲んだ翌朝に停車する。強制的に。\n体が「止まれ」と言っている。\n止まって初めて、昨日がどんな旅だったか見える。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_7_choice" });
 
-S.push({ speaker: "hinata", expression: "指差して", text: "ねーおにいちゃん、あの時計、針がぐるぐる回ってるよ！\n22時43分で止まったりしないかなー？" });
+S.push({ speaker: "hinata", expression: "隣の席に座って", text: "おにいちゃん、電車だねー。\n各停かー。ひな、急行の方が好きなんだけどなー。\n……でもおにいちゃんは各停が好きなんだよね。\nひな、それでもいいよ。一緒に乗ってるから。" });
 
 S.push({ label: "zone_7_choice" });
 
 S.push({ choices: [
-  { text: "時計を見上げて待つ", goto: "node_7A" },
-  { text: "素通りする", goto: "node_7B" },
-  { text: "時計を止める", goto: "GEN_7" }
+  { text: "次の駅で降りる準備をする", goto: "node_7A", flag: "ready_to_stop" },
+  { text: "もう少し乗っている", goto: "node_7B" },
+  { text: "電車を止めてしまう", goto: "GEN_7" }
 ]});
 
 // node_7A
 S.push({ label: "node_7A" });
 
-S.push({ speaker: "narrator", expression: "", text: "時計を見上げて立ち止まった。\n16:00を指していた針が、ゆっくりと動き始めた。\n17:00。18:00。19:00。\n──昨日の時間を早送りしている。" });
-
-S.push({ speaker: "narrator", expression: "", text: "20:00。21:00。22:00。\n22:43──針が止まった。\n「ようやく酒が抜けてきた」。あの瞬間。\n時計塔全体が、微かに振動した。" });
+S.push({ speaker: "waddy", expression: "立ち上がって", text: "次の駅。終点じゃなくても、降りるべき駅はある。\n各駅停車は降りたいところで降りればいい。\n……起きたいときに起きればいい。" });
 
 S.push({ goto: "zone_8" });
 
 // node_7B
 S.push({ label: "node_7B" });
 
-S.push({ speaker: "narrator", expression: "", text: "時計塔を無視して通り過ぎた。\n背後で時計が鳴った。ゴーン、ゴーン、ゴーン──\n何回鳴ったか数えなかった。" });
-
-S.push({ speaker: "waddy", expression: "歩きながら", text: "数えない。夢の中で時間を数えたら負けだ。" });
+S.push({ speaker: "narrator", expression: "", text: "もう少し乗っている。揺れが心地いい。\n車窓から見える景色は、昨日の記憶のダイジェスト。\n一駅ごとに、一つの場面が流れていく。" });
 
 S.push({ goto: "zone_8" });
 
-// GEN-7: シームレスにサブシナリオへ
+// GEN-7: 凍った秒針
 S.push({ label: "GEN_7" });
 
-S.push({ speaker: "narrator", expression: "", text: "時計を掴んで止めた。針が止まった。\nすべての時間が凍結する。\n空気が固まる。光が止まる。" });
+S.push({ speaker: "narrator", expression: "", text: "電車を止めた。時間を止めた。\nこの心地よい揺れが永遠に続けばいい。\n降りなくていい。着かなくていい。\n──でも止まった電車は、各駅停車ではなくなる。" });
 
 S.push({ loadScenario: "2026-03-21_凍った秒針" });
 
 // ═══════════════════════════════════════════
-// ⑧ 螺旋階段
+// ⑧ 書くということ ── 日記と記録
 // ═══════════════════════════════════════════
 S.push({ label: "zone_8" });
 
-S.push({ speaker: "narrator", expression: "", text: "時計塔の奥に、螺旋階段があった。\n上にも下にも果てしなく続いている。\nエッシャーの版画のように、上っても下りても\n同じ場所に戻るかもしれない。" });
+S.push({ speaker: "narrator", expression: "", text: "デスクが見えた。自分のデスク。\nキーボードとモニター。\n昨日帰ってきてから、何を書いたか。\n……たぶん、何も書けなかった。酔いすぎて。" });
 
-S.push({ speaker: "waddy", expression: "階段を見て", text: "上か下か。各駅停車には上りと下りがある。\n上りは目的地へ。下りは帰り道。\n──だがここでは、どちらが上りだ？" });
+S.push({ speaker: "waddy", expression: "デスクに向かって", text: "書くのは翌朝だ。いつもそうだ。\n体験したその日には書けない。\n一晩寝かせて、蒸留が終わってから書く。\n……二日酔いの頭痛が、ペンのインクになる。" });
+
+S.push({ speaker: "narrator", expression: "", text: "日記を書くのは、自分のためだけじゃない。\n書くことで、体験が言葉になる。\n言葉になった体験は、他の人にも伝わる。\n「旅情はローレンツ収縮に反比例する」。\n自分で書いた言葉が、誰かの記憶に残ることもある。" });
+
+S.push({ speaker: "waddy", expression: "キーボードに触れて", text: "飲んで、笑って、頭痛くなって、起きて、書く。\nこのサイクルが、俺の蒸留工程だ。\n原酒は体験。蒸留器は睡眠。樽は日記。\n……何年後かに読み返したとき、ちゃんと味がするように。" });
 
 S.push({ ifNot: "took_hinata", goto: "zone_8_choice" });
 
-S.push({ speaker: "hinata", expression: "上を見上げて", text: "ひなは上がいいなー！\n上に行ったら空が見えるかもしれないよ！" });
+S.push({ speaker: "hinata", expression: "覗き込んで", text: "おにいちゃん、何書くの？\nひなのことも書いてくれるー？　えへへ。" });
 
 S.push({ label: "zone_8_choice" });
 
 S.push({ choices: [
-  { text: "上る", goto: "node_8A", flag: "climbed_stairs" },
-  { text: "下る", goto: "node_8B", flag: "descended_stairs" },
-  { text: "手すりから身を投げる", goto: "GEN_8" }
+  { text: "書く覚悟を決める", goto: "node_8A", flag: "decided_to_write" },
+  { text: "まだ蒸留が足りないと感じる", goto: "node_8B" },
+  { text: "書けない──自分の言葉に押しつぶされる", goto: "GEN_8" }
 ]});
 
 // node_8A
 S.push({ label: "node_8A" });
 
-S.push({ speaker: "narrator", expression: "", text: "上る。上る。上る。\n50段。100段。200段。\n息が切れない。夢だから体力は無限だ。" });
-
-S.push({ speaker: "narrator", expression: "", text: "上った先に、光が見えた。\n白い光。眩しい。でも温かくはない。\n冷たい光。概念の光。" });
+S.push({ speaker: "waddy", expression: "決意して", text: "起きたら書く。\n二百円のコーヒー牛乳のこと。\n金子屋のもつ煮込みのこと。\n各駅停車の車窓のこと。\n……頭痛のことも、ちゃんと書く。" });
 
 S.push({ goto: "zone_9" });
 
 // node_8B
 S.push({ label: "node_8B" });
 
-S.push({ speaker: "narrator", expression: "", text: "下る。下る。下る。\n暗くなっていく。だが不思議と恐怖はない。\n暗闇は敵ではない。暗闇は、ただ光がないだけだ。" });
-
-S.push({ speaker: "narrator", expression: "", text: "底に辿り着いた。小さな扉がある。\n扉の向こうから、かすかに声が聞こえる。" });
+S.push({ speaker: "narrator", expression: "", text: "まだ書けない。まだ蒸留が終わっていない。\nあと少しだけ、夢の中で処理する時間が必要だ。\n書くのは──起きてから。" });
 
 S.push({ goto: "zone_9" });
 
-// GEN-8: シームレスにサブシナリオへ
+// GEN-8: 自由落下の定義
 S.push({ label: "GEN_8" });
 
-S.push({ speaker: "narrator", expression: "", text: "手すりを越えた。落ちる。落ち続ける。\n壁が遠ざかっていく。階段が小さくなっていく。\n底がない。永遠に落ち続ける。" });
+S.push({ speaker: "narrator", expression: "", text: "書こうとした。でも書けない。\n言葉が足りない。言葉が多すぎる。\n書いた文字が自分を見つめ返している。\n自分の書いた言葉の重さに、押しつぶされていく。\n落ちる。自分の文章の底に向かって。" });
 
 S.push({ loadScenario: "2026-03-21_自由落下の定義" });
 
 // ═══════════════════════════════════════════
-// ⑨ みとらの間
+// ⑨ 帰り道 ── 約束と代償
 // ═══════════════════════════════════════════
 S.push({ label: "zone_9" });
 
-S.push({ speaker: "narrator", expression: "", text: "階段の先に、何もない空間があった。\n白い。何もない。だが──声がある。" });
+S.push({ speaker: "narrator", expression: "", text: "記憶が最後の場面に近づいている。\n昨日の帰り道。タクシーか電車か。\nたぶん電車だった。各駅停車で。\n……切符はあったか。ICカードだったか。覚えていない。" });
 
-S.push({ speaker: "mitra", expression: "", text: "ここまで来たのね、観測者。\nあなたの夢は、想像以上に深い。" });
+S.push({ speaker: "waddy", expression: "帰り道を思い出して", text: "帰り道のことは、いつもぼんやりしている。\n行きは鮮明なのに、帰りはいつもぼやける。\n酔いが深くなるからだけじゃない。\n……帰りたくなかったからだ。\nもう少しだけ、あの場所にいたかった。" });
 
-S.push({ speaker: "mitra", expression: "", text: "各駅停車の記憶。コーヒー牛乳の瓶。鏡の中の自分。\n全部、あなたの無意識が作った駅よ。\n一つずつ停まってきた。各駅停車のように。" });
+S.push({ speaker: "narrator", expression: "", text: "「また飲もう」と誰かが言った。\nそれは約束か。社交辞令か。\nどちらでもいい。その言葉が、帰り道を歩ける理由になった。\n「また」がある。だから今日は帰れる。" });
 
-S.push({ speaker: "waddy", expression: "周りを見回して", text: "……お前は夢の管理者か？" });
+S.push({ speaker: "waddy", expression: "静かに", text: "「また」があるから帰れる。\n「また」がなかったら、帰りたくなくなる。\n……二日酔いの朝に「また」を思い出せるのは、\nたぶん、昨日がちゃんと楽しかった証拠だ。" });
 
-S.push({ speaker: "mitra", expression: "", text: "管理者ではないわ。観測者を観測する者。\nメタ観測者。\n……最後の選択よ。" });
+S.push({ ifNot: "took_hinata", goto: "zone_9_choice" });
+
+S.push({ speaker: "hinata", expression: "笑顔で", text: "「また」って、いい言葉だよね。\nひなも、おにいちゃんに「また」って言いたいな。\n……また明日ね、おにいちゃん。" });
+
+S.push({ label: "zone_9_choice" });
 
 S.push({ choices: [
-  { text: "みとらの声に従う", goto: "node_9A", flag: "heard_mitra" },
-  { text: "みとらに逆らう", goto: "node_9B", flag: "resisted_mitra" },
-  { text: "みとらに全てを委ねる", goto: "GEN_9" }
+  { text: "「また」を握りしめて先へ", goto: "node_9A", flag: "held_promise" },
+  { text: "帰り道をもう一度歩いてみる", goto: "node_9B" },
+  { text: "帰らない──ここに留まる", goto: "GEN_9" }
 ]});
 
 // node_9A
 S.push({ label: "node_9A" });
 
-S.push({ speaker: "mitra", expression: "静かに", text: "正しい選択よ。いえ──「正しい」なんてものは存在しないわ。\nでも、声を聞くことができる人は、\n目覚める資格がある。" });
-
-S.push({ speaker: "mitra", expression: "", text: "さあ──最後の扉を開けなさい。" });
+S.push({ speaker: "waddy", expression: "少し笑って", text: "また飲もう。また行こう。また笑おう。\n「また」は約束じゃない。でも嘘でもない。\n……願いに近い。次も楽しくあってくれ、という。" });
 
 S.push({ goto: "zone_10" });
 
 // node_9B
 S.push({ label: "node_9B" });
 
-S.push({ speaker: "waddy", expression: "はっきりと", text: "俺は俺の判断で進む。お前の声には従わない。" });
-
-S.push({ speaker: "mitra", expression: "微かに笑って", text: "そう。それもまた、一つの回答。\n自分の意志で動く者は、自分の意志で目覚めることもできるわ。\n……行きなさい。" });
+S.push({ speaker: "narrator", expression: "", text: "帰り道をもう一度歩く。夢の中だから、\n同じ道を何度でも歩ける。\n……でも二度目は風景が薄くなっている。\n記憶は再生のたびに劣化する。\n一度で十分だ。帰ろう。" });
 
 S.push({ goto: "zone_10" });
 
-// GEN-9: シームレスにサブシナリオへ
+// GEN-9: 乗車拒否
 S.push({ label: "GEN_9" });
 
-S.push({ speaker: "narrator", expression: "", text: "手に持っていた切符を見た。行き先は書いていない。\nワディーはその切符を──両手で裂いた。" });
+S.push({ speaker: "narrator", expression: "", text: "帰りたくない。ここにいたい。\n昨日のあの瞬間に留まりたい。\n帰りの切符を──破った。\n電車は来ない。もう帰れない。" });
 
 S.push({ loadScenario: "2026-03-21_乗車拒否" });
 
 // ═══════════════════════════════════════════
-// ⑩ 特異点 ── エンディング分岐
+// ⑩ 覚醒の淵 ── 起きるか、眠るか
 // ═══════════════════════════════════════════
 S.push({ label: "zone_10" });
 
-S.push({ speaker: "narrator", expression: "", text: "白い空間の奥に、最後の扉がある。\n扉の向こうから──光が差している。\n目覚まし時計の音が、遠くから聞こえる。" });
+S.push({ speaker: "narrator", expression: "", text: "蒸留が終わりに近づいている。\n記憶は透き通った。頭痛はまだある。\nスマートウォッチが振動している。\n血中酸素飽和度98%。体は正常。朝が来ている。" });
 
-S.push({ speaker: "narrator", expression: "", text: "……いや、それはスマートウォッチの振動かもしれない。\n血中酸素飽和度──98%。あの数字が、また点滅している。" });
+S.push({ speaker: "narrator", expression: "", text: "目の奥に、光が差している。\nカーテンの隙間からの朝日。\n夢と現実の境界線。その境界線の上に、今いる。" });
 
 // ひなたの台詞（フラグ依存）
 S.push({ if: "took_hinata", goto: "zone_10_hinata" });
-S.push({ goto: "zone_10_mitra_check" });
-
-S.push({ label: "zone_10_hinata" });
-S.push({ speaker: "hinata", expression: "嬉しそうに", text: "おにいちゃん、あの光──もしかして朝の光じゃない？\n起きられるかもしれないよ！" });
-
-S.push({ label: "zone_10_mitra_check" });
-// みとらの台詞 (heard_mitra時)
-S.push({ if: "heard_mitra", goto: "zone_10_mitra_line" });
 S.push({ goto: "zone_10_final_choice" });
 
-S.push({ label: "zone_10_mitra_line" });
-S.push({ speaker: "mitra", expression: "", text: "最後の選択よ。目覚めるか、留まるか。\nあなたの通ってきた道が、答えを教えてくれるわ。" });
+S.push({ label: "zone_10_hinata" });
+S.push({ speaker: "hinata", expression: "手を差し伸べて", text: "おにいちゃん、もう朝だよ。\n昨日のこと、全部ちゃんと覚えてるでしょ？\n頭痛いのは知ってるけど──起きよ？\nご飯食べて、水飲んで、それから日記書こ？" });
 
 // 最終選択
 S.push({ label: "zone_10_final_choice" });
 
 S.push({ choices: [
-  { text: "扉を開けて目覚める", goto: "ending_router" },
-  { text: "夢に留まる", goto: "GEN_10" }
+  { text: "目を開ける", goto: "ending_router" },
+  { text: "もう少しだけ……", goto: "GEN_10" }
 ]});
 
 // ═══════════════════════════════════════════
@@ -492,118 +502,86 @@ S.push({ choices: [
 // ═══════════════════════════════════════════
 S.push({ label: "ending_router" });
 
-// KEN-A: took_hinata + found_bottle + heard_mitra
+// KEN-A: took_hinata + savored_smell + promised_diary → 正常覚醒
 S.push({ if: "took_hinata", goto: "check_KEN_A_2" });
 S.push({ goto: "check_KEN_B" });
 
 S.push({ label: "check_KEN_A_2" });
-S.push({ if: "found_bottle", goto: "check_KEN_A_3" });
-S.push({ goto: "check_KEN_D" });
+S.push({ if: "promised_diary", goto: "KEN_A" });
+S.push({ if: "savored_smell", goto: "KEN_D" });
+S.push({ goto: "KEN_C" });
 
-S.push({ label: "check_KEN_A_3" });
-S.push({ if: "heard_mitra", goto: "KEN_A" });
-S.push({ goto: "check_KEN_D" });
-
-// KEN-B: alone + mirror_self + climbed_stairs
+// KEN-B: lingered + organized_diary → 明晰夢
 S.push({ label: "check_KEN_B" });
-S.push({ if: "alone", goto: "check_KEN_B_2" });
-S.push({ goto: "check_KEN_E" });
+S.push({ if: "organized_diary", goto: "check_KEN_B_2" });
+S.push({ if: "decided_to_write", goto: "KEN_E" });
+S.push({ goto: "KEN_C" });
 
 S.push({ label: "check_KEN_B_2" });
-S.push({ if: "mirror_self", goto: "check_KEN_B_3" });
-S.push({ goto: "check_KEN_E" });
-
-S.push({ label: "check_KEN_B_3" });
-S.push({ if: "climbed_stairs", goto: "KEN_B" });
-S.push({ goto: "KEN_C" }); // fallback
-
-// KEN-D: took_hinata + entered_bar + resisted_mitra
-S.push({ label: "check_KEN_D" });
-S.push({ if: "entered_bar", goto: "check_KEN_D_2" });
-S.push({ goto: "KEN_C" });
-
-S.push({ label: "check_KEN_D_2" });
-S.push({ if: "resisted_mitra", goto: "KEN_D" });
-S.push({ goto: "KEN_C" });
-
-// KEN-E: found_bottle + mirror_self + heard_mitra (non-hinata route)
-S.push({ label: "check_KEN_E" });
-S.push({ if: "found_bottle", goto: "check_KEN_E_2" });
-S.push({ goto: "KEN_C" });
-
-S.push({ label: "check_KEN_E_2" });
-S.push({ if: "mirror_self", goto: "check_KEN_E_3" });
-S.push({ goto: "KEN_C" });
-
-S.push({ label: "check_KEN_E_3" });
-S.push({ if: "heard_mitra", goto: "KEN_E" });
+S.push({ if: "held_promise", goto: "KEN_B" });
 S.push({ goto: "KEN_C" });
 
 // ═══════════════════════════════════════════
 // 顕界エンディング
 // ═══════════════════════════════════════════
 
-// KEN-A: 正常覚醒（ひなたの導きEND）
+// KEN-A: 正常覚醒（ひなたの声と日記の約束）
 S.push({ label: "KEN_A" });
 
-S.push({ speaker: "hinata", expression: "手を振って", text: "じゃあね、おにいちゃん。\n目が覚めたら、ちゃんとごはん食べてね！\nまた夢の中で会おうね！　えへへ。" });
+S.push({ speaker: "narrator", expression: "", text: "目を開けた。\n天井が見える。見慣れた天井。\n頭が痛い。でも──昨日の記憶は透き通っている。" });
 
-S.push({ speaker: "narrator", expression: "", text: "意識が浮上する。天井が見える。見慣れた天井。\nスマートウォッチが振動している。血中酸素飽和度98%。\n頭痛はまだある。だが──昨日よりは軽い。\nコーヒー牛乳が飲みたくなった。" });
+S.push({ speaker: "hinata", expression: "笑顔で", text: "おはよう、おにいちゃん！\n昨日、楽しかったんでしょ？　えへへ。\n頭痛くても、ちゃんと起きれたね。\nさ、お水持ってくるからね！" });
 
-S.push({ end: true, title: "正常覚醒", subtitle: "ひなたの声に導かれて、夢の出口を見つけた。" });
+S.push({ speaker: "waddy", expression: "布団の中で笑って", text: "……ああ。起きた。\n頭は痛い。胃もまだ重い。\nでも──昨日は悪くなかった。\n書こう。全部書こう。二百円のことから。" });
 
-// KEN-B: 明晰夢
+S.push({ speaker: "narrator", expression: "", text: "スマートウォッチの表示。血中酸素飽和度98%。\n蒸留は完了した。\n原酒は記憶に変わった。あとは瓶に詰めるだけ。\n──日記を開こう。" });
+
+S.push({ end: true, title: "正常覚醒", subtitle: "頭は痛い。でも昨日は悪くなかった。書こう、全部。" });
+
+// KEN-B: 明晰夢（自力で処理を終えた）
 S.push({ label: "KEN_B" });
 
-S.push({ speaker: "waddy", expression: "確信を持って", text: "──これは夢だ。俺は知っている。\n鏡の中の自分に「誰だ」と聞いた時から気づいていた。\n階段を上ったのも、自分で選んだ。" });
+S.push({ speaker: "waddy", expression: "静かに目を開けて", text: "……わかった。これは夢だ。\n蒸留が終わった音がした。\n記憶は整理された。頭痛は代償。\n「また」は約束じゃなくて願い。\n全部わかった。だから起きる。" });
 
-S.push({ speaker: "waddy", expression: "静かに", text: "夢の中でも、俺は各駅停車だ。\n一つずつ停まって、一つずつ確認する。\n全部確認した。もういい。起きる。" });
+S.push({ speaker: "narrator", expression: "", text: "意識がクリアになる。\n夢の輪郭が鮮明に見え始める。\nそして──解ける。朝日の中に。" });
 
-S.push({ speaker: "narrator", expression: "", text: "意識がクリアになる。\n夢のエッジが鮮明に見え始めた。\nそして目覚めた。自力で。" });
-
-S.push({ end: true, title: "明晰夢", subtitle: "自分の力で夢を制御し、自分の意志で目覚めた。" });
+S.push({ end: true, title: "明晰夢", subtitle: "蒸留完了。記憶は透き通った。起きよう。" });
 
 // KEN-C: 目覚まし時計（フォールバックEND）
 S.push({ label: "KEN_C" });
 
-S.push({ speaker: "narrator", expression: "", text: "遠くから鳴り響く電子音。\n目覚まし時計──いや、スマートウォッチのアラーム。\n夢の壁を突き破って、現実の音が侵入してきた。" });
+S.push({ speaker: "narrator", expression: "", text: "アラームが鳴った。\n夢を突き破って、現実の音が侵入してきた。\n蒸留は──中途半端なまま。\nでも、起きないといけない。" });
 
-S.push({ speaker: "waddy", expression: "目を開けて", text: "……あ。アラーム。何時だ。もう朝か。" });
+S.push({ speaker: "waddy", expression: "アラームを止めて", text: "……何を見てたんだ。\n昨日のこと……だったような。\n思い出せる分だけ、書こう。" });
 
-S.push({ speaker: "mitra", expression: "どこからともなく", text: "外部からの干渉。夢の管理者としては不本意だけれど──\nあなたは呼ばれている。現実に。" });
+S.push({ end: true, title: "目覚まし時計", subtitle: "蒸留は途中で終わった。でも書けるだけ書こう。" });
 
-S.push({ speaker: "narrator", expression: "", text: "唐突に意識が浮上し、見慣れた天井が目に入る。\n夢の残滓が急速に薄れていく。\n……何を見ていたのか、もう思い出せない。" });
-
-S.push({ end: true, title: "目覚まし時計", subtitle: "現実からの呼び声が、夢の迷宮を打ち破った。" });
-
-// KEN-D: 半覚醒
+// KEN-D: 半覚醒（匂いだけが残った）
 S.push({ label: "KEN_D" });
 
-S.push({ speaker: "narrator", expression: "", text: "目覚めたのか、夢の続きなのか、判然としない。\n天井は見える。だがまだ琥珀色に揺れている気がする。\n二日酔いの残滓なのか、夢の残滓なのか。" });
+S.push({ speaker: "narrator", expression: "", text: "起きたのか、まだ夢の中なのか。\n判然としない。\nでも──もつ煮込みの匂いだけが、はっきりと残っている。\n鼻の奥に。昨日の金子屋の匂い。" });
 
-S.push({ speaker: "waddy", expression: "天井を見つめて", text: "……起きた、のか？　まだ寝ている、のか？\n……どっちでもいい。腹が減った。" });
+S.push({ speaker: "waddy", expression: "鼻をくんくんさせて", text: "……匂いだけ持って帰ってきた。\nまあいい。匂いは記憶のいちばん深い層だ。\nここから全部思い出せる。\n……腹が減った。もつ煮込み食いたい。朝から。" });
 
-S.push({ speaker: "narrator", expression: "", text: "琥珀色の残像が視界の端で揺れている。\n酒場の記憶か、二日酔いの幻覚か。\n区別がつかないまま、体を起こした。" });
+S.push({ end: true, title: "半覚醒", subtitle: "匂いだけが残った。でも、それで十分。" });
 
-S.push({ end: true, title: "半覚醒", subtitle: "夢と現実の境界線。どちらにいるのかは、まだわからない。" });
-
-// KEN-E: 各駅停車の残響
+// KEN-E: 各駅停車の残響（書く覚悟だけ持ち帰った）
 S.push({ label: "KEN_E" });
 
-S.push({ speaker: "narrator", expression: "", text: "目覚めた瞬間、手に何かを握っていた。\n──何もない。だがコーヒー牛乳の瓶の感触が残っている。\n夢から持ち帰った記憶。鏡の中で見た自分の顔。" });
+S.push({ speaker: "narrator", expression: "", text: "目覚めた瞬間、指がキーボードを探していた。\n枕の横にあるはずのキーボード。\n──まだ布団の中だった。" });
 
-S.push({ speaker: "waddy", expression: "手を見つめて", text: "……あの夢は何だったんだ。\nいや──何だったかは覚えている。\n昨日の秋葉原が、全部夢になっていた。\n各駅停車の記憶が歪んで、再構成されて、戻ってきた。" });
+S.push({ speaker: "waddy", expression: "起き上がって", text: "書きたい。今すぐ書きたい。\n昨日の全部が、言葉になりたがっている。\n各駅停車の記憶。二百円の味。金子屋の匂い。\n頭痛は──インクだ。これで書ける。" });
 
-S.push({ speaker: "waddy", expression: "少し笑って", text: "……悪くない二日酔いだったのかもしれない。" });
+S.push({ speaker: "narrator", expression: "", text: "蒸留は終わった。樽に詰める時間だ。\nパソコンを開いて、最初の一行を打つ。\n「旅情はローレンツ収縮により──」\n……いや、今日はもっとシンプルに始めよう。\n「昨日、秋葉原で飲んだ。」" });
 
-S.push({ end: true, title: "各駅停車の残響", subtitle: "昨日の記録が、夢の中で蒸留された。二度目の各駅停車。" });
+S.push({ end: true, title: "各駅停車の残響", subtitle: "昨日の全部が、言葉になりたがっている。" });
 
 // ═══════════════════════════════════════════
 // GEN-10: 永遠の微睡み
 // ═══════════════════════════════════════════
 S.push({ label: "GEN_10" });
 
-S.push({ speaker: "narrator", expression: "", text: "光から目を背けた。\n目覚まし時計の音を無視した。\n二日酔いの体を引きずって、布団に潜った──夢の中の布団に。" });
+S.push({ speaker: "narrator", expression: "", text: "もう少しだけ。もう少しだけ。\n蒸留が心地いい。夢の中で昨日を反芻するのが心地いい。\n起きたら──この心地よさは消えてしまう。\n頭痛だけが残る。" });
 
 S.push({ loadScenario: "2026-03-21_永遠の微睡み" });
 

@@ -504,7 +504,7 @@ class GalgeRuntimeApp {
 
   findActiveBgmCue(index) {
     if (!this.scenario?.steps?.length) {
-      return null;
+      return this.scenario?.defaultBgm || null;
     }
 
     let activeCue = null;
@@ -515,7 +515,7 @@ class GalgeRuntimeApp {
         activeCue = cue.stop ? { stop: true } : cue;
       }
     }
-    return activeCue;
+    return activeCue || this.scenario?.defaultBgm || null;
   }
 
   syncBgmForIndex(index) {

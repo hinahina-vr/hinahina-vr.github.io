@@ -376,6 +376,12 @@
     if (!Array.isArray(raw.scenario)) {
       warnings.push(`scenario "${scenarioName}" に scenario 配列がありません。`);
     }
+    const defaultBgmRaw = raw.defaultBgm ?? {
+      src: "./assets/bgm/wasurenagusa.mp3",
+      volume: 0.1,
+      loop: true
+    };
+    const defaultBgm = normalizeBgmCue(defaultBgmRaw, -1, warnings);
     const normalized = {
       scenarioName,
       id,
@@ -387,6 +393,7 @@
       date: asString(raw.date),
       chars,
       steps: scenario,
+      defaultBgm,
       warnings
     };
     return normalized;
@@ -33049,7 +33056,7 @@ void main() {
     }
     findActiveBgmCue(index) {
       if (!this.scenario?.steps?.length) {
-        return null;
+        return this.scenario?.defaultBgm || null;
       }
       let activeCue = null;
       const safeIndex = Math.min(index, this.scenario.steps.length - 1);
@@ -33059,7 +33066,7 @@ void main() {
           activeCue = cue.stop ? { stop: true } : cue;
         }
       }
-      return activeCue;
+      return activeCue || this.scenario?.defaultBgm || null;
     }
     syncBgmForIndex(index) {
       const cue = this.findActiveBgmCue(index);

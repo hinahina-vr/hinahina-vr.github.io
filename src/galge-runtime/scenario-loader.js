@@ -286,6 +286,13 @@ export async function loadScenarioDefinition() {
     warnings.push(`scenario "${scenarioName}" に scenario 配列がありません。`);
   }
 
+  const defaultBgmRaw = raw.defaultBgm ?? {
+    src: "./assets/bgm/wasurenagusa.mp3",
+    volume: 0.10,
+    loop: true,
+  };
+  const defaultBgm = normalizeBgmCue(defaultBgmRaw, -1, warnings);
+
   const normalized = {
     scenarioName,
     id,
@@ -297,6 +304,7 @@ export async function loadScenarioDefinition() {
     date: asString(raw.date),
     chars,
     steps: scenario,
+    defaultBgm,
     warnings,
   };
 

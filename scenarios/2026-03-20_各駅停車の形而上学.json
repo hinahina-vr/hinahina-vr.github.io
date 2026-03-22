@@ -22,26 +22,36 @@
 
     { "choices": [
       { "text": "各駅停車に乗る", "goto": "route_local" },
-      { "text": "中央線快速に乗り換える", "goto": "route_rapid" }
+      { "text": "中央線快速に乗り換える", "goto": "route_rapid_furi" }
+    ]},
+
+    { "label": "route_rapid_furi" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "快速のホームに足を踏み出しかけた。\nだがふと、振り返る。\n向こうのホームに各駅停車が滑り込んでくる。\n黄色い車体が、夕日を反射していた。" },
+
+    { "choices": [
+      { "text": "……やっぱり、各駅停車にしよう", "goto": "route_local" },
+      { "text": "いや、快速でいい", "goto": "route_rapid" }
     ]},
 
     { "label": "route_rapid" },
     { "bg": "abyss" },
 
-    { "speaker": "mitra", "expression": "",
+    { "speaker": "narrator", "expression": "",
       "text": "これは、選ばれなかった世界線の記録。\n各駅停車に乗らなかった瞬間、この物語は幻界に落ちた。" },
 
-    { "speaker": "mitra", "expression": "",
+    { "speaker": "narrator", "expression": "",
       "text": "ワディーが急行を選んだ日——\n御茶ノ水で乗り換え、12分早く着いた。\n向かいの座席のバイオリンケースは、視界に入らなかった。" },
 
     { "speaker": "narrator", "expression": "",
       "text": "秋葉原。電気街口。\nミルクスタンドの前を、通り過ぎた。\n立ち止まる理由がなかった。" },
 
-    { "speaker": "mitra", "expression": "静かに",
+    { "speaker": "narrator", "expression": "",
       "text": "急行は速い。だが——飛ばした駅は、二度と戻らない。\nことみの声は届かなかった。\nでじこの庭を通らなかった。\n二百円の証明書は、発行されなかった。" },
 
-    { "speaker": "mitra", "expression": "",
-      "text": "選択は、完了している。\n顕界に、戻りなさい。" },
+    { "speaker": "narrator", "expression": "",
+      "text": "選択は、完了している。" },
 
     { "end": true, "title": "幻界の記録 — 急行の世界線", "subtitle": "飛ばされた駅に、声は届かない。" },
 
@@ -138,23 +148,30 @@
 
     { "choices": [
       { "text": "二百円、払ってやるか", "goto": "route_milkstand" },
-      { "text": "先を急ぐ", "goto": "route_pass" }
+      { "text": "先を急ぐ", "goto": "route_pass_furi" }
+    ]},
+
+    { "label": "route_pass_furi" },
+
+    { "speaker": "narrator", "expression": "",
+      "text": "足が動き出した。通り過ぎようとした。\nでじこの声が背中に当たった。\n「入場料にょ！」と。\n足が、一瞬だけ止まった。" },
+
+    { "choices": [
+      { "text": "……やっぱり二百円、払うか", "goto": "route_milkstand" },
+      { "text": "振り返らない", "goto": "route_pass" }
     ]},
 
     { "label": "route_pass" },
     { "bg": "void" },
 
-    { "speaker": "mitra", "expression": "",
+    { "speaker": "narrator", "expression": "",
       "text": "ミルクスタンドを、通り過ぎた。\n各駅停車に乗ったのに——駅を飛ばした。" },
 
     { "speaker": "narrator", "expression": "",
-      "text": "でじこの声が聞こえた気がした。\n「入場料にょ！」と。\nだが足は止まらなかった。" },
-
-    { "speaker": "mitra", "expression": "",
       "text": "二百円の停車駅。\n名前を呼ばなかった場所は、記憶に残らない。\nコーヒー牛乳の味も、瓶の底の残像も、\nこの世界線には存在しない。" },
 
-    { "speaker": "mitra", "expression": "静かに",
-      "text": "各駅停車は、すべての駅に停まることで完成する。\nあなたは——飛ばした。\n選択は、完了している。\n顕界に、戻りなさい。" },
+    { "speaker": "narrator", "expression": "",
+      "text": "各駅停車は、すべての駅に停まることで完成する。\n飛ばした。選択は、完了している。" },
 
     { "end": true, "title": "幻界の記録 — 通過駅", "subtitle": "通り過ぎた駅に、証明書はない。" },
 
@@ -546,8 +563,8 @@
     { "speaker": "narrator", "expression": "",
       "text": "そして——最後に。\n声のない声が、響いた。" },
 
-    { "speaker": "mitra", "expression": "どこからともなく",
-      "text": "停まることは遅れることではない。\n停まることは聴くことだ。\n各駅停車は、すべての駅で停まることで完成する。\n一つでも飛ばせば、それは各駅停車ではなくなる。\nあなたはまだ、どの駅も飛ばしていない。" },
+    { "speaker": "narrator", "expression": "",
+      "text": "声のない声が、響いた。\n停まることは遅れることではない。\n停まることは聴くことだ。\n各駅停車は、すべての駅で停まることで完成する。\nどの駅も、飛ばさなかった。" },
 
     { "speaker": "narrator", "expression": "",
       "text": "電車が揺れる。窓の外を、夜の東京が流れていく。\n各駅停車。一つずつ停まる乗り物。\n速くはないが、取りこぼさない。" },
@@ -605,8 +622,8 @@
     { "speaker": "narrator", "expression": "",
       "text": "二皿目の餃子が空になった。\n夜が更けていく。\n大阪王将の窓の外を、最終電車が通り過ぎていく。" },
 
-    { "speaker": "mitra", "expression": "静かに",
-      "text": "終着駅の先にも、駅はある。\n時刻表に載っていない駅。名前のない駅。\nそこに停まるかどうかは、乗客が決める。\nあなたはまだ、降りていない。" },
+    { "speaker": "narrator", "expression": "",
+      "text": "終着駅の先にも、駅はある。\n時刻表に載っていない駅。名前のない駅。\nそこに停まるかどうかは、乗客が決める。\nまだ、降りていない。" },
 
     { "end": true, "title": "もう一皿", "subtitle": "もう一皿。時刻表にない駅。" }
   ]
