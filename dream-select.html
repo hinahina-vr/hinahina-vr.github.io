@@ -15,15 +15,25 @@
         font-family: "Zen Maru Gothic", sans-serif;
         color: #ece7ff;
         background:
-          radial-gradient(ellipse at 30% 20%, rgba(60,40,120,0.15), transparent 50%),
-          radial-gradient(ellipse at 70% 80%, rgba(40,20,80,0.12), transparent 50%),
-          linear-gradient(180deg, #050310 0%, #030208 100%);
+          radial-gradient(circle at top, rgba(88, 65, 160, 0.32), transparent 30%),
+          linear-gradient(180deg, #110818 0%, #050309 52%, #110818 100%);
       }
       body {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 24px 16px 48px;
+        position: relative;
+      }
+
+      /* ── Particle Canvas ── */
+      #particle-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
       }
 
       /* ── Header ── */
@@ -31,6 +41,8 @@
         text-align: center;
         margin-bottom: clamp(24px, 4vh, 48px);
         animation: fade-in 0.8s ease both;
+        position: relative;
+        z-index: 1;
       }
       .date-label {
         font-size: clamp(11px, 1vw, 14px);
@@ -55,9 +67,10 @@
       .timeline {
         position: relative;
         width: min(720px, 100%);
+        z-index: 1;
       }
 
-      /* ── Main trunk line (顕界) ── */
+      /* ── Main trunk line ── */
       .trunk-line {
         position: absolute;
         left: 28px;
@@ -65,12 +78,13 @@
         bottom: 0;
         width: 2px;
         background: linear-gradient(180deg,
-          rgba(160,120,220,0.6) 0%,
-          rgba(120,80,180,0.4) 50%,
+          rgba(200,170,100,0.5) 0%,
+          rgba(160,130,80,0.35) 30%,
+          rgba(100,80,160,0.3) 60%,
           rgba(80,50,140,0.2) 100%);
       }
 
-      /* ── Location Node (時系列ポイント) ── */
+      /* ── Location Node ── */
       .location-group {
         position: relative;
         margin-bottom: 0;
@@ -87,20 +101,22 @@
         z-index: 2;
       }
 
+      /* ── Node Dots ── */
       .node-dot {
         width: 16px;
         height: 16px;
         min-width: 16px;
         border-radius: 50%;
-        background: radial-gradient(circle, #c0a0e0, #6040a0);
-        border: 2px solid rgba(200,160,255,0.5);
-        box-shadow: 0 0 12px rgba(160,100,220,0.4), 0 0 24px rgba(140,80,200,0.15);
+        background: radial-gradient(circle, #8070a0, #403060);
+        border: 2px solid rgba(120,100,160,0.4);
+        box-shadow: 0 0 8px rgba(100,70,140,0.3);
         position: relative;
         left: 21px;
       }
       .node-dot.kenkai {
-        background: radial-gradient(circle, #e0c0ff, #8060c0);
-        box-shadow: 0 0 16px rgba(200,150,255,0.5), 0 0 32px rgba(160,100,220,0.2);
+        background: radial-gradient(circle, #f0d888, #c09030);
+        border: 2px solid rgba(240,200,100,0.6);
+        box-shadow: 0 0 16px rgba(220,170,60,0.5), 0 0 32px rgba(200,150,40,0.2);
         width: 20px;
         height: 20px;
         min-width: 20px;
@@ -156,32 +172,37 @@
         height: 2px;
       }
 
+      /* ── Kenkai (顕界) = Warm Gold ── */
       .scenario-card.kenkai {
-        background: linear-gradient(135deg, rgba(40,20,80,0.5), rgba(20,10,40,0.6));
-        border: 1px solid rgba(180,120,255,0.3);
+        background: linear-gradient(135deg, rgba(60,45,15,0.5), rgba(35,25,8,0.6));
+        border: 1px solid rgba(220,180,80,0.3);
       }
       .scenario-card.kenkai::before {
-        background: linear-gradient(90deg, rgba(160,120,220,0.5), rgba(180,140,240,0.3));
+        background: linear-gradient(90deg, rgba(200,160,60,0.5), rgba(220,180,80,0.3));
       }
       .scenario-card.kenkai:hover {
-        background: linear-gradient(135deg, rgba(50,25,100,0.6), rgba(25,12,50,0.7));
-        border-color: rgba(220,170,255,0.5);
+        background: linear-gradient(135deg, rgba(75,55,18,0.6), rgba(45,32,10,0.7));
+        border-color: rgba(255,210,100,0.5);
         transform: translateX(4px);
-        box-shadow: 0 4px 24px rgba(140,80,220,0.2);
+        box-shadow: 0 4px 24px rgba(200,150,40,0.2);
       }
 
+      /* ── Genkai (幻界) = Cherenkov Blue ── */
       .scenario-card.genkai {
-        background: linear-gradient(135deg, rgba(15,10,25,0.6), rgba(8,5,15,0.7));
-        border: 1px solid rgba(70,50,100,0.25);
+        background: linear-gradient(135deg, rgba(8,15,35,0.7), rgba(5,10,25,0.8));
+        border: 1px solid rgba(40,100,180,0.25);
+        border-left: 3px solid rgba(60,140,220,0.4);
+        box-shadow: 0 0 12px rgba(30,80,160,0.1);
       }
       .scenario-card.genkai::before {
-        background: linear-gradient(90deg, rgba(80,60,120,0.3), rgba(60,40,90,0.15));
+        background: linear-gradient(90deg, rgba(40,100,180,0.3), rgba(30,80,150,0.15));
       }
       .scenario-card.genkai:hover {
-        background: linear-gradient(135deg, rgba(20,15,35,0.7), rgba(10,7,20,0.8));
-        border-color: rgba(100,70,140,0.4);
+        background: linear-gradient(135deg, rgba(12,20,50,0.8), rgba(8,14,35,0.85));
+        border-color: rgba(60,140,220,0.5);
+        border-left-color: rgba(80,170,255,0.6);
         transform: translateX(4px);
-        box-shadow: 0 4px 24px rgba(80,40,140,0.15);
+        box-shadow: 0 4px 24px rgba(30,80,180,0.2), 0 0 16px rgba(40,120,220,0.15);
       }
 
       .card-icon {
@@ -198,8 +219,11 @@
         letter-spacing: 0.1em;
         margin-bottom: 2px;
       }
-      .kenkai .card-title { color: #c0a0e0; }
-      .genkai .card-title { color: #807090; }
+      .kenkai .card-title { color: #e8c868; }
+      .genkai .card-title {
+        color: #80b8e0;
+        text-shadow: 0 0 8px rgba(60,140,220,0.3);
+      }
 
       .card-desc {
         font-size: clamp(10px, 0.9vw, 12px);
@@ -209,8 +233,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .kenkai .card-desc { color: rgba(190,170,220,0.5); }
-      .genkai .card-desc { color: rgba(120,100,150,0.45); }
+      .kenkai .card-desc { color: rgba(220,190,120,0.5); }
+      .genkai .card-desc { color: rgba(100,150,200,0.5); }
 
       .card-tag {
         font-size: 9px;
@@ -220,17 +244,41 @@
         white-space: nowrap;
       }
       .kenkai .card-tag {
-        background: rgba(160,100,220,0.15);
-        color: rgba(200,160,240,0.6);
-        border: 1px solid rgba(160,100,220,0.2);
+        background: rgba(200,160,40,0.15);
+        color: rgba(230,190,80,0.7);
+        border: 1px solid rgba(200,160,40,0.25);
       }
       .genkai .card-tag {
-        background: rgba(60,40,90,0.15);
-        color: rgba(110,90,140,0.5);
-        border: 1px solid rgba(60,40,90,0.15);
+        background: rgba(20,60,120,0.2);
+        color: rgba(100,180,255,0.8);
+        border: 1px solid rgba(60,140,220,0.35);
+        box-shadow: 0 0 8px rgba(40,120,220,0.3), 0 0 20px rgba(30,100,200,0.1);
+        text-shadow: 0 0 6px rgba(80,160,255,0.5);
       }
 
-      /* ── Terminal node (end of timeline) ── */
+      /* ── World-line divergence separator ── */
+      .diverge-separator {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+        padding: 4px 0;
+      }
+      .diverge-separator::before,
+      .diverge-separator::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(60,140,220,0.25), transparent);
+      }
+      .diverge-label {
+        font-size: 9px;
+        letter-spacing: 0.25em;
+        color: rgba(80,150,220,0.5);
+        white-space: nowrap;
+      }
+
+      /* ── Terminal node ── */
       .terminal-node {
         display: flex;
         align-items: center;
@@ -265,6 +313,8 @@
         font-size: clamp(12px, 1vw, 14px);
         letter-spacing: 0.15em;
         transition: color 0.2s;
+        position: relative;
+        z-index: 1;
       }
       .back-link:hover { color: rgba(255,255,255,0.6); }
 
@@ -292,15 +342,17 @@
       .location-group:nth-child(8) { animation-delay: 0.7s; }
       .location-group:nth-child(n+9) { animation-delay: 0.8s; }
 
-      /* ── Pulse on main dot ── */
-      @keyframes pulse {
-        0%, 100% { box-shadow: 0 0 12px rgba(160,100,220,0.4); }
-        50% { box-shadow: 0 0 20px rgba(180,120,240,0.6); }
+      /* ── Pulse on kenkai dot ── */
+      @keyframes pulse-kenkai {
+        0%, 100% { box-shadow: 0 0 16px rgba(220,170,60,0.5); }
+        50% { box-shadow: 0 0 28px rgba(240,190,80,0.7), 0 0 48px rgba(200,150,40,0.2); }
       }
-      .node-dot.kenkai { animation: pulse 3s ease-in-out infinite; }
+      .node-dot.kenkai { animation: pulse-kenkai 3s ease-in-out infinite; }
     </style>
   </head>
   <body>
+    <canvas id="particle-canvas"></canvas>
+
     <div class="header">
       <p class="date-label" id="date-label"></p>
       <h1>A.D.M.S.</h1>
@@ -312,6 +364,171 @@
     <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
 
     <script>
+      // ── Kongou Particle System (shared with galge-scenario) ──
+      (function () {
+        const canvas = document.getElementById("particle-canvas");
+        const ctx = canvas.getContext("2d");
+        const bgColor = { h: 270, s: 40, l: 8 };
+        const bgClearColor = "rgba(12,5,24,0.15)";
+        let streams = [], stars = [], nebulae = [], pillars = [];
+        let animId = 0;
+
+        function initCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+          streams = []; stars = []; nebulae = []; pillars = [];
+          const w = canvas.width, h = canvas.height;
+
+          for (let i = 0; i < 6; i++) {
+            streams.push({
+              y: Math.random() * h,
+              baseX: Math.random() * w,
+              amp: Math.random() * 120 + 60,
+              freq: Math.random() * 0.008 + 0.003,
+              speed: Math.random() * 1.5 + 1,
+              phase: Math.random() * Math.PI * 2,
+              width: Math.random() * 2.5 + 0.8,
+              hue: Math.floor(Math.random() * 60 + bgColor.h - 30),
+              len: Math.floor(Math.random() * 80 + 60),
+              trail: []
+            });
+          }
+
+          for (let i = 0; i < 80; i++) {
+            stars.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              vx: (Math.random() - 0.3) * 2,
+              vy: (Math.random() - 0.5) * 1,
+              size: Math.random() * 2 + 0.4,
+              brightness: Math.random(),
+              phase: Math.random() * Math.PI * 2,
+              speed: Math.random() * 2.5 + 0.8
+            });
+          }
+
+          for (let i = 0; i < 5; i++) {
+            nebulae.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              r: Math.random() * 180 + 80,
+              dx: (Math.random() - 0.5) * 0.3,
+              dy: (Math.random() - 0.5) * 0.2,
+              phase: Math.random() * Math.PI * 2,
+              hue: Math.floor(Math.random() * 80 + bgColor.h - 40),
+              sat: Math.floor(Math.random() * 40 + 50)
+            });
+          }
+
+          for (let i = 0; i < 3; i++) {
+            pillars.push({
+              x: Math.random() * w,
+              width: Math.random() * 50 + 15,
+              phase: Math.random() * Math.PI * 2,
+              speed: Math.random() * 0.02 + 0.01,
+              hue: Math.floor(Math.random() * 40 + bgColor.h - 20),
+              drift: (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.4 : -0.4)
+            });
+          }
+        }
+
+        function draw() {
+          const w = canvas.width, h = canvas.height;
+          const time = Date.now() * 0.001;
+          ctx.fillStyle = bgClearColor;
+          ctx.fillRect(0, 0, w, h);
+
+          for (const n of nebulae) {
+            n.x += n.dx; n.y += n.dy;
+            if (n.x < -200) n.x = w + 200;
+            if (n.x > w + 200) n.x = -200;
+            if (n.y < -200) n.y = h + 200;
+            if (n.y > h + 200) n.y = -200;
+            const pulse = Math.sin(time * 1.5 + n.phase) * 0.4 + 0.6;
+            const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * pulse);
+            grad.addColorStop(0, `hsla(${n.hue},${n.sat}%,40%,${0.12 * pulse})`);
+            grad.addColorStop(0.4, `hsla(${n.hue},${n.sat}%,25%,${0.06 * pulse})`);
+            grad.addColorStop(1, `hsla(${n.hue},${n.sat}%,10%,0)`);
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.fill();
+          }
+
+          for (const p of pillars) {
+            p.x += p.drift + Math.sin(time * 0.8 + p.phase) * 1.2;
+            if (p.x < -100) p.x = w + 100;
+            if (p.x > w + 100) p.x = -100;
+            const intensity = Math.sin(time * p.speed * 50 + p.phase) * 0.5 + 0.5;
+            const grad = ctx.createLinearGradient(p.x - p.width / 2, 0, p.x + p.width / 2, 0);
+            grad.addColorStop(0, `hsla(${p.hue},60%,50%,0)`);
+            grad.addColorStop(0.5, `hsla(${p.hue},60%,50%,${0.08 * intensity})`);
+            grad.addColorStop(1, `hsla(${p.hue},60%,50%,0)`);
+            ctx.fillStyle = grad;
+            ctx.fillRect(p.x - p.width, 0, p.width * 2, h);
+          }
+
+          for (const s of streams) {
+            const cx = s.baseX + Math.sin(time * 0.5 + s.phase) * 100;
+            s.trail.push({
+              x: cx + Math.sin(time * s.freq * 100 + s.phase) * s.amp,
+              y: s.y
+            });
+            s.y -= s.speed;
+            if (s.y < -20) { s.y = h + 20; s.trail.length = 0; }
+            if (s.trail.length > s.len) s.trail.shift();
+            if (s.trail.length > 2) {
+              ctx.beginPath();
+              ctx.moveTo(s.trail[0].x, s.trail[0].y);
+              for (let i = 1; i < s.trail.length; i++) {
+                const pt = s.trail[i], prev = s.trail[i - 1];
+                ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + pt.x) / 2, (prev.y + pt.y) / 2);
+              }
+              ctx.strokeStyle = `hsla(${s.hue},70%,60%,0.5)`;
+              ctx.lineWidth = s.width;
+              ctx.shadowColor = `hsla(${s.hue},80%,50%,0.6)`;
+              ctx.shadowBlur = 12;
+              ctx.stroke();
+              ctx.shadowBlur = 0;
+            }
+          }
+
+          for (const star of stars) {
+            star.x += star.vx; star.y += star.vy;
+            if (star.x < 0) star.x = w;
+            if (star.x > w) star.x = 0;
+            if (star.y < 0) star.y = h;
+            if (star.y > h) star.y = 0;
+            const flicker = Math.sin(time * star.speed * 3 + star.phase) * 0.3 + 0.7;
+            const alpha = star.brightness * flicker;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size * flicker, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180,170,220,${alpha * 0.7})`;
+            ctx.fill();
+            if (star.size > 1.5) {
+              ctx.beginPath();
+              ctx.arc(star.x, star.y, star.size * 3 * flicker, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(140,130,200,${alpha * 0.12})`;
+              ctx.fill();
+            }
+          }
+
+          animId = requestAnimationFrame(draw);
+        }
+
+        initCanvas();
+        initParticles();
+        draw();
+
+        window.addEventListener("resize", function () {
+          initCanvas();
+          initParticles();
+        });
+      })();
+
       /**
        * DREAM REGISTRY
        * location: 時系列順の場所。同じlocationのシナリオは同じノードに束ねられる。
@@ -321,7 +538,7 @@
         "2026-03-18": [
           {
             scenario: "2026-03-18_声の座標",
-            realm: "kenkai", icon: "▶",
+            realm: "kenkai", icon: "🌕",
             title: "声の座標",
             desc: "選ばれた世界線の記録",
             tag: "顕界",
@@ -331,7 +548,7 @@
         "2026-03-19": [
           {
             scenario: "2026-03-19_影の踊り子",
-            realm: "kenkai", icon: "▶",
+            realm: "kenkai", icon: "🌕",
             title: "影の踊り子",
             desc: "ワディー×ひなひな ─ 選ばれた世界線の記録",
             tag: "顕界",
@@ -349,7 +566,7 @@
         "2026-03-20": [
           {
             scenario: "2026-03-20_各駅停車の形而上学",
-            realm: "kenkai", icon: "▶",
+            realm: "kenkai", icon: "🌕",
             title: "各駅停車の形而上学",
             desc: "ことみ×でじこ ─ 選ばれた世界線の記録",
             tag: "顕界",
@@ -460,7 +677,17 @@
           const branchDiv = document.createElement("div");
           branchDiv.className = "branches";
 
+          let lastRealm = null;
           for (const d of items) {
+            // Insert divergence separator between kenkai and genkai
+            if (lastRealm === "kenkai" && d.realm === "genkai") {
+              const sep = document.createElement("div");
+              sep.className = "diverge-separator";
+              sep.innerHTML = '<span class="diverge-label">⟡ 世界線分岐</span>';
+              branchDiv.appendChild(sep);
+            }
+            lastRealm = d.realm;
+
             const card = document.createElement("a");
             card.className = `scenario-card ${d.realm}`;
             card.href = `./galge-scenario.html?scenario=${encodeURIComponent(d.scenario)}`;
