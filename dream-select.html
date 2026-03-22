@@ -9,18 +9,19 @@
       (function () {
         var KEY = "waddy-display-mode";
         var DEFAULT_MODE = "classic";
+        var FORCE_IMMERSIVE = /\/dream-select(?:\.html)?\/?$/i.test(window.location.pathname);
         var params = new URLSearchParams(window.location.search);
         var queryMode = params.get("mode");
-        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+        var mode = FORCE_IMMERSIVE ? "immersive" : (queryMode === "immersive" || queryMode === "classic" ? queryMode : null);
 
-        if (!mode) {
+        if (!mode && !FORCE_IMMERSIVE) {
           try {
             var storedMode = window.localStorage.getItem(KEY);
             mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
           } catch (error) {
             mode = DEFAULT_MODE;
           }
-        } else {
+        } else if (!FORCE_IMMERSIVE) {
           try {
             window.localStorage.setItem(KEY, mode);
           } catch (error) {
@@ -30,6 +31,7 @@
 
         document.documentElement.dataset.siteMode = mode;
         window.__waddyInitialSiteMode = mode;
+        window.__waddyDreamSelectForceImmersive = FORCE_IMMERSIVE;
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -95,6 +97,11 @@
       }
       #mode-toggle:hover {
         transform: translateY(-1px);
+      }
+      #mode-toggle[disabled] {
+        opacity: 0.8;
+        cursor: default;
+        transform: none;
       }
       body.mode-classic #mode-toggle {
         border-radius: 0;
@@ -552,8 +559,12 @@
       const SITE_MODE_STORAGE_KEY = "waddy-display-mode";
       const SITE_MODE_DEFAULT = "classic";
       const SITE_MODE_VALUES = new Set(["immersive", "classic"]);
+      const DREAM_SELECT_FORCE_IMMERSIVE = Boolean(window.__waddyDreamSelectForceImmersive);
 
       function getModeFromQuery() {
+        if (DREAM_SELECT_FORCE_IMMERSIVE) {
+          return "immersive";
+        }
         const params = new URLSearchParams(window.location.search);
         const mode = params.get("mode");
         return SITE_MODE_VALUES.has(mode) ? mode : null;
@@ -577,6 +588,9 @@
       }
 
       function resolveInitialMode() {
+        if (DREAM_SELECT_FORCE_IMMERSIVE) {
+          return "immersive";
+        }
         return getModeFromQuery() || getStoredMode() || SITE_MODE_DEFAULT;
       }
 
@@ -591,27 +605,38 @@
         if (!toggle) {
           return;
         }
+        if (DREAM_SELECT_FORCE_IMMERSIVE) {
+          toggle.textContent = "◆ IMMERSIVE ONLY";
+          toggle.disabled = true;
+          toggle.setAttribute("aria-disabled", "true");
+          return;
+        }
+        toggle.disabled = false;
+        toggle.removeAttribute("aria-disabled");
         toggle.textContent = mode === "immersive" ? "◆ IMMERSIVE" : "▦ CLASSIC";
       }
 
       function applyMode(mode, options = {}) {
-        const resolvedMode = SITE_MODE_VALUES.has(mode) ? mode : SITE_MODE_DEFAULT;
+        const resolvedMode = DREAM_SELECT_FORCE_IMMERSIVE ? "immersive" : (SITE_MODE_VALUES.has(mode) ? mode : SITE_MODE_DEFAULT);
         document.documentElement.dataset.siteMode = resolvedMode;
         document.body.classList.remove("mode-immersive", "mode-classic");
         document.body.classList.add("mode-" + resolvedMode);
         updateModeToggle(resolvedMode);
         syncScenarioLinks(resolvedMode);
 
-        if (options.persist !== false) {
+        if (!DREAM_SELECT_FORCE_IMMERSIVE && options.persist !== false) {
           setStoredMode(resolvedMode);
         }
-        if (options.updateUrl !== false) {
+        if (!DREAM_SELECT_FORCE_IMMERSIVE && options.updateUrl !== false) {
           updateModeUrl(resolvedMode);
         }
         return resolvedMode;
       }
 
       function getCurrentMode() {
+        if (DREAM_SELECT_FORCE_IMMERSIVE) {
+          return "immersive";
+        }
         return document.body.classList.contains("mode-classic") ? "classic" : "immersive";
       }
 
@@ -619,17 +644,17 @@
         const params = new URLSearchParams();
         params.set("scenario", scenario);
         params.set("mode", getCurrentMode());
-        return "./galge-scenario.html?" + params.toString();
+        return "./galge-scenario?" + params.toString();
       }
 
       function syncScenarioLinks(mode) {
-        document.querySelectorAll('a[href*="galge-scenario.html"]').forEach(function (link) {
+        document.querySelectorAll('a[href*="galge-scenario"]').forEach(function (link) {
           const rawHref = link.getAttribute("href");
           if (!rawHref) {
             return;
           }
           const url = new URL(rawHref, window.location.href);
-          if (!url.pathname.endsWith("/galge-scenario.html")) {
+          if (!url.pathname.endsWith("/galge-scenario") && !url.pathname.endsWith("/galge-scenario.html")) {
             return;
           }
           url.searchParams.set("mode", mode);
@@ -642,11 +667,13 @@
         updateUrl: Boolean(getModeFromQuery()),
       });
 
-      document.getElementById("mode-toggle").addEventListener("click", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        applyMode(getCurrentMode() === "immersive" ? "classic" : "immersive");
-      });
+      if (!DREAM_SELECT_FORCE_IMMERSIVE) {
+        document.getElementById("mode-toggle").addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          applyMode(getCurrentMode() === "immersive" ? "classic" : "immersive");
+        });
+      }
 
       // ── Kongou Particle System (shared with galge-scenario) ──
       (function () {

@@ -140,7 +140,6 @@
   }
 
   // src/galge-runtime/scenario-loader.js
-  var DEFAULT_SCENARIO_NAME = "2026-03-18_声の座標";
   function asObject(value) {
     return value && typeof value === "object" && !Array.isArray(value) ? value : {};
   }
@@ -316,7 +315,13 @@
   }
   function deriveScenarioName() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("scenario") || DEFAULT_SCENARIO_NAME;
+    const scenario = params.get("scenario");
+    if (!scenario) {
+      throw new Error(
+        "scenario パラメータが指定されていません。\nURL例: galge-scenario?scenario=2026-03-20_各駅停車の形而上学\n現在のURL: " + window.location.href
+      );
+    }
+    return scenario;
   }
   async function loadScenarioDefinition() {
     const scenarioName = deriveScenarioName();

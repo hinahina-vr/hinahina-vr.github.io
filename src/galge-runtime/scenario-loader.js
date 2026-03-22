@@ -209,7 +209,15 @@ function normalizeChars(chars, warnings) {
 
 function deriveScenarioName() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("scenario") || DEFAULT_SCENARIO_NAME;
+  const scenario = params.get("scenario");
+  if (!scenario) {
+    throw new Error(
+      "scenario パラメータが指定されていません。\n" +
+      "URL例: galge-scenario?scenario=2026-03-20_各駅停車の形而上学\n" +
+      "現在のURL: " + window.location.href
+    );
+  }
+  return scenario;
 }
 
 export async function loadScenarioDefinition() {
