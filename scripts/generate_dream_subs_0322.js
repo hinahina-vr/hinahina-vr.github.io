@@ -9,10 +9,28 @@ const COMMON_CHARS = {
   waddy:    { name: "ワディー", color: "#606060", emoji: "🖥️" }
 };
 
+function withBranchEntries(data) {
+  return {
+    ...data,
+    scenario: [
+      { label: "standalone_start" },
+      { bg: "abyss" },
+      {
+        speaker: "narrator",
+        expression: "",
+        text: `これは、「${data.title}」へ枝分かれした記録。\n顕幻の交差路の本筋から、そのまま滑り落ちてきた者だけが見る部屋だ。`,
+      },
+      { label: "entry_from_main" },
+      ...data.scenario,
+    ],
+  };
+}
+
 function write(filename, data) {
   const p = path.join(OUT_DIR, filename);
-  fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf-8');
-  console.log(`✓ ${filename} (${data.scenario.length} steps)`);
+  const normalized = withBranchEntries(data);
+  fs.writeFileSync(p, JSON.stringify(normalized, null, 2), 'utf-8');
+  console.log(`✓ ${filename} (${normalized.scenario.length} steps)`);
 }
 
 // ──────────────────────────────────────

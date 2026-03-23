@@ -17,6 +17,20 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "abyss"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "これは、「無音の配信」へ枝分かれした記録。\n顕幻の交差路の本筋から、そのまま滑り落ちてきた者だけが見る部屋だ。"
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
       "bg": "abyss"
     },
     {

@@ -81,6 +81,39 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   return false;
 }
 
+async function waitForTextIncludes(page, expectedText, timeoutMs = 5000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const text = await page.$eval("#text-content", (element) => element.textContent || "");
+    if (text.includes(expectedText)) {
+      return true;
+    }
+    await page.waitForTimeout(50);
+  }
+  return false;
+}
+
+async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 120) {
+  for (let index = 0; index < maxIterations; index += 1) {
+    const currentTitle = await page.evaluate(() => window.__galgeRuntimeApp?.scenario?.title || "");
+    if (currentTitle.includes(expectedTitle)) {
+      return true;
+    }
+
+    if (await isVisible(page, "#chapter-overlay")) {
+      await page.waitForTimeout(400);
+      continue;
+    }
+
+    await page.mouse.click(480, 520);
+    await page.waitForTimeout(20);
+    await page.mouse.click(480, 520);
+    await page.waitForTimeout(40);
+  }
+
+  return false;
+}
+
 (async () => {
   const apiPort = 8182;
   const apiServer = spawn("node", ["scripts/serve-galge-message-api.mjs"], {
@@ -180,12 +213,12 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   console.log("\n=== galge-scenario runtime test ===");
 
   let response = await page.goto(
-    `${baseUrl}/galge-scenario.html?messageApiBase=${encodeURIComponent(messageApiBase)}`,
+    `${baseUrl}/galge-scenario.html?scenario=${encodeURIComponent("2026-03-18_声の座標")}&messageApiBase=${encodeURIComponent(messageApiBase)}`,
     {
       waitUntil: "domcontentloaded",
     }
   );
-  assert(response.status() === 200, "default scenario page loads");
+  assert(response.status() === 200, "explicit scenario page loads");
 
   await page.waitForSelector("#title-screen");
   const defaultTitle = await page.$eval("#title-screen h1", (element) => element.textContent);
@@ -344,12 +377,12 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
   assert(bodyClass.includes("mode-classic"), `mode toggle switches back to classic (got: "${bodyClass}")`);
 
   response = await page.goto(
-    `${baseUrl}/galge-scenario.html?messageApiBase=${encodeURIComponent(messageApiBase)}`,
+    `${baseUrl}/galge-scenario.html?scenario=${encodeURIComponent("2026-03-18_声の座標")}&messageApiBase=${encodeURIComponent(messageApiBase)}`,
     {
     waitUntil: "domcontentloaded",
     }
   );
-  assert(response.status() === 200, "default scenario reloads for branch test");
+  assert(response.status() === 200, "explicit scenario reloads for branch test");
   await page.waitForSelector("#title-screen");
   await page.click("#start-btn");
   await page.waitForTimeout(1200);
@@ -376,6 +409,87 @@ async function waitForApiMessage(page, expectedText, timeoutMs = 5000) {
     await page.waitForTimeout(2800);
     const textAfterChoice = await page.$eval("#text-content", (element) => element.textContent);
     assert(textAfterChoice.length > 0, "choice selection continues the scenario after API speech");
+  }
+
+  console.log("\n=== entry label startup ===");
+  response = await page.goto(
+    `${baseUrl}/galge-scenario.html?scenario=${encodeURIComponent("2026-03-21_沈黙のリビング")}&entry=${encodeURIComponent("entry_from_main")}&messageApiBase=${encodeURIComponent(messageApiBase)}`,
+    {
+      waitUntil: "domcontentloaded",
+    }
+  );
+  assert(response.status() === 200, "entry label scenario page loads");
+  await page.waitForSelector("#title-screen");
+  await page.click("#start-btn");
+  const entryTextShown = await waitForTextIncludes(page, "歪んだゲストハウスのリビング", 6000);
+  assert(entryTextShown, "entry=entry_from_main starts from the in-branch scene");
+  const branchEntryText = await page.$eval("#text-content", (element) => element.textContent || "");
+  assert(
+    !branchEntryText.includes("これは、何も選ばなかった世界線の記録"),
+    "entry=entry_from_main skips the standalone intro text"
+  );
+
+  console.log("\n=== inline branch transition ===");
+  response = await page.goto(
+    `${baseUrl}/galge-scenario.html?scenario=${encodeURIComponent("2026-03-21_百夢回廊")}&messageApiBase=${encodeURIComponent(messageApiBase)}`,
+    {
+      waitUntil: "domcontentloaded",
+    }
+  );
+  assert(response.status() === 200, "main branch scenario loads");
+  await page.waitForSelector("#title-screen");
+  await page.click("#start-btn");
+  await page.waitForTimeout(1200);
+  const inlineChoiceShown = await advanceUntilChoice(page);
+  assert(inlineChoiceShown, "main branch scenario reaches the first branch choice");
+
+  if (inlineChoiceShown) {
+    const beforeBranchState = await page.evaluate(() => {
+      const app = window.__galgeRuntimeApp;
+      app.flags.add("__inline_branch_flag");
+      return {
+        backlogLength: app.backlog.length,
+        url: window.location.href,
+      };
+    });
+    const branchChoiceCount = await page.locator("#choice-container.visible .choice-btn").count();
+    assert(branchChoiceCount >= 3, "first branch choice exposes the genkai branch option");
+    await page.locator("#choice-container.visible .choice-btn").nth(2).click();
+    const inlineScenarioLoaded = await advanceUntilScenarioTitle(page, "沈黙のリビング");
+    assert(inlineScenarioLoaded, "loadScenario inline transition swaps the in-memory scenario");
+    const inlineBranchText = await waitForNonEmptyText(page, 4000);
+    assert(inlineBranchText.length > 0, "loadScenario inline transition keeps rendering text after the swap");
+    const afterBranchState = await page.evaluate(() => {
+      const app = window.__galgeRuntimeApp;
+      return {
+        title: app.scenario?.title || "",
+        entry: app.currentScenarioEntry,
+        backlogLength: app.backlog.length,
+        hasFlag: app.flags.has("__inline_branch_flag"),
+        url: window.location.href,
+      };
+    });
+    assert(
+      afterBranchState.url === beforeBranchState.url,
+      "inline branch transition does not rewrite the current page URL"
+    );
+    assert(
+      afterBranchState.title.includes("沈黙のリビング"),
+      `inline branch transition loads the target scenario in-memory (got: "${afterBranchState.title}")`
+    );
+    assert(
+      afterBranchState.entry === "entry_from_main",
+      `inline branch transition records the requested entry label (got: "${afterBranchState.entry}")`
+    );
+    assert(afterBranchState.hasFlag, "inline branch transition preserves previously set flags");
+    assert(
+      afterBranchState.backlogLength >= beforeBranchState.backlogLength,
+      `inline branch transition preserves backlog history (before: ${beforeBranchState.backlogLength}, after: ${afterBranchState.backlogLength})`
+    );
+    assert(
+      !inlineBranchText.includes("これは、何も選ばなかった世界線の記録"),
+      "inline branch transition skips the standalone intro and starts at entry_from_main"
+    );
   }
 
   console.log(`\n=== result: ${passed} passed, ${failed} failed ===`);

@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、自分の言葉に飲み込まれた世界線の記録。\n書架の森で、彼は本を開くのではなく──本の中に入った。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "void"

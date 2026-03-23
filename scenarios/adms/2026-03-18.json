@@ -1,0 +1,20 @@
+{
+  "date": "2026-03-18",
+  "title": "声の座標 A.D.M.S.",
+  "rootNodeId": "voice_coordinates",
+  "nodes": [
+    {
+      "id": "voice_coordinates",
+      "title": "声の座標",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 0,
+      "icon": "🌕",
+      "scenario": "2026-03-18_声の座標",
+      "entry": null,
+      "summary": "単独観測された最初の世界線"
+    }
+  ],
+  "edges": []
+}

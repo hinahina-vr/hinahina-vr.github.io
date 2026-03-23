@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、何も選ばなかった世界線の記録。\n2026年3月21日。ゲストハウスのリビング。\n観測者は──観測を拒否した。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "void"

@@ -1,6 +1,10 @@
 import { BGMController } from "./bgm-controller.js";
 import { resolveEmotion } from "./emotion-resolver.js";
-import { loadScenarioDefinition } from "./scenario-loader.js";
+import {
+  fetchScenarioDefinition,
+  loadScenarioDefinitionFromUrl,
+  resolveScenarioEntryStartIndex,
+} from "./scenario-loader.js";
 import { MessageApiReceiver } from "./message-api-receiver.js";
 import { SettingsPanel } from "./settings-panel.js";
 import { VoiceController } from "./voice-controller.js";
@@ -57,6 +61,7 @@ class GalgeRuntimeApp {
     this.currentChapter = "";
     this.textSteps = [];
     this.scenario = null;
+    this.currentScenarioEntry = null;
     this.renderToken = 0;
     this.flags = new Set();
 
@@ -169,16 +174,14 @@ class GalgeRuntimeApp {
 
   async init() {
     try {
-      this.scenario = await loadScenarioDefinition();
+      const scenario = await loadScenarioDefinitionFromUrl();
+      await this.applyScenarioDefinition(scenario);
     } catch (error) {
       console.error(error);
       this.$loading.textContent = error.message;
       return;
     }
 
-    this.textSteps = this.scenario.steps.filter((step) => step.kind === "text");
-    this.applyScenarioMetadata();
-    await this.settingsPanel.setScenario(this.scenario);
     this.bindEvents();
     this.setMode(this.currentMode);
     this.messageApiReceiver.start();
@@ -190,7 +193,16 @@ class GalgeRuntimeApp {
     }, 300);
   }
 
-  applyScenarioMetadata() {
+  async applyScenarioDefinition(definition, { preserveAtmosphere = false } = {}) {
+    this.scenario = definition;
+    this.currentScenarioEntry = definition.requestedEntry || null;
+    this.currentStep = definition.startIndex || 0;
+    this.textSteps = definition.steps.filter((step) => step.kind === "text");
+    this.applyScenarioMetadata({ preserveAtmosphere });
+    await this.settingsPanel.setScenario(this.scenario);
+  }
+
+  applyScenarioMetadata({ preserveAtmosphere = false } = {}) {
     document.title = `${this.scenario.title} | ビジュアルノベル`;
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -206,26 +218,28 @@ class GalgeRuntimeApp {
       this.$titleSecondarySubtitle.textContent = this.scenario.genre || "群像哲学ノベル";
     }
 
-    // Realm-based styling (顕界 vs 幻界)
-    const isGenkai = (this.scenario.genre || "").includes("幻界");
-    document.body.classList.toggle("realm-genkai", isGenkai);
-    document.body.classList.toggle("realm-kenkai", !isGenkai);
+    if (!preserveAtmosphere) {
+      // Realm-based styling (顕界 vs 幻界)
+      const isGenkai = (this.scenario.genre || "").includes("幻界");
+      document.body.classList.toggle("realm-genkai", isGenkai);
+      document.body.classList.toggle("realm-kenkai", !isGenkai);
 
-    // Realm-based particle colors (fade transition)
-    if (isGenkai) {
-      this._setColorTarget(
-        { h: 220, s: 55, l: 10 },
-        { r: 6, g: 10, b: 36, a: 0.15 },
-        { r: 140, g: 180, b: 255 },
-        { r: 100, g: 140, b: 220 }
-      );
-    } else {
-      this._setColorTarget(
-        { h: 40, s: 50, l: 10 },
-        { r: 20, g: 16, b: 6, a: 0.15 },
-        { r: 255, g: 220, b: 140 },
-        { r: 220, g: 180, b: 100 }
-      );
+      // Realm-based particle colors (fade transition)
+      if (isGenkai) {
+        this._setColorTarget(
+          { h: 220, s: 55, l: 10 },
+          { r: 6, g: 10, b: 36, a: 0.15 },
+          { r: 140, g: 180, b: 255 },
+          { r: 100, g: 140, b: 220 }
+        );
+      } else {
+        this._setColorTarget(
+          { h: 40, s: 50, l: 10 },
+          { r: 20, g: 16, b: 6, a: 0.15 },
+          { r: 255, g: 220, b: 140 },
+          { r: 220, g: 180, b: 100 }
+        );
+      }
     }
 
     if (this.scenario.warnings.length) {
@@ -419,7 +433,7 @@ class GalgeRuntimeApp {
     window.setTimeout(() => {
       this.$titleScreen.style.display = "none";
       this.$hud.style.display = "flex";
-      this.showStep(0);
+      this.showStep(this.scenario.startIndex || 0);
     }, 800);
   }
 
@@ -530,11 +544,20 @@ class GalgeRuntimeApp {
         activeCue = cue.stop ? { stop: true } : cue;
       }
     }
-    return activeCue || this.scenario?.defaultBgm || null;
+    if (activeCue) {
+      return activeCue;
+    }
+    if (this.scenario?.suppressDefaultBgmUntilExplicit) {
+      return null;
+    }
+    return this.scenario?.defaultBgm || null;
   }
 
   syncBgmForIndex(index) {
     const cue = this.findActiveBgmCue(index);
+    if (!cue) {
+      return;
+    }
     this.bgmController.setCue(this.scenario?.bgmNamespace || this.scenario?.audioNamespace || "", cue);
   }
 
@@ -1050,6 +1073,36 @@ class GalgeRuntimeApp {
     return this.assetStore.getSharedFallbackModel();
   }
 
+  resolveLabelStepIndex(targetLabel) {
+    const labelIndex = this.scenario?.labelIndex?.get(targetLabel);
+    return labelIndex == null ? -1 : labelIndex;
+  }
+
+  resetTransientUiForScenarioTransition() {
+    this.renderToken += 1;
+    window.clearTimeout(this.typeTimer);
+    this.isTyping = false;
+    this.showingChoice = false;
+    this.isAdvancing = false;
+    this.$choiceContainer.classList.remove("visible");
+    this.$choiceContainer.style.display = "none";
+    this.$choiceContainer.innerHTML = "";
+    this.$continueIndicator.classList.remove("visible");
+    this.$cursor.style.display = "none";
+    this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+    this.voiceController.stopCurrent();
+  }
+
+  async loadScenarioInline({ scenario, entry = null }) {
+    const definition = await fetchScenarioDefinition(scenario);
+    definition.requestedEntry = entry || null;
+    definition.startIndex = resolveScenarioEntryStartIndex(definition, definition.requestedEntry);
+    definition.suppressDefaultBgmUntilExplicit = true;
+    await this.applyScenarioDefinition(definition, { preserveAtmosphere: true });
+    this.resetTransientUiForScenarioTransition();
+    await this.showStep(definition.startIndex);
+  }
+
   async refreshCurrentStage(changedSpeakerKey) {
     if (!this.started) {
       return;
@@ -1091,9 +1144,7 @@ class GalgeRuntimeApp {
     }
 
     if (step.kind === "goto") {
-      const targetIndex = this.scenario.steps.findIndex(
-        (candidate) => candidate.kind === "label" && candidate.label === step.target
-      );
+      const targetIndex = this.resolveLabelStepIndex(step.target);
       if (targetIndex >= 0) {
         await this.showStep(targetIndex + 1);
       } else {
@@ -1104,10 +1155,8 @@ class GalgeRuntimeApp {
     }
 
     if (step.kind === "loadScenario") {
-      console.log(`[loadScenario] redirecting to: ${step.scenario}`);
-      const url = new URL(window.location.href);
-      url.searchParams.set("scenario", step.scenario);
-      window.location.replace(url.toString());
+      console.log(`[loadScenario] loading inline: ${step.scenario}${step.entry ? `#${step.entry}` : ""}`);
+      await this.loadScenarioInline(step);
       return;
     }
 
@@ -1121,17 +1170,13 @@ class GalgeRuntimeApp {
     if (step.kind === "if") {
       const hasFlagValue = this.flags.has(step.condition);
       if (hasFlagValue) {
-        const targetIndex = this.scenario.steps.findIndex(
-          (candidate) => candidate.kind === "label" && candidate.label === step.target
-        );
+        const targetIndex = this.resolveLabelStepIndex(step.target);
         if (targetIndex >= 0) {
           await this.showStep(targetIndex + 1);
           return;
         }
       } else if (step.elseTarget) {
-        const elseIndex = this.scenario.steps.findIndex(
-          (candidate) => candidate.kind === "label" && candidate.label === step.elseTarget
-        );
+        const elseIndex = this.resolveLabelStepIndex(step.elseTarget);
         if (elseIndex >= 0) {
           await this.showStep(elseIndex + 1);
           return;
@@ -1144,17 +1189,13 @@ class GalgeRuntimeApp {
     if (step.kind === "ifNot") {
       const hasFlagValue = this.flags.has(step.condition);
       if (!hasFlagValue) {
-        const targetIndex = this.scenario.steps.findIndex(
-          (candidate) => candidate.kind === "label" && candidate.label === step.target
-        );
+        const targetIndex = this.resolveLabelStepIndex(step.target);
         if (targetIndex >= 0) {
           await this.showStep(targetIndex + 1);
           return;
         }
       } else if (step.elseTarget) {
-        const elseIndex = this.scenario.steps.findIndex(
-          (candidate) => candidate.kind === "label" && candidate.label === step.elseTarget
-        );
+        const elseIndex = this.resolveLabelStepIndex(step.elseTarget);
         if (elseIndex >= 0) {
           await this.showStep(elseIndex + 1);
           return;
@@ -1241,9 +1282,7 @@ class GalgeRuntimeApp {
             this.$choiceContainer.style.display = "none";
           }, 400);
           if (choice.goto) {
-            const targetIndex = this.scenario.steps.findIndex(
-              (candidate) => candidate.kind === "label" && candidate.label === choice.goto
-            );
+            const targetIndex = this.resolveLabelStepIndex(choice.goto);
             if (targetIndex >= 0) {
               this.showStep(targetIndex + 1);
               return;

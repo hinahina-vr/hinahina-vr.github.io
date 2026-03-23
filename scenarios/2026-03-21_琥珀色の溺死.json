@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、飽和した液体にさらに注ぎ続けた世界線の記録。\n琥珀色の酒場で、彼はグラスを止めなかった。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "twilight"

@@ -13,6 +13,7 @@
         "build:dialogue": "node scripts/build-dialogue.mjs",
         "build:video-scripts": "node scripts/build-video-scripts.mjs",
         "check:scenario-audio": "node scripts/check-scenario-audio.mjs",
+        "check:dream-graphs": "node scripts/validate-dream-graphs.mjs",
         "build:diary-hina": "node scripts/build-diary-hina.mjs",
         "build:diary-multi": "node scripts/build-diary-multi.mjs",
         "build:diary-hinahina": "node scripts/build-diary-hinahina.mjs",

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A.D.M.S. | ワディーゲストハウス</title>
-    <meta name="description" content="Auto Diverge Mapping System ─ 分岐する世界線の地図。" />
+    <meta name="description" content="Auto Diverge Mapping System ─ 分岐と再合流を可視化する夢の地図。" />
     <script>
       (function () {
         var KEY = "waddy-display-mode";
@@ -38,80 +38,70 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet" />
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg-1: #03050f;
+        --bg-2: #0d1028;
+        --bg-3: #1d1830;
+        --panel: rgba(9, 12, 26, 0.72);
+        --panel-border: rgba(255, 255, 255, 0.12);
+        --text: #eef2ff;
+        --muted: rgba(238, 242, 255, 0.62);
+        --kenkai: #f0c15d;
+        --kenkai-glow: rgba(240, 193, 93, 0.3);
+        --genkai: #73c6ff;
+        --genkai-glow: rgba(115, 198, 255, 0.28);
+        --rejoin: #f3a9d9;
+        --rejoin-glow: rgba(243, 169, 217, 0.28);
+        --node-width: 220px;
+        --node-height: 96px;
+        --header-border: rgba(255, 255, 255, 0.08);
+        --header-top-bg: rgba(14, 16, 34, 0.28);
+        --header-bottom-bg: rgba(7, 8, 18, 0.36);
+        --header-accent: rgba(126, 88, 188, 0.06);
+        --header-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
+        --header-blur: blur(4px);
+        --graph-shell-top-bg: rgba(8, 10, 22, 0.76);
+        --graph-shell-bottom-bg: rgba(4, 5, 12, 0.92);
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
       html, body {
-        width: 100%; min-height: 100vh;
-        font-family: "Zen Maru Gothic", sans-serif;
-        color: #ece7ff;
-        background:
-          radial-gradient(circle at top, rgba(88, 65, 160, 0.32), transparent 30%),
-          linear-gradient(180deg, #110818 0%, #050309 52%, #110818 100%);
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
       }
+
       body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 24px 16px 48px;
         position: relative;
-        transition: background 0.3s ease, color 0.3s ease;
+        overflow: hidden;
+        font-family: "Zen Maru Gothic", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, rgba(126, 88, 188, 0.3), transparent 24%),
+          radial-gradient(circle at 20% 20%, rgba(60, 112, 180, 0.16), transparent 28%),
+          linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 38%, var(--bg-1) 100%);
       }
+
       body.mode-classic {
         font-family: "DotGothic16", "MS Gothic", monospace;
-        color: #d8e0ff;
-        background:
-          radial-gradient(circle at top, rgba(30, 60, 120, 0.18), transparent 25%),
-          linear-gradient(180deg, #070914 0%, #02030a 100%);
       }
-      body.mode-classic::before {
+
+      body::before {
         content: "";
         position: fixed;
         inset: 0;
-        pointer-events: none;
         z-index: 0;
+        pointer-events: none;
         background:
-          linear-gradient(90deg, rgba(64, 96, 180, 0.08) 1px, transparent 1px),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 24px 24px, 100% 3px;
-        opacity: 0.45;
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 80px 80px, 100% 4px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 92%);
       }
 
-      #mode-toggle {
-        position: fixed;
-        top: 14px;
-        right: 14px;
-        z-index: 3;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.14);
-        background: rgba(8, 6, 18, 0.68);
-        color: rgba(255,255,255,0.86);
-        font: inherit;
-        letter-spacing: 0.14em;
-        cursor: pointer;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
-      }
-      #mode-toggle:hover {
-        transform: translateY(-1px);
-      }
-      #mode-toggle[disabled] {
-        opacity: 0.8;
-        cursor: default;
-        transform: none;
-      }
-      body.mode-classic #mode-toggle {
-        border-radius: 0;
-        border: 2px solid #99b0ff;
-        background: rgba(6, 10, 28, 0.94);
-        color: #d8e0ff;
-        box-shadow: 0 0 0 2px rgba(20, 40, 90, 0.8);
-      }
-
-      /* ── Particle Canvas ── */
       #particle-canvas {
         position: fixed;
         inset: 0;
@@ -120,431 +110,483 @@
         z-index: 0;
         pointer-events: none;
       }
+
       body.mode-classic #particle-canvas {
         display: none;
       }
 
-      /* ── Header ── */
-      .header {
-        text-align: center;
-        margin-bottom: clamp(24px, 4vh, 48px);
-        animation: fade-in 0.8s ease both;
-        position: relative;
-        z-index: 1;
-      }
-      .date-label {
-        font-size: clamp(11px, 1vw, 14px);
-        letter-spacing: 0.3em;
-        color: rgba(255,255,255,0.3);
-        margin-bottom: 8px;
-      }
-      h1 {
-        font-size: clamp(1.1rem, 2.5vw, 1.8rem);
-        letter-spacing: 0.25em;
-        color: #c0a0e0;
-        text-shadow: 0 0 30px rgba(140,100,200,0.2);
-        margin-bottom: 4px;
-      }
-      .subtitle {
-        font-size: clamp(10px, 0.9vw, 13px);
-        letter-spacing: 0.15em;
-        color: rgba(255,255,255,0.3);
-      }
-      body.mode-classic .header {
-        width: min(760px, 100%);
-        padding: 22px 18px 18px;
-        border: 2px solid rgba(146, 176, 255, 0.72);
-        background: rgba(4, 10, 28, 0.88);
-        box-shadow: 0 0 0 2px rgba(12, 18, 40, 0.95), inset 0 0 0 1px rgba(220, 230, 255, 0.1);
-      }
-      body.mode-classic .date-label,
-      body.mode-classic .subtitle {
-        color: rgba(198, 214, 255, 0.68);
-      }
-      body.mode-classic h1 {
-        color: #f4f0b2;
-        text-shadow: none;
-      }
-
-      /* ── Timeline Container ── */
-      .timeline {
-        position: relative;
-        width: min(720px, 100%);
-        z-index: 1;
-      }
-      body.mode-classic .timeline {
-        width: min(780px, 100%);
-        padding: 18px 18px 22px;
-        border: 2px solid rgba(138, 166, 242, 0.72);
-        background: rgba(3, 6, 20, 0.82);
-        box-shadow: 0 0 0 2px rgba(10, 16, 34, 0.94);
-      }
-
-      /* ── Main trunk line ── */
-      .trunk-line {
-        position: absolute;
-        left: 28px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(180deg,
-          rgba(200,170,100,0.5) 0%,
-          rgba(160,130,80,0.35) 30%,
-          rgba(100,80,160,0.3) 60%,
-          rgba(80,50,140,0.2) 100%);
-      }
-      body.mode-classic .trunk-line,
-      body.mode-classic .branches::before {
-        background: linear-gradient(180deg, rgba(132, 160, 236, 0.82), rgba(76, 102, 170, 0.35));
-      }
-
-      /* ── Location Node ── */
-      .location-group {
-        position: relative;
-        margin-bottom: 0;
-        animation: fade-in 0.6s ease both;
-      }
-      .location-group:last-child { margin-bottom: 0; }
-
-      .location-node {
-        display: flex;
+      #mode-toggle {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 3;
+        display: inline-flex;
         align-items: center;
-        gap: 16px;
-        padding: 8px 0;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        background: rgba(9, 12, 26, 0.74);
+        color: rgba(255, 255, 255, 0.9);
+        font: inherit;
+        letter-spacing: 0.16em;
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      }
+
+      #mode-toggle[disabled] {
+        opacity: 0.84;
+        cursor: default;
+      }
+
+      .page-shell {
         position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: 100vh;
+        height: 100dvh;
+        padding: 20px 18px 22px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: minmax(320px, 520px) 1fr;
+        align-items: start;
+        width: 100%;
+        margin: 0;
+        min-height: 88px;
+        padding: 8px 14px 8px 10px;
+        border: 1px solid var(--header-border);
+        border-radius: 16px;
+        background:
+          linear-gradient(180deg, var(--header-top-bg), var(--header-bottom-bg)),
+          radial-gradient(circle at top left, var(--header-accent), transparent 56%);
+        box-shadow: var(--header-shadow);
+        backdrop-filter: var(--header-blur);
+      }
+
+      .header-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        max-width: 520px;
+      }
+
+      .date-label {
+        margin: 0 0 2px;
+        color: rgba(255, 255, 255, 0.52);
+        font-size: clamp(9px, 0.68vw, 11px);
+        letter-spacing: 0.28em;
+      }
+
+      h1 {
+        margin: 0 0 2px;
+        font-size: clamp(0.96rem, 1.55vw, 1.35rem);
+        letter-spacing: 0.28em;
+        color: #d8c8ff;
+        text-shadow:
+          0 0 24px rgba(164, 120, 255, 0.22),
+          0 1px 2px rgba(0, 0, 0, 0.46);
+      }
+
+      .subtitle,
+      .map-title {
+        margin: 0;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      .subtitle {
+        font-size: clamp(9px, 0.62vw, 10px);
+        color: rgba(255, 255, 255, 0.62);
+      }
+
+      .map-title {
+        font-size: clamp(9px, 0.62vw, 10px);
+        color: rgba(255, 255, 255, 0.82);
+        letter-spacing: 0.08em;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 8px;
+        margin-top: 3px;
+      }
+
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 8px;
+        letter-spacing: 0.08em;
+      }
+
+      .legend-swatch {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.12);
+      }
+
+      .legend-swatch.kenkai {
+        background: linear-gradient(135deg, rgba(240, 193, 93, 0.95), rgba(135, 94, 32, 0.88));
+      }
+
+      .legend-swatch.genkai {
+        background: linear-gradient(135deg, rgba(115, 198, 255, 0.96), rgba(33, 87, 153, 0.88));
+      }
+
+      .legend-swatch.rejoin {
+        background: linear-gradient(135deg, rgba(243, 169, 217, 0.96), rgba(135, 64, 120, 0.88));
+      }
+
+      .legend-swatch.ending {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(161, 164, 192, 0.88));
+      }
+
+      .graph-shell {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        flex: 1;
+        min-height: 0;
+        border: 1px solid var(--panel-border);
+        border-radius: 30px;
+        background:
+          linear-gradient(180deg, var(--graph-shell-top-bg), var(--graph-shell-bottom-bg)),
+          radial-gradient(circle at 15% 10%, rgba(49, 111, 173, 0.08), transparent 26%);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.06),
+          0 28px 72px rgba(0, 0, 0, 0.28);
+        overflow: auto;
+      }
+
+      .graph-shell[data-layout-mode="desktop-horizontal"] {
+        overflow-x: auto;
+        overflow-y: auto;
+      }
+
+      .graph-shell[data-layout-mode="mobile-vertical"] {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .graph-shell::before {
+        content: "";
+        position: sticky;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 1px;
         z-index: 2;
       }
 
-      /* ── Node Dots ── */
-      .node-dot {
-        width: 16px;
-        height: 16px;
-        min-width: 16px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #8070a0, #403060);
-        border: 2px solid rgba(120,100,160,0.4);
-        box-shadow: 0 0 8px rgba(100,70,140,0.3);
+      .graph-stage {
         position: relative;
-        left: 21px;
-      }
-      .node-dot.kenkai {
-        background: radial-gradient(circle, #f0d888, #c09030);
-        border: 2px solid rgba(240,200,100,0.6);
-        box-shadow: 0 0 16px rgba(220,170,60,0.5), 0 0 32px rgba(200,150,40,0.2);
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        left: 19px;
+        min-width: 100%;
+        min-height: 100%;
       }
 
-      .location-label {
-        font-size: clamp(11px, 1vw, 13px);
-        letter-spacing: 0.15em;
-        color: rgba(255,255,255,0.4);
-        padding-left: 24px;
-      }
-      body.mode-classic .location-label {
-        color: rgba(220, 230, 255, 0.82);
-      }
-      .location-label .time {
-        color: rgba(255,255,255,0.25);
-        margin-right: 8px;
-      }
-
-      /* ── Branch Lines (kenkai) ── */
-      .branches {
-        padding-left: 60px;
-        position: relative;
-      }
-      .branches::before {
-        content: "";
+      #graph-edges,
+      #graph-edge-labels,
+      #graph-nodes {
         position: absolute;
-        left: 29px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: rgba(160,130,60,0.2);
+        inset: 0;
       }
 
-      /* ── Genkai parallel track ── */
-      .genkai-track {
-        position: relative;
-        margin-left: 60px;
-        margin-top: 4px;
-        padding: 12px 0 12px 36px;
-        border-left: 2px solid rgba(40,100,180,0.25);
-        box-shadow: -4px 0 16px rgba(30,80,160,0.06);
+      #graph-edges {
+        overflow: visible;
+        z-index: 0;
       }
-      body.mode-classic .genkai-track {
-        border-left-color: rgba(126, 168, 255, 0.48);
-        box-shadow: none;
+
+      #graph-edge-labels {
+        z-index: 1;
+        pointer-events: none;
       }
-      .genkai-track::before {
-        content: "⟡ 並行世界線";
+
+      #graph-nodes {
+        z-index: 2;
+      }
+
+      .graph-edge {
+        fill: none;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.06));
+      }
+
+      .graph-edge[data-edge-style="kenkai"] {
+        stroke: var(--kenkai);
+      }
+
+      .graph-edge[data-edge-style="genkai"] {
+        stroke: var(--genkai);
+      }
+
+      .graph-edge[data-edge-style="rejoin"] {
+        stroke: var(--rejoin);
+        stroke-dasharray: 10 8;
+      }
+
+      .edge-label {
         position: absolute;
-        top: -2px;
-        left: 12px;
-        font-size: 9px;
-        letter-spacing: 0.25em;
-        color: rgba(80,150,220,0.45);
+        transform: translate(-50%, -50%);
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(8, 10, 24, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 10px;
+        line-height: 1.3;
+        letter-spacing: 0.08em;
         white-space: nowrap;
-      }
-      .genkai-track .scenario-card {
-        margin: 4px 0;
-      }
-      .genkai-track .scenario-card::before {
-        content: "";
-        position: absolute;
-        left: -37px;
-        top: 50%;
-        width: 34px;
-        height: 2px;
-        background: linear-gradient(90deg, rgba(40,100,180,0.35), rgba(30,80,150,0.15));
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
       }
 
-      /* ── Scenario Card ── */
       .scenario-card {
+        position: absolute;
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 12px 20px;
-        margin: 4px 0;
-        border-radius: 12px;
+        width: var(--node-width);
+        min-height: var(--node-height);
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background:
+          linear-gradient(180deg, rgba(20, 22, 44, 0.94), rgba(10, 12, 28, 0.96)),
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 48%);
+        color: var(--text);
         text-decoration: none;
-        transition: all 0.3s ease;
-        position: relative;
-      }
-      body.mode-classic .scenario-card {
-        border-radius: 0;
+        box-shadow:
+          0 20px 48px rgba(0, 0, 0, 0.24),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transition:
+          transform 0.22s ease,
+          border-color 0.22s ease,
+          box-shadow 0.22s ease,
+          background 0.22s ease;
       }
 
-      /* Branch connector line */
-      .scenario-card::before {
+      .scenario-card:hover {
+        transform: translateY(-4px) translateX(4px);
+        border-color: rgba(255, 255, 255, 0.28);
+        box-shadow:
+          0 26px 56px rgba(0, 0, 0, 0.28),
+          0 0 30px rgba(255, 255, 255, 0.08);
+      }
+
+      .scenario-card[data-graph-realm="kenkai"] {
+        background:
+          linear-gradient(180deg, rgba(44, 33, 10, 0.94), rgba(22, 18, 7, 0.96)),
+          radial-gradient(circle at top, rgba(240, 193, 93, 0.12), transparent 48%);
+        border-color: rgba(240, 193, 93, 0.2);
+      }
+
+      .scenario-card[data-graph-realm="kenkai"]:hover {
+        border-color: rgba(240, 193, 93, 0.48);
+        box-shadow:
+          0 26px 56px rgba(0, 0, 0, 0.28),
+          0 0 34px var(--kenkai-glow);
+      }
+
+      .scenario-card[data-graph-realm="genkai"] {
+        background:
+          linear-gradient(180deg, rgba(10, 20, 44, 0.94), rgba(6, 10, 24, 0.96)),
+          radial-gradient(circle at top, rgba(115, 198, 255, 0.12), transparent 48%);
+        border-color: rgba(115, 198, 255, 0.22);
+      }
+
+      .scenario-card[data-graph-realm="genkai"]:hover {
+        border-color: rgba(115, 198, 255, 0.48);
+        box-shadow:
+          0 26px 56px rgba(0, 0, 0, 0.28),
+          0 0 34px var(--genkai-glow);
+      }
+
+      .scenario-card[data-graph-kind="rejoin"],
+      .scenario-card[data-graph-kind="root"] {
+        border-width: 2px;
+      }
+
+      .scenario-card[data-graph-kind="rejoin"] {
+        box-shadow:
+          0 20px 48px rgba(0, 0, 0, 0.24),
+          0 0 18px var(--rejoin-glow),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+
+      .scenario-card[data-graph-kind="ending"] {
+        background:
+          linear-gradient(180deg, rgba(31, 33, 48, 0.95), rgba(10, 11, 20, 0.98)),
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 52%);
+      }
+
+      .scenario-card[data-graph-kind="root"]::after {
         content: "";
         position: absolute;
-        left: -31px;
-        top: 50%;
-        width: 28px;
-        height: 2px;
+        inset: -8px;
+        border-radius: 24px;
+        border: 1px solid rgba(243, 169, 217, 0.22);
+        pointer-events: none;
+        animation: root-pulse 3s ease-in-out infinite;
       }
 
-      /* ── Kenkai (顕界) = Warm Gold ── */
-      .scenario-card.kenkai {
-        background: linear-gradient(135deg, rgba(60,45,15,0.5), rgba(35,25,8,0.6));
-        border: 1px solid rgba(220,180,80,0.3);
-      }
-      body.mode-classic .scenario-card.kenkai {
-        background: rgba(28, 28, 8, 0.95);
-        border: 1px solid rgba(250, 234, 144, 0.74);
-        box-shadow: inset 0 0 0 1px rgba(255, 244, 184, 0.08);
-      }
-      .scenario-card.kenkai::before {
-        background: linear-gradient(90deg, rgba(200,160,60,0.5), rgba(220,180,80,0.3));
-      }
-      .scenario-card.kenkai:hover {
-        background: linear-gradient(135deg, rgba(75,55,18,0.6), rgba(45,32,10,0.7));
-        border-color: rgba(255,210,100,0.5);
-        transform: translateX(4px);
-        box-shadow: 0 4px 24px rgba(200,150,40,0.2);
-      }
-
-      /* ── Genkai (幻界) = Cherenkov Blue ── */
-      .scenario-card.genkai {
-        background: linear-gradient(135deg, rgba(8,15,35,0.7), rgba(5,10,25,0.8));
-        border: 1px solid rgba(40,100,180,0.25);
-        border-left: 3px solid rgba(60,140,220,0.4);
-        box-shadow: 0 0 12px rgba(30,80,160,0.1);
-      }
-      body.mode-classic .scenario-card.genkai {
-        background: rgba(8, 14, 34, 0.96);
-        border: 1px solid rgba(136, 180, 255, 0.78);
-        border-left: 3px solid rgba(176, 208, 255, 0.92);
-        box-shadow: inset 0 0 0 1px rgba(214, 232, 255, 0.08);
-      }
-      .scenario-card.genkai::before {
-        background: linear-gradient(90deg, rgba(40,100,180,0.3), rgba(30,80,150,0.15));
-      }
-      .scenario-card.genkai:hover {
-        background: linear-gradient(135deg, rgba(12,20,50,0.8), rgba(8,14,35,0.85));
-        border-color: rgba(60,140,220,0.5);
-        border-left-color: rgba(80,170,255,0.6);
-        transform: translateX(4px);
-        box-shadow: 0 4px 24px rgba(30,80,180,0.2), 0 0 16px rgba(40,120,220,0.15);
+      @keyframes root-pulse {
+        0%, 100% {
+          opacity: 0.45;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.14;
+          transform: scale(1.04);
+        }
       }
 
       .card-icon {
-        font-size: 16px;
-        min-width: 20px;
-        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 20px;
+        flex-shrink: 0;
       }
 
-      .card-body { flex: 1; min-width: 0; }
-
-      .card-title {
-        font-size: clamp(13px, 1.3vw, 16px);
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        margin-bottom: 2px;
-      }
-      .kenkai .card-title { color: #e8c868; }
-      .genkai .card-title {
-        color: #80b8e0;
-        text-shadow: 0 0 8px rgba(60,140,220,0.3);
+      .card-copy {
+        min-width: 0;
+        flex: 1;
       }
 
-      .card-desc {
-        font-size: clamp(10px, 0.9vw, 12px);
-        letter-spacing: 0.05em;
-        line-height: 1.5;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .kenkai .card-desc { color: rgba(220,190,120,0.5); }
-      .genkai .card-desc { color: rgba(100,150,200,0.5); }
-
-      /* Character name emphasis */
-      .card-chars {
-        font-weight: 700;
-        font-size: clamp(11px, 1vw, 13px);
-        letter-spacing: 0.08em;
-        margin-bottom: 1px;
-        display: block;
-      }
-      .kenkai .card-chars {
-        color: rgba(230,200,100,0.85);
-      }
-      .genkai .card-chars {
-        color: rgba(120,190,255,0.85);
-        text-shadow: 0 0 6px rgba(60,140,220,0.25);
-      }
-
-      /* Kenkai passthrough marker */
-      .kenkai-passthrough {
+      .card-heading {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 6px 12px;
-        margin: 2px 0 6px;
-        font-size: 10px;
-        letter-spacing: 0.15em;
-        color: rgba(200,170,80,0.4);
-        border-left: 2px solid rgba(200,170,80,0.15);
-      }
-      .kenkai-passthrough a {
-        color: rgba(220,190,100,0.5);
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
-      .kenkai-passthrough a:hover {
-        color: rgba(230,200,100,0.8);
+        margin-bottom: 6px;
       }
 
-      .card-tag {
-        font-size: 9px;
-        letter-spacing: 0.2em;
+      .card-title {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        line-height: 1.35;
+      }
+
+      .card-kind {
         padding: 2px 8px;
         border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: rgba(255, 255, 255, 0.72);
         white-space: nowrap;
       }
-      .kenkai .card-tag {
-        background: rgba(200,160,40,0.15);
-        color: rgba(230,190,80,0.7);
-        border: 1px solid rgba(200,160,40,0.25);
-      }
-      .genkai .card-tag {
-        background: rgba(20,60,120,0.2);
-        color: rgba(100,180,255,0.8);
-        border: 1px solid rgba(60,140,220,0.35);
-        box-shadow: 0 0 8px rgba(40,120,220,0.3), 0 0 20px rgba(30,100,200,0.1);
-        text-shadow: 0 0 6px rgba(80,160,255,0.5);
+
+      .scenario-card[data-graph-realm="kenkai"] .card-title {
+        color: #f8d98d;
       }
 
-
-
-      /* ── Terminal node ── */
-      .terminal-node {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 12px 0;
-        position: relative;
-        z-index: 2;
+      .scenario-card[data-graph-realm="genkai"] .card-title {
+        color: #98d6ff;
       }
-      .terminal-dot {
-        width: 8px;
-        height: 8px;
-        min-width: 8px;
-        border-radius: 50%;
-        background: rgba(100,70,150,0.3);
-        border: 1px solid rgba(100,70,150,0.2);
-        position: relative;
-        left: 25px;
-      }
-      .terminal-label {
+
+      .card-summary {
+        color: rgba(255, 255, 255, 0.66);
         font-size: 11px;
-        letter-spacing: 0.1em;
-        color: rgba(255,255,255,0.2);
-        padding-left: 24px;
+        line-height: 1.55;
+        letter-spacing: 0.04em;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
 
-      /* ── Back link ── */
-      .back-link {
-        display: inline-block;
-        margin-top: clamp(28px, 4vh, 48px);
-        color: rgba(255,255,255,0.3);
-        text-decoration: none;
-        font-size: clamp(12px, 1vw, 14px);
-        letter-spacing: 0.15em;
-        transition: color 0.2s;
-        position: relative;
-        z-index: 1;
-      }
-      .back-link:hover { color: rgba(255,255,255,0.6); }
-      body.mode-classic .back-link {
-        color: rgba(214, 228, 255, 0.76);
+      .card-meta {
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.48);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
       }
 
       .no-dreams {
-        color: rgba(255,255,255,0.35);
-        font-size: 14px;
-        letter-spacing: 0.1em;
-        padding: 40px 0;
+        margin: 0;
+        padding: 56px 24px;
+        color: rgba(255, 255, 255, 0.62);
         text-align: center;
+        font-size: 15px;
+        letter-spacing: 0.1em;
       }
 
-      @keyframes fade-in {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
+      .back-link {
+        align-self: center;
+        color: rgba(255, 255, 255, 0.56);
+        text-decoration: none;
+        letter-spacing: 0.12em;
       }
 
-      /* Staggered animation */
-      .location-group:nth-child(1) { animation-delay: 0s; }
-      .location-group:nth-child(2) { animation-delay: 0.1s; }
-      .location-group:nth-child(3) { animation-delay: 0.2s; }
-      .location-group:nth-child(4) { animation-delay: 0.3s; }
-      .location-group:nth-child(5) { animation-delay: 0.4s; }
-      .location-group:nth-child(6) { animation-delay: 0.5s; }
-      .location-group:nth-child(7) { animation-delay: 0.6s; }
-      .location-group:nth-child(8) { animation-delay: 0.7s; }
-      .location-group:nth-child(n+9) { animation-delay: 0.8s; }
-
-      /* ── Pulse on kenkai dot ── */
-      @keyframes pulse-kenkai {
-        0%, 100% { box-shadow: 0 0 16px rgba(220,170,60,0.5); }
-        50% { box-shadow: 0 0 28px rgba(240,190,80,0.7), 0 0 48px rgba(200,150,40,0.2); }
+      .back-link:hover {
+        color: rgba(255, 255, 255, 0.84);
       }
-      .node-dot.kenkai { animation: pulse-kenkai 3s ease-in-out infinite; }
 
-      @media (max-width: 640px) {
-        #mode-toggle {
-          font-size: 10px;
-          padding: 6px 10px;
-          letter-spacing: 0.1em;
-        }
-        .header {
-          margin-top: 36px;
-        }
+      body[data-graph-layout="mobile-vertical"] {
+        --header-top-bg: rgba(14, 16, 34, 0.34);
+        --header-bottom-bg: rgba(7, 8, 18, 0.44);
+        --header-blur: none;
+        --graph-shell-top-bg: rgba(8, 10, 22, 0.8);
+      }
+
+      body[data-graph-layout="mobile-vertical"] .page-shell {
+        padding: 14px 12px 18px;
+        gap: 10px;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .header {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 10px 12px 10px;
+        border-radius: 14px;
+        backdrop-filter: none;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .header-copy {
+        max-width: none;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .subtitle,
+      body[data-graph-layout="mobile-vertical"] .map-title {
+        white-space: normal;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .graph-shell {
+        border-radius: 22px;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .graph-stage {
+        overflow: hidden;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .edge-label {
+        display: none;
+      }
+
+      body[data-graph-layout="mobile-vertical"] #mode-toggle {
+        top: 12px;
+        right: 12px;
+        padding: 8px 10px;
+        font-size: 11px;
       }
     </style>
   </head>
@@ -554,146 +596,56 @@
       document.body.classList.add("mode-" + (window.__waddyInitialSiteMode || "immersive"));
     </script>
     <button id="mode-toggle" type="button" aria-label="表示モード切替" title="表示モード切替">◆ IMMERSIVE</button>
-    <canvas id="particle-canvas"></canvas>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-    <div class="header">
-      <p class="date-label" id="date-label"></p>
-      <h1>A.D.M.S.</h1>
-      <p class="subtitle">Auto Diverge Mapping System ─ 分岐する世界線の地図</p>
-    </div>
+    <main class="page-shell">
+      <header class="header">
+        <div class="header-copy">
+          <p class="date-label" id="date-label"></p>
+          <h1>A.D.M.S.</h1>
+          <p class="subtitle">Auto Diverge Mapping System ─ 分岐と再合流を可視化する夢の地図</p>
+          <p class="map-title" id="map-title">観測中…</p>
+          <div class="legend">
+            <span class="legend-item"><span class="legend-swatch kenkai"></span>顕界ルート</span>
+            <span class="legend-item"><span class="legend-swatch genkai"></span>幻界サブ</span>
+            <span class="legend-item"><span class="legend-swatch rejoin"></span>再合流</span>
+            <span class="legend-item"><span class="legend-swatch ending"></span>終点</span>
+          </div>
+        </div>
+      </header>
 
-    <div class="timeline" id="timeline"></div>
+      <section class="graph-shell" id="graph-shell">
+        <div class="graph-stage" id="graph-stage" hidden>
+          <svg id="graph-edges" aria-hidden="true"></svg>
+          <div id="graph-edge-labels" aria-hidden="true"></div>
+          <div id="graph-nodes"></div>
+        </div>
+        <p class="no-dreams" id="graph-empty" hidden></p>
+      </section>
 
-    <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
+      <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
+    </main>
 
     <script>
-      const SITE_MODE_STORAGE_KEY = "waddy-display-mode";
-      const SITE_MODE_DEFAULT = "classic";
-      const SITE_MODE_VALUES = new Set(["immersive", "classic"]);
-      const DREAM_SELECT_FORCE_IMMERSIVE = Boolean(window.__waddyDreamSelectForceImmersive);
-
-      function getModeFromQuery() {
-        if (DREAM_SELECT_FORCE_IMMERSIVE) {
-          return "immersive";
-        }
-        const params = new URLSearchParams(window.location.search);
-        const mode = params.get("mode");
-        return SITE_MODE_VALUES.has(mode) ? mode : null;
-      }
-
-      function getStoredMode() {
-        try {
-          const stored = window.localStorage.getItem(SITE_MODE_STORAGE_KEY);
-          return SITE_MODE_VALUES.has(stored) ? stored : null;
-        } catch (error) {
-          return null;
-        }
-      }
-
-      function setStoredMode(mode) {
-        try {
-          window.localStorage.setItem(SITE_MODE_STORAGE_KEY, mode);
-        } catch (error) {
-          // Ignore storage failures and keep the current in-memory mode.
-        }
-      }
-
-      function resolveInitialMode() {
-        if (DREAM_SELECT_FORCE_IMMERSIVE) {
-          return "immersive";
-        }
-        return getModeFromQuery() || getStoredMode() || SITE_MODE_DEFAULT;
-      }
-
-      function updateModeUrl(mode) {
-        const url = new URL(window.location.href);
-        url.searchParams.set("mode", mode);
-        window.history.replaceState({}, "", url);
-      }
-
-      function updateModeToggle(mode) {
-        const toggle = document.getElementById("mode-toggle");
-        if (!toggle) {
-          return;
-        }
-        if (DREAM_SELECT_FORCE_IMMERSIVE) {
-          toggle.textContent = "◆ IMMERSIVE ONLY";
-          toggle.disabled = true;
-          toggle.setAttribute("aria-disabled", "true");
-          return;
-        }
-        toggle.disabled = false;
-        toggle.removeAttribute("aria-disabled");
-        toggle.textContent = mode === "immersive" ? "◆ IMMERSIVE" : "▦ CLASSIC";
-      }
-
-      function applyMode(mode, options = {}) {
-        const resolvedMode = DREAM_SELECT_FORCE_IMMERSIVE ? "immersive" : (SITE_MODE_VALUES.has(mode) ? mode : SITE_MODE_DEFAULT);
-        document.documentElement.dataset.siteMode = resolvedMode;
-        document.body.classList.remove("mode-immersive", "mode-classic");
-        document.body.classList.add("mode-" + resolvedMode);
-        updateModeToggle(resolvedMode);
-        syncScenarioLinks(resolvedMode);
-
-        if (!DREAM_SELECT_FORCE_IMMERSIVE && options.persist !== false) {
-          setStoredMode(resolvedMode);
-        }
-        if (!DREAM_SELECT_FORCE_IMMERSIVE && options.updateUrl !== false) {
-          updateModeUrl(resolvedMode);
-        }
-        return resolvedMode;
-      }
-
-      function getCurrentMode() {
-        if (DREAM_SELECT_FORCE_IMMERSIVE) {
-          return "immersive";
-        }
-        return document.body.classList.contains("mode-classic") ? "classic" : "immersive";
-      }
-
-      function buildScenarioUrl(scenario) {
-        const params = new URLSearchParams();
-        params.set("scenario", scenario);
-        params.set("mode", getCurrentMode());
-        return "./galge-scenario?" + params.toString();
-      }
-
-      function syncScenarioLinks(mode) {
-        document.querySelectorAll('a[href*="galge-scenario"]').forEach(function (link) {
-          const rawHref = link.getAttribute("href");
-          if (!rawHref) {
-            return;
-          }
-          const url = new URL(rawHref, window.location.href);
-          if (!url.pathname.endsWith("/galge-scenario") && !url.pathname.endsWith("/galge-scenario.html")) {
-            return;
-          }
-          url.searchParams.set("mode", mode);
-          link.setAttribute("href", "./galge-scenario.html?" + url.searchParams.toString());
-        });
-      }
-
-      applyMode(window.__waddyInitialSiteMode || resolveInitialMode(), {
-        persist: true,
-        updateUrl: Boolean(getModeFromQuery()),
-      });
-
-      if (!DREAM_SELECT_FORCE_IMMERSIVE) {
-        document.getElementById("mode-toggle").addEventListener("click", function (event) {
-          event.preventDefault();
-          event.stopPropagation();
-          applyMode(getCurrentMode() === "immersive" ? "classic" : "immersive");
-        });
-      }
-
-      // ── Kongou Particle System (shared with galge-scenario) ──
       (function () {
-        const canvas = document.getElementById("particle-canvas");
-        const ctx = canvas.getContext("2d");
-        const bgColor = { h: 270, s: 40, l: 8 };
-        const bgClearColor = "rgba(12,5,24,0.15)";
-        let streams = [], stars = [], nebulae = [], pillars = [];
-        let animId = 0;
+        var toggle = document.getElementById("mode-toggle");
+        var forceImmersive = Boolean(window.__waddyDreamSelectForceImmersive);
+        if (toggle && forceImmersive) {
+          toggle.textContent = "◆ IMMERSIVE";
+          toggle.disabled = true;
+        }
+      })();
+
+      (function () {
+        var canvas = document.getElementById("particle-canvas");
+        var ctx = canvas.getContext("2d");
+        var bgColor = { h: 270, s: 40, l: 8 };
+        var bgClearColor = "rgba(12,5,24,0.15)";
+        var streams = [];
+        var stars = [];
+        var nebulae = [];
+        var pillars = [];
+        var animId = 0;
 
         function initCanvas() {
           canvas.width = window.innerWidth;
@@ -701,10 +653,15 @@
         }
 
         function initParticles() {
-          streams = []; stars = []; nebulae = []; pillars = [];
-          const w = canvas.width, h = canvas.height;
+          var i = 0;
+          var w = canvas.width;
+          var h = canvas.height;
+          streams = [];
+          stars = [];
+          nebulae = [];
+          pillars = [];
 
-          for (let i = 0; i < 6; i++) {
+          for (i = 0; i < 6; i += 1) {
             streams.push({
               y: Math.random() * h,
               baseX: Math.random() * w,
@@ -715,11 +672,11 @@
               width: Math.random() * 2.5 + 0.8,
               hue: Math.floor(Math.random() * 60 + bgColor.h - 30),
               len: Math.floor(Math.random() * 80 + 60),
-              trail: []
+              trail: [],
             });
           }
 
-          for (let i = 0; i < 80; i++) {
+          for (i = 0; i < 80; i += 1) {
             stars.push({
               x: Math.random() * w,
               y: Math.random() * h,
@@ -728,11 +685,11 @@
               size: Math.random() * 2 + 0.4,
               brightness: Math.random(),
               phase: Math.random() * Math.PI * 2,
-              speed: Math.random() * 2.5 + 0.8
+              speed: Math.random() * 2.5 + 0.8,
             });
           }
 
-          for (let i = 0; i < 5; i++) {
+          for (i = 0; i < 5; i += 1) {
             nebulae.push({
               x: Math.random() * w,
               y: Math.random() * h,
@@ -741,99 +698,114 @@
               dy: (Math.random() - 0.5) * 0.2,
               phase: Math.random() * Math.PI * 2,
               hue: Math.floor(Math.random() * 80 + bgColor.h - 40),
-              sat: Math.floor(Math.random() * 40 + 50)
+              sat: Math.floor(Math.random() * 40 + 50),
             });
           }
 
-          for (let i = 0; i < 3; i++) {
+          for (i = 0; i < 3; i += 1) {
             pillars.push({
               x: Math.random() * w,
               width: Math.random() * 50 + 15,
               phase: Math.random() * Math.PI * 2,
               speed: Math.random() * 0.02 + 0.01,
               hue: Math.floor(Math.random() * 40 + bgColor.h - 20),
-              drift: (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.4 : -0.4)
+              drift: (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.4 : -0.4),
             });
           }
         }
 
         function draw() {
-          const w = canvas.width, h = canvas.height;
-          const time = Date.now() * 0.001;
+          var w = canvas.width;
+          var h = canvas.height;
+          var time = Date.now() * 0.001;
+          var i = 0;
+
           ctx.fillStyle = bgClearColor;
           ctx.fillRect(0, 0, w, h);
 
-          for (const n of nebulae) {
-            n.x += n.dx; n.y += n.dy;
-            if (n.x < -200) n.x = w + 200;
-            if (n.x > w + 200) n.x = -200;
-            if (n.y < -200) n.y = h + 200;
-            if (n.y > h + 200) n.y = -200;
-            const pulse = Math.sin(time * 1.5 + n.phase) * 0.4 + 0.6;
-            const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * pulse);
-            grad.addColorStop(0, `hsla(${n.hue},${n.sat}%,40%,${0.12 * pulse})`);
-            grad.addColorStop(0.4, `hsla(${n.hue},${n.sat}%,25%,${0.06 * pulse})`);
-            grad.addColorStop(1, `hsla(${n.hue},${n.sat}%,10%,0)`);
+          for (i = 0; i < nebulae.length; i += 1) {
+            var nebula = nebulae[i];
+            nebula.x += nebula.dx;
+            nebula.y += nebula.dy;
+            if (nebula.x < -200) nebula.x = w + 200;
+            if (nebula.x > w + 200) nebula.x = -200;
+            if (nebula.y < -200) nebula.y = h + 200;
+            if (nebula.y > h + 200) nebula.y = -200;
+            var pulse = Math.sin(time * 1.5 + nebula.phase) * 0.4 + 0.6;
+            var nebulaGradient = ctx.createRadialGradient(nebula.x, nebula.y, 0, nebula.x, nebula.y, nebula.r * pulse);
+            nebulaGradient.addColorStop(0, "hsla(" + nebula.hue + "," + nebula.sat + "%,40%," + 0.12 * pulse + ")");
+            nebulaGradient.addColorStop(0.4, "hsla(" + nebula.hue + "," + nebula.sat + "%,25%," + 0.06 * pulse + ")");
+            nebulaGradient.addColorStop(1, "hsla(" + nebula.hue + "," + nebula.sat + "%,10%,0)");
             ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-            ctx.fillStyle = grad;
+            ctx.arc(nebula.x, nebula.y, nebula.r * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = nebulaGradient;
             ctx.fill();
           }
 
-          for (const p of pillars) {
-            p.x += p.drift + Math.sin(time * 0.8 + p.phase) * 1.2;
-            if (p.x < -100) p.x = w + 100;
-            if (p.x > w + 100) p.x = -100;
-            const intensity = Math.sin(time * p.speed * 50 + p.phase) * 0.5 + 0.5;
-            const grad = ctx.createLinearGradient(p.x - p.width / 2, 0, p.x + p.width / 2, 0);
-            grad.addColorStop(0, `hsla(${p.hue},60%,50%,0)`);
-            grad.addColorStop(0.5, `hsla(${p.hue},60%,50%,${0.08 * intensity})`);
-            grad.addColorStop(1, `hsla(${p.hue},60%,50%,0)`);
-            ctx.fillStyle = grad;
-            ctx.fillRect(p.x - p.width, 0, p.width * 2, h);
+          for (i = 0; i < pillars.length; i += 1) {
+            var pillar = pillars[i];
+            pillar.x += pillar.drift + Math.sin(time * 0.8 + pillar.phase) * 1.2;
+            if (pillar.x < -100) pillar.x = w + 100;
+            if (pillar.x > w + 100) pillar.x = -100;
+            var intensity = Math.sin(time * pillar.speed * 50 + pillar.phase) * 0.5 + 0.5;
+            var pillarGradient = ctx.createLinearGradient(pillar.x - pillar.width / 2, 0, pillar.x + pillar.width / 2, 0);
+            pillarGradient.addColorStop(0, "hsla(" + pillar.hue + ",60%,50%,0)");
+            pillarGradient.addColorStop(0.5, "hsla(" + pillar.hue + ",60%,50%," + 0.08 * intensity + ")");
+            pillarGradient.addColorStop(1, "hsla(" + pillar.hue + ",60%,50%,0)");
+            ctx.fillStyle = pillarGradient;
+            ctx.fillRect(pillar.x - pillar.width, 0, pillar.width * 2, h);
           }
 
-          for (const s of streams) {
-            const cx = s.baseX + Math.sin(time * 0.5 + s.phase) * 100;
-            s.trail.push({
-              x: cx + Math.sin(time * s.freq * 100 + s.phase) * s.amp,
-              y: s.y
+          for (i = 0; i < streams.length; i += 1) {
+            var stream = streams[i];
+            var cx = stream.baseX + Math.sin(time * 0.5 + stream.phase) * 100;
+            stream.trail.push({
+              x: cx + Math.sin(time * stream.freq * 100 + stream.phase) * stream.amp,
+              y: stream.y,
             });
-            s.y -= s.speed;
-            if (s.y < -20) { s.y = h + 20; s.trail.length = 0; }
-            if (s.trail.length > s.len) s.trail.shift();
-            if (s.trail.length > 2) {
+            stream.y -= stream.speed;
+            if (stream.y < -20) {
+              stream.y = h + 20;
+              stream.trail.length = 0;
+            }
+            if (stream.trail.length > stream.len) {
+              stream.trail.shift();
+            }
+            if (stream.trail.length > 2) {
               ctx.beginPath();
-              ctx.moveTo(s.trail[0].x, s.trail[0].y);
-              for (let i = 1; i < s.trail.length; i++) {
-                const pt = s.trail[i], prev = s.trail[i - 1];
-                ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + pt.x) / 2, (prev.y + pt.y) / 2);
+              ctx.moveTo(stream.trail[0].x, stream.trail[0].y);
+              for (var j = 1; j < stream.trail.length; j += 1) {
+                var point = stream.trail[j];
+                var prev = stream.trail[j - 1];
+                ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + point.x) / 2, (prev.y + point.y) / 2);
               }
-              ctx.strokeStyle = `hsla(${s.hue},70%,60%,0.5)`;
-              ctx.lineWidth = s.width;
-              ctx.shadowColor = `hsla(${s.hue},80%,50%,0.6)`;
+              ctx.strokeStyle = "hsla(" + stream.hue + ",70%,60%,0.5)";
+              ctx.lineWidth = stream.width;
+              ctx.shadowColor = "hsla(" + stream.hue + ",80%,50%,0.6)";
               ctx.shadowBlur = 12;
               ctx.stroke();
               ctx.shadowBlur = 0;
             }
           }
 
-          for (const star of stars) {
-            star.x += star.vx; star.y += star.vy;
+          for (i = 0; i < stars.length; i += 1) {
+            var star = stars[i];
+            star.x += star.vx;
+            star.y += star.vy;
             if (star.x < 0) star.x = w;
             if (star.x > w) star.x = 0;
             if (star.y < 0) star.y = h;
             if (star.y > h) star.y = 0;
-            const flicker = Math.sin(time * star.speed * 3 + star.phase) * 0.3 + 0.7;
-            const alpha = star.brightness * flicker;
+            var flicker = Math.sin(time * star.speed * 3 + star.phase) * 0.3 + 0.7;
+            var alpha = star.brightness * flicker;
             ctx.beginPath();
             ctx.arc(star.x, star.y, star.size * flicker, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(180,170,220,${alpha * 0.7})`;
+            ctx.fillStyle = "rgba(180,170,220," + alpha * 0.7 + ")";
             ctx.fill();
             if (star.size > 1.5) {
               ctx.beginPath();
               ctx.arc(star.x, star.y, star.size * 3 * flicker, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(140,130,200,${alpha * 0.12})`;
+              ctx.fillStyle = "rgba(140,130,200," + alpha * 0.12 + ")";
               ctx.fill();
             }
           }
@@ -849,437 +821,452 @@
           initCanvas();
           initParticles();
         });
+
+        window.addEventListener("beforeunload", function () {
+          cancelAnimationFrame(animId);
+        });
       })();
 
-      /**
-       * DREAM REGISTRY
-       * location: 時系列順の場所。同じlocationのシナリオは同じノードに束ねられる。
-       * order: location内の表示順（小さい方が上）
-       */
-      const DREAM_REGISTRY = {
-        "2026-03-18": [
-          {
-            scenario: "2026-03-18_声の座標",
-            realm: "kenkai", icon: "🌕",
-            title: "声の座標",
-            desc: "選ばれた世界線の記録",
-            tag: "顕界",
-            location: "神話製作機械", order: 0
-          }
-        ],
-        "2026-03-19": [
-          {
-            scenario: "2026-03-19_影の踊り子",
-            realm: "kenkai", icon: "🌕",
-            title: "影の踊り子",
-            desc: "ワディー×ひなひな ─ 選ばれた世界線の記録",
-            tag: "顕界",
-            location: "VRChat ─ 深夜のラウンジ", order: 0
-          },
-          {
-            scenario: "2026-03-19_出口のない建物",
-            realm: "genkai", icon: "🌘",
-            title: "出口のない建物",
-            desc: "選択肢を入れなかった建物の記録",
-            tag: "幻界",
-            location: "VRChat ─ 深夜のラウンジ", order: 1
-          }
-        ],
-        "2026-03-20": [
-          {
-            scenario: "2026-03-20_各駅停車の形而上学",
-            realm: "kenkai", icon: "🌕",
-            title: "各駅停車の形而上学",
-            desc: "ことみ×でじこ×マルチ ─ フラグ蓄積型マルチエンディング",
-            tag: "顕界",
-            location: "各駅停車 ─ 全行程", order: 0
-          },
-          {
-            scenario: "2026-03-20_急行の形而上学",
-            realm: "genkai", icon: "🌘",
-            title: "急行の形而上学",
-            desc: "ことみの声が届かなかった12分",
-            tag: "幻界",
-            location: "総武線 ─ 選択肢①", order: 1,
-            route: "中央線で急いでいく → 確定"
-          },
-          {
-            scenario: "2026-03-20_黄色い箱の独白",
-            realm: "genkai", icon: "🌘",
-            title: "黄色い箱の独白",
-            desc: "瑠璃子×ワディー ─ 電車は棺か揺りかごか",
-            tag: "幻界",
-            location: "総武線 ─ 選択肢①-b", order: 2,
-            route: "車内で黙る → silent_trainフラグ"
-          },
-          {
-            scenario: "2026-03-20_二百円の祈り",
-            realm: "genkai", icon: "🌘",
-            title: "二百円の祈り",
-            desc: "あゆ×ワディー ─ 瓶の底に沈んでいるもの",
-            tag: "幻界",
-            location: "ミルクスタンド ─ 選択肢②", order: 0,
-            route: "先を急ぐ → skipped_milkstandフラグ"
-          },
-          {
-            scenario: "2026-03-20_煮込みの時間論",
-            realm: "genkai", icon: "🌘",
-            title: "煮込みの時間論",
-            desc: "物理おじ×ワディー ─ もつ煮込みとPID制御",
-            tag: "幻界",
-            location: "金子屋 ─ 選択肢③-b", order: 0,
-            route: "一人で飲む → solo_kanekoyaフラグ"
-          },
-          {
-            scenario: "2026-03-20_16小節の輪廻",
-            realm: "genkai", icon: "🌘",
-            title: "16小節の輪廻",
-            desc: "フェイリス×ワディー ─ DJとタイムリープ",
-            tag: "幻界",
-            location: "Iv Akihabara ─ 選択肢④-b", order: 0,
-            route: "先に出る → left_iv_earlyフラグ"
-          },
-          {
-            scenario: "2026-03-20_包むということ",
-            realm: "genkai", icon: "🌘",
-            title: "包むということ",
-            desc: "マルチ×ワディー ─ 餃子の皮と心のガワ",
-            tag: "幻界",
-            location: "大阪王将 ─ 選択肢⑤", order: 0,
-            route: "外に出る → マルチと二人"
-          }
-        ],
-        "2026-03-21": [
-          {
-            scenario: "2026-03-21_血中アルコール飽和度",
-            realm: "kenkai", icon: "🌕",
-            title: "血中アルコール飽和度",
-            desc: "ワディー ─ 各駅停車の代償",
-            tag: "顕界",
-            location: "ワディーゲストハウス ─ 寝室", order: 0
-          },
-          {
-            scenario: "2026-03-21_百夢回廊",
-            realm: "genkai", icon: "🌘",
-            title: "百夢回廊",
-            desc: "ひなた×みとら×ワディー ─ 百の扉、千の幻影",
-            tag: "幻界",
-            location: "夢の境界線", order: 1
-          },
-          {
-            scenario: "2026-03-21_沈黙のリビング",
-            realm: "genkai", icon: "💤",
-            title: "沈黙のリビング",
-            desc: "ねむりん×ワディー ─ 選ばれた静けさ",
-            tag: "幻界",
-            location: "ゲストハウスのソファ", order: 2
-          },
-          {
-            scenario: "2026-03-21_水底の秋葉原",
-            realm: "genkai", icon: "🫧",
-            title: "水底の秋葉原",
-            desc: "ことみ×ワディー ─ 記憶の沈殿",
-            tag: "幻界",
-            location: "水没した電気街口", order: 3
-          },
-          {
-            scenario: "2026-03-21_活字の牢獄",
-            realm: "genkai", icon: "📖",
-            title: "活字の牢獄",
-            desc: "くくり×ワディー ─ 日記は魔法陣",
-            tag: "幻界",
-            location: "書架の森", order: 4
-          },
-          {
-            scenario: "2026-03-21_鏡像の奴隷",
-            realm: "genkai", icon: "🪞",
-            title: "鏡像の奴隷",
-            desc: "瑠璃子×ワディー ─ 実像と鏡像の逆転",
-            tag: "幻界",
-            location: "鏡の回廊", order: 5
-          },
-          {
-            scenario: "2026-03-21_看板の墓場",
-            realm: "genkai", icon: "🪧",
-            title: "看板の墓場",
-            desc: "でじこ×ワディー ─ 名前だけでは足りない",
-            tag: "幻界",
-            location: "逆転秋葉原", order: 6
-          },
-          {
-            scenario: "2026-03-21_琥珀色の溺死",
-            realm: "genkai", icon: "🥃",
-            title: "琥珀色の溺死",
-            desc: "フェイリス×ワディー ─ 過飽和の結晶化",
-            tag: "幻界",
-            location: "琥珀の酒場", order: 7
-          },
-          {
-            scenario: "2026-03-21_凍った秒針",
-            realm: "genkai", icon: "⏱️",
-            title: "凍った秒針",
-            desc: "美凪×ワディー ─ 永遠の22:43",
-            tag: "幻界",
-            location: "時計塔", order: 8
-          },
-          {
-            scenario: "2026-03-21_自由落下の定義",
-            realm: "genkai", icon: "🚀",
-            title: "自由落下の定義",
-            desc: "くど×ワディー ─ 停まらない電車に名前はない",
-            tag: "幻界",
-            location: "螺旋階段", order: 9
-          },
-          {
-            scenario: "2026-03-21_乗車拒否",
-            realm: "genkai", icon: "🎫",
-            title: "乗車拒否",
-            desc: "あゆ×ワディー ─ 壊した約束は修理できない",
-            tag: "幻界",
-            location: "幻影のプラットホーム", order: 10
-          },
-          {
-            scenario: "2026-03-21_永遠の微睡み",
-            realm: "genkai", icon: "😴",
-            title: "永遠の微睡み",
-            desc: "ひなた×ワディー ─ もう少しだけの永遠",
-            tag: "幻界",
-            location: "最後の扉の前", order: 11
-          }
-        ],
-        "2026-03-22": [
-          {
-            scenario: "2026-03-22_顕幻の交差路",
-            realm: "kenkai", icon: "🌕",
-            title: "顕幻の交差路",
-            desc: "ワディー×住人たち ─ 創作者は自分の世界から出られるのか",
-            tag: "顕幻迷宮",
-            location: "日曜の夜のゲストハウス", order: 0
-          },
-          {
-            scenario: "2026-03-22_沈まない太陽",
-            realm: "genkai", icon: "☀️",
-            title: "沈まない太陽",
-            desc: "マルチ×ワディー ─ 造られた感情は本物か",
-            tag: "幻界",
-            location: "第三層 ─ マルチの部屋", order: 1,
-            route: "マルチの部屋に入る → GENKAI_END_1"
-          },
-          {
-            scenario: "2026-03-22_放課後の永遠",
-            realm: "genkai", icon: "🌻",
-            title: "放課後の永遠",
-            desc: "ひなた×ワディー ─ 時計は15:45を指したまま",
-            tag: "幻界",
-            location: "第三層 ─ ひなたの部屋", order: 2,
-            route: "ひなたの部屋に入る → GENKAI_END_2"
-          },
-          {
-            scenario: "2026-03-22_逆転する鏡",
-            realm: "genkai", icon: "🪞",
-            title: "逆転する鏡",
-            desc: "瑠璃子×ワディー ─ 書き手と書かれた者の共生",
-            tag: "幻界",
-            location: "第三層 ─ 瑠璃子の部屋", order: 3,
-            route: "瑠璃子の部屋に入る → GENKAI_END_3"
-          },
-          {
-            scenario: "2026-03-22_未送信の手紙",
-            realm: "genkai", icon: "✉️",
-            title: "未送信の手紙",
-            desc: "あゆ×ワディー ─ 届かなかった言葉は存在したのか",
-            tag: "幻界",
-            location: "第四層 ─ 郵便受け", order: 4,
-            route: "郵便受けを開ける → GENKAI_END_4"
-          },
-          {
-            scenario: "2026-03-22_書架の奥の墓",
-            realm: "genkai", icon: "📖",
-            title: "書架の奥の墓",
-            desc: "くくり×ワディー ─ 読まれなかった物語は死んだのか",
-            tag: "幻界",
-            location: "第三層 ─ くくりの書庫", order: 5,
-            route: "書庫に入る → GENKAI_END_5"
-          },
-          {
-            scenario: "2026-03-22_02：00の台所",
-            realm: "genkai", icon: "🍜",
-            title: "02:00の台所",
-            desc: "物理おじ×ワディー ─ 孤独味のカップ麺",
-            tag: "幻界",
-            location: "第一層 ─ 深夜の台所", order: 6,
-            route: "冷蔵庫のビールを飲む → GENKAI_END_6"
-          },
-          {
-            scenario: "2026-03-22_錆びた看板",
-            realm: "genkai", icon: "🪧",
-            title: "錆びた看板",
-            desc: "でじこ×ワディー ─ 名前は鎖か翼か",
-            tag: "幻界",
-            location: "第三層 ─ でじこの部屋", order: 7,
-            route: "でじこの部屋に入る → GENKAI_END_7"
-          },
-          {
-            scenario: "2026-03-22_空の酒瓶",
-            realm: "genkai", icon: "🥃",
-            title: "空の酒瓶",
-            desc: "萌神×ワディー ─ 空瓶は飲まれた証拠",
-            tag: "幻界",
-            location: "第三層 ─ 萌神のバー", order: 8,
-            route: "萌神の部屋に入る → GENKAI_END_8"
-          },
-          {
-            scenario: "2026-03-22_最終行のセミコロン",
-            realm: "genkai", icon: "⌨️",
-            title: "最終行のセミコロン",
-            desc: "ひなひな×ワディー ─ 永遠に途中でいること",
-            tag: "幻界",
-            location: "第二層 ─ コードの最深部", order: 9,
-            route: "コードの深層へ → GENKAI_END_9"
-          },
-          {
-            scenario: "2026-03-22_無音の配信",
-            realm: "genkai", icon: "📡",
-            title: "無音の配信",
-            desc: "ワディー独白 ─ 視聴者数: 1",
-            tag: "幻界",
-            location: "第四層 ─ 扉の前", order: 10,
-            route: "扉の前に座る → GENKAI_END_10"
-          }
-        ]
-      };
+      (function () {
+        var DESKTOP_GRID = {
+          padX: 140,
+          padY: 110,
+          layerGap: 260,
+          laneGap: 118,
+          nodeWidth: 220,
+          nodeHeight: 96,
+        };
+        var MOBILE_GRID = {
+          padX: 16,
+          padY: 24,
+          bandGap: 48,
+          bandPaddingTop: 18,
+          bandPaddingBottom: 28,
+          mainGap: 18,
+          sideGapX: 12,
+          sideGapY: 16,
+          minNodeWidth: 112,
+          maxNodeWidth: 220,
+          nodeHeight: 96,
+        };
 
-      // ── Render ──
-      const params = new URLSearchParams(window.location.search);
-      const hash = window.location.hash.replace(/^#/, "");
-      const date = params.get("date") || hash || null;
-      const dreams = DREAM_REGISTRY[date];
+        var KIND_LABELS = {
+          root: "起点",
+          route: "本線",
+          rejoin: "再合流",
+          branch: "分岐",
+          side: "枝線",
+          ending: "終点",
+        };
 
-      document.getElementById("date-label").textContent = date || "";
+        var REALM_LABELS = {
+          kenkai: "顕界",
+          genkai: "幻界",
+        };
 
-      const timeline = document.getElementById("timeline");
+        var dateLabel = document.getElementById("date-label");
+        var mapTitle = document.getElementById("map-title");
+        var graphStage = document.getElementById("graph-stage");
+        var graphEmpty = document.getElementById("graph-empty");
+        var graphShell = document.getElementById("graph-shell");
+        var graphEdges = document.getElementById("graph-edges");
+        var graphEdgeLabels = document.getElementById("graph-edge-labels");
+        var graphNodes = document.getElementById("graph-nodes");
+        var orientationQuery = window.matchMedia("(orientation: portrait)");
+        var pointerQuery = window.matchMedia("(pointer: coarse)");
+        var anyPointerQuery = window.matchMedia("(any-pointer: coarse)");
+        var currentGraph = null;
+        var renderScheduled = false;
 
-      if (!dreams || dreams.length === 0) {
-        timeline.innerHTML = '<p class="no-dreams">この日の世界線は観測されていません。</p>';
-      } else if (dreams.length === 1) {
-        // 1つだけなら直接遷移
-        window.location.href = buildScenarioUrl(dreams[0].scenario);
-      } else {
-        // Group by location, preserving insertion order
-        const locationOrder = [];
-        const locationMap = new Map();
-        for (const d of dreams) {
-          const loc = d.location || "不明";
-          if (!locationMap.has(loc)) {
-            locationOrder.push(loc);
-            locationMap.set(loc, []);
-          }
-          locationMap.get(loc).push(d);
-        }
-        // Sort within each location
-        for (const [, arr] of locationMap) {
-          arr.sort((a, b) => (a.order || 0) - (b.order || 0));
+        function resolveDate() {
+          var params = new URLSearchParams(window.location.search);
+          var hash = window.location.hash.replace(/^#/, "");
+          return params.get("date") || hash || null;
         }
 
-        // Add trunk line
-        timeline.innerHTML = '<div class="trunk-line"></div>';
+        function resolveLayoutMode() {
+          var hasTouch = typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0;
+          var coarsePointer = pointerQuery.matches || anyPointerQuery.matches;
+          var portrait = orientationQuery.matches;
+          return hasTouch && coarsePointer && portrait ? "mobile-vertical" : "desktop-horizontal";
+        }
 
-        for (const loc of locationOrder) {
-          const items = locationMap.get(loc);
-          const hasKenkai = items.some(d => d.realm === "kenkai");
+        function applyLayoutMode(mode) {
+          document.body.dataset.graphLayout = mode;
+          graphShell.dataset.layoutMode = mode;
+          graphStage.dataset.layoutMode = mode;
+        }
 
-          const group = document.createElement("div");
-          group.className = "location-group";
-
-          // Location node
-          group.innerHTML += `
-            <div class="location-node">
-              <div class="node-dot ${hasKenkai ? 'kenkai' : ''}"></div>
-              <span class="location-label">${loc}</span>
-            </div>
-          `;
-
-          // Split items into kenkai and genkai
-          const kenkaiItems = items.filter(d => d.realm === 'kenkai');
-          const genkaiItems = items.filter(d => d.realm === 'genkai');
-
-          // Helper: parse desc into chars + rest
-          function renderDesc(desc) {
-            const match = desc.match(/^(.+?)\s*─\s*(.+)$/);
-            if (match) {
-              return `<span class="card-chars">${match[1]}</span><span class="card-desc-rest">${match[2]}</span>`;
-            }
-            return `<span class="card-desc-rest">${desc}</span>`;
+        function addMediaListener(query, listener) {
+          if (typeof query.addEventListener === "function") {
+            query.addEventListener("change", listener);
+            return function () {
+              query.removeEventListener("change", listener);
+            };
           }
-
-          // Kenkai branch (main timeline)
-          if (kenkaiItems.length > 0) {
-            const branchDiv = document.createElement('div');
-            branchDiv.className = 'branches';
-            for (const d of kenkaiItems) {
-              const card = document.createElement('a');
-              card.className = `scenario-card ${d.realm}`;
-              card.href = buildScenarioUrl(d.scenario);
-              card.innerHTML = `
-                <span class="card-icon">${d.icon}</span>
-                <div class="card-body">
-                  <div class="card-title">${d.title}</div>
-                  <div class="card-desc">${renderDesc(d.desc)}</div>
-                </div>
-                <span class="card-tag">${d.tag}</span>
-              `;
-              branchDiv.appendChild(card);
-            }
-            group.appendChild(branchDiv);
+          if (typeof query.addListener === "function") {
+            query.addListener(listener);
+            return function () {
+              query.removeListener(listener);
+            };
           }
+          return function () {};
+        }
 
-          // Genkai parallel track
-          if (genkaiItems.length > 0) {
-            const trackDiv = document.createElement('div');
-            trackDiv.className = 'genkai-track';
+        function buildScenarioUrl(scenarioName, entryLabel) {
+          var url = new URL("./galge-scenario.html", window.location.href);
+          url.searchParams.set("scenario", scenarioName);
+          if (entryLabel) {
+            url.searchParams.set("entry", entryLabel);
+          }
+          url.searchParams.set("mode", "immersive");
+          return url.pathname + url.search;
+        }
 
-            // If this location has no kenkai card, add a passthrough marker
-            if (kenkaiItems.length === 0) {
-              // Find the kenkai scenario for this date
-              const kenkaiRef = dreams.find(d => d.realm === 'kenkai');
-              if (kenkaiRef) {
-                const marker = document.createElement('div');
-                marker.className = 'kenkai-passthrough';
-                marker.innerHTML = `🌕 <a href="${buildScenarioUrl(kenkaiRef.scenario)}">顕界: ${kenkaiRef.title}</a> ─ ルート通過`;
-                group.appendChild(marker);
+        async function fetchGraph(date) {
+          var response = await fetch("./scenarios/adms/" + date + ".json");
+          if (!response.ok) {
+            throw new Error("graph not found");
+          }
+          return response.json();
+        }
+
+        function showEmpty(message) {
+          graphStage.hidden = true;
+          graphEmpty.hidden = false;
+          graphEmpty.textContent = message;
+          mapTitle.textContent = "観測されていません";
+        }
+
+        function getDesktopNodeRect(node) {
+          return {
+            x: DESKTOP_GRID.padX + node.layer * DESKTOP_GRID.layerGap,
+            y: DESKTOP_GRID.padY + node.lane * DESKTOP_GRID.laneGap,
+            width: DESKTOP_GRID.nodeWidth,
+            height: DESKTOP_GRID.nodeHeight,
+          };
+        }
+
+        function createNodeElement(node, rect) {
+          var card = document.createElement("a");
+          card.className = "scenario-card";
+          card.href = buildScenarioUrl(node.scenario, node.entry);
+          card.style.left = rect.x + "px";
+          card.style.top = rect.y + "px";
+          card.style.width = rect.width + "px";
+          card.style.minHeight = rect.height + "px";
+          card.dataset.graphNodeId = node.id;
+          card.dataset.graphRealm = node.realm;
+          card.dataset.graphKind = node.kind;
+          card.dataset.graphLayer = String(node.layer);
+          card.dataset.graphLane = String(node.lane);
+          card.setAttribute(
+            "aria-label",
+            [node.title, REALM_LABELS[node.realm] || node.realm, KIND_LABELS[node.kind] || node.kind]
+              .filter(Boolean)
+              .join(" / ")
+          );
+          card.title = node.entry ? node.scenario + " / " + node.entry : node.scenario;
+
+          var icon = document.createElement("span");
+          icon.className = "card-icon";
+          icon.textContent = node.icon || "•";
+
+          var copy = document.createElement("div");
+          copy.className = "card-copy";
+
+          var heading = document.createElement("div");
+          heading.className = "card-heading";
+
+          var title = document.createElement("div");
+          title.className = "card-title";
+          title.textContent = node.title;
+
+          var kind = document.createElement("span");
+          kind.className = "card-kind";
+          kind.textContent = KIND_LABELS[node.kind] || node.kind || "";
+
+          var summary = document.createElement("div");
+          summary.className = "card-summary";
+          summary.textContent = node.summary || "";
+
+          var meta = document.createElement("div");
+          meta.className = "card-meta";
+          meta.textContent = (REALM_LABELS[node.realm] || node.realm || "") + (node.entry ? " / " + node.entry : "");
+
+          heading.appendChild(title);
+          heading.appendChild(kind);
+          copy.appendChild(heading);
+          copy.appendChild(summary);
+          copy.appendChild(meta);
+          card.appendChild(icon);
+          card.appendChild(copy);
+          return card;
+        }
+
+        function buildEdgePathDesktop(fromRect, toRect) {
+          var startX = fromRect.x + fromRect.width;
+          var startY = fromRect.y + fromRect.height / 2;
+          var endX = toRect.x;
+          var endY = toRect.y + toRect.height / 2;
+          var deltaX = Math.max(80, (endX - startX) * 0.34);
+          var control1X = startX + deltaX;
+          var control2X = endX - deltaX;
+          return {
+            d: "M " + startX + " " + startY + " C " + control1X + " " + startY + ", " + control2X + " " + endY + ", " + endX + " " + endY,
+            labelX: (startX + endX) / 2,
+            labelY: (startY + endY) / 2 - (startY === endY ? 18 : 0),
+          };
+        }
+
+        function buildEdgePathMobile(fromRect, toRect) {
+          var startX = fromRect.x + fromRect.width / 2;
+          var startY = fromRect.y + fromRect.height;
+          var endX = toRect.x + toRect.width / 2;
+          var endY = toRect.y;
+          var direction = endY >= startY ? 1 : -1;
+          var deltaY = Math.max(52, Math.abs(endY - startY) * 0.38);
+          var control1Y = startY + deltaY * direction;
+          var control2Y = endY - deltaY * direction;
+          return {
+            d: "M " + startX + " " + startY + " C " + startX + " " + control1Y + ", " + endX + " " + control2Y + ", " + endX + " " + endY,
+            labelX: (startX + endX) / 2,
+            labelY: (startY + endY) / 2,
+          };
+        }
+
+        function computeDesktopLayout(sortedNodes) {
+          var rectMap = new Map();
+          var maxLayer = sortedNodes.reduce(function (value, node) {
+            return Math.max(value, node.layer);
+          }, 0);
+          var maxLane = sortedNodes.reduce(function (value, node) {
+            return Math.max(value, node.lane);
+          }, 0);
+          var stageWidth = Math.max(graphShell.clientWidth || 0, DESKTOP_GRID.padX * 2 + maxLayer * DESKTOP_GRID.layerGap + DESKTOP_GRID.nodeWidth);
+          var stageHeight = Math.max(graphShell.clientHeight || 0, DESKTOP_GRID.padY * 2 + maxLane * DESKTOP_GRID.laneGap + DESKTOP_GRID.nodeHeight);
+
+          sortedNodes.forEach(function (node) {
+            rectMap.set(node.id, getDesktopNodeRect(node));
+          });
+
+          return {
+            mode: "desktop-horizontal",
+            stageWidth: stageWidth,
+            stageHeight: stageHeight,
+            rectMap: rectMap,
+            showEdgeLabels: true,
+            buildEdgePath: buildEdgePathDesktop,
+          };
+        }
+
+        function computeMobileLayout(sortedNodes) {
+          var rectMap = new Map();
+          var shellWidth = graphShell.clientWidth || window.innerWidth || 390;
+          var usableWidth = Math.max(280, Math.floor(shellWidth - 8));
+          var twoColumnWidth = Math.floor((usableWidth - MOBILE_GRID.padX * 2 - MOBILE_GRID.sideGapX) / 2);
+          var nodeWidth = Math.max(MOBILE_GRID.minNodeWidth, Math.min(MOBILE_GRID.maxNodeWidth, twoColumnWidth));
+          var leftX = MOBILE_GRID.padX;
+          var rightX = usableWidth - MOBILE_GRID.padX - nodeWidth;
+          var centerX = Math.max(MOBILE_GRID.padX, Math.round((usableWidth - nodeWidth) / 2));
+          var layers = new Map();
+          var orderedLayers = [];
+          var cursorY = MOBILE_GRID.padY;
+          var lastBottom = MOBILE_GRID.padY;
+
+          sortedNodes.forEach(function (node) {
+            if (!layers.has(node.layer)) {
+              layers.set(node.layer, []);
+              orderedLayers.push(node.layer);
+            }
+            layers.get(node.layer).push(node);
+          });
+
+          orderedLayers.sort(function (a, b) {
+            return a - b;
+          });
+
+          orderedLayers.forEach(function (layer) {
+            var layerNodes = layers.get(layer).slice().sort(function (a, b) {
+              if (a.lane !== b.lane) return a.lane - b.lane;
+              return a.id.localeCompare(b.id);
+            });
+            var mainNodes = [];
+            var sideNodes = [];
+            var bandTop = cursorY;
+            var localCursorY = bandTop + MOBILE_GRID.bandPaddingTop;
+
+            layerNodes.forEach(function (node) {
+              if (node.kind === "side") {
+                sideNodes.push(node);
+              } else {
+                mainNodes.push(node);
               }
+            });
+
+            mainNodes.forEach(function (node) {
+              rectMap.set(node.id, {
+                x: centerX,
+                y: localCursorY,
+                width: nodeWidth,
+                height: MOBILE_GRID.nodeHeight,
+              });
+              localCursorY += MOBILE_GRID.nodeHeight + MOBILE_GRID.mainGap;
+            });
+
+            if (mainNodes.length > 0) {
+              localCursorY -= MOBILE_GRID.mainGap;
             }
 
-            for (const d of genkaiItems) {
-              const card = document.createElement('a');
-              card.className = `scenario-card ${d.realm}`;
-              card.href = buildScenarioUrl(d.scenario);
-              card.innerHTML = `
-                <span class="card-icon">${d.icon}</span>
-                <div class="card-body">
-                  <div class="card-title">${d.title}</div>
-                  <div class="card-desc">${renderDesc(d.desc)}</div>
-                </div>
-                <span class="card-tag">${d.tag}</span>
-              `;
-              trackDiv.appendChild(card);
+            lastBottom = localCursorY;
+
+            if (sideNodes.length > 0) {
+              var sideStartY = Math.max(localCursorY + MOBILE_GRID.sideGapY, bandTop + MOBILE_GRID.bandPaddingTop);
+              sideNodes.forEach(function (node, index) {
+                var column = index % 2;
+                var row = Math.floor(index / 2);
+                rectMap.set(node.id, {
+                  x: column === 0 ? leftX : rightX,
+                  y: sideStartY + row * (MOBILE_GRID.nodeHeight + MOBILE_GRID.sideGapY),
+                  width: nodeWidth,
+                  height: MOBILE_GRID.nodeHeight,
+                });
+              });
+              lastBottom = sideStartY + Math.ceil(sideNodes.length / 2) * MOBILE_GRID.nodeHeight + Math.max(0, Math.ceil(sideNodes.length / 2) - 1) * MOBILE_GRID.sideGapY;
             }
-            group.appendChild(trackDiv);
-          }
-          timeline.appendChild(group);
+
+            cursorY = lastBottom + MOBILE_GRID.bandPaddingBottom + MOBILE_GRID.bandGap;
+          });
+
+          return {
+            mode: "mobile-vertical",
+            stageWidth: usableWidth,
+            stageHeight: Math.max(graphShell.clientHeight || 0, lastBottom + MOBILE_GRID.padY),
+            rectMap: rectMap,
+            showEdgeLabels: false,
+            buildEdgePath: buildEdgePathMobile,
+          };
         }
 
-        // Terminal node
-        const terminal = document.createElement("div");
-        terminal.className = "location-group";
-        terminal.innerHTML = `
-          <div class="terminal-node">
-            <div class="terminal-dot"></div>
-            <span class="terminal-label">── 世界線の末端 ──</span>
-          </div>
-        `;
-        timeline.appendChild(terminal);
-      }
+        function computeLayout(sortedNodes) {
+          var mode = resolveLayoutMode();
+          applyLayoutMode(mode);
+          return mode === "mobile-vertical" ? computeMobileLayout(sortedNodes) : computeDesktopLayout(sortedNodes);
+        }
+
+        function scheduleRender() {
+          if (!currentGraph || renderScheduled) {
+            return;
+          }
+          renderScheduled = true;
+          window.requestAnimationFrame(function () {
+            renderScheduled = false;
+            if (currentGraph) {
+              renderGraph(currentGraph);
+            }
+          });
+        }
+
+        function renderGraph(graph) {
+          var nodes = Array.isArray(graph.nodes) ? graph.nodes.slice() : [];
+          var edges = Array.isArray(graph.edges) ? graph.edges.slice() : [];
+          var sortedNodes = nodes.slice().sort(function (a, b) {
+            if (a.layer !== b.layer) return a.layer - b.layer;
+            return a.lane - b.lane;
+          });
+
+          dateLabel.textContent = graph.date || resolveDate() || "";
+          mapTitle.textContent = graph.title || "観測された地図";
+          document.title = (graph.title || "A.D.M.S.") + " | ワディーゲストハウス";
+
+          if (sortedNodes.length === 0) {
+            showEmpty("この日の世界線は観測されていません。");
+            return;
+          }
+
+          if (sortedNodes.length === 1) {
+            window.location.replace(buildScenarioUrl(sortedNodes[0].scenario, sortedNodes[0].entry));
+            return;
+          }
+
+          currentGraph = graph;
+          var nodeMap = new Map();
+          for (var i = 0; i < sortedNodes.length; i += 1) {
+            nodeMap.set(sortedNodes[i].id, sortedNodes[i]);
+          }
+
+          var layout = computeLayout(sortedNodes);
+
+          graphStage.hidden = false;
+          graphEmpty.hidden = true;
+          graphStage.style.width = layout.stageWidth + "px";
+          graphStage.style.height = layout.stageHeight + "px";
+          graphEdges.setAttribute("viewBox", "0 0 " + layout.stageWidth + " " + layout.stageHeight);
+          graphEdges.setAttribute("width", String(layout.stageWidth));
+          graphEdges.setAttribute("height", String(layout.stageHeight));
+          graphEdges.style.overflow = layout.mode === "mobile-vertical" ? "hidden" : "visible";
+          graphEdges.innerHTML = "";
+          graphEdgeLabels.innerHTML = "";
+          graphNodes.innerHTML = "";
+
+          for (var j = 0; j < sortedNodes.length; j += 1) {
+            var node = sortedNodes[j];
+            var rect = layout.rectMap.get(node.id);
+            graphNodes.appendChild(createNodeElement(node, rect));
+          }
+
+          for (var k = 0; k < edges.length; k += 1) {
+            var edge = edges[k];
+            var fromNode = nodeMap.get(edge.from);
+            var toNode = nodeMap.get(edge.to);
+            if (!fromNode || !toNode) {
+              continue;
+            }
+
+            var pathInfo = layout.buildEdgePath(layout.rectMap.get(fromNode.id), layout.rectMap.get(toNode.id));
+            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", pathInfo.d);
+            path.setAttribute("class", "graph-edge");
+            path.dataset.edgeStyle = edge.style || "kenkai";
+            graphEdges.appendChild(path);
+
+            if (layout.showEdgeLabels && edge.choiceText) {
+              var label = document.createElement("div");
+              label.className = "edge-label";
+              label.textContent = edge.choiceText;
+              label.style.left = pathInfo.labelX + "px";
+              label.style.top = pathInfo.labelY + "px";
+              graphEdgeLabels.appendChild(label);
+            }
+          }
+        }
+
+        async function main() {
+          var date = resolveDate();
+          dateLabel.textContent = date || "";
+          mapTitle.textContent = "観測する日付を探索中";
+          applyLayoutMode(resolveLayoutMode());
+
+          if (!date) {
+            showEmpty("日付が指定されていません。");
+            return;
+          }
+
+          try {
+            var graph = await fetchGraph(date);
+            renderGraph(graph);
+          } catch (error) {
+            showEmpty("この日の世界線は観測されていません。");
+          }
+        }
+
+        addMediaListener(orientationQuery, scheduleRender);
+        addMediaListener(pointerQuery, scheduleRender);
+        addMediaListener(anyPointerQuery, scheduleRender);
+        window.addEventListener("resize", scheduleRender);
+
+        main();
+      })();
     </script>
   </body>
 </html>

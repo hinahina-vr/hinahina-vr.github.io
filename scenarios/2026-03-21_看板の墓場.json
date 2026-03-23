@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、看板を追い続けた世界線の記録。\nもう存在しない店のネオンが、彼を導いた。\nたどり着いた先は──看板の墓場だった。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "akihabara"

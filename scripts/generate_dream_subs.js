@@ -9,10 +9,30 @@ const COMMON_CHARS = {
   waddy:    { name: "ワディー（幻影）", color: "#606060", emoji: "🖥️" }
 };
 
+function withBranchEntries(data) {
+  const entryIndex = data.scenario.findIndex((step, index) => index > 0 && step.bg);
+  if (entryIndex <= 0) {
+    return {
+      ...data,
+      scenario: [{ label: "standalone_start" }, { label: "entry_from_main" }, ...data.scenario],
+    };
+  }
+  return {
+    ...data,
+    scenario: [
+      { label: "standalone_start" },
+      ...data.scenario.slice(0, entryIndex),
+      { label: "entry_from_main" },
+      ...data.scenario.slice(entryIndex),
+    ],
+  };
+}
+
 function write(filename, data) {
   const p = path.join(OUT_DIR, filename);
-  fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf-8');
-  console.log(`✓ ${filename} (${data.scenario.length} steps)`);
+  const normalized = withBranchEntries(data);
+  fs.writeFileSync(p, JSON.stringify(normalized, null, 2), 'utf-8');
+  console.log(`✓ ${filename} (${normalized.scenario.length} steps)`);
 }
 
 // ──────────────────────────────────────

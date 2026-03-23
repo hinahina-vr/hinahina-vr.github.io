@@ -1,13 +1,36 @@
 import { isValidEmotion } from "./emotion-resolver.js";
 
-const DEFAULT_SCENARIO_NAME = "2026-03-18_声の座標";
-
 function asObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};
 }
 
 function asString(value, fallback = "") {
   return typeof value === "string" ? value : fallback;
+}
+
+function normalizeLoadScenarioStep(step, stepIndex, warnings) {
+  const source = step.loadScenario;
+  let scenario = "";
+  let entry = "";
+
+  if (typeof source === "string") {
+    scenario = source.trim();
+  } else if (source && typeof source === "object" && !Array.isArray(source)) {
+    scenario = asString(source.scenario).trim();
+    entry = asString(source.entry).trim();
+  }
+
+  if (!scenario) {
+    warnings.push(`step[${stepIndex}] の loadScenario に scenario がありません。`);
+    return null;
+  }
+
+  return {
+    kind: "loadScenario",
+    scenario,
+    entry: entry || null,
+    bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
+  };
 }
 
 function normalizeBgmCue(bgm, stepIndex, warnings) {
@@ -167,11 +190,7 @@ function normalizeStep(step, stepIndex, warnings, chars) {
   }
 
   if (step.loadScenario) {
-    return {
-      kind: "loadScenario",
-      scenario: asString(step.loadScenario).trim(),
-      bgm: normalizeBgmCue(step.bgm, stepIndex, warnings),
-    };
+    return normalizeLoadScenarioStep(step, stepIndex, warnings);
   }
 
   if (step.goto) {
@@ -246,7 +265,7 @@ function normalizeChars(chars, warnings) {
   );
 }
 
-function deriveScenarioName() {
+function deriveScenarioRequestFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const scenario = params.get("scenario");
   if (!scenario) {
@@ -256,11 +275,43 @@ function deriveScenarioName() {
       "現在のURL: " + window.location.href
     );
   }
-  return scenario;
+  return {
+    scenarioName: scenario,
+    entry: asString(params.get("entry")).trim() || null,
+  };
 }
 
-export async function loadScenarioDefinition() {
-  const scenarioName = deriveScenarioName();
+function buildLabelIndex(steps, warnings) {
+  const labelIndex = new Map();
+  steps.forEach((step, index) => {
+    if (step.kind !== "label") {
+      return;
+    }
+    if (labelIndex.has(step.label)) {
+      warnings.push(`label "${step.label}" が重複しています。最初の定義を優先します。`);
+      return;
+    }
+    labelIndex.set(step.label, index);
+  });
+  return labelIndex;
+}
+
+export function resolveScenarioEntryStartIndex(definition, entryLabel) {
+  if (!entryLabel) {
+    return 0;
+  }
+  const labelIndex = definition.labelIndex?.get(entryLabel);
+  if (labelIndex == null) {
+    throw new Error(`entry "${entryLabel}" が ${definition.scenarioName} に見つかりません。`);
+  }
+  const startIndex = labelIndex + 1;
+  if (startIndex >= definition.steps.length) {
+    throw new Error(`entry "${entryLabel}" の直後に再生可能な step がありません。`);
+  }
+  return startIndex;
+}
+
+export async function fetchScenarioDefinition(scenarioName) {
   const warnings = [];
   const url = `./scenarios/${encodeURIComponent(scenarioName)}.json`;
   const response = await fetch(url);
@@ -286,6 +337,8 @@ export async function loadScenarioDefinition() {
     warnings.push(`scenario "${scenarioName}" に scenario 配列がありません。`);
   }
 
+  const labelIndex = buildLabelIndex(scenario, warnings);
+
   const defaultBgmRaw = raw.defaultBgm ?? {
     src: "./assets/bgm/wasurenagusa.mp3",
     volume: 0.10,
@@ -304,9 +357,23 @@ export async function loadScenarioDefinition() {
     date: asString(raw.date),
     chars,
     steps: scenario,
+    labelIndex,
     defaultBgm,
     warnings,
   };
 
   return normalized;
 }
+
+export async function loadScenarioDefinitionFromUrl() {
+  const request = deriveScenarioRequestFromUrl();
+  const definition = await fetchScenarioDefinition(request.scenarioName);
+  return {
+    ...definition,
+    requestedEntry: request.entry,
+    startIndex: resolveScenarioEntryStartIndex(definition, request.entry),
+    suppressDefaultBgmUntilExplicit: false,
+  };
+}
+
+export { loadScenarioDefinitionFromUrl as loadScenarioDefinition };

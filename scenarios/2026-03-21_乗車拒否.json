@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、切符を自ら破り捨てた世界線の記録。\nプラットホームに立ったまま、帰りの電車を──拒んだ。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "station_night"

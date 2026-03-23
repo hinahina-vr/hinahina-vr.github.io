@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、時計を止めた世界線の記録。\n22時43分。すべてが凍結した世界。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "void"

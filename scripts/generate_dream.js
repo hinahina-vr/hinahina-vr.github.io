@@ -89,7 +89,7 @@ S.push({ label: "GEN_1" });
 
 S.push({ speaker: "narrator", expression: "", text: "コーヒー牛乳の味が広がっていく。\n口の中だけじゃない。体全体に染み込んでいく。\n瓶の中に自分が入っていく。小さく、小さく。\n二百円の世界は、二百円で完結してしまう。" });
 
-S.push({ loadScenario: "2026-03-21_沈黙のリビング" });
+S.push({ loadScenario: { scenario: "2026-03-21_沈黙のリビング", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ② 電気街の地層 ── 消えた店と残った店
@@ -139,7 +139,7 @@ S.push({ label: "GEN_2" });
 
 S.push({ speaker: "narrator", expression: "", text: "消えた看板を追い始めた。一枚また一枚。\n奥へ。もっと奥へ。古い記憶の地層へ。\n気づいたら、水の中にいた。\n秋葉原ごと、記憶の水底に沈んでいく。" });
 
-S.push({ loadScenario: "2026-03-21_水底の秋葉原" });
+S.push({ loadScenario: { scenario: "2026-03-21_水底の秋葉原", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ③ 金子屋の湯気 ── もつ煮込みとウイスキー
@@ -187,7 +187,7 @@ S.push({ label: "GEN_3" });
 
 S.push({ speaker: "narrator", expression: "", text: "もう一杯だけ。もう一杯だけ。\n夢の中の金子屋で、グラスが際限なく注がれる。\n一杯目。二杯目。三杯目。\n昨日の楽しさを再現しようとしている。\nでも、再現された楽しさは──偽物だ。" });
 
-S.push({ loadScenario: "2026-03-21_活字の牢獄" });
+S.push({ loadScenario: { scenario: "2026-03-21_活字の牢獄", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ④ 二日酔いの物理学 ── 体と頭のずれ
@@ -239,7 +239,7 @@ S.push({ label: "GEN_4" });
 
 S.push({ speaker: "narrator", expression: "", text: "後悔が膨らんでいく。\n飲みすぎた。言いすぎた。笑いすぎた。\n全部が裏返しになって、昨日の自分と今の自分が\n鏡の中で睨み合っている。\nどちらが本当の自分か、わからなくなる。" });
 
-S.push({ loadScenario: "2026-03-21_鏡像の奴隷" });
+S.push({ loadScenario: { scenario: "2026-03-21_鏡像の奴隷", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ⑤ 友人の輪郭 ── 一緒に飲んだ人たち
@@ -287,7 +287,7 @@ S.push({ label: "GEN_5" });
 
 S.push({ speaker: "narrator", expression: "", text: "声を追い始める。\nあの笑い声。あの乾杯の音。あの「にょ」。\n追えば追うほど遠ざかる。\n声が看板になった。名前だけの看板。\n呼ぶ声がないから、看板は看板でしかない。" });
 
-S.push({ loadScenario: "2026-03-21_看板の墓場" });
+S.push({ loadScenario: { scenario: "2026-03-21_看板の墓場", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ⑥ 酔いの哲学 ── なぜ飲むのか
@@ -333,7 +333,7 @@ S.push({ label: "GEN_6" });
 
 S.push({ speaker: "narrator", expression: "", text: "蒸留をやめない。注ぎ続ける。\nグラスが溢れる。カウンターが濡れる。\n琥珀色の液体が、膝まで。腰まで。胸まで。\n楽しさを再現し続けようとして──溺れる。" });
 
-S.push({ loadScenario: "2026-03-21_琥珀色の溺死" });
+S.push({ loadScenario: { scenario: "2026-03-21_琥珀色の溺死", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ⑦ 各駅停車の残響 ── 昨日の移動
@@ -379,7 +379,7 @@ S.push({ label: "GEN_7" });
 
 S.push({ speaker: "narrator", expression: "", text: "電車を止めた。時間を止めた。\nこの心地よい揺れが永遠に続けばいい。\n降りなくていい。着かなくていい。\n──でも止まった電車は、各駅停車ではなくなる。" });
 
-S.push({ loadScenario: "2026-03-21_凍った秒針" });
+S.push({ loadScenario: { scenario: "2026-03-21_凍った秒針", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ⑧ 書くということ ── 日記と記録
@@ -425,7 +425,7 @@ S.push({ label: "GEN_8" });
 
 S.push({ speaker: "narrator", expression: "", text: "書こうとした。でも書けない。\n言葉が足りない。言葉が多すぎる。\n書いた文字が自分を見つめ返している。\n自分の書いた言葉の重さに、押しつぶされていく。\n落ちる。自分の文章の底に向かって。" });
 
-S.push({ loadScenario: "2026-03-21_自由落下の定義" });
+S.push({ loadScenario: { scenario: "2026-03-21_自由落下の定義", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ⑨ 帰り道 ── 約束と代償
@@ -471,7 +471,7 @@ S.push({ label: "GEN_9" });
 
 S.push({ speaker: "narrator", expression: "", text: "帰りたくない。ここにいたい。\n昨日のあの瞬間に留まりたい。\n帰りの切符を──破った。\n電車は来ない。もう帰れない。" });
 
-S.push({ loadScenario: "2026-03-21_乗車拒否" });
+S.push({ loadScenario: { scenario: "2026-03-21_乗車拒否", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // ⑩ 覚醒の淵 ── 起きるか、眠るか
@@ -583,7 +583,7 @@ S.push({ label: "GEN_10" });
 
 S.push({ speaker: "narrator", expression: "", text: "もう少しだけ。もう少しだけ。\n蒸留が心地いい。夢の中で昨日を反芻するのが心地いい。\n起きたら──この心地よさは消えてしまう。\n頭痛だけが残る。" });
 
-S.push({ loadScenario: "2026-03-21_永遠の微睡み" });
+S.push({ loadScenario: { scenario: "2026-03-21_永遠の微睡み", entry: "entry_from_main" } });
 
 // ═══════════════════════════════════════════
 // 書き出し

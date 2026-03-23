@@ -22,12 +22,18 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "abyss"
     },
     {
       "speaker": "narrator",
       "expression": "",
       "text": "これは、最後の扉を開けなかった世界線の記録。\n光は見えていた。朝の光が。\nだが彼は──背を向けた。"
+    },
+    {
+      "label": "entry_from_main"
     },
     {
       "bg": "void"

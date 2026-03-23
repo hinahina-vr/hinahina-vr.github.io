@@ -1,0 +1,39 @@
+{
+  "date": "2026-03-19",
+  "title": "影の踊り子 A.D.M.S.",
+  "rootNodeId": "shadow_dancer",
+  "nodes": [
+    {
+      "id": "shadow_dancer",
+      "title": "影の踊り子",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 1,
+      "icon": "🌕",
+      "scenario": "2026-03-19_影の踊り子",
+      "entry": null,
+      "summary": "VRChat の暖炉から始まる顕界の本筋"
+    },
+    {
+      "id": "no_exit_building",
+      "title": "出口のない建物",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 1,
+      "lane": 0,
+      "icon": "🌘",
+      "scenario": "2026-03-19_出口のない建物",
+      "entry": null,
+      "summary": "選択肢を入れなかった場合の閉じた世界線"
+    }
+  ],
+  "edges": [
+    {
+      "from": "shadow_dancer",
+      "to": "no_exit_building",
+      "choiceText": "選択肢を作らない",
+      "style": "genkai"
+    }
+  ]
+}
