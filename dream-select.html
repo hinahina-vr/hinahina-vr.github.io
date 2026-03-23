@@ -463,29 +463,72 @@
           inset 0 1px 0 rgba(255, 255, 255, 0.06);
         overflow: hidden;
         transition:
-          transform 0.28s var(--transition-smooth),
-          border-color 0.28s ease,
-          box-shadow 0.32s ease,
-          background 0.28s ease,
-          opacity 0.28s ease;
+          transform 0.38s var(--transition-smooth),
+          border-color 0.38s ease,
+          box-shadow 0.45s ease,
+          background 0.38s ease,
+          opacity 0.38s ease;
       }
 
+      /* Jewel shine sweep — diagonal light band */
       .scenario-card::before {
         content: "";
         position: absolute;
-        inset: 0;
-        border-radius: 14px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+        top: 0;
+        left: -120%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          105deg,
+          transparent 20%,
+          rgba(255, 255, 255, 0.06) 35%,
+          rgba(255, 255, 255, 0.18) 48%,
+          rgba(255, 255, 255, 0.28) 50%,
+          rgba(255, 255, 255, 0.18) 52%,
+          rgba(255, 255, 255, 0.06) 65%,
+          transparent 80%
+        );
         pointer-events: none;
+        z-index: 1;
+        transition: left 0.65s var(--transition-smooth), opacity 0.45s ease;
+        opacity: 0;
       }
 
+      .scenario-card:hover::before {
+        left: 160%;
+        opacity: 1;
+      }
+
+      /* Jewel mouse-position glow overlay */
+      .scenario-card .card-jewel-glow {
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        background: radial-gradient(
+          circle 120px at var(--glow-x, 50%) var(--glow-y, 50%),
+          rgba(255, 255, 255, 0.14),
+          rgba(255, 255, 255, 0.04) 40%,
+          transparent 70%
+        );
+      }
+
+      .scenario-card:hover .card-jewel-glow {
+        opacity: 1;
+      }
+
+      /* Border flash on hover */
       .scenario-card:hover {
         transform: translateY(-3px) scale(1.02);
-        border-color: rgba(255, 255, 255, 0.22);
+        border-color: rgba(255, 255, 255, 0.32);
         box-shadow:
-          0 8px 36px rgba(0, 0, 0, 0.24),
-          0 0 24px rgba(255, 255, 255, 0.06),
-          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+          0 8px 40px rgba(0, 0, 0, 0.26),
+          0 0 28px rgba(255, 255, 255, 0.08),
+          0 0 2px 1px rgba(255, 255, 255, 0.10),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
       }
 
       .scenario-card[data-graph-visited="false"] {
@@ -518,10 +561,13 @@
       }
 
       .scenario-card[data-graph-realm="kenkai"]:hover {
-        border-color: rgba(240, 193, 93, 0.62);
+        border-color: rgba(255, 228, 140, 0.82);
         box-shadow:
-          0 0 32px var(--kenkai-glow),
-          0 8px 36px rgba(0, 0, 0, 0.22);
+          0 0 36px rgba(240, 193, 93, 0.38),
+          0 0 12px rgba(255, 232, 176, 0.22),
+          0 8px 36px rgba(0, 0, 0, 0.22),
+          0 0 2px 1px rgba(255, 228, 140, 0.14),
+          inset 0 1px 0 rgba(255, 240, 189, 0.22);
       }
 
       .scenario-card[data-graph-realm="genkai"] {
@@ -543,10 +589,13 @@
       }
 
       .scenario-card[data-graph-realm="genkai"]:hover {
-        border-color: rgba(110, 196, 255, 0.62);
+        border-color: rgba(150, 218, 255, 0.82);
         box-shadow:
-          0 0 32px var(--genkai-glow),
-          0 8px 36px rgba(0, 0, 0, 0.22);
+          0 0 36px rgba(110, 196, 255, 0.38),
+          0 0 12px rgba(186, 231, 255, 0.22),
+          0 8px 36px rgba(0, 0, 0, 0.22),
+          0 0 2px 1px rgba(150, 218, 255, 0.14),
+          inset 0 1px 0 rgba(210, 240, 255, 0.22);
       }
 
       .scenario-card[data-graph-kind="rejoin"],
@@ -561,8 +610,7 @@
           inset 0 1px 0 rgba(240, 164, 214, 0.10);
       }
 
-      .scenario-card[data-graph-kind="root"]::after {
-        content: "";
+      .scenario-card[data-graph-kind="root"] .card-root-pulse {
         position: absolute;
         inset: -6px;
         border-radius: 20px;
@@ -1571,6 +1619,18 @@
               .join(" / ")
           );
 
+          // Jewel glow overlay (mouse-position tracking)
+          var jewelGlow = document.createElement("div");
+          jewelGlow.className = "card-jewel-glow";
+          card.appendChild(jewelGlow);
+
+          // Root pulse ring (replaces ::after which is now used for shine)
+          if (node.kind === "root") {
+            var rootPulse = document.createElement("div");
+            rootPulse.className = "card-root-pulse";
+            card.appendChild(rootPulse);
+          }
+
           var copy = document.createElement("div");
           copy.className = "card-copy";
 
@@ -1585,12 +1645,26 @@
           copy.appendChild(heading);
           card.appendChild(copy);
 
+          // Mouse-position jewel glow tracking
+          card.addEventListener("mousemove", function (event) {
+            var rect = card.getBoundingClientRect();
+            var x = ((event.clientX - rect.left) / rect.width * 100);
+            var y = ((event.clientY - rect.top) / rect.height * 100);
+            card.style.setProperty("--glow-x", x + "%");
+            card.style.setProperty("--glow-y", y + "%");
+          });
+
           card.addEventListener("mouseenter", function () {
             if (canHoverDetails()) {
               openPopup(card, popupModel);
             }
           });
-          card.addEventListener("mouseleave", schedulePopupClose);
+          card.addEventListener("mouseleave", function () {
+            schedulePopupClose();
+            // Reset glow to center for smooth fade-out
+            card.style.setProperty("--glow-x", "50%");
+            card.style.setProperty("--glow-y", "50%");
+          });
           card.addEventListener("focus", function () {
             openPopup(card, popupModel);
           });
