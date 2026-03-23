@@ -16,12 +16,12 @@
   },
   "scenario": [
     { "bg": "nakamoto_exterior" },
-    { "speaker": "narrator", "expression": "", "text": "日曜日の夜。蒙古タンメン中本・町田店。\n赤い暖簾の向こうから、辛い霧のような蒸気が漏れている。" },
+    { "speaker": "narrator", "expression": "", "text": "月曜日の夜。蒙古タンメン中本・町田店。\n赤い暖簾の向こうから、辛い霧のような蒸気が漏れている。" },
     { "speaker": "narrator", "expression": "", "text": "券売機の前に立つ。光るボタンが並んでいる。\nゴモミ──五目味噌タンメン、辛さ8。\n北極──辛さ9。その名の通り、極地だ。" },
     { "label": "nakamoto_enter" },
     { "speaker": "narrator", "expression": "", "text": "席に座る。カウンター席。左には常連らしき男、右は空席。\n壁には「辛さレベル表」が貼ってある。0から10まで。" },
+    { "label": "menu_choice" },
     {
-      "label": "menu_choice",
       "choices": [
         { "text": "北極ラーメンを頼む（辛さ9）", "goto": "hokkyoku_order" },
         { "text": "ゴモミを頼む（辛さ8）", "goto": "gomomi_order" }
