@@ -33656,7 +33656,7 @@ void main() {
       if (step.kind === "goto") {
         const targetIndex = this.resolveLabelStepIndex(step.target);
         if (targetIndex >= 0) {
-          await this.showStep(targetIndex + 1);
+          await this.showStep(targetIndex);
         } else {
           console.warn(`[goto] target label "${step.target}" not found`);
           await this.showStep(index + 1);
@@ -33679,13 +33679,13 @@ void main() {
         if (hasFlagValue) {
           const targetIndex = this.resolveLabelStepIndex(step.target);
           if (targetIndex >= 0) {
-            await this.showStep(targetIndex + 1);
+            await this.showStep(targetIndex);
             return;
           }
         } else if (step.elseTarget) {
           const elseIndex = this.resolveLabelStepIndex(step.elseTarget);
           if (elseIndex >= 0) {
-            await this.showStep(elseIndex + 1);
+            await this.showStep(elseIndex);
             return;
           }
         }
@@ -33697,13 +33697,13 @@ void main() {
         if (!hasFlagValue) {
           const targetIndex = this.resolveLabelStepIndex(step.target);
           if (targetIndex >= 0) {
-            await this.showStep(targetIndex + 1);
+            await this.showStep(targetIndex);
             return;
           }
         } else if (step.elseTarget) {
           const elseIndex = this.resolveLabelStepIndex(step.elseTarget);
           if (elseIndex >= 0) {
-            await this.showStep(elseIndex + 1);
+            await this.showStep(elseIndex);
             return;
           }
         }
@@ -33783,7 +33783,7 @@ void main() {
             if (choice.goto) {
               const targetIndex = this.resolveLabelStepIndex(choice.goto);
               if (targetIndex >= 0) {
-                this.showStep(targetIndex + 1);
+                this.showStep(targetIndex);
                 return;
               }
             }

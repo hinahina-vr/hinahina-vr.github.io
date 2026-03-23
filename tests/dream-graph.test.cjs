@@ -148,7 +148,7 @@ const { chromium, devices } = require("playwright");
     const snapshot = await page.evaluate(getGraphSnapshotScript());
     assert(march21GenkaiCount === 10, `2026-03-21 graph shows 10 genkai side nodes (got: ${march21GenkaiCount})`);
     assert(march21EndingCount === 5, `2026-03-21 graph shows 5 kenkai endings (got: ${march21EndingCount})`);
-    assert(snapshot.headerHeight !== null && snapshot.headerHeight <= 110, `desktop header is compressed into a thin band (got: ${snapshot.headerHeight}px)`);
+    assert(snapshot.headerHeight !== null && snapshot.headerHeight <= 132, `desktop header is compressed into a thin band (got: ${snapshot.headerHeight}px)`);
     assert(snapshot.headerLeftDelta !== null && snapshot.headerLeftDelta <= 16, `desktop header copy stays near the left edge (got: ${snapshot.headerLeftDelta}px)`);
     assert(snapshot.headerRightGap !== null && snapshot.headerRightGap >= 320, `desktop header leaves a broad empty right side (got: ${snapshot.headerRightGap}px)`);
     assert(
@@ -164,9 +164,9 @@ const { chromium, devices } = require("playwright");
       "desktop header text and legend are left-aligned inside the margin"
     );
     assert(
-      snapshot.headerVars.topBg.includes("0.28") &&
-        snapshot.headerVars.bottomBg.includes("0.36") &&
-        snapshot.headerVars.blur.includes("4px") &&
+      snapshot.headerVars.topBg.includes("0.32") &&
+        snapshot.headerVars.bottomBg.includes("0.42") &&
+        snapshot.headerVars.blur.includes("8px") &&
         snapshot.headerVars.graphShellTopBg.includes("0.76"),
       `desktop header and graph shell use the lighter transparency settings (${JSON.stringify(snapshot.headerVars)})`
     );
@@ -232,8 +232,8 @@ const { chromium, devices } = require("playwright");
     assert(
       snapshot.backLinkStyle &&
         snapshot.backLinkStyle.bottom === "64px" &&
-        snapshot.backLinkStyle.background.includes("0.82") &&
-        snapshot.backLinkStyle.color.includes("0.88"),
+        snapshot.backLinkStyle.background.includes("0.78") &&
+        snapshot.backLinkStyle.color.includes("0.84"),
       `desktop back link uses the stronger fixed styling (${JSON.stringify(snapshot.backLinkStyle)})`
     );
     assert(

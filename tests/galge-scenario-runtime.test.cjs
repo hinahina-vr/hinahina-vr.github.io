@@ -526,6 +526,38 @@ async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 12
     );
   }
 
+  console.log("\n=== branch target labels record visited state ===");
+  await page.evaluate(() => {
+    window.localStorage.removeItem("waddy-dream-visited-v1");
+  });
+  response = await page.goto(
+    `${baseUrl}/galge-scenario.html?scenario=${encodeURIComponent("2026-03-23_辛味と人格のシミュラークル")}&entry=${encodeURIComponent("game_center")}&messageApiBase=${encodeURIComponent(messageApiBase)}`,
+    {
+      waitUntil: "domcontentloaded",
+    }
+  );
+  assert(response.status() === 200, "2026-03-23 entry scenario page loads");
+  await page.waitForSelector("#title-screen");
+  await page.click("#start-btn");
+  const gotoChoiceShown = await advanceUntilChoice(page, 80);
+  assert(gotoChoiceShown, "2026-03-23 game_center route reaches its choice block");
+  if (gotoChoiceShown) {
+    await page.locator("#choice-container.visible .choice-btn").nth(1).click();
+    await page.waitForFunction(() => {
+      const visits = JSON.parse(window.localStorage.getItem("waddy-dream-visited-v1") || "{}");
+      return Boolean(visits["2026-03-23_辛味と人格のシミュラークル::train_home"]);
+    });
+    const branchDreamVisits = await page.evaluate(() => JSON.parse(window.localStorage.getItem("waddy-dream-visited-v1") || "{}"));
+    assert(
+      Boolean(branchDreamVisits["2026-03-23_辛味と人格のシミュラークル::game_center"]),
+      "entry startup records the current route node before branching"
+    );
+    assert(
+      Boolean(branchDreamVisits["2026-03-23_辛味と人格のシミュラークル::train_home"]),
+      "choice goto records the target route label as visited"
+    );
+  }
+
   console.log(`\n=== result: ${passed} passed, ${failed} failed ===`);
   await browser.close();
   apiServer.kill();
