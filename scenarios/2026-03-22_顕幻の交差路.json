@@ -419,7 +419,7 @@
           "goto": "ruriko_commit"
         },
         {
-          "text": "くくりの書庫に入る",
+          "text": "ククリの書庫に入る",
           "goto": "kukuri_commit"
         },
         {

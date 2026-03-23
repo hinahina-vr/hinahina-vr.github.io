@@ -39,20 +39,37 @@ const { chromium, devices } = require("playwright");
       }
 
       const graphShell = document.getElementById("graph-shell");
+      const graphStage = document.getElementById("graph-stage");
       const header = document.querySelector(".header");
       const headerCopy = document.querySelector(".header-copy");
+      const backLink = document.querySelector(".back-link");
       const headerStyle = header ? getComputedStyle(header) : null;
       const graphShellStyle = graphShell ? getComputedStyle(graphShell) : null;
+      const backLinkStyle = backLink ? getComputedStyle(backLink) : null;
+      const residentHubCard = document.querySelector('.scenario-card[data-graph-node-id="resident_hub"]');
+      const hallCard = document.querySelector('.scenario-card[data-graph-node-id="hall"]');
+      const worldEdgeCard = document.querySelector('.scenario-card[data-graph-node-id="world_edge"]');
       const layerEightNodes = Array.from(document.querySelectorAll('.scenario-card[data-graph-layer="8"]'));
       const layerEightLefts = layerEightNodes.map((element) => Math.round(parseFloat(element.style.left)));
       const layerEightTops = layerEightNodes.map((element) => Math.round(parseFloat(element.style.top)));
+      const edgeMaskRects = document.querySelectorAll('#graph-edge-mask rect[data-mask-node-id]');
       const canvas = document.getElementById("particle-canvas");
+      const prevNav = document.getElementById("date-nav-prev");
+      const nextNav = document.getElementById("date-nav-next");
 
       return {
         layoutMode: document.body.dataset.graphLayout,
         headerHeight: header ? Math.round(header.getBoundingClientRect().height) : null,
         headerWidth: header ? Math.round(header.getBoundingClientRect().width) : null,
         headerCopyWidth: headerCopy ? Math.round(headerCopy.getBoundingClientRect().width) : null,
+        backLinkRect: backLink ? backLink.getBoundingClientRect().toJSON() : null,
+        backLinkStyle: backLinkStyle
+          ? {
+              bottom: backLinkStyle.bottom,
+              background: backLinkStyle.backgroundColor,
+              color: backLinkStyle.color,
+            }
+          : null,
         headerRightGap:
           header && headerCopy ? Math.round(header.getBoundingClientRect().right - headerCopy.getBoundingClientRect().right) : null,
         headerLeftDelta:
@@ -68,9 +85,33 @@ const { chromium, devices } = require("playwright");
           blur: headerStyle ? headerStyle.getPropertyValue("--header-blur").trim() : "",
           graphShellTopBg: graphShellStyle ? graphShellStyle.getPropertyValue("--graph-shell-top-bg").trim() : "",
         },
+        residentHubInline: residentHubCard
+          ? {
+              titleCount: residentHubCard.querySelectorAll(".card-title").length,
+              iconCount: residentHubCard.querySelectorAll(".card-icon").length,
+              kindCount: residentHubCard.querySelectorAll(".card-kind").length,
+              summaryCount: residentHubCard.querySelectorAll(".card-summary").length,
+              metaCount: residentHubCard.querySelectorAll(".card-meta").length,
+              visited: residentHubCard.dataset.graphVisited || "",
+            }
+          : null,
+        hallVisited: hallCard ? hallCard.dataset.graphVisited || "" : "",
+        worldEdgeVisited: worldEdgeCard ? worldEdgeCard.dataset.graphVisited || "" : "",
+        edgeMaskRectCount: edgeMaskRects.length,
+        hallMaskExists: Boolean(document.querySelector('#graph-edge-mask rect[data-mask-node-id="hall"]')),
+        residentHubMaskExists: Boolean(document.querySelector('#graph-edge-mask rect[data-mask-node-id="resident_hub"]')),
+        prevNavHidden: prevNav ? prevNav.hidden : true,
+        nextNavHidden: nextNav ? nextNav.hidden : true,
+        prevNavTargetDate: prevNav ? prevNav.dataset.targetDate || "" : "",
+        nextNavTargetDate: nextNav ? nextNav.dataset.targetDate || "" : "",
+        prevNavHref: prevNav ? prevNav.getAttribute("href") || "" : "",
+        nextNavHref: nextNav ? nextNav.getAttribute("href") || "" : "",
         shellWidth: Math.round(graphShell.getBoundingClientRect().width),
         shellClientWidth: graphShell.clientWidth,
         shellScrollWidth: graphShell.scrollWidth,
+        shellClientHeight: graphShell.clientHeight,
+        shellScrollHeight: graphShell.scrollHeight,
+        graphScale: graphStage ? Number(graphStage.dataset.graphScale || "1") : 1,
         viewportWidth: window.innerWidth,
         canvasWidth: canvas ? canvas.width : null,
         canvasHeight: canvas ? canvas.height : null,
@@ -133,6 +174,23 @@ const { chromium, devices } = require("playwright");
 
   console.log("\n=== desktop 2026-03-22 graph ===");
   await withPage({ viewport: { width: 1600, height: 1000 } }, async (page) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem(
+        "waddy-dream-visited-v1",
+        JSON.stringify({
+          "2026-03-22_顕幻の交差路::resident_hub": {
+            scenario: "2026-03-22_顕幻の交差路",
+            entry: "resident_hub",
+            visitedAt: "2026-03-22T00:00:00.000Z",
+          },
+          "2026-03-22_顕幻の交差路::world_edge": {
+            scenario: "2026-03-22_顕幻の交差路",
+            entry: "world_edge",
+            visitedAt: "2026-03-22T00:00:00.000Z",
+          },
+        })
+      );
+    });
     await page.goto(`${baseUrl}/dream-select.html?date=2026-03-22`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector('.scenario-card[data-graph-node-id="resident_hub"]', { timeout: 5000 });
     const snapshot = await page.evaluate(getGraphSnapshotScript());
@@ -155,6 +213,72 @@ const { chromium, devices } = require("playwright");
       snapshot.canvasWidth === snapshot.viewportWidth && snapshot.canvasHeight === snapshot.viewportHeight,
       `particle canvas is sized to the viewport (got: ${snapshot.canvasWidth}x${snapshot.canvasHeight}, viewport: ${snapshot.viewportWidth}x${snapshot.viewportHeight})`
     );
+    assert(snapshot.graphScale < 1, `desktop graph shrinks when width or height would overflow the viewport (got: ${snapshot.graphScale})`);
+    assert(
+      snapshot.shellScrollWidth <= snapshot.shellClientWidth + 1,
+      `desktop graph auto-fits horizontally without a scrollbar (client: ${snapshot.shellClientWidth}, scroll: ${snapshot.shellScrollWidth})`
+    );
+    assert(
+      snapshot.shellScrollHeight <= snapshot.shellClientHeight + 1,
+      `desktop graph auto-fits vertically without a scrollbar (client: ${snapshot.shellClientHeight}, scroll: ${snapshot.shellScrollHeight})`
+    );
+    assert(
+      snapshot.backLinkRect &&
+        snapshot.backLinkRect.bottom <= snapshot.viewportHeight - 40 &&
+        snapshot.backLinkRect.top >= 0 &&
+        Math.abs(snapshot.backLinkRect.left + snapshot.backLinkRect.width / 2 - snapshot.viewportWidth / 2) <= 24,
+      `desktop back link stays visible near the bottom center (${JSON.stringify(snapshot.backLinkRect)})`
+    );
+    assert(
+      snapshot.backLinkStyle &&
+        snapshot.backLinkStyle.bottom === "64px" &&
+        snapshot.backLinkStyle.background.includes("0.82") &&
+        snapshot.backLinkStyle.color.includes("0.88"),
+      `desktop back link uses the stronger fixed styling (${JSON.stringify(snapshot.backLinkStyle)})`
+    );
+    assert(
+      snapshot.residentHubInline &&
+        snapshot.residentHubInline.titleCount === 1 &&
+        snapshot.residentHubInline.iconCount === 0 &&
+        snapshot.residentHubInline.kindCount === 0 &&
+        snapshot.residentHubInline.summaryCount === 0 &&
+        snapshot.residentHubInline.metaCount === 0 &&
+        snapshot.residentHubInline.visited === "true",
+      `desktop cards render title-only inline (${JSON.stringify(snapshot.residentHubInline)})`
+    );
+    assert(
+      snapshot.hallVisited === "false" && snapshot.worldEdgeVisited === "true",
+      `dream-select colors only the visited nodes from storage (hall: ${snapshot.hallVisited}, world_edge: ${snapshot.worldEdgeVisited})`
+    );
+    assert(
+      snapshot.edgeMaskRectCount >= 10 && snapshot.hallMaskExists && snapshot.residentHubMaskExists,
+      `graph edges are masked under node cards so lines do not cross the text (mask count: ${snapshot.edgeMaskRectCount})`
+    );
+    assert(
+      snapshot.prevNavHidden === false &&
+        snapshot.nextNavHidden === false &&
+        snapshot.prevNavTargetDate === "2026-03-21" &&
+        snapshot.nextNavTargetDate === "2026-03-23" &&
+        snapshot.prevNavHref.includes("date=2026-03-21") &&
+        snapshot.nextNavHref.includes("date=2026-03-23"),
+      `desktop side arrows navigate to adjacent A.D.M.S. dates (${JSON.stringify({
+        prevHidden: snapshot.prevNavHidden,
+        nextHidden: snapshot.nextNavHidden,
+        prevDate: snapshot.prevNavTargetDate,
+        nextDate: snapshot.nextNavTargetDate,
+      })})`
+    );
+
+    await page.hover('.scenario-card[data-graph-node-id="resident_hub"]');
+    await page.waitForSelector('#card-popup-layer[data-open="true"]', { timeout: 5000 });
+    const popupSnapshot = await page.evaluate(() => ({
+      popupTitle: document.getElementById("card-popup-title")?.textContent || "",
+      popupSummary: document.getElementById("card-popup-summary")?.textContent || "",
+      popupHref: document.getElementById("card-popup-link")?.getAttribute("href") || "",
+    }));
+    assert(popupSnapshot.popupTitle.includes("住"), `desktop hover popup shows the card title (got: ${popupSnapshot.popupTitle})`);
+    assert(popupSnapshot.popupSummary.length > 0, "desktop hover popup exposes the hidden summary");
+    assert(popupSnapshot.popupHref.includes("mode=immersive"), `desktop hover popup link keeps immersive mode (got: ${popupSnapshot.popupHref})`);
   });
 
   console.log("\n=== mobile portrait 2026-03-22 graph ===");
@@ -177,6 +301,7 @@ const { chromium, devices } = require("playwright");
       snapshot.shellScrollWidth <= snapshot.shellClientWidth + 1,
       `mobile portrait graph does not require horizontal scrolling (client: ${snapshot.shellClientWidth}, scroll: ${snapshot.shellScrollWidth})`
     );
+    assert(snapshot.graphScale === 1, `mobile portrait keeps the original scale (got: ${snapshot.graphScale})`);
     assert(
       snapshot.layerEightRowCount >= 4 && snapshot.layerEightColumnCount >= 2,
       `mobile portrait graph spreads resident branches into multiple rows and columns (rows: ${snapshot.layerEightRowCount}, cols: ${snapshot.layerEightColumnCount})`
@@ -197,6 +322,17 @@ const { chromium, devices } = require("playwright");
         snapshot.headerVars.blur === "none",
       `mobile portrait uses the denser transparent header settings (${JSON.stringify(snapshot.headerVars)})`
     );
+
+    const beforeTapUrl = page.url();
+    await page.click('.scenario-card[data-graph-node-id="resident_hub"]');
+    await page.waitForSelector('#card-popup-layer[data-open="true"]', { timeout: 5000 });
+    const touchPopup = await page.evaluate(() => ({
+      popupHref: document.getElementById("card-popup-link")?.getAttribute("href") || "",
+      popupSummary: document.getElementById("card-popup-summary")?.textContent || "",
+    }));
+    assert(page.url() === beforeTapUrl, "mobile portrait first tap opens the popup instead of navigating");
+    assert(touchPopup.popupSummary.length > 0, "mobile portrait popup exposes hidden details");
+    assert(touchPopup.popupHref.includes("mode=immersive"), `mobile portrait popup link keeps immersive mode (got: ${touchPopup.popupHref})`);
   });
 
   console.log("\n=== mobile landscape 2026-03-22 graph ===");

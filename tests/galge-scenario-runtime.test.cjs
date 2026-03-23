@@ -223,6 +223,25 @@ async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 12
   await page.waitForSelector("#title-screen");
   const defaultTitle = await page.$eval("#title-screen h1", (element) => element.textContent);
   assert(defaultTitle.includes("声の座標"), `default scenario title loads (got: "${defaultTitle}")`);
+  const initialBackHref = await page.$eval("#back-btn", (element) => element.getAttribute("href") || "");
+  assert(
+    initialBackHref.includes("dream-select.html?date=2026-03-18"),
+    `back button points to the matching A.D.M.S. map (got: "${initialBackHref}")`
+  );
+  assert(
+    initialBackHref.includes("mode=immersive"),
+    `back button keeps immersive mode for dream-select (got: "${initialBackHref}")`
+  );
+  const endBackHref = await page.$eval("#end-screen .back-link", (element) => element.getAttribute("href") || "");
+  assert(
+    endBackHref === initialBackHref,
+    `end screen back link matches the runtime back target (got: "${endBackHref}")`
+  );
+  const initialDreamVisits = await page.evaluate(() => JSON.parse(window.localStorage.getItem("waddy-dream-visited-v1") || "{}"));
+  assert(
+    Boolean(initialDreamVisits["2026-03-18_声の座標::__root__"]),
+    "root scenario load records the visited dream node in localStorage"
+  );
   const titleApiClient = await page.$eval("#title-api-client-id", (element) => element.textContent);
   assert(titleApiClient.includes("API client:"), `message api client id is shown (got: "${titleApiClient}")`);
 
@@ -428,6 +447,11 @@ async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 12
     !branchEntryText.includes("これは、何も選ばなかった世界線の記録"),
     "entry=entry_from_main skips the standalone intro text"
   );
+  const entryDreamVisits = await page.evaluate(() => JSON.parse(window.localStorage.getItem("waddy-dream-visited-v1") || "{}"));
+  assert(
+    Boolean(entryDreamVisits["2026-03-21_沈黙のリビング::entry_from_main"]),
+    "entry launch records the in-branch node as visited"
+  );
 
   console.log("\n=== inline branch transition ===");
   response = await page.goto(
@@ -467,6 +491,7 @@ async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 12
         backlogLength: app.backlog.length,
         hasFlag: app.flags.has("__inline_branch_flag"),
         url: window.location.href,
+        backHref: document.getElementById("back-btn")?.getAttribute("href") || "",
       };
     });
     assert(
@@ -481,6 +506,10 @@ async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 12
       afterBranchState.entry === "entry_from_main",
       `inline branch transition records the requested entry label (got: "${afterBranchState.entry}")`
     );
+    assert(
+      afterBranchState.backHref.includes("dream-select.html?date=2026-03-21"),
+      `inline branch transition updates the back link to the current scenario date (got: "${afterBranchState.backHref}")`
+    );
     assert(afterBranchState.hasFlag, "inline branch transition preserves previously set flags");
     assert(
       afterBranchState.backlogLength >= beforeBranchState.backlogLength,
@@ -489,6 +518,11 @@ async function advanceUntilScenarioTitle(page, expectedTitle, maxIterations = 12
     assert(
       !inlineBranchText.includes("これは、何も選ばなかった世界線の記録"),
       "inline branch transition skips the standalone intro and starts at entry_from_main"
+    );
+    const inlineDreamVisits = await page.evaluate(() => JSON.parse(window.localStorage.getItem("waddy-dream-visited-v1") || "{}"));
+    assert(
+      Boolean(inlineDreamVisits["2026-03-21_沈黙のリビング::entry_from_main"]),
+      "inline branch transition records the branch node as visited"
     );
   }
 

@@ -386,7 +386,7 @@
     { "from": "resident_hub", "to": "multi_room", "choiceText": "マルチの部屋", "style": "genkai" },
     { "from": "resident_hub", "to": "hinata_room", "choiceText": "ひなたの部屋", "style": "genkai" },
     { "from": "resident_hub", "to": "ruriko_room", "choiceText": "瑠璃子の部屋", "style": "genkai" },
-    { "from": "resident_hub", "to": "kukuri_room", "choiceText": "くくりの書庫", "style": "genkai" },
+    { "from": "resident_hub", "to": "kukuri_room", "choiceText": "ククリの書庫", "style": "genkai" },
     { "from": "resident_hub", "to": "dejiko_room", "choiceText": "でじこの部屋", "style": "genkai" },
     { "from": "resident_hub", "to": "moegami_bar", "choiceText": "萌神のバー", "style": "genkai" },
     { "from": "resident_hub", "to": "mailbox_crossroads", "choiceText": "廊下の奥へ", "style": "kenkai" },

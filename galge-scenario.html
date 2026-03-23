@@ -697,27 +697,58 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        padding: 24px;
         background: rgba(0, 0, 0, 0.9);
         opacity: 0;
+        text-align: center;
         transition: opacity 0.6s ease;
       }
       #chapter-overlay.visible,
       #end-screen.visible { opacity: 1; }
       #chapter-overlay h2,
       #end-screen h2 {
+        margin: 0;
+        max-width: min(720px, calc(100vw - 48px));
         font-size: clamp(1.4rem, 3vw, 3rem);
         letter-spacing: 0.22em;
         color: #d9cbff;
       }
       #end-subtitle {
         margin-top: 12px;
+        max-width: min(720px, calc(100vw - 48px));
         opacity: 0.6;
+        line-height: 1.7;
         letter-spacing: 0.1em;
+        text-align: center;
       }
       .back-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 18px;
         margin-top: 20px;
+        border-radius: 14px;
+        border: 1px solid rgba(196, 163, 255, 0.2);
+        background: linear-gradient(180deg, rgba(18, 12, 32, 0.72), rgba(8, 6, 16, 0.78));
+        box-shadow:
+          0 12px 30px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
         color: rgba(255, 255, 255, 0.5);
         text-decoration: none;
+        letter-spacing: 0.08em;
+        transition:
+          color 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .back-link:hover {
+        color: rgba(255, 255, 255, 0.82);
+        border-color: rgba(220, 194, 255, 0.34);
+        background: linear-gradient(180deg, rgba(28, 18, 48, 0.8), rgba(10, 8, 22, 0.84));
+        transform: translateY(-1px);
       }
 
       #settings-modal {
@@ -1180,6 +1211,18 @@
         #settings-list {
           padding: 16px;
         }
+        #chapter-overlay,
+        #end-screen {
+          padding: 18px 20px;
+        }
+        #chapter-overlay h2,
+        #end-screen h2,
+        #end-subtitle {
+          max-width: calc(100vw - 40px);
+        }
+        #end-subtitle {
+          font-size: clamp(13px, 3.7vw, 16px);
+        }
       }
 
       /* Backlog panel */
@@ -1290,7 +1333,7 @@
     <div id="end-screen">
       <h2 id="end-title">— F I N —</h2>
       <p id="end-subtitle">COMPの画面は、閉じていない。</p>
-      <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
+      <a class="back-link" href="./dream-select.html">◁ A.D.M.S. に戻る</a>
     </div>
 
     <div id="hud">
@@ -1310,7 +1353,7 @@
     <div id="chapter-display"></div>
 
     <button class="utility-btn" id="mode-toggle" title="表示モード切替" type="button"><span class="btn-icon">🌙</span><span class="btn-text">表示切替</span></button>
-    <a id="back-btn" href="./diary.html">◁ 戻る</a>
+    <a id="back-btn" href="./dream-select.html">◁ 戻る</a>
     <button class="utility-btn" id="settings-btn" type="button" title="モデル設定"><span class="btn-icon">🎭</span><span class="btn-text">モデル設定</span></button>
     <button class="utility-btn" id="sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
     <div id="volume-popup">

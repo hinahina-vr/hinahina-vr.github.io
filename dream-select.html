@@ -39,29 +39,35 @@
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg-1: #03050f;
-        --bg-2: #0d1028;
-        --bg-3: #1d1830;
+        --bg-1: #020410;
+        --bg-2: #0a0e24;
+        --bg-3: #1a1530;
         --panel: rgba(9, 12, 26, 0.72);
-        --panel-border: rgba(255, 255, 255, 0.12);
-        --text: #eef2ff;
-        --muted: rgba(238, 242, 255, 0.62);
-        --kenkai: #f0c15d;
-        --kenkai-glow: rgba(240, 193, 93, 0.3);
-        --genkai: #73c6ff;
-        --genkai-glow: rgba(115, 198, 255, 0.28);
-        --rejoin: #f3a9d9;
-        --rejoin-glow: rgba(243, 169, 217, 0.28);
+        --panel-border: rgba(255, 255, 255, 0.10);
+        --text: #edf1ff;
+        --muted: rgba(238, 242, 255, 0.58);
+        --kenkai: #efc05c;
+        --kenkai-glow: rgba(240, 193, 93, 0.32);
+        --kenkai-soft: rgba(240, 193, 93, 0.08);
+        --genkai: #6ec4ff;
+        --genkai-glow: rgba(110, 196, 255, 0.30);
+        --genkai-soft: rgba(110, 196, 255, 0.08);
+        --rejoin: #f0a4d6;
+        --rejoin-glow: rgba(240, 164, 214, 0.30);
         --node-width: 220px;
         --node-height: 96px;
-        --header-border: rgba(255, 255, 255, 0.08);
-        --header-top-bg: rgba(14, 16, 34, 0.28);
-        --header-bottom-bg: rgba(7, 8, 18, 0.36);
-        --header-accent: rgba(126, 88, 188, 0.06);
-        --header-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
-        --header-blur: blur(4px);
+        --card-glass: rgba(12, 14, 32, 0.52);
+        --card-glass-border: rgba(255, 255, 255, 0.10);
+        --card-blur: blur(12px);
+        --header-border: rgba(255, 255, 255, 0.07);
+        --header-top-bg: rgba(14, 16, 36, 0.32);
+        --header-bottom-bg: rgba(6, 8, 18, 0.42);
+        --header-accent: rgba(126, 88, 188, 0.08);
+        --header-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+        --header-blur: blur(8px);
         --graph-shell-top-bg: rgba(8, 10, 22, 0.76);
         --graph-shell-bottom-bg: rgba(4, 5, 12, 0.92);
+        --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
       }
 
       *, *::before, *::after {
@@ -80,9 +86,10 @@
         font-family: "Zen Maru Gothic", sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top, rgba(126, 88, 188, 0.3), transparent 24%),
-          radial-gradient(circle at 20% 20%, rgba(60, 112, 180, 0.16), transparent 28%),
-          linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 38%, var(--bg-1) 100%);
+          radial-gradient(ellipse 80% 50% at 50% 0%, rgba(126, 88, 188, 0.22), transparent),
+          radial-gradient(ellipse 60% 40% at 15% 20%, rgba(60, 112, 180, 0.12), transparent),
+          radial-gradient(ellipse 40% 60% at 85% 70%, rgba(90, 50, 140, 0.10), transparent),
+          linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 42%, var(--bg-1) 100%);
       }
 
       body.mode-classic {
@@ -96,10 +103,20 @@
         z-index: 0;
         pointer-events: none;
         background:
-          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-        background-size: 80px 80px, 100% 4px;
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 92%);
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 72px 72px, 100% 3px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 88%);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 100% 100% at 50% 100%, rgba(6, 4, 18, 0.6), transparent 70%);
       }
 
       #particle-canvas {
@@ -124,19 +141,79 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 10px 14px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 9px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 999px;
-        background: rgba(9, 12, 26, 0.74);
-        color: rgba(255, 255, 255, 0.9);
+        background: rgba(10, 12, 28, 0.68);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: rgba(255, 255, 255, 0.82);
         font: inherit;
-        letter-spacing: 0.16em;
-        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+        transition: border-color 0.2s ease, background 0.2s ease;
       }
 
       #mode-toggle[disabled] {
         opacity: 0.84;
         cursor: default;
+      }
+
+      .date-nav-arrow {
+        position: fixed;
+        top: 50%;
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 64px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        background: rgba(10, 12, 28, 0.52);
+        color: rgba(255, 255, 255, 0.72);
+        text-decoration: none;
+        font-size: 20px;
+        line-height: 1;
+        transform: translateY(-50%);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.20);
+        transition:
+          color 200ms var(--transition-smooth),
+          border-color 200ms ease,
+          background 200ms ease,
+          box-shadow 200ms ease,
+          transform 200ms var(--transition-smooth);
+      }
+
+      .date-nav-arrow:hover,
+      .date-nav-arrow:focus-visible {
+        color: rgba(255, 255, 255, 0.96);
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(14, 16, 34, 0.72);
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+      }
+
+      .date-nav-arrow.prev:hover {
+        transform: translateY(-50%) translateX(-2px);
+      }
+
+      .date-nav-arrow.next:hover {
+        transform: translateY(-50%) translateX(2px);
+      }
+
+      .date-nav-arrow[hidden] {
+        display: none;
+      }
+
+      .date-nav-arrow.prev {
+        left: 12px;
+      }
+
+      .date-nav-arrow.next {
+        right: 12px;
       }
 
       .page-shell {
@@ -155,19 +232,21 @@
 
       .header {
         display: grid;
-        grid-template-columns: minmax(320px, 520px) 1fr;
+        grid-template-columns: max-content 1fr;
+        justify-items: start;
         align-items: start;
         width: 100%;
         margin: 0;
         min-height: 88px;
-        padding: 8px 14px 8px 10px;
+        padding: 10px 16px 10px 14px;
         border: 1px solid var(--header-border);
-        border-radius: 16px;
+        border-radius: 18px;
         background:
           linear-gradient(180deg, var(--header-top-bg), var(--header-bottom-bg)),
-          radial-gradient(circle at top left, var(--header-accent), transparent 56%);
+          radial-gradient(ellipse 80% 100% at 0% 0%, var(--header-accent), transparent);
         box-shadow: var(--header-shadow);
         backdrop-filter: var(--header-blur);
+        -webkit-backdrop-filter: var(--header-blur);
       }
 
       .header-copy {
@@ -175,7 +254,9 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        max-width: 520px;
+        justify-self: start;
+        width: fit-content;
+        max-width: min(520px, 100%);
       }
 
       .date-label {
@@ -186,13 +267,14 @@
       }
 
       h1 {
-        margin: 0 0 2px;
+        margin: 0 0 3px;
         font-size: clamp(0.96rem, 1.55vw, 1.35rem);
-        letter-spacing: 0.28em;
-        color: #d8c8ff;
+        letter-spacing: 0.32em;
+        color: #d4c4ff;
         text-shadow:
-          0 0 24px rgba(164, 120, 255, 0.22),
-          0 1px 2px rgba(0, 0, 0, 0.46);
+          0 0 32px rgba(164, 120, 255, 0.28),
+          0 0 8px rgba(164, 120, 255, 0.12),
+          0 1px 2px rgba(0, 0, 0, 0.5);
       }
 
       .subtitle,
@@ -216,41 +298,49 @@
       .legend {
         display: flex;
         flex-wrap: wrap;
-        gap: 4px 8px;
-        margin-top: 3px;
+        gap: 6px 12px;
+        margin-top: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .legend-item {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 8px;
-        letter-spacing: 0.08em;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 9px;
+        letter-spacing: 0.10em;
       }
 
       .legend-swatch {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 0 18px rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
       }
 
       .legend-swatch.kenkai {
-        background: linear-gradient(135deg, rgba(240, 193, 93, 0.95), rgba(135, 94, 32, 0.88));
+        background: radial-gradient(circle at 30% 30%, rgba(255, 220, 120, 1), rgba(200, 150, 50, 0.9));
+        box-shadow: 0 0 10px var(--kenkai-glow);
       }
 
       .legend-swatch.genkai {
-        background: linear-gradient(135deg, rgba(115, 198, 255, 0.96), rgba(33, 87, 153, 0.88));
+        background: radial-gradient(circle at 30% 30%, rgba(150, 216, 255, 1), rgba(60, 130, 200, 0.9));
+        box-shadow: 0 0 10px var(--genkai-glow);
       }
 
       .legend-swatch.rejoin {
-        background: linear-gradient(135deg, rgba(243, 169, 217, 0.96), rgba(135, 64, 120, 0.88));
+        background: radial-gradient(circle at 30% 30%, rgba(248, 180, 224, 1), rgba(180, 80, 150, 0.9));
+        box-shadow: 0 0 10px var(--rejoin-glow);
       }
 
       .legend-swatch.ending {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(161, 164, 192, 0.88));
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(160, 162, 190, 0.9));
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
       }
 
       .graph-shell {
@@ -259,14 +349,10 @@
         margin: 0;
         flex: 1;
         min-height: 0;
-        border: 1px solid var(--panel-border);
-        border-radius: 30px;
-        background:
-          linear-gradient(180deg, var(--graph-shell-top-bg), var(--graph-shell-bottom-bg)),
-          radial-gradient(circle at 15% 10%, rgba(49, 111, 173, 0.08), transparent 26%);
-        box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.06),
-          0 28px 72px rgba(0, 0, 0, 0.28);
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
         overflow: auto;
       }
 
@@ -280,20 +366,17 @@
         overflow-y: auto;
       }
 
-      .graph-shell::before {
-        content: "";
-        position: sticky;
-        top: 0;
-        display: block;
-        width: 100%;
-        height: 1px;
-        z-index: 2;
-      }
-
       .graph-stage {
         position: relative;
         min-width: 100%;
         min-height: 100%;
+      }
+
+      .graph-zoom {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: top left;
       }
 
       #graph-edges,
@@ -309,7 +392,7 @@
       }
 
       #graph-edge-labels {
-        z-index: 1;
+        z-index: 3;
         pointer-events: none;
       }
 
@@ -319,206 +402,405 @@
 
       .graph-edge {
         fill: none;
-        stroke-width: 4;
+        stroke-width: 3;
         stroke-linecap: round;
         stroke-linejoin: round;
-        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.06));
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.04));
+        opacity: 0.72;
+        transition: opacity 0.3s ease;
       }
 
       .graph-edge[data-edge-style="kenkai"] {
         stroke: var(--kenkai);
+        filter: drop-shadow(0 0 6px var(--kenkai-glow));
       }
 
       .graph-edge[data-edge-style="genkai"] {
         stroke: var(--genkai);
+        filter: drop-shadow(0 0 6px var(--genkai-glow));
       }
 
       .graph-edge[data-edge-style="rejoin"] {
         stroke: var(--rejoin);
-        stroke-dasharray: 10 8;
+        stroke-dasharray: 8 6;
+        filter: drop-shadow(0 0 8px var(--rejoin-glow));
       }
 
       .edge-label {
         position: absolute;
         transform: translate(-50%, -50%);
-        padding: 4px 10px;
+        padding: 4px 12px;
         border-radius: 999px;
-        background: rgba(8, 10, 24, 0.92);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: rgba(255, 255, 255, 0.68);
-        font-size: 10px;
+        background: rgba(10, 12, 28, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 9px;
         line-height: 1.3;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.12em;
         white-space: nowrap;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
       }
 
       .scenario-card {
         position: absolute;
         display: flex;
         align-items: center;
-        gap: 12px;
+        justify-content: center;
         width: var(--node-width);
         min-height: var(--node-height);
-        padding: 14px 16px;
-        border-radius: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background:
-          linear-gradient(180deg, rgba(20, 22, 44, 0.94), rgba(10, 12, 28, 0.96)),
-          radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 48%);
+        padding: 8px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--card-glass-border);
+        background: var(--card-glass);
+        backdrop-filter: var(--card-blur);
+        -webkit-backdrop-filter: var(--card-blur);
         color: var(--text);
         text-decoration: none;
         box-shadow:
-          0 20px 48px rgba(0, 0, 0, 0.24),
+          0 4px 24px rgba(0, 0, 0, 0.18),
           inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        overflow: hidden;
         transition:
-          transform 0.22s ease,
-          border-color 0.22s ease,
-          box-shadow 0.22s ease,
-          background 0.22s ease;
+          transform 0.28s var(--transition-smooth),
+          border-color 0.28s ease,
+          box-shadow 0.32s ease,
+          background 0.28s ease,
+          opacity 0.28s ease;
+      }
+
+      .scenario-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+        pointer-events: none;
       }
 
       .scenario-card:hover {
-        transform: translateY(-4px) translateX(4px);
-        border-color: rgba(255, 255, 255, 0.28);
+        transform: translateY(-3px) scale(1.02);
+        border-color: rgba(255, 255, 255, 0.22);
         box-shadow:
-          0 26px 56px rgba(0, 0, 0, 0.28),
-          0 0 30px rgba(255, 255, 255, 0.08);
+          0 8px 36px rgba(0, 0, 0, 0.24),
+          0 0 24px rgba(255, 255, 255, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      .scenario-card[data-graph-visited="false"] {
+        opacity: 0.62;
+        filter: saturate(0.7) brightness(0.82);
+      }
+
+      .scenario-card[data-graph-visited="true"] {
+        opacity: 1;
+        filter: none;
+        border-width: 1.5px;
       }
 
       .scenario-card[data-graph-realm="kenkai"] {
+        border-color: rgba(240, 193, 93, 0.28);
         background:
-          linear-gradient(180deg, rgba(44, 33, 10, 0.94), rgba(22, 18, 7, 0.96)),
-          radial-gradient(circle at top, rgba(240, 193, 93, 0.12), transparent 48%);
-        border-color: rgba(240, 193, 93, 0.2);
+          linear-gradient(180deg, rgba(240, 193, 93, 0.06), rgba(12, 14, 32, 0.52));
+      }
+
+      .scenario-card[data-graph-realm="kenkai"][data-graph-visited="true"] {
+        border-color: rgba(255, 216, 110, 0.72);
+        background:
+          linear-gradient(180deg, rgba(255, 219, 118, 0.16), rgba(60, 40, 10, 0.18)),
+          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 234, 170, 0.10), transparent);
+        box-shadow:
+          0 0 28px rgba(240, 193, 93, 0.22),
+          0 4px 24px rgba(0, 0, 0, 0.18),
+          inset 0 1px 0 rgba(255, 240, 189, 0.18),
+          inset 0 0 0 1px rgba(255, 240, 189, 0.08);
       }
 
       .scenario-card[data-graph-realm="kenkai"]:hover {
-        border-color: rgba(240, 193, 93, 0.48);
+        border-color: rgba(240, 193, 93, 0.62);
         box-shadow:
-          0 26px 56px rgba(0, 0, 0, 0.28),
-          0 0 34px var(--kenkai-glow);
+          0 0 32px var(--kenkai-glow),
+          0 8px 36px rgba(0, 0, 0, 0.22);
       }
 
       .scenario-card[data-graph-realm="genkai"] {
+        border-color: rgba(110, 196, 255, 0.28);
         background:
-          linear-gradient(180deg, rgba(10, 20, 44, 0.94), rgba(6, 10, 24, 0.96)),
-          radial-gradient(circle at top, rgba(115, 198, 255, 0.12), transparent 48%);
-        border-color: rgba(115, 198, 255, 0.22);
+          linear-gradient(180deg, rgba(110, 196, 255, 0.06), rgba(12, 14, 32, 0.52));
+      }
+
+      .scenario-card[data-graph-realm="genkai"][data-graph-visited="true"] {
+        border-color: rgba(160, 220, 255, 0.72);
+        background:
+          linear-gradient(180deg, rgba(110, 196, 255, 0.16), rgba(8, 30, 56, 0.18)),
+          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200, 236, 255, 0.10), transparent);
+        box-shadow:
+          0 0 28px rgba(110, 196, 255, 0.22),
+          0 4px 24px rgba(0, 0, 0, 0.18),
+          inset 0 1px 0 rgba(210, 240, 255, 0.16),
+          inset 0 0 0 1px rgba(210, 240, 255, 0.06);
       }
 
       .scenario-card[data-graph-realm="genkai"]:hover {
-        border-color: rgba(115, 198, 255, 0.48);
+        border-color: rgba(110, 196, 255, 0.62);
         box-shadow:
-          0 26px 56px rgba(0, 0, 0, 0.28),
-          0 0 34px var(--genkai-glow);
+          0 0 32px var(--genkai-glow),
+          0 8px 36px rgba(0, 0, 0, 0.22);
       }
 
       .scenario-card[data-graph-kind="rejoin"],
       .scenario-card[data-graph-kind="root"] {
-        border-width: 2px;
+        border-width: 1.5px;
       }
 
       .scenario-card[data-graph-kind="rejoin"] {
         box-shadow:
-          0 20px 48px rgba(0, 0, 0, 0.24),
-          0 0 18px var(--rejoin-glow),
-          inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      }
-
-      .scenario-card[data-graph-kind="ending"] {
-        background:
-          linear-gradient(180deg, rgba(31, 33, 48, 0.95), rgba(10, 11, 20, 0.98)),
-          radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 52%);
+          0 0 20px var(--rejoin-glow),
+          0 4px 24px rgba(0, 0, 0, 0.18),
+          inset 0 1px 0 rgba(240, 164, 214, 0.10);
       }
 
       .scenario-card[data-graph-kind="root"]::after {
         content: "";
         position: absolute;
-        inset: -8px;
-        border-radius: 24px;
-        border: 1px solid rgba(243, 169, 217, 0.22);
+        inset: -6px;
+        border-radius: 20px;
+        border: 1px solid rgba(240, 164, 214, 0.18);
         pointer-events: none;
-        animation: root-pulse 3s ease-in-out infinite;
+        animation: root-pulse 4s ease-in-out infinite;
       }
 
       @keyframes root-pulse {
         0%, 100% {
-          opacity: 0.45;
+          opacity: 0.4;
           transform: scale(1);
         }
         50% {
-          opacity: 0.14;
-          transform: scale(1.04);
+          opacity: 0.12;
+          transform: scale(1.03);
         }
-      }
-
-      .card-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.08);
-        font-size: 20px;
-        flex-shrink: 0;
       }
 
       .card-copy {
         min-width: 0;
         flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
 
       .card-heading {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 6px;
+        display: block;
+        width: 100%;
       }
 
       .card-title {
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 0.07em;
-        line-height: 1.35;
-      }
-
-      .card-kind {
-        padding: 2px 8px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        font-size: 9px;
-        letter-spacing: 0.14em;
-        color: rgba(255, 255, 255, 0.72);
-        white-space: nowrap;
-      }
-
-      .scenario-card[data-graph-realm="kenkai"] .card-title {
-        color: #f8d98d;
-      }
-
-      .scenario-card[data-graph-realm="genkai"] .card-title {
-        color: #98d6ff;
-      }
-
-      .card-summary {
-        color: rgba(255, 255, 255, 0.66);
-        font-size: 11px;
-        line-height: 1.55;
-        letter-spacing: 0.04em;
         display: -webkit-box;
         overflow: hidden;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        line-height: 1.22;
+        text-align: center;
+        text-shadow:
+          0 0 12px rgba(0, 0, 0, 0.6),
+          0 1px 2px rgba(0, 0, 0, 0.6);
+        overflow-wrap: anywhere;
+        word-break: keep-all;
       }
 
-      .card-meta {
-        margin-top: 8px;
-        color: rgba(255, 255, 255, 0.48);
+      .scenario-card[data-graph-realm="kenkai"] .card-title {
+        color: #f2d48a;
+        opacity: 0.82;
+      }
+
+      .scenario-card[data-graph-realm="kenkai"][data-graph-visited="true"] .card-title {
+        color: #fff3c4;
+        opacity: 1;
+        text-shadow:
+          0 0 18px rgba(255, 221, 132, 0.22),
+          0 0 4px rgba(255, 221, 132, 0.08),
+          0 1px 2px rgba(0, 0, 0, 0.6);
+      }
+
+      .scenario-card[data-graph-realm="genkai"] .card-title {
+        color: #92d2ff;
+        opacity: 0.82;
+      }
+
+      .scenario-card[data-graph-realm="genkai"][data-graph-visited="true"] .card-title {
+        color: #ddf2ff;
+        opacity: 1;
+        text-shadow:
+          0 0 18px rgba(170, 225, 255, 0.20),
+          0 0 4px rgba(170, 225, 255, 0.08),
+          0 1px 2px rgba(0, 0, 0, 0.6);
+      }
+
+      .scenario-card[data-popup-open="true"] {
+        border-color: rgba(255, 255, 255, 0.34);
+        box-shadow:
+          0 26px 56px rgba(0, 0, 0, 0.32),
+          0 0 32px rgba(255, 255, 255, 0.12);
+      }
+
+      .card-popup-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .card-popup-layer[data-open="true"] {
+        pointer-events: auto;
+      }
+
+      .card-popup-layer[data-mode="hover"] {
+        pointer-events: none;
+      }
+
+      .card-popup-backdrop {
+        position: absolute;
+        inset: 0;
+        border: 0;
+        background: rgba(0, 0, 0, 0.001);
+        padding: 0;
+        cursor: default;
+      }
+
+      .card-popup-layer[data-mode="hover"] .card-popup-backdrop {
+        display: none;
+      }
+
+      .card-popup-layer[data-mode="touch"] .card-popup-backdrop {
+        display: block;
+      }
+
+      .card-popup {
+        position: fixed;
+        width: min(340px, calc(100vw - 24px));
+        padding: 16px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 16px;
+        background:
+          linear-gradient(180deg, rgba(14, 16, 36, 0.92), rgba(6, 8, 20, 0.96));
+        backdrop-filter: blur(16px) saturate(1.3);
+        -webkit-backdrop-filter: blur(16px) saturate(1.3);
+        box-shadow:
+          0 32px 80px rgba(0, 0, 0, 0.38),
+          0 0 0 1px rgba(255, 255, 255, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        opacity: 0;
+        transform: translateY(6px) scale(0.98);
+        transition:
+          opacity 0.22s var(--transition-smooth),
+          transform 0.22s var(--transition-smooth);
+        pointer-events: auto;
+      }
+
+      .card-popup-layer[data-open="true"] .card-popup {
+        opacity: 1;
+        transform: none;
+      }
+
+      .card-popup-layer[data-mode="touch"] .card-popup {
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        left: 12px;
+        width: auto;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .card-popup-kicker {
+        margin: 0 0 6px;
+        color: rgba(255, 255, 255, 0.62);
         font-size: 10px;
+        letter-spacing: 0.14em;
+      }
+
+      .card-popup-title {
+        margin: 0;
+        color: #eef2ff;
+        font-size: 16px;
+        line-height: 1.35;
+        letter-spacing: 0.06em;
+      }
+
+      .card-popup-summary {
+        margin: 10px 0 0;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .card-popup-meta {
+        margin: 10px 0 0;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 10px;
+        line-height: 1.5;
+        letter-spacing: 0.08em;
+        word-break: break-word;
+      }
+
+      .card-popup-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .card-popup-link,
+      .card-popup-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font: inherit;
         letter-spacing: 0.12em;
-        text-transform: uppercase;
+        text-decoration: none;
+      }
+
+      .card-popup-link {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: linear-gradient(135deg, rgba(120, 80, 200, 0.18), rgba(60, 120, 220, 0.14));
+        color: rgba(255, 255, 255, 0.92);
+        transition:
+          background 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .card-popup-link:hover {
+        border-color: rgba(255, 255, 255, 0.22);
+        background: linear-gradient(135deg, rgba(120, 80, 200, 0.28), rgba(60, 120, 220, 0.22));
+        box-shadow: 0 4px 16px rgba(120, 80, 200, 0.16);
+      }
+
+      .card-popup-close {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.58);
+        cursor: pointer;
+        transition:
+          color 0.18s ease,
+          border-color 0.18s ease;
+      }
+
+      .card-popup-close:hover {
+        color: rgba(255, 255, 255, 0.82);
+        border-color: rgba(255, 255, 255, 0.16);
+      }
+
+      body[data-graph-layout="mobile-vertical"] .card-popup-actions {
+        flex-wrap: wrap;
       }
 
       .no-dreams {
@@ -531,14 +813,45 @@
       }
 
       .back-link {
-        align-self: center;
-        color: rgba(255, 255, 255, 0.56);
+        position: fixed;
+        left: 50%;
+        bottom: 64px;
+        z-index: 4;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 12px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        background: rgba(10, 12, 28, 0.78);
+        color: rgba(255, 255, 255, 0.84);
         text-decoration: none;
-        letter-spacing: 0.12em;
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        transform: translateX(-50%);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow:
+          0 16px 44px rgba(0, 0, 0, 0.28),
+          0 0 0 1px rgba(120, 80, 200, 0.06);
+        transition:
+          color 0.22s ease,
+          border-color 0.22s ease,
+          background 0.22s ease,
+          box-shadow 0.22s ease,
+          transform 0.22s var(--transition-smooth);
       }
 
       .back-link:hover {
-        color: rgba(255, 255, 255, 0.84);
+        color: rgba(255, 255, 255, 0.96);
+        border-color: rgba(255, 255, 255, 0.22);
+        background: rgba(16, 18, 38, 0.88);
+        box-shadow:
+          0 20px 52px rgba(0, 0, 0, 0.32),
+          0 0 0 1px rgba(120, 80, 200, 0.12);
+        transform: translateX(-50%) translateY(-2px);
       }
 
       body[data-graph-layout="mobile-vertical"] {
@@ -562,6 +875,7 @@
       }
 
       body[data-graph-layout="mobile-vertical"] .header-copy {
+        width: 100%;
         max-width: none;
       }
 
@@ -571,7 +885,27 @@
       }
 
       body[data-graph-layout="mobile-vertical"] .graph-shell {
-        border-radius: 22px;
+        border-radius: 0;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .back-link {
+        position: static;
+        left: auto;
+        bottom: auto;
+        align-self: center;
+        margin-top: 2px;
+        transform: none;
+        min-height: 44px;
+        padding: 10px 18px;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .scenario-card {
+        padding: 4px 10px;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .card-title {
+        font-size: 14px;
+        line-height: 1.08;
       }
 
       body[data-graph-layout="mobile-vertical"] .graph-stage {
@@ -588,6 +922,20 @@
         padding: 8px 10px;
         font-size: 11px;
       }
+
+      body[data-graph-layout="mobile-vertical"] .date-nav-arrow {
+        width: 42px;
+        height: 58px;
+        font-size: 20px;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .date-nav-arrow.prev {
+        left: 8px;
+      }
+
+      body[data-graph-layout="mobile-vertical"] .date-nav-arrow.next {
+        right: 8px;
+      }
     </style>
   </head>
   <body class="mode-immersive">
@@ -596,6 +944,8 @@
       document.body.classList.add("mode-" + (window.__waddyInitialSiteMode || "immersive"));
     </script>
     <button id="mode-toggle" type="button" aria-label="表示モード切替" title="表示モード切替">◆ IMMERSIVE</button>
+    <a class="date-nav-arrow prev" id="date-nav-prev" href="#" hidden aria-label="previous A.D.M.S." title="previous A.D.M.S.">◀</a>
+    <a class="date-nav-arrow next" id="date-nav-next" href="#" hidden aria-label="next A.D.M.S." title="next A.D.M.S.">▶</a>
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
     <main class="page-shell">
@@ -616,12 +966,28 @@
 
       <section class="graph-shell" id="graph-shell">
         <div class="graph-stage" id="graph-stage" hidden>
-          <svg id="graph-edges" aria-hidden="true"></svg>
-          <div id="graph-edge-labels" aria-hidden="true"></div>
-          <div id="graph-nodes"></div>
+          <div class="graph-zoom" id="graph-zoom">
+            <svg id="graph-edges" aria-hidden="true"></svg>
+            <div id="graph-edge-labels" aria-hidden="true"></div>
+            <div id="graph-nodes"></div>
+          </div>
         </div>
         <p class="no-dreams" id="graph-empty" hidden></p>
       </section>
+
+      <div class="card-popup-layer" id="card-popup-layer" hidden aria-hidden="true">
+        <button class="card-popup-backdrop" id="card-popup-backdrop" type="button" aria-label="詳細を閉じる"></button>
+        <section class="card-popup" id="card-popup" hidden aria-live="polite">
+          <p class="card-popup-kicker" id="card-popup-kicker"></p>
+          <h2 class="card-popup-title" id="card-popup-title"></h2>
+          <p class="card-popup-summary" id="card-popup-summary"></p>
+          <p class="card-popup-meta" id="card-popup-meta"></p>
+          <div class="card-popup-actions">
+            <a class="card-popup-link" id="card-popup-link" href="#">この世界線へ</a>
+            <button class="card-popup-close" id="card-popup-close" type="button">閉じる</button>
+          </div>
+        </section>
+      </div>
 
       <a class="back-link" href="./diary.html">◁ 日記に戻る</a>
     </main>
@@ -828,13 +1194,15 @@
       })();
 
       (function () {
+        var DREAM_VISITED_STORAGE_KEY = "waddy-dream-visited-v1";
+        var DREAM_ROOT_ENTRY_KEY = "__root__";
         var DESKTOP_GRID = {
           padX: 140,
           padY: 110,
           layerGap: 260,
           laneGap: 118,
-          nodeWidth: 220,
-          nodeHeight: 96,
+          nodeWidth: 216,
+          nodeHeight: 84,
         };
         var MOBILE_GRID = {
           padX: 16,
@@ -845,9 +1213,9 @@
           mainGap: 18,
           sideGapX: 12,
           sideGapY: 16,
-          minNodeWidth: 112,
-          maxNodeWidth: 220,
-          nodeHeight: 96,
+          minNodeWidth: 124,
+          maxNodeWidth: 176,
+          nodeHeight: 44,
         };
 
         var KIND_LABELS = {
@@ -864,24 +1232,78 @@
           genkai: "幻界",
         };
 
+        var AVAILABLE_ADMS_DATES = ["2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23"];
         var dateLabel = document.getElementById("date-label");
         var mapTitle = document.getElementById("map-title");
         var graphStage = document.getElementById("graph-stage");
+        var graphZoom = document.getElementById("graph-zoom");
         var graphEmpty = document.getElementById("graph-empty");
         var graphShell = document.getElementById("graph-shell");
         var graphEdges = document.getElementById("graph-edges");
         var graphEdgeLabels = document.getElementById("graph-edge-labels");
         var graphNodes = document.getElementById("graph-nodes");
+        var popupLayer = document.getElementById("card-popup-layer");
+        var popupBackdrop = document.getElementById("card-popup-backdrop");
+        var popup = document.getElementById("card-popup");
+        var popupKicker = document.getElementById("card-popup-kicker");
+        var popupTitle = document.getElementById("card-popup-title");
+        var popupSummary = document.getElementById("card-popup-summary");
+        var popupMeta = document.getElementById("card-popup-meta");
+        var popupLink = document.getElementById("card-popup-link");
+        var popupClose = document.getElementById("card-popup-close");
+        var prevDateNav = document.getElementById("date-nav-prev");
+        var nextDateNav = document.getElementById("date-nav-next");
         var orientationQuery = window.matchMedia("(orientation: portrait)");
         var pointerQuery = window.matchMedia("(pointer: coarse)");
         var anyPointerQuery = window.matchMedia("(any-pointer: coarse)");
+        var hoverQuery = window.matchMedia("(hover: hover)");
         var currentGraph = null;
         var renderScheduled = false;
+        var popupCloseTimer = 0;
+        var activePopupCard = null;
+        var activePopupModel = null;
+        var visitedScenarioKeys = loadVisitedScenarioKeys();
+        var SVG_NS = "http://www.w3.org/2000/svg";
+        var EDGE_MASK_ID = "graph-edge-mask";
 
         function resolveDate() {
           var params = new URLSearchParams(window.location.search);
           var hash = window.location.hash.replace(/^#/, "");
           return params.get("date") || hash || null;
+        }
+
+        function buildDreamSelectUrl(date) {
+          var url = new URL("./dream-select.html", window.location.href);
+          url.searchParams.set("date", date);
+          url.searchParams.set("mode", "immersive");
+          return url.pathname + url.search;
+        }
+
+        function setDateNavLink(link, targetDate, label) {
+          if (!link) {
+            return;
+          }
+          if (!targetDate) {
+            link.hidden = true;
+            link.removeAttribute("href");
+            delete link.dataset.targetDate;
+            link.title = "";
+            link.setAttribute("aria-label", label);
+            return;
+          }
+          link.hidden = false;
+          link.href = buildDreamSelectUrl(targetDate);
+          link.dataset.targetDate = targetDate;
+          link.title = targetDate + " " + label;
+          link.setAttribute("aria-label", targetDate + " " + label);
+        }
+
+        function updateDateNavigation(date) {
+          var index = AVAILABLE_ADMS_DATES.indexOf(date);
+          var previousDate = index > 0 ? AVAILABLE_ADMS_DATES[index - 1] : null;
+          var nextDate = index >= 0 && index < AVAILABLE_ADMS_DATES.length - 1 ? AVAILABLE_ADMS_DATES[index + 1] : null;
+          setDateNavLink(prevDateNav, previousDate, "A.D.M.S.");
+          setDateNavLink(nextDateNav, nextDate, "A.D.M.S.");
         }
 
         function resolveLayoutMode() {
@@ -913,6 +1335,183 @@
           return function () {};
         }
 
+        function canHoverDetails() {
+          return hoverQuery.matches;
+        }
+
+        function buildScenarioVisitKey(scenarioName, entryLabel) {
+          if (!scenarioName) {
+            return "";
+          }
+          return scenarioName + "::" + (entryLabel || DREAM_ROOT_ENTRY_KEY);
+        }
+
+        function loadVisitedScenarioKeys() {
+          try {
+            var raw = window.localStorage.getItem(DREAM_VISITED_STORAGE_KEY);
+            if (!raw) {
+              return new Set();
+            }
+            var parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+              return new Set();
+            }
+            return new Set(Object.keys(parsed));
+          } catch (error) {
+            return new Set();
+          }
+        }
+
+        function refreshVisitedScenarioKeys() {
+          visitedScenarioKeys = loadVisitedScenarioKeys();
+        }
+
+        function isNodeVisited(node) {
+          return visitedScenarioKeys.has(buildScenarioVisitKey(node.scenario, node.entry || null));
+        }
+
+        function clearPopupCloseTimer() {
+          if (popupCloseTimer) {
+            window.clearTimeout(popupCloseTimer);
+            popupCloseTimer = 0;
+          }
+        }
+
+        function buildPopupModel(node) {
+          return {
+            title: node.title || "",
+            kicker: [node.icon || "•", REALM_LABELS[node.realm] || node.realm || "", KIND_LABELS[node.kind] || node.kind || ""]
+              .filter(Boolean)
+              .join(" "),
+            summary: node.summary || "この世界線の記録です。",
+            meta: node.scenario + (node.entry ? " / " + node.entry : ""),
+            href: buildScenarioUrl(node.scenario, node.entry),
+          };
+        }
+
+        function fillPopup(model) {
+          popupKicker.textContent = model.kicker;
+          popupTitle.textContent = model.title;
+          popupSummary.textContent = model.summary;
+          popupMeta.textContent = model.meta;
+          popupLink.href = model.href;
+        }
+
+        function placeHoverPopup(card) {
+          var cardRect = card.getBoundingClientRect();
+          var popupRect = popup.getBoundingClientRect();
+          var margin = 12;
+          var left = cardRect.right + 14;
+          var top = cardRect.top + Math.max(-6, (cardRect.height - popupRect.height) / 2);
+
+          if (left + popupRect.width > window.innerWidth - margin) {
+            left = cardRect.left - popupRect.width - 14;
+          }
+
+          if (left < margin) {
+            left = Math.max(margin, window.innerWidth - popupRect.width - margin);
+            top = Math.min(window.innerHeight - popupRect.height - margin, cardRect.bottom + 10);
+          }
+
+          top = Math.max(margin, Math.min(top, window.innerHeight - popupRect.height - margin));
+          popup.style.left = left + "px";
+          popup.style.top = top + "px";
+          popup.style.right = "auto";
+          popup.style.bottom = "auto";
+        }
+
+        function placePopup() {
+          if (!activePopupCard || !activePopupModel) {
+            return;
+          }
+          if (canHoverDetails()) {
+            placeHoverPopup(activePopupCard);
+          } else {
+            popup.style.left = "";
+            popup.style.top = "";
+            popup.style.right = "";
+            popup.style.bottom = "";
+          }
+        }
+
+        function closePopup(options) {
+          var opts = options || {};
+          clearPopupCloseTimer();
+          if (activePopupCard) {
+            activePopupCard.removeAttribute("data-popup-open");
+          }
+          if (popupLayer.hidden) {
+            activePopupCard = null;
+            activePopupModel = null;
+            return;
+          }
+
+          popupLayer.hidden = true;
+          popup.hidden = true;
+          popupLayer.dataset.open = "false";
+          popupLayer.dataset.mode = "";
+          popupLayer.setAttribute("aria-hidden", "true");
+          popup.removeAttribute("role");
+          popup.removeAttribute("aria-modal");
+          popup.style.left = "";
+          popup.style.top = "";
+          popup.style.right = "";
+          popup.style.bottom = "";
+
+          var cardToFocus = activePopupCard;
+          activePopupCard = null;
+          activePopupModel = null;
+
+          if (opts.restoreFocus && cardToFocus) {
+            cardToFocus.focus({ preventScroll: true });
+          }
+        }
+
+        function schedulePopupClose() {
+          if (!canHoverDetails()) {
+            return;
+          }
+          clearPopupCloseTimer();
+          popupCloseTimer = window.setTimeout(function () {
+            closePopup();
+          }, 120);
+        }
+
+        function openPopup(card, model, options) {
+          var opts = options || {};
+          clearPopupCloseTimer();
+          if (activePopupCard && activePopupCard !== card) {
+            activePopupCard.removeAttribute("data-popup-open");
+          }
+
+          activePopupCard = card;
+          activePopupModel = model;
+          card.dataset.popupOpen = "true";
+          fillPopup(model);
+
+          popupLayer.hidden = false;
+          popup.hidden = false;
+          popupLayer.dataset.open = "true";
+          popupLayer.dataset.mode = canHoverDetails() ? "hover" : "touch";
+          popupLayer.setAttribute("aria-hidden", "false");
+
+          if (canHoverDetails()) {
+            popup.setAttribute("role", "tooltip");
+            popup.removeAttribute("aria-modal");
+          } else {
+            popup.setAttribute("role", "dialog");
+            popup.setAttribute("aria-modal", "true");
+          }
+
+          placePopup();
+
+          if (opts.focusCta && !canHoverDetails()) {
+            window.requestAnimationFrame(function () {
+              popupLink.focus({ preventScroll: true });
+            });
+          }
+        }
+
         function buildScenarioUrl(scenarioName, entryLabel) {
           var url = new URL("./galge-scenario.html", window.location.href);
           url.searchParams.set("scenario", scenarioName);
@@ -932,9 +1531,11 @@
         }
 
         function showEmpty(message) {
+          closePopup();
           graphStage.hidden = true;
           graphEmpty.hidden = false;
           graphEmpty.textContent = message;
+          updateDateNavigation(resolveDate());
           mapTitle.textContent = "観測されていません";
         }
 
@@ -948,6 +1549,8 @@
         }
 
         function createNodeElement(node, rect) {
+          var popupModel = buildPopupModel(node);
+          var visited = isNodeVisited(node);
           var card = document.createElement("a");
           card.className = "scenario-card";
           card.href = buildScenarioUrl(node.scenario, node.entry);
@@ -960,17 +1563,13 @@
           card.dataset.graphKind = node.kind;
           card.dataset.graphLayer = String(node.layer);
           card.dataset.graphLane = String(node.lane);
+          card.dataset.graphVisited = visited ? "true" : "false";
           card.setAttribute(
             "aria-label",
             [node.title, REALM_LABELS[node.realm] || node.realm, KIND_LABELS[node.kind] || node.kind]
               .filter(Boolean)
               .join(" / ")
           );
-          card.title = node.entry ? node.scenario + " / " + node.entry : node.scenario;
-
-          var icon = document.createElement("span");
-          icon.className = "card-icon";
-          icon.textContent = node.icon || "•";
 
           var copy = document.createElement("div");
           copy.className = "card-copy";
@@ -982,25 +1581,29 @@
           title.className = "card-title";
           title.textContent = node.title;
 
-          var kind = document.createElement("span");
-          kind.className = "card-kind";
-          kind.textContent = KIND_LABELS[node.kind] || node.kind || "";
-
-          var summary = document.createElement("div");
-          summary.className = "card-summary";
-          summary.textContent = node.summary || "";
-
-          var meta = document.createElement("div");
-          meta.className = "card-meta";
-          meta.textContent = (REALM_LABELS[node.realm] || node.realm || "") + (node.entry ? " / " + node.entry : "");
-
           heading.appendChild(title);
-          heading.appendChild(kind);
           copy.appendChild(heading);
-          copy.appendChild(summary);
-          copy.appendChild(meta);
-          card.appendChild(icon);
           card.appendChild(copy);
+
+          card.addEventListener("mouseenter", function () {
+            if (canHoverDetails()) {
+              openPopup(card, popupModel);
+            }
+          });
+          card.addEventListener("mouseleave", schedulePopupClose);
+          card.addEventListener("focus", function () {
+            openPopup(card, popupModel);
+          });
+          card.addEventListener("blur", function () {
+            schedulePopupClose();
+          });
+          card.addEventListener("click", function (event) {
+            if (!canHoverDetails()) {
+              event.preventDefault();
+              openPopup(card, popupModel, { focusCta: true });
+            }
+          });
+
           return card;
         }
 
@@ -1012,10 +1615,11 @@
           var deltaX = Math.max(80, (endX - startX) * 0.34);
           var control1X = startX + deltaX;
           var control2X = endX - deltaX;
+          var labelOffsetY = 26;
           return {
             d: "M " + startX + " " + startY + " C " + control1X + " " + startY + ", " + control2X + " " + endY + ", " + endX + " " + endY,
             labelX: (startX + endX) / 2,
-            labelY: (startY + endY) / 2 - (startY === endY ? 18 : 0),
+            labelY: (startY + endY) / 2 - labelOffsetY,
           };
         }
 
@@ -1033,6 +1637,48 @@
             labelX: (startX + endX) / 2,
             labelY: (startY + endY) / 2,
           };
+        }
+
+        function appendEdgeMask(layout, sortedNodes) {
+          var defs = document.createElementNS(SVG_NS, "defs");
+          var mask = document.createElementNS(SVG_NS, "mask");
+          var base = document.createElementNS(SVG_NS, "rect");
+          var padding = 3;
+
+          mask.setAttribute("id", EDGE_MASK_ID);
+          mask.setAttribute("maskUnits", "userSpaceOnUse");
+          mask.setAttribute("maskContentUnits", "userSpaceOnUse");
+          mask.setAttribute("x", "0");
+          mask.setAttribute("y", "0");
+          mask.setAttribute("width", String(layout.baseStageWidth));
+          mask.setAttribute("height", String(layout.baseStageHeight));
+
+          base.setAttribute("x", "0");
+          base.setAttribute("y", "0");
+          base.setAttribute("width", String(layout.baseStageWidth));
+          base.setAttribute("height", String(layout.baseStageHeight));
+          base.setAttribute("fill", "white");
+          mask.appendChild(base);
+
+          sortedNodes.forEach(function (node) {
+            var rect = layout.rectMap.get(node.id);
+            if (!rect) {
+              return;
+            }
+            var blocker = document.createElementNS(SVG_NS, "rect");
+            blocker.setAttribute("x", String(rect.x - padding));
+            blocker.setAttribute("y", String(rect.y - padding));
+            blocker.setAttribute("width", String(rect.width + padding * 2));
+            blocker.setAttribute("height", String(rect.height + padding * 2));
+            blocker.setAttribute("rx", "18");
+            blocker.setAttribute("ry", "18");
+            blocker.setAttribute("fill", "black");
+            blocker.dataset.maskNodeId = node.id;
+            mask.appendChild(blocker);
+          });
+
+          defs.appendChild(mask);
+          graphEdges.appendChild(defs);
         }
 
         function computeDesktopLayout(sortedNodes) {
@@ -1151,13 +1797,50 @@
         function computeLayout(sortedNodes) {
           var mode = resolveLayoutMode();
           applyLayoutMode(mode);
-          return mode === "mobile-vertical" ? computeMobileLayout(sortedNodes) : computeDesktopLayout(sortedNodes);
+          return finalizeLayout(mode === "mobile-vertical" ? computeMobileLayout(sortedNodes) : computeDesktopLayout(sortedNodes));
+        }
+
+        function finalizeLayout(layout) {
+          var baseStageWidth = layout.stageWidth;
+          var baseStageHeight = layout.stageHeight;
+          var stageWidth = baseStageWidth;
+          var stageHeight = baseStageHeight;
+          var scale = 1;
+          var offsetX = 0;
+          var offsetY = 0;
+
+          if (layout.mode === "desktop-horizontal" && canHoverDetails()) {
+            var shellWidth = graphShell.clientWidth || baseStageWidth;
+            var shellHeight = graphShell.clientHeight || baseStageHeight;
+            if (baseStageWidth > shellWidth || baseStageHeight > shellHeight) {
+              scale = Math.min(1, shellWidth / baseStageWidth, shellHeight / baseStageHeight);
+            }
+
+            if (scale < 1) {
+              var scaledWidth = Math.max(1, Math.round(baseStageWidth * scale));
+              var scaledHeight = Math.max(1, Math.round(baseStageHeight * scale));
+              stageWidth = Math.max(shellWidth, scaledWidth);
+              stageHeight = Math.max(shellHeight, scaledHeight);
+              offsetX = Math.max(0, Math.round((stageWidth - scaledWidth) / 2));
+              offsetY = Math.max(0, Math.round((stageHeight - scaledHeight) / 2));
+            }
+          }
+
+          layout.baseStageWidth = baseStageWidth;
+          layout.baseStageHeight = baseStageHeight;
+          layout.stageWidth = stageWidth;
+          layout.stageHeight = stageHeight;
+          layout.scale = scale;
+          layout.offsetX = offsetX;
+          layout.offsetY = offsetY;
+          return layout;
         }
 
         function scheduleRender() {
           if (!currentGraph || renderScheduled) {
             return;
           }
+          closePopup();
           renderScheduled = true;
           window.requestAnimationFrame(function () {
             renderScheduled = false;
@@ -1168,6 +1851,7 @@
         }
 
         function renderGraph(graph) {
+          refreshVisitedScenarioKeys();
           var nodes = Array.isArray(graph.nodes) ? graph.nodes.slice() : [];
           var edges = Array.isArray(graph.edges) ? graph.edges.slice() : [];
           var sortedNodes = nodes.slice().sort(function (a, b) {
@@ -1176,6 +1860,7 @@
           });
 
           dateLabel.textContent = graph.date || resolveDate() || "";
+          updateDateNavigation(graph.date || resolveDate() || "");
           mapTitle.textContent = graph.title || "観測された地図";
           document.title = (graph.title || "A.D.M.S.") + " | ワディーゲストハウス";
 
@@ -1189,6 +1874,7 @@
             return;
           }
 
+          closePopup();
           currentGraph = graph;
           var nodeMap = new Map();
           for (var i = 0; i < sortedNodes.length; i += 1) {
@@ -1199,15 +1885,22 @@
 
           graphStage.hidden = false;
           graphEmpty.hidden = true;
+          graphStage.dataset.graphScale = String(layout.scale);
           graphStage.style.width = layout.stageWidth + "px";
           graphStage.style.height = layout.stageHeight + "px";
-          graphEdges.setAttribute("viewBox", "0 0 " + layout.stageWidth + " " + layout.stageHeight);
-          graphEdges.setAttribute("width", String(layout.stageWidth));
-          graphEdges.setAttribute("height", String(layout.stageHeight));
+          graphZoom.style.width = layout.baseStageWidth + "px";
+          graphZoom.style.height = layout.baseStageHeight + "px";
+          graphZoom.style.left = layout.offsetX + "px";
+          graphZoom.style.top = layout.offsetY + "px";
+          graphZoom.style.transform = layout.scale === 1 ? "" : "scale(" + layout.scale + ")";
+          graphEdges.setAttribute("viewBox", "0 0 " + layout.baseStageWidth + " " + layout.baseStageHeight);
+          graphEdges.setAttribute("width", String(layout.baseStageWidth));
+          graphEdges.setAttribute("height", String(layout.baseStageHeight));
           graphEdges.style.overflow = layout.mode === "mobile-vertical" ? "hidden" : "visible";
           graphEdges.innerHTML = "";
           graphEdgeLabels.innerHTML = "";
           graphNodes.innerHTML = "";
+          appendEdgeMask(layout, sortedNodes);
 
           for (var j = 0; j < sortedNodes.length; j += 1) {
             var node = sortedNodes[j];
@@ -1224,9 +1917,10 @@
             }
 
             var pathInfo = layout.buildEdgePath(layout.rectMap.get(fromNode.id), layout.rectMap.get(toNode.id));
-            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            var path = document.createElementNS(SVG_NS, "path");
             path.setAttribute("d", pathInfo.d);
             path.setAttribute("class", "graph-edge");
+            path.setAttribute("mask", "url(#" + EDGE_MASK_ID + ")");
             path.dataset.edgeStyle = edge.style || "kenkai";
             graphEdges.appendChild(path);
 
@@ -1244,6 +1938,7 @@
         async function main() {
           var date = resolveDate();
           dateLabel.textContent = date || "";
+          updateDateNavigation(date || "");
           mapTitle.textContent = "観測する日付を探索中";
           applyLayoutMode(resolveLayoutMode());
 
@@ -1263,7 +1958,39 @@
         addMediaListener(orientationQuery, scheduleRender);
         addMediaListener(pointerQuery, scheduleRender);
         addMediaListener(anyPointerQuery, scheduleRender);
+        addMediaListener(hoverQuery, scheduleRender);
         window.addEventListener("resize", scheduleRender);
+        window.addEventListener("pageshow", function () {
+          refreshVisitedScenarioKeys();
+          if (currentGraph) {
+            renderGraph(currentGraph);
+          }
+        });
+        graphShell.addEventListener("scroll", function () {
+          if (activePopupCard && activePopupModel && canHoverDetails()) {
+            placePopup();
+          }
+        });
+        popup.addEventListener("mouseenter", clearPopupCloseTimer);
+        popup.addEventListener("mouseleave", schedulePopupClose);
+        popup.addEventListener("focusin", clearPopupCloseTimer);
+        popup.addEventListener("focusout", function (event) {
+          if (event.relatedTarget && (popup.contains(event.relatedTarget) || (activePopupCard && activePopupCard.contains(event.relatedTarget)))) {
+            return;
+          }
+          schedulePopupClose();
+        });
+        popupBackdrop.addEventListener("click", function () {
+          closePopup({ restoreFocus: true });
+        });
+        popupClose.addEventListener("click", function () {
+          closePopup({ restoreFocus: true });
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            closePopup({ restoreFocus: true });
+          }
+        });
 
         main();
       })();

@@ -32582,6 +32582,8 @@ void main() {
   // src/galge-runtime/main.js
   var SITE_MODE_STORAGE_KEY = "waddy-display-mode";
   var SITE_MODE_DEFAULT = "classic";
+  var DREAM_VISITED_STORAGE_KEY = "waddy-dream-visited-v1";
+  var DREAM_ROOT_ENTRY_KEY = "__root__";
   function getModeFromQuery() {
     const mode = new URLSearchParams(window.location.search).get("mode");
     return mode === "classic" || mode === "immersive" ? mode : null;
@@ -32607,6 +32609,46 @@ void main() {
     const url = new URL(window.location.href);
     url.searchParams.set("mode", mode);
     window.history.replaceState({}, "", url);
+  }
+  function buildDreamVisitKey(scenarioName, entryLabel = null) {
+    if (!scenarioName) {
+      return "";
+    }
+    return `${scenarioName}::${entryLabel || DREAM_ROOT_ENTRY_KEY}`;
+  }
+  function loadDreamVisitedState() {
+    try {
+      const raw = window.localStorage.getItem(DREAM_VISITED_STORAGE_KEY);
+      if (!raw) {
+        return {};
+      }
+      const parsed = JSON.parse(raw);
+      return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  }
+  function saveDreamVisitedState(state) {
+    try {
+      window.localStorage.setItem(DREAM_VISITED_STORAGE_KEY, JSON.stringify(state));
+    } catch (error) {
+    }
+  }
+  function rememberDreamVisit(scenarioName, entryLabel = null) {
+    const key = buildDreamVisitKey(scenarioName, entryLabel);
+    if (!key) {
+      return;
+    }
+    const visitedState = loadDreamVisitedState();
+    if (visitedState[key]) {
+      return;
+    }
+    visitedState[key] = {
+      scenario: scenarioName,
+      entry: entryLabel || null,
+      visitedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    saveDreamVisitedState(visitedState);
   }
   var GalgeRuntimeApp = class {
     constructor() {
@@ -32752,6 +32794,7 @@ void main() {
       this.$chapterOverlay = this.$("chapter-overlay");
       this.$chapterTitle = this.$("chapter-title");
       this.$endScreen = this.$("end-screen");
+      this.$endBackLink = document.querySelector("#end-screen .back-link");
       this.$choiceContainer = this.$("choice-container");
       this.$textWindow = this.$("text-window");
       this.$backBtn = this.$("back-btn");
@@ -32858,11 +32901,13 @@ void main() {
       this.currentScenarioEntry = definition.requestedEntry || null;
       this.currentStep = definition.startIndex || 0;
       this.textSteps = definition.steps.filter((step) => step.kind === "text");
+      this.markScenarioVisit(this.currentScenarioEntry);
       this.applyScenarioMetadata({ preserveAtmosphere });
       await this.settingsPanel.setScenario(this.scenario);
     }
     applyScenarioMetadata({ preserveAtmosphere = false } = {}) {
       document.title = `${this.scenario.title} | ビジュアルノベル`;
+      this.syncBackNavigation();
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute(
@@ -32905,6 +32950,46 @@ void main() {
       } else {
         this.$runtimeWarning.hidden = true;
       }
+    }
+    extractScenarioDate() {
+      const candidates = [
+        this.scenario?.date,
+        this.scenario?.scenarioDate,
+        this.scenario?.scenarioName
+      ];
+      for (const candidate of candidates) {
+        if (typeof candidate !== "string") {
+          continue;
+        }
+        const match = candidate.match(/\b\d{4}-\d{2}-\d{2}\b/);
+        if (match) {
+          return match[0];
+        }
+      }
+      return null;
+    }
+    resolveBackUrl() {
+      const scenarioDate = this.extractScenarioDate();
+      if (!scenarioDate) {
+        return "./diary.html";
+      }
+      const params = new URLSearchParams({
+        date: scenarioDate,
+        mode: "immersive"
+      });
+      return `./dream-select.html?${params.toString()}`;
+    }
+    syncBackNavigation() {
+      const backUrl = this.resolveBackUrl();
+      if (this.$backBtn) {
+        this.$backBtn.href = backUrl;
+      }
+      if (this.$endBackLink) {
+        this.$endBackLink.href = backUrl;
+      }
+    }
+    markScenarioVisit(entryLabel = null) {
+      rememberDreamVisit(this.scenario?.scenarioName, entryLabel || null);
     }
     updateModelSummary(summary) {
       const text = `モデル設定済み ${summary.dedicatedCount} / ${summary.relevantCount}`;
@@ -33003,7 +33088,7 @@ void main() {
             this.settingsPanel.close();
             return;
           }
-          window.location.href = "./diary.html";
+          window.location.href = this.resolveBackUrl();
         }
       });
       document.addEventListener("keyup", (event) => {
@@ -33564,6 +33649,7 @@ void main() {
       this.updateProgress();
       this.syncBgmForIndex(index);
       if (step.kind === "label") {
+        this.markScenarioVisit(step.label || null);
         await this.showStep(index + 1);
         return;
       }
