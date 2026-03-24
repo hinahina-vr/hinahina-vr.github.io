@@ -45,6 +45,8 @@ const CROSS_LINK_TARGETS = [
   { dir: "diary-hazuki", page: "diary-hazuki.html", label: "葉月", emoji: "💥", color: "#d04028", group: "火の司祭" },
   { dir: "diary-rin", page: "diary-rin.html", label: "りん", emoji: "🔥", color: "#606060", group: "火の司祭" },
   { dir: "diary-mayuki", page: "diary-mayuki.html", label: "真雪", emoji: "❄", color: "#4080c0", group: "火の司祭" },
+  // ── 老中AI【仁】 ──
+  { dir: "diary-roju", page: "diary-roju.html", label: "老中評定", emoji: "🥃", color: "#daa520", group: "老中" },
   // ── みとら ──
   { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8", group: "神託" },
 ];
