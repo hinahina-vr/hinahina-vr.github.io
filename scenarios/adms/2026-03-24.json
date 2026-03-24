@@ -53,7 +53,7 @@
     },
     {
       "id": "gen_1_atp",
-      "title": "GEN-1 ATP分解の夕暮れ",
+      "title": "ATP分解の夕暮れ",
       "realm": "genkai",
       "kind": "side",
       "layer": 3,
@@ -65,7 +65,7 @@
     },
     {
       "id": "gen_2_vinegar",
-      "title": "GEN-2 酢で止めた時間",
+      "title": "酢で止めた時間",
       "realm": "genkai",
       "kind": "side",
       "layer": 3,
@@ -113,7 +113,7 @@
     },
     {
       "id": "gen_3_kanon",
-      "title": "GEN-3 うぐぅと1999年の雪",
+      "title": "うぐぅと1999年の雪",
       "realm": "genkai",
       "kind": "side",
       "layer": 6,
@@ -125,7 +125,7 @@
     },
     {
       "id": "gen_4_air",
-      "title": "GEN-4 風のない観覧車",
+      "title": "風のない観覧車",
       "realm": "genkai",
       "kind": "side",
       "layer": 6,
@@ -137,7 +137,7 @@
     },
     {
       "id": "gen_5_sapoke",
-      "title": "GEN-5 灯台と紬の夏",
+      "title": "灯台と紬の夏",
       "realm": "genkai",
       "kind": "side",
       "layer": 6,
@@ -185,7 +185,7 @@
     },
     {
       "id": "gen_6_disc",
-      "title": "GEN-6 割れたディスクの考古学",
+      "title": "割れたディスクの考古学",
       "realm": "genkai",
       "kind": "side",
       "layer": 7,
@@ -197,7 +197,7 @@
     },
     {
       "id": "gen_7_download",
-      "title": "GEN-7 100%の欠損",
+      "title": "100%の欠損",
       "realm": "genkai",
       "kind": "side",
       "layer": 7,
@@ -245,7 +245,7 @@
     },
     {
       "id": "gen_8_coffin",
-      "title": "GEN-8 パラメータの棺",
+      "title": "パラメータの棺",
       "realm": "genkai",
       "kind": "side",
       "layer": 9,
@@ -257,7 +257,7 @@
     },
     {
       "id": "gen_9_tasteless",
-      "title": "GEN-9 味のない記録",
+      "title": "味のない記録",
       "realm": "genkai",
       "kind": "side",
       "layer": 9,
@@ -293,7 +293,7 @@
     },
     {
       "id": "kenkai_end_1",
-      "title": "KEN-1 anemoiの風",
+      "title": "anemoiの風",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -305,7 +305,7 @@
     },
     {
       "id": "kenkai_end_2",
-      "title": "KEN-2 いつものゴモミ",
+      "title": "いつものゴモミ",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -317,7 +317,7 @@
     },
     {
       "id": "kenkai_end_3",
-      "title": "KEN-3 エントロピーの朝",
+      "title": "エントロピーの朝",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -329,7 +329,7 @@
     },
     {
       "id": "kenkai_end_4",
-      "title": "KEN-4 33番目の予約",
+      "title": "33番目の予約",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -341,7 +341,7 @@
     },
     {
       "id": "kenkai_end_5",
-      "title": "KEN-5 やれやれの朝",
+      "title": "春の予約",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -349,7 +349,7 @@
       "icon": "😮‍💨",
       "scenario": "2026-03-24_予約と鮮度の春秋",
       "entry": "KENKAI_END_5",
-      "summary": "三度目のやれやれ"
+      "summary": "三度目の呟き"
     }
   ],
   "edges": [
@@ -384,6 +384,6 @@
     { "from": "final_counter", "to": "kenkai_end_2", "choiceText": "変わらない味を予約する", "style": "kenkai" },
     { "from": "final_counter", "to": "kenkai_end_3", "choiceText": "鮮度を手放す", "style": "kenkai" },
     { "from": "final_counter", "to": "kenkai_end_4", "choiceText": "33人目のヒロインを予約する", "style": "kenkai" },
-    { "from": "final_counter", "to": "kenkai_end_5", "choiceText": "やれやれ、と言って目覚める", "style": "kenkai" }
+    { "from": "final_counter", "to": "kenkai_end_5", "choiceText": "大抵のことはそうだ、と呟いて目覚める", "style": "kenkai" }
   ]
 }

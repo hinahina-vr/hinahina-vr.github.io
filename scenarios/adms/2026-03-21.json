@@ -257,7 +257,7 @@
     },
     {
       "id": "ken_a",
-      "title": "KEN-A 正常覚醒",
+      "title": "正常覚醒",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -269,7 +269,7 @@
     },
     {
       "id": "ken_b",
-      "title": "KEN-B 明晰夢",
+      "title": "明晰夢",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -281,7 +281,7 @@
     },
     {
       "id": "ken_c",
-      "title": "KEN-C 目覚まし時計",
+      "title": "目覚まし時計",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -293,7 +293,7 @@
     },
     {
       "id": "ken_d",
-      "title": "KEN-D 半覚醒",
+      "title": "半覚醒",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -305,7 +305,7 @@
     },
     {
       "id": "ken_e",
-      "title": "KEN-E 各駅停車の残響",
+      "title": "各駅停車の残響",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,

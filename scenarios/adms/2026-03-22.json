@@ -41,7 +41,7 @@
     },
     {
       "id": "kenkai_end_1",
-      "title": "KEN-1 月曜の朝",
+      "title": "月曜の朝",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -89,7 +89,7 @@
     },
     {
       "id": "genkai_end_6",
-      "title": "GEN-6 02:00の台所",
+      "title": "02:00の台所",
       "realm": "genkai",
       "kind": "side",
       "layer": 4,
@@ -161,7 +161,7 @@
     },
     {
       "id": "kenkai_end_2",
-      "title": "KEN-2 ターミナルの残像",
+      "title": "ターミナルの残像",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 7,
@@ -329,7 +329,7 @@
     },
     {
       "id": "kenkai_end_3",
-      "title": "KEN-3 名前を呼ぶ声",
+      "title": "名前を呼ぶ声",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -341,7 +341,7 @@
     },
     {
       "id": "kenkai_end_4",
-      "title": "KEN-4 正史のない朝",
+      "title": "正史のない朝",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,
@@ -353,7 +353,7 @@
     },
     {
       "id": "kenkai_end_5",
-      "title": "KEN-5 各駅停車の帰路",
+      "title": "各駅停車の帰路",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 11,

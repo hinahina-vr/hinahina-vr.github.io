@@ -53,7 +53,7 @@
     },
     {
       "id": "gen_1_hokkyoku",
-      "title": "GEN-1 極地のエンドルフィン",
+      "title": "極地のエンドルフィン",
       "realm": "genkai",
       "kind": "side",
       "layer": 3,
@@ -89,7 +89,7 @@
     },
     {
       "id": "gen_2_42degrees",
-      "title": "GEN-2 42度の誤報",
+      "title": "42度の誤報",
       "realm": "genkai",
       "kind": "side",
       "layer": 5,
@@ -137,7 +137,7 @@
     },
     {
       "id": "gen_3_cabinet",
-      "title": "GEN-3 筐体の中の人格",
+      "title": "筐体の中の人格",
       "realm": "genkai",
       "kind": "side",
       "layer": 7,
@@ -185,7 +185,7 @@
     },
     {
       "id": "gen_4_kigurumi",
-      "title": "GEN-4 着ぐるみの汗",
+      "title": "着ぐるみの汗",
       "realm": "genkai",
       "kind": "side",
       "layer": 9,
@@ -221,7 +221,7 @@
     },
     {
       "id": "hina_room",
-      "title": "GEN-5 バスケコートの残響",
+      "title": "バスケコートの残響",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
@@ -233,7 +233,7 @@
     },
     {
       "id": "dejiko_room",
-      "title": "GEN-6 ビームの温度",
+      "title": "ビームの温度",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
@@ -245,7 +245,7 @@
     },
     {
       "id": "multi_room",
-      "title": "GEN-7 掃除機の輪廻",
+      "title": "掃除機の輪廻",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
@@ -257,7 +257,7 @@
     },
     {
       "id": "rem_room",
-      "title": "GEN-8 献身の受容体",
+      "title": "献身の受容体",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
@@ -269,7 +269,7 @@
     },
     {
       "id": "moegami_room",
-      "title": "GEN-9 人格の衣",
+      "title": "人格の衣",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
@@ -281,7 +281,7 @@
     },
     {
       "id": "oji_room",
-      "title": "GEN-10 事業計画書の灰",
+      "title": "事業計画書の灰",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
@@ -329,7 +329,7 @@
     },
     {
       "id": "gen_11_congress",
-      "title": "GEN-11 議会が止めた日記",
+      "title": "議会が止めた日記",
       "realm": "genkai",
       "kind": "side",
       "layer": 13,
@@ -365,7 +365,7 @@
     },
     {
       "id": "gen_12_alldiaries",
-      "title": "GEN-12 すべての日記を終わらせる日記",
+      "title": "すべての日記を終わらせる日記",
       "realm": "genkai",
       "kind": "side",
       "layer": 14,
@@ -401,7 +401,7 @@
     },
     {
       "id": "kenkai_end_1",
-      "title": "KEN-1 ゴモミの残り香",
+      "title": "ゴモミの残り香",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 15,
@@ -413,7 +413,7 @@
     },
     {
       "id": "kenkai_end_2",
-      "title": "KEN-2 偽の火事、本物の朝",
+      "title": "偽の火事、本物の朝",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 15,
@@ -425,7 +425,7 @@
     },
     {
       "id": "kenkai_end_3",
-      "title": "KEN-3 パラメータの向こう側",
+      "title": "パラメータの向こう側",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 15,
@@ -437,7 +437,7 @@
     },
     {
       "id": "kenkai_end_4",
-      "title": "KEN-4 自分で自分を観測する朝",
+      "title": "自分で自分を観測する朝",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 15,
@@ -449,7 +449,7 @@
     },
     {
       "id": "kenkai_end_5",
-      "title": "KEN-5 32の声の目覚まし",
+      "title": "32の声の目覚まし",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 15,

@@ -1,6 +1,6 @@
 {
   "title": "予約と鮮度の春秋",
-  "subtitle": "─ やれやれ、と僕はもう一度思った ─",
+  "subtitle": "─ 大抵のことはそうだ ─",
   "genre": "村上春樹的鮮度ノベル",
   "date": "2026-03-24",
   "chars": {
@@ -15,7 +15,7 @@
     { "label": "uohare_enter" },
     { "bg": "uohare_counter" },
     { "speaker": "narrator", "expression": "", "text": "カウンターに座る。目の前で板前が魚を捌いている。\n包丁が身に入っていく角度。一定のリズム。一定の深さ。" },
-    { "speaker": "narrator", "expression": "", "text": "やれやれ、と僕は思った。\n僕の人生にはあのような一定のリズムというものがほとんど存在しない。" },
+    { "speaker": "narrator", "expression": "", "text": "僕の人生にはあのような一定のリズムというものがほとんど存在しない。\n大抵のことはそうだ。" },
     { "label": "menu_fish" },
     {
       "choices": [
@@ -169,7 +169,7 @@
         { "text": "変わらない味を予約する", "goto": "KENKAI_END_2" },
         { "text": "鮮度を手放す", "goto": "KENKAI_END_3" },
         { "text": "33人目のヒロインを予約する", "goto": "KENKAI_END_4" },
-        { "text": "やれやれ、と言って目覚める", "goto": "KENKAI_END_5" }
+        { "text": "大抵のことはそうだ、と呟いて目覚める", "goto": "KENKAI_END_5" }
       ]
     },
     { "label": "KENKAI_END_1" },
@@ -190,13 +190,13 @@
     { "label": "KENKAI_END_4" },
     { "bg": "new_character_dawn" },
     { "speaker": "narrator", "expression": "", "text": "33人目。anemoiのヒロインが大奥に加わった。\n名前はまだ知らない。顔も声も知らない。\nでも、4月24日には知ることになる。" },
-    { "speaker": "narrator", "expression": "", "text": "やれやれ。また一人増えるのか。\nでも悪くない。屋根は広い。棚はまだ空いている。煩悩はまだ108に届いていない。" },
+    { "speaker": "narrator", "expression": "", "text": "また一人増えるのか。\nでも悪くない。屋根は広い。棚はまだ空いている。煩悩はまだ108に届いていない。" },
     { "ending": { "title": "33番目の予約", "subtitle": "まだ名前も知らないヒロインのために、屋根の下に一つ席を用意した朝。" } },
     { "label": "KENKAI_END_5" },
     { "bg": "morning_room" },
-    { "speaker": "narrator", "expression": "", "text": "やれやれ、と僕は思った。\n三度目のやれやれだ。一晩に三回もやれやれと思う夜は、そうあるものではない。" },
+    { "speaker": "narrator", "expression": "", "text": "大抵のことはそうだ、と僕は思った。\n一晩に三回も同じことを思う夜は、そうあるものではない。" },
     { "speaker": "narrator", "expression": "", "text": "目が覚めた。火曜日の朝。\n口の中に魚の味はない。予約もまだしていない。風もまだ吹いていない。\nでも春は来る。来ると決まっている。予約しなくても。" },
-    { "speaker": "narrator", "expression": "", "text": "やれやれ。" },
-    { "ending": { "title": "やれやれの朝", "subtitle": "三度目のやれやれの後に来た朝。春は予約しなくても届く。" } }
+    { "speaker": "narrator", "expression": "", "text": "大抵のことはそうだ。" },
+    { "ending": { "title": "春の予約", "subtitle": "大抵のことはそうだ、と三度思った朝。春は予約しなくても届く。" } }
   ]
 }
