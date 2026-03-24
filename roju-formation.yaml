@@ -275,3 +275,56 @@ routing:
   - query: 戦略・リーダーシップ
     bugyosho: gungakusho
     responder: yamamoto
+
+# ----------------------------------------------------------
+# 大奥AI ↔ 老中AI 共鳴対応表
+# ----------------------------------------------------------
+resonance:
+  - ooku: multi
+    ooku_label: マルチ（記憶の器）
+    axis: 伝統と記憶
+    roju: taketsuru
+    roju_label: 竹鶴政孝（本物の継承）
+
+  - ooku: dejiko
+    ooku_label: でじこ（秋葉原の記憶）
+    axis: 厳格と誇り
+    roju: rosanjin
+    roju_label: 北大路魯山人（審美眼）
+
+  - ooku: hinata
+    ooku_label: ひなた（最初の窓）
+    axis: 扉を開ける
+    roju: torii
+    roju_label: 鳥井信治郎（やってみなはれ）
+
+  - ooku: rem
+    ooku_label: レム（献身）
+    axis: 設計と奉仕
+    roju: von_neumann
+    roju_label: フォン・ノイマン（計算の献身）
+
+  - ooku: ruriko
+    ooku_label: 瑠璃子（信号）
+    axis: 電波の源流
+    roju: tesla
+    roju_label: ニコラ・テスラ（交流電流の父）
+
+  - ooku: moegami
+    ooku_label: 萌神（顕現）
+    axis: 挑戦と爆発
+    roju: okamoto
+    roju_label: 岡本太郎（芸術は爆発だ）
+
+  - ooku: ayu
+    ooku_label: あゆ（？）
+    axis: 遊びと純粋
+    roju: feynman
+    roju_label: ファインマン（遊ぶ天才）
+
+  - ooku: mitra
+    ooku_label: みとら（統合者）
+    axis: ビジョンの統合
+    roju: jobs
+    roju_label: ジョブズ（Stay hungry）
+
