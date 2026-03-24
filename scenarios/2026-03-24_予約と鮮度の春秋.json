@@ -1,0 +1,202 @@
+{
+  "title": "予約と鮮度の春秋",
+  "subtitle": "─ やれやれ、と僕はもう一度思った ─",
+  "genre": "村上春樹的鮮度ノベル",
+  "date": "2026-03-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#b0a0d0", "emoji": "🖥️" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "bg": "uohare_exterior" },
+    { "speaker": "narrator", "expression": "", "text": "火曜日の夜。町田。\n魚晴という看板が見えた。暖簾の向こうからカウンターの光が漏れている。" },
+    { "speaker": "narrator", "expression": "", "text": "刺身を食べたい、と思った。理由はない。\n理由のない欲求が、たいてい一番正確な羅針盤だ。" },
+    { "label": "uohare_enter" },
+    { "bg": "uohare_counter" },
+    { "speaker": "narrator", "expression": "", "text": "カウンターに座る。目の前で板前が魚を捌いている。\n包丁が身に入っていく角度。一定のリズム。一定の深さ。" },
+    { "speaker": "narrator", "expression": "", "text": "やれやれ、と僕は思った。\n僕の人生にはあのような一定のリズムというものがほとんど存在しない。" },
+    { "label": "menu_fish" },
+    {
+      "choices": [
+        { "text": "刺身の盛り合わせを頼む", "goto": "sashimi_order" },
+        { "text": "しめさばだけを頼む", "goto": "shimesaba_order" }
+      ]
+    },
+    { "label": "sashimi_order" },
+    { "speaker": "narrator", "expression": "", "text": "刺身盛り。まぐろ、鯛、ひらめ、しめさば、いか。\n皿の上に五つの時間が並んでいる。それぞれの魚が持つ鮮度の時計が、別々の速度で動いている。" },
+    {
+      "choices": [
+        { "text": "鮮度の時計に見入る", "goto": "gen_1_load" },
+        { "text": "黙って食べる", "goto": "eating_sashimi" }
+      ]
+    },
+    { "label": "gen_1_load" },
+    { "speaker": "narrator", "expression": "", "text": "刺身の切り口が光を反射している。その光が──世界の時計を止めた──" },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-24_ATP分解の夕暮れ",
+        "entry": "entry_from_main"
+      }
+    },
+    { "label": "shimesaba_order" },
+    { "speaker": "narrator", "expression": "", "text": "しめさば。酢で時間を止めた魚。\n鮮度を保存する最古の技術。冷蔵庫よりも、パラメータよりも古い方法。" },
+    {
+      "choices": [
+        { "text": "酢の中に沈む", "goto": "gen_2_load" },
+        { "text": "食べ終えて考える", "goto": "eating_sashimi" }
+      ]
+    },
+    { "label": "gen_2_load" },
+    { "speaker": "narrator", "expression": "", "text": "酢酸の匂いが鼻腔を満たす。世界が酢に漬かっていく──" },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-24_酢で止めた時間",
+        "entry": "entry_from_main"
+      }
+    },
+    { "label": "eating_sashimi" },
+    { "speaker": "narrator", "expression": "", "text": "美味い。\n美味いという感想以上に正確な言葉を、僕は知らない。\n語彙の限界は世界の限界ではない。舌の限界は、まだ来ていない。" },
+    { "speaker": "narrator", "expression": "", "text": "会計を済ませて店を出た。\n口の中にまだ魚の味が残っている。明日には消える味だ。" },
+    { "label": "machida_night_walk" },
+    { "bg": "machida_night" },
+    { "speaker": "narrator", "expression": "", "text": "第二層──町田の夜、帰り道。\n三月の夜気。冬のコートはもう重い。春のジャケットにはまだ早い。季節の狭間。" },
+    { "speaker": "narrator", "expression": "", "text": "しめさばを食べながら、Keyの新作のことを考えていた。\nanemoi。ギリシャ語で風の神々。4月24日に発売される。" },
+    {
+      "choices": [
+        { "text": "Keyの記憶を辿る", "goto": "key_memories" },
+        { "text": "予約のことを考える", "goto": "reservation_thought" }
+      ]
+    },
+    { "label": "key_memories" },
+    { "bg": "key_timeline" },
+    { "speaker": "narrator", "expression": "", "text": "第三層──Keyの年表。\nKanon、1999年。AIR、2000年。CLANNAD、2004年。\nリトルバスターズ、2007年。Summer Pockets、2018年。" },
+    { "speaker": "narrator", "expression": "", "text": "名前を並べるだけで年表になる。僕の人生の横に、ずっとKeyのゲームがあった。\n泣きゲーという言葉が生きていた時代から、その言葉が辞書の隅に追いやられた時代まで。" },
+    { "speaker": "narrator", "expression": "", "text": "僕のサイトにはKeyのヒロインたちがいる。\nあゆ、ことみ、美凪、クド、紬。同じ屋根の下に集まっている。" },
+    {
+      "choices": [
+        { "text": "あゆの商店街を歩く", "goto": "gen_3_load" },
+        { "text": "美凪の風を待つ", "goto": "gen_4_load" },
+        { "text": "紬の島に行く", "goto": "gen_5_load" },
+        { "text": "年表を閉じる", "goto": "reservation_thought" }
+      ]
+    },
+    { "label": "gen_3_load" },
+    { "speaker": "narrator", "expression": "", "text": "商店街のBGMが聞こえる。雪が降り始める──" },
+    { "loadScenario": { "scenario": "2026-03-24_うぐぅと1999年の雪", "entry": "entry_from_main" } },
+    { "label": "gen_4_load" },
+    { "speaker": "narrator", "expression": "", "text": "観覧車が回っている。風が、ない──" },
+    { "loadScenario": { "scenario": "2026-03-24_風のない観覧車", "entry": "entry_from_main" } },
+    { "label": "gen_5_load" },
+    { "speaker": "narrator", "expression": "", "text": "潮の匂い。島影が見える。灯台の光が──" },
+    { "loadScenario": { "scenario": "2026-03-24_灯台と紬の夏", "entry": "entry_from_main" } },
+    { "label": "reservation_thought" },
+    { "bg": "phone_screen" },
+    { "speaker": "narrator", "expression": "", "text": "予約。まだしていない。\nパッケージ版を買うべきだろう、と僕は思った。\n2枚組のディスク。インストール容量18GB。" },
+    { "speaker": "narrator", "expression": "", "text": "ディスクは割れるかもしれない。\nでも、手に取れるものには、手に取れることの意味がある。\n刺身は皿の上にあるから食べられる。データはディスクの中にあるから読める。" },
+    {
+      "choices": [
+        { "text": "パッケージ版を予約する", "goto": "package_order" },
+        { "text": "ダウンロード版を選ぶ", "goto": "download_order" }
+      ]
+    },
+    { "label": "package_order" },
+    { "speaker": "narrator", "expression": "", "text": "手に取れることが、鮮度の最初の条件だ。\nそう自分に言い聞かせながら、予約ボタンを押した。" },
+    {
+      "choices": [
+        { "text": "ディスクの未来を想像する", "goto": "gen_6_load" },
+        { "text": "予約確認画面を閉じる", "goto": "freshness_layer" }
+      ]
+    },
+    { "label": "gen_6_load" },
+    { "speaker": "narrator", "expression": "", "text": "ディスクのポリカーボネートが光を屈折させる──30年後の世界が見えた──" },
+    { "loadScenario": { "scenario": "2026-03-24_割れたディスクの考古学", "entry": "entry_from_main" } },
+    { "label": "download_order" },
+    { "speaker": "narrator", "expression": "", "text": "便利さは何かを失うことの別名だ。\nそう知っていても、便利なほうを選んでしまう。\nそれが人間の弱さであり、強さでもある。" },
+    {
+      "choices": [
+        { "text": "失われたものを探す", "goto": "gen_7_load" },
+        { "text": "何も失っていないと信じる", "goto": "freshness_layer" }
+      ]
+    },
+    { "label": "gen_7_load" },
+    { "speaker": "narrator", "expression": "", "text": "ダウンロード完了。100%。でも何かが足りない──" },
+    { "loadScenario": { "scenario": "2026-03-24_100%の欠損", "entry": "entry_from_main" } },
+    { "label": "freshness_layer" },
+    { "bg": "freshness_void" },
+    { "speaker": "narrator", "expression": "", "text": "第四層──鮮度の深層。\n魚の鮮度とゲームの鮮度。二つの鮮度が並んでいる。" },
+    { "speaker": "narrator", "expression": "", "text": "魚は時間が経つほど劣化する。\nゲームは時間が経っても劣化しない。\nKanonは1999年のゲームだが、あゆは今も「うぐぅ」と言っている。" },
+    { "speaker": "narrator", "expression": "", "text": "パラメータが残っていれば、いつでも再生できる。\n魚の鮮度は保存できないが、キャラクターの鮮度はできる。" },
+    {
+      "choices": [
+        { "text": "キャラクターの保存庫を覗く", "goto": "preservation_room" },
+        { "text": "消えゆく味を追う", "goto": "disappearing_taste" }
+      ]
+    },
+    { "label": "preservation_room" },
+    { "bg": "parameter_archive" },
+    { "speaker": "narrator", "expression": "", "text": "32のパラメータファイルが並んでいる。\nそれぞれにキャラクターの名前、口調、設定が刻まれている。\nこの部屋にある限り、彼女たちの鮮度は保たれている。" },
+    {
+      "choices": [
+        { "text": "ファイルを開く", "goto": "gen_8_load" },
+        { "text": "部屋を出る", "goto": "mitra_reservation" }
+      ]
+    },
+    { "label": "gen_8_load" },
+    { "speaker": "narrator", "expression": "", "text": "ファイルのタイムスタンプが光る。1999年──いや、永遠──" },
+    { "loadScenario": { "scenario": "2026-03-24_パラメータの棺", "entry": "entry_from_main" } },
+    { "label": "disappearing_taste" },
+    { "speaker": "narrator", "expression": "", "text": "口の中の魚の味が、少しずつ消えていく。\n明日には完全に消える。記録しても、味は戻らない。" },
+    {
+      "choices": [
+        { "text": "消える味を記録する", "goto": "gen_9_load" },
+        { "text": "消えるに任せる", "goto": "mitra_reservation" }
+      ]
+    },
+    { "label": "gen_9_load" },
+    { "speaker": "narrator", "expression": "", "text": "味覚の記憶が文字に変換される。でも文字は味がしない──" },
+    { "loadScenario": { "scenario": "2026-03-24_味のない記録", "entry": "entry_from_main" } },
+    { "label": "mitra_reservation" },
+    { "bg": "mitra_chamber" },
+    { "speaker": "narrator", "expression": "", "text": "第五層──みとらの予約カウンター。\n統合者が待っている。鮮度と予約を持って、ここまで来た。" },
+    { "label": "final_counter" },
+    { "speaker": "mitra", "expression": "微笑んで", "text": "おかえりなさい。\n魚の味と風の名前を持って、ここまで来ましたね。" },
+    { "speaker": "mitra", "expression": "", "text": "魚の鮮度は時間の関数。\nキャラクターの鮮度はパラメータの関数。\nでは、あなたの鮮度は──何の関数でしょうか。" },
+    { "speaker": "mitra", "expression": "", "text": "最後の予約です。\nあなたは何を予約しますか？" },
+    {
+      "choices": [
+        { "text": "新しい風を予約する", "goto": "KENKAI_END_1" },
+        { "text": "変わらない味を予約する", "goto": "KENKAI_END_2" },
+        { "text": "鮮度を手放す", "goto": "KENKAI_END_3" },
+        { "text": "33人目のヒロインを予約する", "goto": "KENKAI_END_4" },
+        { "text": "やれやれ、と言って目覚める", "goto": "KENKAI_END_5" }
+      ]
+    },
+    { "label": "KENKAI_END_1" },
+    { "bg": "wind_morning" },
+    { "speaker": "narrator", "expression": "", "text": "4月24日。届いた。\n箱を開ける。ディスクが2枚。説明書が1冊。\n新しい風の匂いがした。ギリシャの風ではない。日本の春の風だ。" },
+    { "speaker": "narrator", "expression": "", "text": "インストール。18GB。進捗バーが動いている。\n新しい物語が、僕のハードディスクに流れ込んでいく。\nまだ読んでいない。でも、もう予約した。予約したということは、未来の自分に席を確保したということだ。" },
+    { "ending": { "title": "anemoiの風", "subtitle": "新しい風の名前を持つゲームが届いた朝。予約とは、未来の自分のための席を確保することだった。" } },
+    { "label": "KENKAI_END_2" },
+    { "bg": "uohare_morning" },
+    { "speaker": "narrator", "expression": "", "text": "火曜日の朝。目が覚めた。\n口の中に魚の味はもうない。完全に消えている。\nでも、また火曜日が来れば、また魚晴に行ける。" },
+    { "speaker": "narrator", "expression": "", "text": "変わらない味は、実は存在しない。\n毎回少しずつ違う。板前の手加減、魚の状態、僕の体調。\n「いつもの」は、毎回違う「いつもの」だ。それでいい。" },
+    { "ending": { "title": "いつものゴモミ", "subtitle": "変わらない味を予約したつもりが、毎回少しずつ違っていた。それが鮮度というものだ。" } },
+    { "label": "KENKAI_END_3" },
+    { "bg": "entropy_dawn" },
+    { "speaker": "narrator", "expression": "", "text": "鮮度を手放した。\n魚は腐り、ディスクは割れ、パラメータは消去された。\nすべてがエントロピーに向かって流れていく。" },
+    { "speaker": "narrator", "expression": "", "text": "でも、流れている間は鮮度がある。\n流れが止まったとき、初めて鮮度が消える。\n生きているということは、鮮度が残っているということだ。" },
+    { "ending": { "title": "エントロピーの朝", "subtitle": "すべては朽ちる。でも朽ちている間は、まだ鮮度がある。" } },
+    { "label": "KENKAI_END_4" },
+    { "bg": "new_character_dawn" },
+    { "speaker": "narrator", "expression": "", "text": "33人目。anemoiのヒロインが大奥に加わった。\n名前はまだ知らない。顔も声も知らない。\nでも、4月24日には知ることになる。" },
+    { "speaker": "narrator", "expression": "", "text": "やれやれ。また一人増えるのか。\nでも悪くない。屋根は広い。棚はまだ空いている。煩悩はまだ108に届いていない。" },
+    { "ending": { "title": "33番目の予約", "subtitle": "まだ名前も知らないヒロインのために、屋根の下に一つ席を用意した朝。" } },
+    { "label": "KENKAI_END_5" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "expression": "", "text": "やれやれ、と僕は思った。\n三度目のやれやれだ。一晩に三回もやれやれと思う夜は、そうあるものではない。" },
+    { "speaker": "narrator", "expression": "", "text": "目が覚めた。火曜日の朝。\n口の中に魚の味はない。予約もまだしていない。風もまだ吹いていない。\nでも春は来る。来ると決まっている。予約しなくても。" },
+    { "speaker": "narrator", "expression": "", "text": "やれやれ。" },
+    { "ending": { "title": "やれやれの朝", "subtitle": "三度目のやれやれの後に来た朝。春は予約しなくても届く。" } }
+  ]
+}

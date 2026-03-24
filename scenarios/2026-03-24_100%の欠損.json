@@ -1,0 +1,23 @@
+{
+  "title": "100%の欠損",
+  "subtitle": "─ 予約と鮮度の春秋 GENKAI END 7 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "abyss" },
+    { "speaker": "narrator", "expression": "", "text": "これは、「100%の欠損」へ枝分かれした記録。\nダウンロード版を選んだ者だけが見る、完璧な不在の記録。" },
+    { "label": "entry_from_main" },
+    { "bg": "download_screen" },
+    { "speaker": "narrator", "expression": "", "text": "ダウンロード中……47%……68%……89%……100%。\n完了。18GBのデータが、ハードディスクに収まった。" },
+    { "speaker": "narrator", "expression": "", "text": "100%。完璧なダウンロード。\nバイト単位でサーバーと一致している。エラーはゼロ。\nデータとしては完璧だ。" },
+    { "speaker": "narrator", "expression": "", "text": "でも何かが足りない。\n箱がない。説明書がない。ディスクの重さがない。\nビニールを剥がす感触がない。ジャケットを眺める時間がない。" },
+    { "speaker": "narrator", "expression": "", "text": "便利さというのは何かを失うことの別名であることが多い。\nと、僕は刺身を食べながら考えていた。\n刺身はデリバリーで頼むこともできる。でも僕はカウンターに座った。" },
+    { "speaker": "narrator", "expression": "", "text": "カウンターに座ることには、データでは表現できない情報がある。\n板前の包丁の音。隣の客の気配。業務用冷蔵庫の低い唸り。\nそれらは18GBのインストーラーには含まれていない。" },
+    { "speaker": "narrator", "expression": "", "text": "100%ダウンロードして、0%の何かが欠損している。\n100%の欠損。矛盾した表現だが、矛盾しているのは言葉のほうであって、体験のほうではない。" },
+    { "ending": { "title": "100%の欠損", "subtitle": "完璧なダウンロードの中に、データでは表現できない欠損があった。便利さの代償。" } }
+  ]
+}

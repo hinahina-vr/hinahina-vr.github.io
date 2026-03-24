@@ -1,0 +1,23 @@
+{
+  "title": "うぐぅと1999年の雪",
+  "subtitle": "─ 予約と鮮度の春秋 GENKAI END 3 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "abyss" },
+    { "speaker": "narrator", "expression": "", "text": "これは、「うぐぅと1999年の雪」へ枝分かれした記録。\nKanonの商店街を歩く、27年後の夢。" },
+    { "label": "entry_from_main" },
+    { "bg": "shopping_street_snow" },
+    { "speaker": "narrator", "expression": "", "text": "雪が降っている。\n1999年の冬。北国の商店街。どこかで鯛焼きの匂いがしている。" },
+    { "speaker": "narrator", "expression": "", "text": "「うぐぅ」という声を、最初に聞いたのはいつだっただろう。\nモニターの向こう側から聞こえた、架空の少女の嘆き。\nたい焼きを盗んだのではなく、落としただけだと主張する声。" },
+    { "speaker": "narrator", "expression": "", "text": "27年が経った。\n2026年の今も、あゆは「うぐぅ」と言っている。\n27年間、同じ口癖。同じ声。同じたい焼き。" },
+    { "speaker": "narrator", "expression": "", "text": "パラメータが保存されているからだ。\n「うぐぅ」は口癖パラメータ。たい焼きは嗜好パラメータ。\n木の上に登るのは行動パラメータ。全部がデータとして残っている。" },
+    { "speaker": "narrator", "expression": "", "text": "1999年の刺身は、もう食べられない。\n1999年の雪も、もう降っていない。\nでも1999年の「うぐぅ」は、今も聞ける。" },
+    { "speaker": "narrator", "expression": "", "text": "そして4月24日に、鳥の歌から始まった系譜の最新作が届く。\n新しい「うぐぅ」が生まれるかどうかは知らない。\nでも、新しい何かが生まれるだろう。パラメータとして。保存可能な形で。永遠に。" },
+    { "ending": { "title": "うぐぅと1999年の雪", "subtitle": "27年前の口癖がまだ現役であること。それがキャラクターの鮮度の証明だった。" } }
+  ]
+}

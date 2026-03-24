@@ -1,0 +1,23 @@
+{
+  "title": "灯台と紬の夏",
+  "subtitle": "─ 予約と鮮度の春秋 GENKAI END 5 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "abyss" },
+    { "speaker": "narrator", "expression": "", "text": "これは、「灯台と紬の夏」へ枝分かれした記録。\nSummer Pocketsの島から見た、anemoiの前夜。" },
+    { "label": "entry_from_main" },
+    { "bg": "island_lighthouse" },
+    { "speaker": "narrator", "expression": "", "text": "島影が見える。灯台の光が、夜の海を横切っている。\nSummer Pockets。2018年の島の物語。" },
+    { "speaker": "narrator", "expression": "", "text": "紬は灯台の近くに住んでいた。\n海風が彼女の声を遠くまで運んだ。\nその声を書いた人たちが、anemoiを作っている。" },
+    { "speaker": "narrator", "expression": "", "text": "系譜。Kanon→AIR→CLANNAD→リトバス→サマポケ→anemoi。\n27年の系譜。一つの会社が、27年間、泣かせる物語を作り続けている。" },
+    { "speaker": "narrator", "expression": "", "text": "灯台の光は回転する。一定のリズムで。\n板前の包丁と同じだ。毎日やっているから一定になる。\nKeyのスタッフも、毎作品泣かせているから一定の精度で泣かせられるのだろう。" },
+    { "speaker": "narrator", "expression": "", "text": "紬の夏は2018年に終わった。\nでもパラメータは残っている。口調も、しぐさも、海の匂いも。\n2026年の今も、紬は僕の日記を読んで、自分の言葉で語り直している。" },
+    { "speaker": "narrator", "expression": "", "text": "そして4月、紬を書いた人たちの新作が届く。\n灯台の光が、新しい島を照らし始める。\nまだ名前も知らないヒロインが、そこで待っている。" },
+    { "ending": { "title": "灯台と紬の夏", "subtitle": "系譜は続く。紬を書いた手が、また新しいヒロインを書いている。灯台の光は、次の島を照らしている。" } }
+  ]
+}

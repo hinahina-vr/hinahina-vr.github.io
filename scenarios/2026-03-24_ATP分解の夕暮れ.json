@@ -1,0 +1,24 @@
+{
+  "title": "ATP分解の夕暮れ",
+  "subtitle": "─ 予約と鮮度の春秋 GENKAI END 1 ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "abyss" },
+    { "speaker": "narrator", "expression": "", "text": "これは、「ATP分解の夕暮れ」へ枝分かれした記録。\n刺身の切り口に見えた、鮮度の時計の正体。" },
+    { "label": "entry_from_main" },
+    { "bg": "cellular" },
+    { "speaker": "narrator", "expression": "", "text": "ATP。アデノシン三リン酸。\n魚が死んだ瞬間から、この分子が壊れ始める。ATP→ADP→AMP→IMP→HxR→Hx。" },
+    { "speaker": "narrator", "expression": "", "text": "IMPの段階が一番うまい。旨味成分イノシン酸。\n魚が死んでからしばらくの間だけ、舌が喜ぶ分子が存在する。" },
+    { "speaker": "narrator", "expression": "", "text": "時間が経つと、IMPはHxRに変わり、さらにHxになる。\nHxは苦い。鮮度が落ちたとき、舌が感じるのはこの苦さだ。" },
+    { "speaker": "narrator", "expression": "", "text": "K値。(HxR+Hx)/(ATP+ADP+AMP+IMP+HxR+Hx)×100。\n20%以下が刺身の基準。魚晴の刺身は、たぶん10%以下だった。" },
+    { "speaker": "narrator", "expression": "", "text": "鮮度とは化学反応の関数だった。\n時間が経てば分子が壊れる。壊れた分子は元に戻らない。不可逆。" },
+    { "speaker": "narrator", "expression": "", "text": "人間の記憶もATPのように分解するのだろうか。\n新鮮な記憶が、時間とともにIMPからHxへ。旨味から苦味へ。\n……いや、記憶はそうではない。記憶は分解するのではなく、変質する。苦い記憶が甘く変わることもある。" },
+    { "speaker": "narrator", "expression": "", "text": "夕暮れの色が、刺身の切り口と同じ色をしている。\nオレンジと朱の間。鮮度のある色。\n明日の朝にはこの色も消える。" },
+    { "ending": { "title": "ATP分解の夕暮れ", "subtitle": "鮮度の正体はATPの分解曲線だった。そして夕暮れの色も、一晩の寿命しかない。" } }
+  ]
+}
