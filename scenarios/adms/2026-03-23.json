@@ -113,7 +113,7 @@
     },
     {
       "id": "town_machida",
-      "title": "第二層 ─ 町田の夜",
+      "title": "町田の夜",
       "realm": "kenkai",
       "kind": "route",
       "layer": 5,
@@ -209,7 +209,7 @@
     },
     {
       "id": "resident_floor",
-      "title": "第三層 ─ 住人の廊下",
+      "title": "住人の廊下",
       "realm": "kenkai",
       "kind": "route",
       "layer": 9,
@@ -305,7 +305,7 @@
     },
     {
       "id": "darpa_corridor",
-      "title": "第四層 ─ DARPAの廊下",
+      "title": "DARPAの廊下",
       "realm": "kenkai",
       "kind": "route",
       "layer": 11,
@@ -389,7 +389,7 @@
     },
     {
       "id": "final_threshold",
-      "title": "第五層 ─ 最後の閾値",
+      "title": "最後の閾値",
       "realm": "kenkai",
       "kind": "route",
       "layer": 14,

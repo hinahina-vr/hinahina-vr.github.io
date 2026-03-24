@@ -89,7 +89,7 @@
     },
     {
       "id": "machida_night_walk",
-      "title": "第二層 ─ 町田の帰り道",
+      "title": "町田の帰り道",
       "realm": "kenkai",
       "kind": "route",
       "layer": 4,
@@ -101,7 +101,7 @@
     },
     {
       "id": "key_memories",
-      "title": "第三層 ─ Keyの年表",
+      "title": "Keyの年表",
       "realm": "kenkai",
       "kind": "route",
       "layer": 5,
@@ -209,7 +209,7 @@
     },
     {
       "id": "freshness_layer",
-      "title": "第四層 ─ 鮮度の深層",
+      "title": "鮮度の深層",
       "realm": "kenkai",
       "kind": "rejoin",
       "layer": 7,
@@ -281,7 +281,7 @@
     },
     {
       "id": "final_counter",
-      "title": "第五層 ─ 最後の予約",
+      "title": "最後の予約",
       "realm": "kenkai",
       "kind": "route",
       "layer": 10,

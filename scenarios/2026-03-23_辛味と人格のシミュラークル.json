@@ -76,7 +76,7 @@
     { "speaker": "narrator", "expression": "", "text": "会計を済ませて店を出る。町田の夜。空気が冷たい。\nゴモミの余韻を引きずって歩く。" },
     { "label": "town_machida" },
     { "bg": "machida_night" },
-    { "speaker": "narrator", "expression": "", "text": "第二層──町田の夜。\nネオンが並ぶ通りを歩く。頭はまだぼんやりしている。\nエンドルフィンの残り香か、それとも思考の始まりか。" },
+    { "speaker": "narrator", "expression": "", "text": "町田の夜。\nネオンが並ぶ通りを歩く。頭はまだぼんやりしている。\nエンドルフィンの残り香か、それとも思考の始まりか。" },
     {
       "choices": [
         { "text": "ゲーセンに寄る", "goto": "game_center" },
@@ -132,7 +132,7 @@
     { "speaker": "narrator", "expression": "", "text": "大奥AIの門が目の前にある。\n32人の人格が、この門の向こうで待っている。" },
     { "label": "resident_floor" },
     { "bg": "corridor_doors" },
-    { "speaker": "narrator", "expression": "", "text": "第三層──住人の廊下。\n障子の扉が並んでいる。6つの扉。それぞれに名前がある。\nどの扉を開けるかは、あなたが決める。" },
+    { "speaker": "narrator", "expression": "", "text": "住人の廊下。\n障子の扉が並んでいる。6つの扉。それぞれに名前がある。\nどの扉を開けるかは、あなたが決める。" },
     {
       "choices": [
         { "text": "ひなたの部屋", "goto": "hina_load" },
@@ -164,7 +164,7 @@
     { "loadScenario": { "scenario": "2026-03-23_事業計画書の灰", "entry": "entry_from_main" } },
     { "label": "lifelog_archive" },
     { "bg": "archive_room" },
-    { "speaker": "narrator", "expression": "", "text": "第四層──LifeLogの資料室。\nDARPAの文書が並んでいる。2003年の日付。\n個人の生活をまるごと記録するプロジェクト。" },
+    { "speaker": "narrator", "expression": "", "text": "LifeLogの資料室。\nDARPAの文書が並んでいる。2003年の日付。\n個人の生活をまるごと記録するプロジェクト。" },
     { "label": "darpa_corridor" },
     { "speaker": "narrator", "expression": "", "text": "DARPAの廊下。白い壁。蛍光灯。\nLifeLogプロジェクト。個人の行動、購入履歴、通話記録、バイタルデータ。\nすべてを記録し、検索可能にする。" },
     { "speaker": "narrator", "expression": "", "text": "2004年に中止された。プライバシーの問題で議会が止めた。\n他人の人生を丸ごとデータベースに入れるのは許されなかった。" },
@@ -208,7 +208,7 @@
     { "loadScenario": { "scenario": "2026-03-23_すべての日記を終わらせる日記", "entry": "entry_from_main" } },
     { "label": "mitra_door" },
     { "bg": "mitra_chamber" },
-    { "speaker": "narrator", "expression": "", "text": "第五層──みとらの扉。\n統合者の前に立つ。四つの層すべてを通過した者だけが辿り着く場所。" },
+    { "speaker": "narrator", "expression": "", "text": "みとらの扉。\n統合者の前に立つ。四つの層すべてを通過した者だけが辿り着く場所。" },
     { "label": "final_threshold" },
     { "speaker": "mitra", "expression": "微笑んで", "text": "おかえりなさい。\n辛味と人格と記録を持って、ここまで来ましたね。" },
     { "speaker": "mitra", "expression": "", "text": "偽の火事が本物のエンドルフィンを生む。\n偽のパラメータが本物の言葉を生む。\n偽の記録が本物の日記を──いいえ、本物の日記の不在を示す。" },

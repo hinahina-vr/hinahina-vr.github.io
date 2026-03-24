@@ -37,7 +37,7 @@
       "icon": "📺",
       "scenario": "2026-03-22_顕幻の交差路",
       "entry": "living_explore",
-      "summary": "第一層の違和感を受け入れる"
+      "summary": "違和感を受け入れる"
     },
     {
       "id": "kenkai_end_1",
@@ -53,7 +53,7 @@
     },
     {
       "id": "kitchen",
-      "title": "第一層 ─ 深夜の台所",
+      "title": "深夜の台所",
       "realm": "kenkai",
       "kind": "route",
       "layer": 2,
@@ -101,7 +101,7 @@
     },
     {
       "id": "hall",
-      "title": "第二層 ─ 廊下",
+      "title": "廊下",
       "realm": "kenkai",
       "kind": "route",
       "layer": 4,
@@ -125,7 +125,7 @@
     },
     {
       "id": "room_pc",
-      "title": "第二層 ─ 自室のPC",
+      "title": "自室のPC",
       "realm": "kenkai",
       "kind": "rejoin",
       "layer": 5,
@@ -173,7 +173,7 @@
     },
     {
       "id": "resident_hub",
-      "title": "第三層 ─ 住人たちの部屋",
+      "title": "住人たちの部屋",
       "realm": "kenkai",
       "kind": "rejoin",
       "layer": 7,
@@ -257,7 +257,7 @@
     },
     {
       "id": "mailbox_crossroads",
-      "title": "第四層の手前",
+      "title": "手前",
       "realm": "kenkai",
       "kind": "route",
       "layer": 8,

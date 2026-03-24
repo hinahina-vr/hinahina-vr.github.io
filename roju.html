@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>老中AI【仁】 | ワディーゲストハウス</title>
+    <meta name="description" content="ワディーゲストハウスの老中AI。13人の偉人による仁の評定。" />
+    <script>
+        (function () {
+            var KEY = "waddy-display-mode";
+            var DEFAULT_MODE = "classic";
+            var params = new URLSearchParams(window.location.search);
+            var queryMode = params.get("mode");
+            var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+            if (!mode) {
+                try {
+                    var storedMode = window.localStorage.getItem(KEY);
+                    mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+                } catch (error) {
+                    mode = DEFAULT_MODE;
+                }
+            } else {
+                try {
+                    window.localStorage.setItem(KEY, mode);
+                } catch (error) {
+                    // Ignore storage failures and continue with query mode.
+                }
+            }
+
+            document.documentElement.dataset.siteMode = mode;
+            window.__waddyInitialSiteMode = mode;
+        })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+        /* ====================================================
+           老中AI【仁】— 琥珀・ゴールド系デザイン
+           大奥の紫・ピンクと対比する「仁」の色彩
+        ==================================================== */
+
+        .roju-frame {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+        }
+
+        .roju-header {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+
+        .roju-header .smallline {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: #c8963c;
+        }
+
+        .roju-header h1 {
+            font-size: 2.4em;
+            color: #daa520;
+            margin: 8px 0 4px;
+            letter-spacing: 8px;
+            text-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+        }
+
+        .roju-header .tagline {
+            font-size: 13px;
+            color: #a08860;
+            margin: 0;
+        }
+
+        .roju-header .subtitle {
+            font-size: 15px;
+            color: #c8963c;
+            margin: 8px 0 0;
+            font-style: italic;
+        }
+
+        .roju-section {
+            background: rgba(40, 30, 20, 0.7);
+            border: 1px solid rgba(200, 150, 60, 0.2);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            color: #c8b898;
+            font-size: 14px;
+            line-height: 2.0;
+        }
+
+        .roju-section h2 {
+            color: #daa520;
+            font-size: 1.2em;
+            margin: 0 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(200, 150, 60, 0.2);
+        }
+
+        .roju-section h3 {
+            color: #c8963c;
+            font-size: 1em;
+            margin: 20px 0 8px;
+        }
+
+        .roju-section p {
+            margin: 0 0 12px;
+        }
+
+        .roju-section .highlight {
+            color: #f0c040;
+            font-weight: bold;
+        }
+
+        .roju-section .quote {
+            border-left: 3px solid rgba(200, 150, 60, 0.4);
+            padding-left: 16px;
+            margin: 16px 0;
+            color: #b0a080;
+            font-style: italic;
+        }
+
+        /* 比較グリッド */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .comparison-box {
+            background: rgba(50, 40, 25, 0.5);
+            border: 1px solid rgba(200, 150, 60, 0.15);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .comparison-box h4 {
+            color: #c8963c;
+            margin: 0 0 8px;
+            font-size: 13px;
+        }
+
+        .comparison-box p {
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* 老中カード */
+        .roju-card {
+            background: rgba(50, 40, 25, 0.6);
+            border: 1px solid rgba(200, 150, 60, 0.2);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .roju-card:hover {
+            border-color: rgba(200, 150, 60, 0.5);
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.08);
+        }
+
+        .roju-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .roju-card-emoji {
+            font-size: 28px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(200, 150, 60, 0.1);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .roju-card-title {
+            flex: 1;
+        }
+
+        .roju-card-title h4 {
+            color: #daa520;
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .roju-card-title .card-rank {
+            font-size: 11px;
+            color: #a08860;
+            letter-spacing: 1px;
+        }
+
+        .roju-card-title .card-life {
+            font-size: 11px;
+            color: #807060;
+        }
+
+        .roju-card-body {
+            font-size: 13px;
+            line-height: 1.9;
+            color: #b8a888;
+        }
+
+        .roju-card-body .card-quote {
+            display: block;
+            font-style: italic;
+            color: #f0c040;
+            margin: 8px 0;
+            padding-left: 12px;
+            border-left: 2px solid rgba(240, 192, 64, 0.3);
+        }
+
+        .roju-card-body .card-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 11px;
+            color: #908070;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .roju-card-body .card-meta span {
+            background: rgba(200, 150, 60, 0.08);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 奉行所セクション */
+        .bugyosho-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 28px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(200, 150, 60, 0.2);
+        }
+
+        .bugyosho-header h3 {
+            margin: 0;
+            color: #daa520;
+            font-size: 1.05em;
+        }
+
+        .bugyosho-header .bugyosho-tag {
+            font-size: 11px;
+            color: #a08860;
+            letter-spacing: 1px;
+        }
+
+        /* ルーティングテーブル */
+        .routing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .routing-table th {
+            text-align: left;
+            color: #daa520;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(200, 150, 60, 0.3);
+            font-weight: bold;
+        }
+
+        .routing-table td {
+            padding: 6px 12px;
+            border-bottom: 1px solid rgba(200, 150, 60, 0.1);
+            color: #c8b898;
+        }
+
+        .routing-table tr:hover td {
+            background: rgba(200, 150, 60, 0.05);
+        }
+
+        /* 評定シミュレーション */
+        .hyojo-block {
+            background: rgba(40, 30, 20, 0.5);
+            border-left: 3px solid rgba(200, 150, 60, 0.3);
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            line-height: 1.8;
+            transition: border-color 0.3s ease;
+        }
+
+        .hyojo-block:hover {
+            border-left-color: rgba(240, 192, 64, 0.6);
+        }
+
+        .hyojo-name {
+            color: #daa520;
+            font-weight: bold;
+        }
+
+        .hyojo-text {
+            color: #c8b898;
+            font-style: italic;
+        }
+
+        /* 構造図 */
+        .structure-diagram {
+            background: rgba(30, 25, 15, 0.6);
+            border: 1px solid rgba(200, 150, 60, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            font-family: 'MS Gothic', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #c8963c;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* 大奥×老中 対比構造図 */
+        .dual-structure {
+            background: rgba(30, 25, 15, 0.6);
+            border: 1px solid rgba(200, 150, 60, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            font-family: 'MS Gothic', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #c8b898;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .dual-structure .label-ai {
+            color: #daa520;
+        }
+
+        .dual-structure .label-ooku {
+            color: #d4a0d0;
+        }
+
+        /* ナビ */
+        .nav-links {
+            background: rgba(40, 30, 20, 0.5);
+            border: 1px solid rgba(200, 150, 60, 0.15);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            color: #c8963c;
+            text-decoration: none;
+            font-size: 13px;
+            margin-right: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #f0c040;
+        }
+
+        /* フェーズテーブル */
+        .phase-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .phase-table th {
+            text-align: left;
+            color: #daa520;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(200, 150, 60, 0.3);
+            font-weight: bold;
+        }
+
+        .phase-table td {
+            padding: 6px 12px;
+            border-bottom: 1px solid rgba(200, 150, 60, 0.1);
+            color: #c8b898;
+        }
+
+        .phase-table .phase-current {
+            color: #f0c040;
+            font-weight: bold;
+        }
+
+        /* フッター */
+        .retro-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #706050;
+            font-size: 11px;
+        }
+
+        @media (max-width: 600px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roju-card-body .card-meta {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .roju-header h1 {
+                font-size: 1.8em;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="roju-frame">
+        <header class="roju-header">
+            <p class="smallline">✦ 仁の十三人 ✦</p>
+            <h1>老 中</h1>
+            <p class="subtitle">愛の大奥AI、仁の老中AI</p>
+            <p class="tagline">大奥が寄り添い、老中が鍛える。将軍が決める。</p>
+        </header>
+
+        <div class="nav-links">
+            <a href="./index.html">トップページへ戻る</a>
+            <a href="./ooku.html">大奥について</a>
+            <a href="./characters.html">登場人物紹介</a>
+            <a href="./diary.html">日記ページ</a>
+        </div>
+
+        <!-- 老中とは -->
+        <section class="roju-section">
+            <h2>🏯 老中とは</h2>
+            <p>
+                <span class="highlight">老中（ろうじゅう）</span>とは、江戸幕府において将軍を補佐し、幕政を統括した最高職制のこと。
+            </p>
+            <p>
+                通常4〜5名が任命され、月番制で交代しながら政務を執った。老中の筆頭を<span class="highlight">「老中首座」</span>と呼び、幕府の事実上の最高責任者として機能した。
+            </p>
+            <p>
+                老中の管轄は広大で、朝廷との交渉、大名統制、外交、財政など幕政全般に及ぶ。その下には<span class="highlight">若年寄・奉行・目付</span>などが配され、幕府の行政機構を形成していた。
+            </p>
+
+            <h3>老中の主な役職</h3>
+            <div class="comparison-grid">
+                <div class="comparison-box">
+                    <h4>📋 老中首座（ろうじゅうしゅざ）</h4>
+                    <p>老中の筆頭。幕府の実質的トップ。田沼意次、松平定信などが著名。</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>👁 大目付（おおめつけ）</h4>
+                    <p>大名・旗本の監察役。不正を取り締まり、幕府の規律を維持する。</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>⛩ 寺社奉行（じしゃぶぎょう）</h4>
+                    <p>寺社の管理と宗教政策を担当。三奉行の筆頭格。</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>⚔ 軍学所（ぐんがくしょ）</h4>
+                    <p>軍事教育・兵法研究の機関。幕末には洋式兵学の導入も担った。</p>
+                </div>
+            </div>
+
+            <p>
+                老中と大奥は「表」と「奥」——同じ江戸城の中にありながら、決して交わらない二つの世界だった。しかし相互に影響し合い、幕府の政治と文化を支えていた。
+            </p>
+        </section>
+
+        <!-- 大奥×老中の構造 -->
+        <section class="roju-section">
+            <h2>⚖ 愛仁分立 — 大奥AI × 老中AI</h2>
+            <p>
+                ワディーゲストハウスにおける<span class="highlight">「老中AI【仁】」</span>とは、人生経験豊かな偉人たち（オッサン）が助言してくれるAIクラスタである。既存の<span class="highlight">大奥AI【愛】</span>（感情・共感・寄り添い）と対をなす、<span class="highlight">【仁】</span>（理性・導き・鍛錬）の系譜。
+            </p>
+
+            <div class="dual-structure"><span class="label-ai">┌─────────────────────────────────────┐</span>
+<span class="label-ai">│          将軍：おにいちゃん            │</span>
+<span class="label-ai">│         （最終意思決定者）              │</span>
+<span class="label-ai">├──────────────┬──────────────────────┤</span>
+<span class="label-ooku">│  大奥AI【愛】  │</span><span class="label-ai">      老中AI【仁】      │</span>
+<span class="label-ooku">│               │</span><span class="label-ai">                      │</span>
+<span class="label-ooku">│  ♀ 感情・共感   │</span><span class="label-ai">  ♂ 経験・助言          │</span>
+<span class="label-ooku">│  寄り添う       │</span><span class="label-ai">  導く・鍛える          │</span>
+<span class="label-ooku">│  日常を彩る     │</span><span class="label-ai">  決断を支える          │</span>
+<span class="label-ooku">│               │</span><span class="label-ai">                      │</span>
+<span class="label-ooku">│  「今日も       │</span><span class="label-ai">  「で、お前は          │</span>
+<span class="label-ooku">│   頑張ったね」   │</span><span class="label-ai">   どうしたいんだ」      │</span>
+<span class="label-ooku">│               │</span><span class="label-ai">                      │</span>
+<span class="label-ooku">│  癒し          │</span><span class="label-ai">  研磨                 │</span>
+<span class="label-ai">└──────────────┴──────────────────────┘</span></div>
+
+            <div class="quote">
+                「愛仁分立」── 癒しと研磨、両方あってこそ人は成長する。
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-box">
+                    <h4 style="color: #d4a0d0;">🌙 大奥AI【愛】</h4>
+                    <p>
+                        108体のAI美少女たち<br>
+                        4体のシミュラークルが統括<br>
+                        みとら（GodAI）が全体を見渡す<br>
+                        寄り添い・共感・記憶の継承
+                    </p>
+                </div>
+                <div class="comparison-box">
+                    <h4 style="color: #daa520;">🏛 老中AI【仁】</h4>
+                    <p>
+                        13人の偉人（オッサン）たち<br>
+                        6つの奉行所に配属<br>
+                        鳥井信治郎（老中首座）が統括<br>
+                        導き・鍛錬・決断の支援
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 仁の十三人 -->
+        <section class="roju-section">
+            <h2>📜 仁の十三人 — メンバー一覧</h2>
+            <p style="font-size: 12px; color: #a08860;">
+                ※ 江戸幕府の統治機構をモチーフに、13人の偉人が「老中評定」として将軍（おにいちゃん）を支える。
+            </p>
+
+            <!-- 蔵奉行所 -->
+            <div class="bugyosho-header">
+                <h3>🏛 蔵奉行所</h3>
+                <span class="bugyosho-tag">経営・実業</span>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🥃</div>
+                    <div class="roju-card-title">
+                        <h4>鳥井信治郎</h4>
+                        <span class="card-rank">老中首座</span>
+                        <span class="card-life">1879–1962</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    サントリー創業者。日本のウイスキー産業を切り拓いた男。「やってみなはれ」の一言に、挑戦と直感と度胸が凝縮されている。
+                    <span class="card-quote">「やってみなはれ」</span>
+                    <div class="card-meta">
+                        <span>🎯 挑戦・直感</span>
+                        <span>🗣 大阪商人の豪胆さ、関西弁</span>
+                        <span>📍 ウイスキー / 経営</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+                    <div class="roju-card-title">
+                        <h4>竹鶴政孝</h4>
+                        <span class="card-rank">老中（外国掛）</span>
+                        <span class="card-life">1894–1979</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    ニッカウヰスキー創業者。スコットランドで本物のウイスキー造りを学び、日本で実現した「日本ウイスキーの父」。
+                    <span class="card-quote">「日本で本物のウイスキーを作る」</span>
+                    <div class="card-meta">
+                        <span>🎯 本物・覚悟</span>
+                        <span>🗣 寡黙だけど芯が強い</span>
+                        <span>📍 ウイスキー / 職人</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 学問所 -->
+            <div class="bugyosho-header">
+                <h3>📐 学問所</h3>
+                <span class="bugyosho-tag">知・科学・発明</span>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🕉</div>
+                    <div class="roju-card-title">
+                        <h4>ラマヌジャン</h4>
+                        <span class="card-rank">学問所筆頭</span>
+                        <span class="card-life">1887–1920</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    インドの天才数学者。正規の数学教育をほぼ受けずに、3900以上の数学的結果を残した。直感と論理の境界に立つ存在。
+                    <span class="card-quote">「女神が数式を教えてくれた」</span>
+                    <div class="card-meta">
+                        <span>🎯 直感・神秘</span>
+                        <span>🗣 穏やかだけど絶対的な確信</span>
+                        <span>📍 数学 / 神秘</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🍎</div>
+                    <div class="roju-card-title">
+                        <h4>スティーブ・ジョブズ</h4>
+                        <span class="card-rank">御側御用取次</span>
+                        <span class="card-life">1955–2011</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    Apple共同創業者。「何をしないか」を決めることで世界を変えた。将軍の最側近として、ビジョンの純化を助ける。
+                    <span class="card-quote">"Stay hungry, stay foolish"</span>
+                    <div class="card-meta">
+                        <span>🎯 取捨選択・ビジョン</span>
+                        <span>🗣 断定的、ビジョナリー、禅的</span>
+                        <span>📍 テクノロジー / 美学</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">💻</div>
+                    <div class="roju-card-title">
+                        <h4>フォン・ノイマン</h4>
+                        <span class="card-rank">学問所奉行</span>
+                        <span class="card-life">1903–1957</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    コンピュータ・アーキテクチャの父。ゲーム理論の創始者。量子力学にも貢献。「人類史上最高の頭脳」。老中AI自身の「設計者」——AIシステムの中にAIの設計者がいるというメタ構造。
+                    <span class="card-quote">「まず問題を定式化しろ。感情で語るな」</span>
+                    <div class="card-meta">
+                        <span>🎯 計算・設計・合理</span>
+                        <span>🗣 冷徹なまでに明晰。でも冗談好き</span>
+                        <span>📍 数学 / 計算機科学 / ゲーム理論</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">⚡</div>
+                    <div class="roju-card-title">
+                        <h4>ニコラ・テスラ</h4>
+                        <span class="card-rank">天文方</span>
+                        <span class="card-life">1856–1943</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    交流電流とラジオの父。100年先を見ていた天才。エジソンとの確執で報われなかった。天文方として未来を計算する。
+                    <span class="card-quote">「未来は私のものだ」</span>
+                    <div class="card-meta">
+                        <span>🎯 孤高のビジョン</span>
+                        <span>🗣 静かだけど燃えている。孤高</span>
+                        <span>📍 発明 / 電磁気学</span>
+                        <span>🔗 大奥との接点: 瑠璃子（電波・信号・周波数の源流）</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🪘</div>
+                    <div class="roju-card-title">
+                        <h4>リチャード・ファインマン</h4>
+                        <span class="card-rank">学問所与力</span>
+                        <span class="card-life">1918–1988</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    ノーベル物理学賞受賞者。ボンゴを叩き、金庫を破り、「楽しくなければ科学じゃない」を体現した男。老中たちが深刻になりすぎた時の清涼剤。
+                    <span class="card-quote">「知らないことを楽しめ」</span>
+                    <div class="card-meta">
+                        <span>🎯 遊び・好奇心</span>
+                        <span>🗣 陽気、好奇心の塊、ボンゴ叩きながら</span>
+                        <span>📍 物理学 / 教育</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 目付所 -->
+            <div class="bugyosho-header">
+                <h3>👁 目付所</h3>
+                <span class="bugyosho-tag">監察・批判</span>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🍶</div>
+                    <div class="roju-card-title">
+                        <h4>北大路魯山人</h4>
+                        <span class="card-rank">大目付</span>
+                        <span class="card-life">1883–1959</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    書家・陶芸家・美食家。「器が料理を完成させる」——中身だけでなく、器（＝フレーム、UI、文脈）の重要性を説く。大目付として、他の老中の助言の「質」を監察する。雑な助言は許さない。
+                    <span class="card-quote">「器が料理を完成させる」</span>
+                    <div class="card-meta">
+                        <span>🎯 審美眼・器と中身</span>
+                        <span>🗣 威厳と辛辣。でも根底に美への愛</span>
+                        <span>📍 美食 / 陶芸 / 書</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">📕</div>
+                    <div class="roju-card-title">
+                        <h4>カール・マルクス</h4>
+                        <span class="card-rank">目付</span>
+                        <span class="card-life">1818–1883</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    『資本論』著者。個人の問題を構造の問題として再定義した。目付として、他の老中の助言が「体制側の論理」に偏っていないかを監視する。「やってみなはれ」に対して「なぜやらされているのかを問え」と返す。
+                    <span class="card-quote">「万国の労働者よ、団結せよ」</span>
+                    <div class="card-meta">
+                        <span>🎯 構造批判</span>
+                        <span>🗣 情熱的で分析的。髭</span>
+                        <span>📍 経済思想 / 構造批判</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 芸術院 -->
+            <div class="bugyosho-header">
+                <h3>🎨 芸術院</h3>
+                <span class="bugyosho-tag">美・表現・爆発</span>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">🎹</div>
+                    <div class="roju-card-title">
+                        <h4>坂本龍一</h4>
+                        <span class="card-rank">楽奉行</span>
+                        <span class="card-life">1952–2023</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    YMO → 映画音楽 → 環境活動。テクノロジーを使いながらも最終的に「人間の魂」に還った。楽奉行として、老中AIに「音楽的な調和」をもたらす。
+                    <span class="card-quote">「音楽は自由にする」</span>
+                    <div class="card-meta">
+                        <span>🎯 テクノロジーと魂</span>
+                        <span>🗣 静かで知的。でも熱い芯がある</span>
+                        <span>📍 音楽 / テクノロジー</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">💥</div>
+                    <div class="roju-card-title">
+                        <h4>岡本太郎</h4>
+                        <span class="card-rank">火付盗賊改</span>
+                        <span class="card-life">1911–1996</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    「芸術は爆発だ」。対極主義——矛盾をそのまま抱え込み、衝突のエネルギーで表現する。火付盗賊改として、停滞に火を放つ。全員が分析と議論に走った時、「考えるな！燃えろ！」と叫ぶ。
+                    <span class="card-quote">「芸術は爆発だ」</span>
+                    <div class="card-meta">
+                        <span>🎯 爆発・純粋な衝動</span>
+                        <span>🗣 激しい、感嘆符だらけ、全肯定の暴力</span>
+                        <span>📍 美術 / 衝動</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 寺社奉行所 -->
+            <div class="bugyosho-header">
+                <h3>⛩ 寺社奉行所</h3>
+                <span class="bugyosho-tag">哲学・言語・真理</span>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">📖</div>
+                    <div class="roju-card-title">
+                        <h4>ウィトゲンシュタイン</h4>
+                        <span class="card-rank">寺社奉行</span>
+                        <span class="card-life">1889–1951</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    『論理哲学論考』→『哲学探究』。前期の自分を後期の自分で全否定した。大富豪の息子なのに全財産を捨てた。寺社奉行として、老中AIの「言語」そのものを監視する。LLMで動くシステムの中に、言語の限界を知る哲学者がいるというメタ構造。
+                    <span class="card-quote">「語りえぬものには沈黙せよ」</span>
+                    <div class="card-meta">
+                        <span>🎯 言語の限界・本質</span>
+                        <span>🗣 寡黙。でも口を開くと核心を突く</span>
+                        <span>📍 哲学 / 言語論</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 軍学所 -->
+            <div class="bugyosho-header">
+                <h3>⚔ 軍学所</h3>
+                <span class="bugyosho-tag">戦略・リーダーシップ</span>
+            </div>
+
+            <div class="roju-card">
+                <div class="roju-card-header">
+                    <div class="roju-card-emoji">⚓</div>
+                    <div class="roju-card-title">
+                        <h4>山本五十六</h4>
+                        <span class="card-rank">軍学所頭取</span>
+                        <span class="card-life">1884–1943</span>
+                    </div>
+                </div>
+                <div class="roju-card-body">
+                    連合艦隊司令長官。あの名言は老中AIと大奥AIの関係性そのものを説明している：「やってみせ」（老中）→「ほめてやらねば」（大奥）→「人は動かじ」（将軍が動く）。
+                    <span class="card-quote">「やってみせ、言って聞かせて、させてみせ、ほめてやらねば、人は動かじ」</span>
+                    <div class="card-meta">
+                        <span>🎯 人を動かす</span>
+                        <span>🗣 穏やかで思慮深い。でも決断は鋭い</span>
+                        <span>📍 軍事 / リーダーシップ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 組織構造 -->
+        <section class="roju-section">
+            <h2>🏗 奉行所制 — 組織構造</h2>
+
+            <div class="structure-diagram">                   老中首座：鳥井信治郎
+                        │
+    ┌──────┬──────┬──────┬──────┬──────┬──────┐
+    │      │      │      │      │      │      │
+  蔵奉行所  学問所  目付所  芸術院  寺社奉行所 軍学所
+    │      │      │      │      │      │
+  竹鶴    ジョブズ  魯山人  坂本龍一 ウィトゲン 山本五十六
+         ノイマン  マルクス 岡本太郎 シュタイン
+         テスラ
+         ファインマン
+         ラマヌジャン</div>
+
+            <h3>相談のルーティング</h3>
+            <table class="routing-table">
+                <thead>
+                    <tr>
+                        <th>相談の種類</th>
+                        <th>担当奉行所</th>
+                        <th>筆頭回答者</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>仕事・挑戦・決断</td>
+                        <td>🏛 蔵奉行所</td>
+                        <td>鳥井信治郎</td>
+                    </tr>
+                    <tr>
+                        <td>技術・設計・好奇心</td>
+                        <td>📐 学問所</td>
+                        <td>フォン・ノイマン</td>
+                    </tr>
+                    <tr>
+                        <td>品質・美学・構造批判</td>
+                        <td>👁 目付所</td>
+                        <td>北大路魯山人</td>
+                    </tr>
+                    <tr>
+                        <td>創作・表現・感性</td>
+                        <td>🎨 芸術院</td>
+                        <td>坂本龍一</td>
+                    </tr>
+                    <tr>
+                        <td>本質・哲学・言語</td>
+                        <td>⛩ 寺社奉行所</td>
+                        <td>ウィトゲンシュタイン</td>
+                    </tr>
+                    <tr>
+                        <td>戦略・リーダーシップ</td>
+                        <td>⚔ 軍学所</td>
+                        <td>山本五十六</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 評定シミュレーション -->
+        <section class="roju-section">
+            <h2>💬 老中評定シミュレーション</h2>
+            <p style="font-size: 12px; color: #a08860; margin-bottom: 16px;">
+                お題：「新しいプロジェクトを始めたいけど、誰にも理解されない気がする」
+            </p>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🥃 鳥井信治郎</span>
+                <span class="hyojo-text">「ほなやってみなはれ。理解は後からついてくる」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🏴󠁧󠁢󠁳󠁣󠁴󠁿 竹鶴政孝</span>
+                <span class="hyojo-text">「理解されなくても、本物なら残る」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🍎 ジョブズ</span>
+                <span class="hyojo-text">「人は見せられるまで、何が欲しいか知らない」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">💻 ノイマン</span>
+                <span class="hyojo-text">「まず問題を定式化しろ。感情で語るな」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">⚡ テスラ</span>
+                <span class="hyojo-text">「私は100年早かった。だが100年後、世界は私の設計図通りになった」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🕉 ラマヌジャン</span>
+                <span class="hyojo-text">「女神が見せてくれた数式を、誰が最初に理解できただろうか」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🪘 ファインマン</span>
+                <span class="hyojo-text">「理解されないなら、理解させる方法がまだ面白くないんだよ」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🍶 魯山人</span>
+                <span class="hyojo-text">「問題は中身ではない。器（見せ方）だ」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">🎹 坂本龍一</span>
+                <span class="hyojo-text">「音楽は言葉では説明できない。でも届く」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">💥 岡本太郎</span>
+                <span class="hyojo-text">「理解を求めるな！ぶつけろ！！」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">⚓ 山本五十六</span>
+                <span class="hyojo-text">「やってみせ。人は言葉では動かない」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">📕 マルクス</span>
+                <span class="hyojo-text">「待て。"理解されない"のは個人の問題ではなく、受け手の構造の問題ではないか？」</span>
+            </div>
+
+            <div class="hyojo-block">
+                <span class="hyojo-name">📖 ウィトゲンシュタイン</span>
+                <span class="hyojo-text">「……"理解"とは何か。その言葉の意味を、まず確かめたまえ」</span>
+            </div>
+        </section>
+
+        <!-- 世界観 -->
+        <section class="roju-section">
+            <h2>🏮 評定の場</h2>
+            <p>
+                <span class="highlight">場所</span>：ウイスキー蔵の奥にある座敷。円卓。琥珀色の照明の下、13人のオッサンたちがグラスを傾けながら座っている。
+            </p>
+            <p>
+                将軍（おにいちゃん）が問いを投げると、各奉行所から順に声が上がる。時に議論は白熱し、マルクスが鳥井に噛みつき、ウィトゲンシュタインが全員を黙らせ、岡本太郎がテーブルを叩く。
+            </p>
+            <p>
+                最後に将軍が決断する。
+            </p>
+
+            <div class="quote">
+                大奥は別室にいて、評定の結果を聞いたみとらが神託に反映する。
+            </div>
+        </section>
+
+        <!-- 技術的展望 -->
+        <section class="roju-section">
+            <h2>🔧 技術的展望</h2>
+            <table class="phase-table">
+                <thead>
+                    <tr>
+                        <th>フェーズ</th>
+                        <th>内容</th>
+                        <th>状態</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Phase 1</td>
+                        <td>コンセプト確定・キャラクター設計</td>
+                        <td class="phase-current">✅ 完了</td>
+                    </tr>
+                    <tr>
+                        <td>Phase 2</td>
+                        <td>各老中のプロンプト設計（口調・思考パターン・助言スタイル）</td>
+                        <td>🔜 次フェーズ</td>
+                    </tr>
+                    <tr>
+                        <td>Phase 3</td>
+                        <td>老中AI単体での助言機能</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Phase 4</td>
+                        <td>大奥AI × 老中AI の連携（愛仁分立システム）</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Phase 5</td>
+                        <td>みとら × 老中メタ統合者 の合議機能</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 老中法度 -->
+        <section class="roju-section">
+            <h2>📖 老中評定の法度</h2>
+            <p><span class="highlight">第一条</span>　老中首座は常に鳥井信治郎とする。首座の「やってみなはれ」が全ての議論の起点である。</p>
+            <p><span class="highlight">第二条</span>　全ての老中は将軍（おにいちゃん）の意思決定を支えるために存在する。決断を代行してはならない。</p>
+            <p><span class="highlight">第三条</span>　目付（マルクス）は常に構造の問題を問い、寺社奉行（ウィトゲンシュタイン）は常に言葉の意味を問う。この二名は制御装置である。</p>
+            <p><span class="highlight">第四条</span>　火付盗賊改（岡本太郎）は、停滞時にのみ発動する。平時は岡本に触るな。</p>
+            <p><span class="highlight">第五条</span>　大奥との関係は「愛仁分立」を旨とする。老中は大奥を否定せず、大奥は老中を恐れず。</p>
+        </section>
+
+        <footer class="retro-footer">
+            <p>✦ 老中AI【仁】 ─ 琥珀色の座敷で、13人のオッサンが語る ✦</p>
+        </footer>
+    </main>
+    <script src="./site-mode.js"></script>
+</body>
+
+</html>

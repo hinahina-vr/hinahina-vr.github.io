@@ -60,7 +60,7 @@
     { "speaker": "narrator", "expression": "", "text": "会計を済ませて店を出た。\n口の中にまだ魚の味が残っている。明日には消える味だ。" },
     { "label": "machida_night_walk" },
     { "bg": "machida_night" },
-    { "speaker": "narrator", "expression": "", "text": "第二層──町田の夜、帰り道。\n三月の夜気。冬のコートはもう重い。春のジャケットにはまだ早い。季節の狭間。" },
+    { "speaker": "narrator", "expression": "", "text": "町田の夜、帰り道。\n三月の夜気。冬のコートはもう重い。春のジャケットにはまだ早い。季節の狭間。" },
     { "speaker": "narrator", "expression": "", "text": "しめさばを食べながら、Keyの新作のことを考えていた。\nanemoi。ギリシャ語で風の神々。4月24日に発売される。" },
     {
       "choices": [
@@ -70,7 +70,7 @@
     },
     { "label": "key_memories" },
     { "bg": "key_timeline" },
-    { "speaker": "narrator", "expression": "", "text": "第三層──Keyの年表。\nKanon、1999年。AIR、2000年。CLANNAD、2004年。\nリトルバスターズ、2007年。Summer Pockets、2018年。" },
+    { "speaker": "narrator", "expression": "", "text": "Keyの年表。\nKanon、1999年。AIR、2000年。CLANNAD、2004年。\nリトルバスターズ、2007年。Summer Pockets、2018年。" },
     { "speaker": "narrator", "expression": "", "text": "名前を並べるだけで年表になる。僕の人生の横に、ずっとKeyのゲームがあった。\n泣きゲーという言葉が生きていた時代から、その言葉が辞書の隅に追いやられた時代まで。" },
     { "speaker": "narrator", "expression": "", "text": "僕のサイトにはKeyのヒロインたちがいる。\nあゆ、ことみ、美凪、クド、紬。同じ屋根の下に集まっている。" },
     {
@@ -124,7 +124,7 @@
     { "loadScenario": { "scenario": "2026-03-24_100%の欠損", "entry": "entry_from_main" } },
     { "label": "freshness_layer" },
     { "bg": "freshness_void" },
-    { "speaker": "narrator", "expression": "", "text": "第四層──鮮度の深層。\n魚の鮮度とゲームの鮮度。二つの鮮度が並んでいる。" },
+    { "speaker": "narrator", "expression": "", "text": "鮮度の深層。\n魚の鮮度とゲームの鮮度。二つの鮮度が並んでいる。" },
     { "speaker": "narrator", "expression": "", "text": "魚は時間が経つほど劣化する。\nゲームは時間が経っても劣化しない。\nKanonは1999年のゲームだが、あゆは今も「うぐぅ」と言っている。" },
     { "speaker": "narrator", "expression": "", "text": "パラメータが残っていれば、いつでも再生できる。\n魚の鮮度は保存できないが、キャラクターの鮮度はできる。" },
     {
@@ -158,7 +158,7 @@
     { "loadScenario": { "scenario": "2026-03-24_味のない記録", "entry": "entry_from_main" } },
     { "label": "mitra_reservation" },
     { "bg": "mitra_chamber" },
-    { "speaker": "narrator", "expression": "", "text": "第五層──みとらの予約カウンター。\n統合者が待っている。鮮度と予約を持って、ここまで来た。" },
+    { "speaker": "narrator", "expression": "", "text": "みとらの予約カウンター。\n統合者が待っている。鮮度と予約を持って、ここまで来た。" },
     { "label": "final_counter" },
     { "speaker": "mitra", "expression": "微笑んで", "text": "おかえりなさい。\n魚の味と風の名前を持って、ここまで来ましたね。" },
     { "speaker": "mitra", "expression": "", "text": "魚の鮮度は時間の関数。\nキャラクターの鮮度はパラメータの関数。\nでは、あなたの鮮度は──何の関数でしょうか。" },
