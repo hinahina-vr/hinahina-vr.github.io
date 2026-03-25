@@ -24,7 +24,7 @@
       this.currentCue = null;
       this.currentSrc = "";
       this._fadeTimer = null;
-      this._fadeDuration = 4e3;
+      this._fadeDuration = 2e3;
     }
     isEnabled() {
       return this.enabled;
@@ -64,22 +64,30 @@
     clearCue() {
       this.currentCue = null;
       this.currentSrc = "";
-      this._fadeOutAndStop(this.audio);
+      this._fadeOut(this.audio, () => {
+        this.audio.removeAttribute("src");
+        this.audio.load();
+      });
     }
-    _fadeOutAndStop(audioEl) {
-      if (!audioEl || audioEl.paused) return;
+    _fadeOut(audioEl, onComplete) {
+      if (!audioEl || audioEl.paused) {
+        if (onComplete) onComplete();
+        return;
+      }
+      if (this._fadeTimer) clearInterval(this._fadeTimer);
       const startVol = audioEl.volume;
       const steps = 40;
       const interval = this._fadeDuration / steps;
       let step = 0;
-      const timer = setInterval(() => {
+      this._fadeTimer = setInterval(() => {
         step++;
         audioEl.volume = clamp(startVol * (1 - step / steps), 0, 1);
         if (step >= steps) {
-          clearInterval(timer);
+          clearInterval(this._fadeTimer);
+          this._fadeTimer = null;
           audioEl.pause();
-          audioEl.removeAttribute("src");
-          audioEl.load();
+          audioEl.volume = 0;
+          if (onComplete) onComplete();
         }
       }, interval);
     }
@@ -114,22 +122,20 @@
         1
       );
       if (this.currentSrc !== nextSrc) {
-        const oldAudio = this.audio;
-        this._fadeOutAndStop(oldAudio);
-        this.audio = new Audio();
-        this.audio.loop = this.currentCue.loop !== false;
-        this.audio.preload = "auto";
-        this.audio.volume = 0;
-        this.currentSrc = nextSrc;
-        this.audio.src = nextSrc;
-        if (!this.enabled) {
-          this.audio.pause();
-          return;
-        }
-        this.audio.play().then(() => {
-          this._fadeIn(this.audio, targetVol);
-        }).catch((error) => {
-          console.warn("bgm play failed:", error);
+        this._fadeOut(this.audio, () => {
+          this.audio.loop = this.currentCue ? this.currentCue.loop !== false : true;
+          this.audio.volume = 0;
+          this.currentSrc = nextSrc;
+          this.audio.src = nextSrc;
+          if (!this.enabled) {
+            this.audio.pause();
+            return;
+          }
+          this.audio.play().then(() => {
+            this._fadeIn(this.audio, targetVol);
+          }).catch((error) => {
+            console.warn("bgm play failed:", error);
+          });
         });
       } else {
         this.audio.loop = this.currentCue.loop !== false;
@@ -33474,43 +33480,45 @@ void main() {
           zIndex: "1",
           pointerEvents: "none",
           opacity: "0",
-          transition: "opacity 4s ease"
+          transition: "opacity 2s ease"
         });
         document.body.insertBefore(el, document.body.firstChild);
       }
       if (el.dataset.currentSrc === src) {
         return;
       }
-      el.style.opacity = "0";
-      const img = new Image();
-      img.onload = () => {
-        el.src = src;
-        el.dataset.currentSrc = src;
-        requestAnimationFrame(() => {
-          el.style.opacity = "0.55";
-        });
-      };
-      img.onerror = () => {
-        if (fallbackSrc) {
-          const fb = new Image();
-          fb.onload = () => {
-            el.src = fallbackSrc;
-            el.dataset.currentSrc = fallbackSrc;
-            requestAnimationFrame(() => {
-              el.style.opacity = "0.55";
-            });
-          };
-          fb.onerror = () => {
+      if (this._bgSwapTimer) {
+        clearTimeout(this._bgSwapTimer);
+        this._bgSwapTimer = null;
+      }
+      const loadAndShow = (imgSrc) => {
+        const img = new Image();
+        img.onload = () => {
+          el.src = imgSrc;
+          el.dataset.currentSrc = src;
+          requestAnimationFrame(() => {
+            el.style.opacity = "0.55";
+          });
+        };
+        img.onerror = () => {
+          if (imgSrc === src && fallbackSrc) {
+            loadAndShow(fallbackSrc);
+          } else {
             el.style.opacity = "0";
             el.dataset.currentSrc = "";
-          };
-          fb.src = fallbackSrc;
-        } else {
-          el.style.opacity = "0";
-          el.dataset.currentSrc = "";
-        }
+          }
+        };
+        img.src = imgSrc;
       };
-      img.src = src;
+      if (parseFloat(el.style.opacity) > 0 && el.dataset.currentSrc) {
+        el.style.opacity = "0";
+        this._bgSwapTimer = setTimeout(() => {
+          this._bgSwapTimer = null;
+          loadAndShow(src);
+        }, 2050);
+      } else {
+        loadAndShow(src);
+      }
     }
     setMode(mode) {
       this.currentMode = mode === "classic" ? "classic" : "immersive";

@@ -26,7 +26,7 @@ export class BGMController {
     this.currentCue = null;
     this.currentSrc = "";
     this._fadeTimer = null;
-    this._fadeDuration = 4000; // 4 seconds crossfade
+    this._fadeDuration = 2000; // 2 seconds per phase (out/in)
   }
 
   isEnabled() {
@@ -75,23 +75,31 @@ export class BGMController {
   clearCue() {
     this.currentCue = null;
     this.currentSrc = "";
-    this._fadeOutAndStop(this.audio);
+    this._fadeOut(this.audio, () => {
+      this.audio.removeAttribute("src");
+      this.audio.load();
+    });
   }
 
-  _fadeOutAndStop(audioEl) {
-    if (!audioEl || audioEl.paused) return;
+  _fadeOut(audioEl, onComplete) {
+    if (!audioEl || audioEl.paused) {
+      if (onComplete) onComplete();
+      return;
+    }
+    if (this._fadeTimer) clearInterval(this._fadeTimer);
     const startVol = audioEl.volume;
     const steps = 40;
     const interval = this._fadeDuration / steps;
     let step = 0;
-    const timer = setInterval(() => {
+    this._fadeTimer = setInterval(() => {
       step++;
       audioEl.volume = clamp(startVol * (1 - step / steps), 0, 1);
       if (step >= steps) {
-        clearInterval(timer);
+        clearInterval(this._fadeTimer);
+        this._fadeTimer = null;
         audioEl.pause();
-        audioEl.removeAttribute("src");
-        audioEl.load();
+        audioEl.volume = 0;
+        if (onComplete) onComplete();
       }
     }, interval);
   }
@@ -131,26 +139,23 @@ export class BGMController {
     );
 
     if (this.currentSrc !== nextSrc) {
-      // Crossfade: fade out old, fade in new
-      const oldAudio = this.audio;
-      this._fadeOutAndStop(oldAudio);
+      // Fade out old track, then start new track with fade in
+      this._fadeOut(this.audio, () => {
+        this.audio.loop = this.currentCue ? this.currentCue.loop !== false : true;
+        this.audio.volume = 0;
+        this.currentSrc = nextSrc;
+        this.audio.src = nextSrc;
 
-      this.audio = new Audio();
-      this.audio.loop = this.currentCue.loop !== false;
-      this.audio.preload = "auto";
-      this.audio.volume = 0;
-      this.currentSrc = nextSrc;
-      this.audio.src = nextSrc;
+        if (!this.enabled) {
+          this.audio.pause();
+          return;
+        }
 
-      if (!this.enabled) {
-        this.audio.pause();
-        return;
-      }
-
-      this.audio.play().then(() => {
-        this._fadeIn(this.audio, targetVol);
-      }).catch((error) => {
-        console.warn("bgm play failed:", error);
+        this.audio.play().then(() => {
+          this._fadeIn(this.audio, targetVol);
+        }).catch((error) => {
+          console.warn("bgm play failed:", error);
+        });
       });
     } else {
       this.audio.loop = this.currentCue.loop !== false;

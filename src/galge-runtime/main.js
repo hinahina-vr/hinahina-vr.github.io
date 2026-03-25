@@ -983,7 +983,7 @@ class GalgeRuntimeApp {
         zIndex: "1",
         pointerEvents: "none",
         opacity: "0",
-        transition: "opacity 4s ease",
+        transition: "opacity 2s ease",
       });
       document.body.insertBefore(el, document.body.firstChild);
     }
@@ -992,35 +992,44 @@ class GalgeRuntimeApp {
       return;
     }
 
-    // Fade out, swap, fade in
-    el.style.opacity = "0";
-    const img = new Image();
-    img.onload = () => {
-      el.src = src;
-      el.dataset.currentSrc = src;
-      requestAnimationFrame(() => {
-        el.style.opacity = "0.55";
-      });
-    };
-    img.onerror = () => {
-      if (fallbackSrc) {
-        const fb = new Image();
-        fb.onload = () => {
-          el.src = fallbackSrc;
-          el.dataset.currentSrc = fallbackSrc;
-          requestAnimationFrame(() => { el.style.opacity = "0.55"; });
-        };
-        fb.onerror = () => {
+    // Cancel any pending swap
+    if (this._bgSwapTimer) {
+      clearTimeout(this._bgSwapTimer);
+      this._bgSwapTimer = null;
+    }
+
+    const loadAndShow = (imgSrc) => {
+      const img = new Image();
+      img.onload = () => {
+        el.src = imgSrc;
+        el.dataset.currentSrc = src; // always track the original src key
+        requestAnimationFrame(() => {
+          el.style.opacity = "0.55";
+        });
+      };
+      img.onerror = () => {
+        if (imgSrc === src && fallbackSrc) {
+          loadAndShow(fallbackSrc);
+        } else {
           el.style.opacity = "0";
           el.dataset.currentSrc = "";
-        };
-        fb.src = fallbackSrc;
-      } else {
-        el.style.opacity = "0";
-        el.dataset.currentSrc = "";
-      }
+        }
+      };
+      img.src = imgSrc;
     };
-    img.src = src;
+
+    // If already visible, fade out first then swap
+    if (parseFloat(el.style.opacity) > 0 && el.dataset.currentSrc) {
+      el.style.opacity = "0";
+      // Wait for fade-out transition (2s) then load new image
+      this._bgSwapTimer = setTimeout(() => {
+        this._bgSwapTimer = null;
+        loadAndShow(src);
+      }, 2050); // slightly over 2s to ensure transition completes
+    } else {
+      // Not visible yet, just load
+      loadAndShow(src);
+    }
   }
 
   setMode(mode) {
