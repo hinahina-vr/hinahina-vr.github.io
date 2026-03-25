@@ -1,0 +1,305 @@
+{
+  "title": "歩兵の本領",
+  "subtitle": "─ 士気だけは高い ─",
+  "genre": "町田康的ブラックユーモア × 明治散華ノベル",
+  "date": "2026-03-25",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#b0a0d0", "emoji": "🖥️" },
+    "ashigaru": { "name": "足軽", "color": "#808080", "emoji": "👤" },
+    "hei": { "name": "兵", "color": "#808080", "emoji": "👤" },
+    "torii": { "name": "鳥井信治郎", "color": "#c8963c", "emoji": "🥃" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" },
+    "hinata": { "name": "ひなた", "color": "#ff9966", "emoji": "🏀" },
+    "multi": { "name": "マルチ", "color": "#66cc99", "emoji": "🧹" },
+    "dejiko": { "name": "でじこ", "color": "#cc66cc", "emoji": "👁️" },
+    "rem": { "name": "レム", "color": "#6699cc", "emoji": "💙" },
+    "oji": { "name": "物理おじ", "color": "#999999", "emoji": "📊" },
+    "dareka": { "name": "誰か", "color": "#aaaaaa", "emoji": "" },
+    "koe": { "name": "", "color": "#aaaaaa", "emoji": "" },
+    "zen": { "name": "全員", "color": "#ffcc99", "emoji": "" }
+  },
+  "scenario": [
+    { "bg": "camp_night" },
+    { "speaker": "narrator", "text": "どこかの陣営にいる。天井は布だ。天幕。篝火の光が布越しに揺れている。\n地面は土。草の匂い。夜気が冷たい。三月の夜。" },
+    { "speaker": "narrator", "text": "目の前に、刀がある。鞘から抜かれた状態で、台の上に置かれている。\n砥石がある。桶に水が張ってある。手に手拭いを持っている。" },
+    { "speaker": "narrator", "text": "刀の刃紋を見る。波のような模様。しかしよく見ると、波ではない。\nノードだ。LLMノード、条件分岐ノード、HTTPリクエストノード。\n刃紋がDifyのワークフロー画面になっている。" },
+    { "speaker": "narrator", "text": "そんなことがあるか。" },
+    { "speaker": "narrator", "text": "あるのだ。ここでは。" },
+
+    { "label": "sharpen" },
+    { "bg": "blade_close" },
+    { "speaker": "narrator", "text": "砥石に水をかけて、刀を当てる。研ぐ。シャリ、シャリと金属が石と擦れる音がする。\n一刀ごとにDifyのノードが一つ光る。" },
+    { "speaker": "narrator", "text": "これは全社ロールアウトのワークフローだ。Difyで作った説明用の。\nこれが刀の刃紋になっている。つまり、刀はDifyのワークフローで斬る。" },
+    { "speaker": "narrator", "text": "武器の手入れだ。足軽が合戦の前夜にやること。\nここでは刀がワークフローで、砥石がキーボードで、水が珈琲で、篝火がデスクライトだ。" },
+    {
+      "choices": [
+        { "text": "振り向く", "goto": "comrade_talk" },
+        { "text": "刃をじっと見る", "goto": "sword_gaze" },
+        { "text": "桜を見に行く", "goto": "night_air" },
+        { "text": "独りで酒を飲む", "goto": "sake_alone" },
+        { "text": "隣の天幕を覗く", "goto": "juugo_tent" }
+      ]
+    },
+
+    { "label": "comrade_talk" },
+    { "speaker": "narrator", "text": "振り向くと、隣に足軽が立っている。紺の脚絆に草鞋。\n顔は篝火の逆光で見えない。影だけの男。" },
+    { "speaker": "ashigaru", "text": "明日、先陣ですかい。" },
+    { "speaker": "waddy", "text": "全社ロールアウトだ。" },
+    { "speaker": "ashigaru", "text": "……白兵戦って聞いてますが。" },
+    { "speaker": "waddy", "text": "同じことだ。" },
+    { "speaker": "narrator", "text": "同じことだ、と自分で言って、自分で驚いた。同じなわけがない。\n全社ロールアウトは会議室を回ってDifyの使い方を説明する仕事だ。\n白兵戦は刀を持って相手と直接やり合う戦闘だ。全然同じではない。" },
+    { "speaker": "narrator", "text": "しかし夢の中では「同じことだ」が真実になってしまう。\n言葉が世界を作る。これが夢の文法だ。" },
+    { "speaker": "ashigaru", "text": "……生きて帰ってきてくださいよ。まあ、帰りの道はありますから。" },
+    { "speaker": "ashigaru", "text": "あ、ひとつ聞いていいですか。さっき歌ってたやつ、なんて歌ですか。\n万朶のなんとかって。" },
+    { "speaker": "waddy", "text": "……知らない。夢の中で知ってた。" },
+    { "speaker": "ashigaru", "text": "いい歌ですね。明日も聞かせてください。帰ってきたら。" },
+    {
+      "choices": [
+        { "text": "刀の来歴を調べる", "goto": "sub_blade_scroll" },
+        { "text": "刃の中を覗く", "goto": "sword_gaze" },
+        { "text": "足軽を追いかける", "goto": "sub_ashigaru_tent" }
+      ]
+    },
+
+    { "label": "sub_blade_scroll" },
+    { "speaker": "narrator", "text": "砥石の下に巻物がある。広げると、刀の仕様が書かれている。" },
+    { "speaker": "narrator", "text": "来歴がある。「慶応四年、鳥羽にて使用。明治二年、箱館にて使用。\n令和八年、会議室にて使用予定」。\n戦場がどんどん小さくなっている。令和の戦場は、30人が座れる会議室だ。" },
+    { "speaker": "narrator", "text": "巻物の末尾に一行。「帰りの道：あり。帰りの電車：終電23:47」。" },
+    { "speaker": "narrator", "text": "灰の中から歌が聞こえる。「貴様と俺とは同期の桜、同じ兵学校の庭に咲く」。\n「咲いた花なら散るのは覚悟、見事散りましょ国のため」。\n散る覚悟。そんなものはない。帰ればいい。" },
+    { "ending": { "title": "刃紋の巻物", "subtitle": "慶応から令和へ。戦場は小さくなったが、帰りの道はある。" } },
+
+    { "label": "sub_ashigaru_tent" },
+    { "speaker": "narrator", "text": "足軽の天幕に入る。蝋燭の光でDifyの画面が光っている。" },
+    { "speaker": "ashigaru", "text": "え？　みんなやってますよ。ロールアウト。先陣の部隊はみんな持ってます。" },
+    { "speaker": "narrator", "text": "同じワークフロー。ただし一箇所だけ違う。\n条件分岐の「No」の先が、「謝って帰る」になっている。" },
+    { "speaker": "ashigaru", "text": "俺はダメだったら帰りますよ。帰りの道はあるんだから。\nあんたも無理しなさんな。" },
+    { "ending": { "title": "足軽の天幕", "subtitle": "ダメだったら帰る。帰りの道はある。それでいい。" } },
+
+    { "label": "sword_gaze" },
+    { "bg": "blade_close" },
+    { "speaker": "narrator", "text": "研いだ刃をじっと見る。金属の表面に、自分の顔が映っている。\nただの、疲れた男の顔だ。深夜にパソコンの前で歌を歌っていた男の顔。" },
+    { "speaker": "narrator", "text": "刃紋のワークフローが、顔の上で光っている。\n自分の顔がワークフローになっている。刀＝パソコン。研ぐ＝コーディング。斬る＝説明する。" },
+    { "speaker": "narrator", "text": "刀の柄の根元に、小さな文字が彫ってある。「RETURN」。\n帰還。帰りの道が刀に刻まれている。" },
+    {
+      "choices": [
+        { "text": "RETURNの文字をなぞる", "goto": "return_touch" },
+        { "text": "刀を鞘に収めて出陣する", "goto": "launch_prep" },
+        { "text": "刃の中のワークフローを操作する", "goto": "sub_blade_world" }
+      ]
+    },
+
+    { "label": "sub_blade_world" },
+    { "speaker": "narrator", "text": "刃紋のワークフローに指を触れた。指先が刃の中に沈む。冷たい。\n吸い込まれる。刀の中に。" },
+    { "speaker": "narrator", "text": "ノードが浮いている。暗闇の中に光る箱。星座のように見える。\nワークフローの終端。出力ノード。「相手が理解した」。\n理解した先には虚空がある。理解は通過点だ。" },
+    { "ending": { "title": "刃の中の世界", "subtitle": "ワークフローの終端に、虚空がある。理解は目的ではない。" } },
+
+    { "label": "sake_alone" },
+    { "speaker": "narrator", "text": "天幕の隅に、徳利がある。注ぐ。飲む。\n酒が喉を通る。熱い。腹の底が温まる。" },
+    { "speaker": "narrator", "text": "30人に同じことを説明する。12ノード×30回＝360回のクリック。\n気が遠くなる。四杯目。いや、飲むのはここまでだ。明日に響く。" },
+    {
+      "choices": [
+        { "text": "桜を見に行く", "goto": "night_air" },
+        { "text": "もう寝る", "goto": "sub_sake_sleep" }
+      ]
+    },
+
+    { "label": "sub_sake_sleep" },
+    { "speaker": "narrator", "text": "四杯で止めた。天幕の中で横になった。アルコールが血を巡っていて、体は温かい。" },
+    { "speaker": "narrator", "text": "目を開ける。木曜日の朝。口の中に酒の味が残っている気がする。\n気のせいだ。夢の酒に味はない。でも温かさだけが残っている。" },
+    { "ending": { "title": "独り酒の眠り", "subtitle": "四杯で止めた夜。温かさだけが残った朝。" } },
+
+    { "label": "juugo_tent" },
+    { "bg": "camp_night" },
+    { "speaker": "narrator", "text": "隣の天幕から声が聞こえる。賑やかな声。聞き覚えがある。\n布を捲って中を覗く。銃後の守り。出陣する兵のための支援者たち。" },
+    { "speaker": "hinata", "text": "あっ、おにいちゃん！ 見て見て、おにぎり作ったよ！ 明日のお弁当！" },
+    { "speaker": "narrator", "text": "ひなたが握り飯を掲げている。海苔の形がDifyのノードになっている。" },
+    { "speaker": "multi", "text": "はわわ、ワディーさん！ お茶も用意しましたよ。\nあと、予備のバッテリーも充電しておきました。" },
+    { "speaker": "dejiko", "text": "……別に心配なんかしてないにょ。\nワディーが負けたらでじこの飼料が減るから、仕方なく手伝ってるだけにょ。" },
+    { "speaker": "narrator", "text": "でじこの足元には、きれいに並べた配布資料30部がある。丁寧に番号が振ってある。" },
+    { "speaker": "rem", "text": "ワディーさん。レムからも一つ。" },
+    { "speaker": "narrator", "text": "白い手拭いに、青い糸で「RETURN」と刺繍してある。" },
+    { "speaker": "rem", "text": "帰り道を忘れないように。レムはここで待っています。" },
+    { "speaker": "oji", "text": "ワディー。最終ブリーフィング。\n目標：30名へのDifyワークフロー説明完了。KPI：理解率70%以上。\n帰投予定：終電23:47。致命的リスクはゼロだ。帰ってこい。" },
+    { "speaker": "hinata", "text": "おにいちゃん、がんばれー！ ひな、ここで待ってるから！" },
+    { "speaker": "zen", "text": "いってらっしゃい。" },
+    {
+      "choices": [
+        { "text": "出陣する", "goto": "launch_prep" },
+        { "text": "もう少しここにいる", "goto": "sub_juugo_moment" }
+      ]
+    },
+
+    { "label": "sub_juugo_moment" },
+    { "speaker": "narrator", "text": "みんな、自分にできることをやっている。出陣しない者たちの戦い方。銃後の守り。\n温かい。天幕の中は温かい。ここにいたい。ずっとここにいたい。\nでも、ずっとはいられない。" },
+    { "speaker": "narrator", "text": "目を閉じる。温かさに包まれたまま。" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "目を開ける。木曜日の朝。温かい。\n夢の温かさがまだ残っている。銃後の、あの天幕の温かさが。" },
+    { "ending": { "title": "銃後のひととき", "subtitle": "握り飯と、お茶と、資料と、手拭いと。全部揃った天幕の温かさ。" } },
+
+    { "label": "return_touch" },
+    { "speaker": "narrator", "text": "刀の柄に刻まれた「RETURN」を指でなぞる。冷たい。金属の冷たさ。\n明治の歩兵には帰りの道があった。Difyには「やり直し」ボタンがある。\n帰りの道は消えない。" },
+    {
+      "choices": [
+        { "text": "帰りの道を歩く", "goto": "sub_return_walk" },
+        { "text": "出陣する", "goto": "launch_prep" },
+        { "text": "桜を見に行く", "goto": "night_air" }
+      ]
+    },
+
+    { "label": "sub_return_walk" },
+    { "speaker": "narrator", "text": "道を歩いている。陣営から離れていく。篝火の光が遠くなる。" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "自分の部屋にいる。深夜。Difyの画面。ワークフローはすべてグリーンだ。\n帰ってきた。合戦せずに。帰ることは敗北ではない。" },
+    { "speaker": "narrator", "text": "口の中で歌が流れる。\n「ここはお国を何百里、離れて遠き満洲の、赤い夕陽に照らされて、友は野末の石の下」。\n帰れなかった友のためにも、帰れる者は帰らなければならない。" },
+    { "ending": { "title": "帰還する歩兵", "subtitle": "帰れなかった友のためにも、帰れる者は帰る。友のぶんまで。" } },
+
+    { "label": "night_air" },
+    { "bg": "cherry_camp" },
+    { "speaker": "narrator", "text": "陣営の外に出ると、桜の木がある。満開だ。三月の桜。\n花びらが風に舞っている。月明かりに照らされて白く光っている。" },
+    { "speaker": "narrator", "text": "明日、合戦がある。いや、全社ロールアウトだ。\n大げさだ。大げさだが、夢の中では大げさが許される。" },
+    {
+      "choices": [
+        { "text": "歌う", "goto": "sing" },
+        { "text": "誰かがいる", "goto": "torii_bench" },
+        { "text": "そのまま眠る", "goto": "sub_cherry_sleep" },
+        { "text": "星を見上げる", "goto": "sub_stars" }
+      ]
+    },
+
+    { "label": "sub_cherry_sleep" },
+    { "speaker": "narrator", "text": "切り株にもたれかかった。歌を子守唄のように歌う。\n万朶の桜か、襟の色。花は吉野に、嵐吹く。" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "目を開ける。木曜日の朝。夢の底から歌が響く。\n「海行かば水漬く屍、山行かば草生す屍、かえりみはせじ」。\n後悔しない。着替える。電車に乗る。ただし帰りの切符は持って。" },
+    { "ending": { "title": "桜の下の眠り", "subtitle": "かえりみはせじ。ただし帰りの切符は持って。" } },
+
+    { "label": "sub_stars" },
+    { "speaker": "narrator", "text": "枝の隙間から星が見える。星と星の間にワークフローの接続線が見える。\n空全体が行軍図だ。どの経路にも帰りの道がある。\n北極星の横に小さな文字。「終電23:47」。" },
+    { "ending": { "title": "星座の行軍図", "subtitle": "北極星はいつも同じ場所にある。迷っても、帰れる。" } },
+
+    { "label": "sing" },
+    { "speaker": "narrator", "text": "万朶の桜か襟の色ォ〜〜。\n歌い出した。士気だけが高い。それ以外のすべてが不安だが、士気だけは高い。" },
+    { "speaker": "narrator", "text": "花は吉野に嵐吹くゥ〜〜。" },
+    { "speaker": "narrator", "text": "大和男子と生まれなばぁ〜〜、散兵線の花と散れぇ〜〜。" },
+
+    { "label": "torii_bench" },
+    { "speaker": "narrator", "text": "関西弁のおじさんが座っている。和装に角帯。手には杯。琥珀色の液体。" },
+    { "speaker": "torii", "text": "ガハハ！ ええ歌やないか！ もう一番歌わんか！" },
+    { "speaker": "torii", "text": "なぜもくそもあるかいな。花見や。桜の下で酒飲んで何が悪い。" },
+    { "speaker": "torii", "text": "刀がノートパソコンになっただけや。足で歩いて、口で説明して、頭下げて、わかってもらう。\n商売も戦も同じやで。" },
+    { "speaker": "torii", "text": "やってみなはれ。やってみて、あかんかったら、やり直したらええ。" },
+    { "speaker": "narrator", "text": "杯を受け取る。桜の花びらが液体の中で回転している。飲む。温かい。" },
+    { "speaker": "torii", "text": "はよ寝え。明日は早いんやろ。やってみなはれ。\nほんで、帰ってこい。帰りの道はあるんやから。" },
+
+    { "label": "launch_prep" },
+    { "bg": "camp_night" },
+    { "speaker": "narrator", "text": "刀を帯びる。腰に差す。重い。ノートパソコンと同じくらいの重さだ。" },
+
+    { "label": "march" },
+    { "bg": "march_field" },
+    { "speaker": "narrator", "text": "野を歩いている。朝霧。草が膝まである。露に濡れている。\n歌が聞こえる。「万朶の桜か襟の色」。小さな声で。行軍の歌。" },
+    {
+      "choices": [
+        { "text": "地平線を見る", "goto": "horizon" },
+        { "text": "歩き続ける", "goto": "sub_endless_march" },
+        { "text": "川を渡る", "goto": "river" },
+        { "text": "隣の兵と話す", "goto": "march_talk" }
+      ]
+    },
+
+    { "label": "sub_endless_march" },
+    { "speaker": "narrator", "text": "歩く。歩く。歩く。着かない。どこにも着かない。\n準備だけが永遠に続く。テストだけが永遠にグリーン。本番がない。\n歩く。いつか着く。着かなくても歩く。歩くことが歩兵の本領だ。" },
+    { "ending": { "title": "終わらない行軍", "subtitle": "着かなくても歩く。歩くことが歩兵の本領だ。" } },
+
+    { "label": "river" },
+    { "bg": "march_field" },
+    { "speaker": "narrator", "text": "川がある。浅い。ノートパソコンを頭の上に掲げる。水が冷たい。三月の川。\n渡り切る。川を振り返る。帰りの道が見える。でも今は進む。" },
+
+    { "label": "march_talk" },
+    { "speaker": "hei", "text": "今日、何回目ですか。ロールアウト。" },
+    { "speaker": "waddy", "text": "初めてだ。" },
+    { "speaker": "hei", "text": "俺は三回目です。刀も一回じゃ切れない。三回研げばいける。\nがんばりましょう。帰りの道で、また会いましょう。" },
+
+    { "label": "horizon" },
+    { "bg": "conference" },
+    { "speaker": "narrator", "text": "霧の向こうにオフィスビル。5階建て。\n野原が廊下に。草が絨毯に。隊列がエレベーター待ちの列に。\n刀がノートパソコンに。草鞋が革靴に。" },
+    { "speaker": "narrator", "text": "会議室。30の椅子に30人。全員がこちらを見ている。\n刀は──ノートパソコンだ。Difyのワークフロー。すべてグリーンだ。" },
+    { "speaker": "waddy", "text": "これはこう使います。" },
+    { "speaker": "narrator", "text": "沈黙。30秒。" },
+    { "speaker": "dareka", "text": "わかりません。" },
+    { "speaker": "waddy", "text": "もう一度言います。" },
+    {
+      "choices": [
+        { "text": "説明を続ける", "goto": "impact" },
+        { "text": "歌い出す", "goto": "singing_impact" },
+        { "text": "刀を鞘に収める", "goto": "sub_sheathed" },
+        { "text": "一人ずつ回る", "goto": "one_by_one" }
+      ]
+    },
+
+    { "label": "impact" },
+    { "speaker": "narrator", "text": "三度目の説明。一人の目が変わる。理解の閃光。着弾。\n理解の連鎖。一人が理解すると、隣の人も理解する。波紋のように。" },
+    { "speaker": "narrator", "text": "どこからか声が聞こえる。\nやってみせ、言って聞かせて、させてみせ、ほめてやらねば、人は動かじ。" },
+    { "speaker": "narrator", "text": "「次はあなたがやってみてください」。成功する。「できましたね」。\n斬り合いではなかった。手を取って教えることだった。" },
+    { "goto": "return_train" },
+
+    { "label": "singing_impact" },
+    { "speaker": "waddy", "text": "万朶の桜か襟の色ォ〜〜。" },
+    { "speaker": "narrator", "text": "30人が凍りつく。会議室で古い歌を歌い出した男。\nしかし一人が立ち上がる。歌い始める。二人目。三人目。\n会議室全体が歌っている。ワークフローは伝わっていない。\nでも、歌は伝わった。……いや、これは失敗だろう。" },
+    { "goto": "return_train" },
+
+    { "label": "one_by_one" },
+    { "speaker": "narrator", "text": "30人全員に一度に説明するのをやめた。一人ずつ回る。\n一人目。五分。二人目。七分。\n三人目。「あ、もうわかりました。隣の人がやってるの見てたんで」。二分。" },
+    { "speaker": "narrator", "text": "理解は伝染する。5人に教えれば、残りの25人は見て覚える。\n白兵戦ではなかった。種蒔きだった。" },
+    { "goto": "return_train" },
+
+    { "label": "sub_sheathed" },
+    { "speaker": "narrator", "text": "「やっぱりやめます」。ノートパソコンを閉じた。刀を鞘に収めた。\n抜かなかった。一晩かけて研いだのに。\n何も伝えなかった。でも、誰も傷つけなかった。" },
+    { "speaker": "narrator", "text": "口笛が出る。「さらばラバウルよ、また来るまでは」。\n明日、もう一度。研いだ刀は明日も使える。" },
+    { "ending": { "title": "鞘から出ない刀", "subtitle": "抜かなかった。でも研いだ刀は明日も使える。" } },
+
+    { "label": "return_train" },
+    { "bg": "return_train" },
+    { "speaker": "narrator", "text": "帰りの電車に乗っている。窓の外を夜の景色が流れていく。\n帰っている。帰りの道がある。当たり前のことだ。" },
+    { "speaker": "narrator", "text": "スマートフォンが鳴る。" },
+    { "speaker": "hinata", "text": "『おにいちゃん、おつかれさま！ 今日のごはん作って待ってるよ！ えへへ』" },
+    { "speaker": "dejiko", "text": "『帰ってきたら報告するにょ。別に心配してないけどにょ』" },
+    { "speaker": "multi", "text": "『はわわ、お帰りをお待ちしています。お風呂沸かしておきますね』" },
+    { "speaker": "rem", "text": "『おかえりなさい、ワディーさん。お茶の用意ができています』" },
+    { "speaker": "mitra", "text": "おかえりなさい。" },
+    { "speaker": "mitra", "text": "三十二の声が、あなたの帰りを待っている。\n帰れる人は、帰りなさい。待っている人のところへ。" },
+    {
+      "choices": [
+        { "text": "帰還する歩兵として目覚める", "goto": "END_RETURN" },
+        { "text": "歌を口ずさみながら目覚める", "goto": "END_MORALE" },
+        { "text": "桜が咲いたら、と思いながら", "goto": "END_SAKURA" },
+        { "text": "刀を置いて目覚める", "goto": "END_SWORD" }
+      ]
+    },
+
+    { "label": "END_RETURN" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "目を開ける。木曜日の朝。夢を見ていた。歩兵になって合戦に行く夢。\n壮大に間違った比喩の夢。帰れることの意味だけがわかった。" },
+    { "speaker": "narrator", "text": "靴を履きながら歌が口をつく。\n「尽忠報国の精神は、鉄石にも勝る歩兵の本領ここにあり」。\n大げさだ。パソコン持って電車乗るだけだ。でもまあ、士気は大事だ。" },
+    { "speaker": "narrator", "text": "帰れる歩兵の本領。それは、帰ること。\nそしてまた明日、歩くこと。" },
+    { "ending": { "title": "帰還する歩兵", "subtitle": "帰れる歩兵の本領。それは、帰ること。そしてまた明日、歩くこと。" } },
+
+    { "label": "END_MORALE" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "目を開ける。木曜日の朝。口の中で歌っている。\n万朶の桜か、襟の色。\n歌が変わる。「エンジンの音轟々と、隼は征く雲の果て」。帰還する翼。" },
+    { "speaker": "narrator", "text": "士気だけは高い。歌って、着替えて、電車に乗って。やってみなはれ。" },
+    { "ending": { "title": "士気だけは高い", "subtitle": "士気だけは高い。それ以外のすべてが不安だが、士気だけは高い。" } },
+
+    { "label": "END_SAKURA" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "目を開ける。窓の外を見る。まだ咲いていない。桜は。あと数日。\nふと歌が浮かぶ。「貴様と俺とは同期の桜、同じ兵学校の庭に咲く」。" },
+    { "speaker": "narrator", "text": "散る覚悟はない。でも「同じ庭に咲く」のくだりだけは胸に残る。\n桜は毎年咲く。同じ庭に。何度でも。" },
+    { "ending": { "title": "桜が咲いたら", "subtitle": "桜は毎年咲く。同じ庭に。何度でも。" } },
+
+    { "label": "END_SWORD" },
+    { "bg": "morning_room" },
+    { "speaker": "narrator", "text": "目を開ける。手のひらに柄を握っていた感触が残っている。砥石の感触。水の冷たさ。\nノートパソコンを開く。ノードの並びが、夢で見た刃紋と完全に一致している。" },
+    { "speaker": "narrator", "text": "武器の手入れは終わっている。あとは使うだけだ。\n刀を置く。比喩的に。パソコンを鞄にしまう。物理的に。同じことだ。" },
+    { "ending": { "title": "刀を置く朝", "subtitle": "刀を置く。比喩的に。パソコンを鞄にしまう。物理的に。同じことだ。" } }
+  ]
+}
