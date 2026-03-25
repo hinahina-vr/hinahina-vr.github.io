@@ -966,7 +966,7 @@ class GalgeRuntimeApp {
     const baseDir = scenarioDir
       ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}`
       : `./scenarios/bg`;
-    this._showBgImage(`${baseDir}/${bgImageKey}.png`, `${baseDir}/${bgImageKey}.jpg`);
+    return this._showBgImage(`${baseDir}/${bgImageKey}.png`, `${baseDir}/${bgImageKey}.jpg`);
   }
 
   _showBgImage(src, fallbackSrc) {
@@ -989,7 +989,7 @@ class GalgeRuntimeApp {
     }
 
     if (el.dataset.currentSrc === src) {
-      return;
+      return Promise.resolve();
     }
 
     // Cancel any pending swap
@@ -998,38 +998,41 @@ class GalgeRuntimeApp {
       this._bgSwapTimer = null;
     }
 
-    const loadAndShow = (imgSrc) => {
-      const img = new Image();
-      img.onload = () => {
-        el.src = imgSrc;
-        el.dataset.currentSrc = src; // always track the original src key
-        requestAnimationFrame(() => {
-          el.style.opacity = "0.55";
-        });
+    return new Promise((resolve) => {
+      const loadAndShow = (imgSrc) => {
+        const img = new Image();
+        img.onload = () => {
+          el.src = imgSrc;
+          el.dataset.currentSrc = src;
+          requestAnimationFrame(() => {
+            el.style.opacity = "0.55";
+          });
+          // Wait for fade-in transition (2s)
+          setTimeout(resolve, 2050);
+        };
+        img.onerror = () => {
+          if (imgSrc === src && fallbackSrc) {
+            loadAndShow(fallbackSrc);
+          } else {
+            el.style.opacity = "0";
+            el.dataset.currentSrc = "";
+            resolve();
+          }
+        };
+        img.src = imgSrc;
       };
-      img.onerror = () => {
-        if (imgSrc === src && fallbackSrc) {
-          loadAndShow(fallbackSrc);
-        } else {
-          el.style.opacity = "0";
-          el.dataset.currentSrc = "";
-        }
-      };
-      img.src = imgSrc;
-    };
 
-    // If already visible, fade out first then swap
-    if (parseFloat(el.style.opacity) > 0 && el.dataset.currentSrc) {
-      el.style.opacity = "0";
-      // Wait for fade-out transition (2s) then load new image
-      this._bgSwapTimer = setTimeout(() => {
-        this._bgSwapTimer = null;
+      // If already visible, fade out first then swap
+      if (parseFloat(el.style.opacity) > 0 && el.dataset.currentSrc) {
+        el.style.opacity = "0";
+        this._bgSwapTimer = setTimeout(() => {
+          this._bgSwapTimer = null;
+          loadAndShow(src);
+        }, 2050);
+      } else {
         loadAndShow(src);
-      }, 2050); // slightly over 2s to ensure transition completes
-    } else {
-      // Not visible yet, just load
-      loadAndShow(src);
-    }
+      }
+    });
   }
 
   setMode(mode) {
@@ -1310,9 +1313,22 @@ class GalgeRuntimeApp {
     }
 
     if (step.kind === "bg") {
-      this.setAtmosphere(step.bg);
+      // Fade out text window
+      if (this.$hud) {
+        this.$hud.style.transition = "opacity 0.8s ease";
+        this.$hud.style.opacity = "0";
+      }
+      // Wait for bg image fade (returns promise)
+      const bgPromise = this.setAtmosphere(step.bg);
       if (step.bgm) {
         this.bgmController.setCue(this.scenario.audioNamespace, step.bgm);
+      }
+      if (bgPromise && typeof bgPromise.then === "function") {
+        await bgPromise;
+      }
+      // Fade in text window
+      if (this.$hud) {
+        this.$hud.style.opacity = "1";
       }
       await this.showStep(index + 1);
       return;

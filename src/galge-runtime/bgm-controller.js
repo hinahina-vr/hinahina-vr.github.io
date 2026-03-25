@@ -26,7 +26,7 @@ export class BGMController {
     this.currentCue = null;
     this.currentSrc = "";
     this._fadeTimer = null;
-    this._fadeDuration = 4000; // 4 seconds fade out
+    this._fadeDuration = 2000; // 2 seconds fade out
   }
 
   isEnabled() {

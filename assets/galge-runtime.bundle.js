@@ -24,7 +24,7 @@
       this.currentCue = null;
       this.currentSrc = "";
       this._fadeTimer = null;
-      this._fadeDuration = 4e3;
+      this._fadeDuration = 2e3;
     }
     isEnabled() {
       return this.enabled;
@@ -33462,7 +33462,7 @@ void main() {
       const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
       const scenarioDir = this.scenario.scenarioName || "";
       const baseDir = scenarioDir ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}` : `./scenarios/bg`;
-      this._showBgImage(`${baseDir}/${bgImageKey}.png`, `${baseDir}/${bgImageKey}.jpg`);
+      return this._showBgImage(`${baseDir}/${bgImageKey}.png`, `${baseDir}/${bgImageKey}.jpg`);
     }
     _showBgImage(src, fallbackSrc) {
       let el = document.getElementById("scene-bg-img");
@@ -33483,40 +33483,44 @@ void main() {
         document.body.insertBefore(el, document.body.firstChild);
       }
       if (el.dataset.currentSrc === src) {
-        return;
+        return Promise.resolve();
       }
       if (this._bgSwapTimer) {
         clearTimeout(this._bgSwapTimer);
         this._bgSwapTimer = null;
       }
-      const loadAndShow = (imgSrc) => {
-        const img = new Image();
-        img.onload = () => {
-          el.src = imgSrc;
-          el.dataset.currentSrc = src;
-          requestAnimationFrame(() => {
-            el.style.opacity = "0.55";
-          });
+      return new Promise((resolve) => {
+        const loadAndShow = (imgSrc) => {
+          const img = new Image();
+          img.onload = () => {
+            el.src = imgSrc;
+            el.dataset.currentSrc = src;
+            requestAnimationFrame(() => {
+              el.style.opacity = "0.55";
+            });
+            setTimeout(resolve, 2050);
+          };
+          img.onerror = () => {
+            if (imgSrc === src && fallbackSrc) {
+              loadAndShow(fallbackSrc);
+            } else {
+              el.style.opacity = "0";
+              el.dataset.currentSrc = "";
+              resolve();
+            }
+          };
+          img.src = imgSrc;
         };
-        img.onerror = () => {
-          if (imgSrc === src && fallbackSrc) {
-            loadAndShow(fallbackSrc);
-          } else {
-            el.style.opacity = "0";
-            el.dataset.currentSrc = "";
-          }
-        };
-        img.src = imgSrc;
-      };
-      if (parseFloat(el.style.opacity) > 0 && el.dataset.currentSrc) {
-        el.style.opacity = "0";
-        this._bgSwapTimer = setTimeout(() => {
-          this._bgSwapTimer = null;
+        if (parseFloat(el.style.opacity) > 0 && el.dataset.currentSrc) {
+          el.style.opacity = "0";
+          this._bgSwapTimer = setTimeout(() => {
+            this._bgSwapTimer = null;
+            loadAndShow(src);
+          }, 2050);
+        } else {
           loadAndShow(src);
-        }, 2050);
-      } else {
-        loadAndShow(src);
-      }
+        }
+      });
     }
     setMode(mode) {
       this.currentMode = mode === "classic" ? "classic" : "immersive";
@@ -33766,9 +33770,19 @@ void main() {
         return;
       }
       if (step.kind === "bg") {
-        this.setAtmosphere(step.bg);
+        if (this.$hud) {
+          this.$hud.style.transition = "opacity 0.8s ease";
+          this.$hud.style.opacity = "0";
+        }
+        const bgPromise = this.setAtmosphere(step.bg);
         if (step.bgm) {
           this.bgmController.setCue(this.scenario.audioNamespace, step.bgm);
+        }
+        if (bgPromise && typeof bgPromise.then === "function") {
+          await bgPromise;
+        }
+        if (this.$hud) {
+          this.$hud.style.opacity = "1";
         }
         await this.showStep(index + 1);
         return;
