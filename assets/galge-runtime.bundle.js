@@ -23,6 +23,8 @@
       this.currentNamespace = "";
       this.currentCue = null;
       this.currentSrc = "";
+      this._fadeTimer = null;
+      this._fadeDuration = 4e3;
     }
     isEnabled() {
       return this.enabled;
@@ -62,9 +64,39 @@
     clearCue() {
       this.currentCue = null;
       this.currentSrc = "";
-      this.audio.pause();
-      this.audio.removeAttribute("src");
-      this.audio.load();
+      this._fadeOutAndStop(this.audio);
+    }
+    _fadeOutAndStop(audioEl) {
+      if (!audioEl || audioEl.paused) return;
+      const startVol = audioEl.volume;
+      const steps = 40;
+      const interval = this._fadeDuration / steps;
+      let step = 0;
+      const timer = setInterval(() => {
+        step++;
+        audioEl.volume = clamp(startVol * (1 - step / steps), 0, 1);
+        if (step >= steps) {
+          clearInterval(timer);
+          audioEl.pause();
+          audioEl.removeAttribute("src");
+          audioEl.load();
+        }
+      }, interval);
+    }
+    _fadeIn(audioEl, targetVol) {
+      audioEl.volume = 0;
+      const steps = 40;
+      const interval = this._fadeDuration / steps;
+      let step = 0;
+      if (this._fadeTimer) clearInterval(this._fadeTimer);
+      this._fadeTimer = setInterval(() => {
+        step++;
+        audioEl.volume = clamp(targetVol * (step / steps), 0, 1);
+        if (step >= steps) {
+          clearInterval(this._fadeTimer);
+          this._fadeTimer = null;
+        }
+      }, interval);
     }
     syncPlayback() {
       if (!this.currentCue || this.currentCue.stop) {
@@ -76,24 +108,41 @@
         this.clearCue();
         return;
       }
-      this.audio.loop = this.currentCue.loop !== false;
-      this.audio.volume = clamp(
+      const targetVol = clamp(
         Number.isFinite(this.currentCue.volume) ? this.currentCue.volume : 0.45,
         0,
         1
       );
       if (this.currentSrc !== nextSrc) {
+        const oldAudio = this.audio;
+        this._fadeOutAndStop(oldAudio);
+        this.audio = new Audio();
+        this.audio.loop = this.currentCue.loop !== false;
+        this.audio.preload = "auto";
+        this.audio.volume = 0;
         this.currentSrc = nextSrc;
         this.audio.src = nextSrc;
+        if (!this.enabled) {
+          this.audio.pause();
+          return;
+        }
+        this.audio.play().then(() => {
+          this._fadeIn(this.audio, targetVol);
+        }).catch((error) => {
+          console.warn("bgm play failed:", error);
+        });
+      } else {
+        this.audio.loop = this.currentCue.loop !== false;
+        this.audio.volume = targetVol;
+        if (!this.enabled) {
+          this.audio.pause();
+          this.audio.currentTime = 0;
+          return;
+        }
+        this.audio.play().catch((error) => {
+          console.warn("bgm play failed:", error);
+        });
       }
-      if (!this.enabled) {
-        this.audio.pause();
-        this.audio.currentTime = 0;
-        return;
-      }
-      this.audio.play().catch((error) => {
-        console.warn("bgm play failed:", error);
-      });
     }
     stop() {
       this.audio.pause();
@@ -32875,7 +32924,7 @@ void main() {
       this._starGlowTarget = { r: 160, g: 140, b: 220 };
       this._clearCurrent = { r: 10, g: 10, b: 46, a: 0.15 };
       this._clearTarget = { r: 10, g: 10, b: 46, a: 0.15 };
-      this._colorFadeSpeed = 8e-3;
+      this._colorFadeSpeed = 4e-3;
     }
     async init() {
       try {
@@ -33339,7 +33388,7 @@ void main() {
       this.starGlowColor = `${starGlow.r},${starGlow.g},${starGlow.b}`;
     }
     _lerpColors() {
-      const t = this._colorFadeSpeed;
+      const t = this._colorFadeSpeed || 0.012;
       const threshold = 0.5;
       const ch = this._colorCurrent;
       const th = this._colorTarget;
@@ -33425,7 +33474,7 @@ void main() {
           zIndex: "1",
           pointerEvents: "none",
           opacity: "0",
-          transition: "opacity 1.6s ease"
+          transition: "opacity 4s ease"
         });
         document.body.insertBefore(el, document.body.firstChild);
       }

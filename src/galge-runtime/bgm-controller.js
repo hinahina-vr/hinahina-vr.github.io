@@ -25,6 +25,8 @@ export class BGMController {
     this.currentNamespace = "";
     this.currentCue = null;
     this.currentSrc = "";
+    this._fadeTimer = null;
+    this._fadeDuration = 4000; // 4 seconds crossfade
   }
 
   isEnabled() {
@@ -73,9 +75,41 @@ export class BGMController {
   clearCue() {
     this.currentCue = null;
     this.currentSrc = "";
-    this.audio.pause();
-    this.audio.removeAttribute("src");
-    this.audio.load();
+    this._fadeOutAndStop(this.audio);
+  }
+
+  _fadeOutAndStop(audioEl) {
+    if (!audioEl || audioEl.paused) return;
+    const startVol = audioEl.volume;
+    const steps = 40;
+    const interval = this._fadeDuration / steps;
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      audioEl.volume = clamp(startVol * (1 - step / steps), 0, 1);
+      if (step >= steps) {
+        clearInterval(timer);
+        audioEl.pause();
+        audioEl.removeAttribute("src");
+        audioEl.load();
+      }
+    }, interval);
+  }
+
+  _fadeIn(audioEl, targetVol) {
+    audioEl.volume = 0;
+    const steps = 40;
+    const interval = this._fadeDuration / steps;
+    let step = 0;
+    if (this._fadeTimer) clearInterval(this._fadeTimer);
+    this._fadeTimer = setInterval(() => {
+      step++;
+      audioEl.volume = clamp(targetVol * (step / steps), 0, 1);
+      if (step >= steps) {
+        clearInterval(this._fadeTimer);
+        this._fadeTimer = null;
+      }
+    }, interval);
   }
 
   syncPlayback() {
@@ -90,27 +124,48 @@ export class BGMController {
       return;
     }
 
-    this.audio.loop = this.currentCue.loop !== false;
-    this.audio.volume = clamp(
+    const targetVol = clamp(
       Number.isFinite(this.currentCue.volume) ? this.currentCue.volume : 0.45,
       0,
       1
     );
 
     if (this.currentSrc !== nextSrc) {
+      // Crossfade: fade out old, fade in new
+      const oldAudio = this.audio;
+      this._fadeOutAndStop(oldAudio);
+
+      this.audio = new Audio();
+      this.audio.loop = this.currentCue.loop !== false;
+      this.audio.preload = "auto";
+      this.audio.volume = 0;
       this.currentSrc = nextSrc;
       this.audio.src = nextSrc;
-    }
 
-    if (!this.enabled) {
-      this.audio.pause();
-      this.audio.currentTime = 0;
-      return;
-    }
+      if (!this.enabled) {
+        this.audio.pause();
+        return;
+      }
 
-    this.audio.play().catch((error) => {
-      console.warn("bgm play failed:", error);
-    });
+      this.audio.play().then(() => {
+        this._fadeIn(this.audio, targetVol);
+      }).catch((error) => {
+        console.warn("bgm play failed:", error);
+      });
+    } else {
+      this.audio.loop = this.currentCue.loop !== false;
+      this.audio.volume = targetVol;
+
+      if (!this.enabled) {
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        return;
+      }
+
+      this.audio.play().catch((error) => {
+        console.warn("bgm play failed:", error);
+      });
+    }
   }
 
   stop() {

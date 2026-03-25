@@ -217,7 +217,7 @@ class GalgeRuntimeApp {
     this._starGlowTarget = { r: 160, g: 140, b: 220 };
     this._clearCurrent = { r: 10, g: 10, b: 46, a: 0.15 };
     this._clearTarget = { r: 10, g: 10, b: 46, a: 0.15 };
-    this._colorFadeSpeed = 0.008; // ~2s to converge (roughly 1 - 0.008^120 ≈ done in 120 frames)
+    this._colorFadeSpeed = 0.004; // ~4s to converge
   }
 
   async init() {
@@ -874,7 +874,7 @@ class GalgeRuntimeApp {
   }
 
   _lerpColors() {
-    const t = this._colorFadeSpeed;
+    const t = this._colorFadeSpeed || 0.012;
     const threshold = 0.5;
 
     // HSL bg color
@@ -983,7 +983,7 @@ class GalgeRuntimeApp {
         zIndex: "1",
         pointerEvents: "none",
         opacity: "0",
-        transition: "opacity 1.6s ease",
+        transition: "opacity 4s ease",
       });
       document.body.insertBefore(el, document.body.firstChild);
     }
