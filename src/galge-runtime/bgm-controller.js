@@ -142,18 +142,16 @@ export class BGMController {
       // Fade out old track, then start new track with fade in
       this._fadeOut(this.audio, () => {
         this.audio.loop = this.currentCue ? this.currentCue.loop !== false : true;
-        this.audio.volume = 0;
         this.currentSrc = nextSrc;
         this.audio.src = nextSrc;
+        this.audio.volume = targetVol;
 
         if (!this.enabled) {
           this.audio.pause();
           return;
         }
 
-        this.audio.play().then(() => {
-          this.audio.volume = targetVol;
-        }).catch((error) => {
+        this.audio.play().catch((error) => {
           console.warn("bgm play failed:", error);
         });
       });
