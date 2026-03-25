@@ -4,20 +4,70 @@
   "genre": "幻界ノベル",
   "date": "2026-03-24",
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "abyss" },
-    { "speaker": "narrator", "expression": "", "text": "これは、「割れたディスクの考古学」へ枝分かれした記録。\nパッケージ版を選んだ者だけが見る、30年後の発掘現場。" },
-    { "label": "entry_from_main" },
-    { "bg": "excavation_site" },
-    { "speaker": "narrator", "expression": "", "text": "2056年。\n押入れの奥から、PC用ゲームのパッケージが出てきた。\nanemoiと書いてある。2026年の発売日シール。30年前だ。" },
-    { "speaker": "narrator", "expression": "", "text": "ディスクを取り出す。2枚組。\n1枚目は無事だ。2枚目には小さなヒビが入っている。\nポリカーボネートの劣化。光学ドライブはもう存在しない。" },
-    { "speaker": "narrator", "expression": "", "text": "30年前、僕はこのディスクを選んだ。\nダウンロード版ではなく。\n手に取れることが鮮度の最初の条件だ、と思ったから。" },
-    { "speaker": "narrator", "expression": "", "text": "ディスクは割れた。しかし箱は残っている。\n説明書も残っている。ジャケットの絵も。\n触れる。匂いがする。紙とインクとプラスチックの匂い。" },
-    { "speaker": "narrator", "expression": "", "text": "2056年のハードディスクには、ダウンロード版のデータも残っているだろう。\nでもそのデータには匂いがない。触感がない。重さがない。" },
-    { "speaker": "narrator", "expression": "", "text": "考古学者は土器の破片を拾って文明を推測する。\n割れたディスクから、僕は何を推測できるだろう。\n2026年の春に、一人の男がKeyの新作を予約した。パッケージ版を。\nそれだけのことだが、それだけのことが30年後に物語になる。" },
-    { "ending": { "title": "割れたディスクの考古学", "subtitle": "割れたディスクは読めない。でも割れたディスクそのものが、30年前の予約の証拠になる。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "abyss",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "これは、「割れたディスクの考古学」へ枝分かれした記録。\nパッケージ版を選んだ者だけが見る、30年後の発掘現場。"
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "excavation_site"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2056年。\n押入れの奥から、PC用ゲームのパッケージが出てきた。\nanemoiと書いてある。2026年の発売日シール。30年前だ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ディスクを取り出す。2枚組。\n1枚目は無事だ。2枚目には小さなヒビが入っている。\nポリカーボネートの劣化。光学ドライブはもう存在しない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "30年前、僕はこのディスクを選んだ。\nダウンロード版ではなく。\n手に取れることが鮮度の最初の条件だ、と思ったから。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ディスクは割れた。しかし箱は残っている。\n説明書も残っている。ジャケットの絵も。\n触れる。匂いがする。紙とインクとプラスチックの匂い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2056年のハードディスクには、ダウンロード版のデータも残っているだろう。\nでもそのデータには匂いがない。触感がない。重さがない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "考古学者は土器の破片を拾って文明を推測する。\n割れたディスクから、僕は何を推測できるだろう。\n2026年の春に、一人の男がKeyの新作を予約した。パッケージ版を。\nそれだけのことだが、それだけのことが30年後に物語になる。"
+    },
+    {
+      "ending": {
+        "title": "割れたディスクの考古学",
+        "subtitle": "割れたディスクは読めない。でも割れたディスクそのものが、30年前の予約の証拠になる。"
+      }
+    }
   ]
 }

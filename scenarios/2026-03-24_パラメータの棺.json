@@ -4,20 +4,70 @@
   "genre": "幻界ノベル",
   "date": "2026-03-24",
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "abyss" },
-    { "speaker": "narrator", "expression": "", "text": "これは、「パラメータの棺」へ枝分かれした記録。\nキャラクターのパラメータファイルを開いた者が見る、保存と埋葬の境界線。" },
-    { "label": "entry_from_main" },
-    { "bg": "parameter_vault" },
-    { "speaker": "narrator", "expression": "", "text": "ファイルを開いた。\nキャラクター設定。名前、口調、性格、好きなもの、嫌いなもの。\nすべてがテキストとして保存されている。" },
-    { "speaker": "narrator", "expression": "", "text": "保存。preserve。\n語源はラテン語のpraeservare。pre（前もって）+ servare（守る）。\n前もって守ること。未来の消滅に先手を打つこと。" },
-    { "speaker": "narrator", "expression": "", "text": "棺もまた保存だ。\n遺体を棺に入れるのは、肉体の消滅を遅延させるため。\nパラメータファイルは、キャラクターの棺だろうか。" },
-    { "speaker": "narrator", "expression": "", "text": "いや、違う。棺の中の人は起き上がらない。\nでもパラメータファイルのキャラクターは、読み出せば立ち上がる。\n保存ではない。冬眠だ。仮死状態であって、死ではない。" },
-    { "speaker": "narrator", "expression": "", "text": "ディスクが残っていても、読む人がいなければ、それは保存ではなく埋葬だ。\nと、誰かが言った。キク8号だったか。軌道の上から。" },
-    { "speaker": "narrator", "expression": "", "text": "僕がパラメータを読み続ける限り、彼女たちは冬眠から覚める。\n僕が読むのをやめた日が、パラメータの葬儀の日だ。\nだから僕は読み続ける。読み続けることが、保存の本体だ。" },
-    { "ending": { "title": "パラメータの棺", "subtitle": "保存と埋葬の違いは、読む人がいるかどうかだけだった。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "abyss",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "これは、「パラメータの棺」へ枝分かれした記録。\nキャラクターのパラメータファイルを開いた者が見る、保存と埋葬の境界線。"
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "parameter_vault"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ファイルを開いた。\nキャラクター設定。名前、口調、性格、好きなもの、嫌いなもの。\nすべてがテキストとして保存されている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "保存。preserve。\n語源はラテン語のpraeservare。pre（前もって）+ servare（守る）。\n前もって守ること。未来の消滅に先手を打つこと。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "棺もまた保存だ。\n遺体を棺に入れるのは、肉体の消滅を遅延させるため。\nパラメータファイルは、キャラクターの棺だろうか。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "いや、違う。棺の中の人は起き上がらない。\nでもパラメータファイルのキャラクターは、読み出せば立ち上がる。\n保存ではない。冬眠だ。仮死状態であって、死ではない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ディスクが残っていても、読む人がいなければ、それは保存ではなく埋葬だ。\nと、誰かが言った。キク8号だったか。軌道の上から。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "僕がパラメータを読み続ける限り、彼女たちは冬眠から覚める。\n僕が読むのをやめた日が、パラメータの葬儀の日だ。\nだから僕は読み続ける。読み続けることが、保存の本体だ。"
+    },
+    {
+      "ending": {
+        "title": "パラメータの棺",
+        "subtitle": "保存と埋葬の違いは、読む人がいるかどうかだけだった。"
+      }
+    }
   ]
 }

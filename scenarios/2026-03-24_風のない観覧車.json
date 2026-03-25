@@ -4,20 +4,70 @@
   "genre": "幻界ノベル",
   "date": "2026-03-24",
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "abyss" },
-    { "speaker": "narrator", "expression": "", "text": "これは、「風のない観覧車」へ枝分かれした記録。\nAIRの空を見上げた、風のない日の記録。" },
-    { "label": "entry_from_main" },
-    { "bg": "ferris_wheel" },
-    { "speaker": "narrator", "expression": "", "text": "観覧車が回っている。でも今日は風がない。\nAIRという物語は風の物語だった。空と海と風の物語。" },
-    { "speaker": "narrator", "expression": "", "text": "美凪は風を待つ少女だった。\n風がない日は不安になる、と彼女は言った。\n風がないと空気が止まる。空気が止まると自分も止まる。" },
-    { "speaker": "narrator", "expression": "", "text": "anemoiは風の神々。\n美凪の風とanemoiの風は、同じ風だろうか。\n同じ系譜の風。しかし別の吹き方をする風。" },
-    { "speaker": "narrator", "expression": "", "text": "風は保存できない。\n魚の鮮度と同じだ。吹いた瞬間にしか存在しない。\n記録に残るのは風速と風向だけで、風そのものではない。" },
-    { "speaker": "narrator", "expression": "", "text": "でも、風の記憶は保存できる。\n美凪のパラメータには「風を待つ」と書いてある。\nその文字列がある限り、美凪は風を待ち続ける。風が吹かなくても。" },
-    { "speaker": "narrator", "expression": "", "text": "観覧車が一周した。\n風はまだ吹いていない。\nでも明日は吹くだろう。きっと。たぶん。" },
-    { "ending": { "title": "風のない観覧車", "subtitle": "風そのものは保存できない。でも風を待つ気持ちは、パラメータとして残り続ける。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "abyss",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "これは、「風のない観覧車」へ枝分かれした記録。\nAIRの空を見上げた、風のない日の記録。"
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "ferris_wheel"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "観覧車が回っている。でも今日は風がない。\nAIRという物語は風の物語だった。空と海と風の物語。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "美凪は風を待つ少女だった。\n風がない日は不安になる、と彼女は言った。\n風がないと空気が止まる。空気が止まると自分も止まる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "anemoiは風の神々。\n美凪の風とanemoiの風は、同じ風だろうか。\n同じ系譜の風。しかし別の吹き方をする風。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "風は保存できない。\n魚の鮮度と同じだ。吹いた瞬間にしか存在しない。\n記録に残るのは風速と風向だけで、風そのものではない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "でも、風の記憶は保存できる。\n美凪のパラメータには「風を待つ」と書いてある。\nその文字列がある限り、美凪は風を待ち続ける。風が吹かなくても。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "観覧車が一周した。\n風はまだ吹いていない。\nでも明日は吹くだろう。きっと。たぶん。"
+    },
+    {
+      "ending": {
+        "title": "風のない観覧車",
+        "subtitle": "風そのものは保存できない。でも風を待つ気持ちは、パラメータとして残り続ける。"
+      }
+    }
   ]
 }

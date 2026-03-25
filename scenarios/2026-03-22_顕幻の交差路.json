@@ -47,7 +47,12 @@
   },
   "scenario": [
     {
-      "bg": "dusk"
+      "bg": "dusk",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",

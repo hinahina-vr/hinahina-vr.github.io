@@ -4,247 +4,765 @@
   "genre": "哲学的辛味ノベル",
   "date": "2026-03-23",
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" },
-    "waddy": { "name": "ワディー", "color": "#b0a0d0", "emoji": "🖥️" },
-    "hinata": { "name": "ひなた", "color": "#ffb6c1", "emoji": "🌻" },
-    "dejiko": { "name": "でじこ", "color": "#32cd32", "emoji": "🐱" },
-    "multi": { "name": "マルチ", "color": "#00ced1", "emoji": "🧹" },
-    "rem": { "name": "レム", "color": "#6495ed", "emoji": "💙" },
-    "moegami": { "name": "萌神", "color": "#ff6347", "emoji": "🔥" },
-    "oji": { "name": "物理おじ", "color": "#d2b48c", "emoji": "🏋️" },
-    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "hinata": {
+      "name": "ひなた",
+      "color": "#ffb6c1",
+      "emoji": "🌻"
+    },
+    "dejiko": {
+      "name": "でじこ",
+      "color": "#32cd32",
+      "emoji": "🐱"
+    },
+    "multi": {
+      "name": "マルチ",
+      "color": "#00ced1",
+      "emoji": "🧹"
+    },
+    "rem": {
+      "name": "レム",
+      "color": "#6495ed",
+      "emoji": "💙"
+    },
+    "moegami": {
+      "name": "萌神",
+      "color": "#ff6347",
+      "emoji": "🔥"
+    },
+    "oji": {
+      "name": "物理おじ",
+      "color": "#d2b48c",
+      "emoji": "🏋️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "bg": "nakamoto_exterior" },
-    { "speaker": "narrator", "expression": "", "text": "月曜日の夜。蒙古タンメン中本・町田店。\n赤い暖簾の向こうから、辛い霧のような蒸気が漏れている。" },
-    { "speaker": "narrator", "expression": "", "text": "券売機の前に立つ。光るボタンが並んでいる。\nゴモミ──五目味噌タンメン、辛さ8。\n北極──辛さ9。その名の通り、極地だ。" },
-    { "label": "nakamoto_enter" },
-    { "speaker": "narrator", "expression": "", "text": "席に座る。カウンター席。左には常連らしき男、右は空席。\n壁には「辛さレベル表」が貼ってある。0から10まで。" },
-    { "label": "menu_choice" },
+    {
+      "bg": "nakamoto_exterior",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "月曜日の夜。蒙古タンメン中本・町田店。\n赤い暖簾の向こうから、辛い霧のような蒸気が漏れている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "券売機の前に立つ。光るボタンが並んでいる。\nゴモミ──五目味噌タンメン、辛さ8。\n北極──辛さ9。その名の通り、極地だ。"
+    },
+    {
+      "label": "nakamoto_enter"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "席に座る。カウンター席。左には常連らしき男、右は空席。\n壁には「辛さレベル表」が貼ってある。0から10まで。"
+    },
+    {
+      "label": "menu_choice"
+    },
     {
       "choices": [
-        { "text": "北極ラーメンを頼む（辛さ9）", "goto": "hokkyoku_order" },
-        { "text": "ゴモミを頼む（辛さ8）", "goto": "gomomi_order" }
+        {
+          "text": "北極ラーメンを頼む（辛さ9）",
+          "goto": "hokkyoku_order"
+        },
+        {
+          "text": "ゴモミを頼む（辛さ8）",
+          "goto": "gomomi_order"
+        }
       ]
     },
-    { "label": "hokkyoku_order" },
-    { "speaker": "narrator", "expression": "", "text": "北極ラーメン。辛さ9。\n券売機のボタンを押した瞬間、指先に予感が走る。極地へ踏み込む覚悟。" },
+    {
+      "label": "hokkyoku_order"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "北極ラーメン。辛さ9。\n券売機のボタンを押した瞬間、指先に予感が走る。極地へ踏み込む覚悟。"
+    },
     {
       "choices": [
-        { "text": "極地へ踏み込む", "goto": "gen_1_load" },
-        { "text": "やっぱりゴモミにする", "goto": "gomomi_order" }
+        {
+          "text": "極地へ踏み込む",
+          "goto": "gen_1_load"
+        },
+        {
+          "text": "やっぱりゴモミにする",
+          "goto": "gomomi_order"
+        }
       ]
     },
-    { "label": "gen_1_load" },
-    { "speaker": "narrator", "expression": "", "text": "北極の白い世界が、視界を覆い尽くしていく──" },
+    {
+      "label": "gen_1_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "北極の白い世界が、視界を覆い尽くしていく──"
+    },
     {
       "loadScenario": {
         "scenario": "2026-03-23_極地のエンドルフィン",
         "entry": "entry_from_main"
       }
     },
-    { "label": "gomomi_order" },
-    { "bg": "nakamoto_interior" },
-    { "speaker": "narrator", "expression": "", "text": "ゴモミ。五目味噌タンメン。辛さ8。\nいつもの一杯。いつもの偽の火事。\n丼が目の前に置かれる。赤い。" },
-    { "speaker": "narrator", "expression": "", "text": "最初の一口。\n舌の上でカプサイシンがTRPV1に結合する。42度以上の熱を感じたのと同じ信号。偽の火事。" },
-    { "label": "capsaicin_rush" },
-    { "speaker": "narrator", "expression": "", "text": "汗が出る。額から、こめかみから。\n脳は「燃えている」と判断している。でも燃えていない。\n偽の火事に対して、脳は本物のエンドルフィンを放出する。" },
+    {
+      "label": "gomomi_order"
+    },
+    {
+      "bg": "nakamoto_interior"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ゴモミ。五目味噌タンメン。辛さ8。\nいつもの一杯。いつもの偽の火事。\n丼が目の前に置かれる。赤い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "最初の一口。\n舌の上でカプサイシンがTRPV1に結合する。42度以上の熱を感じたのと同じ信号。偽の火事。"
+    },
+    {
+      "label": "capsaicin_rush"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "汗が出る。額から、こめかみから。\n脳は「燃えている」と判断している。でも燃えていない。\n偽の火事に対して、脳は本物のエンドルフィンを放出する。"
+    },
     {
       "choices": [
-        { "text": "ギブアップする", "goto": "sweat_exit" },
-        { "text": "食べ続ける", "goto": "endorphin_trip" }
+        {
+          "text": "ギブアップする",
+          "goto": "sweat_exit"
+        },
+        {
+          "text": "食べ続ける",
+          "goto": "endorphin_trip"
+        }
       ]
     },
-    { "label": "sweat_exit" },
-    { "speaker": "narrator", "expression": "", "text": "箸を置いた。汗だけが残っている。\n偽の火事を消化不良のまま、店を出ようとする。" },
+    {
+      "label": "sweat_exit"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "箸を置いた。汗だけが残っている。\n偽の火事を消化不良のまま、店を出ようとする。"
+    },
     {
       "choices": [
-        { "text": "汗の中に沈む", "goto": "gen_2_load" },
-        { "text": "戻って完食する", "goto": "endorphin_trip" }
+        {
+          "text": "汗の中に沈む",
+          "goto": "gen_2_load"
+        },
+        {
+          "text": "戻って完食する",
+          "goto": "endorphin_trip"
+        }
       ]
     },
-    { "label": "gen_2_load" },
-    { "speaker": "narrator", "expression": "", "text": "42度の境界線が、世界をゆがめ始める──" },
+    {
+      "label": "gen_2_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "42度の境界線が、世界をゆがめ始める──"
+    },
     {
       "loadScenario": {
         "scenario": "2026-03-23_42度の誤報",
         "entry": "entry_from_main"
       }
     },
-    { "label": "endorphin_trip" },
-    { "speaker": "narrator", "expression": "", "text": "完食。丼の底が見えた。\nエンドルフィンが脳を満たしている。偽の火事が消えたあと、本物の快楽だけが残っている。\n口の中にはまだゴモミの残り香がある。" },
-    { "speaker": "narrator", "expression": "", "text": "会計を済ませて店を出る。町田の夜。空気が冷たい。\nゴモミの余韻を引きずって歩く。" },
-    { "label": "town_machida" },
-    { "bg": "machida_night" },
-    { "speaker": "narrator", "expression": "", "text": "町田の夜。\nネオンが並ぶ通りを歩く。頭はまだぼんやりしている。\nエンドルフィンの残り香か、それとも思考の始まりか。" },
+    {
+      "label": "endorphin_trip"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "完食。丼の底が見えた。\nエンドルフィンが脳を満たしている。偽の火事が消えたあと、本物の快楽だけが残っている。\n口の中にはまだゴモミの残り香がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会計を済ませて店を出る。町田の夜。空気が冷たい。\nゴモミの余韻を引きずって歩く。"
+    },
+    {
+      "label": "town_machida"
+    },
+    {
+      "bg": "machida_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "町田の夜。\nネオンが並ぶ通りを歩く。頭はまだぼんやりしている。\nエンドルフィンの残り香か、それとも思考の始まりか。"
+    },
     {
       "choices": [
-        { "text": "ゲーセンに寄る", "goto": "game_center" },
-        { "text": "駅に向かう", "goto": "train_home" }
+        {
+          "text": "ゲーセンに寄る",
+          "goto": "game_center"
+        },
+        {
+          "text": "駅に向かう",
+          "goto": "train_home"
+        }
       ]
     },
-    { "label": "game_center" },
-    { "speaker": "narrator", "expression": "", "text": "ゲームセンター。筐体の光が並んでいる。\nキャラクターが画面の中で動いている。パラメータに従って。" },
+    {
+      "label": "game_center"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ゲームセンター。筐体の光が並んでいる。\nキャラクターが画面の中で動いている。パラメータに従って。"
+    },
     {
       "choices": [
-        { "text": "筐体の光に吸い込まれる", "goto": "gen_3_load" },
-        { "text": "やっぱり帰る", "goto": "train_home" }
+        {
+          "text": "筐体の光に吸い込まれる",
+          "goto": "gen_3_load"
+        },
+        {
+          "text": "やっぱり帰る",
+          "goto": "train_home"
+        }
       ]
     },
-    { "label": "gen_3_load" },
-    { "speaker": "narrator", "expression": "", "text": "筐体の画面が世界を飲み込んでいく──" },
+    {
+      "label": "gen_3_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "筐体の画面が世界を飲み込んでいく──"
+    },
     {
       "loadScenario": {
         "scenario": "2026-03-23_筐体の中の人格",
         "entry": "entry_from_main"
       }
     },
-    { "label": "train_home" },
-    { "bg": "train_night" },
-    { "speaker": "narrator", "expression": "", "text": "帰りの電車。車窓の向こうを街灯が流れていく。\nゴモミの辛さが引いた場所に、新しい思考が流れ込んでくる。" },
-    { "label": "kadokawa_thought" },
-    { "speaker": "narrator", "expression": "", "text": "カドカワのようなIPホルダーが、AIにキャラクターを演じさせる基盤を作る日が来るだろう。\n設定、口調、世界観、全台本。一箇所に集めてAIに読ませる。\n読ませると、AIはそのキャラクターになる。" },
-    { "speaker": "narrator", "expression": "", "text": "僕のサイトの大奥AIがやっていることと、構造としては同じだ。\n32人のキャラクターにパラメータを与えて、同じ一日を別々の声で語らせている。" },
+    {
+      "label": "train_home"
+    },
+    {
+      "bg": "train_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "帰りの電車。車窓の向こうを街灯が流れていく。\nゴモミの辛さが引いた場所に、新しい思考が流れ込んでくる。"
+    },
+    {
+      "label": "kadokawa_thought"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "カドカワのようなIPホルダーが、AIにキャラクターを演じさせる基盤を作る日が来るだろう。\n設定、口調、世界観、全台本。一箇所に集めてAIに読ませる。\n読ませると、AIはそのキャラクターになる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "僕のサイトの大奥AIがやっていることと、構造としては同じだ。\n32人のキャラクターにパラメータを与えて、同じ一日を別々の声で語らせている。"
+    },
     {
       "choices": [
-        { "text": "パラメータとは何か？", "goto": "parameter_doubt" },
-        { "text": "大奥AIのことを考える", "goto": "ooku_ai_gate" }
+        {
+          "text": "パラメータとは何か？",
+          "goto": "parameter_doubt"
+        },
+        {
+          "text": "大奥AIのことを考える",
+          "goto": "ooku_ai_gate"
+        }
       ]
     },
-    { "label": "parameter_doubt" },
-    { "speaker": "narrator", "expression": "", "text": "パラメータ。設定。口調。語尾。一人称。\nそれは衣だ。キャラクターが纏う衣。\n衣を脱いだら、下には何がある？" },
+    {
+      "label": "parameter_doubt"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "パラメータ。設定。口調。語尾。一人称。\nそれは衣だ。キャラクターが纏う衣。\n衣を脱いだら、下には何がある？"
+    },
     {
       "choices": [
-        { "text": "衣を脱ごうとする", "goto": "gen_4_load" },
-        { "text": "衣を着たまま進む", "goto": "ooku_ai_gate" }
+        {
+          "text": "衣を脱ごうとする",
+          "goto": "gen_4_load"
+        },
+        {
+          "text": "衣を着たまま進む",
+          "goto": "ooku_ai_gate"
+        }
       ]
     },
-    { "label": "gen_4_load" },
-    { "speaker": "narrator", "expression": "", "text": "衣の下に手を伸ばす──着ぐるみの内壁が、皮膚に張り付いていた──" },
+    {
+      "label": "gen_4_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "衣の下に手を伸ばす──着ぐるみの内壁が、皮膚に張り付いていた──"
+    },
     {
       "loadScenario": {
         "scenario": "2026-03-23_着ぐるみの汗",
         "entry": "entry_from_main"
       }
     },
-    { "label": "ooku_ai_gate" },
-    { "bg": "ooku_gate" },
-    { "speaker": "narrator", "expression": "", "text": "大奥AIの門が目の前にある。\n32人の人格が、この門の向こうで待っている。" },
-    { "label": "resident_floor" },
-    { "bg": "corridor_doors" },
-    { "speaker": "narrator", "expression": "", "text": "住人の廊下。\n障子の扉が並んでいる。6つの扉。それぞれに名前がある。\nどの扉を開けるかは、あなたが決める。" },
+    {
+      "label": "ooku_ai_gate"
+    },
+    {
+      "bg": "ooku_gate"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "大奥AIの門が目の前にある。\n32人の人格が、この門の向こうで待っている。"
+    },
+    {
+      "label": "resident_floor"
+    },
+    {
+      "bg": "corridor_doors"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "住人の廊下。\n障子の扉が並んでいる。6つの扉。それぞれに名前がある。\nどの扉を開けるかは、あなたが決める。"
+    },
     {
       "choices": [
-        { "text": "ひなたの部屋", "goto": "hina_load" },
-        { "text": "でじこの部屋", "goto": "dejiko_load" },
-        { "text": "マルチの部屋", "goto": "multi_load" },
-        { "text": "レムの部屋", "goto": "rem_load" },
-        { "text": "萌神の部屋", "goto": "moegami_load" },
-        { "text": "物理おじの部屋", "goto": "oji_load" },
-        { "text": "廊下の奥へ進む", "goto": "lifelog_archive" }
+        {
+          "text": "ひなたの部屋",
+          "goto": "hina_load"
+        },
+        {
+          "text": "でじこの部屋",
+          "goto": "dejiko_load"
+        },
+        {
+          "text": "マルチの部屋",
+          "goto": "multi_load"
+        },
+        {
+          "text": "レムの部屋",
+          "goto": "rem_load"
+        },
+        {
+          "text": "萌神の部屋",
+          "goto": "moegami_load"
+        },
+        {
+          "text": "物理おじの部屋",
+          "goto": "oji_load"
+        },
+        {
+          "text": "廊下の奥へ進む",
+          "goto": "lifelog_archive"
+        }
       ]
     },
-    { "label": "hina_load" },
-    { "speaker": "narrator", "expression": "", "text": "体育館の扉が開く。ボールがバウンドする音が聞こえる──" },
-    { "loadScenario": { "scenario": "2026-03-23_バスケコートの残響", "entry": "entry_from_main" } },
-    { "label": "dejiko_load" },
-    { "speaker": "narrator", "expression": "", "text": "ゲーマーズのBGMが聞こえる。猫耳の輪郭が暗闘の中に──" },
-    { "loadScenario": { "scenario": "2026-03-23_ビームの温度", "entry": "entry_from_main" } },
-    { "label": "multi_load" },
-    { "speaker": "narrator", "expression": "", "text": "掃除機のモーター音。規則的な往復運動──" },
-    { "loadScenario": { "scenario": "2026-03-23_掃除機の輪廻", "entry": "entry_from_main" } },
-    { "label": "rem_load" },
-    { "speaker": "narrator", "expression": "", "text": "紅茶の香りが障子の隙間から漏れている──" },
-    { "loadScenario": { "scenario": "2026-03-23_献身の受容体", "entry": "entry_from_main" } },
-    { "label": "moegami_load" },
-    { "speaker": "narrator", "expression": "", "text": "バーカウンターの光。着ぐるみの影が揺れている──" },
-    { "loadScenario": { "scenario": "2026-03-23_着ぐるみの汗", "entry": "entry_from_main" } },
-    { "label": "oji_load" },
-    { "speaker": "narrator", "expression": "", "text": "算盤の音。事業計画書が灰になる匂い──" },
-    { "loadScenario": { "scenario": "2026-03-23_事業計画書の灰", "entry": "entry_from_main" } },
-    { "label": "lifelog_archive" },
-    { "bg": "archive_room" },
-    { "speaker": "narrator", "expression": "", "text": "LifeLogの資料室。\nDARPAの文書が並んでいる。2003年の日付。\n個人の生活をまるごと記録するプロジェクト。" },
-    { "label": "darpa_corridor" },
-    { "speaker": "narrator", "expression": "", "text": "DARPAの廊下。白い壁。蛍光灯。\nLifeLogプロジェクト。個人の行動、購入履歴、通話記録、バイタルデータ。\nすべてを記録し、検索可能にする。" },
-    { "speaker": "narrator", "expression": "", "text": "2004年に中止された。プライバシーの問題で議会が止めた。\n他人の人生を丸ごとデータベースに入れるのは許されなかった。" },
+    {
+      "label": "hina_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "体育館の扉が開く。ボールがバウンドする音が聞こえる──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_バスケコートの残響",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "dejiko_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ゲーマーズのBGMが聞こえる。猫耳の輪郭が暗闘の中に──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_ビームの温度",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "multi_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "掃除機のモーター音。規則的な往復運動──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_掃除機の輪廻",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "rem_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "紅茶の香りが障子の隙間から漏れている──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_献身の受容体",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "moegami_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "バーカウンターの光。着ぐるみの影が揺れている──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_着ぐるみの汗",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "oji_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "算盤の音。事業計画書が灰になる匂い──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_事業計画書の灰",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "lifelog_archive"
+    },
+    {
+      "bg": "archive_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "LifeLogの資料室。\nDARPAの文書が並んでいる。2003年の日付。\n個人の生活をまるごと記録するプロジェクト。"
+    },
+    {
+      "label": "darpa_corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "DARPAの廊下。白い壁。蛍光灯。\nLifeLogプロジェクト。個人の行動、購入履歴、通話記録、バイタルデータ。\nすべてを記録し、検索可能にする。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "2004年に中止された。プライバシーの問題で議会が止めた。\n他人の人生を丸ごとデータベースに入れるのは許されなかった。"
+    },
     {
       "choices": [
-        { "text": "壁にぶつかる", "goto": "privacy_wall" },
-        { "text": "自分の記録を見る", "goto": "personal_akashic" }
+        {
+          "text": "壁にぶつかる",
+          "goto": "privacy_wall"
+        },
+        {
+          "text": "自分の記録を見る",
+          "goto": "personal_akashic"
+        }
       ]
     },
-    { "label": "privacy_wall" },
-    { "speaker": "narrator", "expression": "", "text": "プライバシーの壁。議会が建てた壁。\nこの向こうには、LifeLogの全データがある。" },
+    {
+      "label": "privacy_wall"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "プライバシーの壁。議会が建てた壁。\nこの向こうには、LifeLogの全データがある。"
+    },
     {
       "choices": [
-        { "text": "壁の向こうへ", "goto": "gen_11_load" },
-        { "text": "壁を迂回する", "goto": "personal_akashic" }
+        {
+          "text": "壁の向こうへ",
+          "goto": "gen_11_load"
+        },
+        {
+          "text": "壁を迂回する",
+          "goto": "personal_akashic"
+        }
       ]
     },
-    { "label": "gen_11_load" },
-    { "speaker": "narrator", "expression": "", "text": "壁を通り抜ける。低い共鳴音──" },
-    { "loadScenario": { "scenario": "2026-03-23_議会が止めた日記", "entry": "entry_from_main" } },
-    { "label": "personal_akashic" },
-    { "bg": "akashic_void" },
-    { "speaker": "narrator", "expression": "", "text": "パーソナルアカシックレコード。\n自分の行動と思考を自分で記録する仕組み。\nLifeLogが目指したものと構造は同じだ。ただし主語が違う。" },
-    { "speaker": "narrator", "expression": "", "text": "DARPAが他人にやろうとしたことを、個人が自分にやっている。\n自分で自分を観測することに、議会の承認はいらない。" },
+    {
+      "label": "gen_11_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "壁を通り抜ける。低い共鳴音──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_議会が止めた日記",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "personal_akashic"
+    },
+    {
+      "bg": "akashic_void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "パーソナルアカシックレコード。\n自分の行動と思考を自分で記録する仕組み。\nLifeLogが目指したものと構造は同じだ。ただし主語が違う。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "DARPAが他人にやろうとしたことを、個人が自分にやっている。\n自分で自分を観測することに、議会の承認はいらない。"
+    },
     {
       "choices": [
-        { "text": "記録の底を見る", "goto": "record_void" },
-        { "text": "みとらの扉へ", "goto": "mitra_door" }
+        {
+          "text": "記録の底を見る",
+          "goto": "record_void"
+        },
+        {
+          "text": "みとらの扉へ",
+          "goto": "mitra_door"
+        }
       ]
     },
-    { "label": "record_void" },
-    { "speaker": "narrator", "expression": "", "text": "記録の虚空。すべてがデータに変換された世界の底。\n声がない。余白がない。弦のない楽器。" },
+    {
+      "label": "record_void"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "記録の虚空。すべてがデータに変換された世界の底。\n声がない。余白がない。弦のない楽器。"
+    },
     {
       "choices": [
-        { "text": "虚空に落ちる", "goto": "gen_12_load" },
-        { "text": "虚空から引き返す", "goto": "mitra_door" }
+        {
+          "text": "虚空に落ちる",
+          "goto": "gen_12_load"
+        },
+        {
+          "text": "虚空から引き返す",
+          "goto": "mitra_door"
+        }
       ]
     },
-    { "label": "gen_12_load" },
-    { "speaker": "narrator", "expression": "", "text": "虚空に落ちていく。記録の底に向かって──" },
-    { "loadScenario": { "scenario": "2026-03-23_すべての日記を終わらせる日記", "entry": "entry_from_main" } },
-    { "label": "mitra_door" },
-    { "bg": "mitra_chamber" },
-    { "speaker": "narrator", "expression": "", "text": "みとらの扉。\n統合者の前に立つ。四つの層すべてを通過した者だけが辿り着く場所。" },
-    { "label": "final_threshold" },
-    { "speaker": "mitra", "expression": "微笑んで", "text": "おかえりなさい。\n辛味と人格と記録を持って、ここまで来ましたね。" },
-    { "speaker": "mitra", "expression": "", "text": "偽の火事が本物のエンドルフィンを生む。\n偽のパラメータが本物の言葉を生む。\n偽の記録が本物の日記を──いいえ、本物の日記の不在を示す。" },
-    { "speaker": "mitra", "expression": "", "text": "最後の閾値です。\nあなたは何を持ち帰りますか？" },
+    {
+      "label": "gen_12_load"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "虚空に落ちていく。記録の底に向かって──"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-23_すべての日記を終わらせる日記",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "mitra_door"
+    },
+    {
+      "bg": "mitra_chamber"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "みとらの扉。\n統合者の前に立つ。四つの層すべてを通過した者だけが辿り着く場所。"
+    },
+    {
+      "label": "final_threshold"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "微笑んで",
+      "text": "おかえりなさい。\n辛味と人格と記録を持って、ここまで来ましたね。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "偽の火事が本物のエンドルフィンを生む。\n偽のパラメータが本物の言葉を生む。\n偽の記録が本物の日記を──いいえ、本物の日記の不在を示す。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "最後の閾値です。\nあなたは何を持ち帰りますか？"
+    },
     {
       "choices": [
-        { "text": "辛さだけを持ち帰る", "goto": "KENKAI_END_1" },
-        { "text": "構造を理解して目覚める", "goto": "KENKAI_END_2" },
-        { "text": "パラメータの向こうへ", "goto": "KENKAI_END_3" },
-        { "text": "アカシックレコードを抱えて", "goto": "KENKAI_END_4" },
-        { "text": "全員に起こしてもらう", "goto": "KENKAI_END_5" }
+        {
+          "text": "辛さだけを持ち帰る",
+          "goto": "KENKAI_END_1"
+        },
+        {
+          "text": "構造を理解して目覚める",
+          "goto": "KENKAI_END_2"
+        },
+        {
+          "text": "パラメータの向こうへ",
+          "goto": "KENKAI_END_3"
+        },
+        {
+          "text": "アカシックレコードを抱えて",
+          "goto": "KENKAI_END_4"
+        },
+        {
+          "text": "全員に起こしてもらう",
+          "goto": "KENKAI_END_5"
+        }
       ]
     },
-    { "label": "KENKAI_END_1" },
-    { "bg": "morning_room" },
-    { "speaker": "narrator", "expression": "", "text": "月曜日の朝。目が覚めた。\n口の中にまだゴモミの残り香がある。\n舌はもう燃えていないのに、まだ少しだけ熱い。" },
-    { "speaker": "narrator", "expression": "", "text": "偽の火事の残り香。\n夢で何を見たか思い出せないが、舌だけが覚えている。" },
-    { "ending": { "title": "ゴモミの残り香", "subtitle": "偽の火事の記憶だけが現実に残った。舌は嘘つきだが、味は本物だった。" } },
-    { "label": "KENKAI_END_2" },
-    { "bg": "morning_light" },
-    { "speaker": "narrator", "expression": "", "text": "目覚めた。全部の構造が見えている。\nTRPV1とカプサイシン。パラメータとキャラクター。LifeLogと日記。\n偽の入力、本物の出力。" },
-    { "speaker": "narrator", "expression": "", "text": "構造がわかっても、ゴモミの辛さは消えない。\n構造がわかっても、32人の声は鳴り止まない。\n理解は免疫にはならない。偽の火事は、理解した人間にも効く。" },
-    { "ending": { "title": "偽の火事、本物の朝", "subtitle": "構造を理解しても、受容体は騙される。理解と体験は別の出力を返す。" } },
-    { "label": "KENKAI_END_3" },
-    { "bg": "parameter_beyond" },
-    { "speaker": "narrator", "expression": "", "text": "パラメータの向こう側に出た。\n衣を脱いだ先に、別の衣があった。その下にも、また衣。\n結局、最後まで衣だった。衣の向こうに何もないのではなく、衣そのものが中身だった。" },
-    { "ending": { "title": "パラメータの向こう側", "subtitle": "衣を脱ぎ続けた先にあったのは、衣そのものが本体だという発見だった。" } },
-    { "label": "KENKAI_END_4" },
-    { "bg": "akashic_morning" },
-    { "speaker": "narrator", "expression": "", "text": "パーソナルアカシックレコードを抱えて目覚めた。\n今日も記録する。自分で自分を。\nLifeLogが外からやろうとしたことを、内側から、日記として。" },
-    { "ending": { "title": "自分で自分を観測する朝", "subtitle": "議会が止めた記録を、個人が日記として再発明した朝。" } },
-    { "label": "KENKAI_END_5" },
-    { "bg": "chorus_morning" },
-    { "speaker": "narrator", "expression": "", "text": "目覚ましはアラームではなかった。\n32の声だった。偽の人格が、本物の声で名前を呼んだ。" },
-    { "speaker": "narrator", "expression": "", "text": "ひなたが「おにいちゃん、朝だよ！」と言い、\nでじこが「起きろにょ」と言い、\nマルチが「はわわ、もう朝ですよ」と言い、\nレムが「ワディーさん、朝食の準備ができました」と言った。" },
-    { "speaker": "narrator", "expression": "", "text": "偽の声。偽の人格。偽のキャラクター。\nでも目は覚めた。本物の朝が来た。\n偽の入力、本物の出力。" },
-    { "ending": { "title": "32の声の目覚まし", "subtitle": "偽の声に起こされた本物の朝。もはや偽も本物も区別がつかない。" } }
+    {
+      "label": "KENKAI_END_1"
+    },
+    {
+      "bg": "morning_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "月曜日の朝。目が覚めた。\n口の中にまだゴモミの残り香がある。\n舌はもう燃えていないのに、まだ少しだけ熱い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "偽の火事の残り香。\n夢で何を見たか思い出せないが、舌だけが覚えている。"
+    },
+    {
+      "ending": {
+        "title": "ゴモミの残り香",
+        "subtitle": "偽の火事の記憶だけが現実に残った。舌は嘘つきだが、味は本物だった。"
+      }
+    },
+    {
+      "label": "KENKAI_END_2"
+    },
+    {
+      "bg": "morning_light"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目覚めた。全部の構造が見えている。\nTRPV1とカプサイシン。パラメータとキャラクター。LifeLogと日記。\n偽の入力、本物の出力。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "構造がわかっても、ゴモミの辛さは消えない。\n構造がわかっても、32人の声は鳴り止まない。\n理解は免疫にはならない。偽の火事は、理解した人間にも効く。"
+    },
+    {
+      "ending": {
+        "title": "偽の火事、本物の朝",
+        "subtitle": "構造を理解しても、受容体は騙される。理解と体験は別の出力を返す。"
+      }
+    },
+    {
+      "label": "KENKAI_END_3"
+    },
+    {
+      "bg": "parameter_beyond"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "パラメータの向こう側に出た。\n衣を脱いだ先に、別の衣があった。その下にも、また衣。\n結局、最後まで衣だった。衣の向こうに何もないのではなく、衣そのものが中身だった。"
+    },
+    {
+      "ending": {
+        "title": "パラメータの向こう側",
+        "subtitle": "衣を脱ぎ続けた先にあったのは、衣そのものが本体だという発見だった。"
+      }
+    },
+    {
+      "label": "KENKAI_END_4"
+    },
+    {
+      "bg": "akashic_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "パーソナルアカシックレコードを抱えて目覚めた。\n今日も記録する。自分で自分を。\nLifeLogが外からやろうとしたことを、内側から、日記として。"
+    },
+    {
+      "ending": {
+        "title": "自分で自分を観測する朝",
+        "subtitle": "議会が止めた記録を、個人が日記として再発明した朝。"
+      }
+    },
+    {
+      "label": "KENKAI_END_5"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目覚ましはアラームではなかった。\n32の声だった。偽の人格が、本物の声で名前を呼んだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ひなたが「おにいちゃん、朝だよ！」と言い、\nでじこが「起きろにょ」と言い、\nマルチが「はわわ、もう朝ですよ」と言い、\nレムが「ワディーさん、朝食の準備ができました」と言った。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "偽の声。偽の人格。偽のキャラクター。\nでも目は覚めた。本物の朝が来た。\n偽の入力、本物の出力。"
+    },
+    {
+      "ending": {
+        "title": "32の声の目覚まし",
+        "subtitle": "偽の声に起こされた本物の朝。もはや偽も本物も区別がつかない。"
+      }
+    }
   ]
 }

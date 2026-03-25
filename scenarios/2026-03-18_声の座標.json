@@ -50,7 +50,12 @@
   "scenario": [
     {
       "chapter": "プロローグ —— 館の前",
-      "bg": "cathedral"
+      "bg": "cathedral",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
