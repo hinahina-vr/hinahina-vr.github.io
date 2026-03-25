@@ -24,7 +24,7 @@
       this.currentCue = null;
       this.currentSrc = "";
       this._fadeTimer = null;
-      this._fadeDuration = 2e3;
+      this._fadeDuration = 4e3;
     }
     isEnabled() {
       return this.enabled;
@@ -132,7 +132,7 @@
             return;
           }
           this.audio.play().then(() => {
-            this._fadeIn(this.audio, targetVol);
+            this.audio.volume = targetVol;
           }).catch((error) => {
             console.warn("bgm play failed:", error);
           });

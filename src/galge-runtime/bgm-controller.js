@@ -26,7 +26,7 @@ export class BGMController {
     this.currentCue = null;
     this.currentSrc = "";
     this._fadeTimer = null;
-    this._fadeDuration = 2000; // 2 seconds per phase (out/in)
+    this._fadeDuration = 4000; // 4 seconds fade out
   }
 
   isEnabled() {
@@ -152,7 +152,7 @@ export class BGMController {
         }
 
         this.audio.play().then(() => {
-          this._fadeIn(this.audio, targetVol);
+          this.audio.volume = targetVol;
         }).catch((error) => {
           console.warn("bgm play failed:", error);
         });
