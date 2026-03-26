@@ -33462,9 +33462,13 @@ void main() {
       const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
       const scenarioDir = this.scenario.scenarioName || "";
       const baseDir = scenarioDir ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}` : `./scenarios/bg`;
-      return this._showBgImage(`${baseDir}/${bgImageKey}.png`, `${baseDir}/${bgImageKey}.jpg`);
+      return this._showBgImage(
+        `${baseDir}/${bgImageKey}.webp`,
+        `${baseDir}/${bgImageKey}.png`,
+        `${baseDir}/${bgImageKey}.jpg`
+      );
     }
-    _showBgImage(src, fallbackSrc) {
+    _showBgImage(src, fallbackSrc, fallbackSrc2) {
       let el = document.getElementById("scene-bg-img");
       if (!el) {
         el = document.createElement("img");
@@ -33503,6 +33507,8 @@ void main() {
           img.onerror = () => {
             if (imgSrc === src && fallbackSrc) {
               loadAndShow(fallbackSrc);
+            } else if (imgSrc === fallbackSrc && fallbackSrc2) {
+              loadAndShow(fallbackSrc2);
             } else {
               el.style.opacity = "0";
               el.dataset.currentSrc = "";

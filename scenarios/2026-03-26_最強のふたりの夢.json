@@ -11,7 +11,7 @@
     "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
   },
   "scenario": [
-    { "bg": "study_night" },
+    { "bg": "study_night", "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true } },
     {
       "speaker": "narrator",
       "expression": "",
@@ -347,7 +347,7 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "角瓶からグラスに琥珀色が落ちていく。\n12年の歳月が液体になって流れている。\n佐治が作り、開高が飲み、言葉が生まれた味。"
+      "text": "角瓶からグラスに琥珀色が落ちていく。\n12年の歳月が液体になって流れている。\n鳥井が作り、佐治が育て、開高が言葉にした味。"
     },
     {
       "speaker": "narrator",
