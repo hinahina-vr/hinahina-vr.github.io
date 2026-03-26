@@ -33479,6 +33479,7 @@ void main() {
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          imageRendering: "pixelated",
           zIndex: "1",
           pointerEvents: "none",
           opacity: "0",
