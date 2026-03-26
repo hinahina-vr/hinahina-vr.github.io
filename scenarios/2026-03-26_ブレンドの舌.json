@@ -1,0 +1,124 @@
+{
+  "title": "ブレンドの舌",
+  "subtitle": "─ 多すぎる個性を一つの響きにする ─",
+  "genre": "調合ノベル",
+  "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "グラスの中で、いくつもの原酒がまだ名乗らずに揺れている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "一樽ごとの個性は強い。\n草、蜂蜜、煙、樹脂、果実。強いもの同士を混ぜると、たいていは喧嘩になる。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "ブレンドは平均化やない。\nばらばらの尖りを、いちばんよう響く位置に座らせるんや。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その言葉は、編集や組織の話にも聞こえた。\n作家も、広告も、ホールも、美術館も、一人では完成しない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "舌の上に開高の文体が乗る。\n比喩が強く、視界が広く、少し危ない。\nそれを壊さずに会社の器へ置くには、かなりいい舌が要る。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "才能を均すな。\n癖は残して、全体だけ整えろ。\nそれが一番むずかしい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "琥珀色は単一の色ではない。\n幾層もの時間と個性が、ぎりぎりまで衝突した結果の妥協なき和音だ。"
+    },
+    {
+      "ending": {
+        "title": "ブレンドの舌",
+        "subtitle": "強い個性を消さずに並べること。それが美しい経営に近かった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "一滴ごとに香りが変わる。\n混ぜるたび、誰かの癖が前へ出て、誰かの静けさが後ろから支える。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "佐治が見ていたのは製品ではなく、個性がぶつからずに並ぶ一瞬だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ブレンドは多数決じゃない。\n響きの設計だ。"
+    },
+    {
+      "ending": {
+        "title": "一滴の会議",
+        "subtitle": "混ぜることは、削ることではなく響きを選ぶことだった。"
+      }
+    }
+  ]
+}

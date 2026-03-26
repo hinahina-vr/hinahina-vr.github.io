@@ -1,0 +1,124 @@
+{
+  "title": "白紙の会議録",
+  "subtitle": "─ 決めないことで決まることがある ─",
+  "genre": "会議ノベル",
+  "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会議室の机の中央に、議事録だけが置かれている。\n開かれていない。まだ何も書かれていない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "数字は揃っている。リスクも並んでいる。異論も想定できる。\nそれなのに最後の一行だけが空いている。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "最終的に要るんは、正しい文章やない。\n腹を決める人間や。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "議事録に残るのは結論だ。\nだが結論に至る本当の瞬間は、たいてい文章にならない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "誰かの才能に賭けるとき、合理性の説明は後からいくらでも書ける。\n先にあるのは、『やらせる』という決断の裸だけだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "白紙の会議録は無責任ではない。\n責任を引き受ける人間が先に署名してしまったから、言葉が追いつけないだけだ。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "書けることは後で書けばええ。\n先にやるか、やらへんかや。"
+    },
+    {
+      "ending": {
+        "title": "白紙の会議録",
+        "subtitle": "説明できることより先に、引き受ける覚悟だけが決まっていた。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "議事録の最後の一行だけが、なぜか埋まらない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "数字を越える判断には、たいてい白紙の瞬間がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その空白を怖がらない人が、組織に未来を通す。"
+    },
+    {
+      "ending": {
+        "title": "最後の一行",
+        "subtitle": "文章が追いつかない決断だけが、本当に未来を動かした。"
+      }
+    }
+  ]
+}

@@ -1,22 +1,124 @@
 {
   "title": "トリスを飲んでハワイに",
-  "subtitle": "─ 広告は夢を売る ─",
-  "genre": "昭和広告ノベル",
+  "subtitle": "─ 広告は夢の配給所 ─",
+  "genre": "広告ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "beer_factory" },
-    { "speaker": "narrator", "text": "アンクルトリスが手招きしている。\n漫画みたいなおじさんが、ハワイの椰子の木の下でウイスキーを飲んでいる。" },
-    { "speaker": "narrator", "text": "「トリスを飲んでハワイに行こう！」\n1960年代の日本人にとって、ハワイは夢の島だった。\nトリスを飲めばハワイに行ける——もちろん嘘だ。でも、いい嘘だ。" },
-    { "speaker": "narrator", "text": "広告は夢を売る。商品を売るのではなく、夢を売る。\n佐治はそのことを知っていた。だから開高に宣伝部を任せた。\n作家は夢を書く専門家だ。夢を書ける人間に、夢を売らせる。論理的だ。" },
-    { "speaker": "narrator", "text": "アンクルトリスの笑顔が少しずつ消えていく。\n広告のインクが褪せていく。1960年代は遠い。\nでも、夢の方法論は変わらない。" },
-    { "ending": { "title": "ハワイへの切符", "subtitle": "トリスを飲んでもハワイには行けない。でも夢は飲める。" } },
-    { "label": "entry_from_main" },
-    { "bg": "beer_factory" },
-    { "speaker": "narrator", "text": "アンクルトリスが手招きしている。ハワイの椰子の木の下で。\n広告は夢を売る。佐治はそのことを知っていた。" },
-    { "ending": { "title": "トリスの夢", "subtitle": "商品ではなく夢を売る。それが佐治の方法だった。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "beer_factory",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "工場の壁一面にポスターが貼られている。\nアンクルトリスが笑って、ハワイの青を指さしている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "当時の日本でハワイは、距離より先に夢だった。\n行けるかどうかより、想像できるかどうかが問題だった。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "酒を売るだけやったら、味の説明で足りる。\nでも人は味だけで暮らしてへん。行き先も欲しいんや。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "広告は誇張ではなく、遠くを指す指差しだった。\nこの一杯の先に、もう少し広い人生があると示すための。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "トリスの軽やかさは、大衆を見下さない軽やかさだ。\n難しい顔をしない。けれど、誰でも夢を持っていいと正面から言う。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その明るさの裏で、会社は必死に規模を作り、流通を整え、次の時代の酒文化を育てていた。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "夢は安売りしたらあかん。\nせやけど高すぎても届かへん。\n届く値段で、遠い景色を売るんや。"
+    },
+    {
+      "ending": {
+        "title": "ハワイへの切符",
+        "subtitle": "広告は商品説明ではなく、まだ見ぬ人生への乗車券だった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "beer_factory",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ポスターの笑顔が、工場の蒸気の中でふいに立体になる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "広告は嘘ではなく、まだ自分のものじゃない未来の景色を先に配る装置だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "一杯の酒は、しばしば空港の代わりになる。"
+    },
+    {
+      "ending": {
+        "title": "夢の配給所",
+        "subtitle": "届く値段で遠い景色を見せること。それもまた文化だった。"
+      }
+    }
   ]
 }

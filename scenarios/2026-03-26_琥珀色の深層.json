@@ -1,21 +1,124 @@
 {
   "title": "琥珀色の深層",
-  "subtitle": "─ ウイスキーの色に溺れる ─",
+  "subtitle": "─ 一杯の中に沈んでいく ─",
   "genre": "琥珀ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "whisky_pour" },
-    { "speaker": "narrator", "text": "琥珀色の中にいる。\n液体の中を沈んでいく。温かい。甘い。少し苦い。" },
-    { "speaker": "narrator", "text": "ウイスキーの色は一色ではない。\n金色、琥珀色、赤褐色。樽の種類と年数で色が変わる。\n佐治はこの色の違いを見分けることができた。経営者の目と、職人の舌で。" },
-    { "speaker": "narrator", "text": "開高の文章にも色がある。\n初期の文章は透明だった。芥川賞の頃は金色になった。\nベトナムの後は赤褐色に変わった。\n色は経験で変わる。ウイスキーも文章も。" },
-    { "ending": { "title": "琥珀色の深層", "subtitle": "色は経験で変わる。ウイスキーも、文章も、人間も。" } },
-    { "label": "entry_from_main" },
-    { "bg": "whisky_pour" },
-    { "speaker": "narrator", "text": "グラスの中の琥珀色が世界を飲み込んでいく。\n12年の時間と友情の色。" },
-    { "ending": { "title": "琥珀色", "subtitle": "ウイスキーの色は時間の色。友情の色。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "グラスを覗く。\n覗いたつもりが、向こう側からこちらを覗き返される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "琥珀色は単色ではない。\n熟成の年数、樽の差、光の角度、飲む側の記憶まで混ざって、その瞬間だけの色になる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "鳥井が作り、佐治が育て、開高が言葉にした。\n一杯の中に三種類の仕事が沈殿している。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酒の味を説明する言葉は山ほどある。\nだが本当に近いのは、味そのものより、その味に辿り着くまでの時間だ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "グラスを回すと、バー、蒸溜所、編集部、戦場、ホールが順番に浮いては沈む。\n全部この色の中に折り畳まれている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "飲むとは摂取ではない。\n誰かの待機時間と決断と失敗まで、一緒に口に含むことだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "喉を過ぎたあとで、言葉より先に感謝だけが残る。\nたぶん酒の一番奥は、その無言の感謝でできている。"
+    },
+    {
+      "ending": {
+        "title": "琥珀色の深層",
+        "subtitle": "飲んだのは酒だけではない。二人が積み重ねた時間そのものだった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "琥珀色が深すぎて、グラスの底が見えない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "味の奥には、作り手と待ち手と書き手の時間が何層も沈んでいた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "一杯の酒は、時々一冊の評伝よりも短く、同じくらい長い。"
+    },
+    {
+      "ending": {
+        "title": "グラスの底",
+        "subtitle": "味の奥で、待つ人と書く人の時間がゆっくり溶け合っていた。"
+      }
+    }
   ]
 }

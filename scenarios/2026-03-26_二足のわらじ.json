@@ -3,20 +3,122 @@
   "subtitle": "─ 会社員と作家の二重生活 ─",
   "genre": "二重生活ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "two_shoes" },
-    { "speaker": "narrator", "text": "二つの靴が並んでいる。\n革靴と草履。ビジネスシューズとサンダル。会社員の靴と作家の靴。" },
-    { "speaker": "narrator", "text": "開高健は両方を履いた。\n午前中は寿屋の宣伝部員。午後は芥川賞を目指す作家。\n佐治はそれを許した。許すどころか、応援した。" },
-    { "speaker": "narrator", "text": "二足のわらじを許されることは、現代では珍しい。\n副業禁止。本業に集中しろ。会社への忠誠。\n佐治はそんなことを言わなかった。才能は一つの靴には収まらないと知っていたから。" },
-    { "speaker": "narrator", "text": "二足目を履くことを自分に許すこと。\nそれは自分の中のもう一人の自分を認めること。\n佐治が開高を許したように、自分で自分を許すこと。" },
-    { "ending": { "title": "二足のわらじ", "subtitle": "もう一つの自分を許す。自分が自分の佐治になる。" } },
-    { "label": "entry_from_main" },
-    { "bg": "two_shoes" },
-    { "speaker": "narrator", "text": "二つの靴が並んでいる。どちらも履き潰されている。\nどちらも本物だった。" },
-    { "ending": { "title": "二足目", "subtitle": "もう一つの自分を許す朝。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "two_shoes",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "床に二足の履き物が並ぶ。\n磨かれた革靴と、歩き癖のついたもう一足。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会社員であることと、作家であること。\nどちらかを本業、どちらかを余技と呼べば話は簡単だ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "だが開高健の時間は、そういう並び方をしていない。\n両方が本気で、両方が互いの血になっている。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "昼の会社が夜の文章を養う。\n夜の文章が昼の宣伝を鋭くする。\n分けて考える方がむしろ不自然です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "多くの組織は二足目を嫌う。\n集中しろ、忠誠を誓え、寄り道するなと言う。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "佐治は逆だった。\n一人の人間が一足で済むほど単純なものだと、最初から思っていなかった。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "ええやないか、二足でも三足でも。\n履き替えた先でよう歩けるなら、それが才能や。"
+    },
+    {
+      "ending": {
+        "title": "二足のわらじ",
+        "subtitle": "もう一つの自分を副業扱いしないこと。それが佐治の自由だった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "two_shoes",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "二つの靴のどちらにも、同じ人間の体温が残っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "兼業ではなく往復だ。\n会社と文学のあいだを、同じ足が何度も渡っていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "一人の人間に主線が二本あってもいいと、ここではもう決まっている。"
+    },
+    {
+      "ending": {
+        "title": "並んだ靴",
+        "subtitle": "一人の人間に主線が二本あってもいいと、ようやく認められた。"
+      }
+    }
   ]
 }

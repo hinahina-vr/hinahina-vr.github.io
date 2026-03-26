@@ -3,20 +3,122 @@
   "subtitle": "─ 戦場で書くということ ─",
   "genre": "戦場ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "saigon_night" },
-    { "speaker": "narrator", "text": "銃弾が耳を掠めた。万年筆を握り直す。\nノートの上にインクの線が走る。手が震えている。" },
-    { "speaker": "narrator", "text": "開高健はベトナムの戦場にいた。\n作家が戦場に行く意味。それは体験するためだ。\n体験しないと書けないことがある。体験すると書けなくなることもある。" },
-    { "speaker": "narrator", "text": "銃弾と万年筆。どちらも細い金属でできている。\nどちらも人の心を貫く。方法が違うだけだ。" },
-    { "speaker": "narrator", "text": "開高は帰国した。傷を負って。\n体の傷はいつか治る。心の傷は──治らないかもしれない。\n佐治はそのことを知っていた。だから何も言わなかった。" },
-    { "ending": { "title": "銃弾と万年筆", "subtitle": "どちらも細い金属。どちらも心を貫く。" } },
-    { "label": "entry_from_main" },
-    { "bg": "saigon_night" },
-    { "speaker": "narrator", "text": "弾丸が頭上を掠める。万年筆のインクが揺れる。\n戦場で書くということ。それは命懸けの文学だ。" },
-    { "ending": { "title": "戦場の万年筆", "subtitle": "銃弾と万年筆。どちらも心を貫く金属。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "saigon_night",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "湿気が重い。\nサイゴンの夜は、暗さより先に空気の厚みでこちらを押してくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "砲声が聞こえるたび、文章の比喩は剥がれる。\n言葉が現場に追いつかないというより、現場が言葉の想定を越えてくる。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "安全な机で書ける勇敢さには限界がある。\n現場の匂いを吸った文章だけが、ようやく自分の顔になる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "万年筆は繊細だ。\n泥にも汗にも向いていない。\nそれでも持ってくるしかないのは、書くことがこの人の唯一の受け皿だからだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "死を見たから文章が強くなるわけではない。\nむしろ見たものの多くは、強さではなく裂け目として残る。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "それでも開高は逃げない。\n自分の視界に入ったものだけは、自分の文体で引き受けようとする。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "書けない部分が残るのは敗北じゃない。\nその沈黙ごと持ち帰るのが、戦場帰りの文章です。"
+    },
+    {
+      "ending": {
+        "title": "銃弾と万年筆",
+        "subtitle": "書けたことより、書けないまま持ち帰った沈黙の方が重かった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "saigon_night",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "弾丸は速い。\n比喩は遅い。\nそれでも遅い方で追いかけるしかない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "万年筆を握る手だけが、自分がまだこちら側にいる証拠だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "書けるところまで書く。\n残りは傷として体に残す。"
+    },
+    {
+      "ending": {
+        "title": "前線の文体",
+        "subtitle": "現場が言葉を壊し、それでも壊れた言葉で追うしかなかった。"
+      }
+    }
   ]
 }

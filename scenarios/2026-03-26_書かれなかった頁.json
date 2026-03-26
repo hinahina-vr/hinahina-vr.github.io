@@ -1,21 +1,124 @@
 {
   "title": "書かれなかった頁",
-  "subtitle": "─ 開高が書かなかった小説 ─",
-  "genre": "不在ノベル",
+  "subtitle": "─ 白紙もまた返礼である ─",
+  "genre": "白紙ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "manuscript" },
-    { "speaker": "narrator", "text": "白紙のページが無限に続いている。\n書かれなかった小説の頁だ。" },
-    { "speaker": "narrator", "text": "開高健は多くの作品を残した。\nしかし、残した以上に多くの作品を書かなかった。\n書けなかった、のかもしれない。書かなかった、のかもしれない。\nその二つの間には、鬱という名前の深い谷がある。" },
-    { "speaker": "narrator", "text": "佐治は書かれなかった小説のことも大切にしたはずだ。\n目に見えるものだけが成果ではない。\n書かれなかった頁の中にも、開高の才能は存在した。\n白紙もまた、ひとつの表現だ。" },
-    { "ending": { "title": "書かれなかった頁", "subtitle": "白紙もまた、ひとつの表現だ。" } },
-    { "label": "entry_from_main" },
-    { "bg": "manuscript" },
-    { "speaker": "narrator", "text": "白紙の頁が続く。書かれなかった物語の気配がする。\n白紙の中の沈黙もまた、開高の声だ。" },
-    { "ending": { "title": "白紙の声", "subtitle": "書かれなかったものの中に、言葉は存在する。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ページをめくる。\n文字がある頁より、白紙の頁の方が重い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "書かなかったことは、怠慢ではない。\n書けば薄まるから、あえて白いまま残した感情がある。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "書けることばかり書いていたら、人間の借りは返せませんよ。\nいちばん大事なところで、いつも言葉が足りない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "佐治への敬意も、会社への恩義も、自由を与えられた驚きも、すべて文章になり切るわけではない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "むしろ文章になり切らないから長く残る。\n礼は完全に返された瞬間から過去になるが、返し切れない恩は現在のまま生き続ける。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "白紙は欠落ではなく、保留された返礼だ。\nまだ終わっていない関係だけが、そこに残る。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "書かれなかった頁というのは、逃げた頁やない。\nまだ人間の方が追いついてへんだけです。"
+    },
+    {
+      "ending": {
+        "title": "書かれなかった頁",
+        "subtitle": "返し切れない恩だけが、白紙のまま長く現在に居残った。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "白紙が続く。\n何も書かれていないのに、どの頁よりも密度が高い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "返し切れない恩や、言い切れない敬意は、しばしば沈黙のまま保存される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "白いまま残ることも、一つの完成だ。"
+    },
+    {
+      "ending": {
+        "title": "保留された返礼",
+        "subtitle": "言葉が追いつかない敬意だけが、白紙の密度を重くしていた。"
+      }
+    }
   ]
 }

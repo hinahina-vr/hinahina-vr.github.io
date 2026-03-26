@@ -1,0 +1,124 @@
+{
+  "title": "水鏡の仕込み",
+  "subtitle": "─ 見えないものから味は始まる ─",
+  "genre": "仕込みノベル",
+  "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "yamazaki_morning",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "霧の朝だ。\n山崎の水場は鏡みたいに静かで、空より先に人の気配を映す。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ポットスチルや樽は目立つ。\nけれど味の最初は、水というほとんど無色の部分から始まっている。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "派手な設備だけ見てたら、酒づくりはわからへん。\nいちばん大事なんは、たいてい地味なもんや。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "水面に覗き込むと、鳥井信治郎の横に若い佐治敬三が立っていた。\n先代の夢と、二代目の判断が一つの流れで混ざっていく。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "継ぐとは、前の人間の顔を真似ることではない。\n同じ水を汲みながら、自分の舌で次の味を決めることだ。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "原点は守る。\nでも原点に縛られたら、新しい香りは立たへん。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "水鏡に浮かぶ二つの顔は、やがて開高の原稿の白さにも重なった。\n透明なものほど、大きな器になる。"
+    },
+    {
+      "ending": {
+        "title": "水鏡の仕込み",
+        "subtitle": "いちばん透明なものが、最後にいちばん大きな輪郭を残した。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "yamazaki_morning",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "仕込み水の音を追うと、朝の霧が足首にまとわりつく。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "樽や広告より先に、味は見えない水で決まる。\n人もたぶん同じだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "見えない部分に手を抜かない人だけが、目に見える文化を作れる。"
+    },
+    {
+      "ending": {
+        "title": "見えない水",
+        "subtitle": "派手ではない部分に、未来の味は先に住んでいた。"
+      }
+    }
+  ]
+}

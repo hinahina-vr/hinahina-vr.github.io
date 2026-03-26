@@ -1,0 +1,124 @@
+{
+  "title": "ガラスケースの余白",
+  "subtitle": "─ 残すとは、飾ることより守ること ─",
+  "genre": "展示ノベル",
+  "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "suntory_museum",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "展示ケースの中に器がある。\n器より先に目に入るのは、その周りの静けさだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "美術館は物を増やす場所ではない。\n物の周りにある余白を守る場所だ。\nその余白があるから、古い手つきが現代まで届く。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "ええもんは、説明しすぎたらあかん。\n近づける距離だけ整えて、あとは見てもらうんや。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酒も同じだと思う。\n全部をラベルに書き切ったら、飲む前に終わってしまう。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ケースのガラスに、書きかけの原稿が薄く映る。\n佐治の残した美術館と、開高の残した文章は、どちらも余白の設計でできていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "残すとは所有することではない。\n次の時代の誰かが触れられる距離に、静かに置いておくことだ。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "守るってのは、鍵をかけることやない。\n次の人間の目線まで考えて置き直すことや。"
+    },
+    {
+      "ending": {
+        "title": "ガラスケースの余白",
+        "subtitle": "残すとは所有ではなく、次の眼差しのために余白を守ることだった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "suntory_museum",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "器の横の空白だけが、不自然なくらい丁寧に守られている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "価値は物体だけに宿らない。\n近づき方まで含めて設計される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "美しい保存には、必ず静かな編集がある。"
+    },
+    {
+      "ending": {
+        "title": "保存の距離",
+        "subtitle": "物そのものより、近づける距離の設計に思想があった。"
+      }
+    }
+  ]
+}

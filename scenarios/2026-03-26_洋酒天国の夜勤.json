@@ -3,20 +3,122 @@
   "subtitle": "─ 宣伝と文学の境界 ─",
   "genre": "編集部ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "youten_office" },
-    { "speaker": "narrator", "text": "蛍光灯が明滅している。\n深夜の編集部。原稿用紙の山。コーヒーの染みがついたゲラ刷り。" },
-    { "speaker": "narrator", "text": "『洋酒天国』の締め切りは明日。開高健は原稿を書いている。\nウイスキーの広告記事を書いているはずなのに、いつの間にか小説になっている。" },
-    { "speaker": "narrator", "text": "宣伝と文学の境界が溶けている。\nウイスキーの味を描写する文章が、いつしか人間の孤独を描写している。\n琥珀色の液体が、琥珀色の感情に変わっている。" },
-    { "speaker": "narrator", "text": "開高は気づいていない。自分が境界を越えたことに。\n佐治は気づいている。だから何も言わない。\n境界を越えた者を引き止めてはいけない。それが佐治の経営哲学だった。" },
-    { "ending": { "title": "夜勤の原稿", "subtitle": "宣伝が文学に変わる瞬間。佐治はそれを許した。" } },
-    { "label": "entry_from_main" },
-    { "bg": "youten_office" },
-    { "speaker": "narrator", "text": "深夜の編集部。原稿用紙の升目が無限に広がっていく。\n宣伝と文学の境界が溶ける場所。" },
-    { "ending": { "title": "編集部の夜", "subtitle": "広告記事がいつの間にか小説になっていた。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "youten_office",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "蛍光灯が白い。\n深夜の編集部は、昼よりも紙の匂いが濃い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "本来はPR誌だ。\n酒を売るための媒体だ。\nだがページをめくるたび、広告の顔がほどけて文学の骨が出てくる。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "宣伝文句というのは、短い小説ですよ。\n一行で人を連れ出せなければ、ただの説明だ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "編集部の机にはボトル写真とゲラ刷りが並んでいる。\n商品と比喩が、同じ締め切りで管理されている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "こんな場所が成立するのは、上司が『それでええ』と黙っているからだ。\n普通の会社なら、どこかで線を引かれる。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "線を引く人間がいないと、文章は遠くまで行けるんです。\n困るのは経理だけだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "夜勤は疲れる。\nけれど疲れの果てでだけ、広告と文学が同じ温度になる瞬間がある。"
+    },
+    {
+      "ending": {
+        "title": "夜勤の原稿",
+        "subtitle": "宣伝が文学に変わる瞬間を、会社が黙って見逃した。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "youten_office",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "編集部の升目が夜更かしのせいで少し歪んで見える。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酒を売るための紙面が、気づけば人間を書くための器になっていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その越境を、佐治は止めなかった。"
+    },
+    {
+      "ending": {
+        "title": "編集部の深夜",
+        "subtitle": "境界線は消えたのではない。黙認されたから越えられた。"
+      }
+    }
   ]
 }

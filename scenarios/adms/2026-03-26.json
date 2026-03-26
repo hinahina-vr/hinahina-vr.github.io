@@ -12,7 +12,7 @@
       "lane": 7,
       "icon": "📕",
       "scenario": "2026-03-26_最強のふたりの夢",
-      "entry": null,
+      "entry": "book_close",
       "summary": "480ページの評伝を閉じた夜"
     },
     {
@@ -25,7 +25,7 @@
       "icon": "🚪",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "choose_era",
-      "summary": "どちらの戦場に行く？"
+      "summary": "社長室か書斎か"
     },
     {
       "id": "saji_route",
@@ -37,7 +37,7 @@
       "icon": "🥃",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "saji_route",
-      "summary": "サントリー本社、社長室"
+      "summary": "やってみなはれ、と、やらせとけ"
     },
     {
       "id": "kaiko_route",
@@ -49,11 +49,11 @@
       "icon": "✒️",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "kaiko_route",
-      "summary": "原稿用紙の山の中で"
+      "summary": "会社より広い机"
     },
     {
       "id": "saji_whisky",
-      "title": "蒸溜所の朝",
+      "title": "山崎蒸溜所",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 3,
@@ -61,19 +61,19 @@
       "icon": "🏭",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "saji_whisky",
-      "summary": "山崎の蒸溜所を歩く"
+      "summary": "見えない時間を仕込む"
     },
     {
-      "id": "saji_beer",
-      "title": "ビール戦争",
+      "id": "saji_brand",
+      "title": "広告と流通",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 3,
       "lane": 4,
-      "icon": "🍺",
+      "icon": "📣",
       "scenario": "2026-03-26_最強のふたりの夢",
-      "entry": "saji_beer",
-      "summary": "キリンとアサヒに挑む"
+      "entry": "saji_brand",
+      "summary": "夢を届ける仕組み"
     },
     {
       "id": "kaiko_youten",
@@ -85,11 +85,11 @@
       "icon": "📰",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "kaiko_youten",
-      "summary": "伝説のPR誌を作る"
+      "summary": "PR誌が文学へずれていく"
     },
     {
       "id": "kaiko_vietnam",
-      "title": "サイゴンの夜",
+      "title": "サイゴン前線",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 3,
@@ -97,7 +97,7 @@
       "icon": "🪖",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "kaiko_vietnam",
-      "summary": "銃弾の飛ぶ最前線"
+      "summary": "壊れる比喩の現場"
     },
     {
       "id": "gen_cask",
@@ -107,21 +107,21 @@
       "layer": 4,
       "lane": 0,
       "icon": "🪵",
-      "scenario": "2026-03-26_樽の中の時間",
-      "entry": "entry_from_main",
-      "summary": "12年待つということ"
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_cask_load",
+      "summary": "熟成とは信じて待つこと"
     },
     {
       "id": "gen_torisuad",
-      "title": "トリスを飲んでハワイに",
+      "title": "ハワイへの切符",
       "realm": "genkai",
       "kind": "side",
       "layer": 4,
       "lane": 4,
       "icon": "🌺",
-      "scenario": "2026-03-26_トリスを飲んでハワイに",
-      "entry": "entry_from_main",
-      "summary": "広告は夢を売る"
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_torisuad_load",
+      "summary": "広告は夢の配給所"
     },
     {
       "id": "gen_youten_night",
@@ -131,8 +131,8 @@
       "layer": 4,
       "lane": 10,
       "icon": "🌙",
-      "scenario": "2026-03-26_洋酒天国の夜勤",
-      "entry": "entry_from_main",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_youten_night_load",
       "summary": "宣伝と文学の境界"
     },
     {
@@ -143,21 +143,21 @@
       "layer": 4,
       "lane": 14,
       "icon": "🖊️",
-      "scenario": "2026-03-26_銃弾と万年筆",
-      "entry": "entry_from_main",
-      "summary": "戦場で書くということ"
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_bullet_load",
+      "summary": "書けることと書けないこと"
     },
     {
-      "id": "saji_culture",
-      "title": "サントリーホール",
+      "id": "saji_blend",
+      "title": "ブレンド室",
       "realm": "kenkai",
       "kind": "route",
       "layer": 5,
       "lane": 1,
-      "icon": "🎵",
+      "icon": "🥄",
       "scenario": "2026-03-26_最強のふたりの夢",
-      "entry": "saji_culture",
-      "summary": "利益を文化に還元する"
+      "entry": "saji_blend",
+      "summary": "個性を一つの響きにする"
     },
     {
       "id": "saji_art",
@@ -169,7 +169,7 @@
       "icon": "🎨",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "saji_art",
-      "summary": "美しいものを残す"
+      "summary": "保存の距離を設計する"
     },
     {
       "id": "kaiko_akutagawa",
@@ -181,11 +181,11 @@
       "icon": "🏆",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "kaiko_akutagawa",
-      "summary": "在職のまま受賞した"
+      "summary": "祝福された二足の主線"
     },
     {
       "id": "kaiko_depression",
-      "title": "沈黙の書斎",
+      "title": "帰国後の書斎",
       "realm": "kenkai",
       "kind": "route",
       "layer": 5,
@@ -193,19 +193,55 @@
       "icon": "🌑",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "kaiko_depression",
-      "summary": "鬱の闇の中で"
+      "summary": "言葉より先に酒を置く夜"
     },
     {
-      "id": "gen_hall_echo",
-      "title": "残響のホール",
+      "id": "gen_water",
+      "title": "水鏡の仕込み",
       "realm": "genkai",
       "kind": "side",
       "layer": 6,
       "lane": 0,
-      "icon": "🔊",
-      "scenario": "2026-03-26_残響のホール",
-      "entry": "entry_from_main",
-      "summary": "音楽は建物に残る"
+      "icon": "💧",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_water_load",
+      "summary": "見えない水から味は始まる"
+    },
+    {
+      "id": "gen_blend",
+      "title": "ブレンドの舌",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 6,
+      "lane": 2,
+      "icon": "👅",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_blend_load",
+      "summary": "強い個性を均さず響かせる"
+    },
+    {
+      "id": "gen_blank_minutes",
+      "title": "白紙の会議録",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 6,
+      "lane": 4,
+      "icon": "📄",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_blank_minutes_load",
+      "summary": "引き受けた決断だけが先にある"
+    },
+    {
+      "id": "gen_glasscase",
+      "title": "ガラスケースの余白",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🏺",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_glasscase_load",
+      "summary": "残すための静かな編集"
     },
     {
       "id": "gen_waraji",
@@ -213,11 +249,23 @@
       "realm": "genkai",
       "kind": "side",
       "layer": 6,
-      "lane": 8,
+      "lane": 10,
       "icon": "👞",
-      "scenario": "2026-03-26_二足のわらじ",
-      "entry": "entry_from_main",
-      "summary": "会社員と作家の二重生活"
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_waraji_load",
+      "summary": "主線が二本あっていい"
+    },
+    {
+      "id": "gen_map",
+      "title": "未完の地図",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 6,
+      "lane": 12,
+      "icon": "🗺️",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_map_load",
+      "summary": "埋まらない余白の誠実さ"
     },
     {
       "id": "gen_silence",
@@ -227,215 +275,551 @@
       "layer": 6,
       "lane": 14,
       "icon": "🤫",
-      "scenario": "2026-03-26_注がれる沈黙",
-      "entry": "entry_from_main",
-      "summary": "何も言わずに酒を注ぐ"
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_silence_load",
+      "summary": "励まさない優しさ"
+    },
+    {
+      "id": "saji_culture",
+      "title": "サントリーホール",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 7,
+      "lane": 3,
+      "icon": "🎵",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "saji_culture",
+      "summary": "金を響きへ還元する"
+    },
+    {
+      "id": "kaiko_travel",
+      "title": "旅の食卓",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 7,
+      "lane": 11,
+      "icon": "🍽️",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "kaiko_travel",
+      "summary": "移動と食事が文体を更新する"
+    },
+    {
+      "id": "gen_hall_echo",
+      "title": "残響のホール",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 8,
+      "lane": 3,
+      "icon": "🔊",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_hall_echo_load",
+      "summary": "音が消えた後の文化"
+    },
+    {
+      "id": "gen_travel_table",
+      "title": "旅の卓上は編集室",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 8,
+      "lane": 11,
+      "icon": "🧭",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_travel_table_load",
+      "summary": "外へ出ることで会社の言葉も変わる"
     },
     {
       "id": "reunion_bar",
       "title": "再会のバー",
       "realm": "kenkai",
       "kind": "rejoin",
-      "layer": 7,
+      "layer": 9,
       "lane": 7,
       "icon": "🍸",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "reunion_bar",
-      "summary": "二つの戦場から帰還した二人"
+      "summary": "説明を終えた二人の沈黙"
     },
     {
       "id": "pour_whisky",
       "title": "角瓶を注ぐ",
       "realm": "kenkai",
       "kind": "route",
-      "layer": 8,
-      "lane": 3,
+      "layer": 10,
+      "lane": 4,
       "icon": "🥃",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "pour_whisky",
-      "summary": "グラスに琥珀色が落ちる"
+      "summary": "一杯に三人分の時間が沈む"
     },
     {
       "id": "pour_words",
       "title": "言葉を注ぐ",
       "realm": "kenkai",
       "kind": "route",
-      "layer": 8,
-      "lane": 11,
+      "layer": 10,
+      "lane": 10,
       "icon": "📝",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "pour_words",
-      "summary": "原稿用紙にインクが落ちる"
+      "summary": "返し切れない恩を文体へ変える"
     },
     {
       "id": "gen_amber_deep",
       "title": "琥珀色の深層",
       "realm": "genkai",
       "kind": "side",
-      "layer": 9,
-      "lane": 1,
+      "layer": 11,
+      "lane": 4,
       "icon": "🔶",
-      "scenario": "2026-03-26_琥珀色の深層",
-      "entry": "entry_from_main",
-      "summary": "ウイスキーの色に溺れる"
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_amber_deep_load",
+      "summary": "味の奥に人の時間が沈む"
     },
     {
       "id": "gen_unwritten",
       "title": "書かれなかった頁",
       "realm": "genkai",
       "kind": "side",
-      "layer": 9,
-      "lane": 13,
-      "icon": "📄",
-      "scenario": "2026-03-26_書かれなかった頁",
-      "entry": "entry_from_main",
-      "summary": "開高が書かなかった小説"
+      "layer": 11,
+      "lane": 10,
+      "icon": "📚",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "gen_unwritten_load",
+      "summary": "白紙もまた返礼になる"
     },
     {
       "id": "mitra_table",
       "title": "みとらのテーブル",
       "realm": "kenkai",
       "kind": "rejoin",
-      "layer": 10,
+      "layer": 12,
       "lane": 7,
       "icon": "🔮",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "mitra_table",
-      "summary": "二人の声が統合される場所"
+      "summary": "酒と言葉が同じ器に収まる"
     },
     {
       "id": "final_glass",
       "title": "最後の一杯",
       "realm": "kenkai",
       "kind": "route",
-      "layer": 11,
+      "layer": 13,
       "lane": 7,
       "icon": "⚡",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "final_glass",
-      "summary": "あなたの杯は何で満たされているか"
+      "summary": "いま何を満たすか"
     },
     {
       "id": "end_yamazaki",
       "title": "山崎の朝",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 12,
+      "layer": 14,
       "lane": 0,
       "icon": "🌅",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "END_YAMAZAKI",
-      "summary": "蒸溜所の朝霧の中で目覚める"
+      "summary": "熟成の朝霧で目覚める"
     },
     {
-      "id": "end_youten",
-      "title": "洋酒天国・最終号",
+      "id": "end_blend",
+      "title": "ブレンドの舌",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 12,
-      "lane": 3,
-      "icon": "📖",
+      "layer": 14,
+      "lane": 2,
+      "icon": "🎼",
       "scenario": "2026-03-26_最強のふたりの夢",
-      "entry": "END_YOUTEN",
-      "summary": "最終号が完成した朝"
-    },
-    {
-      "id": "end_silence",
-      "title": "沈黙の献杯",
-      "realm": "kenkai",
-      "kind": "ending",
-      "layer": 12,
-      "lane": 5,
-      "icon": "🤐",
-      "scenario": "2026-03-26_最強のふたりの夢",
-      "entry": "END_SILENCE",
-      "summary": "何も言わずにグラスを掲げた"
+      "entry": "END_BLEND",
+      "summary": "個性を響かせる最終解"
     },
     {
       "id": "end_hall",
       "title": "ホールの残響",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 12,
-      "lane": 7,
+      "layer": 14,
+      "lane": 4,
       "icon": "🎶",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "END_HALL",
-      "summary": "音が消えた後にも響いているもの"
+      "summary": "利益が文化へ還る瞬間"
+    },
+    {
+      "id": "end_silence",
+      "title": "沈黙の献杯",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 14,
+      "lane": 6,
+      "icon": "🤐",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "END_SILENCE",
+      "summary": "語らないことで届く夜"
+    },
+    {
+      "id": "end_white",
+      "title": "白紙の頁",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 14,
+      "lane": 8,
+      "icon": "📜",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "END_WHITE",
+      "summary": "余白へ署名する"
+    },
+    {
+      "id": "end_youten",
+      "title": "洋酒天国・最終号",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 14,
+      "lane": 10,
+      "icon": "📖",
+      "scenario": "2026-03-26_最強のふたりの夢",
+      "entry": "END_YOUTEN",
+      "summary": "越境を許した雑誌の終幕"
     },
     {
       "id": "end_waraji",
       "title": "二足目のわらじ",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 12,
-      "lane": 9,
+      "layer": 14,
+      "lane": 12,
       "icon": "👟",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "END_WARAJI",
-      "summary": "もう一つの自分を許す朝"
+      "summary": "主線を増やして目覚める"
     },
     {
       "id": "end_saigon",
       "title": "サイゴンの朝焼け",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 12,
-      "lane": 11,
+      "layer": 14,
+      "lane": 14,
       "icon": "🌄",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "END_SAIGON",
-      "summary": "戦場の向こうに見えた光"
+      "summary": "壊れた比喩を抱えて戻る"
     },
     {
       "id": "end_saikyou",
       "title": "最強のふたり",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 12,
-      "lane": 14,
+      "layer": 15,
+      "lane": 7,
       "icon": "🤝",
       "scenario": "2026-03-26_最強のふたりの夢",
       "entry": "END_SAIKYOU",
-      "summary": "本を閉じた夜、二人の影が重なる"
+      "summary": "信頼の往復だけが残る"
     }
   ],
   "edges": [
-    { "from": "book_close", "to": "choose_era", "choiceText": "本を開き直す", "style": "kenkai" },
-    { "from": "choose_era", "to": "saji_route", "choiceText": "佐治の執務室へ", "style": "kenkai" },
-    { "from": "choose_era", "to": "kaiko_route", "choiceText": "開高の書斎へ", "style": "kenkai" },
-    { "from": "saji_route", "to": "saji_whisky", "choiceText": "蒸溜所を歩く", "style": "kenkai" },
-    { "from": "saji_route", "to": "saji_beer", "choiceText": "ビール戦争に参戦する", "style": "kenkai" },
-    { "from": "kaiko_route", "to": "kaiko_youten", "choiceText": "洋酒天国を編集する", "style": "kenkai" },
-    { "from": "kaiko_route", "to": "kaiko_vietnam", "choiceText": "サイゴンへ飛ぶ", "style": "kenkai" },
-    { "from": "saji_whisky", "to": "gen_cask", "choiceText": "樽の中に入る", "style": "genkai" },
-    { "from": "saji_whisky", "to": "saji_culture", "choiceText": "ホールの設計図を見る", "style": "kenkai" },
-    { "from": "saji_beer", "to": "gen_torisuad", "choiceText": "トリスの広告を思い出す", "style": "genkai" },
-    { "from": "saji_beer", "to": "saji_art", "choiceText": "美術館の構想を練る", "style": "kenkai" },
-    { "from": "kaiko_youten", "to": "gen_youten_night", "choiceText": "夜勤の原稿に沈む", "style": "genkai" },
-    { "from": "kaiko_youten", "to": "kaiko_akutagawa", "choiceText": "芥川賞の報せを受ける", "style": "kenkai" },
-    { "from": "kaiko_vietnam", "to": "gen_bullet", "choiceText": "銃弾の中で書く", "style": "genkai" },
-    { "from": "kaiko_vietnam", "to": "kaiko_depression", "choiceText": "傷を負って帰国する", "style": "kenkai" },
-    { "from": "saji_culture", "to": "gen_hall_echo", "choiceText": "残響に耳を澄ます", "style": "genkai" },
-    { "from": "saji_culture", "to": "reunion_bar", "choiceText": "バーで待つ", "style": "kenkai" },
-    { "from": "saji_art", "to": "reunion_bar", "choiceText": "バーで待つ", "style": "kenkai" },
-    { "from": "kaiko_akutagawa", "to": "gen_waraji", "choiceText": "二足のわらじを見つめる", "style": "genkai" },
-    { "from": "kaiko_akutagawa", "to": "reunion_bar", "choiceText": "祝杯を挙げに行く", "style": "kenkai" },
-    { "from": "kaiko_depression", "to": "gen_silence", "choiceText": "沈黙の中に沈む", "style": "genkai" },
-    { "from": "kaiko_depression", "to": "reunion_bar", "choiceText": "それでもバーに行く", "style": "kenkai" },
-    { "from": "reunion_bar", "to": "pour_whisky", "choiceText": "角瓶を注ぐ", "style": "kenkai" },
-    { "from": "reunion_bar", "to": "pour_words", "choiceText": "言葉を注ぐ", "style": "kenkai" },
-    { "from": "pour_whisky", "to": "gen_amber_deep", "choiceText": "琥珀色に溺れる", "style": "genkai" },
-    { "from": "pour_whisky", "to": "mitra_table", "choiceText": "グラスを置く", "style": "kenkai" },
-    { "from": "pour_words", "to": "gen_unwritten", "choiceText": "書かれなかった頁を開く", "style": "genkai" },
-    { "from": "pour_words", "to": "mitra_table", "choiceText": "ペンを置く", "style": "kenkai" },
-    { "from": "mitra_table", "to": "final_glass", "choiceText": "最後の一杯に手を伸ばす", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_yamazaki", "choiceText": "山崎の朝霧を選ぶ", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_youten", "choiceText": "洋酒天国の最終号を閉じる", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_silence", "choiceText": "何も言わずにグラスを掲げる", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_hall", "choiceText": "ホールの残響を聴く", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_waraji", "choiceText": "もう一足のわらじを履く", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_saigon", "choiceText": "サイゴンの朝焼けを見る", "style": "kenkai" },
-    { "from": "final_glass", "to": "end_saikyou", "choiceText": "二人の影と重なって目覚める", "style": "kenkai" }
+    {
+      "from": "book_close",
+      "to": "choose_era",
+      "choiceText": "本を開き直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_era",
+      "to": "saji_route",
+      "choiceText": "佐治の執務室へ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_era",
+      "to": "kaiko_route",
+      "choiceText": "開高の書斎へ",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_route",
+      "to": "saji_whisky",
+      "choiceText": "蒸溜所の湿気を吸う",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_route",
+      "to": "saji_brand",
+      "choiceText": "広告と流通の予算書をめくる",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_route",
+      "to": "kaiko_youten",
+      "choiceText": "『洋酒天国』のゲラへ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_route",
+      "to": "kaiko_vietnam",
+      "choiceText": "サイゴンの地図を開く",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_route",
+      "to": "kaiko_travel",
+      "choiceText": "旅の食卓を追う",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_whisky",
+      "to": "gen_cask",
+      "choiceText": "樽の中に耳を当てる",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_whisky",
+      "to": "gen_water",
+      "choiceText": "仕込み水の音を追う",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_whisky",
+      "to": "saji_blend",
+      "choiceText": "ブレンド室へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_blend",
+      "to": "gen_blend",
+      "choiceText": "舌の地図を覗き込む",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_blend",
+      "to": "saji_culture",
+      "choiceText": "文化事業の青写真へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_brand",
+      "to": "gen_torisuad",
+      "choiceText": "トリス広告の笑顔を追う",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_brand",
+      "to": "gen_blank_minutes",
+      "choiceText": "白紙の会議録を拾う",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_brand",
+      "to": "saji_art",
+      "choiceText": "美術館のガラスケースへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_art",
+      "to": "gen_glasscase",
+      "choiceText": "ガラスケースの余白を覗く",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_art",
+      "to": "reunion_bar",
+      "choiceText": "図録を抱えてバーへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_culture",
+      "to": "gen_hall_echo",
+      "choiceText": "残響の芯に耳を澄ます",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_culture",
+      "to": "kaiko_youten",
+      "choiceText": "この席に座る書き手を思う",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_culture",
+      "to": "reunion_bar",
+      "choiceText": "余韻を抱えたままバーへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_youten",
+      "to": "gen_youten_night",
+      "choiceText": "夜勤の原稿に沈む",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_youten",
+      "to": "kaiko_akutagawa",
+      "choiceText": "芥川賞の夜へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_youten",
+      "to": "reunion_bar",
+      "choiceText": "余白を抱えたままバーへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_akutagawa",
+      "to": "gen_waraji",
+      "choiceText": "二足のわらじを履き直す",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_akutagawa",
+      "to": "reunion_bar",
+      "choiceText": "祝杯を持ってバーへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_vietnam",
+      "to": "gen_bullet",
+      "choiceText": "銃弾の中で書き続ける",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_vietnam",
+      "to": "gen_map",
+      "choiceText": "未完の地図を広げる",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_vietnam",
+      "to": "kaiko_depression",
+      "choiceText": "帰国後の暗い部屋へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_depression",
+      "to": "gen_silence",
+      "choiceText": "沈黙の一杯へ沈む",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_depression",
+      "to": "reunion_bar",
+      "choiceText": "それでもバーへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_travel",
+      "to": "gen_travel_table",
+      "choiceText": "旅の卓上を編集室に変える",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_travel",
+      "to": "saji_art",
+      "choiceText": "この旅費を通した人を思い出す",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_travel",
+      "to": "reunion_bar",
+      "choiceText": "土産話を抱えてバーへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "reunion_bar",
+      "to": "pour_whisky",
+      "choiceText": "角瓶を注ぐ",
+      "style": "kenkai"
+    },
+    {
+      "from": "reunion_bar",
+      "to": "pour_words",
+      "choiceText": "言葉を注ぐ",
+      "style": "kenkai"
+    },
+    {
+      "from": "pour_whisky",
+      "to": "gen_amber_deep",
+      "choiceText": "琥珀色の深層へ沈む",
+      "style": "genkai"
+    },
+    {
+      "from": "pour_whisky",
+      "to": "mitra_table",
+      "choiceText": "グラスをテーブルへ戻す",
+      "style": "kenkai"
+    },
+    {
+      "from": "pour_words",
+      "to": "gen_unwritten",
+      "choiceText": "書かれなかった頁を開く",
+      "style": "genkai"
+    },
+    {
+      "from": "pour_words",
+      "to": "mitra_table",
+      "choiceText": "ペン先の震えを止める",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_table",
+      "to": "final_glass",
+      "choiceText": "最後の一杯に向き合う",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_yamazaki",
+      "choiceText": "山崎の朝霧を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_blend",
+      "choiceText": "ブレンドの舌を信じる",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_hall",
+      "choiceText": "ホールの残響を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_silence",
+      "choiceText": "何も言わずに献杯する",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_white",
+      "choiceText": "白紙の頁に署名する",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_youten",
+      "choiceText": "洋酒天国の最終号を閉じる",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_waraji",
+      "choiceText": "もう一足のわらじを履く",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_saigon",
+      "choiceText": "サイゴンの朝焼けを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_glass",
+      "to": "end_saikyou",
+      "choiceText": "二人の影と重なる",
+      "style": "kenkai"
+    }
   ]
 }

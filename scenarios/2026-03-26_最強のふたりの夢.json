@@ -3,90 +3,201 @@
   "subtitle": "─ 信じて、待て ─",
   "genre": "昭和評伝ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" },
-    "waddy": { "name": "ワディー", "color": "#b0a0d0", "emoji": "🖥️" },
-    "saji": { "name": "佐治", "color": "#c8a050", "emoji": "🥃" },
-    "kaiko": { "name": "開高", "color": "#607080", "emoji": "✒️" },
-    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "bg": "study_night", "bgm": { "src": "./assets/bgm/yorugakuru.mp3", "volume": 0.08, "loop": true } },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "木曜日の夜。本を閉じた。\n480ページの評伝。三日間の旅が終わった。"
+      "bg": "study_night",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "ウイスキーを飲みたくなった。角瓶でいい。トリスでもいい。\nでもグラスを探す前に、意識が溶けていく──"
+      "text": "木曜日の夜。本を閉じた。\n480ページの評伝。三日で読み切ったのに、頭の中だけまだ昭和から帰ってこない。"
     },
-    { "label": "book_close" },
-    { "bg": "book_pages" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "閉じたはずの本が、また開いている。\nページの隙間から昭和の匂いがする。インクと、樟脳と、ウイスキーの匂い。"
+      "text": "角瓶が飲みたいと思った。\nトリスでもよかった。\nとにかく、喉ではなく時間の方に酒を流し込みたかった。"
     },
-    { "label": "choose_era" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "本の中に二つの扉がある。\n左は重厚な木製の扉。社長室のプレートが光っている。\n右は積み上がった原稿用紙の壁。インクの染みが星座のように散っている。"
+      "text": "机の上には読み終えた本、空のグラス、書きかけのメモ。\n酒を作った人と、言葉を書いた人の名前だけが、やけに強く残っている。"
+    },
+    {
+      "label": "book_close"
+    },
+    {
+      "bg": "book_pages",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "閉じたはずの本が、また開いている。\nページの隙間から樟脳とインクとウイスキーの匂いが洩れてくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "紙の向こうに、二つの仕事場が見えた。\n左は社長室。右は書斎。\nどちらも、妙に静かだった。"
+    },
+    {
+      "label": "choose_era"
     },
     {
       "choices": [
-        { "text": "佐治の執務室へ", "goto": "saji_route" },
-        { "text": "開高の書斎へ", "goto": "kaiko_route" }
+        {
+          "text": "佐治の執務室へ",
+          "goto": "saji_route"
+        },
+        {
+          "text": "開高の書斎へ",
+          "goto": "kaiko_route"
+        }
       ]
     },
-    { "label": "saji_route" },
-    { "bg": "saji_office" },
+    {
+      "label": "saji_route"
+    },
+    {
+      "bg": "saji_office",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "サントリー本社。社長室。\n窓から大阪の街が見える。高度経済成長の熱気が、ガラス越しでも伝わってくる。"
+      "text": "サントリー本社の執務室。\n窓の外に大阪の光が広がり、机の上には決裁書類よりも大きな余白がある。"
     },
     {
       "speaker": "saji",
       "expression": "",
-      "text": "やってみなはれ。\n──父がよく言っていた言葉だ。僕はその言葉を、少し違う意味で使っている。"
+      "text": "やってみなはれ。\n父の言葉は有名やけど、ほんまにむずかしいのはその後や。"
     },
     {
       "speaker": "saji",
       "expression": "",
-      "text": "やってみなはれ、は始めることだ。\n僕が付け加えたいのは──「やらせとけ」だ。始めた人間を、邪魔せず見守ること。"
+      "text": "始める勇気を認めても、途中で不安になる。\nそこで横から口を出さんこと。\nそれが『やらせとけ』や。"
     },
-    {
-      "choices": [
-        { "text": "蒸溜所を歩く", "goto": "saji_whisky" },
-        { "text": "ビール戦争に参戦する", "goto": "saji_beer" }
-      ]
-    },
-    { "label": "saji_whisky" },
-    { "bg": "yamazaki_distillery" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "山崎蒸溜所。\n銅製のポットスティルが並んでいる。樽の倉庫から甘い香りが漂ってくる。\n12年、18年、25年。ここでは時間が味になる。"
+      "text": "佐治の机には酒の設計図だけでなく、人の時間を信じるための沈黙まで置かれている気がした。"
+    },
+    {
+      "choices": [
+        {
+          "text": "蒸溜所の湿気を吸う",
+          "goto": "saji_whisky"
+        },
+        {
+          "text": "広告と流通の予算書をめくる",
+          "goto": "saji_brand"
+        }
+      ]
+    },
+    {
+      "label": "saji_whisky"
+    },
+    {
+      "flag": "visited_saji"
+    },
+    {
+      "bg": "yamazaki_distillery",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "山崎蒸溜所。\n銅のポットスチルが鈍く光り、樽倉庫から甘い木の匂いが押し寄せてくる。"
     },
     {
       "speaker": "saji",
       "expression": "",
-      "text": "ウイスキーも人間も、急いだらあかん。\n樽の中で静かに待つ。待っている間に、何かが変わる。何が変わるかは、開けてみないとわからん。"
+      "text": "酒はできあがった瞬間より、待ってる途中の方が長い。\nせやから、長い途中に耐えられる設計にせなあかん。"
     },
-    {
-      "choices": [
-        { "text": "樽の中に入る", "goto": "gen_cask_load" },
-        { "text": "ホールの設計図を見る", "goto": "saji_culture" }
-      ]
-    },
-    { "label": "gen_cask_load" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "樽のオークの香りが世界を包む──暗闇の中で、12年の時間が流れ始める──"
+      "text": "待つ、混ぜる、寝かせる。\nどれもすぐ成果が見えない。\nそれでも佐治は、その見えなさごと事業にした。"
+    },
+    {
+      "choices": [
+        {
+          "text": "樽の中に耳を当てる",
+          "goto": "gen_cask_load"
+        },
+        {
+          "text": "仕込み水の音を追う",
+          "goto": "gen_water_load"
+        },
+        {
+          "text": "ブレンド室へ進む",
+          "goto": "saji_blend"
+        }
+      ]
+    },
+    {
+      "label": "gen_cask_load"
+    },
+    {
+      "bg": "yamazaki_distillery",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "樽の継ぎ目から、十二年分の沈黙が漏れてくる。\n耳を近づけた瞬間、木目の暗闇へ引き込まれた。"
     },
     {
       "loadScenario": {
@@ -94,29 +205,154 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "saji_beer" },
-    { "bg": "beer_factory" },
+    {
+      "label": "gen_water_load"
+    },
+    {
+      "bg": "yamazaki_morning",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "ビール事業への参入。サントリーの最大の賭け。\nキリンという巨人が市場を支配している時代に、挑んだ。"
+      "text": "蒸気の匂いの奥に、もっと透明な気配がある。\n仕込み水の流れを覗き込むと、水面が鏡みたいに揺れた。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_水鏡の仕込み",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "saji_blend"
+    },
+    {
+      "flag": "visited_saji"
+    },
+    {
+      "flag": "saw_blend_room"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ブレンド室には、一樽ずつ違う性格が並んでいる。\nどれか一つが正解なのではなく、どう響かせるかが問題らしい。"
     },
     {
       "speaker": "saji",
       "expression": "",
-      "text": "勝てるかどうかは問題やない。\n挑むかどうかが問題や。挑まない会社は、生きている会社やない。"
+      "text": "癖の強い原酒ほど捨てたらあかん。\n置く場所さえ見つけたら、全体の骨になる。"
     },
-    {
-      "choices": [
-        { "text": "トリスの広告を思い出す", "goto": "gen_torisuad_load" },
-        { "text": "美術館の構想を練る", "goto": "saji_art" }
-      ]
-    },
-    { "label": "gen_torisuad_load" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "「トリスを飲んでハワイに行こう！」──あの広告のアンクルトリスが手招きしている──"
+      "text": "その言い方は、人材配置にも編集にも、そのまま通じてしまう。"
+    },
+    {
+      "choices": [
+        {
+          "text": "舌の地図を覗き込む",
+          "goto": "gen_blend_load"
+        },
+        {
+          "text": "文化事業の青写真へ進む",
+          "goto": "saji_culture"
+        }
+      ]
+    },
+    {
+      "label": "gen_blend_load"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "グラスの中で香りがぶつかり合い、ひとつの和音に落ち着く瞬間だけが見えた。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_ブレンドの舌",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "saji_brand"
+    },
+    {
+      "flag": "visited_saji"
+    },
+    {
+      "bg": "beer_factory",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "工場の蒸気の向こうに、広告ポスターと出荷表が同じ壁へ貼られている。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "うまい酒を作るだけでは足りへん。\nそれが誰の明日につながるかまで、ちゃんと見せなあかん。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "夢を売ることと物流を通すことが、ここでは一続きの業務になっていた。"
+    },
+    {
+      "choices": [
+        {
+          "text": "トリス広告の笑顔を追う",
+          "goto": "gen_torisuad_load"
+        },
+        {
+          "text": "白紙の会議録を拾う",
+          "goto": "gen_blank_minutes_load"
+        },
+        {
+          "text": "美術館のガラスケースへ向かう",
+          "goto": "saji_art"
+        }
+      ]
+    },
+    {
+      "label": "gen_torisuad_load"
+    },
+    {
+      "bg": "beer_factory",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ポスターの向こう側に、まだ誰のものでもない青い海が見える。"
     },
     {
       "loadScenario": {
@@ -124,112 +360,151 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "kaiko_route" },
-    { "bg": "kaiko_study" },
+    {
+      "label": "gen_blank_minutes_load"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "開高健の書斎。原稿用紙の山。万年筆。灰皿にはタバコの吸い殻が溜まっている。\n窓の外は東京の夜だ。"
-    },
-    {
-      "speaker": "kaiko",
-      "expression": "",
-      "text": "書くことは、世界を一度壊して、もう一度組み立て直すことだ。\n壊すのは簡単だ。組み立て直すのが難しい。"
-    },
-    {
-      "speaker": "kaiko",
-      "expression": "",
-      "text": "佐治さんは、僕に場所をくれた。寿屋の宣伝部という場所を。\nその場所で、僕は壊し方と組み立て方を覚えた。"
-    },
-    {
-      "choices": [
-        { "text": "洋酒天国を編集する", "goto": "kaiko_youten" },
-        { "text": "サイゴンへ飛ぶ", "goto": "kaiko_vietnam" }
-      ]
-    },
-    { "label": "kaiko_youten" },
-    { "bg": "youten_office" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "『洋酒天国』編集部。\nウイスキーの宣伝雑誌のはずが、いつの間にか文学雑誌になっていた。\n開高の文章には、ウイスキーの広告以上のものがあった。"
-    },
-    {
-      "speaker": "kaiko",
-      "expression": "",
-      "text": "宣伝とは何か。人の心を動かすことだ。\n文学とは何か。人の心を動かすことだ。\nなら、同じじゃないか。"
-    },
-    {
-      "choices": [
-        { "text": "夜勤の原稿に沈む", "goto": "gen_youten_night_load" },
-        { "text": "芥川賞の報せを受ける", "goto": "kaiko_akutagawa" }
-      ]
-    },
-    { "label": "gen_youten_night_load" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "編集部の蛍光灯が明滅する──原稿用紙の升目が無限に広がっていく──"
+      "text": "決裁済みのはずの会議録だけが、最後の一行を空けたままこちらを待っていた。"
     },
     {
       "loadScenario": {
-        "scenario": "2026-03-26_洋酒天国の夜勤",
+        "scenario": "2026-03-26_白紙の会議録",
         "entry": "entry_from_main"
       }
     },
-    { "label": "kaiko_vietnam" },
-    { "bg": "saigon_night" },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "サイゴン。1965年。\nベトナム戦争の最前線。砲声が遠くから聞こえる。\n開高健は作家として、ここに来た。"
+      "label": "saji_art"
     },
     {
-      "speaker": "kaiko",
-      "expression": "",
-      "text": "小説という戦場では、人は死なない。\nここでは、死ぬ。\nどちらの戦場が本物か──両方だ。"
+      "flag": "visited_saji"
     },
     {
-      "choices": [
-        { "text": "銃弾の中で書く", "goto": "gen_bullet_load" },
-        { "text": "傷を負って帰国する", "goto": "kaiko_depression" }
-      ]
-    },
-    { "label": "gen_bullet_load" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "弾丸が頭上を掠める──万年筆のインクが揺れる──"
-    },
-    {
-      "loadScenario": {
-        "scenario": "2026-03-26_銃弾と万年筆",
-        "entry": "entry_from_main"
+      "bg": "suntory_museum",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
       }
     },
-    { "label": "saji_culture" },
-    { "bg": "suntory_hall" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "サントリーホール。\n「世界一美しい響き」を求めて建てられたコンサートホール。\n利益を文化に還元する。佐治敬三の哲学がここにある。"
+      "text": "サントリー美術館。\n器と余白が並び、ガラスの反射にこちらの顔まで少しだけ展示される。"
     },
     {
       "speaker": "saji",
       "expression": "",
-      "text": "金を儲けて、金を使って美しいものを作る。\nそれだけのことや。なんで誰もやらへんのやろな。"
+      "text": "残すってのは、持っとくことやない。\n次の人間がちゃんと見られる距離に置きなおすことや。"
     },
-    {
-      "choices": [
-        { "text": "残響に耳を澄ます", "goto": "gen_hall_echo_load" },
-        { "text": "バーで待つ", "goto": "reunion_bar" }
-      ]
-    },
-    { "label": "gen_hall_echo_load" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "最後の音が消えた──でもホールの壁がまだ響いている──"
+      "text": "保存にも編集がある。\n酒のラベルと同じで、説明しすぎない勇気が要る。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ガラスケースの余白を覗く",
+          "goto": "gen_glasscase_load"
+        },
+        {
+          "text": "図録を抱えてバーへ向かう",
+          "goto": "reunion_bar"
+        }
+      ]
+    },
+    {
+      "label": "gen_glasscase_load"
+    },
+    {
+      "bg": "suntory_museum",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "展示物より先に、その周りの静けさがこちらの目線を整えてくる。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_ガラスケースの余白",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "saji_culture"
+    },
+    {
+      "flag": "visited_saji"
+    },
+    {
+      "bg": "suntory_hall",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "サントリーホールの客席は、誰も座っていないのに使われる前提の緊張で満ちている。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "儲けた金を、また美しいもんへ返す。\n酒屋としては、その循環までできて一人前や。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "響きのために建てられた空間を歩いていると、誰かの文章の座席まで最初から用意されていた気がした。"
+    },
+    {
+      "choices": [
+        {
+          "text": "残響の芯に耳を澄ます",
+          "goto": "gen_hall_echo_load"
+        },
+        {
+          "text": "この席に座る書き手を思う",
+          "goto": "kaiko_youten"
+        },
+        {
+          "text": "余韻を抱えたままバーへ向かう",
+          "goto": "reunion_bar"
+        }
+      ]
+    },
+    {
+      "label": "gen_hall_echo_load"
+    },
+    {
+      "bg": "concert_hall_empty",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "演奏後の静けさだけが、まだホールの壁から剥がれない。"
     },
     {
       "loadScenario": {
@@ -237,46 +512,174 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "saji_art" },
-    { "bg": "suntory_museum" },
+    {
+      "label": "kaiko_route"
+    },
+    {
+      "bg": "kaiko_study",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "サントリー美術館。\n日本美術のコレクション。ガラスの中に閉じ込められた美。\n佐治は、美しいものを残すことが経営の一部だと考えていた。"
-    },
-    {
-      "speaker": "saji",
-      "expression": "",
-      "text": "ウイスキーも美術品も、時間をかけて作るもんや。\n時間をかけたものだけが、時間に耐える。"
-    },
-    {
-      "choices": [
-        { "text": "バーで待つ", "goto": "reunion_bar" }
-      ]
-    },
-    { "label": "kaiko_akutagawa" },
-    { "bg": "award_night" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "芥川賞受賞の報せ。\n開高健は寿屋の社員として、在職のまま受賞した。\n佐治は二足のわらじを許した。許すどころか、祝った。"
+      "text": "開高健の書斎。\n原稿用紙の山、灰皿、辞書、旅行のメモ。\n机の上だけで世界の面積が足りていない。"
     },
     {
       "speaker": "kaiko",
       "expression": "",
-      "text": "佐治さんが「おめでとう」と言ってくれた。\n上司が部下の副業を祝ってくれる──こんなことがあっていいのか。"
+      "text": "書くってのは、考えることより先に嗅ぐことです。\n匂いのない文章は、だいたい途中で死ぬ。"
     },
-    {
-      "choices": [
-        { "text": "二足のわらじを見つめる", "goto": "gen_waraji_load" },
-        { "text": "祝杯を挙げに行く", "goto": "reunion_bar" }
-      ]
-    },
-    { "label": "gen_waraji_load" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "二つの靴が並んでいる──革靴と草履──どちらも履き潰されている──"
+      "text": "宣伝部の社員でありながら、会社の外まで文体を伸ばしていく気配が最初から強い。"
+    },
+    {
+      "choices": [
+        {
+          "text": "『洋酒天国』のゲラへ降りる",
+          "goto": "kaiko_youten"
+        },
+        {
+          "text": "サイゴンの地図を開く",
+          "goto": "kaiko_vietnam"
+        },
+        {
+          "text": "旅の食卓を追う",
+          "goto": "kaiko_travel"
+        }
+      ]
+    },
+    {
+      "label": "kaiko_youten"
+    },
+    {
+      "flag": "visited_kaiko"
+    },
+    {
+      "flag": "saw_editorial"
+    },
+    {
+      "bg": "youten_office",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "『洋酒天国』編集部。\n本来はPR誌のはずなのに、机の上の空気は完全に文学雑誌のそれだ。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "一行で人を旅に連れ出せたら、それは広告でもあり小説でもある。\n名前はどっちでもいい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会社の媒体の中で、文体が勝手に独立していく。\nそれを止めない上司がいるから、この雑誌は雑誌以上の器になる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "夜勤の原稿に沈む",
+          "goto": "gen_youten_night_load"
+        },
+        {
+          "text": "芥川賞の夜へ進む",
+          "goto": "kaiko_akutagawa"
+        },
+        {
+          "text": "余白を抱えたままバーへ向かう",
+          "goto": "reunion_bar"
+        }
+      ]
+    },
+    {
+      "label": "gen_youten_night_load"
+    },
+    {
+      "bg": "youten_office",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ゲラの升目が増殖して、広告と小説の境界が見えなくなる。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_洋酒天国の夜勤",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "kaiko_akutagawa"
+    },
+    {
+      "flag": "visited_kaiko"
+    },
+    {
+      "bg": "award_night",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "受賞の夜。\n在職のまま芥川賞を取った男の横で、会社の秩序だけが少し戸惑っている。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "上司が『おめでとう』と言ってくれると、こちらまで少し困りますね。\nもっと怒られる準備をしていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "許可ではなく祝福。\nその差が、一人の書き手の呼吸をどれだけ楽にしたか想像もつかない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "二足のわらじを履き直す",
+          "goto": "gen_waraji_load"
+        },
+        {
+          "text": "祝杯を持ってバーへ向かう",
+          "goto": "reunion_bar"
+        }
+      ]
+    },
+    {
+      "label": "gen_waraji_load"
+    },
+    {
+      "bg": "two_shoes",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "革靴ともう一足が、どちらも同じ体温で温まっている。"
     },
     {
       "loadScenario": {
@@ -284,29 +687,151 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "kaiko_depression" },
-    { "bg": "dark_study" },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "帰国した開高は、書斎に閉じこもった。\n鬱。豪快なイメージの裏側にある繊細な心。\n戦場の記憶が、夜になると蘇る。"
+      "label": "kaiko_vietnam"
+    },
+    {
+      "flag": "visited_kaiko"
+    },
+    {
+      "bg": "saigon_night",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "佐治は何も言わなかった。\n何も言わないことが、最善の対応だった。\n黙って、酒を注いだ。"
+      "text": "サイゴンの湿気が原稿用紙の端を曲げていく。\n安全な机の上では出ない皺だ。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "前線に来ると、勇ましい文章ほどすぐ壊れる。\n壊れた後に残る言葉だけが、自分の持ち分です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "戦場は文体を鍛えるのではない。\nむしろ文体が何に耐えられないかを突きつける。"
     },
     {
       "choices": [
-        { "text": "沈黙の中に沈む", "goto": "gen_silence_load" },
-        { "text": "それでもバーに行く", "goto": "reunion_bar" }
+        {
+          "text": "銃弾の中で書き続ける",
+          "goto": "gen_bullet_load"
+        },
+        {
+          "text": "未完の地図を広げる",
+          "goto": "gen_map_load"
+        },
+        {
+          "text": "帰国後の暗い部屋へ戻る",
+          "goto": "kaiko_depression"
+        }
       ]
     },
-    { "label": "gen_silence_load" },
+    {
+      "label": "gen_bullet_load"
+    },
+    {
+      "bg": "saigon_night",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "沈黙が液体になってグラスに注がれていく──"
+      "text": "弾丸の速さに、比喩の速度が追いつかない。\nそれでも遅い方で追いかけるしかない。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_銃弾と万年筆",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "gen_map_load"
+    },
+    {
+      "bg": "saigon_dawn",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "道路は引かれているのに、現地の気配だけが地図の外へ溢れている。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_未完の地図",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "kaiko_depression"
+    },
+    {
+      "flag": "visited_kaiko"
+    },
+    {
+      "bg": "dark_study",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "帰国後の書斎は、夜だけ広くなる。\n目を閉じても、戦場の湿気がまだ引かない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "豪快な逸話では説明できない沈み方がある。\nその沈み方に対して、佐治は上手な言葉を持ち込まなかった。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "励まされると、かえって壊れる夜がありますね。\nそういう夜に限って、酒だけはちゃんと喉を通る。"
+    },
+    {
+      "choices": [
+        {
+          "text": "沈黙の一杯へ沈む",
+          "goto": "gen_silence_load"
+        },
+        {
+          "text": "それでもバーへ向かう",
+          "goto": "reunion_bar"
+        }
+      ]
+    },
+    {
+      "label": "gen_silence_load"
+    },
+    {
+      "bg": "silent_bar",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会話の代わりに、グラスへゆっくり琥珀色が落ちていく。"
     },
     {
       "loadScenario": {
@@ -314,12 +839,88 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "reunion_bar" },
-    { "bg": "bar_reunion" },
+    {
+      "label": "kaiko_travel"
+    },
+    {
+      "flag": "visited_kaiko"
+    },
+    {
+      "bg": "book_pages",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "バー。\n佐治と開高が向かい合っている。\nカウンターの上にグラスが二つ。琥珀色の液体が静かに揺れている。"
+      "text": "旅先の食卓と原稿机が、いつのまにか同じ高さで繋がっている。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "外へ出ると、会社の文章まで新鮮になるんですよ。\n内勤だけで磨ける比喩には限界がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "移動、食事、観察、記述。\nどれも別作業に見えて、開高の中では一つの仕事として回っている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "旅の卓上を編集室に変える",
+          "goto": "gen_travel_table_load"
+        },
+        {
+          "text": "この旅費を通した人を思い出す",
+          "goto": "saji_art"
+        },
+        {
+          "text": "土産話を抱えてバーへ向かう",
+          "goto": "reunion_bar"
+        }
+      ]
+    },
+    {
+      "label": "gen_travel_table_load"
+    },
+    {
+      "bg": "book_pages",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "皿の湯気の上で、ノートの余白だけがやたらとよく乾いている。"
+    },
+    {
+      "loadScenario": {
+        "scenario": "2026-03-26_旅の卓上は編集室",
+        "entry": "entry_from_main"
+      }
+    },
+    {
+      "label": "reunion_bar"
+    },
+    {
+      "bg": "bar_reunion",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "バー。\n佐治と開高が向かい合っている。\nここまで来ると、もう説明はいらない。"
     },
     {
       "speaker": "saji",
@@ -334,37 +935,78 @@
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "何も言わない。言う必要がない。\n二つのグラスが触れ合う音だけが、バーに響いた。"
+      "text": "話すべきことはたぶん山ほどある。\nけれど本当に必要な部分だけが先に済んでしまった顔をしている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会社の時間と作家の時間。\n熟成の時間と締め切りの時間。\n全然違う時計が、今だけ同じ速度で進んでいた。"
     },
     {
       "choices": [
-        { "text": "角瓶を注ぐ", "goto": "pour_whisky" },
-        { "text": "言葉を注ぐ", "goto": "pour_words" }
+        {
+          "text": "角瓶を注ぐ",
+          "goto": "pour_whisky"
+        },
+        {
+          "text": "言葉を注ぐ",
+          "goto": "pour_words"
+        }
       ]
     },
-    { "label": "pour_whisky" },
-    { "bg": "whisky_pour" },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "角瓶からグラスに琥珀色が落ちていく。\n12年の歳月が液体になって流れている。\n鳥井が作り、佐治が育て、開高が言葉にした味。"
+      "label": "pour_whisky"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "一杯のウイスキーの中に、どれだけの時間が溶けているか。\n熟成の時間、友情の時間、沈黙の時間。\n全部が混ざって、この色になった。"
+      "text": "角瓶からグラスへ、琥珀色が細い線になって落ちていく。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "鳥井が起点を作り、佐治が時間を引き受け、開高がその味へ言葉を与えた。\n一杯の中に、三人分の仕事が重なっている。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "味は一人でできへん。\nせやけど最後に飲む瞬間だけは、一人の舌で決まる。"
     },
     {
       "choices": [
-        { "text": "琥珀色に溺れる", "goto": "gen_amber_deep_load" },
-        { "text": "グラスを置く", "goto": "mitra_table" }
+        {
+          "text": "琥珀色の深層へ沈む",
+          "goto": "gen_amber_deep_load"
+        },
+        {
+          "text": "グラスをテーブルへ戻す",
+          "goto": "mitra_table"
+        }
       ]
     },
-    { "label": "gen_amber_deep_load" },
+    {
+      "label": "gen_amber_deep_load"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "グラスの中の琥珀色が、世界を飲み込んでいく──"
+      "text": "グラスの奥行きが、いつの間にか年表の深さに変わっている。"
     },
     {
       "loadScenario": {
@@ -372,29 +1014,59 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "pour_words" },
-    { "bg": "manuscript" },
+    {
+      "label": "pour_words"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "原稿用紙にインクが落ちる。\n開高の万年筆が、一文字ずつ世界を記述していく。\n宣伝部の仕事でもなく、芥川賞のためでもなく。ただ、書くために書く。"
+      "text": "原稿用紙へインクが落ちる。\n開高の万年筆は、礼も怒りも借りも、全部いったん文体へ変えてから差し出す。"
     },
     {
       "speaker": "kaiko",
       "expression": "",
-      "text": "書くことは、佐治さんへの返礼だ。\nもらった自由を、文字で返す。\n返しきれるとは思っていない。でも書き続ける。"
+      "text": "返し切れない恩を、そのまま書くわけにはいかない。\nだから比喩にする。\nそれでもまだ足りない。"
     },
-    {
-      "choices": [
-        { "text": "書かれなかった頁を開く", "goto": "gen_unwritten_load" },
-        { "text": "ペンを置く", "goto": "mitra_table" }
-      ]
-    },
-    { "label": "gen_unwritten_load" },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "白紙のページが無限に続く──書かれなかった物語の気配がする──"
+      "text": "文章は返礼だ。\nだが返礼し切れないからこそ、書き続けるしかない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "書かれなかった頁を開く",
+          "goto": "gen_unwritten_load"
+        },
+        {
+          "text": "ペン先の震えを止める",
+          "goto": "mitra_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_unwritten_load"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "文字のない頁だけが、妙に重く指へ絡んでくる。"
     },
     {
       "loadScenario": {
@@ -402,23 +1074,64 @@
         "entry": "entry_from_main"
       }
     },
-    { "label": "mitra_table" },
-    { "bg": "mitra_chamber" },
+    {
+      "label": "mitra_table"
+    },
+    {
+      "bg": "mitra_chamber",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "みとらのテーブル。\n佐治の声と開高の声が、ここで一つになる。"
-    },
-    { "label": "final_glass" },
-    {
-      "speaker": "mitra",
-      "expression": "微笑んで",
-      "text": "おかえりなさい。\n二つの戦場を歩いて、ここまで来ましたね。"
+      "text": "みとらのテーブル。\n酒の香りと言葉の残響が、ここでようやく同じ器に収まる。"
     },
     {
       "speaker": "mitra",
       "expression": "",
-      "text": "佐治は酒を注ぎ、開高は言葉を注いだ。\n二人とも、注ぐことしかできなかった。\nでは──あなたは何を注ぎますか？"
+      "text": "おかえりなさい。\n熟成と執筆、経営と放浪。\n別々のようで、どちらも誰かの時間を信じる仕事でした。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "杯に何を満たすかは、ここまで歩いた経路で少しだけ変わります。\nでも最後に選ぶのは、いつだって今のあなたです。"
+    },
+    {
+      "if": "visited_saji",
+      "goto": "mitra_check_kaiko",
+      "else": "final_glass"
+    },
+    {
+      "label": "mitra_check_kaiko"
+    },
+    {
+      "if": "visited_kaiko",
+      "goto": "mitra_unlock_saikyou",
+      "else": "final_glass"
+    },
+    {
+      "label": "mitra_unlock_saikyou"
+    },
+    {
+      "flag": "unlock_saikyou"
+    },
+    {
+      "goto": "final_glass"
+    },
+    {
+      "label": "final_glass"
+    },
+    {
+      "bg": "mitra_chamber",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "mitra",
@@ -427,110 +1140,294 @@
     },
     {
       "choices": [
-        { "text": "山崎の朝霧を選ぶ", "goto": "END_YAMAZAKI" },
-        { "text": "洋酒天国の最終号を閉じる", "goto": "END_YOUTEN" },
-        { "text": "何も言わずにグラスを掲げる", "goto": "END_SILENCE" },
-        { "text": "ホールの残響を聴く", "goto": "END_HALL" },
-        { "text": "もう一足のわらじを履く", "goto": "END_WARAJI" },
-        { "text": "サイゴンの朝焼けを見る", "goto": "END_SAIGON" },
-        { "text": "二人の影と重なって目覚める", "goto": "END_SAIKYOU" }
+        {
+          "text": "山崎の朝霧を選ぶ",
+          "goto": "END_YAMAZAKI"
+        },
+        {
+          "text": "ブレンドの舌を信じる",
+          "goto": "END_BLEND",
+          "if": "saw_blend_room"
+        },
+        {
+          "text": "ホールの残響を選ぶ",
+          "goto": "END_HALL"
+        },
+        {
+          "text": "何も言わずに献杯する",
+          "goto": "END_SILENCE"
+        },
+        {
+          "text": "白紙の頁に署名する",
+          "goto": "END_WHITE",
+          "if": "saw_editorial"
+        },
+        {
+          "text": "洋酒天国の最終号を閉じる",
+          "goto": "END_YOUTEN"
+        },
+        {
+          "text": "もう一足のわらじを履く",
+          "goto": "END_WARAJI"
+        },
+        {
+          "text": "サイゴンの朝焼けを見る",
+          "goto": "END_SAIGON"
+        },
+        {
+          "text": "二人の影と重なる",
+          "goto": "END_SAIKYOU",
+          "if": "unlock_saikyou"
+        }
       ]
     },
-    { "label": "END_YAMAZAKI" },
-    { "bg": "yamazaki_morning" },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "山崎蒸溜所の朝。霧が樽の倉庫を包んでいる。\n12年の沈黙の後に生まれる味。25年の忍耐の後に現れる琥珀色。\n佐治はこの霧の中で待ち続けた。結果が出るまで、信じて。"
+      "label": "END_YAMAZAKI"
+    },
+    {
+      "bg": "yamazaki_morning",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "目が覚めた。木曜日の朝。\n本は枕元に閉じたまま。山崎の朝霧の匂いは──もうしない。\nでもグラスに注げば、いつでも会える。"
-    },
-    { "ending": { "title": "山崎の朝", "subtitle": "信じて待つことが、熟成の全てだった。蒸溜所の朝霧が教えてくれた。" } },
-    { "label": "END_YOUTEN" },
-    { "bg": "youten_final" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "『洋酒天国』最終号。\n宣伝雑誌が文学になった奇跡は、もう繰り返されない。\n開高は最終号のあとがきに何も書かなかった。白紙のまま入稿した。"
+      "text": "山崎の朝だ。\n霧が樽倉庫の輪郭をゆっくり持ち上げ、待つことの長さだけが静かに残っている。"
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "目が覚めた。枕元の本が少しだけ開いている。\n白紙のページが一枚、挟まっていた。\n書かれなかった言葉は、読まれなかった沈黙だ。"
-    },
-    { "ending": { "title": "洋酒天国・最終号", "subtitle": "最終号の白紙は、すべてを語り終えた後の沈黙だった。" } },
-    { "label": "END_SILENCE" },
-    { "bg": "silent_bar" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "何も言わずにグラスを掲げた。\n佐治がそうしたように。開高がそうしたように。\n言葉にしないことで完成する関係がある。"
+      "text": "目が覚めても、熟成という言葉だけはすぐ消えなかった。\n焦らせないこともまた、未来への投資なのだと体が先に理解している。"
     },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "目が覚めた。木曜日の夜明け。\n口の中に角瓶の味がする——気がした。\n何も言わなかった夜の味は、朝になっても消えない。"
+      "ending": {
+        "title": "山崎の朝",
+        "subtitle": "信じて待つことが、最終的にはいちばん濃い仕事になる。"
+      }
     },
-    { "ending": { "title": "沈黙の献杯", "subtitle": "何も言わなかったから、全てが伝わった。グラスの音だけが残響している。" } },
-    { "label": "END_HALL" },
-    { "bg": "concert_hall_empty" },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "誰もいないホール。\n最後の演奏が終わって、客が帰った後。\n壁が、天井が、床が、まだ響いている。音が消えた後の残響。"
+      "label": "END_BLEND"
+    },
+    {
+      "bg": "whisky_pour",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "目が覚めた。耳の奥にまだ響いている。\n佐治が建てたホールの残響。開高が書いた言葉の残響。\n残響の中でなら、二人はまだ生きている。"
-    },
-    { "ending": { "title": "ホールの残響", "subtitle": "音が消えた後にも響いているものがある。それを文化と呼ぶ。" } },
-    { "label": "END_WARAJI" },
-    { "bg": "two_shoes" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "二足目のわらじを手に取った。\n一足目はもう履き潰されている。仕事用の革靴。\n二足目は——まだ新しい。自分のための靴。"
+      "text": "最後に残ったのは、単一の才能ではなく、癖の違う原酒たちが同じグラスで響く感触だった。"
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "目が覚めた。\n佐治は開高に二足のわらじを許した。\n僕にそれを許してくれる佐治はいない。\nでも——自分で許せばいい。自分が自分の佐治になればいい。"
-    },
-    { "ending": { "title": "二足目のわらじ", "subtitle": "もう一つの自分を許す。自分が自分の佐治になる朝。" } },
-    { "label": "END_SAIGON" },
-    { "bg": "saigon_dawn" },
-    {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "サイゴンの朝焼け。\n砲声は止んだ。血の匂いが残る夜が、明けようとしている。\n開高はノートを閉じた。書くべきことは書いた。書けないことは、体が覚えている。"
+      "text": "強さを削って平均を作るのではない。\n強さの置き場を見つけて、一つの和音にする。\nそれが佐治の舌であり、組織の美学でもあった。"
     },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "目が覚めた。\n戦場は遠い。でも、自分だけの戦場は近い。\n毎日が最前線だ。書き続けること、作り続けること、注ぎ続けること。"
+      "ending": {
+        "title": "ブレンドの舌",
+        "subtitle": "個性を均さずに響かせること。それが『最強』の別名だった。"
+      }
     },
-    { "ending": { "title": "サイゴンの朝焼け", "subtitle": "戦場から帰還した朝。自分の戦場は、まだ毎日続いている。" } },
-    { "label": "END_SAIKYOU" },
-    { "bg": "two_shadows" },
     {
-      "speaker": "narrator",
-      "expression": "",
-      "text": "二人の影が重なった。\n佐治の影と開高の影。経営者と作家。\n酒を作る人と、言葉を作る人。方法は違っても、二人とも美しいものを残そうとしていた。"
+      "label": "END_HALL"
+    },
+    {
+      "bg": "concert_hall_empty",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "目が覚めた。本は枕元に閉じたまま。\n480ページの中の二人は、もう語り終えている。\nでも、僕の中では——まだ語り終えていない。たぶん、しばらく終わらない。"
+      "text": "誰もいない客席で、音だけが遅れて帰ってくる。"
     },
     {
       "speaker": "narrator",
       "expression": "",
-      "text": "角瓶を探しに、台所に立った。"
+      "text": "利益が建物へ、建物が響きへ、響きが記憶へ変わっていく。\n文化とは、この変換の連なりにほかならない。"
     },
-    { "ending": { "title": "最強のふたり", "subtitle": "本を閉じた夜、二人の影が重なった。読み終えた本は、まだ終わっていなかった。" } }
+    {
+      "ending": {
+        "title": "ホールの残響",
+        "subtitle": "音が消えた後に残る時間へ、佐治は金を還元した。"
+      }
+    },
+    {
+      "label": "END_SILENCE"
+    },
+    {
+      "bg": "silent_bar",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "何も言わずにグラスを掲げる。\nそれだけで十分に会話が終わってしまう関係がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "言葉を減らしたからこそ伝わる夜。\n酒は時々、語彙の代わりに人を支える。"
+    },
+    {
+      "ending": {
+        "title": "沈黙の献杯",
+        "subtitle": "語らなかった部分まで含めて、二人の関係はすでに完成していた。"
+      }
+    },
+    {
+      "label": "END_WHITE"
+    },
+    {
+      "bg": "manuscript",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "白紙の頁に名前を書く。\n何も埋めないまま、それでも引き受けると決める。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "書けない敬意も、説明し切れない決断も、最後は白いまま署名される。\n余白は逃避ではなく、引き受けた証明だ。"
+    },
+    {
+      "ending": {
+        "title": "白紙の頁",
+        "subtitle": "言葉が追いつかない瞬間だけが、本当に重要な決断を宿していた。"
+      }
+    },
+    {
+      "label": "END_YOUTEN"
+    },
+    {
+      "bg": "youten_final",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "『洋酒天国』最終号。\n雑誌は終わっても、そこで許された越境の温度だけがまだ冷めない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "PR誌の形を借りた文学。\n会社の器を借りて、文体が遠くへ行った記録。"
+    },
+    {
+      "ending": {
+        "title": "洋酒天国・最終号",
+        "subtitle": "止めなかった上司と、越えていった書き手。その共犯関係だけが長く残る。"
+      }
+    },
+    {
+      "label": "END_WARAJI"
+    },
+    {
+      "bg": "two_shoes",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "二足目を履く。\n誰かに許可されるのを待つのではなく、自分で自分の主線を増やしてしまう。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "佐治が開高にしたことを、今度は自分が自分に向けてやる番だ。"
+    },
+    {
+      "ending": {
+        "title": "二足目のわらじ",
+        "subtitle": "一人の人間に複数の本気があっていいと認めた瞬間、朝が少し広くなる。"
+      }
+    },
+    {
+      "label": "END_SAIGON"
+    },
+    {
+      "bg": "saigon_dawn",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "サイゴンの朝焼け。\n砲声が止んだあとの空だけが、不自然なくらいきれいだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "書けることと書けないことの境目を抱えたまま、それでも日常へ戻る。\n戦場は遠くても、各自の前線は毎日ある。"
+    },
+    {
+      "ending": {
+        "title": "サイゴンの朝焼け",
+        "subtitle": "壊れた比喩のあとでも、人は書き続けることでしか戻れない。"
+      }
+    },
+    {
+      "label": "END_SAIKYOU"
+    },
+    {
+      "bg": "two_shadows",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "二つの影が重なる。\n経営者の影と作家の影。\n作る方法は違うのに、どちらも誰かの時間を信じていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "片方だけでは辿り着けない輪郭だった。\n酒だけでも、言葉だけでもなく、そのあいだに流れた信頼まで含めて『最強のふたり』だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。\n本は閉じている。\nけれど二人の影だけは、しばらく机の上から消えない。"
+    },
+    {
+      "ending": {
+        "title": "最強のふたり",
+        "subtitle": "信じて待つ人と、自由を受け取って書く人。その往復だけが時代を越えて残った。"
+      }
+    }
   ]
 }

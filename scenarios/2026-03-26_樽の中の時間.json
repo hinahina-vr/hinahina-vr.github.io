@@ -3,22 +3,122 @@
   "subtitle": "─ 12年待つということ ─",
   "genre": "熟成ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "yamazaki_distillery" },
-    { "speaker": "narrator", "text": "樽の中にいる。\nオークの壁が四方を囲んでいる。暗い。温かい。甘い匂いがする。" },
-    { "speaker": "narrator", "text": "時間が見える。12年分の時間が、琥珀色の液体の中に溶けている。\n一年ごとに少しずつ色が変わる。透明から、金色へ。金色から、琥珀へ。" },
-    { "speaker": "narrator", "text": "佐治敬三は、この時間を信じた。\n12年後の味を想像して、今日の原酒を樽に入れた。\n結果が見えない投資。信じて、待つ。" },
-    { "speaker": "narrator", "text": "開高健も待たれていた。\n才能が熟成するまで、佐治は待った。芥川賞までの年月。\n樽の中の原酒と同じように、急がせなかった。" },
-    { "speaker": "narrator", "text": "樽の壁を叩く。コンコン。返事はない。\n12年後の自分に、返事を求めるのは無意味だ。12年後の自分は、まだ存在しない。\n存在しないものを信じること。それが熟成だ。" },
-    { "ending": { "title": "樽の中の時間", "subtitle": "存在しないものを信じること。それが熟成というものの正体だった。" } },
-    { "label": "entry_from_main" },
-    { "bg": "yamazaki_distillery" },
-    { "speaker": "narrator", "text": "樽の中に落ちた。\nオークの香りが鼻腔を満たす。暗い。でも恐ろしくはない。" },
-    { "speaker": "narrator", "text": "蒸溜所の樽には12年分の時間が眠っている。\n佐治が信じた時間。開高が待たされた時間。\n信じて、待つ。それ以外に熟成の方法はない。" },
-    { "ending": { "title": "樽の中", "subtitle": "12年の沈黙の後に生まれる味。信じて待つことだけが方法だった。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "yamazaki_distillery",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "樽の中にいる。\nオークの壁が近い。息をするたび、木が吸った十二年分の酒気が肺に滲む。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "秒針は見えないのに、時間だけが降ってくる。\n夏の蒸し暑さ、冬の乾き、樽材の収縮、蒸発していく天使の取り分。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "熟成は派手な仕事やない。\n待っているあいだ、周りからは何もしてへんように見える。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "だが樽の内側では、見えない仕事だけが続いている。\n荒さが丸くなり、角がほどけ、透明だった液体が黄昏みたいな色を帯びていく。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "人にも同じことが起きる。\n才能がすぐ売り物になるわけやない。ようわからん時間をくぐって、ようやく香りになる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "樽板に耳を当てると、原稿用紙をめくる音が混じっていた。\n開高健の文章も、ここで熟成していたのだと思う。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "待つことは放置ではない。\n誰かが未来の味を先に信じて、今日の樽を選び、倉庫の湿度を守り続けることだ。"
+    },
+    {
+      "ending": {
+        "title": "樽の中の時間",
+        "subtitle": "熟成とは、まだ存在しない未来の味を先に信じることだった。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "yamazaki_distillery",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "樽の内側は暗いのに、時間だけが薄く光っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "佐治が信じたのは、完成した味ではなく、まだ存在しない味の可能性だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その可能性を急かさないこと。\nそれが『やらせとけ』の、いちばん酒に近い形だった。"
+    },
+    {
+      "ending": {
+        "title": "樽の中",
+        "subtitle": "待つことそのものが、すでに一つの仕事だった。"
+      }
+    }
   ]
 }

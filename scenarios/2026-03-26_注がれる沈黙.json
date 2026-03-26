@@ -3,20 +3,122 @@
   "subtitle": "─ 何も言わずに酒を注ぐ ─",
   "genre": "沈黙ノベル",
   "date": "2026-03-26",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
   "chars": {
-    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#c8a050",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#607080",
+      "emoji": "✒️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
   },
   "scenario": [
-    { "label": "standalone_start" },
-    { "bg": "silent_bar" },
-    { "speaker": "narrator", "text": "沈黙が液体になっている。\nグラスの中に琥珀色の沈黙が注がれていく。" },
-    { "speaker": "narrator", "text": "開高健が鬱に沈んだとき、佐治は何も言わなかった。\n「頑張れ」と言わなかった。「大丈夫か」と聞かなかった。\nただ、酒を注いだ。" },
-    { "speaker": "narrator", "text": "言葉で救えない痛みがある。\n言葉は便利だが万能ではない。沈黙で伝わるものがある。\n酒を注ぐ手の動きだけで、「ここにいるよ」と伝えられることがある。" },
-    { "speaker": "narrator", "text": "沈黙は空白ではない。沈黙は、言葉の代わりに注がれるものだ。\n佐治の沈黙には、開高への全ての感情が含まれていた。\n心配、信頼、尊敬、友情。全部が琥珀色の中に溶けていた。" },
-    { "ending": { "title": "注がれる沈黙", "subtitle": "沈黙がグラスに満ちたとき、全てが伝わっていた。" } },
-    { "label": "entry_from_main" },
-    { "bg": "silent_bar" },
-    { "speaker": "narrator", "text": "沈黙が液体になってグラスに注がれていく。\n何も言わない。何も言わないことが全てを語っている。" },
-    { "ending": { "title": "沈黙の杯", "subtitle": "黙って酒を注ぐ。それが最善の言葉だった。" } }
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "silent_bar",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "バーの照明は低い。\n沈んだ気分を慰めるためではなく、言葉を少なくするために低い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "帰国後の開高は、豪胆な逸話だけでは語れない顔をしていた。\n夜になると戦場が戻ってくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "そこで佐治がしたのは、助言でも叱咤でも分析でもない。\n黙って酒を注ぐことだった。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "喋った方がええときもある。\nでも喋らん方がええ夜の方が、案外多いんや。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "沈黙は放棄ではない。\n相手の壊れ方に合わせて、こちらの言葉数を減らす高度な気遣いだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "グラスに酒が満ちる音だけが会話になる。\nその簡潔さが、かえって人を傷つけない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "治すことはできなくても、独りで沈まないように隣に器を置くことはできる。\n佐治がしたのはたぶんそれだけだった。"
+    },
+    {
+      "ending": {
+        "title": "注がれる沈黙",
+        "subtitle": "励まさない優しさだけが、どうにか夜を越えさせた。"
+      }
+    },
+    {
+      "label": "entry_from_main"
+    },
+    {
+      "bg": "silent_bar",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "言葉を足せば足すほど、今夜は何かが壊れそうだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "だから佐治は、説明の代わりに酒量だけを整えた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "沈黙は空白ではなく、相手の呼吸に合わせた分量だった。"
+    },
+    {
+      "ending": {
+        "title": "声の代わりの一杯",
+        "subtitle": "何も言わないことが、最善の対話になる夜がある。"
+      }
+    }
   ]
 }
