@@ -962,7 +962,8 @@ class GalgeRuntimeApp {
 
     // Background image support
     const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
-    const scenarioDir = this.scenario.scenarioName || "";
+    // Use bgBaseDir (set by main scenario) if available, otherwise current scenario
+    const scenarioDir = this._bgBaseDir || this.scenario.scenarioName || "";
     const baseDir = scenarioDir
       ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}`
       : `./scenarios/bg`;
@@ -1207,6 +1208,10 @@ class GalgeRuntimeApp {
   }
 
   async loadScenarioInline({ scenario, entry = null }) {
+    // Preserve main scenario's bg folder for sub-scenarios
+    if (!this._bgBaseDir && this.scenario?.scenarioName) {
+      this._bgBaseDir = this.scenario.scenarioName;
+    }
     const definition = await fetchScenarioDefinition(scenario);
     definition.requestedEntry = entry || null;
     definition.startIndex = resolveScenarioEntryStartIndex(definition, definition.requestedEntry);

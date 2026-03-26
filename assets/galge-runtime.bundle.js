@@ -33460,7 +33460,7 @@ void main() {
         preset.glow
       );
       const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
-      const scenarioDir = this.scenario.scenarioName || "";
+      const scenarioDir = this._bgBaseDir || this.scenario.scenarioName || "";
       const baseDir = scenarioDir ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}` : `./scenarios/bg`;
       return this._showBgImage(
         `${baseDir}/${bgImageKey}.webp`,
@@ -33674,6 +33674,9 @@ void main() {
       this.voiceController.stopCurrent();
     }
     async loadScenarioInline({ scenario, entry = null }) {
+      if (!this._bgBaseDir && this.scenario?.scenarioName) {
+        this._bgBaseDir = this.scenario.scenarioName;
+      }
       const definition = await fetchScenarioDefinition(scenario);
       definition.requestedEntry = entry || null;
       definition.startIndex = resolveScenarioEntryStartIndex(definition, definition.requestedEntry);
