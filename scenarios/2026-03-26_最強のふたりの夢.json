@@ -11,7 +11,7 @@
     "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
   },
   "scenario": [
-    { "bg": "study_night", "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true } },
+    { "bg": "study_night", "bgm": { "src": "./assets/bgm/yorugakuru.mp3", "volume": 0.08, "loop": true } },
     {
       "speaker": "narrator",
       "expression": "",
