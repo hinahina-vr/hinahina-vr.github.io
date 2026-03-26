@@ -1,0 +1,21 @@
+{
+  "title": "書かれなかった頁",
+  "subtitle": "─ 開高が書かなかった小説 ─",
+  "genre": "不在ノベル",
+  "date": "2026-03-26",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "manuscript" },
+    { "speaker": "narrator", "text": "白紙のページが無限に続いている。\n書かれなかった小説の頁だ。" },
+    { "speaker": "narrator", "text": "開高健は多くの作品を残した。\nしかし、残した以上に多くの作品を書かなかった。\n書けなかった、のかもしれない。書かなかった、のかもしれない。\nその二つの間には、鬱という名前の深い谷がある。" },
+    { "speaker": "narrator", "text": "佐治は書かれなかった小説のことも大切にしたはずだ。\n目に見えるものだけが成果ではない。\n書かれなかった頁の中にも、開高の才能は存在した。\n白紙もまた、ひとつの表現だ。" },
+    { "ending": { "title": "書かれなかった頁", "subtitle": "白紙もまた、ひとつの表現だ。" } },
+    { "label": "entry_from_main" },
+    { "bg": "manuscript" },
+    { "speaker": "narrator", "text": "白紙の頁が続く。書かれなかった物語の気配がする。\n白紙の中の沈黙もまた、開高の声だ。" },
+    { "ending": { "title": "白紙の声", "subtitle": "書かれなかったものの中に、言葉は存在する。" } }
+  ]
+}

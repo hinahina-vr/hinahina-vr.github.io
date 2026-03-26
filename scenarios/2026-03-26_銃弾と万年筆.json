@@ -1,0 +1,22 @@
+{
+  "title": "銃弾と万年筆",
+  "subtitle": "─ 戦場で書くということ ─",
+  "genre": "戦場ノベル",
+  "date": "2026-03-26",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "saigon_night" },
+    { "speaker": "narrator", "text": "銃弾が耳を掠めた。万年筆を握り直す。\nノートの上にインクの線が走る。手が震えている。" },
+    { "speaker": "narrator", "text": "開高健はベトナムの戦場にいた。\n作家が戦場に行く意味。それは体験するためだ。\n体験しないと書けないことがある。体験すると書けなくなることもある。" },
+    { "speaker": "narrator", "text": "銃弾と万年筆。どちらも細い金属でできている。\nどちらも人の心を貫く。方法が違うだけだ。" },
+    { "speaker": "narrator", "text": "開高は帰国した。傷を負って。\n体の傷はいつか治る。心の傷は──治らないかもしれない。\n佐治はそのことを知っていた。だから何も言わなかった。" },
+    { "ending": { "title": "銃弾と万年筆", "subtitle": "どちらも細い金属。どちらも心を貫く。" } },
+    { "label": "entry_from_main" },
+    { "bg": "saigon_night" },
+    { "speaker": "narrator", "text": "弾丸が頭上を掠める。万年筆のインクが揺れる。\n戦場で書くということ。それは命懸けの文学だ。" },
+    { "ending": { "title": "戦場の万年筆", "subtitle": "銃弾と万年筆。どちらも心を貫く金属。" } }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "残響のホール",
+  "subtitle": "─ 音楽は建物に残る ─",
+  "genre": "残響ノベル",
+  "date": "2026-03-26",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "concert_hall_empty" },
+    { "speaker": "narrator", "text": "誰もいないホール。\n最後の音が消えた後。壁がまだ振動している。人間の耳には聞こえないが、確実に響いている。" },
+    { "speaker": "narrator", "text": "佐治敬三は「世界一美しい響き」を求めてこのホールを建てた。\nコンクリートと木材の組み合わせ。柔らかい残響。2秒の残響時間。\n2秒間、音は死なない。音が死なない場所を作ること。それが文化事業だ。" },
+    { "speaker": "narrator", "text": "開高健の文章にも残響がある。\n読み終えた後、頭の中でまだ文章が響いている。\n本を閉じた後にも消えない言葉。それが文学だ。" },
+    { "ending": { "title": "残響のホール", "subtitle": "音が死なない場所を作ること。それが文化事業だった。" } },
+    { "label": "entry_from_main" },
+    { "bg": "concert_hall_empty" },
+    { "speaker": "narrator", "text": "最後の音が消えた。でもホールの壁がまだ響いている。\n佐治が建てた場所。音が死なない場所。" },
+    { "ending": { "title": "残響", "subtitle": "2秒間、音は死なない。" } }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "琥珀色の深層",
+  "subtitle": "─ ウイスキーの色に溺れる ─",
+  "genre": "琥珀ノベル",
+  "date": "2026-03-26",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "whisky_pour" },
+    { "speaker": "narrator", "text": "琥珀色の中にいる。\n液体の中を沈んでいく。温かい。甘い。少し苦い。" },
+    { "speaker": "narrator", "text": "ウイスキーの色は一色ではない。\n金色、琥珀色、赤褐色。樽の種類と年数で色が変わる。\n佐治はこの色の違いを見分けることができた。経営者の目と、職人の舌で。" },
+    { "speaker": "narrator", "text": "開高の文章にも色がある。\n初期の文章は透明だった。芥川賞の頃は金色になった。\nベトナムの後は赤褐色に変わった。\n色は経験で変わる。ウイスキーも文章も。" },
+    { "ending": { "title": "琥珀色の深層", "subtitle": "色は経験で変わる。ウイスキーも、文章も、人間も。" } },
+    { "label": "entry_from_main" },
+    { "bg": "whisky_pour" },
+    { "speaker": "narrator", "text": "グラスの中の琥珀色が世界を飲み込んでいく。\n12年の時間と友情の色。" },
+    { "ending": { "title": "琥珀色", "subtitle": "ウイスキーの色は時間の色。友情の色。" } }
+  ]
+}
