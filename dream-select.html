@@ -295,6 +295,38 @@
         letter-spacing: 0.08em;
       }
 
+      .map-status {
+        margin: 8px 0 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(9, 12, 26, 0.66);
+        color: rgba(255, 255, 255, 0.86);
+        font-size: clamp(9px, 0.66vw, 11px);
+        letter-spacing: 0.08em;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .map-status::before {
+        content: "NOW";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 38px;
+        min-height: 20px;
+        padding: 0 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.96);
+        font-size: 9px;
+        letter-spacing: 0.16em;
+      }
+
       .legend {
         display: flex;
         flex-wrap: wrap;
@@ -696,6 +728,26 @@
           0 0 32px rgba(255, 255, 255, 0.12);
       }
 
+      .scenario-card[data-graph-current="true"] {
+        z-index: 5;
+        opacity: 1;
+        transform: translateY(-4px) scale(1.04);
+        border-color: rgba(255, 255, 255, 0.9);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.2),
+          0 0 42px rgba(255, 255, 255, 0.16),
+          0 18px 48px rgba(0, 0, 0, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      }
+
+      .scenario-card[data-graph-current="true"] .card-jewel-glow {
+        opacity: 1;
+      }
+
+      .scenario-card[data-graph-current="true"] .card-title {
+        opacity: 1;
+      }
+
       .card-popup-layer {
         position: fixed;
         inset: 0;
@@ -1003,6 +1055,7 @@
           <h1>A.D.M.S.</h1>
           <p class="subtitle">Auto Diverge Mapping System ─ 分岐と再合流を可視化する夢の地図</p>
           <p class="map-title" id="map-title">観測中…</p>
+          <p class="map-status" id="map-status" hidden></p>
           <div class="legend">
             <span class="legend-item"><span class="legend-swatch kenkai"></span>顕界ルート</span>
             <span class="legend-item"><span class="legend-swatch genkai"></span>幻界サブ</span>
@@ -1280,9 +1333,10 @@
           genkai: "幻界",
         };
 
-        var AVAILABLE_ADMS_DATES = ["2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23"];
+        var AVAILABLE_ADMS_DATES = ["2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26"];
         var dateLabel = document.getElementById("date-label");
         var mapTitle = document.getElementById("map-title");
+        var mapStatus = document.getElementById("map-status");
         var graphStage = document.getElementById("graph-stage");
         var graphZoom = document.getElementById("graph-zoom");
         var graphEmpty = document.getElementById("graph-empty");
@@ -1318,6 +1372,19 @@
           var params = new URLSearchParams(window.location.search);
           var hash = window.location.hash.replace(/^#/, "");
           return params.get("date") || hash || null;
+        }
+
+        function resolveFocusLocation() {
+          var params = new URLSearchParams(window.location.search);
+          var scenario = (params.get("focusScenario") || "").trim();
+          if (!scenario) {
+            return null;
+          }
+          var entry = params.has("focusEntry") ? ((params.get("focusEntry") || "").trim() || null) : null;
+          return {
+            scenario: scenario,
+            entry: entry,
+          };
         }
 
         function buildDreamSelectUrl(date) {
@@ -1585,6 +1652,11 @@
           graphEmpty.textContent = message;
           updateDateNavigation(resolveDate());
           mapTitle.textContent = "観測されていません";
+          if (mapStatus) {
+            mapStatus.hidden = true;
+            mapStatus.textContent = "";
+            mapStatus.removeAttribute("title");
+          }
         }
 
         function getDesktopNodeRect(node) {
@@ -1596,7 +1668,7 @@
           };
         }
 
-        function createNodeElement(node, rect) {
+        function createNodeElement(node, rect, isCurrent) {
           var popupModel = buildPopupModel(node);
           var visited = isNodeVisited(node);
           var card = document.createElement("a");
@@ -1612,6 +1684,10 @@
           card.dataset.graphLayer = String(node.layer);
           card.dataset.graphLane = String(node.lane);
           card.dataset.graphVisited = visited ? "true" : "false";
+          card.dataset.graphCurrent = isCurrent ? "true" : "false";
+          if (isCurrent) {
+            card.setAttribute("aria-current", "page");
+          }
           card.setAttribute(
             "aria-label",
             [node.title, REALM_LABELS[node.realm] || node.realm, KIND_LABELS[node.kind] || node.kind]
@@ -1679,6 +1755,39 @@
           });
 
           return card;
+        }
+
+        function findFocusNode(nodes, focus) {
+          if (!focus) {
+            return null;
+          }
+          for (var i = 0; i < nodes.length; i += 1) {
+            var node = nodes[i];
+            if (node.scenario !== focus.scenario) {
+              continue;
+            }
+            if ((node.entry || null) === focus.entry) {
+              return node;
+            }
+          }
+          return null;
+        }
+
+        function updateMapStatus(node, graph) {
+          if (!mapStatus) {
+            return;
+          }
+          if (!node) {
+            mapStatus.hidden = true;
+            mapStatus.textContent = "";
+            mapStatus.removeAttribute("title");
+            return;
+          }
+          mapStatus.hidden = false;
+          mapStatus.textContent = "現在地: " + node.title;
+          mapStatus.title = [graph && graph.title ? graph.title : "", node.summary || "", node.scenario, node.entry]
+            .filter(Boolean)
+            .join(" / ");
         }
 
         function buildEdgePathDesktop(fromRect, toRect) {
@@ -1928,6 +2037,8 @@
           refreshVisitedScenarioKeys();
           var nodes = Array.isArray(graph.nodes) ? graph.nodes.slice() : [];
           var edges = Array.isArray(graph.edges) ? graph.edges.slice() : [];
+          var focus = resolveFocusLocation();
+          var focusNode = findFocusNode(nodes, focus);
           var sortedNodes = nodes.slice().sort(function (a, b) {
             if (a.layer !== b.layer) return a.layer - b.layer;
             return a.lane - b.lane;
@@ -1936,6 +2047,7 @@
           dateLabel.textContent = graph.date || resolveDate() || "";
           updateDateNavigation(graph.date || resolveDate() || "");
           mapTitle.textContent = graph.title || "観測された地図";
+          updateMapStatus(focusNode, graph);
           document.title = (graph.title || "A.D.M.S.") + " | ワディーゲストハウス";
 
           if (sortedNodes.length === 0) {
@@ -1976,10 +2088,16 @@
           graphNodes.innerHTML = "";
           appendEdgeMask(layout, sortedNodes);
 
+          var focusCard = null;
           for (var j = 0; j < sortedNodes.length; j += 1) {
             var node = sortedNodes[j];
             var rect = layout.rectMap.get(node.id);
-            graphNodes.appendChild(createNodeElement(node, rect));
+            var isCurrent = Boolean(focusNode && focusNode.id === node.id);
+            var card = createNodeElement(node, rect, isCurrent);
+            graphNodes.appendChild(card);
+            if (isCurrent) {
+              focusCard = card;
+            }
           }
 
           for (var k = 0; k < edges.length; k += 1) {
@@ -2006,6 +2124,16 @@
               label.style.top = pathInfo.labelY + "px";
               graphEdgeLabels.appendChild(label);
             }
+          }
+
+          if (focusCard) {
+            window.requestAnimationFrame(function () {
+              focusCard.scrollIntoView({
+                block: "center",
+                inline: "center",
+                behavior: "auto",
+              });
+            });
           }
         }
 

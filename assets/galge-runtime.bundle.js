@@ -32898,6 +32898,9 @@ void main() {
       this.ctrlSkipTimer = null;
       this.backlog = [];
       this.backlogOpen = false;
+      this.choiceHistory = [];
+      this.admsGraphCache = /* @__PURE__ */ new Map();
+      this.admsLocationRequestToken = 0;
       this.currentChapter = "";
       this.textSteps = [];
       this.scenario = null;
@@ -32922,7 +32925,10 @@ void main() {
       this.$chapterOverlay = this.$("chapter-overlay");
       this.$chapterTitle = this.$("chapter-title");
       this.$endScreen = this.$("end-screen");
+      this.$endRetryChoiceBtn = this.$("end-retry-choice-btn");
       this.$endBackLink = document.querySelector("#end-screen .back-link");
+      this.$admsCurrentLocation = this.$("adms-current-location");
+      this.$admsCurrentText = this.$("adms-current-text");
       this.$choiceContainer = this.$("choice-container");
       this.$textWindow = this.$("text-window");
       this.$backBtn = this.$("back-btn");
@@ -33028,7 +33034,7 @@ void main() {
     }
     async applyScenarioDefinition(definition, { preserveAtmosphere = false } = {}) {
       this.scenario = definition;
-      this.currentScenarioEntry = definition.requestedEntry || null;
+      this.setCurrentScenarioEntry(definition.requestedEntry || null);
       this.currentStep = definition.startIndex || 0;
       this.textSteps = definition.steps.filter((step) => step.kind === "text");
       this.markScenarioVisit(this.currentScenarioEntry);
@@ -33038,6 +33044,7 @@ void main() {
     applyScenarioMetadata({ preserveAtmosphere = false } = {}) {
       document.title = `${this.scenario.title} | ビジュアルノベル`;
       this.syncBackNavigation();
+      this.updateAdmsLocation();
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute(
@@ -33107,6 +33114,12 @@ void main() {
         date: scenarioDate,
         mode: "immersive"
       });
+      if (this.scenario?.scenarioName) {
+        params.set("focusScenario", this.scenario.scenarioName);
+      }
+      if (this.currentScenarioEntry) {
+        params.set("focusEntry", this.currentScenarioEntry);
+      }
       return `./dream-select.html?${params.toString()}`;
     }
     syncBackNavigation() {
@@ -33120,6 +33133,206 @@ void main() {
     }
     markScenarioVisit(entryLabel = null) {
       rememberDreamVisit(this.scenario?.scenarioName, entryLabel || null);
+    }
+    setCurrentScenarioEntry(entryLabel = null) {
+      this.currentScenarioEntry = typeof entryLabel === "string" && entryLabel ? entryLabel : null;
+      this.syncBackNavigation();
+      this.updateAdmsLocation();
+    }
+    async fetchAdmsGraph(date) {
+      if (!date) {
+        return null;
+      }
+      if (!this.admsGraphCache.has(date)) {
+        const request = fetch(`./scenarios/adms/${encodeURIComponent(date)}.json`).then((response) => response.ok ? response.json() : null).catch(() => null);
+        this.admsGraphCache.set(date, request);
+      }
+      return this.admsGraphCache.get(date);
+    }
+    findCurrentAdmsNode(graph) {
+      if (!graph || !Array.isArray(graph.nodes) || !this.scenario?.scenarioName) {
+        return null;
+      }
+      const entryLabel = this.currentScenarioEntry || null;
+      return graph.nodes.find(
+        (node) => node.scenario === this.scenario.scenarioName && (node.entry || null) === entryLabel
+      ) || null;
+    }
+    async updateAdmsLocation() {
+      if (!this.$admsCurrentText) {
+        return;
+      }
+      const scenarioName = this.scenario?.scenarioName || "";
+      const date = this.extractScenarioDate();
+      const entryLabel = this.currentScenarioEntry || null;
+      const fallbackText = [this.scenario?.title || scenarioName, entryLabel].filter(Boolean).join(" / ") || "観測中…";
+      this.$admsCurrentText.textContent = fallbackText;
+      if (this.$admsCurrentLocation) {
+        this.$admsCurrentLocation.title = [scenarioName, entryLabel].filter(Boolean).join(" / ");
+      }
+      if (!scenarioName || !date) {
+        return;
+      }
+      const token = ++this.admsLocationRequestToken;
+      const graph = await this.fetchAdmsGraph(date);
+      if (token !== this.admsLocationRequestToken) {
+        return;
+      }
+      const node = this.findCurrentAdmsNode(graph);
+      if (!node) {
+        return;
+      }
+      this.$admsCurrentText.textContent = node.icon ? `${node.icon} ${node.title}` : node.title;
+      if (this.$admsCurrentLocation) {
+        this.$admsCurrentLocation.title = [
+          graph?.title || "",
+          node.summary || "",
+          scenarioName,
+          entryLabel
+        ].filter(Boolean).join(" / ");
+      }
+    }
+    cloneBacklogEntries(entries = this.backlog) {
+      return entries.map((entry) => ({ ...entry }));
+    }
+    updateEndRetryChoiceButton() {
+      if (!this.$endRetryChoiceBtn) {
+        return;
+      }
+      this.$endRetryChoiceBtn.hidden = this.choiceHistory.length < 1;
+    }
+    hideEndScreen() {
+      this.$endScreen.classList.remove("visible");
+      this.$endScreen.style.display = "none";
+    }
+    captureAtmosphereSnapshot() {
+      const bgImage = document.getElementById("scene-bg-img");
+      return {
+        bodyBackground: document.body.style.background,
+        bgColor: { ...this.bgColor },
+        bgClearColor: this.bgClearColor,
+        starColor: this.starColor,
+        starGlowColor: this.starGlowColor,
+        colorCurrent: { ...this._colorCurrent },
+        colorTarget: { ...this._colorTarget },
+        starCurrent: { ...this._starCurrent },
+        starTarget: { ...this._starTarget },
+        starGlowCurrent: { ...this._starGlowCurrent },
+        starGlowTarget: { ...this._starGlowTarget },
+        clearCurrent: { ...this._clearCurrent },
+        clearTarget: { ...this._clearTarget },
+        sceneBgSrc: bgImage?.getAttribute("src") || "",
+        sceneBgCurrentSrc: bgImage?.dataset.currentSrc || "",
+        sceneBgOpacity: bgImage?.style.opacity || ""
+      };
+    }
+    restoreAtmosphereSnapshot(snapshot) {
+      if (!snapshot) {
+        return;
+      }
+      this.bgColor = { ...snapshot.bgColor };
+      this.bgClearColor = snapshot.bgClearColor;
+      this.starColor = snapshot.starColor;
+      this.starGlowColor = snapshot.starGlowColor;
+      this._colorCurrent = { ...snapshot.colorCurrent };
+      this._colorTarget = { ...snapshot.colorTarget };
+      this._starCurrent = { ...snapshot.starCurrent };
+      this._starTarget = { ...snapshot.starTarget };
+      this._starGlowCurrent = { ...snapshot.starGlowCurrent };
+      this._starGlowTarget = { ...snapshot.starGlowTarget };
+      this._clearCurrent = { ...snapshot.clearCurrent };
+      this._clearTarget = { ...snapshot.clearTarget };
+      document.body.style.background = snapshot.bodyBackground || "";
+      const hasSceneBg = snapshot.sceneBgSrc || snapshot.sceneBgCurrentSrc;
+      const bgImage = hasSceneBg ? this.ensureSceneBgImageElement() : document.getElementById("scene-bg-img");
+      if (!bgImage) {
+        return;
+      }
+      if (!hasSceneBg) {
+        bgImage.removeAttribute("src");
+        delete bgImage.dataset.currentSrc;
+        bgImage.style.opacity = "0";
+        return;
+      }
+      bgImage.src = snapshot.sceneBgSrc || snapshot.sceneBgCurrentSrc;
+      bgImage.dataset.currentSrc = snapshot.sceneBgCurrentSrc || snapshot.sceneBgSrc;
+      bgImage.style.opacity = snapshot.sceneBgOpacity || "0.55";
+    }
+    captureStageSnapshot() {
+      return {
+        visible: this.vrmStage.host.classList.contains("is-visible"),
+        speakerKey: this.vrmStage.currentSpeakerKey,
+        emotion: this.vrmStage.currentEmotion,
+        modelRecord: this.vrmStage.currentEntry?.record || null
+      };
+    }
+    async restoreStageSnapshot(snapshot) {
+      if (!snapshot?.visible || !snapshot.modelRecord) {
+        this.vrmStage.hide();
+        this.vrmStage.currentSpeakerKey = snapshot?.speakerKey || null;
+        this.vrmStage.currentEmotion = snapshot?.emotion || "neutral";
+        return;
+      }
+      await this.vrmStage.setSpeaker({
+        speakerKey: snapshot.speakerKey,
+        modelRecord: snapshot.modelRecord,
+        emotion: snapshot.emotion
+      });
+    }
+    captureChoiceSnapshot(stepIndex) {
+      return {
+        scenario: this.scenario,
+        currentScenarioEntry: this.currentScenarioEntry,
+        stepIndex,
+        flags: [...this.flags],
+        backlog: this.cloneBacklogEntries(),
+        currentChapter: this.currentChapter,
+        chapterDisplayText: this.$chapterDisplay.textContent,
+        bgBaseDir: this._bgBaseDir || null,
+        hudOpacity: this.$hud.style.opacity || "1",
+        textWindow: this.captureTextWindowSnapshot(),
+        atmosphere: this.captureAtmosphereSnapshot(),
+        stage: this.captureStageSnapshot()
+      };
+    }
+    rememberChoiceSnapshot(snapshot) {
+      this.choiceHistory.push(snapshot);
+      if (this.choiceHistory.length > 48) {
+        this.choiceHistory.splice(0, this.choiceHistory.length - 48);
+      }
+      this.updateEndRetryChoiceButton();
+    }
+    async returnToPreviousChoice() {
+      const snapshot = this.choiceHistory[this.choiceHistory.length - 1];
+      if (!snapshot || this.isAdvancing) {
+        return;
+      }
+      this.isAdvancing = true;
+      try {
+        this.closeSoundPopup();
+        this.hideEndScreen();
+        this.resetTransientUiForScenarioTransition();
+        this.scenario = snapshot.scenario;
+        this.setCurrentScenarioEntry(snapshot.currentScenarioEntry);
+        this.currentChapter = snapshot.currentChapter;
+        this.textSteps = this.scenario.steps.filter((step) => step.kind === "text");
+        this.flags = new Set(snapshot.flags);
+        this.backlog = this.cloneBacklogEntries(snapshot.backlog);
+        this._bgBaseDir = snapshot.bgBaseDir;
+        this.$chapterDisplay.textContent = snapshot.chapterDisplayText || snapshot.currentChapter || "";
+        this.$chapterTitle.textContent = snapshot.currentChapter || "";
+        this.$hud.style.display = "flex";
+        this.$hud.style.opacity = snapshot.hudOpacity || "1";
+        this.applyScenarioMetadata({ preserveAtmosphere: true });
+        this.restoreAtmosphereSnapshot(snapshot.atmosphere);
+        this.restoreTextWindowSnapshot(snapshot.textWindow);
+        await this.restoreStageSnapshot(snapshot.stage);
+        await this.showStep(snapshot.stepIndex);
+        this.choiceHistory.pop();
+        this.updateEndRetryChoiceButton();
+      } finally {
+        this.isAdvancing = false;
+      }
     }
     updateModelSummary(summary) {
       const text = `モデル設定済み ${summary.dedicatedCount} / ${summary.relevantCount}`;
@@ -33162,6 +33375,12 @@ void main() {
         event.stopPropagation();
         this.toggleSoundPopup();
       });
+      if (this.$endRetryChoiceBtn) {
+        this.$endRetryChoiceBtn.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          await this.returnToPreviousChoice();
+        });
+      }
       this.$bgmToggle.addEventListener("click", (event) => {
         event.stopPropagation();
         this.toggleBgm();
@@ -33196,7 +33415,7 @@ void main() {
         await this.startExperience();
       });
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#back-btn") || event.target.closest("#end-screen a")) {
+        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-panel") || event.target.closest("#back-btn") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
           return;
         }
         if (this.$volumePopup.classList.contains("visible")) {
@@ -33585,25 +33804,30 @@ void main() {
         `${baseDir}/${bgImageKey}.jpg`
       );
     }
-    _showBgImage(src, fallbackSrc, fallbackSrc2) {
+    ensureSceneBgImageElement() {
       let el = document.getElementById("scene-bg-img");
-      if (!el) {
-        el = document.createElement("img");
-        el.id = "scene-bg-img";
-        Object.assign(el.style, {
-          position: "fixed",
-          inset: "0",
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          imageRendering: "pixelated",
-          zIndex: "1",
-          pointerEvents: "none",
-          opacity: "0",
-          transition: "opacity 2s ease"
-        });
-        document.body.insertBefore(el, document.body.firstChild);
+      if (el) {
+        return el;
       }
+      el = document.createElement("img");
+      el.id = "scene-bg-img";
+      Object.assign(el.style, {
+        position: "fixed",
+        inset: "0",
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        imageRendering: "pixelated",
+        zIndex: "1",
+        pointerEvents: "none",
+        opacity: "0",
+        transition: "opacity 2s ease"
+      });
+      document.body.insertBefore(el, document.body.firstChild);
+      return el;
+    }
+    _showBgImage(src, fallbackSrc, fallbackSrc2) {
+      const el = this.ensureSceneBgImageElement();
       if (el.dataset.currentSrc === src) {
         return Promise.resolve();
       }
@@ -33834,6 +34058,7 @@ void main() {
       this.updateProgress();
       this.syncBgmForIndex(index);
       if (step.kind === "label") {
+        this.setCurrentScenarioEntry(step.label || null);
         this.markScenarioVisit(step.label || null);
         await this.showStep(index + 1);
         return;
@@ -33926,6 +34151,7 @@ void main() {
         this.$hud.style.display = "none";
         this.$("end-title").textContent = step.title;
         this.$("end-subtitle").textContent = step.subtitle;
+        this.updateEndRetryChoiceButton();
         this.$endScreen.style.display = "flex";
         window.setTimeout(() => this.$endScreen.classList.add("visible"), 50);
         return;
@@ -33966,6 +34192,7 @@ void main() {
           button.textContent = choice.text;
           button.addEventListener("click", (event) => {
             event.stopPropagation();
+            this.rememberChoiceSnapshot(this.captureChoiceSnapshot(index));
             this.showingChoice = false;
             if (choice.flag) {
               this.flags.add(choice.flag);
