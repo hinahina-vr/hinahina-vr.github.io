@@ -1,5 +1,7 @@
 const BGM_ENABLED_STORAGE_KEY = "galgeRuntimeBgmEnabled";
 const BGM_VOLUME_OVERRIDE_STORAGE_KEY = "galgeRuntimeBgmVolumeOverride";
+const BGM_ENABLED_DEFAULT = true;
+const BGM_VOLUME_DEFAULT = 0.2;
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -19,7 +21,8 @@ function isDirectPath(track) {
 
 export class BGMController {
   constructor() {
-    this.enabled = window.localStorage.getItem(BGM_ENABLED_STORAGE_KEY) === "1";
+    const storedEnabled = window.localStorage.getItem(BGM_ENABLED_STORAGE_KEY);
+    this.enabled = storedEnabled == null ? BGM_ENABLED_DEFAULT : storedEnabled === "1";
     this.volumeOverride = this.loadVolumeOverride();
     this.audio = new Audio();
     this.audio.loop = true;
@@ -50,12 +53,12 @@ export class BGMController {
     try {
       const raw = window.localStorage.getItem(BGM_VOLUME_OVERRIDE_STORAGE_KEY);
       if (raw == null || raw === "") {
-        return null;
+        return BGM_VOLUME_DEFAULT;
       }
       const parsed = Number(raw);
-      return Number.isFinite(parsed) ? clamp(parsed, 0, 1) : null;
+      return Number.isFinite(parsed) ? clamp(parsed, 0, 1) : BGM_VOLUME_DEFAULT;
     } catch (error) {
-      return null;
+      return BGM_VOLUME_DEFAULT;
     }
   }
 
