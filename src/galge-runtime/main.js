@@ -24,6 +24,9 @@ const MESSAGE_SPEED_PRESETS = {
   4: { label: "速い", multiplier: 0.7 },
   5: { label: "最速", multiplier: 0.4 },
 };
+const FLAG_UNLOCK_HINT_OVERRIDES = {
+  unlock_saikyou: "佐治と開高の両ルートを見る",
+};
 
 function getModeFromQuery() {
   const mode = new URLSearchParams(window.location.search).get("mode");
@@ -375,6 +378,72 @@ class GalgeRuntimeApp {
       return true;
     }
     return false;
+  }
+
+  getChoiceUnlockHint(choice) {
+    if (!choice) {
+      return "";
+    }
+    const hints = [];
+    if (choice.if) {
+      hints.push(`解放条件: ${this.describeFlagRequirement(choice.if)}`);
+    }
+    if (choice.ifNot) {
+      hints.push(`解放条件: ${this.describeFlagRequirement(choice.ifNot, { negate: true })}`);
+    }
+    return hints.join("\n");
+  }
+
+  describeFlagRequirement(flagName, { negate = false } = {}) {
+    if (!flagName || typeof flagName !== "string") {
+      return negate ? "別条件をまだ満たしていない" : "特定条件を満たす";
+    }
+
+    const override = FLAG_UNLOCK_HINT_OVERRIDES[flagName];
+    if (override) {
+      return negate ? `まだ ${override} 前の段階にいる` : override;
+    }
+
+    if (!negate && flagName.startsWith("visited_")) {
+      const roleKey = flagName.slice("visited_".length);
+      const roleName = this.scenario?.chars?.[roleKey]?.name || roleKey.replace(/_/g, " ");
+      return `${roleName}側のルートを一度見る`;
+    }
+
+    const choiceText = this.getChoiceTextThatSetsFlag(flagName);
+    if (choiceText) {
+      return negate ? `まだ「${choiceText}」を選んでいない` : `「${choiceText}」まで進む`;
+    }
+
+    const normalized = flagName.replace(/_/g, " ");
+    return negate ? `まだ ${normalized} を満たしていない` : `${normalized} を満たす`;
+  }
+
+  getChoiceTextThatSetsFlag(flagName) {
+    const scenarioSteps = this.scenario?.steps || [];
+    const choiceTextByTarget = new Map();
+    for (const step of scenarioSteps) {
+      if (step.kind !== "choices") {
+        continue;
+      }
+      for (const choice of step.choices || []) {
+        if (!choice?.goto || !choice?.text || choiceTextByTarget.has(choice.goto)) {
+          continue;
+        }
+        choiceTextByTarget.set(choice.goto, choice.text);
+      }
+    }
+
+    let currentLabel = null;
+    for (const step of scenarioSteps) {
+      if (step.label) {
+        currentLabel = step.label;
+      }
+      if (step.flag === flagName && currentLabel && choiceTextByTarget.has(currentLabel)) {
+        return choiceTextByTarget.get(currentLabel);
+      }
+    }
+    return null;
   }
 
   getLockedChoiceTargets() {
@@ -1811,9 +1880,26 @@ class GalgeRuntimeApp {
         button.dataset.locked = locked ? "true" : "false";
         if (locked) {
           button.classList.add("locked");
-          button.disabled = true;
           button.setAttribute("aria-disabled", "true");
-          button.title = "条件未達のため選べません";
+          button.tabIndex = -1;
+          button.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          });
+        }
+
+        if (locked) {
+          const lockHint = this.getChoiceUnlockHint(choice) || "解放条件はまだ見えていません";
+          const lockLabel = document.createElement("span");
+          lockLabel.className = "choice-btn-lock";
+          lockLabel.textContent = "🔒";
+          lockLabel.tabIndex = 0;
+          lockLabel.setAttribute("aria-label", lockHint);
+          const lockTooltip = document.createElement("span");
+          lockTooltip.className = "choice-btn-lock-tooltip";
+          lockTooltip.textContent = lockHint;
+          lockLabel.appendChild(lockTooltip);
+          button.appendChild(lockLabel);
         }
 
         const label = document.createElement("span");
@@ -1822,10 +1908,6 @@ class GalgeRuntimeApp {
         button.appendChild(label);
 
         if (locked) {
-          const lockLabel = document.createElement("span");
-          lockLabel.className = "choice-btn-lock";
-          lockLabel.textContent = "🔒 条件未達";
-          button.appendChild(lockLabel);
           this.$choiceContainer.appendChild(button);
           continue;
         }

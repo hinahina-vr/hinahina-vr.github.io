@@ -493,15 +493,15 @@
       #choice-container.visible { opacity: 1; }
       .choice-btn {
         min-width: min(560px, 86vw);
-        min-height: clamp(116px, 10vw, 146px);
-        padding: clamp(18px, 2vw, 28px) clamp(32px, 4vw, 68px);
+        min-height: clamp(80px, 7vw, 98px);
+        padding: clamp(14px, 1.6vw, 22px) clamp(28px, 3.4vw, 60px);
         border-radius: 18px;
         border: 1px solid rgba(196, 163, 255, 0.25);
         background:
           linear-gradient(135deg, rgba(60, 35, 110, 0.7), rgba(25, 14, 50, 0.85)),
           radial-gradient(ellipse at 30% 0%, rgba(180, 140, 255, 0.12), transparent 60%);
         color: #f0e8ff;
-        font-size: clamp(18px, 2vw, 34px);
+        font-size: clamp(18px, 1.75vw, 30px);
         letter-spacing: 0.13em;
         cursor: pointer;
         position: relative;
@@ -528,23 +528,68 @@
         max-width: 100%;
         line-height: 1.28;
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .choice-btn-lock {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        position: absolute;
-        left: clamp(24px, 2vw, 38px);
-        bottom: clamp(16px, 1.5vw, 22px);
-        min-height: 24px;
-        padding: 0 10px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(10, 12, 24, 0.42);
+        justify-content: center;
+        flex: 0 0 auto;
+        position: relative;
         color: rgba(255, 232, 187, 0.9);
-        font-size: clamp(10px, 0.9vw, 14px);
-        letter-spacing: 0.16em;
+        font-size: 0.78em;
         line-height: 1;
+        cursor: help;
+        outline: none;
+      }
+      .choice-btn-lock-tooltip {
+        position: absolute;
+        left: 50%;
+        bottom: calc(100% + 12px);
+        transform: translate(-50%, 8px);
+        min-width: min(220px, 46vw);
+        max-width: min(320px, 64vw);
+        padding: 10px 12px 11px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 220, 176, 0.22);
+        background:
+          linear-gradient(180deg, rgba(26, 20, 42, 0.98), rgba(16, 12, 28, 0.96)),
+          radial-gradient(circle at 50% 0%, rgba(255, 215, 150, 0.14), transparent 68%);
+        box-shadow:
+          0 18px 40px rgba(0, 0, 0, 0.42),
+          0 0 24px rgba(255, 210, 150, 0.08);
+        color: rgba(255, 246, 218, 0.96);
+        font-size: clamp(11px, 0.88vw, 14px);
+        line-height: 1.55;
+        letter-spacing: 0.08em;
+        text-align: left;
+        white-space: pre-line;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          visibility 0.18s step-end;
+        z-index: 4;
+      }
+      .choice-btn-lock-tooltip::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: calc(100% - 1px);
+        transform: translateX(-50%);
+        border-width: 8px 7px 0;
+        border-style: solid;
+        border-color: rgba(24, 18, 36, 0.96) transparent transparent;
+      }
+      .choice-btn-lock:hover .choice-btn-lock-tooltip,
+      .choice-btn-lock:focus-visible .choice-btn-lock-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
       }
       .choice-btn::before {
         content: "";
@@ -588,7 +633,9 @@
       }
       .choice-btn.locked,
       .choice-btn:disabled {
+        gap: clamp(10px, 0.8vw, 16px);
         cursor: not-allowed;
+        overflow: visible;
         border-color: rgba(190, 198, 218, 0.18);
         background:
           linear-gradient(135deg, rgba(44, 42, 64, 0.82), rgba(18, 16, 30, 0.9)),
@@ -602,7 +649,9 @@
       }
       .choice-btn.locked .choice-btn-text,
       .choice-btn:disabled .choice-btn-text {
-        padding-bottom: clamp(30px, 2.6vw, 42px);
+        width: auto;
+        flex: 0 1 auto;
+        text-align: left;
       }
       .choice-btn.locked::before,
       .choice-btn:disabled::before {
@@ -1393,20 +1442,22 @@
         #expression-tag { font-size: clamp(10px, 2.5vw, 13px); font-style: normal; }
         .choice-btn {
           min-width: 88vw;
-          min-height: 104px;
+          min-height: 78px;
           font-size: clamp(14px, 3.8vw, 20px);
-          padding: 18px 24px;
+          padding: 14px 22px;
         }
         .choice-btn-lock {
-          left: 18px;
-          bottom: 14px;
-          min-height: 22px;
-          padding: 0 9px;
-          font-size: 10px;
+          font-size: 0.82em;
+        }
+        .choice-btn-lock-tooltip {
+          min-width: min(180px, 68vw);
+          max-width: min(240px, 78vw);
+          padding: 9px 10px 10px;
+          font-size: 11px;
         }
         .choice-btn.locked .choice-btn-text,
         .choice-btn:disabled .choice-btn-text {
-          padding-bottom: 28px;
+          width: auto;
         }
         #settings-dialog {
           width: calc(100vw - 16px);
