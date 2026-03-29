@@ -956,6 +956,19 @@
         align-items: center;
         gap: 10px;
       }
+      .vol-icon {
+        width: 40px;
+        height: 22px;
+        border-radius: 11px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background: rgba(124, 77, 255, 0.22);
+        border: 1px solid rgba(200, 160, 224, 0.22);
+        color: #dbc7ff;
+        font-size: 12px;
+      }
       .vol-toggle {
         width: 40px;
         height: 22px;
@@ -1027,6 +1040,10 @@
         width: 28px;
         text-align: right;
         flex-shrink: 0;
+      }
+      .vol-value.speed-value {
+        width: 52px;
+        font-size: 10px;
       }
 
       .text-fade-out { animation: fadeOut 0.25s ease forwards; }
@@ -1368,6 +1385,12 @@
         <span class="vol-label">発話</span>
         <input type="range" class="vol-slider" id="voice-slider" min="0" max="100" value="100">
         <span class="vol-value" id="voice-value">100</span>
+      </div>
+      <div class="vol-row">
+        <span class="vol-icon" aria-hidden="true">✎</span>
+        <span class="vol-label">速度</span>
+        <input type="range" class="vol-slider" id="message-speed-slider" min="1" max="5" step="1" value="3">
+        <span class="vol-value speed-value" id="message-speed-value">標準</span>
       </div>
     </div>
     <div id="mini-model-summary">モデル設定済み 0 / 0</div>

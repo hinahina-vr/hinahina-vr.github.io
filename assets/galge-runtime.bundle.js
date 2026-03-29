@@ -32637,6 +32637,15 @@ void main() {
   var SITE_MODE_DEFAULT = "classic";
   var DREAM_VISITED_STORAGE_KEY = "waddy-dream-visited-v1";
   var DREAM_ROOT_ENTRY_KEY = "__root__";
+  var MESSAGE_SPEED_STORAGE_KEY = "waddy-message-speed";
+  var MESSAGE_SPEED_DEFAULT = 3;
+  var MESSAGE_SPEED_PRESETS = {
+    1: { label: "遅い", multiplier: 1.75 },
+    2: { label: "ゆっくり", multiplier: 1.3 },
+    3: { label: "標準", multiplier: 1 },
+    4: { label: "速い", multiplier: 0.7 },
+    5: { label: "最速", multiplier: 0.4 }
+  };
   function getModeFromQuery() {
     const mode = new URLSearchParams(window.location.search).get("mode");
     return mode === "classic" || mode === "immersive" ? mode : null;
@@ -32662,6 +32671,26 @@ void main() {
     const url = new URL(window.location.href);
     url.searchParams.set("mode", mode);
     window.history.replaceState({}, "", url);
+  }
+  function normalizeMessageSpeed(value) {
+    const parsed = Number.parseInt(value, 10);
+    return MESSAGE_SPEED_PRESETS[parsed] ? parsed : MESSAGE_SPEED_DEFAULT;
+  }
+  function getStoredMessageSpeed() {
+    try {
+      return normalizeMessageSpeed(window.localStorage.getItem(MESSAGE_SPEED_STORAGE_KEY));
+    } catch (error) {
+      return MESSAGE_SPEED_DEFAULT;
+    }
+  }
+  function setStoredMessageSpeed(speed) {
+    try {
+      window.localStorage.setItem(MESSAGE_SPEED_STORAGE_KEY, String(normalizeMessageSpeed(speed)));
+    } catch (error) {
+    }
+  }
+  function resolveInitialMessageSpeed() {
+    return getStoredMessageSpeed();
   }
   function buildDreamVisitKey(scenarioName, entryLabel = null) {
     if (!scenarioName) {
@@ -32814,6 +32843,7 @@ void main() {
         this.animId = requestAnimationFrame(this.drawKongou);
       });
       this.currentMode = resolveInitialSiteMode();
+      this.messageSpeed = resolveInitialMessageSpeed();
       this.currentStep = 0;
       this.isTyping = false;
       this.typeTimer = null;
@@ -32869,6 +32899,8 @@ void main() {
       this.$voiceToggle = this.$("voice-toggle");
       this.$voiceSlider = this.$("voice-slider");
       this.$voiceValue = this.$("voice-value");
+      this.$messageSpeedSlider = this.$("message-speed-slider");
+      this.$messageSpeedValue = this.$("message-speed-value");
       this.$titleApiClientId = this.$("title-api-client-id");
       this.$titleApiStatus = this.$("title-api-status");
       this.$apiClientId = this.$("api-client-id");
@@ -33105,6 +33137,12 @@ void main() {
         this.$voiceValue.textContent = v;
         this.voiceController.setVolume(v / 100);
       });
+      if (this.$messageSpeedSlider) {
+        this.$messageSpeedSlider.addEventListener("input", (event) => {
+          event.stopPropagation();
+          this.setMessageSpeed(this.$messageSpeedSlider.value);
+        });
+      }
       this.$volumePopup.addEventListener("click", (event) => {
         event.stopPropagation();
       });
@@ -33170,6 +33208,7 @@ void main() {
       });
       this.updateVoiceToggle();
       this.updateBgmToggle();
+      this.syncMessageSpeedUi();
       this.updateMessageApiUI({
         message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
         clientId: this.messageApiReceiver.getClientId(),
@@ -33242,6 +33281,28 @@ void main() {
           this.$volumePopup.style.display = "none";
         }
       }, 300);
+    }
+    getMessageSpeedConfig() {
+      return MESSAGE_SPEED_PRESETS[this.messageSpeed] || MESSAGE_SPEED_PRESETS[MESSAGE_SPEED_DEFAULT];
+    }
+    getTypingDelay() {
+      const base = this.currentMode === "classic" ? 35 : 28;
+      const { multiplier } = this.getMessageSpeedConfig();
+      return Math.max(8, Math.round(base * multiplier));
+    }
+    syncMessageSpeedUi() {
+      const config = this.getMessageSpeedConfig();
+      if (this.$messageSpeedSlider) {
+        this.$messageSpeedSlider.value = String(this.messageSpeed);
+      }
+      if (this.$messageSpeedValue) {
+        this.$messageSpeedValue.textContent = config.label;
+      }
+    }
+    setMessageSpeed(speed) {
+      this.messageSpeed = normalizeMessageSpeed(speed);
+      setStoredMessageSpeed(this.messageSpeed);
+      this.syncMessageSpeedUi();
     }
     updateMessageApiUI({ message, clientId, apiBase, configured }) {
       this.voiceController.setProxyBase(apiBase);
@@ -33600,13 +33661,12 @@ void main() {
       this.$cursor.style.display = "inline-block";
       this.$continueIndicator.classList.remove("visible");
       let index = 0;
-      const speed = this.currentMode === "classic" ? 35 : 28;
       const step = () => {
         if (index < text.length) {
           this.$textContent.textContent += text[index];
           index += 1;
           this.$textWindow.scrollTop = this.$textWindow.scrollHeight;
-          this.typeTimer = window.setTimeout(step, speed);
+          this.typeTimer = window.setTimeout(step, this.getTypingDelay());
         } else {
           this.isTyping = false;
           this.$cursor.style.display = "none";
