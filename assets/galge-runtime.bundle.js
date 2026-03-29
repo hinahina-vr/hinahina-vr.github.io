@@ -32899,8 +32899,6 @@ void main() {
       this.backlog = [];
       this.backlogOpen = false;
       this.choiceHistory = [];
-      this.admsGraphCache = /* @__PURE__ */ new Map();
-      this.admsLocationRequestToken = 0;
       this.currentChapter = "";
       this.textSteps = [];
       this.scenario = null;
@@ -32927,8 +32925,10 @@ void main() {
       this.$endScreen = this.$("end-screen");
       this.$endRetryChoiceBtn = this.$("end-retry-choice-btn");
       this.$endBackLink = document.querySelector("#end-screen .back-link");
-      this.$admsCurrentLocation = this.$("adms-current-location");
-      this.$admsCurrentText = this.$("adms-current-text");
+      this.$admsOverlay = this.$("adms-overlay");
+      this.$admsOverlayBackdrop = this.$("adms-overlay-backdrop");
+      this.$admsOverlayClose = this.$("adms-overlay-close");
+      this.$admsOverlayFrame = this.$("adms-overlay-frame");
       this.$choiceContainer = this.$("choice-container");
       this.$textWindow = this.$("text-window");
       this.$backBtn = this.$("back-btn");
@@ -33044,7 +33044,6 @@ void main() {
     applyScenarioMetadata({ preserveAtmosphere = false } = {}) {
       document.title = `${this.scenario.title} | ビジュアルノベル`;
       this.syncBackNavigation();
-      this.updateAdmsLocation();
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute(
@@ -33105,7 +33104,50 @@ void main() {
       }
       return null;
     }
-    resolveBackUrl() {
+    isChoiceLocked(choice) {
+      if (!choice) {
+        return false;
+      }
+      if (choice.if && !this.flags.has(choice.if)) {
+        return true;
+      }
+      if (choice.ifNot && this.flags.has(choice.ifNot)) {
+        return true;
+      }
+      return false;
+    }
+    getLockedChoiceTargets() {
+      const step = this.scenario?.steps?.[this.currentStep];
+      const scenarioName = this.scenario?.scenarioName || null;
+      if (!step || step.kind !== "choices" || !scenarioName) {
+        return [];
+      }
+      const unlockedKeys = /* @__PURE__ */ new Set();
+      const lockedByKey = /* @__PURE__ */ new Map();
+      for (const choice of step.choices || []) {
+        if (!choice?.goto) {
+          continue;
+        }
+        const key = buildDreamVisitKey(scenarioName, choice.goto);
+        if (!key) {
+          continue;
+        }
+        if (this.isChoiceLocked(choice)) {
+          if (!unlockedKeys.has(key) && !lockedByKey.has(key)) {
+            lockedByKey.set(key, {
+              scenario: scenarioName,
+              entry: choice.goto,
+              text: choice.text || ""
+            });
+          }
+          continue;
+        }
+        unlockedKeys.add(key);
+        lockedByKey.delete(key);
+      }
+      return [...lockedByKey.values()];
+    }
+    resolveBackUrl({ overlay = false } = {}) {
       const scenarioDate = this.extractScenarioDate();
       if (!scenarioDate) {
         return "./diary.html";
@@ -33119,6 +33161,13 @@ void main() {
       }
       if (this.currentScenarioEntry) {
         params.set("focusEntry", this.currentScenarioEntry);
+      }
+      const lockedTargets = this.getLockedChoiceTargets();
+      if (lockedTargets.length > 0) {
+        params.set("lockedTargets", JSON.stringify(lockedTargets));
+      }
+      if (overlay) {
+        params.set("overlay", "1");
       }
       return `./dream-select.html?${params.toString()}`;
     }
@@ -33137,60 +33186,41 @@ void main() {
     setCurrentScenarioEntry(entryLabel = null) {
       this.currentScenarioEntry = typeof entryLabel === "string" && entryLabel ? entryLabel : null;
       this.syncBackNavigation();
-      this.updateAdmsLocation();
     }
-    async fetchAdmsGraph(date) {
-      if (!date) {
-        return null;
-      }
-      if (!this.admsGraphCache.has(date)) {
-        const request = fetch(`./scenarios/adms/${encodeURIComponent(date)}.json`).then((response) => response.ok ? response.json() : null).catch(() => null);
-        this.admsGraphCache.set(date, request);
-      }
-      return this.admsGraphCache.get(date);
+    isAdmsOverlayOpen() {
+      return this.$admsOverlay?.style.display === "flex";
     }
-    findCurrentAdmsNode(graph) {
-      if (!graph || !Array.isArray(graph.nodes) || !this.scenario?.scenarioName) {
-        return null;
+    openAdmsOverlay() {
+      if (!this.$admsOverlay || !this.$admsOverlayFrame) {
+        window.location.href = this.resolveBackUrl();
+        return;
       }
-      const entryLabel = this.currentScenarioEntry || null;
-      return graph.nodes.find(
-        (node) => node.scenario === this.scenario.scenarioName && (node.entry || null) === entryLabel
-      ) || null;
+      if (this.backlogOpen) {
+        this.closeBacklog();
+      }
+      this.closeSoundPopup();
+      this.stopCtrlSkip();
+      const overlayUrl = this.resolveBackUrl({ overlay: true });
+      this.$admsOverlayFrame.src = overlayUrl;
+      this.$admsOverlayFrame.dataset.currentUrl = overlayUrl;
+      this.$admsOverlay.setAttribute("aria-hidden", "false");
+      this.$admsOverlay.style.display = "flex";
+      window.requestAnimationFrame(() => {
+        this.$admsOverlay.classList.add("visible");
+        this.$admsOverlayClose?.focus({ preventScroll: true });
+      });
     }
-    async updateAdmsLocation() {
-      if (!this.$admsCurrentText) {
+    closeAdmsOverlay() {
+      if (!this.$admsOverlay || this.$admsOverlay.style.display !== "flex") {
         return;
       }
-      const scenarioName = this.scenario?.scenarioName || "";
-      const date = this.extractScenarioDate();
-      const entryLabel = this.currentScenarioEntry || null;
-      const fallbackText = [this.scenario?.title || scenarioName, entryLabel].filter(Boolean).join(" / ") || "観測中…";
-      this.$admsCurrentText.textContent = fallbackText;
-      if (this.$admsCurrentLocation) {
-        this.$admsCurrentLocation.title = [scenarioName, entryLabel].filter(Boolean).join(" / ");
-      }
-      if (!scenarioName || !date) {
-        return;
-      }
-      const token = ++this.admsLocationRequestToken;
-      const graph = await this.fetchAdmsGraph(date);
-      if (token !== this.admsLocationRequestToken) {
-        return;
-      }
-      const node = this.findCurrentAdmsNode(graph);
-      if (!node) {
-        return;
-      }
-      this.$admsCurrentText.textContent = node.icon ? `${node.icon} ${node.title}` : node.title;
-      if (this.$admsCurrentLocation) {
-        this.$admsCurrentLocation.title = [
-          graph?.title || "",
-          node.summary || "",
-          scenarioName,
-          entryLabel
-        ].filter(Boolean).join(" / ");
-      }
+      this.$admsOverlay.classList.remove("visible");
+      this.$admsOverlay.setAttribute("aria-hidden", "true");
+      window.setTimeout(() => {
+        if (!this.$admsOverlay.classList.contains("visible")) {
+          this.$admsOverlay.style.display = "none";
+        }
+      }, 240);
     }
     cloneBacklogEntries(entries = this.backlog) {
       return entries.map((entry) => ({ ...entry }));
@@ -33414,8 +33444,36 @@ void main() {
         event.stopPropagation();
         await this.startExperience();
       });
+      if (this.$backBtn) {
+        this.$backBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          this.openAdmsOverlay();
+        });
+      }
+      if (this.$endBackLink) {
+        this.$endBackLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          this.openAdmsOverlay();
+        });
+      }
+      if (this.$admsOverlayBackdrop) {
+        this.$admsOverlayBackdrop.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          this.closeAdmsOverlay();
+        });
+      }
+      if (this.$admsOverlayClose) {
+        this.$admsOverlayClose.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          this.closeAdmsOverlay();
+        });
+      }
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-panel") || event.target.closest("#back-btn") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
+        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-overlay") || event.target.closest("#back-btn") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
           return;
         }
         if (this.$volumePopup.classList.contains("visible")) {
@@ -33424,6 +33482,11 @@ void main() {
         this.advance();
       });
       document.addEventListener("keydown", (event) => {
+        if (this.isAdmsOverlayOpen() && event.key === "Escape") {
+          event.preventDefault();
+          this.closeAdmsOverlay();
+          return;
+        }
         if (event.key === "Control" && !event.repeat) {
           this.startCtrlSkip();
           return;
@@ -33451,8 +33514,16 @@ void main() {
           this.stopCtrlSkip();
         }
       });
+      window.addEventListener("message", (event) => {
+        if (event.origin !== window.location.origin) {
+          return;
+        }
+        if (event.data?.type === "waddy-close-adms-overlay") {
+          this.closeAdmsOverlay();
+        }
+      });
       document.addEventListener("wheel", (event) => {
-        if (!this.started || !this.$("settings-modal").hidden) {
+        if (!this.started || !this.$("settings-modal").hidden || this.isAdmsOverlayOpen()) {
           return;
         }
         if (event.deltaY < 0) {
@@ -34181,15 +34252,29 @@ void main() {
         this.voiceController.stopCurrent();
         this.$choiceContainer.innerHTML = "";
         for (const choice of step.choices) {
-          if (choice.if && !this.flags.has(choice.if)) {
-            continue;
-          }
-          if (choice.ifNot && this.flags.has(choice.ifNot)) {
-            continue;
-          }
+          const locked = this.isChoiceLocked(choice);
           const button = document.createElement("button");
           button.className = "choice-btn";
-          button.textContent = choice.text;
+          button.type = "button";
+          button.dataset.locked = locked ? "true" : "false";
+          if (locked) {
+            button.classList.add("locked");
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.title = "条件未達のため選べません";
+          }
+          const label = document.createElement("span");
+          label.className = "choice-btn-text";
+          label.textContent = choice.text;
+          button.appendChild(label);
+          if (locked) {
+            const lockLabel = document.createElement("span");
+            lockLabel.className = "choice-btn-lock";
+            lockLabel.textContent = "🔒 条件未達";
+            button.appendChild(lockLabel);
+            this.$choiceContainer.appendChild(button);
+            continue;
+          }
           button.addEventListener("click", (event) => {
             event.stopPropagation();
             this.rememberChoiceSnapshot(this.captureChoiceSnapshot(index));
@@ -34391,7 +34476,7 @@ void main() {
       }
     }
     advance() {
-      if (!this.started || this.showingChoice || this.isAdvancing || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
+      if (!this.started || this.showingChoice || this.isAdvancing || this.isAdmsOverlayOpen() || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
         return;
       }
       if (this.isTyping) {
@@ -34411,7 +34496,7 @@ void main() {
       }
     }
     goBack() {
-      if (!this.started || this.isTyping || this.isAdvancing || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
+      if (!this.started || this.isTyping || this.isAdvancing || this.isAdmsOverlayOpen() || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
         return;
       }
       this.voiceController.stopCurrent();
@@ -34451,11 +34536,11 @@ void main() {
       });
     }
     startCtrlSkip() {
-      if (!this.started || this.ctrlSkipTimer || this.backlogOpen) {
+      if (!this.started || this.ctrlSkipTimer || this.backlogOpen || this.isAdmsOverlayOpen()) {
         return;
       }
       const tick = () => {
-        if (this.showingChoice || this.$endScreen.style.display === "flex") {
+        if (this.showingChoice || this.$endScreen.style.display === "flex" || this.isAdmsOverlayOpen()) {
           this.stopCtrlSkip();
           return;
         }
@@ -34486,7 +34571,7 @@ void main() {
       }
     }
     openBacklog() {
-      if (this.backlogOpen || this.backlog.length === 0) {
+      if (this.backlogOpen || this.backlog.length === 0 || this.isAdmsOverlayOpen()) {
         return;
       }
       this.backlogOpen = true;
