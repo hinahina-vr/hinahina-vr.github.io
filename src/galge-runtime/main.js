@@ -150,6 +150,13 @@ class GalgeRuntimeApp {
     this.currentScenarioEntry = null;
     this.renderToken = 0;
     this.flags = new Set();
+    this.currentTextPages = [];
+    this.currentTextPageIndex = 0;
+    this.currentTextStepIndex = -1;
+    this.currentTextVisibleLength = 0;
+    this.$textMeasure = null;
+    this.$textMeasureContent = null;
+    this.pageTurnTimer = null;
 
     this.$ = (id) => document.getElementById(id);
     this.$loading = this.$("loading");
@@ -940,6 +947,7 @@ class GalgeRuntimeApp {
         this.initKongou();
       }
       this.vrmStage.resize();
+      this.refreshCurrentTextPagination();
     });
 
     this.updateVoiceToggle();
@@ -1587,6 +1595,7 @@ class GalgeRuntimeApp {
       }
     }
 
+    this.refreshCurrentTextPagination();
     updateModeUrl(this.currentMode);
   }
 
@@ -1600,20 +1609,317 @@ class GalgeRuntimeApp {
     );
   }
 
-  typeText(text, onDone) {
+  ensureTextMeasure() {
+    if (this.$textMeasure && this.$textMeasureContent) {
+      return { container: this.$textMeasure, content: this.$textMeasureContent };
+    }
+
+    const container = document.createElement("div");
+    const content = document.createElement("span");
+    container.appendChild(content);
+    container.setAttribute("aria-hidden", "true");
+    container.style.position = "fixed";
+    container.style.left = "-10000px";
+    container.style.top = "0";
+    container.style.visibility = "hidden";
+    container.style.pointerEvents = "none";
+    container.style.zIndex = "-1";
+    container.style.maxHeight = "none";
+    container.style.minHeight = "0";
+    container.style.height = "auto";
+    container.style.overflow = "visible";
+    content.style.whiteSpace = "pre-wrap";
+    content.style.wordBreak = "break-word";
+    document.body.appendChild(container);
+    this.$textMeasure = container;
+    this.$textMeasureContent = content;
+    return { container, content };
+  }
+
+  configureTextMeasure() {
+    const { container, content } = this.ensureTextMeasure();
+    const textWindowStyle = window.getComputedStyle(this.$textWindow);
+    const textContentStyle = window.getComputedStyle(this.$textContent);
+    const rect = this.$textWindow.getBoundingClientRect();
+    const width = rect.width || this.$textWindow.clientWidth || 0;
+
+    container.style.width = `${Math.max(0, width)}px`;
+    container.style.padding = textWindowStyle.padding;
+    container.style.border = textWindowStyle.border;
+    container.style.borderRadius = textWindowStyle.borderRadius;
+    container.style.boxSizing = textWindowStyle.boxSizing;
+    container.style.fontSize = textWindowStyle.fontSize;
+    container.style.fontFamily = textWindowStyle.fontFamily;
+    container.style.fontWeight = textWindowStyle.fontWeight;
+    container.style.fontStyle = textWindowStyle.fontStyle;
+    container.style.letterSpacing = textWindowStyle.letterSpacing;
+    container.style.lineHeight = textWindowStyle.lineHeight;
+    container.style.textTransform = textWindowStyle.textTransform;
+    container.style.textIndent = textWindowStyle.textIndent;
+
+    content.style.whiteSpace = textContentStyle.whiteSpace;
+    content.style.wordBreak = textContentStyle.wordBreak;
+    content.style.overflowWrap = textContentStyle.overflowWrap;
+
+    return { container, content };
+  }
+
+  getResolvedTextWindowMaxHeight() {
+    const maxHeight = Number.parseFloat(window.getComputedStyle(this.$textWindow).maxHeight);
+    if (Number.isFinite(maxHeight)) {
+      return maxHeight;
+    }
+    const rect = this.$textWindow.getBoundingClientRect();
+    return rect.height || this.$textWindow.clientHeight || window.innerHeight * 0.42;
+  }
+
+  textFitsInWindow(text) {
+    const { container, content } = this.configureTextMeasure();
+    content.textContent = text;
+    return container.scrollHeight <= this.getResolvedTextWindowMaxHeight() + 0.5;
+  }
+
+  findPreferredPageBreak(units, start, maxEnd) {
+    const pageLength = maxEnd - start;
+    if (pageLength <= 12) {
+      return maxEnd;
+    }
+
+    const threshold = start + Math.max(8, Math.floor(pageLength * 0.6));
+    const preferredBreakChars = new Set([
+      "\n",
+      "。",
+      "！",
+      "？",
+      "!",
+      "?",
+      "」",
+      "』",
+      "】",
+      "）",
+      ")",
+      " ",
+      "　",
+      "\t",
+    ]);
+
+    for (let index = maxEnd; index > threshold; index -= 1) {
+      if (preferredBreakChars.has(units[index - 1])) {
+        return index;
+      }
+    }
+
+    return maxEnd;
+  }
+
+  paginateText(text) {
+    const safeText = typeof text === "string" ? text : String(text ?? "");
+    const units = Array.from(safeText);
+    if (units.length === 0) {
+      return [{ start: 0, end: 0, text: "" }];
+    }
+    if (this.textFitsInWindow(safeText)) {
+      return [{ start: 0, end: units.length, text: safeText }];
+    }
+
+    const pages = [];
+    let start = 0;
+    while (start < units.length) {
+      let low = start + 1;
+      let high = units.length;
+      let best = start + 1;
+
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        const candidate = units.slice(start, mid).join("");
+        if (this.textFitsInWindow(candidate)) {
+          best = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      let end = this.findPreferredPageBreak(units, start, best);
+      if (end <= start) {
+        end = Math.max(start + 1, best);
+      }
+
+      pages.push({
+        start,
+        end,
+        text: units.slice(start, end).join(""),
+      });
+      start = end;
+    }
+
+    return pages;
+  }
+
+  cloneTextPages(pages = this.currentTextPages) {
+    return Array.isArray(pages) ? pages.map((page) => ({ ...page })) : [];
+  }
+
+  resetTextPagination() {
+    this.currentTextPages = [];
+    this.currentTextPageIndex = 0;
+    this.currentTextStepIndex = -1;
+    this.currentTextVisibleLength = 0;
+  }
+
+  setTextPaginationForStep(text, stepIndex, { preserveVisibleLength = 0 } = {}) {
+    const pages = this.paginateText(text);
+    const totalLength = pages.length ? pages[pages.length - 1].end : 0;
+    const visibleLength = Math.max(0, Math.min(totalLength, preserveVisibleLength));
+    let pageIndex = pages.findIndex((page) => visibleLength <= page.end);
+    if (pageIndex < 0) {
+      pageIndex = Math.max(0, pages.length - 1);
+    }
+
+    this.currentTextPages = pages;
+    this.currentTextPageIndex = pageIndex;
+    this.currentTextStepIndex = stepIndex;
+    this.currentTextVisibleLength = visibleLength;
+  }
+
+  getCurrentTextPage() {
+    return this.currentTextPages[this.currentTextPageIndex] || null;
+  }
+
+  getCurrentTextPageText() {
+    return this.getCurrentTextPage()?.text || "";
+  }
+
+  hasMoreTextPages() {
+    return (
+      this.currentTextStepIndex === this.currentStep &&
+      this.currentTextPageIndex < this.currentTextPages.length - 1
+    );
+  }
+
+  hasPreviousTextPages() {
+    return this.currentTextStepIndex === this.currentStep && this.currentTextPageIndex > 0;
+  }
+
+  showCurrentTextPage({ animate = true } = {}) {
+    const page = this.getCurrentTextPage();
+    if (!page) {
+      return;
+    }
+
+    if (this.pageTurnTimer) {
+      window.clearTimeout(this.pageTurnTimer);
+      this.pageTurnTimer = null;
+    }
+    this.currentTextVisibleLength = page.start;
+    this.$continueIndicator.classList.remove("visible");
+    this.$cursor.style.display = "none";
+    this.$textContent.classList.remove("text-fade-in");
+
+    const renderPage = () => {
+      this.isAdvancing = false;
+      this.$textContent.classList.remove("text-fade-out");
+      this.$textContent.classList.add("text-fade-in");
+      this.typeText(page.text, () => {
+        this.$textContent.classList.remove("text-fade-in");
+      }, { startVisibleLength: page.start });
+    };
+
+    if (!animate) {
+      this.isAdvancing = false;
+      renderPage();
+      return;
+    }
+
+    this.isAdvancing = true;
+    this.renderToken += 1;
+    const token = this.renderToken;
+    this.$textContent.classList.add("text-fade-out");
+    this.pageTurnTimer = window.setTimeout(() => {
+      this.pageTurnTimer = null;
+      if (token !== this.renderToken) {
+        return;
+      }
+      renderPage();
+    }, 180);
+  }
+
+  showNextTextPage() {
+    if (!this.hasMoreTextPages()) {
+      return false;
+    }
+    this.currentTextPageIndex += 1;
+    this.showCurrentTextPage();
+    return true;
+  }
+
+  showPreviousTextPage() {
+    if (!this.hasPreviousTextPages()) {
+      return false;
+    }
+    this.currentTextPageIndex -= 1;
+    const page = this.getCurrentTextPage();
+    if (!page) {
+      return false;
+    }
+    window.clearTimeout(this.typeTimer);
+    this.isTyping = false;
+    this.currentTextVisibleLength = page.end;
+    this.$textContent.textContent = page.text;
+    this.$cursor.style.display = "none";
+    this.$continueIndicator.classList.add("visible");
+    this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+    return true;
+  }
+
+  refreshCurrentTextPagination() {
+    const step = this.scenario?.steps?.[this.currentStep];
+    if (!this.started || !step || step.kind !== "text" || this.currentTextStepIndex !== this.currentStep) {
+      return;
+    }
+
+    const preservedVisibleLength = this.isTyping
+      ? this.currentTextVisibleLength
+      : (this.getCurrentTextPage()?.end ?? 0);
+    if (this.pageTurnTimer) {
+      window.clearTimeout(this.pageTurnTimer);
+      this.pageTurnTimer = null;
+    }
+    window.clearTimeout(this.typeTimer);
+    this.isTyping = false;
+    this.isAdvancing = false;
+    this.setTextPaginationForStep(step.text, this.currentStep, {
+      preserveVisibleLength: preservedVisibleLength,
+    });
+
+    const page = this.getCurrentTextPage();
+    if (!page) {
+      return;
+    }
+
+    this.currentTextVisibleLength = page.end;
+    this.$textContent.textContent = page.text;
+    this.$cursor.style.display = "none";
+    this.$continueIndicator.classList.add("visible");
+    this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+  }
+
+  typeText(text, onDone, { startVisibleLength = 0 } = {}) {
     this.isTyping = true;
     this.$textContent.textContent = "";
     this.$cursor.style.display = "inline-block";
     this.$continueIndicator.classList.remove("visible");
+    const units = Array.from(text);
     let index = 0;
     const step = () => {
-      if (index < text.length) {
-        this.$textContent.textContent += text[index];
+      if (index < units.length) {
+        this.$textContent.textContent += units[index];
         index += 1;
-        this.$textWindow.scrollTop = this.$textWindow.scrollHeight;
+        this.currentTextVisibleLength = startVisibleLength + index;
         this.typeTimer = window.setTimeout(step, this.getTypingDelay());
       } else {
         this.isTyping = false;
+        this.currentTextVisibleLength = startVisibleLength + units.length;
         this.$cursor.style.display = "none";
         this.$continueIndicator.classList.add("visible");
         onDone?.();
@@ -1622,13 +1928,14 @@ class GalgeRuntimeApp {
     step();
   }
 
-  skipType(text) {
+  skipType(text, { startVisibleLength = 0 } = {}) {
     window.clearTimeout(this.typeTimer);
     this.$textContent.textContent = text;
-    this.$textWindow.scrollTop = this.$textWindow.scrollHeight;
+    this.currentTextVisibleLength = startVisibleLength + Array.from(text).length;
     this.isTyping = false;
     this.$cursor.style.display = "none";
     this.$continueIndicator.classList.add("visible");
+    this.$textContent.classList.remove("text-fade-in");
   }
 
   updateProgress() {
@@ -1674,6 +1981,10 @@ class GalgeRuntimeApp {
 
   resetTransientUiForScenarioTransition() {
     this.renderToken += 1;
+    if (this.pageTurnTimer) {
+      window.clearTimeout(this.pageTurnTimer);
+      this.pageTurnTimer = null;
+    }
     window.clearTimeout(this.typeTimer);
     this.isTyping = false;
     this.showingChoice = false;
@@ -1685,6 +1996,7 @@ class GalgeRuntimeApp {
     this.$cursor.style.display = "none";
     this.$textContent.classList.remove("text-fade-in", "text-fade-out");
     this.voiceController.stopCurrent();
+    this.resetTextPagination();
   }
 
   async loadScenarioInline({ scenario, entry = null }) {
@@ -1946,6 +2258,7 @@ class GalgeRuntimeApp {
       return;
     }
 
+    this.setTextPaginationForStep(step.text, index);
     this.addToBacklog(step);
 
     const charData = this.getCharData(step.speaker);
@@ -2007,9 +2320,10 @@ class GalgeRuntimeApp {
 
       this.$textContent.classList.remove("text-fade-out");
       this.$textContent.classList.add("text-fade-in");
-      this.typeText(step.text, () => {
+      const currentPage = this.getCurrentTextPage();
+      this.typeText(currentPage?.text || "", () => {
         this.$textContent.classList.remove("text-fade-in");
-      });
+      }, { startVisibleLength: currentPage?.start || 0 });
     }, 240);
   }
 
@@ -2030,6 +2344,10 @@ class GalgeRuntimeApp {
       textColor: this.$textContent.style.color,
       continueVisible: this.$continueIndicator.classList.contains("visible"),
       cursorDisplay: this.$cursor.style.display,
+      currentTextPages: this.cloneTextPages(),
+      currentTextPageIndex: this.currentTextPageIndex,
+      currentTextStepIndex: this.currentTextStepIndex,
+      currentTextVisibleLength: this.currentTextVisibleLength,
     };
   }
 
@@ -2046,6 +2364,16 @@ class GalgeRuntimeApp {
     this.$textContent.style.color = snapshot.textColor;
     this.$cursor.style.display = snapshot.cursorDisplay;
     this.$continueIndicator.classList.toggle("visible", snapshot.continueVisible);
+    this.currentTextPages = this.cloneTextPages(snapshot.currentTextPages);
+    this.currentTextPageIndex = Number.isInteger(snapshot.currentTextPageIndex)
+      ? snapshot.currentTextPageIndex
+      : 0;
+    this.currentTextStepIndex = Number.isInteger(snapshot.currentTextStepIndex)
+      ? snapshot.currentTextStepIndex
+      : -1;
+    this.currentTextVisibleLength = Number.isInteger(snapshot.currentTextVisibleLength)
+      ? snapshot.currentTextVisibleLength
+      : 0;
   }
 
   async directSpeakMessage(messageData) {
@@ -2056,7 +2384,10 @@ class GalgeRuntimeApp {
 
     const currentScenarioStep = this.scenario.steps[this.currentStep];
     if (this.isTyping && currentScenarioStep?.kind === "text") {
-      this.skipType(currentScenarioStep.text);
+      const currentPage = this.getCurrentTextPage();
+      this.skipType(currentPage?.text || currentScenarioStep.text, {
+        startVisibleLength: currentPage?.start || 0,
+      });
     }
 
     const snapshot = this.started ? this.captureTextWindowSnapshot() : null;
@@ -2162,8 +2493,15 @@ class GalgeRuntimeApp {
     if (this.isTyping) {
       const step = this.scenario.steps[this.currentStep];
       if (step?.kind === "text") {
-        this.skipType(step.text);
+        const currentPage = this.getCurrentTextPage();
+        this.skipType(currentPage?.text || step.text, {
+          startVisibleLength: currentPage?.start || 0,
+        });
       }
+      return;
+    }
+
+    if (this.scenario.steps[this.currentStep]?.kind === "text" && this.showNextTextPage()) {
       return;
     }
 
@@ -2191,6 +2529,9 @@ class GalgeRuntimeApp {
     }
 
     this.voiceController.stopCurrent();
+    if (this.scenario.steps[this.currentStep]?.kind === "text" && this.showPreviousTextPage()) {
+      return;
+    }
     let previousIndex = this.currentStep - 1;
     while (previousIndex >= 0) {
       if (this.scenario.steps[previousIndex].kind === "text") {
@@ -2238,18 +2579,15 @@ class GalgeRuntimeApp {
         this.stopCtrlSkip();
         return;
       }
-      const step = this.scenario.steps[this.currentStep];
-      if (this.isTyping && step?.kind === "text") {
-        this.skipType(step.text);
-      }
       if (!this.isAdvancing) {
+        const wasTyping = this.isTyping;
+        const hadMorePages =
+          this.scenario.steps[this.currentStep]?.kind === "text" && this.hasMoreTextPages();
         const nextIndex = this.currentStep + 1;
-        if (nextIndex < this.scenario.steps.length) {
-          this.isAdvancing = true;
-          this.showStep(nextIndex).finally(() => {
-            this.isAdvancing = false;
-          });
-        } else {
+
+        this.advance();
+
+        if (!wasTyping && !hadMorePages && nextIndex >= this.scenario.steps.length) {
           this.stopCtrlSkip();
           return;
         }
