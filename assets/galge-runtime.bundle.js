@@ -33130,7 +33130,7 @@ void main() {
       if (choice.ifNot) {
         hints.push(`解放条件: ${this.describeFlagRequirement(choice.ifNot, { negate: true })}`);
       }
-      return hints.join("\n");
+      return hints.join(" / ");
     }
     describeFlagRequirement(flagName, { negate = false } = {}) {
       if (!flagName || typeof flagName !== "string") {
@@ -34332,13 +34332,12 @@ void main() {
             const lockLabel = document.createElement("span");
             lockLabel.className = "choice-btn-lock";
             lockLabel.textContent = "🔒";
-            lockLabel.tabIndex = 0;
-            lockLabel.setAttribute("aria-label", lockHint);
+            lockLabel.setAttribute("aria-hidden", "true");
             const lockTooltip = document.createElement("span");
             lockTooltip.className = "choice-btn-lock-tooltip";
             lockTooltip.textContent = lockHint;
-            lockLabel.appendChild(lockTooltip);
             button.appendChild(lockLabel);
+            button.appendChild(lockTooltip);
           }
           const label = document.createElement("span");
           label.className = "choice-btn-text";

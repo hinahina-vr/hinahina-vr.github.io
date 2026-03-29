@@ -537,21 +537,17 @@
         align-items: center;
         justify-content: center;
         flex: 0 0 auto;
-        position: relative;
         color: rgba(255, 232, 187, 0.9);
         font-size: 0.78em;
         line-height: 1;
-        cursor: help;
-        outline: none;
       }
       .choice-btn-lock-tooltip {
         position: absolute;
         left: 50%;
         bottom: calc(100% + 12px);
         transform: translate(-50%, 8px);
-        min-width: min(220px, 46vw);
-        max-width: min(320px, 64vw);
-        padding: 10px 12px 11px;
+        max-width: min(520px, 88vw);
+        padding: 9px 13px 10px;
         border-radius: 12px;
         border: 1px solid rgba(255, 220, 176, 0.22);
         background:
@@ -562,10 +558,12 @@
           0 0 24px rgba(255, 210, 150, 0.08);
         color: rgba(255, 246, 218, 0.96);
         font-size: clamp(11px, 0.88vw, 14px);
-        line-height: 1.55;
+        line-height: 1.3;
         letter-spacing: 0.08em;
         text-align: left;
-        white-space: pre-line;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -585,8 +583,8 @@
         border-style: solid;
         border-color: rgba(24, 18, 36, 0.96) transparent transparent;
       }
-      .choice-btn-lock:hover .choice-btn-lock-tooltip,
-      .choice-btn-lock:focus-visible .choice-btn-lock-tooltip {
+      .choice-btn.locked:hover .choice-btn-lock-tooltip,
+      .choice-btn.locked:focus-visible .choice-btn-lock-tooltip {
         opacity: 1;
         visibility: visible;
         transform: translate(-50%, 0);
@@ -1450,9 +1448,8 @@
           font-size: 0.82em;
         }
         .choice-btn-lock-tooltip {
-          min-width: min(180px, 68vw);
-          max-width: min(240px, 78vw);
-          padding: 9px 10px 10px;
+          max-width: min(320px, 90vw);
+          padding: 8px 10px 9px;
           font-size: 11px;
         }
         .choice-btn.locked .choice-btn-text,
