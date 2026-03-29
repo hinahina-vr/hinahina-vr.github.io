@@ -1,0 +1,344 @@
+{
+  "title": "青いシートの上の誤認識",
+  "subtitle": "─ 見えているのに、誰も見ていない ─",
+  "genre": "学園電波ノベル",
+  "date": "2026-03-28",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "私",
+      "color": "#9aa0d8",
+      "emoji": "🪞"
+    },
+    "crowd": {
+      "name": "群衆",
+      "color": "#8f775e",
+      "emoji": "🍺"
+    },
+    "icon": {
+      "name": "アイコン",
+      "color": "#c070b0",
+      "emoji": "🖼️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "cherry_camp",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "代々木公園を上から見ている。青いシート、缶ビール、紙皿、人間。どれも同じ縮尺の記号として地面に貼りついていて、桜だけがその上に薄い膜のように重なっている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "花見とは、本当に花を見る行為なのだろうか。むしろ人間が自分のノイズを自然に貼りつけて、そのノイズの派手さを桜で免責してもらう儀式なのかもしれない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "見えているものが多すぎる。\nそして多すぎるとき、人はたいていちゃんと見ていない。"
+    },
+    {
+      "label": "choose_noise"
+    },
+    {
+      "choices": [
+        {
+          "text": "青いシートの格子へ降りる",
+          "goto": "park_grid"
+        },
+        {
+          "text": "二次会で剥がれる膜を見る",
+          "goto": "afterparty_membrane"
+        },
+        {
+          "text": "アイコンの廊下へ入る",
+          "goto": "icon_corridor"
+        }
+      ]
+    },
+    {
+      "label": "park_grid"
+    },
+    {
+      "bg": "cherry_camp"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "地上に降りると、青いシートは格子だった。人は格子の中に座って、笑い、飲み、紙皿を往復させている。隣の格子との境界は三メートルもなく、その三メートルが社会の全部みたいな顔をしている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "桜の色は高いところにあり、缶の色は低いところにあり、声はそのあいだを雑に往復していた。春というより、配色済みの騒音だった。"
+    },
+    {
+      "choices": [
+        {
+          "text": "上空からもう一度見直す",
+          "goto": "gen_pattern"
+        },
+        {
+          "text": "格子の外縁を歩く",
+          "goto": "window_sakura"
+        }
+      ]
+    },
+    {
+      "label": "gen_pattern"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "もう一度上へ浮かぶ。すると缶も紙皿も人の頭も、みな同じ円になった。花見とは円の集合であり、円たちは自分が人間であると信じながら地面に散っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "カテゴリーは高度で壊れる。人間とゴミは、近づけば違い、離れれば模様になる。認識とはしばしば距離の副作用だ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "その模様を記憶したまま歩く",
+          "goto": "window_sakura"
+        }
+      ]
+    },
+    {
+      "label": "afterparty_membrane"
+    },
+    {
+      "bg": "bar"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "二次会の居酒屋では、人格の外側に張られていた薄い膜が、アルコールでゆっくり溶けていた。最初は談笑で、それから大声になり、それから笑いと愚かさの区別がつかなくなる。"
+    },
+    {
+      "speaker": "crowd",
+      "expression": "",
+      "text": "ゴミであることは、たぶん突然の堕落ではない。\n最初から内蔵されていた素質が、酒と集団で適温まで温められただけだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "品質が落ちる、という言い方は少し正確すぎる。実際には、何かが露出しただけなのだ。ふだん隠れているものが、春の夜の温度で表面へ出てきただけなのだ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "その膜の断面を見る",
+          "goto": "gen_membrane"
+        },
+        {
+          "text": "窓際の席へ移る",
+          "goto": "window_sakura"
+        }
+      ]
+    },
+    {
+      "label": "gen_membrane"
+    },
+    {
+      "bg": "dark_study"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "断面は驚くほど薄かった。善良さも、社会性も、気遣いも、その薄い膜の上に置かれていただけだった。剥がれた下から出てきたものを、私たちはたぶん本性と呼ぶ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "けれど本性という言葉も、少し乱暴だ。酔った夜だけ現れるものが本性なら、翌朝の頭痛もまた人格の一部でなければおかしい。人間はいつも、いくつかの薄膜の重なりでしかない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "その薄膜を折りたたむ",
+          "goto": "window_sakura"
+        }
+      ]
+    },
+    {
+      "label": "icon_corridor"
+    },
+    {
+      "bg": "hall_of_rooms"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "廊下の壁一面に、小さな四角い画像が貼られている。名前も並んでいる。アイコンと名前。たったそれだけの材料から、人々は勝手に身体を組み立て、声色まで塗り、性別まで確定してしまう。"
+    },
+    {
+      "speaker": "icon",
+      "expression": "",
+      "text": "私は画像ではない。\nだが画像であることを期待される。\n名前もまた、身体の代用品として使われる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "認識とは知覚の別名ではない。多くの場合それは、願望の設計図だ。見たい身体を先に描いて、そのあとで現実をそれに合わせようとする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "名前と画像の継ぎ目を見る",
+          "goto": "gen_avatar"
+        },
+        {
+          "text": "廊下の突き当たりの窓へ向かう",
+          "goto": "window_sakura"
+        }
+      ]
+    },
+    {
+      "label": "gen_avatar"
+    },
+    {
+      "bg": "hall_of_rooms"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "継ぎ目には、ほとんど何もなかった。にもかかわらず、人はそこへ大量の意味を流し込める。小さな画像一枚と、短い名前ひとつ。それだけで、知らない誰かをかなり具体的に誤認できる。"
+    },
+    {
+      "speaker": "icon",
+      "expression": "",
+      "text": "誤認は失敗ではない。\nしばしば、それは認識の通常運転だ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "その通常運転を見届ける",
+          "goto": "window_sakura"
+        }
+      ]
+    },
+    {
+      "label": "window_sakura"
+    },
+    {
+      "bg": "mitra_chamber"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "最後に窓があった。窓の向こうは暗い。桜は見えない。見えないのに、そこに咲いているとわかる。むしろ見えていた人間たちより、その見えない花のほうがよほど現実に近い。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "人は、見えているものを見ているのではありません。\n見たいと思っている輪郭のほうを、いつも少しだけ先に見ています。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "だから青いシートの上では人間と缶が同じ記号になり、居酒屋では人格の膜が剥がれ、アイコンから勝手な身体が逆算される。\nあなたが最後に信用したのが、窓の外の見えない桜だったのは自然なことです。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "見えないもののほうが、見えているものより正確な夜がある。\nたぶん今夜がそうだ。"
+    },
+    {
+      "label": "final_sight"
+    },
+    {
+      "choices": [
+        {
+          "text": "ノイズの模様を持ち帰る",
+          "goto": "END_NOISE"
+        },
+        {
+          "text": "アイコンの継ぎ目を持ち帰る",
+          "goto": "END_ICON"
+        },
+        {
+          "text": "見えない桜を持ち帰る",
+          "goto": "END_UNSEEN"
+        }
+      ]
+    },
+    {
+      "label": "END_NOISE"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。昨夜の騒がしさは、内容より先に模様として残っていた。笑い声も缶の色も、もう具体的な意味は失っている。ただ春のノイズだけが薄く耳に残る。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "花見の記憶は、たいてい出来事ではなく配色でできている。\n──END: 配色された騒音"
+    },
+    {
+      "label": "END_ICON"
+    },
+    {
+      "bg": "morning_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚めても、まだ少しだけ可笑しい。人が他人を決めるとき、いかに少ない材料で十分だと思い込めるか。その粗雑さは滑稽だが、同時にかなり普遍的でもある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "認識はよく外れる。外れたまま案外平然と進む。そのことを覚えておくだけでも、次に会う他人に少しは慎重になれるかもしれない。\n──END: 誤認の継ぎ目"
+    },
+    {
+      "label": "END_UNSEEN"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。窓の外には、まだ見えない花がある気がする。昨夜の酔った人間たちより、まだそこにあるかもしれない花のほうが、よほど確かなものとして思い出される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "見えないものを信じるのは危うい。けれど、ときどきそれしか信用できない夜もある。\n──END: 窓の外の現実"
+    }
+  ]
+}

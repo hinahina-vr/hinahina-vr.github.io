@@ -1,0 +1,267 @@
+{
+  "date": "2026-03-28",
+  "title": "青いシートの上の誤認識 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "代々木公園上空",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🛰️",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "standalone_start",
+      "summary": "青いシートも人間も、上から見れば同じ記号になる"
+    },
+    {
+      "id": "choose_noise",
+      "title": "三つの認識の迷路",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🪞",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "choose_noise",
+      "summary": "格子、膜、アイコン"
+    },
+    {
+      "id": "park_grid",
+      "title": "青いシートの格子",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🟦",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "park_grid",
+      "summary": "花見は配色済みの騒音になる"
+    },
+    {
+      "id": "afterparty_membrane",
+      "title": "二次会の薄膜",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🍻",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "afterparty_membrane",
+      "summary": "人格の外側に貼られた膜がゆっくり剥がれる"
+    },
+    {
+      "id": "icon_corridor",
+      "title": "アイコンの廊下",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🖼️",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "icon_corridor",
+      "summary": "画像と名前だけで仮の身体が組み立てられる"
+    },
+    {
+      "id": "gen_pattern",
+      "title": "円の集合",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "⭕",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "gen_pattern",
+      "summary": "距離が変わると人間とゴミは同じ模様になる"
+    },
+    {
+      "id": "gen_membrane",
+      "title": "膜の断面",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🫧",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "gen_membrane",
+      "summary": "本性とは、剥がれた後にだけ与えられる乱暴な名前"
+    },
+    {
+      "id": "gen_avatar",
+      "title": "継ぎ目のない誤認",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🔖",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "gen_avatar",
+      "summary": "誤認は失敗ではなく認識の通常運転である"
+    },
+    {
+      "id": "window_sakura",
+      "title": "見えない桜の窓",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🪟",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "window_sakura",
+      "summary": "見えていない花のほうが、酔った人間より現実に近い"
+    },
+    {
+      "id": "final_sight",
+      "title": "持ち帰る現実",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "👁️",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "final_sight",
+      "summary": "ノイズ、継ぎ目、見えない花"
+    },
+    {
+      "id": "END_NOISE",
+      "title": "配色された騒音",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🎨",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "END_NOISE",
+      "summary": "花見の記憶は配色として残る"
+    },
+    {
+      "id": "END_ICON",
+      "title": "誤認の継ぎ目",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🪡",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "END_ICON",
+      "summary": "少ない手がかりで人は平然と他人を決める"
+    },
+    {
+      "id": "END_UNSEEN",
+      "title": "窓の外の現実",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌸",
+      "scenario": "2026-03-28_青いシートの上の誤認識",
+      "entry": "END_UNSEEN",
+      "summary": "見えないもののほうが確かな夜もある"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_noise",
+      "choiceText": "認識の迷路へ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_noise",
+      "to": "park_grid",
+      "choiceText": "青いシートの格子へ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_noise",
+      "to": "afterparty_membrane",
+      "choiceText": "二次会で剥がれる膜を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_noise",
+      "to": "icon_corridor",
+      "choiceText": "アイコンの廊下へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "park_grid",
+      "to": "gen_pattern",
+      "choiceText": "上空からもう一度見直す",
+      "style": "genkai"
+    },
+    {
+      "from": "park_grid",
+      "to": "window_sakura",
+      "choiceText": "格子の外縁を歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_pattern",
+      "to": "window_sakura",
+      "choiceText": "その模様を記憶したまま歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "afterparty_membrane",
+      "to": "gen_membrane",
+      "choiceText": "その膜の断面を見る",
+      "style": "genkai"
+    },
+    {
+      "from": "afterparty_membrane",
+      "to": "window_sakura",
+      "choiceText": "窓際の席へ移る",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_membrane",
+      "to": "window_sakura",
+      "choiceText": "その薄膜を折りたたむ",
+      "style": "kenkai"
+    },
+    {
+      "from": "icon_corridor",
+      "to": "gen_avatar",
+      "choiceText": "名前と画像の継ぎ目を見る",
+      "style": "genkai"
+    },
+    {
+      "from": "icon_corridor",
+      "to": "window_sakura",
+      "choiceText": "廊下の突き当たりの窓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_avatar",
+      "to": "window_sakura",
+      "choiceText": "その通常運転を見届ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "window_sakura",
+      "to": "final_sight",
+      "choiceText": "どの現実を持ち帰るか決める",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_sight",
+      "to": "END_NOISE",
+      "choiceText": "ノイズの模様を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_sight",
+      "to": "END_ICON",
+      "choiceText": "アイコンの継ぎ目を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_sight",
+      "to": "END_UNSEEN",
+      "choiceText": "見えない桜を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

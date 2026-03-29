@@ -1,0 +1,267 @@
+{
+  "date": "2026-03-27",
+  "title": "ひとりぶん早い花見 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "前夜の机",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🗺️",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "standalone_start",
+      "summary": "持ち物確認が、そのまま夢の地図へ変わる"
+    },
+    {
+      "id": "choose_route",
+      "title": "一人ぶん早い寄り道",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🌙",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "choose_route",
+      "summary": "誰もいない公園、青い川、夜明け前のコンビニ"
+    },
+    {
+      "id": "empty_park",
+      "title": "誰もいない公園",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🌸",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "empty_park",
+      "summary": "本番前の静けさだけが先に来ている"
+    },
+    {
+      "id": "tarp_river",
+      "title": "ブルーシートの川",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🟦",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "tarp_river",
+      "summary": "楽しさは、リストの上を流れてくる"
+    },
+    {
+      "id": "convenience_dawn",
+      "title": "夜明け前のコンビニ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🏪",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "convenience_dawn",
+      "summary": "足りないものは、朝にわかる"
+    },
+    {
+      "id": "gen_petals",
+      "title": "まだ落ちていない花びら",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🍃",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "gen_petals",
+      "summary": "完成前の傾きだけを拾う"
+    },
+    {
+      "id": "gen_tarp",
+      "title": "チェックリストの水面",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "📋",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "gen_tarp",
+      "summary": "地味な準備が翌日の空気を軽くする"
+    },
+    {
+      "id": "gen_receipt",
+      "title": "朝のレシート",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🧾",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "gen_receipt",
+      "summary": "未来は薄い紙に小さく印字される"
+    },
+    {
+      "id": "mitra_bench",
+      "title": "みとらのベンチ",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "mitra_bench",
+      "summary": "準備は、まだ来ていない誰かの席をつくる"
+    },
+    {
+      "id": "final_hold",
+      "title": "朝へ持ち帰るもの",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎒",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "final_hold",
+      "summary": "枝、リスト、レシート"
+    },
+    {
+      "id": "END_PARK",
+      "title": "誰もいない公園",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🌳",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "END_PARK",
+      "summary": "静けさを先に見た朝"
+    },
+    {
+      "id": "END_LOGISTICS",
+      "title": "兵站のやさしさ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "📦",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "END_LOGISTICS",
+      "summary": "楽しさは机の上のリストから始まっている"
+    },
+    {
+      "id": "END_MORNING",
+      "title": "夜明け前のレシート",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌅",
+      "scenario": "2026-03-27_ひとりぶん早い花見",
+      "entry": "END_MORNING",
+      "summary": "朝は薄い紙みたいに静かに始まる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_route",
+      "choiceText": "夢の地図を開く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_route",
+      "to": "empty_park",
+      "choiceText": "誰もいない公園へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_route",
+      "to": "tarp_river",
+      "choiceText": "ブルーシートの川をたどる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_route",
+      "to": "convenience_dawn",
+      "choiceText": "夜明け前のコンビニへ寄る",
+      "style": "kenkai"
+    },
+    {
+      "from": "empty_park",
+      "to": "gen_petals",
+      "choiceText": "散っていない花びらを拾う",
+      "style": "genkai"
+    },
+    {
+      "from": "empty_park",
+      "to": "mitra_bench",
+      "choiceText": "桜の幹に背中を預ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_petals",
+      "to": "mitra_bench",
+      "choiceText": "その想像をポケットにしまう",
+      "style": "kenkai"
+    },
+    {
+      "from": "tarp_river",
+      "to": "gen_tarp",
+      "choiceText": "流れてくるチェックリストを読む",
+      "style": "genkai"
+    },
+    {
+      "from": "tarp_river",
+      "to": "mitra_bench",
+      "choiceText": "川沿いのベンチへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_tarp",
+      "to": "mitra_bench",
+      "choiceText": "軽くなった空気のほうへ歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "convenience_dawn",
+      "to": "gen_receipt",
+      "choiceText": "レシートの裏を見る",
+      "style": "genkai"
+    },
+    {
+      "from": "convenience_dawn",
+      "to": "mitra_bench",
+      "choiceText": "そのまま公園のベンチへ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_receipt",
+      "to": "mitra_bench",
+      "choiceText": "レシートを折って胸ポケットへ入れる",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_bench",
+      "to": "final_hold",
+      "choiceText": "朝へ持ち帰るものを選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_hold",
+      "to": "END_PARK",
+      "choiceText": "桜の枝を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_hold",
+      "to": "END_LOGISTICS",
+      "choiceText": "チェックリストを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_hold",
+      "to": "END_MORNING",
+      "choiceText": "レシートを持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

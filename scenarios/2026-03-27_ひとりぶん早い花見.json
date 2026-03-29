@@ -1,0 +1,354 @@
+{
+  "title": "ひとりぶん早い花見",
+  "subtitle": "─ 桜より先に眠る ─",
+  "genre": "予行演習ノベル",
+  "date": "2026-03-27",
+  "defaultBgm": {
+    "src": "./assets/bgm/wasurenagusa.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "僕",
+      "color": "#90a0c0",
+      "emoji": "🌸"
+    },
+    "cat": {
+      "name": "猫",
+      "color": "#8a7b64",
+      "emoji": "🐈"
+    },
+    "clerk": {
+      "name": "店員",
+      "color": "#70a890",
+      "emoji": "🏪"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/wasurenagusa.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "紙皿の数を数えているうちに、眠気はだいたい限界まで来ていた。ブルーシートは折りたたまれた海みたいに机の端に置かれていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "買い出しメモ、割り箸、紙コップ。そういう小さなものを揃えていくと、花見はイベントというより兵站に近くなる。兵站が整えば、翌日の楽しさはほとんど半分くらい保証される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "二十一時前に眠る。そんな健全なことをすると、世界のほうが少し戸惑う。目を閉じた瞬間、机の木目が公園の地図になり、折りたたんだブルーシートが青い川になった。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "明日の予行演習を、たぶん一人でやることになる。悪くない。花見の本番には本番の良さがあるけれど、誰もいないうちの静けさにも別の良さがある。"
+    },
+    {
+      "label": "choose_route"
+    },
+    {
+      "choices": [
+        {
+          "text": "誰もいない公園へ行く",
+          "goto": "empty_park"
+        },
+        {
+          "text": "ブルーシートの川をたどる",
+          "goto": "tarp_river"
+        },
+        {
+          "text": "夜明け前のコンビニへ寄る",
+          "goto": "convenience_dawn"
+        }
+      ]
+    },
+    {
+      "label": "empty_park"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "公園にはまだ誰もいなかった。桜は満開の一歩手前で止まっていた。七分と八分のあいだにある、どちらとも決めきれないような咲き方だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ブルーシートを広げる必要もない。ただ歩いて、どの枝の下に座るのがいちばんよさそうかを考える。準備がいらない花見というのは、むしろ準備の気配だけでできている。"
+    },
+    {
+      "speaker": "cat",
+      "expression": "",
+      "text": "まだ早いね、と猫が言った。\nもちろん本当に言ったわけではない。でも夢の中では、猫はたいてい少しだけ事情を知っている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "散っていない花びらを拾う",
+          "goto": "gen_petals"
+        },
+        {
+          "text": "桜の幹に背中を預ける",
+          "goto": "mitra_bench"
+        }
+      ]
+    },
+    {
+      "label": "gen_petals"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "地面にはまだ花びらがほとんど落ちていなかった。落ちていない花びらを拾うことはできない。だから僕は、これから落ちる予定の花びらを想像するしかなかった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "何かがまだ起きていない、その直前の感じが好きなのだと思う。完成したものより、完成に向かって少しだけ傾いているもののほうが、僕には本物らしく見える。"
+    },
+    {
+      "choices": [
+        {
+          "text": "その想像をポケットにしまう",
+          "goto": "mitra_bench"
+        }
+      ]
+    },
+    {
+      "label": "tarp_river"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ブルーシートの川は、公園の真ん中を静かに流れていた。紙コップは小さな舟みたいに揺れていたし、買い出しメモは水面に浮かぶ白い魚みたいに見えた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "分担表に書いた名前が、水面の上を一定の速度で流れていく。誰が酒を持ってくるか。誰がソフトドリンクを持ってくるか。楽しさというのは、意外にこういうリストの上を流れてくる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "何もロマンチックではない。でも、たぶんそのことが少しだけロマンチックなんだろう。"
+    },
+    {
+      "choices": [
+        {
+          "text": "流れてくるチェックリストを読む",
+          "goto": "gen_tarp"
+        },
+        {
+          "text": "川沿いのベンチへ向かう",
+          "goto": "mitra_bench"
+        }
+      ]
+    },
+    {
+      "label": "gen_tarp"
+    },
+    {
+      "bg": "morning_light"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "リストはどれも実用的な言葉でできていた。紙皿。割り箸。氷。だけど実用的な言葉が一定の順番で並ぶと、そこには妙な安心が生まれる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "誰かのための準備というのは、大げさな親切とは少し違う。もっと地味で、もっと静かで、それでも翌日の空気をちゃんと軽くする。"
+    },
+    {
+      "choices": [
+        {
+          "text": "軽くなった空気のほうへ歩く",
+          "goto": "mitra_bench"
+        }
+      ]
+    },
+    {
+      "label": "convenience_dawn"
+    },
+    {
+      "bg": "station_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "夜明け前のコンビニは、水槽みたいな明るさをしていた。棚には紙コップや割り箸が、必要とされるのを静かに待っていた。"
+    },
+    {
+      "speaker": "clerk",
+      "expression": "",
+      "text": "足りないものは、たいてい朝にわかります。\nそして朝のほうが、だいたい少しだけやさしいです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "レシートを受け取る。それは買い物の記録というより、明日の朝へ戻るための切符みたいに見えた。薄くて、頼りなくて、それでもちゃんと役に立つ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "レシートの裏を見る",
+          "goto": "gen_receipt"
+        },
+        {
+          "text": "そのまま公園のベンチへ向かう",
+          "goto": "mitra_bench"
+        }
+      ]
+    },
+    {
+      "label": "gen_receipt"
+    },
+    {
+      "bg": "morning_light"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "レシートの裏には、明日の天気が小さく印字されていた。もちろんそんなはずはない。でも夢の中では、天気予報と買い物の記録はときどき同じ紙に印刷される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "晴れ。少し風。桜はまだ持つ。\nそれだけわかれば十分だった。未来はだいたい、その程度の情報で前に進む。"
+    },
+    {
+      "choices": [
+        {
+          "text": "レシートを折って胸ポケットへ入れる",
+          "goto": "mitra_bench"
+        }
+      ]
+    },
+    {
+      "label": "mitra_bench"
+    },
+    {
+      "bg": "mitra_chamber"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ベンチには、なぜかみとらが先に座っていた。公園のベンチなのに、どこか図書館の閲覧席みたいな静けさがあった。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "祭りの前日に先回りしているのは、せっかちな性格のせいだけではありません。\nあなたは楽しさそのものより、そのための摩擦を減らすことに安心している。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "紙皿や割り箸の数を数えることは、桜からいちばん遠いようでいて、実はかなり近い行為です。\n明日そこに来る複数の人のために、すでに席をつくっているのですから。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "準備は地味だ。\nでも地味なことがないと、たいていの楽しいことは始まらない。"
+    },
+    {
+      "label": "final_hold"
+    },
+    {
+      "choices": [
+        {
+          "text": "桜の枝を持ち帰る",
+          "goto": "END_PARK"
+        },
+        {
+          "text": "チェックリストを持ち帰る",
+          "goto": "END_LOGISTICS"
+        },
+        {
+          "text": "レシートを持ち帰る",
+          "goto": "END_MORNING"
+        }
+      ]
+    },
+    {
+      "label": "END_PARK"
+    },
+    {
+      "bg": "morning_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。窓の外はまだ早い。眠気は残っている。でも公園の静けさが、まだ身体のどこかに残っていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "誰もいない桜を先に見てしまった気がした。だから本番の騒がしさも、きっと少しだけやさしく受け止められる。\n──END: 誰もいない公園"
+    },
+    {
+      "label": "END_LOGISTICS"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。メモは机の上にちゃんと残っていた。足りないものも、やるべきことも、昨日のうちにほとんど見えている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "楽しさはいつも突然やって来るわけではない。昨夜のチェックリストみたいな顔をして、かなり前から机の上に置かれていることもある。\n──END: 兵站のやさしさ"
+    },
+    {
+      "label": "END_MORNING"
+    },
+    {
+      "bg": "station_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚めて、すぐにコンビニへ行く。紙皿、紙コップ、割り箸。レジ袋は軽い。でもその軽さは、昨日のうちに少しだけ準備しておいた時間の重さでできている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝はちゃんと始まる。夢も、だいたいその確認のためにある。\n──END: 夜明け前のレシート"
+    }
+  ]
+}
