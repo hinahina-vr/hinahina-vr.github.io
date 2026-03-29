@@ -5,6 +5,7 @@
 
   // src/galge-runtime/bgm-controller.js
   var BGM_ENABLED_STORAGE_KEY = "galgeRuntimeBgmEnabled";
+  var BGM_VOLUME_OVERRIDE_STORAGE_KEY = "galgeRuntimeBgmVolumeOverride";
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
@@ -17,6 +18,7 @@
   var BGMController = class {
     constructor() {
       this.enabled = window.localStorage.getItem(BGM_ENABLED_STORAGE_KEY) === "1";
+      this.volumeOverride = this.loadVolumeOverride();
       this.audio = new Audio();
       this.audio.loop = true;
       this.audio.preload = "none";
@@ -39,6 +41,28 @@
       }
       this.syncPlayback();
     }
+    loadVolumeOverride() {
+      try {
+        const raw = window.localStorage.getItem(BGM_VOLUME_OVERRIDE_STORAGE_KEY);
+        if (raw == null || raw === "") {
+          return null;
+        }
+        const parsed = Number(raw);
+        return Number.isFinite(parsed) ? clamp(parsed, 0, 1) : null;
+      } catch (error) {
+        return null;
+      }
+    }
+    saveVolumeOverride() {
+      try {
+        if (this.volumeOverride == null) {
+          window.localStorage.removeItem(BGM_VOLUME_OVERRIDE_STORAGE_KEY);
+          return;
+        }
+        window.localStorage.setItem(BGM_VOLUME_OVERRIDE_STORAGE_KEY, String(this.volumeOverride));
+      } catch (error) {
+      }
+    }
     resolveSource(namespace, cue) {
       if (!cue || cue.stop) {
         return "";
@@ -58,7 +82,7 @@
     }
     setCue(namespace, cue) {
       this.currentNamespace = namespace || "";
-      this.currentCue = cue || null;
+      this.currentCue = cue ? { ...cue } : null;
       this.syncPlayback();
     }
     clearCue() {
@@ -116,11 +140,7 @@
         this.clearCue();
         return;
       }
-      const targetVol = clamp(
-        Number.isFinite(this.currentCue.volume) ? this.currentCue.volume : 0.45,
-        0,
-        1
-      );
+      const targetVol = this.getTargetVolume(this.currentCue);
       if (this.currentSrc !== nextSrc) {
         this._fadeOut(this.audio, () => {
           this.audio.loop = this.currentCue ? this.currentCue.loop !== false : true;
@@ -153,13 +173,38 @@
       this.audio.currentTime = 0;
     }
     getVolume() {
-      return this.audio.volume;
+      if (this.volumeOverride != null) {
+        return this.volumeOverride;
+      }
+      return this.getCueVolume(this.currentCue);
     }
     setVolume(v) {
-      this.audio.volume = clamp(v, 0, 1);
-      if (this.currentCue) {
-        this.currentCue.volume = this.audio.volume;
+      this.volumeOverride = clamp(v, 0, 1);
+      this.saveVolumeOverride();
+      if (this.currentCue && !this.currentCue.stop) {
+        this.audio.volume = this.getTargetVolume(this.currentCue);
+      } else {
+        this.audio.volume = this.volumeOverride;
       }
+    }
+    hasVolumeOverride() {
+      return this.volumeOverride != null;
+    }
+    clearVolumeOverride() {
+      this.volumeOverride = null;
+      this.saveVolumeOverride();
+      if (this.currentCue && !this.currentCue.stop) {
+        this.audio.volume = this.getTargetVolume(this.currentCue);
+      }
+    }
+    getCueVolume(cue) {
+      return clamp(Number.isFinite(cue?.volume) ? cue.volume : 0.45, 0, 1);
+    }
+    getTargetVolume(cue) {
+      if (this.volumeOverride != null) {
+        return this.volumeOverride;
+      }
+      return this.getCueVolume(cue);
     }
   };
 
@@ -33208,6 +33253,9 @@ void main() {
       });
       this.updateVoiceToggle();
       this.updateBgmToggle();
+      if (this.bgmController.hasVolumeOverride()) {
+        this.syncBgmVolumeUi();
+      }
       this.syncMessageSpeedUi();
       this.updateMessageApiUI({
         message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
@@ -33256,6 +33304,14 @@ void main() {
         this.$titleBgmToggle.setAttribute("aria-label", runtimeLabel);
         this.$titleBgmToggle.setAttribute("title", runtimeLabel);
       }
+    }
+    syncBgmVolumeUi() {
+      if (!this.$bgmSlider || !this.$bgmValue) {
+        return;
+      }
+      const volume = Math.round(this.bgmController.getVolume() * 100);
+      this.$bgmSlider.value = String(volume);
+      this.$bgmValue.textContent = String(volume);
     }
     toggleBgm() {
       this.bgmController.setEnabled(!this.bgmController.isEnabled());

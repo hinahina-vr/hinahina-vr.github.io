@@ -553,6 +553,9 @@ class GalgeRuntimeApp {
 
     this.updateVoiceToggle();
     this.updateBgmToggle();
+    if (this.bgmController.hasVolumeOverride()) {
+      this.syncBgmVolumeUi();
+    }
     this.syncMessageSpeedUi();
     this.updateMessageApiUI({
       message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
@@ -605,6 +608,15 @@ class GalgeRuntimeApp {
       this.$titleBgmToggle.setAttribute("aria-label", runtimeLabel);
       this.$titleBgmToggle.setAttribute("title", runtimeLabel);
     }
+  }
+
+  syncBgmVolumeUi() {
+    if (!this.$bgmSlider || !this.$bgmValue) {
+      return;
+    }
+    const volume = Math.round(this.bgmController.getVolume() * 100);
+    this.$bgmSlider.value = String(volume);
+    this.$bgmValue.textContent = String(volume);
   }
 
   toggleBgm() {
