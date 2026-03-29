@@ -30,6 +30,8 @@ export class SettingsPanel {
     onModelChange,
     onSummaryChange,
     onVoiceTest,
+    onOpen,
+    onClose,
   }) {
     this.assetStore = assetStore;
     this.modal = modal;
@@ -42,6 +44,8 @@ export class SettingsPanel {
     this.onModelChange = onModelChange;
     this.onSummaryChange = onSummaryChange;
     this.onVoiceTest = onVoiceTest;
+    this.onOpen = onOpen;
+    this.onClose = onClose;
     this.scenario = null;
 
     this.closeButton.addEventListener("click", () => this.close());
@@ -68,6 +72,7 @@ export class SettingsPanel {
   }
 
   open() {
+    this.onOpen?.();
     this.modal.hidden = false;
     requestAnimationFrame(() => {
       this.modal.classList.add("visible");
@@ -78,6 +83,7 @@ export class SettingsPanel {
     this.modal.classList.remove("visible");
     window.setTimeout(() => {
       this.modal.hidden = true;
+      this.onClose?.();
     }, 160);
   }
 

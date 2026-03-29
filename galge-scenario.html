@@ -172,6 +172,7 @@
       body:not(.runtime-started) #mini-model-summary,
       body:not(.runtime-started) #settings-btn,
       body:not(.runtime-started) #sound-settings-btn,
+      body:not(.runtime-started) #auto-advance-toggle,
       body:not(.runtime-started) #api-client-id,
       body:not(.runtime-started) #api-status {
         display: none;
@@ -677,6 +678,7 @@
       #mini-model-summary,
       #settings-btn,
       #sound-settings-btn,
+      #auto-advance-toggle,
       #mode-toggle {
         position: fixed;
         top: 12px;
@@ -696,6 +698,7 @@
       #settings-btn:hover,
       #mode-toggle:hover,
       #sound-settings-btn:hover,
+      #auto-advance-toggle:hover,
       #mini-model-summary:hover {
         background: rgba(80, 40, 120, 0.45);
         color: #ffffff;
@@ -707,11 +710,18 @@
         pointer-events: none;
       }
       #settings-btn { right: 12px; top: 12px; }
-      #mode-toggle { right: 12px; top: 100px; }
+      #auto-advance-toggle { right: 12px; top: 100px; }
+      #mode-toggle { right: 12px; top: 144px; }
       #sound-settings-btn {
         top: 56px;
         bottom: auto;
         right: 12px;
+      }
+      #auto-advance-toggle.auto-on {
+        border-color: rgba(220, 194, 255, 0.52);
+        background: linear-gradient(180deg, rgba(88, 42, 148, 0.86), rgba(34, 16, 62, 0.92));
+        color: #ffffff;
+        box-shadow: 0 0 18px rgba(170, 110, 255, 0.28);
       }
       #chapter-display,
       #expression-tag,
@@ -728,7 +738,7 @@
         display: none;
       }
       #chapter-display {
-        top: 140px;
+        top: 184px;
         right: 12px;
         max-width: min(42vw, 420px);
         text-align: right;
@@ -1367,7 +1377,7 @@
 
       @media (max-width: 960px) {
         #title-settings-btn, #title-sound-settings-btn, #title-mode-toggle-btn, #title-bgm-toggle,
-        #settings-btn, #sound-settings-btn, #mode-toggle {
+        #settings-btn, #sound-settings-btn, #auto-advance-toggle, #mode-toggle {
           width: 44px;
           height: 44px;
           padding: 0;
@@ -1381,9 +1391,10 @@
         #back-btn { top: 16px; left: 18px; }
         #settings-btn { top: 16px; right: 18px; left: auto; bottom: auto; }
         #sound-settings-btn { top: 72px; right: 18px; left: auto; bottom: auto; }
-        #mode-toggle { top: 128px; right: 18px; left: auto; bottom: auto; }
-        #chapter-display { top: 184px; right: 18px; }
-        #expression-tag { top: 156px; right: 18px; }
+        #auto-advance-toggle { top: 128px; right: 18px; left: auto; bottom: auto; }
+        #mode-toggle { top: 184px; right: 18px; left: auto; bottom: auto; }
+        #chapter-display { top: 240px; right: 18px; }
+        #expression-tag { top: 212px; right: 18px; }
         #mini-model-summary {
           left: 18px;
           right: auto;
@@ -1645,6 +1656,7 @@
     <a id="back-btn" href="./dream-select.html">◁ A.D.M.S.</a>
     <button class="utility-btn" id="settings-btn" type="button" title="モデル設定"><span class="btn-icon">🎭</span><span class="btn-text">モデル設定</span></button>
     <button class="utility-btn" id="sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
+    <button class="utility-btn" id="auto-advance-toggle" type="button" title="自動送り OFF"><span class="btn-icon">▶</span><span class="btn-text">自動</span></button>
     <div id="volume-popup">
       <div class="vol-row">
         <button class="vol-toggle on" id="bgm-toggle" type="button" title="BGM ON"><span class="sr-only">BGM ON</span></button>
@@ -1660,9 +1672,15 @@
       </div>
       <div class="vol-row">
         <span class="vol-icon" aria-hidden="true">✎</span>
-        <span class="vol-label">速度</span>
+        <span class="vol-label">文字送り</span>
         <input type="range" class="vol-slider" id="message-speed-slider" min="1" max="5" step="1" value="3">
         <span class="vol-value speed-value" id="message-speed-value">標準</span>
+      </div>
+      <div class="vol-row">
+        <span class="vol-icon" aria-hidden="true">▶</span>
+        <span class="vol-label">自動送り</span>
+        <input type="range" class="vol-slider" id="auto-advance-speed-slider" min="1" max="5" step="1" value="3">
+        <span class="vol-value speed-value" id="auto-advance-speed-value">標準</span>
       </div>
     </div>
     <div id="mini-model-summary">モデル設定済み 0 / 0</div>

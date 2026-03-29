@@ -1019,7 +1019,9 @@
       backdrop,
       onModelChange,
       onSummaryChange,
-      onVoiceTest
+      onVoiceTest,
+      onOpen,
+      onClose
     }) {
       this.assetStore = assetStore;
       this.modal = modal;
@@ -1032,6 +1034,8 @@
       this.onModelChange = onModelChange;
       this.onSummaryChange = onSummaryChange;
       this.onVoiceTest = onVoiceTest;
+      this.onOpen = onOpen;
+      this.onClose = onClose;
       this.scenario = null;
       this.closeButton.addEventListener("click", () => this.close());
       this.backdrop.addEventListener("click", () => this.close());
@@ -1053,6 +1057,7 @@
       await this.render();
     }
     open() {
+      this.onOpen?.();
       this.modal.hidden = false;
       requestAnimationFrame(() => {
         this.modal.classList.add("visible");
@@ -1062,6 +1067,7 @@
       this.modal.classList.remove("visible");
       window.setTimeout(() => {
         this.modal.hidden = true;
+        this.onClose?.();
       }, 160);
     }
     async render() {
@@ -32687,12 +32693,22 @@ void main() {
   var DREAM_ROOT_ENTRY_KEY = "__root__";
   var MESSAGE_SPEED_STORAGE_KEY = "waddy-message-speed";
   var MESSAGE_SPEED_DEFAULT = 3;
+  var AUTO_ADVANCE_STORAGE_KEY = "waddy-auto-advance-enabled";
+  var AUTO_ADVANCE_SPEED_STORAGE_KEY = "waddy-auto-advance-speed";
+  var AUTO_ADVANCE_SPEED_DEFAULT = 3;
   var MESSAGE_SPEED_PRESETS = {
     1: { label: "遅い", multiplier: 1.75 },
     2: { label: "ゆっくり", multiplier: 1.3 },
     3: { label: "標準", multiplier: 1 },
     4: { label: "速い", multiplier: 0.7 },
     5: { label: "最速", multiplier: 0.4 }
+  };
+  var AUTO_ADVANCE_SPEED_PRESETS = {
+    1: { label: "遅い", delay: 2200 },
+    2: { label: "ゆっくり", delay: 1600 },
+    3: { label: "標準", delay: 1100 },
+    4: { label: "速い", delay: 700 },
+    5: { label: "最速", delay: 450 }
   };
   var FLAG_UNLOCK_HINT_OVERRIDES = {
     unlock_saikyou: "佐治と開高の両ルートを見る"
@@ -32742,6 +32758,45 @@ void main() {
   }
   function resolveInitialMessageSpeed() {
     return getStoredMessageSpeed();
+  }
+  function normalizeAutoAdvanceSpeed(value) {
+    const parsed = Number.parseInt(value, 10);
+    return AUTO_ADVANCE_SPEED_PRESETS[parsed] ? parsed : AUTO_ADVANCE_SPEED_DEFAULT;
+  }
+  function getStoredAutoAdvanceEnabled() {
+    try {
+      return window.localStorage.getItem(AUTO_ADVANCE_STORAGE_KEY) === "1";
+    } catch (error) {
+      return false;
+    }
+  }
+  function setStoredAutoAdvanceEnabled(enabled) {
+    try {
+      window.localStorage.setItem(AUTO_ADVANCE_STORAGE_KEY, enabled ? "1" : "0");
+    } catch (error) {
+    }
+  }
+  function resolveInitialAutoAdvanceEnabled() {
+    return getStoredAutoAdvanceEnabled();
+  }
+  function getStoredAutoAdvanceSpeed() {
+    try {
+      return normalizeAutoAdvanceSpeed(window.localStorage.getItem(AUTO_ADVANCE_SPEED_STORAGE_KEY));
+    } catch (error) {
+      return AUTO_ADVANCE_SPEED_DEFAULT;
+    }
+  }
+  function setStoredAutoAdvanceSpeed(speed) {
+    try {
+      window.localStorage.setItem(
+        AUTO_ADVANCE_SPEED_STORAGE_KEY,
+        String(normalizeAutoAdvanceSpeed(speed))
+      );
+    } catch (error) {
+    }
+  }
+  function resolveInitialAutoAdvanceSpeed() {
+    return getStoredAutoAdvanceSpeed();
   }
   function buildDreamVisitKey(scenarioName, entryLabel = null) {
     if (!scenarioName) {
@@ -32895,9 +32950,12 @@ void main() {
       });
       this.currentMode = resolveInitialSiteMode();
       this.messageSpeed = resolveInitialMessageSpeed();
+      this.autoAdvanceEnabled = resolveInitialAutoAdvanceEnabled();
+      this.autoAdvanceSpeed = resolveInitialAutoAdvanceSpeed();
       this.currentStep = 0;
       this.isTyping = false;
       this.typeTimer = null;
+      this.autoAdvanceTimer = null;
       this.started = false;
       this.showingChoice = false;
       this.isAdvancing = false;
@@ -32956,6 +33014,7 @@ void main() {
       this.$settingsBtn = this.$("settings-btn");
       this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
       this.$soundSettingsBtn = this.$("sound-settings-btn");
+      this.$autoAdvanceToggle = this.$("auto-advance-toggle");
       this.$volumePopup = this.$("volume-popup");
       this.$bgmToggle = this.$("bgm-toggle");
       this.$bgmSlider = this.$("bgm-slider");
@@ -32965,6 +33024,8 @@ void main() {
       this.$voiceValue = this.$("voice-value");
       this.$messageSpeedSlider = this.$("message-speed-slider");
       this.$messageSpeedValue = this.$("message-speed-value");
+      this.$autoAdvanceSpeedSlider = this.$("auto-advance-speed-slider");
+      this.$autoAdvanceSpeedValue = this.$("auto-advance-speed-value");
       this.$titleApiClientId = this.$("title-api-client-id");
       this.$titleApiStatus = this.$("title-api-status");
       this.$apiClientId = this.$("api-client-id");
@@ -32995,6 +33056,12 @@ void main() {
         },
         onVoiceTest: async ({ speakerKey, speakerLabel, config }) => {
           await this.playVoiceTest(speakerKey, speakerLabel, config);
+        },
+        onOpen: () => {
+          this.clearAutoAdvanceTimer();
+        },
+        onClose: () => {
+          this.scheduleAutoAdvance();
         }
       });
       this.messageApiReceiver = new MessageApiReceiver({
@@ -33266,6 +33333,7 @@ void main() {
         window.location.href = this.resolveBackUrl();
         return;
       }
+      this.clearAutoAdvanceTimer();
       if (this.backlogOpen) {
         this.closeBacklog();
       }
@@ -33290,6 +33358,7 @@ void main() {
       window.setTimeout(() => {
         if (!this.$admsOverlay.classList.contains("visible")) {
           this.$admsOverlay.style.display = "none";
+          this.scheduleAutoAdvance();
         }
       }, 240);
     }
@@ -33409,6 +33478,7 @@ void main() {
         return;
       }
       this.isAdvancing = true;
+      this.clearAutoAdvanceTimer();
       try {
         this.closeSoundPopup();
         this.hideEndScreen();
@@ -33476,6 +33546,12 @@ void main() {
         event.stopPropagation();
         this.toggleSoundPopup();
       });
+      if (this.$autoAdvanceToggle) {
+        this.$autoAdvanceToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          this.toggleAutoAdvance();
+        });
+      }
       if (this.$endRetryChoiceBtn) {
         this.$endRetryChoiceBtn.addEventListener("click", async (event) => {
           event.stopPropagation();
@@ -33506,6 +33582,12 @@ void main() {
         this.$messageSpeedSlider.addEventListener("input", (event) => {
           event.stopPropagation();
           this.setMessageSpeed(this.$messageSpeedSlider.value);
+        });
+      }
+      if (this.$autoAdvanceSpeedSlider) {
+        this.$autoAdvanceSpeedSlider.addEventListener("input", (event) => {
+          event.stopPropagation();
+          this.setAutoAdvanceSpeed(this.$autoAdvanceSpeedSlider.value);
         });
       }
       this.$volumePopup.addEventListener("click", (event) => {
@@ -33544,7 +33626,7 @@ void main() {
         });
       }
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-overlay") || event.target.closest("#back-btn") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
+        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target === this.$autoAdvanceToggle || event.target.closest("#auto-advance-toggle") || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-overlay") || event.target.closest("#back-btn") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
           return;
         }
         if (this.$volumePopup.classList.contains("visible")) {
@@ -33619,6 +33701,7 @@ void main() {
         this.syncBgmVolumeUi();
       }
       this.syncMessageSpeedUi();
+      this.syncAutoAdvanceUi();
       this.updateMessageApiUI({
         message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
         clientId: this.messageApiReceiver.getClientId(),
@@ -33686,6 +33769,7 @@ void main() {
       if (this.$volumePopup.classList.contains("visible")) {
         this.closeSoundPopup();
       } else {
+        this.clearAutoAdvanceTimer();
         this.$volumePopup.style.display = "flex";
         window.requestAnimationFrame(() => {
           this.$volumePopup.classList.add("visible");
@@ -33697,6 +33781,7 @@ void main() {
       window.setTimeout(() => {
         if (!this.$volumePopup.classList.contains("visible")) {
           this.$volumePopup.style.display = "none";
+          this.scheduleAutoAdvance();
         }
       }, 300);
     }
@@ -33721,6 +33806,76 @@ void main() {
       this.messageSpeed = normalizeMessageSpeed(speed);
       setStoredMessageSpeed(this.messageSpeed);
       this.syncMessageSpeedUi();
+    }
+    clearAutoAdvanceTimer() {
+      if (this.autoAdvanceTimer) {
+        window.clearTimeout(this.autoAdvanceTimer);
+        this.autoAdvanceTimer = null;
+      }
+    }
+    getAutoAdvanceConfig() {
+      return AUTO_ADVANCE_SPEED_PRESETS[this.autoAdvanceSpeed] || AUTO_ADVANCE_SPEED_PRESETS[AUTO_ADVANCE_SPEED_DEFAULT];
+    }
+    getAutoAdvanceDelay() {
+      return this.getAutoAdvanceConfig().delay;
+    }
+    syncAutoAdvanceUi() {
+      const enabled = !!this.autoAdvanceEnabled;
+      const label = enabled ? "自動送り ON" : "自動送り OFF";
+      if (this.$autoAdvanceToggle) {
+        this.$autoAdvanceToggle.classList.toggle("auto-on", enabled);
+        this.$autoAdvanceToggle.setAttribute("title", label);
+        this.$autoAdvanceToggle.setAttribute("aria-label", label);
+        const text = this.$autoAdvanceToggle.querySelector(".btn-text");
+        if (text) {
+          text.textContent = "自動";
+        }
+      }
+      if (this.$autoAdvanceSpeedSlider) {
+        this.$autoAdvanceSpeedSlider.value = String(this.autoAdvanceSpeed);
+      }
+      if (this.$autoAdvanceSpeedValue) {
+        this.$autoAdvanceSpeedValue.textContent = this.getAutoAdvanceConfig().label;
+      }
+    }
+    setAutoAdvanceEnabled(enabled) {
+      this.autoAdvanceEnabled = !!enabled;
+      setStoredAutoAdvanceEnabled(this.autoAdvanceEnabled);
+      this.syncAutoAdvanceUi();
+      if (!this.autoAdvanceEnabled) {
+        this.clearAutoAdvanceTimer();
+        return;
+      }
+      this.scheduleAutoAdvance();
+    }
+    toggleAutoAdvance() {
+      this.setAutoAdvanceEnabled(!this.autoAdvanceEnabled);
+    }
+    setAutoAdvanceSpeed(speed) {
+      this.autoAdvanceSpeed = normalizeAutoAdvanceSpeed(speed);
+      setStoredAutoAdvanceSpeed(this.autoAdvanceSpeed);
+      this.syncAutoAdvanceUi();
+      if (this.autoAdvanceEnabled) {
+        this.scheduleAutoAdvance();
+      }
+    }
+    canAutoAdvance() {
+      const currentStep = this.scenario?.steps?.[this.currentStep];
+      const settingsModal = this.$("settings-modal");
+      return this.autoAdvanceEnabled && this.started && currentStep?.kind === "text" && this.currentTextStepIndex === this.currentStep && !this.isTyping && !this.isAdvancing && !this.showingChoice && !this.backlogOpen && !this.ctrlSkipTimer && !this.isAdmsOverlayOpen() && !!settingsModal?.hidden && !this.$volumePopup.classList.contains("visible") && this.$chapterOverlay.style.display !== "flex" && this.$endScreen.style.display !== "flex" && this.$continueIndicator.classList.contains("visible");
+    }
+    scheduleAutoAdvance() {
+      this.clearAutoAdvanceTimer();
+      if (!this.canAutoAdvance()) {
+        return;
+      }
+      this.autoAdvanceTimer = window.setTimeout(() => {
+        this.autoAdvanceTimer = null;
+        if (!this.canAutoAdvance()) {
+          return;
+        }
+        this.advance();
+      }, this.getAutoAdvanceDelay());
     }
     updateMessageApiUI({ message, clientId, apiBase, configured }) {
       this.voiceController.setProxyBase(apiBase);
@@ -34247,6 +34402,7 @@ void main() {
       if (!page) {
         return;
       }
+      this.clearAutoAdvanceTimer();
       if (this.pageTurnTimer) {
         window.clearTimeout(this.pageTurnTimer);
         this.pageTurnTimer = null;
@@ -34292,6 +34448,7 @@ void main() {
       if (!this.hasPreviousTextPages()) {
         return false;
       }
+      this.clearAutoAdvanceTimer();
       this.currentTextPageIndex -= 1;
       const page = this.getCurrentTextPage();
       if (!page) {
@@ -34304,6 +34461,7 @@ void main() {
       this.$cursor.style.display = "none";
       this.$continueIndicator.classList.add("visible");
       this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+      this.scheduleAutoAdvance();
       return true;
     }
     refreshCurrentTextPagination() {
@@ -34312,6 +34470,7 @@ void main() {
         return;
       }
       const preservedVisibleLength = this.isTyping ? this.currentTextVisibleLength : this.getCurrentTextPage()?.end ?? 0;
+      this.clearAutoAdvanceTimer();
       if (this.pageTurnTimer) {
         window.clearTimeout(this.pageTurnTimer);
         this.pageTurnTimer = null;
@@ -34331,8 +34490,10 @@ void main() {
       this.$cursor.style.display = "none";
       this.$continueIndicator.classList.add("visible");
       this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+      this.scheduleAutoAdvance();
     }
     typeText(text, onDone, { startVisibleLength = 0 } = {}) {
+      this.clearAutoAdvanceTimer();
       this.isTyping = true;
       this.$textContent.textContent = "";
       this.$cursor.style.display = "inline-block";
@@ -34351,11 +34512,13 @@ void main() {
           this.$cursor.style.display = "none";
           this.$continueIndicator.classList.add("visible");
           onDone?.();
+          this.scheduleAutoAdvance();
         }
       };
       step();
     }
     skipType(text, { startVisibleLength = 0 } = {}) {
+      this.clearAutoAdvanceTimer();
       window.clearTimeout(this.typeTimer);
       this.$textContent.textContent = text;
       this.currentTextVisibleLength = startVisibleLength + Array.from(text).length;
@@ -34363,6 +34526,7 @@ void main() {
       this.$cursor.style.display = "none";
       this.$continueIndicator.classList.add("visible");
       this.$textContent.classList.remove("text-fade-in");
+      this.scheduleAutoAdvance();
     }
     updateProgress() {
       const textIndex = this.scenario.steps.slice(0, this.currentStep + 1).filter((step) => step.kind === "text").length;
@@ -34401,6 +34565,7 @@ void main() {
     }
     resetTransientUiForScenarioTransition() {
       this.renderToken += 1;
+      this.clearAutoAdvanceTimer();
       if (this.pageTurnTimer) {
         window.clearTimeout(this.pageTurnTimer);
         this.pageTurnTimer = null;
@@ -34456,6 +34621,7 @@ void main() {
       if (index >= this.scenario.steps.length) {
         return;
       }
+      this.clearAutoAdvanceTimer();
       const step = this.scenario.steps[index];
       this.currentStep = index;
       this.renderToken += 1;
@@ -34756,6 +34922,7 @@ void main() {
       if (!text) {
         return;
       }
+      this.clearAutoAdvanceTimer();
       const currentScenarioStep = this.scenario.steps[this.currentStep];
       if (this.isTyping && currentScenarioStep?.kind === "text") {
         const currentPage = this.getCurrentTextPage();
@@ -34821,6 +34988,7 @@ void main() {
       if (snapshot && this.started && this.currentStep === snapshot.stepIndex && this.renderToken === snapshot.renderToken && !this.showingChoice) {
         this.restoreTextWindowSnapshot(snapshot);
         await this.refreshCurrentStage(null);
+        this.scheduleAutoAdvance();
       }
     }
     async handleReceivedMessages(messages) {
@@ -34837,6 +35005,7 @@ void main() {
       if (!this.started || this.showingChoice || this.isAdvancing || this.isAdmsOverlayOpen() || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
         return;
       }
+      this.clearAutoAdvanceTimer();
       if (this.isTyping) {
         const step = this.scenario.steps[this.currentStep];
         if (step?.kind === "text") {
@@ -34863,6 +35032,7 @@ void main() {
       if (!this.started || this.isTyping || this.isAdvancing || this.isAdmsOverlayOpen() || !this.$("settings-modal").hidden || this.$chapterOverlay.style.display === "flex" || this.$endScreen.style.display === "flex") {
         return;
       }
+      this.clearAutoAdvanceTimer();
       this.voiceController.stopCurrent();
       if (this.scenario.steps[this.currentStep]?.kind === "text" && this.showPreviousTextPage()) {
         return;
@@ -34906,6 +35076,7 @@ void main() {
       if (!this.started || this.ctrlSkipTimer || this.backlogOpen || this.isAdmsOverlayOpen()) {
         return;
       }
+      this.clearAutoAdvanceTimer();
       const tick = () => {
         if (this.showingChoice || this.$endScreen.style.display === "flex" || this.isAdmsOverlayOpen()) {
           this.stopCtrlSkip();
@@ -34930,11 +35101,13 @@ void main() {
         window.clearTimeout(this.ctrlSkipTimer);
         this.ctrlSkipTimer = null;
       }
+      this.scheduleAutoAdvance();
     }
     openBacklog() {
       if (this.backlogOpen || this.backlog.length === 0 || this.isAdmsOverlayOpen()) {
         return;
       }
+      this.clearAutoAdvanceTimer();
       this.backlogOpen = true;
       let el = document.getElementById("backlog-panel");
       if (!el) {
@@ -34995,6 +35168,7 @@ void main() {
         }, 300);
       }
       this.backlogOpen = false;
+      this.scheduleAutoAdvance();
     }
   };
   window.addEventListener("DOMContentLoaded", () => {

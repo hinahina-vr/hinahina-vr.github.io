@@ -17,12 +17,22 @@ const DREAM_VISITED_STORAGE_KEY = "waddy-dream-visited-v1";
 const DREAM_ROOT_ENTRY_KEY = "__root__";
 const MESSAGE_SPEED_STORAGE_KEY = "waddy-message-speed";
 const MESSAGE_SPEED_DEFAULT = 3;
+const AUTO_ADVANCE_STORAGE_KEY = "waddy-auto-advance-enabled";
+const AUTO_ADVANCE_SPEED_STORAGE_KEY = "waddy-auto-advance-speed";
+const AUTO_ADVANCE_SPEED_DEFAULT = 3;
 const MESSAGE_SPEED_PRESETS = {
   1: { label: "遅い", multiplier: 1.75 },
   2: { label: "ゆっくり", multiplier: 1.3 },
   3: { label: "標準", multiplier: 1 },
   4: { label: "速い", multiplier: 0.7 },
   5: { label: "最速", multiplier: 0.4 },
+};
+const AUTO_ADVANCE_SPEED_PRESETS = {
+  1: { label: "遅い", delay: 2200 },
+  2: { label: "ゆっくり", delay: 1600 },
+  3: { label: "標準", delay: 1100 },
+  4: { label: "速い", delay: 700 },
+  5: { label: "最速", delay: 450 },
 };
 const FLAG_UNLOCK_HINT_OVERRIDES = {
   unlock_saikyou: "佐治と開高の両ルートを見る",
@@ -85,6 +95,54 @@ function resolveInitialMessageSpeed() {
   return getStoredMessageSpeed();
 }
 
+function normalizeAutoAdvanceSpeed(value) {
+  const parsed = Number.parseInt(value, 10);
+  return AUTO_ADVANCE_SPEED_PRESETS[parsed] ? parsed : AUTO_ADVANCE_SPEED_DEFAULT;
+}
+
+function getStoredAutoAdvanceEnabled() {
+  try {
+    return window.localStorage.getItem(AUTO_ADVANCE_STORAGE_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+}
+
+function setStoredAutoAdvanceEnabled(enabled) {
+  try {
+    window.localStorage.setItem(AUTO_ADVANCE_STORAGE_KEY, enabled ? "1" : "0");
+  } catch (error) {
+    // Ignore storage failures and continue with in-memory settings.
+  }
+}
+
+function resolveInitialAutoAdvanceEnabled() {
+  return getStoredAutoAdvanceEnabled();
+}
+
+function getStoredAutoAdvanceSpeed() {
+  try {
+    return normalizeAutoAdvanceSpeed(window.localStorage.getItem(AUTO_ADVANCE_SPEED_STORAGE_KEY));
+  } catch (error) {
+    return AUTO_ADVANCE_SPEED_DEFAULT;
+  }
+}
+
+function setStoredAutoAdvanceSpeed(speed) {
+  try {
+    window.localStorage.setItem(
+      AUTO_ADVANCE_SPEED_STORAGE_KEY,
+      String(normalizeAutoAdvanceSpeed(speed))
+    );
+  } catch (error) {
+    // Ignore storage failures and continue with in-memory settings.
+  }
+}
+
+function resolveInitialAutoAdvanceSpeed() {
+  return getStoredAutoAdvanceSpeed();
+}
+
 function buildDreamVisitKey(scenarioName, entryLabel = null) {
   if (!scenarioName) {
     return "";
@@ -134,9 +192,12 @@ class GalgeRuntimeApp {
   constructor() {
     this.currentMode = resolveInitialSiteMode();
     this.messageSpeed = resolveInitialMessageSpeed();
+    this.autoAdvanceEnabled = resolveInitialAutoAdvanceEnabled();
+    this.autoAdvanceSpeed = resolveInitialAutoAdvanceSpeed();
     this.currentStep = 0;
     this.isTyping = false;
     this.typeTimer = null;
+    this.autoAdvanceTimer = null;
     this.started = false;
     this.showingChoice = false;
     this.isAdvancing = false;
@@ -196,6 +257,7 @@ class GalgeRuntimeApp {
     this.$settingsBtn = this.$("settings-btn");
     this.$titleSoundSettingsBtn = this.$("title-sound-settings-btn");
     this.$soundSettingsBtn = this.$("sound-settings-btn");
+    this.$autoAdvanceToggle = this.$("auto-advance-toggle");
     this.$volumePopup = this.$("volume-popup");
     this.$bgmToggle = this.$("bgm-toggle");
     this.$bgmSlider = this.$("bgm-slider");
@@ -205,6 +267,8 @@ class GalgeRuntimeApp {
     this.$voiceValue = this.$("voice-value");
     this.$messageSpeedSlider = this.$("message-speed-slider");
     this.$messageSpeedValue = this.$("message-speed-value");
+    this.$autoAdvanceSpeedSlider = this.$("auto-advance-speed-slider");
+    this.$autoAdvanceSpeedValue = this.$("auto-advance-speed-value");
     this.$titleApiClientId = this.$("title-api-client-id");
     this.$titleApiStatus = this.$("title-api-status");
     this.$apiClientId = this.$("api-client-id");
@@ -237,6 +301,12 @@ class GalgeRuntimeApp {
       },
       onVoiceTest: async ({ speakerKey, speakerLabel, config }) => {
         await this.playVoiceTest(speakerKey, speakerLabel, config);
+      },
+      onOpen: () => {
+        this.clearAutoAdvanceTimer();
+      },
+      onClose: () => {
+        this.scheduleAutoAdvance();
       },
     });
 
@@ -541,6 +611,7 @@ class GalgeRuntimeApp {
       window.location.href = this.resolveBackUrl();
       return;
     }
+    this.clearAutoAdvanceTimer();
     if (this.backlogOpen) {
       this.closeBacklog();
     }
@@ -566,6 +637,7 @@ class GalgeRuntimeApp {
     window.setTimeout(() => {
       if (!this.$admsOverlay.classList.contains("visible")) {
         this.$admsOverlay.style.display = "none";
+        this.scheduleAutoAdvance();
       }
     }, 240);
   }
@@ -700,6 +772,7 @@ class GalgeRuntimeApp {
     }
 
     this.isAdvancing = true;
+    this.clearAutoAdvanceTimer();
     try {
       this.closeSoundPopup();
       this.hideEndScreen();
@@ -777,6 +850,13 @@ class GalgeRuntimeApp {
       this.toggleSoundPopup();
     });
 
+    if (this.$autoAdvanceToggle) {
+      this.$autoAdvanceToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleAutoAdvance();
+      });
+    }
+
     if (this.$endRetryChoiceBtn) {
       this.$endRetryChoiceBtn.addEventListener("click", async (event) => {
         event.stopPropagation();
@@ -812,6 +892,13 @@ class GalgeRuntimeApp {
       this.$messageSpeedSlider.addEventListener("input", (event) => {
         event.stopPropagation();
         this.setMessageSpeed(this.$messageSpeedSlider.value);
+      });
+    }
+
+    if (this.$autoAdvanceSpeedSlider) {
+      this.$autoAdvanceSpeedSlider.addEventListener("input", (event) => {
+        event.stopPropagation();
+        this.setAutoAdvanceSpeed(this.$autoAdvanceSpeedSlider.value);
       });
     }
 
@@ -867,6 +954,8 @@ class GalgeRuntimeApp {
         event.target === this.$titleSettingsBtn ||
         event.target === this.$soundSettingsBtn ||
         event.target === this.$titleSoundSettingsBtn ||
+        event.target === this.$autoAdvanceToggle ||
+        event.target.closest("#auto-advance-toggle") ||
         event.target.closest("#volume-popup") ||
         event.target.closest("#settings-modal") ||
         event.target.closest("#adms-overlay") ||
@@ -956,6 +1045,7 @@ class GalgeRuntimeApp {
       this.syncBgmVolumeUi();
     }
     this.syncMessageSpeedUi();
+    this.syncAutoAdvanceUi();
     this.updateMessageApiUI({
       message: this.messageApiReceiver.isConfigured() ? "発話API 接続待機中" : "発話API 未設定",
       clientId: this.messageApiReceiver.getClientId(),
@@ -1030,6 +1120,7 @@ class GalgeRuntimeApp {
     if (this.$volumePopup.classList.contains("visible")) {
       this.closeSoundPopup();
     } else {
+      this.clearAutoAdvanceTimer();
       this.$volumePopup.style.display = "flex";
       window.requestAnimationFrame(() => {
         this.$volumePopup.classList.add("visible");
@@ -1042,6 +1133,7 @@ class GalgeRuntimeApp {
     window.setTimeout(() => {
       if (!this.$volumePopup.classList.contains("visible")) {
         this.$volumePopup.style.display = "none";
+        this.scheduleAutoAdvance();
       }
     }, 300);
   }
@@ -1070,6 +1162,104 @@ class GalgeRuntimeApp {
     this.messageSpeed = normalizeMessageSpeed(speed);
     setStoredMessageSpeed(this.messageSpeed);
     this.syncMessageSpeedUi();
+  }
+
+  clearAutoAdvanceTimer() {
+    if (this.autoAdvanceTimer) {
+      window.clearTimeout(this.autoAdvanceTimer);
+      this.autoAdvanceTimer = null;
+    }
+  }
+
+  getAutoAdvanceConfig() {
+    return (
+      AUTO_ADVANCE_SPEED_PRESETS[this.autoAdvanceSpeed] ||
+      AUTO_ADVANCE_SPEED_PRESETS[AUTO_ADVANCE_SPEED_DEFAULT]
+    );
+  }
+
+  getAutoAdvanceDelay() {
+    return this.getAutoAdvanceConfig().delay;
+  }
+
+  syncAutoAdvanceUi() {
+    const enabled = !!this.autoAdvanceEnabled;
+    const label = enabled ? "自動送り ON" : "自動送り OFF";
+    if (this.$autoAdvanceToggle) {
+      this.$autoAdvanceToggle.classList.toggle("auto-on", enabled);
+      this.$autoAdvanceToggle.setAttribute("title", label);
+      this.$autoAdvanceToggle.setAttribute("aria-label", label);
+      const text = this.$autoAdvanceToggle.querySelector(".btn-text");
+      if (text) {
+        text.textContent = "自動";
+      }
+    }
+    if (this.$autoAdvanceSpeedSlider) {
+      this.$autoAdvanceSpeedSlider.value = String(this.autoAdvanceSpeed);
+    }
+    if (this.$autoAdvanceSpeedValue) {
+      this.$autoAdvanceSpeedValue.textContent = this.getAutoAdvanceConfig().label;
+    }
+  }
+
+  setAutoAdvanceEnabled(enabled) {
+    this.autoAdvanceEnabled = !!enabled;
+    setStoredAutoAdvanceEnabled(this.autoAdvanceEnabled);
+    this.syncAutoAdvanceUi();
+    if (!this.autoAdvanceEnabled) {
+      this.clearAutoAdvanceTimer();
+      return;
+    }
+    this.scheduleAutoAdvance();
+  }
+
+  toggleAutoAdvance() {
+    this.setAutoAdvanceEnabled(!this.autoAdvanceEnabled);
+  }
+
+  setAutoAdvanceSpeed(speed) {
+    this.autoAdvanceSpeed = normalizeAutoAdvanceSpeed(speed);
+    setStoredAutoAdvanceSpeed(this.autoAdvanceSpeed);
+    this.syncAutoAdvanceUi();
+    if (this.autoAdvanceEnabled) {
+      this.scheduleAutoAdvance();
+    }
+  }
+
+  canAutoAdvance() {
+    const currentStep = this.scenario?.steps?.[this.currentStep];
+    const settingsModal = this.$("settings-modal");
+    return (
+      this.autoAdvanceEnabled &&
+      this.started &&
+      currentStep?.kind === "text" &&
+      this.currentTextStepIndex === this.currentStep &&
+      !this.isTyping &&
+      !this.isAdvancing &&
+      !this.showingChoice &&
+      !this.backlogOpen &&
+      !this.ctrlSkipTimer &&
+      !this.isAdmsOverlayOpen() &&
+      !!settingsModal?.hidden &&
+      !this.$volumePopup.classList.contains("visible") &&
+      this.$chapterOverlay.style.display !== "flex" &&
+      this.$endScreen.style.display !== "flex" &&
+      this.$continueIndicator.classList.contains("visible")
+    );
+  }
+
+  scheduleAutoAdvance() {
+    this.clearAutoAdvanceTimer();
+    if (!this.canAutoAdvance()) {
+      return;
+    }
+    this.autoAdvanceTimer = window.setTimeout(() => {
+      this.autoAdvanceTimer = null;
+      if (!this.canAutoAdvance()) {
+        return;
+      }
+      this.advance();
+    }, this.getAutoAdvanceDelay());
   }
 
   updateMessageApiUI({ message, clientId, apiBase, configured }) {
@@ -1807,6 +1997,7 @@ class GalgeRuntimeApp {
       return;
     }
 
+    this.clearAutoAdvanceTimer();
     if (this.pageTurnTimer) {
       window.clearTimeout(this.pageTurnTimer);
       this.pageTurnTimer = null;
@@ -1857,6 +2048,7 @@ class GalgeRuntimeApp {
     if (!this.hasPreviousTextPages()) {
       return false;
     }
+    this.clearAutoAdvanceTimer();
     this.currentTextPageIndex -= 1;
     const page = this.getCurrentTextPage();
     if (!page) {
@@ -1869,6 +2061,7 @@ class GalgeRuntimeApp {
     this.$cursor.style.display = "none";
     this.$continueIndicator.classList.add("visible");
     this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+    this.scheduleAutoAdvance();
     return true;
   }
 
@@ -1881,6 +2074,7 @@ class GalgeRuntimeApp {
     const preservedVisibleLength = this.isTyping
       ? this.currentTextVisibleLength
       : (this.getCurrentTextPage()?.end ?? 0);
+    this.clearAutoAdvanceTimer();
     if (this.pageTurnTimer) {
       window.clearTimeout(this.pageTurnTimer);
       this.pageTurnTimer = null;
@@ -1902,9 +2096,11 @@ class GalgeRuntimeApp {
     this.$cursor.style.display = "none";
     this.$continueIndicator.classList.add("visible");
     this.$textContent.classList.remove("text-fade-in", "text-fade-out");
+    this.scheduleAutoAdvance();
   }
 
   typeText(text, onDone, { startVisibleLength = 0 } = {}) {
+    this.clearAutoAdvanceTimer();
     this.isTyping = true;
     this.$textContent.textContent = "";
     this.$cursor.style.display = "inline-block";
@@ -1923,12 +2119,14 @@ class GalgeRuntimeApp {
         this.$cursor.style.display = "none";
         this.$continueIndicator.classList.add("visible");
         onDone?.();
+        this.scheduleAutoAdvance();
       }
     };
     step();
   }
 
   skipType(text, { startVisibleLength = 0 } = {}) {
+    this.clearAutoAdvanceTimer();
     window.clearTimeout(this.typeTimer);
     this.$textContent.textContent = text;
     this.currentTextVisibleLength = startVisibleLength + Array.from(text).length;
@@ -1936,6 +2134,7 @@ class GalgeRuntimeApp {
     this.$cursor.style.display = "none";
     this.$continueIndicator.classList.add("visible");
     this.$textContent.classList.remove("text-fade-in");
+    this.scheduleAutoAdvance();
   }
 
   updateProgress() {
@@ -1981,6 +2180,7 @@ class GalgeRuntimeApp {
 
   resetTransientUiForScenarioTransition() {
     this.renderToken += 1;
+    this.clearAutoAdvanceTimer();
     if (this.pageTurnTimer) {
       window.clearTimeout(this.pageTurnTimer);
       this.pageTurnTimer = null;
@@ -2041,6 +2241,7 @@ class GalgeRuntimeApp {
       return;
     }
 
+    this.clearAutoAdvanceTimer();
     const step = this.scenario.steps[index];
     this.currentStep = index;
     this.renderToken += 1;
@@ -2382,6 +2583,7 @@ class GalgeRuntimeApp {
       return;
     }
 
+    this.clearAutoAdvanceTimer();
     const currentScenarioStep = this.scenario.steps[this.currentStep];
     if (this.isTyping && currentScenarioStep?.kind === "text") {
       const currentPage = this.getCurrentTextPage();
@@ -2463,6 +2665,7 @@ class GalgeRuntimeApp {
     ) {
       this.restoreTextWindowSnapshot(snapshot);
       await this.refreshCurrentStage(null);
+      this.scheduleAutoAdvance();
     }
   }
 
@@ -2490,6 +2693,7 @@ class GalgeRuntimeApp {
       return;
     }
 
+    this.clearAutoAdvanceTimer();
     if (this.isTyping) {
       const step = this.scenario.steps[this.currentStep];
       if (step?.kind === "text") {
@@ -2528,6 +2732,7 @@ class GalgeRuntimeApp {
       return;
     }
 
+    this.clearAutoAdvanceTimer();
     this.voiceController.stopCurrent();
     if (this.scenario.steps[this.currentStep]?.kind === "text" && this.showPreviousTextPage()) {
       return;
@@ -2574,6 +2779,7 @@ class GalgeRuntimeApp {
     if (!this.started || this.ctrlSkipTimer || this.backlogOpen || this.isAdmsOverlayOpen()) {
       return;
     }
+    this.clearAutoAdvanceTimer();
     const tick = () => {
       if (this.showingChoice || this.$endScreen.style.display === "flex" || this.isAdmsOverlayOpen()) {
         this.stopCtrlSkip();
@@ -2602,12 +2808,14 @@ class GalgeRuntimeApp {
       window.clearTimeout(this.ctrlSkipTimer);
       this.ctrlSkipTimer = null;
     }
+    this.scheduleAutoAdvance();
   }
 
   openBacklog() {
     if (this.backlogOpen || this.backlog.length === 0 || this.isAdmsOverlayOpen()) {
       return;
     }
+    this.clearAutoAdvanceTimer();
     this.backlogOpen = true;
     let el = document.getElementById("backlog-panel");
     if (!el) {
@@ -2673,6 +2881,7 @@ class GalgeRuntimeApp {
       }, 300);
     }
     this.backlogOpen = false;
+    this.scheduleAutoAdvance();
   }
 }
 
