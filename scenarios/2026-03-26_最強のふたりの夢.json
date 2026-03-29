@@ -37,6 +37,9 @@
   },
   "scenario": [
     {
+      "label": "standalone_start"
+    },
+    {
       "bg": "study_night",
       "bgm": {
         "src": "./assets/bgm/yorugakuru.mp3",

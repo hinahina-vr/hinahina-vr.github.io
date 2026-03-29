@@ -1,19 +1,19 @@
 {
   "date": "2026-03-26",
   "title": "最強のふたり A.D.M.S.",
-  "rootNodeId": "book_close",
+  "rootNodeId": "standalone_start",
   "nodes": [
     {
-      "id": "book_close",
-      "title": "本を閉じる",
+      "id": "standalone_start",
+      "title": "プロローグ",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
       "lane": 7,
       "icon": "📕",
       "scenario": "2026-03-26_最強のふたりの夢",
-      "entry": "book_close",
-      "summary": "480ページの評伝を閉じた夜"
+      "entry": "standalone_start",
+      "summary": "木曜の夜、480ページの昭和が脳味噌で発酵する"
     },
     {
       "id": "choose_era",
@@ -522,7 +522,7 @@
   ],
   "edges": [
     {
-      "from": "book_close",
+      "from": "standalone_start",
       "to": "choose_era",
       "choiceText": "本を開き直す",
       "style": "kenkai"
