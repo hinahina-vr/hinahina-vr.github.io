@@ -1226,6 +1226,15 @@ class GalgeRuntimeApp {
     }
   }
 
+  shouldWaitForNarrationVoiceBeforeAdvance() {
+    const currentStep = this.scenario?.steps?.[this.currentStep];
+    return (
+      currentStep?.kind === "text" &&
+      currentStep.speaker === "narrator" &&
+      this.voiceController.isSpeaking()
+    );
+  }
+
   canAutoAdvance() {
     const currentStep = this.scenario?.steps?.[this.currentStep];
     const settingsModal = this.$("settings-modal");
@@ -1248,18 +1257,19 @@ class GalgeRuntimeApp {
     );
   }
 
-  scheduleAutoAdvance() {
+  scheduleAutoAdvance(delayOverride = null) {
     this.clearAutoAdvanceTimer();
     if (!this.canAutoAdvance()) {
       return;
     }
+    const delay = Number.isFinite(delayOverride) ? delayOverride : this.getAutoAdvanceDelay();
     this.autoAdvanceTimer = window.setTimeout(() => {
       this.autoAdvanceTimer = null;
       if (!this.canAutoAdvance()) {
         return;
       }
       this.advance();
-    }, this.getAutoAdvanceDelay());
+    }, delay);
   }
 
   updateMessageApiUI({ message, clientId, apiBase, configured }) {
@@ -2706,6 +2716,11 @@ class GalgeRuntimeApp {
     }
 
     if (this.scenario.steps[this.currentStep]?.kind === "text" && this.showNextTextPage()) {
+      return;
+    }
+
+    if (this.shouldWaitForNarrationVoiceBeforeAdvance()) {
+      this.scheduleAutoAdvance(180);
       return;
     }
 

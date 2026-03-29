@@ -102,6 +102,10 @@ export class VoiceController {
     }
   }
 
+  isSpeaking() {
+    return Boolean(this.currentSource || this.speechSynthesisActive);
+  }
+
   stopPlayback() {
     if (this.currentSource) {
       try {

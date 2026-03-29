@@ -1457,6 +1457,9 @@
         this.masterGain.gain.value = Math.min(1, Math.max(0, v));
       }
     }
+    isSpeaking() {
+      return Boolean(this.currentSource || this.speechSynthesisActive);
+    }
     stopPlayback() {
       if (this.currentSource) {
         try {
@@ -33859,23 +33862,28 @@ void main() {
         this.scheduleAutoAdvance();
       }
     }
+    shouldWaitForNarrationVoiceBeforeAdvance() {
+      const currentStep = this.scenario?.steps?.[this.currentStep];
+      return currentStep?.kind === "text" && currentStep.speaker === "narrator" && this.voiceController.isSpeaking();
+    }
     canAutoAdvance() {
       const currentStep = this.scenario?.steps?.[this.currentStep];
       const settingsModal = this.$("settings-modal");
       return this.autoAdvanceEnabled && this.started && currentStep?.kind === "text" && this.currentTextStepIndex === this.currentStep && !this.isTyping && !this.isAdvancing && !this.showingChoice && !this.backlogOpen && !this.ctrlSkipTimer && !this.isAdmsOverlayOpen() && !!settingsModal?.hidden && !this.$volumePopup.classList.contains("visible") && this.$chapterOverlay.style.display !== "flex" && this.$endScreen.style.display !== "flex" && this.$continueIndicator.classList.contains("visible");
     }
-    scheduleAutoAdvance() {
+    scheduleAutoAdvance(delayOverride = null) {
       this.clearAutoAdvanceTimer();
       if (!this.canAutoAdvance()) {
         return;
       }
+      const delay = Number.isFinite(delayOverride) ? delayOverride : this.getAutoAdvanceDelay();
       this.autoAdvanceTimer = window.setTimeout(() => {
         this.autoAdvanceTimer = null;
         if (!this.canAutoAdvance()) {
           return;
         }
         this.advance();
-      }, this.getAutoAdvanceDelay());
+      }, delay);
     }
     updateMessageApiUI({ message, clientId, apiBase, configured }) {
       this.voiceController.setProxyBase(apiBase);
@@ -35017,6 +35025,10 @@ void main() {
         return;
       }
       if (this.scenario.steps[this.currentStep]?.kind === "text" && this.showNextTextPage()) {
+        return;
+      }
+      if (this.shouldWaitForNarrationVoiceBeforeAdvance()) {
+        this.scheduleAutoAdvance(180);
         return;
       }
       this.voiceController.stopCurrent();
