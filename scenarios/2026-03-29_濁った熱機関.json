@@ -4,7 +4,7 @@
   "genre": "酩酊熱力学ノベル",
   "date": "2026-03-29",
   "defaultBgm": {
-    "src": "./assets/bgm/yorugakuru.mp3",
+    "src": "./assets/bgm/yu-no.mp3",
     "volume": 0.08,
     "loop": true
   },
