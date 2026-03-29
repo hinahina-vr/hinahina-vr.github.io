@@ -4,7 +4,7 @@
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
-import { readdirSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
@@ -53,6 +53,7 @@ const CROSS_LINK_TARGETS = [
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary");
 const OUT_DIR = join(import.meta.dirname, "..");
+const ADMS_DIR = join(import.meta.dirname, "..", "scenarios", "adms");
 
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
@@ -73,6 +74,66 @@ function formatDate(dateStr) {
 function formatMonthLabel(monthKey) {
   const [y, m] = monthKey.split("-");
   return `${y}年${parseInt(m)}月`;
+}
+
+function buildDreamRootMap() {
+  const map = new Map();
+  let files = [];
+  try {
+    files = readdirSync(ADMS_DIR).filter((name) => /^\d{4}-\d{2}-\d{2}\.json$/.test(name));
+  } catch {
+    return map;
+  }
+
+  for (const file of files) {
+    try {
+      const raw = readFileSync(join(ADMS_DIR, file), "utf-8");
+      const graph = JSON.parse(raw);
+      const rootNode = Array.isArray(graph.nodes)
+        ? graph.nodes.find((node) => node.id === graph.rootNodeId)
+        : null;
+      if (!rootNode?.scenario) {
+        continue;
+      }
+      map.set(file.replace(/\.json$/, ""), {
+        scenario: rootNode.scenario,
+        entry: typeof rootNode.entry === "string" && rootNode.entry.length > 0 ? rootNode.entry : null,
+      });
+    } catch {
+      // Ignore broken graphs here and leave the original diary link untouched.
+    }
+  }
+
+  return map;
+}
+
+function buildDreamStartHref(date, dreamRootMap) {
+  const root = dreamRootMap.get(date);
+  if (!root?.scenario) {
+    return "";
+  }
+
+  const params = new URLSearchParams({
+    scenario: root.scenario,
+    mode: "immersive",
+  });
+  if (root.entry) {
+    params.set("entry", root.entry);
+  }
+
+  return `./galge-scenario.html?${params.toString()}`;
+}
+
+function rewriteDreamButtonLinks(html, date, dreamRootMap) {
+  const nextHref = buildDreamStartHref(date, dreamRootMap);
+  if (!nextHref) {
+    return html;
+  }
+
+  return html.replace(
+    /<a([^>]*?)href="[^"]*"([^>]*?)>([\s\S]*?夢を見る[\s\S]*?)<\/a>/g,
+    `<a$1href="${nextHref}"$2>$3</a>`
+  );
 }
 
 // 同じ日付の他キャラ日記を検索してリンクを生成（グループごとに改行、見出しなし）
@@ -157,6 +218,7 @@ function htmlFooter() {
 }
 
 async function main() {
+  const dreamRootMap = buildDreamRootMap();
   const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md") && !f.includes("下書き"));
 
   const entries = [];
@@ -169,7 +231,7 @@ async function main() {
     const raw = await readFile(join(DIARY_DIR, file), "utf-8");
     const cleaned = stripDailyContextBlock(raw);
     const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
-    const html = await marked.parse(body);
+    const html = rewriteDreamButtonLinks(await marked.parse(body), meta.date, dreamRootMap);
     entries.push({ ...meta, html });
   }
 
