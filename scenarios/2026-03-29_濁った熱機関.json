@@ -1,0 +1,414 @@
+{
+  "title": "濁った熱機関",
+  "subtitle": "─ 少し汚れた熱で回る ─",
+  "genre": "酩酊熱力学ノベル",
+  "date": "2026-03-29",
+  "defaultBgm": {
+    "src": "./assets/bgm/yorugakuru.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#b0a0d0",
+      "emoji": "🖥️"
+    },
+    "keeper": {
+      "name": "機関番",
+      "color": "#8f7a66",
+      "emoji": "⚙️"
+    },
+    "master": {
+      "name": "店主",
+      "color": "#a86a3c",
+      "emoji": "🍜"
+    },
+    "bottle": {
+      "name": "瓶たち",
+      "color": "#9d8c63",
+      "emoji": "🥃"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yorugakuru.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "夜更け。コードを書いていたはずの指が、いつの間にか止まっている。キーボードの隙間に、昨日の騒ぎの残り熱がまだこもっている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の端には開栓済みのボトルが並んでいる。ラベルは立派だが、中身はどれも昨日の続きだ。見栄の残骸であり、今日じゅうに始末すべき現物でもある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "まぶたが落ちる。落ちた、と思った瞬間、部屋が縦に伸びて、廊下になった。左右の壁に瓶が埋め込まれている。瓶の腹が赤く光り、ボコボコと低い音を立てている。まるでボイラーだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "廊下の先に三つの熱源が見える。ひとつは鉄と配管の機関室。ひとつは味噌と脂の湯気で白く曇ったカウンター。ひとつは開栓済みボトルだけが並ぶ静かな霊廟。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "清潔な燃料では動かない。\nそう思ったところまでは覚えている。じゃあ、何で動いてるのか見に行くしかない。"
+    },
+    {
+      "label": "choose_heat"
+    },
+    {
+      "choices": [
+        {
+          "text": "機関室へ降りる",
+          "goto": "engine_room"
+        },
+        {
+          "text": "味噌ラーメンの湯気へ向かう",
+          "goto": "ramen_counter"
+        },
+        {
+          "text": "開栓済みボトルの霊廟へ入る",
+          "goto": "bottle_tomb"
+        }
+      ]
+    },
+    {
+      "label": "engine_room"
+    },
+    {
+      "bg": "server_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "階段を降りると、機関室だった。配管の代わりに空き瓶と半端瓶がつながっている。液面がわずかに揺れるたび、圧力計の針が震える。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "床には真新しいネジが散っている。文字送り、BGM、現在地、ナレーター待ち。今日締め直した機能の名前が、頭の丸いネジに一つずつ刻まれていた。"
+    },
+    {
+      "speaker": "keeper",
+      "expression": "",
+      "text": "見栄で開けた瓶も、翌日きちんと始末すれば熱になります。\n機械は、立派さでは回りません。残りをちゃんと燃やしたかどうかで回ります。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "昨日の笑い声まで圧力に変わってる。\nひどい話だが、わりと正確だ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "煤けた圧力計に耳を当てる",
+          "goto": "gen_dirty_heat"
+        },
+        {
+          "text": "中央の昇降機で上へ戻る",
+          "goto": "mitra_platform"
+        }
+      ]
+    },
+    {
+      "label": "gen_dirty_heat"
+    },
+    {
+      "bg": "server_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "圧力計に耳を当てると、昨夜の乾杯の音がする。グラスの触れ合う硬い音、そのあとに少し遅れて来る笑い声。どれももう終わった出来事のはずなのに、ここではまだ蒸気になっている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "恥は消えない。ただ形が変わる。昨夜の乱れは、朝になってそのまま消えるのではなく、少しだけ仕事の圧力に変わっている。汚れた熱、というのはたぶんこれだ。"
+    },
+    {
+      "speaker": "keeper",
+      "expression": "",
+      "text": "壊れた分だけ動く日があります。\nただし壊れっぱなしではダメです。ネジを締めるところまでやって、やっと熱になります。"
+    },
+    {
+      "choices": [
+        {
+          "text": "工具箱を閉じて円卓へ向かう",
+          "goto": "mitra_platform"
+        }
+      ]
+    },
+    {
+      "label": "ramen_counter"
+    },
+    {
+      "bg": "uohare_counter"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "暖簾をくぐると、湯気の中だった。味噌の匂い、炒めた野菜の甘い焦げ、脂の膜が光る表面。高価な香りが全部この湯気に負けている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "カウンターには、さっきまで勲章のように見えた瓶たちが行儀よく並んでいる。しかし客は誰も瓶を見ていない。全員、どんぶりの中だけを見ている。"
+    },
+    {
+      "speaker": "master",
+      "expression": "",
+      "text": "鼻で飲んだ話は鼻で終わるんだよ。\nほんとに人を立ち上がらせるのは、塩と脂と熱だ。判決を下すのはいつだって胃袋だよ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "負けた、と思う。\nでもこの負けは気分がいい。文明の最後に残るのが汁だっていうなら、まだ人間のことを見限らずに済む。"
+    },
+    {
+      "choices": [
+        {
+          "text": "湯気の奥に顔を入れる",
+          "goto": "gen_broth_steam"
+        },
+        {
+          "text": "どんぶりを持って円卓へ向かう",
+          "goto": "mitra_platform"
+        }
+      ]
+    },
+    {
+      "label": "gen_broth_steam"
+    },
+    {
+      "bg": "kitchen"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "湯気の中には街があった。正しさで舗装された街だ。節度、適量、清潔、計画。どれも立派だが、全部が薄い。そこへ味噌の湯気が流れ込むと、街は一気に生き物の温度を取り戻す。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "身体は理論より先に返事をする。熱い汁が喉を通る未来を想像しただけで、指先に血が戻る。考えより先に体が生き返る。"
+    },
+    {
+      "speaker": "master",
+      "expression": "",
+      "text": "きれいごとだけ食っても腹はふくれない。\n腹が決まると、だいたい次にやることも決まる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "湯気をまとったまま円卓へ向かう",
+          "goto": "mitra_platform"
+        }
+      ]
+    },
+    {
+      "label": "bottle_tomb"
+    },
+    {
+      "bg": "silent_bar"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "霊廟は静かだった。棚に並ぶのは開栓済みの瓶だけだ。未開栓のものは一本もない。虚栄はここまで来ると消えて、残量だけが事実として立っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "どの瓶も少しずつ減っている。昨日の誰かの笑い、誰かの自慢、誰かの失敗、その名残が目盛りみたいに腹へ残っている。立派なのはラベルではなく、開けたあとに始まる始末のほうだ。"
+    },
+    {
+      "speaker": "bottle",
+      "expression": "",
+      "text": "名前で飲むな。\n開けたなら、終わりまで責任を取れ。\n未開栓のままなら飾りで済んだのに、口を切った瞬間からこちらは生活だ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "ずいぶん正論だ。\n見栄のほうがもっと楽だった。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ラベルの年号を指でなぞる",
+          "goto": "gen_residue"
+        },
+        {
+          "text": "残りを一つのグラスに集めて持ち去る",
+          "goto": "mitra_platform"
+        }
+      ]
+    },
+    {
+      "label": "gen_residue"
+    },
+    {
+      "bg": "whisky_pour"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "年号をなぞると、指に薄く熱が移る。高い酒の値段ではない。開けたあとにゆっくり逃げていく時間の熱だ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "贅沢は密封されているうちは観念だ。開けた瞬間に作業になる。どのくらい残っているか、いつまでに飲むか、どう始末するか。そこから先は見栄ではなく労働だ。"
+    },
+    {
+      "speaker": "bottle",
+      "expression": "",
+      "text": "浪費は浪費のままでは終わらない。\nちゃんと引き受けるなら、それもまた別の仕事になる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "空き棚を背にして円卓へ向かう",
+          "goto": "mitra_platform"
+        }
+      ]
+    },
+    {
+      "label": "mitra_platform"
+    },
+    {
+      "bg": "mitra_chamber"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "三つの熱源の先には円卓があった。機関室の蒸気、味噌ラーメンの湯気、グラスから立つ薄い琥珀色の匂いが、ここでは一つの輪になっている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "清潔な燃料だけで動く世界は、よく整った標本です。\nけれど生きた生活は、いつも少しこぼれ、少し濁り、少し恥ずかしい。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "あなたが今日進めたものは、立派さの結果ではなく、始末まで引き受けた熱の結果でした。\n昨夜の乱れ、今朝の塩分、昼の供養、夜のネジ締め。\n別々に見えるものが、ここでは同じ釜で沸いています。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "汚れているから動く。\nそれを免罪符にしたくはないが、観察としては否定できない。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "だからこそ、どの熱を持ち帰るかだけが残ります。\n道徳ではなく、今朝のあなたを動かした温度として。"
+    },
+    {
+      "label": "final_switch"
+    },
+    {
+      "choices": [
+        {
+          "text": "工具箱を持ち帰る",
+          "goto": "END_ENGINE"
+        },
+        {
+          "text": "どんぶりの熱を抱える",
+          "goto": "END_BROTH"
+        },
+        {
+          "text": "空になったグラスを見る",
+          "goto": "END_EMPTY"
+        }
+      ]
+    },
+    {
+      "label": "END_ENGINE"
+    },
+    {
+      "bg": "morning_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。机に突っ伏していた。首が痛い。頭は完全ではない。でも指先だけが妙に落ち着いている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨夜の乱れで緩んだネジを、今日のうちに締める。文字送り、BGM、現在地、ナレーター待ち。機械はまだ回る。きれいではないが、回る。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "世界は清潔な力で前へ進むのではない。少し煤けた工具箱みたいな手つきで、案外ちゃんと前へ進む。\n──END: 機関室の朝"
+    },
+    {
+      "label": "END_BROTH"
+    },
+    {
+      "bg": "morning_hall"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚めた瞬間、味噌の匂いを思い出す。空腹が先に来る。理屈はあとだ。身体の票が先に集計される。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "高価な香りの話はいったん棚へ戻す。まず熱い汁で腹を決める。人間の文明はその順番を守るかぎり、まだ壊れきらない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "腹が決まると、今日の作業も少しだけはっきりする。身体に通った熱が、そのまま次の一手になる。\n──END: どんぶりの判決"
+    },
+    {
+      "label": "END_EMPTY"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。グラスは空だ。昨夜から続いていたもののうち、ひとつだけ始末がついている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "開けたものを終わりまで引き受ける。たいした倫理ではない。だが生活は、そのくらい低いところでようやく姿勢を保つ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "見栄は夜に生まれやすい。始末は朝にしかできない。空になったグラスは、その二つがようやく同じ机に置かれた証拠だった。\n──END: 空のグラス"
+    }
+  ]
+}

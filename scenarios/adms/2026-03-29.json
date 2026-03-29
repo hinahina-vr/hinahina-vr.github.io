@@ -1,0 +1,267 @@
+{
+  "date": "2026-03-29",
+  "title": "濁った熱機関 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "ボトルの廊下",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🌃",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "standalone_start",
+      "summary": "夜更けの机が、発電所の入口へ変わる"
+    },
+    {
+      "id": "choose_heat",
+      "title": "三つの熱源",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "♨️",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "choose_heat",
+      "summary": "機関室、味噌の湯気、開栓済みの霊廟"
+    },
+    {
+      "id": "engine_room",
+      "title": "機関室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "⚙️",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "engine_room",
+      "summary": "昨夜の乱れが、今日のネジ締めを回している"
+    },
+    {
+      "id": "ramen_counter",
+      "title": "味噌ラーメンの湯気",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🍜",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "ramen_counter",
+      "summary": "香りではなく汁が身体へ判決を下す"
+    },
+    {
+      "id": "bottle_tomb",
+      "title": "開栓済みボトルの霊廟",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🥃",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "bottle_tomb",
+      "summary": "開けた瞬間から贅沢は生活へ変わる"
+    },
+    {
+      "id": "gen_dirty_heat",
+      "title": "圧力計の鼓動",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🫀",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "gen_dirty_heat",
+      "summary": "恥と笑いが蒸気へ変わる"
+    },
+    {
+      "id": "gen_broth_steam",
+      "title": "湯気の街",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🌫️",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "gen_broth_steam",
+      "summary": "理屈より先に身体が生き返る"
+    },
+    {
+      "id": "gen_residue",
+      "title": "残量の倫理",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🧪",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "gen_residue",
+      "summary": "見栄のあとに始まる始末の労働"
+    },
+    {
+      "id": "mitra_platform",
+      "title": "みとらの円卓",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "mitra_platform",
+      "summary": "三つの熱がひとつの釜で沸いている"
+    },
+    {
+      "id": "final_switch",
+      "title": "持ち帰る熱",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🪫",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "final_switch",
+      "summary": "工具箱、どんぶり、空のグラス"
+    },
+    {
+      "id": "END_ENGINE",
+      "title": "機関室の朝",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🧰",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "END_ENGINE",
+      "summary": "煤けた工具箱の手つきで世界を進める"
+    },
+    {
+      "id": "END_BROTH",
+      "title": "どんぶりの判決",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🍲",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "END_BROTH",
+      "summary": "まず身体を温めてから次の一手へ行く"
+    },
+    {
+      "id": "END_EMPTY",
+      "title": "空のグラス",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🥛",
+      "scenario": "2026-03-29_濁った熱機関",
+      "entry": "END_EMPTY",
+      "summary": "見栄と始末が同じ机へ戻ってくる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_heat",
+      "choiceText": "三つの熱源を見比べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_heat",
+      "to": "engine_room",
+      "choiceText": "機関室へ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_heat",
+      "to": "ramen_counter",
+      "choiceText": "味噌ラーメンの湯気へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_heat",
+      "to": "bottle_tomb",
+      "choiceText": "開栓済みボトルの霊廟へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "engine_room",
+      "to": "gen_dirty_heat",
+      "choiceText": "圧力計に耳を当てる",
+      "style": "genkai"
+    },
+    {
+      "from": "engine_room",
+      "to": "mitra_platform",
+      "choiceText": "中央の昇降機で上へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_dirty_heat",
+      "to": "mitra_platform",
+      "choiceText": "工具箱を閉じて円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "ramen_counter",
+      "to": "gen_broth_steam",
+      "choiceText": "湯気の奥に顔を入れる",
+      "style": "genkai"
+    },
+    {
+      "from": "ramen_counter",
+      "to": "mitra_platform",
+      "choiceText": "どんぶりを持って円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_broth_steam",
+      "to": "mitra_platform",
+      "choiceText": "湯気をまとったまま円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "bottle_tomb",
+      "to": "gen_residue",
+      "choiceText": "ラベルの年号を指でなぞる",
+      "style": "genkai"
+    },
+    {
+      "from": "bottle_tomb",
+      "to": "mitra_platform",
+      "choiceText": "残りを一つのグラスに集めて持ち去る",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_residue",
+      "to": "mitra_platform",
+      "choiceText": "空き棚を背にして円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_platform",
+      "to": "final_switch",
+      "choiceText": "持ち帰る熱を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_switch",
+      "to": "END_ENGINE",
+      "choiceText": "工具箱を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_switch",
+      "to": "END_BROTH",
+      "choiceText": "どんぶりの熱を抱える",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_switch",
+      "to": "END_EMPTY",
+      "choiceText": "空になったグラスを見る",
+      "style": "kenkai"
+    }
+  ]
+}
