@@ -33,6 +33,7 @@ function buildSignedRequest(body: Record<string, unknown>, secretKey: Uint8Array
 class StubDifyClient implements DifyClient {
   public readonly deleted: Array<{ conversationId: string; user: string }> = [];
   public readonly requests: DifyChatRequest[] = [];
+  public failureMessage = "boom";
   public shouldFail = false;
 
   async deleteConversation(conversationId: string, user: string): Promise<void> {
@@ -51,7 +52,7 @@ class StubDifyClient implements DifyClient {
   async sendChatMessage(request: DifyChatRequest): Promise<DifyChatResult> {
     this.requests.push(request);
     if (this.shouldFail) {
-      throw new Error("boom");
+      throw new Error(this.failureMessage);
     }
 
     return {
@@ -236,6 +237,36 @@ describe("worker interactions", () => {
 
     expect(discord.edits.at(-1)?.content).toContain("今ちょっと立て込んでるにょ");
   });
+  it("surfaces a publish hint when Dify workflow is not published", async () => {
+    const dify = new StubDifyClient();
+    dify.shouldFail = true;
+    dify.failureMessage = "Failed to send Dify chat message: {\"code\":\"invalid_param\",\"message\":\"Workflow not published\",\"status\":400}";
+    const discord = new StubDiscordClient();
+    const { app, keyPair } = createRuntime(dify, discord);
+    const ctx = createExecutionContext();
+
+    const body = {
+      application_id: "app-1",
+      channel_id: "channel-1",
+      data: {
+        name: "dejiko",
+        options: [{ name: "message", type: 3, value: "publish してある?" }],
+      },
+      guild_id: "guild-1",
+      id: "interaction-5",
+      member: {
+        user: { id: "user-1", username: "alice" },
+      },
+      token: "token-5",
+      type: 2,
+    };
+
+    await app.fetch(buildSignedRequest(body, keyPair.secretKey), ctx);
+    await ctx.drain();
+
+    expect(discord.edits.at(-1)?.content).toContain("Publish");
+  });
+
   it("uses a follow-up message when the original interaction edit fails", async () => {
     const dify = new StubDifyClient();
     const discord = new StubDiscordClient();
@@ -251,11 +282,11 @@ describe("worker interactions", () => {
         options: [{ name: "message", type: 3, value: "follow-up で返すテスト" }],
       },
       guild_id: "guild-1",
-      id: "interaction-5",
+      id: "interaction-6",
       member: {
         user: { id: "user-1", username: "alice" },
       },
-      token: "token-5",
+      token: "token-6",
       type: 2,
     };
 

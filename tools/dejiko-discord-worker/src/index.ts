@@ -166,6 +166,41 @@ function mergeProfileFromDify(
   };
 }
 
+function resolveCommandFallback(
+  commandName: string | null,
+  error: unknown,
+): { content: string; ephemeral: boolean } {
+  const message = error instanceof Error ? error.message : String(error);
+
+  if (commandName === "dejiko") {
+    if (message.includes("Workflow not published")) {
+      return {
+        content: "Dify 側がまだ Publish されてないにょ。Dify で Publish してから、もう一回言うにょ。",
+        ephemeral: false,
+      };
+    }
+
+    if (message.includes("401") || message.includes("Unauthorized")) {
+      return {
+        content: "Dify の API key がうまく入ってないにょ。設定を見直してから呼ぶにょ。",
+        ephemeral: false,
+      };
+    }
+
+    if (message.includes("timed out")) {
+      return {
+        content: DEJIKO_BUSY_FALLBACK,
+        ephemeral: false,
+      };
+    }
+  }
+
+  return {
+    content: commandName === "dejiko" ? DEJIKO_BUSY_FALLBACK : DEJIKO_ERROR_FALLBACK,
+    ephemeral: commandName !== "dejiko",
+  };
+}
+
 async function syncGuildSnapshot(
   interaction: DiscordApplicationCommandInteraction,
   runtime: AppRuntime,
@@ -370,11 +405,11 @@ async function processCommand(
   } catch (error) {
     console.error("Failed to process Discord interaction", error);
     const commandName = getCommandName(interaction);
-    const fallback = commandName === "dejiko" ? DEJIKO_BUSY_FALLBACK : DEJIKO_ERROR_FALLBACK;
+    const fallback = resolveCommandFallback(commandName, error);
     try {
       await updateInteractionResponse(interaction, runtime, {
-        content: fallback,
-        ephemeral: commandName !== "dejiko",
+        content: fallback.content,
+        ephemeral: fallback.ephemeral,
       });
     } catch (editError) {
       console.error("Failed to write fallback Discord response", editError);

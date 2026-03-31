@@ -70,7 +70,7 @@ export class HttpDifyClient implements DifyClient {
     private readonly apiBase: string,
     private readonly apiKey: string,
     private readonly timeoutMs: number,
-    private readonly fetchImpl: typeof fetch = fetch,
+    private readonly fetchImpl: typeof fetch = (...args) => fetch(...args),
   ) {}
 
   private async fetchWithTimeout(input: string, init: RequestInit): Promise<Response> {
