@@ -1,0 +1,374 @@
+{
+  "title": "夜がくる",
+  "subtitle": "─ 日付の外側で熟成する ─",
+  "genre": "昭和熟成ノベル",
+  "date": "2026-03-30",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aeb0dc",
+      "emoji": "🌙"
+    },
+    "saji": {
+      "name": "佐治",
+      "color": "#9d7b50",
+      "emoji": "🥃"
+    },
+    "kaiko": {
+      "name": "開高",
+      "color": "#7c8ca8",
+      "emoji": "📝"
+    },
+    "chorus": {
+      "name": "スキャット",
+      "color": "#b0a36a",
+      "emoji": "🎶"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "study_night",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "3月30日になっている。だが身体だけが今日へ来ただけで、頭の大半はまだ3月26日の夜に居残っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ログは薄い。Swarmは0件、外出もない。Xには22時22分に一行だけ。ところが机の内側では、数日前の読書感想が3800行の昭和評伝ノベルへ伸び続けている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "人間の生活は0時で切り替わる。\nでも原稿と夢は、そんなに素直じゃない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "口の中で、ダン・ダン・ディダン・シュビダドゥン、という節が勝手に回る。すると書斎の壁が三つの扉に割れた。佐治の執務室、開高の書斎、そして歌詞のないスキャットだけが鳴る展示室。"
+    },
+    {
+      "label": "choose_night"
+    },
+    {
+      "choices": [
+        {
+          "text": "佐治の執務室へ入る",
+          "goto": "saji_office"
+        },
+        {
+          "text": "開高の原稿迷宮へ入る",
+          "goto": "kaiko_manuscript"
+        },
+        {
+          "text": "スキャットの展示室へ入る",
+          "goto": "old_jingle"
+        }
+      ]
+    },
+    {
+      "label": "saji_office"
+    },
+    {
+      "bg": "saji_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "執務室には樽の帳簿が積まれていた。どの頁にも、減った量まであらかじめ書き込まれている。失われる分が事故ではなく予定として扱われている。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "待つ、というのは手を離すことではない。\n減る分まで込みで設計して、時間そのものを資産として預けることだ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "何も起きていない一日にも、減る分と育つ分があるわけか。\n今日の空白も、帳簿の外で熟成してる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "樽帳簿の欠けた数字を見る",
+          "goto": "gen_angel_share"
+        },
+        {
+          "text": "時計の音を背にして円卓へ向かう",
+          "goto": "night_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_angel_share"
+    },
+    {
+      "bg": "yamazaki_distillery"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "蒸溜所の通路には、見えない減少だけが数字になって浮かんでいる。天使の分け前。失われた分があるからこそ、残った液は濃くなる。"
+    },
+    {
+      "speaker": "saji",
+      "expression": "",
+      "text": "消えた分を無として数えるのは、焦る人間の計算です。\n残ったものの輪郭を深くしたなら、それは税金であって損失ではない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "欠けた数字を覚えたまま円卓へ向かう",
+          "goto": "night_table"
+        }
+      ]
+    },
+    {
+      "label": "kaiko_manuscript"
+    },
+    {
+      "bg": "kaiko_study"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "書斎では原稿が机からはみ出し、床へ落ち、棚へ登り、壁まで侵食している。読書感想だったはずのものが、いつのまにか昭和評伝ノベルの都市になっていた。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "感想は終点じゃない。\n匂いが残れば、文章のほうが勝手に本編を増築する。\n本を読んだあとに始まる仕事のほうが、たいてい長い。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "ログは0件に近いのに、いちばん長い文章だけが育ってる。\n記録されない時間のほうが、よほど濃い日がある。"
+    },
+    {
+      "choices": [
+        {
+          "text": "余白で増殖する頁をのぞく",
+          "goto": "gen_manuscript_tide"
+        },
+        {
+          "text": "背表紙を閉じて円卓へ向かう",
+          "goto": "night_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_manuscript_tide"
+    },
+    {
+      "bg": "book_pages"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "頁の波が寄せては返す。カレンダーは3月30日のままだが、文章だけがまだ昨日の夜を掘り続けている。日付は止まり、原稿だけが時間を持っている。"
+    },
+    {
+      "speaker": "kaiko",
+      "expression": "",
+      "text": "役所の時間と、文章の時間は別です。\n前者は切り替わるが、後者はしつこく尾を引く。\n尾を引くものだけが、本当に体に入ったものです。"
+    },
+    {
+      "choices": [
+        {
+          "text": "頁の波をたたんで円卓へ向かう",
+          "goto": "night_table"
+        }
+      ]
+    },
+    {
+      "label": "old_jingle"
+    },
+    {
+      "bg": "suntory_museum"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "展示室には歌詞がない。あるのはあのスキャットだけだ。ダン・ダン・ディダン・シュビダドゥン。旋律だけが古い照明の下を何度も往復している。"
+    },
+    {
+      "speaker": "chorus",
+      "expression": "",
+      "text": "言葉になる前の夜。\nタイトルになる前の気配。\n一日を閉じるのに必要なのは、長い説明ではなく短い節だけ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "さっきポストした一行も、ここから漏れたのか。\n書いていた章と生活の口元が、もうつながってしまっている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "スキャットの反響を追う",
+          "goto": "gen_scat_leak"
+        },
+        {
+          "text": "メロディを抱えて円卓へ向かう",
+          "goto": "night_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_scat_leak"
+    },
+    {
+      "bg": "concert_hall_empty"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "反響の奥には、誰もいないステージがあった。歌手も拍手もない。ただ『夜がくる』という題だけが、まだ発音されないまま空中に吊られている。"
+    },
+    {
+      "speaker": "chorus",
+      "expression": "",
+      "text": "夜が来る、というだけで十分です。\nそれだけで、一日を生き延びた人間の安堵はだいたい説明できる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "一節だけ持って円卓へ向かう",
+          "goto": "night_table"
+        }
+      ]
+    },
+    {
+      "label": "night_table"
+    },
+    {
+      "bg": "mitra_chamber"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "円卓には、欠けた数字、増殖した頁、歌詞になる前の旋律が置かれている。どれも今日のログには残りにくいが、今日そのものよりずっと今日の輪郭に近い。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "記録の空白は、不在の証拠ではありません。\n熟成はタイムラインに通知を出さないだけです。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "待つ執務室、増殖する原稿、漏れ出すスキャット。\nどれも日付の外側で、同じ夜をゆっくり発酵させていました。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "今日は薄かったんじゃなくて、見える場所にあまり出てこなかっただけか。\n夜のほうで勝手に濃くなっていた。"
+    },
+    {
+      "label": "final_carry"
+    },
+    {
+      "choices": [
+        {
+          "text": "樽帳簿の欠けた数字を持ち帰る",
+          "goto": "END_TAX"
+        },
+        {
+          "text": "増殖した原稿の切れ端を持ち帰る",
+          "goto": "END_PAGES"
+        },
+        {
+          "text": "スキャットの一節を持ち帰る",
+          "goto": "END_NIGHT"
+        }
+      ]
+    },
+    {
+      "label": "END_TAX"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。何もしていない日、という言い方が少しだけ不正確に見える。減った分はある。消えた分はある。だがその減少は、残った輪郭を確かに濃くしている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "空白の日にも、天使の分け前は発生する。失われた時間は丸ごと無駄ではなく、どこかで今日の濃度を上げている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "だから私は、空白を少しだけ信用する。\n減ったものまで込みで一日を設計するほうが、生活には正直だ。\n──END: 信頼の税金"
+    },
+    {
+      "label": "END_PAGES"
+    },
+    {
+      "bg": "morning_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚めても、文章だけがまだ昨日の夜を引きずっている。日付は変わったのに、原稿の時間だけがしつこく残っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "0件の日に3800行。何もしていないどころか、見えない場所でいちばん大きな増築が起きていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "記録されない制作のほうが、自分の輪郭を強く作る日がある。\n今日もたぶん、その類の一日だった。\n──END: 0件の日に3800行"
+    },
+    {
+      "label": "END_NIGHT"
+    },
+    {
+      "bg": "morning_hall"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚めても、口の中にあの節が残っている。ダン・ダン・ディダン・シュビダドゥン。説明ではなく、一日の余韻だけがそのまま口内に保存されている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "夜が来る。それだけでよかったのだと思う。外へ出ず、誰にも会わず、それでも一日が熟成していたことを、その短い節だけが知っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "もう少しだけ昭和にいさせてくれ、と思いながら起き上がる。\n現実へ戻っても、旋律だけはしばらく戻らない。\n──END: 夜がくる"
+    }
+  ]
+}

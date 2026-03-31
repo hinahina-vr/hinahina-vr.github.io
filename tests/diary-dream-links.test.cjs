@@ -37,10 +37,12 @@ assert(march29.includes("夢を見る"), "2026-03-29 keeps the dream button when
 assert(march29.includes("./galge-scenario.html?scenario="), "2026-03-29 dream button points to the scenario runtime");
 assert(!march29.includes("./dream-select.html?date=2026-03-29"), "2026-03-29 no longer links to dream-select directly");
 
-assert(!march30.includes("夢を見る"), "2026-03-30 hides the dream button when ADMS is missing");
+assert(march30.includes("夢を見る"), "2026-03-30 restores the dream button when ADMS exists");
+assert(march30.includes("./galge-scenario.html?scenario="), "2026-03-30 dream button points to the scenario runtime");
 assert(!march30.includes("./dream-select.html?date=2026-03-30"), "2026-03-30 does not expose a broken dream-select link");
 
-assert(!march31.includes("夢を見る"), "2026-03-31 hides the dream button when ADMS is missing");
+assert(march31.includes("夢を見る"), "2026-03-31 restores the dream button when ADMS exists");
+assert(march31.includes("./galge-scenario.html?scenario="), "2026-03-31 dream button points to the scenario runtime");
 assert(!march31.includes("./dream-select.html?date=2026-03-31"), "2026-03-31 does not expose a broken dream-select link");
 
 console.log(`\n=== 結果: ${passed} passed, ${failed} failed ===`);

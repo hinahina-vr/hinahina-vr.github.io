@@ -1,0 +1,374 @@
+{
+  "title": "敗北を知りたい",
+  "subtitle": "─ 勝ちすぎて、負けを知らない ─",
+  "genre": "制度配線ノベル",
+  "date": "2026-03-31",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "🏁"
+    },
+    "clerk": {
+      "name": "係員",
+      "color": "#8790a8",
+      "emoji": "📄"
+    },
+    "wireman": {
+      "name": "配線工",
+      "color": "#7f9c9a",
+      "emoji": "🔌"
+    },
+    "herald": {
+      "name": "案内人",
+      "color": "#b39a68",
+      "emoji": "🏆"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "parameter_archive",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "書庫のような試験会場を歩いている。棚には制度の部品が整然と並んでいるが、こちらが「やめろ」と思ったものだけ、先に薄くなっている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "怒っているわけではない。むしろ少し笑っている。願ったら通ってしまった、また勝ってしまった、その軽さのほうに戸惑っている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "勝ちたいんじゃない。\n願っても通らず、正面から打ち返される感触を、まだちゃんと知らないだけだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "前方で三つの装置が回っている。設問から余計な紙だけが剥がれ落ちる棟。冗談半分の悪態が現実の配線へ届く工房。勝利だけが陳列されている展示室。"
+    },
+    {
+      "label": "choose_wish"
+    },
+    {
+      "choices": [
+        {
+          "text": "剥がれる設問棟へ入る",
+          "goto": "paper_hall"
+        },
+        {
+          "text": "願望配線室へ降りる",
+          "goto": "wiring_room"
+        },
+        {
+          "text": "勝敗展示室へ向かう",
+          "goto": "victory_museum"
+        }
+      ]
+    },
+    {
+      "label": "paper_hall"
+    },
+    {
+      "bg": "conference"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の上に置かれた試験冊子から、ある頁だけがふわりと剥がれ落ちていく。技術の問題ではない、態度の作文だけが自分で自分を外している。"
+    },
+    {
+      "speaker": "clerk",
+      "expression": "",
+      "text": "測るべきものと、測りたがるものが一致しないとき、制度はまず紙を増やします。\nでも、ときどきその余計な紙だけが先に寿命を迎えます。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "なくなったのは結構だ。\nただ、なくなり方があまりに素直で、こっちが少し気まずい。"
+    },
+    {
+      "choices": [
+        {
+          "text": "剥がれた設問の余白を読む",
+          "goto": "gen_removed_paper"
+        },
+        {
+          "text": "冊子を閉じて円卓へ向かう",
+          "goto": "verdict_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_removed_paper"
+    },
+    {
+      "bg": "blank_page"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "余白には何も書いていない。勝利の理由も、撤回の議事録もない。ただ「ここにはもう必要のない紙があった」という静かな跡だけが残っている。"
+    },
+    {
+      "speaker": "clerk",
+      "expression": "",
+      "text": "願いが通るとき、証拠はあまり残りません。\nだから勝ったあとほど、手応えが薄くなるのです。"
+    },
+    {
+      "choices": [
+        {
+          "text": "余白を折りたたんで円卓へ向かう",
+          "goto": "verdict_table"
+        }
+      ]
+    },
+    {
+      "label": "wiring_room"
+    },
+    {
+      "bg": "server_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "配線室には言葉が流れていた。立派な提言ではない。雑な悪態、冗談半分の不満、その程度の言葉が銅線の中を思いのほか遠くまで走っていく。"
+    },
+    {
+      "speaker": "wireman",
+      "expression": "",
+      "text": "真面目な文は会議で止まります。\nでも投げた小石みたいな一言は、ときどき泥の深いところまで届きます。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "通った瞬間に快哉を叫ぶ感じじゃないな。\nあ、これも届くのか、って少し引く。"
+    },
+    {
+      "choices": [
+        {
+          "text": "悪態の波紋を追う",
+          "goto": "gen_wave"
+        },
+        {
+          "text": "配線盤を閉じて円卓へ向かう",
+          "goto": "verdict_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_wave"
+    },
+    {
+      "bg": "parameter_beyond"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "波紋は温い泥の上を静かに伸びていく。怒りの色ではない。むしろ笑いをこらえたときの、少し引きつった水面みたいな広がり方だった。"
+    },
+    {
+      "speaker": "wireman",
+      "expression": "",
+      "text": "世界が折れたあとに残るのは、勝利感より照れです。\n素直すぎる相手に勝つと、人は少し困るのです。"
+    },
+    {
+      "choices": [
+        {
+          "text": "波紋の温度を覚えたまま円卓へ向かう",
+          "goto": "verdict_table"
+        }
+      ]
+    },
+    {
+      "label": "victory_museum"
+    },
+    {
+      "bg": "award_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "展示室には勝利の標本ばかり並んでいる。小さな杯、大きな盾、修正済みの制度。だが「敗北」と書かれた棚だけは、最初から空のままだ。"
+    },
+    {
+      "speaker": "herald",
+      "expression": "",
+      "text": "敗北標本は未入荷です。\nここへ来る者の多くは、負けを憎んでいます。\nあなたは珍しいですね。標本として見たがっている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "勝利に飽きたわけじゃない。\nただ、負けたときにどこが折れるのか、その輪郭だけは見てみたい。"
+    },
+    {
+      "choices": [
+        {
+          "text": "欠番の展示ケースをのぞく",
+          "goto": "gen_no_defeat"
+        },
+        {
+          "text": "空の棚を背にして円卓へ向かう",
+          "goto": "verdict_table"
+        }
+      ]
+    },
+    {
+      "label": "gen_no_defeat"
+    },
+    {
+      "bg": "archive_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "欠番のケースには何もない。負けを説明する札も、敗者の写真も、閉ざされた扉もない。空白だけが、まだ取得されていない感触として保存されている。"
+    },
+    {
+      "speaker": "herald",
+      "expression": "",
+      "text": "拒絶されなかった願いは、勝利というより欠測値です。\nだからこそ、あなたはその欠けを見に来たのでしょう。"
+    },
+    {
+      "choices": [
+        {
+          "text": "欠番を胸にしまって円卓へ向かう",
+          "goto": "verdict_table"
+        }
+      ]
+    },
+    {
+      "label": "verdict_table"
+    },
+    {
+      "bg": "mitra_chamber"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "円卓には余白、波紋、空の展示ケースが置かれている。消えた紙も、届いた悪態も、未入荷の敗北も、全部こちらの前に静かに並んだ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "あなたは制度に腹を立てていたのではありません。\n願いが通ってしまう世界の軽さに、少し戸惑っていただけです。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "勝ちが続くと、勝ち負けの輪郭そのものが痩せます。\n欲しかったのは称賛ではなく、ちゃんと反発する壁だったのでしょう。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "願っても通らない一枚が欲しい。\nその一枚にぶつかって初めて、敗北の感触が手に入る。"
+    },
+    {
+      "label": "final_turn"
+    },
+    {
+      "choices": [
+        {
+          "text": "消えた設問の余白を持ち帰る",
+          "goto": "END_WORLD"
+        },
+        {
+          "text": "見つからない閉門を探し続ける",
+          "goto": "END_DEFEAT"
+        },
+        {
+          "text": "少し笑う口元だけを持ち帰る",
+          "goto": "END_AWKWARD"
+        }
+      ]
+    },
+    {
+      "label": "END_WORLD"
+    },
+    {
+      "bg": "morning_room"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。世界は本当に少し素直すぎたのかもしれない、と思う。やめろと言ったものだけが、妙にきれいに消えている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "怒りはない。ただ、通った願いのぶんだけ余白が増えた。余白が増えると、人は勝利より先に気まずさを受け取る。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "それでも消えたものが消えたままである以上、こちらはまた勝った側に立っている。\n──END: 素直すぎる世界"
+    },
+    {
+      "label": "END_DEFEAT"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚めても、閉じた扉だけが見つからない。どの通路も少し開いていて、拒絶はいつも一歩手前で別の何かへ変わってしまう。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "技術が足りずに負けるなら納得できる。その単純な負け方にすら、今日はまだ届かなかった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "敗北は未取得のまま、輪郭だけを残して逃げる。\nだから私は、次にぶつかる壁を少しだけ楽しみにしている。\n──END: 未取得の敗北"
+    },
+    {
+      "label": "END_AWKWARD"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。少しだけ笑っている。快勝の笑いではない。世界がはいわかりましたと折れたあとに残る、あの妙な照れ笑いだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "また勝ってしまった。だから敗北を知らない。その事実が、怒りより先に可笑しみとして体に残る。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "機嫌が悪いのではない。むしろ少し良すぎる。\nその良さの気まずさごと抱えて、朝のほうへ起き上がる。\n──END: 勝ちの気まずさ"
+    }
+  ]
+}
