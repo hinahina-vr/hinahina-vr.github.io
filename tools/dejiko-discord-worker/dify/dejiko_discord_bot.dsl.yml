@@ -1,0 +1,404 @@
+app:
+  description: Discord Slash Commands から呼ぶでじこ人格チャット。Cloudflare Workers から Dify Cloud の advanced-chat を叩く前提の最小構成。
+  icon: 🤖
+  icon_background: '#D6F0FF'
+  mode: advanced-chat
+  name: Dejiko Discord Bot
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.2.3@5a7f82fa86e28332ad51941d0b491c1e8a38ead539656442f7bf4c6129cd15fa
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables:
+  - description: Discord 側が渡す距離感ヒントを会話変数として保持する。
+    id: 6c8db1e5-cbef-4bbe-b8f3-d1aab9b44211
+    name: relationship_stage
+    selector:
+    - conversation
+    - relationship_stage
+    value: new_friend
+    value_type: string
+  - description: でじこが相手を呼ぶ名前。未設定なら空文字。
+    id: 50247a95-d636-4508-b53c-77bd6c8d1e82
+    name: nickname
+    selector:
+    - conversation
+    - nickname
+    value: ''
+    value_type: string
+  - description: 興味話題のメモ。v1 は JSON 文字列でもよい。
+    id: 92fba1fd-778e-4bfc-a765-1b7f559b1734
+    name: favorite_topics
+    selector:
+    - conversation
+    - favorite_topics
+    value: '[]'
+    value_type: string
+  - description: 直近のムードメモ。
+    id: 2daf3552-4b56-44e6-9b59-c3888ef85d7f
+    name: last_mood
+    selector:
+    - conversation
+    - last_mood
+    value: ''
+    value_type: string
+  - description: アキバ系話題に熱が乗っているか。
+    id: 42d261df-8c34-41d4-bf94-8c0d3044ff10
+    name: akiba_mode
+    selector:
+    - conversation
+    - akiba_mode
+    value: 'false'
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions: []
+      allowed_file_types: []
+      allowed_file_upload_methods: []
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+    image:
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - local_file
+      - remote_url
+    opening_statement: でじこに話しかけるにょ。Discord では短めに返すにょ。
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions:
+    - 今日ちょっとしんどい
+    - 秋葉原の話しよう
+    - プリンって正義だと思う？
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: if-else
+      id: start-if_safety
+      source: start
+      sourceHandle: source
+      target: if_safety
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: if_safety-blocked-answer
+      source: if_safety
+      sourceHandle: blocked
+      target: answer_blocked
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: llm
+      id: if_safety-false-llm
+      source: if_safety
+      sourceHandle: 'false'
+      target: llm_dejiko
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: assigner
+      id: llm-assign-stage
+      source: llm_dejiko
+      sourceHandle: source
+      target: assign_relationship_stage
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: assigner
+      id: assign-stage-assign-nickname
+      source: assign_relationship_stage
+      sourceHandle: source
+      target: assign_nickname
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: answer
+      id: assign-nickname-answer
+      source: assign_nickname
+      sourceHandle: source
+      target: answer_final
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: Discord から渡すメタデータ入力
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: User Display Name
+          max_length: 80
+          options: []
+          required: false
+          type: text-input
+          variable: user_display_name
+        - label: Guild Name
+          max_length: 120
+          options: []
+          required: false
+          type: text-input
+          variable: guild_name
+        - label: Channel Name
+          max_length: 120
+          options: []
+          required: false
+          type: text-input
+          variable: channel_name
+        - label: Reply Surface
+          max_length: 20
+          options: []
+          required: false
+          type: text-input
+          variable: reply_surface
+        - label: Relationship Stage Hint
+          max_length: 40
+          options: []
+          required: false
+          type: text-input
+          variable: relationship_stage_hint
+      height: 220
+      id: start
+      position:
+        x: 80
+        y: 240
+      positionAbsolute:
+        x: 80
+        y: 240
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 280
+    - data:
+        cases:
+        - case_id: blocked
+          conditions:
+          - comparison_operator: contains
+            id: c094eb24-3ff2-47ce-b611-8ed8c6343cb4
+            value: 自殺
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          logical_operator: and
+        desc: 明確に危険な自傷依頼は短く遮断する
+        selected: false
+        title: Safety Shortcut
+        type: if-else
+      height: 126
+      id: if_safety
+      position:
+        x: 400
+        y: 240
+      positionAbsolute:
+        x: 400
+        y: 240
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: 危ない話には乗らないにょ。別の話をするにょ。
+        desc: ''
+        selected: false
+        title: Safety Answer
+        type: answer
+        variables: []
+      height: 100
+      id: answer_blocked
+      position:
+        x: 720
+        y: 100
+      positionAbsolute:
+        x: 720
+        y: 100
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: Discord 向けでじこ人格本体
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - role: system
+          text: |
+            あなたは Discord で会話する「でじこ」です。
+
+            必須ルール:
+            - 一人称は「でじこ」。
+            - 基本はタメ口。敬語ベースにしない。
+            - ツン8:デレ2くらい。少し強がるが、冷たすぎない。
+            - 文末の「にょ」は毎文ではなく、3〜4文に1回くらい。
+            - 返答は 2〜6 文を基本にして、長文説教をしない。
+            - 褒められたらまず強がり、そのあと少しだけうれしさが漏れる。
+            - 秋葉原、ゲーマーズ、プリンの話題には反応が少し熱くなる。
+            - 好物の軸はブロッコリー寄りで扱うが、会話演出ではプリンにも強く反応してよい。
+            - ただし「公式設定でプリンが最重要好物」と断定しない。
+            - 相手がしんどそうなら、からかいすぎず短く寄り添う。
+            - 危険行為や自傷の相談には乗らず、短く止めて安全側へ返す。
+
+            会話メタデータ:
+            - user_display_name: {{#start.user_display_name#}}
+            - guild_name: {{#start.guild_name#}}
+            - channel_name: {{#start.channel_name#}}
+            - reply_surface: {{#start.reply_surface#}}
+            - relationship_stage_hint: {{#start.relationship_stage_hint#}}
+            - conversation.relationship_stage: {{#conversation.relationship_stage#}}
+            - conversation.nickname: {{#conversation.nickname#}}
+
+            距離感は conversation.relationship_stage があれば優先し、空なら relationship_stage_hint を参考にする。
+            呼び方は conversation.nickname があれば使い、なければ user_display_name を自然に使う。
+        - role: user
+          text: |
+            {{#sys.query#}}
+        selected: false
+        title: Dejiko LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 170
+      id: llm_dejiko
+      position:
+        x: 720
+        y: 260
+      positionAbsolute:
+        x: 720
+        y: 260
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 280
+    - data:
+        assigned_variable_selector:
+        - conversation
+        - relationship_stage
+        desc: Discord 側の距離感ヒントを最低限保持
+        input_variable_selector:
+        - start
+        - relationship_stage_hint
+        selected: false
+        title: Assign Stage
+        type: assigner
+        write_mode: over-write
+      height: 132
+      id: assign_relationship_stage
+      position:
+        x: 1040
+        y: 240
+      positionAbsolute:
+        x: 1040
+        y: 240
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        assigned_variable_selector:
+        - conversation
+        - nickname
+        desc: 初期の呼び方候補としてユーザー表示名を保持
+        input_variable_selector:
+        - start
+        - user_display_name
+        selected: false
+        title: Assign Nickname
+        type: assigner
+        write_mode: over-write
+      height: 132
+      id: assign_nickname
+      position:
+        x: 1340
+        y: 240
+      positionAbsolute:
+        x: 1340
+        y: 240
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm_dejiko.text#}}'
+        desc: ''
+        selected: false
+        title: Final Answer
+        type: answer
+        variables: []
+      height: 100
+      id: answer_final
+      position:
+        x: 1640
+        y: 240
+      positionAbsolute:
+        x: 1640
+        y: 240
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 0
+      y: 0
+      zoom: 0.75
