@@ -179,7 +179,7 @@ export function getStringOption(
 export class DiscordWebhookClient implements DiscordApiClient {
   constructor(
     private readonly applicationId: string,
-    private readonly fetchImpl: typeof fetch = fetch,
+    private readonly fetchImpl: typeof fetch = (...args) => fetch(...args),
   ) {}
 
   async createFollowupInteraction(
