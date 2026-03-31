@@ -64,11 +64,23 @@ class StubDifyClient implements DifyClient {
 
 class StubDiscordClient implements DiscordApiClient {
   public readonly edits: Array<{ content: string; ephemeral?: boolean; interactionToken: string }> = [];
+  public readonly followups: Array<{ content: string; ephemeral?: boolean; interactionToken: string }> = [];
+  public failEdits = false;
+
+  async createFollowupInteraction(
+    interactionToken: string,
+    payload: { content: string; ephemeral?: boolean },
+  ): Promise<void> {
+    this.followups.push({ interactionToken, ...payload });
+  }
 
   async editOriginalInteraction(
     interactionToken: string,
     payload: { content: string; ephemeral?: boolean },
   ): Promise<void> {
+    if (this.failEdits) {
+      throw new Error("edit failed");
+    }
     this.edits.push({ interactionToken, ...payload });
   }
 }
@@ -223,5 +235,35 @@ describe("worker interactions", () => {
     await ctx.drain();
 
     expect(discord.edits.at(-1)?.content).toContain("今ちょっと立て込んでるにょ");
+  });
+  it("uses a follow-up message when the original interaction edit fails", async () => {
+    const dify = new StubDifyClient();
+    const discord = new StubDiscordClient();
+    discord.failEdits = true;
+    const { app, keyPair } = createRuntime(dify, discord);
+    const ctx = createExecutionContext();
+
+    const body = {
+      application_id: "app-1",
+      channel_id: "channel-1",
+      data: {
+        name: "dejiko",
+        options: [{ name: "message", type: 3, value: "follow-up で返すテスト" }],
+      },
+      guild_id: "guild-1",
+      id: "interaction-5",
+      member: {
+        user: { id: "user-1", username: "alice" },
+      },
+      token: "token-5",
+      type: 2,
+    };
+
+    await app.fetch(buildSignedRequest(body, keyPair.secretKey), ctx);
+    await ctx.drain();
+
+    expect(discord.edits).toHaveLength(0);
+    expect(discord.followups).toHaveLength(1);
+    expect(discord.followups[0]?.content.length).toBeGreaterThan(0);
   });
 });
