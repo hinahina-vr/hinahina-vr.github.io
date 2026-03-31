@@ -61,6 +61,10 @@ async function readErrorMessage(response: Response): Promise<string> {
   return body || `${response.status} ${response.statusText}`;
 }
 
+function createTimeoutError(timeoutMs: number): Error {
+  return new Error(`Dify request timed out after ${timeoutMs}ms`);
+}
+
 export class HttpDifyClient implements DifyClient {
   constructor(
     private readonly apiBase: string,
@@ -69,8 +73,31 @@ export class HttpDifyClient implements DifyClient {
     private readonly fetchImpl: typeof fetch = fetch,
   ) {}
 
+  private async fetchWithTimeout(input: string, init: RequestInit): Promise<Response> {
+    const controller = new AbortController();
+    let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
+
+    try {
+      return await new Promise<Response>((resolve, reject) => {
+        timeoutHandle = setTimeout(() => {
+          controller.abort("timeout");
+          reject(createTimeoutError(this.timeoutMs));
+        }, this.timeoutMs);
+
+        this.fetchImpl(input, {
+          ...init,
+          signal: controller.signal,
+        }).then(resolve, reject);
+      });
+    } finally {
+      if (timeoutHandle) {
+        clearTimeout(timeoutHandle);
+      }
+    }
+  }
+
   async deleteConversation(conversationId: string, user: string): Promise<void> {
-    const response = await this.fetchImpl(`${this.apiBase}/conversations/${conversationId}`, {
+    const response = await this.fetchWithTimeout(`${this.apiBase}/conversations/${conversationId}`, {
       body: JSON.stringify({ user }),
       headers: {
         Authorization: `Bearer ${this.apiKey}`,
@@ -93,7 +120,7 @@ export class HttpDifyClient implements DifyClient {
     url.searchParams.set("user", user);
     url.searchParams.set("limit", "100");
 
-    const response = await this.fetchImpl(url.toString(), {
+    const response = await this.fetchWithTimeout(url.toString(), {
       headers: {
         Authorization: `Bearer ${this.apiKey}`,
       },
@@ -113,39 +140,31 @@ export class HttpDifyClient implements DifyClient {
   }
 
   async sendChatMessage(request: DifyChatRequest): Promise<DifyChatResult> {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort("timeout"), this.timeoutMs);
+    const response = await this.fetchWithTimeout(`${this.apiBase}/chat-messages`, {
+      body: JSON.stringify({
+        auto_generate_name: false,
+        conversation_id: request.conversationId ?? undefined,
+        inputs: request.inputs,
+        query: request.query,
+        response_mode: "blocking",
+        user: request.user,
+      }),
+      headers: {
+        Authorization: `Bearer ${this.apiKey}`,
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
 
-    try {
-      const response = await this.fetchImpl(`${this.apiBase}/chat-messages`, {
-        body: JSON.stringify({
-          auto_generate_name: false,
-          conversation_id: request.conversationId ?? undefined,
-          inputs: request.inputs,
-          query: request.query,
-          response_mode: "blocking",
-          user: request.user,
-        }),
-        headers: {
-          Authorization: `Bearer ${this.apiKey}`,
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        signal: controller.signal,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to send Dify chat message: ${await readErrorMessage(response)}`);
-      }
-
-      const payload = (await response.json()) as DifyChatResponsePayload;
-      return {
-        answer: payload.answer?.trim() || "",
-        conversationId: payload.conversation_id ?? request.conversationId ?? null,
-        messageId: payload.message_id ?? null,
-      };
-    } finally {
-      clearTimeout(timeout);
+    if (!response.ok) {
+      throw new Error(`Failed to send Dify chat message: ${await readErrorMessage(response)}`);
     }
+
+    const payload = (await response.json()) as DifyChatResponsePayload;
+    return {
+      answer: payload.answer?.trim() || "",
+      conversationId: payload.conversation_id ?? request.conversationId ?? null,
+      messageId: payload.message_id ?? null,
+    };
   }
 }

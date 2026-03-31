@@ -182,6 +182,23 @@ async function syncGuildSnapshot(
   });
 }
 
+async function updateInteractionResponse(
+  interaction: DiscordApplicationCommandInteraction,
+  runtime: AppRuntime,
+  payload: { content: string; ephemeral?: boolean },
+): Promise<void> {
+  try {
+    await runtime.discord.editOriginalInteraction(interaction.token, payload);
+  } catch (error) {
+    console.warn("Failed to edit original Discord interaction, trying follow-up", {
+      commandName: getCommandName(interaction),
+      error: error instanceof Error ? error.message : String(error),
+      interactionId: interaction.id,
+    });
+    await runtime.discord.createFollowupInteraction(interaction.token, payload);
+  }
+}
+
 async function handleNewChat(
   interaction: DiscordApplicationCommandInteraction,
   runtime: AppRuntime,
@@ -212,7 +229,7 @@ async function handleNewChat(
   await runtime.storage.clearConversation(conversationKey);
   await runtime.storage.clearUserProfile(conversationKey);
 
-  await runtime.discord.editOriginalInteraction(interaction.token, {
+  await updateInteractionResponse(interaction, runtime, {
     content: "会話をまっさらにしたにょ。最初から話すにょ。",
     ephemeral: true,
   });
@@ -234,7 +251,7 @@ async function handleProfile(
   });
 
   const profile = await runtime.storage.getUserProfile(conversationKey);
-  await runtime.discord.editOriginalInteraction(interaction.token, {
+  await updateInteractionResponse(interaction, runtime, {
     content: formatProfileMessage(profile),
     ephemeral: true,
   });
@@ -259,6 +276,12 @@ async function handleDejiko(
   const previousProfile = await runtime.storage.getUserProfile(conversationKey);
   const nextTurnCount = Math.max(previousConversation?.turnCount ?? 0, previousProfile?.turnCount ?? 0) + 1;
   const heuristicSnapshot = deriveProfileSnapshot(previousProfile, message, nextTurnCount);
+  console.log("Starting /dejiko command", {
+    conversationKey,
+    hasPreviousConversation: Boolean(previousConversation?.conversationId),
+    interactionId: interaction.id,
+    userId: user.id,
+  });
   const difyResult = await runtime.dify.sendChatMessage({
     conversationId: previousConversation?.conversationId ?? null,
     inputs: {
@@ -270,6 +293,11 @@ async function handleDejiko(
     },
     query: message,
     user: buildUserIdentifier(interaction),
+  });
+  console.log("Completed Dify response", {
+    answerLength: difyResult.answer.length,
+    conversationId: difyResult.conversationId,
+    interactionId: interaction.id,
   });
 
   let mergedSnapshot = heuristicSnapshot;
@@ -310,7 +338,7 @@ async function handleDejiko(
   );
   await runtime.storage.upsertUserProfile(profileRecord);
 
-  await runtime.discord.editOriginalInteraction(interaction.token, {
+  await updateInteractionResponse(interaction, runtime, {
     content: trimDiscordMessage(difyResult.answer || DEJIKO_ERROR_FALLBACK),
   });
 }
@@ -334,7 +362,7 @@ async function processCommand(
         await handleProfile(interaction, runtime);
         return;
       default:
-        await runtime.discord.editOriginalInteraction(interaction.token, {
+        await updateInteractionResponse(interaction, runtime, {
           content: "その呼び方はまだ覚えてないにょ。",
           ephemeral: true,
         });
@@ -344,7 +372,7 @@ async function processCommand(
     const commandName = getCommandName(interaction);
     const fallback = commandName === "dejiko" ? DEJIKO_BUSY_FALLBACK : DEJIKO_ERROR_FALLBACK;
     try {
-      await runtime.discord.editOriginalInteraction(interaction.token, {
+      await updateInteractionResponse(interaction, runtime, {
         content: fallback,
         ephemeral: commandName !== "dejiko",
       });

@@ -31,6 +31,10 @@ export interface DiscordApplicationCommandInteraction {
 }
 
 export interface DiscordApiClient {
+  createFollowupInteraction(
+    interactionToken: string,
+    payload: { content: string; ephemeral?: boolean },
+  ): Promise<void>;
   editOriginalInteraction(
     interactionToken: string,
     payload: { content: string; ephemeral?: boolean },
@@ -178,6 +182,30 @@ export class DiscordWebhookClient implements DiscordApiClient {
     private readonly fetchImpl: typeof fetch = fetch,
   ) {}
 
+  async createFollowupInteraction(
+    interactionToken: string,
+    payload: { content: string; ephemeral?: boolean },
+  ): Promise<void> {
+    const response = await this.fetchImpl(
+      `${DISCORD_API_BASE}/webhooks/${this.applicationId}/${interactionToken}`,
+      {
+        body: JSON.stringify({
+          allowed_mentions: { parse: [] },
+          content: payload.content,
+          ...(payload.ephemeral ? { flags: EPHEMERAL_FLAG } : {}),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to create Discord follow-up message: ${response.status} ${response.statusText}`);
+    }
+  }
+
   async editOriginalInteraction(
     interactionToken: string,
     payload: { content: string; ephemeral?: boolean },
@@ -188,7 +216,6 @@ export class DiscordWebhookClient implements DiscordApiClient {
         body: JSON.stringify({
           allowed_mentions: { parse: [] },
           content: payload.content,
-          ...(payload.ephemeral ? { flags: EPHEMERAL_FLAG } : {}),
         }),
         headers: {
           "Content-Type": "application/json",
