@@ -9,5 +9,5 @@ BOT_TIMEOUT_MS = "25000"
 [[d1_databases]]
 binding = "DB"
 database_name = "dejiko-discord-worker"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "27b1b3d4-030c-4860-829c-f8aa4959b1a2"
 migrations_dir = "migrations"

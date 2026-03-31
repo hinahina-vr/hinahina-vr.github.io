@@ -137,18 +137,19 @@ function buildUserIdentifier(interaction: DiscordApplicationCommandInteraction):
 
 function buildRuntime(env: Env): AppRuntime {
   const timeoutMs = Number.parseInt(env.BOT_TIMEOUT_MS ?? "25000", 10);
+  const difyApiBase = env.DIFY_API_BASE?.trim() || "https://api.dify.ai/v1";
   return {
     allowedChannelIds: parseAllowedChannelIds(env.ALLOWED_CHANNEL_IDS),
     allowedGuildId: env.ALLOWED_GUILD_ID?.trim() || null,
-    applicationId: env.DISCORD_APPLICATION_ID,
+    applicationId: env.DISCORD_APPLICATION_ID ?? "",
     dify: new HttpDifyClient(
-      env.DIFY_API_BASE.replace(/\/+$/, ""),
-      env.DIFY_API_KEY,
+      difyApiBase.replace(/\/+$/, ""),
+      env.DIFY_API_KEY ?? "",
       Number.isFinite(timeoutMs) ? timeoutMs : 25000,
     ),
-    discord: new DiscordWebhookClient(env.DISCORD_APPLICATION_ID),
+    discord: new DiscordWebhookClient(env.DISCORD_APPLICATION_ID ?? ""),
     now: () => new Date(),
-    publicKey: env.DISCORD_PUBLIC_KEY,
+    publicKey: env.DISCORD_PUBLIC_KEY ?? "",
     storage: new D1Storage(env.DB),
   };
 }
