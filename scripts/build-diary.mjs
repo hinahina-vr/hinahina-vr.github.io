@@ -124,10 +124,22 @@ function buildDreamStartHref(date, dreamRootMap) {
   return `./galge-scenario.html?${params.toString()}`;
 }
 
+function stripDreamButton(html) {
+  const withoutWrappedButtons = html.replace(
+    /<p([^>]*)>\s*<a([^>]*?)href="[^"]*"([^>]*?)>([\s\S]*?夢を見る[\s\S]*?)<\/a>\s*<\/p>/g,
+    ""
+  );
+
+  return withoutWrappedButtons.replace(
+    /<a([^>]*?)href="[^"]*"([^>]*?)>([\s\S]*?夢を見る[\s\S]*?)<\/a>/g,
+    ""
+  );
+}
+
 function rewriteDreamButtonLinks(html, date, dreamRootMap) {
   const nextHref = buildDreamStartHref(date, dreamRootMap);
   if (!nextHref) {
-    return html;
+    return stripDreamButton(html);
   }
 
   return html.replace(
