@@ -1,5 +1,7 @@
 node_modules/
 .local/
+**/.wrangler/
+**/.dev.vars
 tools/ooku-health-exporter-android/.gradle/
 tools/ooku-health-exporter-android/.idea/
 tools/ooku-health-exporter-android/local.properties

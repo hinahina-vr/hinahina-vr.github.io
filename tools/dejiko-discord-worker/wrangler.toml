@@ -1,0 +1,13 @@
+name = "dejiko-discord-worker"
+main = "src/index.ts"
+compatibility_date = "2026-03-31"
+workers_dev = true
+
+[vars]
+BOT_TIMEOUT_MS = "25000"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dejiko-discord-worker"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"

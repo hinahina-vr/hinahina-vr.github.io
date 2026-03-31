@@ -1,0 +1,34 @@
+name: Dejiko Worker Check
+
+on:
+  push:
+    paths:
+      - ".github/workflows/dejiko-worker-check.yml"
+      - "tools/dejiko-discord-worker/**"
+  pull_request:
+    paths:
+      - ".github/workflows/dejiko-worker-check.yml"
+      - "tools/dejiko-discord-worker/**"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/dejiko-discord-worker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.18.1"
+          cache: npm
+          cache-dependency-path: tools/dejiko-discord-worker/package-lock.json
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Typecheck and test
+        run: npm run check
