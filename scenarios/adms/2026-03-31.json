@@ -1,0 +1,267 @@
+{
+  "date": "2026-03-31",
+  "title": "敗北を知りたい A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "勝ちすぎた廊下",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🏁",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "standalone_start",
+      "summary": "願ったものだけが先に薄くなる書庫の廊下"
+    },
+    {
+      "id": "choose_wish",
+      "title": "三つの素直な装置",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🧭",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "choose_wish",
+      "summary": "剥がれる設問、届く悪態、未入荷の敗北"
+    },
+    {
+      "id": "paper_hall",
+      "title": "剥がれる設問棟",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "📄",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "paper_hall",
+      "summary": "測るはずでない作文だけが冊子から外れていく"
+    },
+    {
+      "id": "wiring_room",
+      "title": "願望配線室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🔌",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "wiring_room",
+      "summary": "冗談半分の悪態が思ったより遠くまで届く"
+    },
+    {
+      "id": "victory_museum",
+      "title": "勝敗展示室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🏆",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "victory_museum",
+      "summary": "勝利の標本だけが並び、敗北だけが欠番のまま残る"
+    },
+    {
+      "id": "gen_removed_paper",
+      "title": "余白の勝利",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "⬜",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "gen_removed_paper",
+      "summary": "通った願いほど証拠を残さず、勝ちの手応えを薄くする"
+    },
+    {
+      "id": "gen_wave",
+      "title": "悪態の波紋",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🌊",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "gen_wave",
+      "summary": "世界が折れたあとに残るのは怒りではなく照れである"
+    },
+    {
+      "id": "gen_no_defeat",
+      "title": "欠番の展示ケース",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🚪",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "gen_no_defeat",
+      "summary": "拒絶されなかった願いは勝利より欠測値として残る"
+    },
+    {
+      "id": "verdict_table",
+      "title": "勝ち過ぎの円卓",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "verdict_table",
+      "summary": "通りすぎる勝利の軽さが、ようやく言葉になる"
+    },
+    {
+      "id": "final_turn",
+      "title": "持ち帰る気配",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎯",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "final_turn",
+      "summary": "余白、閉門の不在、照れ笑い"
+    },
+    {
+      "id": "END_WORLD",
+      "title": "素直すぎる世界",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🗂️",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "END_WORLD",
+      "summary": "やめろと言ったものだけが本当に消えて、余白だけが残る"
+    },
+    {
+      "id": "END_DEFEAT",
+      "title": "未取得の敗北",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🚫",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "END_DEFEAT",
+      "summary": "閉じた扉が見つからず、負けは輪郭だけを残して逃げる"
+    },
+    {
+      "id": "END_AWKWARD",
+      "title": "勝ちの気まずさ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🙂",
+      "scenario": "2026-03-31_敗北を知りたい",
+      "entry": "END_AWKWARD",
+      "summary": "怒りの代わりに、少し良すぎる機嫌の気まずさが残る"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_wish",
+      "choiceText": "素直な装置のほうへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_wish",
+      "to": "paper_hall",
+      "choiceText": "剥がれる設問棟へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_wish",
+      "to": "wiring_room",
+      "choiceText": "願望配線室へ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_wish",
+      "to": "victory_museum",
+      "choiceText": "勝敗展示室へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "paper_hall",
+      "to": "gen_removed_paper",
+      "choiceText": "剥がれた設問の余白を読む",
+      "style": "genkai"
+    },
+    {
+      "from": "paper_hall",
+      "to": "verdict_table",
+      "choiceText": "冊子を閉じて円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_removed_paper",
+      "to": "verdict_table",
+      "choiceText": "余白を折りたたんで円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "wiring_room",
+      "to": "gen_wave",
+      "choiceText": "悪態の波紋を追う",
+      "style": "genkai"
+    },
+    {
+      "from": "wiring_room",
+      "to": "verdict_table",
+      "choiceText": "配線盤を閉じて円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_wave",
+      "to": "verdict_table",
+      "choiceText": "波紋の温度を覚えたまま円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "victory_museum",
+      "to": "gen_no_defeat",
+      "choiceText": "欠番の展示ケースをのぞく",
+      "style": "genkai"
+    },
+    {
+      "from": "victory_museum",
+      "to": "verdict_table",
+      "choiceText": "空の棚を背にして円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_no_defeat",
+      "to": "verdict_table",
+      "choiceText": "欠番を胸にしまって円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "verdict_table",
+      "to": "final_turn",
+      "choiceText": "残る気配をひとつ選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "final_turn",
+      "to": "END_WORLD",
+      "choiceText": "消えた設問の余白を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_turn",
+      "to": "END_DEFEAT",
+      "choiceText": "見つからない閉門を探し続ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_turn",
+      "to": "END_AWKWARD",
+      "choiceText": "少し笑う口元だけを持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

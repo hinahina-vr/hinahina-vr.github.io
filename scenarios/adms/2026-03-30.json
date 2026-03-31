@@ -1,0 +1,267 @@
+{
+  "date": "2026-03-30",
+  "title": "夜がくる A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "居残りの机",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🌙",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "standalone_start",
+      "summary": "身体だけが3/30へ来て、夢はまだ3/26に居残っている"
+    },
+    {
+      "id": "choose_night",
+      "title": "三つの熟成室",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🕰️",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "choose_night",
+      "summary": "待つ執務室、増殖する原稿、スキャットの展示室"
+    },
+    {
+      "id": "saji_office",
+      "title": "佐治の執務室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🥃",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "saji_office",
+      "summary": "減る分まで込みで時間を設計する部屋"
+    },
+    {
+      "id": "kaiko_manuscript",
+      "title": "開高の原稿迷宮",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "📝",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "kaiko_manuscript",
+      "summary": "読書感想が本編を乗っ取って増殖し続ける"
+    },
+    {
+      "id": "old_jingle",
+      "title": "スキャットの展示室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🎶",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "old_jingle",
+      "summary": "『夜がくる』の旋律だけが生活へ漏れ出す"
+    },
+    {
+      "id": "gen_angel_share",
+      "title": "天使の分け前",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🪽",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "gen_angel_share",
+      "summary": "失われた分が今日の濃度を深くしている"
+    },
+    {
+      "id": "gen_manuscript_tide",
+      "title": "頁の潮",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "📚",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "gen_manuscript_tide",
+      "summary": "日付を無視して文章だけが昨日を掘り続ける"
+    },
+    {
+      "id": "gen_scat_leak",
+      "title": "スキャットの反響",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "📻",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "gen_scat_leak",
+      "summary": "生活と制作の境目から一節だけが外へ漏れる"
+    },
+    {
+      "id": "night_table",
+      "title": "夜の円卓",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "night_table",
+      "summary": "空白の日の濃度が、三つの熟成室で言葉になる"
+    },
+    {
+      "id": "final_carry",
+      "title": "今日の印",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🌌",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "final_carry",
+      "summary": "欠けた数字、切れ端の頁、スキャットの一節"
+    },
+    {
+      "id": "END_TAX",
+      "title": "信頼の税金",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🧾",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "END_TAX",
+      "summary": "空白の日にも、失われた分だけ濃くなる熟成がある"
+    },
+    {
+      "id": "END_PAGES",
+      "title": "0件の日に3800行",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "📄",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "END_PAGES",
+      "summary": "記録されない制作のほうが今日の輪郭を深く作る"
+    },
+    {
+      "id": "END_NIGHT",
+      "title": "夜がくる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌃",
+      "scenario": "2026-03-30_夜がくる",
+      "entry": "END_NIGHT",
+      "summary": "昭和のスキャットだけが一日を閉じる合図として残る"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_night",
+      "choiceText": "熟成した夜へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_night",
+      "to": "saji_office",
+      "choiceText": "佐治の執務室へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_night",
+      "to": "kaiko_manuscript",
+      "choiceText": "開高の原稿迷宮へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_night",
+      "to": "old_jingle",
+      "choiceText": "スキャットの展示室へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "saji_office",
+      "to": "gen_angel_share",
+      "choiceText": "樽帳簿の欠けた数字を見る",
+      "style": "genkai"
+    },
+    {
+      "from": "saji_office",
+      "to": "night_table",
+      "choiceText": "時計の音を背にして円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_angel_share",
+      "to": "night_table",
+      "choiceText": "欠けた数字を覚えたまま円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "kaiko_manuscript",
+      "to": "gen_manuscript_tide",
+      "choiceText": "余白で増殖する頁をのぞく",
+      "style": "genkai"
+    },
+    {
+      "from": "kaiko_manuscript",
+      "to": "night_table",
+      "choiceText": "背表紙を閉じて円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_manuscript_tide",
+      "to": "night_table",
+      "choiceText": "頁の波をたたんで円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "old_jingle",
+      "to": "gen_scat_leak",
+      "choiceText": "スキャットの反響を追う",
+      "style": "genkai"
+    },
+    {
+      "from": "old_jingle",
+      "to": "night_table",
+      "choiceText": "メロディを抱えて円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_scat_leak",
+      "to": "night_table",
+      "choiceText": "一節だけ持って円卓へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "night_table",
+      "to": "final_carry",
+      "choiceText": "今日の印を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "final_carry",
+      "to": "END_TAX",
+      "choiceText": "樽帳簿の欠けた数字を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_carry",
+      "to": "END_PAGES",
+      "choiceText": "増殖した原稿の切れ端を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "final_carry",
+      "to": "END_NIGHT",
+      "choiceText": "スキャットの一節を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}
