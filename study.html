@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>勉強コーナー | ワディーゲストハウス</title>
+    <meta name="description" content="大学で勉強した内容を科目ごとに整理していく、ワディーゲストハウスの勉強コーナー。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "classic";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="stars" aria-hidden="true"></div>
+    <main class="page-frame">
+      <header class="retro-header">
+        <p class="smallline">Study Corner</p>
+        <h1>勉強コーナー</h1>
+        <p class="tagline">大学で勉強した内容を、科目ごとに少しずつ整理していく入口。</p>
+        <marquee behavior="scroll" direction="left" scrollamount="5">★ まずは力学から ★ 章ごとに少しずつ更新予定 ★</marquee>
+      </header>
+
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./index.html">トップページへ戻る</a>
+          <a class="back-link" href="./study-mechanics.html">力学の章一覧へ</a>
+        </p>
+      </section>
+      <section class="panel">
+        <h2>科目一覧</h2>
+        <div class="study-collection">
+          <article class="study-subject-card">
+            <p class="study-card-kicker">Subject 01</p>
+            <h3>力学</h3>
+            <p>大学ノートを章ごとに整理しながら、本文と図解をあとから育てていく入口です。</p>
+            <p class="study-card-note">最初は見出しだけの stub から始め、方向性が固まった章から公開します。</p>
+            <p><a class="feature-link" href="./study-mechanics.html">章一覧を見る</a></p>
+          </article>
+        </div>
+      </section>
+      <footer class="retro-footer">
+        <p>Copyright (C) 1999-2026 ワディーゲストハウス All Rights Reserved.</p>
+      </footer>
+    </main>
+    <script src="./study-visuals.js"></script>
+    <script src="./site-mode.js"></script>
+  </body>
+</html>

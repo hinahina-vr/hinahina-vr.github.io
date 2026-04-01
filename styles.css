@@ -1112,6 +1112,7 @@ marquee {
 .study-visual[data-study-visual-ready="error"] {
   border-color: rgba(255, 124, 124, 0.38);
 }
+
 @keyframes blink {
   50% {
     opacity: 0;
@@ -1173,6 +1174,7 @@ marquee {
   .study-visual__controls {
     align-items: flex-start;
   }
+
   .feature-link,
   .back-link {
     min-height: 42px;
