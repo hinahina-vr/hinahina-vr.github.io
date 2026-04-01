@@ -17,6 +17,90 @@ marked.use({
   breaks: false,
 });
 
+function stripInlineMarkdown(text) {
+  return text
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/__([^_]+)__/g, "$1")
+    .replace(/_([^_]+)_/g, "$1")
+    .replace(/~~([^~]+)~~/g, "$1")
+    .replace(/<[^>]+>/g, "")
+    .trim();
+}
+
+function createHeadingId(rawText, slugCounts) {
+  const base =
+    rawText
+      .normalize("NFKC")
+      .toLowerCase()
+      .replace(/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~]/g, " ")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "") || "section";
+
+  const count = slugCounts.get(base) ?? 0;
+  slugCounts.set(base, count + 1);
+  return count === 0 ? base : `${base}-${count + 1}`;
+}
+
+function buildChapterMarkup(markdown) {
+  const headings = [];
+  const slugCounts = new Map();
+  const lines = markdown.split(/\r?\n/);
+
+  const preparedMarkdown = lines
+    .map((line) => {
+      const match = /^(#{2,4})\s+(.+?)\s*$/.exec(line);
+      if (!match) {
+        return line;
+      }
+
+      const level = match[1].length;
+      const sourceText = match[2].replace(/\s+#+\s*$/, "").trim();
+      const plainText = stripInlineMarkdown(sourceText);
+      const headingId = createHeadingId(plainText, slugCounts);
+      const headingHtml = typeof marked.parseInline === "function" ? marked.parseInline(sourceText) : escapeHtml(sourceText);
+
+      headings.push({
+        id: headingId,
+        level,
+        text: plainText,
+      });
+
+      return `<h${level} id="${escapeHtml(headingId)}" class="study-heading-anchor">${headingHtml}</h${level}>`;
+    })
+    .join("\n");
+
+  return {
+    headings,
+    preparedMarkdown,
+  };
+}
+
+function renderChapterToc(headings) {
+  if (!headings.length) {
+    return "";
+  }
+
+  const items = headings
+    .map(
+      (heading) => `          <li class="study-toc-item study-toc-item--level-${heading.level}">
+            <a href="#${escapeHtml(heading.id)}">${escapeHtml(heading.text)}</a>
+          </li>`
+    )
+    .join("\n");
+
+  return `      <section class="panel">
+        <h2>目次</h2>
+        <ol class="study-toc-list">
+${items}
+        </ol>
+      </section>`;
+}
+
 function renderNav(links) {
   return `
       <section class="panel">
@@ -139,7 +223,8 @@ ${chapterItems}
 }
 
 async function renderChapterPage(subject, chapter) {
-  const articleHtml = await marked.parse(chapter.body);
+  const chapterMarkup = buildChapterMarkup(chapter.body);
+  const articleHtml = await marked.parse(chapterMarkup.preparedMarkdown);
   const introText =
     chapter.status === "published"
       ? "いま読める章です。本文と図を行き来しながら読めるようにまとめています。"
@@ -163,6 +248,7 @@ async function renderChapterPage(subject, chapter) {
         </div>
         <p class="study-page-note">${escapeHtml(introText)}</p>
       </section>`,
+      renderChapterToc(chapterMarkup.headings),
       `      <section class="panel study-article-panel">
         <article class="study-article">
 ${articleHtml}
