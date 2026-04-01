@@ -62,22 +62,23 @@ const { chromium } = require("playwright");
   assert(chapterText.includes("概要"), "章ページに 概要 見出しがあること");
   assert(chapterText.includes("本文"), "章ページに 本文 見出しがあること");
   assert(chapterText.includes("補足"), "章ページに 補足 見出しがあること");
-  assert(chapterText.includes("図解と操作"), "章ページに 図解と操作 見出しがあること");
+  assert(chapterText.includes("時間と位置の関係"), "章ページに節内の可視化タイトルが表示されること");
   assert(chapterText.includes("ひなた"), "章ページに ひなた の感想があること");
   assert(chapterText.includes("一ノ瀬ことみ"), "章ページに 一ノ瀬ことみ の感想があること");
   assert(chapterText.includes("キク8号"), "章ページに キク8号 の感想があること");
+  assert(chapterText.includes("リチャードファインマン"), "章ページに担当した老中AI名があること");
   assert(!chapterText.includes("打ち合わせMD"), "章ページに内部の draft 情報が出ていないこと");
   const visualCount = await page.$$eval(".study-visual", (nodes) => nodes.length);
-  assert(visualCount >= 3, `章ページに可視化ブロックが3つ以上あること (got: ${visualCount})`);
+  assert(visualCount >= 4, `章ページに可視化ブロックが4つ以上あること (got: ${visualCount})`);
 
   console.log("\n=== index.html テスト ===");
   await page.goto(`${baseUrl}/index.html`, { waitUntil: "domcontentloaded" });
   const studyLink = await page.$('a.feature-link[href="./study.html"]');
-  assert(studyLink === null, "index.html に勉強コーナーへの導線が存在しないこと");
+  assert(studyLink !== null, "index.html に勉強コーナーへの導線が存在すること");
 
   const indexText = await page.textContent("body");
-  assert(!indexText.includes("勉強コーナー"), "index.html に勉強コーナーの文言が出ていないこと");
-  assert(!indexText.includes("大学ノート"), "index.html のヒーロー文言から大学ノートが外れていること");
+  assert(indexText.includes("勉強コーナー"), "index.html に勉強コーナーの文言が出ていること");
+  assert(indexText.includes("力学の第1章"), "index.html に勉強コーナーの紹介文が出ていること");
 
   console.log(`\n=== 結果: ${passed} passed, ${failed} failed ===`);
 

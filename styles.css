@@ -825,6 +825,12 @@ marquee {
   font-size: 1rem;
 }
 
+.study-article h4 {
+  margin: 0 0 8px;
+  color: var(--heading-color);
+  font-size: 0.95rem;
+}
+
 .study-article ul,
 .study-article ol {
   margin: 0;
@@ -844,6 +850,85 @@ marquee {
 
 .study-article blockquote p {
   margin: 0;
+}
+
+.study-formula-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.study-formula {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(157, 213, 255, 0.26);
+  border-radius: calc(var(--card-radius) * 0.8);
+  background:
+    linear-gradient(180deg, rgba(8, 28, 48, 0.86), rgba(4, 14, 28, 0.96)),
+    radial-gradient(circle at top right, rgba(159, 231, 255, 0.14), transparent 40%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.study-formula__label {
+  margin: 0;
+  color: var(--card-meta);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.study-formula__expr {
+  margin: 0;
+  overflow-x: auto;
+  color: #f7fbff;
+  font-family: "Cambria Math", "Times New Roman", "Georgia", serif;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 14px rgba(143, 232, 255, 0.14);
+}
+
+.study-formula__expr sub,
+.study-formula__expr sup {
+  font-size: 0.62em;
+  line-height: 0;
+}
+
+.study-formula__note {
+  margin: 0;
+  color: var(--text-sub);
+}
+
+.study-voice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.study-voice-card {
+  border: 1px solid var(--card-border);
+  border-radius: calc(var(--card-radius) * 0.8);
+  background: linear-gradient(180deg, rgba(9, 24, 40, 0.82), rgba(4, 12, 24, 0.96));
+  padding: 14px;
+}
+
+.study-voice-card__name {
+  margin: 0 0 10px;
+  color: var(--card-title);
+}
+
+.study-voice-card p {
+  margin: 0 0 12px;
+}
+
+.study-voice-card p:last-child {
+  margin-bottom: 0;
 }
 
 .study-article code,
@@ -1039,7 +1124,9 @@ marquee {
   }
 
   .study-collection,
-  .study-rule-grid {
+  .study-rule-grid,
+  .study-formula-grid,
+  .study-voice-grid {
     grid-template-columns: 1fr;
   }
 
