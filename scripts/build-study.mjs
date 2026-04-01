@@ -99,8 +99,6 @@ ${subjectCards}
 function renderSubjectPage(subject) {
   const chapterItems = subject.chapters
     .map((chapter) => {
-      const statusClass = chapter.status === "published" ? "study-status--published" : "study-status--stub";
-      const statusText = chapter.status === "published" ? "公開中" : "準備中";
       const note =
         chapter.status === "published"
           ? "いま読める章です。図やメモを見ながら内容を追えます。"
@@ -110,7 +108,6 @@ function renderSubjectPage(subject) {
             <article class="study-chapter-card">
               <div class="study-chapter-meta">
                 <span class="study-chapter-number">Chapter ${formatChapterNumber(chapter.order)}</span>
-                <span class="study-status ${statusClass}">${statusText}</span>
               </div>
               <h3><a href="./${chapter.pageName}">${escapeHtml(chapter.title)}</a></h3>
               <p>${escapeHtml(note)}</p>
@@ -143,8 +140,6 @@ ${chapterItems}
 
 async function renderChapterPage(subject, chapter) {
   const articleHtml = await marked.parse(chapter.body);
-  const statusClass = chapter.status === "published" ? "study-status--published" : "study-status--stub";
-  const statusText = chapter.status === "published" ? "公開中" : "準備中";
   const introText =
     chapter.status === "published"
       ? "いま読める章です。本文と図を行き来しながら読めるようにまとめています。"
@@ -165,7 +160,6 @@ async function renderChapterPage(subject, chapter) {
       `      <section class="panel">
         <div class="study-page-meta">
           <span class="study-chapter-number">Chapter ${formatChapterNumber(chapter.order)}</span>
-          <span class="study-status ${statusClass}">${statusText}</span>
         </div>
         <p class="study-page-note">${escapeHtml(introText)}</p>
       </section>`,

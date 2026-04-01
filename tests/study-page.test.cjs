@@ -41,10 +41,11 @@ const { chromium } = require("playwright");
 
   const chapterLink = await page.$('a[href="./study-mechanics-01.html"]');
   assert(chapterLink !== null, "study-mechanics.html に第1章へのリンクが存在すること");
+  const mechanicsStatus = await page.$(".study-status");
+  assert(mechanicsStatus === null, "study-mechanics.html に状態バッジが出ていないこと");
 
   const mechanicsText = await page.textContent("body");
   assert(mechanicsText.includes("質量と速度"), "study-mechanics.html に 質量と速度 が表示されること");
-  assert(mechanicsText.includes("公開中"), "study-mechanics.html に章の状態が表示されること");
   assert(mechanicsText.includes("いま読める章です"), "study-mechanics.html に自然な章説明が表示されること");
   assert(!mechanicsText.includes("この科目のルール"), "study-mechanics.html に運用ルールの見出しが出ていないこと");
   assert(!mechanicsText.includes("老中AI"), "study-mechanics.html に内部運用のAI案内が出ていないこと");
@@ -58,6 +59,8 @@ const { chromium } = require("playwright");
     title === "力学 — 質量と速度 | ワディーゲストハウス",
     `ページタイトルが正しいこと (got: "${title}")`
   );
+  const chapterStatus = await page.$(".study-status");
+  assert(chapterStatus === null, "章ページに状態バッジが出ていないこと");
 
   const chapterText = await page.textContent("body");
   assert(chapterText.includes("概要"), "章ページに 概要 見出しがあること");
