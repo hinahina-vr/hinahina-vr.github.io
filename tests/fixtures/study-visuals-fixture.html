@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Visual Fixture</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <main class="page-frame">
+      <section class="panel">
+        <h1>Study Visual Fixture</h1>
+        <figure
+          id="line-demo"
+          class="study-visual"
+          data-kind="line-chart"
+          data-config='{"xLabel":"time","yLabel":"position","highlightIndex":1,"points":[{"x":0,"y":0,"label":"0s"},{"x":1,"y":2,"label":"1s"},{"x":2,"y":5,"label":"2s"}]}'
+        >
+          <h2 class="study-visual__title">位置の変化</h2>
+          <p class="study-visual__description">レンジ入力で注目点を切り替えられる折れ線グラフです。</p>
+          <p class="study-visual__fallback">JavaScript が無効なときは、時間と位置の対応を本文で確認します。</p>
+        </figure>
+
+        <figure
+          id="vector-demo"
+          class="study-visual"
+          data-kind="vector-diagram"
+          data-config='{"vectors":[{"label":"Fx","x":4,"y":0,"color":"#9fe7ff"},{"label":"Fy","x":0,"y":3,"color":"#ffd67c"}],"showResultant":true}'
+        >
+          <h2 class="study-visual__title">力の合成</h2>
+          <p class="study-visual__description">各ベクトルを切り替えながら、resultant の向きを確認できます。</p>
+          <p class="study-visual__fallback">JavaScript が無効なときは、Fx と Fy を図に描いて合成を考えます。</p>
+        </figure>
+
+        <figure
+          id="step-demo"
+          class="study-visual"
+          data-kind="step-animation"
+          data-config='{"intervalMs":180,"steps":[{"label":"準備","note":"図を描く"},{"label":"整理","note":"既知量と未知量を分ける"},{"label":"立式","note":"保存則か運動方程式を選ぶ"},{"label":"確認","note":"単位と符号を見直す"}]}'
+        >
+          <h2 class="study-visual__title">解く手順のアニメーション</h2>
+          <p class="study-visual__description">play / pause / step / reset で手順の進み方を確認できます。</p>
+          <p class="study-visual__fallback">JavaScript が無効なときは、準備 → 整理 → 立式 → 確認 の順で読みます。</p>
+        </figure>
+      </section>
+    </main>
+    <script src="../../study-visuals.js"></script>
+  </body>
+</html>

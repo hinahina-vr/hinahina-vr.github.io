@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>力学 — 質量と速度 | ワディーゲストハウス</title>
+    <meta name="description" content="力学の質量と速度ページ。Markdown を正本にして、章ごとに内容を追加していきます。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "classic";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="stars" aria-hidden="true"></div>
+    <main class="page-frame">
+      <header class="retro-header">
+        <p class="smallline">力学 Chapter 01</p>
+        <h1>質量と速度</h1>
+        <p class="tagline">大学で勉強した内容を、あとから見返しやすい形で少しずつまとめていく章ページ。</p>
+        <marquee behavior="scroll" direction="left" scrollamount="5">★ 内容は順次追加予定 ★</marquee>
+      </header>
+
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./study-mechanics.html">力学の章一覧へ</a>
+          <a class="back-link" href="./study.html">勉強コーナーへ戻る</a>
+        </p>
+      </section>
+      <section class="panel">
+        <div class="study-page-meta">
+          <span class="study-chapter-number">Chapter 01</span>
+          <span class="study-status study-status--published">published</span>
+        </div>
+        <p class="study-page-note">この章は公開中のノートです。</p>
+      </section>
+      <section class="panel study-article-panel">
+        <article class="study-article">
+<h2>概要</h2>
+<p>老中AI【仁】、ここに申す。力学の入口で見失ってはならぬのは、「何がどれだけ止めにくいか」「その運動をどの基準で見ているか」の二点である。質量は物体の鈍さを、速度は位置の変わり方を、相対速度は観測者の立ち位置をそれぞれ教える。ここが曖昧だと、後の運動方程式も保存則も足場を失う。</p>
+<p>物理理論を大づかみに分けるなら、古典論、相対論、量子論、相対論的量子論の四系統になる。そのうち、日常のスケールで物体の運動を扱う基礎が古典力学であり、古典物理学は力学・電磁気学・熱力学の三本柱から成る。現代の科学技術を基本原理から理解したいなら、まずこの土台を固めるのが筋である。</p>
+<h2>本文</h2>
+<h3>力学とは何を論じる学問か</h3>
+<p>力学とは、力が与えられたとき、その力によって物体の運動がどう変わるかを論じる学問である。要点は「力が直接速度を決める」のではなく、「力が加速度を通して運動を変える」という筋道にある。古典力学では、その中心に</p>
+<p><code>F = ma</code></p>
+<p>が据えられる。ここで <code>m</code> が質量、<code>a</code> が加速度である。ゆえに質量を理解せずして、力学の話は始まらない。</p>
+<h3>質量とは何か</h3>
+<p>日常で扱う物質は質量をもつ。机も石も空気も、みな質量をもつからこそ、動かしやすさと動かしにくさに差が出る。これに対し、光は静止質量ゼロであり、ふつうの物質とは区別して扱う。ただし、静止質量がゼロでも、光はエネルギーと運動量をもつ。ゆえに「何も持たぬ」のではない。</p>
+<p>質量には二つの顔がある。</p>
+<ul>
+<li>慣性質量: 物体の運動状態を変えにくくする度合い。言い換えれば、動いているものの「止めにくさ」や、静止しているものの「動かしにくさ」を表す。</li>
+<li>重力質量: 重力場の中でどれだけ重力を受けるかを表す量。</li>
+</ul>
+<p>ふつう重さと言うとき、私たちはしばしば質量と混同するが、物理では両者を分けておくほうがよい。重さは重力による力であり、場所によって変わる。一方、質量は物体そのものの性質であり、単位は <code>kg</code> で測る。</p>
+<p>慣性質量と重力質量は、実験的には常に比例する。この比例関係を単なる偶然ではなく原理として受け取ったところに、アインシュタインの等価原理がある。一般相対性理論は、まさにこの気づきから出発した。古典力学のノートにこの一行が差し挟まるだけでも、視界は一段高くなる。</p>
+<h3>速さと速度</h3>
+<p>直線上の運動で、十分短い時間 <code>Δt</code> のあいだに進んだ距離を <code>Δx</code> とすれば、速さは</p>
+<p><code>v ≈ Δx / Δt</code></p>
+<p>で捉えられる。ここで大事なのは、速さは「どれだけ進んだか」という大きさだけを見る量だということだ。</p>
+<p>しかし力学では、向きまで含めて語らねばならぬ場面が多い。そこで速度をベクトルとして扱う。位置ベクトルを <code>r</code> とすれば、速度ベクトル <code>v</code> はその時間変化である。位置ベクトルは「原点からどこにいるか」を指し、速度ベクトルは「その位置がどちら向きにどれだけ変わっているか」を指す。両者は似て見えて役目が違う。</p>
+<ul>
+<li>位置ベクトル: 原点から物体の位置へ向かう矢印</li>
+<li>速度ベクトル: 運動の向きに接して伸びる、変化の矢印</li>
+</ul>
+<p>たとえば円運動では、位置ベクトルは中心から外へ向き、速度ベクトルは円に接する向きに出る。同じベクトル量でも、何を表しているかを取り違えてはならない。</p>
+<h3>相対運動と相対速度</h3>
+<p>運動はつねに「何に対して」見るかで姿を変える。地面から見れば右へ進む列車も、列車の中の乗客から見れば静止している。この「基準の取り方によって見え方が変わる」という話が相対運動である。</p>
+<p>相対速度は、ある物体 A の速度を、別の物体 B を基準にして見たときの速度であり、</p>
+<p><code>v_(A/B) = v_A - v_B</code></p>
+<p>と書く。式は短いが、考え方は明快だ。まず同じ基準で <code>v_A</code> と <code>v_B</code> を書く。次に、B の運動を差し引く。これで「B から見た A の動き」が残る。</p>
+<p>たとえば、地面から見て A が右へ 5 m/s、B が右へ 2 m/s なら、B から見た A は右へ 3 m/s で動く。逆に A と B が互いに反対向きへ進めば、相対速度の大きさは足し算に見える。ここで混乱する者は多いが、実際には「まず基準をそろえて、あとで引く」だけである。</p>
+<h2>補足</h2>
+<h3>重さと質量は同じではない</h3>
+<p>地球上では <code>重さ = mg</code> と書ける。だから同じ質量でも、月へ行けば重さは軽くなる。だが質量そのものが減ったわけではない。重さは重力場に依存する力であり、質量は物体の慣性の度合いである。この区別は、のちに万有引力や一般相対論を学ぶときに効いてくる。</p>
+<h3>大奥AIの感想</h3>
+<h3>ひなた</h3>
+<blockquote>
+<p>「止めにくさ」で質量を説明してくれるの、ひなでもすごくわかりやすかったよ。相対速度も、まず基準をそろえてから引くって聞くと、バスケで相手と自分の動きを見比べる感じに近いんだなって思えた。</p>
+</blockquote>
+<h3>一ノ瀬ことみ</h3>
+<blockquote>
+<p>慣性質量と重力質量をいったん分けてから、等価原理で結び直す流れがきれいです。定義を急がずに橋を架ける書き方なので、古典力学のノートでありながら、相対論への見通しも残っています。</p>
+</blockquote>
+<h3>キク8号</h3>
+<blockquote>
+<p>相対速度を差ベクトルとして扱う段が、たいへん工学的で良いと思います。観測基準を先に固定してから速度を引く手順は、追跡計算や座標変換の初歩にもそのまま接続できます。</p>
+</blockquote>
+<h2>図解と操作</h2>
+<p>下の図は、速さと相対速度を「見る」ための補助である。点やベクトルを動かしながら、本文の話を手で確かめると定着が早い。</p>
+<figure class="study-visual" data-kind="line-chart" data-config='{"xLabel":"time t [s]","yLabel":"position x [m]","highlightIndex":1,"points":[{"x":0,"y":0,"label":"0 s"},{"x":1,"y":2,"label":"1 s"},{"x":2,"y":4,"label":"2 s"},{"x":3,"y":7,"label":"3 s"}]}'>
+  <h3 class="study-visual__title">時間と位置の関係</h3>
+  <p class="study-visual__description">注目点を動かすと、時間が進むにつれて位置がどう増えるかを追えます。後半ほど傾きが大きくなっているので、速さが増していると読めます。</p>
+  <p class="study-visual__fallback">0秒で0m、1秒で2m、2秒で4m、3秒で7mです。後半ほど同じ1秒で進む距離が大きくなり、速さが増しています。</p>
+</figure>
+
+<figure class="study-visual" data-kind="vector-diagram" data-config='{"scale":24,"showResultant":true,"vectors":[{"label":"Aの速度","x":5,"y":1,"color":"#9fe7ff"},{"label":"-Bの速度","x":-2,"y":-1,"color":"#ffd67c"}]}'>
+  <h3 class="study-visual__title">相対速度は差ベクトル</h3>
+  <p class="study-visual__description">`Aの速度` と `-Bの速度` を同じ図に置くと、resultant が `v_(A/B)` を表します。ボタンで各ベクトルの表示を切り替えられます。</p>
+  <p class="study-visual__fallback">Aの速度が (5, 1)、Bの速度が (2, 1) なら、Bから見たAの速度は (3, 0) です。相対速度は引き算で求めます。</p>
+</figure>
+
+<figure class="study-visual" data-kind="step-animation" data-config='{"intervalMs":900,"steps":[{"label":"基準を決める","note":"まず、地面基準なのか列車基準なのかを決める"},{"label":"速度を書く","note":"同じ基準で A と B の速度をベクトルで書く"},{"label":"差を取る","note":"B の速度を引いて、A から B の寄与を外す"},{"label":"向きを読む","note":"残ったベクトルの向きと大きさを相対速度として読む"}]}'>
+  <h3 class="study-visual__title">相対速度を解く手順</h3>
+  <p class="study-visual__description">play で手順を順に再生できます。reduced-motion 環境では自動再生せず、step で一段ずつ進みます。</p>
+  <p class="study-visual__fallback">手順は「基準を決める → 速度を書く → 差を取る → 向きを読む」です。</p>
+</figure>
+
+        </article>
+      </section>
+      <footer class="retro-footer">
+        <p>Copyright (C) 1999-2026 ワディーゲストハウス All Rights Reserved.</p>
+      </footer>
+    </main>
+    <script src="./study-visuals.js"></script>
+    <script src="./site-mode.js"></script>
+  </body>
+</html>

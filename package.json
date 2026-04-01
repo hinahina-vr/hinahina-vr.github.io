@@ -10,10 +10,13 @@
         "build:galge-runtime": "node scripts/build-galge-runtime.mjs",
         "build:voicepeak-files": "node scripts/build-voicepeak-files.mjs",
         "serve:galge-message-api": "node scripts/serve-galge-message-api.mjs",
-        "build:dialogue": "node scripts/build-dialogue.mjs",
-        "build:video-scripts": "node scripts/build-video-scripts.mjs",
-        "check:scenario-audio": "node scripts/check-scenario-audio.mjs",
-        "check:dream-graphs": "node scripts/validate-dream-graphs.mjs",
+    "build:dialogue": "node scripts/build-dialogue.mjs",
+    "build:video-scripts": "node scripts/build-video-scripts.mjs",
+    "new:study-draft": "node scripts/create-study-draft.mjs",
+    "build:study": "node scripts/build-study.mjs",
+    "check:study": "node scripts/check-study.mjs",
+    "check:scenario-audio": "node scripts/check-scenario-audio.mjs",
+    "check:dream-graphs": "node scripts/validate-dream-graphs.mjs",
         "build:diary-hina": "node scripts/build-diary-hina.mjs",
         "build:diary-multi": "node scripts/build-diary-multi.mjs",
         "build:diary-hinahina": "node scripts/build-diary-hinahina.mjs",
@@ -47,7 +50,7 @@
         "build:diary-rin": "node scripts/build-diary-rin.mjs",
         "build:diary-rizel": "node scripts/build-diary-rizel.mjs",
         "build:diary-roju": "node scripts/build-diary-roju.mjs",
-        "build": "npm run build:diary && node scripts/build-galge.mjs && npm run build:galge-runtime && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-diary-kud.mjs && node scripts/build-diary-feiris.mjs && node scripts/build-diary-kotomi.mjs && node scripts/build-diary-minagi.mjs && node scripts/build-diary-kiku8.mjs && node scripts/build-diary-mint.mjs && node scripts/build-diary-tama.mjs && node scripts/build-diary-kukuri.mjs && node scripts/build-diary-sharo.mjs && node scripts/build-diary-nemurin.mjs && node scripts/build-diary-hinako.mjs && node scripts/build-diary-kyoko.mjs && node scripts/build-diary-mayuki.mjs && node scripts/build-diary-mitsuba.mjs && node scripts/build-diary-ana.mjs && node scripts/build-diary-astarotte.mjs && node scripts/build-diary-hazuki.mjs && node scripts/build-diary-rin.mjs && node scripts/build-diary-rizel.mjs && node scripts/build-diary-roju.mjs && node scripts/build-video-scripts.mjs"
+    "build": "npm run build:diary && npm run build:study && node scripts/build-galge.mjs && npm run build:galge-runtime && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-diary-kud.mjs && node scripts/build-diary-feiris.mjs && node scripts/build-diary-kotomi.mjs && node scripts/build-diary-minagi.mjs && node scripts/build-diary-kiku8.mjs && node scripts/build-diary-mint.mjs && node scripts/build-diary-tama.mjs && node scripts/build-diary-kukuri.mjs && node scripts/build-diary-sharo.mjs && node scripts/build-diary-nemurin.mjs && node scripts/build-diary-hinako.mjs && node scripts/build-diary-kyoko.mjs && node scripts/build-diary-mayuki.mjs && node scripts/build-diary-mitsuba.mjs && node scripts/build-diary-ana.mjs && node scripts/build-diary-astarotte.mjs && node scripts/build-diary-hazuki.mjs && node scripts/build-diary-rin.mjs && node scripts/build-diary-rizel.mjs && node scripts/build-diary-roju.mjs && node scripts/build-video-scripts.mjs"
     },
     "devDependencies": {
         "esbuild": "^0.25.9",
