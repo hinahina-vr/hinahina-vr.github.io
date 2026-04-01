@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>力学 | ワディーゲストハウス</title>
+    <meta name="description" content="力学ノートの章一覧ページ。いま読める章と、これから増やしていく章を並べています。" />
+    <script>
+      (function () {
+        var KEY = "waddy-display-mode";
+        var DEFAULT_MODE = "classic";
+        var params = new URLSearchParams(window.location.search);
+        var queryMode = params.get("mode");
+        var mode = queryMode === "immersive" || queryMode === "classic" ? queryMode : null;
+
+        if (!mode) {
+          try {
+            var storedMode = window.localStorage.getItem(KEY);
+            mode = storedMode === "immersive" || storedMode === "classic" ? storedMode : DEFAULT_MODE;
+          } catch (error) {
+            mode = DEFAULT_MODE;
+          }
+        } else {
+          try {
+            window.localStorage.setItem(KEY, mode);
+          } catch (error) {
+            // Ignore storage failures and continue with query mode.
+          }
+        }
+
+        document.documentElement.dataset.siteMode = mode;
+        window.__waddyInitialSiteMode = mode;
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="stars" aria-hidden="true"></div>
+    <main class="page-frame">
+      <header class="retro-header">
+        <p class="smallline">Mechanics</p>
+        <h1>力学</h1>
+        <p class="tagline">大学で勉強した力学ノートを、章ごとにまとめていくページ。</p>
+        <marquee behavior="scroll" direction="left" scrollamount="5">★ 第1章から順番に追加予定 ★</marquee>
+      </header>
+
+      <section class="panel">
+        <p>
+          <a class="back-link" href="./study.html">勉強コーナーへ戻る</a>
+          <a class="back-link" href="./index.html">トップページへ戻る</a>
+        </p>
+      </section>
+      <section class="panel">
+        <h2>章一覧</h2>
+        <ol class="study-chapter-list">
+          <li>
+            <article class="study-chapter-card">
+              <div class="study-chapter-meta">
+                <span class="study-chapter-number">Chapter 01</span>
+                <span class="study-status study-status--published">公開中</span>
+              </div>
+              <h3><a href="./study-mechanics-01.html">質量と速度</a></h3>
+              <p>いま読める章です。図やメモを見ながら内容を追えます。</p>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <footer class="retro-footer">
+        <p>Copyright (C) 1999-2026 ワディーゲストハウス All Rights Reserved.</p>
+      </footer>
+    </main>
+    <script src="./study-visuals.js"></script>
+    <script src="./site-mode.js"></script>
+  </body>
+</html>
