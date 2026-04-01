@@ -61,8 +61,13 @@ const { chromium } = require("playwright");
   );
   const chapterStatus = await page.$(".study-status");
   assert(chapterStatus === null, "章ページに状態バッジが出ていないこと");
+  const toc = await page.$(".study-toc-list");
+  assert(toc !== null, "章ページの冒頭に目次があること");
+  const tocLinkCount = await page.$$eval(".study-toc-list a", (nodes) => nodes.length);
+  assert(tocLinkCount >= 8, `章ページの目次に十分な見出しリンクがあること (got: ${tocLinkCount})`);
 
   const chapterText = await page.textContent("body");
+  assert(chapterText.includes("目次"), "章ページに 目次 見出しがあること");
   assert(chapterText.includes("概要"), "章ページに 概要 見出しがあること");
   assert(chapterText.includes("本文"), "章ページに 本文 見出しがあること");
   assert(chapterText.includes("補足"), "章ページに 補足 見出しがあること");
@@ -75,6 +80,9 @@ const { chromium } = require("playwright");
   assert(!chapterText.includes("打ち合わせMD"), "章ページに内部の draft 情報が出ていないこと");
   const visualCount = await page.$$eval(".study-visual", (nodes) => nodes.length);
   assert(visualCount >= 4, `章ページに可視化ブロックが4つ以上あること (got: ${visualCount})`);
+  await page.click('.study-toc-list a[href="#概要"]');
+  const currentHash = await page.evaluate(() => decodeURIComponent(window.location.hash));
+  assert(currentHash === "#概要", `目次から見出しへジャンプできること (got: "${currentHash}")`);
 
   console.log("\n=== index.html テスト ===");
   await page.goto(`${baseUrl}/index.html`, { waitUntil: "domcontentloaded" });

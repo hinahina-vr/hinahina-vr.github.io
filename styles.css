@@ -763,6 +763,41 @@ marquee {
   margin-bottom: 10px;
 }
 
+.study-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.study-toc-item {
+  margin: 0;
+}
+
+.study-toc-item a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--card-title);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(159, 231, 255, 0.35);
+  padding-bottom: 2px;
+}
+
+.study-toc-item a:hover,
+.study-toc-item a:focus-visible {
+  color: var(--heading-color);
+  border-bottom-color: currentColor;
+}
+
+.study-toc-item--level-3 {
+  padding-left: 16px;
+}
+
+.study-toc-item--level-4 {
+  padding-left: 32px;
+}
+
 .study-status {
   display: inline-flex;
   align-items: center;
@@ -794,6 +829,10 @@ marquee {
 .study-article {
   display: grid;
   gap: 20px;
+}
+
+.study-heading-anchor {
+  scroll-margin-top: 18px;
 }
 
 .study-article > :first-child {
