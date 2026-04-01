@@ -100,11 +100,11 @@ function renderSubjectPage(subject) {
   const chapterItems = subject.chapters
     .map((chapter) => {
       const statusClass = chapter.status === "published" ? "study-status--published" : "study-status--stub";
-      const statusText = chapter.status === "published" ? "published" : "stub";
+      const statusText = chapter.status === "published" ? "公開中" : "準備中";
       const note =
         chapter.status === "published"
-          ? "本文と可視化を含む公開状態の章です。"
-          : "見出しだけの骨組みから始める準備中の章です。";
+          ? "いま読める章です。図やメモを見ながら内容を追えます。"
+          : "これから少しずつ書き足していく章です。";
 
       return `          <li>
             <article class="study-chapter-card">
@@ -121,7 +121,7 @@ function renderSubjectPage(subject) {
 
   return renderPage({
     title: "力学",
-    description: "力学ノートの章一覧ページ。公開済みの章と準備中の章を並べています。",
+    description: "力学ノートの章一覧ページ。いま読める章と、これから増やしていく章を並べています。",
     smallline: "Mechanics",
     heading: subject.label,
     tagline: "大学で勉強した力学ノートを、章ごとにまとめていくページ。",
@@ -144,9 +144,11 @@ ${chapterItems}
 async function renderChapterPage(subject, chapter) {
   const articleHtml = await marked.parse(chapter.body);
   const statusClass = chapter.status === "published" ? "study-status--published" : "study-status--stub";
-  const statusText = chapter.status === "published" ? "published" : "stub";
+  const statusText = chapter.status === "published" ? "公開中" : "準備中";
   const introText =
-    chapter.status === "published" ? "この章は公開中のノートです。" : "この章は準備中です。内容はこれから追加していきます。";
+    chapter.status === "published"
+      ? "いま読める章です。本文と図を行き来しながら読めるようにまとめています。"
+      : "この章はこれから書き足していきます。";
 
   return renderPage({
     title: `${subject.label} — ${chapter.title}`,

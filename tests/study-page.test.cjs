@@ -44,7 +44,8 @@ const { chromium } = require("playwright");
 
   const mechanicsText = await page.textContent("body");
   assert(mechanicsText.includes("質量と速度"), "study-mechanics.html に 質量と速度 が表示されること");
-  assert(mechanicsText.includes("published"), "study-mechanics.html に章の状態が表示されること");
+  assert(mechanicsText.includes("公開中"), "study-mechanics.html に章の状態が表示されること");
+  assert(mechanicsText.includes("いま読める章です"), "study-mechanics.html に自然な章説明が表示されること");
   assert(!mechanicsText.includes("この科目のルール"), "study-mechanics.html に運用ルールの見出しが出ていないこと");
   assert(!mechanicsText.includes("老中AI"), "study-mechanics.html に内部運用のAI案内が出ていないこと");
 
@@ -67,6 +68,7 @@ const { chromium } = require("playwright");
   assert(chapterText.includes("一ノ瀬ことみ"), "章ページに 一ノ瀬ことみ の感想があること");
   assert(chapterText.includes("キク8号"), "章ページに キク8号 の感想があること");
   assert(chapterText.includes("リチャードファインマン"), "章ページに担当した老中AI名があること");
+  assert(chapterText.includes("いま読める章です"), "章ページの案内文が自然な文言になっていること");
   assert(!chapterText.includes("打ち合わせMD"), "章ページに内部の draft 情報が出ていないこと");
   const visualCount = await page.$$eval(".study-visual", (nodes) => nodes.length);
   assert(visualCount >= 4, `章ページに可視化ブロックが4つ以上あること (got: ${visualCount})`);
