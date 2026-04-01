@@ -1,0 +1,379 @@
+{
+  "title": "桜は見ていない",
+  "subtitle": "─ 本当だけが嘘に見える ─",
+  "genre": "虚実通過ノベル",
+  "date": "2026-04-01",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "📱"
+    },
+    "projectionist": {
+      "name": "映写係",
+      "color": "#c487d9",
+      "emoji": "🎬"
+    },
+    "clerk": {
+      "name": "窓口係",
+      "color": "#8ea7cf",
+      "emoji": "🎓"
+    },
+    "logger": {
+      "name": "記録係",
+      "color": "#7f9c9a",
+      "emoji": "📝"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "phone_screen",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "スマホの画面が暗い部屋でひとつだけ光っている。時刻は午前1時11分。ハナヒメ＊アブソリュート！のオープニングが、日付の境目をまたいで繰り返し鳴っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "数時間後には「大学2年生になりました」という文が昼のタイムラインへ置かれる。その文は本当なのに、4月1日という日付が勝手に半分だけ冗談へ寄せてしまう。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "嘘はついていない。\nただ、日付のほうがこちらの本当を疑ってくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "部屋の奥に三つの入口が開く。画面の中だけ花が咲く上映室。進級の一文を受理する窓口。空白のログだけが静かに積まれた記録室。"
+    },
+    {
+      "label": "choose_gate"
+    },
+    {
+      "choices": [
+        {
+          "text": "OP上映室へ入る",
+          "goto": "opening_hall"
+        },
+        {
+          "text": "進級窓口へ向かう",
+          "goto": "student_office"
+        },
+        {
+          "text": "空白ログ室へ降りる",
+          "goto": "blank_log_room"
+        }
+      ]
+    },
+    {
+      "label": "opening_hall"
+    },
+    {
+      "bg": "anison_club"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "上映室では主題歌が途切れず、スクリーンの中だけに春がある。ピンク色の花びらは何度散っても客席へは落ちてこない。現実の床はずっと黒いままだ。"
+    },
+    {
+      "speaker": "projectionist",
+      "expression": "",
+      "text": "映像の春はいつも少しだけ早いんです。\nまだ外で桜を見ていなくても、画面の光だけで体は先に季節を受理してしまう。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "年度の境目をこの曲で越えたなら、出席していないわけでもないのか。"
+    },
+    {
+      "choices": [
+        {
+          "text": "画面の花びらに近づく",
+          "goto": "gen_screen_spring"
+        },
+        {
+          "text": "主題歌を背にして検札口へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_screen_spring"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "スクリーンのすぐ前まで歩く。頬に当たるのは風ではなく光だ。それでも体のほうは、いま確かに春へ触れたのだと勝手に判断している。"
+    },
+    {
+      "speaker": "projectionist",
+      "expression": "",
+      "text": "見ていない桜にも、ちゃんと体温は上がります。\n春は必ずしも外で始まるものじゃありません。"
+    },
+    {
+      "choices": [
+        {
+          "text": "光の余熱を持って検札口へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "student_office"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "長い廊下の先に窓口があり、その上の掲示板には「大学2年生になりました」の紙が貼られている。読むたびに文字の濃さが揺れ、本当と冗談のあいだを往復する。"
+    },
+    {
+      "speaker": "clerk",
+      "expression": "",
+      "text": "申告内容は正確です。\nただし本日4月1日に限り、すべての真実は一度だけ半透明で受理されます。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "本当だと説明するほど怪しくなる。\n四月一日は、そういう日付なんだな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "半透明の学生証を受け取る",
+          "goto": "gen_half_id"
+        },
+        {
+          "text": "申告書をたたんで検札口へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_half_id"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "差し出された学生証には名前も学年も印字されているのに、学校印だけがうっすら透けている。事実の内容ではなく、今日という日付だけがその輪郭を薄くしている。"
+    },
+    {
+      "speaker": "clerk",
+      "expression": "",
+      "text": "進級は済んでいます。\nでも今日は、証明より先に雰囲気が届いてしまうのです。"
+    },
+    {
+      "choices": [
+        {
+          "text": "半透明の角を指でなぞって検札口へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "blank_log_room"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "記録室には何も動いていない。Swarmは0件、歩数も体温も取得不能、机の上に残っているのは深夜1時の主題歌と昼12時45分の進級報告だけだ。"
+    },
+    {
+      "speaker": "logger",
+      "expression": "",
+      "text": "外側の計器は眠っています。\nけれど静かな日は、しばしば内側だけが稼働率100%になります。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "何もしていない日に限って、言葉だけがちゃんと残るんだよな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "空白グラフの奥をのぞく",
+          "goto": "gen_silent_density"
+        },
+        {
+          "text": "ログを閉じて検札口へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_silent_density"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "空白のグラフは無音ではなかった。棒も線もないのに、その裏側で何かがゆっくり増えている。測定されなかった一日が、温室みたいに内側だけを育てている。"
+    },
+    {
+      "speaker": "logger",
+      "expression": "",
+      "text": "記録の空白は停止ではありません。\n測れない密度が、外出ゼロの内側で育っていただけです。"
+    },
+    {
+      "choices": [
+        {
+          "text": "無音の密度を抱えて検札口へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "3月31日と4月1日のあいだに、小さな検札口がある。ガラス窓の向こうにみとらがいて、トレイの上には半透明の学生証、光だけの花びら、数字の出ないログが並べられている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは会議室ではありません。検札口です。\nあなたの一日を裁くのではなく、どんな調子で朝へ通すかを見るだけです。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "あなたは嘘をつきませんでした。\n四月一日という日付が、本当の文にいたずらの影を一枚だけ重ねたのです。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "桜を見なくても、主題歌の光と進級の一文と空白のログで、春の輪郭はもうできています。\n必要なのは証明ではなく、持ち帰る調子です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "じゃあ、朝へ持っていくのは事実そのものじゃなくて、その日の手触りでいいのか。"
+    },
+    {
+      "label": "carry_sign"
+    },
+    {
+      "choices": [
+        {
+          "text": "半透明の学生証を持ち帰る",
+          "goto": "END_CARD"
+        },
+        {
+          "text": "見ていない桜の花びらを持ち帰る",
+          "goto": "END_PETAL"
+        },
+        {
+          "text": "主題歌の一節だけを持ち帰る",
+          "goto": "END_MOOD"
+        }
+      ]
+    },
+    {
+      "label": "END_CARD"
+    },
+    {
+      "bg": "station_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。投稿の文面はまだ少しだけ冗談くさい。でも机の端には、夢で受け取った学生証の角の感触だけが残っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "本当であることは疑われたままでいい。疑われながらも進んだ、という輪郭のほうが今日は似合っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "半信半疑のまま、進級だけはきちんと朝へ届いている。\n──END: 半信半疑の学生証"
+    },
+    {
+      "label": "END_PETAL"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。窓の外を見ても、相変わらず桜は見ていない。それでも胸のどこかに、まだ触れていない花びらの気配だけが静かに貼りついている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "見たことのない春でも、朝へ持ち帰ることはできる。画面の光で受理した季節が、遅れて現実へ染みてくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "だから今日は、見ていないことそのものを春の証拠にして歩き出す。\n──END: 見ていない桜"
+    },
+    {
+      "label": "END_MOOD"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。歌詞は覚えていないのに、主題歌の上がりきらない高揚だけが体のどこかに残っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "重い議論の翌日に、こういう軽い光が差しこむ。軽さは堕落ではない。ただ春のほうが先に肩の力を抜いただけだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "深夜一時の `mood` を、そのまま朝の調子へつなぎ替える。\n──END: 主題歌の春"
+    }
+  ]
+}

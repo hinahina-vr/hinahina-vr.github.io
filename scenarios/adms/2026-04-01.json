@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-01",
+  "title": "桜は見ていない A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "嘘の午前零時",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "📱",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "standalone_start",
+      "summary": "主題歌と4月1日が重なり、本当の文が最初から疑わしくなる"
+    },
+    {
+      "id": "choose_gate",
+      "title": "三つの春の入口",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🧭",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "choose_gate",
+      "summary": "画面の春、書類の春、空白の春へ枝分かれする"
+    },
+    {
+      "id": "opening_hall",
+      "title": "OP上映室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🎬",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "opening_hall",
+      "summary": "画面の中だけ花びらが散り、現実より早く春が上映される"
+    },
+    {
+      "id": "student_office",
+      "title": "進級窓口",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🎓",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "student_office",
+      "summary": "「大学2年生になりました」が本当のまま半透明で受理される"
+    },
+    {
+      "id": "blank_log_room",
+      "title": "空白ログ室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "📝",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "blank_log_room",
+      "summary": "外出も計測もないのに、内側の密度だけが静かに増えている"
+    },
+    {
+      "id": "gen_screen_spring",
+      "title": "見ていない春",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🌸",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "gen_screen_spring",
+      "summary": "画面の光だけで体が先に春を受理してしまう"
+    },
+    {
+      "id": "gen_half_id",
+      "title": "半透明の学生証",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🪪",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "gen_half_id",
+      "summary": "進級は事実だが、4月1日が証明書の輪郭だけを透かしてしまう"
+    },
+    {
+      "id": "gen_silent_density",
+      "title": "無音の密度",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "📡",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "gen_silent_density",
+      "summary": "記録されなかった一日が、内側だけを温室みたいに育てている"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "みとらの検札口",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🚉",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "mitra_gate",
+      "summary": "嘘を裁くのではなく、どんな調子で朝へ通すかだけを確かめる"
+    },
+    {
+      "id": "carry_sign",
+      "title": "持ち帰る調子",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "carry_sign",
+      "summary": "学生証、見ていない桜、主題歌の一節のどれを朝へ持つか選ぶ"
+    },
+    {
+      "id": "END_CARD",
+      "title": "半信半疑の学生証",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🪪",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "END_CARD",
+      "summary": "疑われたままでも、進級の輪郭だけは朝へ届いている"
+    },
+    {
+      "id": "END_PETAL",
+      "title": "見ていない桜",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🌸",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "END_PETAL",
+      "summary": "まだ見ていない花の気配そのものを、春の証拠として持ち帰る"
+    },
+    {
+      "id": "END_MOOD",
+      "title": "主題歌の春",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🎵",
+      "scenario": "2026-04-01_桜は見ていない",
+      "entry": "END_MOOD",
+      "summary": "深夜一時の軽い高揚を、そのまま朝の調子へつなぎ替える"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_gate",
+      "choiceText": "三つの入口のほうへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_gate",
+      "to": "opening_hall",
+      "choiceText": "OP上映室へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_gate",
+      "to": "student_office",
+      "choiceText": "進級窓口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_gate",
+      "to": "blank_log_room",
+      "choiceText": "空白ログ室へ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "opening_hall",
+      "to": "gen_screen_spring",
+      "choiceText": "画面の花びらに近づく",
+      "style": "genkai"
+    },
+    {
+      "from": "opening_hall",
+      "to": "mitra_gate",
+      "choiceText": "主題歌を背にして検札口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_screen_spring",
+      "to": "mitra_gate",
+      "choiceText": "光の余熱を持って検札口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "student_office",
+      "to": "gen_half_id",
+      "choiceText": "半透明の学生証を受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "student_office",
+      "to": "mitra_gate",
+      "choiceText": "申告書をたたんで検札口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_half_id",
+      "to": "mitra_gate",
+      "choiceText": "半透明の角を指でなぞって検札口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "blank_log_room",
+      "to": "gen_silent_density",
+      "choiceText": "空白グラフの奥をのぞく",
+      "style": "genkai"
+    },
+    {
+      "from": "blank_log_room",
+      "to": "mitra_gate",
+      "choiceText": "ログを閉じて検札口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_silent_density",
+      "to": "mitra_gate",
+      "choiceText": "無音の密度を抱えて検札口へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "carry_sign",
+      "choiceText": "朝へ持ち帰る印を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_sign",
+      "to": "END_CARD",
+      "choiceText": "半透明の学生証を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_sign",
+      "to": "END_PETAL",
+      "choiceText": "見ていない桜の花びらを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_sign",
+      "to": "END_MOOD",
+      "choiceText": "主題歌の一節だけを持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}
