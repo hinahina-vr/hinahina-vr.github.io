@@ -75,10 +75,13 @@ const { chromium } = require("playwright");
   await page.goto(`${baseUrl}/index.html`, { waitUntil: "domcontentloaded" });
   const studyLink = await page.$('a.feature-link[href="./study.html"]');
   assert(studyLink !== null, "index.html に勉強コーナーへの導線が存在すること");
+  const mechanicsChapterLink = await page.$('a.feature-link[href="./study-mechanics-01.html"]');
+  assert(mechanicsChapterLink !== null, "index.html に力学第1章への直リンクが存在すること");
 
   const indexText = await page.textContent("body");
   assert(indexText.includes("勉強コーナー"), "index.html に勉強コーナーの文言が出ていること");
   assert(indexText.includes("力学の第1章"), "index.html に勉強コーナーの紹介文が出ていること");
+  assert(indexText.includes("質量と速度"), "index.html から現在読める章が分かること");
 
   console.log(`\n=== 結果: ${passed} passed, ${failed} failed ===`);
 
