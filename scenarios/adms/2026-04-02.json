@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-02",
+  "title": "肉体が嘘をつかない A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "深夜三時の公開ボタン",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "💻",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "standalone_start",
+      "summary": "zen-quest-mapを公開した深夜、辛さと誓いの記憶が夜を渡ってくる"
+    },
+    {
+      "id": "choose_room",
+      "title": "三つの場所",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🧭",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "choose_room",
+      "summary": "熱源室・深夜工房・誓いの劇場へ枝分かれする"
+    },
+    {
+      "id": "heat_room",
+      "title": "熱源室",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🌶️",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "heat_room",
+      "summary": "カプサイシンは燃やさないが汗は本物、身体はいつも正直"
+    },
+    {
+      "id": "night_workshop",
+      "title": "深夜工房",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🔧",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "night_workshop",
+      "summary": "誰も頼んでいないのに指が動いた、それが内発的動機の証拠"
+    },
+    {
+      "id": "oath_theater",
+      "title": "誓いの劇場",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🎵",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "oath_theater",
+      "summary": "フィクションの歌詞でも胸が動いたなら、それは本物の何か"
+    },
+    {
+      "id": "gen_capsaicin",
+      "title": "痛みと快楽の境界",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🔥",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "gen_capsaicin",
+      "summary": "嘘の信号が本物の反応を生む、フィクションで泣く涙が本物なのと同じ"
+    },
+    {
+      "id": "gen_unsent",
+      "title": "未送信フォルダ",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "📁",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "gen_unsent",
+      "summary": "形になっていない道具たちも、同じ信号から動き始めていた"
+    },
+    {
+      "id": "gen_wish_core",
+      "title": "wishの核心",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "✨",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "gen_wish_core",
+      "summary": "守ると決める前に、もう守り始めている衝動の正体"
+    },
+    {
+      "id": "mitra_passage",
+      "title": "みとらの通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "mitra_passage",
+      "summary": "肉体が嘘をつかなかった夜は、証明を必要としない"
+    },
+    {
+      "id": "carry_truth",
+      "title": "持ち帰る本物",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "carry_truth",
+      "summary": "汗の余熱・公開ボタンの感触・誓いの一節のどれを朝へ持つか"
+    },
+    {
+      "id": "END_SWEAT",
+      "title": "本物の汗",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "💧",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "END_SWEAT",
+      "summary": "傷はないのに身体は昨夜を覚えている、汗の跡が地図になる"
+    },
+    {
+      "id": "END_RELEASE",
+      "title": "深夜の道標",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🗺️",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "END_RELEASE",
+      "summary": "頼まれていなかったことがむしろ証明、道標は確かにそこにある"
+    },
+    {
+      "id": "END_WISH",
+      "title": "誓いの余振",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌟",
+      "scenario": "2026-04-02_肉体が嘘をつかない",
+      "entry": "END_WISH",
+      "summary": "wishは決意より前に始まっている、それが昨夜から今朝へ持ち越された"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_room",
+      "choiceText": "三つの場所のほうへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "heat_room",
+      "choiceText": "熱源室へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "night_workshop",
+      "choiceText": "深夜工房へ降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "oath_theater",
+      "choiceText": "誓いの劇場へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "heat_room",
+      "to": "gen_capsaicin",
+      "choiceText": "辛さの奥を覗く",
+      "style": "genkai"
+    },
+    {
+      "from": "heat_room",
+      "to": "mitra_passage",
+      "choiceText": "汗を拭って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_capsaicin",
+      "to": "mitra_passage",
+      "choiceText": "汗の余熱を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "night_workshop",
+      "to": "gen_unsent",
+      "choiceText": "工房の奥の未送信フォルダを開く",
+      "style": "genkai"
+    },
+    {
+      "from": "night_workshop",
+      "to": "mitra_passage",
+      "choiceText": "公開ボタンの余韻を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_unsent",
+      "to": "mitra_passage",
+      "choiceText": "未送信の数を数えないままで通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "oath_theater",
+      "to": "gen_wish_core",
+      "choiceText": "「どんなに痛んでも」の一節へ近づく",
+      "style": "genkai"
+    },
+    {
+      "from": "oath_theater",
+      "to": "mitra_passage",
+      "choiceText": "歌の余韻を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_wish_core",
+      "to": "mitra_passage",
+      "choiceText": "誓いの核心を抱えて通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_passage",
+      "to": "carry_truth",
+      "choiceText": "朝へ持ち帰る本物を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_truth",
+      "to": "END_SWEAT",
+      "choiceText": "汗の余熱を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_truth",
+      "to": "END_RELEASE",
+      "choiceText": "公開ボタンの感触を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_truth",
+      "to": "END_WISH",
+      "choiceText": "誓いの一節を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}
