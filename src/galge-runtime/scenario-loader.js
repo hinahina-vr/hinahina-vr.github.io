@@ -8,6 +8,46 @@ function asString(value, fallback = "") {
   return typeof value === "string" ? value : fallback;
 }
 
+function extractInlineEndingTitle(text) {
+  if (typeof text !== "string") {
+    return "";
+  }
+  const match = text.match(/(?:^|\n)\s*[─—-]{2}\s*END[:：]\s*(.+?)\s*$/u);
+  return match ? asString(match[1]).trim() : "";
+}
+
+function injectImplicitEndingSteps(steps) {
+  const normalized = [];
+
+  for (let index = 0; index < steps.length; index += 1) {
+    const step = steps[index];
+    normalized.push(step);
+
+    if (step?.kind !== "text") {
+      continue;
+    }
+
+    const endingTitle = extractInlineEndingTitle(step.text);
+    if (!endingTitle) {
+      continue;
+    }
+
+    const nextStep = steps[index + 1];
+    if (nextStep?.kind === "end") {
+      continue;
+    }
+
+    normalized.push({
+      kind: "end",
+      title: "— F I N —",
+      subtitle: endingTitle,
+      bgm: null,
+    });
+  }
+
+  return normalized;
+}
+
 function normalizeLoadScenarioStep(step, stepIndex, warnings) {
   const source = step.loadScenario;
   let scenario = "";
@@ -328,6 +368,7 @@ export async function fetchScenarioDefinition(scenarioName) {
         .map((step, index) => normalizeStep(step, index, warnings, chars))
         .filter(Boolean)
     : [];
+  const steps = injectImplicitEndingSteps(scenario);
 
   if (!raw.id) {
     warnings.push(`scenario "${scenarioName}" に id がないため "${id}" を採用しました。`);
@@ -337,7 +378,7 @@ export async function fetchScenarioDefinition(scenarioName) {
     warnings.push(`scenario "${scenarioName}" に scenario 配列がありません。`);
   }
 
-  const labelIndex = buildLabelIndex(scenario, warnings);
+  const labelIndex = buildLabelIndex(steps, warnings);
 
   const defaultBgmRaw = raw.defaultBgm ?? {
     src: "./assets/bgm/wasurenagusa.mp3",
@@ -356,7 +397,7 @@ export async function fetchScenarioDefinition(scenarioName) {
     genre: asString(raw.genre),
     date: asString(raw.date),
     chars,
-    steps: scenario,
+    steps,
     labelIndex,
     defaultBgm,
     warnings,
