@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-03",
+  "title": "眠りが先に来た A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "閉まり始める部屋",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "💤",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "standalone_start",
+      "summary": "4/2 の反動が残る夜、何かを始めるより先に閉じる方が自然になる"
+    },
+    {
+      "id": "choose_rest",
+      "title": "三つの通路",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🚪",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "choose_rest",
+      "summary": "灯りを消す、何も足さずに閉じる、布団へ向かうの三択"
+    },
+    {
+      "id": "lamp_room",
+      "title": "消灯の通路",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🕯️",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "lamp_room",
+      "summary": "閉店係が、終わり方を整える小さな技術としての消灯を案内する"
+    },
+    {
+      "id": "blank_room",
+      "title": "数えない棚",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "📚",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "blank_room",
+      "summary": "未読も未送信も数えず、今夜これ以上増やさない方へ切り替える"
+    },
+    {
+      "id": "futon_room",
+      "title": "布団への歩幅",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🛏️",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "futon_room",
+      "summary": "眠りの声に導かれ、説明のいらない通路として布団へ向かう"
+    },
+    {
+      "id": "gen_lamp_off",
+      "title": "終わりの形",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🌘",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "gen_lamp_off",
+      "summary": "消灯は敗北ではなく、夜の終わりを整える技術である"
+    },
+    {
+      "id": "gen_blank_close",
+      "title": "静かな棚",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🗃️",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "gen_blank_close",
+      "summary": "閉じきらないものが残っても、今夜の仕事は増やさないことに変わる"
+    },
+    {
+      "id": "gen_fall_asleep",
+      "title": "ほどける言葉",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🌙",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "gen_fall_asleep",
+      "summary": "眠気は勝ちに来たのではなく、夜を終えるために来ていたとわかる"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "みとらの通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "mitra_gate",
+      "summary": "回復を空白として処理しないための小さな通行所"
+    },
+    {
+      "id": "carry_rest",
+      "title": "朝へ持ち帰るもの",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "carry_rest",
+      "summary": "消灯の整い、布団の許可、薄明の回復のどれを朝へ残すか選ぶ"
+    },
+    {
+      "id": "END_LIGHT",
+      "title": "消灯の整い",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🕯️",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "END_LIGHT",
+      "summary": "整えて終えた夜は、朝の輪郭も荒らさない"
+    },
+    {
+      "id": "END_BLANKET",
+      "title": "布団の許可",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🛏️",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "END_BLANKET",
+      "summary": "眠ることを拒まなかった夜は、朝に言い訳を残さない"
+    },
+    {
+      "id": "END_MORNING",
+      "title": "薄明の回復",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌅",
+      "scenario": "2026-04-03_眠りが先に来た",
+      "entry": "END_MORNING",
+      "summary": "大きくなくても、疲れを朝へ持ち越さなかった回復は充分である"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_rest",
+      "choiceText": "今夜の通路を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_rest",
+      "to": "lamp_room",
+      "choiceText": "灯りを消しに行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_rest",
+      "to": "blank_room",
+      "choiceText": "何も足さずに閉じる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_rest",
+      "to": "futon_room",
+      "choiceText": "そのまま布団へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "lamp_room",
+      "to": "gen_lamp_off",
+      "choiceText": "最後の灯りだけ整える",
+      "style": "genkai"
+    },
+    {
+      "from": "lamp_room",
+      "to": "mitra_gate",
+      "choiceText": "そのまま通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_lamp_off",
+      "to": "mitra_gate",
+      "choiceText": "整った暗さを持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "blank_room",
+      "to": "gen_blank_close",
+      "choiceText": "空白をそのまま受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "blank_room",
+      "to": "mitra_gate",
+      "choiceText": "数えないまま通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_blank_close",
+      "to": "mitra_gate",
+      "choiceText": "静かな棚を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "futon_room",
+      "to": "gen_fall_asleep",
+      "choiceText": "そのまま目を閉じる手前まで行く",
+      "style": "genkai"
+    },
+    {
+      "from": "futon_room",
+      "to": "mitra_gate",
+      "choiceText": "眠気を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_fall_asleep",
+      "to": "mitra_gate",
+      "choiceText": "ほどけた言葉のまま通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "carry_rest",
+      "choiceText": "朝へ持ち帰る回復を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_rest",
+      "to": "END_LIGHT",
+      "choiceText": "消灯の整いを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_rest",
+      "to": "END_BLANKET",
+      "choiceText": "布団の許可を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_rest",
+      "to": "END_MORNING",
+      "choiceText": "薄明の回復を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

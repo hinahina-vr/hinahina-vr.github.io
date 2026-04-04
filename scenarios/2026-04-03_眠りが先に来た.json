@@ -1,0 +1,334 @@
+{
+  "title": "眠りが先に来た",
+  "subtitle": "─ 回復日の小さな通路 ─",
+  "genre": "回復通過ノベル",
+  "date": "2026-04-03",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "💻"
+    },
+    "keeper": {
+      "name": "閉店係",
+      "color": "#9a8f7a",
+      "emoji": "🕯️"
+    },
+    "sleeper": {
+      "name": "眠りの声",
+      "color": "#8a80c0",
+      "emoji": "🛏️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月三日の夜。画面はついているのに、部屋はもう閉まり始めている。昨日の余熱が残っていて、今日は何かを始めるより先に、何かを終える方が自然だった。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "やることがないわけじゃない。\nでも、続ける理由がもう薄い。\n眠い。たぶん、それが一番正確だ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "部屋の中に三つの通路が見える。灯りを消しに行く部屋。何も足さずに閉じる部屋。布団までそのまま歩いていく部屋。"
+    },
+    {
+      "label": "choose_rest"
+    },
+    {
+      "choices": [
+        {
+          "text": "灯りを消しに行く",
+          "goto": "lamp_room"
+        },
+        {
+          "text": "何も足さずに閉じる",
+          "goto": "blank_room"
+        },
+        {
+          "text": "そのまま布団へ向かう",
+          "goto": "futon_room"
+        }
+      ]
+    },
+    {
+      "label": "lamp_room"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "廊下の先に、閉店係が立っている。部屋の灯りはまだ白いが、その白さもそろそろ細くなっている。"
+    },
+    {
+      "speaker": "keeper",
+      "expression": "",
+      "text": "今日はここまででよろしいです。\n締切ではなく、閉店です。\n閉めることにも手順があります。"
+    },
+    {
+      "choices": [
+        {
+          "text": "最後の灯りだけ整える",
+          "goto": "gen_lamp_off"
+        },
+        {
+          "text": "そのまま通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_lamp_off"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の明かりを落とす。やり残しは消えないが、今夜そこへ手を伸ばさないことだけは決まる。部屋が少しだけ静かになる。"
+    },
+    {
+      "speaker": "keeper",
+      "expression": "",
+      "text": "消灯は敗北ではありません。\n終わりの形を整える、小さな技術です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "整った暗さを持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "blank_room"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "棚には未読も未送信も少しだけ残っている。けれど今夜は数えない。数え始めれば、夜はまた開いてしまう。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "何も足さない。\n何も片づけきらない。\nそのままで閉じる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "空白をそのまま受け取る",
+          "goto": "gen_blank_close"
+        },
+        {
+          "text": "数えないまま通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_blank_close"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "閉じられていないものは残っている。それでも今夜の仕事は、残りをゼロにすることではなく、これ以上増やさないことに変わる。"
+    },
+    {
+      "speaker": "keeper",
+      "expression": "",
+      "text": "空白は欠品ではありません。\n本日の営業を終えたあとに残る、静かな棚です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "静かな棚を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "futon_room"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "布団までの距離だけが、今夜の正しいタスクになる。眠りの声は、急かさず、ただ近い場所から呼んでいる。"
+    },
+    {
+      "speaker": "sleeper",
+      "expression": "",
+      "text": "今日は考えなくていいよ。\n歩幅ひとつぶんずつ、こっちへ来ればいい。\n眠りは説明を要求しないから。"
+    },
+    {
+      "choices": [
+        {
+          "text": "そのまま目を閉じる手前まで行く",
+          "goto": "gen_fall_asleep"
+        },
+        {
+          "text": "眠気を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_fall_asleep"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "布団に入ると、言葉がほどける。眠気は勝つために来たのではなく、終えるために来ていたのだとわかる。"
+    },
+    {
+      "speaker": "sleeper",
+      "expression": "",
+      "text": "落ちるんじゃない。\n通るだけ。\n朝までのあいだを、静かに渡るだけ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "ほどけた言葉のまま通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "小さな通過点に、みとらがいる。トレイの上には、消えた灯り、数えなかった棚、布団へ向かう足音が並んでいる。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは評価室ではありません。通過点です。\n今夜の回復を、空白として処理しないためにあります。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "疲労は敵ではありません。\n閉店の合図です。\n合図が来たなら、通してよいのです。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "眠りが先に来たなら、\n先に通していい。\nたぶん、それでよかった。"
+    },
+    {
+      "label": "carry_rest"
+    },
+    {
+      "choices": [
+        {
+          "text": "消灯の整いを持ち帰る",
+          "goto": "END_LIGHT"
+        },
+        {
+          "text": "布団の許可を持ち帰る",
+          "goto": "END_BLANKET"
+        },
+        {
+          "text": "薄明の回復を持ち帰る",
+          "goto": "END_MORNING"
+        }
+      ]
+    },
+    {
+      "label": "END_LIGHT"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝、部屋の灯りは消えたままだ。昨夜の終わり方が乱れていなかったことだけが、静かな安心として残っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "整えて終えた夜は、朝の輪郭も荒らさない。\n──END: 消灯の整い"
+    },
+    {
+      "label": "END_BLANKET"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝、布団のぬくさが少しだけ残っている。昨夜は何も成し遂げなかったのではない。ただ、眠ることを拒まなかった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "許可された眠りは、朝に言い訳を残さない。\n──END: 布団の許可"
+    },
+    {
+      "label": "END_MORNING"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝、窓の外が少し白い。大きな回復ではない。ただ昨日の疲れが、今朝まで持ち越されなかったことがわかる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "小さい回復でも、朝へ渡れば充分だ。\n──END: 薄明の回復"
+    }
+  ]
+}
