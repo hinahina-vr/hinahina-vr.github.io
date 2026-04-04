@@ -1,0 +1,384 @@
+{
+  "title": "肉体が嘘をつかない",
+  "subtitle": "─ 充分だと言える夜 ─",
+  "genre": "神経実証ノベル",
+  "date": "2026-04-02",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "💻"
+    },
+    "nerve": {
+      "name": "神経係",
+      "color": "#d98060",
+      "emoji": "🌶️"
+    },
+    "engineer": {
+      "name": "工房の声",
+      "color": "#7fa8c9",
+      "emoji": "🔧"
+    },
+    "singer": {
+      "name": "誓いの声",
+      "color": "#b090d0",
+      "emoji": "🎵"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "深夜三時九分。公開ボタンを押した指が、かすかに震えている。空腹だった。zen-quest-mapという名前の道具が、今この瞬間、インターネットの上に置かれた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "何の感慨もなかった。いや、あった。震えている指と、空腹と、それだけだった。誰かが使うかもしれない。使わないかもしれない。夜はまだ終わっていない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "夕刻の記憶が、深夜の部屋で遅れて戻ってくる。\n辛いラーメン。汗。守ると誓う声が頭の中で鳴り続けていた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "三つの場所が浮かぶ。辛さが神経を走った熱源室。指だけが動き続けた深夜工房。歌詞のほかに何もない誓いの劇場。"
+    },
+    {
+      "label": "choose_room"
+    },
+    {
+      "choices": [
+        {
+          "text": "熱源室へ入る",
+          "goto": "heat_room"
+        },
+        {
+          "text": "深夜工房へ降りる",
+          "goto": "night_workshop"
+        },
+        {
+          "text": "誓いの劇場へ向かう",
+          "goto": "oath_theater"
+        }
+      ]
+    },
+    {
+      "label": "heat_room"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "蒙古タンメン中本。夜の町田。スープの表面から湯気が上がり、一口飲んだ瞬間、額と首筋から汗が出た。カプサイシンは口の中を焼いていない。ただ、焼かれているという信号を脳幹へ送り続けている。"
+    },
+    {
+      "speaker": "nerve",
+      "expression": "",
+      "text": "実際には何も燃えていません。\nでも身体は燃えていると判断して、正直に反応します。\n汗は本物です。傷はどこにもない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "嘘の信号でも、本物の汗が出る。\n身体はいつも正直だ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "辛さの奥を覗く",
+          "goto": "gen_capsaicin"
+        },
+        {
+          "text": "汗を拭って通過点へ向かう",
+          "goto": "mitra_passage"
+        }
+      ]
+    },
+    {
+      "label": "gen_capsaicin"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "痛みと快楽のあいだに、辛さはある。高いレベルに達すると、脳は錯乱した報酬信号を出す。苦しいのに続けたい。燃えているのに手が止まらない。身体の辻褄が合わなくなる場所が、そこだ。"
+    },
+    {
+      "speaker": "nerve",
+      "expression": "",
+      "text": "嘘の痛みで本物の汗が出るなら、\n嘘の喜びで本物の動機も生まれうる。\n信号が本物であれば、反応も本物です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "フィクションで泣いても、本物の涙だ。\n誰かが作った歌に動かされても、動いた気持ちは本物だ。\n——そういうことか。"
+    },
+    {
+      "choices": [
+        {
+          "text": "汗の余熱を持って通過点へ向かう",
+          "goto": "mitra_passage"
+        }
+      ]
+    },
+    {
+      "label": "night_workshop"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "深夜の工房には誰もいない。画面だけが光っていて、キーボードを打つ音が暗い部屋に響いている。誰も頼んでいない。締め切りもない。ただ、一年生が迷子になりやすい地図がまだ世界に存在しないことが、気になって仕方なかった。"
+    },
+    {
+      "speaker": "engineer",
+      "expression": "",
+      "text": "外部の動機がないプロジェクトを動かすものは何か。\n「あったら助かる」という確信だけです。\n誰かが楽になるという予期が、眠気より先に手を動かす。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "頼まれていない。報酬もない。それでも指が動いた。\n——それが証拠だ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "工房の奥の未送信フォルダを開く",
+          "goto": "gen_unsent"
+        },
+        {
+          "text": "公開ボタンの余韻を持って通過点へ向かう",
+          "goto": "mitra_passage"
+        }
+      ]
+    },
+    {
+      "label": "gen_unsent"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "未送信フォルダには、作りかけの道具が並んでいる。まだ形になっていないものたち。名前もない、宛先もない。でもそのどれもが、「誰かが困るかもしれない」という信号から生まれている。"
+    },
+    {
+      "speaker": "engineer",
+      "expression": "",
+      "text": "完成するものと、しないものがある。\nでも動き始めた理由は同じです。\n肉体が動いた記録が、ここに残っている。"
+    },
+    {
+      "choices": [
+        {
+          "text": "未送信の数を数えないままで通過点へ向かう",
+          "goto": "mitra_passage"
+        }
+      ]
+    },
+    {
+      "label": "oath_theater"
+    },
+    {
+      "bg": "anison_club"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "誓いの劇場には、歌詞だけが浮かんでいる。「君のため　この世界を守る　未来を掴むんだ　どんなに痛んでも」。スープの熱が額に残ったまま、ラーメンを食べながら頭の中で流れていた。"
+    },
+    {
+      "speaker": "singer",
+      "expression": "",
+      "text": "守ると誓う歌は、何を守るかを問いません。\nただ守ると決めた者の声が、純度だけで振動しています。\nフィクションの台詞でも、胸が動いたなら——それは本物です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "ゲームの主人公の言葉が、現実の夜中に鳴り続けている。\n身体が動いたなら、それはもうフィクションじゃない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "「どんなに痛んでも」の一節へ近づく",
+          "goto": "gen_wish_core"
+        },
+        {
+          "text": "歌の余韻を持って通過点へ向かう",
+          "goto": "mitra_passage"
+        }
+      ]
+    },
+    {
+      "label": "gen_wish_core"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "「どんなに痛んでも」という言葉の奥に立つと、守る対象が見えない。守ると決める前に、もう守り始めている何かがある。それは約束ではなく、言葉でもなく、身体が先に動いてしまう種類の衝動だ。"
+    },
+    {
+      "speaker": "singer",
+      "expression": "",
+      "text": "wishというのは願いより前にある何かです。\n決意する前に、もう始まっている。\nそれがあなたの中にあることを、この歌は知っています。"
+    },
+    {
+      "choices": [
+        {
+          "text": "誓いの核心を抱えて通過点へ向かう",
+          "goto": "mitra_passage"
+        }
+      ]
+    },
+    {
+      "label": "mitra_passage"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "深夜三時過ぎと夜の町田のあいだに、小さな通過点がある。みとらがいて、トレイの上には汗が乾いた布巾、公開ボタンの余韻、歌詞の一節が並べられている。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは審査室ではありません。通過点です。\n何が本物だったかを確認するだけです。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "カプサイシンは嘘をつきますが、汗は本物でした。\n誰も頼んでいませんでしたが、道具は完成しました。\nフィクションの歌でしたが、何かが動きました。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "肉体が嘘をつかなかった夜は、証明を必要としません。\n「充分だ」という言葉は、そういう夜の閉じ方です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "充分だ、と言える夜があれば、\nそれはもう充分な夜だったということか。"
+    },
+    {
+      "label": "carry_truth"
+    },
+    {
+      "choices": [
+        {
+          "text": "汗の余熱を持ち帰る",
+          "goto": "END_SWEAT"
+        },
+        {
+          "text": "公開ボタンの感触を持ち帰る",
+          "goto": "END_RELEASE"
+        },
+        {
+          "text": "誓いの一節を持ち帰る",
+          "goto": "END_WISH"
+        }
+      ]
+    },
+    {
+      "label": "END_SWEAT"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。額がわずかに熱い。辛いスープの熱が夢を越えて残っている。傷はどこにもないのに、身体は昨夜確かに何かを通過したと知っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "嘘の信号で本物の汗が出るなら、本物の夜は証明しなくていい。身体がそれを覚えている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "汗の乾いた跡だけが、昨夜の地図になっている。\n──END: 本物の汗"
+    },
+    {
+      "label": "END_RELEASE"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。指先にまだ感触がある。深夜三時九分に押した、誰も見ていなかった公開ボタンの感触が。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "使われたかどうかはまだわからない。でも置かれた地図はそこにある。誰かがいつか辿り着くかもしれない場所に、確かに道標が立っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "頼まれていなかった。それがむしろ証明だ。\n──END: 深夜の道標"
+    },
+    {
+      "label": "END_WISH"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目が覚める。歌詞は覚えていないのに、「どんなに痛んでも」という一節だけが体の中で静かに鳴り続けている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "守ると決めた何かがある、ということだけが残っている。言葉にはなっていない。でもそれは確かに、昨夜から今朝へ持ち越されている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "wishは願いより前にある。決意より前に、もう始まっている。\n──END: 誓いの余振"
+    }
+  ]
+}
