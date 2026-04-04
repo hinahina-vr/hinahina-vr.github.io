@@ -247,6 +247,38 @@
   function asString(value, fallback = "") {
     return typeof value === "string" ? value : fallback;
   }
+  function extractInlineEndingTitle(text) {
+    if (typeof text !== "string") {
+      return "";
+    }
+    const match = text.match(/(?:^|\n)\s*[─—-]{2}\s*END[:：]\s*(.+?)\s*$/u);
+    return match ? asString(match[1]).trim() : "";
+  }
+  function injectImplicitEndingSteps(steps) {
+    const normalized = [];
+    for (let index = 0; index < steps.length; index += 1) {
+      const step = steps[index];
+      normalized.push(step);
+      if (step?.kind !== "text") {
+        continue;
+      }
+      const endingTitle = extractInlineEndingTitle(step.text);
+      if (!endingTitle) {
+        continue;
+      }
+      const nextStep = steps[index + 1];
+      if (nextStep?.kind === "end") {
+        continue;
+      }
+      normalized.push({
+        kind: "end",
+        title: "— F I N —",
+        subtitle: endingTitle,
+        bgm: null
+      });
+    }
+    return normalized;
+  }
   function normalizeLoadScenarioStep(step, stepIndex, warnings) {
     const source = step.loadScenario;
     let scenario = "";
@@ -518,13 +550,14 @@
     const chars = normalizeChars(raw.chars, warnings);
     const id = asString(raw.id).trim() || scenarioName;
     const scenario = Array.isArray(raw.scenario) ? raw.scenario.map((step, index) => normalizeStep(step, index, warnings, chars)).filter(Boolean) : [];
+    const steps = injectImplicitEndingSteps(scenario);
     if (!raw.id) {
       warnings.push(`scenario "${scenarioName}" に id がないため "${id}" を採用しました。`);
     }
     if (!Array.isArray(raw.scenario)) {
       warnings.push(`scenario "${scenarioName}" に scenario 配列がありません。`);
     }
-    const labelIndex = buildLabelIndex(scenario, warnings);
+    const labelIndex = buildLabelIndex(steps, warnings);
     const defaultBgmRaw = raw.defaultBgm ?? {
       src: "./assets/bgm/wasurenagusa.mp3",
       volume: 0.1,
@@ -541,7 +574,7 @@
       genre: asString(raw.genre),
       date: asString(raw.date),
       chars,
-      steps: scenario,
+      steps,
       labelIndex,
       defaultBgm,
       warnings
