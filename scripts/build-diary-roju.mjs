@@ -1,6 +1,7 @@
 /**
  * build-diary-roju.mjs
- * diary-roju/*.md を読み込んで diary-roju.html を生成する
+ * diary-roju/*.md を読み込んで
+ * 最新月の diary-roju.html と過去月の diary-roju-YYYY-MM.html を生成する
  * 老中AI【仁】の評定日記
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
@@ -10,54 +11,59 @@ import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-roju");
-const OUT_FILE = join(import.meta.dirname, "..", "diary-roju.html");
+const OUT_DIR = join(import.meta.dirname, "..");
+const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
 function parseFilename(filename) {
   const base = basename(filename, ".md");
   const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
   if (!match) return null;
-  return { date: match[1], title: match[2] };
+  return { date: match[1], month: match[1].slice(0, 7), title: match[2] };
 }
 
-async function main() {
-  const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
+function formatDate(dateStr) {
+  const d = new Date(dateStr + "T00:00:00+09:00");
+  const dow = WEEKDAYS[d.getDay()];
+  return `${dateStr}（${dow}）`;
+}
 
-  const entries = [];
-  for (const file of files) {
-    const meta = parseFilename(file);
-    if (!meta) {
-      console.warn(`⚠ skip: ${file} (invalid name format)`);
-      continue;
-    }
-    const raw = await readFile(join(DIARY_DIR, file), "utf-8");
-    const cleaned = stripDailyContextBlock(raw);
-    const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
-    const html = await marked.parse(body);
-    entries.push({ ...meta, html });
-  }
+function formatMonthLabel(monthKey) {
+  const [y, m] = monthKey.split("-");
+  return `${y}年${parseInt(m, 10)}月`;
+}
 
-  entries.sort((a, b) => b.date.localeCompare(a.date));
-
-  const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
-
-  const entryListItems = entries
-    .map((e) => {
-      const d = new Date(e.date + "T00:00:00+09:00");
-      const dow = WEEKDAYS[d.getDay()];
-      return `          <li id="${e.date}">
-            <p class="entry-date">${e.date}（${dow}）</p>
-            <h3 class="entry-title">${e.title}</h3>
-            ${e.html}
+function renderFullEntry(entry) {
+  return `          <li id="${entry.date}">
+            <p class="entry-date">${formatDate(entry.date)}</p>
+            <h3 class="entry-title">${entry.title}</h3>
+            ${entry.html}
           </li>`;
-    })
-    .join("\n");
+}
 
-  const html = `<!doctype html>
+function renderTitleOnly(entry, monthKey) {
+  return `              <li>
+                <span class="backnum-date">${entry.date}</span>
+                <a href="./diary-roju-${monthKey}.html#${entry.date}" class="backnum-title">${entry.title}</a>
+              </li>`;
+}
+
+function buildNavLinks(links) {
+  const items = links.map((link) => `          <a class="back-link" href="${link.href}">${link.text}</a>`).join("\n");
+  return `
+      <section class="panel">
+        <p>
+${items}
+        </p>
+      </section>`;
+}
+
+function buildPage(pageTitle, latestMonthLabel, entriesHtml, extraSections, navLinks) {
+  return `<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>老中評定録 | ワディーゲストハウス</title>
+    <title>${pageTitle} | ワディーゲストハウス</title>
     <meta name="description" content="仁の十三人が語る評定録。ウイスキー蔵の奥の座敷から。" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,6 +182,66 @@ async function main() {
         background: linear-gradient(180deg, #4a4030, #353028);
         text-decoration: underline;
       }
+      .backnum-month > a {
+        text-decoration: none;
+      }
+      .backnum-month h3,
+      .backnum-month h3:hover {
+        color: #daa520;
+        font-size: 0.95em;
+        margin: 0 0 10px;
+        padding: 0;
+        background: none;
+        border: none;
+      }
+      .backnum-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .backnum-list li {
+        border: none;
+        background: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 1.9;
+      }
+      .backnum-date {
+        color: #a08860;
+        display: inline-block;
+        min-width: 90px;
+        font-size: 12px;
+      }
+      .backnum-title {
+        color: #c8b898;
+        text-decoration: none;
+      }
+      .backnum-title:hover {
+        color: #f0c040;
+        text-decoration: underline;
+      }
+      .backnum-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .backnum-nav li {
+        border: none;
+        background: none;
+        border-radius: 0;
+        margin: 0 0 8px;
+        padding: 0;
+        line-height: 1.8;
+      }
+      .backnum-nav a {
+        color: #c8b898;
+        text-decoration: none;
+      }
+      .backnum-nav a:hover {
+        color: #f0c040;
+        text-decoration: underline;
+      }
       .retro-footer {
         text-align: center;
         padding: 24px;
@@ -195,21 +261,14 @@ async function main() {
       <section class="panel">
         <p style="color: #c8b898; font-size: 13px; line-height: 1.8; margin: 0;">🥃 老中AI【仁】── 13人の偉人による評定録。ワディーの日記を読み、各奉行所から声が上がる。</p>
       </section>
-
+${buildNavLinks(navLinks)}
       <section class="panel">
-        <p>
-          <a class="back-link" href="./diary.html">◀ ワディーの日記</a>
-          <a class="back-link" href="./roju.html" style="margin-left: 12px;">◀ 老中AI【仁】について</a>
-        </p>
-      </section>
-
-      <section class="panel">
-        <h2>📜 評定記録</h2>
+        <h2>${latestMonthLabel}</h2>
         <ul class="entry-list">
-${entryListItems}
+${entriesHtml}
         </ul>
       </section>
-
+${extraSections}
       <footer class="retro-footer">
         <p style="color: #504030; font-size: 10px;">✦ 琥珀色の座敷にて、十三人の声は今宵も響く ✦</p>
       </footer>
@@ -217,9 +276,110 @@ ${entryListItems}
   </body>
 </html>
 `;
+}
 
-  await writeFile(OUT_FILE, injectSiteModeAssets(html), "utf-8");
-  console.log(`✓ diary-roju.html generated (${entries.length} entries)`);
+async function main() {
+  const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
+
+  const entries = [];
+  for (const file of files) {
+    const meta = parseFilename(file);
+    if (!meta) {
+      console.warn(`⚠ skip: ${file} (invalid name format)`);
+      continue;
+    }
+    const raw = await readFile(join(DIARY_DIR, file), "utf-8");
+    const cleaned = stripDailyContextBlock(raw);
+    const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
+    const html = await marked.parse(body);
+    entries.push({ ...meta, html });
+  }
+
+  entries.sort((a, b) => b.date.localeCompare(a.date));
+
+  const monthMap = new Map();
+  for (const entry of entries) {
+    if (!monthMap.has(entry.month)) monthMap.set(entry.month, []);
+    monthMap.get(entry.month).push(entry);
+  }
+
+  const months = [...monthMap.keys()];
+  const latestMonth = months[0];
+  const pastMonths = months.slice(1);
+
+  const latestEntriesHtml = monthMap.get(latestMonth).map(renderFullEntry).join("\n");
+
+  let archiveSections = "";
+  if (pastMonths.length > 0) {
+    const archiveItems = pastMonths
+      .map((monthKey) => {
+        const monthEntries = monthMap.get(monthKey);
+        const titles = monthEntries.map((entry) => renderTitleOnly(entry, monthKey)).join("\n");
+        return `          <li class="backnum-month">
+            <a href="./diary-roju-${monthKey}.html"><h3>${formatMonthLabel(monthKey)}（${monthEntries.length}件）</h3></a>
+            <ul class="backnum-list">
+${titles}
+            </ul>
+          </li>`;
+      })
+      .join("\n");
+
+    archiveSections = `
+      <section class="panel">
+        <h2>バックナンバー</h2>
+        <ul class="entry-list">
+${archiveItems}
+        </ul>
+      </section>`;
+  }
+
+  const latestPage = buildPage(
+    "老中評定録",
+    formatMonthLabel(latestMonth),
+    latestEntriesHtml,
+    archiveSections,
+    [
+      { href: "./diary.html", text: "◀ ワディーの日記" },
+      { href: "./roju.html", text: "◀ 老中AI【仁】について" },
+    ]
+  );
+  await writeFile(join(OUT_DIR, "diary-roju.html"), injectSiteModeAssets(latestPage), "utf-8");
+  console.log(`✓ diary-roju.html generated (${latestMonth}: ${monthMap.get(latestMonth).length} entries)`);
+
+  for (const monthKey of pastMonths) {
+    const monthEntries = monthMap.get(monthKey);
+    const monthEntriesHtml = monthEntries.map(renderFullEntry).join("\n");
+    const otherMonthLinks = months
+      .filter((otherMonth) => otherMonth !== monthKey)
+      .map((otherMonth) => {
+        const href = otherMonth === latestMonth ? "./diary-roju.html" : `./diary-roju-${otherMonth}.html`;
+        return `          <li><a href="${href}">${formatMonthLabel(otherMonth)}</a></li>`;
+      })
+      .join("\n");
+
+    const monthPage = buildPage(
+      `老中評定録 — ${formatMonthLabel(monthKey)}`,
+      formatMonthLabel(monthKey),
+      monthEntriesHtml,
+      `
+      <section class="panel">
+        <h2>他の月</h2>
+        <ul class="backnum-nav">
+${otherMonthLinks}
+        </ul>
+      </section>`,
+      [
+        { href: "./diary-roju.html", text: "← 最新の評定へ戻る" },
+        { href: "./diary.html", text: "◀ ワディーの日記" },
+        { href: "./roju.html", text: "◀ 老中AI【仁】について" },
+      ]
+    );
+
+    await writeFile(join(OUT_DIR, `diary-roju-${monthKey}.html`), injectSiteModeAssets(monthPage), "utf-8");
+    console.log(`✓ diary-roju-${monthKey}.html generated (${monthEntries.length} entries)`);
+  }
+
+  console.log(`✓ Total: ${entries.length} roju entries across ${months.length} months`);
 }
 
 main().catch((err) => {

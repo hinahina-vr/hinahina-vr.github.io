@@ -46,14 +46,16 @@ const CROSS_LINK_TARGETS = [
   { dir: "diary-rin", page: "diary-rin.html", label: "りん", emoji: "🔥", color: "#606060", group: "火の司祭" },
   { dir: "diary-mayuki", page: "diary-mayuki.html", label: "真雪", emoji: "❄", color: "#4080c0", group: "火の司祭" },
   // ── 老中AI【仁】 ──
-  { dir: "diary-roju", page: "diary-roju.html", label: "老中評定", emoji: "🥃", color: "#daa520", group: "老中" },
+  { dir: "diary-roju", page: "diary-roju.html", pagePrefix: "diary-roju", monthlySplit: true, label: "老中評定", emoji: "🥃", color: "#daa520", group: "老中" },
   // ── みとら ──
   { dir: "diary-mitra", page: "diary-mitra.html", label: "神託", emoji: "🔮", color: "#a888c8", group: "神託" },
 ];
 
-const DIARY_DIR = join(import.meta.dirname, "..", "diary");
-const OUT_DIR = join(import.meta.dirname, "..");
-const ADMS_DIR = join(import.meta.dirname, "..", "scenarios", "adms");
+const ROOT_DIR = join(import.meta.dirname, "..");
+const DIARY_DIR = join(ROOT_DIR, "diary");
+const OUT_DIR = ROOT_DIR;
+const ADMS_DIR = join(ROOT_DIR, "scenarios", "adms");
+const crossLinkTargetCache = new Map();
 
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
@@ -74,6 +76,43 @@ function formatDate(dateStr) {
 function formatMonthLabel(monthKey) {
   const [y, m] = monthKey.split("-");
   return `${y}年${parseInt(m)}月`;
+}
+
+function parseCrossLinkFilename(filename) {
+  const base = basename(filename, ".md");
+  const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
+  if (!match) return null;
+  return { date: match[1], month: match[1].slice(0, 7), slug: base };
+}
+
+function getCrossLinkTargetMeta(target) {
+  if (crossLinkTargetCache.has(target.dir)) {
+    return crossLinkTargetCache.get(target.dir);
+  }
+
+  try {
+    const dirPath = join(ROOT_DIR, target.dir);
+    const files = readdirSync(dirPath)
+      .filter((file) => file.endsWith(".md"))
+      .map((file) => parseCrossLinkFilename(file))
+      .filter(Boolean);
+    const latestMonth = [...new Set(files.map((file) => file.month))].sort((a, b) => b.localeCompare(a))[0] ?? null;
+    const meta = { files, latestMonth };
+    crossLinkTargetCache.set(target.dir, meta);
+    return meta;
+  } catch {
+    const empty = { files: [], latestMonth: null };
+    crossLinkTargetCache.set(target.dir, empty);
+    return empty;
+  }
+}
+
+function resolveCrossLinkPage(target, matchMeta, targetMeta) {
+  if (target.monthlySplit && matchMeta?.month && targetMeta.latestMonth && matchMeta.month !== targetMeta.latestMonth) {
+    const prefix = target.pagePrefix ?? target.page.replace(/\.html$/, "");
+    return `${prefix}-${matchMeta.month}.html`;
+  }
+  return target.page;
 }
 
 function buildDreamRootMap() {
@@ -150,18 +189,14 @@ function rewriteDreamButtonLinks(html, date, dreamRootMap) {
 
 // 同じ日付の他キャラ日記を検索してリンクを生成（グループごとに改行、見出しなし）
 function buildCrossLinks(date) {
-  const ROOT = join(import.meta.dirname, "..");
   const groups = new Map();
   for (const t of CROSS_LINK_TARGETS) {
-    try {
-      const dirPath = join(ROOT, t.dir);
-      const files = readdirSync(dirPath);
-      const match = files.find((f) => f.startsWith(date) && f.endsWith(".md"));
-      if (match) {
-        if (!groups.has(t.group)) groups.set(t.group, []);
-        groups.get(t.group).push(`<a href="./${t.page}#${date}" class="cross-link" style="color:${t.color};border-color:${t.color}">${t.emoji} ${t.label}</a>`);
-      }
-    } catch { /* dir doesn't exist yet */ }
+    const targetMeta = getCrossLinkTargetMeta(t);
+    const match = targetMeta.files.find((file) => file.date === date);
+    if (!match) continue;
+    const page = resolveCrossLinkPage(t, match, targetMeta);
+    if (!groups.has(t.group)) groups.set(t.group, []);
+    groups.get(t.group).push(`<a href="./${page}#${date}" class="cross-link" style="color:${t.color};border-color:${t.color}">${t.emoji} ${t.label}</a>`);
   }
   if (groups.size === 0) return "";
   let html = `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>`;
