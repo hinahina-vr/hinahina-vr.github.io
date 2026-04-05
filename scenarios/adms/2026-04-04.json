@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-04",
+  "title": "店のあいだの川 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "昼から始まる夜",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🍺",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "standalone_start",
+      "summary": "まだ飲んでいない酒の値段を考え始めた時点で、四月四日の夜はもう始まっている"
+    },
+    {
+      "id": "choose_route",
+      "title": "三つの通路",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🚪",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "choose_route",
+      "summary": "値札、魚の店、久しぶりの階段のどこから夜を読むかを選ぶ"
+    },
+    {
+      "id": "price_room",
+      "title": "値札の部屋",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🥃",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "price_room",
+      "summary": "陸五百、角四百という細かい採点の中に、その夜の機嫌が出ている"
+    },
+    {
+      "id": "fish_room",
+      "title": "魚の通路",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🐟",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "fish_room",
+      "summary": "さかなやキンボシから柿島屋へ、店を変えても酔いだけが一本の川になる"
+    },
+    {
+      "id": "late_room",
+      "title": "深夜階段",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🌃",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "late_room",
+      "summary": "カンブリア紀ぶりとしか書けないほど久しぶりの深夜帯へ降りていく"
+    },
+    {
+      "id": "gen_price",
+      "title": "価格表の気分",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "💴",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "gen_price",
+      "summary": "数百円の差額の中に、その日の欲望と機嫌が縮図のように残っている"
+    },
+    {
+      "id": "gen_river",
+      "title": "一本の酔い",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🌊",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "gen_river",
+      "summary": "店名は増えても、夜そのものは一本の流れとして切れずに続いていく"
+    },
+    {
+      "id": "gen_ancient",
+      "title": "臓器の驚き",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🫀",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "gen_ancient",
+      "summary": "ひさしぶりの夜は記憶ではなく、肝臓や脚の驚きとして先に立ち上がる"
+    },
+    {
+      "id": "mitra_hall",
+      "title": "みとらの中継点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "mitra_hall",
+      "summary": "値札、回遊、誇張の三つを同じ川の途中として受け止める通過点"
+    },
+    {
+      "id": "carry_night",
+      "title": "朝へ持ち帰るもの",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "carry_night",
+      "summary": "値札の細かさ、一本の酔い、臓器の驚きのどれを朝へ残すかを選ぶ"
+    },
+    {
+      "id": "END_PRICE",
+      "title": "値札の細かさ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🥃",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "END_PRICE",
+      "summary": "現物より先に数値として始まった夜の機嫌が、朝にも細かく残っている"
+    },
+    {
+      "id": "END_FLOW",
+      "title": "一本の酔い",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🌊",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "END_FLOW",
+      "summary": "戸口はいくつあっても、四月四日の夜は一本の流れとしてしか思い出されない"
+    },
+    {
+      "id": "END_LATE",
+      "title": "臓器の驚き",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌃",
+      "scenario": "2026-04-04_店のあいだの川",
+      "entry": "END_LATE",
+      "summary": "カンブリア紀ぶりという誇張が、そのまま本当の手触りとして朝に残る"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_route",
+      "choiceText": "夜の順番を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_route",
+      "to": "price_room",
+      "choiceText": "値札の前で立ち止まる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_route",
+      "to": "fish_room",
+      "choiceText": "魚の匂いを追う",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_route",
+      "to": "late_room",
+      "choiceText": "久しぶりの階段を降りる",
+      "style": "kenkai"
+    },
+    {
+      "from": "price_room",
+      "to": "gen_price",
+      "choiceText": "角なら満点を考え続ける",
+      "style": "genkai"
+    },
+    {
+      "from": "price_room",
+      "to": "mitra_hall",
+      "choiceText": "値札を離れて通路へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_price",
+      "to": "mitra_hall",
+      "choiceText": "その細かさを持って通路へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "fish_room",
+      "to": "gen_river",
+      "choiceText": "次の店へそのまま流れる",
+      "style": "genkai"
+    },
+    {
+      "from": "fish_room",
+      "to": "mitra_hall",
+      "choiceText": "流れの途中で通路へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_river",
+      "to": "mitra_hall",
+      "choiceText": "一本の酔いを持って通路へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "late_room",
+      "to": "gen_ancient",
+      "choiceText": "大げささごと受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "late_room",
+      "to": "mitra_hall",
+      "choiceText": "笑いながら通路へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_ancient",
+      "to": "mitra_hall",
+      "choiceText": "驚いた体のまま通路へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_hall",
+      "to": "carry_night",
+      "choiceText": "朝へ持ち帰るものを選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_night",
+      "to": "END_PRICE",
+      "choiceText": "値札の細かさを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_night",
+      "to": "END_FLOW",
+      "choiceText": "一本の酔いを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_night",
+      "to": "END_LATE",
+      "choiceText": "臓器の驚きを持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}
