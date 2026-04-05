@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-05",
+  "title": "十七時間の底 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "徴収される一日",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "💤",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "standalone_start",
+      "summary": "四月四日の長い夜の翌日、一日の大半が睡眠へ徴収されている"
+    },
+    {
+      "id": "choose_sleep",
+      "title": "三つの通路",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🚪",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "choose_sleep",
+      "summary": "前夜の請求、時計を伏せる、布団の底へ沈むの三択"
+    },
+    {
+      "id": "debt_room",
+      "title": "請求書の部屋",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🧾",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "debt_room",
+      "summary": "前夜の店と深夜帯の長さが、睡眠で支払う請求書として机に置かれる"
+    },
+    {
+      "id": "clock_room",
+      "title": "時計を伏せる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🕰️",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "clock_room",
+      "summary": "Swarm が空っぽの一日を、失敗ではなく内向きの回復として読む"
+    },
+    {
+      "id": "bed_room",
+      "title": "布団の底",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🛏️",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "bed_room",
+      "summary": "十七時間という数字を、怠けではなく必要な深さとして受け取る"
+    },
+    {
+      "id": "gen_pay_sleep",
+      "title": "睡眠で支払う",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "💸",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "gen_pay_sleep",
+      "summary": "眠気は罰ではなく、昨夜に使ったぶんを正確に徴収する勘定合わせである"
+    },
+    {
+      "id": "gen_blank_day",
+      "title": "内向きの輪郭",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🫧",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "gen_blank_day",
+      "summary": "外出のない日は存在の薄い日ではなく、記録の向きが内側だった日である"
+    },
+    {
+      "id": "gen_deep_sleep",
+      "title": "修理の深さ",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🌙",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "gen_deep_sleep",
+      "summary": "長時間睡眠は停止ではなく、身体の底で静かに行われる整備である"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "身体返却所",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "mitra_gate",
+      "summary": "請求、空白、深さをすべて回復の別名として受け取る通過点"
+    },
+    {
+      "id": "carry_back",
+      "title": "朝へ持ち帰るもの",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "carry_back",
+      "summary": "勘定の済んだ身体、内向きの一日、布団の深さのどれを朝へ残すか選ぶ"
+    },
+    {
+      "id": "END_PAID",
+      "title": "勘定の済んだ身体",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🧾",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "END_PAID",
+      "summary": "昨夜の長さは残っても、眠りによる支払いが済んだことで後腐れが消えている"
+    },
+    {
+      "id": "END_BLANK",
+      "title": "内向きの一日",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🕰️",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "END_BLANK",
+      "summary": "外へ出なかった一日も、回復の向きを持った輪郭として読み直せる"
+    },
+    {
+      "id": "END_DEEP",
+      "title": "布団の深さ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🛏️",
+      "scenario": "2026-04-05_十七時間の底",
+      "entry": "END_DEEP",
+      "summary": "十七時間は長さではなく深さであり、必要なところまで降りた記録になる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_sleep",
+      "choiceText": "今日の通路を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_sleep",
+      "to": "debt_room",
+      "choiceText": "前夜の請求書を受け取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_sleep",
+      "to": "clock_room",
+      "choiceText": "時計を伏せたままにする",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_sleep",
+      "to": "bed_room",
+      "choiceText": "布団の底へ沈む",
+      "style": "kenkai"
+    },
+    {
+      "from": "debt_room",
+      "to": "gen_pay_sleep",
+      "choiceText": "眠気でまとめて支払う",
+      "style": "genkai"
+    },
+    {
+      "from": "debt_room",
+      "to": "mitra_gate",
+      "choiceText": "請求書を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_pay_sleep",
+      "to": "mitra_gate",
+      "choiceText": "勘定の済んだ身体で通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "clock_room",
+      "to": "gen_blank_day",
+      "choiceText": "時計を伏せたまま受け入れる",
+      "style": "genkai"
+    },
+    {
+      "from": "clock_room",
+      "to": "mitra_gate",
+      "choiceText": "空白ごと通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_blank_day",
+      "to": "mitra_gate",
+      "choiceText": "内向きの輪郭を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "bed_room",
+      "to": "gen_deep_sleep",
+      "choiceText": "深さをそのまま受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "bed_room",
+      "to": "mitra_gate",
+      "choiceText": "深い眠りを持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_deep_sleep",
+      "to": "mitra_gate",
+      "choiceText": "整備の済んだ深さで通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "carry_back",
+      "choiceText": "朝へ持ち帰るものを選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_PAID",
+      "choiceText": "勘定の済んだ身体を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_BLANK",
+      "choiceText": "内向きの一日を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_DEEP",
+      "choiceText": "布団の深さを持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}
