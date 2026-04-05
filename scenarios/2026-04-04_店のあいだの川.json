@@ -1,0 +1,324 @@
+{
+  "title": "店のあいだの川",
+  "subtitle": "─ 夜の順番を渡る回遊ノベル ─",
+  "genre": "夜間回遊ノベル",
+  "date": "2026-04-04",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "🍺"
+    },
+    "bartender": {
+      "name": "値札係",
+      "color": "#b88a5a",
+      "emoji": "🥃"
+    },
+    "fishkeeper": {
+      "name": "魚の店の番人",
+      "color": "#5fa0a0",
+      "emoji": "🐟"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "station_night",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月四日。夜は夕方から始まったのではない。昼のうちから、まだ見ていない酒場の値段を考え始めた時点で、もう始まっていた。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "陸が五百円。\n角が四百円なら満点。\nそういうことを考えている時は、もう帰る日の頭じゃない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目の前に三つの通路がある。値札の前で立ち止まる通路。魚の匂いを追って次の店へ流れる通路。久しぶりの階段をそのまま降りていく通路。"
+    },
+    {
+      "label": "choose_route"
+    },
+    {
+      "choices": [
+        {
+          "text": "値札の前で立ち止まる",
+          "goto": "price_room"
+        },
+        {
+          "text": "魚の匂いを追う",
+          "goto": "fish_room"
+        },
+        {
+          "text": "久しぶりの階段を降りる",
+          "goto": "late_room"
+        }
+      ]
+    },
+    {
+      "label": "price_room"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "bartender",
+      "expression": "",
+      "text": "値段は数字ですが、気分の温度でもあります。\n高い安いではなく、今夜に合うかどうかです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "まだ飲んでいないのに、銘柄と金額だけで喉の奥が少し乾く。夜は現物より先に、採点表として頭の中へ入ってくる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "角なら満点を考え続ける",
+          "goto": "gen_price"
+        },
+        {
+          "text": "値札を離れて通路へ戻る",
+          "goto": "mitra_hall"
+        }
+      ]
+    },
+    {
+      "label": "gen_price"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "数百円の差なのに、その差額の中に夜の機嫌が丸ごと入っている。人はたまに、価格表だけでかなり正直になる。"
+    },
+    {
+      "speaker": "bartender",
+      "expression": "",
+      "text": "値札は、今夜の欲望の縮図です。\n数字が細かいほど、気分は本物です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "その細かさを持って通路へ戻る",
+          "goto": "mitra_hall"
+        }
+      ]
+    },
+    {
+      "label": "fish_room"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "fishkeeper",
+      "expression": "",
+      "text": "魚の匂いは、帰り道を少し遠ざけます。\n一軒目にいるのに、次の戸のことを考えさせるからです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "さかなやキンボシから柿島屋へ。店が変わるたびに空気は切り替わる。だが酔いだけは切り替わらず、一本の川として続いていく。"
+    },
+    {
+      "choices": [
+        {
+          "text": "次の店へそのまま流れる",
+          "goto": "gen_river"
+        },
+        {
+          "text": "流れの途中で通路へ戻る",
+          "goto": "mitra_hall"
+        }
+      ]
+    },
+    {
+      "label": "gen_river"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "店名は増えていくのに、夜はばらばらにならない。足取りが雑でも、川筋だけは妙にきれいだ。"
+    },
+    {
+      "speaker": "fishkeeper",
+      "expression": "",
+      "text": "寄り道ではなく、回遊です。\n昨日はそういう泳ぎ方でした。"
+    },
+    {
+      "choices": [
+        {
+          "text": "一本の酔いを持って通路へ戻る",
+          "goto": "mitra_hall"
+        }
+      ]
+    },
+    {
+      "label": "late_room"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その先には、普段あまり降りない時間帯の階段がある。ひさしぶりすぎる場所は、ふつうの言葉では手触りが出ない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "カンブリア紀ぶり、って書くしかない。\n大げさだけど、それ以外に合う単位がない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "大げささごと受け取る",
+          "goto": "gen_ancient"
+        },
+        {
+          "text": "笑いながら通路へ戻る",
+          "goto": "mitra_hall"
+        }
+      ]
+    },
+    {
+      "label": "gen_ancient"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ひさしぶりとは記憶の単位ではない。臓器の驚きの単位だ。肝臓も脚も、まだ行くのか、と笑っている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "理屈じゃない。\n久しぶりすぎる夜は、少し大きい言葉でしか書けない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "驚いた体のまま通路へ戻る",
+          "goto": "mitra_hall"
+        }
+      ]
+    },
+    {
+      "label": "mitra_hall"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは反省室ではありません。回遊の中継点です。\n昨日の夜は、整うためではなく、続くためにありました。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "値札の細かさ、店から店への移動、久しぶりの誇張。\nそれらは全部、同じ川の途中にあります。"
+    },
+    {
+      "label": "carry_night"
+    },
+    {
+      "choices": [
+        {
+          "text": "値札の細かさを持ち帰る",
+          "goto": "END_PRICE"
+        },
+        {
+          "text": "一本の酔いを持ち帰る",
+          "goto": "END_FLOW"
+        },
+        {
+          "text": "臓器の驚きを持ち帰る",
+          "goto": "END_LATE"
+        }
+      ]
+    },
+    {
+      "label": "END_PRICE"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝、まだ飲んでいない酒の値札だけが妙に鮮明だ。夜は現物より先に、数字として始まることがある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "細かい採点の中に、昨夜の機嫌は残っている。\n──END: 値札の細かさ"
+    },
+    {
+      "label": "END_FLOW"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝、店の名前は少し曖昧なのに、酔いだけが一本の線として残っている。回遊した夜には、回遊したままの筋がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "戸口はいくつもあったが、川はひとつだった。\n──END: 一本の酔い"
+    },
+    {
+      "label": "END_LATE"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝、記憶より先に身体が笑っている。ひさしぶりの夜は、言葉より臓器の方に長く残る。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨日の大げささは、たぶん嘘ではなかった。\n──END: 臓器の驚き"
+    }
+  ]
+}
