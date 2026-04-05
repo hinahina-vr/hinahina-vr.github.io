@@ -1,0 +1,329 @@
+{
+  "title": "十七時間の底",
+  "subtitle": "─ 身体へ返す回復ノベル ─",
+  "genre": "長時間睡眠ノベル",
+  "date": "2026-04-05",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "💤"
+    },
+    "collector": {
+      "name": "請求係",
+      "color": "#9a8f7a",
+      "emoji": "🧾"
+    },
+    "deep": {
+      "name": "布団の底",
+      "color": "#8a80c0",
+      "emoji": "🛏️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月五日。部屋の時計は進んでいるのに、こちらはほとんど進んでいない。昨夜の長い回遊のあとで、一日の大半が睡眠に徴収されている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "十七時間。\n数字にするとだいぶ大きい。\nでも、たぶん身体の方が正しい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目の前に三つの通路がある。前夜の請求書を受け取る通路。時計を伏せたままにする通路。布団の底へもう一度沈む通路。"
+    },
+    {
+      "label": "choose_sleep"
+    },
+    {
+      "choices": [
+        {
+          "text": "前夜の請求書を受け取る",
+          "goto": "debt_room"
+        },
+        {
+          "text": "時計を伏せたままにする",
+          "goto": "clock_room"
+        },
+        {
+          "text": "布団の底へ沈む",
+          "goto": "bed_room"
+        }
+      ]
+    },
+    {
+      "label": "debt_room"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "collector",
+      "expression": "",
+      "text": "昨夜の請求です。\n支払方法は睡眠のみ。\n分割払いはできません。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "町田の店、深い時間、久しぶりの誇張。その全部が一枚の紙になって、静かに机へ置かれる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "眠気でまとめて支払う",
+          "goto": "gen_pay_sleep"
+        },
+        {
+          "text": "請求書を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_pay_sleep"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "眠気は甘くない。だが、正確だ。昨夜に使ったぶんだけ、今日を眠りへ引き渡していく。"
+    },
+    {
+      "speaker": "collector",
+      "expression": "",
+      "text": "これは罰ではありません。\n勘定合わせです。\n身体は案外、帳簿が得意です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "勘定の済んだ身体で通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "clock_room"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "時計を見れば、一日がずいぶん減っている。だが今日は、その減り方を失敗として数える気になれない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "Swarm が空っぽなのも、まあそうだ。\n今日は外じゃなくて、内側にいた。"
+    },
+    {
+      "choices": [
+        {
+          "text": "時計を伏せたまま受け入れる",
+          "goto": "gen_blank_day"
+        },
+        {
+          "text": "空白ごと通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_blank_day"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "部屋と布団と水だけで閉じた一日にも、輪郭はある。外へ出なかった日ではなく、戻る方を優先した日として。"
+    },
+    {
+      "speaker": "collector",
+      "expression": "",
+      "text": "記録が少ない日は、存在が薄い日ではありません。\n記録の向きが内側だっただけです。"
+    },
+    {
+      "choices": [
+        {
+          "text": "内向きの輪郭を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "bed_room"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "deep",
+      "expression": "",
+      "text": "まだ下があります。\n眠りは浅瀬では終わりません。\n必要な深さまで降りればいいのです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "布団の底へ行くほど、言い訳は軽くなる。十七時間という数字が、怠けた証拠ではなく深さの記録に見えてくる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "深さをそのまま受け取る",
+          "goto": "gen_deep_sleep"
+        },
+        {
+          "text": "深い眠りを持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_deep_sleep"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "長く眠った一日は、失われたのではない。身体の底で静かに修理されている。"
+    },
+    {
+      "speaker": "deep",
+      "expression": "",
+      "text": "深く眠ることは停止ではありません。\n朝へ渡る前の、長い整備です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "整備の済んだ深さで通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは評価室ではありません。身体返却所です。\n昨夜に使ったぶんを、今日の眠りで戻したかどうかを確認する場所です。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "請求書、空白の一日、布団の深さ。\nそれらはすべて、回復の別名です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "寝すぎた、でもある。\n返した、でもある。\n今日は後者で読んでいい気がする。"
+    },
+    {
+      "label": "carry_back"
+    },
+    {
+      "choices": [
+        {
+          "text": "勘定の済んだ身体を持ち帰る",
+          "goto": "END_PAID"
+        },
+        {
+          "text": "内向きの一日を持ち帰る",
+          "goto": "END_BLANK"
+        },
+        {
+          "text": "布団の深さを持ち帰る",
+          "goto": "END_DEEP"
+        }
+      ]
+    },
+    {
+      "label": "END_PAID"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝とも夜ともつかない時刻、身体は静かになっている。昨夜の長さは消えないが、勘定だけはきれいに済んでいる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "請求どおり払った眠りは、妙に後腐れがない。\n──END: 勘定の済んだ身体"
+    },
+    {
+      "label": "END_BLANK"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "外へ出なかった一日が、薄く見えるとは限らない。内側へ戻った日には、内側の輪郭がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "空白に見えたものは、回復の向きだった。\n──END: 内向きの一日"
+    },
+    {
+      "label": "END_DEEP"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "十七時間の底から戻ると、時間の長さより、深さの方が先に残っている。長く眠ったのではなく、必要なところまで降りていたのだとわかる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "深い眠りは、失った時間ではなく、返した時間だ。\n──END: 布団の深さ"
+    }
+  ]
+}
