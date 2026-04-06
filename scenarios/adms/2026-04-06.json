@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-06",
+  "title": "社交の請求書 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "朝まで残る質",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "😮‍💨",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "standalone_start",
+      "summary": "まずい酒と楽しくない会話のざらつきが、出勤前の身体に張りついている"
+    },
+    {
+      "id": "choose_debt",
+      "title": "三つの通路",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🚪",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "choose_debt",
+      "summary": "ラベルを剥がす、会話の部屋へ戻る、会社の椅子に座るの三択"
+    },
+    {
+      "id": "fake_room",
+      "title": "ラベルを剥がす",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🥃",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "fake_room",
+      "summary": "名札だけ借りた液体が、翌朝の機嫌を濁らせる"
+    },
+    {
+      "id": "talk_room",
+      "title": "会話の部屋",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "💬",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "talk_room",
+      "summary": "楽しくない会話の長さが、翌朝になって重さへ変わる"
+    },
+    {
+      "id": "office_room",
+      "title": "会社の椅子",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🪑",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "office_room",
+      "summary": "昨夜のざらつきを持ち込んだまま、怒りやすい状態で勤務へ入る"
+    },
+    {
+      "id": "gen_fake_taste",
+      "title": "濁った後味",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 0,
+      "icon": "🫗",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "gen_fake_taste",
+      "summary": "質の悪さは量より遅く効き、朝になってから機嫌を濁らせる"
+    },
+    {
+      "id": "gen_forced_chat",
+      "title": "社交の請求書",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "🧾",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "gen_forced_chat",
+      "summary": "欲しくない言葉を受け止め続けた疲れが、翌朝に請求される"
+    },
+    {
+      "id": "gen_anger_chair",
+      "title": "怒りやすい椅子",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 12,
+      "icon": "🔥",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "gen_anger_chair",
+      "summary": "職場が変わったのではなく、座る側の余裕が減っているため刺激が鋭く見える"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "社交後遺症の通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "mitra_gate",
+      "summary": "粗い酒、重い会話、怒りやすい椅子を切れなかった流れとして受け取る"
+    },
+    {
+      "id": "carry_back",
+      "title": "持ち帰る輪郭",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "carry_back",
+      "summary": "濁った後味、会話の重さ、怒りやすい椅子のどれを今日の輪郭として残すか選ぶ"
+    },
+    {
+      "id": "END_FAKE",
+      "title": "濁った後味",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🥃",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "END_FAKE",
+      "summary": "粗い酒の質の悪さが、時間差で翌日の気分を濁らせる"
+    },
+    {
+      "id": "END_CHAT",
+      "title": "会話の重さ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "💬",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "END_CHAT",
+      "summary": "楽しくない会話は翌朝になって本当の長さを見せ、機嫌で支払われる"
+    },
+    {
+      "id": "END_CHAIR",
+      "title": "怒りやすい椅子",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🪑",
+      "scenario": "2026-04-06_社交の請求書",
+      "entry": "END_CHAIR",
+      "summary": "疲れたのは怒ったからではなく、怒りやすい状態が長く続いたからである"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_debt",
+      "choiceText": "今日の通路を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_debt",
+      "to": "fake_room",
+      "choiceText": "ラベルを剥がす",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_debt",
+      "to": "talk_room",
+      "choiceText": "会話の部屋へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_debt",
+      "to": "office_room",
+      "choiceText": "会社の椅子に座る",
+      "style": "kenkai"
+    },
+    {
+      "from": "fake_room",
+      "to": "gen_fake_taste",
+      "choiceText": "粗い後味を受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "fake_room",
+      "to": "mitra_gate",
+      "choiceText": "後味を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_fake_taste",
+      "to": "mitra_gate",
+      "choiceText": "濁った後味で通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "talk_room",
+      "to": "gen_forced_chat",
+      "choiceText": "会話の重さを認める",
+      "style": "genkai"
+    },
+    {
+      "from": "talk_room",
+      "to": "mitra_gate",
+      "choiceText": "重さを持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_forced_chat",
+      "to": "mitra_gate",
+      "choiceText": "重い会話を抱えて通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "office_room",
+      "to": "gen_anger_chair",
+      "choiceText": "怒りやすい状態を引き受ける",
+      "style": "genkai"
+    },
+    {
+      "from": "office_room",
+      "to": "mitra_gate",
+      "choiceText": "椅子の固さを持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_anger_chair",
+      "to": "mitra_gate",
+      "choiceText": "怒りやすい椅子で通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "carry_back",
+      "choiceText": "今日の輪郭を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_FAKE",
+      "choiceText": "濁った後味を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_CHAT",
+      "choiceText": "会話の重さを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_CHAIR",
+      "choiceText": "怒りやすい椅子を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}
