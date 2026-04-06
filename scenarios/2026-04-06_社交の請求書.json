@@ -1,0 +1,329 @@
+{
+  "title": "社交の請求書",
+  "subtitle": "─ 後遺症勤務ノベル ─",
+  "genre": "社交後遺症ノベル",
+  "date": "2026-04-06",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "😮‍💨"
+    },
+    "host": {
+      "name": "残り香",
+      "color": "#8f6b60",
+      "emoji": "🥃"
+    },
+    "chair": {
+      "name": "会社の椅子",
+      "color": "#6d7d8f",
+      "emoji": "🪑"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月六日。朝になっても、夜の質だけがまだ残っている。まずい酒、楽しくない会話、遠すぎた解散。そのざらつきが、出勤前の身体に張りついている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "眠いというより、気分が悪い。\n飲みすぎた感じとも少し違う。\n昨日の空気が、まだ終わっていない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目の前に三つの通路がある。ラベルを剥がす通路。会話の部屋へ戻る通路。会社の椅子に座る通路。"
+    },
+    {
+      "label": "choose_debt"
+    },
+    {
+      "choices": [
+        {
+          "text": "ラベルを剥がす",
+          "goto": "fake_room"
+        },
+        {
+          "text": "会話の部屋へ戻る",
+          "goto": "talk_room"
+        },
+        {
+          "text": "会社の椅子に座る",
+          "goto": "office_room"
+        }
+      ]
+    },
+    {
+      "label": "fake_room"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "host",
+      "expression": "",
+      "text": "名札だけ借りた液体は、朝になるといちばんよくわかります。\n舌ではなく、機嫌に残るからです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨夜の粗さは、味覚の問題だけではなかった。信じた名前と中身がずれていた、その小さな裏切りが、気分の底に沈んでいる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "粗い後味を受け取る",
+          "goto": "gen_fake_taste"
+        },
+        {
+          "text": "後味を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_fake_taste"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "まずいのは、酒だけではない。雑なものを飲み込まされた、という事実のほうが、長く残る。"
+    },
+    {
+      "speaker": "host",
+      "expression": "",
+      "text": "質の悪さは、量より遅く効きます。\n朝になってから、機嫌を濁らせます。"
+    },
+    {
+      "choices": [
+        {
+          "text": "濁った後味で通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "talk_room"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "host",
+      "expression": "",
+      "text": "楽しくない会話は、その場で終わりません。\n終わったあとで、ようやく疲労に名前がつきます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨夜の言葉には、心を動かす成分がほとんどなかった。ただ長さだけがあり、朝になるとその長さが重さに変わる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "会話の重さを認める",
+          "goto": "gen_forced_chat"
+        },
+        {
+          "text": "重さを持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_forced_chat"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "人と長く話したから疲れたのではない。ひとつも欲しくない言葉を、長く受け止め続けたから疲れたのだ。"
+    },
+    {
+      "speaker": "host",
+      "expression": "",
+      "text": "社交の請求書は、帰り際ではなく翌朝に届きます。\n支払先は、たいてい機嫌です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "重い会話を抱えて通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "office_room"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "chair",
+      "expression": "",
+      "text": "どうぞ、お座りください。\nただし今日は、いつもより少し怒りやすい仕様になっています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "会社の椅子は昨日と同じだ。違うのは、そこに座る側の余裕だけである。声も段取りも、今日は細い棘に見える。"
+    },
+    {
+      "choices": [
+        {
+          "text": "怒りやすい状態を引き受ける",
+          "goto": "gen_anger_chair"
+        },
+        {
+          "text": "椅子の固さを持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_anger_chair"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "chair",
+      "expression": "",
+      "text": "職場が急に険しくなったのではありません。\n昨夜のざらつきが、今日の刺激を全部鋭くしているだけです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "怒りは判断ではなく、状態だった。だから一日中続き、続いたぶんだけ疲れていく。"
+    },
+    {
+      "choices": [
+        {
+          "text": "怒りやすい椅子で通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは勤務評価室ではありません。社交後遺症の通過点です。\n昨夜の質が、今日の機嫌へどう越境したかを見ています。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "粗い酒、重い会話、怒りやすい椅子。\nそれぞれ別の出来事ではなく、切れなかった流れの別名です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "昼に急に怒ったわけじゃない。\n夜の残りが、昼の形を借りただけなんだと思う。"
+    },
+    {
+      "label": "carry_back"
+    },
+    {
+      "choices": [
+        {
+          "text": "濁った後味を持ち帰る",
+          "goto": "END_FAKE"
+        },
+        {
+          "text": "会話の重さを持ち帰る",
+          "goto": "END_CHAT"
+        },
+        {
+          "text": "怒りやすい椅子を持ち帰る",
+          "goto": "END_CHAIR"
+        }
+      ]
+    },
+    {
+      "label": "END_FAKE"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "舌に残った違和感は、夜よりも朝のほうがはっきりする。質の悪さは、時間が経つほど機嫌に染みてくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "粗い酒は、翌日の気分を濁らせる。\n──END: 濁った後味"
+    },
+    {
+      "label": "END_CHAT"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "長く続いた会話の内容は薄れても、重さだけは残っている。楽しくなかった時間は、終わったあとで本当の長さを見せる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "社交の請求書は、機嫌で支払われる。\n──END: 会話の重さ"
+    },
+    {
+      "label": "END_CHAIR"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨日と同じ椅子でも、座る側の余白が違えば、世界の固さは変わって見える。怒りは性格ではなく、その日の座り心地だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "疲れたのは、怒ったからではない。怒りやすい状態が長く続いたからだ。\n──END: 怒りやすい椅子"
+    }
+  ]
+}
