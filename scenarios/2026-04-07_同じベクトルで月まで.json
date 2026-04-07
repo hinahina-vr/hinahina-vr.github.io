@@ -1,0 +1,334 @@
+{
+  "title": "同じベクトルで月まで",
+  "subtitle": "─ 月行き同行ノベル ─",
+  "genre": "偏愛推進ノベル",
+  "date": "2026-04-07",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "🌙"
+    },
+    "curse": {
+      "name": "呪い",
+      "color": "#8f6b60",
+      "emoji": "🏷️"
+    },
+    "vector": {
+      "name": "ベクトル",
+      "color": "#6d7d8f",
+      "emoji": "🧭"
+    },
+    "moon": {
+      "name": "月面受付",
+      "color": "#b8a46b",
+      "emoji": "🌕"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月七日。今日は出来事よりも、誰にしか反応しないのか、という条件だけが部屋に残っている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "狂っている人間にしか、あまり興味が持てない。\n冗談みたいだけど、たぶんほんとうだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "目の前に三つの卓がある。呪いの卓、方角の卓、月行きの卓。"
+    },
+    {
+      "label": "choose_orbit"
+    },
+    {
+      "choices": [
+        {
+          "text": "呪いの名札を読む",
+          "goto": "curse_room"
+        },
+        {
+          "text": "方角を測る",
+          "goto": "vector_room"
+        },
+        {
+          "text": "月行き計画を見る",
+          "goto": "moon_room"
+        }
+      ]
+    },
+    {
+      "label": "curse_room"
+    },
+    {
+      "bg": "threshold"
+    },
+    {
+      "speaker": "curse",
+      "expression": "",
+      "text": "狭い好みは、ときどき呪いと呼ばれます。\n誰にでも反応できれば、もっと楽だったでしょう。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "このままリタイアするとえらいことになる。その危機感は、偏った好みが未来の空白まで見せてしまうから生まれる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "呪いとして引き受ける",
+          "goto": "gen_curse"
+        },
+        {
+          "text": "名札を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_curse"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "好き嫌いの狭さは、趣味の問題に見えて、接続先の少なさを先に予告する。だから冗談めいた言葉ほど、未来の輪郭に近い。"
+    },
+    {
+      "speaker": "curse",
+      "expression": "",
+      "text": "危機感は悪いものではありません。\n何にだけ心が動くかを知っている証拠です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "狭い好みで通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "vector_room"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "vector",
+      "expression": "",
+      "text": "狂いは量ではなく向きです。\n方向の合わない異常は騒音で、合う異常だけが推進になります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "みんな狂ってみんないい。ただし、ほんとうに一緒に進めるのは、同じベクトルでずれている者たちだけだ。"
+    },
+    {
+      "choices": [
+        {
+          "text": "整列角を測る",
+          "goto": "gen_vector"
+        },
+        {
+          "text": "方角を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_vector"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "変わっていることより、どちらへ変わっているかのほうがずっと重要だ。向きが合えば、偏りは孤独ではなく編成になる。"
+    },
+    {
+      "speaker": "vector",
+      "expression": "",
+      "text": "同じ方角へずれるものは、互いを壊しません。\nむしろ速度を合わせます。"
+    },
+    {
+      "choices": [
+        {
+          "text": "整列したまま通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "moon_room"
+    },
+    {
+      "bg": "station_night"
+    },
+    {
+      "speaker": "moon",
+      "expression": "",
+      "text": "月行きの搭乗条件は正常性ではありません。\n同じ方向へ加速できるかどうかだけを見ています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ひとりの偏りは比喩で終わる。でも同じ向きの偏りが集まると、比喩は軌道に変わる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "月行き座標を受け取る",
+          "goto": "gen_moon"
+        },
+        {
+          "text": "計画書を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_moon"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "moon",
+      "expression": "",
+      "text": "足し合わせるとは、似た者同士で群れることではありません。\n飛距離の出る向きを揃えることです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "月まで行かないか。大げさな誘い文句のようでいて、実際には同行条件の最終確認でもあった。"
+    },
+    {
+      "choices": [
+        {
+          "text": "月行き座標で通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "ここは診断室ではありません。同行許可室です。\nあなたが読むべきなのは異常の有無ではなく、その異常がどちらへ向いているかです。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "呪いも危機感も、方角が見えた瞬間に別の名前を持ちます。\n同じ向きにずれる者だけを選びなさい。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "変な人が好きなんじゃない。\n同じ方角にずれてる人と、まだ先へ行きたいんだ。"
+    },
+    {
+      "label": "carry_back"
+    },
+    {
+      "choices": [
+        {
+          "text": "狭い好みを持ち帰る",
+          "goto": "END_CURSE"
+        },
+        {
+          "text": "方角の合う狂いを持ち帰る",
+          "goto": "END_VECTOR"
+        },
+        {
+          "text": "月行き座標を持ち帰る",
+          "goto": "END_MOON"
+        }
+      ]
+    },
+    {
+      "label": "END_CURSE"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "狭い好みは、未来の空白を先に見せる。だから呪いみたいに感じるし、だからこそ無視もできない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "反応する相手の少なさは、未来の輪郭を濃くする。\n──END: 狭い好み"
+    },
+    {
+      "label": "END_VECTOR"
+    },
+    {
+      "bg": "parameter_archive"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "異常の価値は強さではなく整列角にある。向きの合う偏りだけが、孤独を編成へ変えていく。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "同じベクトルの狂いだけが推進力になる。\n──END: 方角の合う狂い"
+    },
+    {
+      "label": "END_MOON"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ひとりの偏りでは届かない場所がある。けれど、同じ向きの偏りが揃えば、月は比喩ではなくなる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "月まで行くには、同じ向きの偏りが要る。\n──END: 月行き座標"
+    }
+  ]
+}
