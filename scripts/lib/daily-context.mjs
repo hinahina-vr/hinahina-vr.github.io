@@ -114,6 +114,62 @@ export function addDays(dateString, days) {
   return date.toISOString().slice(0, 10);
 }
 
+function getTimeZoneOffsetMs(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
+  const utcLike = Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    Number(values.hour),
+    Number(values.minute),
+    Number(values.second),
+  );
+  return utcLike - date.getTime();
+}
+
+export function getUtcInstantForLocalMidnight(dateString, timeZone = "Asia/Tokyo") {
+  ensureDateString(dateString);
+  const [year, month, day] = dateString.split("-").map(Number);
+  const wallClockUtcMs = Date.UTC(year, month - 1, day, 0, 0, 0, 0);
+
+  let instant = new Date(wallClockUtcMs);
+  let offsetMs = getTimeZoneOffsetMs(instant, timeZone);
+  instant = new Date(wallClockUtcMs - offsetMs);
+
+  const adjustedOffsetMs = getTimeZoneOffsetMs(instant, timeZone);
+  if (adjustedOffsetMs !== offsetMs) {
+    instant = new Date(wallClockUtcMs - adjustedOffsetMs);
+  }
+
+  return instant;
+}
+
+export function buildSearchDateRangeForLocalDay(dateString, timeZone = "Asia/Tokyo") {
+  ensureDateString(dateString);
+  const startUtc = getUtcInstantForLocalMidnight(dateString, timeZone);
+  const endUtc = getUtcInstantForLocalMidnight(addDays(dateString, 1), timeZone);
+
+  const sinceDate = startUtc.toISOString().slice(0, 10);
+  const endFloorDate = endUtc.toISOString().slice(0, 10);
+  const endIsUtcMidnight = endUtc.getUTCHours() === 0
+    && endUtc.getUTCMinutes() === 0
+    && endUtc.getUTCSeconds() === 0
+    && endUtc.getUTCMilliseconds() === 0;
+  const untilDate = endIsUtcMidnight ? endFloorDate : addDays(endFloorDate, 1);
+
+  return { sinceDate, untilDate };
+}
+
 export async function ensureDir(path) {
   await mkdir(path, { recursive: true });
 }

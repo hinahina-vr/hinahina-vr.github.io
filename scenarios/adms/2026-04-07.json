@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-07",
+  "title": "同じベクトルで月まで A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "誰にしか反応しないか",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🌙",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "standalone_start",
+      "summary": "出来事よりも、誰にしか心が動かないのかという条件だけが残っている"
+    },
+    {
+      "id": "choose_orbit",
+      "title": "三つの卓",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🪑",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "choose_orbit",
+      "summary": "呪いの卓、方角の卓、月行きの卓のどこから今日を読むか選ぶ"
+    },
+    {
+      "id": "curse_room",
+      "title": "呪いの卓",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🏷️",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "curse_room",
+      "summary": "狭い好みが、未来の空白まで見せてしまう危機感に触れる"
+    },
+    {
+      "id": "vector_room",
+      "title": "方角の卓",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🧭",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "vector_room",
+      "summary": "異常の強さではなく、同じ方角へずれているかを測る"
+    },
+    {
+      "id": "moon_room",
+      "title": "月行きの卓",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🌕",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "moon_room",
+      "summary": "同方向の偏りが集まると、比喩は軌道に変わる"
+    },
+    {
+      "id": "gen_curse",
+      "title": "接続先の少なさ",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 1,
+      "icon": "⚠️",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "gen_curse",
+      "summary": "偏った好みは、未来にある空白の形まで先に見せてしまう"
+    },
+    {
+      "id": "gen_vector",
+      "title": "整列角",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "📐",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "gen_vector",
+      "summary": "向きの合う偏りだけが、孤独を編成へ変えていく"
+    },
+    {
+      "id": "gen_moon",
+      "title": "偏りの軌道",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 11,
+      "icon": "🚀",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "gen_moon",
+      "summary": "同じ向きの偏りが揃うと、月行きの座標が見えてくる"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "同行許可室",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "mitra_gate",
+      "summary": "異常の有無ではなく、その異常がどちらへ向いているかを受け取る"
+    },
+    {
+      "id": "carry_back",
+      "title": "持ち帰る輪郭",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "carry_back",
+      "summary": "狭い好み、方角の合う狂い、月行き座標のどれを今日の輪郭として残すか選ぶ"
+    },
+    {
+      "id": "END_CURSE",
+      "title": "狭い好み",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🏷️",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "END_CURSE",
+      "summary": "反応する相手の少なさが、未来の輪郭を先に濃くしてしまう"
+    },
+    {
+      "id": "END_VECTOR",
+      "title": "方角の合う狂い",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🧭",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "END_VECTOR",
+      "summary": "異常の価値は強さではなく整列角にあり、合う偏りだけが推進力になる"
+    },
+    {
+      "id": "END_MOON",
+      "title": "月行き座標",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🌕",
+      "scenario": "2026-04-07_同じベクトルで月まで",
+      "entry": "END_MOON",
+      "summary": "同じ向きの偏りが揃ったとき、月は比喩ではなく目標になる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_orbit",
+      "choiceText": "今日の卓を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_orbit",
+      "to": "curse_room",
+      "choiceText": "呪いの名札を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_orbit",
+      "to": "vector_room",
+      "choiceText": "方角を測る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_orbit",
+      "to": "moon_room",
+      "choiceText": "月行き計画を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "curse_room",
+      "to": "gen_curse",
+      "choiceText": "呪いとして引き受ける",
+      "style": "genkai"
+    },
+    {
+      "from": "curse_room",
+      "to": "mitra_gate",
+      "choiceText": "名札を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_curse",
+      "to": "mitra_gate",
+      "choiceText": "狭い好みで通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "vector_room",
+      "to": "gen_vector",
+      "choiceText": "整列角を測る",
+      "style": "genkai"
+    },
+    {
+      "from": "vector_room",
+      "to": "mitra_gate",
+      "choiceText": "方角を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_vector",
+      "to": "mitra_gate",
+      "choiceText": "整列したまま通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "moon_room",
+      "to": "gen_moon",
+      "choiceText": "月行き座標を受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "moon_room",
+      "to": "mitra_gate",
+      "choiceText": "計画書を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_moon",
+      "to": "mitra_gate",
+      "choiceText": "月行き座標で通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "carry_back",
+      "choiceText": "今日の輪郭を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_CURSE",
+      "choiceText": "狭い好みを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_VECTOR",
+      "choiceText": "方角の合う狂いを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_MOON",
+      "choiceText": "月行き座標を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

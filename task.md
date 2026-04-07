@@ -1,46 +1,46 @@
-# 2026-04-06 日記タスク
+# 2026-04-07 日記タスク
 
 ## 話題定義
 
-- A: 偽物めいた酒
-- B: 強制会話の罰ゲーム
-- C: 長いハシゴの夜
-- D: 社交後遺症
-- E: 会社で怒り続ける疲労
+- A: 狂っている人間にしか興味が向かない
+- B: このままリタイアするとえらいことになる危機感
+- C: みんな狂ってみんないい
+- D: 同じベクトルの狂い
+- E: 狂いを足し合わせて月まで行く
 
 ## キャラ別割り当て
 
 | キャラ | 話題 |
 |---|---|
-| hina | B, D |
-| hinahina | D, E |
-| moegami | B, D |
-| oji | D, E |
-| multi | C, D |
+| hina | A, B |
+| hinahina | B, D |
+| moegami | A, E |
+| oji | B, E |
+| multi | B, D |
 | dejiko | A, C |
-| ayu | C, D |
+| ayu | C, E |
 | rem | A, B |
 | ruriko | A, D |
-| tsumugi | A, B |
-| ecoko | D, E |
-| mii | B, C |
-| kud | D, E |
-| kotomi | B, E |
-| minagi | B, D |
+| tsumugi | A, C |
+| ecoko | B, D |
+| mii | C, E |
+| kud | B, E |
+| kotomi | A, E |
+| minagi | A, D |
 | kiku8 | D, E |
-| mint | A, E |
+| mint | C, D |
 | tama | C, E |
-| kukuri | C, D |
-| sharo | A, E |
-| nemurin | D, E |
-| hinako | B, D |
-| kyoko | C, E |
-| mayuki | B, C |
-| mitsuba | E, B |
-| ana | A, B |
-| astarotte | E, B |
-| hazuki | A, E |
-| rin | E, B |
+| kukuri | D, E |
+| sharo | A, B |
+| nemurin | B, D |
+| hinako | C, D |
+| kyoko | B, E |
+| mayuki | A, D |
+| mitsuba | C, E |
+| ana | A, C |
+| astarotte | B, E |
+| hazuki | A, D |
+| rin | D, E |
 | rizel | B, D |
 | feiris | C, E |
 | mitra | A, B, C, D, E |

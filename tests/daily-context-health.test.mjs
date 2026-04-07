@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  buildSearchDateRangeForLocalDay,
   buildCandidateTopics,
   renderDailyContextBlock,
 } from "../scripts/lib/daily-context.mjs";
@@ -207,12 +208,30 @@ function testHealthTopicsLimit() {
   assert(healthTopics.length <= 2);
 }
 
+function testBuildSearchDateRangeForLocalDay() {
+  assert.deepEqual(
+    buildSearchDateRangeForLocalDay("2026-04-07", "Asia/Tokyo"),
+    { sinceDate: "2026-04-06", untilDate: "2026-04-08" },
+  );
+
+  assert.deepEqual(
+    buildSearchDateRangeForLocalDay("2026-04-07", "UTC"),
+    { sinceDate: "2026-04-07", untilDate: "2026-04-08" },
+  );
+
+  assert.deepEqual(
+    buildSearchDateRangeForLocalDay("2026-11-01", "America/Los_Angeles"),
+    { sinceDate: "2026-11-01", untilDate: "2026-11-03" },
+  );
+}
+
 function run() {
   testNormalizeHealthExport();
   testNormalizeHealthExportErrorStatus();
   testRenderHealthSourceLines();
   testDailyContextBlockIncludesHealth();
   testHealthTopicsLimit();
+  testBuildSearchDateRangeForLocalDay();
   console.log("daily-context health tests passed");
 }
 
