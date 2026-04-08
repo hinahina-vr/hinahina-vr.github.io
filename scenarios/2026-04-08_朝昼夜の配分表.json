@@ -1,0 +1,200 @@
+{
+  "title": "朝昼夜の配分表",
+  "subtitle": "─ OS更新講義ノベル ─",
+  "genre": "時間配分ノベル",
+  "date": "2026-04-08",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "📘" },
+    "mechanics": { "name": "力学", "color": "#708090", "emoji": "📐" },
+    "os": { "name": "OS更新講義", "color": "#8b6fb5", "emoji": "💽" },
+    "citation": { "name": "引用脚注", "color": "#8f7d4e", "emoji": "🔖" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    {
+      "bg": "home_office",
+      "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月八日。朝は力学で止まり、夜には人類のOSを考えている。頭の中に三枚の配分表が置かれている。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "朝は自分のため。昼は社会のため。夜は神様のため。\nそんな暮らしへ、って急に言いたくなった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の上には三つの札がある。力学の札、更新講義の札、引用脚注の札。"
+    },
+    { "label": "choose_table" },
+    {
+      "choices": [
+        { "text": "力学の札をめくる", "goto": "mechanics_room" },
+        { "text": "更新講義の札をめくる", "goto": "os_room" },
+        { "text": "引用脚注の札をめくる", "goto": "citation_room" }
+      ]
+    },
+    { "label": "mechanics_room" },
+    { "bg": "parameter_archive" },
+    {
+      "speaker": "mechanics",
+      "expression": "",
+      "text": "思想では点は取れません。\n式を追い、条件を確かめ、途中で止まるところから始めなさい。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝の演習問題が激ムズであることは、未来語りの前に現実の硬度を知らせる。"
+    },
+    {
+      "choices": [
+        { "text": "現実の硬さを受け取る", "goto": "gen_mechanics" },
+        { "text": "札を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_mechanics" },
+    { "bg": "corridor" },
+    {
+      "speaker": "mechanics",
+      "expression": "",
+      "text": "更新より先に、まずは止まる経験です。\n止まった場所が、その日の地面になります。"
+    },
+    {
+      "choices": [
+        { "text": "地面を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "os_room" },
+    { "bg": "station_night" },
+    {
+      "speaker": "os",
+      "expression": "",
+      "text": "ポストAI時代とは、仕事の名前を変えることではありません。\n時間の割り振りを更新することです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝は自分、昼は社会、夜は神様。大きい話は、最後に暮らしの配分へ降りてくる。"
+    },
+    {
+      "choices": [
+        { "text": "時間配分を更新する", "goto": "gen_os" },
+        { "text": "札を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_os" },
+    { "bg": "chorus_morning" },
+    {
+      "speaker": "os",
+      "expression": "",
+      "text": "世界を変える前に、一日の役割を変えなさい。\n更新は宣言より配分に出ます。"
+    },
+    {
+      "choices": [
+        { "text": "配分表を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "citation_room" },
+    { "bg": "home_office" },
+    {
+      "speaker": "citation",
+      "expression": "",
+      "text": "古い形式は消えません。\n引用できて、あとから辿れて、参考文献に添付できるからです。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "テキストサイト回帰は懐古ではない。未来でも残る形式の再評価である。"
+    },
+    {
+      "choices": [
+        { "text": "引用可能性を持ち帰る", "goto": "gen_citation" },
+        { "text": "札を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_citation" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "citation",
+      "expression": "",
+      "text": "残るものは派手なものではありません。\nあとから参照可能なものです。"
+    },
+    {
+      "choices": [
+        { "text": "脚注を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "dawn" },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は未来を語る日でありながら、同時に地面を確認する日でもありました。ふふ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "力学の硬さ、時間配分の更新、引用可能な形式。その三つを一緒に持ちなさい。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "大きい話をするなら、最後にちゃんと暮らしへ戻ってこないとな。"
+    },
+    { "label": "carry_back" },
+    {
+      "choices": [
+        { "text": "現実の硬さを持ち帰る", "goto": "END_MECHANICS" },
+        { "text": "時間配分を持ち帰る", "goto": "END_OS" },
+        { "text": "引用可能性を持ち帰る", "goto": "END_CITATION" }
+      ]
+    },
+    { "label": "END_MECHANICS" },
+    { "bg": "parameter_archive" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "未来を語る前に、まず止まる。演習問題で手が止まった場所こそ、その日の確かな地面だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "更新より先に、硬さを知る。\n──END: 現実の硬さ"
+    },
+    { "label": "END_OS" },
+    { "bg": "station_night" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "朝は自分、昼は社会、夜は神様。大きな時代の変化は、最後に生活の配分表へ降りてくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "更新は宣言ではなく配分に宿る。\n──END: 時間配分"
+    },
+    { "label": "END_CITATION" },
+    { "bg": "home_office" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "古い形式は、引用できるときに強くなる。未来は新しさだけではなく、参照可能性によって支えられる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "残るものは、あとから辿れる。\n──END: 引用可能性"
+    }
+  ]
+}
