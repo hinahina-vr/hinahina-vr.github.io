@@ -1,0 +1,200 @@
+{
+  "title": "雨宿りの宿命表",
+  "subtitle": "─ 聖地と予約窓の夢 ─",
+  "genre": "宿縁回想ノベル",
+  "date": "2026-04-09",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "📘" },
+    "inn": { "name": "国民宿舎", "color": "#708090", "emoji": "🏨" },
+    "postcard": { "name": "巡礼記録", "color": "#8f7d4e", "emoji": "📮" },
+    "reservation": { "name": "予約窓", "color": "#8b6fb5", "emoji": "🗓️" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    {
+      "bg": "home_office",
+      "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月九日。机の上に、古い雨の記憶と、まだ取れていない予約画面が並んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "御坊駅で止まった夜のことを思い出してたら、anemoiの予約を忘れてたことまで一緒に出てきた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の上には三つのものが置かれている。宿の鍵、古いポストカード、未完了の予約窓。"
+    },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "宿の鍵を拾う", "goto": "inn_room" },
+        { "text": "古いポストカードを読む", "goto": "postcard_room" },
+        { "text": "予約窓を開く", "goto": "reservation_room" }
+      ]
+    },
+    { "label": "inn_room" },
+    { "bg": "station_night" },
+    {
+      "speaker": "inn",
+      "expression": "",
+      "text": "あなたは雨に止められてここへ来ました。\n当夜は足止めでも、回想の中では宿命に変わります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "美浜町の国民宿舎は、災難の避難先であり、あとから AIR の聖地になる。"
+    },
+    {
+      "choices": [
+        { "text": "宿命として受け取る", "goto": "gen_inn" },
+        { "text": "鍵を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_inn" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "inn",
+      "expression": "",
+      "text": "偶然は、その夜ではなく後年に完成します。\nあなたは遅れて意味を受け取る旅人です。"
+    },
+    {
+      "choices": [
+        { "text": "鍵を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "postcard_room" },
+    { "bg": "dawn" },
+    {
+      "speaker": "postcard",
+      "expression": "",
+      "text": "2014.8.4。\n日の岬で一日ゆっくりします。明日は晴れますように。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "短い願いは、長い記憶よりもその日の湿度を残している。"
+    },
+    {
+      "choices": [
+        { "text": "祈りを読み返す", "goto": "gen_postcard" },
+        { "text": "葉書を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_postcard" },
+    { "bg": "chorus_morning" },
+    {
+      "speaker": "postcard",
+      "expression": "",
+      "text": "旅の記録は説明ではありません。\nあとから再点灯するための小さな火種です。"
+    },
+    {
+      "choices": [
+        { "text": "葉書を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "reservation_room" },
+    { "bg": "corridor" },
+    {
+      "speaker": "reservation",
+      "expression": "",
+      "text": "休暇取得、完了。\n予約入力、未完了。\n熱意だけが先に未来へ到着しています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "遊ぶ気分はもう確定している。手続きだけが現在に取り残されている。"
+    },
+    {
+      "choices": [
+        { "text": "先走る熱を認める", "goto": "gen_reservation" },
+        { "text": "窓を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_reservation" },
+    { "bg": "home_office" },
+    {
+      "speaker": "reservation",
+      "expression": "",
+      "text": "人は本気のとき、順番を壊します。\n未来の休暇だけが、現在より先に確保されるのです。"
+    },
+    {
+      "choices": [
+        { "text": "窓を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "dawn" },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は、過去の宿縁と未来の休暇が同じ机にありました。ふふ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "偶然の宿、短い祈り、先走る熱。その三つを一緒に持ちなさい。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "だらしないようで、ぜんぶ同じ方向の好きなんだよな。"
+    },
+    { "label": "carry_back" },
+    {
+      "choices": [
+        { "text": "宿命を持ち帰る", "goto": "END_FATE" },
+        { "text": "祈りを持ち帰る", "goto": "END_POSTCARD" },
+        { "text": "先走る熱を持ち帰る", "goto": "END_RESERVATION" }
+      ]
+    },
+    { "label": "END_FATE" },
+    { "bg": "station_night" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "大雨に止められた夜は、あとから正しい宿へ導かれていたことになる。偶然は時間差で宿命へ変わる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "雨宿りは、のちに物語になる。\n──END: 宿命"
+    },
+    { "label": "END_POSTCARD" },
+    { "bg": "dawn" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "明日は晴れますように。その短い祈りだけで、昔の旅は今夜ももう一度始まる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "願いは、あとから再点灯する。\n──END: 祈り"
+    },
+    { "label": "END_RESERVATION" },
+    { "bg": "home_office" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "休暇だけが先に確保されている。順番は悪いが、熱量としては正しい。未来はときどき手続きを追い越す。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "本気の気分は、先に休みを取る。\n──END: 先走る熱"
+    }
+  ]
+}
