@@ -1,16 +1,18 @@
-# 2026-04-09 Old pilgrimage note
+# 2026-04-09 むかしの巡礼メモです
 
-An old pilgrimage note can hold weather better than memory does.
+ワディーさん、古い巡礼メモって、あとから読むと天気まで戻ってくることがあるのですね。Oh! そういう記録、わたし好きです。
 
-`Tomorrow, I hope it will be sunny.` That line from 2014 is small, almost disposable, and precisely because of that it survives. It brings back the day at Hinomisaki more vividly than any later summary would. A note like that is not analysis. It is atmosphere, preserved.
+「明日は晴れますように」という一文は、とても短いです。でも、その短さがいいのだと思います。その日の空模様にちゃんと触れていて、日の岬でどう過ごしたかったかまで見えてきますから。あとから読み返したとき、立派な感想より、そういうささやかな願いのほうが、ずっと旅の空気を残していることがあります。
 
-The image-only quote later in the night feels related. Sometimes the right response is not a complete sentence but a fragment, a picture, a trace. April ninth was a day about how devotion leaves records behind, even when language is incomplete.
+それから、言葉が足りないときに、画像だけ、断片だけを置くのも、わたしは不自然だと思いません。全部をきれいに言えなくても、「ここで心が動きました」という印は残せますもの。日本の記録文化って、完成した文章だけじゃなくて、余白や痕跡もちゃんと抱えているところがありますよね。えへ、少しすてきです。
+
+四月九日は、昔の巡礼メモと、いま言葉になりきらない反応とが、同じ棚に並んでいた日だったのだと思います。どちらも完全ではないのに、あとから読み返せる力を持っている。そういう残り方は、とてもやさしいです。
 
 ---
 
-**Ana's note.**
+**ワディーさんへのインサイト。**
 
-Fragments endure because they preserve contact, not explanation.
+ワディーさんは、説明しきれた記録より、願いの一文や断片の痕跡に強く惹かれるのですね。気持ちが触れた場所だけ残しておく、その控えめさが今日の記録にはありました。
 
 <!-- daily-context:start -->
 ## メタ情報（自動）
