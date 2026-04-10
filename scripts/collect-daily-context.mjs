@@ -6,6 +6,7 @@ import {
   DAILY_CONTEXT_DIR,
   DEBUG_DIR,
   RAW_DIR,
+  buildBungouStyleRecommendation,
   buildSearchDateRangeForLocalDay,
   buildCandidateTopics,
   ensureDir,
@@ -13,8 +14,10 @@ import {
   getDateStringInTimeZone,
   loadDailyContextConfig,
   pathExists,
+  renderBungouStyleBlock,
   renderDailyContextBlock,
   resolveMainDiaryFile,
+  upsertBungouStyleBlock,
   upsertDailyContextBlock,
 } from "./lib/daily-context.mjs";
 import {
@@ -425,8 +428,10 @@ async function writeJson(path, value) {
 
 async function updateDiaryFile(targetFile, normalized) {
   const current = await readFile(targetFile.absPath, "utf-8");
+  const styleBlock = renderBungouStyleBlock(normalized.bungouStyle);
   const block = renderDailyContextBlock(normalized);
-  const updated = upsertDailyContextBlock(current, block);
+  const withStyle = upsertBungouStyleBlock(current, styleBlock);
+  const updated = upsertDailyContextBlock(withStyle, block);
   await writeFile(targetFile.absPath, updated, "utf-8");
 }
 
@@ -579,7 +584,7 @@ async function collectAndWrite(options) {
 
   // Create draft file if it doesn't exist
   if (!(await pathExists(draftAbsPath))) {
-    const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n`;
+    const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n## 仮タイトル案\n\n## 方針メモ\n\n## 叩き台\n\n## トーン\n\n`;
     await writeFile(draftAbsPath, draftContent, "utf-8");
   }
 
@@ -687,6 +692,7 @@ async function collectAndWrite(options) {
         health,
       },
       candidateTopics: [],
+      bungouStyle: null,
     };
 
     if (swarm.status === "error" && x.status === "error" && health.status !== "ok") {
@@ -694,6 +700,7 @@ async function collectAndWrite(options) {
     }
 
     normalized.candidateTopics = buildCandidateTopics(normalized);
+    normalized.bungouStyle = buildBungouStyleRecommendation(normalized);
 
     const swarmRaw = {
       date,

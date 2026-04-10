@@ -5,6 +5,7 @@
         "auth:daily-sources": "node scripts/auth-daily-sources.mjs",
         "collect:daily-context": "node scripts/collect-daily-context.mjs",
         "test:daily-context-health": "node tests/daily-context-health.test.mjs",
+        "check:diary-topic-distribution": "node scripts/check-diary-topic-distribution.mjs",
         "build:diary": "node scripts/collect-daily-context.mjs --best-effort && node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
         "build:galge-runtime": "node scripts/build-galge-runtime.mjs",

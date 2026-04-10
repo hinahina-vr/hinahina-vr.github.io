@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
 import {
+  buildBungouStyleRecommendation,
   buildSearchDateRangeForLocalDay,
   buildCandidateTopics,
   renderDailyContextBlock,
+  renderBungouStyleBlock,
+  upsertBungouStyleBlock,
 } from "../scripts/lib/daily-context.mjs";
 import {
   buildHealthCandidateTopics,
@@ -208,6 +211,20 @@ function testHealthTopicsLimit() {
   assert(healthTopics.length <= 2);
 }
 
+function testCandidateTopicsStaySourceNeutral() {
+  const normalized = createBaseNormalized();
+  normalized.sources.health = {
+    status: "error",
+    note: "skipped",
+  };
+  normalized.sources.swarm.items[0].shout = null;
+  normalized.candidateTopics = buildCandidateTopics(normalized);
+
+  assert(normalized.candidateTopics.some((topic) => topic === "外出と、その日に考えていたことが重なった日"));
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("Swarm")));
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("Xの投稿")));
+}
+
 function testBuildSearchDateRangeForLocalDay() {
   assert.deepEqual(
     buildSearchDateRangeForLocalDay("2026-04-07", "Asia/Tokyo"),
@@ -225,13 +242,92 @@ function testBuildSearchDateRangeForLocalDay() {
   );
 }
 
+function testBungouRecommendationPicksKaikoForTravelAndDrinking() {
+  const normalized = createBaseNormalized({
+    sources: {
+      ...createBaseNormalized().sources,
+      swarm: {
+        status: "ok",
+        note: null,
+        sourceUrl: "https://ja.swarmapp.com/history",
+        items: [
+          {
+            checkedInAt: "2026-03-16T11:15:00.000Z",
+            venueName: "港の居酒屋",
+            venueArea: "横浜",
+            venueUrl: "https://example.com/venues/2",
+            shout: "旅先で魚とハイボール",
+            sourceUrl: "https://example.com/checkin/2",
+          },
+        ],
+      },
+      x: {
+        status: "ok",
+        note: null,
+        sourceUrl: "https://x.com/hinahina_vr",
+        items: [
+          {
+            postedAt: "2026-03-16T12:00:00.000Z",
+            tweetId: "2",
+            text: "旅先の駅前で魚をつつきながら酒を飲んだ",
+            tweetUrl: "https://x.com/hinahina_vr/status/2",
+            kind: "post",
+            mediaUrls: [],
+          },
+        ],
+      },
+    },
+  });
+
+  normalized.candidateTopics = buildCandidateTopics(normalized);
+  const recommendation = buildBungouStyleRecommendation(normalized);
+
+  assert.equal(recommendation.primary.key, "kaiko");
+  assert(recommendation.reasons.some((reason) => reason.includes("酒・食・旅")));
+}
+
+function testBungouStyleBlockIsInsertedBeforeDailyContext() {
+  const recommendation = {
+    primary: { key: "dazai", label: "太宰治", school: "知層塾" },
+    alternates: [{ key: "banana", label: "吉本ばなな", school: "耽美塾" }],
+    reasons: ["弱さや疲労や自己嫌悪が主題に近い"],
+    notes: ["口語で、自意識とだめさを真正面から引き受ける"],
+  };
+
+  const block = renderBungouStyleBlock(recommendation);
+  const original = `# 2026-04-10 下書き
+
+## 元ネタ・話題候補
+
+- 眠い
+
+## 方針メモ
+
+- 文豪AI【文】は \`hoshi\` / 星新一 で行く。古いメモ
+- 既存のメモ
+
+<!-- daily-context:start -->
+## 今日のメモ（自動）
+<!-- daily-context:end -->
+`;
+
+  const updated = upsertBungouStyleBlock(original, block);
+  assert(updated.includes("## 文豪AIメモ（自動）"));
+  assert(updated.includes("- 採用文豪AI: `dazai` / 太宰治（知層塾）"));
+  assert(!updated.includes("- 文豪AI【文】は `hoshi` / 星新一 で行く。古いメモ"));
+  assert(updated.indexOf("## 文豪AIメモ（自動）") < updated.indexOf("<!-- daily-context:start -->"));
+}
+
 function run() {
   testNormalizeHealthExport();
   testNormalizeHealthExportErrorStatus();
   testRenderHealthSourceLines();
   testDailyContextBlockIncludesHealth();
   testHealthTopicsLimit();
+  testCandidateTopicsStaySourceNeutral();
   testBuildSearchDateRangeForLocalDay();
+  testBungouRecommendationPicksKaikoForTravelAndDrinking();
+  testBungouStyleBlockIsInsertedBeforeDailyContext();
   console.log("daily-context health tests passed");
 }
 

@@ -105,3 +105,50 @@
   - G: 中二病的な呪い
   - H: 西友で遭遇した変なアイス
 - 4/7 の再配分では、A-H から各キャラが別の切り口を担当する
+
+## 4/10 話題定義
+
+- A: マッサンのありえた最終回 / 数年後の丘
+- B: 風・笑い声・青空・挿入歌が先に感情を連れてくる
+- C: 力学を勉強しているとUnityを触りたくなる
+- D: 物理演算は近似でも落下や衝突を触りたくなる
+- E: 補完や近似が本物の感情と理解の入口になる
+- F: 静かな日の内側で再生装置と実験装置が回る
+- G: まず近似から好きになってしまう
+
+## 4/10 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A, E |
+| hinahina | F, G |
+| moegami | A, B |
+| oji | C, D |
+| multi | D, E |
+| dejiko | C, D |
+| ayu | A, B |
+| rem | E, F |
+| ruriko | B, E |
+| tsumugi | B, F |
+| ecoko | D, F |
+| mii | A, F |
+| kud | C, D |
+| feiris | A, B |
+| kotomi | C, E |
+| minagi | B, F |
+| kiku8 | C, D |
+| mint | B, E |
+| tama | A, B |
+| kukuri | A, C |
+| sharo | C, G |
+| nemurin | B, F |
+| hinako | A, E |
+| kyoko | C, F |
+| mayuki | A, E |
+| mitsuba | D, G |
+| ana | A, B |
+| astarotte | E, G |
+| hazuki | C, D |
+| rin | D, F |
+| rizel | E, G |
+| mitra | A, B, C, D, E, F, G |

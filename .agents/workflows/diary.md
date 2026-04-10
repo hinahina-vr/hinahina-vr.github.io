@@ -25,6 +25,7 @@ npm run auth:daily-sources
 node scripts/collect-daily-context.mjs --date YYYY-MM-DD --file diary/YYYY-MM-DD_タイトル.md --cdp-url http://127.0.0.1:9222
 ```
 → Swarm・X・Health のデータを `<!-- daily-context:start -->` ～ `<!-- daily-context:end -->` ブロックに自動挿入
+→ 同時に、下書き本文へ `<!-- bungou-style:start -->` ～ `<!-- bungou-style:end -->` の `文豪AIメモ（自動）` を挿入し、その日の採用文豪AIを先に決める
 
 補足:
 - `--skip-health` を付けると健康データ取得を明示的に飛ばす
@@ -34,7 +35,10 @@ node scripts/collect-daily-context.mjs --date YYYY-MM-DD --file diary/YYYY-MM-DD
 自動取得が失敗した場合は、Xのプロフィールページ（https://x.com/hinahina_vr）を直接確認し、必要なら `--health-file` を使って health JSON だけ手動で差し込む。`daily-context` は観測値のメモであり、Health の数値を診断や断定に使わない。
 
 ### 2. メイン日記の本文作成
-- daily-contextブロックのXポスト・Swarm・Health要約をもとに本文を執筆
+- daily-contextブロックのX・Swarm・Health要約を裏取りにして本文を執筆する
+- 本文、下書きの自然文、シナリオ本文では `X` / `Swarm` などのサービス名や件数を書かない
+- `Xに書いていた` ではなく「その日に考えていたこと」「頭の中にあった文」、`Swarmが空` ではなく「外出記録がない」「移動の痕跡が少ない」などの自然な言い換えに変換する
+- 下書きの `文豪AIメモ（自動）` に入った `採用文豪AI` を起点に本文を書く。変更する場合は、理由を `文体メモ` に残す
 - 文体はおにいちゃんの指示に従う（例: 村上春樹風など）
 - `### 文体メモ` セクションをdaily-contextブロック内に追加し、どんな文体で書いたか記録する
 - Health の数値は「よく眠れた」「よく歩いた」などの観測事実としてだけ扱い、医療的な診断や断定に変換しない
@@ -56,6 +60,14 @@ Get-ChildItem -Path "diary-*\YYYY-MM-DD*.md" | ForEach-Object { $c = Get-Content
 ```
 → 本文800文字未満のキャラは加筆する
 
+#### 話題分散チェック
+// turbo
+```
+npm run check:diary-topic-distribution -- --date YYYY-MM-DD
+```
+→ `本日の話題` を集計し、1つの話題が全体の3分の1を超えていないか確認する
+→ 同じ話題組み合わせの量産も注意表示されるので、偏っていたら割り当てを組み直す
+
 #### 口調・呼称チェック
 以下を目視確認する：
 - [ ] 各キャラの語尾がガイドライン通りか（例：ことみ→「〜なの」、でじこ→「にょ」）
@@ -63,6 +75,7 @@ Get-ChildItem -Path "diary-*\YYYY-MM-DD*.md" | ForEach-Object { $c = Get-Content
   - ひなた→「おにいちゃん」、りぜる→「だんなさま」、キク8号→「ワディーさん」等
   - 分析的なキャラ（物理おじ、ひなひな）以外は、インサイトもキャラ口調で書く
 - [ ] 口癖・定型フレーズが1日記1回以内か（金太郎飴禁止）
+- [ ] `本日の話題` が分散していて、同じ1〜2話題の量産になっていないか
 
 ### 4. 絵日記用の画像プロンプト提案
 - メイン日記・キャラ日記の内容から、絵日記用のイラストプロンプトを提案
