@@ -1,0 +1,200 @@
+{
+  "title": "近似の丘はまだ終わらない",
+  "subtitle": "─ 補完と物理演算の夢 ─",
+  "genre": "近似感情ノベル",
+  "date": "2026-04-10",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "📘" },
+    "reel": { "name": "映写機", "color": "#8f7d4e", "emoji": "🎞️" },
+    "sandbox": { "name": "物理箱庭", "color": "#5b8bd0", "emoji": "🧪" },
+    "bridge": { "name": "近似通路", "color": "#8b6fb5", "emoji": "🌉" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    {
+      "bg": "home_office",
+      "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月十日。机の上には、まだ放送されていない最終回と、まだ手で触っていない重力が並んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "ないはずの場面で泣きそうになって、式を見てたら今度は近似の世界を触りたくなった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机上には三つのものが置かれている。丘の映写機、力の箱庭、そして本物の手前に架かった通路。"
+    },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "丘の映写機を回す", "goto": "reel_room" },
+        { "text": "力の箱庭へ入る", "goto": "sandbox_room" },
+        { "text": "近似通路を渡る", "goto": "bridge_room" }
+      ]
+    },
+    { "label": "reel_room" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "reel",
+      "expression": "",
+      "text": "数年後の丘。風。笑い声。青空。\nまだ存在しない続きほど、きれいに心へ映ることがあります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "未放映の終幕なのに、感情だけが先に上映を終えている。"
+    },
+    {
+      "choices": [
+        { "text": "ありえた続きを受け取る", "goto": "gen_reel" },
+        { "text": "映写機を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_reel" },
+    { "bg": "dawn" },
+    {
+      "speaker": "reel",
+      "expression": "",
+      "text": "好きなものの続きは、ときどき外ではなく内側で完成します。\n涙は、その完成通知です。"
+    },
+    {
+      "choices": [
+        { "text": "映写機を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "sandbox_room" },
+    { "bg": "corridor" },
+    {
+      "speaker": "sandbox",
+      "expression": "",
+      "text": "ここでは重力も衝突も近似です。\nそれでも、落ちる、跳ねる、ぶつかる手ざわりは十分にあります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "厳密解の前に、まず触れる模型が差し出される。"
+    },
+    {
+      "choices": [
+        { "text": "先に手で理解する", "goto": "gen_sandbox" },
+        { "text": "箱庭を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_sandbox" },
+    { "bg": "home_office" },
+    {
+      "speaker": "sandbox",
+      "expression": "",
+      "text": "近似は妥協ではありません。\n遠い法則へ触れるための、可触な足場です。"
+    },
+    {
+      "choices": [
+        { "text": "箱庭を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "bridge_room" },
+    { "bg": "home_office" },
+    {
+      "speaker": "bridge",
+      "expression": "",
+      "text": "本物へいきなり触るには強すぎる日があります。\nだから人は、少しやわらかい橋から先に好きになります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "補完された終幕も、近似された法則も、どちらも本岸へ向かう仮設の通路だった。"
+    },
+    {
+      "choices": [
+        { "text": "仮の橋を信じる", "goto": "gen_bridge" },
+        { "text": "通路を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_bridge" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "bridge",
+      "expression": "",
+      "text": "偽物だから無価値なのではありません。\n偽物だからこそ、最初の一歩を許すものもあります。"
+    },
+    {
+      "choices": [
+        { "text": "通路を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "dawn" },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は、未放映の続きと、可触な近似と、やわらかい橋が同じ机にありました。ふふ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "どれも本物の代用品ではなく、本物へ近づくための順番です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "いきなり本物へ行けない日もあるけど、入口があるだけでかなり違うんだよな。"
+    },
+    { "label": "carry_back" },
+    {
+      "choices": [
+        { "text": "ありえた続きを持ち帰る", "goto": "END_EPILOGUE" },
+        { "text": "手で触る近似を持ち帰る", "goto": "END_SANDBOX" },
+        { "text": "やわらかい橋を持ち帰る", "goto": "END_BRIDGE" }
+      ]
+    },
+    { "label": "END_EPILOGUE" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "まだ放送されていない終幕なのに、風景だけは先に心の中で完成していた。終わらないからこそ、続きは育つ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "ないはずの続きが、いちばん深く残る。\n──END: 未放映の終幕"
+    },
+    { "label": "END_SANDBOX" },
+    { "bg": "corridor" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "近似された重力でも、手で触れれば理解は動き出す。厳密さの前に、まず触れる足場が必要な日がある。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "手ざわりは、理屈の先触れになる。\n──END: 可触な近似"
+    },
+    { "label": "END_BRIDGE" },
+    { "bg": "home_office" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "本物の手前にある仮の橋は、逃げ道ではなかった。強すぎるものへ向かうための、ちょうどよい順番だった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "まず近似から好きになる。\n──END: やわらかい橋"
+    }
+  ]
+}

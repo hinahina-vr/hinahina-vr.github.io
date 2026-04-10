@@ -6,15 +6,18 @@ import {
   DAILY_CONTEXT_DIR,
   DEBUG_DIR,
   RAW_DIR,
-  addDays,
+  buildBungouStyleRecommendation,
+  buildSearchDateRangeForLocalDay,
   buildCandidateTopics,
   ensureDir,
   getDateStringForValue,
   getDateStringInTimeZone,
   loadDailyContextConfig,
   pathExists,
+  renderBungouStyleBlock,
   renderDailyContextBlock,
   resolveMainDiaryFile,
+  upsertBungouStyleBlock,
   upsertDailyContextBlock,
 } from "./lib/daily-context.mjs";
 import {
@@ -295,9 +298,9 @@ async function collectSwarmForDate(page, date, timeZone, config) {
   };
 }
 
-function buildXSearchUrl(handle, date) {
-  const nextDate = addDays(date, 1);
-  const query = `(from:${handle}) since:${date} until:${nextDate}`;
+function buildXSearchUrl(handle, date, timeZone) {
+  const { sinceDate, untilDate } = buildSearchDateRangeForLocalDay(date, timeZone);
+  const query = `(from:${handle}) since:${sinceDate} until:${untilDate}`;
   return `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query&f=live`;
 }
 
@@ -341,14 +344,28 @@ async function extractXSnapshot(page) {
   });
 }
 
-async function collectXForDate(page, date, timeZone, config) {
-  await page.goto(buildXSearchUrl(config.xHandle, date), { waitUntil: "domcontentloaded", timeout: 45000 });
-  await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
-  if (isXLoginRedirect(page)) {
-    await page.goto(`https://x.com/${config.xHandle}/with_replies`, { waitUntil: "domcontentloaded", timeout: 45000 });
-    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
-  }
+function mapXSnapshotToItems(snapshot, date, timeZone) {
+  return snapshot
+    .map((item) => {
+      const tweetId = item.statusUrl.match(/status\/(\d+)/)?.[1] ?? null;
+      if (!tweetId) return null;
 
+      const postedAt = new Date(item.datetime).toISOString();
+      if (getDateStringForValue(postedAt, timeZone) !== date) return null;
+
+      return {
+        postedAt,
+        tweetId,
+        text: item.text,
+        tweetUrl: item.statusUrl,
+        kind: classifyXKind(item.rawText, item.text, item.statusLinkCount),
+        mediaUrls: item.mediaUrls,
+      };
+    })
+    .filter(Boolean);
+}
+
+async function collectXItemsFromCurrentPage(page, date, timeZone) {
   const xBodyText = await page.locator("body").innerText().catch(() => "");
   const xArticleCount = await page.locator("article[data-testid='tweet']").count().catch(() => 0);
   if (xArticleCount === 0 && isLoginErrorText("x", page.url().toLowerCase(), xBodyText)) {
@@ -360,24 +377,7 @@ async function collectXForDate(page, date, timeZone, config) {
 
   for (let attempt = 0; attempt < 14; attempt += 1) {
     const snapshot = await extractXSnapshot(page);
-    const items = snapshot
-      .map((item) => {
-        const tweetId = item.statusUrl.match(/status\/(\d+)/)?.[1] ?? null;
-        if (!tweetId) return null;
-
-        const postedAt = new Date(item.datetime).toISOString();
-        if (getDateStringForValue(postedAt, timeZone) !== date) return null;
-
-        return {
-          postedAt,
-          tweetId,
-          text: item.text,
-          tweetUrl: item.statusUrl,
-          kind: classifyXKind(item.rawText, item.text, item.statusLinkCount),
-          mediaUrls: item.mediaUrls,
-        };
-      })
-      .filter(Boolean);
+    const items = mapXSnapshotToItems(snapshot, date, timeZone);
 
     const beforeCount = collected.length;
     collected.push(...items);
@@ -393,10 +393,27 @@ async function collectXForDate(page, date, timeZone, config) {
   }
 
   collected.sort((left, right) => left.postedAt.localeCompare(right.postedAt));
+  return collected;
+}
+
+async function collectXForDate(page, date, timeZone, config) {
+  await page.goto(buildXSearchUrl(config.xHandle, date, timeZone), { waitUntil: "domcontentloaded", timeout: 45000 });
+  await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+  if (isXLoginRedirect(page)) {
+    await page.goto(`https://x.com/${config.xHandle}/with_replies`, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+  }
+
+  let items = await collectXItemsFromCurrentPage(page, date, timeZone);
+  if (items.length === 0) {
+    await page.goto(`https://x.com/${config.xHandle}/with_replies`, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+    items = await collectXItemsFromCurrentPage(page, date, timeZone);
+  }
 
   return {
     sourceUrl: page.url(),
-    items: collected,
+    items,
   };
 }
 
@@ -411,8 +428,10 @@ async function writeJson(path, value) {
 
 async function updateDiaryFile(targetFile, normalized) {
   const current = await readFile(targetFile.absPath, "utf-8");
+  const styleBlock = renderBungouStyleBlock(normalized.bungouStyle);
   const block = renderDailyContextBlock(normalized);
-  const updated = upsertDailyContextBlock(current, block);
+  const withStyle = upsertBungouStyleBlock(current, styleBlock);
+  const updated = upsertDailyContextBlock(withStyle, block);
   await writeFile(targetFile.absPath, updated, "utf-8");
 }
 
@@ -565,7 +584,7 @@ async function collectAndWrite(options) {
 
   // Create draft file if it doesn't exist
   if (!(await pathExists(draftAbsPath))) {
-    const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n`;
+    const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n## 仮タイトル案\n\n## 方針メモ\n\n## 叩き台\n\n## トーン\n\n`;
     await writeFile(draftAbsPath, draftContent, "utf-8");
   }
 
@@ -673,6 +692,7 @@ async function collectAndWrite(options) {
         health,
       },
       candidateTopics: [],
+      bungouStyle: null,
     };
 
     if (swarm.status === "error" && x.status === "error" && health.status !== "ok") {
@@ -680,6 +700,7 @@ async function collectAndWrite(options) {
     }
 
     normalized.candidateTopics = buildCandidateTopics(normalized);
+    normalized.bungouStyle = buildBungouStyleRecommendation(normalized);
 
     const swarmRaw = {
       date,
