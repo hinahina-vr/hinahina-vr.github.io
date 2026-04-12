@@ -421,7 +421,7 @@ export function renderDailyContextBlock(normalized) {
     ? [`- 取得できず: ${clipText(normalized.sources.x.note || "不明なエラー", 120)}`]
     : normalized.sources.x.items
       .filter((item) => item.kind !== "repost")
-      .map((item) => `- ${formatTimeInTimeZone(item.postedAt, normalized.timezone)} ${item.kind}: ${clipText(item.text || "(本文なし)", 120)}`);
+      .map((item) => `- ${formatTimeInTimeZone(item.postedAt, normalized.timezone)} ${item.kind}: ${cleanText(item.text || "(本文なし)")}`);
   const healthLines = renderHealthSourceLines(normalized.sources.health);
 
   const topicLines = normalized.candidateTopics.length > 0
@@ -452,7 +452,7 @@ export function renderDailyContextBlock(normalized) {
 function getBungouSignalText({ sources, candidateTopics }) {
   const parts = [
     ...candidateTopics,
-    ...sources.swarm.items.flatMap((item) => [item.venueName, item.venueArea, item.shout].filter(Boolean)),
+    ...sources.swarm.items.map((item) => item.shout).filter(Boolean),
     ...sources.x.items.filter((item) => item.kind !== "repost").map((item) => item.text).filter(Boolean),
   ];
   return cleanText(parts.join(" "));
@@ -462,8 +462,13 @@ function uniqueStrings(items) {
   return [...new Set(items.filter(Boolean).map((item) => cleanText(item)).filter(Boolean))];
 }
 
+function hasSwarmNarrativeItem(items) {
+  return items.some((item) => cleanText(item.shout || "").length > 0);
+}
+
 export function buildBungouStyleRecommendation(normalized) {
   const signalText = getBungouSignalText(normalized);
+  const hasSwarmNarrative = hasSwarmNarrativeItem(normalized.sources.swarm.items);
 
   const scored = BUNGOU_STYLE_CATALOG.map((style) => {
     let score = style.key === "murakami" ? 1 : 0;
@@ -476,12 +481,12 @@ export function buildBungouStyleRecommendation(normalized) {
       }
     }
 
-    if (style.key === "kaiko" && normalized.sources.swarm.items.length > 0) {
+    if (style.key === "kaiko" && hasSwarmNarrative) {
       score += 1;
-      reasons.push("外出や移動の痕跡があり、肉体寄りに押せる");
+      reasons.push("移動や現場の手触りが言葉として残っており、肉体寄りに押せる");
     }
 
-    if (style.key === "murakami" && normalized.sources.swarm.items.length === 0) {
+    if (style.key === "murakami" && !hasSwarmNarrative) {
       score += 1;
       reasons.push("外の出来事より観察や思索を前に出しやすい");
     }
@@ -553,8 +558,6 @@ export function buildCandidateTopics({ sources }) {
   };
 
   for (const item of sources.swarm.items) {
-    if (item.venueName) addTopic(`${item.venueName}に行った`);
-    if (item.venueArea && item.venueName) addTopic(`${item.venueArea}で${item.venueName}に立ち寄った`);
     if (item.shout) addTopic(clipText(item.shout, 48));
     if (baseTopics.length >= 4) break;
   }
@@ -563,11 +566,6 @@ export function buildCandidateTopics({ sources }) {
     if (item.kind === "repost" || !item.text) continue;
     addTopic(clipText(item.text, 52));
     if (baseTopics.length >= 6) break;
-  }
-
-  // 話題候補は本文にそのまま持ち込みやすいので、外部サービス名を含めない。
-  if (sources.swarm.items.length > 0 && sources.x.items.some((item) => item.kind !== "repost")) {
-    addTopic("外出と、その日に考えていたことが重なった日");
   }
 
   const healthTopics = buildHealthCandidateTopics(sources.health);

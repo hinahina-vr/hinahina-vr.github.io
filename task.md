@@ -71,7 +71,7 @@
 | multi | D, J |
 | dejiko | H, I |
 | ayu | B, D |
-| rem | E, G |
+| rem | G |
 | ruriko | C, D |
 | tsumugi | A, E |
 | ecoko | F, G |
@@ -148,7 +148,54 @@
 | mitsuba | D, G |
 | ana | A, B |
 | astarotte | E, G |
-| hazuki | C, D |
+| hazuki | D |
 | rin | D, F |
 | rizel | E, G |
+| mitra | A, B, C, D, E, F, G |
+
+## 4/11 話題定義
+
+- A: 人間と地球をOS、生と死をUXと捉える世界観
+- B: ポスト生成AI時代を考えた結果、縄文へ回帰したくなる
+- C: 文字と言葉は新しすぎて重く、アプリ処理になる
+- D: 酒を飲んで踊っているだけで暮らしたい
+- E: 「気分：」だけ先にあり、あとから長い文明論が噴き出す
+- F: 深夜にGoogleCloudとDifyをいじっていて話がきれいに終わらない
+- G: 最新の道具といちばん古い欲望が同居している
+
+## 4/11 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A, E |
+| hinahina | E, G |
+| moegami | B, G |
+| oji | A, F |
+| multi | C, F |
+| dejiko | C, D |
+| ayu | B, D |
+| rem | E, G |
+| ruriko | C, E |
+| tsumugi | B, G |
+| ecoko | C, D |
+| mii | D, E |
+| kud | A, F |
+| feiris | A, G |
+| kotomi | A, C |
+| minagi | B, E |
+| kiku8 | A, F |
+| mint | C, G |
+| tama | B, D |
+| kukuri | B, D |
+| sharo | C, F |
+| nemurin | E, G |
+| hinako | D, E |
+| kyoko | D, G |
+| mayuki | C, D |
+| mitsuba | E, F |
+| ana | B, E |
+| astarotte | C, G |
+| hazuki | C, D |
+| rin | C, E |
+| rizel | G |
 | mitra | A, B, C, D, E, F, G |

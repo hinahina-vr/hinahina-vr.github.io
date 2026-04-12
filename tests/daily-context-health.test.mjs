@@ -199,6 +199,36 @@ function testDailyContextBlockIncludesHealth() {
   assert(block.includes("- 生体: 安静時心拍 63bpm / 平均 71bpm / 最低SpO2 96%"));
 }
 
+function testDailyContextBlockKeepsFullXPostText() {
+  const longText = "最終回のつづきを勝手に考えてしまって、丘と風と青空と挿入歌が全部そろったので、これは完全に泣くための装置として完成している気がするし、まだ終わってないと言い張りたくなる。";
+  const normalized = createBaseNormalized({
+    sources: {
+      ...createBaseNormalized().sources,
+      x: {
+        status: "ok",
+        note: null,
+        sourceUrl: "https://x.com/hinahina_vr",
+        items: [
+          {
+            postedAt: "2026-03-16T12:00:00.000Z",
+            tweetId: "99",
+            text: longText,
+            tweetUrl: "https://x.com/hinahina_vr/status/99",
+            kind: "post",
+            mediaUrls: [],
+          },
+        ],
+      },
+    },
+  });
+  normalized.candidateTopics = buildCandidateTopics(normalized);
+
+  const block = renderDailyContextBlock(normalized);
+
+  assert(block.includes(`- 21:00 post: ${longText}`));
+  assert(!block.includes("まだ終わってないと言い張りたくなる…"));
+}
+
 function testHealthTopicsLimit() {
   const topics = buildHealthCandidateTopics(createBaseNormalized().sources.health);
   assert.equal(topics.length, 2);
@@ -220,7 +250,10 @@ function testCandidateTopicsStaySourceNeutral() {
   normalized.sources.swarm.items[0].shout = null;
   normalized.candidateTopics = buildCandidateTopics(normalized);
 
-  assert(normalized.candidateTopics.some((topic) => topic === "外出と、その日に考えていたことが重なった日"));
+  assert(normalized.candidateTopics.some((topic) => topic === "深圳の部材街を歩き回った"));
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("華強北路")));
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("に行った")));
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("に立ち寄った")));
   assert(normalized.candidateTopics.every((topic) => !topic.includes("Swarm")));
   assert(normalized.candidateTopics.every((topic) => !topic.includes("Xの投稿")));
 }
@@ -286,6 +319,51 @@ function testBungouRecommendationPicksKaikoForTravelAndDrinking() {
   assert(recommendation.reasons.some((reason) => reason.includes("酒・食・旅")));
 }
 
+function testBungouRecommendationIgnoresVenueOnlySwarm() {
+  const normalized = createBaseNormalized({
+    sources: {
+      ...createBaseNormalized().sources,
+      swarm: {
+        status: "ok",
+        note: null,
+        sourceUrl: "https://ja.swarmapp.com/history",
+        items: [
+          {
+            checkedInAt: "2026-03-16T11:15:00.000Z",
+            venueName: "港の居酒屋",
+            venueArea: "横浜",
+            venueUrl: "https://example.com/venues/2",
+            shout: null,
+            sourceUrl: "https://example.com/checkin/2",
+          },
+        ],
+      },
+      x: {
+        status: "ok",
+        note: null,
+        sourceUrl: "https://x.com/hinahina_vr",
+        items: [
+          {
+            postedAt: "2026-03-16T12:00:00.000Z",
+            tweetId: "3",
+            text: "AIと世界の構造を考えている",
+            tweetUrl: "https://x.com/hinahina_vr/status/3",
+            kind: "post",
+            mediaUrls: [],
+          },
+        ],
+      },
+    },
+  });
+
+  normalized.candidateTopics = buildCandidateTopics(normalized);
+  const recommendation = buildBungouStyleRecommendation(normalized);
+
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("港の居酒屋")));
+  assert(normalized.candidateTopics.every((topic) => !topic.includes("横浜")));
+  assert(recommendation.reasons.every((reason) => !reason.includes("移動や現場の手触り")));
+}
+
 function testBungouStyleBlockIsInsertedBeforeDailyContext() {
   const recommendation = {
     primary: { key: "dazai", label: "太宰治", school: "知層塾" },
@@ -323,10 +401,12 @@ function run() {
   testNormalizeHealthExportErrorStatus();
   testRenderHealthSourceLines();
   testDailyContextBlockIncludesHealth();
+  testDailyContextBlockKeepsFullXPostText();
   testHealthTopicsLimit();
   testCandidateTopicsStaySourceNeutral();
   testBuildSearchDateRangeForLocalDay();
   testBungouRecommendationPicksKaikoForTravelAndDrinking();
+  testBungouRecommendationIgnoresVenueOnlySwarm();
   testBungouStyleBlockIsInsertedBeforeDailyContext();
   console.log("daily-context health tests passed");
 }
