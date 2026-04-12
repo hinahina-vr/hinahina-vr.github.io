@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
+import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 import {
   extractLeadParagraphsFromMarkdown,
+  loadSourceDiaryContext,
   parseEntrySourcePath,
+  parseEntryTopics,
   parseSourceFileMeta,
 } from "../scripts/lib/source-context.mjs";
 
@@ -48,10 +53,73 @@ function testExtractLeadParagraphsFromMarkdown() {
   ]);
 }
 
-function run() {
+function testParseEntryTopics() {
+  const raw = `# 2026-04-12 テスト
+
+本文
+
+<!-- daily-context:start -->
+## メタ情報（自動）
+
+### 元ネタ
+- diary/2026-04-12_満足は翌日に残る.md
+
+### 本日の話題
+- A. 昨日の景気のいい行程を翌日に回収している
+- G. 興奮の翌日に満足を受け取る採点
+<!-- daily-context:end -->
+`;
+
+  assert.deepEqual(parseEntryTopics(raw), [
+    "昨日の景気のいい行程を翌日に回収している",
+    "興奮の翌日に満足を受け取る採点",
+  ]);
+}
+
+async function run() {
   testParseEntrySourcePath();
   testParseSourceFileMeta();
   testExtractLeadParagraphsFromMarkdown();
+  testParseEntryTopics();
+
+  const rootDir = await mkdtemp(join(tmpdir(), "source-context-"));
+  const sourceDir = join(rootDir, "diary");
+  await mkdir(sourceDir, { recursive: true });
+  await writeFile(
+    join(sourceDir, "2026-04-12_満足は翌日に残る.md"),
+    `# 2026-04-12 満足は翌日に残る
+
+景気のいい順番が、一晩寝ても崩れなかった。
+
+部品から始まり、最後は肉で締めている。
+`,
+    "utf-8",
+  );
+
+  const sourceContext = await loadSourceDiaryContext({
+    rootDir,
+    rawEntry: `# 2026-04-12 テスト
+
+本文
+
+<!-- daily-context:start -->
+## メタ情報（自動）
+
+### 元ネタ
+- diary/2026-04-12_満足は翌日に残る.md
+
+### 本日の話題
+- B. 電子部品から始まる配線図のような前日
+- E. 最後を肉で締める景気のよさ
+<!-- daily-context:end -->
+`,
+  });
+
+  assert(sourceContext);
+  assert(sourceContext.markdown.includes("**この日の話題**"));
+  assert(sourceContext.markdown.includes("- 電子部品から始まる配線図のような前日"));
+  assert(sourceContext.markdown.includes("- 最後を肉で締める景気のよさ"));
+
   console.log("source-context tests passed");
 }
 
