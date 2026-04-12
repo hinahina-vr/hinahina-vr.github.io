@@ -1,9 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
-import { join } from "node:path";
-import { tmpdir } from "node:os";
 import {
-  extractLeadParagraphsFromMarkdown,
   loadSourceDiaryContext,
   parseEntrySourcePath,
   parseEntryTopics,
@@ -33,26 +29,6 @@ function testParseSourceFileMeta() {
   );
 }
 
-function testExtractLeadParagraphsFromMarkdown() {
-  const raw = `# 2026-04-11 世界観を更新したら縄文だった
-
-文字や会話だけでくたびれて、酒を飲んで踊っていたくなる日がある。
-
-それでも深夜には新しい道具をいじっていて、未来と原始が同居していた。
-
-<p style="text-align:center;">✦ 夢を見る</p>
-
-<!-- daily-context:start -->
-## 今日のメモ（自動）
-<!-- daily-context:end -->
-`;
-
-  assert.deepEqual(extractLeadParagraphsFromMarkdown(raw), [
-    "文字や会話だけでくたびれて、酒を飲んで踊っていたくなる日がある。",
-    "それでも深夜には新しい道具をいじっていて、未来と原始が同居していた。",
-  ]);
-}
-
 function testParseEntryTopics() {
   const raw = `# 2026-04-12 テスト
 
@@ -79,25 +55,9 @@ function testParseEntryTopics() {
 async function run() {
   testParseEntrySourcePath();
   testParseSourceFileMeta();
-  testExtractLeadParagraphsFromMarkdown();
   testParseEntryTopics();
 
-  const rootDir = await mkdtemp(join(tmpdir(), "source-context-"));
-  const sourceDir = join(rootDir, "diary");
-  await mkdir(sourceDir, { recursive: true });
-  await writeFile(
-    join(sourceDir, "2026-04-12_満足は翌日に残る.md"),
-    `# 2026-04-12 満足は翌日に残る
-
-景気のいい順番が、一晩寝ても崩れなかった。
-
-部品から始まり、最後は肉で締めている。
-`,
-    "utf-8",
-  );
-
   const sourceContext = await loadSourceDiaryContext({
-    rootDir,
     rawEntry: `# 2026-04-12 テスト
 
 本文
@@ -119,6 +79,10 @@ async function run() {
   assert(sourceContext.markdown.includes("**この日の話題**"));
   assert(sourceContext.markdown.includes("- 電子部品から始まる配線図のような前日"));
   assert(sourceContext.markdown.includes("- 最後を肉で締める景気のよさ"));
+  assert(!sourceContext.markdown.includes("景気のいい順番が、一晩寝ても崩れなかった。"));
+  assert.equal(sourceContext.markdown.trim(), `**この日の話題**
+- 電子部品から始まる配線図のような前日
+- 最後を肉で締める景気のよさ`);
 
   console.log("source-context tests passed");
 }
