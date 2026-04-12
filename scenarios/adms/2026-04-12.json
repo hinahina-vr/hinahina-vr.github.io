@@ -1,0 +1,267 @@
+{
+  "date": "2026-04-12",
+  "title": "翌日の採点表 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "机上の三点",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "📘",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "standalone_start",
+      "summary": "昨日の配線図と今日の採点と締めの余熱が同じ机に並ぶ"
+    },
+    {
+      "id": "choose_room",
+      "title": "三つの手がかり",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🗂️",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "choose_room",
+      "summary": "配線図、採点札、締め皿のどこから今日を読むか選ぶ"
+    },
+    {
+      "id": "route_room",
+      "title": "昨日の配線図",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🧭",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "route_room",
+      "summary": "散らかった昨日の点が翌日には一本の線になる"
+    },
+    {
+      "id": "verdict_room",
+      "title": "今日の採点札",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "📝",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "verdict_room",
+      "summary": "かなり良かった、という短い総括が満足を確定する"
+    },
+    {
+      "id": "plate_room",
+      "title": "締め皿",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🥩",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "plate_room",
+      "summary": "最後の強さが翌日の余韻まで決めている"
+    },
+    {
+      "id": "gen_route",
+      "title": "遅れて見える線",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 1,
+      "icon": "📐",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "gen_route",
+      "summary": "本番では見えなかった輪郭が翌日に完成する"
+    },
+    {
+      "id": "gen_verdict",
+      "title": "短い採点",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 6,
+      "icon": "✨",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "gen_verdict",
+      "summary": "説明不要な満足ほど短い言葉で保存される"
+    },
+    {
+      "id": "gen_plate",
+      "title": "勝ち分の余熱",
+      "realm": "genkai",
+      "kind": "side",
+      "layer": 3,
+      "lane": 11,
+      "icon": "🔥",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "gen_plate",
+      "summary": "身体が喜んだ終わり方は翌日にも残る"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "翌日受理点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "mitra_gate",
+      "summary": "昨日の景気と今日の採点を同時に持つよう促される"
+    },
+    {
+      "id": "carry_back",
+      "title": "今日の輪郭",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 5,
+      "lane": 6,
+      "icon": "🎟️",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "carry_back",
+      "summary": "配線、採点、残響のどれを今日の記録として残すか選ぶ"
+    },
+    {
+      "id": "END_ROUTE",
+      "title": "昨日の配線図",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🧭",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "END_ROUTE",
+      "summary": "昨日の散点が翌日に一本の景気のいい線へ変わる"
+    },
+    {
+      "id": "END_VERDICT",
+      "title": "翌日の採点",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "📝",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "END_VERDICT",
+      "summary": "かなり良かったという一言が満足を確定する"
+    },
+    {
+      "id": "END_PLATE",
+      "title": "景気の残響",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🥩",
+      "scenario": "2026-04-12_翌日の採点表",
+      "entry": "END_PLATE",
+      "summary": "強い締めが翌日の気分にまで熱を残す"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_room",
+      "choiceText": "今日の手がかりを選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "route_room",
+      "choiceText": "昨日の配線図を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "verdict_room",
+      "choiceText": "今日の採点札を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "plate_room",
+      "choiceText": "締め皿を持ち上げる",
+      "style": "kenkai"
+    },
+    {
+      "from": "route_room",
+      "to": "gen_route",
+      "choiceText": "昨日を一本の線として受け取る",
+      "style": "genkai"
+    },
+    {
+      "from": "route_room",
+      "to": "mitra_gate",
+      "choiceText": "配線図を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_route",
+      "to": "mitra_gate",
+      "choiceText": "配線図を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "verdict_room",
+      "to": "gen_verdict",
+      "choiceText": "短い採点を信じる",
+      "style": "genkai"
+    },
+    {
+      "from": "verdict_room",
+      "to": "mitra_gate",
+      "choiceText": "採点札を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_verdict",
+      "to": "mitra_gate",
+      "choiceText": "採点札を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "plate_room",
+      "to": "gen_plate",
+      "choiceText": "締めの強さを認める",
+      "style": "genkai"
+    },
+    {
+      "from": "plate_room",
+      "to": "mitra_gate",
+      "choiceText": "締め皿を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "gen_plate",
+      "to": "mitra_gate",
+      "choiceText": "締め皿を持って通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "carry_back",
+      "choiceText": "今日の輪郭を選ぶ",
+      "style": "rejoin"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_ROUTE",
+      "choiceText": "配線図を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_VERDICT",
+      "choiceText": "採点札を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "carry_back",
+      "to": "END_PLATE",
+      "choiceText": "締め皿を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

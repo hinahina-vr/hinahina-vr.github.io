@@ -1,0 +1,319 @@
+{
+  "title": "翌日の採点表",
+  "subtitle": "─ 景気残響の夢 ─",
+  "genre": "翌日採点ノベル",
+  "date": "2026-04-12",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "📘"
+    },
+    "route": {
+      "name": "配線図",
+      "color": "#5b8bd0",
+      "emoji": "🧭"
+    },
+    "verdict": {
+      "name": "採点札",
+      "color": "#8b6fb5",
+      "emoji": "📝"
+    },
+    "plate": {
+      "name": "締め皿",
+      "color": "#b05a2b",
+      "emoji": "🥩"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月十二日。机の上には、きのうの配線図と、今日の短い採点が並んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "昨日はかなり良かった。今日はそれを、やっとそう言えてる感じなんだよな。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机上には三つのものが置かれている。昨日の配線図、今日の採点札、そして最後に残った締め皿。"
+    },
+    {
+      "label": "choose_room"
+    },
+    {
+      "choices": [
+        {
+          "text": "昨日の配線図を見る",
+          "goto": "route_room"
+        },
+        {
+          "text": "今日の採点札を読む",
+          "goto": "verdict_room"
+        },
+        {
+          "text": "締め皿を持ち上げる",
+          "goto": "plate_room"
+        }
+      ]
+    },
+    {
+      "label": "route_room"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "route",
+      "expression": "",
+      "text": "電子部品、甲殻類、二軒ハシゴ、そして肉。\n順番は妙でも、勢いは一本でした。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨日の散らかった点は、今日から見ると一本の線になる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "昨日を一本の線として受け取る",
+          "goto": "gen_route"
+        },
+        {
+          "text": "配線図を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_route"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "route",
+      "expression": "",
+      "text": "本番の日には見えなかった輪郭が、翌日にはきれいに見えることがあります。"
+    },
+    {
+      "choices": [
+        {
+          "text": "配線図を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "verdict_room"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "verdict",
+      "expression": "",
+      "text": "かなり良かった。\n短いけれど、これで足りる日のほうが信用できます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "説明しないのではなく、説明が要らない程度に満足している。"
+    },
+    {
+      "choices": [
+        {
+          "text": "短い採点を信じる",
+          "goto": "gen_verdict"
+        },
+        {
+          "text": "採点札を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_verdict"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "verdict",
+      "expression": "",
+      "text": "翌日に残る一言は、その場の興奮よりも少しだけ正確です。"
+    },
+    {
+      "choices": [
+        {
+          "text": "採点札を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "plate_room"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "plate",
+      "expression": "",
+      "text": "最後が強ければ、一日全体が締まります。\n満足はたいてい、終わり方で保存されます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "景気のいい終わりは、翌日の気分にまで熱を残していく。"
+    },
+    {
+      "choices": [
+        {
+          "text": "締めの強さを認める",
+          "goto": "gen_plate"
+        },
+        {
+          "text": "締め皿を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "gen_plate"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "plate",
+      "expression": "",
+      "text": "身体が喜んだ終わり方は、翌日にもちゃんと勝ち分として残ります。"
+    },
+    {
+      "choices": [
+        {
+          "text": "締め皿を持って通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は、きのうの配線図と、今日の採点と、最後の熱が同じ机にありました。ふふ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "本番の日と受理の日がずれていても、どちらもあなたのものです。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "あとから良かったって言えるの、けっこう大事なんだよな。"
+    },
+    {
+      "label": "carry_back"
+    },
+    {
+      "choices": [
+        {
+          "text": "配線図を持ち帰る",
+          "goto": "END_ROUTE"
+        },
+        {
+          "text": "採点札を持ち帰る",
+          "goto": "END_VERDICT"
+        },
+        {
+          "text": "締め皿を持ち帰る",
+          "goto": "END_PLATE"
+        }
+      ]
+    },
+    {
+      "label": "END_ROUTE"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "昨日は散らかっていたはずの点が、翌日には一本の線として見えてきた。輪郭は遅れて完成する。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "景気のよさは、あとから配線される。\n──END: 昨日の配線図"
+    },
+    {
+      "label": "END_VERDICT"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "かなり良かった。たったその一言で足りるのは、満足が翌日まで残っていたからだ。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "短い採点ほど、信用できる。\n──END: 翌日の採点"
+    },
+    {
+      "label": "END_PLATE"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "最後を強く閉じた日の熱は、翌日の気分にも残っている。身体の勝ち分は、寝ても消えない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "締めが強いと、余韻も強い。\n──END: 景気の残響"
+    }
+  ]
+}

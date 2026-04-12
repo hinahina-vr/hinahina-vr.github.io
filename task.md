@@ -199,3 +199,52 @@
 | rin | C, E |
 | rizel | G |
 | mitra | A, B, C, D, E, F, G |
+
+## 4/12 話題定義
+
+- A: 昨日の景気のいい行程を翌日に回収している
+- B: 電子部品から始まる配線図のような前日
+- C: 途中に甲殻類が挟まっている妙な強さ
+- D: 街へ戻って二軒ハシゴする加速
+- E: 最後を肉で締める景気のよさ
+- F: 「かなり良かった」という雑で正確な総括
+- G: 興奮の翌日に満足を受け取る採点
+- H: 4/11 の重さの翌日に身体の勝ち分を認める
+
+## 4/12 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A, G |
+| hinahina | G, H |
+| moegami | B, E |
+| oji | B, F |
+| multi | F, G |
+| dejiko | D, E |
+| ayu | C, G |
+| rem | G, H |
+| ruriko | C, F |
+| tsumugi | A, H |
+| ecoko | B, D |
+| mii | E, F |
+| kud | B, H |
+| feiris | D, F |
+| kotomi | A, B |
+| minagi | A, G |
+| kiku8 | B, F |
+| mint | C, F |
+| tama | E, H |
+| kukuri | A, D |
+| sharo | E, F |
+| nemurin | G, H |
+| hinako | C, G |
+| kyoko | D, H |
+| mayuki | C, F |
+| mitsuba | A, E |
+| ana | C, D |
+| astarotte | D, G |
+| hazuki | E, H |
+| rin | B, D |
+| rizel | F, G |
+| mitra | A, B, C, D, E, F, G, H |
+| roju | A, B, D, E, F, G, H |
