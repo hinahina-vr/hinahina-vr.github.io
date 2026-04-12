@@ -2044,14 +2044,36 @@ body.diary-despair.mode-classic .guide-card hr ~ p {
   color: inherit !important;
 }
 
+.source-context-body strong {
+  display: block !important;
+  margin: 0 0 6px !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+  opacity: 0.92 !important;
+}
+
 .source-context-body ul {
-  margin: 4px 0 0 !important;
-  padding-left: 1.2em !important;
+  list-style: none !important;
+  margin: 6px 0 0 !important;
+  padding: 0 !important;
+  display: grid !important;
+  gap: 6px !important;
 }
 
 .source-context-body li {
-  margin: 0 0 4px !important;
-  line-height: 1.7 !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 7px 10px !important;
+  line-height: 1.6 !important;
+  border-left: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: none !important;
+}
+
+.source-context-body li::marker {
+  content: "" !important;
 }
 
 .source-context-body p:last-child,
