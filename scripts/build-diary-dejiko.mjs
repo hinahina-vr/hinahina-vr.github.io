@@ -7,15 +7,39 @@ import { join, basename } from "node:path";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
+import { loadSourceDiaryContext } from "./lib/source-context.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-dejiko");
 const OUT_FILE = join(import.meta.dirname, "..", "diary-dejiko.html");
+const ROOT = join(import.meta.dirname, "..");
 
 function parseFilename(filename) {
   const base = basename(filename, ".md");
   const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
   if (!match) return null;
   return { date: match[1], title: match[2] };
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function renderSourceContext(entry) {
+  if (!entry.sourceContextHtml) return "";
+  const sourceMeta = [entry.sourceDate, entry.sourceTitle].filter(Boolean).join(" / ");
+  const sourceLine = sourceMeta
+    ? ` <span class="source-context-sep">·</span> <span class="source-context-source">${escapeHtml(sourceMeta)}</span>`
+    : "";
+  return `            <div class="source-context">
+              <p class="source-context-label">この日の前提${sourceLine}</p>
+              <div class="source-context-body">
+${entry.sourceContextHtml}
+              </div>
+            </div>`;
 }
 
 async function main() {
@@ -29,10 +53,18 @@ async function main() {
       continue;
     }
     const raw = await readFile(join(DIARY_DIR, file), "utf-8");
+    const sourceContext = await loadSourceDiaryContext({ rootDir: ROOT, rawEntry: raw });
     const cleaned = stripDailyContextBlock(raw);
     const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
     const html = await marked.parse(body);
-    entries.push({ ...meta, html });
+    const sourceContextHtml = sourceContext ? await marked.parse(sourceContext.markdown) : "";
+    entries.push({
+      ...meta,
+      html,
+      sourceContextHtml,
+      sourceDate: sourceContext?.date ?? null,
+      sourceTitle: sourceContext?.title ?? null,
+    });
   }
 
   entries.sort((a, b) => b.date.localeCompare(a.date));
@@ -46,6 +78,7 @@ async function main() {
       return `          <li id="${e.date}">
             <p class="entry-date">${e.date}（${dow}）</p>
             <h3 class="entry-title">${e.title}</h3>
+${renderSourceContext(e)}
             ${e.html}
           </li>`;
     })
@@ -133,6 +166,35 @@ async function main() {
       }
       .entry-list li strong {
         color: #70d090;
+      }
+
+      .source-context {
+        margin: 0 0 16px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px dashed rgba(255, 255, 255, 0.35);
+      }
+      .source-context-label {
+        margin: 0 0 6px;
+        color: inherit;
+        opacity: 0.72;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+      }
+      .source-context-sep {
+        opacity: 0.6;
+      }
+      .source-context-source {
+        letter-spacing: 0;
+      }
+      .source-context-body p {
+        margin: 0 0 8px;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+      .source-context-body p:last-child {
+        margin-bottom: 0;
       }
       .back-link {
         color: #0a2a15;
