@@ -19,7 +19,20 @@ const DISCOURAGED_PATTERNS = [
     label: "読み手に見えない出来事の受け方",
     regex: /今日の人間は|だが今日起きているのは|要するに今日は|その日はまさにそうで/g,
   },
+  {
+    label: "本文内の日付表現",
+    regex: /(?:\d{4}年\d{1,2}月\d{1,2}日|(?:\d{1,2}|[一二三四五六七八九十〇零]+)月(?:\d{1,2}|[一二三四五六七八九十〇零]+)日)/g,
+  },
 ];
+
+function stripMarkup(body) {
+  return body
+    .replace(/<[^>]+>/g, " ")
+    .replace(/`[^`]*`/g, " ")
+    .replace(/\[[^\]]+\]\([^)]+\)/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 function parseArgs(argv) {
   const args = { date: null };
@@ -49,10 +62,11 @@ const findings = [];
 for (const file of files) {
   const markdown = readDiaryFile(file);
   const { body } = splitDiaryMarkdown(markdown);
+  const plainBody = stripMarkup(body);
   const matches = [];
 
   for (const pattern of DISCOURAGED_PATTERNS) {
-    const hit = body.match(pattern.regex);
+    const hit = plainBody.match(pattern.regex);
     if (!hit) continue;
     matches.push(`${pattern.label}: ${[...new Set(hit)].join(", ")}`);
   }
