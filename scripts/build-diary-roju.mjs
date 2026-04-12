@@ -9,6 +9,7 @@ import { join, basename } from "node:path";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
+import { loadSourceDiaryContext } from "./lib/source-context.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-roju");
 const OUT_DIR = join(import.meta.dirname, "..");
@@ -33,11 +34,33 @@ function formatMonthLabel(monthKey) {
 }
 
 function renderFullEntry(entry) {
+  const sourceMeta = [entry.sourceDate, entry.sourceTitle].filter(Boolean).join(" / ");
+  const sourceLine = sourceMeta
+    ? ` <span class="source-context-sep">·</span> <span class="source-context-source">${escapeHtml(sourceMeta)}</span>`
+    : "";
+  const sourceContext = entry.sourceContextHtml
+    ? `            <div class="source-context">
+              <p class="source-context-label">この日の前提${sourceLine}</p>
+              <div class="source-context-body">
+${entry.sourceContextHtml}
+              </div>
+            </div>
+`
+    : "";
   return `          <li id="${entry.date}">
             <p class="entry-date">${formatDate(entry.date)}</p>
             <h3 class="entry-title">${entry.title}</h3>
+${sourceContext}
             ${entry.html}
           </li>`;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function renderTitleOnly(entry, monthKey) {
@@ -142,6 +165,34 @@ function buildPage(pageTitle, latestMonthLabel, entriesHtml, extraSections, navL
       .entry-list li p {
         color: #c8b898;
         font-size: 13px;
+      }
+      .source-context {
+        margin: 0 0 16px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        background: rgba(60, 45, 26, 0.72);
+        border: 1px dashed rgba(200, 150, 60, 0.28);
+      }
+      .source-context-label {
+        margin: 0 0 6px;
+        color: #c8963c;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+      }
+      .source-context-sep {
+        opacity: 0.6;
+      }
+      .source-context-source {
+        letter-spacing: 0;
+      }
+      .source-context-body p {
+        margin: 0 0 8px;
+        color: #c8b898;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+      .source-context-body p:last-child {
+        margin-bottom: 0;
       }
       .entry-list li h3 + blockquote {
         border-left: 3px solid rgba(200, 150, 60, 0.3);
@@ -289,10 +340,18 @@ async function main() {
       continue;
     }
     const raw = await readFile(join(DIARY_DIR, file), "utf-8");
+    const sourceContext = await loadSourceDiaryContext({ rootDir: OUT_DIR, rawEntry: raw });
     const cleaned = stripDailyContextBlock(raw);
     const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
     const html = await marked.parse(body);
-    entries.push({ ...meta, html });
+    const sourceContextHtml = sourceContext ? await marked.parse(sourceContext.markdown) : "";
+    entries.push({
+      ...meta,
+      html,
+      sourceContextHtml,
+      sourceDate: sourceContext?.date ?? null,
+      sourceTitle: sourceContext?.title ?? null,
+    });
   }
 
   entries.sort((a, b) => b.date.localeCompare(a.date));

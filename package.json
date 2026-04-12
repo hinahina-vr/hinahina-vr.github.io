@@ -5,6 +5,7 @@
         "auth:daily-sources": "node scripts/auth-daily-sources.mjs",
         "collect:daily-context": "node scripts/collect-daily-context.mjs",
         "test:daily-context-health": "node tests/daily-context-health.test.mjs",
+        "test:source-context": "node tests/source-context.test.mjs",
         "check:diary-self-date": "node scripts/check-diary-self-date-mentions.mjs",
         "check:diary-topic-distribution": "node scripts/check-diary-topic-distribution.mjs",
         "fix:diary-self-date": "node scripts/fix-diary-self-date-mentions.mjs",
