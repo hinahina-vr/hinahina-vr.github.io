@@ -75,14 +75,7 @@ async function run() {
 `,
   });
 
-  assert(sourceContext);
-  assert(sourceContext.markdown.includes("**この日の話題**"));
-  assert(sourceContext.markdown.includes("- 電子部品から始まる配線図のような前日"));
-  assert(sourceContext.markdown.includes("- 最後を肉で締める景気のよさ"));
-  assert(!sourceContext.markdown.includes("景気のいい順番が、一晩寝ても崩れなかった。"));
-  assert.equal(sourceContext.markdown.trim(), `**この日の話題**
-- 電子部品から始まる配線図のような前日
-- 最後を肉で締める景気のよさ`);
+  assert.equal(sourceContext, null);
 
   console.log("source-context tests passed");
 }

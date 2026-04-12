@@ -28,17 +28,5 @@ export function parseEntryTopics(rawMarkdown) {
 }
 
 export async function loadSourceDiaryContext({ rootDir, rawEntry, paragraphLimit = 2 }) {
-  const sourcePath = parseEntrySourcePath(rawEntry);
-  if (!sourcePath) return null;
-
-  const topics = parseEntryTopics(rawEntry);
-  if (topics.length === 0) {
-    return null;
-  }
-
-  return {
-    sourcePath,
-    ...parseSourceFileMeta(sourcePath),
-    markdown: `**この日の話題**\n${topics.map((topic) => `- ${topic}`).join("\n")}`,
-  };
+  return null;
 }
