@@ -1,0 +1,200 @@
+{
+  "title": "文明と火のあいだ",
+  "subtitle": "─ OSと縄文の夢 ─",
+  "genre": "古層回帰ノベル",
+  "date": "2026-04-11",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "📘" },
+    "schema": { "name": "OS図", "color": "#5b8bd0", "emoji": "🧭" },
+    "bonfire": { "name": "焚き火", "color": "#b05a2b", "emoji": "🔥" },
+    "terminal": { "name": "クラウド端末", "color": "#8b6fb5", "emoji": "☁️" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    {
+      "bg": "home_office",
+      "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "四月十一日。机の上に、OSの設計図と、酒を飲んで踊りたい本音と、深夜のクラウド端末が並んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "言葉は重いし、帰りたい先はやたら古い。でも最後にはまた端末を開いてるんだよな。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机上には三つの入口がある。世界観の図面、古い火、そして終わらない端末。"
+    },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "OS図をひらく", "goto": "schema_room" },
+        { "text": "焚き火へ寄る", "goto": "bonfire_room" },
+        { "text": "クラウド端末を起こす", "goto": "terminal_room" }
+      ]
+    },
+    { "label": "schema_room" },
+    { "bg": "corridor" },
+    {
+      "speaker": "schema",
+      "expression": "",
+      "text": "人間と地球がOS、生と死がUX。\n雑に大きい比喩ほど、疲れた日には妙に正確です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "世界観は逃避ではなく、重さの発生源を見つけるための図面になる。"
+    },
+    {
+      "choices": [
+        { "text": "負荷の位置を読む", "goto": "gen_schema" },
+        { "text": "図面を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_schema" },
+    { "bg": "home_office" },
+    {
+      "speaker": "schema",
+      "expression": "",
+      "text": "だるさは抽象化されることで消えません。\nけれど、どこが重いかは少し見えるようになります。"
+    },
+    {
+      "choices": [
+        { "text": "図面を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "bonfire_room" },
+    { "bg": "dawn" },
+    {
+      "speaker": "bonfire",
+      "expression": "",
+      "text": "文字より古く、会話より古く、火と酒と踊りは先に身体へ届きます。\n疲れた日は、そちらが本体です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "縄文とは時代名ではなく、言葉の前に戻りたい身体の言い換えだった。"
+    },
+    {
+      "choices": [
+        { "text": "古いリズムへ寄る", "goto": "gen_bonfire" },
+        { "text": "火を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_bonfire" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "bonfire",
+      "expression": "",
+      "text": "退行ではありません。\n処理が重すぎる日に、身体が自力で選ぶ避難所です。"
+    },
+    {
+      "choices": [
+        { "text": "火を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "terminal_room" },
+    { "bg": "home_office" },
+    {
+      "speaker": "terminal",
+      "expression": "",
+      "text": "帰りたい先が原始でも、手はまた現在の端末を起こします。\n未終了の仕事と好奇心は、深夜にも残っています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "文明を捨てたいわけではない。ただ少し離れたいだけなのに、結局また接続してしまう。"
+    },
+    {
+      "choices": [
+        { "text": "未終了を引き受ける", "goto": "gen_terminal" },
+        { "text": "端末を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_terminal" },
+    { "bg": "corridor" },
+    {
+      "speaker": "terminal",
+      "expression": "",
+      "text": "矛盾は故障ではありません。\n古い欲望と新しい道具が同時に残るのが、あなたの現在地です。"
+    },
+    {
+      "choices": [
+        { "text": "端末を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "dawn" },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は、設計図と焚き火と端末が同じ机にありました。ふふ。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "高い理屈、古い身体、終わらない接続。その三つを矛盾のまま持ちなさい。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "どれか一個に決めきれないのも、たぶん今日の正直さなんだよな。"
+    },
+    { "label": "carry_back" },
+    {
+      "choices": [
+        { "text": "図面を持ち帰る", "goto": "END_SCHEMA" },
+        { "text": "火を持ち帰る", "goto": "END_FIRE" },
+        { "text": "端末を持ち帰る", "goto": "END_TERMINAL" }
+      ]
+    },
+    { "label": "END_SCHEMA" },
+    { "bg": "home_office" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "大きすぎる比喩は、ときどき疲労の地図になる。世界を説明するためではなく、自分の重さを測るために。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "だるさには、図面が要る。\n──END: 負荷の設計図"
+    },
+    { "label": "END_FIRE" },
+    { "bg": "dawn" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酒と踊りと火のほうが、今日は言葉より先に身体へ届いた。古いものは、疲れた心の退路になる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "先に火へ戻る。\n──END: 古層の退路"
+    },
+    { "label": "END_TERMINAL" },
+    { "bg": "corridor" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "縄文へ帰りたいと言いながら、最後にはまた端末を起こしている。その矛盾は敗北ではなく、現在地の正確さだった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "接続は、まだ切れない。\n──END: 未終了の接続"
+    }
+  ]
+}
