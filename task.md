@@ -248,3 +248,52 @@
 | rizel | F, G |
 | mitra | A, B, C, D, E, F, G, H |
 | roju | A, B, D, E, F, G, H |
+
+## 4/13 話題定義
+
+- A: マイコン未経験なのに、PC と AI をつなげば回路設計まで行けるのではという雑な希望
+- B: 電子工作にも物理の限界があり、力学と電磁気学をやるしかない
+- C: 習作としてアルコールチェッカーを作ろうとしている
+- D: ブレッドボードの配線図まで出たが、合っているのか分からない
+- E: ソフトウェアと違って、工作は煙や火事の現実がある
+- F: 「家燃えまくり」まで含めて、便利さと危うさを半分笑いながら見ている
+- G: 夜には一句が出て、散る花と時間の影へ飛んでいく
+- H: 配線の現実と観念の逃避が同じ頭の中で往復している
+
+## 4/13 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A, G |
+| hinahina | D, H |
+| moegami | E, G |
+| oji | B, D |
+| multi | A, C |
+| dejiko | D, F |
+| ayu | C, F |
+| rem | E, H |
+| ruriko | G, H |
+| tsumugi | B, G |
+| ecoko | C, E |
+| mii | C, F |
+| kud | A, C |
+| feiris | D, F |
+| kotomi | B, D |
+| minagi | G, H |
+| kiku8 | B, E |
+| mint | B, H |
+| tama | A, F |
+| kukuri | A, E |
+| sharo | C, D |
+| nemurin | G, H |
+| hinako | C, G |
+| kyoko | D, F |
+| mayuki | E, F |
+| mitsuba | A, H |
+| ana | B, C |
+| astarotte | E, H |
+| hazuki | D, E |
+| rin | B, F |
+| rizel | C, G |
+| mitra | A, B, C, D, E, F, G, H |
+| roju | A, B, C, D, E, F, G, H |

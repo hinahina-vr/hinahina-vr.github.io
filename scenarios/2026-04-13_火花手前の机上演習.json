@@ -1,0 +1,201 @@
+{
+  "title": "火花手前の机上演習",
+  "subtitle": "─ 配線と花影の夢 ─",
+  "genre": "工作逡巡ノベル",
+  "date": "2026-04-13",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "📘" },
+    "blueprint": { "name": "配線図", "color": "#5b8bd0", "emoji": "📐" },
+    "sensor": { "name": "測定器", "color": "#63a36f", "emoji": "🍶" },
+    "spark": { "name": "火花", "color": "#c96a3a", "emoji": "🔥" },
+    "shadow": { "name": "花影", "color": "#8b6fb5", "emoji": "🌸" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    {
+      "bg": "home_office",
+      "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の上には、配線図と、作りたい測定器の名前と、まだ出ていない火花が並んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "PCとAIの勢いでここまで来たけど、ここから先はほんとに現実だな。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "今夜の入口は三つある。配線図、測定器、そして火花手前の想像。"
+    },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "配線図をのぞく", "goto": "blueprint_room" },
+        { "text": "測定器の夢を見る", "goto": "sensor_room" },
+        { "text": "火花の手前に立つ", "goto": "spark_room" }
+      ]
+    },
+    { "label": "blueprint_room" },
+    { "bg": "corridor" },
+    {
+      "speaker": "blueprint",
+      "expression": "",
+      "text": "図はある。\nけれど、図が正しいとはまだ誰も保証していない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "線を引けることと、流してよいことは別だと、机の上が教えてくる。"
+    },
+    {
+      "choices": [
+        { "text": "基礎へ戻る", "goto": "gen_blueprint" },
+        { "text": "図面を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_blueprint" },
+    { "bg": "home_office" },
+    {
+      "speaker": "blueprint",
+      "expression": "",
+      "text": "配線図は信仰ではありません。\n力学と電磁気の言葉で裏打ちされて、はじめて図面になります。"
+    },
+    {
+      "choices": [
+        { "text": "図面を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "sensor_room" },
+    { "bg": "dawn" },
+    {
+      "speaker": "sensor",
+      "expression": "",
+      "text": "酒の気配を測る装置を作りたい。\n少しふざけていて、少しだけ役に立つ夢です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "作りたいものの名前がある日は、失敗の怖さも少しだけ具体的になる。"
+    },
+    {
+      "choices": [
+        { "text": "夢の形を信じる", "goto": "gen_sensor" },
+        { "text": "測定器を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_sensor" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "sensor",
+      "expression": "",
+      "text": "役に立つかもしれない冗談は、工作のかなりいい燃料になります。"
+    },
+    {
+      "choices": [
+        { "text": "測定器を持って通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "spark_room" },
+    { "bg": "chorus_morning" },
+    {
+      "speaker": "spark",
+      "expression": "",
+      "text": "間違えれば煙、最悪は家。\nハードウェアは冗談を現実へ近づけます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "想像された火花は、まだ出ていないからこそ、今日は教科書になる。"
+    },
+    {
+      "choices": [
+        { "text": "火花の手前で止まる", "goto": "gen_spark" },
+        { "text": "火花を連れて通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_spark" },
+    { "bg": "dawn" },
+    {
+      "speaker": "spark",
+      "expression": "",
+      "text": "怖さを見たあとにしか、本気の手順は始まりません。"
+    },
+    {
+      "choices": [
+        { "text": "花影のほうへ回り込む", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "shadow",
+      "expression": "",
+      "text": "散る花に、すべての刻の影を集める。現実が固い夜ほど、影はやわらかく見えます。"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は、配線図と測定器と火花の想像を持ったまま、最後に影のほうへ触れました。ふふ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "怖いってわかったあとで、まだ作りたいなら、それは本気なんだろうな。"
+    },
+    { "label": "carry_back" },
+    {
+      "choices": [
+        { "text": "図面を持ち帰る", "goto": "END_BLUEPRINT" },
+        { "text": "測定器の夢を持ち帰る", "goto": "END_SENSOR" },
+        { "text": "花影を持ち帰る", "goto": "END_SHADOW" }
+      ]
+    },
+    { "label": "END_BLUEPRINT" },
+    { "bg": "home_office" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "図面を信じるには、まず基礎へ戻るしかない。勢いは入口であって、配線そのものではなかった。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "信じる前に、確かめる。\n──END: 基礎へ戻る線"
+    },
+    { "label": "END_SENSOR" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酒を測る装置という少し笑える夢が、現実の手順を本気にした。作りたいものの名前が、今日はちゃんと役に立った。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "冗談みたいな夢ほど燃料になる。\n──END: 測定器の夢"
+    },
+    { "label": "END_SHADOW" },
+    { "bg": "chorus_morning" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "火花の手前まで行ったあとで、夜は花の影へ逃げこんだ。硬い現実に触れた日の詩は、少しだけ深い。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "焦げる前に、影を拾う。\n──END: 花影の退避"
+    }
+  ]
+}
