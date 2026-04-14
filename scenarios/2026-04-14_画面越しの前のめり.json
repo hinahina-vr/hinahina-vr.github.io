@@ -1,0 +1,196 @@
+{
+  "title": "画面越しの前のめり",
+  "subtitle": "─ 説明より先に引きこまれる夜 ─",
+  "genre": "講義没入ノベル",
+  "date": "2026-04-14",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "📘" },
+    "screen": { "name": "画面", "color": "#5b8bd0", "emoji": "🖥️" },
+    "lecture": { "name": "講義", "color": "#63a36f", "emoji": "📊" },
+    "flow": { "name": "流れ", "color": "#c96a3a", "emoji": "🎙️" },
+    "work": { "name": "残る仕事", "color": "#8b6fb5", "emoji": "🛠️" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    {
+      "bg": "home_office",
+      "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "机の上で回線をつなぐ。数字の講義を聞くはずの夜が、少しずつ別の熱を持ちはじめる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "内容を聞くつもりで座ったのに、なんかもう流れそのものに乗せられてる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "今夜の入口は三つある。画面、講義、そして残る仕事。"
+    },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "画面の前に座る", "goto": "screen_room" },
+        { "text": "講義の流れに入る", "goto": "lecture_room" },
+        { "text": "残る仕事を考える", "goto": "work_room" }
+      ]
+    },
+    { "label": "screen_room" },
+    { "bg": "corridor" },
+    {
+      "speaker": "screen",
+      "expression": "",
+      "text": "ただ映っているだけのはずなのに、目は外れない。\n画面は距離を置く道具にも、前のめりの入口にもなる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "接続という事務的な動作のあとで、姿勢のほうが先に変えられていく。"
+    },
+    {
+      "choices": [
+        { "text": "手が止まらない理由を見る", "goto": "gen_screen" },
+        { "text": "通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_screen" },
+    { "bg": "home_office" },
+    {
+      "speaker": "screen",
+      "expression": "",
+      "text": "見ているのは映像でも、動いているのは受け手の身体です。"
+    },
+    {
+      "choices": [
+        { "text": "通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "lecture_room" },
+    { "bg": "dawn" },
+    {
+      "speaker": "lecture",
+      "expression": "",
+      "text": "数字の話をするはずが、言葉の選び方、間、笑い、速度のほうが先に効いてくる。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "内容はあとから追いつく。先に起きるのは、次を聞きたくなる傾きだ。"
+    },
+    {
+      "choices": [
+        { "text": "流れの手つきを見る", "goto": "gen_lecture" },
+        { "text": "通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_lecture" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "flow",
+      "expression": "",
+      "text": "うまい説明は情報を並べません。\n聞く姿勢そのものを前へ運びます。"
+    },
+    {
+      "choices": [
+        { "text": "通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "work_room" },
+    { "bg": "chorus_morning" },
+    {
+      "speaker": "work",
+      "expression": "",
+      "text": "情報を渡すことと、人をその気にさせることは、まだ別の仕事です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "技術の先を見ていた頭が、そのまま人間の上手さに押し返される。"
+    },
+    {
+      "choices": [
+        { "text": "代替不能の側を見る", "goto": "gen_work" },
+        { "text": "通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "gen_work" },
+    { "bg": "dawn" },
+    {
+      "speaker": "work",
+      "expression": "",
+      "text": "残るのは、内容より先に気分を動かす技術。\nそれはまだ人の手にあります。"
+    },
+    {
+      "choices": [
+        { "text": "通過点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "今日は、画面の距離と、人の強さを同時に受け取りました。ふふ。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "便利さの先を見てたはずなのに、結局ちゃんと人に負けたな。"
+    },
+    { "label": "carry_back" },
+    {
+      "choices": [
+        { "text": "画面の集中を持ち帰る", "goto": "END_SCREEN" },
+        { "text": "流れの手つきを持ち帰る", "goto": "END_FLOW" },
+        { "text": "残る仕事を持ち帰る", "goto": "END_WORK" }
+      ]
+    },
+    { "label": "END_SCREEN" },
+    { "bg": "home_office" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "距離があるから薄まるとは限らない。前のめりは、画面の向こうからでもやって来た。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "姿勢は回線を越える。\n──END: 画面の集中"
+    },
+    { "label": "END_FLOW" },
+    { "bg": "wind_morning" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "話の内容より先に、次を待つ気分が運ばれていた。うまい授業は、まず流れで人を動かす。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "説明の前に、流れが勝つ。\n──END: 流れの手つき"
+    },
+    { "label": "END_WORK" },
+    { "bg": "chorus_morning" },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "置き換えを考える頭のままで、それでもなお人に負けた。その敗北は、まだ残る仕事の在りかを教えてくれた。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その気にさせる技術は残る。\n──END: 代替不能の仕事"
+    }
+  ]
+}

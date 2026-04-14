@@ -297,3 +297,51 @@
 | rizel | C, G |
 | mitra | A, B, C, D, E, F, G, H |
 | roju | A, B, C, D, E, F, G, H |
+
+## 4/14 話題定義
+
+- A: ZEN大学のライブ映像科目をつなぎ、画面越しに授業を受けた
+- B: 回のテーマは「数字で見るIT革命」で、理屈やデータの話のはずだった
+- C: 言葉の選び方、間、笑い、速度がうますぎて流れに乗せられる
+- D: ノートを取る手が止まらず、目線が画面から外れないくらい没入した
+- E: 情報を渡すことと、場を動かすことは別だと感じた
+- F: AIや自動化を考えがちな頭のままで、人間の代替不可能性に負けた
+- G: まだ残る仕事は「人をその気にさせる技術」の側にある
+
+## 4/14 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A, D |
+| hinahina | D, F |
+| moegami | B, G |
+| oji | E, G |
+| multi | C, D |
+| dejiko | C, G |
+| ayu | A, C |
+| rem | E, F |
+| ruriko | C, F |
+| tsumugi | A, E |
+| ecoko | A, D |
+| mii | C, D |
+| kud | A, B |
+| feiris | C, G |
+| kotomi | B, E |
+| minagi | A, F |
+| kiku8 | B, G |
+| mint | C, E |
+| tama | C, D |
+| kukuri | A, G |
+| sharo | E, G |
+| nemurin | D, F |
+| hinako | A, D |
+| kyoko | C, F |
+| mayuki | B, F |
+| mitsuba | D, G |
+| ana | A, E |
+| astarotte | F, G |
+| hazuki | C, E |
+| rin | E, F |
+| rizel | D, G |
+| mitra | A, B, C, D, E, F, G |
+| roju | B, C, E, F, G |
