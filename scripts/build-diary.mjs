@@ -4,7 +4,7 @@
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
@@ -55,7 +55,9 @@ const ROOT_DIR = join(import.meta.dirname, "..");
 const DIARY_DIR = join(ROOT_DIR, "diary");
 const OUT_DIR = ROOT_DIR;
 const ADMS_DIR = join(ROOT_DIR, "scenarios", "adms");
+const COVER_DIR = join(ROOT_DIR, "assets", "diary-covers");
 const crossLinkTargetCache = new Map();
+const coverAssetCache = new Map();
 
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
@@ -65,6 +67,14 @@ function parseFilename(filename) {
   const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
   if (!match) return null;
   return { date: match[1], month: match[1].slice(0, 7), title: match[2], slug: base };
+}
+
+function escapeHtmlAttr(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 function formatDate(dateStr) {
@@ -163,6 +173,29 @@ function buildDreamStartHref(date, dreamRootMap) {
   return `./galge-scenario.html?${params.toString()}`;
 }
 
+function resolveEntryCover(slug, title) {
+  if (coverAssetCache.has(slug)) {
+    return coverAssetCache.get(slug);
+  }
+
+  const extensions = [".webp", ".png", ".jpg", ".jpeg", ".svg"];
+  for (const ext of extensions) {
+    const filename = `${slug}${ext}`;
+    const absolutePath = join(COVER_DIR, filename);
+    if (existsSync(absolutePath)) {
+      const cover = {
+        src: encodeURI(`./assets/diary-covers/${filename}`),
+        alt: `${title}の扉絵`,
+      };
+      coverAssetCache.set(slug, cover);
+      return cover;
+    }
+  }
+
+  coverAssetCache.set(slug, null);
+  return null;
+}
+
 function stripDreamButton(html) {
   const withoutWrappedButtons = html.replace(
     /<p([^>]*)>\s*<a([^>]*?)href="[^"]*"([^>]*?)>([\s\S]*?夢を見る[\s\S]*?)<\/a>\s*<\/p>/g,
@@ -210,9 +243,17 @@ function buildCrossLinks(date) {
 // エントリのHTML（全文表示）
 function renderFullEntry(e) {
   const crossLinks = buildCrossLinks(e.date);
+  const cover = resolveEntryCover(e.slug, e.title);
+  const coverHtml = cover
+    ? `
+            <figure class="entry-cover">
+              <img class="entry-cover-image" src="${cover.src}" alt="${escapeHtmlAttr(cover.alt)}" loading="lazy" decoding="async" />
+            </figure>`
+    : "";
   return `          <li id="${e.slug}">
             <p class="entry-date">${formatDate(e.date)}</p>
             <h3 class="entry-title">${e.title}</h3>
+            ${coverHtml}
             ${e.html}${crossLinks}
           </li>`;
 }

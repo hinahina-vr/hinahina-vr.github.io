@@ -10,6 +10,7 @@
         "check:diary-context-phrasing": "node scripts/check-diary-context-phrasing.mjs",
         "check:diary-topic-distribution": "node scripts/check-diary-topic-distribution.mjs",
         "fix:diary-self-date": "node scripts/fix-diary-self-date-mentions.mjs",
+        "build:diary-covers": "node scripts/generate-diary-covers.mjs",
         "build:diary": "node scripts/collect-daily-context.mjs --best-effort && node scripts/build-diary.mjs",
         "build:galge": "node scripts/build-galge.mjs",
         "build:galge-runtime": "node scripts/build-galge-runtime.mjs",

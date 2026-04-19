@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">画面越しでも場は動く</title>
+  <desc id="desc">朝から夏野さんのライブ映像の授業をつないだ。回のテーマは「数字で見るIT革命」で、もともとはデータと構造の話を落ち着いて聞くつもりでいた。画面の向こうで前に立つ人の声を聞く。ただそれだけのことなのに、始まってしばらくすると、これは説明を聞いているというより、ひとつの流れの中に乗せられている時間なんだと分かった。最近はなんでも仕組みに還元したくなる方向へ頭が寄りがちだったが、その授業では、そういう整理があっさりほどけた。 うまい授業という</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071123" />
+      <stop offset="52%" stop-color="#10254a" />
+      <stop offset="100%" stop-color="#1c4772" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="26%" cy="26%" r="54%">
+      <stop offset="0%" stop-color="#8fe7ff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#8fe7ff" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="78%" cy="28%" r="48%">
+      <stop offset="0%" stop-color="#ffd39a" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#ffd39a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="100%" r="56%">
+      <stop offset="0%" stop-color="#ffe7b7" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#ffe7b7" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="url(#bg)" />
+  <rect width="1536" height="1024" fill="url(#glowA)" />
+  <rect width="1536" height="1024" fill="url(#glowB)" />
+  <rect width="1536" height="1024" fill="url(#glowC)" />
+  <rect x="58" y="58" width="1420" height="908" rx="40" fill="rgba(2, 6, 18, 0.28)" stroke="rgba(255,255,255,0.08)" />
+  <g>
+<line x1="170" y1="164" x2="1366" y2="164" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="236" x2="1366" y2="236" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="308" x2="1366" y2="308" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="380" x2="1366" y2="380" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="452" x2="1366" y2="452" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="524" x2="1366" y2="524" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="596" x2="1366" y2="596" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="668" x2="1366" y2="668" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="740" x2="1366" y2="740" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="812" x2="1366" y2="812" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+  </g>
+  <g>
+<rect x="248" y="172" width="1040" height="612" rx="36" fill="rgba(255,255,255,0.04)" opacity="1" stroke="#65bfff" stroke-opacity="0.22" />
+<rect x="320" y="214" width="896" height="456" rx="30" fill="rgba(10,18,26,0.7)" opacity="1" stroke="#8fe7ff" stroke-opacity="0.18" />
+<rect x="356" y="250" width="824" height="384" rx="26" fill="rgba(116, 215, 255, 0.08)" opacity="1" />
+<polygon points="536,610 1000,610 906,402 640,402" fill="#ffd39a" opacity="0.14" />
+<circle cx="768" cy="398" r="110" fill="#ffe7b7" opacity="0.18" />
+<path d="M 356 634 C 514 560 628 534 768 530 S 1026 558 1180 634" fill="none" stroke="#8fe7ff" stroke-width="3" opacity="0.55"  />
+<path d="M 430 692 C 560 612 662 588 768 584 S 972 616 1106 696" fill="none" stroke="#65bfff" stroke-width="2" opacity="0.5"  />
+<circle cx="522" cy="772" r="46" fill="rgba(255,255,255,0.08)" opacity="1" />
+<circle cx="664" cy="804" r="60" fill="rgba(255,255,255,0.08)" opacity="1" />
+<circle cx="850" cy="810" r="58" fill="rgba(255,255,255,0.08)" opacity="1" />
+<circle cx="1016" cy="776" r="44" fill="rgba(255,255,255,0.08)" opacity="1" />
+<line x1="428" y1="300" x2="1110" y2="300" stroke="#ffe7b7" stroke-width="1.4" opacity="0.5" />
+<line x1="428" y1="360" x2="1110" y2="360" stroke="#ffe7b7" stroke-width="1.4" opacity="0.4" />
+<line x1="428" y1="420" x2="1110" y2="420" stroke="#ffe7b7" stroke-width="1.4" opacity="0.35" />
+  </g>
+  <g opacity="0.72">
+    <text x="156" y="162" fill="rgba(255,255,255,0.7)" font-size="28" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif" letter-spacing="8">2026-04-14</text>
+    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">画面越しでも場は動く</text>
+    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">朝から夏野さんのライブ映像の授業をつないだ。回のテーマは「数字で見るIT革命」で、もともとはデータと構造の話を落ち着いて聞くつもりでいた。画面の向こうで前に立つ人の声を聞く。ただそれだけのことなのに、始まってしばらくすると、これは説明を聞いているというより、ひとつの流れの中に乗せられている時間なんだと分かった。最近はなんでも仕組みに還元したくなる方向へ頭が寄りがちだったが、その授業では、そういう整理があっさりほどけた。 うまい授業という</text>
+  </g>
+</svg>
