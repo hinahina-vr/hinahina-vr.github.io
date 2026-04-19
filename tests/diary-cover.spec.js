@@ -17,7 +17,7 @@ test.describe('日記の扉絵', () => {
     for (const id of targetIds) {
       const cover = page.locator(`[id="${id}"] .entry-cover-image`);
       await expect(cover).toBeVisible();
-      await expect(cover).toHaveAttribute('src', /assets\/diary-covers\//);
+      await expect(cover).toHaveAttribute('src', /assets\/diary-covers\/.+\.png$/);
     }
   });
 });
