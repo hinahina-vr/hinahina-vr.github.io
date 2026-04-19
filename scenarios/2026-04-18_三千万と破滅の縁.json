@@ -1,0 +1,239 @@
+{
+  "title": "三千万と破滅の縁",
+  "subtitle": "─ 余白と雑音のあいだ ─",
+  "genre": "都市逍遥ノベル",
+  "date": "2026-04-18",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "💴"
+    },
+    "graph": {
+      "name": "数字",
+      "color": "#5b8bd0",
+      "emoji": "📈"
+    },
+    "margin": {
+      "name": "余白",
+      "color": "#63a36f",
+      "emoji": "🪑"
+    },
+    "ruin": {
+      "name": "破滅",
+      "color": "#c96a3a",
+      "emoji": "🍺"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "桁がひとつ変わった夜ほど、街は急に静かに見える。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "数字の節目と、反対側へ逃げたくなる言葉が、同じガラス面に映っている。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "今夜の入口は三つある。数字、余白、破滅語。"
+    },
+    {
+      "label": "choose_room"
+    },
+    {
+      "choices": [
+        {
+          "text": "節目の数字を見る",
+          "goto": "graph_room"
+        },
+        {
+          "text": "余白の部屋へ行く",
+          "goto": "margin_room"
+        },
+        {
+          "text": "破滅語の部屋へ行く",
+          "goto": "ruin_room"
+        }
+      ]
+    },
+    {
+      "label": "graph_room"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "graph",
+      "expression": "",
+      "text": "桁がひとつ変わるだけで、数年分の時間が急に形を持ちます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "無表情な数字の奥で、長い反復がようやく見えるようになる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "時間の塊を持ち帰る",
+          "goto": "END_GRAPH"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "margin_room"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "margin",
+      "expression": "",
+      "text": "大きく変わるのは生活ではなく、慌てなくていい時間の置き場所です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "余白は贅沢ではなく、神経の摩耗を少し減らすための装置でもある。"
+    },
+    {
+      "choices": [
+        {
+          "text": "猶予を持ち帰る",
+          "goto": "END_MARGIN"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "ruin_room"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "ruin",
+      "expression": "",
+      "text": "本当に壊れたいわけではなく、秩序の反対側へ言葉だけ置きたくなる夜があります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "余白があるからこそ、破滅という語を冗談へ近づけられる距離も生まれる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "雑な呼吸を持ち帰る",
+          "goto": "END_RUIN"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "完成ではなく、何を芯にして何を冗談として持つかが見えやすくなる夜があります。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "積み上げた秩序の横で、雑な言葉がまだ息をしているのも悪くない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "時間の塊を持ち帰る",
+          "goto": "END_GRAPH"
+        },
+        {
+          "text": "猶予を持ち帰る",
+          "goto": "END_MARGIN"
+        },
+        {
+          "text": "雑な呼吸を持ち帰る",
+          "goto": "END_RUIN"
+        }
+      ]
+    },
+    {
+      "label": "END_GRAPH"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "節目とは祝杯ではなく、沈殿していた年月がひとつの塊になる瞬間だった。\n──END: 時間の塊"
+    },
+    {
+      "label": "END_MARGIN"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "節目の価値は、威張れることより、急がなくていい時間が少し増えることのほうにあった。\n──END: 猶予を持ち帰る"
+    },
+    {
+      "label": "END_RUIN"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "積み上げた秩序の横で、雑な逃走語がまだ息をしていること自体が、その日の正直さだった。\n──END: 雑な呼吸"
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "title": "科目名に朝を足す夜",
+  "subtitle": "─ 目録が入口へ変わるまで ─",
+  "genre": "講義逍遥ノベル",
+  "date": "2026-04-17",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "🗂️"
+    },
+    "frame": {
+      "name": "骨組み",
+      "color": "#5b8bd0",
+      "emoji": "🏗️"
+    },
+    "title": {
+      "name": "入口",
+      "color": "#63a36f",
+      "emoji": "🚪"
+    },
+    "rhythm": {
+      "name": "照明",
+      "color": "#c96a3a",
+      "emoji": "🎭"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "科目名は整列している。でも、そのままではまだ入口にならない。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "今夜は骨組みを増やしながら、ひとつずつ別の扉を付けていく。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "今夜の入口は三つある。骨組み、別景色、照明。"
+    },
+    {
+      "label": "choose_room"
+    },
+    {
+      "choices": [
+        {
+          "text": "骨組みの量産を見る",
+          "goto": "frame_room"
+        },
+        {
+          "text": "授業ごとの別景色へ行く",
+          "goto": "title_room"
+        },
+        {
+          "text": "劇場の照明を見る",
+          "goto": "rhythm_room"
+        }
+      ]
+    },
+    {
+      "label": "frame_room"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "frame",
+      "expression": "",
+      "text": "同じ形式で回しながらも、どこから入る授業かだけは毎回選び直しています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "量産の速度の中で、入口だけは手作りの呼吸を残している。"
+    },
+    {
+      "choices": [
+        {
+          "text": "骨組みを持ち帰る",
+          "goto": "END_FRAME"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "title_room"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "title",
+      "expression": "",
+      "text": "通知が似合う授業もあれば、数字の温室が似合う授業もあります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "共通の形式の中で、温度だけは別々に残しておく必要がある。"
+    },
+    {
+      "choices": [
+        {
+          "text": "別景色を持ち帰る",
+          "goto": "END_TITLE"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "rhythm_room"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "rhythm",
+      "expression": "",
+      "text": "作業は整然としていても、底に少しだけ過剰な照明が要る夜があります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "その明かりがあるから、一覧はただの目録で終わらない。"
+    },
+    {
+      "choices": [
+        {
+          "text": "照明を持ち帰る",
+          "goto": "END_RHYTHM"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "たくさん並べる夜ほど、何を同じにして何を別のまま残すかが問われます。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "一覧表の中でも、全部を同じ扉にはしたくなかったんだよな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "骨組みを持ち帰る",
+          "goto": "END_FRAME"
+        },
+        {
+          "text": "別景色を持ち帰る",
+          "goto": "END_TITLE"
+        },
+        {
+          "text": "照明を持ち帰る",
+          "goto": "END_RHYTHM"
+        }
+      ]
+    },
+    {
+      "label": "END_FRAME"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "数を増やす夜でも、入口の骨組みだけは乱暴に複製されなかった。\n──END: 骨組みの量産"
+    },
+    {
+      "label": "END_TITLE"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "似た棚へ並べても、授業ごとの景色だけはまだ別々のままだった。\n──END: 別景色を持ち帰る"
+    },
+    {
+      "label": "END_RHYTHM"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "整然とした量産の底にだけ小さな劇場を残したことで、並んだ入口は少しだけ生き物に見えた。\n──END: 劇場の照明"
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "title": "電圧が酔いに追いつかない",
+  "subtitle": "─ しらふのまま減圧する夜 ─",
+  "genre": "工作逍遥ノベル",
+  "date": "2026-04-16",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "🔧"
+    },
+    "sober": {
+      "name": "しらふ",
+      "color": "#63a36f",
+      "emoji": "🥛"
+    },
+    "divider": {
+      "name": "分圧",
+      "color": "#5b8bd0",
+      "emoji": "⚡"
+    },
+    "joke": {
+      "name": "自嘲",
+      "color": "#c96a3a",
+      "emoji": "😅"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酔いを測りたい夜なのに、机の上ではまだ減圧だけが進んでいる。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "願いは先へ行きたがるのに、回路は入口の条件を揃えることしか許してくれない。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "今夜の入口は三つある。しらふ、分圧、自嘲。"
+    },
+    {
+      "label": "choose_room"
+    },
+    {
+      "choices": [
+        {
+          "text": "しらふの入口へ行く",
+          "goto": "sober_room"
+        },
+        {
+          "text": "分圧の段差を見る",
+          "goto": "divider_room"
+        },
+        {
+          "text": "自嘲の部屋へ行く",
+          "goto": "joke_room"
+        }
+      ]
+    },
+    {
+      "label": "sober_room"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "sober",
+      "expression": "",
+      "text": "早く酔いたいと言いながら、最初に必要なのはまだしらふの時間です。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "願望より先に入口へ留まることで、気分より足場のほうが見えてくる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "しらふの入口を持ち帰る",
+          "goto": "END_SOBER"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "divider_room"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "divider",
+      "expression": "",
+      "text": "上げる話より、ちゃんと下げる話のほうが今夜は効きます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "壊さず進めるための減圧が、次の表示を守ってくれる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "減圧の手つきを持ち帰る",
+          "goto": "END_DIVIDER"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "joke_room"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "joke",
+      "expression": "",
+      "text": "笑えるうちはまだ戻れます。抜けていた自分を見て、基礎へ帰る道が残っています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "自嘲は煙幕ではなく、立て直しの合図にもなる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "笑って戻る",
+          "goto": "END_JOKE"
+        },
+        {
+          "text": "通過点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "気分の名前は後からでも付けられます。先に通していい条件を整える夜もあります。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "派手さはないけど、入口を飛ばさないほうが結局は遠くへ行けるんだな。"
+    },
+    {
+      "choices": [
+        {
+          "text": "しらふの入口を持ち帰る",
+          "goto": "END_SOBER"
+        },
+        {
+          "text": "減圧の手つきを持ち帰る",
+          "goto": "END_DIVIDER"
+        },
+        {
+          "text": "笑って戻る",
+          "goto": "END_JOKE"
+        }
+      ]
+    },
+    {
+      "label": "END_SOBER"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "酔いを急ぐより先に、しらふでいる時間のほうが準備の本体だった。\n──END: しらふの入口"
+    },
+    {
+      "label": "END_DIVIDER"
+    },
+    {
+      "bg": "corridor"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "人が夢を見るより先に、回路は壊れない高さまで降りることを求めていた。\n──END: 減圧の手つき"
+    },
+    {
+      "label": "END_JOKE"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "冗談の芯に残っていた恥ずかしさが、次の手順をちゃんと本物にした。\n──END: 笑って戻る"
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-18",
+  "title": "三千万と破滅の縁 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "節目の夜景",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "💴",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "standalone_start",
+      "summary": "節目の数字と、反対側へ逃げたくなる言葉が同時に立つ"
+    },
+    {
+      "id": "choose_room",
+      "title": "三つの入口",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🗂️",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "choose_room",
+      "summary": "数字、余白、破滅語のどこから今夜を読むか選ぶ"
+    },
+    {
+      "id": "graph_room",
+      "title": "数字の重さ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "📈",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "graph_room",
+      "summary": "三千万という桁が、年月の塊として返ってくる"
+    },
+    {
+      "id": "margin_room",
+      "title": "余白の部屋",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🪑",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "margin_room",
+      "summary": "完成ではなく、急がなくていい時間が少し増える"
+    },
+    {
+      "id": "ruin_room",
+      "title": "破滅語の距離",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🍺",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "ruin_room",
+      "summary": "秩序が積み上がった日にだけ出る雑な逃走欲求"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "受け取りの通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "mitra_gate",
+      "summary": "秩序と雑音を同じ夜景で受け取る"
+    },
+    {
+      "id": "END_GRAPH",
+      "title": "時間の塊",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "📈",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "END_GRAPH",
+      "summary": "桁の変化を時間の塊として受け取る"
+    },
+    {
+      "id": "END_MARGIN",
+      "title": "猶予を持ち帰る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🪑",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "END_MARGIN",
+      "summary": "数字を猶予として持ち帰る"
+    },
+    {
+      "id": "END_RUIN",
+      "title": "雑な呼吸",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🍺",
+      "scenario": "2026-04-18_三千万と破滅の縁",
+      "entry": "END_RUIN",
+      "summary": "破滅語を呼吸として残す"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_room",
+      "choiceText": "今夜の入口を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "graph_room",
+      "choiceText": "節目の数字を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "graph_room",
+      "to": "END_GRAPH",
+      "choiceText": "時間の塊を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "graph_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_GRAPH",
+      "choiceText": "時間の塊を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "margin_room",
+      "choiceText": "余白の部屋へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "margin_room",
+      "to": "END_MARGIN",
+      "choiceText": "猶予を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "margin_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_MARGIN",
+      "choiceText": "猶予を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "ruin_room",
+      "choiceText": "破滅語の部屋へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "ruin_room",
+      "to": "END_RUIN",
+      "choiceText": "雑な呼吸を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "ruin_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_RUIN",
+      "choiceText": "雑な呼吸を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

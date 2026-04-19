@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-17",
+  "title": "科目名に朝を足す夜 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "入口を足す棚",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "📚",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "standalone_start",
+      "summary": "乾いた科目名の棚へ、夢の入口を差し込んでいく"
+    },
+    {
+      "id": "choose_room",
+      "title": "三つの入口",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🗂️",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "choose_room",
+      "summary": "骨組み、別景色、照明のどこから今夜を読むか選ぶ"
+    },
+    {
+      "id": "frame_room",
+      "title": "入口の骨組み",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🏗️",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "frame_room",
+      "summary": "量産でありながら、雑には作らない骨組み"
+    },
+    {
+      "id": "title_room",
+      "title": "授業ごとの別景色",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🚪",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "title_room",
+      "summary": "授業ごとに違う入口の温度を割り当てる"
+    },
+    {
+      "id": "rhythm_room",
+      "title": "底で鳴る照明",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🎭",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "rhythm_room",
+      "summary": "整然とした作業へ劇場感を足す音の役割"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "受け取りの通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "mitra_gate",
+      "summary": "量産と個別性の同居を受け取る"
+    },
+    {
+      "id": "END_FRAME",
+      "title": "骨組みの量産",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🏗️",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "END_FRAME",
+      "summary": "量産の中に手作りの呼吸を残す"
+    },
+    {
+      "id": "END_TITLE",
+      "title": "別景色を持ち帰る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🚪",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "END_TITLE",
+      "summary": "講義ごとの温度差を残す"
+    },
+    {
+      "id": "END_RHYTHM",
+      "title": "劇場の照明",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🎭",
+      "scenario": "2026-04-17_科目名に朝を足す夜",
+      "entry": "END_RHYTHM",
+      "summary": "整然とした作業へ温度を足す"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_room",
+      "choiceText": "今夜の入口を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "frame_room",
+      "choiceText": "骨組みの量産を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "frame_room",
+      "to": "END_FRAME",
+      "choiceText": "骨組みを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "frame_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_FRAME",
+      "choiceText": "骨組みを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "title_room",
+      "choiceText": "授業ごとの別景色へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "title_room",
+      "to": "END_TITLE",
+      "choiceText": "別景色を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "title_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_TITLE",
+      "choiceText": "別景色を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "rhythm_room",
+      "choiceText": "劇場の照明を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "rhythm_room",
+      "to": "END_RHYTHM",
+      "choiceText": "照明を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "rhythm_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_RHYTHM",
+      "choiceText": "照明を持ち帰る",
+      "style": "kenkai"
+    }
+  ]
+}

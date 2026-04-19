@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-16",
+  "title": "電圧が酔いに追いつかない A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "入口の減圧",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🔧",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "standalone_start",
+      "summary": "願望は酔いへ向かうが、手元はまだ減圧の入口にいる"
+    },
+    {
+      "id": "choose_room",
+      "title": "三つの入口",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🗂️",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "choose_room",
+      "summary": "しらふ、分圧、自嘲のどこから今夜を読むか選ぶ"
+    },
+    {
+      "id": "sober_room",
+      "title": "しらふのねじれ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🥛",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "sober_room",
+      "summary": "酔いを測りたいのに、自分はまだしらふのままだ"
+    },
+    {
+      "id": "divider_room",
+      "title": "3.3Vまで降りる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "⚡",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "divider_room",
+      "summary": "5V をそのまま通さず、壊れない高さまで下げる"
+    },
+    {
+      "id": "joke_room",
+      "title": "冗談の芯",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "😅",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "joke_room",
+      "summary": "免許返納と笑いながら、抜けをいったん認める"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "受け取りの通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "mitra_gate",
+      "summary": "願望より先に条件をそろえる夜を受け取る"
+    },
+    {
+      "id": "END_SOBER",
+      "title": "しらふの入口",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🥛",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "END_SOBER",
+      "summary": "願望より先に入口のしらふを引き受ける"
+    },
+    {
+      "id": "END_DIVIDER",
+      "title": "減圧の手つき",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "⚡",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "END_DIVIDER",
+      "summary": "見えない段差を先に整える"
+    },
+    {
+      "id": "END_JOKE",
+      "title": "笑って戻る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "😅",
+      "scenario": "2026-04-16_電圧が酔いに追いつかない",
+      "entry": "END_JOKE",
+      "summary": "恥ずかしさを笑いへ変えて立て直す"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_room",
+      "choiceText": "今夜の入口を選ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "sober_room",
+      "choiceText": "しらふの入口へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "sober_room",
+      "to": "END_SOBER",
+      "choiceText": "しらふの入口を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "sober_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_SOBER",
+      "choiceText": "しらふの入口を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "divider_room",
+      "choiceText": "分圧の段差を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "divider_room",
+      "to": "END_DIVIDER",
+      "choiceText": "減圧の手つきを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "divider_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_DIVIDER",
+      "choiceText": "減圧の手つきを持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_room",
+      "to": "joke_room",
+      "choiceText": "自嘲の部屋へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "joke_room",
+      "to": "END_JOKE",
+      "choiceText": "笑って戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "joke_room",
+      "to": "mitra_gate",
+      "choiceText": "通過点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_JOKE",
+      "choiceText": "笑って戻る",
+      "style": "kenkai"
+    }
+  ]
+}

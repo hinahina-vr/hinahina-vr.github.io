@@ -345,3 +345,143 @@
 | rizel | D, G |
 | mitra | A, B, C, D, E, F, G |
 | roju | B, C, E, F, G |
+
+## 04/16 話題定義
+
+- A: しらふのまま早く DEISUI になりたいと思いながら、アルコールチェッカーのことを考えていた
+- B: 5V を 3.3V に落とすための分圧で、基礎からやり直す羽目になった
+- C: 基礎法則を忘れていた自分を、免許返納と言いたくなるくらい自嘲した
+- D: 人間の状態名より先に、装置は電圧と順番だけを要求してきた
+- E: 酔いの夢より、地味な減圧作業のほうが結局その夜を支配していた
+
+## 04/16 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| hinahina | A |
+| moegami | D |
+| oji | B |
+| multi | B |
+| dejiko | E |
+| ayu | A |
+| rem | D |
+| ruriko | D |
+| tsumugi | D |
+| ecoko | E |
+| mii | A |
+| kud | B |
+| feiris | E |
+| kotomi | D |
+| minagi | D |
+| kiku8 | B |
+| mint | E |
+| tama | E |
+| kukuri | A |
+| sharo | C |
+| nemurin | E |
+| hinako | E |
+| kyoko | C |
+| mayuki | C |
+| mitsuba | C |
+| ana | C |
+| astarotte | C |
+| hazuki | B |
+| rin | B |
+| rizel | A |
+| mitra | A, B, C, D, E |
+| roju | A, B, C, D, E |
+
+## 04/17 話題定義
+
+- A: 複数の講義プロットを一晩で量産し、入口の骨組みを増やしていた
+- B: 乾いた科目名へ、夢を見るためのタイトルを与え直していた
+- C: セキュリティやデータサイエンスなど、授業ごとに別々の風景と感情の芯を作った
+- D: TITLES 一覧が、科目コードの目録というより夢の入口のカタログになっていた
+- E: メフィストのボーナスメドレーが、その夜の作業全体へ劇場感を足していた
+- F: 量産の中でも、それぞれの授業へ感情の芯を入れ直していた
+
+## 04/17 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | D |
+| hinahina | D |
+| moegami | B |
+| oji | A |
+| multi | A |
+| dejiko | E |
+| ayu | E |
+| rem | C |
+| ruriko | B |
+| tsumugi | C |
+| ecoko | D |
+| mii | E |
+| kud | F |
+| feiris | E |
+| kotomi | C |
+| minagi | C |
+| kiku8 | A |
+| mint | B |
+| tama | C |
+| kukuri | E |
+| sharo | A |
+| nemurin | D |
+| hinako | D |
+| kyoko | F |
+| mayuki | F |
+| mitsuba | A |
+| ana | B |
+| astarotte | B |
+| hazuki | F |
+| rin | F |
+| rizel | F |
+| mitra | A, B, C, D, E, F |
+| roju | A, B, C, D, E, F |
+
+## 04/18 話題定義
+
+- A: 流動資産が 3000 万円を超え、数字の塊として時間が返ってきた
+- B: 増え方は一撃ではなく、入れる・持つ・退場しない反復だった
+- C: 本体は王道投信、外側は雑多な遊び玉という区別がはっきり見えた
+- D: 三千万でも人生は激変しないが、すぐ詰まないかもしれないという余白は増えた
+- E: それでも『野毛で破滅してもいい』と言いたくなる逃走欲求が残っていた
+- F: 数字の節目を記事に起こすことで、沈殿していた時間が文章の塊になった
+
+## 04/18 キャラ別割り当て
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| hinahina | D |
+| moegami | C |
+| oji | B |
+| multi | B |
+| dejiko | E |
+| ayu | E |
+| rem | A |
+| ruriko | F |
+| tsumugi | B |
+| ecoko | D |
+| mii | E |
+| kud | B |
+| feiris | C |
+| kotomi | C |
+| minagi | A |
+| kiku8 | B |
+| mint | A |
+| tama | F |
+| kukuri | E |
+| sharo | B |
+| nemurin | D |
+| hinako | D |
+| kyoko | E |
+| mayuki | D |
+| mitsuba | F |
+| ana | C |
+| astarotte | C |
+| hazuki | E |
+| rin | F |
+| rizel | A |
+| mitra | A, B, C, D, E, F |
+| roju | A, B, C, D, E, F |
