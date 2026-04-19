@@ -1,7 +1,7 @@
 {
   "version": 1,
   "requestedModel": "gpt-image-1.5",
-  "generatedAt": "2026-04-19T02:47:55.3766510Z",
+  "generatedAt": "2026-04-19T03:08:05Z",
   "entries": {
     "2026-04-13_爆発の手前で配線を信じる": {
       "slug": "2026-04-13_爆発の手前で配線を信じる",
@@ -10,9 +10,9 @@
       "coverSrc": "./assets/diary-covers/2026-04-13_爆発の手前で配線を信じる.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "A moody literary cover illustration for a Japanese diary entry. Midnight electronics workbench, glowing breadboard wires, tiny sparks, cautious tension before failure, subtle cherry blossom shadows drifting in the dark, analog realism with dreamy neon highlights, no text, cinematic, richly detailed.",
+      "prompt": "Landscape diary cover illustration, 3:2. Style: Japanese woodblock print mixed with modern circuit diagram aesthetics, visibly textured washi paper, indigo night, pale cherry blossoms, hand-carved linework, glowing breadboard wires and one tiny dangerous spark at the center, tense but beautiful, no text, not photorealistic.",
       "summary": "マイコンをほとんど触ったことのない人間が、いきなり回路設計までまとめて面倒を見てもらおうとしている。今日はそんな無茶な始まり方をした。PC と AI が間に入れば、そのまま物の側まで一気に行けるのではないか、という雑な期待が先に立つ。ソフトウェアの側に長くいると、画面の向こうにあるものも、つい同じ手触りで扱える気がしてしまう。 だが、そこで急に現実が割り込んでくる。電子工作には物理の限界がある。基板の向こうにはちゃんと力学と電磁気学が待",
-      "updatedAt": "2026-04-19T02:47:55.3766510Z"
+      "updatedAt": "2026-04-19T03:08:05Z"
     },
     "2026-04-14_画面越しでも場は動く": {
       "slug": "2026-04-14_画面越しでも場は動く",
@@ -21,9 +21,9 @@
       "coverSrc": "./assets/diary-covers/2026-04-14_画面越しでも場は動く.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "A cover illustration for a reflective Japanese diary entry about a charismatic online lecture. A luminous screen in a dark room, a single speaker commanding the atmosphere through rhythm and gesture, data motifs and audience attention lines converging toward the screen, elegant, cinematic, human warmth stronger than pure technology, no text.",
+      "prompt": "Landscape diary cover illustration, 3:2. Style: bold editorial vector poster, flat geometric shapes, limited palette of electric cyan, cream, black, and vermilion. A glowing lecture screen commands the whole room, attention lines and rhythm blocks radiate from one speaker silhouette, dynamic composition like a festival poster, crisp and graphic, no text, not painterly.",
       "summary": "朝から夏野さんのライブ映像の授業をつないだ。回のテーマは「数字で見るIT革命」で、もともとはデータと構造の話を落ち着いて聞くつもりでいた。画面の向こうで前に立つ人の声を聞く。ただそれだけのことなのに、始まってしばらくすると、これは説明を聞いているというより、ひとつの流れの中に乗せられている時間なんだと分かった。最近はなんでも仕組みに還元したくなる方向へ頭が寄りがちだったが、その授業では、そういう整理があっさりほどけた。 うまい授業という",
-      "updatedAt": "2026-04-19T02:47:55.3766510Z"
+      "updatedAt": "2026-04-19T03:08:05Z"
     },
     "2026-04-15_入門書が死んでも温まるまで待つ": {
       "slug": "2026-04-15_入門書が死んでも温まるまで待つ",
@@ -32,9 +32,9 @@
       "coverSrc": "./assets/diary-covers/2026-04-15_入門書が死んでも温まるまで待つ.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "A literary tech cover illustration. A small OLED alcohol meter demo on a desk, warm sensor glow, patient waiting, tiny status labels like a playful human mood scale implied without readable text, old guidebooks fading into the background while real heat and voltage remain stubbornly physical, warm amber against cool midnight purple, no text.",
+      "prompt": "Landscape diary cover illustration, 3:2. Style: 1980s Japanese science magazine cover art, airbrushed retro-futurist illustration, glossy print feel. A small DIY alcohol meter device on a desk with an abstract glowing face-like indicator made of dots only, warm sensor glow, coils of wire, faded old manuals as anonymous blocks in the background, deep magenta and amber with teal accents, playful but physical, absolutely no letters, no numbers, no readable symbols, no text.",
       "summary": "今日は、小さな表示を一枚まともに出すだけで、思ったよりずいぶん現実に引き戻された日だった。昼は I2C 液晶の相性合わせで、`lcd_profile` を 0 から 7 まで順番に試していた。番号を変える。反応を見る。だめならまた変える。いまどき何かを始める時には、賢い案内役が横にいて、次にどこを触るかまで教えてくれる。にもかかわらず、液晶のほうはその親切に少しも感動せず、ただ相性だけを要求してくる。こういう時、未来っぽい話より、地味な",
-      "updatedAt": "2026-04-19T02:47:55.3766510Z"
+      "updatedAt": "2026-04-19T03:08:05Z"
     },
     "2026-04-16_シラフのまま3.3Vに降りる": {
       "slug": "2026-04-16_シラフのまま3.3Vに降りる",
@@ -43,9 +43,9 @@
       "coverSrc": "./assets/diary-covers/2026-04-16_シラフのまま3.3Vに降りる.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "A poetic engineering cover illustration about reducing 5V to 3.3V before an alcohol sensing project can begin. Cool blue voltage bars descending in steps, sober restraint, tiny resistor forms, precise circuitry, a feeling of wanting intoxication while reality demands careful calibration first, minimalist but atmospheric, no text.",
+      "prompt": "Landscape diary cover illustration, 3:2. Style: ultra-clean geometric infographic poster, Swiss modernism mixed with Japanese industrial design. Abstract voltage bars stepping down from bright 5V red to cool 3.3V blue, resistor-like modules, precise grid, lots of negative space, sober and controlled, no objects from a desk, no text, no letters, no numbers.",
       "summary": "酔いを測る装置のことを考えているのに、自分はまだしらふのままだった。そこがまず少しおかしい。早く DEISUI になりたい、みたいな言葉だけは威勢がいいのに、机の上で進んでいるのは、あくまでその手前の段取りだった。人間は気分から先に飛びたがるが、装置のほうはそんな願いを一度も聞かず、入口に留まったままでいる。 その入口で一日を支配したのが、5V を 3.3V に落とすという、あまりにも基本的な仕事だった。やることは単純だ。高すぎるものを",
-      "updatedAt": "2026-04-19T02:47:55.3766510Z"
+      "updatedAt": "2026-04-19T03:08:05Z"
     },
     "2026-04-17_科目名にまだ朝を足していく": {
       "slug": "2026-04-17_科目名にまだ朝を足していく",
@@ -54,9 +54,9 @@
       "coverSrc": "./assets/diary-covers/2026-04-17_科目名にまだ朝を足していく.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "A cover illustration for a diary entry about turning dry course titles into dreamlike entrances. Floating academic cards transforming into dawn-lit doors, catalog pages becoming pathways, orderly lists gaining warmth and atmosphere, a hint of theatrical music in the air, morning light inside a structured archive, no text.",
+      "prompt": "Landscape diary cover illustration, 3:2. Style: luminous watercolor storybook painting with soft bleeding edges and visible paper grain. A dawn archive where blank cream cards drift through the air and transform into warmly lit doors, gentle gold light, dusty shelves, handmade and quiet, no text, no letters, no numbers, no writing on the cards.",
       "summary": "乾いた講義名が並んでいるだけの一覧に、ひとつずつ夢の入口を付けていく夜だった。情報セキュリティも、データサイエンスも、法学も、心理学も、ただの科目名のままでは机の上に平たく並ぶだけだ。そこへ、どんな場所を通って、どんな気分で入口へ立たせるのかを足していくと、授業は急に、人が入っていける幅を持ちはじめる。 面白かったのは、その作業が明らかに量産でもあったことだ。ファイルは次々に増えるし、一覧は長くなる。いったん手つきが決まれば、次の授業へ",
-      "updatedAt": "2026-04-19T02:47:55.3766510Z"
+      "updatedAt": "2026-04-19T03:08:05Z"
     },
     "2026-04-18_三千万と破滅のあいだ": {
       "slug": "2026-04-18_三千万と破滅のあいだ",
@@ -65,9 +65,9 @@
       "coverSrc": "./assets/diary-covers/2026-04-18_三千万と破滅のあいだ.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "A contemplative cover illustration for a Japanese diary entry about liquid assets passing thirty million yen. Calm stacked financial forms, a steady core holding noisy speculative sparks at the edges, city-night elegance, restrained wealth, and a thin reckless neon line hinting at ruin temptation, no text, cinematic and reflective.",
+      "prompt": "Landscape diary cover illustration, 3:2. Style: dark oil painting with noir finance mood, thick brushstrokes, muted charcoal, brass, and deep green. Calm stacks of anonymous financial forms and ledgers in a quiet city-night interior, one thin reckless neon streak near the edge, restrained wealth and temptation, serious and heavy, no text, no numbers, no readable documents.",
       "summary": "家計簿を開いたら、流動資産が三千万を超えていた。数字はたいてい無表情だ。しかし桁がひとつ変わると、急に時間の重さを持つ。銀行口座や証券口座の奥に沈んでいた数年分の反復が、ひとつの塊になってこちらへ返ってくる。嬉しいかと聞かれれば、もちろん嬉しい。でも、それ以上に、鈍くて現実的な重みのほうが先に来た。 もちろん、一撃で勝ったわけではない。やったことは単純だ。入れる。持つ。下がってもすぐには消さない。また入れる。退屈で、誰の記憶にも残らない",
-      "updatedAt": "2026-04-19T02:47:55.3766510Z"
+      "updatedAt": "2026-04-19T03:08:05Z"
     }
   }
 }
