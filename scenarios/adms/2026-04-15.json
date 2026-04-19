@@ -1,0 +1,130 @@
+{
+  "date": "2026-04-15",
+  "title": "温まるまでの入門 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "机の上の遅さ",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🔧",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "standalone_start",
+      "summary": "賢い案内があっても、液晶もセンサーもゆっくりしか動かない"
+    },
+    {
+      "id": "choose_room",
+      "title": "三つの入口",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🗂️",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "choose_room",
+      "summary": "表示、しらふ、入門のどこから今夜を読むか選ぶ"
+    },
+    {
+      "id": "display_room",
+      "title": "表示の総当たり",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "📟",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "display_room",
+      "summary": "`lcd_profile` 0〜7 を順番に試す"
+    },
+    {
+      "id": "meter_room",
+      "title": "しらふの基準",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🍶",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "meter_room",
+      "summary": "判定より前に baseline を取る"
+    },
+    {
+      "id": "guide_room",
+      "title": "入門の変わり方",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "📘",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "guide_room",
+      "summary": "案内役は賢くなっても、物理の遅さは残る"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "受け取りの通過点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "mitra_gate",
+      "summary": "近道と待ち時間を同時に受け取る"
+    },
+    {
+      "id": "END_DISPLAY",
+      "title": "表示の粘り",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "📟",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "END_DISPLAY",
+      "summary": "近道が増えても、最後は総当たりの粘りが効く"
+    },
+    {
+      "id": "END_BASELINE",
+      "title": "しらふの基準",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🍶",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "END_BASELINE",
+      "summary": "遊びの装置でも、最初に基準を置く誠実さが残る"
+    },
+    {
+      "id": "END_GUIDE",
+      "title": "入門の変化",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "📘",
+      "scenario": "2026-04-15_温まるまでの入門",
+      "entry": "END_GUIDE",
+      "summary": "入門の導線は短くなっても、熱と電圧は残る"
+    }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_room", "choiceText": "今夜の入口を選ぶ", "style": "kenkai" },
+    { "from": "choose_room", "to": "display_room", "choiceText": "表示の総当たりを見る", "style": "kenkai" },
+    { "from": "choose_room", "to": "meter_room", "choiceText": "しらふの基準へ行く", "style": "kenkai" },
+    { "from": "choose_room", "to": "guide_room", "choiceText": "入門の変わり方を考える", "style": "kenkai" },
+    { "from": "display_room", "to": "END_DISPLAY", "choiceText": "表示の粘りを持ち帰る", "style": "kenkai" },
+    { "from": "display_room", "to": "mitra_gate", "choiceText": "通過点へ向かう", "style": "kenkai" },
+    { "from": "meter_room", "to": "END_BASELINE", "choiceText": "しらふの基準を持ち帰る", "style": "kenkai" },
+    { "from": "meter_room", "to": "mitra_gate", "choiceText": "通過点へ向かう", "style": "kenkai" },
+    { "from": "guide_room", "to": "END_GUIDE", "choiceText": "入門の変化を持ち帰る", "style": "kenkai" },
+    { "from": "guide_room", "to": "mitra_gate", "choiceText": "通過点へ向かう", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_DISPLAY", "choiceText": "表示の粘りを持ち帰る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_BASELINE", "choiceText": "しらふの基準を持ち帰る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_GUIDE", "choiceText": "入門の変化を持ち帰る", "style": "kenkai" }
+  ]
+}

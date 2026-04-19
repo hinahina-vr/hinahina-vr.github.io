@@ -1,0 +1,76 @@
+{
+  "title": "温まるまでの入門",
+  "subtitle": "─ しらふを教える前の待ち時間 ─",
+  "genre": "工作逍遥ノベル",
+  "date": "2026-04-15",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "🔧" },
+    "display": { "name": "表示", "color": "#5b8bd0", "emoji": "📟" },
+    "meter": { "name": "メーター", "color": "#63a36f", "emoji": "🍶" },
+    "guide": { "name": "入門", "color": "#c96a3a", "emoji": "📘" },
+    "physics": { "name": "物理", "color": "#8b6fb5", "emoji": "⚡" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office", "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true } },
+    { "speaker": "narrator", "expression": "", "text": "液晶はまだ気難しく、センサーはまだ温まらない。賢い案内がそばにあっても、手元の現実だけはゆっくり動く。" },
+    { "speaker": "waddy", "expression": "", "text": "案内は早いのに、装置のほうは全然急いでくれない。" },
+    { "speaker": "narrator", "expression": "", "text": "今夜の入口は三つある。表示、しらふ、入門。" },
+    { "label": "choose_room" },
+    { "choices": [
+      { "text": "表示の総当たりを見る", "goto": "display_room" },
+      { "text": "しらふの基準へ行く", "goto": "meter_room" },
+      { "text": "入門の変わり方を考える", "goto": "guide_room" }
+    ] },
+    { "label": "display_room" },
+    { "bg": "corridor" },
+    { "speaker": "display", "expression": "", "text": "`lcd_profile` は 0 から 7 まで並んでいる。賢さより先に、相性を総当たりで探す夜。" },
+    { "speaker": "narrator", "expression": "", "text": "小さな表示を一枚出すために、人は意外と何度でもやり直せる。" },
+    { "choices": [
+      { "text": "表示の粘りを持ち帰る", "goto": "END_DISPLAY" },
+      { "text": "通過点へ向かう", "goto": "mitra_gate" }
+    ] },
+    { "label": "meter_room" },
+    { "bg": "dawn" },
+    { "speaker": "meter", "expression": "", "text": "`SHIRAFU / HOROYOI / GOKIGEN / NOMISUGI / ABUNAI`。でも、最初に覚えるべきなのはきれいな空気の値です。" },
+    { "speaker": "narrator", "expression": "", "text": "判定の前に基準がある。ふざけた表示の入口に、妙にまっとうな順番が置かれている。" },
+    { "choices": [
+      { "text": "しらふの基準を持ち帰る", "goto": "END_BASELINE" },
+      { "text": "通過点へ向かう", "goto": "mitra_gate" }
+    ] },
+    { "label": "guide_room" },
+    { "bg": "wind_morning" },
+    { "speaker": "guide", "expression": "", "text": "賢い案内役が横にいるなら、入門書の役目はたしかに変わります。けれど、ヒーターを温める待ち時間までは短くなりません。" },
+    { "speaker": "physics", "expression": "", "text": "分圧抵抗、ADC、I2Cアドレス。最後に勝つのは、いつも手触りのある現実です。" },
+    { "choices": [
+      { "text": "入門の変化を持ち帰る", "goto": "END_GUIDE" },
+      { "text": "通過点へ向かう", "goto": "mitra_gate" }
+    ] },
+    { "label": "mitra_gate" },
+    { "bg": "chorus_morning" },
+    { "speaker": "mitra", "expression": "", "text": "近道は増えました。でも、基準と待ち時間が消えたわけではありません。" },
+    { "speaker": "waddy", "expression": "", "text": "早くなった入口の先で、結局ちゃんと待たされるんだな。" },
+    { "label": "carry_back" },
+    { "choices": [
+      { "text": "表示の粘りを持ち帰る", "goto": "END_DISPLAY" },
+      { "text": "しらふの基準を持ち帰る", "goto": "END_BASELINE" },
+      { "text": "入門の変化を持ち帰る", "goto": "END_GUIDE" }
+    ] },
+    { "label": "END_DISPLAY" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "近道が増えても、表示は気難しいままだ。だから総当たりの一回一回が、最後にちゃんと効く。\n──END: 表示の粘り" },
+    { "label": "END_BASELINE" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "expression": "", "text": "ごきげんの前に、しらふがある。遊びの装置の入口に置かれた誠実さが、今夜の手応えになった。\n──END: しらふの基準" },
+    { "label": "END_GUIDE" },
+    { "bg": "wind_morning" },
+    { "speaker": "narrator", "expression": "", "text": "入門の導線は短くなっていく。それでも熱と電圧と待ち時間は、まだ人を机へ引き止める。\n──END: 入門の変化" }
+  ]
+}
