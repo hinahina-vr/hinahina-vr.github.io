@@ -1,24 +1,24 @@
+import fs from "node:fs";
+import path from "node:path";
+
 import {
   collectDiaryMarkdownFiles,
   readDiaryFile,
+  repoRoot,
   splitDiaryMarkdown,
 } from "./lib/diary-self-date.mjs";
 
+const DIARY_OUTPUT_FILE_RE = /^diary(?:-.+)?\.html$/;
+const BANNED_PHRASES = ["着地", "輪郭"];
+
 const PHRASE_LIMITS = [
-  {
-    phrase: "着地",
+  ...BANNED_PHRASES.map((phrase) => ({
+    phrase,
     max: 0,
-    label: "禁止語: 着地",
+    label: `禁止語: ${phrase}`,
     scope: "all-diaries",
     includeHeading: true,
-  },
-  {
-    phrase: "輪郭",
-    max: 0,
-    label: "禁止語: 輪郭",
-    scope: "all-diaries",
-    includeHeading: true,
-  },
+  })),
   {
     phrase: "AIと抱き枕",
     max: 1,
@@ -77,7 +77,19 @@ function countPhrase(text, phrase) {
   }
 }
 
+function collectDiaryHtmlFiles(rootDir = repoRoot) {
+  return fs
+    .readdirSync(rootDir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && DIARY_OUTPUT_FILE_RE.test(entry.name))
+    .map((entry) => ({
+      name: entry.name,
+      fullPath: path.join(rootDir, entry.name),
+    }))
+    .sort((left, right) => left.name.localeCompare(right.name, "ja"));
+}
+
 const files = collectDiaryMarkdownFiles();
+const htmlFiles = collectDiaryHtmlFiles();
 const findings = [];
 
 for (const limit of PHRASE_LIMITS) {
@@ -102,8 +114,32 @@ for (const limit of PHRASE_LIMITS) {
   }
 }
 
+for (const phrase of BANNED_PHRASES) {
+  let total = 0;
+  const owners = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file.fullPath, "utf8");
+    const count = countPhrase(stripMarkup(`${file.name}\n${html}`), phrase);
+    if (count === 0) continue;
+
+    total += count;
+    owners.push(`${file.name}: ${count}件`);
+  }
+
+  if (total > 0) {
+    findings.push({
+      phrase,
+      max: 0,
+      label: `禁止語: ${phrase} (生成HTML)`,
+      total,
+      owners,
+    });
+  }
+}
+
 if (findings.length === 0) {
-  console.log("日記本文の言い回し上限チェックを通過しました。");
+  console.log("日記ソースと生成HTMLの言い回し上限チェックを通過しました。");
   process.exit(0);
 }
 
