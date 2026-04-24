@@ -8,6 +8,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { formatVoiceFindings, validateCharacterVoicesForDate } from "./lib/diary-character-voice.mjs";
+import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 // 他キャラの日記ディレクトリとページの定義
@@ -433,6 +434,13 @@ async function main() {
       throw new Error(formatVoiceFindings(voiceCheck));
     }
     console.log(`✓ character voice check passed (${latestDate}: ${voiceCheck.checked.length} entries)`);
+  }
+  if (latestDate && process.env.WADDY_SKIP_DIARY_SOURCE_CHECK !== "1") {
+    const sourceCheck = validateSourceMentionsForDate(latestDate);
+    if (sourceCheck.findings.length > 0) {
+      throw new Error(formatSourceMentionFindings(sourceCheck));
+    }
+    console.log(`✓ source name check passed (${latestDate}: ${sourceCheck.checked.length} entries)`);
   }
 
   const latestEntriesHtml = latestEntries.map(renderFullEntry).join("\n");
