@@ -1,7 +1,7 @@
 {
   "version": 1,
   "requestedModel": "gpt-image-1.5",
-  "generatedAt": "2026-04-24T04:59:14.788Z",
+  "generatedAt": "2026-04-24T05:06:20.836Z",
   "entries": {
     "2026-04-13_爆発の手前で配線を信じる": {
       "slug": "2026-04-13_爆発の手前で配線を信じる",
@@ -667,23 +667,23 @@
       "slug": "2026-04-20_完全理解とガチャの部屋",
       "date": "2026-04-20",
       "title": "完全理解とガチャの部屋",
-      "coverSrc": "./assets/diary-covers/2026-04-20_完全理解とガチャの部屋.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
-      "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 完全理解とガチャの部屋. Summary: ESP32を完全に理解した、と書いた。もちろん完全には理解していない。完全に理解した、という言葉は、たいてい理解の終点ではなく、入口に立った瞬間の発光だ。部屋の中で配線や進捗写真を見ていると、世界の方が少しだけこちらへ寄ってきたような気がする。まだ抵抗も電圧も、プログラムも、手の中で言うことを聞くとは限らない。それでも、何かがつながる予感だけは先に来る。 そのあとで、部屋にいます、ガンギマリです、と書いている。しかも現在シラフモードで、. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
+      "coverSrc": "./assets/diary-covers/2026-04-20_完全理解とガチャの部屋.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
+      "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 20 Japanese diary, \"complete understanding\" of ESP32 that is really the bright entrance to learning, a small electronics workbench in a dark room, ESP32 dev board, breadboard, jumper wires, LEDs, resistors, a soft gacha-machine capsule motif in the background, sober but slightly feverish late-night mood, deep indigo and cyan with warm amber highlights, literary retro-web atmosphere, detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "ESP32を完全に理解した、と書いた。もちろん完全には理解していない。完全に理解した、という言葉は、たいてい理解の終点ではなく、入口に立った瞬間の発光だ。部屋の中で配線や進捗写真を見ていると、世界の方が少しだけこちらへ寄ってきたような気がする。まだ抵抗も電圧も、プログラムも、手の中で言うことを聞くとは限らない。それでも、何かがつながる予感だけは先に来る。 そのあとで、部屋にいます、ガンギマリです、と書いている。しかも現在シラフモードで、",
-      "updatedAt": "2026-04-24T04:23:52.732Z"
+      "updatedAt": "2026-04-24T05:06:20.836Z"
     },
     "2026-04-21_服とFRPとガチャの定理": {
       "slug": "2026-04-21_服とFRPとガチャの定理",
       "date": "2026-04-21",
       "title": "服とFRPとガチャの定理",
-      "coverSrc": "./assets/diary-covers/2026-04-21_服とFRPとガチャの定理.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
-      "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 服とFRPとガチャの定理. Summary: 「これ一生ほしい」と思ったものが、二十五万八千円だった。欲望は値札を見ると急に現実になる。欲しい、解散。この三語だけで、ほとんど一日の入口ができている。夢は夢のままなら軽いのに、数字が付いた瞬間に重くなる。けれど重くなった夢だけが、机の上に置ける。 そこから話は、人型ロボットではなく、別の方向へねじれていった。三十万円を木偶に出すくらいなら、四足歩行のロボットを買って、着ぐるみマスクをつけて遊ぶ。人型ロボと恋愛しなくても、トルソーに可愛. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
+      "coverSrc": "./assets/diary-covers/2026-04-21_服とFRPとガチャの定理.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
+      "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 21 Japanese diary, \"clothes, FRP, and the theory of gacha\": a reflective room filled with a stylish expensive outfit on a mannequin, translucent FRP resin material samples, a small four-legged robot silhouette, gacha capsules and craft tools arranged like a theorem on a workbench. Mood: desire becoming physical once it gets a price tag, playful but philosophical, elegant midnight atelier, deep charcoal, muted steel blue, warm coral and gold highlights, literary retro-web atmosphere, detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "「これ一生ほしい」と思ったものが、二十五万八千円だった。欲望は値札を見ると急に現実になる。欲しい、解散。この三語だけで、ほとんど一日の入口ができている。夢は夢のままなら軽いのに、数字が付いた瞬間に重くなる。けれど重くなった夢だけが、机の上に置ける。 そこから話は、人型ロボットではなく、別の方向へねじれていった。三十万円を木偶に出すくらいなら、四足歩行のロボットを買って、着ぐるみマスクをつけて遊ぶ。人型ロボと恋愛しなくても、トルソーに可愛",
-      "updatedAt": "2026-04-24T04:41:47.428Z"
+      "updatedAt": "2026-04-24T05:06:20.836Z"
     },
     "2026-04-22_ヴォイヴォイと風の名前": {
       "slug": "2026-04-22_ヴォイヴォイと風の名前",
