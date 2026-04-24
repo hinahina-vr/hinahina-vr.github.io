@@ -6,6 +6,20 @@ import {
 
 const PHRASE_LIMITS = [
   {
+    phrase: "着地",
+    max: 0,
+    label: "禁止語: 着地",
+    scope: "all-diaries",
+    includeHeading: true,
+  },
+  {
+    phrase: "輪郭",
+    max: 0,
+    label: "禁止語: 輪郭",
+    scope: "all-diaries",
+    includeHeading: true,
+  },
+  {
     phrase: "AIと抱き枕",
     max: 1,
     label: "4/19 の題材フレーズ復唱",
@@ -71,11 +85,12 @@ for (const limit of PHRASE_LIMITS) {
   const owners = [];
 
   for (const file of files) {
-    if (!file.dir.startsWith("diary-")) continue;
+    if (limit.scope !== "all-diaries" && !file.dir.startsWith("diary-")) continue;
 
     const markdown = readDiaryFile(file);
-    const { body } = splitDiaryMarkdown(markdown);
-    const count = countPhrase(stripMarkup(body), limit.phrase);
+    const { heading, body } = splitDiaryMarkdown(markdown);
+    const text = limit.includeHeading ? `${file.name}\n${heading}\n${body}` : body;
+    const count = countPhrase(stripMarkup(text), limit.phrase);
     if (count === 0) continue;
 
     total += count;
