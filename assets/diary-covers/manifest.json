@@ -1,7 +1,7 @@
 {
   "version": 1,
   "requestedModel": "gpt-image-1.5",
-  "generatedAt": "2026-04-24T05:18:55.053Z",
+  "generatedAt": "2026-04-24T06:39:01.749Z",
   "entries": {
     "2026-04-13_爆発の手前で配線を信じる": {
       "slug": "2026-04-13_爆発の手前で配線を信じる",
@@ -706,6 +706,17 @@
       "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 23 Japanese diary, \"spice and a spinning joke\": a late-night Machida ramen counter inspired by spicy tanmen, a steaming red bowl, neon reflections, a small absurd pachinko-like light machine motif in the background, political satire reduced to noisy arcade lights without any readable symbols, appetite and ridiculous language colliding. Mood: dry, funny, bodily, reflective, city-night red glow, deep black, chili crimson, amber steam, cyan neon edges. Detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "夜、町田で蒙古タンメン中本に寄った。辛いものは、思想より先に身体へ届く。赤いスープを前にすると、頭の中でどんな理屈を並べていても、口と胃袋のほうが先に返事をする。世界はだいたい複雑だが、辛味だけはわりと単純で、単純なものほど強い。 その少し前から、「CR中国共産党」という言葉が頭に残っていた。ひどく雑で、ひどく光っている。政治の重たい名詞が、急に遊技機のランプみたいな軽さへ落ちる。笑っていいのか、呆れればいいのか、判断する前に赤と金の光",
       "updatedAt": "2026-04-24T05:18:55.053Z"
+    },
+    "2026-04-24_供給過多と麦の丘": {
+      "slug": "2026-04-24_供給過多と麦の丘",
+      "date": "2026-04-24",
+      "title": "供給過多と麦の丘",
+      "coverSrc": "./assets/diary-covers/2026-04-24_供給過多と麦の丘.png",
+      "renderMode": "fallback-svg-rasterized",
+      "modelUsed": "local-svg",
+      "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 供給過多と麦の丘. Summary: この日は、ビッグデータ分析概論を受けたあとで、神託生成のからくりを直した。授業というものは、受けている最中よりも、そのあと自分の道具へ戻った瞬間に効いてくることがある。頭の中で「なるほど」と思うだけではまだ足りない。実際の仕組みに触れて、入力の扱い方や、拾うべき偏りや、結果をどう読ませるかを少し変えたとき、ようやく知識が部品になる。 その作業の横で、妙な言葉遊びも続いていた。「モルトが実るあの丘で」とアネモイ。麦と風が並ぶと、急に授業の. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
+      "summary": "この日は、ビッグデータ分析概論を受けたあとで、神託生成のからくりを直した。授業というものは、受けている最中よりも、そのあと自分の道具へ戻った瞬間に効いてくることがある。頭の中で「なるほど」と思うだけではまだ足りない。実際の仕組みに触れて、入力の扱い方や、拾うべき偏りや、結果をどう読ませるかを少し変えたとき、ようやく知識が部品になる。 その作業の横で、妙な言葉遊びも続いていた。「モルトが実るあの丘で」とアネモイ。麦と風が並ぶと、急に授業の",
+      "updatedAt": "2026-04-24T06:39:01.749Z"
     }
   }
 }

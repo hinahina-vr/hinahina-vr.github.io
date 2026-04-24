@@ -334,16 +334,14 @@ function renderFullEntry(e) {
   const voiceBundleButton = crossLinks ? buildVoiceBundleButton(e.date) : "";
   const cover = resolveEntryCover(e.slug, e.title);
   const coverHtml = cover
-    ? `
-            <figure class="entry-cover">
+    ? `            <figure class="entry-cover">
               <img class="entry-cover-image" src="${cover.src}" alt="${escapeHtmlAttr(cover.alt)}" loading="lazy" decoding="async" />
             </figure>`
     : "";
   return `          <li id="${e.slug}">
             <p class="entry-date">${formatDate(e.date)}</p>
             <h3 class="entry-title">${e.title}</h3>
-            ${coverHtml}
-            ${e.html}${voiceBundleButton}${crossLinks}
+${coverHtml ? `${coverHtml}\n` : ""}            ${e.html}${voiceBundleButton}${crossLinks}
           </li>`;
 }
 

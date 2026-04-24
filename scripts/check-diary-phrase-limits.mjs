@@ -54,6 +54,36 @@ const PHRASE_LIMITS = [
     max: 1,
     label: "4/23 の説明句の復唱",
   },
+  {
+    phrase: "ビッグデータ分析概論",
+    max: 1,
+    label: "4/24 の講義名の復唱",
+    scope: "all-diaries",
+  },
+  {
+    phrase: "神託生成のからくり",
+    max: 1,
+    label: "4/24 の実装説明句の復唱",
+    scope: "all-diaries",
+  },
+  {
+    phrase: "モルトが実るあの丘で",
+    max: 1,
+    label: "4/24 の題材フレーズ復唱",
+    scope: "all-diaries",
+  },
+  {
+    phrase: "供給＞＞＞需要",
+    max: 1,
+    label: "4/24 の記号句の復唱",
+    scope: "all-diaries",
+  },
+  {
+    phrase: "消費AI",
+    max: 1,
+    label: "4/24 の発想名の復唱",
+    scope: "all-diaries",
+  },
 ];
 
 function stripMarkup(body) {
