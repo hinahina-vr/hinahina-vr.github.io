@@ -6,9 +6,39 @@ import {
 
 const PHRASE_LIMITS = [
   {
+    phrase: "AIと抱き枕",
+    max: 1,
+    label: "4/19 の題材フレーズ復唱",
+  },
+  {
+    phrase: "ESP32とLLMガチャ",
+    max: 1,
+    label: "4/20 の題材フレーズ復唱",
+  },
+  {
+    phrase: "値札とトルソー",
+    max: 1,
+    label: "4/21 の題材フレーズ復唱",
+  },
+  {
     phrase: "ヴォイヴォイとアネモイ",
     max: 1,
-    label: "同じ並列表現の使い回し",
+    label: "4/22 の題材フレーズ復唱",
+  },
+  {
+    phrase: "アネモイという風の名前",
+    max: 1,
+    label: "4/22 の説明句の復唱",
+  },
+  {
+    phrase: "中本と赤い冗談",
+    max: 1,
+    label: "4/23 の題材フレーズ復唱",
+  },
+  {
+    phrase: "外の足あとが赤い店で止まること",
+    max: 1,
+    label: "4/23 の説明句の復唱",
   },
 ];
 
@@ -41,6 +71,8 @@ for (const limit of PHRASE_LIMITS) {
   const owners = [];
 
   for (const file of files) {
+    if (!file.dir.startsWith("diary-")) continue;
+
     const markdown = readDiaryFile(file);
     const { body } = splitDiaryMarkdown(markdown);
     const count = countPhrase(stripMarkup(body), limit.phrase);
