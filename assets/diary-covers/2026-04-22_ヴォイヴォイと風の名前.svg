@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">ヴォイヴォイと風の名前</title>
+  <desc id="desc">短い言葉だけが残る日がある。「先輩たちもみんなヴォイヴォイ」。それから「アネモイ」。ほとんど説明ではない。説明ではないのに、妙に空気だけはある。声が増えていく感じと、風に名前をつける感じ。その二つだけが、机の上に置かれていた。 ヴォイヴォイ、という響きには、誰かの声が連鎖していく軽さがある。先輩たちもみんな、という言い方には、個人の発見がいつの間にか集団の合図になる感じがある。ひとりが声を出すと、次の人も声を出す。意味より先に、声の形だ</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d18" />
+      <stop offset="52%" stop-color="#1f2940" />
+      <stop offset="100%" stop-color="#3f4b66" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="26%" cy="26%" r="54%">
+      <stop offset="0%" stop-color="#c8e7ff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#c8e7ff" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="78%" cy="28%" r="48%">
+      <stop offset="0%" stop-color="#ff9b72" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#ff9b72" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="100%" r="56%">
+      <stop offset="0%" stop-color="#ffe19a" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#ffe19a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="url(#bg)" />
+  <rect width="1536" height="1024" fill="url(#glowA)" />
+  <rect width="1536" height="1024" fill="url(#glowB)" />
+  <rect width="1536" height="1024" fill="url(#glowC)" />
+  <rect x="58" y="58" width="1420" height="908" rx="40" fill="rgba(2, 6, 18, 0.28)" stroke="rgba(255,255,255,0.08)" />
+  <g>
+<line x1="170" y1="164" x2="1366" y2="164" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="236" x2="1366" y2="236" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="308" x2="1366" y2="308" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="380" x2="1366" y2="380" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="452" x2="1366" y2="452" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="524" x2="1366" y2="524" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="596" x2="1366" y2="596" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="668" x2="1366" y2="668" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+<line x1="170" y1="740" x2="1366" y2="740" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.08" />
+<line x1="170" y1="812" x2="1366" y2="812" stroke="rgba(255,255,255,0.22)" stroke-width="1" opacity="0.04" />
+  </g>
+  <g>
+<rect x="210" y="210" width="1116" height="604" rx="38" fill="rgba(255,255,255,0.04)" opacity="1" stroke="#7fc4ff" stroke-opacity="0.16" />
+<circle cx="460" cy="378" r="166" fill="#ff9b72" opacity="0.1" />
+<circle cx="1010" cy="364" r="184" fill="#c8e7ff" opacity="0.12" />
+<polygon points="768,208 1124,786 410,786" fill="#ffe19a" opacity="0.08" />
+  </g>
+  <g opacity="0.72">
+    <text x="156" y="162" fill="rgba(255,255,255,0.7)" font-size="28" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif" letter-spacing="8">2026-04-22</text>
+    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">ヴォイヴォイと風の名前</text>
+    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">短い言葉だけが残る日がある。「先輩たちもみんなヴォイヴォイ」。それから「アネモイ」。ほとんど説明ではない。説明ではないのに、妙に空気だけはある。声が増えていく感じと、風に名前をつける感じ。その二つだけが、机の上に置かれていた。 ヴォイヴォイ、という響きには、誰かの声が連鎖していく軽さがある。先輩たちもみんな、という言い方には、個人の発見がいつの間にか集団の合図になる感じがある。ひとりが声を出すと、次の人も声を出す。意味より先に、声の形だ</text>
+  </g>
+</svg>
