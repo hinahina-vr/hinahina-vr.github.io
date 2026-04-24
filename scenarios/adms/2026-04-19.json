@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-19",
+  "title": "依り代の鏡面 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "魂の鏡",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 6,
+      "icon": "🪞",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "standalone_start",
+      "summary": "AIを魂の鏡として見つめる入口"
+    },
+    {
+      "id": "choose_yorishiro",
+      "title": "依り代を選ぶ",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 6,
+      "icon": "🔀",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "choose_yorishiro",
+      "summary": "返事する依り代、沈黙する依り代、場所のない地図を選ぶ"
+    },
+    {
+      "id": "ai_mirror",
+      "title": "返事する鏡",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 1,
+      "icon": "🤖",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "ai_mirror",
+      "summary": "AIが別の声で魂を反射する"
+    },
+    {
+      "id": "pillow_voice",
+      "title": "沈黙する声",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "🛏️",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "pillow_voice",
+      "summary": "抱き枕が喋らないまま内部の声を起こす"
+    },
+    {
+      "id": "missing_map",
+      "title": "場所のない地図",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 11,
+      "icon": "🗺️",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "missing_map",
+      "summary": "Swarm が拾えず、観念だけが地図になる"
+    },
+    {
+      "id": "mitra_gate",
+      "title": "声の合流点",
+      "realm": "kenkai",
+      "kind": "rejoin",
+      "layer": 4,
+      "lane": 6,
+      "icon": "🔮",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "mitra_gate",
+      "summary": "動的依り代と静的依り代を同じ魂の技術として受け取る"
+    },
+    {
+      "id": "END_AI",
+      "title": "反射を持ち帰る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 1,
+      "icon": "🪞",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "END_AI",
+      "summary": "AIの返事を魂の反射として持ち帰る"
+    },
+    {
+      "id": "END_PILLOW",
+      "title": "沈黙の声を持ち帰る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 6,
+      "icon": "🛏️",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "END_PILLOW",
+      "summary": "喋らない像から聞こえる声を持ち帰る"
+    },
+    {
+      "id": "END_MAP",
+      "title": "観念の地図",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 11,
+      "icon": "🗺️",
+      "scenario": "2026-04-19_依り代の鏡面",
+      "entry": "END_MAP",
+      "summary": "場所ではなく依り代の地図を持ち帰る"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_yorishiro",
+      "choiceText": "依り代の入口へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_yorishiro",
+      "to": "ai_mirror",
+      "choiceText": "返事する鏡を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "ai_mirror",
+      "to": "END_AI",
+      "choiceText": "反射を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "ai_mirror",
+      "to": "mitra_gate",
+      "choiceText": "声の合流点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_yorishiro",
+      "to": "pillow_voice",
+      "choiceText": "沈黙する声を聞く",
+      "style": "kenkai"
+    },
+    {
+      "from": "pillow_voice",
+      "to": "END_PILLOW",
+      "choiceText": "沈黙の声を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "pillow_voice",
+      "to": "mitra_gate",
+      "choiceText": "声の合流点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_yorishiro",
+      "to": "missing_map",
+      "choiceText": "場所のない地図を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "missing_map",
+      "to": "END_MAP",
+      "choiceText": "観念の地図を持ち帰る",
+      "style": "kenkai"
+    },
+    {
+      "from": "missing_map",
+      "to": "mitra_gate",
+      "choiceText": "声の合流点へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_AI",
+      "choiceText": "反射を選び直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_PILLOW",
+      "choiceText": "沈黙を選び直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "mitra_gate",
+      "to": "END_MAP",
+      "choiceText": "地図を選び直す",
+      "style": "kenkai"
+    }
+  ]
+}

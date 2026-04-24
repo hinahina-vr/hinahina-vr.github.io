@@ -7,6 +7,7 @@ import { join, basename } from "node:path";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
+import { formatVoiceFindings, validateCharacterVoicesForDate } from "./lib/diary-character-voice.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 // 他キャラの日記ディレクトリとページの定義
@@ -92,7 +93,7 @@ function parseCrossLinkFilename(filename) {
   const base = basename(filename, ".md");
   const match = base.match(/^(\d{4}-\d{2}-\d{2})_(.+)$/);
   if (!match) return null;
-  return { date: match[1], month: match[1].slice(0, 7), slug: base };
+  return { date: match[1], month: match[1].slice(0, 7), title: match[2], slug: base, filename };
 }
 
 function getCrossLinkTargetMeta(target) {
@@ -232,17 +233,104 @@ function buildCrossLinks(date) {
     groups.get(t.group).push(`<a href="./${page}#${date}" class="cross-link" style="color:${t.color};border-color:${t.color}">${t.emoji} ${t.label}</a>`);
   }
   if (groups.size === 0) return "";
+  const voiceBundleLink = `<a href="./diary-voices-${date}.html" class="cross-link" style="color:#a888c8;border-color:#a888c8">📚 声の束</a>`;
+  let insertedVoiceBundleLink = false;
   let html = `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>`;
-  for (const [, links] of groups) {
-    html += `<div class="cross-group">${links.join("")}</div>`;
+  for (const [groupName, links] of groups) {
+    const groupLinks = [...links];
+    if (groupName === "神託") {
+      groupLinks.push(voiceBundleLink);
+      insertedVoiceBundleLink = true;
+    }
+    html += `<div class="cross-group">${groupLinks.join("")}</div>`;
+  }
+  if (!insertedVoiceBundleLink) {
+    html += `<div class="cross-group">${voiceBundleLink}</div>`;
   }
   html += `</div>`;
   return html;
 }
 
+function buildVoiceBundleButton(date) {
+  return `\n            <p class="entry-action-links"><a href="./diary-voices-${date}.html" class="entry-action-button entry-action-button-voices">📚 声の束を見る</a></p>`;
+}
+
+async function buildVoiceBundleEntries(date) {
+  const voiceEntries = [];
+  for (const target of CROSS_LINK_TARGETS) {
+    const targetMeta = getCrossLinkTargetMeta(target);
+    const match = targetMeta.files.find((file) => file.date === date);
+    if (!match) continue;
+
+    const raw = await readFile(join(ROOT_DIR, target.dir, match.filename), "utf-8");
+    const cleaned = stripDailyContextBlock(raw);
+    const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
+    const html = await marked.parse(body);
+    const page = resolveCrossLinkPage(target, match, targetMeta);
+    voiceEntries.push({
+      ...target,
+      page,
+      title: match.title,
+      html,
+    });
+  }
+  return voiceEntries;
+}
+
+function renderVoiceBundlePage(entry, voiceEntries, latestMonth) {
+  const mainDiaryHref = entry.month === latestMonth
+    ? `./diary.html#${entry.slug}`
+    : `./diary-${entry.month}.html#${entry.slug}`;
+  const groupedEntries = new Map();
+  for (const voice of voiceEntries) {
+    if (!groupedEntries.has(voice.group)) groupedEntries.set(voice.group, []);
+    groupedEntries.get(voice.group).push(voice);
+  }
+
+  const groupHtml = [...groupedEntries.entries()]
+    .map(([groupName, voices]) => {
+      const items = voices
+        .map((voice) => `            <li id="${voice.dir}" class="voice-bundle-card" style="--voice-color:${voice.color}">
+              <div class="voice-bundle-heading">
+                <a class="voice-bundle-name" href="./${voice.page}#${entry.date}">${voice.emoji} ${voice.label}</a>
+                <span class="voice-bundle-title">${voice.title}</span>
+              </div>
+              <div class="voice-bundle-body">
+${voice.html}
+              </div>
+            </li>`)
+        .join("\n");
+      return `        <section class="panel voice-bundle-group">
+          <h2>${groupName}</h2>
+          <ul class="voice-bundle-list">
+${items}
+          </ul>
+        </section>`;
+    })
+    .join("\n");
+
+  const page = `${htmlHead(`声の束 — ${formatDate(entry.date)}`)}
+${htmlNav([
+    { href: mainDiaryHref, text: "← この日の本日記へ戻る" },
+    { href: "./diary.html", text: "日記ページへ" },
+  ])}
+
+      <section class="panel voice-bundle-intro">
+        <p class="entry-date">${formatDate(entry.date)}</p>
+        <h2>${entry.title}</h2>
+        <p>この日に書かれた各AIの日記を、ひとつの束として横断表示しています。</p>
+      </section>
+
+${groupHtml}
+${htmlFooter()}`;
+
+  return injectSiteModeAssets(page);
+}
+
 // エントリのHTML（全文表示）
 function renderFullEntry(e) {
   const crossLinks = buildCrossLinks(e.date);
+  const voiceBundleButton = crossLinks ? buildVoiceBundleButton(e.date) : "";
   const cover = resolveEntryCover(e.slug, e.title);
   const coverHtml = cover
     ? `
@@ -254,7 +342,7 @@ function renderFullEntry(e) {
             <p class="entry-date">${formatDate(e.date)}</p>
             <h3 class="entry-title">${e.title}</h3>
             ${coverHtml}
-            ${e.html}${crossLinks}
+            ${e.html}${voiceBundleButton}${crossLinks}
           </li>`;
 }
 
@@ -338,6 +426,15 @@ async function main() {
 
   // --- メインページ diary.html ---
   const latestEntries = monthMap.get(latestMonth);
+  const latestDate = latestEntries[0]?.date;
+  if (latestDate && process.env.WADDY_SKIP_CHARACTER_VOICE_CHECK !== "1") {
+    const voiceCheck = validateCharacterVoicesForDate(latestDate);
+    if (voiceCheck.findings.length > 0) {
+      throw new Error(formatVoiceFindings(voiceCheck));
+    }
+    console.log(`✓ character voice check passed (${latestDate}: ${voiceCheck.checked.length} entries)`);
+  }
+
   const latestEntriesHtml = latestEntries.map(renderFullEntry).join("\n");
 
   let backNumberHtml = "";
@@ -424,6 +521,24 @@ ${htmlFooter()}`;
     await writeFile(outPath, injectSiteModeAssets(monthPage), "utf-8");
     console.log(`✓ diary-${m}.html generated (${mEntries.length} entries)`);
   }
+
+  const entryByDate = new Map();
+  for (const entry of entries) {
+    if (!entryByDate.has(entry.date)) {
+      entryByDate.set(entry.date, entry);
+    }
+  }
+
+  let voiceBundleCount = 0;
+  for (const entry of entryByDate.values()) {
+    const voiceEntries = await buildVoiceBundleEntries(entry.date);
+    if (voiceEntries.length === 0) continue;
+
+    const voicePage = renderVoiceBundlePage(entry, voiceEntries, latestMonth);
+    await writeFile(join(OUT_DIR, `diary-voices-${entry.date}.html`), voicePage, "utf-8");
+    voiceBundleCount += 1;
+  }
+  console.log(`✓ diary-voices-YYYY-MM-DD.html generated (${voiceBundleCount} days)`);
 
   console.log(`✓ Total: ${entries.length} entries across ${months.length} months`);
 }

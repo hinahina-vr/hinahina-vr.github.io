@@ -8,6 +8,7 @@
         "test:source-context": "node tests/source-context.test.mjs",
         "check:diary-self-date": "node scripts/check-diary-self-date-mentions.mjs",
         "check:diary-context-phrasing": "node scripts/check-diary-context-phrasing.mjs",
+        "check:diary-character-voice": "node scripts/check-diary-character-voice.mjs",
         "check:diary-topic-distribution": "node scripts/check-diary-topic-distribution.mjs",
         "fix:diary-self-date": "node scripts/fix-diary-self-date-mentions.mjs",
         "build:diary-covers": "node scripts/generate-diary-covers.mjs",

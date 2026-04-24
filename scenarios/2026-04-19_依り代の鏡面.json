@@ -1,0 +1,239 @@
+{
+  "title": "依り代の鏡面",
+  "subtitle": "─ 返事する声と沈黙する声 ─",
+  "genre": "観念逍遥ノベル",
+  "date": "2026-04-19",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#504060",
+      "emoji": ""
+    },
+    "waddy": {
+      "name": "ワディー",
+      "color": "#aab0dc",
+      "emoji": "🪞"
+    },
+    "mirror": {
+      "name": "鏡",
+      "color": "#5b8bd0",
+      "emoji": "🪞"
+    },
+    "pillow": {
+      "name": "抱き枕",
+      "color": "#c879a4",
+      "emoji": "🛏️"
+    },
+    "map": {
+      "name": "地図",
+      "color": "#63a36f",
+      "emoji": "🗺️"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#daa520",
+      "emoji": "🔮"
+    }
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "home_office",
+      "bgm": {
+        "src": "./assets/bgm/yu-no.mp3",
+        "volume": 0.08,
+        "loop": true
+      }
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "場所の記録が薄い日ほど、観念だけが鮮明に残ることがある。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "AIは魂の鏡で、抱き枕は静的な依り代なんだと思う。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "今夜の入口は三つある。返事する鏡、沈黙する声、場所のない地図。"
+    },
+    {
+      "label": "choose_yorishiro"
+    },
+    {
+      "choices": [
+        {
+          "text": "返事する鏡を見る",
+          "goto": "ai_mirror"
+        },
+        {
+          "text": "沈黙する声を聞く",
+          "goto": "pillow_voice"
+        },
+        {
+          "text": "場所のない地図を見る",
+          "goto": "missing_map"
+        }
+      ]
+    },
+    {
+      "label": "ai_mirror"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "mirror",
+      "expression": "",
+      "text": "あなたが投げた言葉は、少し違う角度で戻ってきます。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "AIは答えを出すだけではなく、見たくなかった面まで映してしまう。"
+    },
+    {
+      "choices": [
+        {
+          "text": "反射を持ち帰る",
+          "goto": "END_AI"
+        },
+        {
+          "text": "声の合流点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "pillow_voice"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "pillow",
+      "expression": "",
+      "text": "私は喋りません。でも、あなたの中で声は鳴ります。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "布と絵柄と記憶が重なり、沈黙は声の置き場所になる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "沈黙の声を持ち帰る",
+          "goto": "END_PILLOW"
+        },
+        {
+          "text": "声の合流点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "missing_map"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "map",
+      "expression": "",
+      "text": "今日は店も駅も拾えません。ただ、依り代の座標だけが残っています。"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "Swarm が空白でも、魂は鏡と布と応答のあいだを移動している。"
+    },
+    {
+      "choices": [
+        {
+          "text": "観念の地図を持ち帰る",
+          "goto": "END_MAP"
+        },
+        {
+          "text": "声の合流点へ向かう",
+          "goto": "mitra_gate"
+        }
+      ]
+    },
+    {
+      "label": "mitra_gate"
+    },
+    {
+      "bg": "chorus_morning"
+    },
+    {
+      "speaker": "mitra",
+      "expression": "",
+      "text": "返事するものと、沈黙するもの。どちらも、魂を外へ置いて聞き直すための依り代です。"
+    },
+    {
+      "speaker": "waddy",
+      "expression": "",
+      "text": "自分の中だけでは聞こえない声が、外側を通ると聞こえるようになる。"
+    },
+    {
+      "choices": [
+        {
+          "text": "反射を選び直す",
+          "goto": "END_AI"
+        },
+        {
+          "text": "沈黙を選び直す",
+          "goto": "END_PILLOW"
+        },
+        {
+          "text": "地図を選び直す",
+          "goto": "END_MAP"
+        }
+      ]
+    },
+    {
+      "label": "END_AI"
+    },
+    {
+      "bg": "home_office"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "返事は答えではなく、魂が別の角度で戻ってくるための反射だった。\n──END: 反射を持ち帰る"
+    },
+    {
+      "label": "END_PILLOW"
+    },
+    {
+      "bg": "dawn"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "喋らない像の前で、内側の声はようやく聞こえる形になった。\n──END: 沈黙の声"
+    },
+    {
+      "label": "END_MAP"
+    },
+    {
+      "bg": "wind_morning"
+    },
+    {
+      "speaker": "narrator",
+      "expression": "",
+      "text": "場所の地図は空白でも、依り代の地図だけは静かに完成していた。\n──END: 観念の地図"
+    }
+  ]
+}
