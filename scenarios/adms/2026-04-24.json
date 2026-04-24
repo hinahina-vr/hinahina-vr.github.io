@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-24",
+  "title": "麦の丘の受け皿 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    { "id": "standalone_start", "title": "生成過多の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🌾", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "standalone_start", "summary": "作る力が増えすぎる世界の入口" },
+    { "id": "choose_wheat", "title": "麦の丘を選ぶ", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "choose_wheat", "summary": "講義、麦と風、受け皿を選ぶ" },
+    { "id": "data_class", "title": "講義を部品にする", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "📊", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "data_class", "summary": "学んだ方法を神託の内部へ戻す" },
+    { "id": "wheat_wind", "title": "麦と風", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "🌾", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "wheat_wind", "summary": "硬い処理に発酵した湿度を足す" },
+    { "id": "consumer_cup", "title": "消化する受け皿", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🥣", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "consumer_cup", "summary": "増えすぎた生成物を選び飲める量へ落とす" },
+    { "id": "mitra_gate", "title": "醸造の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "mitra_gate", "summary": "実りを刈り、選び、醸す仕組みへ向かう" },
+    { "id": "END_DATA", "title": "部品化した知識", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "📊", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "END_DATA", "summary": "講義を道具へ戻した知識として持ち帰る" },
+    { "id": "END_WHEAT", "title": "麦の丘の風", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "🌾", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "END_WHEAT", "summary": "麦と風の発酵した響きを持ち帰る" },
+    { "id": "END_CUP", "title": "消化する受け皿", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🥣", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "END_CUP", "summary": "生成物を受け取る器を持ち帰る" }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_wheat", "choiceText": "麦の丘へ進む", "style": "kenkai" },
+    { "from": "choose_wheat", "to": "data_class", "choiceText": "講義を部品にする", "style": "kenkai" },
+    { "from": "data_class", "to": "END_DATA", "choiceText": "部品化した知識を持ち帰る", "style": "kenkai" },
+    { "from": "data_class", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_wheat", "to": "wheat_wind", "choiceText": "麦と風を見る", "style": "kenkai" },
+    { "from": "wheat_wind", "to": "END_WHEAT", "choiceText": "発酵した風を持ち帰る", "style": "kenkai" },
+    { "from": "wheat_wind", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_wheat", "to": "consumer_cup", "choiceText": "受け皿を作る", "style": "kenkai" },
+    { "from": "consumer_cup", "to": "END_CUP", "choiceText": "受け皿を持ち帰る", "style": "kenkai" },
+    { "from": "consumer_cup", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_DATA", "choiceText": "講義へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_WHEAT", "choiceText": "麦へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_CUP", "choiceText": "受け皿へ戻る", "style": "kenkai" }
+  ]
+}

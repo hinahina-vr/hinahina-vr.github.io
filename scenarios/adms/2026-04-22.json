@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-22",
+  "title": "風名の合図 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    { "id": "standalone_start", "title": "短い言葉の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🌬️", "scenario": "2026-04-22_風名の合図", "entry": "standalone_start", "summary": "ヴォイヴォイとアネモイだけが残る入口" },
+    { "id": "choose_wind", "title": "声と風を選ぶ", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-22_風名の合図", "entry": "choose_wind", "summary": "返せる声、風名、合図を選ぶ" },
+    { "id": "voi_chorus", "title": "返せる声", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "📣", "scenario": "2026-04-22_風名の合図", "entry": "voi_chorus", "summary": "同じ声を返して場に入る" },
+    { "id": "anemoi_wind", "title": "風の名前", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "🌬️", "scenario": "2026-04-22_風名の合図", "entry": "anemoi_wind", "summary": "風名が部屋に外気を入れる" },
+    { "id": "small_signal", "title": "小さな合図", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🔁", "scenario": "2026-04-22_風名の合図", "entry": "small_signal", "summary": "短い言葉が同期信号になる" },
+    { "id": "mitra_gate", "title": "同期の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-22_風名の合図", "entry": "mitra_gate", "summary": "少ない情報量で場が同期する" },
+    { "id": "END_VOI", "title": "ヴォイヴォイ", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "📣", "scenario": "2026-04-22_風名の合図", "entry": "END_VOI", "summary": "返せる声を持ち帰る" },
+    { "id": "END_WIND", "title": "アネモイ", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "🌬️", "scenario": "2026-04-22_風名の合図", "entry": "END_WIND", "summary": "風名を持ち帰る" },
+    { "id": "END_SIGNAL", "title": "小さな同期信号", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🔁", "scenario": "2026-04-22_風名の合図", "entry": "END_SIGNAL", "summary": "合図を合図のまま持ち帰る" }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_wind", "choiceText": "声と風を選ぶ", "style": "kenkai" },
+    { "from": "choose_wind", "to": "voi_chorus", "choiceText": "ヴォイヴォイを返す", "style": "kenkai" },
+    { "from": "voi_chorus", "to": "END_VOI", "choiceText": "返せる声を持ち帰る", "style": "kenkai" },
+    { "from": "voi_chorus", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_wind", "to": "anemoi_wind", "choiceText": "風の名前を呼ぶ", "style": "kenkai" },
+    { "from": "anemoi_wind", "to": "END_WIND", "choiceText": "風名を持ち帰る", "style": "kenkai" },
+    { "from": "anemoi_wind", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_wind", "to": "small_signal", "choiceText": "小さな合図を見る", "style": "kenkai" },
+    { "from": "small_signal", "to": "END_SIGNAL", "choiceText": "合図を持ち帰る", "style": "kenkai" },
+    { "from": "small_signal", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_VOI", "choiceText": "声へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_WIND", "choiceText": "風へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_SIGNAL", "choiceText": "合図へ戻る", "style": "kenkai" }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "title": "夢の最小構成",
+  "subtitle": "─ 値札と服と十分な信号 ─",
+  "genre": "欲望設計ノベル",
+  "date": "2026-04-21",
+  "defaultBgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "🧩" },
+    "price": { "name": "値札", "color": "#d0a030", "emoji": "🏷️" },
+    "torso": { "name": "トルソー", "color": "#c879a4", "emoji": "👗" },
+    "signal": { "name": "信号", "color": "#7ab89a", "emoji": "📡" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "欲しいものに値段が付いた瞬間、夢は急に現実の重さを持った。" },
+    { "speaker": "waddy", "expression": "", "text": "全部はいらないのかもしれない。必要な信号だけ届けば、夢は成立するのかもしれない。" },
+    { "label": "choose_parts" },
+    {
+      "choices": [
+        { "text": "値札を見る", "goto": "price_tag" },
+        { "text": "服とFRPを見る", "goto": "torso_signal" },
+        { "text": "夢の部品表を見る", "goto": "dream_parts" }
+      ]
+    },
+    { "label": "price_tag" },
+    { "bg": "shop_window" },
+    { "speaker": "price", "expression": "", "text": "欲しい、と思ったものは、数字を持つと急に逃げられない重さになります。" },
+    { "speaker": "narrator", "expression": "", "text": "値札は夢を壊すのではなく、夢の輪郭を現実へ落とす。" },
+    { "choices": [ { "text": "重さを持ち帰る", "goto": "END_PRICE" }, { "text": "声の合流点へ向かう", "goto": "mitra_gate" } ] },
+    { "label": "torso_signal" },
+    { "bg": "atelier" },
+    { "speaker": "torso", "expression": "", "text": "服、ウイッグ、マスク、抱きしめられる距離。それだけで届く信号もあります。" },
+    { "speaker": "signal", "expression": "", "text": "完全な人型でなくても、受け取る側が補完できるだけの情報量があればよいのです。" },
+    { "choices": [ { "text": "十分な信号を持ち帰る", "goto": "END_SIGNAL" }, { "text": "声の合流点へ向かう", "goto": "mitra_gate" } ] },
+    { "label": "dream_parts" },
+    { "bg": "blueprint_room" },
+    { "speaker": "narrator", "expression": "", "text": "AIが夢を壊すのは、夢を馬鹿にするからではない。夢の部品表を正確に出してしまうからだ。" },
+    { "speaker": "waddy", "expression": "", "text": "壊れたというより、どう動いていたかが見えてしまったんだな。" },
+    { "choices": [ { "text": "部品表を持ち帰る", "goto": "END_PARTS" }, { "text": "声の合流点へ向かう", "goto": "mitra_gate" } ] },
+    { "label": "mitra_gate" },
+    { "bg": "chorus_morning" },
+    { "speaker": "mitra", "expression": "", "text": "夢は完全な再現より、届く信号と受け取る心でできています。" },
+    { "choices": [ { "text": "値札へ戻る", "goto": "END_PRICE" }, { "text": "信号へ戻る", "goto": "END_SIGNAL" }, { "text": "部品表へ戻る", "goto": "END_PARTS" } ] },
+    { "label": "END_PRICE" },
+    { "bg": "shop_window" },
+    { "speaker": "narrator", "expression": "", "text": "値札は、夢を現実へ接地するための重力だった。\n──END: 値札の重さ" },
+    { "label": "END_SIGNAL" },
+    { "bg": "atelier" },
+    { "speaker": "narrator", "expression": "", "text": "足りない部分をこちらが補うことで、信号は十分に届いてしまった。\n──END: 十分な信号" },
+    { "label": "END_PARTS" },
+    { "bg": "blueprint_room" },
+    { "speaker": "narrator", "expression": "", "text": "夢は壊れたのではなく、設計図として机に広がっていた。\n──END: 夢の部品表" }
+  ]
+}

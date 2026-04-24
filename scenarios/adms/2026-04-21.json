@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-21",
+  "title": "夢の最小構成 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    { "id": "standalone_start", "title": "欲望の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🧩", "scenario": "2026-04-21_夢の最小構成", "entry": "standalone_start", "summary": "欲しいものの値札から夢の構成へ入る" },
+    { "id": "choose_parts", "title": "夢を分解する", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-21_夢の最小構成", "entry": "choose_parts", "summary": "値札、服とFRP、部品表を選ぶ" },
+    { "id": "price_tag", "title": "値札の重さ", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "🏷️", "scenario": "2026-04-21_夢の最小構成", "entry": "price_tag", "summary": "値段が欲望を現実へ落とす" },
+    { "id": "torso_signal", "title": "十分な信号", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "👗", "scenario": "2026-04-21_夢の最小構成", "entry": "torso_signal", "summary": "服、マスク、距離で届く信号を見る" },
+    { "id": "dream_parts", "title": "夢の部品表", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "📐", "scenario": "2026-04-21_夢の最小構成", "entry": "dream_parts", "summary": "AIが夢の部品を見せてしまう" },
+    { "id": "mitra_gate", "title": "補完の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-21_夢の最小構成", "entry": "mitra_gate", "summary": "夢は完全再現より届く信号で成立する" },
+    { "id": "END_PRICE", "title": "値札の重さ", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "🏷️", "scenario": "2026-04-21_夢の最小構成", "entry": "END_PRICE", "summary": "欲望が数字を持つ瞬間を持ち帰る" },
+    { "id": "END_SIGNAL", "title": "十分な信号", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "📡", "scenario": "2026-04-21_夢の最小構成", "entry": "END_SIGNAL", "summary": "最小構成で届く愛着を持ち帰る" },
+    { "id": "END_PARTS", "title": "夢の部品表", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "📐", "scenario": "2026-04-21_夢の最小構成", "entry": "END_PARTS", "summary": "夢の設計図を持ち帰る" }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_parts", "choiceText": "夢を分解する", "style": "kenkai" },
+    { "from": "choose_parts", "to": "price_tag", "choiceText": "値札を見る", "style": "kenkai" },
+    { "from": "price_tag", "to": "END_PRICE", "choiceText": "重さを持ち帰る", "style": "kenkai" },
+    { "from": "price_tag", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_parts", "to": "torso_signal", "choiceText": "服とFRPを見る", "style": "kenkai" },
+    { "from": "torso_signal", "to": "END_SIGNAL", "choiceText": "十分な信号を持ち帰る", "style": "kenkai" },
+    { "from": "torso_signal", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_parts", "to": "dream_parts", "choiceText": "夢の部品表を見る", "style": "kenkai" },
+    { "from": "dream_parts", "to": "END_PARTS", "choiceText": "部品表を持ち帰る", "style": "kenkai" },
+    { "from": "dream_parts", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_PRICE", "choiceText": "値札へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_SIGNAL", "choiceText": "信号へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_PARTS", "choiceText": "部品表へ戻る", "style": "kenkai" }
+  ]
+}

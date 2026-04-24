@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-23",
+  "title": "赤い回転灯 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    { "id": "standalone_start", "title": "赤い夜の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🌶️", "scenario": "2026-04-23_赤い回転灯", "entry": "standalone_start", "summary": "辛味と赤い冗談が同じ夜に並ぶ" },
+    { "id": "choose_red", "title": "赤を選ぶ", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-23_赤い回転灯", "entry": "choose_red", "summary": "丼、冗談、身体の錨を選ぶ" },
+    { "id": "red_bowl", "title": "赤い丼", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "🍜", "scenario": "2026-04-23_赤い回転灯", "entry": "red_bowl", "summary": "辛味が身体を現在地へ戻す" },
+    { "id": "spinning_joke", "title": "回転する冗談", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "🔴", "scenario": "2026-04-23_赤い回転灯", "entry": "spinning_joke", "summary": "重たい語が光る記号として回る" },
+    { "id": "body_anchor", "title": "身体の錨", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🔥", "scenario": "2026-04-23_赤い回転灯", "entry": "body_anchor", "summary": "外出と辛味が一日を固定する" },
+    { "id": "mitra_gate", "title": "赤の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-23_赤い回転灯", "entry": "mitra_gate", "summary": "頭の赤い光と胃の赤い熱が重なる" },
+    { "id": "END_BOWL", "title": "赤い熱", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "🍜", "scenario": "2026-04-23_赤い回転灯", "entry": "END_BOWL", "summary": "赤い丼の熱を持ち帰る" },
+    { "id": "END_JOKE", "title": "光る冗談", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "🔴", "scenario": "2026-04-23_赤い回転灯", "entry": "END_JOKE", "summary": "頭で回る光を持ち帰る" },
+    { "id": "END_BODY", "title": "身体の錨", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🔥", "scenario": "2026-04-23_赤い回転灯", "entry": "END_BODY", "summary": "外出の錨を持ち帰る" }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_red", "choiceText": "赤を選ぶ", "style": "kenkai" },
+    { "from": "choose_red", "to": "red_bowl", "choiceText": "赤い丼を見る", "style": "kenkai" },
+    { "from": "red_bowl", "to": "END_BOWL", "choiceText": "赤い熱を持ち帰る", "style": "kenkai" },
+    { "from": "red_bowl", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_red", "to": "spinning_joke", "choiceText": "回転する冗談を見る", "style": "kenkai" },
+    { "from": "spinning_joke", "to": "END_JOKE", "choiceText": "光る冗談を持ち帰る", "style": "kenkai" },
+    { "from": "spinning_joke", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "choose_red", "to": "body_anchor", "choiceText": "身体の錨を下ろす", "style": "kenkai" },
+    { "from": "body_anchor", "to": "END_BODY", "choiceText": "身体の錨を持ち帰る", "style": "kenkai" },
+    { "from": "body_anchor", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_BOWL", "choiceText": "丼へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_JOKE", "choiceText": "冗談へ戻る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_BODY", "choiceText": "身体へ戻る", "style": "kenkai" }
+  ]
+}

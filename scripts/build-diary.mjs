@@ -175,6 +175,10 @@ function buildDreamStartHref(date, dreamRootMap) {
   return `./galge-scenario.html?${params.toString()}`;
 }
 
+function buildDreamButtonHtml(href) {
+  return `<p style="text-align:center; margin:24px 0 12px;"><a href="${href}" style="display:inline-block; padding:16px 52px; background:linear-gradient(135deg, rgba(82,45,145,0.85), rgba(45,18,90,0.9)); border:2px solid rgba(200,160,255,0.4); color:#e8d8ff; text-decoration:none; letter-spacing:0.3em; font-size:16px; font-weight:700; border-radius:8px; box-shadow:0 0 20px rgba(140,80,220,0.35), 0 0 40px rgba(120,60,200,0.15), inset 0 1px 0 rgba(255,255,255,0.1); text-shadow:0 0 8px rgba(180,140,255,0.4);">✦ 夢を見る</a></p>`;
+}
+
 function resolveEntryCover(slug, title) {
   if (coverAssetCache.has(slug)) {
     return coverAssetCache.get(slug);
@@ -216,10 +220,15 @@ function rewriteDreamButtonLinks(html, date, dreamRootMap) {
     return stripDreamButton(html);
   }
 
-  return html.replace(
+  const rewritten = html.replace(
     /<a([^>]*?)href="[^"]*"([^>]*?)>([\s\S]*?夢を見る[\s\S]*?)<\/a>/g,
     `<a$1href="${nextHref}"$2>$3</a>`
   );
+  if (rewritten !== html) {
+    return rewritten;
+  }
+
+  return `${html}\n${buildDreamButtonHtml(nextHref)}`;
 }
 
 // 同じ日付の他キャラ日記を検索してリンクを生成（グループごとに改行、見出しなし）

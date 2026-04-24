@@ -1,0 +1,83 @@
+{
+  "title": "部屋の抽選機",
+  "subtitle": "─ 完全理解とまだ来ない未来 ─",
+  "genre": "机上実験ノベル",
+  "date": "2026-04-20",
+  "defaultBgm": {
+    "src": "./assets/bgm/yu-no.mp3",
+    "volume": 0.08,
+    "loop": true
+  },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "🧪" },
+    "esp32": { "name": "ESP32", "color": "#7ab89a", "emoji": "🔌" },
+    "machine": { "name": "抽選機", "color": "#d0a030", "emoji": "🎰" },
+    "room": { "name": "部屋", "color": "#8aa0c8", "emoji": "🏠" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office", "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true } },
+    { "speaker": "narrator", "expression": "", "text": "部屋の机に、小さな基板と、まだ来ない未来への期待が並んでいた。" },
+    { "speaker": "waddy", "expression": "", "text": "ESP32、完全に理解した。たぶん。いや、入口には立った。" },
+    { "speaker": "narrator", "expression": "", "text": "今夜の入口は三つある。配線の現実、抽選の未来、しらふの熱。" },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "配線の現実を見る", "goto": "workbench" },
+        { "text": "抽選の未来を待つ", "goto": "lottery" },
+        { "text": "しらふの熱を測る", "goto": "sober_heat" }
+      ]
+    },
+    { "label": "workbench" },
+    { "bg": "home_office" },
+    { "speaker": "esp32", "expression": "", "text": "配線は、合えば光ります。間違えれば黙ります。" },
+    { "speaker": "narrator", "expression": "", "text": "手元の確認だけが、未来の大きな言葉を小さく現実へ落としてくれる。" },
+    {
+      "choices": [
+        { "text": "入口の光を持ち帰る", "goto": "END_WORKBENCH" },
+        { "text": "声の合流点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "lottery" },
+    { "bg": "city_night" },
+    { "speaker": "machine", "expression": "", "text": "まだ開かない機能は、技術ではなく当たり待ちの顔をしています。" },
+    { "speaker": "waddy", "expression": "", "text": "使えるかどうかが、いつのまにか抽選みたいに見えてくるんだよな。" },
+    {
+      "choices": [
+        { "text": "外れ台を離れる", "goto": "END_LOTTERY" },
+        { "text": "声の合流点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "sober_heat" },
+    { "bg": "home_office" },
+    { "speaker": "room", "expression": "", "text": "酒はまだ入っていません。それでも、気分だけが先に赤いランプを点けました。" },
+    { "speaker": "narrator", "expression": "", "text": "しらふの部屋が、配線と期待で小さな遊技場になる。" },
+    {
+      "choices": [
+        { "text": "部屋の熱を持ち帰る", "goto": "END_ROOM" },
+        { "text": "声の合流点へ向かう", "goto": "mitra_gate" }
+      ]
+    },
+    { "label": "mitra_gate" },
+    { "bg": "chorus_morning" },
+    { "speaker": "mitra", "expression": "", "text": "確かめる機械と、待つしかない未来。二つが同じ机に置かれた時、部屋は小さな儀式場になります。" },
+    {
+      "choices": [
+        { "text": "配線へ戻る", "goto": "END_WORKBENCH" },
+        { "text": "抽選へ戻る", "goto": "END_LOTTERY" },
+        { "text": "部屋へ戻る", "goto": "END_ROOM" }
+      ]
+    },
+    { "label": "END_WORKBENCH" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "完全理解とは、検証へ戻るための少し大げさな入口だった。\n──END: 入口の光" },
+    { "label": "END_LOTTERY" },
+    { "bg": "city_night" },
+    { "speaker": "narrator", "expression": "", "text": "まだ来ない未来は、光る抽選機の顔でこちらを待たせていた。\n──END: 外れ台の未来" },
+    { "label": "END_ROOM" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "しらふの部屋で、机の上だけが妙に熱を持って回っていた。\n──END: 部屋の熱" }
+  ]
+}

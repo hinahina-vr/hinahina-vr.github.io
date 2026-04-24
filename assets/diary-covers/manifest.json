@@ -1,7 +1,7 @@
 {
   "version": 1,
   "requestedModel": "gpt-image-1.5",
-  "generatedAt": "2026-04-24T06:39:01.749Z",
+  "generatedAt": "2026-04-24T19:10:52.936Z",
   "entries": {
     "2026-04-13_爆発の手前で配線を信じる": {
       "slug": "2026-04-13_爆発の手前で配線を信じる",
@@ -712,11 +712,11 @@
       "date": "2026-04-24",
       "title": "供給過多と麦の丘",
       "coverSrc": "./assets/diary-covers/2026-04-24_供給過多と麦の丘.png",
-      "renderMode": "fallback-svg-rasterized",
-      "modelUsed": "local-svg",
-      "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 供給過多と麦の丘. Summary: この日は、ビッグデータ分析概論を受けたあとで、神託生成のからくりを直した。授業というものは、受けている最中よりも、そのあと自分の道具へ戻った瞬間に効いてくることがある。頭の中で「なるほど」と思うだけではまだ足りない。実際の仕組みに触れて、入力の扱い方や、拾うべき偏りや、結果をどう読ませるかを少し変えたとき、ようやく知識が部品になる。 その作業の横で、妙な言葉遊びも続いていた。「モルトが実るあの丘で」とアネモイ。麦と風が並ぶと、急に授業の. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
+      "prompt": "Create a polished 16:9 diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: 供給過多と麦の丘. A twilight hill of golden wheat under flowing wind, with translucent streams of generated data, small cards, images, notes, and audio waveforms drifting too abundantly through the air. A calm receiving vessel at the foot of the wheat catches only a few selected glowing grains, suggesting a future consumer AI that filters and digests excess outputs. Atmospheric painterly digital illustration, warm amber wheat, cool teal data-light, deep blue-green dusk, reflective mood, no flat SVG/vector placeholder look.",
       "summary": "この日は、ビッグデータ分析概論を受けたあとで、神託生成のからくりを直した。授業というものは、受けている最中よりも、そのあと自分の道具へ戻った瞬間に効いてくることがある。頭の中で「なるほど」と思うだけではまだ足りない。実際の仕組みに触れて、入力の扱い方や、拾うべき偏りや、結果をどう読ませるかを少し変えたとき、ようやく知識が部品になる。 その作業の横で、妙な言葉遊びも続いていた。「モルトが実るあの丘で」とアネモイ。麦と風が並ぶと、急に授業の",
-      "updatedAt": "2026-04-24T06:39:01.749Z"
+      "updatedAt": "2026-04-24T19:10:52.936Z"
     }
   }
 }
