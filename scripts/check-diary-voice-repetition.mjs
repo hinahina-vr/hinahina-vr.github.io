@@ -33,6 +33,8 @@ function parseArgs(argv) {
 
 function stripMarkup(body) {
   return body
+    .replace(/^---\s*$/gmu, " ")
+    .replace(/^\*\*[^*\n]+への(?:インサイト|神託)[^*\n]*。\*\*\s*$/gmu, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/`[^`]*`/g, " ")
     .replace(/\[[^\]]+\]\([^)]+\)/g, " ")
