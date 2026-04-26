@@ -25,6 +25,8 @@ export const BUNGOU_STYLE_END = "<!-- bungou-style:end -->";
 
 const DAILY_CONTEXT_BLOCK_RE = /\n?<!-- daily-context:start -->[\s\S]*?<!-- daily-context:end -->\n?/g;
 const BUNGOU_STYLE_BLOCK_RE = /\n?<!-- bungou-style:start -->[\s\S]*?<!-- bungou-style:end -->\n?/g;
+const BUNGOU_STYLE_ROUND_ROBIN_START_DATE = "2026-02-23";
+const DAY_MS = 24 * 60 * 60 * 1000;
 
 const BUNGOU_STYLE_CATALOG = [
   {
@@ -466,11 +468,27 @@ function hasSwarmNarrativeItem(items) {
   return items.some((item) => cleanText(item.shout || "").length > 0);
 }
 
-export function buildBungouStyleRecommendation(normalized) {
+function getUtcDayNumber(dateString) {
+  ensureDateString(dateString);
+  const [year, month, day] = dateString.split("-").map(Number);
+  return Math.floor(Date.UTC(year, month - 1, day) / DAY_MS);
+}
+
+function positiveModulo(value, divisor) {
+  return ((value % divisor) + divisor) % divisor;
+}
+
+function getRoundRobinBungouStyle(dateString) {
+  const offset = getUtcDayNumber(dateString) - getUtcDayNumber(BUNGOU_STYLE_ROUND_ROBIN_START_DATE);
+  const index = positiveModulo(offset, BUNGOU_STYLE_CATALOG.length);
+  return { ...BUNGOU_STYLE_CATALOG[index], roundRobinIndex: index };
+}
+
+function scoreBungouStyles(normalized) {
   const signalText = getBungouSignalText(normalized);
   const hasSwarmNarrative = hasSwarmNarrativeItem(normalized.sources.swarm.items);
 
-  const scored = BUNGOU_STYLE_CATALOG.map((style) => {
+  return BUNGOU_STYLE_CATALOG.map((style) => {
     let score = style.key === "murakami" ? 1 : 0;
     const reasons = [];
 
@@ -507,8 +525,12 @@ export function buildBungouStyleRecommendation(normalized) {
     if (right.key === "murakami") return -1;
     return left.key.localeCompare(right.key, "ja");
   });
+}
 
-  const primary = scored[0];
+export function buildBungouStyleRecommendation(normalized) {
+  const primary = getRoundRobinBungouStyle(normalized.date);
+  const scored = scoreBungouStyles(normalized);
+
   const alternates = scored
     .filter((style) => style.key !== primary.key && style.score > 0)
     .slice(0, 2)
@@ -521,7 +543,10 @@ export function buildBungouStyleRecommendation(normalized) {
       school: primary.school,
     },
     alternates,
-    reasons: primary.reasons.length > 0 ? primary.reasons.slice(0, 2) : [primary.defaultReason],
+    reasons: [
+      `${normalized.date} のラウンドロビン担当`,
+      primary.defaultReason,
+    ],
     notes: primary.notes,
   };
 }

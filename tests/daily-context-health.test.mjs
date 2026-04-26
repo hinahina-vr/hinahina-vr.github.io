@@ -275,7 +275,7 @@ function testBuildSearchDateRangeForLocalDay() {
   );
 }
 
-function testBungouRecommendationPicksKaikoForTravelAndDrinking() {
+function testBungouRecommendationUsesRoundRobinPrimaryAndTopicAlternates() {
   const normalized = createBaseNormalized({
     sources: {
       ...createBaseNormalized().sources,
@@ -315,8 +315,9 @@ function testBungouRecommendationPicksKaikoForTravelAndDrinking() {
   normalized.candidateTopics = buildCandidateTopics(normalized);
   const recommendation = buildBungouStyleRecommendation(normalized);
 
-  assert.equal(recommendation.primary.key, "kaiko");
-  assert(recommendation.reasons.some((reason) => reason.includes("酒・食・旅")));
+  assert.equal(recommendation.primary.key, "mukouda");
+  assert(recommendation.reasons.some((reason) => reason.includes("ラウンドロビン")));
+  assert(recommendation.alternates.some((style) => style.key === "kaiko"));
 }
 
 function testBungouRecommendationIgnoresVenueOnlySwarm() {
@@ -405,7 +406,7 @@ function run() {
   testHealthTopicsLimit();
   testCandidateTopicsStaySourceNeutral();
   testBuildSearchDateRangeForLocalDay();
-  testBungouRecommendationPicksKaikoForTravelAndDrinking();
+  testBungouRecommendationUsesRoundRobinPrimaryAndTopicAlternates();
   testBungouRecommendationIgnoresVenueOnlySwarm();
   testBungouStyleBlockIsInsertedBeforeDailyContext();
   console.log("daily-context health tests passed");
