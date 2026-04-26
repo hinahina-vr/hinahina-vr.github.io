@@ -87,7 +87,7 @@ const ENTRY_OVERRIDES = {
     prompt:
       "A cover illustration for a diary entry about turning dry course titles into dreamlike entrances. Floating academic cards transforming into dawn-lit doors, catalog pages becoming pathways, orderly lists gaining warmth and atmosphere, a hint of theatrical music in the air, morning light inside a structured archive, no text.",
   },
-  "2026-04-18_三千万と破滅のあいだ": {
+  "2026-04-18_3000万円の余白": {
     motif: "wealth",
     palette: {
       bg0: "#090910",

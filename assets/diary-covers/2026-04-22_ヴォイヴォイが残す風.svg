@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
-  <title id="title">ヴォイヴォイと風の名前</title>
-  <desc id="desc">短い言葉だけが残る日がある。「先輩たちもみんなヴォイヴォイ」。それから「アネモイ」。ほとんど説明ではない。説明ではないのに、妙に空気だけはある。声が増えていく感じと、風に名前をつける感じ。その二つだけが、机の上に置かれていた。 ヴォイヴォイ、という響きには、誰かの声が連鎖していく軽さがある。先輩たちもみんな、という言い方には、個人の発見がいつの間にか集団の合図になる感じがある。ひとりが声を出すと、次の人も声を出す。意味より先に、声の形だ</desc>
+  <title id="title">ヴォイヴォイが残す風</title>
+  <desc id="desc">「先輩たちもみんなヴォイヴォイ」という言葉が残った。意味はほとんどない。けれど、誰かが言い、別の人がまねすると、それだけで小さな合図になる。内容よりも、声に出したときの調子が強い。もう1つ残ったのが「アネモイ」だった。</desc>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#090d18" />
@@ -46,7 +46,7 @@
   </g>
   <g opacity="0.72">
     <text x="156" y="162" fill="rgba(255,255,255,0.7)" font-size="28" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif" letter-spacing="8">2026-04-22</text>
-    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">ヴォイヴォイと風の名前</text>
-    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">短い言葉だけが残る日がある。「先輩たちもみんなヴォイヴォイ」。それから「アネモイ」。ほとんど説明ではない。説明ではないのに、妙に空気だけはある。声が増えていく感じと、風に名前をつける感じ。その二つだけが、机の上に置かれていた。 ヴォイヴォイ、という響きには、誰かの声が連鎖していく軽さがある。先輩たちもみんな、という言い方には、個人の発見がいつの間にか集団の合図になる感じがある。ひとりが声を出すと、次の人も声を出す。意味より先に、声の形だ</text>
+    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">ヴォイヴォイが残す風</text>
+    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">「先輩たちもみんなヴォイヴォイ」という言葉が残った。意味はほとんどない。けれど、誰かが言い、別の人がまねすると、それだけで小さな合図になる。内容よりも、声に出したときの調子が強い。もう1つ残ったのが「アネモイ」だった。</text>
   </g>
 </svg>

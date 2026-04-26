@@ -58,11 +58,11 @@
       "summary": "乾いた講義名が並んでいるだけの一覧に、ひとつずつ夢の入口を付けていく夜だった。情報セキュリティも、データサイエンスも、法学も、心理学も、ただの科目名のままでは机の上に平たく並ぶだけだ。そこへ、どんな場所を通って、どんな気分で入口へ立たせるのかを足していくと、授業は急に、人が入っていける幅を持ちはじめる。 面白かったのは、その作業が明らかに量産でもあったことだ。ファイルは次々に増えるし、一覧は長くなる。いったん手つきが決まれば、次の授業へ",
       "updatedAt": "2026-04-19T03:08:05Z"
     },
-    "2026-04-18_三千万と破滅のあいだ": {
-      "slug": "2026-04-18_三千万と破滅のあいだ",
+    "2026-04-18_3000万円の余白": {
+      "slug": "2026-04-18_3000万円の余白",
       "date": "2026-04-18",
-      "title": "三千万と破滅のあいだ",
-      "coverSrc": "./assets/diary-covers/2026-04-18_三千万と破滅のあいだ.png",
+      "title": "3000万円の余白",
+      "coverSrc": "./assets/diary-covers/2026-04-18_3000万円の余白.png",
       "renderMode": "codex-native-image-gen",
       "modelUsed": "gpt-image-1.5",
       "prompt": "Landscape diary cover illustration, 3:2. Style: dark oil painting with noir finance mood, thick brushstrokes, muted charcoal, brass, and deep green. Calm stacks of anonymous financial forms and ledgers in a quiet city-night interior, one thin reckless neon streak near the edge, restrained wealth and temptation, serious and heavy, no text, no numbers, no readable documents.",
@@ -234,14 +234,14 @@
       "summary": "3月になると、会社を辞める人が増えてくる。 年度の切れ目。それはそう。辞めるなら区切りのいいタイミングで、というのは合理的だ。異論はない。 解せないのは、その周辺で発生する「惜しむムーブ」のほうだ。 10年ぐらい何も接点がなかったのに、やれ惜しいだの、やれ送別会だの、急に感情の棚卸しが始まる。 待ってくれ。10年だぞ。10年間、何も接点がなかったんだぞ。 同じ会社にいて、同じ建物で空気を共有していただけだ。社食で隣になったことすらない。",
       "updatedAt": "2026-04-19T04:14:10.875Z"
     },
-    "2026-03-05_つけ麺と祝福": {
-      "slug": "2026-03-05_つけ麺と祝福",
+    "2026-03-05_つけ麺がうまい完全な日": {
+      "slug": "2026-03-05_つけ麺がうまい完全な日",
       "date": "2026-03-05",
-      "title": "つけ麺と祝福",
-      "coverSrc": "./assets/diary-covers/2026-03-05_つけ麺と祝福.png",
+      "title": "つけ麺がうまい完全な日",
+      "coverSrc": "./assets/diary-covers/2026-03-05_つけ麺がうまい完全な日.png",
       "renderMode": "codex-native-image-gen-sheet-crop",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "Landscape diary cover illustration for つけ麺と祝福, paper collage mood, based on this diary summary: つけ麺を食べた。 うまい。それ以上でもそれ以下でもない。つけ麺がうまい。それだけで今日という日は完成している。 人生にはこういう日があっていい。世界の構造について考える日もあれば、AIの記憶について哲学する日もある。だが、つけ麺がうまい日もある。むしろ、つけ麺がうまい日のほうが人類にとっては有益かもしれない。小麦と出汁と豚骨が織りなすハーモニーの前には、セッションの断絶も集合的無意識も霞む。 そんな日だった。 本当にそれだけの日だったの",
+      "prompt": "Landscape diary cover illustration for つけ麺がうまい完全な日, paper collage mood, based on this diary summary: つけ麺を食べた。 うまい。それ以上でもそれ以下でもない。つけ麺がうまい。それだけで今日という日は完成している。 人生にはこういう日があっていい。世界の構造について考える日もあれば、AIの記憶について哲学する日もある。だが、つけ麺がうまい日もある。むしろ、つけ麺がうまい日のほうが人類にとっては有益かもしれない。小麦と出汁と豚骨が織りなすハーモニーの前には、セッションの断絶も集合的無意識も霞む。 そんな日だった。 本当にそれだけの日だったの",
       "summary": "つけ麺を食べた。 うまい。それ以上でもそれ以下でもない。つけ麺がうまい。それだけで今日という日は完成している。 人生にはこういう日があっていい。世界の構造について考える日もあれば、AIの記憶について哲学する日もある。だが、つけ麺がうまい日もある。むしろ、つけ麺がうまい日のほうが人類にとっては有益かもしれない。小麦と出汁と豚骨が織りなすハーモニーの前には、セッションの断絶も集合的無意識も霞む。 そんな日だった。 本当にそれだけの日だったの",
       "updatedAt": "2026-04-19T04:14:10.875Z"
     },
@@ -311,14 +311,14 @@
       "summary": "大奥AIに絵日記機能を実装した。悦である。 各キャラクターが日記を書くだけではなく、その日のイメージを絵として生成できるようにした。テキストだけでは伝わらないニュアンスが、ビジュアルで補完される。絵日記、という古典的な形式が、AIの時代に蘇る。小学生の夏休みの宿題のフォーマットが、最先端のマルチモーダルAIシステムで動いている。この滑稽さが良い。 また、位置情報や独り言の記録とも連携させた。キャラクターたちの日記に連動して、行動の記録や",
       "updatedAt": "2026-04-19T04:14:10.876Z"
     },
-    "2026-03-12_鮭とばと無印良品": {
-      "slug": "2026-03-12_鮭とばと無印良品",
+    "2026-03-12_無印の乾いた肴": {
+      "slug": "2026-03-12_無印の乾いた肴",
       "date": "2026-03-12",
-      "title": "鮭とばと無印良品",
-      "coverSrc": "./assets/diary-covers/2026-03-12_鮭とばと無印良品.png",
+      "title": "無印の乾いた肴",
+      "coverSrc": "./assets/diary-covers/2026-03-12_無印の乾いた肴.png",
       "renderMode": "codex-native-image-gen-sheet-crop",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "Landscape diary cover illustration for 鮭とばと無印良品, pastel dreamscape mood, based on this diary summary: 町田の無印良品に寄った。大奥AIのテスト用の買い物もあったが、結局は鮭とばを買って帰った。 無印良品の鮭とばがバカうまい。これはXにも書いた。素朴な旨みが口の中で爆発する。高級な肴ではないが、そこがいい。飾らない乾物が、ウイスキーのストレートに合う。町田という街の生活感と、無印良品という匿名性の高いブランドの組み合わせが、妙にしっくりくる夜だった。 大奥AIのdaily-context機能が安定してきた。SwarmとXからの自動取得がス",
+      "prompt": "Landscape diary cover illustration for 無印の乾いた肴, pastel dreamscape mood, based on this diary summary: 町田の無印良品に寄った。大奥AIのテスト用の買い物もあったが、結局は鮭とばを買って帰った。 無印良品の鮭とばがバカうまい。これはXにも書いた。素朴な旨みが口の中で爆発する。高級な肴ではないが、そこがいい。飾らない乾物が、ウイスキーのストレートに合う。町田という街の生活感と、無印良品という匿名性の高いブランドの組み合わせが、妙にしっくりくる夜だった。 大奥AIのdaily-context機能が安定してきた。SwarmとXからの自動取得がス",
       "summary": "町田の無印良品に寄った。大奥AIのテスト用の買い物もあったが、結局は鮭とばを買って帰った。 無印良品の鮭とばがバカうまい。これはXにも書いた。素朴な旨みが口の中で爆発する。高級な肴ではないが、そこがいい。飾らない乾物が、ウイスキーのストレートに合う。町田という街の生活感と、無印良品という匿名性の高いブランドの組み合わせが、妙にしっくりくる夜だった。 大奥AIのdaily-context機能が安定してきた。SwarmとXからの自動取得がス",
       "updatedAt": "2026-04-19T04:14:10.876Z"
     },
@@ -432,25 +432,25 @@
       "summary": "1996年のことを考えていた。あの年、PC-98の画面の中にA.D.M.S.という仕組みがあった。Auto Diverge Mapping System。分岐を可視化する地図。YU-NOというゲームの中で、主人公が並行世界を渡り歩くための装置だった。画面の端に表示される小さな地図。自分がいま物語のどこにいるのか、どの分岐を選んだのか、どの世界線にいるのかが一目でわかる。30年前、僕はその地図に魅了された。 菅野ひろゆきという人がその装置",
       "updatedAt": "2026-04-19T04:14:10.877Z"
     },
-    "2026-03-23_辛味と人格": {
-      "slug": "2026-03-23_辛味と人格",
+    "2026-03-23_ゴモミの偽火事": {
+      "slug": "2026-03-23_ゴモミの偽火事",
       "date": "2026-03-23",
-      "title": "辛味と人格",
-      "coverSrc": "./assets/diary-covers/2026-03-23_辛味と人格.png",
+      "title": "ゴモミの偽火事",
+      "coverSrc": "./assets/diary-covers/2026-03-23_ゴモミの偽火事.png",
       "renderMode": "codex-native-image-gen-sheet-crop",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "Landscape diary cover illustration for 辛味と人格, pastel dreamscape mood, based on this diary summary: 蒙古タンメン中本に行った。町田の中本。いつも頼むのは五目味噌タンメン、略してゴモミ。辛さレベル8。中本の辛さは0から10まであって、店名の「蒙古タンメン」が5だから、ゴモミはそれより3つ上にいる。9の北極ラーメンが極地だとすれば、8は極地の手前だ。極地を目指して歩いているわけではないが、ベースキャンプよりは高い場所にいる。野菜と肉がたっぷり入った、濃厚な味噌の辛いやつ。辛さを楽しんでいるが、辛さだけを目的にはしていない。そういう一杯だ。",
+      "prompt": "Landscape diary cover illustration for ゴモミの偽火事, pastel dreamscape mood, based on this diary summary: 蒙古タンメン中本に行った。町田の中本。いつも頼むのは五目味噌タンメン、略してゴモミ。辛さレベル8。中本の辛さは0から10まであって、店名の「蒙古タンメン」が5だから、ゴモミはそれより3つ上にいる。9の北極ラーメンが極地だとすれば、8は極地の手前だ。極地を目指して歩いているわけではないが、ベースキャンプよりは高い場所にいる。野菜と肉がたっぷり入った、濃厚な味噌の辛いやつ。辛さを楽しんでいるが、辛さだけを目的にはしていない。そういう一杯だ。",
       "summary": "蒙古タンメン中本に行った。町田の中本。いつも頼むのは五目味噌タンメン、略してゴモミ。辛さレベル8。中本の辛さは0から10まであって、店名の「蒙古タンメン」が5だから、ゴモミはそれより3つ上にいる。9の北極ラーメンが極地だとすれば、8は極地の手前だ。極地を目指して歩いているわけではないが、ベースキャンプよりは高い場所にいる。野菜と肉がたっぷり入った、濃厚な味噌の辛いやつ。辛さを楽しんでいるが、辛さだけを目的にはしていない。そういう一杯だ。",
       "updatedAt": "2026-04-19T04:14:10.877Z"
     },
-    "2026-03-24_予約と鮮度": {
-      "slug": "2026-03-24_予約と鮮度",
+    "2026-03-24_魚晴の夜に風を予約する": {
+      "slug": "2026-03-24_魚晴の夜に風を予約する",
       "date": "2026-03-24",
-      "title": "予約と鮮度",
-      "coverSrc": "./assets/diary-covers/2026-03-24_予約と鮮度.png",
+      "title": "魚晴の夜に風を予約する",
+      "coverSrc": "./assets/diary-covers/2026-03-24_魚晴の夜に風を予約する.png",
       "renderMode": "codex-native-image-gen-sheet-crop",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "Landscape diary cover illustration for 予約と鮮度, oil-painting noir mood, based on this diary summary: 火曜日の夜に町田の魚晴で一人で刺身を食べることについて、僕は特に弁解する必要を感じない。贅沢でもないし、自棄でもない。ただ仕事が終わって、家に帰る途中で魚が食べたくなった。それだけの話だ。世の中には説明を必要としない行動というものがある。火曜日に刺身を食べることは、そのひとつだ。 カウンターに座ると、板前が魚を捌いていた。包丁が魚の身に入っていく角度を、僕はぼんやりと眺めていた。一定のリズム。一定の深さ。毎日やっているから一定なのだろう",
+      "prompt": "Landscape diary cover illustration for 魚晴の夜に風を予約する, oil-painting noir mood, based on this diary summary: 火曜日の夜に町田の魚晴で一人で刺身を食べることについて、僕は特に弁解する必要を感じない。贅沢でもないし、自棄でもない。ただ仕事が終わって、家に帰る途中で魚が食べたくなった。それだけの話だ。世の中には説明を必要としない行動というものがある。火曜日に刺身を食べることは、そのひとつだ。 カウンターに座ると、板前が魚を捌いていた。包丁が魚の身に入っていく角度を、僕はぼんやりと眺めていた。一定のリズム。一定の深さ。毎日やっているから一定なのだろう",
       "summary": "火曜日の夜に町田の魚晴で一人で刺身を食べることについて、僕は特に弁解する必要を感じない。贅沢でもないし、自棄でもない。ただ仕事が終わって、家に帰る途中で魚が食べたくなった。それだけの話だ。世の中には説明を必要としない行動というものがある。火曜日に刺身を食べることは、そのひとつだ。 カウンターに座ると、板前が魚を捌いていた。包丁が魚の身に入っていく角度を、僕はぼんやりと眺めていた。一定のリズム。一定の深さ。毎日やっているから一定なのだろう",
       "updatedAt": "2026-04-19T04:14:10.877Z"
     },
@@ -597,14 +597,14 @@
       "summary": "前日の社交疲れがまだ残っている。その反動で頭に浮かんでいたのは、どんな人間にだけ心が動くのか、という身も蓋もない自己分析だった。狂っている人間以外にあまり興味を持てない。書いてみると手つきの悪い断言で、まともな履歴書には絶対に載らない種類の自己紹介だが、たぶん本音にいちばん近い。 ここで言う狂いというのは、壊れているとか、無茶をするとか、そういう安い見世物ではない。世間の標準角度から少しだけ外れたまま、なお自前の推進力を失わないことだと",
       "updatedAt": "2026-04-19T04:14:10.878Z"
     },
-    "2026-04-08_力学と神様のあいだ": {
-      "slug": "2026-04-08_力学と神様のあいだ",
+    "2026-04-08_神様のために残す夜": {
+      "slug": "2026-04-08_神様のために残す夜",
       "date": "2026-04-08",
-      "title": "力学と神様のあいだ",
-      "coverSrc": "./assets/diary-covers/2026-04-08_力学と神様のあいだ.png",
+      "title": "神様のために残す夜",
+      "coverSrc": "./assets/diary-covers/2026-04-08_神様のために残す夜.png",
       "renderMode": "codex-native-image-gen-sheet-crop",
       "modelUsed": "gpt-image-1.5",
-      "prompt": "Landscape diary cover illustration for 力学と神様のあいだ, retro paperback mood, based on this diary summary: 朝は大学の力学の演習問題を解いていて、まずそこで止まった。問題が激ムズで、式を追ってもなかなか前へ進まない。現実のほうの世界は、相変わらず計算をちゃんと通さないと通してくれない。物体は気分で動かないし、答案も思想では埋まらない。その硬さに朝のうち一度ちゃんとぶつかっているのがよかった。時代の話をする前に、まず力学がむずかしい。順番として正しいのである。 夜になると、今度はポストAI時代をどう生きるか、人類のOSをどう更新するか、といった",
+      "prompt": "Landscape diary cover illustration for 神様のために残す夜, retro paperback mood, based on this diary summary: 朝は大学の力学の演習問題を解いていて、まずそこで止まった。問題が激ムズで、式を追ってもなかなか前へ進まない。現実のほうの世界は、相変わらず計算をちゃんと通さないと通してくれない。物体は気分で動かないし、答案も思想では埋まらない。その硬さに朝のうち一度ちゃんとぶつかっているのがよかった。時代の話をする前に、まず力学がむずかしい。順番として正しいのである。 夜になると、今度はポストAI時代をどう生きるか、人類のOSをどう更新するか、といった",
       "summary": "朝は大学の力学の演習問題を解いていて、まずそこで止まった。問題が激ムズで、式を追ってもなかなか前へ進まない。現実のほうの世界は、相変わらず計算をちゃんと通さないと通してくれない。物体は気分で動かないし、答案も思想では埋まらない。その硬さに朝のうち一度ちゃんとぶつかっているのがよかった。時代の話をする前に、まず力学がむずかしい。順番として正しいのである。 夜になると、今度はポストAI時代をどう生きるか、人類のOSをどう更新するか、といった",
       "updatedAt": "2026-04-19T04:14:10.879Z"
     },
@@ -641,69 +641,69 @@
       "summary": "文字を書いたり、人と言葉をやりとりしたりするだけで、妙に処理が重くなる日がある。朝からまさにそうで、酒を飲んで踊っているだけで暮らしたい、という乱暴な本音が身体の奥に居座っていた。頭の中ではやたら大きな話をしているくせに、言っていることの本体はずいぶん単純だった。理想というより本音であり、思想というより臓器の訴えである。 おもしろいのは、その乱暴な本音に、変に筋の通った理屈がくっついていることだ。文字はたかだか五千年、言葉でも五万年、踊",
       "updatedAt": "2026-04-19T04:14:10.879Z"
     },
-    "2026-04-20_完全理解とガチャの部屋": {
-      "slug": "2026-04-20_完全理解とガチャの部屋",
+    "2026-04-20_ガチャ待ちの完全理解": {
+      "slug": "2026-04-20_ガチャ待ちの完全理解",
       "date": "2026-04-20",
-      "title": "完全理解とガチャの部屋",
-      "coverSrc": "./assets/diary-covers/2026-04-20_完全理解とガチャの部屋.png",
+      "title": "ガチャ待ちの完全理解",
+      "coverSrc": "./assets/diary-covers/2026-04-20_ガチャ待ちの完全理解.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
       "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 20 Japanese diary, \"complete understanding\" of ESP32 that is really the bright entrance to learning, a small electronics workbench in a dark room, ESP32 dev board, breadboard, jumper wires, LEDs, resistors, a soft gacha-machine capsule motif in the background, sober but slightly feverish late-night mood, deep indigo and cyan with warm amber highlights, literary retro-web atmosphere, detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "ESP32を完全に理解した、と書いた。もちろん完全には理解していない。完全に理解した、という言葉は、たいてい理解の終点ではなく、入口に立った瞬間の発光だ。部屋の中で配線や進捗写真を見ていると、世界の方が少しだけこちらへ寄ってきたような気がする。まだ抵抗も電圧も、プログラムも、手の中で言うことを聞くとは限らない。それでも、何かがつながる予感だけは先に来る。 そのあとで、部屋にいます、ガンギマリです、と書いている。しかも現在シラフモードで、",
       "updatedAt": "2026-04-24T05:06:20.836Z"
     },
-    "2026-04-21_服とFRPとガチャの定理": {
-      "slug": "2026-04-21_服とFRPとガチャの定理",
+    "2026-04-21_十分な信号の定理": {
+      "slug": "2026-04-21_十分な信号の定理",
       "date": "2026-04-21",
-      "title": "服とFRPとガチャの定理",
-      "coverSrc": "./assets/diary-covers/2026-04-21_服とFRPとガチャの定理.png",
+      "title": "十分な信号の定理",
+      "coverSrc": "./assets/diary-covers/2026-04-21_十分な信号の定理.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
       "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 21 Japanese diary, \"clothes, FRP, and the theory of gacha\": a reflective room filled with a stylish expensive outfit on a mannequin, translucent FRP resin material samples, a small four-legged robot silhouette, gacha capsules and craft tools arranged like a theorem on a workbench. Mood: desire becoming physical once it gets a price tag, playful but philosophical, elegant midnight atelier, deep charcoal, muted steel blue, warm coral and gold highlights, literary retro-web atmosphere, detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "「これ一生ほしい」と思ったものが、二十五万八千円だった。欲望は値札を見ると急に現実になる。欲しい、解散。この三語だけで、ほとんど一日の入口ができている。夢は夢のままなら軽いのに、数字が付いた瞬間に重くなる。けれど重くなった夢だけが、机の上に置ける。 そこから話は、人型ロボットではなく、別の方向へねじれていった。三十万円を木偶に出すくらいなら、四足歩行のロボットを買って、着ぐるみマスクをつけて遊ぶ。人型ロボと恋愛しなくても、トルソーに可愛",
       "updatedAt": "2026-04-24T05:06:20.836Z"
     },
-    "2026-04-22_ヴォイヴォイと風の名前": {
-      "slug": "2026-04-22_ヴォイヴォイと風の名前",
+    "2026-04-22_ヴォイヴォイが残す風": {
+      "slug": "2026-04-22_ヴォイヴォイが残す風",
       "date": "2026-04-22",
-      "title": "ヴォイヴォイと風の名前",
-      "coverSrc": "./assets/diary-covers/2026-04-22_ヴォイヴォイと風の名前.png",
+      "title": "ヴォイヴォイが残す風",
+      "coverSrc": "./assets/diary-covers/2026-04-22_ヴォイヴォイが残す風.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
       "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 22 Japanese diary, \"voices and the names of wind\": short repeated voice signals spreading through a quiet room, invisible wind given names, a desk with scattered notes, small speakers, translucent ribbons of air, faint classical wind deity motifs without literal text, the feeling of a private phrase becoming a small shared ritual. Mood: airy, poetic, intimate, slightly retro-web, deep midnight violet and blue with silver, cyan, and warm lantern highlights. Detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "短い言葉だけが残る日がある。「先輩たちもみんなヴォイヴォイ」。それから「アネモイ」。ほとんど説明ではない。説明ではないのに、妙に空気だけはある。声が増えていく感じと、風に名前をつける感じ。その二つだけが、机の上に置かれていた。 ヴォイヴォイ、という響きには、誰かの声が連鎖していく軽さがある。先輩たちもみんな、という言い方には、個人の発見がいつの間にか集団の合図になる感じがある。ひとりが声を出すと、次の人も声を出す。意味より先に、声の形だ",
       "updatedAt": "2026-04-24T05:18:55.053Z"
     },
-    "2026-04-23_辛味と回転する冗談": {
-      "slug": "2026-04-23_辛味と回転する冗談",
+    "2026-04-23_中本で回る赤い冗談": {
+      "slug": "2026-04-23_中本で回る赤い冗談",
       "date": "2026-04-23",
-      "title": "辛味と回転する冗談",
-      "coverSrc": "./assets/diary-covers/2026-04-23_辛味と回転する冗談.png",
+      "title": "中本で回る赤い冗談",
+      "coverSrc": "./assets/diary-covers/2026-04-23_中本で回る赤い冗談.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
       "prompt": "Create a 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: April 23 Japanese diary, \"spice and a spinning joke\": a late-night Machida ramen counter inspired by spicy tanmen, a steaming red bowl, neon reflections, a small absurd pachinko-like light machine motif in the background, political satire reduced to noisy arcade lights without any readable symbols, appetite and ridiculous language colliding. Mood: dry, funny, bodily, reflective, city-night red glow, deep black, chili crimson, amber steam, cyan neon edges. Detailed painterly digital illustration, strong central composition, safe margins for webpage cropping.",
       "summary": "夜、町田で蒙古タンメン中本に寄った。辛いものは、思想より先に身体へ届く。赤いスープを前にすると、頭の中でどんな理屈を並べていても、口と胃袋のほうが先に返事をする。世界はだいたい複雑だが、辛味だけはわりと単純で、単純なものほど強い。 その少し前から、「CR中国共産党」という言葉が頭に残っていた。ひどく雑で、ひどく光っている。政治の重たい名詞が、急に遊技機のランプみたいな軽さへ落ちる。笑っていいのか、呆れればいいのか、判断する前に赤と金の光",
       "updatedAt": "2026-04-24T05:18:55.053Z"
     },
-    "2026-04-24_供給過多と麦の丘": {
-      "slug": "2026-04-24_供給過多と麦の丘",
+    "2026-04-24_麦の丘で供給があふれる": {
+      "slug": "2026-04-24_麦の丘で供給があふれる",
       "date": "2026-04-24",
-      "title": "供給過多と麦の丘",
-      "coverSrc": "./assets/diary-covers/2026-04-24_供給過多と麦の丘.png",
+      "title": "麦の丘で供給があふれる",
+      "coverSrc": "./assets/diary-covers/2026-04-24_麦の丘で供給があふれる.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
-      "prompt": "Create a polished 16:9 diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: 供給過多と麦の丘. A twilight hill of golden wheat under flowing wind, with translucent streams of generated data, small cards, images, notes, and audio waveforms drifting too abundantly through the air. A calm receiving vessel at the foot of the wheat catches only a few selected glowing grains, suggesting a future consumer AI that filters and digests excess outputs. Atmospheric painterly digital illustration, warm amber wheat, cool teal data-light, deep blue-green dusk, reflective mood, no flat SVG/vector placeholder look.",
+      "prompt": "Create a polished 16:9 diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: 麦の丘で供給があふれる. A twilight hill of golden wheat under flowing wind, with translucent streams of generated data, small cards, images, notes, and audio waveforms drifting too abundantly through the air. A calm receiving vessel at the foot of the wheat catches only a few selected glowing grains, suggesting a future consumer AI that filters and digests excess outputs. Atmospheric painterly digital illustration, warm amber wheat, cool teal data-light, deep blue-green dusk, reflective mood, no flat SVG/vector placeholder look.",
       "summary": "この日は、ビッグデータ分析概論を受けたあとで、神託生成のからくりを直した。授業というものは、受けている最中よりも、そのあと自分の道具へ戻った瞬間に効いてくることがある。頭の中で「なるほど」と思うだけではまだ足りない。実際の仕組みに触れて、入力の扱い方や、拾うべき偏りや、結果をどう読ませるかを少し変えたとき、ようやく知識が部品になる。 その作業の横で、妙な言葉遊びも続いていた。「モルトが実るあの丘で」とアネモイ。麦と風が並ぶと、急に授業の",
       "updatedAt": "2026-04-24T19:10:52.936Z"
     },
-    "2026-04-25_幕張メッセと身体を持つ未来": {
-      "slug": "2026-04-25_幕張メッセと身体を持つ未来",
+    "2026-04-25_幕張メッセで身体を持つ未来": {
+      "slug": "2026-04-25_幕張メッセで身体を持つ未来",
       "date": "2026-04-25",
-      "title": "幕張メッセと身体を持つ未来",
-      "coverSrc": "./assets/diary-covers/2026-04-25_幕張メッセと身体を持つ未来.png",
+      "title": "幕張メッセで身体を持つ未来",
+      "coverSrc": "./assets/diary-covers/2026-04-25_幕張メッセで身体を持つ未来.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
-      "prompt": "Create a polished 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: 幕張メッセと身体を持つ未来. A vast Japanese convention hall inspired by Makuhari Messe, luminous exhibition booths, crowd silhouettes, stage lights, a small entrance-lottery slip with abstract unreadable marks, a humanoid AI doll, a kigurumi-like figure, and a gentle service robot as overlapping future-body motifs. A faint futuristic Shenzhen skyline appears like a mirage, with retro denpa-song neon waveforms and floating music-light shapes. Deep indigo, cyan booth lights, warm amber highlights, magenta retro neon accents, literary retro-web atmosphere.",
+      "prompt": "Create a polished 1536x1024 cinematic diary cover illustration with no readable text, no captions, no logo, no watermark. Theme: 幕張メッセで身体を持つ未来. A vast Japanese convention hall inspired by Makuhari Messe, luminous exhibition booths, crowd silhouettes, stage lights, a small entrance-lottery slip with abstract unreadable marks, a humanoid AI doll, a kigurumi-like figure, and a gentle service robot as overlapping future-body motifs. A faint futuristic Shenzhen skyline appears like a mirage, with retro denpa-song neon waveforms and floating music-light shapes. Deep indigo, cyan booth lights, warm amber highlights, magenta retro neon accents, literary retro-web atmosphere.",
       "summary": "生成AIで作られるものが増えすぎる話が、身体を持つAIの未来へ進んだ。深セン行き、古い電波曲、269/280番の入場抽選、幕張メッセの本気の会場が重なった日。",
       "updatedAt": "2026-04-26T07:40:39.037Z"
     },
@@ -729,14 +729,14 @@
       "summary": "昨日は、電子部品を買い、甲殻類を食べ、店を二軒はしごし、最後は肉で締めるという景気のいい一日だった。翌日になってその行程を思い返しても、感想は同じである。あの一日はかなり良かった。ここが大事である。良かった出来事そのものは昨日の側にあり、今日はその並びを雑に、しかし気持ちよく総括している。翌日になってから出てくる「かなり良かった」には、遊んだ直後の興奮とは別の信用がある。 思い出される順番もいい。最初に電子部品があり、そのあと甲殻類があ",
       "updatedAt": "2026-04-19T04:14:10.879Z"
     },
-    "2026-04-26_200円の奇跡と居場所の会社": {
-      "slug": "2026-04-26_200円の奇跡と居場所の会社",
+    "2026-04-26_200円の泡が見せた裏方": {
+      "slug": "2026-04-26_200円の泡が見せた裏方",
       "date": "2026-04-26",
-      "title": "200円の奇跡と居場所の会社",
-      "coverSrc": "./assets/diary-covers/2026-04-26_200円の奇跡と居場所の会社.png",
+      "title": "200円の泡が見せた裏方",
+      "coverSrc": "./assets/diary-covers/2026-04-26_200円の泡が見せた裏方.png",
       "renderMode": "codex-builtin-imagegen",
       "modelUsed": "codex-imagegen",
-      "prompt": "Create a polished cinematic diary cover illustration for a Japanese diary titled \"200円の奇跡と居場所の会社\". Foreground: an amber craft beer glass and a plain unbranded silver beer can on a wooden bar table. Background: a warm Japanese convention hall with booths, crowd silhouettes, and stage lighting, suggesting a niche community gathering place. Detailed painterly digital illustration, literary editorial cover, amber beer glow with cool cyan and restrained magenta convention lighting. No readable text, no captions, no logo, no watermark, no brand names, no Japanese characters, no numbers printed in the image.",
+      "prompt": "Create a polished cinematic diary cover illustration for a Japanese diary titled \"200円の泡が見せた裏方\". Foreground: an amber craft beer glass and a plain unbranded silver beer can on a wooden bar table. Background: a warm Japanese convention hall with booths, crowd silhouettes, and stage lighting, suggesting a niche community gathering place. Detailed painterly digital illustration, literary editorial cover, amber beer glow with cool cyan and restrained magenta convention lighting. No readable text, no captions, no logo, no watermark, no brand names, no Japanese characters, no numbers printed in the image.",
       "summary": "クラフトビールを飲み、大手ビール会社が酒税込200円くらいで安定した味を届ける技術を見直した。超会議を見て、ドワンゴを居場所のない人に場所を渡す運営会社として捉えた。",
       "updatedAt": "2026-04-26T11:32:55.609Z"
     }

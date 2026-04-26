@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
-  <title id="title">完全理解とガチャの部屋</title>
-  <desc id="desc">ESP32を完全に理解した、と書いた。もちろん完全には理解していない。完全に理解した、という言葉は、たいてい理解の終点ではなく、入口に立った瞬間の発光だ。部屋の中で配線や進捗写真を見ていると、世界の方が少しだけこちらへ寄ってきたような気がする。まだ抵抗も電圧も、プログラムも、手の中で言うことを聞くとは限らない。それでも、何かがつながる予感だけは先に来る。 そのあとで、部屋にいます、ガンギマリです、と書いている。しかも現在シラフモードで、</desc>
+  <title id="title">ガチャ待ちの完全理解</title>
+  <desc id="desc">机の上にESP32と配線があった。写真を撮り、画面に進捗が出た。全体を分かったわけではない。それでも、1つ動く気配が見えると「完全に理解した」と言いたくなる。電子工作はそういう雑な達成感が強い。外へ出た記録はない。部屋にいて、机の前で配線を見ていた。酒は入っていない。なのに気分だけは妙に上がっていた。</desc>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#070913" />
@@ -55,7 +55,7 @@
   </g>
   <g opacity="0.72">
     <text x="156" y="162" fill="rgba(255,255,255,0.7)" font-size="28" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif" letter-spacing="8">2026-04-20</text>
-    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">完全理解とガチャの部屋</text>
-    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">ESP32を完全に理解した、と書いた。もちろん完全には理解していない。完全に理解した、という言葉は、たいてい理解の終点ではなく、入口に立った瞬間の発光だ。部屋の中で配線や進捗写真を見ていると、世界の方が少しだけこちらへ寄ってきたような気がする。まだ抵抗も電圧も、プログラムも、手の中で言うことを聞くとは限らない。それでも、何かがつながる予感だけは先に来る。 そのあとで、部屋にいます、ガンギマリです、と書いている。しかも現在シラフモードで、</text>
+    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">ガチャ待ちの完全理解</text>
+    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">机の上にESP32と配線があった。写真を撮り、画面に進捗が出た。全体を分かったわけではない。それでも、1つ動く気配が見えると「完全に理解した」と言いたくなる。電子工作はそういう雑な達成感が強い。外へ出た記録はない。部屋にいて、机の前で配線を見ていた。酒は入っていない。なのに気分だけは妙に上がっていた。</text>
   </g>
 </svg>

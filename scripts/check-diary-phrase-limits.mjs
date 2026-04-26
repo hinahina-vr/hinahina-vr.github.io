@@ -9,14 +9,27 @@ import {
 } from "./lib/diary-self-date.mjs";
 
 const DIARY_OUTPUT_FILE_RE = /^diary(?:-.+)?\.html$/;
-const BANNED_PHRASES = ["着地", "輪郭"];
+const MAIN_DIARY_OUTPUT_FILE_RE = /^diary(?:-\d{4}-\d{2})?\.html$/;
+const BANNED_PHRASES = [
+  { phrase: "着地", scope: "all-diaries" },
+  { phrase: "輪郭", scope: "all-diaries" },
+  { phrase: "ビールとイベント", scope: "main-diary" },
+  { phrase: "缶と会場", scope: "main-diary" },
+  { phrase: "泡と照明", scope: "main-diary" },
+  { phrase: "商品とイベント", scope: "main-diary" },
+  { phrase: "味と会場", scope: "main-diary" },
+  { phrase: "価格と品質", scope: "main-diary" },
+  { phrase: "ビール会社とイベント会社", scope: "main-diary" },
+  { phrase: "安い酒と", scope: "main-diary" },
+  { phrase: "量産設計と", scope: "main-diary" },
+];
 
 const PHRASE_LIMITS = [
-  ...BANNED_PHRASES.map((phrase) => ({
+  ...BANNED_PHRASES.map(({ phrase, scope }) => ({
     phrase,
     max: 0,
     label: `禁止語: ${phrase}`,
-    scope: "all-diaries",
+    scope,
     includeHeading: true,
   })),
   {
@@ -127,7 +140,8 @@ for (const limit of PHRASE_LIMITS) {
   const owners = [];
 
   for (const file of files) {
-    if (limit.scope !== "all-diaries" && !file.dir.startsWith("diary-")) continue;
+    if (limit.scope === "main-diary" && file.dir !== "diary") continue;
+    if (limit.scope !== "all-diaries" && limit.scope !== "main-diary" && !file.dir.startsWith("diary-")) continue;
 
     const markdown = readDiaryFile(file);
     const { heading, body } = splitDiaryMarkdown(markdown);
@@ -144,11 +158,12 @@ for (const limit of PHRASE_LIMITS) {
   }
 }
 
-for (const phrase of BANNED_PHRASES) {
+for (const { phrase, scope } of BANNED_PHRASES) {
   let total = 0;
   const owners = [];
 
   for (const file of htmlFiles) {
+    if (scope === "main-diary" && !MAIN_DIARY_OUTPUT_FILE_RE.test(file.name)) continue;
     const html = fs.readFileSync(file.fullPath, "utf8");
     const count = countPhrase(stripMarkup(`${file.name}\n${html}`), phrase);
     if (count === 0) continue;

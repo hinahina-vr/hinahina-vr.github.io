@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
-  <title id="title">服とFRPとガチャの定理</title>
-  <desc id="desc">「これ一生ほしい」と思ったものが、二十五万八千円だった。欲望は値札を見ると急に現実になる。欲しい、解散。この三語だけで、ほとんど一日の入口ができている。夢は夢のままなら軽いのに、数字が付いた瞬間に重くなる。けれど重くなった夢だけが、机の上に置ける。 そこから話は、人型ロボットではなく、別の方向へねじれていった。三十万円を木偶に出すくらいなら、四足歩行のロボットを買って、着ぐるみマスクをつけて遊ぶ。人型ロボと恋愛しなくても、トルソーに可愛</desc>
+  <title id="title">十分な信号の定理</title>
+  <desc id="desc">「これ一生ほしい」と思った服は25万8000円だった。欲しい。値段を見る。解散。すぐに買える額ではない。欲しい気持ちは残っているのに、値札だけが現実を突きつけてくる。夢のままなら軽いものが、数字を持った瞬間に急に重くなる。</desc>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#090d18" />
@@ -46,7 +46,7 @@
   </g>
   <g opacity="0.72">
     <text x="156" y="162" fill="rgba(255,255,255,0.7)" font-size="28" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif" letter-spacing="8">2026-04-21</text>
-    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">服とFRPとガチャの定理</text>
-    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">「これ一生ほしい」と思ったものが、二十五万八千円だった。欲望は値札を見ると急に現実になる。欲しい、解散。この三語だけで、ほとんど一日の入口ができている。夢は夢のままなら軽いのに、数字が付いた瞬間に重くなる。けれど重くなった夢だけが、机の上に置ける。 そこから話は、人型ロボットではなく、別の方向へねじれていった。三十万円を木偶に出すくらいなら、四足歩行のロボットを買って、着ぐるみマスクをつけて遊ぶ。人型ロボと恋愛しなくても、トルソーに可愛</text>
+    <text x="156" y="906" fill="rgba(255,255,255,0.88)" font-size="72" font-weight="700" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">十分な信号の定理</text>
+    <text x="156" y="950" fill="rgba(255,255,255,0.54)" font-size="24" font-family="'Trebuchet MS', 'Yu Gothic', sans-serif">「これ一生ほしい」と思った服は25万8000円だった。欲しい。値段を見る。解散。すぐに買える額ではない。欲しい気持ちは残っているのに、値札だけが現実を突きつけてくる。夢のままなら軽いものが、数字を持った瞬間に急に重くなる。</text>
   </g>
 </svg>
