@@ -1,7 +1,7 @@
 {
   "version": 1,
   "requestedModel": "gpt-image-1.5",
-  "generatedAt": "2026-04-26T07:40:39.038Z",
+  "generatedAt": "2026-04-26T11:32:55.608Z",
   "entries": {
     "2026-04-13_爆発の手前で配線を信じる": {
       "slug": "2026-04-13_爆発の手前で配線を信じる",
@@ -728,6 +728,17 @@
       "prompt": "Landscape diary cover illustration for かなり良かったと言う, retro paperback mood, based on this diary summary: 昨日は、電子部品を買い、甲殻類を食べ、店を二軒はしごし、最後は肉で締めるという景気のいい一日だった。翌日になってその行程を思い返しても、感想は同じである。あの一日はかなり良かった。ここが大事である。良かった出来事そのものは昨日の側にあり、今日はその並びを雑に、しかし気持ちよく総括している。翌日になってから出てくる「かなり良かった」には、遊んだ直後の興奮とは別の信用がある。 思い出される順番もいい。最初に電子部品があり、そのあと甲殻類があ",
       "summary": "昨日は、電子部品を買い、甲殻類を食べ、店を二軒はしごし、最後は肉で締めるという景気のいい一日だった。翌日になってその行程を思い返しても、感想は同じである。あの一日はかなり良かった。ここが大事である。良かった出来事そのものは昨日の側にあり、今日はその並びを雑に、しかし気持ちよく総括している。翌日になってから出てくる「かなり良かった」には、遊んだ直後の興奮とは別の信用がある。 思い出される順番もいい。最初に電子部品があり、そのあと甲殻類があ",
       "updatedAt": "2026-04-19T04:14:10.879Z"
+    },
+    "2026-04-26_200円の奇跡と居場所の会社": {
+      "slug": "2026-04-26_200円の奇跡と居場所の会社",
+      "date": "2026-04-26",
+      "title": "200円の奇跡と居場所の会社",
+      "coverSrc": "./assets/diary-covers/2026-04-26_200円の奇跡と居場所の会社.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
+      "prompt": "Create a polished cinematic diary cover illustration for a Japanese diary titled \"200円の奇跡と居場所の会社\". Foreground: an amber craft beer glass and a plain unbranded silver beer can on a wooden bar table. Background: a warm Japanese convention hall with booths, crowd silhouettes, and stage lighting, suggesting a niche community gathering place. Detailed painterly digital illustration, literary editorial cover, amber beer glow with cool cyan and restrained magenta convention lighting. No readable text, no captions, no logo, no watermark, no brand names, no Japanese characters, no numbers printed in the image.",
+      "summary": "クラフトビールを飲み、大手ビール会社が酒税込200円くらいで安定した味を届ける技術を見直した。超会議を見て、ドワンゴを居場所のない人に場所を渡す運営会社として捉えた。",
+      "updatedAt": "2026-04-26T11:32:55.609Z"
     }
   }
 }
