@@ -42,6 +42,16 @@ function stripMarkup(body) {
     .trim();
 }
 
+function getOpeningText(body) {
+  const paragraphs = body
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .split(/\r?\n\s*\r?\n/)
+    .map(stripMarkup)
+    .filter(Boolean);
+
+  return paragraphs[0] ?? "";
+}
+
 function parseArgs(argv) {
   const args = { date: null };
 
@@ -71,12 +81,17 @@ for (const file of files) {
   const markdown = readDiaryFile(file);
   const { heading, body } = splitDiaryMarkdown(markdown);
   const plainBody = stripMarkup(`${heading}\n${body}`);
+  const openingText = getOpeningText(body);
   const matches = [];
 
   for (const pattern of DISCOURAGED_PATTERNS) {
     const hit = plainBody.match(pattern.regex);
     if (!hit) continue;
     matches.push(`${pattern.label}: ${[...new Set(hit)].join(", ")}`);
+  }
+
+  if (/^この日は/.test(openingText)) {
+    matches.push("冒頭の弱い指示語: この日は");
   }
 
   if (matches.length === 0) continue;
