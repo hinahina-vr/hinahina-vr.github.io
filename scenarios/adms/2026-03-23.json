@@ -269,13 +269,13 @@
     },
     {
       "id": "moegami_room",
-      "title": "人格の衣",
+      "title": "着ぐるみの汗",
       "realm": "genkai",
       "kind": "side",
       "layer": 10,
       "lane": 8,
       "icon": "👘",
-      "scenario": "2026-03-23_人格の衣",
+      "scenario": "2026-03-23_着ぐるみの汗",
       "entry": "entry_from_main",
       "summary": "着ぐるみが溶けて肌になる"
     },

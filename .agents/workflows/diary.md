@@ -53,6 +53,12 @@ node scripts/collect-daily-context.mjs --date YYYY-MM-DD --file diary/YYYY-MM-DD
 - Health の数値は「よく眠れた」「よく歩いた」などの観測事実としてだけ扱い、医療的な診断や断定に変換しない
 - **この段階でおにいちゃんに内容を確認してもらう**（notify_user）
 
+### 2.5 夢を見る導線の作成
+- 本編日記を公開する日は、対応する `scenarios/YYYY-MM-DD_夢タイトル.json` と `scenarios/adms/YYYY-MM-DD.json` を作成する
+- `scenarios/adms/YYYY-MM-DD.json` の `rootNodeId` は原則 `standalone_start` とし、root node の `scenario` / `entry` が実在するシナリオとラベルを指すようにする
+- 本編日記本文に手書きの `夢を見る` リンクを残さない。`scripts/build-diary.mjs` が `scenarios/adms/YYYY-MM-DD.json` を見て自動で差し込む
+- `npm run check:dream-graphs` を通し、`2026-03-18` 以降の本編日記に夢グラフが欠けていないことを確認する
+
 ### 3. 各AIキャラの日記作成
 - 全32キャラ+みとら分の日記MDを作成
 - 各キャラの性格・口調は `diary-rules.md` のキャラクター別ガイドラインを参照

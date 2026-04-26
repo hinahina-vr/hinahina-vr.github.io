@@ -1,0 +1,81 @@
+{
+  "title": "展示ホールの身体",
+  "subtitle": "─ 画面から立ち上がる未来 ─",
+  "genre": "現物化予感ノベル",
+  "date": "2026-04-25",
+  "defaultBgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "🧭" },
+    "body": { "name": "未来の身体", "color": "#c879a4", "emoji": "🤖" },
+    "song": { "name": "古い電波", "color": "#d0a030", "emoji": "📻" },
+    "ticket": { "name": "抽選番号", "color": "#8aa0c8", "emoji": "🎟️" },
+    "hall": { "name": "展示ホール", "color": "#7ab89a", "emoji": "🏟️" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "深夜の机には、人型ドール、着ぐるみ、生成AI、人型ロボットの気配が並んでいた。" },
+    { "speaker": "waddy", "expression": "", "text": "画面の中にいたAIが、部屋に立つ商品になる。そう考えると急に近い。" },
+    { "label": "choose_body" },
+    { "choices": [
+      { "text": "未来の身体を見る", "goto": "future_body" },
+      { "text": "古い電波を聞く", "goto": "old_signal" },
+      { "text": "幕張の床へ出る", "goto": "makuhari_floor" }
+    ] },
+    { "label": "future_body" },
+    { "bg": "parameter_archive" },
+    { "speaker": "body", "expression": "", "text": "私は研究発表だけで来るわけではありません。安い商品、強い欲望、雑な売り場から先に立ち上がります。" },
+    { "speaker": "waddy", "expression": "", "text": "深センへ行く予定があるだけで、妄想が地図の上に降りてくる。" },
+    { "choices": [
+      { "text": "現物化の予感を持ち帰る", "goto": "END_BODY" },
+      { "text": "合流点へ進む", "goto": "mitra_gate" }
+    ] },
+    { "label": "old_signal" },
+    { "bg": "anison_club" },
+    { "speaker": "song", "expression": "", "text": "新しい技術を考える頭でも、古い曲が鳴れば身体はすぐに反応します。" },
+    { "speaker": "narrator", "expression": "", "text": "懐かしい音の匂いが、未来の話を変に湿らせた。" },
+    { "choices": [
+      { "text": "電波の熱を持ち帰る", "goto": "END_SIGNAL" },
+      { "text": "合流点へ進む", "goto": "mitra_gate" }
+    ] },
+    { "label": "bad_number" },
+    { "bg": "station_night" },
+    { "speaker": "ticket", "expression": "", "text": "269/280番。点数ではありません。入場の順番としては、ほぼ最後尾です。" },
+    { "speaker": "waddy", "expression": "", "text": "同じ数字でも、順番になると腹が立つ。朝からそれで気分が傾いた。" },
+    { "choices": [
+      { "text": "順番の重さを持ち帰る", "goto": "END_NUMBER" },
+      { "text": "幕張の床へ進む", "goto": "makuhari_floor" }
+    ] },
+    { "label": "makuhari_floor" },
+    { "bg": "neon_arcade" },
+    { "speaker": "hall", "expression": "", "text": "冗談や企画が、ブースになり、列になり、照明を浴びています。" },
+    { "speaker": "narrator", "expression": "", "text": "画面の向こうにあったものが、幕張メッセの床で現物になっていた。" },
+    { "choices": [
+      { "text": "悪い番号を思い出す", "goto": "bad_number" },
+      { "text": "会場の熱を持ち帰る", "goto": "END_HALL" },
+      { "text": "合流点へ進む", "goto": "mitra_gate" }
+    ] },
+    { "label": "mitra_gate" },
+    { "bg": "chorus_morning" },
+    { "speaker": "mitra", "expression": "", "text": "未来は、画面だけでは足りません。番号に揺れた身体、古い曲で動く身体、会場を歩く身体が必要です。" },
+    { "choices": [
+      { "text": "現物化の予感を持ち帰る", "goto": "END_BODY" },
+      { "text": "電波の熱を持ち帰る", "goto": "END_SIGNAL" },
+      { "text": "会場の熱を持ち帰る", "goto": "END_HALL" }
+    ] },
+    { "label": "END_BODY" },
+    { "bg": "parameter_archive" },
+    { "speaker": "narrator", "expression": "", "text": "画面の中のAIは、安い商品と欲望を通って、部屋に置ける身体へ近づいた。\n──END: 現物化の予感" },
+    { "label": "END_SIGNAL" },
+    { "bg": "anison_club" },
+    { "speaker": "narrator", "expression": "", "text": "古い電波の音が、未来の話に自分の身体の年季を混ぜた。\n──END: 電波の熱" },
+    { "label": "END_NUMBER" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "expression": "", "text": "269/280番という順番が、朝の気分をほぼ最後尾へ押し下げた。\n──END: 順番の重さ" },
+    { "label": "END_HALL" },
+    { "bg": "neon_arcade" },
+    { "speaker": "narrator", "expression": "", "text": "幕張の床で、冗談は企画になり、企画は現物になり、人の列を作っていた。\n──END: 会場の熱" }
+  ]
+}

@@ -3,8 +3,10 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 
 const ROOT = join(import.meta.dirname, "..");
+const DIARY_DIR = join(ROOT, "diary");
 const GRAPH_DIR = join(ROOT, "scenarios", "adms");
 const SCENARIO_DIR = join(ROOT, "scenarios");
+const DREAM_REQUIRED_SINCE = "2026-03-18";
 
 const scenarioLabelCache = new Map();
 
@@ -152,6 +154,20 @@ async function main() {
   }
 
   const errors = results.flatMap((result) => result.errors);
+  const graphDates = new Set(files.map((file) => file.replace(/\.json$/, "")));
+  const diaryFiles = (await readdir(DIARY_DIR))
+    .filter((name) => /^\d{4}-\d{2}-\d{2}_.+\.md$/.test(name))
+    .sort();
+
+  for (const diaryFile of diaryFiles) {
+    const date = diaryFile.slice(0, 10);
+    if (date < DREAM_REQUIRED_SINCE) {
+      continue;
+    }
+    if (!graphDates.has(date)) {
+      errors.push(`${diaryFile}: missing dream graph scenarios/adms/${date}.json`);
+    }
+  }
 
   if (errors.length > 0) {
     console.error("Dream graph validation failed:");

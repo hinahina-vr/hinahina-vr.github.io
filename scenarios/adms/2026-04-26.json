@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-26",
+  "title": "泡を支える裏方 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    { "id": "standalone_start", "title": "泡の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🍺", "scenario": "2026-04-26_泡を支える裏方", "entry": "standalone_start", "summary": "クラフトビールから量産品質を見る" },
+    { "id": "choose_foam", "title": "泡を選ぶ", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-26_泡を支える裏方", "entry": "choose_foam", "summary": "グラス、缶、会場の床を選ぶ" },
+    { "id": "craft_glass", "title": "香りのグラス", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "🍺", "scenario": "2026-04-26_泡を支える裏方", "entry": "craft_glass", "summary": "個性の強い酒が量産品質を照らす" },
+    { "id": "stable_can", "title": "200円の缶", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "🥫", "scenario": "2026-04-26_泡を支える裏方", "entry": "stable_can", "summary": "安定した味を低価格で成立させる" },
+    { "id": "niche_hall", "title": "会場の床", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🏟️", "scenario": "2026-04-26_泡を支える裏方", "entry": "niche_hall", "summary": "偏った好きなものが並ぶ場所を見る" },
+    { "id": "backstage_work", "title": "裏方の手元", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🛠️", "scenario": "2026-04-26_泡を支える裏方", "entry": "backstage_work", "summary": "値段、品質、導線を崩さない仕事へ進む" },
+    { "id": "END_GLASS", "title": "香りの線", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "🍺", "scenario": "2026-04-26_泡を支える裏方", "entry": "END_GLASS", "summary": "個性の強い酒の線を持ち帰る" },
+    { "id": "END_CAN", "title": "安定した泡", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "🥫", "scenario": "2026-04-26_泡を支える裏方", "entry": "END_CAN", "summary": "毎回成立する缶の泡を持ち帰る" },
+    { "id": "END_HALL", "title": "居場所の熱", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🏟️", "scenario": "2026-04-26_泡を支える裏方", "entry": "END_HALL", "summary": "偏ったまま集まれる場所を持ち帰る" }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_foam", "choiceText": "泡を選ぶ", "style": "kenkai" },
+    { "from": "choose_foam", "to": "craft_glass", "choiceText": "香りの強いグラスを見る", "style": "kenkai" },
+    { "from": "craft_glass", "to": "END_GLASS", "choiceText": "香りの線を持ち帰る", "style": "kenkai" },
+    { "from": "craft_glass", "to": "backstage_work", "choiceText": "裏方の手元へ進む", "style": "kenkai" },
+    { "from": "choose_foam", "to": "stable_can", "choiceText": "200円の缶を開ける", "style": "kenkai" },
+    { "from": "stable_can", "to": "END_CAN", "choiceText": "安定した泡を持ち帰る", "style": "kenkai" },
+    { "from": "stable_can", "to": "backstage_work", "choiceText": "裏方の手元へ進む", "style": "kenkai" },
+    { "from": "choose_foam", "to": "niche_hall", "choiceText": "会場の床を見る", "style": "kenkai" },
+    { "from": "niche_hall", "to": "END_HALL", "choiceText": "居場所の熱を持ち帰る", "style": "kenkai" },
+    { "from": "niche_hall", "to": "backstage_work", "choiceText": "裏方の手元へ進む", "style": "kenkai" },
+    { "from": "backstage_work", "to": "END_GLASS", "choiceText": "香りの線を持ち帰る", "style": "kenkai" },
+    { "from": "backstage_work", "to": "END_CAN", "choiceText": "安定した泡を持ち帰る", "style": "kenkai" },
+    { "from": "backstage_work", "to": "END_HALL", "choiceText": "居場所の熱を持ち帰る", "style": "kenkai" }
+  ]
+}

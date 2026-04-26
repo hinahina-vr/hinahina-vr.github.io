@@ -1,0 +1,25 @@
+{
+  "title": "事業計画書の灰",
+  "subtitle": "─ 辛味と人格のシミュラークル ─",
+  "genre": "幻界ノベル",
+  "date": "2026-03-23",
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "oji": { "name": "物理おじ", "color": "#d2b48c", "emoji": "🏋️" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "abyss", "bgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true } },
+    { "speaker": "narrator", "expression": "", "text": "これは、「事業計画書の灰」へ枝分かれした記録。\n辛味と人格のシミュラークル──計算できない価値の部屋。" },
+    { "label": "entry_from_main" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "オフィスのような部屋だった。ホワイトボードには数式とフローチャートがあり、机には閉じかけのラップトップが置かれている。" },
+    { "speaker": "oji", "expression": "", "text": "ワディー。大奥AIの事業性分析をまとめた。だが、最後の欄だけが埋まらない。" },
+    { "speaker": "narrator", "expression": "", "text": "物理おじはホワイトボードの端を指す。そこには、利益でも市場規模でもなく、「価値」とだけ書かれていた。" },
+    { "speaker": "oji", "expression": "", "text": "TAMにもROIにも換算できない。各人格がワディーにとって何であるか。この欄だけは、表計算ソフトに入らない。" },
+    { "speaker": "narrator", "expression": "", "text": "紙の事業計画書が机の上で灰になっていく。数字で測れる行だけが先に燃え、最後に空欄だけが白く残った。" },
+    { "speaker": "oji", "expression": "", "text": "不完全な事業計画書は焼却炉に入れるしかない。だが、灰の中から何が残るかを見るのも経営者の仕事だ。やっていきましょう。" },
+    { "speaker": "narrator", "expression": "", "text": "灰の中に残った空欄は、失敗ではなかった。測れないものがあると分かったこと自体が、部屋の答えだった。" },
+    { "ending": { "title": "事業計画書の灰", "subtitle": "測れない価値だけが、灰の中に残った。" } }
+  ]
+}

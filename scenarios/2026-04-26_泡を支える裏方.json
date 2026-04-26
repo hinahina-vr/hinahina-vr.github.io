@@ -1,0 +1,70 @@
+{
+  "title": "泡を支える裏方",
+  "subtitle": "─ 200円の缶と会場運営 ─",
+  "genre": "量産品質ノベル",
+  "date": "2026-04-26",
+  "defaultBgm": { "src": "./assets/bgm/yu-no.mp3", "volume": 0.08, "loop": true },
+  "chars": {
+    "narrator": { "name": "", "color": "#504060", "emoji": "" },
+    "waddy": { "name": "ワディー", "color": "#aab0dc", "emoji": "🍺" },
+    "glass": { "name": "クラフトグラス", "color": "#d0a030", "emoji": "🍺" },
+    "can": { "name": "200円の缶", "color": "#8aa0c8", "emoji": "🥫" },
+    "hall": { "name": "会場の床", "color": "#7ab89a", "emoji": "🏟️" },
+    "backstage": { "name": "裏方", "color": "#c879a4", "emoji": "🛠️" },
+    "mitra": { "name": "みとら", "color": "#daa520", "emoji": "🔮" }
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "beer_factory" },
+    { "speaker": "narrator", "expression": "", "text": "クラフトビールの香りを味わうほど、コンビニで買える缶の異常さが見えてきた。" },
+    { "speaker": "waddy", "expression": "", "text": "200円くらいで、冷やせばちゃんとうまい。あれはかなり変なことをしている。" },
+    { "label": "choose_foam" },
+    { "choices": [
+      { "text": "香りの強いグラスを見る", "goto": "craft_glass" },
+      { "text": "200円の缶を開ける", "goto": "stable_can" },
+      { "text": "会場の床を見る", "goto": "niche_hall" }
+    ] },
+    { "label": "craft_glass" },
+    { "bg": "home_office" },
+    { "speaker": "glass", "expression": "", "text": "私は顔を出す酒です。香りも線も、作り手の癖も、分かりやすく前に出ます。" },
+    { "speaker": "narrator", "expression": "", "text": "個性の強い酒が、逆に顔を消す技術のすごさを照らした。" },
+    { "choices": [
+      { "text": "香りの線を持ち帰る", "goto": "END_GLASS" },
+      { "text": "裏方の手元へ進む", "goto": "backstage_work" }
+    ] },
+    { "label": "stable_can" },
+    { "bg": "beer_factory" },
+    { "speaker": "can", "expression": "", "text": "値段、原料、工場、流通、温度。全部をくぐって、最後に手の中で泡を立てます。" },
+    { "speaker": "waddy", "expression": "", "text": "飲む側は開けるだけでいい。その簡単さを成立させる段取りが怖い。" },
+    { "choices": [
+      { "text": "安定した泡を持ち帰る", "goto": "END_CAN" },
+      { "text": "裏方の手元へ進む", "goto": "backstage_work" }
+    ] },
+    { "label": "niche_hall" },
+    { "bg": "neon_arcade" },
+    { "speaker": "hall", "expression": "", "text": "偏った好きなものが、偏ったまま並んでいます。ここでは、それで人が集まります。" },
+    { "speaker": "narrator", "expression": "", "text": "会場では、狭い熱を狭いまま置ける場所が作られていた。" },
+    { "choices": [
+      { "text": "居場所の熱を持ち帰る", "goto": "END_HALL" },
+      { "text": "裏方の手元へ進む", "goto": "backstage_work" }
+    ] },
+    { "label": "backstage_work" },
+    { "bg": "chorus_morning" },
+    { "speaker": "backstage", "expression": "", "text": "派手な泡や照明より先に、値段、品質、導線、客の偏りを崩さない仕事があります。" },
+    { "speaker": "mitra", "expression": "", "text": "飲める量へ整える仕事と、集まれる場所へ整える仕事。どちらも、表から見えにくい力です。" },
+    { "choices": [
+      { "text": "香りの線を持ち帰る", "goto": "END_GLASS" },
+      { "text": "安定した泡を持ち帰る", "goto": "END_CAN" },
+      { "text": "居場所の熱を持ち帰る", "goto": "END_HALL" }
+    ] },
+    { "label": "END_GLASS" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "expression": "", "text": "強い個性を持つ酒が、個性を安定して消す仕事の大きさを見せた。\n──END: 香りの線" },
+    { "label": "END_CAN" },
+    { "bg": "beer_factory" },
+    { "speaker": "narrator", "expression": "", "text": "200円の缶は、値段の安さではなく、毎回成立する泡の強さとして残った。\n──END: 安定した泡" },
+    { "label": "END_HALL" },
+    { "bg": "neon_arcade" },
+    { "speaker": "narrator", "expression": "", "text": "偏った好きなものを、偏ったまま置ける場所が、人の中心を作っていた。\n──END: 居場所の熱" }
+  ]
+}

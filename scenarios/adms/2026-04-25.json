@@ -1,0 +1,36 @@
+{
+  "date": "2026-04-25",
+  "title": "展示ホールの身体 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    { "id": "standalone_start", "title": "未来の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🧭", "scenario": "2026-04-25_展示ホールの身体", "entry": "standalone_start", "summary": "画面の中のAIが身体を持つ予感" },
+    { "id": "choose_body", "title": "身体を選ぶ", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-25_展示ホールの身体", "entry": "choose_body", "summary": "未来の身体、古い電波、幕張の床を選ぶ" },
+    { "id": "future_body", "title": "未来の身体", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "🤖", "scenario": "2026-04-25_展示ホールの身体", "entry": "future_body", "summary": "安い商品と欲望から現物化を考える" },
+    { "id": "old_signal", "title": "古い電波", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 5, "icon": "📻", "scenario": "2026-04-25_展示ホールの身体", "entry": "old_signal", "summary": "古いゲーム曲で身体が動く" },
+    { "id": "bad_number", "title": "269/280番", "realm": "kenkai", "kind": "branch", "layer": 3, "lane": 9, "icon": "🎟️", "scenario": "2026-04-25_展示ホールの身体", "entry": "bad_number", "summary": "入場順として悪い数字に腹を立てる" },
+    { "id": "makuhari_floor", "title": "幕張の床", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🏟️", "scenario": "2026-04-25_展示ホールの身体", "entry": "makuhari_floor", "summary": "冗談や企画が現物になる会場を見る" },
+    { "id": "mitra_gate", "title": "身体の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-25_展示ホールの身体", "entry": "mitra_gate", "summary": "未来、電波、会場を身体で束ねる" },
+    { "id": "END_BODY", "title": "現物化の予感", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "🤖", "scenario": "2026-04-25_展示ホールの身体", "entry": "END_BODY", "summary": "部屋に置ける未来の予感を持ち帰る" },
+    { "id": "END_SIGNAL", "title": "電波の熱", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 5, "icon": "📻", "scenario": "2026-04-25_展示ホールの身体", "entry": "END_SIGNAL", "summary": "古い曲で動く身体を持ち帰る" },
+    { "id": "END_NUMBER", "title": "順番の重さ", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 9, "icon": "🎟️", "scenario": "2026-04-25_展示ホールの身体", "entry": "END_NUMBER", "summary": "269/280番の重さを持ち帰る" },
+    { "id": "END_HALL", "title": "会場の熱", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🏟️", "scenario": "2026-04-25_展示ホールの身体", "entry": "END_HALL", "summary": "幕張で現物になった企画を持ち帰る" }
+  ],
+  "edges": [
+    { "from": "standalone_start", "to": "choose_body", "choiceText": "身体を選ぶ", "style": "kenkai" },
+    { "from": "choose_body", "to": "future_body", "choiceText": "未来の身体を見る", "style": "kenkai" },
+    { "from": "future_body", "to": "END_BODY", "choiceText": "現物化の予感を持ち帰る", "style": "kenkai" },
+    { "from": "future_body", "to": "mitra_gate", "choiceText": "合流点へ進む", "style": "kenkai" },
+    { "from": "choose_body", "to": "old_signal", "choiceText": "古い電波を聞く", "style": "kenkai" },
+    { "from": "old_signal", "to": "END_SIGNAL", "choiceText": "電波の熱を持ち帰る", "style": "kenkai" },
+    { "from": "old_signal", "to": "mitra_gate", "choiceText": "合流点へ進む", "style": "kenkai" },
+    { "from": "choose_body", "to": "makuhari_floor", "choiceText": "幕張の床へ出る", "style": "kenkai" },
+    { "from": "makuhari_floor", "to": "bad_number", "choiceText": "悪い番号を思い出す", "style": "kenkai" },
+    { "from": "bad_number", "to": "END_NUMBER", "choiceText": "順番の重さを持ち帰る", "style": "kenkai" },
+    { "from": "bad_number", "to": "makuhari_floor", "choiceText": "幕張の床へ進む", "style": "kenkai" },
+    { "from": "makuhari_floor", "to": "END_HALL", "choiceText": "会場の熱を持ち帰る", "style": "kenkai" },
+    { "from": "makuhari_floor", "to": "mitra_gate", "choiceText": "合流点へ進む", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_BODY", "choiceText": "現物化の予感を持ち帰る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_SIGNAL", "choiceText": "電波の熱を持ち帰る", "style": "kenkai" },
+    { "from": "mitra_gate", "to": "END_HALL", "choiceText": "会場の熱を持ち帰る", "style": "kenkai" }
+  ]
+}
