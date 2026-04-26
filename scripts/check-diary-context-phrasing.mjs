@@ -8,9 +8,8 @@ import {
 
 const DISCOURAGED_PATTERNS = [
   {
-    label: "前日参照に頼る本文",
-    regex: /前日|前の日|前夜|昨日|その翌日/g,
-    since: "2026-04-25",
+    label: "前日参照に頼る見出し・本文",
+    regex: /前日|前の日|前夜|昨夜|昨日|その翌日|翌日/g,
   },
   {
     label: "投稿前提の指示語",
@@ -66,12 +65,11 @@ const findings = [];
 
 for (const file of files) {
   const markdown = readDiaryFile(file);
-  const { body } = splitDiaryMarkdown(markdown);
-  const plainBody = stripMarkup(body);
+  const { heading, body } = splitDiaryMarkdown(markdown);
+  const plainBody = stripMarkup(`${heading}\n${body}`);
   const matches = [];
 
   for (const pattern of DISCOURAGED_PATTERNS) {
-    if (pattern.since && file.date < pattern.since) continue;
     const hit = plainBody.match(pattern.regex);
     if (!hit) continue;
     matches.push(`${pattern.label}: ${[...new Set(hit)].join(", ")}`);
