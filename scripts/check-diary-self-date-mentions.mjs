@@ -47,7 +47,7 @@ if (findings.length === 0) {
   process.exit(0);
 }
 
-console.error("日記本文に、その日自身の日付が残っています。");
+console.error("日記本文に、対象日自身の日付が残っています。");
 for (const finding of findings) {
   console.error(`- ${finding.file}: ${finding.matches.join(", ")}`);
 }

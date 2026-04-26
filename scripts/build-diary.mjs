@@ -245,7 +245,7 @@ function buildCrossLinks(date) {
   if (groups.size === 0) return "";
   const voiceBundleLink = `<a href="./diary-voices-${date}.html" class="cross-link" style="color:#a888c8;border-color:#a888c8">📚 声の束</a>`;
   let insertedVoiceBundleLink = false;
-  let html = `\n            <div class="cross-links"><span class="cross-links-label">この日の声：</span>`;
+  let html = `\n            <div class="cross-links"><span class="cross-links-label">同日の声：</span>`;
   for (const [groupName, links] of groups) {
     const groupLinks = [...links];
     if (groupName === "神託") {
@@ -321,14 +321,14 @@ ${items}
 
   const page = `${htmlHead(`声の束 — ${formatDate(entry.date)}`)}
 ${htmlNav([
-    { href: mainDiaryHref, text: "← この日の本日記へ戻る" },
+    { href: mainDiaryHref, text: "← 本日記へ戻る" },
     { href: "./diary.html", text: "日記ページへ" },
   ])}
 
       <section class="panel voice-bundle-intro">
         <p class="entry-date">${formatDate(entry.date)}</p>
         <h2>${entry.title}</h2>
-        <p>この日に書かれた各AIの日記を、ひとつの束として横断表示しています。</p>
+        <p>同じ日付で書かれた各AIの日記を、ひとつの束として横断表示しています。</p>
       </section>
 
 ${groupHtml}

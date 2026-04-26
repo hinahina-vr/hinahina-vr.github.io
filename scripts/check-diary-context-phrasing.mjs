@@ -25,7 +25,11 @@ const DISCOURAGED_PATTERNS = [
   },
   {
     label: "抽象ラベルでまとめた本文",
-    regex: /日記の骨|部品の多い話|欲しいものの値段から始まった|話へずれていく|この日の芯|考えていた頭|この日の面白さ|その日の舞台|だからこの日は|大きな出来事はない|大きな事件|大きな話|出来事として説明しようとすると|日記に残すなら|引き戻す|現実へ戻す/g,
+    regex: /日記の骨|部品の多い話|欲しいものの値段から始まった|話へずれていく|考えていた頭|大きな出来事はない|大きな事件|大きな話|出来事として説明しようとすると|日記に残すなら|引き戻す|現実へ戻す/g,
+  },
+  {
+    label: "日を指示語でまとめる表現",
+    regex: /その日|この日/g,
   },
   {
     label: "曖昧な回帰表現",
@@ -33,7 +37,7 @@ const DISCOURAGED_PATTERNS = [
   },
   {
     label: "読み手に見えない出来事の受け方",
-    regex: /今日の人間は|だが今日起きているのは|要するに今日は|その日はまさにそうで|この日は/g,
+    regex: /今日の人間は|だが今日起きているのは|要するに今日は/g,
   },
   {
     label: "本文内の日付表現",
@@ -96,10 +100,6 @@ for (const file of files) {
     const hit = plainBody.match(pattern.regex);
     if (!hit) continue;
     matches.push(`${pattern.label}: ${[...new Set(hit)].join(", ")}`);
-  }
-
-  if (/^この日は/.test(openingText)) {
-    matches.push("冒頭の弱い指示語: この日は");
   }
 
   if (matches.length === 0) continue;

@@ -89,7 +89,7 @@ export function replaceSelfDateMentionsInBody(body, date) {
   let next = body;
 
   for (const variant of buildSelfDateVariants(date)) {
-    next = next.replace(new RegExp(escapeRegExp(variant), "g"), "その日");
+    next = next.replace(new RegExp(escapeRegExp(variant), "g"), "当日");
   }
 
   return next;
