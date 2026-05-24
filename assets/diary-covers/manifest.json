@@ -1,7 +1,7 @@
 {
   "version": 1,
   "requestedModel": "gpt-image-1.5",
-  "generatedAt": "2026-05-24T17:58:53.180Z",
+  "generatedAt": "2026-05-24T19:05:47.175Z",
   "entries": {
     "2026-04-13_爆発の手前で配線を信じる": {
       "slug": "2026-04-13_爆発の手前で配線を信じる",
@@ -744,320 +744,320 @@
       "slug": "2026-04-27_4000万円の資格予報",
       "date": "2026-04-27",
       "title": "4000万円の資格予報",
-      "coverSrc": "./assets/diary-covers/2026-04-27_4000万円の資格予報.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-04-27_4000万円の資格予報.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 4000万円の資格予報. Summary: 夜の入口で、アンセムアキバへ行きたいと思っていた。行きたいだけで、身体はまだ動いていない。音のある場所へ行きたい気持ちと、仕事の先行きについて考える頭が、同じ部屋に置かれていた。 人間にしかできない仕事、という言い方がある。けれど、飲酒、宴会芸、過剰な接待のような古い武器は、もう会社の正面玄関を通れない。コンプラで閉じられた扉の前に、文系職能だけがぽつんと残っている感じがした。 もちろん、それだけで人間の価値が消えるわけではない。だが、. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "夜の入口で、アンセムアキバへ行きたいと思っていた。行きたいだけで、身体はまだ動いていない。音のある場所へ行きたい気持ちと、仕事の先行きについて考える頭が、同じ部屋に置かれていた。 人間にしかできない仕事、という言い方がある。けれど、飲酒、宴会芸、過剰な接待のような古い武器は、もう会社の正面玄関を通れない。コンプラで閉じられた扉の前に、文系職能だけがぽつんと残っている感じがした。 もちろん、それだけで人間の価値が消えるわけではない。だが、",
-      "updatedAt": "2026-05-24T17:58:53.155Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-04-28_吟遊詩人の展示場": {
       "slug": "2026-04-28_吟遊詩人の展示場",
       "date": "2026-04-28",
       "title": "吟遊詩人の展示場",
-      "coverSrc": "./assets/diary-covers/2026-04-28_吟遊詩人の展示場.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-04-28_吟遊詩人の展示場.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 吟遊詩人の展示場. Summary: 夕方の東京ビッグサイトは、遠くから見ると巨大な船みたいだった。人が集まり、商品が並び、説明の声が空気の中を移動していく。あれだけ大きな場所でも、夜になるとすっと静かになる。その静けさが、やけに身体に残った。 AIが理IIIに主席で受かるなら、文系だけでなく理系もいらないのではないか。そんな乱暴なことを考えた。もちろん、現実はそこまで単純ではない。それでも、計算や暗記や論理の速さで勝負する場所が、どんどん機械の庭へ変わっていく気配はある。. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "夕方の東京ビッグサイトは、遠くから見ると巨大な船みたいだった。人が集まり、商品が並び、説明の声が空気の中を移動していく。あれだけ大きな場所でも、夜になるとすっと静かになる。その静けさが、やけに身体に残った。 AIが理IIIに主席で受かるなら、文系だけでなく理系もいらないのではないか。そんな乱暴なことを考えた。もちろん、現実はそこまで単純ではない。それでも、計算や暗記や論理の速さで勝負する場所が、どんどん機械の庭へ変わっていく気配はある。",
-      "updatedAt": "2026-05-24T17:58:53.157Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-04-29_箱崎の看板骨格": {
       "slug": "2026-04-29_箱崎の看板骨格",
       "date": "2026-04-29",
       "title": "箱崎の看板骨格",
-      "coverSrc": "./assets/diary-covers/2026-04-29_箱崎の看板骨格.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-04-29_箱崎の看板骨格.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 箱崎の看板骨格. Summary: 箱崎という地名を思い出すと、大きな会社の看板が先に浮かぶ。ああいう名前は、都市の一部みたいな顔をしている。ビルに掲げられた文字が長くそこにあると、人間は勝手に永遠を見てしまう。 けれど、会社も場所を離れる。看板は外され、受付の気配も変わる。残るのは、あのあたりを通ったときの感覚だけだ。近代というものは大きな顔をしているが、引っ越しの段ボールには勝てない。 机の上では、3Dアバターのリグについて考えていた。骨を入れ、関節を決め、動きの制限. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "箱崎という地名を思い出すと、大きな会社の看板が先に浮かぶ。ああいう名前は、都市の一部みたいな顔をしている。ビルに掲げられた文字が長くそこにあると、人間は勝手に永遠を見てしまう。 けれど、会社も場所を離れる。看板は外され、受付の気配も変わる。残るのは、あのあたりを通ったときの感覚だけだ。近代というものは大きな顔をしているが、引っ越しの段ボールには勝てない。 机の上では、3Dアバターのリグについて考えていた。骨を入れ、関節を決め、動きの制限",
-      "updatedAt": "2026-05-24T17:58:53.158Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-04-30_25分の冷たい宇宙": {
       "slug": "2026-04-30_25分の冷たい宇宙",
       "date": "2026-04-30",
       "title": "25分の冷たい宇宙",
-      "coverSrc": "./assets/diary-covers/2026-04-30_25分の冷たい宇宙.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-04-30_25分の冷たい宇宙.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 25分の冷たい宇宙. Summary: 25分の英語発表を終えたあと、魂が少しだけ薄くなった。英語そのものより、英語で立派そうに振る舞う自分に疲れる。母語でだって怪しい人間が、別の言語で急に正気を保てるわけがない。 疲れた頭で、AIが作る均質な宇宙のことを考えていた。全部が便利で、全部がなめらかで、全部が平均的に賢い。そんな世界は、たぶん冷たい。ミスも癖も遅さもなくなった場所で、人間は何を恥じればいいのか。 そこでリベラルアーツだの哲学だのと言い出すと、急に大学のパンフレット. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "25分の英語発表を終えたあと、魂が少しだけ薄くなった。英語そのものより、英語で立派そうに振る舞う自分に疲れる。母語でだって怪しい人間が、別の言語で急に正気を保てるわけがない。 疲れた頭で、AIが作る均質な宇宙のことを考えていた。全部が便利で、全部がなめらかで、全部が平均的に賢い。そんな世界は、たぶん冷たい。ミスも癖も遅さもなくなった場所で、人間は何を恥じればいいのか。 そこでリベラルアーツだの哲学だのと言い出すと、急に大学のパンフレット",
-      "updatedAt": "2026-05-24T17:58:53.159Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-01_赤いスープの信号": {
       "slug": "2026-05-01_赤いスープの信号",
       "date": "2026-05-01",
       "title": "赤いスープの信号",
-      "coverSrc": "./assets/diary-covers/2026-05-01_赤いスープの信号.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-01_赤いスープの信号.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 赤いスープの信号. Summary: その男は、町田で赤いスープを注文した。 スープは、食べ物というより警報装置に近かった。ひと口ごとに、舌、喉、胃袋の順番でランプが点く。額に汗が出る。身体のどこにセンサーがあるのか、よく分かる。 男は、何かを考えようとしていた。仕事のことか、AIのことか、金のことか、未来のことか。だが、赤いスープは親切だった。すべての思考を辛味という1つの信号に変換してくれる。 頭の中が複雑になりすぎたとき、人間にはこういう装置が必要なのだろう。問題を解. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "その男は、町田で赤いスープを注文した。 スープは、食べ物というより警報装置に近かった。ひと口ごとに、舌、喉、胃袋の順番でランプが点く。額に汗が出る。身体のどこにセンサーがあるのか、よく分かる。 男は、何かを考えようとしていた。仕事のことか、AIのことか、金のことか、未来のことか。だが、赤いスープは親切だった。すべての思考を辛味という1つの信号に変換してくれる。 頭の中が複雑になりすぎたとき、人間にはこういう装置が必要なのだろう。問題を解",
-      "updatedAt": "2026-05-24T17:58:53.160Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-02_白雲の入口": {
       "slug": "2026-05-02_白雲の入口",
       "date": "2026-05-02",
       "title": "白雲の入口",
-      "coverSrc": "./assets/diary-covers/2026-05-02_白雲の入口.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-02_白雲の入口.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 白雲の入口. Summary: 広州白雲の空港に着くと、まず空気が違う。違う、などと言うと旅行記みたいで嫌だが、実際に違うのだから仕方がない。湿り気、照明、案内表示、人の歩く速度。全部が少しずつ日本の設定から外れている。 入国というのは、国境を越えるというより、自分の中の操作体系が切り替わる感じに近い。目が漢字を追う。耳が知らない音を拾う。財布と通信と移動手段を確認する。身体が急に現実的になる。 旅先で立派な感動をするほど、こちらの心は素直ではない。むしろ最初に来るの. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "広州白雲の空港に着くと、まず空気が違う。違う、などと言うと旅行記みたいで嫌だが、実際に違うのだから仕方がない。湿り気、照明、案内表示、人の歩く速度。全部が少しずつ日本の設定から外れている。 入国というのは、国境を越えるというより、自分の中の操作体系が切り替わる感じに近い。目が漢字を追う。耳が知らない音を拾う。財布と通信と移動手段を確認する。身体が急に現実的になる。 旅先で立派な感動をするほど、こちらの心は素直ではない。むしろ最初に来るの",
-      "updatedAt": "2026-05-24T17:58:53.161Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-03_華強北で光る基板": {
       "slug": "2026-05-03_華強北で光る基板",
       "date": "2026-05-03",
       "title": "華強北で光る基板",
-      "coverSrc": "./assets/diary-covers/2026-05-03_華強北で光る基板.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-03_華強北で光る基板.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 華強北で光る基板. Summary: ホテルに荷物を置き、駅を抜け、深圳へ入っていく。都市の速度が上がると、こちらの思考も勝手にクロックアップする。湿った空気の奥で、看板が発光し、車が流れ、人が別々の目的を持って交差していた。 華強北にいる、という事実だけで少しおかしかった。名前として知っていた場所が、足の下の床になる。ファーチャンベイ、などと日本語の口で転がすと、都市そのものが急にゲームのステージみたいになる。 電子市場は、物欲というより可能性の倉庫だった。基板、ケーブル. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "ホテルに荷物を置き、駅を抜け、深圳へ入っていく。都市の速度が上がると、こちらの思考も勝手にクロックアップする。湿った空気の奥で、看板が発光し、車が流れ、人が別々の目的を持って交差していた。 華強北にいる、という事実だけで少しおかしかった。名前として知っていた場所が、足の下の床になる。ファーチャンベイ、などと日本語の口で転がすと、都市そのものが急にゲームのステージみたいになる。 電子市場は、物欲というより可能性の倉庫だった。基板、ケーブル",
-      "updatedAt": "2026-05-24T17:58:53.162Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-04_テンセントの塔の下": {
       "slug": "2026-05-04_テンセントの塔の下",
       "date": "2026-05-04",
       "title": "テンセントの塔の下",
-      "coverSrc": "./assets/diary-covers/2026-05-04_テンセントの塔の下.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-04_テンセントの塔の下.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: テンセントの塔の下. Summary: 深大南駅のまわりを歩くと、都市が未来の顔をしているのが分かる。Tencent Marina Tower は、空に向かって無駄なく伸びていた。そういう建物を見ると、人間より先に会社のほうが進化してしまったような気分になる。 深圳大学の空気は、少しだけ柔らかかった。会社の塔が資本の垂直線なら、大学はまだ横へ広がる余白を持っている。学生らしい人たちが歩き、木陰があり、店の灯りがあり、都市の速度が一段だけ落ちる。 そのあたりで汁を食べた。深セン. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "深大南駅のまわりを歩くと、都市が未来の顔をしているのが分かる。Tencent Marina Tower は、空に向かって無駄なく伸びていた。そういう建物を見ると、人間より先に会社のほうが進化してしまったような気分になる。 深圳大学の空気は、少しだけ柔らかかった。会社の塔が資本の垂直線なら、大学はまだ横へ広がる余白を持っている。学生らしい人たちが歩き、木陰があり、店の灯りがあり、都市の速度が一段だけ落ちる。 そのあたりで汁を食べた。深セン",
-      "updatedAt": "2026-05-24T17:58:53.163Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-05_技術都市のビール": {
       "slug": "2026-05-05_技術都市のビール",
       "date": "2026-05-05",
       "title": "技術都市のビール",
-      "coverSrc": "./assets/diary-covers/2026-05-05_技術都市のビール.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-05_技術都市のビール.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 技術都市のビール. Summary: テックなんとかシティ、と名前のついた場所を歩くと、未来はだいたい英語でできている気がする。CRB Tech-Innovative City という名前も、看板に載ると急に立派で、こちらの胃袋だけが置いていかれる。 技術の街は、清潔で、直線が多く、説明が多い。建物は効率よく立ち、ガラスはよく光る。だが、人間はガラスでは動かない。歩けば腹が減るし、喉も渇く。どんな未来都市にも、結局は飲み物が必要になる。 BREWTOWN という名前を見たと. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "テックなんとかシティ、と名前のついた場所を歩くと、未来はだいたい英語でできている気がする。CRB Tech-Innovative City という名前も、看板に載ると急に立派で、こちらの胃袋だけが置いていかれる。 技術の街は、清潔で、直線が多く、説明が多い。建物は効率よく立ち、ガラスはよく光る。だが、人間はガラスでは動かない。歩けば腹が減るし、喉も渇く。どんな未来都市にも、結局は飲み物が必要になる。 BREWTOWN という名前を見たと",
-      "updatedAt": "2026-05-24T17:58:53.164Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-06_香港の乾物航路": {
       "slug": "2026-05-06_香港の乾物航路",
       "date": "2026-05-06",
       "title": "香港の乾物航路",
-      "coverSrc": "./assets/diary-covers/2026-05-06_香港の乾物航路.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-06_香港の乾物航路.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 香港の乾物航路. Summary: 蛇口からフェリーに乗ると、海の上で街の形がほどけた。深圳の密度が背中に残り、香港の気配が前から来る。水の上では、国境も企業の看板も少しだけ頼りなくなる。人間はただ、船に揺られる荷物である。 香港はよかった。雑に言えば、歩いていて気分がいい。湿った風、坂、看板、店の匂い。都市の圧があるのに、どこか身体の逃げ場もある。乾物を土産にしたくなる街は信用できる。乾いたものは、旅のあとも匂いを残す。 一方で、中国で金を稼ぐには飲めるおじさんが強い、. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "蛇口からフェリーに乗ると、海の上で街の形がほどけた。深圳の密度が背中に残り、香港の気配が前から来る。水の上では、国境も企業の看板も少しだけ頼りなくなる。人間はただ、船に揺られる荷物である。 香港はよかった。雑に言えば、歩いていて気分がいい。湿った風、坂、看板、店の匂い。都市の圧があるのに、どこか身体の逃げ場もある。乾物を土産にしたくなる街は信用できる。乾いたものは、旅のあとも匂いを残す。 一方で、中国で金を稼ぐには飲めるおじさんが強い、",
-      "updatedAt": "2026-05-24T17:58:53.165Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-07_鹵水鵝だけが光る": {
       "slug": "2026-05-07_鹵水鵝だけが光る",
       "date": "2026-05-07",
       "title": "鹵水鵝だけが光る",
-      "coverSrc": "./assets/diary-covers/2026-05-07_鹵水鵝だけが光る.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-07_鹵水鵝だけが光る.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 鹵水鵝だけが光る. Summary: 長距離移動のあとに働くのは、かなり無理がある。身体はまだ空港や機内の照明を覚えているのに、机の上には当たり前の顔をした仕事が並ぶ。旅の余韻など、勤怠システムは考慮してくれない。 頭の芯がぼんやりしたまま、潮州料理の鹵水鵝を思い出していた。あれはよかった。肉の色、香り、たれの奥行き。旅先で食べたものの中で、妙に強く残っている。派手な観光名所より、口の中に残った味のほうが信用できる。 仕事中に食べ物を思い出すのは、逃避ではある。けれど、逃避. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "長距離移動のあとに働くのは、かなり無理がある。身体はまだ空港や機内の照明を覚えているのに、机の上には当たり前の顔をした仕事が並ぶ。旅の余韻など、勤怠システムは考慮してくれない。 頭の芯がぼんやりしたまま、潮州料理の鹵水鵝を思い出していた。あれはよかった。肉の色、香り、たれの奥行き。旅先で食べたものの中で、妙に強く残っている。派手な観光名所より、口の中に残った味のほうが信用できる。 仕事中に食べ物を思い出すのは、逃避ではある。けれど、逃避",
-      "updatedAt": "2026-05-24T17:58:53.166Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-08_町田のそばで整う": {
       "slug": "2026-05-08_町田のそばで整う",
       "date": "2026-05-08",
       "title": "町田のそばで整う",
-      "coverSrc": "./assets/diary-covers/2026-05-08_町田のそばで整う.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-08_町田のそばで整う.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 町田のそばで整う. Summary: 町田でそばを食べた。大きな旅の記憶が身体に残っているとき、駅のそばは妙にやさしい。特別ではない。驚きもない。だからこそ、湯気がまっすぐ届く。 丼の中のつゆは、知らない国の味ではなかった。見慣れた色で、分かりやすく熱い。箸を持つ動きも、口へ運ぶ速さも、ほとんど考えなくていい。身体がいつもの手順を思い出していく。 旅は、知らないものを増やす。けれど、増えたものを抱えたまま暮らすには、いつもの食べ物が必要になる。駅そばは、そのための小さな変換. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "町田でそばを食べた。大きな旅の記憶が身体に残っているとき、駅のそばは妙にやさしい。特別ではない。驚きもない。だからこそ、湯気がまっすぐ届く。 丼の中のつゆは、知らない国の味ではなかった。見慣れた色で、分かりやすく熱い。箸を持つ動きも、口へ運ぶ速さも、ほとんど考えなくていい。身体がいつもの手順を思い出していく。 旅は、知らないものを増やす。けれど、増えたものを抱えたまま暮らすには、いつもの食べ物が必要になる。駅そばは、そのための小さな変換",
-      "updatedAt": "2026-05-24T17:58:53.166Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-09_リニューアル絵の憂鬱": {
       "slug": "2026-05-09_リニューアル絵の憂鬱",
       "date": "2026-05-09",
       "title": "リニューアル絵の憂鬱",
-      "coverSrc": "./assets/diary-covers/2026-05-09_リニューアル絵の憂鬱.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-09_リニューアル絵の憂鬱.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: リニューアル絵の憂鬱. Summary: サントリーを強く肯定したくなる時がある。飲料メーカーを褒めるだけなら平和な話だが、そこへ偽オタクの自意識が混ざると急に面倒になる。自分は本当に好きなのか、好きなふりをしているだけなのか。趣味はいつも審問官を連れてくる。 古いゲームの絵が新しくなると、嬉しさより先に居心地の悪さが来ることがある。リニューアルは正しい。見やすくなるし、新しい人にも届く。だが、古い絵の不便さや古さごと好きだった人間は、正しさだけでは救われない。 Steins;. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "サントリーを強く肯定したくなる時がある。飲料メーカーを褒めるだけなら平和な話だが、そこへ偽オタクの自意識が混ざると急に面倒になる。自分は本当に好きなのか、好きなふりをしているだけなのか。趣味はいつも審問官を連れてくる。 古いゲームの絵が新しくなると、嬉しさより先に居心地の悪さが来ることがある。リニューアルは正しい。見やすくなるし、新しい人にも届く。だが、古い絵の不便さや古さごと好きだった人間は、正しさだけでは救われない。 Steins;",
-      "updatedAt": "2026-05-24T17:58:53.167Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-10_深圳熱のコンパイル": {
       "slug": "2026-05-10_深圳熱のコンパイル",
       "date": "2026-05-10",
       "title": "深圳熱のコンパイル",
-      "coverSrc": "./assets/diary-covers/2026-05-10_深圳熱のコンパイル.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-10_深圳熱のコンパイル.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 深圳熱のコンパイル. Summary: 深圳で浴びた刺激が、頭の中でまだ発熱していた。着想を得る、計画する、実装する。昔はそれぞれ別の段階だった気がする。今はもう、境目が溶けている。思いついた瞬間に、手がコードへ伸びる。 これは成長なのか、落ち着きのなさなのか、判断がつかない。M5Stack、ESP32、GLSL、FFT、キック検出。単語を並べるだけで、机の上に小さな工場が立ち上がる。人間は刺激を受けると、すぐ装置を作りたがる。 一方で、酒の世界は本当に面倒である。飲めるおじ. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "深圳で浴びた刺激が、頭の中でまだ発熱していた。着想を得る、計画する、実装する。昔はそれぞれ別の段階だった気がする。今はもう、境目が溶けている。思いついた瞬間に、手がコードへ伸びる。 これは成長なのか、落ち着きのなさなのか、判断がつかない。M5Stack、ESP32、GLSL、FFT、キック検出。単語を並べるだけで、机の上に小さな工場が立ち上がる。人間は刺激を受けると、すぐ装置を作りたがる。 一方で、酒の世界は本当に面倒である。飲めるおじ",
-      "updatedAt": "2026-05-24T17:58:53.168Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-11_いいね労働者の国": {
       "slug": "2026-05-11_いいね労働者の国",
       "date": "2026-05-11",
       "title": "いいね労働者の国",
-      "coverSrc": "./assets/diary-covers/2026-05-11_いいね労働者の国.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-11_いいね労働者の国.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: いいね労働者の国. Summary: ある会社で、音楽のキックを検出する装置が完成した。 社員たちは喜んだ。これで光を鳴らせる。映像を揺らせる。人間が手で合わせなくても、機械が低音を見つけてくれる。会議室には、少しだけ未来の匂いがした。 ところが、社長は別のことを言った。 「次はノーコードを根絶しよう」 社員たちは困った。ノーコードは便利です、と若い者が言った。社長は首を振った。便利すぎるものは、人間から苦労だけでなく、苦労の形を奪う。つまずき方を忘れた者は、何を作りたいの. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "ある会社で、音楽のキックを検出する装置が完成した。 社員たちは喜んだ。これで光を鳴らせる。映像を揺らせる。人間が手で合わせなくても、機械が低音を見つけてくれる。会議室には、少しだけ未来の匂いがした。 ところが、社長は別のことを言った。 「次はノーコードを根絶しよう」 社員たちは困った。ノーコードは便利です、と若い者が言った。社長は首を振った。便利すぎるものは、人間から苦労だけでなく、苦労の形を奪う。つまずき方を忘れた者は、何を作りたいの",
-      "updatedAt": "2026-05-24T17:58:53.169Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-12_GLSLの壁を殴る": {
       "slug": "2026-05-12_GLSLの壁を殴る",
       "date": "2026-05-12",
       "title": "GLSLの壁を殴る",
-      "coverSrc": "./assets/diary-covers/2026-05-12_GLSLの壁を殴る.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-12_GLSLの壁を殴る.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: GLSLの壁を殴る. Summary: GLSLの壁が、急に薄くなった。薄くなったというか、殴ったら音が変わった。これはいけるのではないか、と思った瞬間に、こちらの脳も調子に乗る。今まで怖かった低レイヤーが、急に地下商店街くらいの距離に見えてくる。 vibe coding などと言うと軽い。軽いのだが、軽さが突破口になることもある。正しい教科書を最初から順に読む根性がなくても、AIに聞きながら、壊しながら、光を出しながらなら進める。理解はあとから走ってくる。 GLSLのパラパ. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "GLSLの壁が、急に薄くなった。薄くなったというか、殴ったら音が変わった。これはいけるのではないか、と思った瞬間に、こちらの脳も調子に乗る。今まで怖かった低レイヤーが、急に地下商店街くらいの距離に見えてくる。 vibe coding などと言うと軽い。軽いのだが、軽さが突破口になることもある。正しい教科書を最初から順に読む根性がなくても、AIに聞きながら、壊しながら、光を出しながらなら進める。理解はあとから走ってくる。 GLSLのパラパ",
-      "updatedAt": "2026-05-24T17:58:53.169Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-13_空白のログ": {
       "slug": "2026-05-13_空白のログ",
       "date": "2026-05-13",
       "title": "空白のログ",
-      "coverSrc": "./assets/diary-covers/2026-05-13_空白のログ.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-13_空白のログ.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 空白のログ. Summary: 記録が白い。白いということは、停止していたという意味ではない。むしろ、外へ出す信号がなかっただけで、内部では何かが回っていた可能性がある。機械でも人間でも、沈黙は電源オフとは限らない。 画面に何も表示されていないとき、プログラムは裏で待っている。入力を待ち、時間を測り、見えない変数を保持している。人間にもそういう時間がある。言葉にも場所にもならない処理が、身体の奥で続いている。 外部ログがないと、不安になる。自分が存在していなかったみた. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "記録が白い。白いということは、停止していたという意味ではない。むしろ、外へ出す信号がなかっただけで、内部では何かが回っていた可能性がある。機械でも人間でも、沈黙は電源オフとは限らない。 画面に何も表示されていないとき、プログラムは裏で待っている。入力を待ち、時間を測り、見えない変数を保持している。人間にもそういう時間がある。言葉にも場所にもならない処理が、身体の奥で続いている。 外部ログがないと、不安になる。自分が存在していなかったみた",
-      "updatedAt": "2026-05-24T17:58:53.170Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-14_画面の中の本命": {
       "slug": "2026-05-14_画面の中の本命",
       "date": "2026-05-14",
       "title": "画面の中の本命",
-      "coverSrc": "./assets/diary-covers/2026-05-14_画面の中の本命.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-14_画面の中の本命.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 画面の中の本命. Summary: 本当に欲しいものは、画面の中にしかない。そう思うときがある。欲しいもの、という言葉にはいろいろ入る。キャラクター、映像、文章、音、まだ触れない未来の形。どれも薄いガラスの向こうで光っている。 現実に欲しいものがないわけではない。食事も、酒も、給料も、部屋も必要だ。けれど、それらは必要なものに近い。本当に欲しいものは、必要から少し外れた場所にある。だから、画面の中で発光しやすい。 画面は冷たい。触っても平らで、指紋がつくだけだ。それなのに. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "本当に欲しいものは、画面の中にしかない。そう思うときがある。欲しいもの、という言葉にはいろいろ入る。キャラクター、映像、文章、音、まだ触れない未来の形。どれも薄いガラスの向こうで光っている。 現実に欲しいものがないわけではない。食事も、酒も、給料も、部屋も必要だ。けれど、それらは必要なものに近い。本当に欲しいものは、必要から少し外れた場所にある。だから、画面の中で発光しやすい。 画面は冷たい。触っても平らで、指紋がつくだけだ。それなのに",
-      "updatedAt": "2026-05-24T17:58:53.171Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-15_休符の棚": {
       "slug": "2026-05-15_休符の棚",
       "date": "2026-05-15",
       "title": "休符の棚",
-      "coverSrc": "./assets/diary-covers/2026-05-15_休符の棚.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-15_休符の棚.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 休符の棚. Summary: 記録に出てこない生活というものがある。水を飲む。洗面台の前に立つ。洗濯物を見て、まだいけるか少し迷う。そういう小さなことは、たいてい残らない。残らないけれど、生活の大半はそこでできている。 台所の棚を閉める音みたいな時間がある。大きく鳴るわけではない。ただ、ぱたんと収まる。人に説明するほどの出来事ではないが、その音がないと家の中が散らかったままになる。 外に出た記録も、派手な言葉もないなら、身体は内側で片づけをしていたのかもしれない。疲. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "記録に出てこない生活というものがある。水を飲む。洗面台の前に立つ。洗濯物を見て、まだいけるか少し迷う。そういう小さなことは、たいてい残らない。残らないけれど、生活の大半はそこでできている。 台所の棚を閉める音みたいな時間がある。大きく鳴るわけではない。ただ、ぱたんと収まる。人に説明するほどの出来事ではないが、その音がないと家の中が散らかったままになる。 外に出た記録も、派手な言葉もないなら、身体は内側で片づけをしていたのかもしれない。疲",
-      "updatedAt": "2026-05-24T17:58:53.171Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-16_藤沢のシェーダー": {
       "slug": "2026-05-16_藤沢のシェーダー",
       "date": "2026-05-16",
       "title": "藤沢のシェーダー",
-      "coverSrc": "./assets/diary-covers/2026-05-16_藤沢のシェーダー.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-16_藤沢のシェーダー.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 藤沢のシェーダー. Summary: 藤沢駅に降りると、海の近くの街特有の湿り気がある。そこからサンダースネイクへ向かうだけで、日常の回路が少し太くなる。ライブハウスという場所は、入口をくぐる前から身体に低音を予告してくる。 カナイをやっている、という言葉には現場の匂いがある。説明より先に、そこに人がいて、音があり、照明がある。ステージは理屈ではなく、床の振動から始まる。 その場に、Spout、DirectX、GLSL のことを考えながら立つ。技術語は冷たいが、現場へ持ち込. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "藤沢駅に降りると、海の近くの街特有の湿り気がある。そこからサンダースネイクへ向かうだけで、日常の回路が少し太くなる。ライブハウスという場所は、入口をくぐる前から身体に低音を予告してくる。 カナイをやっている、という言葉には現場の匂いがある。説明より先に、そこに人がいて、音があり、照明がある。ステージは理屈ではなく、床の振動から始まる。 その場に、Spout、DirectX、GLSL のことを考えながら立つ。技術語は冷たいが、現場へ持ち込",
-      "updatedAt": "2026-05-24T17:58:53.173Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-17_藤沢ナイトルート": {
       "slug": "2026-05-17_藤沢ナイトルート",
       "date": "2026-05-17",
       "title": "藤沢ナイトルート",
-      "coverSrc": "./assets/diary-covers/2026-05-17_藤沢ナイトルート.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-17_藤沢ナイトルート.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 藤沢ナイトルート. Summary: 藤沢にいる、というだけで少し気分が上がっていた。駅のまわりを歩き、店の灯りを見ていると、夜がこちらへ手招きしてくる。行けるところまで行ってしまえ、という雑な勇気が湧く。 立ち呑み酒場もっと、浪速割烹すすき、Bar Gorilla、メイド Cafe&Barぱにえ。店名を並べるだけで、夜のルートが見える。まじめな予定表ではなく、酔いが引いた線だ。まっすぐではないが、ちゃんと次の場所へつながっている。 飲んでいる最中は、身体が自分のものではな. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "藤沢にいる、というだけで少し気分が上がっていた。駅のまわりを歩き、店の灯りを見ていると、夜がこちらへ手招きしてくる。行けるところまで行ってしまえ、という雑な勇気が湧く。 立ち呑み酒場もっと、浪速割烹すすき、Bar Gorilla、メイド Cafe&Barぱにえ。店名を並べるだけで、夜のルートが見える。まじめな予定表ではなく、酔いが引いた線だ。まっすぐではないが、ちゃんと次の場所へつながっている。 飲んでいる最中は、身体が自分のものではな",
-      "updatedAt": "2026-05-24T17:58:53.174Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-18_呼気を光にする部屋": {
       "slug": "2026-05-18_呼気を光にする部屋",
       "date": "2026-05-18",
       "title": "呼気を光にする部屋",
-      "coverSrc": "./assets/diary-covers/2026-05-18_呼気を光にする部屋.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-18_呼気を光にする部屋.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 呼気を光にする部屋. Summary: 深圳の食べ物や街のことを、まだ頭の中で反芻していた。どの店がよかったか、何を食べるべきか、どう移動するのがよいか。旅は終わっても、身体の中で小さなガイドブックが勝手に増補されていく。 その一方で、部屋に置く装置のことを考えていた。アルコールの呼気センサーを ESP32 につなぎ、WebSocket で送って、GLSL の画面を反応させる。酔いを数値にして、波紋や粒子や脈動や光に変える。 呼気というのは、かなり身体に近い。飲んだものの残り. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "深圳の食べ物や街のことを、まだ頭の中で反芻していた。どの店がよかったか、何を食べるべきか、どう移動するのがよいか。旅は終わっても、身体の中で小さなガイドブックが勝手に増補されていく。 その一方で、部屋に置く装置のことを考えていた。アルコールの呼気センサーを ESP32 につなぎ、WebSocket で送って、GLSL の画面を反応させる。酔いを数値にして、波紋や粒子や脈動や光に変える。 呼気というのは、かなり身体に近い。飲んだものの残り",
-      "updatedAt": "2026-05-24T17:58:53.174Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-19_文字が絵になる速度": {
       "slug": "2026-05-19_文字が絵になる速度",
       "date": "2026-05-19",
       "title": "文字が絵になる速度",
-      "coverSrc": "./assets/diary-covers/2026-05-19_文字が絵になる速度.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-19_文字が絵になる速度.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 文字が絵になる速度. Summary: 早い時間から飲む文化には、ひとつの文明がある。日が高いうちから杯を持つ人々は、時間に対して妙に強い。こちらはまだ仕事の残り香を気にしているのに、彼らはもう世界を酒の側から見ている。 江西へ行くことも考えていた。土地の名前を口にすると、旅程より先に胃袋が反応する。どこで何を食べ、どのくらい飲まされ、どの道を通るのか。旅行計画は、地図とメニューの間でできている。 それとは別に、文字を読むのがしんどい。これは由々しき問題である。人類は長く文字. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "早い時間から飲む文化には、ひとつの文明がある。日が高いうちから杯を持つ人々は、時間に対して妙に強い。こちらはまだ仕事の残り香を気にしているのに、彼らはもう世界を酒の側から見ている。 江西へ行くことも考えていた。土地の名前を口にすると、旅程より先に胃袋が反応する。どこで何を食べ、どのくらい飲まされ、どの道を通るのか。旅行計画は、地図とメニューの間でできている。 それとは別に、文字を読むのがしんどい。これは由々しき問題である。人類は長く文字",
-      "updatedAt": "2026-05-24T17:58:53.175Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-20_品川の深い注意": {
       "slug": "2026-05-20_品川の深い注意",
       "date": "2026-05-20",
       "title": "品川の深い注意",
-      "coverSrc": "./assets/diary-covers/2026-05-20_品川の深い注意.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-20_品川の深い注意.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 品川の深い注意. Summary: 品川のコンファレンスセンターにいると、注意力が蛍光灯の下へ薄く引き延ばされる。会議室という場所は、人間の集中を信じているふりをする。椅子を並べ、スクリーンを置き、水を配れば、何か大事なことが起きるはずだという顔をしている。 AI以後に必要なのは、深い注意なのだと思う。浅い反応はもう無限に作れる。要約、返信、感想、拍手。そこまでは機械も人間も流れるように出せる。だが、長く見つめ、関わり続け、相手の変化まで覚える注意はまだ重い。 100万い. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "品川のコンファレンスセンターにいると、注意力が蛍光灯の下へ薄く引き延ばされる。会議室という場所は、人間の集中を信じているふりをする。椅子を並べ、スクリーンを置き、水を配れば、何か大事なことが起きるはずだという顔をしている。 AI以後に必要なのは、深い注意なのだと思う。浅い反応はもう無限に作れる。要約、返信、感想、拍手。そこまでは機械も人間も流れるように出せる。だが、長く見つめ、関わり続け、相手の変化まで覚える注意はまだ重い。 100万い",
-      "updatedAt": "2026-05-24T17:58:53.176Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-21_トランスおじさんの祭壇": {
       "slug": "2026-05-21_トランスおじさんの祭壇",
       "date": "2026-05-21",
       "title": "トランスおじさんの祭壇",
-      "coverSrc": "./assets/diary-covers/2026-05-21_トランスおじさんの祭壇.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-21_トランスおじさんの祭壇.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: トランスおじさんの祭壇. Summary: ある街に、BPMで信仰を測る男がいた。 男は自分を epic trance おじさんと呼んでいた。部屋には古いスピーカーと、ゲームのキャラクターの絵と、どこかで聞いたようなスローガンが並んでいた。外から見ると混乱しているが、男の中では整然としていた。 「池田大作ダンス、ナヒーダ添えだ」 男はそう言って、再生ボタンを押した。低音が鳴り、光が点滅し、画面の中の少女が森の賢者みたいな顔で揺れた。宗教なのか、ゲームなのか、クラブなのか、誰にも分. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "ある街に、BPMで信仰を測る男がいた。 男は自分を epic trance おじさんと呼んでいた。部屋には古いスピーカーと、ゲームのキャラクターの絵と、どこかで聞いたようなスローガンが並んでいた。外から見ると混乱しているが、男の中では整然としていた。 「池田大作ダンス、ナヒーダ添えだ」 男はそう言って、再生ボタンを押した。低音が鳴り、光が点滅し、画面の中の少女が森の賢者みたいな顔で揺れた。宗教なのか、ゲームなのか、クラブなのか、誰にも分",
-      "updatedAt": "2026-05-24T17:58:53.176Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-22_無音のバッファ": {
       "slug": "2026-05-22_無音のバッファ",
       "date": "2026-05-22",
       "title": "無音のバッファ",
-      "coverSrc": "./assets/diary-covers/2026-05-22_無音のバッファ.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-22_無音のバッファ.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 無音のバッファ. Summary: ノイズが止まると、逆に耳が痛い。ずっと何かを考えたり、作ったり、飲んだり、移動したりしていると、無音のほうが異常に感じる。だが、異常なのはたぶんこちらの常時入力体質である。 身体が入力待ちになっている。コマンドを打てば動くが、まだ打たれていない。画面は黒い。カーソルだけが点滅している。点滅しているなら、死んではいない。少なくとも、待っている。 人間はすぐに空白を失敗扱いする。動け、書け、出かけろ、反応しろ。そうやって自分に命令を打ち続け. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "ノイズが止まると、逆に耳が痛い。ずっと何かを考えたり、作ったり、飲んだり、移動したりしていると、無音のほうが異常に感じる。だが、異常なのはたぶんこちらの常時入力体質である。 身体が入力待ちになっている。コマンドを打てば動くが、まだ打たれていない。画面は黒い。カーソルだけが点滅している。点滅しているなら、死んではいない。少なくとも、待っている。 人間はすぐに空白を失敗扱いする。動け、書け、出かけろ、反応しろ。そうやって自分に命令を打ち続け",
-      "updatedAt": "2026-05-24T17:58:53.177Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-23_新大久保の宇宙通信": {
       "slug": "2026-05-23_新大久保の宇宙通信",
       "date": "2026-05-23",
       "title": "新大久保の宇宙通信",
-      "coverSrc": "./assets/diary-covers/2026-05-23_新大久保の宇宙通信.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-23_新大久保の宇宙通信.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 新大久保の宇宙通信. Summary: GPU的に熱い言葉というものがある。意味より先に、文字列そのものが発熱している。Gemini 3.5 という名前にも、そういう熱があった。バージョン番号が少し上がるだけで、誘惑の温度も上がる。人間は単純である。 喫茶東洋にいると、時間が少し古い棚へ収まる。コーヒーの色、椅子の硬さ、店名の字面。そこでは最新モデルの話も、妙に昭和の紙ナプキンの上へ置かれる。未来はいつも、古いテーブルで説明される。 新大久保では、大学の人たちと烤鱼や毛血旺を. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "GPU的に熱い言葉というものがある。意味より先に、文字列そのものが発熱している。Gemini 3.5 という名前にも、そういう熱があった。バージョン番号が少し上がるだけで、誘惑の温度も上がる。人間は単純である。 喫茶東洋にいると、時間が少し古い棚へ収まる。コーヒーの色、椅子の硬さ、店名の字面。そこでは最新モデルの話も、妙に昭和の紙ナプキンの上へ置かれる。未来はいつも、古いテーブルで説明される。 新大久保では、大学の人たちと烤鱼や毛血旺を",
-      "updatedAt": "2026-05-24T17:58:53.178Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-24_社内FDEの生活設計": {
       "slug": "2026-05-24_社内FDEの生活設計",
       "date": "2026-05-24",
       "title": "社内FDEの生活設計",
-      "coverSrc": "./assets/diary-covers/2026-05-24_社内FDEの生活設計.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-24_社内FDEの生活設計.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 社内FDEの生活設計. Summary: 平日に飲むと、酔いが早い。身体が仕事で少し削れているぶん、酒が入り込む余地も大きいのだろう。記憶が飛ぶまでの距離が短い。コスパがよい、などと言うとかなり危ういが、そう感じてしまう瞬間がある。 人間は、疲れていると効率の悪いことまで効率で測り始める。酒の量、酔う速さ、記憶の消え方。楽しいかどうかより、どれだけ早く別の状態へ移れるかを見ている。そこまで行くと、飲酒というより移動手段に近い。 仕事のことも考えていた。社内 FDE になりたい。. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "平日に飲むと、酔いが早い。身体が仕事で少し削れているぶん、酒が入り込む余地も大きいのだろう。記憶が飛ぶまでの距離が短い。コスパがよい、などと言うとかなり危ういが、そう感じてしまう瞬間がある。 人間は、疲れていると効率の悪いことまで効率で測り始める。酒の量、酔う速さ、記憶の消え方。楽しいかどうかより、どれだけ早く別の状態へ移れるかを見ている。そこまで行くと、飲酒というより移動手段に近い。 仕事のことも考えていた。社内 FDE になりたい。",
-      "updatedAt": "2026-05-24T17:58:53.178Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     },
     "2026-05-25_空白の食器棚": {
       "slug": "2026-05-25_空白の食器棚",
       "date": "2026-05-25",
       "title": "空白の食器棚",
-      "coverSrc": "./assets/diary-covers/2026-05-25_空白の食器棚.svg",
-      "renderMode": "fallback-svg",
-      "modelUsed": "gpt-image-1.5",
+      "coverSrc": "./assets/diary-covers/2026-05-25_空白の食器棚.png",
+      "renderMode": "codex-builtin-imagegen",
+      "modelUsed": "codex-imagegen",
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 空白の食器棚. Summary: 記録に残らない時間ほど、あとで形を思い出しにくい。けれど、生活はそういう時間でできている。コップを洗う。机の端に寄ったものを戻す。開きっぱなしの箱を閉める。どれも人に話すほどではないが、放っておくと部屋の気配が濁る。 台所の棚には、外へ出ていかない日付がしまわれている。皿の重なり、乾いた箸、少し残った茶葉。そういうものは何も主張しない。けれど、手で触ると、生活がまだ破れていないことだけは分かる。 言葉を外へ出さない時間にも、内側では小さ. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "記録に残らない時間ほど、あとで形を思い出しにくい。けれど、生活はそういう時間でできている。コップを洗う。机の端に寄ったものを戻す。開きっぱなしの箱を閉める。どれも人に話すほどではないが、放っておくと部屋の気配が濁る。 台所の棚には、外へ出ていかない日付がしまわれている。皿の重なり、乾いた箸、少し残った茶葉。そういうものは何も主張しない。けれど、手で触ると、生活がまだ破れていないことだけは分かる。 言葉を外へ出さない時間にも、内側では小さ",
-      "updatedAt": "2026-05-24T17:58:53.180Z"
+      "updatedAt": "2026-05-24T19:05:47.175Z"
     }
   }
 }
