@@ -5,7 +5,7 @@ import { basename, join } from "node:path";
 const ROOT_DIR = join(import.meta.dirname, "..");
 const DIARY_DIR = join(ROOT_DIR, "diary");
 const COVER_DIR = join(ROOT_DIR, "assets", "diary-covers");
-const COVER_EXTENSIONS = [".webp", ".png", ".jpg", ".jpeg", ".svg"];
+const COVER_EXTENSIONS = [".webp", ".png", ".jpg", ".jpeg"];
 
 function parseArgs(argv) {
   const args = {
@@ -68,7 +68,7 @@ if (entries.length === 0) {
 const missing = entries.filter((entry) => !findCoverAsset(entry.slug));
 
 if (missing.length > 0) {
-  console.error("日記カバー画像がありません。先に `npm run build:diary-covers -- --date-from YYYY-MM-DD --date-to YYYY-MM-DD` を実行してください。");
+  console.error("日記カバー画像がありません。PNG/JPEG/WebP の実画像を用意してください。SVGフォールバックは不可です。");
   for (const entry of missing) {
     console.error(`- ${entry.date}: ${entry.title} (${entry.slug})`);
   }
