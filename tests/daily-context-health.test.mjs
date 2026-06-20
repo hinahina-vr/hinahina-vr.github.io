@@ -3,6 +3,7 @@ import {
   buildBungouStyleRecommendation,
   buildSearchDateRangeForLocalDay,
   buildCandidateTopics,
+  hasDiarySourceActivity,
   renderDailyContextBlock,
   renderBungouStyleBlock,
   upsertBungouStyleBlock,
@@ -258,6 +259,39 @@ function testCandidateTopicsStaySourceNeutral() {
   assert(normalized.candidateTopics.every((topic) => !topic.includes("Xの投稿")));
 }
 
+function testDiarySourceActivityRequiresSwarmOrVisibleX() {
+  const normalized = createBaseNormalized();
+  assert.equal(hasDiarySourceActivity(normalized), true);
+
+  normalized.sources.swarm.items = [];
+  normalized.sources.x.items = [];
+  assert.equal(hasDiarySourceActivity(normalized), false);
+
+  normalized.sources.x.items = [
+    {
+      postedAt: "2026-03-16T12:00:00.000Z",
+      tweetId: "4",
+      text: "誰かの投稿を回しただけ",
+      tweetUrl: "https://x.com/hinahina_vr/status/4",
+      kind: "repost",
+      mediaUrls: [],
+    },
+  ];
+  assert.equal(hasDiarySourceActivity(normalized), false);
+
+  normalized.sources.swarm.items = [
+    {
+      checkedInAt: "2026-03-16T11:15:00.000Z",
+      venueName: "秋葉原",
+      venueArea: "東京",
+      venueUrl: "https://example.com/venues/3",
+      shout: null,
+      sourceUrl: "https://example.com/checkin/3",
+    },
+  ];
+  assert.equal(hasDiarySourceActivity(normalized), true);
+}
+
 function testBuildSearchDateRangeForLocalDay() {
   assert.deepEqual(
     buildSearchDateRangeForLocalDay("2026-04-07", "Asia/Tokyo"),
@@ -405,6 +439,7 @@ function run() {
   testDailyContextBlockKeepsFullXPostText();
   testHealthTopicsLimit();
   testCandidateTopicsStaySourceNeutral();
+  testDiarySourceActivityRequiresSwarmOrVisibleX();
   testBuildSearchDateRangeForLocalDay();
   testBungouRecommendationUsesRoundRobinPrimaryAndTopicAlternates();
   testBungouRecommendationIgnoresVenueOnlySwarm();

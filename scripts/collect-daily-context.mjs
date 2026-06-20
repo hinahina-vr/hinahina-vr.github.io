@@ -12,6 +12,7 @@ import {
   ensureDir,
   getDateStringForValue,
   getDateStringInTimeZone,
+  hasDiarySourceActivity,
   loadDailyContextConfig,
   pathExists,
   renderBungouStyleBlock,
@@ -576,24 +577,6 @@ async function collectAndWrite(options) {
   const fileDate = options.file ? basename(options.file).match(/^(\d{4}-\d{2}-\d{2})_/u)?.[1] : null;
   const date = options.date ?? fileDate ?? getDateStringInTimeZone(new Date(), config.timezone);
 
-  // Target: drafts/ directory instead of diary/
-  const DRAFTS_DIR = join(import.meta.dirname, "..", "drafts");
-  await ensureDir(DRAFTS_DIR);
-  const draftFileName = `${date}_下書き.md`;
-  const draftAbsPath = join(DRAFTS_DIR, draftFileName);
-
-  // Create draft file if it doesn't exist
-  if (!(await pathExists(draftAbsPath))) {
-    const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n## 仮タイトル案\n\n## 方針メモ\n\n## 叩き台\n\n## トーン\n\n`;
-    await writeFile(draftAbsPath, draftContent, "utf-8");
-  }
-
-  const targetFile = {
-    absPath: draftAbsPath,
-    relPath: `drafts/${draftFileName}`,
-    date,
-  };
-
   await ensureDir(DAILY_CONTEXT_DIR);
   await ensureDir(RAW_DIR);
 
@@ -736,6 +719,29 @@ async function collectAndWrite(options) {
     await writeJson(join(RAW_DIR, `${date}.x.json`), xRaw);
     await writeJson(join(RAW_DIR, `${date}.health.json`), healthRaw);
     await writeJson(join(DAILY_CONTEXT_DIR, `${date}.json`), normalized);
+
+    if (!hasDiarySourceActivity(normalized)) {
+      console.log(`[daily-context] skipped draft for ${date}: XかSwarmに日記化する動きがありません。`);
+      console.log(`[daily-context] Swarm ${swarm.items?.length ?? 0}件 / X ${x.items?.length ?? 0}件 / Health ${health.status}`);
+      return;
+    }
+
+    const DRAFTS_DIR = join(import.meta.dirname, "..", "drafts");
+    await ensureDir(DRAFTS_DIR);
+    const draftFileName = `${date}_下書き.md`;
+    const draftAbsPath = join(DRAFTS_DIR, draftFileName);
+
+    if (!(await pathExists(draftAbsPath))) {
+      const draftContent = `# ${date} 下書き\n\n## 元ネタ・話題候補\n\n## 仮タイトル案\n\n## 方針メモ\n\n## 叩き台\n\n## トーン\n\n`;
+      await writeFile(draftAbsPath, draftContent, "utf-8");
+    }
+
+    const targetFile = {
+      absPath: draftAbsPath,
+      relPath: `drafts/${draftFileName}`,
+      date,
+    };
+
     await updateDiaryFile(targetFile, normalized);
 
     console.log(`[daily-context] updated ${targetFile.relPath}`);

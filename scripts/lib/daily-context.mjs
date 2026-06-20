@@ -451,6 +451,12 @@ export function renderDailyContextBlock(normalized) {
   return lines.join("\n");
 }
 
+export function hasDiarySourceActivity({ sources }) {
+  const hasSwarmCheckin = (sources.swarm?.items ?? []).length > 0;
+  const hasXPost = (sources.x?.items ?? []).some((item) => item.kind !== "repost");
+  return hasSwarmCheckin || hasXPost;
+}
+
 function getBungouSignalText({ sources, candidateTopics }) {
   const parts = [
     ...candidateTopics,

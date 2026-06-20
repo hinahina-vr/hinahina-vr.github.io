@@ -4,6 +4,7 @@ import {
   DAILY_CONTEXT_DIR,
   RAW_DIR,
   ROOT_DIR,
+  hasDiarySourceActivity,
   renderBungouStyleBlock,
   renderDailyContextBlock,
 } from "./lib/daily-context.mjs";
@@ -193,6 +194,10 @@ function validateDraft(draft) {
       `${relativeFile}: 収集済み daily-context がありません。先に node scripts/collect-daily-context.mjs --date ${draft.date} を実行してください。`,
     );
     return findings;
+  }
+
+  if (!hasDiarySourceActivity(context)) {
+    findings.push(`${relativeFile}: XかSwarmに日記化する動きがありません。新しい日記は作成しないでください。`);
   }
 
   findings.push(...validateRawSource({
