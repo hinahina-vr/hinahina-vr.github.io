@@ -2,7 +2,7 @@
  * build-diary.mjs
  * diary/*.md を読み込んで月別の diary.html / diary-YYYY-MM.html を生成する
  */
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, unlink, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
@@ -542,6 +542,13 @@ ${htmlFooter()}`;
     if (!entryByDate.has(entry.date)) {
       entryByDate.set(entry.date, entry);
     }
+  }
+
+  const staleVoicePages = (await readdir(OUT_DIR))
+    .filter((file) => /^diary-voices-\d{4}-\d{2}-\d{2}\.html$/.test(file))
+    .filter((file) => !entryByDate.has(file.match(/^diary-voices-(\d{4}-\d{2}-\d{2})\.html$/)?.[1]));
+  for (const file of staleVoicePages) {
+    await unlink(join(OUT_DIR, file));
   }
 
   let voiceBundleCount = 0;
