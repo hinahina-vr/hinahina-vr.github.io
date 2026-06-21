@@ -8,6 +8,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { formatVoiceFindings, validateCharacterVoicesForDate } from "./lib/diary-character-voice.mjs";
+import { formatVoiceBoilerplateFindings, validateVoiceBoilerplateForDate } from "./lib/diary-voice-boilerplate.mjs";
 import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
@@ -448,6 +449,13 @@ async function main() {
       throw new Error(formatSourceMentionFindings(sourceCheck));
     }
     console.log(`✓ source name check passed (${latestDate}: ${sourceCheck.checked.length} entries)`);
+  }
+  if (latestDate && process.env.WADDY_SKIP_DIARY_BOILERPLATE_CHECK !== "1") {
+    const boilerplateCheck = validateVoiceBoilerplateForDate(latestDate);
+    if (boilerplateCheck.findings.length > 0) {
+      throw new Error(formatVoiceBoilerplateFindings(boilerplateCheck));
+    }
+    console.log(`✓ voice boilerplate check passed (${latestDate}: ${boilerplateCheck.checked.length} entries)`);
   }
 
   const latestEntriesHtml = latestEntries.map(renderFullEntry).join("\n");
