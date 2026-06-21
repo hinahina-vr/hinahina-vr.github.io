@@ -7,6 +7,10 @@ import {
 } from "./diary-self-date.mjs";
 
 export const VOICE_BOILERPLATE_RULES = [
+  { phrase: "「", maxOwners: 0 },
+  { phrase: "」", maxOwners: 0 },
+  { phrase: "『", maxOwners: 0 },
+  { phrase: "』", maxOwners: 0 },
   { phrase: "の声では", maxOwners: 0 },
   { phrase: "という出来事が", maxOwners: 0 },
   { phrase: "という細部を拾って", maxOwners: 0 },

@@ -9,6 +9,7 @@ import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { formatVoiceFindings, validateCharacterVoicesForDate } from "./lib/diary-character-voice.mjs";
 import { formatVoiceBoilerplateFindings, validateVoiceBoilerplateForDate } from "./lib/diary-voice-boilerplate.mjs";
+import { analyzeVoiceSimilarityForDate, formatVoiceSimilarityFindings } from "./lib/diary-voice-similarity.mjs";
 import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
@@ -456,6 +457,15 @@ async function main() {
       throw new Error(formatVoiceBoilerplateFindings(boilerplateCheck));
     }
     console.log(`✓ voice boilerplate check passed (${latestDate}: ${boilerplateCheck.checked.length} entries)`);
+
+    const similarityCheck = analyzeVoiceSimilarityForDate(latestDate);
+    if (similarityCheck.findings.length > 0) {
+      throw new Error(formatVoiceSimilarityFindings(similarityCheck));
+    }
+    console.log(
+      `✓ voice similarity check passed (${latestDate}: ${similarityCheck.checked.length} entries, ` +
+        `max=${similarityCheck.stats.max.toFixed(4)})`,
+    );
   }
 
   const latestEntriesHtml = latestEntries.map(renderFullEntry).join("\n");
