@@ -1,0 +1,40 @@
+{
+  "title": "開栓日と修正履歴",
+  "subtitle": "翌日に残った二つの作業",
+  "genre": "在庫編集ノベル",
+  "date": "2026-03-29",
+  "chars": {
+    "narrator": { "name": "", "color": "#aaa0a0", "emoji": "" },
+    "ledger": { "name": "台帳", "color": "#c19b63", "emoji": "▤" }
+  },
+  "mapTitles": {
+    "standalone_start": "五本の瓶と未修正画面",
+    "choose_task": "先に終える作業",
+    "END_BOTTLES": "飲む順番を決める",
+    "END_PATCH": "文字送りを直す",
+    "END_RAMEN": "因果を作らず食べる"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "机には開栓済みの五本と、夢画面の修正メモがある。前夜の飲み会が制作を進めたと決める証拠はない。" },
+    { "speaker": "ledger", "text": "瓶は開栓日と残量、画面は変更前と変更後。別々の履歴へ書いてください。" },
+    { "label": "choose_task" },
+    {
+      "choices": [
+        { "text": "瓶の残量と開栓日を記録する", "goto": "END_BOTTLES" },
+        { "text": "文字送りと現在地表示を直す", "goto": "END_PATCH" },
+        { "text": "岐阜屋の味噌ラーメンを思い出す", "goto": "END_RAMEN" }
+      ]
+    },
+    { "label": "END_BOTTLES" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "価格ではなく、残量が少なく開栓の古い瓶から順番を付けた。\nEND 五本の在庫表" },
+    { "label": "END_PATCH" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "文字速度を変えてもレイアウトが崩れず、現在地から前の選択へ戻れるようになった。\nEND 一件の修正版" },
+    { "label": "END_RAMEN" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "高い酒の比較と、酔った後の熱い麺を別の味として残した。どちらが上かは決めなかった。\nEND 味噌ラーメンの記憶" }
+  ]
+}

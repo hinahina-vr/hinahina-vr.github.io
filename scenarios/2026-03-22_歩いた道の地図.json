@@ -1,0 +1,40 @@
+{
+  "title": "歩いた道の地図",
+  "subtitle": "正史を決めず、選択を残す",
+  "genre": "分岐編集ノベル",
+  "date": "2026-03-22",
+  "chars": {
+    "narrator": { "name": "", "color": "#98a0c0", "emoji": "" },
+    "map": { "name": "A.D.M.S.", "color": "#9a82d0", "emoji": "◇" }
+  },
+  "mapTitles": {
+    "standalone_start": "未到達の分岐図",
+    "choose_map": "地図の使い方",
+    "END_PLAY": "知らない経路を歩く",
+    "END_EDIT": "重複する枝を切る",
+    "END_LOG": "選択履歴を持ち帰る"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "地図には到達済みの線が一本、未到達の分岐が二本ある。どの結末が正しいかを示す王冠はない。" },
+    { "speaker": "map", "text": "私は正解表ではありません。どこで選び、何をまだ知らないかを表示します。" },
+    { "label": "choose_map" },
+    {
+      "choices": [
+        { "text": "未到達の経路を一つ遊ぶ", "goto": "END_PLAY" },
+        { "text": "同じ情報へ戻る枝を削る", "goto": "END_EDIT" },
+        { "text": "今日選んだ線だけ書き出す", "goto": "END_LOG" }
+      ]
+    },
+    { "label": "END_PLAY" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "別の人物から、前の経路にはなかった事実を一つ知った。結末より、その情報差が再び遊んだ理由になった。\nEND 未到達の一件" },
+    { "label": "END_EDIT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "二本の枝が同じ教訓へ戻る箇所を切った。地図は小さくなり、残った分岐の意味が読めるようになった。\nEND 枝を減らした地図" },
+    { "label": "END_LOG" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "選択時刻と経路だけを保存し、感想は別欄へ置いた。後から気分が変わっても、歩いた線は変わらない。\nEND 経路ログ" }
+  ]
+}

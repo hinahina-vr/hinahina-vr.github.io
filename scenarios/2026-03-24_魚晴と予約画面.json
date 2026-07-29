@@ -1,0 +1,40 @@
+{
+  "title": "魚晴と予約画面",
+  "subtitle": "今夜の皿と来月の一本",
+  "genre": "カウンターノベル",
+  "date": "2026-03-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "menu": { "name": "予約画面", "color": "#72a0c8", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "魚晴のカウンター",
+    "choose_order": "今夜決めるもの",
+    "END_MEAL": "しめさばを食べる",
+    "END_PACKAGE": "箱を予約する",
+    "END_DOWNLOAD": "遊ぶ日を予約する"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "火曜日の魚晴。しめさばの皿の横で、ゲームanemoiの予約画面が開いている。食事は今夜終わり、ゲームは来月始まる。" },
+    { "speaker": "menu", "text": "箱が欲しい理由と、長く遊べる理由は同じではありません。" },
+    { "label": "choose_order" },
+    {
+      "choices": [
+        { "text": "端末を閉じ、しめさばを食べる", "goto": "END_MEAL" },
+        { "text": "特典と対応環境を確認して箱を選ぶ", "goto": "END_PACKAGE" },
+        { "text": "遊ぶ端末を確認してダウンロード版を選ぶ", "goto": "END_DOWNLOAD" }
+      ]
+    },
+    { "label": "END_MEAL" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "包丁の音と酢の味を今夜の記録にした。予約は家へ戻ってから決める。\nEND 先に食べる" },
+    { "label": "END_PACKAGE" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "箱と特典を手元へ置く選択をした。同時に、認証や対応OSが保存性を左右することもメモした。\nEND 物として残す" },
+    { "label": "END_DOWNLOAD" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "発売日にすぐ遊べる版を選び、サービス終了時の扱いを確認した。所有より開始時刻を優先した。\nEND 来月の起動予定" }
+  ]
+}

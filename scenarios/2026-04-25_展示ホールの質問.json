@@ -1,0 +1,59 @@
+{
+  "title": "展示ホールの質問",
+  "subtitle": "未来の身体には置き場所が要る",
+  "genre": "展示会探索ノベル",
+  "date": "2026-04-25",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "staff": { "name": "展示員", "color": "#d7b56d", "emoji": "◆" }
+  },
+  "mapTitles": {
+    "standalone_start": "幕張メッセの入口",
+    "robot_booth": "身体を持つAI",
+    "ask_price": "二十八万円の内訳",
+    "old_culture": "電波ソングの人波",
+    "END_BUY": "予約票を受け取る",
+    "END_MEASURE": "部屋を測って帰る",
+    "END_MEMORY": "懐かしさを持ち帰る"
+  },
+  "mapSummaries": {
+    "standalone_start": "古いネット文化と新しい機械が同じ会場に並ぶ。",
+    "robot_booth": "会話する存在が服、仮面、関節を持ち始めている。",
+    "ask_price": "価格だけでなく、保管と手入れの条件を聞く。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "cathedral" },
+    { "speaker": "narrator", "text": "ニコニコ超会議の会場に、巨大な鳥居、古い電波ソング、技術展示、物販が同居している。人の流れは二つの方向へ分かれた。" },
+    {
+      "choices": [
+        { "text": "人型ロボットの展示へ行く", "goto": "robot_booth" },
+        { "text": "懐かしい曲が聞こえる場所へ行く", "goto": "old_culture" }
+      ]
+    },
+    { "label": "robot_booth" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "会話するAIに服、仮面、関節が与えられている。値札は二十八万円。未来の概念だった身体が、注文できる商品になっている。" },
+    { "speaker": "staff", "text": "本体のほかに、電源、可動部の手入れ、保管する空間が必要です。" },
+    {
+      "choices": [
+        { "text": "予約方法だけ聞く", "goto": "END_BUY" },
+        { "text": "維持費と寸法まで聞く", "goto": "ask_price" }
+      ]
+    },
+    { "label": "ask_price" },
+    { "speaker": "narrator", "text": "欲しいという気持ちを、置けるか、直せるか、使い続けられるかへ分解した。価格は入口にすぎない。" },
+    { "label": "END_MEASURE" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "予約せず、部屋の寸法を測るため町田へ戻った。未来の身体を迎える判断は、床面積から始まる。\nEND まず置き場所" },
+    { "label": "old_culture" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "昔のネット文化を知る人たちが、同じ曲に反応している。古いものは消えず、集まる場所と再生装置を変えて続いていた。" },
+    { "label": "END_MEMORY" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "新しい機械を買わなくても、好きだったものが別の身体で残る場面を見た。懐かしさも未来の作り方の一つだった。\nEND 再生される記憶" },
+    { "label": "END_BUY" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "予約票を受け取った。高揚は残ったが、保管と修理の欄は空白のままだ。\nEND 値札の先は未記入" }
+  ]
+}

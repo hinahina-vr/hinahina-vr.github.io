@@ -6,7 +6,6 @@ const ROOT = join(import.meta.dirname, "..");
 const DIARY_DIR = join(ROOT, "diary");
 const GRAPH_DIR = join(ROOT, "scenarios", "adms");
 const SCENARIO_DIR = join(ROOT, "scenarios");
-const DREAM_REQUIRED_SINCE = "2026-03-18";
 
 const scenarioLabelCache = new Map();
 
@@ -161,10 +160,11 @@ async function main() {
 
   for (const diaryFile of diaryFiles) {
     const date = diaryFile.slice(0, 10);
-    if (date < DREAM_REQUIRED_SINCE) {
-      continue;
-    }
-    if (!graphDates.has(date)) {
+    const diaryBody = await readFile(join(DIARY_DIR, diaryFile), "utf8");
+    const hasDreamLink =
+      diaryBody.includes(`dream-select.html?date=${date}`) ||
+      diaryBody.includes(`galge-scenario.html?scenario=${date}_`);
+    if (hasDreamLink && !graphDates.has(date)) {
       errors.push(`${diaryFile}: missing dream graph scenarios/adms/${date}.json`);
     }
   }

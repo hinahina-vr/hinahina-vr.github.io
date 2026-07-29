@@ -1,0 +1,40 @@
+{
+  "title": "展開前夜のワークフロー",
+  "subtitle": "壊してから説明する",
+  "genre": "社内導入ノベル",
+  "date": "2026-03-25",
+  "chars": {
+    "narrator": { "name": "", "color": "#9ea5b5", "emoji": "" },
+    "workflow": { "name": "Dify", "color": "#70b6a0", "emoji": "⌘" }
+  },
+  "mapTitles": {
+    "standalone_start": "会議室の前夜",
+    "choose_test": "最後の一時間",
+    "END_BREAK": "失敗例を三つ得る",
+    "END_SUPPORT": "問い合わせ経路を作る",
+    "END_SCOPE": "機能を一つ外す"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "明日は全社向けの説明会。正常な入力では回答が出るが、空欄、長文、権限不足をまだ試していない。" },
+    { "speaker": "workflow", "text": "私は動きます。ただし、利用者がどこで止まるかは別の試験です。" },
+    { "label": "choose_test" },
+    {
+      "choices": [
+        { "text": "意図的に三種類の失敗を起こす", "goto": "END_BREAK" },
+        { "text": "展開後の問い合わせ先を一枚にする", "goto": "END_SUPPORT" },
+        { "text": "不安定な機能を明日の説明から外す", "goto": "END_SCOPE" }
+      ]
+    },
+    { "label": "END_BREAK" },
+    { "bg": "crimson" },
+    { "speaker": "narrator", "text": "三つの停止画面と、戻る手順を撮った。明日は成功だけでなく、失敗から復帰する操作を見せられる。\nEND 壊した記録" },
+    { "label": "END_SUPPORT" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "質問の窓口、対応者、既知の問題を一枚にまとめた。説明会が終わった翌日にも運用が続く。\nEND 配布後の道" },
+    { "label": "END_SCOPE" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "一つの機能を隠し、確実に説明できる範囲へ絞った。減らしたことが、明日の安定性になった。\nEND 外した装備" }
+  ]
+}

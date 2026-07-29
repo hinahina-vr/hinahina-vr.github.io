@@ -1,31 +1,117 @@
 {
   "date": "2026-04-20",
-  "title": "部屋の抽選機 A.D.M.S.",
+  "title": "測定前の選択 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
-    { "id": "standalone_start", "title": "完全理解の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🧪", "scenario": "2026-04-20_部屋の抽選機", "entry": "standalone_start", "summary": "配線と抽選が同じ机に並ぶ入口" },
-    { "id": "choose_room", "title": "部屋の三択", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-20_部屋の抽選機", "entry": "choose_room", "summary": "配線、抽選、しらふの熱を選ぶ" },
-    { "id": "workbench", "title": "配線の現実", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "🔌", "scenario": "2026-04-20_部屋の抽選機", "entry": "workbench", "summary": "小さな基板が現実の確認を返す" },
-    { "id": "lottery", "title": "抽選の未来", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "🎰", "scenario": "2026-04-20_部屋の抽選機", "entry": "lottery", "summary": "まだ来ない機能が抽選機の顔になる" },
-    { "id": "sober_heat", "title": "しらふの熱", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🏠", "scenario": "2026-04-20_部屋の抽選機", "entry": "sober_heat", "summary": "酒なしで気分だけが回る部屋" },
-    { "id": "mitra_gate", "title": "机上の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-20_部屋の抽選機", "entry": "mitra_gate", "summary": "確かめる機械と待つ未来を同じ机で受け取る" },
-    { "id": "END_WORKBENCH", "title": "入口の光", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "💡", "scenario": "2026-04-20_部屋の抽選機", "entry": "END_WORKBENCH", "summary": "完全理解を検証の入口として持ち帰る" },
-    { "id": "END_LOTTERY", "title": "外れ台の未来", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "🎰", "scenario": "2026-04-20_部屋の抽選機", "entry": "END_LOTTERY", "summary": "未来が抽選機の顔で待っている" },
-    { "id": "END_ROOM", "title": "部屋の熱", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🔥", "scenario": "2026-04-20_部屋の抽選機", "entry": "END_ROOM", "summary": "しらふの部屋に残る熱を持ち帰る" }
+    {
+      "id": "standalone_start",
+      "title": "配線を終えた机",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-20_測定前の選択",
+      "entry": "standalone_start",
+      "summary": "ESP32とセンサーをつないだ試作機が動き始める。"
+    },
+    {
+      "id": "baseline",
+      "title": "飲む前を測る",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-20_測定前の選択",
+      "entry": "baseline",
+      "summary": "酒を飲む前の値を記録して、比較の基準を作る。"
+    },
+    {
+      "id": "compare",
+      "title": "変化を確かめる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-20_測定前の選択",
+      "entry": "compare",
+      "summary": "変化を確かめる"
+    },
+    {
+      "id": "END_NUMBER",
+      "title": "前後の値を残す",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-20_測定前の選択",
+      "entry": "END_NUMBER",
+      "summary": "感覚と数値を並べ、試作機の限界ごと記録する。"
+    },
+    {
+      "id": "END_GUESS",
+      "title": "酔いだけを頼る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-20_測定前の選択",
+      "entry": "END_GUESS",
+      "summary": "酔いだけを頼る"
+    },
+    {
+      "id": "END_WAIT",
+      "title": "今夜は飲まない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-20_測定前の選択",
+      "entry": "END_WAIT",
+      "summary": "今夜は飲まない"
+    }
   ],
   "edges": [
-    { "from": "standalone_start", "to": "choose_room", "choiceText": "部屋の入口へ進む", "style": "kenkai" },
-    { "from": "choose_room", "to": "workbench", "choiceText": "配線の現実を見る", "style": "kenkai" },
-    { "from": "workbench", "to": "END_WORKBENCH", "choiceText": "入口の光を持ち帰る", "style": "kenkai" },
-    { "from": "workbench", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
-    { "from": "choose_room", "to": "lottery", "choiceText": "抽選の未来を待つ", "style": "kenkai" },
-    { "from": "lottery", "to": "END_LOTTERY", "choiceText": "外れ台を離れる", "style": "kenkai" },
-    { "from": "lottery", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
-    { "from": "choose_room", "to": "sober_heat", "choiceText": "しらふの熱を測る", "style": "kenkai" },
-    { "from": "sober_heat", "to": "END_ROOM", "choiceText": "部屋の熱を持ち帰る", "style": "kenkai" },
-    { "from": "sober_heat", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
-    { "from": "mitra_gate", "to": "END_WORKBENCH", "choiceText": "配線へ戻る", "style": "kenkai" },
-    { "from": "mitra_gate", "to": "END_LOTTERY", "choiceText": "抽選へ戻る", "style": "kenkai" },
-    { "from": "mitra_gate", "to": "END_ROOM", "choiceText": "部屋へ戻る", "style": "kenkai" }
+    {
+      "from": "standalone_start",
+      "to": "baseline",
+      "choiceText": "飲む前の値を記録する",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "END_GUESS",
+      "choiceText": "測らずに飲み始める",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "END_WAIT",
+      "choiceText": "配線を見直して実験を翌日に回す",
+      "style": "kenkai"
+    },
+    {
+      "from": "baseline",
+      "to": "compare",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "compare",
+      "to": "END_NUMBER",
+      "choiceText": "条件をそろえて再測定する",
+      "style": "kenkai"
+    },
+    {
+      "from": "compare",
+      "to": "END_GUESS",
+      "choiceText": "数字より酔った感覚を優先する",
+      "style": "kenkai"
+    }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "title": "出口のある建物",
+  "subtitle": "残ることと閉じ込められることの違い",
+  "genre": "館内探索ノベル",
+  "date": "2026-03-19",
+  "chars": {
+    "narrator": { "name": "", "color": "#9aa0b8", "emoji": "" },
+    "guide": { "name": "案内板", "color": "#80b09c", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "三つの扉",
+    "choose_door": "どこから確かめるか",
+    "END_ARCHIVE": "消える記憶を読む",
+    "END_EXIT": "先に出口を確認する",
+    "END_STAY": "期限を決めて残る"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "cathedral" },
+    { "speaker": "narrator", "text": "建物の中央に、記憶保管室、作業室、非常口の三つの表示がある。廊下には六人の声が流れているが、全部を聞く必要はない。" },
+    { "speaker": "guide", "text": "非常口はいつでも開きます。残る場合は、閉館時刻を自分で設定してください。" },
+    { "label": "choose_door" },
+    {
+      "choices": [
+        { "text": "記憶保管室だけを見る", "goto": "END_ARCHIVE" },
+        { "text": "最初に非常口を開ける", "goto": "END_EXIT" },
+        { "text": "作業室へ入り十分だけ残る", "goto": "END_STAY" }
+      ]
+    },
+    { "label": "END_ARCHIVE" },
+    { "bg": "dark_chapel" },
+    { "speaker": "narrator", "text": "消えた会話の一覧には、保存できなかった理由まで付いていた。記憶の量ではなく、欠落の位置を知って部屋を出た。\nEND 欠落の目録" },
+    { "label": "END_EXIT" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "扉の外には朝の道路が続いていた。戻れることを確認したため、建物の声は誘惑ではなく選択肢になった。\nEND 開いている出口" },
+    { "label": "END_STAY" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "十分のタイマーが鳴るまで一つの試作品を直した。終了時刻があることで、残るという決定を自分のものにできた。\nEND 十分間の滞在" }
+  ]
+}

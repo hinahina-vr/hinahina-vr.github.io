@@ -1,0 +1,51 @@
+{
+  "title": "数字の外の二日酔い",
+  "subtitle": "九十八パーセントでは分からないこと",
+  "genre": "回復手順ノベル",
+  "date": "2026-03-21",
+  "chars": {
+    "narrator": { "name": "", "color": "#94a0b5", "emoji": "" },
+    "watch": { "name": "腕時計", "color": "#72b6aa", "emoji": "◉" }
+  },
+  "mapTitles": {
+    "standalone_start": "夕方の布団",
+    "choose_recovery": "次の行動",
+    "check_symptoms": "症状を確認する",
+    "ask_help": "連絡を入れる",
+    "END_RECOVERY": "数字ではなく行動で戻る",
+    "END_SUPPORT": "一人で判断しない"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "夕方まで布団にいた。腕時計は血中酸素九十八パーセントを表示するが、頭痛と吐き気の欄はない。" },
+    { "speaker": "watch", "text": "私は酸素化を測りました。酒の残量も、運転できるかも測っていません。" },
+    { "label": "choose_recovery" },
+    {
+      "choices": [
+        { "text": "水分、食事、ふらつきを順に確認する", "goto": "check_symptoms" },
+        { "text": "一人で不安なので家族へ連絡する", "goto": "ask_help" }
+      ]
+    },
+    { "label": "check_symptoms" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "水を少しずつ飲み、食べられる量を確かめた。時計の正常値ではなく、二十二時過ぎに空腹が戻ったことを回復の記録にした。" },
+    {
+      "choices": [
+        { "text": "今日は画面を閉じて休む", "goto": "END_RECOVERY" }
+      ]
+    },
+    { "label": "ask_help" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "短い連絡を入れ、反応がおかしくなった場合の連絡先も確認した。数字を眺め続ける役目を一人で抱えずに済んだ。" },
+    {
+      "choices": [
+        { "text": "状態を伝えて休む", "goto": "END_SUPPORT" }
+      ]
+    },
+    { "label": "END_RECOVERY" },
+    { "speaker": "narrator", "text": "制作は進めなかった。水分と休息を選んだことが、今日の完了条件になった。\nEND 回復を急がない" },
+    { "label": "END_SUPPORT" },
+    { "speaker": "narrator", "text": "誰かが状況を知っている。それだけで、腕時計の一数字より広い安全網ができた。\nEND 支援へ接続" }
+  ]
+}

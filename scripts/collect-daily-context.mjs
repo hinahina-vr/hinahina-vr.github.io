@@ -35,6 +35,8 @@ function parseArgs(argv) {
     file: null,
     cdpUrl: null,
     skipHealth: false,
+    skipSwarm: false,
+    skipX: false,
     healthFile: null,
     adbSerial: null,
   };
@@ -68,6 +70,14 @@ function parseArgs(argv) {
     }
     if (arg === "--skip-health") {
       options.skipHealth = true;
+      continue;
+    }
+    if (arg === "--skip-swarm") {
+      options.skipSwarm = true;
+      continue;
+    }
+    if (arg === "--skip-x") {
+      options.skipX = true;
       continue;
     }
     if (arg === "--health-file") {
@@ -177,6 +187,15 @@ function buildHealthErrorSource(note, config, existing) {
   source.status = "error";
   source.note = note;
   return source;
+}
+
+function buildSkippedBrowserSource(sourceUrl, note) {
+  return {
+    status: "skipped",
+    note,
+    sourceUrl,
+    items: [],
+  };
 }
 
 async function assertLoggedIn(page, sourceName) {
@@ -449,15 +468,15 @@ async function openCollectionSession(options, config) {
     throw new Error(`No default browser context found at ${cdpUrl}. Run npm run auth:daily-sources first.`);
   }
 
-  const swarmPage = await context.newPage();
-  const xPage = await context.newPage();
+  const swarmPage = options.skipSwarm ? null : await context.newPage();
+  const xPage = options.skipX ? null : await context.newPage();
 
   return {
     swarmPage,
     xPage,
     close: async () => {
-      await swarmPage.close().catch(() => {});
-      await xPage.close().catch(() => {});
+      await swarmPage?.close().catch(() => {});
+      await xPage?.close().catch(() => {});
     },
   };
 }
@@ -617,46 +636,66 @@ async function collectAndWrite(options) {
       swarm = cloneJson(existingSources.swarm);
       x = cloneJson(existingSources.x);
     } else {
+      if (options.skipSwarm) {
+        swarm = existingSources.swarm
+          ? cloneJson(existingSources.swarm)
+          : buildSkippedBrowserSource(config.swarmHistoryUrl, "Swarm 取得をスキップ (--skip-swarm)");
+      }
+      if (options.skipX) {
+        x = existingSources.x
+          ? cloneJson(existingSources.x)
+          : buildSkippedBrowserSource(
+            `https://x.com/${config.xHandle}`,
+            "X 取得をスキップ (--skip-x)",
+          );
+      }
+
       try {
-        session = await openCollectionSession(options, config);
-        swarmPage = session.swarmPage;
-        xPage = session.xPage;
+        if (!options.skipSwarm || !options.skipX) {
+          session = await openCollectionSession(options, config);
+          swarmPage = session.swarmPage;
+          xPage = session.xPage;
+        }
       } catch (error) {
         if (existingSources.swarm || existingSources.x || health.status === "ok") {
           console.warn(`[daily-context] browser session unavailable for ${date}: ${error.message}`);
-          swarm = buildSwarmErrorSource(error.message, config, existingSources.swarm);
-          x = buildXErrorSource(error.message, config, existingSources.x);
+          swarm ??= buildSwarmErrorSource(error.message, config, existingSources.swarm);
+          x ??= buildXErrorSource(error.message, config, existingSources.x);
         } else {
           throw error;
         }
       }
 
       if (session) {
-        try {
-          const swarmCollected = await collectSwarmForDate(swarmPage, date, config.timezone, config);
-          swarm = { status: "ok", note: null, ...swarmCollected };
-          swarmRawPayload = swarmCollected;
-        } catch (error) {
-          await saveDebugArtifacts(swarmPage, `swarm-${date}`, error);
-          if (existingSources.swarm?.status === "ok") {
-            console.warn(`[daily-context] swarm failed for ${date}, reusing existing data: ${error.message}`);
-            swarm = cloneJson(existingSources.swarm);
-          } else {
-            swarm = buildSwarmErrorSource(error.message, config, null);
+        if (!options.skipSwarm) {
+          try {
+            const swarmCollected = await collectSwarmForDate(swarmPage, date, config.timezone, config);
+            swarm = { status: "ok", note: null, ...swarmCollected };
+            swarmRawPayload = swarmCollected;
+          } catch (error) {
+            await saveDebugArtifacts(swarmPage, `swarm-${date}`, error);
+            if (existingSources.swarm?.status === "ok") {
+              console.warn(`[daily-context] swarm failed for ${date}, reusing existing data: ${error.message}`);
+              swarm = cloneJson(existingSources.swarm);
+            } else {
+              swarm = buildSwarmErrorSource(error.message, config, null);
+            }
           }
         }
 
-        try {
-          const xCollected = await collectXForDate(xPage, date, config.timezone, config);
-          x = { status: "ok", note: null, ...xCollected };
-          xRawPayload = xCollected;
-        } catch (error) {
-          await saveDebugArtifacts(xPage, `x-${date}`, error);
-          if (existingSources.x?.status === "ok") {
-            console.warn(`[daily-context] x failed for ${date}, reusing existing data: ${error.message}`);
-            x = cloneJson(existingSources.x);
-          } else {
-            x = buildXErrorSource(error.message, config, null);
+        if (!options.skipX) {
+          try {
+            const xCollected = await collectXForDate(xPage, date, config.timezone, config);
+            x = { status: "ok", note: null, ...xCollected };
+            xRawPayload = xCollected;
+          } catch (error) {
+            await saveDebugArtifacts(xPage, `x-${date}`, error);
+            if (existingSources.x?.status === "ok") {
+              console.warn(`[daily-context] x failed for ${date}, reusing existing data: ${error.message}`);
+              x = cloneJson(existingSources.x);
+            } else {
+              x = buildXErrorSource(error.message, config, null);
+            }
           }
         }
       }

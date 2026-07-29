@@ -1,0 +1,63 @@
+{
+  "title": "雨宿りの分岐",
+  "subtitle": "止まった列車と一本の電話",
+  "genre": "旅程変更ノベル",
+  "date": "2026-04-09",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "board": { "name": "運行案内", "color": "#76a9d4", "emoji": "▦" },
+    "clerk": { "name": "宿の人", "color": "#d0a86e", "emoji": "☎" }
+  },
+  "mapTitles": {
+    "standalone_start": "雨の御坊駅",
+    "choose_route": "今夜を決める",
+    "call_lodge": "美浜町へ電話する",
+    "choose_room": "空室が一つ",
+    "END_STATION": "始発を待つ",
+    "END_HOME": "旅を切り上げる",
+    "END_LODGE": "雨の宿へ向かう",
+    "END_DECLINE": "別の町を探す"
+  },
+  "mapSummaries": {
+    "standalone_start": "大雨で列車が止まり、予定の先へ進めなくなった。",
+    "call_lodge": "美浜町の国民宿舎へ電話をかける。",
+    "END_LODGE": "偶然たどり着いた土地で、作品の記憶と旅が重なる。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "青春18きっぷで紀伊半島を回る途中、御坊駅で列車が止まった。雨脚は強く、今夜の予定だけが時刻表から消えている。" },
+    { "speaker": "board", "text": "運転再開の見込みは立っていません。駅の外は大雨です。" },
+    { "label": "choose_route" },
+    {
+      "choices": [
+        { "text": "駅で朝まで待つ", "goto": "END_STATION" },
+        { "text": "美浜町の宿へ電話する", "goto": "call_lodge" },
+        { "text": "来た方向へ戻る", "goto": "END_HOME" }
+      ]
+    },
+    { "label": "call_lodge" },
+    { "bg": "twilight" },
+    { "speaker": "clerk", "text": "一部屋だけ空いています。今からでも受け入れられます。" },
+    { "speaker": "narrator", "text": "宿のある土地は、ゲームAIRの舞台を訪ねる人にも知られている。だが今は聖地巡礼より、濡れずに眠れる場所が先だ。" },
+    { "label": "choose_room" },
+    {
+      "choices": [
+        { "text": "部屋を取り、宿までの道を聞く", "goto": "END_LODGE" },
+        { "text": "電話を切り、別の町を探す", "goto": "END_DECLINE" }
+      ]
+    },
+    { "label": "END_STATION" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "濡れた靴のまま始発を待った。時刻表は戻ったが、この夜は作品の記憶と交わらなかった。\nEND 待合室の朝" },
+    { "label": "END_HOME" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "旅を短くして安全を取った。紀伊半島の続きは、次の切符へ持ち越した。\nEND 引き返す判断" },
+    { "label": "END_LODGE" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "一本の電話で今夜の部屋を確保した。雨宿りとして選んだ場所が、あとからAIRの記憶と結びついた。\nEND 偶然が物語になる" },
+    { "label": "END_DECLINE" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "空室は手放した。検索結果は減り、雨はまだ止まない。偶然を選ばないことも旅程の一部になった。\nEND 空室を見送る" }
+  ]
+}

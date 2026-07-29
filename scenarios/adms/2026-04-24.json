@@ -1,31 +1,117 @@
 {
   "date": "2026-04-24",
-  "title": "麦の丘の受け皿 A.D.M.S.",
+  "title": "読む時間の配分 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
-    { "id": "standalone_start", "title": "生成過多の入口", "realm": "kenkai", "kind": "root", "layer": 0, "lane": 6, "icon": "🌾", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "standalone_start", "summary": "作る力が増えすぎる世界の入口" },
-    { "id": "choose_wheat", "title": "麦の丘を選ぶ", "realm": "kenkai", "kind": "route", "layer": 1, "lane": 6, "icon": "🔀", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "choose_wheat", "summary": "講義、麦と風、受け皿を選ぶ" },
-    { "id": "data_class", "title": "講義を部品にする", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 1, "icon": "📊", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "data_class", "summary": "学んだ方法を神託の内部へ戻す" },
-    { "id": "wheat_wind", "title": "麦と風", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 6, "icon": "🌾", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "wheat_wind", "summary": "硬い処理に発酵した湿度を足す" },
-    { "id": "consumer_cup", "title": "消化する受け皿", "realm": "kenkai", "kind": "branch", "layer": 2, "lane": 11, "icon": "🥣", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "consumer_cup", "summary": "増えすぎた生成物を選び飲める量へ落とす" },
-    { "id": "mitra_gate", "title": "醸造の合流点", "realm": "kenkai", "kind": "rejoin", "layer": 4, "lane": 6, "icon": "🔮", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "mitra_gate", "summary": "実りを刈り、選び、醸す仕組みへ向かう" },
-    { "id": "END_DATA", "title": "部品化した知識", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 1, "icon": "📊", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "END_DATA", "summary": "講義を道具へ戻した知識として持ち帰る" },
-    { "id": "END_WHEAT", "title": "麦の丘の風", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 6, "icon": "🌾", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "END_WHEAT", "summary": "麦と風の発酵した響きを持ち帰る" },
-    { "id": "END_CUP", "title": "消化する受け皿", "realm": "kenkai", "kind": "ending", "layer": 6, "lane": 11, "icon": "🥣", "scenario": "2026-04-24_麦の丘の受け皿", "entry": "END_CUP", "summary": "生成物を受け取る器を持ち帰る" }
+    {
+      "id": "standalone_start",
+      "title": "机いっぱいの出力",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-24_読む時間の配分",
+      "entry": "standalone_start",
+      "summary": "文章、画像、プログラムは速く作れるが、読む時間は増えない。"
+    },
+    {
+      "id": "sort_queue",
+      "title": "読む順番を作る",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-24_読む時間の配分",
+      "entry": "sort_queue",
+      "summary": "目的と締切で未読を分け、読む対象を減らす。"
+    },
+    {
+      "id": "one_work",
+      "title": "一本を最後まで読む",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 6,
+      "icon": "◇",
+      "scenario": "2026-04-24_読む時間の配分",
+      "entry": "one_work",
+      "summary": "一つを最後まで読み、他人へ渡せる言葉にする。"
+    },
+    {
+      "id": "END_FINISH",
+      "title": "感想を一つ返す",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-24_読む時間の配分",
+      "entry": "END_FINISH",
+      "summary": "感想を一つ返す"
+    },
+    {
+      "id": "END_EXHAUST",
+      "title": "全部を開いて疲れる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-24_読む時間の配分",
+      "entry": "END_EXHAUST",
+      "summary": "全部を開いて疲れる"
+    },
+    {
+      "id": "END_FILTER",
+      "title": "選ぶ基準を残す",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-24_読む時間の配分",
+      "entry": "END_FILTER",
+      "summary": "選ぶ基準を残す"
+    }
   ],
   "edges": [
-    { "from": "standalone_start", "to": "choose_wheat", "choiceText": "麦の丘へ進む", "style": "kenkai" },
-    { "from": "choose_wheat", "to": "data_class", "choiceText": "講義を部品にする", "style": "kenkai" },
-    { "from": "data_class", "to": "END_DATA", "choiceText": "部品化した知識を持ち帰る", "style": "kenkai" },
-    { "from": "data_class", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
-    { "from": "choose_wheat", "to": "wheat_wind", "choiceText": "麦と風を見る", "style": "kenkai" },
-    { "from": "wheat_wind", "to": "END_WHEAT", "choiceText": "発酵した風を持ち帰る", "style": "kenkai" },
-    { "from": "wheat_wind", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
-    { "from": "choose_wheat", "to": "consumer_cup", "choiceText": "受け皿を作る", "style": "kenkai" },
-    { "from": "consumer_cup", "to": "END_CUP", "choiceText": "受け皿を持ち帰る", "style": "kenkai" },
-    { "from": "consumer_cup", "to": "mitra_gate", "choiceText": "声の合流点へ向かう", "style": "kenkai" },
-    { "from": "mitra_gate", "to": "END_DATA", "choiceText": "講義へ戻る", "style": "kenkai" },
-    { "from": "mitra_gate", "to": "END_WHEAT", "choiceText": "麦へ戻る", "style": "kenkai" },
-    { "from": "mitra_gate", "to": "END_CUP", "choiceText": "受け皿へ戻る", "style": "kenkai" }
+    {
+      "from": "standalone_start",
+      "to": "END_EXHAUST",
+      "choiceText": "上から全部を少しずつ開く",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "sort_queue",
+      "choiceText": "目的と締切で三つに分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "one_work",
+      "choiceText": "最初の一本だけを最後まで読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "sort_queue",
+      "to": "END_FILTER",
+      "choiceText": "分類基準を次回も使えるよう残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "sort_queue",
+      "to": "one_work",
+      "choiceText": "今日必要な一本を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "one_work",
+      "to": "END_FINISH",
+      "choiceText": "進む",
+      "style": "kenkai"
+    }
   ]
 }

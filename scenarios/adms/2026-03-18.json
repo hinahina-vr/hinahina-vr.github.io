@@ -1,20 +1,93 @@
 {
   "date": "2026-03-18",
   "title": "声の座標 A.D.M.S.",
-  "rootNodeId": "voice_coordinates",
+  "rootNodeId": "standalone_start",
   "nodes": [
     {
-      "id": "voice_coordinates",
-      "title": "声の座標",
+      "id": "standalone_start",
+      "title": "六つの発言窓",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
-      "lane": 0,
-      "icon": "🌕",
+      "lane": 2,
+      "icon": "◇",
       "scenario": "2026-03-18_声の座標",
-      "entry": null,
-      "summary": "単独観測された最初の世界線"
+      "entry": "standalone_start",
+      "summary": "六つの発言窓"
+    },
+    {
+      "id": "choose_signal",
+      "title": "最初の操作",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-18_声の座標",
+      "entry": "choose_signal",
+      "summary": "最初の操作"
+    },
+    {
+      "id": "END_COMPARE",
+      "title": "不一致を残す",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-03-18_声の座標",
+      "entry": "END_COMPARE",
+      "summary": "不一致を残す"
+    },
+    {
+      "id": "END_PROVENANCE",
+      "title": "根拠へ戻る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-03-18_声の座標",
+      "entry": "END_PROVENANCE",
+      "summary": "根拠へ戻る"
+    },
+    {
+      "id": "END_SILENCE",
+      "title": "誰も呼ばない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-03-18_声の座標",
+      "entry": "END_SILENCE",
+      "summary": "誰も呼ばない"
     }
   ],
-  "edges": []
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_signal",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_signal",
+      "to": "END_COMPARE",
+      "choiceText": "技術役と生活役へ別の問いを送る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_signal",
+      "to": "END_PROVENANCE",
+      "choiceText": "返答より先に参照資料を開く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_signal",
+      "to": "END_SILENCE",
+      "choiceText": "全員を閉じて自分で一段落書く",
+      "style": "kenkai"
+    }
+  ]
 }

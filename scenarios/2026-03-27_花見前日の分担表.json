@@ -1,0 +1,40 @@
+{
+  "title": "花見前日の分担表",
+  "subtitle": "楽しさの前に、誰が何を持つか",
+  "genre": "準備ノベル",
+  "date": "2026-03-27",
+  "chars": {
+    "narrator": { "name": "", "color": "#a6a0b8", "emoji": "" },
+    "list": { "name": "分担表", "color": "#8ab59b", "emoji": "✓" }
+  },
+  "mapTitles": {
+    "standalone_start": "二十一時の机",
+    "choose_priority": "今夜の最後の仕事",
+    "END_ASSIGN": "担当者を確定する",
+    "END_SHOP": "朝の購入先を決める",
+    "END_SLEEP": "睡眠を持ち物にする"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "ブルーシート、紙皿、紙コップ、割り箸。表には品目があるが、担当者の空欄が二つ残っている。眠気はもう限界に近い。" },
+    { "speaker": "list", "text": "全部を今夜買う必要はありません。朝に迷わない状態までで終えてください。" },
+    { "label": "choose_priority" },
+    {
+      "choices": [
+        { "text": "空欄の担当者へ確認を送る", "goto": "END_ASSIGN" },
+        { "text": "公園近くの購入先だけ調べる", "goto": "END_SHOP" },
+        { "text": "不足を一件残して今すぐ眠る", "goto": "END_SLEEP" }
+      ]
+    },
+    { "label": "END_ASSIGN" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "返事が二件届き、表の空欄が埋まった。自分の持ち物だけ玄関へ置き、画面を閉じた。\nEND 名前のある分担" },
+    { "label": "END_SHOP" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "開店時刻と売り場だけ保存した。朝に必要な物だけ買えるため、今夜の外出はなくなった。\nEND 朝の一店舗" },
+    { "label": "END_SLEEP" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "一件の不足は明日の自分へ渡した。寝不足で公園へ行かないことを、最優先の準備にした。\nEND 持参した睡眠" }
+  ]
+}

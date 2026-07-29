@@ -1,0 +1,55 @@
+{
+  "title": "測定前の選択",
+  "subtitle": "自作アルコールチェッカーの夜",
+  "genre": "卓上実験ノベル",
+  "date": "2026-04-20",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "device": { "name": "試作機", "color": "#65d28a", "emoji": "▥" }
+  },
+  "mapTitles": {
+    "standalone_start": "配線を終えた机",
+    "baseline": "飲む前を測る",
+    "compare": "変化を確かめる",
+    "END_NUMBER": "前後の値を残す",
+    "END_GUESS": "酔いだけを頼る",
+    "END_WAIT": "今夜は飲まない"
+  },
+  "mapSummaries": {
+    "standalone_start": "ESP32とセンサーをつないだ試作機が動き始める。",
+    "baseline": "酒を飲む前の値を記録して、比較の基準を作る。",
+    "END_NUMBER": "感覚と数値を並べ、試作機の限界ごと記録する。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "液晶、センサー、ESP32をつないだ。息を吹きかけると数字が変わる。机の横には、まだ開けていない酒がある。" },
+    { "speaker": "device", "text": "表示はできます。ただし、この数字は市販の検査機と同じ精度を保証しません。" },
+    {
+      "choices": [
+        { "text": "飲む前の値を記録する", "goto": "baseline" },
+        { "text": "測らずに飲み始める", "goto": "END_GUESS" },
+        { "text": "配線を見直して実験を翌日に回す", "goto": "END_WAIT" }
+      ]
+    },
+    { "label": "baseline" },
+    { "speaker": "narrator", "text": "シラフの値を紙に書いた。次は同じ距離、同じ時間で測らなければ、前後を比べても意味が薄い。" },
+    { "speaker": "device", "text": "一杯の後、十分待ってからもう一度息を吹きかけてください。" },
+    { "label": "compare" },
+    {
+      "choices": [
+        { "text": "条件をそろえて再測定する", "goto": "END_NUMBER" },
+        { "text": "数字より酔った感覚を優先する", "goto": "END_GUESS" }
+      ]
+    },
+    { "label": "END_NUMBER" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "飲む前と後で表示は変わった。正確な濃度ではなく、センサーが反応した事実と測定条件を残した。\nEND 比較できる記録" },
+    { "label": "END_GUESS" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "酔った気分だけは分かる。しかし基準を取らなかったので、試作機が何を拾ったのかは説明できない。\nEND 感覚だけの夜" },
+    { "label": "END_WAIT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "はんだ付けと電源を確認し、酒は開けなかった。実験より先に、壊れない装置へ近づけた。\nEND 配線を優先する" }
+  ]
+}

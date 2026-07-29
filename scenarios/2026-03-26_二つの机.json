@@ -1,0 +1,40 @@
+{
+  "title": "二つの机",
+  "subtitle": "経営者と作家を同じ役にしない",
+  "genre": "読書追体験ノベル",
+  "date": "2026-03-26",
+  "chars": {
+    "narrator": { "name": "", "color": "#a89e94", "emoji": "" },
+    "librarian": { "name": "司書", "color": "#b69362", "emoji": "▤" }
+  },
+  "mapTitles": {
+    "standalone_start": "閉館後の図書室",
+    "choose_desk": "どの机から読むか",
+    "END_SAJI": "支援の条件を見る",
+    "END_KAIKO": "書く自由を見る",
+    "END_DISTANCE": "二人の間隔を測る"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "dark_chapel" },
+    { "speaker": "narrator", "text": "四百八十ページの本が、二つの机に分かれた。片方には予算書と文化事業の予定、片方には原稿と取材ノートがある。" },
+    { "speaker": "librarian", "text": "最強という題を、同じ能力の二人という意味で読まないでください。" },
+    { "label": "choose_desk" },
+    {
+      "choices": [
+        { "text": "佐治敬三の机で支援の条件を読む", "goto": "END_SAJI" },
+        { "text": "開高健の机で会社との距離を読む", "goto": "END_KAIKO" },
+        { "text": "二つの机の間に椅子を置く", "goto": "END_DISTANCE" }
+      ]
+    },
+    { "label": "END_SAJI" },
+    { "bg": "cathedral" },
+    { "speaker": "narrator", "text": "給与、媒体、文化事業へ資金を出す条件を拾った。友情だけでは見えなかった組織の支援が残った。\nEND 雇う側の責任" },
+    { "label": "END_KAIKO" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "会社を離れても書く仕事を続けた経路をたどった。支援を受けることと、作品の判断を渡すことを分けて読んだ。\nEND 書く側の距離" },
+    { "label": "END_DISTANCE" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "二人が同じ仕事をしなかった場面へ印を付けた。強さは能力の合計ではなく、互いの領域を残した距離に見えた。\nEND 二つの専門" }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "辛さ八の記録室",
+  "subtitle": "食事、人格、生活ログを混ぜない",
+  "genre": "三室ノベル",
+  "date": "2026-03-23",
+  "chars": {
+    "narrator": { "name": "", "color": "#b0a0a0", "emoji": "" },
+    "clerk": { "name": "記録係", "color": "#d07858", "emoji": "▤" }
+  },
+  "mapTitles": {
+    "standalone_start": "中本の地下記録室",
+    "choose_record": "一つだけ記録する",
+    "END_TASTE": "五目味噌タンメン",
+    "END_CHARACTER": "公式設定の訂正窓口",
+    "END_PRIVACY": "生活ログの削除権"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "crimson" },
+    { "speaker": "narrator", "text": "五目味噌タンメンを食べ終えると、地下に三つの記録室が現れた。食事、キャラクター設定、生活ログ。それぞれ別の鍵で閉じられている。" },
+    { "speaker": "clerk", "text": "同じ日に考えたことでも、同じデータにはしません。今日は一室だけ開けてください。" },
+    { "label": "choose_record" },
+    {
+      "choices": [
+        { "text": "料理名と辛さだけ残す", "goto": "END_TASTE" },
+        { "text": "公式AIの訂正手順を書く", "goto": "END_CHARACTER" },
+        { "text": "生活ログの削除画面を作る", "goto": "END_PRIVACY" }
+      ]
+    },
+    { "label": "END_TASTE" },
+    { "bg": "crimson" },
+    { "speaker": "narrator", "text": "五目味噌タンメン、辛さ八、町田。火事の比喩を外すと、次に同じ一杯を選べる記録が残った。\nEND 一食の仕様" },
+    { "label": "END_CHARACTER" },
+    { "bg": "cathedral" },
+    { "speaker": "narrator", "text": "設定資料だけでなく、誤答の報告先と更新履歴を書いた。公式らしさは口調より、直せる仕組みに宿った。\nEND 監修できる人格" },
+    { "label": "END_PRIVACY" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "位置と購入を日付ごとに書き出し、全削除ボタンを試した。集める前に捨てられることを確認した。\nEND 持ち出せる生活" }
+  ]
+}

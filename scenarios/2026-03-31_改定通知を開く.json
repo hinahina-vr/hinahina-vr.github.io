@@ -1,0 +1,44 @@
+{
+  "title": "改定通知を開く",
+  "subtitle": "勝利宣言の前に一次資料を読む",
+  "genre": "制度確認ノベル",
+  "date": "2026-03-31",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b6", "emoji": "" },
+    "notice": { "name": "公式資料", "color": "#7596b8", "emoji": "PDF" }
+  },
+  "mapTitles": {
+    "standalone_start": "試験変更の見出し",
+    "choose_notice": "最初に開くもの",
+    "read_details": "対象と移行措置",
+    "END_VERIFIED": "確認してから評価する",
+    "END_JOKE": "冗談を冗談で止める"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "試験制度が二〇二七年度から変わるという見出しと、敗北を知りたいと書くための空欄が並んでいる。" },
+    { "speaker": "notice", "text": "願った方向に見えても、対象区分と移行措置は本文にあります。" },
+    { "label": "choose_notice" },
+    {
+      "choices": [
+        { "text": "公式資料で対象と開始年度を読む", "goto": "read_details" },
+        { "text": "勝利の冗談だけ書いて閉じる", "goto": "END_JOKE" }
+      ]
+    },
+    { "label": "read_details" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "長い論文方式の変更範囲と開始年度を確認した。旧制度の受験者へ影響する箇所には、まだ疑問符が残った。" },
+    {
+      "choices": [
+        { "text": "賛成点と未確認点を分けて保存する", "goto": "END_VERIFIED" }
+      ]
+    },
+    { "label": "END_VERIFIED" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "予想が当たったという気分と、制度が良くなったかの評価を別の欄に置いた。\nEND 確認済みの一歩" },
+    { "label": "END_JOKE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "勝利宣言は投稿せず、下書きに冗談と書いた。資料を読む仕事は明日の自分へ残った。\nEND 未確認の勝利" }
+  ]
+}

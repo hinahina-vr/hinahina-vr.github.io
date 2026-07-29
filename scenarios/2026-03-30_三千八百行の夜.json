@@ -1,0 +1,40 @@
+{
+  "title": "三千八百行の夜",
+  "subtitle": "長さを成果にしない編集",
+  "genre": "脚本編集ノベル",
+  "date": "2026-03-30",
+  "chars": {
+    "narrator": { "name": "", "color": "#a2a0b4", "emoji": "" },
+    "editor": { "name": "編集画面", "color": "#7da6b8", "emoji": "⌫" }
+  },
+  "mapTitles": {
+    "standalone_start": "夜の原稿",
+    "choose_edit": "一章だけ直す",
+    "END_CUT": "重複を削る",
+    "END_CONTEXT": "初見向けの説明を足す",
+    "END_STOP": "曲を聴いて閉じる"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "dark_chapel" },
+    { "speaker": "narrator", "text": "佐治の執務室、開高の書斎、山崎蒸溜所を行き来する原稿が三千八百行を越えた。長さの表示だけが緑色に光っている。" },
+    { "speaker": "editor", "text": "今夜は一章だけ。増やすか減らすかではなく、読者が何を知る場面かを選んでください。" },
+    { "label": "choose_edit" },
+    {
+      "choices": [
+        { "text": "同じ説明をする二場面を一つにする", "goto": "END_CUT" },
+        { "text": "本を知らない人向けの事実を一つ足す", "goto": "END_CONTEXT" },
+        { "text": "夜がくるを流して今日は閉じる", "goto": "END_STOP" }
+      ]
+    },
+    { "label": "END_CUT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "行数は減ったが、二人の立場の違いは前より読みやすくなった。\nEND 小さくなった脚本" },
+    { "label": "END_CONTEXT" },
+    { "bg": "cathedral" },
+    { "speaker": "narrator", "text": "洋酒天国が会社のPR誌だったことを短く足した。知らない読者が場面へ入るための一段ができた。\nEND 一行の足場" },
+    { "label": "END_STOP" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "サントリーオールドのCM曲を一度聴き、保存して閉じた。未完のまま、明日続けられる状態を選んだ。\nEND 夜の終了時刻" }
+  ]
+}

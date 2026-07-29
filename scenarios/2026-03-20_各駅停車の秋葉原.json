@@ -1,0 +1,40 @@
+{
+  "title": "各駅停車の秋葉原",
+  "subtitle": "速さを変えると、残る店が変わる",
+  "genre": "沿線ノベル",
+  "date": "2026-03-20",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b8", "emoji": "" },
+    "display": { "name": "車内表示", "color": "#e1c84f", "emoji": "▰" }
+  },
+  "mapTitles": {
+    "standalone_start": "新宿駅の黄色い電車",
+    "choose_train": "移動方法を選ぶ",
+    "END_LOCAL": "ミルクスタンドから歩く",
+    "END_RAPID": "早く着いて一軒選ぶ",
+    "END_RETURN": "乗り過ごして戻る"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "新宿駅。秋葉原まで乗り換えずに行く黄色い電車と、御茶ノ水で乗り換える速い経路が表示されている。到着後に使える時間は同じではない。" },
+    { "speaker": "display", "text": "各駅停車は寄り道を残します。快速は店を一つ多く開いている時間へ届けます。" },
+    { "label": "choose_train" },
+    {
+      "choices": [
+        { "text": "黄色い電車に乗り続ける", "goto": "END_LOCAL" },
+        { "text": "御茶ノ水で快速から乗り換える", "goto": "END_RAPID" },
+        { "text": "座って目を閉じる", "goto": "END_RETURN" }
+      ]
+    },
+    { "label": "END_LOCAL" },
+    { "bg": "akihabara" },
+    { "speaker": "narrator", "text": "電気街口のミルクスタンドから、金子屋、Iv、大阪王将へ進んだ。移動を急がなかったため、最初の一本と最後の餃子が同じ経路に残った。\nEND 各駅停車の四地点" },
+    { "label": "END_RAPID" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "早く着いたぶん、開店中の一軒へ長く滞在した。店数は減ったが、店員との短い会話と一杯の銘柄を覚えて帰った。\nEND 一軒の滞在時間" },
+    { "label": "END_RETURN" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "目を開けると秋葉原を過ぎていた。次の駅で折り返し、閉店したミルクスタンドの前だけを通った。\nEND 乗り過ごした目印" }
+  ]
+}

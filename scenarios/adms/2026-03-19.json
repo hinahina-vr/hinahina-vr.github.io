@@ -1,39 +1,93 @@
 {
   "date": "2026-03-19",
-  "title": "影の踊り子 A.D.M.S.",
-  "rootNodeId": "shadow_dancer",
+  "title": "出口のある建物 A.D.M.S.",
+  "rootNodeId": "standalone_start",
   "nodes": [
     {
-      "id": "shadow_dancer",
-      "title": "影の踊り子",
+      "id": "standalone_start",
+      "title": "三つの扉",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
-      "lane": 1,
-      "icon": "🌕",
-      "scenario": "2026-03-19_影の踊り子",
-      "entry": null,
-      "summary": "VRChat の暖炉から始まる顕界の本筋"
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-19_出口のある建物",
+      "entry": "standalone_start",
+      "summary": "三つの扉"
     },
     {
-      "id": "no_exit_building",
-      "title": "出口のない建物",
-      "realm": "genkai",
-      "kind": "side",
+      "id": "choose_door",
+      "title": "どこから確かめるか",
+      "realm": "kenkai",
+      "kind": "route",
       "layer": 1,
-      "lane": 0,
-      "icon": "🌘",
-      "scenario": "2026-03-19_出口のない建物",
-      "entry": null,
-      "summary": "選択肢を入れなかった場合の閉じた世界線"
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-19_出口のある建物",
+      "entry": "choose_door",
+      "summary": "どこから確かめるか"
+    },
+    {
+      "id": "END_ARCHIVE",
+      "title": "消える記憶を読む",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-03-19_出口のある建物",
+      "entry": "END_ARCHIVE",
+      "summary": "消える記憶を読む"
+    },
+    {
+      "id": "END_EXIT",
+      "title": "先に出口を確認する",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-03-19_出口のある建物",
+      "entry": "END_EXIT",
+      "summary": "先に出口を確認する"
+    },
+    {
+      "id": "END_STAY",
+      "title": "期限を決めて残る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-03-19_出口のある建物",
+      "entry": "END_STAY",
+      "summary": "期限を決めて残る"
     }
   ],
   "edges": [
     {
-      "from": "shadow_dancer",
-      "to": "no_exit_building",
-      "choiceText": "選択肢を作らない",
-      "style": "genkai"
+      "from": "standalone_start",
+      "to": "choose_door",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_door",
+      "to": "END_ARCHIVE",
+      "choiceText": "記憶保管室だけを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_door",
+      "to": "END_EXIT",
+      "choiceText": "最初に非常口を開ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_door",
+      "to": "END_STAY",
+      "choiceText": "作業室へ入り十分だけ残る",
+      "style": "kenkai"
     }
   ]
 }

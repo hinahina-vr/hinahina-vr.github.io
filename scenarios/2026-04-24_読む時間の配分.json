@@ -1,0 +1,56 @@
+{
+  "title": "読む時間の配分",
+  "subtitle": "増え続ける制作物と一日の長さ",
+  "genre": "編集室シミュレーション",
+  "date": "2026-04-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "queue": { "name": "未読一覧", "color": "#d69355", "emoji": "▤" }
+  },
+  "mapTitles": {
+    "standalone_start": "机いっぱいの出力",
+    "sort_queue": "読む順番を作る",
+    "one_work": "一本を最後まで読む",
+    "END_EXHAUST": "全部を開いて疲れる",
+    "END_FILTER": "選ぶ基準を残す",
+    "END_FINISH": "感想を一つ返す"
+  },
+  "mapSummaries": {
+    "standalone_start": "文章、画像、プログラムは速く作れるが、読む時間は増えない。",
+    "sort_queue": "目的と締切で未読を分け、読む対象を減らす。",
+    "one_work": "一つを最後まで読み、他人へ渡せる言葉にする。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "授業資料、生成した文章、画像、更新したプログラムが同じ机へ積まれている。作る速さだけが上がり、夜の残り時間は増えていない。" },
+    { "speaker": "queue", "text": "未読は十二件です。すべてを今夜開くと、一件あたりに使える時間は五分になります。" },
+    {
+      "choices": [
+        { "text": "上から全部を少しずつ開く", "goto": "END_EXHAUST" },
+        { "text": "目的と締切で三つに分ける", "goto": "sort_queue" },
+        { "text": "最初の一本だけを最後まで読む", "goto": "one_work" }
+      ]
+    },
+    { "label": "sort_queue" },
+    { "speaker": "narrator", "text": "今日必要なもの、あとで味わうもの、読まなくてよいものに分けた。未読の数ではなく、読む理由が見える。" },
+    {
+      "choices": [
+        { "text": "分類基準を次回も使えるよう残す", "goto": "END_FILTER" },
+        { "text": "今日必要な一本を読む", "goto": "one_work" }
+      ]
+    },
+    { "label": "one_work" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "途中で別の窓を開かず、一本を最後まで読んだ。面白かった理由と分からなかった箇所を短く書く。" },
+    { "label": "END_FINISH" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "読了した数は一つだけだが、感想を相手へ返せる。供給量ではなく、受け取った事実が残った。\nEND 一つを読み切る" },
+    { "label": "END_EXHAUST" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "十二の窓を開き、どれも途中で止まった。大量に触れたのに、説明できる作品は一つもない。\nEND 未読より増えた未完" },
+    { "label": "END_FILTER" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "選ぶ基準を保存した。次に出力が増えても、読む時間から逆算して入口を狭められる。\nEND 消費の補助輪" }
+  ]
+}

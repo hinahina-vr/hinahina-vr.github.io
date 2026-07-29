@@ -1,0 +1,44 @@
+{
+  "title": "青いシートのプロフィール",
+  "subtitle": "アイコンから埋めた空白",
+  "genre": "対話分岐ノベル",
+  "date": "2026-03-28",
+  "chars": {
+    "narrator": { "name": "", "color": "#a4a8be", "emoji": "" },
+    "member": { "name": "同好会の人", "color": "#78a7b8", "emoji": "●" }
+  },
+  "mapTitles": {
+    "standalone_start": "花見の二次会",
+    "choose_reply": "誤認を知った返事",
+    "ask_reason": "根拠を聞く",
+    "END_CORRECT": "必要な情報だけ直す",
+    "END_CONTEXT": "空白の埋め方を知る"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "twilight" },
+    { "speaker": "member", "text": "女の子のアイコンだったから、女性だと思っていました。" },
+    { "speaker": "narrator", "text": "怒る理由はある。しかし、訂正に必要なのは長い自己紹介ではない。" },
+    { "label": "choose_reply" },
+    {
+      "choices": [
+        { "text": "必要な呼び方だけ短く伝える", "goto": "END_CORRECT" },
+        { "text": "どの情報からそう思ったか聞く", "goto": "ask_reason" }
+      ]
+    },
+    { "label": "ask_reason" },
+    { "bg": "station" },
+    { "speaker": "member", "text": "画像と名前以外は知りませんでした。分からない部分を、自分の慣れた組み合わせで埋めていました。" },
+    {
+      "choices": [
+        { "text": "次から決めつけずに聞いてもらう", "goto": "END_CONTEXT" }
+      ]
+    },
+    { "label": "END_CORRECT" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "誤認した相手を処罰する会話ではなく、今後の呼び方を更新する会話になった。\nEND プロフィールの訂正" },
+    { "label": "END_CONTEXT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "アイコンが示す好みと、本人の属性を別の欄にした。知らない部分を知らないままにする規則が残った。\nEND 空白を空白にする" }
+  ]
+}
