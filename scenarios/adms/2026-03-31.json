@@ -74,19 +74,19 @@
     {
       "from": "choose_notice",
       "to": "read_details",
-      "choiceText": "公式資料で対象と開始年度を読む",
+      "choiceText": "投稿せず公式資料を読む",
       "style": "kenkai"
     },
     {
       "from": "choose_notice",
       "to": "END_JOKE",
-      "choiceText": "勝利の冗談だけ書いて閉じる",
+      "choiceText": "見出しだけで投稿する",
       "style": "kenkai"
     },
     {
       "from": "read_details",
       "to": "END_VERIFIED",
-      "choiceText": "賛成点と未確認点を分けて保存する",
+      "choiceText": "分かった範囲だけ投稿する",
       "style": "kenkai"
     }
   ]

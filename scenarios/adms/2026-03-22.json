@@ -74,19 +74,19 @@
     {
       "from": "choose_map",
       "to": "END_PLAY",
-      "choiceText": "未到達の経路を一つ遊ぶ",
+      "choiceText": "選ばなかった人物へ会いに行く",
       "style": "kenkai"
     },
     {
       "from": "choose_map",
       "to": "END_EDIT",
-      "choiceText": "同じ情報へ戻る枝を削る",
+      "choiceText": "よく似た二本の分岐を比べる",
       "style": "kenkai"
     },
     {
       "from": "choose_map",
       "to": "END_LOG",
-      "choiceText": "今日選んだ線だけ書き出す",
+      "choiceText": "昨日の経路へ感想を書き足す",
       "style": "kenkai"
     }
   ]

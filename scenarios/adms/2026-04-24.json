@@ -1,6 +1,6 @@
 {
   "date": "2026-04-24",
-  "title": "読む時間の配分 A.D.M.S.",
+  "title": "十二の未読窓 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
@@ -80,31 +80,31 @@
     {
       "from": "standalone_start",
       "to": "END_EXHAUST",
-      "choiceText": "上から全部を少しずつ開く",
+      "choiceText": "十二件を少しずつ確認する",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
       "to": "sort_queue",
-      "choiceText": "目的と締切で三つに分ける",
+      "choiceText": "明日使う二件だけ残す",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
       "to": "one_work",
-      "choiceText": "最初の一本だけを最後まで読む",
+      "choiceText": "いちばん古い下書きを最後まで読む",
       "style": "kenkai"
     },
     {
       "from": "sort_queue",
       "to": "END_FILTER",
-      "choiceText": "分類基準を次回も使えるよう残す",
+      "choiceText": "読まない三件を削除する",
       "style": "kenkai"
     },
     {
       "from": "sort_queue",
       "to": "one_work",
-      "choiceText": "今日必要な一本を読む",
+      "choiceText": "明日の資料を一件読む",
       "style": "kenkai"
     },
     {

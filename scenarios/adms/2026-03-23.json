@@ -17,7 +17,7 @@
     },
     {
       "id": "choose_record",
-      "title": "一つだけ記録する",
+      "title": "赤い鍵を使う扉",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,7 +25,7 @@
       "icon": "◇",
       "scenario": "2026-03-23_辛さ八の記録室",
       "entry": "choose_record",
-      "summary": "一つだけ記録する"
+      "summary": "赤い鍵を使う扉"
     },
     {
       "id": "END_TASTE",
@@ -74,19 +74,19 @@
     {
       "from": "choose_record",
       "to": "END_TASTE",
-      "choiceText": "料理名と辛さだけ残す",
+      "choiceText": "五目味噌タンメンを記録する",
       "style": "kenkai"
     },
     {
       "from": "choose_record",
       "to": "END_CHARACTER",
-      "choiceText": "公式AIの訂正手順を書く",
+      "choiceText": "間違えた名前を直す",
       "style": "kenkai"
     },
     {
       "from": "choose_record",
       "to": "END_PRIVACY",
-      "choiceText": "生活ログの削除画面を作る",
+      "choiceText": "位置情報を手元へ移す",
       "style": "kenkai"
     }
   ]

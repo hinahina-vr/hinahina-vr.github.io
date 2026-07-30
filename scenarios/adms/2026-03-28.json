@@ -74,19 +74,19 @@
     {
       "from": "choose_reply",
       "to": "END_CORRECT",
-      "choiceText": "必要な呼び方だけ短く伝える",
+      "choiceText": "思い込んでいたと謝る",
       "style": "kenkai"
     },
     {
       "from": "choose_reply",
       "to": "ask_reason",
-      "choiceText": "どの情報からそう思ったか聞く",
+      "choiceText": "アイコンの作品を聞く",
       "style": "kenkai"
     },
     {
       "from": "ask_reason",
       "to": "END_CONTEXT",
-      "choiceText": "次から決めつけずに聞いてもらう",
+      "choiceText": "好きになったきっかけを聞く",
       "style": "kenkai"
     }
   ]

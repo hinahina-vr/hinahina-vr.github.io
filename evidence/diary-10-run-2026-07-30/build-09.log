@@ -1,0 +1,188 @@
+
+> build
+> npm run check:draft-daily-context && npm run check:diary-self-date && npm run check:diary-kanji-numerals && npm run check:diary-readability && npm run check:diary-context-phrasing && npm run check:diary-title-phrasing && npm run check:diary-source-leaks && npm run check:diary-source-activity && npm run check:diary-voice-repetition && npm run check:diary-voice-variety && npm run check:diary-voice-similarity && npm run check:diary-editorial-independence && npm run check:dream-graphs && npm run build:diary && npm run build:study && node scripts/build-galge.mjs && npm run build:galge-runtime && node scripts/build-dialogue.mjs && node scripts/build-diary-hina.mjs && node scripts/build-diary-multi.mjs && node scripts/build-diary-hinahina.mjs && node scripts/build-diary-oji.mjs && node scripts/build-diary-moegami.mjs && node scripts/build-diary-dejiko.mjs && node scripts/build-diary-mitra.mjs && node scripts/build-diary-ayu.mjs && node scripts/build-diary-rem.mjs && node scripts/build-diary-ruriko.mjs && node scripts/build-diary-tsumugi.mjs && node scripts/build-diary-ecoko.mjs && node scripts/build-diary-mii.mjs && node scripts/build-diary-kud.mjs && node scripts/build-diary-feiris.mjs && node scripts/build-diary-kotomi.mjs && node scripts/build-diary-minagi.mjs && node scripts/build-diary-kiku8.mjs && node scripts/build-diary-mint.mjs && node scripts/build-diary-tama.mjs && node scripts/build-diary-kukuri.mjs && node scripts/build-diary-sharo.mjs && node scripts/build-diary-nemurin.mjs && node scripts/build-diary-hinako.mjs && node scripts/build-diary-kyoko.mjs && node scripts/build-diary-mayuki.mjs && node scripts/build-diary-mitsuba.mjs && node scripts/build-diary-ana.mjs && node scripts/build-diary-astarotte.mjs && node scripts/build-diary-hazuki.mjs && node scripts/build-diary-rin.mjs && node scripts/build-diary-rizel.mjs && node scripts/build-diary-roju.mjs && node scripts/build-video-scripts.mjs && npm run check:diary-phrase-limits
+
+
+> check:draft-daily-context
+> node scripts/check-draft-daily-context.mjs
+
+下書き daily-context チェックを通過しました: 2026-07-28
+
+> check:diary-self-date
+> node scripts/check-diary-self-date-mentions.mjs
+
+日記本文の自己日付チェックを通過しました。
+
+> check:diary-kanji-numerals
+> node scripts/check-diary-kanji-numerals.mjs
+
+2026-07-28 の漢数字表記チェックを通過しました。
+
+> check:diary-readability
+> node scripts/check-diary-readability.mjs
+
+2026-07-28 の本文読みやすさチェックを通過しました。
+
+> check:diary-context-phrasing
+> node scripts/check-diary-context-phrasing.mjs
+
+本編日記の文脈チェックを通過しました。
+
+> check:diary-title-phrasing
+> node scripts/check-diary-title-phrasing.mjs --all
+
+本編日記タイトル並列表現チェックを通過しました。
+
+> check:diary-source-leaks
+> node scripts/check-diary-source-leaks.mjs
+
+2026-07-28 の素材取得元名チェックを通過しました。対象: 3件
+
+> check:diary-source-activity
+> node scripts/check-diary-source-activity.mjs
+
+Source activity passed: 71 activity dates and 71 diary dates from 2026-04-01 through 2026-07-28.
+
+> check:diary-voice-repetition
+> node scripts/check-diary-voice-repetition.mjs
+
+2026-07-28 の声の束重複チェックを通過しました。対象: 2件
+
+> check:diary-voice-variety
+> node scripts/check-diary-voice-variety.mjs
+
+2026-07-28 の声の束バリエーションチェックを通過しました。対象: 2件
+
+> check:diary-voice-similarity
+> node scripts/check-diary-voice-similarity.mjs
+
+2026-07-28 の声の束類似度チェックを通過しました。対象: 2件 / pairs=1 / mean=0.0176 / p95=0.0176 / max=0.0176
+
+> check:diary-editorial-independence
+> node scripts/check-diary-editorial-independence.mjs
+
+Editorial independence passed: 119 mains, 224 voices, 18 dreams.
+
+> check:dream-graphs
+> npm run build:dream-graphs && npm run build:dream-backgrounds && node scripts/validate-dream-graphs.mjs
+
+
+> build:dream-graphs
+> node scripts/build-curated-dream-graphs.mjs
+
+Generated 18 curated dream graphs.
+
+> build:dream-backgrounds
+> node scripts/build-curated-dream-backgrounds.mjs
+
+Generated 71 dream background bindings for 18 scenarios.
+✓ 2026-03-18.json (5 nodes / 4 edges)
+✓ 2026-03-19.json (5 nodes / 4 edges)
+✓ 2026-03-20.json (5 nodes / 4 edges)
+✓ 2026-03-21.json (6 nodes / 5 edges)
+✓ 2026-03-22.json (5 nodes / 4 edges)
+✓ 2026-03-23.json (5 nodes / 4 edges)
+✓ 2026-03-24.json (5 nodes / 4 edges)
+✓ 2026-03-25.json (5 nodes / 4 edges)
+✓ 2026-03-26.json (5 nodes / 4 edges)
+✓ 2026-03-27.json (5 nodes / 4 edges)
+✓ 2026-03-28.json (5 nodes / 4 edges)
+✓ 2026-03-29.json (5 nodes / 4 edges)
+✓ 2026-03-30.json (5 nodes / 4 edges)
+✓ 2026-03-31.json (5 nodes / 4 edges)
+✓ 2026-04-09.json (8 nodes / 7 edges)
+✓ 2026-04-20.json (6 nodes / 6 edges)
+✓ 2026-04-24.json (6 nodes / 6 edges)
+✓ 2026-04-25.json (7 nodes / 6 edges)
+✓ 18 dream graphs validated
+
+> build:diary
+> node scripts/collect-daily-context.mjs --best-effort && npm run check:diary-covers && node scripts/build-diary.mjs
+
+[daily-context] skipped draft for 2026-07-30: XかSwarmに日記化する動きがありません。
+[daily-context] Swarm 0件 / X 0件 / Health error
+
+> check:diary-covers
+> node scripts/check-diary-covers.mjs
+
+日記カバー画像チェックを通過しました。対象: 119件
+✓ character voice check passed (2026-07-28: 1 entries)
+✓ source name check passed (2026-07-28: 3 entries)
+✓ voice boilerplate check passed (2026-07-28: 2 entries)
+✓ voice similarity check passed (2026-07-28: 2 entries, max=0.0176)
+✓ diary.html generated (2026-07: 10 entries)
+✓ diary-2026-06.html generated (12 entries)
+✓ diary-2026-05.html generated (23 entries)
+✓ diary-2026-04.html generated (26 entries)
+✓ diary-2026-03.html generated (31 entries)
+✓ diary-2026-02.html generated (6 entries)
+✓ diary-2026-01.html generated (11 entries)
+✓ diary-voices-YYYY-MM-DD.html generated (119 days)
+✓ Total: 119 entries across 7 months
+
+> build:study
+> node scripts/build-study.mjs
+
+✓ study.html generated
+✓ study-mechanics.html generated
+✓ study-mechanics-01.html generated
+✓ galge-guide.html generated (1 entries)
+
+> build:galge-runtime
+> node scripts/build-galge-runtime.mjs
+
+✓ galge runtime bundled: C:\Users\wdddi\workspace\waddy-guesthouse-publish\assets\galge-runtime.bundle.js
+✓ dialogue.html generated (5 dialogues, 39 sections)
+✓ diary-hina.html generated (1 entries)
+✓ diary-multi.html generated (12 entries)
+✓ diary-hinahina.html generated (2 entries)
+✓ diary-oji.html generated (15 entries)
+✓ diary-moegami.html generated (5 entries)
+✓ diary-dejiko.html generated (7 entries)
+✓ diary-mitra.html generated (12 entries)
+✓ diary-ayu.html generated (7 entries)
+✓ diary-rem.html generated (5 entries)
+✓ diary-ruriko.html generated (1 entries)
+✓ diary-tsumugi.html generated (8 entries)
+✓ diary-ecoko.html generated (10 entries)
+✓ diary-mii.html generated (4 entries)
+✓ diary-kud.html generated (2 entries)
+✓ diary-feiris.html generated (11 entries)
+✓ diary-kotomi.html generated (7 entries)
+✓ diary-minagi.html generated (4 entries)
+✓ diary-kiku8.html generated (1 entries)
+✓ diary-mint.html generated (14 entries)
+✓ diary-tama.html generated (25 entries)
+✓ diary-kukuri.html generated (1 entries)
+✓ diary-sharo.html generated (15 entries)
+✓ diary-nemurin.html generated (4 entries)
+✓ diary-hinako.html generated (1 entries)
+✓ diary-kyoko.html generated (10 entries)
+✓ diary-mayuki.html generated (4 entries)
+✓ diary-mitsuba.html generated (2 entries)
+✓ diary-ana.html generated (12 entries)
+✓ diary-astarotte.html generated (1 entries)
+✓ diary-hazuki.html generated (6 entries)
+✓ diary-rin.html generated (1 entries)
+✓ diary-rizel.html generated (1 entries)
+✓ diary-roju.html generated (2026-07: 1 entries)
+✓ diary-roju-2026-06.html generated (2 entries)
+✓ diary-roju-2026-04.html generated (1 entries)
+✓ diary-roju-2026-03.html generated (7 entries)
+✓ diary-roju-2026-02.html generated (2 entries)
+✓ Total: 13 roju entries across 5 months
+✓ 5 files generated in C:\Users\wdddi\workspace\waddy-guesthouse-publish\video-scripts
+  - episode-01-祈りの輪郭.yaml
+  - episode-02-琥珀と螺鈿.yaml
+  - episode-03-オーバーヘッドの哲学.yaml
+  - episode-04-五つの原酒.yaml
+  - episode-05-多神教の神棚とマスターブレンダー.yaml
+
+> check:diary-phrase-limits
+> node scripts/check-diary-phrase-limits.mjs
+
+日記ソースと生成HTMLの言い回し上限チェックを通過しました。
+
+  assets\galge-runtime.bundle.js  1.5mb
+
+Done in 53ms

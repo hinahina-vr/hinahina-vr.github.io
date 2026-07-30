@@ -74,19 +74,19 @@
     {
       "from": "choose_priority",
       "to": "END_ASSIGN",
-      "choiceText": "空欄の担当者へ確認を送る",
+      "choiceText": "紙コップと割り箸を一人ずつ頼む",
       "style": "kenkai"
     },
     {
       "from": "choose_priority",
       "to": "END_SHOP",
-      "choiceText": "公園近くの購入先だけ調べる",
+      "choiceText": "朝に自分で買うと決める",
       "style": "kenkai"
     },
     {
       "from": "choose_priority",
       "to": "END_SLEEP",
-      "choiceText": "不足を一件残して今すぐ眠る",
+      "choiceText": "不足は朝に任せて眠る",
       "style": "kenkai"
     }
   ]

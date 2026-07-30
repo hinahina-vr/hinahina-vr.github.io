@@ -86,25 +86,25 @@
     {
       "from": "choose_recovery",
       "to": "check_symptoms",
-      "choiceText": "水分、食事、ふらつきを順に確認する",
+      "choiceText": "壁につかまって水を取りに行く",
       "style": "kenkai"
     },
     {
       "from": "choose_recovery",
       "to": "ask_help",
-      "choiceText": "一人で不安なので家族へ連絡する",
+      "choiceText": "一人でいることを家族へ伝える",
       "style": "kenkai"
     },
     {
       "from": "check_symptoms",
       "to": "END_RECOVERY",
-      "choiceText": "今日は画面を閉じて休む",
+      "choiceText": "豆腐を半分食べて休む",
       "style": "kenkai"
     },
     {
       "from": "ask_help",
       "to": "END_SUPPORT",
-      "choiceText": "状態を伝えて休む",
+      "choiceText": "水は飲める、起きたらまた送る、と返す",
       "style": "kenkai"
     }
   ]

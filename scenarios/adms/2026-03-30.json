@@ -74,19 +74,19 @@
     {
       "from": "choose_edit",
       "to": "END_CUT",
-      "choiceText": "同じ説明をする二場面を一つにする",
+      "choiceText": "書斎の会話を丸ごと削る",
       "style": "kenkai"
     },
     {
       "from": "choose_edit",
       "to": "END_CONTEXT",
-      "choiceText": "本を知らない人向けの事実を一つ足す",
+      "choiceText": "二人を知らない読者として読み直す",
       "style": "kenkai"
     },
     {
       "from": "choose_edit",
       "to": "END_STOP",
-      "choiceText": "夜がくるを流して今日は閉じる",
+      "choiceText": "保存して今夜は終える",
       "style": "kenkai"
     }
   ]

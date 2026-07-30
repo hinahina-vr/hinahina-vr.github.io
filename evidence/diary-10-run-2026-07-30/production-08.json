@@ -1,0 +1,37 @@
+{
+  "run": 8,
+  "startedAt": "2026-07-29T19:07:21.626Z",
+  "durationMs": 10532,
+  "passed": true,
+  "error": null,
+  "evidence": {
+    "januaryEntries": 11,
+    "aprilEntries": 26,
+    "april24TitleFound": true,
+    "april24BodyContextFound": true,
+    "voiceCount": 2,
+    "voiceNames": [
+      "🌼 ことみ",
+      "🔔 でじこ"
+    ],
+    "voiceTitles": [
+      "読む補助は原文へ戻れる形に",
+      "作る人より選ぶ人が不足するにょ"
+    ],
+    "choices": [
+      "上から全部を少しずつ開く",
+      "目的と締切で三つに分ける",
+      "最初の一本だけを最後まで読む"
+    ],
+    "branchTextFound": true,
+    "background": {
+      "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+      "complete": true,
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "opacity": "0.55"
+    },
+    "httpFailures": [],
+    "pageErrors": []
+  }
+}

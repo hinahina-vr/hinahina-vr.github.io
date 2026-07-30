@@ -1,0 +1,55 @@
+{
+  "audited_at": "2026-07-30",
+  "scope": {
+    "directory": "diary",
+    "from": "2026-01-01",
+    "through": "2026-07-28",
+    "entries": 119,
+    "state": "working tree after prose recheck"
+  },
+  "passes": {
+    "opening": {
+      "pass": 119,
+      "warn": 0,
+      "fail": 0
+    },
+    "grammar_and_references": {
+      "pass": 119,
+      "warn": 0,
+      "fail": 0
+    },
+    "background_and_standalone": {
+      "pass": 119,
+      "warn": 0,
+      "fail": 0
+    }
+  },
+  "overall": {
+    "pass": 119,
+    "warn": 0,
+    "fail": 0,
+    "ready": true
+  },
+  "voices": {
+    "dates": 119,
+    "entries": 233,
+    "pairs_compared": 135,
+    "weighted_mean_cosine": 0.1024,
+    "maximum_cosine": 0.2585
+  },
+  "dreams": {
+    "entries": 18,
+    "background_bindings": 71
+  },
+  "artifacts": [
+    "REPORT.md",
+    "coverage.tsv",
+    "summary.json",
+    "summarize.mjs",
+    "voice-page-before-title-fix.png",
+    "voice-page-after-title-fix.png",
+    "voice-page-final-2026-06-20.png",
+    "diary-page-final-2026-07.png",
+    "capture-final-pages.mjs"
+  ]
+}

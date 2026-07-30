@@ -110,19 +110,19 @@
     {
       "from": "choose_route",
       "to": "END_STATION",
-      "choiceText": "駅で朝まで待つ",
+      "choiceText": "駅で始発まで待つ",
       "style": "kenkai"
     },
     {
       "from": "choose_route",
       "to": "call_lodge",
-      "choiceText": "美浜町の宿へ電話する",
+      "choiceText": "近くの宿へ片端から電話する",
       "style": "kenkai"
     },
     {
       "from": "choose_route",
       "to": "END_HOME",
-      "choiceText": "来た方向へ戻る",
+      "choiceText": "上り列車で来た道を戻る",
       "style": "kenkai"
     },
     {
@@ -134,13 +134,13 @@
     {
       "from": "choose_room",
       "to": "END_LODGE",
-      "choiceText": "部屋を取り、宿までの道を聞く",
+      "choiceText": "部屋を予約して道を聞く",
       "style": "kenkai"
     },
     {
       "from": "choose_room",
       "to": "END_DECLINE",
-      "choiceText": "電話を切り、別の町を探す",
+      "choiceText": "二十分歩くのをためらう",
       "style": "kenkai"
     }
   ]

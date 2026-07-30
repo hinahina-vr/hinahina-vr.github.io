@@ -74,19 +74,19 @@
     {
       "from": "choose_order",
       "to": "END_MEAL",
-      "choiceText": "端末を閉じ、しめさばを食べる",
+      "choiceText": "スマートフォンを伏せて食べる",
       "style": "kenkai"
     },
     {
       "from": "choose_order",
       "to": "END_PACKAGE",
-      "choiceText": "特典と対応環境を確認して箱を選ぶ",
+      "choiceText": "限定版をその場で予約する",
       "style": "kenkai"
     },
     {
       "from": "choose_order",
       "to": "END_DOWNLOAD",
-      "choiceText": "遊ぶ端末を確認してダウンロード版を選ぶ",
+      "choiceText": "発売日の夜だけ予定へ入れる",
       "style": "kenkai"
     }
   ]

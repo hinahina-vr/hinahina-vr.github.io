@@ -1,6 +1,6 @@
 {
   "date": "2026-04-25",
-  "title": "展示ホールの質問 A.D.M.S.",
+  "title": "二十八万円の身体 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
@@ -92,25 +92,25 @@
     {
       "from": "standalone_start",
       "to": "robot_booth",
-      "choiceText": "人型ロボットの展示へ行く",
+      "choiceText": "二十八万円の人型製品を見に行く",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
       "to": "old_culture",
-      "choiceText": "懐かしい曲が聞こえる場所へ行く",
+      "choiceText": "昔聞いた電波ソングのほうへ行く",
       "style": "kenkai"
     },
     {
       "from": "robot_booth",
       "to": "END_BUY",
-      "choiceText": "予約方法だけ聞く",
+      "choiceText": "勢いのまま予約する",
       "style": "kenkai"
     },
     {
       "from": "robot_booth",
       "to": "ask_price",
-      "choiceText": "維持費と寸法まで聞く",
+      "choiceText": "毎日の置き場所と手入れを聞く",
       "style": "kenkai"
     },
     {

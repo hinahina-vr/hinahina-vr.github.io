@@ -74,19 +74,19 @@
     {
       "from": "choose_desk",
       "to": "END_SAJI",
-      "choiceText": "佐治敬三の机で支援の条件を読む",
+      "choiceText": "佐治が出した金を読む",
       "style": "kenkai"
     },
     {
       "from": "choose_desk",
       "to": "END_KAIKO",
-      "choiceText": "開高健の机で会社との距離を読む",
+      "choiceText": "開高が会社を出たあとを読む",
       "style": "kenkai"
     },
     {
       "from": "choose_desk",
       "to": "END_DISTANCE",
-      "choiceText": "二つの机の間に椅子を置く",
+      "choiceText": "二人が会わない時間を読む",
       "style": "kenkai"
     }
   ]

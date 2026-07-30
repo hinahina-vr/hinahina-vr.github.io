@@ -1,6 +1,6 @@
 {
   "date": "2026-04-20",
-  "title": "測定前の選択 A.D.M.S.",
+  "title": "数字を飲ませる夜 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
@@ -80,19 +80,19 @@
     {
       "from": "standalone_start",
       "to": "baseline",
-      "choiceText": "飲む前の値を記録する",
+      "choiceText": "飲む前の値を何度か測る",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
       "to": "END_GUESS",
-      "choiceText": "測らずに飲み始める",
+      "choiceText": "完成祝いを先に始める",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
       "to": "END_WAIT",
-      "choiceText": "配線を見直して実験を翌日に回す",
+      "choiceText": "熱くなった配線を調べる",
       "style": "kenkai"
     },
     {
@@ -104,13 +104,13 @@
     {
       "from": "compare",
       "to": "END_NUMBER",
-      "choiceText": "条件をそろえて再測定する",
+      "choiceText": "水を飲み、タイマーを待つ",
       "style": "kenkai"
     },
     {
       "from": "compare",
       "to": "END_GUESS",
-      "choiceText": "数字より酔った感覚を優先する",
+      "choiceText": "大きな数字を出すため二杯目を注ぐ",
       "style": "kenkai"
     }
   ]

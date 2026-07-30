@@ -5,7 +5,7 @@
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "三つの扉",
+      "title": "午前四時の廊下",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,11 +13,11 @@
       "icon": "◇",
       "scenario": "2026-03-19_出口のある建物",
       "entry": "standalone_start",
-      "summary": "三つの扉"
+      "summary": "午前四時の廊下"
     },
     {
       "id": "choose_door",
-      "title": "どこから確かめるか",
+      "title": "最後の一時間",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,11 +25,11 @@
       "icon": "◇",
       "scenario": "2026-03-19_出口のある建物",
       "entry": "choose_door",
-      "summary": "どこから確かめるか"
+      "summary": "最後の一時間"
     },
     {
       "id": "END_ARCHIVE",
-      "title": "消える記憶を読む",
+      "title": "空白の棚",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -37,11 +37,11 @@
       "icon": "●",
       "scenario": "2026-03-19_出口のある建物",
       "entry": "END_ARCHIVE",
-      "summary": "消える記憶を読む"
+      "summary": "空白の棚"
     },
     {
       "id": "END_EXIT",
-      "title": "先に出口を確認する",
+      "title": "聞かなかった朝",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -49,11 +49,11 @@
       "icon": "●",
       "scenario": "2026-03-19_出口のある建物",
       "entry": "END_EXIT",
-      "summary": "先に出口を確認する"
+      "summary": "聞かなかった朝"
     },
     {
       "id": "END_STAY",
-      "title": "期限を決めて残る",
+      "title": "出口のない完成",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -61,7 +61,7 @@
       "icon": "●",
       "scenario": "2026-03-19_出口のある建物",
       "entry": "END_STAY",
-      "summary": "期限を決めて残る"
+      "summary": "出口のない完成"
     }
   ],
   "edges": [
@@ -74,19 +74,19 @@
     {
       "from": "choose_door",
       "to": "END_ARCHIVE",
-      "choiceText": "記憶保管室だけを見る",
+      "choiceText": "消えた記録を確かめる",
       "style": "kenkai"
     },
     {
       "from": "choose_door",
       "to": "END_EXIT",
-      "choiceText": "最初に非常口を開ける",
+      "choiceText": "未完成のまま帰る",
       "style": "kenkai"
     },
     {
       "from": "choose_door",
       "to": "END_STAY",
-      "choiceText": "作業室へ入り十分だけ残る",
+      "choiceText": "あと一時間だけ直す",
       "style": "kenkai"
     }
   ]

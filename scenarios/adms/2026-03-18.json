@@ -5,7 +5,7 @@
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "六つの発言窓",
+      "title": "午前零時の六人",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,11 +13,11 @@
       "icon": "◇",
       "scenario": "2026-03-18_声の座標",
       "entry": "standalone_start",
-      "summary": "六つの発言窓"
+      "summary": "午前零時の六人"
     },
     {
       "id": "choose_signal",
-      "title": "最初の操作",
+      "title": "誰に話すか",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,11 +25,11 @@
       "icon": "◇",
       "scenario": "2026-03-18_声の座標",
       "entry": "choose_signal",
-      "summary": "最初の操作"
+      "summary": "誰に話すか"
     },
     {
       "id": "END_COMPARE",
-      "title": "不一致を残す",
+      "title": "別々の返事",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -37,11 +37,11 @@
       "icon": "●",
       "scenario": "2026-03-18_声の座標",
       "entry": "END_COMPARE",
-      "summary": "不一致を残す"
+      "summary": "別々の返事"
     },
     {
       "id": "END_PROVENANCE",
-      "title": "根拠へ戻る",
+      "title": "窓の向こう",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -49,11 +49,11 @@
       "icon": "●",
       "scenario": "2026-03-18_声の座標",
       "entry": "END_PROVENANCE",
-      "summary": "根拠へ戻る"
+      "summary": "窓の向こう"
     },
     {
       "id": "END_SILENCE",
-      "title": "誰も呼ばない",
+      "title": "自分の声",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
@@ -61,7 +61,7 @@
       "icon": "●",
       "scenario": "2026-03-18_声の座標",
       "entry": "END_SILENCE",
-      "summary": "誰も呼ばない"
+      "summary": "自分の声"
     }
   ],
   "edges": [
@@ -74,19 +74,19 @@
     {
       "from": "choose_signal",
       "to": "END_COMPARE",
-      "choiceText": "技術役と生活役へ別の問いを送る",
+      "choiceText": "故障と寝不足を別々に相談する",
       "style": "kenkai"
     },
     {
       "from": "choose_signal",
       "to": "END_PROVENANCE",
-      "choiceText": "返答より先に参照資料を開く",
+      "choiceText": "返事の根拠を開く",
       "style": "kenkai"
     },
     {
       "from": "choose_signal",
       "to": "END_SILENCE",
-      "choiceText": "全員を閉じて自分で一段落書く",
+      "choiceText": "今夜は自分で考える",
       "style": "kenkai"
     }
   ]

@@ -74,19 +74,19 @@
     {
       "from": "choose_task",
       "to": "END_BOTTLES",
-      "choiceText": "瓶の残量と開栓日を記録する",
+      "choiceText": "飲みかけの五本を整理する",
       "style": "kenkai"
     },
     {
       "from": "choose_task",
       "to": "END_PATCH",
-      "choiceText": "文字送りと現在地表示を直す",
+      "choiceText": "読めなかった画面を直す",
       "style": "kenkai"
     },
     {
       "from": "choose_task",
       "to": "END_RAMEN",
-      "choiceText": "岐阜屋の味噌ラーメンを思い出す",
+      "choiceText": "岐阜屋で昼を食べる",
       "style": "kenkai"
     }
   ]

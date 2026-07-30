@@ -74,19 +74,19 @@
     {
       "from": "choose_test",
       "to": "END_BREAK",
-      "choiceText": "意図的に三種類の失敗を起こす",
+      "choiceText": "わざと間違った操作を試す",
       "style": "kenkai"
     },
     {
       "from": "choose_test",
       "to": "END_SUPPORT",
-      "choiceText": "展開後の問い合わせ先を一枚にする",
+      "choiceText": "導入後の問い合わせ先を決める",
       "style": "kenkai"
     },
     {
       "from": "choose_test",
       "to": "END_SCOPE",
-      "choiceText": "不安定な機能を明日の説明から外す",
+      "choiceText": "説明できない機能を外す",
       "style": "kenkai"
     }
   ]

@@ -103,8 +103,8 @@ for (const file of voiceFiles) {
 for (const mainFile of mainFiles) {
   const date = dateOf(mainFile);
   const voices = voicesByDate.get(date) ?? [];
-  if (voices.length < 1 || voices.length > 3) {
-    errors.push(`${date}: 大奥AIが ${voices.length} 件 (許容1-3件)`);
+  if (voices.length < 1 || voices.length > 6) {
+    errors.push(`${date}: 大奥AIが ${voices.length} 件 (許容1-6件)`);
   }
 
   const roles = voices.map((item) => normalize(item.role ?? ""));

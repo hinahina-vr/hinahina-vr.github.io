@@ -74,19 +74,19 @@
     {
       "from": "choose_train",
       "to": "END_LOCAL",
-      "choiceText": "黄色い電車に乗り続ける",
+      "choiceText": "各駅停車でゆっくり行く",
       "style": "kenkai"
     },
     {
       "from": "choose_train",
       "to": "END_RAPID",
-      "choiceText": "御茶ノ水で快速から乗り換える",
+      "choiceText": "御茶ノ水で快速へ移る",
       "style": "kenkai"
     },
     {
       "from": "choose_train",
       "to": "END_RETURN",
-      "choiceText": "座って目を閉じる",
+      "choiceText": "目覚ましをかけず眠る",
       "style": "kenkai"
     }
   ]

@@ -1,0 +1,650 @@
+{
+  "generatedAt": "2026-07-29T19:08:31.650Z",
+  "reportMode": "preserved-log-recheck",
+  "commit": "dc5a3cb6e52863accb483786d56fbd252a4c6863",
+  "branch": "codex/publish-study-main",
+  "environment": {
+    "platform": "win32",
+    "node": "v22.17.0",
+    "chrome": "150.0.7871.184"
+  },
+  "buildRuns": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-29T18:58:16.428Z",
+      "durationMs": 47663,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "2a2dcd445672c5352c99e00cdb786ffd56e17ee164edf6c55a029fc6dd9241dc",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-29T18:59:04.092Z",
+      "durationMs": 46468,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "2a2dcd445672c5352c99e00cdb786ffd56e17ee164edf6c55a029fc6dd9241dc",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 3,
+      "startedAt": "2026-07-29T18:59:50.565Z",
+      "durationMs": 47580,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "bedbb0dd0bb67b672b39949bc6c3c07936d292d3d9f13d7440af707fe130630c",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 4,
+      "startedAt": "2026-07-29T19:00:38.145Z",
+      "durationMs": 47228,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "bedbb0dd0bb67b672b39949bc6c3c07936d292d3d9f13d7440af707fe130630c",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 5,
+      "startedAt": "2026-07-29T19:01:25.378Z",
+      "durationMs": 46213,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "2a2dcd445672c5352c99e00cdb786ffd56e17ee164edf6c55a029fc6dd9241dc",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 6,
+      "startedAt": "2026-07-29T19:02:11.592Z",
+      "durationMs": 47398,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "2a2dcd445672c5352c99e00cdb786ffd56e17ee164edf6c55a029fc6dd9241dc",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 7,
+      "startedAt": "2026-07-29T19:02:58.990Z",
+      "durationMs": 47189,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "54f9ec3769751bb84367ffb95d748537194c93d3837d2c3bd4412eec6f222ac2",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 8,
+      "startedAt": "2026-07-29T19:03:46.180Z",
+      "durationMs": 46142,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "2a2dcd445672c5352c99e00cdb786ffd56e17ee164edf6c55a029fc6dd9241dc",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 9,
+      "startedAt": "2026-07-29T19:04:32.322Z",
+      "durationMs": 46170,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "a6fab96087c7ed0595d99c8053d8e263bca7c3bbdeac8e653fe4270040a27725",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    },
+    {
+      "run": 10,
+      "startedAt": "2026-07-29T19:05:18.493Z",
+      "durationMs": 47172,
+      "exitCode": 0,
+      "passed": true,
+      "outputSha256": "2a2dcd445672c5352c99e00cdb786ffd56e17ee164edf6c55a029fc6dd9241dc",
+      "checks": {
+        "source_activity": true,
+        "editorial_independence": true,
+        "dream_graphs": true,
+        "dream_backgrounds": true,
+        "covers": true,
+        "diary_inventory": true,
+        "phrase_limits": true
+      },
+      "monthChecks": {
+        "2026-01": true,
+        "2026-02": true,
+        "2026-03": true,
+        "2026-04": true,
+        "2026-05": true,
+        "2026-06": true,
+        "2026-07": true
+      }
+    }
+  ],
+  "productionRuns": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-29T19:06:05.785Z",
+      "durationMs": 12137,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-29T19:06:17.923Z",
+      "durationMs": 10532,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 3,
+      "startedAt": "2026-07-29T19:06:28.456Z",
+      "durationMs": 10481,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 4,
+      "startedAt": "2026-07-29T19:06:38.938Z",
+      "durationMs": 11002,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 5,
+      "startedAt": "2026-07-29T19:06:49.941Z",
+      "durationMs": 10365,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 6,
+      "startedAt": "2026-07-29T19:07:00.307Z",
+      "durationMs": 10716,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 7,
+      "startedAt": "2026-07-29T19:07:11.024Z",
+      "durationMs": 10601,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 8,
+      "startedAt": "2026-07-29T19:07:21.626Z",
+      "durationMs": 10532,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 9,
+      "startedAt": "2026-07-29T19:07:32.158Z",
+      "durationMs": 10550,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "run": 10,
+      "startedAt": "2026-07-29T19:07:42.708Z",
+      "durationMs": 10803,
+      "passed": true,
+      "error": null,
+      "evidence": {
+        "januaryEntries": 11,
+        "aprilEntries": 26,
+        "april24TitleFound": true,
+        "april24BodyContextFound": true,
+        "voiceCount": 2,
+        "voiceNames": [
+          "🌼 ことみ",
+          "🔔 でじこ"
+        ],
+        "voiceTitles": [
+          "読む補助は原文へ戻れる形に",
+          "作る人より選ぶ人が不足するにょ"
+        ],
+        "choices": [
+          "上から全部を少しずつ開く",
+          "目的と締切で三つに分ける",
+          "最初の一本だけを最後まで読む"
+        ],
+        "branchTextFound": true,
+        "background": {
+          "src": "https://hinahina-vr.github.io/scenarios/bg/2026-04-24_%E8%AA%AD%E3%82%80%E6%99%82%E9%96%93%E3%81%AE%E9%85%8D%E5%88%86/home_office.webp",
+          "complete": true,
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "opacity": "0.55"
+        },
+        "httpFailures": [],
+        "pageErrors": []
+      }
+    }
+  ],
+  "summary": {
+    "buildPassed": 10,
+    "productionPassed": 10,
+    "overallPassed": true
+  }
+}

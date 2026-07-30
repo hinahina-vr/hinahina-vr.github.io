@@ -1,40 +1,40 @@
 {
   "title": "声の座標",
-  "subtitle": "同じ質問を、同じ答えにしない",
-  "genre": "編集室ノベル",
+  "subtitle": "同じ相談を六人へ投げる前に",
+  "genre": "深夜の会話ノベル",
   "date": "2026-03-18",
   "chars": {
     "narrator": { "name": "", "color": "#8aa0b8", "emoji": "" },
     "operator": { "name": "操作卓", "color": "#76b8b0", "emoji": "⌨" }
   },
   "mapTitles": {
-    "standalone_start": "六つの発言窓",
-    "choose_signal": "最初の操作",
-    "END_COMPARE": "不一致を残す",
-    "END_PROVENANCE": "根拠へ戻る",
-    "END_SILENCE": "誰も呼ばない"
+    "standalone_start": "午前零時の六人",
+    "choose_signal": "誰に話すか",
+    "END_COMPARE": "別々の返事",
+    "END_PROVENANCE": "窓の向こう",
+    "END_SILENCE": "自分の声"
   },
   "scenario": [
     { "label": "standalone_start" },
     { "bg": "home_office" },
-    { "speaker": "narrator", "text": "ブラウザを開くと、六人分の発言窓と、一つの質問欄が並んでいた。見た目は会話だが、全員へ同じ文を送れば、口調だけ違う返事が六つ返る。" },
-    { "speaker": "operator", "text": "今日は人数を増やしません。比較する役、根拠を探す役、沈黙の三つだけを選べます。" },
+    { "speaker": "narrator", "text": "午前零時、大奥AIの画面に六人の顔が並んでいる。昨夜は全員へ同じ相談を送り、仕事は早く切り上げたほうがよい、という返事を六つ読んだ。語尾は違っても、中身はほとんど同じだった。" },
+    { "speaker": "operator", "text": "今夜は二人だけ選べます。相談内容も、それぞれ別にしてください。" },
     { "label": "choose_signal" },
     {
       "choices": [
-        { "text": "技術役と生活役へ別の問いを送る", "goto": "END_COMPARE" },
-        { "text": "返答より先に参照資料を開く", "goto": "END_PROVENANCE" },
-        { "text": "全員を閉じて自分で一段落書く", "goto": "END_SILENCE" }
+        { "text": "故障と寝不足を別々に相談する", "goto": "END_COMPARE" },
+        { "text": "返事の根拠を開く", "goto": "END_PROVENANCE" },
+        { "text": "今夜は自分で考える", "goto": "END_SILENCE" }
       ]
     },
     { "label": "END_COMPARE" },
     { "bg": "twilight" },
-    { "speaker": "narrator", "text": "技術役は失敗条件を挙げ、生活役は中断時刻を決めた。賛成票は増えなかったが、判断に必要な二種類の情報が残った。\nEND 役割で分かれた声" },
+    { "speaker": "narrator", "text": "機械に詳しい一人へ、いちばん先に壊れそうな箇所を聞いた。生活にうるさいもう一人へ、何時に切り上げれば明日の仕事へ響かないか聞いた。片方は保存処理を指し、片方は午前一時を指した。直す場所と、今夜直さない場所が同時に決まった。\nEND 午前一時の保存" },
     { "label": "END_PROVENANCE" },
     { "bg": "station" },
-    { "speaker": "narrator", "text": "発言の横に、読んだ記録と参照時刻が表示された。うまい言葉より、どこから来た主張かを選べる画面になった。\nEND 根拠の座標" },
+    { "speaker": "narrator", "text": "一人の顔を押すと、返事の下に参照した日記が開いた。もう一人は、三年前に自分が書いたメモを読んでいた。同じ結論へ来た二人でも、片方は昨夜の失敗から、片方は昔の後悔から話している。次は返事だけでなく、そこまで一緒に読むことにした。\nEND 返事の脚注" },
     { "label": "END_SILENCE" },
     { "bg": "void" },
-    { "speaker": "narrator", "text": "六つの窓が消え、白い入力欄だけが残る。呼ばない選択も保存され、今日は自分の文から始まった。\nEND 沈黙できる大奥" }
+    { "speaker": "narrator", "text": "六人の窓を閉じ、白いメモへ、困っていること、明日までに必要なこと、今日は捨てること、と書いた。書き終えると、AIへ聞きたかった質問の半分は消えた。残った一問だけを明日の自分へ置き、パソコンを閉じた。\nEND 聞かなかった一問" }
   ]
 }

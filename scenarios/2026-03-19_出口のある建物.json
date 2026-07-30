@@ -1,40 +1,40 @@
 {
   "title": "出口のある建物",
-  "subtitle": "残ることと閉じ込められることの違い",
-  "genre": "館内探索ノベル",
+  "subtitle": "午前五時までの未完成",
+  "genre": "夜の建物探索",
   "date": "2026-03-19",
   "chars": {
     "narrator": { "name": "", "color": "#9aa0b8", "emoji": "" },
     "guide": { "name": "案内板", "color": "#80b09c", "emoji": "▣" }
   },
   "mapTitles": {
-    "standalone_start": "三つの扉",
-    "choose_door": "どこから確かめるか",
-    "END_ARCHIVE": "消える記憶を読む",
-    "END_EXIT": "先に出口を確認する",
-    "END_STAY": "期限を決めて残る"
+    "standalone_start": "午前四時の廊下",
+    "choose_door": "最後の一時間",
+    "END_ARCHIVE": "空白の棚",
+    "END_EXIT": "聞かなかった朝",
+    "END_STAY": "出口のない完成"
   },
   "scenario": [
     { "label": "standalone_start" },
     { "bg": "cathedral" },
-    { "speaker": "narrator", "text": "建物の中央に、記憶保管室、作業室、非常口の三つの表示がある。廊下には六人の声が流れているが、全部を聞く必要はない。" },
-    { "speaker": "guide", "text": "非常口はいつでも開きます。残る場合は、閉館時刻を自分で設定してください。" },
+    { "speaker": "narrator", "text": "午前四時、机へ伏せていた顔を上げると、作りかけの物語が建物になっていた。左の扉には記憶保管室、右には作業室。背後の非常口からは、始発前の冷たい空気が入ってくる。" },
+    { "speaker": "guide", "text": "午前五時で保存処理が始まります。作業室へ入れば続きを直せますが、非常口は閉まります。" },
     { "label": "choose_door" },
     {
       "choices": [
-        { "text": "記憶保管室だけを見る", "goto": "END_ARCHIVE" },
-        { "text": "最初に非常口を開ける", "goto": "END_EXIT" },
-        { "text": "作業室へ入り十分だけ残る", "goto": "END_STAY" }
+        { "text": "消えた記録を確かめる", "goto": "END_ARCHIVE" },
+        { "text": "未完成のまま帰る", "goto": "END_EXIT" },
+        { "text": "あと一時間だけ直す", "goto": "END_STAY" }
       ]
     },
     { "label": "END_ARCHIVE" },
     { "bg": "dark_chapel" },
-    { "speaker": "narrator", "text": "消えた会話の一覧には、保存できなかった理由まで付いていた。記憶の量ではなく、欠落の位置を知って部屋を出た。\nEND 欠落の目録" },
+    { "speaker": "narrator", "text": "保管室の棚には、保存に失敗した一行、削除を頼まれた名前、通信が切れた夜の空欄が並んでいた。戻せる記録は一つだけだったが、削除されたものには手を触れなかった。欠けた場所へ理由を書き、朝のバックアップを始めた。\nEND 理由のある空欄" },
     { "label": "END_EXIT" },
     { "bg": "dawn" },
-    { "speaker": "narrator", "text": "扉の外には朝の道路が続いていた。戻れることを確認したため、建物の声は誘惑ではなく選択肢になった。\nEND 開いている出口" },
+    { "speaker": "narrator", "text": "非常口を押すと、雨上がりの道路へ出た。振り返れば作業室の灯りはついたままで、直したい箇所も残っている。それでも始発の走る音を聞くと、今日はここまでだと思えた。未完成のファイルは、帰って眠ったあとにも残っている。\nEND 続きのある朝" },
     { "label": "END_STAY" },
     { "bg": "home_office" },
-    { "speaker": "narrator", "text": "十分のタイマーが鳴るまで一つの試作品を直した。終了時刻があることで、残るという決定を自分のものにできた。\nEND 十分間の滞在" }
+    { "speaker": "narrator", "text": "作業室には昨日止まった試作品が開かれていた。一か所直すと別の不具合が現れ、時計だけが進んだ。午前五時、非常口の灯りが消える。画面は動くようになったが、朝の会議へ持っていく自分の頭は動かなくなっていた。\nEND 動いた画面、止まった朝" }
   ]
 }
