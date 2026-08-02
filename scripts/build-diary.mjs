@@ -7,7 +7,7 @@ import { join, basename } from "node:path";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
-import { formatVoiceFindings, validateCharacterVoicesForDate } from "./lib/diary-character-voice.mjs";
+import { formatVoiceFindings, validateAllCharacterVoices } from "./lib/diary-character-voice.mjs";
 import { formatVoiceBoilerplateFindings, validateVoiceBoilerplateForDate } from "./lib/diary-voice-boilerplate.mjs";
 import { analyzeVoiceSimilarityForDate, formatVoiceSimilarityFindings } from "./lib/diary-voice-similarity.mjs";
 import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
@@ -438,11 +438,11 @@ async function main() {
   const latestEntries = monthMap.get(latestMonth);
   const latestDate = latestEntries[0]?.date;
   if (latestDate && process.env.WADDY_SKIP_CHARACTER_VOICE_CHECK !== "1") {
-    const voiceCheck = validateCharacterVoicesForDate(latestDate);
+    const voiceCheck = validateAllCharacterVoices();
     if (voiceCheck.findings.length > 0) {
       throw new Error(formatVoiceFindings(voiceCheck));
     }
-    console.log(`✓ character voice check passed (${latestDate}: ${voiceCheck.checked.length} entries)`);
+    console.log(`✓ character voice check passed (${voiceCheck.dates.length} dates: ${voiceCheck.checked} entries)`);
   }
   if (latestDate && process.env.WADDY_SKIP_DIARY_SOURCE_CHECK !== "1") {
     const sourceCheck = validateSourceMentionsForDate(latestDate);

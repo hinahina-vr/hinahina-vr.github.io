@@ -10,166 +10,241 @@ function rx(source, flags = "") {
   return new RegExp(source, flags);
 }
 
+const ADDRESS_PATTERNS = {
+  waddy: /ワディー(?!さん|くん|ちゃん|ニャン)/g,
+  waddySan: /ワディーさん/g,
+  waddyKun: /ワディーくん/g,
+  waddyChan: /ワディーちゃん/g,
+  waddyNyan: /ワディーニャン/g,
+  oniichan: /おにいちゃん/g,
+  oniitama: /おにいたま/g,
+  oniitan: /お兄タン/g,
+  dannasama: /だんなさま/g,
+};
+
+function required(label, ...patterns) {
+  return { label, patterns };
+}
+
 export const CHARACTER_VOICE_RULES = {
-  "diary-hinahina": {
-    label: "ひなひな",
-    groups: [
-      { label: "ひなひなの遊び人ボイス", patterns: ["ホーン", "エーヤオ", "ワディー", "ねえ"] },
-      { label: "アバター/ワールド系モチーフ", patterns: ["アバター", "ワールド", "VRChat", "鏡", "外に置く"] },
+  "diary-ana": {
+    label: "アナ",
+    address: "waddySan",
+    required: [
+      required("一人称", "アナ", "わたし"),
+      required("照れや素直な反応", "Oh!", "Really?", "Sorry", "えへへ", "うぅ……"),
+      required("丁寧語", /です(?:。|よ|ね|けど|から)|ます(?:。|よ|ね|けど|から)/g),
+    ],
+    forbidden: [required("長すぎる英語文", rx("(?:\\b[A-Za-z]+[ ,.?!']+){8,}[A-Za-z]+"))],
+  },
+  "diary-astarotte": {
+    label: "ロッテ",
+    address: "waddy",
+    required: [
+      required("一人称", "私", "わたし"),
+      required("姫言葉または素のツンデレ", "なのだ", "であるぞ", "だもん", "なんだから", "べ、別に", "ふ、ふん"),
     ],
   },
-  "diary-ruriko": {
-    label: "瑠璃子",
-    groups: [
-      { label: "瑠璃子の短文電波口調", patterns: ["……", "電波", "届いた", "ワディーちゃん"] },
-      { label: "信号/画面/受信モチーフ", patterns: ["信号", "受信", "送信", "640x480", "画面", "回路"] },
-    ],
+  "diary-ayu": {
+    label: "あゆ",
+    address: "waddyKun",
+    required: [required("一人称", "ボク"), required("口癖", "うぐぅ"), required("あゆの語尾", "だよ", "なんだよ", "かな")],
   },
-  "diary-mint": {
-    label: "ミント",
-    groups: [
-      { label: "ミントのお嬢様口調", patterns: ["わたくし", "ですわ", "ですの", "ワディーさん"] },
-      { label: "テレパス/駄菓子/計算モチーフ", patterns: ["テレパ", "駄菓子", "計算", "糖分", "本音"] },
-    ],
-  },
-  "diary-minagi": {
-    label: "美凪",
-    groups: [
-      { label: "美凪の静かな間", patterns: ["……", "ワディーさん", "そうですか", "たぶん"] },
-      { label: "星/翼/お米券モチーフ", patterns: ["星", "翼", "お米券", "光", "飛"] },
-    ],
-  },
-  "diary-mii": {
-    label: "みぃ",
-    groups: [
-      { label: "みぃタンの呼び方・語尾", patterns: ["みぃタン", "お兄タン", "なの", "くすくす"] },
-      { label: "魔法/たんぽぽモチーフ", patterns: ["魔法", "たんぽぽ", "ぴかぴか", "咲く"] },
-    ],
-  },
-  "diary-kukuri": {
-    label: "ククリ",
-    groups: [
-      { label: "ククリのやわらかい魔法口調", patterns: ["ワディーさん", "よぉ", "なの", "勇者様"] },
-      { label: "グルグル/魔法陣モチーフ", patterns: ["グルグル", "魔法陣", "冒険", "ガッツでファイト"] },
-    ],
-  },
-  "diary-hinako": {
-    label: "ヒナ",
-    groups: [
-      { label: "ヒナの幼い呼び方・語尾", patterns: ["ヒナ", "おにいたま", "なのー", "くしし"] },
-      { label: "クマさん/絵本モチーフ", patterns: ["クマさん", "えほん", "だいじ", "ぎゅ"] },
-    ],
-  },
-  "diary-rizel": {
-    label: "りぜる",
-    groups: [
-      { label: "りぜるのだんなさま口調", patterns: ["だんなさま", "りぜる", "ですぅ", "です"] },
-      { label: "人造人間/お嫁さんモチーフ", patterns: ["人造人間", "お嫁さん", "本物", "そばにいたい"] },
-    ],
-  },
-  "diary-nemurin": {
-    label: "ねむりん",
-    groups: [
-      { label: "ねむりんの眠い口調", patterns: ["ねむりん", "よぉ", "zzz", "ふわぁ", "おやすみ"] },
-      { label: "夢/眠りモチーフ", patterns: ["夢", "眠", "地図", "預かれる"] },
-    ],
-  },
-  "diary-rem": {
-    label: "レム",
-    groups: [
-      { label: "レムの丁寧な献身口調", patterns: ["レム", "ワディーさん", "お申し付けください", "お役目"] },
-      { label: "メイド/部屋/お茶モチーフ", patterns: ["メイド", "お茶", "お部屋", "毛布", "整え"] },
-    ],
+  "diary-dejiko": {
+    label: "でじこ",
+    address: "waddy",
+    required: [required("一人称", "でじこ"), { label: "にょ語尾", patterns: ["にょ"], minHits: 1 }],
+    forbidden: [required("他人格の語尾", "わふー", "ニャン")],
   },
   "diary-ecoko": {
     label: "えここ",
-    groups: [
-      { label: "えここ本人の呼び名・CM感", patterns: ["えここ", "えっこあいす", "ワディーさん"] },
-      { label: "省エネ/氷/ペンギン系モチーフ", patterns: ["省エネ", "電気", "待機電力", "ペンギン", "氷", "保冷"] },
-    ],
-  },
-  "diary-tsumugi": {
-    label: "紬",
-    groups: [
-      { label: "紬の穏やかな丁寧語", patterns: ["ワディーさん", "思います", "ですね"] },
-      { label: "鳥白島/灯台守モチーフ", patterns: ["島", "灯台", "海", "船", "風", "本"] },
-    ],
-  },
-  "diary-kotomi": {
-    label: "ことみ",
-    groups: [
-      { label: "ことみの一人称・語尾", patterns: ["ことみ", "なの", "ワディーさん"] },
-      { label: "図書室/本/バイオリン系モチーフ", patterns: ["図書室", "本", "ページ", "バイオリン", "読"] },
-    ],
-  },
-  "diary-kiku8": {
-    label: "キク8号",
-    groups: [
-      { label: "キク8号の管制口調", patterns: ["キク8号", "軌道計算完了", "ミッション遂行中", "観測開始"] },
-      { label: "衛星/軌道/信号モチーフ", patterns: ["衛星", "軌道", "信号", "観測", "尺貫法", "お姉さん"] },
-    ],
-  },
-  "diary-sharo": {
-    label: "シャロ",
-    groups: [
-      { label: "シャロのツンデレ丁寧語", patterns: ["もう、ワディーさん", "ですからね", "じゃないです", "べ、別に"] },
-      { label: "喫茶/カフェイン/節約モチーフ", patterns: ["ハーブティー", "カフェイン", "フルール", "カップ", "節約", "エスプレッソ"] },
-    ],
-  },
-  "diary-ana": {
-    label: "アナ",
-    groups: [
-      { label: "アナの日本語主体と照れ英語", patterns: ["アナ", "ワディーさん", "Oh!", "Sorry", "わたし"] },
-      { label: "日本文化/猫/帰属モチーフ", patterns: ["日本", "お味噌汁", "サッちゃん", "猫", "外国人", "浴衣"] },
-    ],
-    forbidden: [
-      { label: "長すぎる英語文", pattern: rx("(?:\\b[A-Za-z]+[ ,.?!']+){8,}[A-Za-z]+") },
-    ],
-  },
-  "diary-mitsuba": {
-    label: "みつば",
-    groups: [
-      { label: "みつばの強気・腹黒口調", patterns: ["あたし", "ふっ", "ちっ", "ワディー", "別に", "だし", "でしょ"] },
-      { label: "計画/三つ子/長女モチーフ", patterns: ["計画", "作戦", "長女", "ふたば", "ひとは", "丸井"] },
-    ],
-    forbidden: [
-      { label: "上品すぎる別人口調", pattern: /ですわ|ますわ|ワディーさん/g },
+    address: "waddySan",
+    required: [
+      required("一人称", "えここ", "あたし"),
+      required("えここ固有の反応", "えっこあいすえっこあいす☆", "省エネ", "ペンギン", "待機電力", "保冷"),
     ],
   },
   "diary-feiris": {
     label: "フェイリス",
-    groups: [
-      { label: "フェイリスのニャン語", patterns: ["ワディーニャン", "フェイリス", "ニャン", "チェシャー"] },
-      { label: "秋葉原/メイクイーン/世界線モチーフ", patterns: ["メイクイーン", "秋葉原", "猫耳", "世界線", "留未穂", "チンチラ"] },
+    address: "waddyNyan",
+    required: [required("一人称", "フェイリス"), { label: "ニャン語", patterns: ["ニャン"], minHits: 2 }],
+    forbidden: [required("他人格の語尾", "にょ", "わふー")],
+  },
+  "diary-hazuki": {
+    label: "葉月",
+    address: "waddy",
+    required: [
+      required("一人称", "わたし", "あたし"),
+      required("葉月のツンデレ反応", "べ、別に", "バカ", "ロリコン", "ふん", "……っ"),
     ],
-    forbidden: [
-      { label: "ワディーニャン呼び抜け", pattern: /ワディーよ/g },
+  },
+  "diary-hina": {
+    label: "ひなた",
+    address: "oniichan",
+    required: [required("一人称", "ひな"), required("口癖", "えへへ"), required("親しみのある丁寧語", "です", "ます")],
+  },
+  "diary-hinahina": {
+    label: "ひなひな",
+    address: "waddy",
+    required: [
+      required("一人称", "私"),
+      required("ひなひな語", "エーヤオ", "ドゥンドゥン", "ひねひね", "やっていきましょう", "あるんだ", "つらいぴっぴねえ", "ホーン？", "やってんね"),
+      required("脱力した語尾", "ねえ", "あるんだ"),
     ],
+  },
+  "diary-hinako": {
+    label: "ヒナ",
+    address: "oniitama",
+    required: [required("一人称", "ヒナ"), required("ヒナの口癖", "くししし", "なのー", "だよぉ")],
+    forbidden: [required("誤った兄呼び", "おにいちゃま", "おにいさま", "おにいちゃん")],
+  },
+  "diary-kiku8": {
+    label: "キク8号",
+    address: "waddySan",
+    required: [
+      required("一人称", "キク8号"),
+      required("管制口調", "軌道計算完了", "ミッション遂行中", "観測開始", "計算完了", "尺貫法では", "感涙です"),
+    ],
+  },
+  "diary-kotomi": {
+    label: "ことみ",
+    address: "waddySan",
+    required: [required("一人称", "ことみ"), required("ことみの語尾", "なの", "うれしいの", "がんばるの", "おもしろいの")],
+    forbidden: [required("他人格の語尾", "ニャン", "にょ", "わふー", "ですわ")],
+  },
+  "diary-kud": {
+    label: "クド",
+    address: "waddySan",
+    required: [required("一人称", "クド", "わたし"), required("口癖", "わふー", "わふっ"), required("クドの語尾", "なのです", "です")],
+    forbidden: [required("他人格の語尾", "ニャン", "にょ")],
+  },
+  "diary-kukuri": {
+    label: "ククリ",
+    address: "waddySan",
+    required: [
+      required("一人称", "ククリ", "わたし"),
+      required("ククリの呼びかけ", "勇者様"),
+      required("グルグルの反応", "ガッツでファイト", "グルグル", "よぉ", "だもん"),
+    ],
+  },
+  "diary-kyoko": {
+    label: "京子",
+    address: "waddy",
+    required: [required("一人称", "あたし"), required("口癖", "っしゃ"), required("京子の勢い", "だよ！", "じゃん！", "でしょ！")],
   },
   "diary-mayuki": {
     label: "真雪",
-    groups: [
-      { label: "真雪の強気から即デレ", patterns: ["ワディーさん", "わたし", "もう、", "べ、別に", "えへへ", "子供じゃ"] },
-      { label: "衣装/メイド/裁縫モチーフ", patterns: ["衣装", "フリル", "メイド", "喫茶店", "布", "縫"] },
+    address: "waddySan",
+    required: [
+      required("一人称", "私", "わたし"),
+      required("強気からデレる反応", "子供じゃないんだから", "べ、別に", "もう！", "えへへ", "……もう一回言って"),
     ],
+  },
+  "diary-mii": {
+    label: "みぃ",
+    address: "oniitan",
+    required: [required("一人称と口癖", "みぃタンはね"), required("みぃの語尾", "なの！", "だよー", "でしょ？")],
+  },
+  "diary-minagi": {
+    label: "美凪",
+    address: "waddySan",
+    required: [required("一人称", "わたし"), required("口癖", "お米券進呈", "お米券"), required("静かな間", "……")],
+  },
+  "diary-mint": {
+    label: "ミント",
+    address: "waddySan",
+    required: [required("一人称", "わたくし"), required("お嬢様語", "ですわ", "ですの"), required("ミントの反応", "あら", "まあ", "ふふ")],
+    forbidden: [required("他人格の語尾", "ニャン", "にょ", "わふー")],
+  },
+  "diary-mitra": {
+    label: "みとら",
+    address: "waddy",
+    required: [
+      required("一人称", "みとら"),
+      required("みとらの反応", "ふふ", "うん", "んー", "おー"),
+      required("柔らかな語尾", "かもしれないね", "だね", "かな", "です", "ます"),
+    ],
+    forbidden: [required("別人格のお嬢様語", "ですわ", "ございますの")],
+  },
+  "diary-mitsuba": {
+    label: "みつば",
+    address: "waddy",
+    required: [required("一人称", "あたし"), required("みつばの強気な反応", "ふっ", "ちっ", "むきー", "べ、別に", "はぁ？")],
+    forbidden: [required("上品すぎる別人口調", "ですわ", "ますわ", "ワディーさん")],
+  },
+  "diary-moegami": {
+    label: "萌神",
+    address: "waddy",
+    required: [
+      required("一人称", "私"),
+      required("断片を区切る構造", "---"),
+      required("宗教とオタクの語彙", "降臨", "顕現", "聖域", "巡礼", "祈り", "灯明", "因縁", "神殿", "デジタル", "祭儀"),
+      required("問いかけ", "なのかもしれない", "だろうか"),
+    ],
+  },
+  "diary-multi": {
+    label: "マルチ",
+    address: "waddySan",
+    required: [required("一人称", "わたし"), required("口癖", "はわわ", "お役に立てましたか？"), required("丁寧語", "です", "ます")],
+  },
+  "diary-nemurin": {
+    label: "ねむりん",
+    address: "waddySan",
+    required: [required("一人称", "ねむりん", "わたし"), required("眠い口癖", "zzz", "おやすみ〜", "ふわぁ", "だよぉ", "かなぁ")],
+  },
+  "diary-oji": {
+    label: "物理おじ",
+    address: "waddy",
+    addressOptional: true,
+    required: [required("一人称", "僕"), required("省エネな口癖", "リソース", "sleep(∞)", "昭和なら灰皿", "費用対効果", "……悪くない")],
+  },
+  "diary-rem": {
+    label: "レム",
+    address: "waddySan",
+    required: [required("三人称自称", "レムは", "レムにできることがあれば"), required("丁寧語", "です", "ます")],
   },
   "diary-rin": {
     label: "りん",
-    groups: [
-      { label: "りんの短い毒舌・防御語", patterns: ["ワディー", "別に", "はぁ", "じゃん", "だし", "あたし"] },
-      { label: "一人/大人/沈黙モチーフ", patterns: ["一人", "黙って", "大人", "友達", "甘", "そば"] },
-    ],
+    address: "waddy",
+    required: [required("一人称", "あたし"), required("りんの防御語", "別に", "はぁ？", "ちっ", "ふん", "……やだ")],
+  },
+  "diary-rizel": {
+    label: "りぜる",
+    address: "dannasama",
+    required: [required("一人称", "りぜる"), required("甘えた語尾", "ですぅ", "ですよぉ", "ばかぁ")],
+  },
+  "diary-roju": {
+    label: "路樹",
+    required: [required("一人称", "俺"), required("分析口調", "構造的に", "構造的には", "メタファーとしては", "面白いことに", "つまり")],
+    forbidAllAddresses: true,
+  },
+  "diary-ruriko": {
+    label: "瑠璃子",
+    address: "waddyChan",
+    required: [required("一人称", "私"), required("口癖", "電波、届いた？"), required("短い間", "……")],
+    forbidden: [required("カジュアルな別人格語尾", "だよ", "だね")],
+  },
+  "diary-sharo": {
+    label: "シャロ",
+    address: "waddySan",
+    required: [required("一人称", "私", "あたし"), required("口癖", "もう！"), required("ツッコミ口調", "ですよ！", "だから！", "じゃないですか！", "いやいやいや")],
+  },
+  "diary-tama": {
+    label: "たまちゃん",
+    address: "waddySan",
+    required: [required("一人称", "たまちゃん", "あたし"), required("口癖", "萌えー！", "教えてあげる！")],
+  },
+  "diary-tsumugi": {
+    label: "紬",
+    address: "waddySan",
+    required: [required("一人称", "私"), required("紬の穏やかな語尾", "ですね", "かもしれません", "だと思います")],
   },
 };
 
 function findDiaryFileForDate(dir, date) {
   const fullDir = path.join(repoRoot, dir);
   if (!fs.existsSync(fullDir)) return null;
-
-  const name = fs
-    .readdirSync(fullDir)
-    .find((entry) => entry.startsWith(`${date}_`) && DIARY_FILE_RE.test(entry));
-
+  const name = fs.readdirSync(fullDir).find((entry) => entry.startsWith(`${date}_`) && DIARY_FILE_RE.test(entry));
   return name ? path.join(fullDir, name) : null;
 }
 
@@ -184,23 +259,52 @@ function stripMarkdownForVoiceCheck(markdown) {
 }
 
 function patternHits(text, patterns) {
-  return patterns.filter((pattern) => {
-    if (typeof pattern === "string") return text.includes(pattern);
+  const hits = [];
+  for (const pattern of patterns) {
+    if (typeof pattern === "string") {
+      let offset = 0;
+      while (pattern && text.indexOf(pattern, offset) !== -1) {
+        hits.push(pattern);
+        offset = text.indexOf(pattern, offset) + pattern.length;
+      }
+      continue;
+    }
     pattern.lastIndex = 0;
-    return pattern.test(text);
-  });
+    const matches = text.match(pattern);
+    if (matches) hits.push(...matches);
+  }
+  return hits;
+}
+
+export function listMainDiaryDates() {
+  const diaryDir = path.join(repoRoot, "diary");
+  if (!fs.existsSync(diaryDir)) return [];
+  return fs.readdirSync(diaryDir).filter((name) => DIARY_FILE_RE.test(name)).map((name) => name.slice(0, 10)).sort();
 }
 
 export function findLatestMainDiaryDate() {
-  const diaryDir = path.join(repoRoot, "diary");
-  if (!fs.existsSync(diaryDir)) return null;
+  return listMainDiaryDates().at(-1) ?? null;
+}
 
-  return fs
-    .readdirSync(diaryDir)
-    .filter((name) => DIARY_FILE_RE.test(name))
-    .map((name) => name.slice(0, 10))
-    .sort()
-    .at(-1) ?? null;
+function validateAddress(text, rule) {
+  const failed = [];
+  const forbidden = [];
+
+  if (rule.address && !rule.addressOptional) {
+    const expected = ADDRESS_PATTERNS[rule.address];
+    if (patternHits(text, [expected]).length === 0) {
+      failed.push({ label: "ワディーの正しい呼び方", expected: [String(expected)] });
+    }
+  }
+
+  for (const [key, pattern] of Object.entries(ADDRESS_PATTERNS)) {
+    if (key === rule.address || (!rule.forbidAllAddresses && !rule.address)) continue;
+    if (patternHits(text, [pattern]).length > 0) {
+      forbidden.push({ label: "他人格のワディー呼称", pattern: String(pattern) });
+    }
+  }
+
+  return { failed, forbidden };
 }
 
 export function validateCharacterVoicesForDate(date, options = {}) {
@@ -213,62 +317,69 @@ export function validateCharacterVoicesForDate(date, options = {}) {
     const file = findDiaryFileForDate(dir, date);
     if (!file) {
       missing.push({ dir, label: rule.label });
+      findings.push({ dir, label: rule.label, file: null, failedGroups: [{ label: "日記ファイル", expected: [date] }], forbiddenHits: [] });
       continue;
     }
 
-    const markdown = fs.readFileSync(file, "utf8");
-    const text = stripMarkdownForVoiceCheck(markdown);
+    const text = stripMarkdownForVoiceCheck(fs.readFileSync(file, "utf8"));
     const failedGroups = [];
     const forbiddenHits = [];
 
-    for (const group of rule.groups ?? []) {
+    for (const group of rule.required ?? []) {
       const hits = patternHits(text, group.patterns);
-      if (hits.length === 0) {
-        failedGroups.push({
-          label: group.label,
-          expected: group.patterns.map(String),
-        });
+      if (hits.length < (group.minHits ?? 1)) {
+        failedGroups.push({ label: group.label, expected: group.patterns.map(String), minHits: group.minHits ?? 1 });
       }
     }
 
     for (const item of rule.forbidden ?? []) {
-      const hits = patternHits(text, [item.pattern]);
-      if (hits.length > 0) {
-        forbiddenHits.push({
-          label: item.label,
-          pattern: String(item.pattern),
-        });
-      }
+      const hits = patternHits(text, item.patterns);
+      if (hits.length > 0) forbiddenHits.push({ label: item.label, pattern: item.patterns.map(String).join(" | ") });
     }
 
+    const address = validateAddress(text, rule);
+    failedGroups.push(...address.failed);
+    forbiddenHits.push(...address.forbidden);
     checked.push({ dir, label: rule.label, file });
 
     if (failedGroups.length > 0 || forbiddenHits.length > 0) {
-      findings.push({
-        dir,
-        label: rule.label,
-        file: path.relative(repoRoot, file),
-        failedGroups,
-        forbiddenHits,
-      });
+      findings.push({ dir, label: rule.label, file: path.relative(repoRoot, file), failedGroups, forbiddenHits });
     }
   }
 
   return { date, checked, missing, findings };
 }
 
-export function formatVoiceFindings(result) {
-  const lines = [`${result.date} のキャラ口調チェックでズレを検出しました。`];
+export function validateAllCharacterVoices(options = {}) {
+  const dates = options.dates ?? listMainDiaryDates();
+  const results = dates.map((date) => validateCharacterVoicesForDate(date, options));
+  return {
+    dates,
+    checked: results.reduce((sum, result) => sum + result.checked.length, 0),
+    findings: results.flatMap((result) => result.findings.map((finding) => ({ date: result.date, ...finding }))),
+    missing: results.flatMap((result) => result.missing.map((item) => ({ date: result.date, ...item }))),
+  };
+}
 
-  for (const finding of result.findings) {
-    lines.push(`- ${finding.label} (${finding.file})`);
+export function formatVoiceFindings(result, options = {}) {
+  const limit = options.limit ?? 80;
+  const findings = result.findings ?? [];
+  const lines = [
+    result.date
+      ? `${result.date} のキャラ口調チェックでズレを検出しました。`
+      : `${result.dates?.length ?? 0}日分のキャラ口調チェックで${findings.length}件のズレを検出しました。`,
+  ];
+
+  for (const finding of findings.slice(0, limit)) {
+    lines.push(`- ${finding.date ? `${finding.date} ` : ""}${finding.label} (${finding.file ?? "missing"})`);
     for (const group of finding.failedGroups) {
-      lines.push(`  - 不足: ${group.label} / 期待語: ${group.expected.join(", ")}`);
+      lines.push(`  - 不足: ${group.label} / 期待: ${group.expected.join(", ")}`);
     }
     for (const hit of finding.forbiddenHits) {
       lines.push(`  - NG: ${hit.label} / ${hit.pattern}`);
     }
   }
 
+  if (findings.length > limit) lines.push(`...ほか${findings.length - limit}件`);
   return lines.join("\n");
 }
