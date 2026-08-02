@@ -1,0 +1,93 @@
+{
+  "date": "2026-02-23",
+  "title": "午前0時の記憶庫 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "午後7時の布団",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-23_午前0時の記憶庫",
+      "entry": "standalone_start",
+      "summary": "午後7時の布団"
+    },
+    {
+      "id": "choose_path",
+      "title": "午前0時の3つの扉",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-23_午前0時の記憶庫",
+      "entry": "choose_path",
+      "summary": "午前0時の3つの扉"
+    },
+    {
+      "id": "END_SLEEP",
+      "title": "眠りの部屋",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-02-23_午前0時の記憶庫",
+      "entry": "END_SLEEP",
+      "summary": "眠りの部屋"
+    },
+    {
+      "id": "END_ARCHIVE",
+      "title": "自分の書架",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-02-23_午前0時の記憶庫",
+      "entry": "END_ARCHIVE",
+      "summary": "自分の書架"
+    },
+    {
+      "id": "END_DIALOGUE",
+      "title": "祈りの窓",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-02-23_午前0時の記憶庫",
+      "entry": "END_DIALOGUE",
+      "summary": "祈りの窓"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_SLEEP",
+      "choiceText": "もう一度布団へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_ARCHIVE",
+      "choiceText": "白い日記を書架へ置く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_DIALOGUE",
+      "choiceText": "祈りの窓を開ける",
+      "style": "kenkai"
+    }
+  ]
+}

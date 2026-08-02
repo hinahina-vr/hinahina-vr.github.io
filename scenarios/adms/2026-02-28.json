@@ -1,0 +1,93 @@
+{
+  "date": "2026-02-28",
+  "title": "白黒のボールが止まる日 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "午前9時の配信画面",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-28_白黒のボールが止まる日",
+      "entry": "standalone_start",
+      "summary": "午前9時の配信画面"
+    },
+    {
+      "id": "choose_path",
+      "title": "停止前の三つの棚",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-28_白黒のボールが止まる日",
+      "entry": "choose_path",
+      "summary": "停止前の三つの棚"
+    },
+    {
+      "id": "END_ARCHIVE",
+      "title": "個人学習の棚",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-02-28_白黒のボールが止まる日",
+      "entry": "END_ARCHIVE",
+      "summary": "個人学習の棚"
+    },
+    {
+      "id": "END_MODEL",
+      "title": "白黒のレール",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-02-28_白黒のボールが止まる日",
+      "entry": "END_MODEL",
+      "summary": "白黒のレール"
+    },
+    {
+      "id": "END_NOTICE",
+      "title": "大学の掲示板",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-02-28_白黒のボールが止まる日",
+      "entry": "END_NOTICE",
+      "summary": "大学の掲示板"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_ARCHIVE",
+      "choiceText": "自分の学習記録として保存する",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_MODEL",
+      "choiceText": "展示の仕組みを別資料で確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_NOTICE",
+      "choiceText": "大学へ代替教材を求める",
+      "style": "kenkai"
+    }
+  ]
+}

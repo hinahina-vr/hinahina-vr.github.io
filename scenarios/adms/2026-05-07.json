@@ -1,0 +1,189 @@
+{
+  "date": "2026-05-07",
+  "title": "旅一番の鹵水鵝と深夜労働 A.D.M.S.",
+  "rootNodeId": "dish_intro",
+  "nodes": [
+    {
+      "id": "dish_intro",
+      "title": "潮州料理の鹵水鵝",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "dish_intro",
+      "summary": "鹵水鵝の材料と調理法を説明する。"
+    },
+    {
+      "id": "flavor",
+      "title": "濃厚でさっぱり",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "flavor",
+      "summary": "本人が一位にした味の理由を読む。"
+    },
+    {
+      "id": "dabao",
+      "title": "同席者の打包",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "dabao",
+      "summary": "同席者だけが持ち帰った行動を説明する。"
+    },
+    {
+      "id": "images",
+      "title": "見本と工程図",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "images",
+      "summary": "添付された二種類の参考画像を見る。"
+    },
+    {
+      "id": "late_work",
+      "title": "23時57分まで労働",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "late_work",
+      "summary": "帰国翌日に日付の終わり近くまで働く。"
+    },
+    {
+      "id": "END_DISH",
+      "title": "一羽を鹵水で煮る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "END_DISH",
+      "summary": "一羽を鹵水で煮る"
+    },
+    {
+      "id": "END_TASTE",
+      "title": "旅行の料理1位",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "END_TASTE",
+      "summary": "旅行の料理1位"
+    },
+    {
+      "id": "END_DABAO",
+      "title": "高級品は推測",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "END_DABAO",
+      "summary": "高級品は推測"
+    },
+    {
+      "id": "END_IMAGES",
+      "title": "実食写真ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "END_IMAGES",
+      "summary": "実食写真ではない"
+    },
+    {
+      "id": "END_WORK",
+      "title": "しんどの三文字",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-07_旅一番の鹵水鵝と深夜労働",
+      "entry": "END_WORK",
+      "summary": "しんどの三文字"
+    }
+  ],
+  "edges": [
+    {
+      "from": "dish_intro",
+      "to": "END_DISH",
+      "choiceText": "料理の基本を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "dish_intro",
+      "to": "flavor",
+      "choiceText": "一位になった味へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "flavor",
+      "to": "END_TASTE",
+      "choiceText": "具体的な味覚評価として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "flavor",
+      "to": "dabao",
+      "choiceText": "同席者の行動へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "dabao",
+      "to": "END_DABAO",
+      "choiceText": "事実と推測を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "dabao",
+      "to": "images",
+      "choiceText": "添付画像へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "images",
+      "to": "END_IMAGES",
+      "choiceText": "参考資料として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "images",
+      "to": "late_work",
+      "choiceText": "一日の終わりへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "late_work",
+      "to": "END_WORK",
+      "choiceText": "短い疲労感想で閉じる",
+      "style": "kenkai"
+    },
+    {
+      "from": "late_work",
+      "to": "dish_intro",
+      "choiceText": "旅一番の料理へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

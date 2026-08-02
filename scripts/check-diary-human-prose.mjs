@@ -8,18 +8,36 @@ import {
 } from "./lib/diary-self-date.mjs";
 
 const PROSE_PATTERNS = [
-  ["画面・投稿を見た報告だけの導入", /(?:画像|画面|投稿|写真)を見た[。．]/g],
-  [
-    "短い反応を作業記録として書く表現",
-    /三文字だけ(?:反応|返事)|一言だけ(?:反応|返事)|三文字しかない(?:んじゃなくて|のではなく)/g,
-  ],
-  ["読み手に見えない資料を根拠にする表現", /記録に(?:は)?ない|資料に(?:は)?ありません|確認でき(?:ません|ない)|断定でき(?:ません|ない)/g],
-  [
-    "欠けた情報の説明を本文にする表現",
-    /どんな[^。]{0,24}(?:書いて|記録されて)ない(?:けど|が)|(?:訪問|仕事|授業|注文)の?目的(?:は|が)[^。]{0,16}(?:不明|分からない|わからない)/g,
-  ],
-  ["本文を監査報告として閉じる表現", /一件で閉じ|証拠の境界|記録だけで終え|記録として残|位置記録として|分からない部分は/g],
-  ["角括弧に頼った台詞・用語表現", /[「」]/g],
+  {
+    label: "画面・投稿を見た報告だけの導入",
+    regex: /(?:画像|画面|投稿|写真)を見た[。．]/g,
+    scope: "opening",
+  },
+  {
+    label: "短い反応を作業記録として書く表現",
+    regex: /三文字だけ(?:反応|返事)|一言だけ(?:反応|返事)|三文字しかない(?:んじゃなくて|のではなく)/g,
+    scope: "any",
+  },
+  {
+    label: "読み手に見えない資料を根拠にして始める・閉じる表現",
+    regex: /記録に(?:は)?ない|資料に(?:は)?ありません|確認でき(?:ません|ない)|断定でき(?:ません|ない)/g,
+    scope: "edges",
+  },
+  {
+    label: "欠けた情報の説明だけで閉じる表現",
+    regex: /どんな[^。]{0,24}(?:書いて|記録されて)ない(?:けど|が)|(?:訪問|仕事|授業|注文)の?目的(?:は|が)[^。]{0,16}(?:不明|分からない|わからない)/g,
+    scope: "closing",
+  },
+  {
+    label: "本文を監査報告として閉じる表現",
+    regex: /一件で閉じ|証拠の境界|記録だけで終え|記録として残|位置記録として|分からない部分は/g,
+    scope: "closing",
+  },
+  {
+    label: "角括弧に頼った台詞・用語表現",
+    regex: /[「」]/g,
+    scope: "any",
+  },
 ];
 
 const IMPERATIVE_ENDINGS =
@@ -46,17 +64,31 @@ function sentenceList(text) {
     .filter(Boolean);
 }
 
+function scopedText(text, scope) {
+  const sentences = sentenceList(text);
+  if (scope === "opening") return sentences.slice(0, 1).join(" ");
+  if (scope === "closing") return sentences.slice(-1).join(" ");
+  if (scope === "edges") return [sentences[0], sentences.at(-1)].filter(Boolean).join(" ");
+  return text;
+}
+
+function proseIssue(text, pattern) {
+  const hits = scopedText(text, pattern.scope).match(pattern.regex);
+  if (!hits) return null;
+  return `${pattern.label}: ${[...new Set(hits)].join(", ")}`;
+}
+
 const findings = [];
 
 for (const file of collectDiaryMarkdownFiles()) {
   const text = visibleMarkdown(readDiaryFile(file));
 
-  for (const [label, regex] of PROSE_PATTERNS) {
-    const hits = text.match(regex);
-    if (!hits) continue;
+  for (const pattern of PROSE_PATTERNS) {
+    const issue = proseIssue(text, pattern);
+    if (!issue) continue;
     findings.push({
       file: path.relative(repoRoot, file.fullPath),
-      issue: `${label}: ${[...new Set(hits)].join(", ")}`,
+      issue,
     });
   }
 
@@ -80,12 +112,12 @@ for (const name of fs.readdirSync(scenarioDir).filter((entry) => /^2026-.+\.json
 
   for (const entry of data.scenario ?? []) {
     if (typeof entry.text === "string") {
-      for (const [label, regex] of PROSE_PATTERNS) {
-        const hits = entry.text.match(regex);
-        if (!hits) continue;
+      for (const pattern of PROSE_PATTERNS) {
+        const issue = proseIssue(entry.text, pattern);
+        if (!issue) continue;
         findings.push({
           file: path.relative(repoRoot, fullPath),
-          issue: `${label}: ${[...new Set(hits)].join(", ")}`,
+          issue,
         });
       }
     }

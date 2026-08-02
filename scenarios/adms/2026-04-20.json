@@ -1,116 +1,194 @@
 {
   "date": "2026-04-20",
-  "title": "数字を飲ませる夜 A.D.M.S.",
+  "title": "完全理解からLLMガチャまで A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "配線を終えた机",
+      "title": "午前0時16分の完全理解",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-20_測定前の選択",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
       "entry": "standalone_start",
-      "summary": "ESP32とセンサーをつないだ試作機が動き始める。"
+      "summary": "ESP32を完全に理解したという一文から始まる。"
     },
     {
-      "id": "baseline",
-      "title": "飲む前を測る",
+      "id": "display",
+      "title": "NOMISUGI LEVEL 99",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 1,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-20_測定前の選択",
-      "entry": "baseline",
-      "summary": "酒を飲む前の値を記録して、比較の基準を作る。"
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "display",
+      "summary": "試作画面にNOMISUGIとLEVEL 99を出す。"
     },
     {
-      "id": "compare",
-      "title": "変化を確かめる",
+      "id": "sobriety",
+      "title": "画面と本人の落差",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 2,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-20_測定前の選択",
-      "entry": "compare",
-      "summary": "変化を確かめる"
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "sobriety",
+      "summary": "本人はシラフで、画面は実測結果ではない。"
     },
     {
-      "id": "END_NUMBER",
-      "title": "前後の値を残す",
+      "id": "image_model",
+      "title": "引けない画像モデル",
       "realm": "kenkai",
-      "kind": "ending",
-      "layer": 3,
-      "lane": 2,
-      "icon": "●",
-      "scenario": "2026-04-20_測定前の選択",
-      "entry": "END_NUMBER",
-      "summary": "感覚と数値を並べ、試作機の限界ごと記録する。"
-    },
-    {
-      "id": "END_GUESS",
-      "title": "酔いだけを頼る",
-      "realm": "kenkai",
-      "kind": "ending",
+      "kind": "branch",
       "layer": 1,
       "lane": 6,
-      "icon": "●",
-      "scenario": "2026-04-20_測定前の選択",
-      "entry": "END_GUESS",
-      "summary": "酔いだけを頼る"
+      "icon": "◇",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "image_model",
+      "summary": "GPT-image-2を使えない不満をガチャへ変える。"
     },
     {
-      "id": "END_WAIT",
-      "title": "今夜は飲まない",
+      "id": "llm_gacha",
+      "title": "生成が抽選に見える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "◇",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "llm_gacha",
+      "summary": "反復生成からパチスロを連想する。"
+    },
+    {
+      "id": "END_MASTERY",
+      "title": "入口で完全と言う",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 1,
       "lane": 10,
       "icon": "●",
-      "scenario": "2026-04-20_測定前の選択",
-      "entry": "END_WAIT",
-      "summary": "今夜は飲まない"
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "END_MASTERY",
+      "summary": "入口で完全と言う"
+    },
+    {
+      "id": "END_DISPLAY",
+      "title": "表示テストの成果",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "END_DISPLAY",
+      "summary": "表示テストの成果"
+    },
+    {
+      "id": "END_SOBER",
+      "title": "機械だけが酔っている",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "END_SOBER",
+      "summary": "機械だけが酔っている"
+    },
+    {
+      "id": "END_UNAVAILABLE",
+      "title": "一生引けないという自虐",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 14,
+      "icon": "●",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "END_UNAVAILABLE",
+      "summary": "一生引けないという自虐"
+    },
+    {
+      "id": "END_SLOT",
+      "title": "生成ボタンからレバーへ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-20_完全理解からLLMガチャまで",
+      "entry": "END_SLOT",
+      "summary": "生成ボタンからレバーへ"
     }
   ],
   "edges": [
     {
       "from": "standalone_start",
-      "to": "baseline",
-      "choiceText": "飲む前の値を何度か測る",
+      "to": "END_MASTERY",
+      "choiceText": "完全理解という冗談を読む",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
-      "to": "END_GUESS",
-      "choiceText": "完成祝いを先に始める",
+      "to": "display",
+      "choiceText": "56分後の進捗写真を見る",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
-      "to": "END_WAIT",
-      "choiceText": "熱くなった配線を調べる",
+      "to": "image_model",
+      "choiceText": "夜の生成AIへ進む",
       "style": "kenkai"
     },
     {
-      "from": "baseline",
-      "to": "compare",
-      "choiceText": "進む",
+      "from": "display",
+      "to": "END_DISPLAY",
+      "choiceText": "表示機能の成果として残す",
       "style": "kenkai"
     },
     {
-      "from": "compare",
-      "to": "END_NUMBER",
-      "choiceText": "水を飲み、タイマーを待つ",
+      "from": "display",
+      "to": "sobriety",
+      "choiceText": "本人の状態を確かめる",
       "style": "kenkai"
     },
     {
-      "from": "compare",
-      "to": "END_GUESS",
-      "choiceText": "大きな数字を出すため二杯目を注ぐ",
+      "from": "sobriety",
+      "to": "END_SOBER",
+      "choiceText": "表示と実状態を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "sobriety",
+      "to": "image_model",
+      "choiceText": "夜の別の抽選へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "image_model",
+      "to": "END_UNAVAILABLE",
+      "choiceText": "今夜の自虐として受け取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "image_model",
+      "to": "llm_gacha",
+      "choiceText": "四分後の投稿へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "llm_gacha",
+      "to": "END_SLOT",
+      "choiceText": "生成と抽選の近さを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "llm_gacha",
+      "to": "END_DISPLAY",
+      "choiceText": "朝の手作業と比べる",
       "style": "kenkai"
     }
   ]

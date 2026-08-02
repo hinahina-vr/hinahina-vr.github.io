@@ -1,0 +1,189 @@
+{
+  "date": "2026-05-21",
+  "title": "ナヒーダと池田大作ダンス A.D.M.S.",
+  "rootNodeId": "mood",
+  "nodes": [
+    {
+      "id": "mood",
+      "title": "今日の気分に一本を選ぶ",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "mood",
+      "summary": "22時43分に動画をその日の気分として残す。"
+    },
+    {
+      "id": "pair",
+      "title": "同じ題名に並ばない二人",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "pair",
+      "summary": "実在人物とゲーム人物の背景を確認する。"
+    },
+    {
+      "id": "thumbnail",
+      "title": "緑の衣装と歌詞",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "thumbnail",
+      "summary": "人物、姿勢、字幕を一枚から読む。"
+    },
+    {
+      "id": "remix",
+      "title": "踊りをナヒーダへ移す",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "remix",
+      "summary": "歌と動きを別の映像へ重ねた編集を見る。"
+    },
+    {
+      "id": "uncle",
+      "title": "エピックトランスおじさん",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "uncle",
+      "summary": "11分後に増えた一言を受け取る。"
+    },
+    {
+      "id": "END_MOOD",
+      "title": "理由は補わない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "END_MOOD",
+      "summary": "理由は補わない"
+    },
+    {
+      "id": "END_PAIR",
+      "title": "実際の共演ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "END_PAIR",
+      "summary": "実際の共演ではない"
+    },
+    {
+      "id": "END_THUMBNAIL",
+      "title": "静止画で分かる範囲",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "END_THUMBNAIL",
+      "summary": "静止画で分かる範囲"
+    },
+    {
+      "id": "END_REMIX",
+      "title": "公式設定とは扱わない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "END_REMIX",
+      "summary": "公式設定とは扱わない"
+    },
+    {
+      "id": "END_UNCLE",
+      "title": "正式な肩書きではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-21_ナヒーダと池田大作ダンス",
+      "entry": "END_UNCLE",
+      "summary": "正式な肩書きではない"
+    }
+  ],
+  "edges": [
+    {
+      "from": "mood",
+      "to": "END_MOOD",
+      "choiceText": "記録の短さを保つ",
+      "style": "kenkai"
+    },
+    {
+      "from": "mood",
+      "to": "pair",
+      "choiceText": "題名の二人を知る",
+      "style": "kenkai"
+    },
+    {
+      "from": "pair",
+      "to": "END_PAIR",
+      "choiceText": "関係の範囲を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "pair",
+      "to": "thumbnail",
+      "choiceText": "サムネイルを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "thumbnail",
+      "to": "END_THUMBNAIL",
+      "choiceText": "一枚で分かる範囲に留める",
+      "style": "kenkai"
+    },
+    {
+      "from": "thumbnail",
+      "to": "remix",
+      "choiceText": "編集の仕組みへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "remix",
+      "to": "END_REMIX",
+      "choiceText": "編集物として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "remix",
+      "to": "uncle",
+      "choiceText": "11分後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "uncle",
+      "to": "END_UNCLE",
+      "choiceText": "一夜の名札として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "uncle",
+      "to": "mood",
+      "choiceText": "動画選択へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

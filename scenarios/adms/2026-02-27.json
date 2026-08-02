@@ -1,0 +1,93 @@
+{
+  "date": "2026-02-27",
+  "title": "神棚へ続く動画工場 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "月末金曜の動画工場",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-27_神棚へ続く動画工場",
+      "entry": "standalone_start",
+      "summary": "月末金曜の動画工場"
+    },
+    {
+      "id": "choose_path",
+      "title": "人間が止めた三地点",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-27_神棚へ続く動画工場",
+      "entry": "choose_path",
+      "summary": "人間が止めた三地点"
+    },
+    {
+      "id": "END_READING",
+      "title": "誤読の辞書",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-02-27_神棚へ続く動画工場",
+      "entry": "END_READING",
+      "summary": "誤読の辞書"
+    },
+    {
+      "id": "END_SCREEN",
+      "title": "視聴者の椅子",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-02-27_神棚へ続く動画工場",
+      "entry": "END_SCREEN",
+      "summary": "視聴者の椅子"
+    },
+    {
+      "id": "END_SHRINE",
+      "title": "工場の神棚",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-02-27_神棚へ続く動画工場",
+      "entry": "END_SHRINE",
+      "summary": "工場の神棚"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_READING",
+      "choiceText": "漢字の誤読を辞書へ戻す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_SCREEN",
+      "choiceText": "初めて見る人に画面を渡す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_SHRINE",
+      "choiceText": "神棚へ上がる条件を決める",
+      "style": "kenkai"
+    }
+  ]
+}

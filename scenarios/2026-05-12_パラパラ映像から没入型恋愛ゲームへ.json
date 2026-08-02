@@ -1,0 +1,77 @@
+{
+  "title": "パラパラ映像から没入型恋愛ゲームへ",
+  "subtitle": "GLSL、AI支援、59秒動画、卒業制作",
+  "genre": "分からないコードから作りたい作品を見つける深夜",
+  "date": "2026-05-12",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "screen": { "name": "GLSLの画面", "color": "#6f9dbb", "emoji": "●" },
+    "room": { "name": "光る部屋", "color": "#b88bc4", "emoji": "◆" }
+  },
+  "mapTitles": {
+    "confusion": "GLSLが分からない",
+    "run_first": "先に動かして覚える",
+    "parapara": "59秒のパラパラ映像",
+    "graduation": "卒業制作の構想",
+    "END_CONFUSION": "AIで壁を越える",
+    "END_LEARNING": "動作結果が教材",
+    "END_VIDEO": "部屋全体が映像",
+    "END_PROJECT": "没入型恋愛ゲームへ"
+  },
+  "mapSummaries": {
+    "confusion": "描画言語の理解不足を正直に認める。",
+    "run_first": "AIで動かした結果から学ぶ。",
+    "parapara": "光が空間全面へ流れる練習を見る。",
+    "graduation": "練習を卒業制作の形式へ育てる。"
+  },
+  "scenario": [
+    { "label": "confusion" },
+    { "bg": "station_night" },
+    { "speaker": "screen", "text": "午前1時29分、GLSLがまじで分からないと書いた。GPUで色や形を計算する低い層へ降りるたび、AIへコードを渡して先へ進んだ。" },
+    {
+      "choices": [
+        { "text": "未理解と動作を分ける", "goto": "END_CONFUSION" },
+        { "text": "学び方へ進む", "goto": "run_first" }
+      ]
+    },
+    { "label": "run_first" },
+    { "bg": "home_office" },
+    { "speaker": "screen", "text": "理解を終えてから作るのではなく、まず動かし、画面の変化を見ながら覚える。この順番をバイブコーディングの大きな恩恵と感じた。" },
+    {
+      "choices": [
+        { "text": "動作結果から学ぶ", "goto": "END_LEARNING" },
+        { "text": "練習動画へ進む", "goto": "parapara" }
+      ]
+    },
+    { "label": "parapara" },
+    { "bg": "twilight" },
+    { "speaker": "room", "text": "2時41分、59秒の動画を公開した。白髪のアバターがパラパラを踊り、白い光の帯と粒が壁、天井、床へ流れた。本人の評価はまだ下手だった。" },
+    {
+      "choices": [
+        { "text": "練習成果を保存する", "goto": "END_VIDEO" },
+        { "text": "10分後へ進む", "goto": "graduation" }
+      ]
+    },
+    { "label": "graduation" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "2時51分、卒業制作でイマーシブエロゲーを絶対に作ると決めた。正面画面だけでなく、登場人物と演出を周囲へ広げる恋愛ゲームの構想だった。" },
+    {
+      "choices": [
+        { "text": "作品形式の決意を残す", "goto": "END_PROJECT" },
+        { "text": "GLSLの画面へ戻る", "goto": "confusion" }
+      ]
+    },
+    { "label": "END_CONFUSION" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "コードが動いたことと、GLSLを理解し終えたことは別。AI支援で制作を止めずに進んだ。\nEND AIで壁を越える" },
+    { "label": "END_LEARNING" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "AIが出した結果を完成の代用品にせず、見ながら仕組みを覚えるための具体物として使った。\nEND 動作結果が教材" },
+    { "label": "END_VIDEO" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "人物の後ろだけでなく壁、天井、床も演出にする方向が見えた。59秒は完成版ではなく練習記録である。\nEND 部屋全体が映像" },
+    { "label": "END_PROJECT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "物語や操作は未定でも、卒業制作の形式は決まった。恋愛ゲームを正面画面の外へ広げる。\nEND 没入型恋愛ゲームへ" }
+  ]
+}

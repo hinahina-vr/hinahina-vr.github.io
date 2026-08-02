@@ -1,0 +1,93 @@
+{
+  "date": "2026-03-06",
+  "title": "15時37分の受付票 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "千代田区の受付",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-06_15時37分の受付票",
+      "entry": "standalone_start",
+      "summary": "千代田区の受付"
+    },
+    {
+      "id": "choose_path",
+      "title": "三つの記入欄",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-06_15時37分の受付票",
+      "entry": "choose_path",
+      "summary": "三つの記入欄"
+    },
+    {
+      "id": "END_PROFILE",
+      "title": "会社概要の欄",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-03-06_15時37分の受付票",
+      "entry": "END_PROFILE",
+      "summary": "会社概要の欄"
+    },
+    {
+      "id": "END_TIME",
+      "title": "時刻の欄",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-03-06_15時37分の受付票",
+      "entry": "END_TIME",
+      "summary": "時刻の欄"
+    },
+    {
+      "id": "END_BLANK",
+      "title": "用件の空欄",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-03-06_15時37分の受付票",
+      "entry": "END_BLANK",
+      "summary": "用件の空欄"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_PROFILE",
+      "choiceText": "会社の仕事を一行で説明する",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_TIME",
+      "choiceText": "午後3時37分を記録する",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_BLANK",
+      "choiceText": "訪問用件を空欄のまま提出する",
+      "style": "kenkai"
+    }
+  ]
+}

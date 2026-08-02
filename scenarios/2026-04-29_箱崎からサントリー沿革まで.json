@@ -1,0 +1,92 @@
+{
+  "title": "箱崎からサントリー沿革まで",
+  "subtitle": "場所の記憶、自動リギング、映像連携、企業史",
+  "genre": "四つの情報を読む一日",
+  "date": "2026-04-29",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "avatar": { "name": "3Dアバター", "color": "#76a9d4", "emoji": "▦" },
+    "timeline": { "name": "沿革画像", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "午前9時1分の箱崎",
+    "rigging": "骨入りアバターを待つ",
+    "connector": "ClaudeとResolume",
+    "early_history": "鳥井商店と赤玉",
+    "late_history": "白札からサントリーへ",
+    "END_MEMORY": "勤務先ではない箱崎ビル",
+    "END_WAIT": "実行していないリギング",
+    "END_CONNECTOR": "導入前のコネクタ",
+    "END_ORIGIN": "1899年と1907年",
+    "END_NAME": "1929年から1963年"
+  },
+  "mapSummaries": {
+    "standalone_start": "IBMの箱崎撤退からビル内コンビニの記憶を思い出す。",
+    "rigging": "リギング済み3Dアバターの自動生成を待つ。",
+    "connector": "ClaudeとResolumeのコネクタに驚く。",
+    "early_history": "鳥井商店創業と赤玉ポートワインを見る。",
+    "late_history": "白札とサントリーへの社名変更を見る。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "4月29日午前9時1分、IBMが箱崎拠点から撤退したと知った。ワディーは以前、永代橋のふもとに住み、箱崎ビルのコンビニへときどき寄っていた。" },
+    {
+      "choices": [
+        { "text": "企業と個人の記憶を分ける", "goto": "END_MEMORY" },
+        { "text": "43分後の願望へ進む", "goto": "rigging" }
+      ]
+    },
+    { "label": "rigging" },
+    { "bg": "dawn" },
+    { "speaker": "avatar", "text": "リギング済みの3Dアバターを作れる時代まで寝ていたいと書いた。リギングはモデルへ骨と関節を設定して動けるようにする工程で、この日に変換作業を行った記録ではない。" },
+    {
+      "choices": [
+        { "text": "将来の自動化要求として残す", "goto": "END_WAIT" },
+        { "text": "映像ソフトの連携へ進む", "goto": "connector" }
+      ]
+    },
+    { "label": "connector" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "午前10時20分、ClaudeとResolumeをつなぐコネクタがあると知って驚いた。Resolumeは映像をリアルタイムで組み合わせる演出ソフト。導入や実演は記録されていない。" },
+    {
+      "choices": [
+        { "text": "発見と利用を分ける", "goto": "END_CONNECTOR" },
+        { "text": "午後の沿革画像へ進む", "goto": "early_history" }
+      ]
+    },
+    { "label": "early_history" },
+    { "bg": "twilight" },
+    { "speaker": "timeline", "text": "午後2時35分、鳥井商店から寿屋を経てサントリーになるまでをまとめた画像を載せた。前半は1899年の鳥井商店創業と1907年の赤玉ポートワイン。" },
+    {
+      "choices": [
+        { "text": "前半の二項目を残す", "goto": "END_ORIGIN" },
+        { "text": "後半の年表へ進む", "goto": "late_history" }
+      ]
+    },
+    { "label": "late_history" },
+    { "bg": "station" },
+    { "speaker": "timeline", "text": "後半は1929年のサントリーウイスキー白札と、1963年のサントリーへの社名変更。商品名に現れた言葉が34年後に会社名になった。" },
+    {
+      "choices": [
+        { "text": "画像内の順序として読む", "goto": "END_NAME" },
+        { "text": "箱崎の朝へ戻る", "goto": "standalone_start" }
+      ]
+    },
+    { "label": "END_MEMORY" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "IBM社員としての記憶ではない。近所に住み、ビル内のコンビニへ寄った記憶である。大企業の撤退情報が、個人には生活圏の店を思い出す知らせとして届いた。\nEND 勤務先ではない箱崎ビル" },
+    { "label": "END_WAIT" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "人物絵の3D化、骨入れ、再生を実行した証拠はない。モデル生成の後に残るリギングまで自動化されたら起こしてほしい、という未来への要求だった。\nEND 実行していないリギング" },
+    { "label": "END_CONNECTOR" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "ClaudeとResolumeの接続手段を知ったが、インストール、設定、映像出力はしていない。人が操作する映像画面へAIが入れる入口を見つけたところで記録を止める。\nEND 導入前のコネクタ" },
+    { "label": "END_ORIGIN" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "沿革画像の始点は1899年の鳥井商店。その8年後に赤玉ポートワインが並ぶ。売上や開発物語を足さず、画像に表示された年と名称だけを残す。\nEND 1899年と1907年" },
+    { "label": "END_NAME" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "1929年の白札にサントリーという名が現れ、1963年に会社名となる。飲酒記録でも改名理由の調査でもなく、画像が示した34年の名称移動だった。\nEND 1929年から1963年" }
+  ]
+}

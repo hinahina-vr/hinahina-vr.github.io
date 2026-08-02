@@ -1,0 +1,80 @@
+{
+  "title": "夜10時33分の一地点",
+  "subtitle": "町田の蒙古タンメン中本だけが残った日",
+  "genre": "一件の位置記録",
+  "date": "2026-04-17",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "clock": { "name": "夜の時刻", "color": "#76a9d4", "emoji": "▦" },
+    "place": { "name": "店の位置", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "一件だけの4月17日",
+    "choose_fact": "時刻と場所",
+    "late_time": "午後10時33分",
+    "restaurant": "蒙古タンメン中本",
+    "evidence_limit": "チェックインの範囲",
+    "END_TIME": "日付が変わる前",
+    "END_PLACE": "町田の一地点",
+    "END_CONTEXT": "辛い店という背景",
+    "END_UNKNOWN": "注文は分からない"
+  },
+  "mapSummaries": {
+    "standalone_start": "文章も写真もない日に残った一件のチェックインを読む。",
+    "late_time": "日付が変わる1時間27分前の記録。",
+    "restaurant": "町田市の辛いタンメン店。",
+    "evidence_limit": "所在と注文を区別する。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "4月17日に残った公開記録は一件だけ。午後10時33分、東京都町田市の蒙古タンメン中本へのチェックインである。文章の投稿も写真もない。" },
+    {
+      "choices": [
+        { "text": "遅い時刻を読む", "goto": "late_time" },
+        { "text": "店がどんな場所か知る", "goto": "restaurant" },
+        { "text": "記録から分からないことを見る", "goto": "evidence_limit" }
+      ]
+    },
+    { "label": "late_time" },
+    { "bg": "station" },
+    { "speaker": "clock", "text": "午後10時33分は、日付が変わるまで1時間27分。夕食か間食かは分からないが、一日の終わりに近い時刻の位置記録だ。" },
+    {
+      "choices": [
+        { "text": "夜の終点として残す", "goto": "END_TIME" },
+        { "text": "場所を確かめる", "goto": "restaurant" }
+      ]
+    },
+    { "label": "restaurant" },
+    { "bg": "twilight" },
+    { "speaker": "place", "text": "蒙古タンメン中本は、味噌仕立ての辛いタンメンで知られる飲食店である。この一般情報は、初めて店名を読む人へ場所の種類を伝える。" },
+    {
+      "choices": [
+        { "text": "町田の一地点として残す", "goto": "END_PLACE" },
+        { "text": "店の背景だけ受け取る", "goto": "END_CONTEXT" },
+        { "text": "個人の注文と分ける", "goto": "evidence_limit" }
+      ]
+    },
+    { "label": "evidence_limit" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "チェックインは時刻と場所を示す。しかし料理の注文、飲食、辛さの感想、同行者、滞在時間は示さない。前日の電子工作との関係も記録されていない。" },
+    {
+      "choices": [
+        { "text": "未知の部分をそのまま残す", "goto": "END_UNKNOWN" },
+        { "text": "確かな店名へ戻る", "goto": "END_PLACE" }
+      ]
+    },
+    { "label": "END_TIME" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "日付が変わる前、4月17日の地図へ最後に置かれたのは町田の飲食店だった。その前の一日を説明できなくても、夜の遅い時刻にどこへいたかは一件の記録から分かる。\nEND 日付が変わる前" },
+    { "label": "END_PLACE" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "地図上で確認できるのは町田市の蒙古タンメン中本だけ。前後の経路を描かず、一地点を孤立したまま保存する。少ない情報でも、場所の固有名詞が一日の端を留める。\nEND 町田の一地点" },
+    { "label": "END_CONTEXT" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "蒙古タンメン中本が辛い味噌タンメンで知られる店だと分かれば、何の場所かは説明できる。ただし、それはワディーが代表料理を注文した証拠ではない。店の背景だけを添える。\nEND 辛い店という背景" },
+    { "label": "END_UNKNOWN" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "注文も写真も感想もない。だから食べた料理や辛さは書かない。4月17日は、午後10時33分に町田の店へ立ち寄った、という確かな一文だけで閉じる。\nEND 注文は分からない" }
+  ]
+}

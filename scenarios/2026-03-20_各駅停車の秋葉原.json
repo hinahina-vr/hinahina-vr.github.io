@@ -1,40 +1,47 @@
 {
   "title": "各駅停車の秋葉原",
-  "subtitle": "新宿から飲みに行くまで",
-  "genre": "街歩きノベル",
+  "subtitle": "5つの位置記録をたどる夢",
+  "genre": "時刻経路の分岐夢",
   "date": "2026-03-20",
   "chars": {
     "narrator": { "name": "", "color": "#a0a8b8", "emoji": "" },
-    "display": { "name": "車内表示", "color": "#e1c84f", "emoji": "▰" }
+    "display": { "name": "時刻表示", "color": "#e1c84f", "emoji": "▰" }
   },
   "mapTitles": {
-    "standalone_start": "新宿駅の黄色い電車",
-    "choose_train": "移動方法を選ぶ",
-    "END_LOCAL": "ミルクスタンドから歩く",
-    "END_RAPID": "早く着いて一軒選ぶ",
-    "END_RETURN": "乗り過ごして戻る"
+    "standalone_start": "新宿から秋葉原へ",
+    "choose_train": "三つの時刻を選ぶ",
+    "END_ARRIVAL": "15時37分の駅",
+    "END_CREATIVE": "19時28分の音楽バー",
+    "END_FINALE": "21時20分の終点"
   },
   "scenario": [
     { "label": "standalone_start" },
     { "bg": "station" },
-    { "speaker": "narrator", "text": "休日の夕方、新宿駅から秋葉原へ飲みに行く。総武線の黄色い各駅停車なら乗り換えなし。中央線快速へ移れば少し早いが、今日は窓際の席が空いていた。" },
-    { "speaker": "display", "text": "秋葉原まで二十分あまり。途中で眠ると、千葉方面まで運ばれます。" },
+    { "speaker": "narrator", "text": "午後3時すぎ、新宿から総武線の各駅停車で秋葉原へ向かった。速い中央線では得られない感じがある、と移動中に書いた日だった。" },
+    { "speaker": "narrator", "text": "秋葉原では、午後3時37分の電気街口とミルクスタンド、5時46分の金子屋、7時28分のIV AKIHABARA、9時20分の大阪王将が順番に記録された。" },
+    { "speaker": "display", "text": "夢の路線図には、約6時間の行程から三つの時刻が光っています。どこを詳しく見ますか。" },
     { "label": "choose_train" },
     {
       "choices": [
-        { "text": "各駅停車でゆっくり行く", "goto": "END_LOCAL" },
-        { "text": "御茶ノ水で快速へ移る", "goto": "END_RAPID" },
-        { "text": "目覚ましをかけず眠る", "goto": "END_RETURN" }
+        { "text": "秋葉原への到着を見る", "goto": "END_ARRIVAL" },
+        { "text": "音楽バーへの移動を見る", "goto": "END_CREATIVE" },
+        { "text": "最後の位置記録を見る", "goto": "END_FINALE" }
       ]
     },
-    { "label": "END_LOCAL" },
+    { "label": "END_ARRIVAL" },
     { "bg": "akihabara" },
-    { "speaker": "narrator", "text": "秋葉原へ着くと、ホームのミルクスタンドでコーヒー牛乳を飲んだ。それから金子屋とIvで酒を飲み、最後は大阪王将の餃子。店を移るたび記憶は少し薄くなったのに、最初に立ったホームと甘い瓶だけは、帰りの電車でもはっきり残っていた。\nEND 最初の一本" },
-    { "label": "END_RAPID" },
-    { "bg": "twilight" },
-    { "speaker": "narrator", "text": "御茶ノ水で乗り換え、予定より少し早く秋葉原へ着いた。空いていた金子屋のカウンターへ入り、二軒目を探さず同じ席にいた。店員とゲームの話をして、餃子を食べる余裕を残して帰る。回った店は一軒減ったが、話した相手の顔は増えた。\nEND カウンターに残る" },
-    { "label": "END_RETURN" },
+    { "speaker": "narrator", "text": "午後3時37分、総武線ホームのミルクスタンドと電気街口が同時に光った。売店から改札へ進む短い動きが、二つの地点として残っていた。" },
+    { "speaker": "display", "text": "購入した商品は記録されていません。ここにあるのは、駅の内側から街へ出た到着の場面です。" },
+    { "speaker": "narrator", "text": "黄色い電車の線が電気街口でほどけた。\nEND 秋葉原へ到着する" },
+    { "label": "END_CREATIVE" },
+    { "bg": "bar" },
+    { "speaker": "narrator", "text": "午後5時46分の金子屋から線を延ばすと、1時間42分後のIV AKIHABARAへ着いた。音楽と創作を掲げ、客もDJブースを使えるバーだった。" },
+    { "speaker": "display", "text": "本人がDJをした記録はありません。店の特徴が、夜の目的地の性格を伝えています。" },
+    { "speaker": "narrator", "text": "音を鳴らさないDJブースにも、19時28分の灯りが残った。\nEND 創作の場所へ着く" },
+    { "label": "END_FINALE" },
     { "bg": "station_night" },
-    { "speaker": "narrator", "text": "目を開けると秋葉原を過ぎ、車内表示には錦糸町と出ていた。反対ホームへ回り、秋葉原へ戻ったころにはミルクスタンドが閉まっている。飲み歩く気分も一緒に切れ、そのまま家へ帰った。休日の秋葉原は、電車の窓から一度通過しただけで終わった。\nEND 乗り過ごした休日" }
+    { "speaker": "narrator", "text": "午後9時20分、路線図の最後に大阪王将が現れた。何を注文したかは空欄のまま、中華料理店という種類と到着時刻だけが表示された。" },
+    { "speaker": "display", "text": "最初の記録から5時間43分。駅、居酒屋、音楽バー、中華料理店を結ぶ秋葉原の一日です。" },
+    { "speaker": "narrator", "text": "5つの地点を結んだ線が、夜の店で静かに止まった。\nEND 約6時間の終点" }
   ]
 }

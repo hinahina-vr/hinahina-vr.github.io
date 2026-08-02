@@ -1,0 +1,47 @@
+{
+  "title": "124単位の地図",
+  "subtitle": "履修プランナー公開日の夢",
+  "genre": "学習経路の分岐夢",
+  "date": "2026-04-02",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "guide": { "name": "履修案内", "color": "#6ea3c8", "emoji": "◇" }
+  },
+  "mapTitles": {
+    "standalone_start": "進級記念の公開",
+    "choose_path": "履修計画の三つの入口",
+    "END_MAP": "科目の前後関係",
+    "END_CREDITS": "124単位への進捗",
+    "END_NIGHT": "公開日の夜"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "curriculum_map" },
+    { "speaker": "narrator", "text": "ZEN大学の2年生になった記念に、PC用の非公式サービス、ZEN大学履修プランナーを公開した。科目を領域ごとのマップへ並べ、受けたい授業を学期別の計画へ追加できる。" },
+    { "speaker": "narrator", "text": "画面上部には区分別の単位数と卒業要件124単位までの合計が表示される。計画はJSONで保存と読込ができ、共有リンクも発行できる。" },
+    { "speaker": "guide", "text": "夢のマップには、学ぶ順序、卒業までの数字、公開日を閉じる夜の三方向があります。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "前提科目をたどる", "goto": "END_MAP" },
+        { "text": "単位の合計を見る", "goto": "END_CREDITS" },
+        { "text": "夜の投稿まで進む", "goto": "END_NIGHT" }
+      ]
+    },
+    { "label": "END_MAP" },
+    { "bg": "course_graph" },
+    { "speaker": "narrator", "text": "一つの科目を選ぶと、開講時期、単位数、必修区分、前提科目、後続科目が現れた。大量の科目名が、先と後ろを持つ経路へ変わった。" },
+    { "speaker": "guide", "text": "受けたい科目を学期へ置く前に、そこへ至る道を確認できます。" },
+    { "speaker": "narrator", "text": "一覧の中から、自分の学習経路が一本だけ光った。\nEND 科目を道として選ぶ" },
+    { "label": "END_CREDITS" },
+    { "bg": "credit_dashboard" },
+    { "speaker": "narrator", "text": "導入、基礎、展開、卒業プロジェクトの数字が増え、画面上部の合計が124単位へ近づいた。JSONへ保存すると、その計画をあとで読み込めた。" },
+    { "speaker": "guide", "text": "合計と内訳を同時に見ることで、卒業までの距離と学習段階の偏りを確認できます。" },
+    { "speaker": "narrator", "text": "計画を小さなファイルへ入れ、次の学期まで持ち帰った。\nEND 卒業までを数える" },
+    { "label": "END_NIGHT" },
+    { "bg": "spicy_noodles" },
+    { "speaker": "narrator", "text": "午後9時42分、町田の蒙古タンメン中本へ行った。約50分後、卵とバターを載せた辛い麺の写真へ、fripSideのabsolute wishを添えて投稿した。" },
+    { "speaker": "guide", "text": "深夜に公開した学習の道具と、夜の食事とゲーム音楽は、同じ日の別々の場面です。" },
+    { "speaker": "narrator", "text": "124単位の地図を閉じ、辛い一枚で公開日を終えた。\nEND 道具を出した日の夜" }
+  ]
+}

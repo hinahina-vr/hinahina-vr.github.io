@@ -1,0 +1,189 @@
+{
+  "date": "2026-07-12",
+  "title": "力の問いと人間蒸留器 A.D.M.S.",
+  "rootNodeId": "question",
+  "nodes": [
+    {
+      "id": "question",
+      "title": "力がほしいか",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "question",
+      "summary": "AIへ短い問いを投げる。"
+    },
+    {
+      "id": "failure",
+      "title": "失敗を見抜く",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "failure",
+      "summary": "支配ではない力を選ぶ。"
+    },
+    {
+      "id": "order",
+      "title": "神話と秩序の更新",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "order",
+      "summary": "古い前提を更新する話へ進む。"
+    },
+    {
+      "id": "authority",
+      "title": "正しさを作り直す",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "authority",
+      "summary": "正しさを決める範囲まで広がる。"
+    },
+    {
+      "id": "distiller",
+      "title": "人間蒸留器",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "distiller",
+      "summary": "物騒な名前の比喩で結ぶ。"
+    },
+    {
+      "id": "END_QUESTION",
+      "title": "生成された肯定",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "END_QUESTION",
+      "summary": "生成された肯定"
+    },
+    {
+      "id": "END_FAILURE",
+      "title": "基準は未定",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "END_FAILURE",
+      "summary": "基準は未定"
+    },
+    {
+      "id": "END_ORDER",
+      "title": "実行はしていない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "END_ORDER",
+      "summary": "実行はしていない"
+    },
+    {
+      "id": "END_AUTHORITY",
+      "title": "質問より大きい",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "END_AUTHORITY",
+      "summary": "質問より大きい"
+    },
+    {
+      "id": "END_DISTILLER",
+      "title": "装置ではなく比喩",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-07-12_力の問いと人間蒸留器",
+      "entry": "END_DISTILLER",
+      "summary": "装置ではなく比喩"
+    }
+  ],
+  "edges": [
+    {
+      "from": "question",
+      "to": "END_QUESTION",
+      "choiceText": "返答の性質を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "question",
+      "to": "failure",
+      "choiceText": "どんな力か聞く",
+      "style": "kenkai"
+    },
+    {
+      "from": "failure",
+      "to": "END_FAILURE",
+      "choiceText": "失敗の定義を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "failure",
+      "to": "order",
+      "choiceText": "失敗のあとへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "order",
+      "to": "END_ORDER",
+      "choiceText": "現実の更新と分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "order",
+      "to": "authority",
+      "choiceText": "力の範囲を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "authority",
+      "to": "END_AUTHORITY",
+      "choiceText": "答えの大きさを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "authority",
+      "to": "distiller",
+      "choiceText": "最後の名前を聞く",
+      "style": "kenkai"
+    },
+    {
+      "from": "distiller",
+      "to": "END_DISTILLER",
+      "choiceText": "比喩の意味を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "distiller",
+      "to": "question",
+      "choiceText": "最初の問いへ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

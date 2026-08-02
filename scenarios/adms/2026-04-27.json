@@ -1,0 +1,189 @@
+{
+  "date": "2026-04-27",
+  "title": "会社のAIと電気の資格 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "午前0時49分の行き先",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "standalone_start",
+      "summary": "ANTHEM AKIBAへ行きたいと書く。"
+    },
+    {
+      "id": "human_skills",
+      "title": "AIにできない古い会社芸",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "human_skills",
+      "summary": "AIにできない古い接待技能が規則で使えないと皮肉る。"
+    },
+    {
+      "id": "ai_training",
+      "title": "人材育成からAI育成へ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "ai_training",
+      "summary": "会社でAI育成へ集中すべきだと主張する。"
+    },
+    {
+      "id": "income",
+      "title": "年収4000万円の願望",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "income",
+      "summary": "年収4000万円を望み、金儲けと株は苦手だと認める。"
+    },
+    {
+      "id": "qualification",
+      "title": "電気工事士とビル管理",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "qualification",
+      "summary": "電気工事士やビル管理資格を将来の守りに考える。"
+    },
+    {
+      "id": "END_WISH",
+      "title": "訪問していないANTHEM AKIBA",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "END_WISH",
+      "summary": "訪問していないANTHEM AKIBA"
+    },
+    {
+      "id": "END_SATIRE",
+      "title": "人間専用でも使えない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "END_SATIRE",
+      "summary": "人間専用でも使えない"
+    },
+    {
+      "id": "END_POLICY",
+      "title": "採択されない個人提案",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "END_POLICY",
+      "summary": "採択されない個人提案"
+    },
+    {
+      "id": "END_MONEY",
+      "title": "未来予測は利益ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "END_MONEY",
+      "summary": "未来予測は利益ではない"
+    },
+    {
+      "id": "END_HEDGE",
+      "title": "まだ検討中の資格",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-27_会社のAIと電気の資格",
+      "entry": "END_HEDGE",
+      "summary": "まだ検討中の資格"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "END_WISH",
+      "choiceText": "行きたいだけだと確認する",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "human_skills",
+      "choiceText": "午前2時の会社論へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "human_skills",
+      "to": "END_SATIRE",
+      "choiceText": "実行記録ではないと分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "human_skills",
+      "to": "ai_training",
+      "choiceText": "人材不足の話へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "ai_training",
+      "to": "END_POLICY",
+      "choiceText": "会社決定と個人意見を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "ai_training",
+      "to": "income",
+      "choiceText": "夜の収入願望へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "income",
+      "to": "END_MONEY",
+      "choiceText": "収入実績ではないと確認する",
+      "style": "kenkai"
+    },
+    {
+      "from": "income",
+      "to": "qualification",
+      "choiceText": "資格という候補へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "qualification",
+      "to": "END_HEDGE",
+      "choiceText": "未取得の候補として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "qualification",
+      "to": "standalone_start",
+      "choiceText": "秋葉原へ行きたい夜へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

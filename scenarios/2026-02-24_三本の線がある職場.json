@@ -1,0 +1,46 @@
+{
+  "title": "三本の線がある職場",
+  "subtitle": "生成AIと人と会社の速さを測り直す夢",
+  "genre": "職場計測の分岐夢",
+  "date": "2026-02-24",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "coworker": { "name": "同じチームの人", "color": "#c7a46a", "emoji": "□" }
+  },
+  "mapTitles": {
+    "standalone_start": "終業後の会議室",
+    "choose_path": "三本の線",
+    "END_MONEY": "給与明細の扉",
+    "END_MEASURE": "作業台の扉",
+    "END_HOME": "煙の香りの扉"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "office" },
+    { "speaker": "narrator", "text": "生成AIの進歩を見ているうちに、仕事を頑張る意味が分からなくなった。職場で同じチームの人へ尋ねると、仕事は金のためだと返された。帰宅後も納得できず、煙のような香りがするスコッチのカリラを飲んだ。" },
+    { "speaker": "narrator", "text": "その夜の夢では、会議室の壁に3本の線が引かれていた。生成AIの線は天井へ、人の線は窓へ、会社の線は床に沿って伸びている。" },
+    { "speaker": "coworker", "text": "速さだけ見ていたら、ここから出られないよ。どの扉を仕事の続きにするか決めよう。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "給与明細を受け取る", "goto": "END_MONEY" },
+        { "text": "三本の線を測り直す", "goto": "END_MEASURE" },
+        { "text": "カリラの香りをたどって帰る", "goto": "END_HOME" }
+      ]
+    },
+    { "label": "END_MONEY" },
+    { "bg": "office" },
+    { "speaker": "narrator", "text": "給与明細には、働いた時間と受け取る金額だけが印字されていた。技術の未来も会社への忠誠も欄にはない。" },
+    { "speaker": "coworker", "text": "今日はこの交換だけで終えてもいい。意味を追加するのは、必要になってからだ。" },
+    { "speaker": "narrator", "text": "紙を折って財布へ入れると、一本目の線が消えた。\nEND 金のために働く日" },
+    { "label": "END_MEASURE" },
+    { "bg": "lab" },
+    { "speaker": "narrator", "text": "生成時間、確認時間、会社が承認するまでの日数を別々に測った。三本の線は競走をやめ、違う目盛りの表になった。" },
+    { "speaker": "coworker", "text": "遅い人を探すより、詰まっている工程を探した方が仕事になる。" },
+    { "speaker": "narrator", "text": "明日確認する項目を一つだけ手帳へ書いた。\nEND 速度を作業へ戻す" },
+    { "label": "END_HOME" },
+    { "bg": "room" },
+    { "speaker": "narrator", "text": "煙のような香りをたどると、自宅の机と水の入ったグラスが現れた。会社の線は玄関より先へ入ってこない。" },
+    { "speaker": "narrator", "text": "答えを出さず、勤務の続きを翌朝まで閉じた。\nEND 仕事を家から帰す" }
+  ]
+}

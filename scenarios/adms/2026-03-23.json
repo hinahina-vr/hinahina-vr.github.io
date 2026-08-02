@@ -1,11 +1,11 @@
 {
   "date": "2026-03-23",
-  "title": "辛さ八の記録室 A.D.M.S.",
+  "title": "キャラクターAIの資料庫 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "中本の地下記録室",
+      "title": "月曜昼の構想",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,11 +13,11 @@
       "icon": "◇",
       "scenario": "2026-03-23_辛さ八の記録室",
       "entry": "standalone_start",
-      "summary": "中本の地下記録室"
+      "summary": "月曜昼の構想"
     },
     {
       "id": "choose_record",
-      "title": "赤い鍵を使う扉",
+      "title": "資料庫の三つの棚",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,43 +25,43 @@
       "icon": "◇",
       "scenario": "2026-03-23_辛さ八の記録室",
       "entry": "choose_record",
-      "summary": "赤い鍵を使う扉"
+      "summary": "資料庫の三つの棚"
     },
     {
-      "id": "END_TASTE",
-      "title": "五目味噌タンメン",
+      "id": "END_METADATA",
+      "title": "人物設定の索引",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 2,
       "icon": "●",
       "scenario": "2026-03-23_辛さ八の記録室",
-      "entry": "END_TASTE",
-      "summary": "五目味噌タンメン"
+      "entry": "END_METADATA",
+      "summary": "人物設定の索引"
     },
     {
-      "id": "END_CHARACTER",
-      "title": "公式設定の訂正窓口",
+      "id": "END_SCRIPT",
+      "title": "作品の全台本",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 6,
       "icon": "●",
       "scenario": "2026-03-23_辛さ八の記録室",
-      "entry": "END_CHARACTER",
-      "summary": "公式設定の訂正窓口"
+      "entry": "END_SCRIPT",
+      "summary": "作品の全台本"
     },
     {
-      "id": "END_PRIVACY",
-      "title": "生活ログの削除権",
+      "id": "END_REVIEW",
+      "title": "権利者の監修室",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 10,
       "icon": "●",
       "scenario": "2026-03-23_辛さ八の記録室",
-      "entry": "END_PRIVACY",
-      "summary": "生活ログの削除権"
+      "entry": "END_REVIEW",
+      "summary": "権利者の監修室"
     }
   ],
   "edges": [
@@ -73,20 +73,20 @@
     },
     {
       "from": "choose_record",
-      "to": "END_TASTE",
-      "choiceText": "五目味噌タンメンを記録する",
+      "to": "END_METADATA",
+      "choiceText": "人物設定を構造化する",
       "style": "kenkai"
     },
     {
       "from": "choose_record",
-      "to": "END_CHARACTER",
-      "choiceText": "間違えた名前を直す",
+      "to": "END_SCRIPT",
+      "choiceText": "台本から場面を探す",
       "style": "kenkai"
     },
     {
       "from": "choose_record",
-      "to": "END_PRIVACY",
-      "choiceText": "位置情報を手元へ移す",
+      "to": "END_REVIEW",
+      "choiceText": "正史の更新を承認する",
       "style": "kenkai"
     }
   ]

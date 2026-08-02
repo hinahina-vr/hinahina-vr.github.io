@@ -1,0 +1,225 @@
+{
+  "date": "2026-05-09",
+  "title": "Tencent本社をKey本社と呼んだ日 A.D.M.S.",
+  "rootNodeId": "song",
+  "nodes": [
+    {
+      "id": "song",
+      "title": "absolute wishと白酒ポスター",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "song",
+      "summary": "ゲーム主題歌と創作ポスターの由来を分ける。"
+    },
+    {
+      "id": "alcohol_images",
+      "title": "酒にまつわる2画像",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "alcohol_images",
+      "summary": "ニュース画面とウイスキー部屋を見る。"
+    },
+    {
+      "id": "remake",
+      "title": "旧作絵を描き直す違和感",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "remake",
+      "summary": "古いゲーム絵を置き換える問題を考える。"
+    },
+    {
+      "id": "tencent",
+      "title": "Tencent本社をKey本社と呼ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "tencent",
+      "summary": "写真と投稿文の社名のずれを読む。"
+    },
+    {
+      "id": "doll",
+      "title": "幸福人形の構造図",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "doll",
+      "summary": "等身大ぬいドールの内部構造を知る。"
+    },
+    {
+      "id": "return_plan",
+      "title": "シルバーウイークの再訪",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 5,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "return_plan",
+      "summary": "帰国直後に次の深圳行きを決める。"
+    },
+    {
+      "id": "END_SONG",
+      "title": "実在の曲と架空画像",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "END_SONG",
+      "summary": "実在の曲と架空画像"
+    },
+    {
+      "id": "END_ALCOHOL",
+      "title": "出所の違う2枚",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "END_ALCOHOL",
+      "summary": "出所の違う2枚"
+    },
+    {
+      "id": "END_REMAKE",
+      "title": "昔の絵柄も作品",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "END_REMAKE",
+      "summary": "昔の絵柄も作品"
+    },
+    {
+      "id": "END_TENCENT",
+      "title": "社名のずれが冗談",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "END_TENCENT",
+      "summary": "社名のずれが冗談"
+    },
+    {
+      "id": "END_DOLL",
+      "title": "柔らかい等身大人形",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "END_DOLL",
+      "summary": "柔らかい等身大人形"
+    },
+    {
+      "id": "END_RETURN",
+      "title": "次も深圳へ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-09_Tencent本社をKey本社と呼んだ日",
+      "entry": "END_RETURN",
+      "summary": "次も深圳へ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "song",
+      "to": "END_SONG",
+      "choiceText": "曲と画像の出所を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "song",
+      "to": "alcohol_images",
+      "choiceText": "深夜の酒画像へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "alcohol_images",
+      "to": "END_ALCOHOL",
+      "choiceText": "別々の資料として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "alcohol_images",
+      "to": "remake",
+      "choiceText": "ゲームの新しい絵へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "remake",
+      "to": "END_REMAKE",
+      "choiceText": "元の絵柄の価値を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "remake",
+      "to": "tencent",
+      "choiceText": "深圳の本社写真へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "tencent",
+      "to": "END_TENCENT",
+      "choiceText": "本当の社名と冗談を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "tencent",
+      "to": "doll",
+      "choiceText": "午後に見つけた人形へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "doll",
+      "to": "END_DOLL",
+      "choiceText": "構造図の内容を保存する",
+      "style": "kenkai"
+    },
+    {
+      "from": "doll",
+      "to": "return_plan",
+      "choiceText": "一日の最後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "return_plan",
+      "to": "END_RETURN",
+      "choiceText": "再訪の意思を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "return_plan",
+      "to": "song",
+      "choiceText": "日付の最初へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

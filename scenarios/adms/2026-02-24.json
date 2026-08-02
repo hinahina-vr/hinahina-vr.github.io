@@ -1,0 +1,93 @@
+{
+  "date": "2026-02-24",
+  "title": "三本の線がある職場 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "終業後の会議室",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-24_三本の線がある職場",
+      "entry": "standalone_start",
+      "summary": "終業後の会議室"
+    },
+    {
+      "id": "choose_path",
+      "title": "三本の線",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-02-24_三本の線がある職場",
+      "entry": "choose_path",
+      "summary": "三本の線"
+    },
+    {
+      "id": "END_MONEY",
+      "title": "給与明細の扉",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-02-24_三本の線がある職場",
+      "entry": "END_MONEY",
+      "summary": "給与明細の扉"
+    },
+    {
+      "id": "END_MEASURE",
+      "title": "作業台の扉",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-02-24_三本の線がある職場",
+      "entry": "END_MEASURE",
+      "summary": "作業台の扉"
+    },
+    {
+      "id": "END_HOME",
+      "title": "煙の香りの扉",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-02-24_三本の線がある職場",
+      "entry": "END_HOME",
+      "summary": "煙の香りの扉"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_MONEY",
+      "choiceText": "給与明細を受け取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_MEASURE",
+      "choiceText": "三本の線を測り直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_HOME",
+      "choiceText": "カリラの香りをたどって帰る",
+      "style": "kenkai"
+    }
+  ]
+}

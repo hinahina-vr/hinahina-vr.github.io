@@ -1,0 +1,46 @@
+{
+  "title": "No.1余市の最後の一滴",
+  "subtitle": "開栓済みの棚を空ける夜",
+  "genre": "酒棚整理の分岐夢",
+  "date": "2026-01-18",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "keeper": { "name": "空瓶棚の管理人", "color": "#c99b62", "emoji": "◇" }
+  },
+  "mapTitles": {
+    "standalone_start": "逆さの余市",
+    "choose_path": "残す記録",
+    "END_NUMBER": "No.1の空き棚",
+    "END_CODE": "コードDの分類室",
+    "END_ICE": "氷の中の北海道"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "開栓したまま残っている酒を順に飲み切ることにした。第1回は北海道のシングルモルト余市。瓶を逆さにし、大きな氷を入れたグラスへ残りを注いだ。記録にはNo.1 余市、北海道、竹鶴コードDと付けた。" },
+    { "speaker": "narrator", "text": "眠ると、逆さの瓶から最後の一滴が落ちる途中で止まっていた。左には番号棚、右にはコードDの扉、下には氷のグラスがある。" },
+    { "speaker": "keeper", "text": "瓶は空になります。番号、分類、最後の動作のどれを残しますか。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "No.1の棚へ瓶を置く", "goto": "END_NUMBER" },
+        { "text": "コードDの扉を開ける", "goto": "END_CODE" },
+        { "text": "最後の一滴を氷へ落とす", "goto": "END_ICE" }
+      ]
+    },
+    { "label": "END_NUMBER" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "棚の最初の区画へ余市の空瓶を置いた。隣にはNo.2から先の札が並ぶが、銘柄名はまだない。空欄の数から残り本数を推測しようとすると、棚が伸びて札も増えた。" },
+    { "speaker": "keeper", "text": "未定の番号は在庫数ではありません。次を置ける余白です。" },
+    { "speaker": "narrator", "text": "No.1以外の札を裏返した。棚に残ったのは余市1本を置くための空席だけだった。\nEND 最初の空瓶だけ" },
+    { "label": "END_CODE" },
+    { "bg": "classroom" },
+    { "speaker": "narrator", "text": "コードDの扉の先には、AからZまで26個の引き出しがあった。Dを開けると余市の写真が入っている。しかし、なぜDなのかを説明する札はない。" },
+    { "speaker": "keeper", "text": "分類は、作った人の規則がなければ他人には読めません。" },
+    { "speaker": "narrator", "text": "余市を別の引き出しへ移さず、Dの取っ手へ定義を書くための白紙を結んだ。夢の中でも意味を作らず、説明の場所だけを残した。\nEND 空白のコード表" },
+    { "label": "END_ICE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "止まっていた一滴が、大きな氷の中心へ落ちた。氷の内部に北海道の地図が現れ、その西側に余市と小さく光る点が付いた。味も量も表示されない。" },
+    { "speaker": "narrator", "text": "氷が溶けると地図も消え、グラスの底に水の輪だけが残った。瓶は空になったが、No.1、余市、北海道の3語は濡れずに机へ残った。\nEND 溶けた産地図" }
+  ]
+}

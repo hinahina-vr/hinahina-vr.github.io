@@ -1,0 +1,189 @@
+{
+  "date": "2026-07-04",
+  "title": "七月は酒を休む A.D.M.S.",
+  "rootNodeId": "memory",
+  "nodes": [
+    {
+      "id": "memory",
+      "title": "出禁寸前の場面",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "memory",
+      "summary": "友人の狼藉による記憶が戻る。"
+    },
+    {
+      "id": "twice",
+      "title": "二回続いた会",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "twice",
+      "summary": "直近二回の飲み会を振り返る。"
+    },
+    {
+      "id": "friday",
+      "title": "飲みたくない金曜日",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "friday",
+      "summary": "酒を欲しない自分に気づく。"
+    },
+    {
+      "id": "lifetime",
+      "title": "一生飲まない",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "lifetime",
+      "summary": "勢いで永久断酒を宣言する。"
+    },
+    {
+      "id": "july",
+      "title": "七月の断酒",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "july",
+      "summary": "実行範囲を一か月へ定める。"
+    },
+    {
+      "id": "END_MEMORY",
+      "title": "詳細は不明",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "END_MEMORY",
+      "summary": "詳細は不明"
+    },
+    {
+      "id": "END_TWICE",
+      "title": "一度きりではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "END_TWICE",
+      "summary": "一度きりではない"
+    },
+    {
+      "id": "END_FRIDAY",
+      "title": "気持ちを無視しない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "END_FRIDAY",
+      "summary": "気持ちを無視しない"
+    },
+    {
+      "id": "END_LIFETIME",
+      "title": "怒りの宣言",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "END_LIFETIME",
+      "summary": "怒りの宣言"
+    },
+    {
+      "id": "END_JULY",
+      "title": "今月は本気",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-07-04_七月は酒を休む",
+      "entry": "END_JULY",
+      "summary": "今月は本気"
+    }
+  ],
+  "edges": [
+    {
+      "from": "memory",
+      "to": "END_MEMORY",
+      "choiceText": "記録の範囲を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "memory",
+      "to": "twice",
+      "choiceText": "もう一つの会も思い出す",
+      "style": "kenkai"
+    },
+    {
+      "from": "twice",
+      "to": "END_TWICE",
+      "choiceText": "連続した意味を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "twice",
+      "to": "friday",
+      "choiceText": "金曜日の気分を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "friday",
+      "to": "END_FRIDAY",
+      "choiceText": "今の気持ちを認める",
+      "style": "kenkai"
+    },
+    {
+      "from": "friday",
+      "to": "lifetime",
+      "choiceText": "最初の宣言を聞く",
+      "style": "kenkai"
+    },
+    {
+      "from": "lifetime",
+      "to": "END_LIFETIME",
+      "choiceText": "宣言の性質を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "lifetime",
+      "to": "july",
+      "choiceText": "期間を言い直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "july",
+      "to": "END_JULY",
+      "choiceText": "七月の決定を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "july",
+      "to": "memory",
+      "choiceText": "最初の記憶へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

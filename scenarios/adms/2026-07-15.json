@@ -1,0 +1,189 @@
+{
+  "date": "2026-07-15",
+  "title": "二枚の身代守りとRIP A.D.M.S.",
+  "rootNodeId": "photos",
+  "nodes": [
+    {
+      "id": "photos",
+      "title": "表裏の二枚",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "photos",
+      "summary": "お守りを両面から撮影する。"
+    },
+    {
+      "id": "front",
+      "title": "文字と女の子",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "front",
+      "summary": "表側の文字と図柄を見る。"
+    },
+    {
+      "id": "back",
+      "title": "寺の札と白いキャラクター",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "back",
+      "summary": "裏側の寺名と模様を見る。"
+    },
+    {
+      "id": "goods",
+      "title": "二つの見え方",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "goods",
+      "summary": "お守りとグッズの印象を比べる。"
+    },
+    {
+      "id": "rip",
+      "title": "三文字の添え書き",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "rip",
+      "summary": "写真へ短い言葉を置く。"
+    },
+    {
+      "id": "END_PHOTOS",
+      "title": "一つの品",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "END_PHOTOS",
+      "summary": "一つの品"
+    },
+    {
+      "id": "END_FRONT",
+      "title": "固有名は不明",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "END_FRONT",
+      "summary": "固有名は不明"
+    },
+    {
+      "id": "END_BACK",
+      "title": "麻の葉模様",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "END_BACK",
+      "summary": "麻の葉模様"
+    },
+    {
+      "id": "END_GOODS",
+      "title": "寺の品",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "END_GOODS",
+      "summary": "寺の品"
+    },
+    {
+      "id": "END_RIP",
+      "title": "役目後の挨拶",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-07-15_二枚の身代守りとRIP",
+      "entry": "END_RIP",
+      "summary": "役目後の挨拶"
+    }
+  ],
+  "edges": [
+    {
+      "from": "photos",
+      "to": "END_PHOTOS",
+      "choiceText": "二枚の関係を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "photos",
+      "to": "front",
+      "choiceText": "表側を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "front",
+      "to": "END_FRONT",
+      "choiceText": "名前の範囲を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "front",
+      "to": "back",
+      "choiceText": "裏返す",
+      "style": "kenkai"
+    },
+    {
+      "from": "back",
+      "to": "END_BACK",
+      "choiceText": "模様を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "back",
+      "to": "goods",
+      "choiceText": "品物の見え方を比べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "goods",
+      "to": "END_GOODS",
+      "choiceText": "商品情報の範囲を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "goods",
+      "to": "rip",
+      "choiceText": "写真の言葉を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "rip",
+      "to": "END_RIP",
+      "choiceText": "三文字の意味を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "rip",
+      "to": "front",
+      "choiceText": "表の写真へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

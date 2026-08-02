@@ -1,0 +1,93 @@
+{
+  "date": "2026-01-09",
+  "title": "青い炎の残り10室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "止まった期待度画面",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-09_青い炎の残り10室",
+      "entry": "standalone_start",
+      "summary": "止まった期待度画面"
+    },
+    {
+      "id": "choose_path",
+      "title": "触れる表示",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-09_青い炎の残り10室",
+      "entry": "choose_path",
+      "summary": "触れる表示"
+    },
+    {
+      "id": "END_TOTAL",
+      "title": "1200個の記録",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-01-09_青い炎の残り10室",
+      "entry": "END_TOTAL",
+      "summary": "1200個の記録"
+    },
+    {
+      "id": "END_LAST",
+      "title": "残り10室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-01-09_青い炎の残り10室",
+      "entry": "END_LAST",
+      "summary": "残り10室"
+    },
+    {
+      "id": "END_FACE",
+      "title": "影の下の顔",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-01-09_青い炎の残り10室",
+      "entry": "END_FACE",
+      "summary": "影の下の顔"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_TOTAL",
+      "choiceText": "TOTAL 1200へ触れる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_LAST",
+      "choiceText": "LAST 10Gを減らす",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_FACE",
+      "choiceText": "目元の影を外す",
+      "style": "kenkai"
+    }
+  ]
+}

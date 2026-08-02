@@ -1,0 +1,46 @@
+{
+  "title": "神棚へ続く動画工場",
+  "subtitle": "自動生成の残り仕事を選ぶ夢",
+  "genre": "動画工場の分岐夢",
+  "date": "2026-02-27",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "machine": { "name": "動画生成機", "color": "#86a6c8", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "月末金曜の動画工場",
+    "choose_path": "人間が止めた三地点",
+    "END_READING": "誤読の辞書",
+    "END_SCREEN": "視聴者の椅子",
+    "END_SHRINE": "工場の神棚"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "factory" },
+    { "speaker": "narrator", "text": "会社では早く帰ろうという月末のキャンペーンが行われていた。体調が戻ったので、以前から作っていた全自動動画生成を再開した。映像は形になったが、漢字を誤読し、画面の見やすさにも人の確認が必要だった。" },
+    { "speaker": "narrator", "text": "夢の工場では動画が次々に流れ、出口の先に小さな神棚が見えた。AIを育てきった功績で、いつかそこへ上げてもらいたいと思った場所だった。" },
+    { "speaker": "machine", "text": "全自動と呼ぶには、まだ人間が止めた地点が3つあります。どこから減らしますか。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "漢字の誤読を辞書へ戻す", "goto": "END_READING" },
+        { "text": "初めて見る人に画面を渡す", "goto": "END_SCREEN" },
+        { "text": "神棚へ上がる条件を決める", "goto": "END_SHRINE" }
+      ]
+    },
+    { "label": "END_READING" },
+    { "bg": "library" },
+    { "speaker": "narrator", "text": "間違えた漢字、正しい読み、前後の文を辞書へ入れた。次の動画は生成前に同じ語を確認した。" },
+    { "speaker": "machine", "text": "人の耳だけが失敗を記憶する工程を一つ減らしました。" },
+    { "speaker": "narrator", "text": "確認表から同じ誤読が消えた。\nEND 失敗を仕組みへ返す" },
+    { "label": "END_SCREEN" },
+    { "bg": "theater" },
+    { "speaker": "narrator", "text": "初めて見る人を椅子へ招き、文字が読めない場所と操作に迷う場所を指してもらった。" },
+    { "speaker": "machine", "text": "見やすさは生成側だけでは決められません。視聴者の反応を次の配置へ使います。" },
+    { "speaker": "narrator", "text": "画面を直し、公開基準へ追加した。\nEND 使う人と完成を決める" },
+    { "label": "END_SHRINE" },
+    { "bg": "shrine" },
+    { "speaker": "narrator", "text": "確認時間5分以下、重大な誤読ゼロと札へ書いた。条件を満たしたら、浮いた時間を新しい仕事で埋めないことも付け足した。" },
+    { "speaker": "narrator", "text": "神棚には上がらず、供え物の酒だけ受け取って工場を早く出た。\nEND 功績を休暇へ替える" }
+  ]
+}

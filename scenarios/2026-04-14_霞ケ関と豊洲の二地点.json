@@ -1,0 +1,78 @@
+{
+  "title": "霞ケ関と豊洲の二地点",
+  "subtitle": "用件のない位置記録をたどる",
+  "genre": "東京の短い移動記録",
+  "date": "2026-04-14",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "morning": { "name": "朝の位置", "color": "#76a9d4", "emoji": "▦" },
+    "afternoon": { "name": "午後の位置", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "二件だけの日記",
+    "kasumigaseki": "朝の霞ケ関駅",
+    "toyosu": "午後の豊洲",
+    "compare": "二地点を比べる",
+    "END_STATION": "C08の朝",
+    "END_TOYOSU": "建物名の午後",
+    "END_ROUTE": "都心から湾岸へ",
+    "END_LIMIT": "用件は書かれていない"
+  },
+  "mapSummaries": {
+    "standalone_start": "4月14日に残った二つのチェックインを時刻順に読む。",
+    "kasumigaseki": "9時28分、千代田線霞ケ関駅C08。",
+    "toyosu": "13時10分、豊洲のNTTデータ。",
+    "compare": "官庁街と湾岸地区の違いを地図から読む。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "4月14日には文章の投稿がなく、二つの位置記録だけが残った。朝9時28分の霞ケ関駅と、午後1時10分の豊洲NTTデータである。" },
+    {
+      "choices": [
+        { "text": "朝の地点から読む", "goto": "kasumigaseki" },
+        { "text": "午後の地点から読む", "goto": "toyosu" },
+        { "text": "二地点で分からないことを見る", "goto": "END_LIMIT" }
+      ]
+    },
+    { "label": "kasumigaseki" },
+    { "bg": "station_night" },
+    { "speaker": "morning", "text": "最初のチェックインは東京メトロ千代田線霞ケ関駅。C08はこの駅の番号である。国の官庁が集まる都心の地区が、朝の出発地点になった。" },
+    {
+      "choices": [
+        { "text": "駅名だけを朝の起点にする", "goto": "END_STATION" },
+        { "text": "午後まで進む", "goto": "toyosu" }
+      ]
+    },
+    { "label": "toyosu" },
+    { "bg": "dawn" },
+    { "speaker": "afternoon", "text": "3時間42分後、位置は東京の湾岸地区である豊洲へ移った。チェックイン先のラベルはNTTデータ。ただし、入館や会議や勤務を示す情報はない。" },
+    {
+      "choices": [
+        { "text": "午後の場所として残す", "goto": "END_TOYOSU" },
+        { "text": "朝と午後を比べる", "goto": "compare" }
+      ]
+    },
+    { "label": "compare" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "霞ケ関は官庁街、豊洲は湾岸地区。二つの地点を地図で結ぶと、東京の都心から東側へ移った大きな方向が分かる。実際の路線や経由地は分からない。" },
+    {
+      "choices": [
+        { "text": "都市の変化を受け取る", "goto": "END_ROUTE" },
+        { "text": "推測できない範囲を残す", "goto": "END_LIMIT" }
+      ]
+    },
+    { "label": "END_STATION" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "午前9時28分、霞ケ関駅C08。乗ってきた列車も出口も、その後の訪問先も書かれていない。それでも、官庁街の地下駅が4月14日の最初の確かな場所として残る。\nEND C08の朝" },
+    { "label": "END_TOYOSU" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "午後1時10分、豊洲のNTTデータ。企業名は場所の目印であり、そこでの用件までは示さない。午後の地図へ一つの固有名詞を置く証拠として扱う。\nEND 建物名の午後" },
+    { "label": "END_ROUTE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "朝の官庁街から午後の湾岸へ。途中を描かなくても、二地点の地理と時刻から東京を東へ横切った変化は読める。詳細な経路ではなく、一日の大きな方向だけが残った。\nEND 都心から湾岸へ" },
+    { "label": "END_LIMIT" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "二件のチェックインは時刻と場所を支えるが、仕事、会議、食事、移動手段を証明しない。情報が少ない日ほど、空白を物語で埋めず、分かる範囲そのものを日記にする。\nEND 用件は書かれていない" }
+  ]
+}

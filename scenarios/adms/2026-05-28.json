@@ -1,0 +1,189 @@
+{
+  "date": "2026-05-28",
+  "title": "着ぐるみフェンシング協会設立 A.D.M.S.",
+  "rootNodeId": "reframe",
+  "nodes": [
+    {
+      "id": "reframe",
+      "title": "実質は着ぐるみバトル",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "reframe",
+      "summary": "顔の見えない全身装備を着ぐるみと見る。"
+    },
+    {
+      "id": "images",
+      "title": "緑とピンクの二人",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "images",
+      "summary": "二色のドレス姿で対戦を画像化する。"
+    },
+    {
+      "id": "appearance",
+      "title": "構えは変わらない",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "appearance",
+      "summary": "動作と会場を残して印象を変える。"
+    },
+    {
+      "id": "association",
+      "title": "二枚から協会へ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "association",
+      "summary": "二枚へ共通の団体名を付ける。"
+    },
+    {
+      "id": "chinese",
+      "title": "今天成立了",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "chinese",
+      "summary": "中国語で本日設立と宣言する。"
+    },
+    {
+      "id": "END_REFRAME",
+      "title": "公式分類ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "END_REFRAME",
+      "summary": "公式分類ではない"
+    },
+    {
+      "id": "END_IMAGES",
+      "title": "実在大会の写真ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "END_IMAGES",
+      "summary": "実在大会の写真ではない"
+    },
+    {
+      "id": "END_APPEARANCE",
+      "title": "変えたのは外見",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "END_APPEARANCE",
+      "summary": "変えたのは外見"
+    },
+    {
+      "id": "END_ASSOCIATION",
+      "title": "組織の実体は未確認",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "END_ASSOCIATION",
+      "summary": "組織の実体は未確認"
+    },
+    {
+      "id": "END_CHINESE",
+      "title": "同日で発想を閉じる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-28_着ぐるみフェンシング協会設立",
+      "entry": "END_CHINESE",
+      "summary": "同日で発想を閉じる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "reframe",
+      "to": "END_REFRAME",
+      "choiceText": "見立ての範囲を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "reframe",
+      "to": "images",
+      "choiceText": "画像へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "images",
+      "to": "END_IMAGES",
+      "choiceText": "生成物として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "images",
+      "to": "appearance",
+      "choiceText": "何が変わったか見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "appearance",
+      "to": "END_APPEARANCE",
+      "choiceText": "外見の効果を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "appearance",
+      "to": "association",
+      "choiceText": "二枚を並べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "association",
+      "to": "END_ASSOCIATION",
+      "choiceText": "団体の実体を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "association",
+      "to": "chinese",
+      "choiceText": "最後の字幕へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "chinese",
+      "to": "END_CHINESE",
+      "choiceText": "一日の落ちとして残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "chinese",
+      "to": "reframe",
+      "choiceText": "最初の発見へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

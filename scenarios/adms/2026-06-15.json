@@ -1,0 +1,189 @@
+{
+  "date": "2026-06-15",
+  "title": "百五十万人の料亭経営者 A.D.M.S.",
+  "rootNodeId": "building",
+  "nodes": [
+    {
+      "id": "building",
+      "title": "階と部屋の経営",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "building",
+      "summary": "建物の各部屋へ人物を置く。"
+    },
+    {
+      "id": "interface",
+      "title": "三通貨と機能列",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "interface",
+      "summary": "画面上部と下部の情報を読む。"
+    },
+    {
+      "id": "reaction",
+      "title": "四十分後の感想",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "reaction",
+      "summary": "接客後の短い感想へ笑う。"
+    },
+    {
+      "id": "users",
+      "title": "利用者百五十万人",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "users",
+      "summary": "翌日にゲームの規模を知る。"
+    },
+    {
+      "id": "tobita",
+      "title": "巨大な料亭経営者団体",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "tobita",
+      "summary": "利用者を架空の料亭経営者へ変える。"
+    },
+    {
+      "id": "END_BUILDING",
+      "title": "ゲーム内の経営",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "END_BUILDING",
+      "summary": "ゲーム内の経営"
+    },
+    {
+      "id": "END_INTERFACE",
+      "title": "詳細用途は未記載",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "END_INTERFACE",
+      "summary": "詳細用途は未記載"
+    },
+    {
+      "id": "END_REACTION",
+      "title": "研究者の顔が崩れる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "END_REACTION",
+      "summary": "研究者の顔が崩れる"
+    },
+    {
+      "id": "END_USERS",
+      "title": "利用者の内訳は不明",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "END_USERS",
+      "summary": "利用者の内訳は不明"
+    },
+    {
+      "id": "END_TOBITA",
+      "title": "現実の営業者数ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-06-15_百五十万人の料亭経営者",
+      "entry": "END_TOBITA",
+      "summary": "現実の営業者数ではない"
+    }
+  ],
+  "edges": [
+    {
+      "from": "building",
+      "to": "END_BUILDING",
+      "choiceText": "現実の店と区別する",
+      "style": "kenkai"
+    },
+    {
+      "from": "building",
+      "to": "interface",
+      "choiceText": "画面の上下を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "interface",
+      "to": "END_INTERFACE",
+      "choiceText": "確認できる要素を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "interface",
+      "to": "reaction",
+      "choiceText": "四十分後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "reaction",
+      "to": "END_REACTION",
+      "choiceText": "一言を日記へ残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "reaction",
+      "to": "users",
+      "choiceText": "翌日の数字を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "users",
+      "to": "END_USERS",
+      "choiceText": "数字の範囲を守る",
+      "style": "kenkai"
+    },
+    {
+      "from": "users",
+      "to": "tobita",
+      "choiceText": "飛田新地へ置き換える",
+      "style": "kenkai"
+    },
+    {
+      "from": "tobita",
+      "to": "END_TOBITA",
+      "choiceText": "比喩として笑う",
+      "style": "kenkai"
+    },
+    {
+      "from": "tobita",
+      "to": "building",
+      "choiceText": "建物へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

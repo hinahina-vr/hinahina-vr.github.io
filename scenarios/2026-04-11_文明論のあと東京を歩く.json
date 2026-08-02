@@ -1,0 +1,94 @@
+{
+  "title": "文明論のあと東京を歩く",
+  "subtitle": "深夜の縄文回帰と午後の秋葉原",
+  "genre": "思考と行動の一日",
+  "date": "2026-04-11",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "thought": { "name": "深夜の思考", "color": "#76a9d4", "emoji": "▦" },
+    "city": { "name": "午後の記録", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "moodという一語",
+    "choose_thread": "深夜と午後",
+    "history_scale": "文字と踊りの年代",
+    "os_ux": "未来から縄文へ",
+    "city_route": "御茶ノ水から秋葉原",
+    "food_route": "浅草橋を経て戻る",
+    "END_MOOD": "Wii2台の軽さ",
+    "END_JOMON": "新しい言葉で古い結論",
+    "END_IMAGE": "麦畑の酒瓶",
+    "END_CITY": "マイコンを買った縄文の日",
+    "END_FOOD": "食べながら街を往復する"
+  },
+  "mapSummaries": {
+    "standalone_start": "BNFがWiiを2台買った映像へmoodとだけ添えた。",
+    "history_scale": "文字と言葉を新しく、踊りと酒を古い活動として並べる。",
+    "os_ux": "OSとUXで未来を考えた末に縄文回帰へ着く。",
+    "city_route": "御茶ノ水から神田明神、小諸そば、秋月電子へ歩く。",
+    "food_route": "浅草橋と秋葉原を往復し、食事と店を巡る。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "4月11日午前3時21分、著名な個人投資家BNFがWiiを2台買ったと話すテレビ映像へ、mood:とだけ添えた。18分後、投稿は一語から人類史規模の長文へ変わった。" },
+    {
+      "choices": [
+        { "text": "短いmoodに残る", "goto": "END_MOOD" },
+        { "text": "長い文明論を読む", "goto": "history_scale" },
+        { "text": "午後の東京へ進む", "goto": "city_route" }
+      ]
+    },
+    { "label": "history_scale" },
+    { "bg": "twilight" },
+    { "speaker": "thought", "text": "ワディーは、文字を約5000年、言葉を約5万年、踊りを数十万年、酒を数百万年の歴史へ置いた。書くことと話すことは新しいアプリ処理なので負荷が高い、という本人の比喩だった。" },
+    {
+      "choices": [
+        { "text": "OSとUXの先まで考える", "goto": "os_ux" },
+        { "text": "添付画像で欲望を見る", "goto": "END_IMAGE" }
+      ]
+    },
+    { "label": "os_ux" },
+    { "bg": "dawn" },
+    { "speaker": "thought", "text": "人間と地球をOS、生と死をUXにたとえ、生成AIの先の世界観を考える。最新の用語を積み上げた結論は、言葉より酒と踊りに近い縄文時代へ戻ることだった。" },
+    {
+      "choices": [
+        { "text": "逆向きの結論を受け取る", "goto": "END_JOMON" },
+        { "text": "その日の現実を確かめる", "goto": "city_route" }
+      ]
+    },
+    { "label": "city_route" },
+    { "bg": "station" },
+    { "speaker": "city", "text": "午後3時27分に御茶ノ水駅、午後3時36分に神田明神、午後3時44分に小諸そば昌平橋店、午後3時59分に秋月電子通商。秋葉原ではマイコンを買った。" },
+    {
+      "choices": [
+        { "text": "文明論との対照を見る", "goto": "END_CITY" },
+        { "text": "その後の移動を追う", "goto": "food_route" }
+      ]
+    },
+    { "label": "food_route" },
+    { "bg": "twilight" },
+    { "speaker": "city", "text": "秋葉原から浅草橋へ移ってカニを食べ、再び秋葉原へ戻った。コンセプトカフェを2軒回り、午後11時には鉄板王国のステーキで一日を締めた。" },
+    {
+      "choices": [
+        { "text": "街と食事の往復を残す", "goto": "END_FOOD" },
+        { "text": "深夜の結論へ戻る", "goto": "END_JOMON" }
+      ]
+    },
+    { "label": "END_MOOD" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "巨額の資産で知られる人物の買い物がWii2台。その映像のどこを気分と重ねたかは説明されない。だからこそ、長い言葉を使いたくない深夜の入口として、一語の投稿がそのまま残る。\nEND Wii2台の軽さ" },
+    { "label": "END_JOMON" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "OS、UX、生成AIという新しい語彙で未来を考えたのに、最後にたどり着いたのは縄文だった。歴史学の提言ではなく、言語から離れ、もっと古い身体の感覚へ戻りたい人が作った深夜の避難経路である。\nEND 新しい言葉で古い結論" },
+    { "label": "END_IMAGE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "添付画像では、麦畑に立つアバターがウイスキー瓶を掲げ、パチスロ風の題字が光る。実際の行動記録ではないが、酒を飲んで踊りたいという長文の中心だけを、一枚の過剰な看板へ変えていた。\nEND 麦畑の酒瓶" },
+    { "label": "END_CITY" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "文明から縄文へ戻るべきだと書いた同じ日に、電子街でマイコンを買った。言葉に疲れたことと、技術への興味は両立する。思想より午後の買い物のほうが、その複雑さを正確に示していた。\nEND マイコンを買った縄文の日" },
+    { "label": "END_FOOD" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "御茶ノ水から秋葉原へ入り、浅草橋を経てまた秋葉原へ戻る。そば、カニ、カフェ2軒、ステーキまで続いた土曜日は、原始生活ではない。ただ、歩くことと食べることが、深夜の言葉より長く一日を動かしていた。\nEND 食べながら街を往復する" }
+  ]
+}

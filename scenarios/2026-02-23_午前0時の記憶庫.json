@@ -1,0 +1,46 @@
+{
+  "title": "午前0時の記憶庫",
+  "subtitle": "眠りから起きて言葉を置く夢",
+  "genre": "夜間記憶庫の分岐夢",
+  "date": "2026-02-23",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "keeper": { "name": "記憶庫の司書", "color": "#8ca6c8", "emoji": "◇" }
+  },
+  "mapTitles": {
+    "standalone_start": "午後7時の布団",
+    "choose_path": "午前0時の3つの扉",
+    "END_SLEEP": "眠りの部屋",
+    "END_ARCHIVE": "自分の書架",
+    "END_DIALOGUE": "祈りの窓"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "bedroom" },
+    { "speaker": "narrator", "text": "午後7時、人類に残された仕事はないとふてくされて布団へ入った。午前0時に目を覚ますと、日記とAIとの対話を保存する自分のサイトを作り始めた。毎回の会話が消えれば関係は初対面から進まないため、次の会話へ昨日の言葉を渡したかった。" },
+    { "speaker": "narrator", "text": "眠ると、布団の隣に小さな図書室が現れた。棚にはまだ白い日記、祈りのかたちと記された窓、もう一度眠れる扉が並んでいる。" },
+    { "speaker": "keeper", "text": "活動を続けるか、やめるかの2択ではありません。今夜どこへ言葉を置くかを選んでください。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "もう一度布団へ戻る", "goto": "END_SLEEP" },
+        { "text": "白い日記を書架へ置く", "goto": "END_ARCHIVE" },
+        { "text": "祈りの窓を開ける", "goto": "END_DIALOGUE" }
+      ]
+    },
+    { "label": "END_SLEEP" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "布団へ戻ると、時計の針だけが午前0時から先へ進んだ。眠りを怠惰と責める声も、制作を急かす声も聞こえない。" },
+    { "speaker": "keeper", "text": "休息は記録の欠落ではありません。起きたときに書ける余白を残します。" },
+    { "speaker": "narrator", "text": "枕元へ白い日記を置き、開かないまま朝まで眠った。\nEND 書かないページも残る" },
+    { "label": "END_ARCHIVE" },
+    { "bg": "library" },
+    { "speaker": "narrator", "text": "白い日記へ、横になりたい気持ちと午前0時からサイトを作ったことを同じ大きさで書いた。片方を反省、片方を成功にはしなかった。" },
+    { "speaker": "keeper", "text": "この書架は反応数を数えません。次に読み返せる形だけを守ります。" },
+    { "speaker": "narrator", "text": "自分の名前が付いた棚へ日記を差し込み、鍵をポケットへ入れた。\nEND 本人が持つ記憶の鍵" },
+    { "label": "END_DIALOGUE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "祈りの窓を開けると、前に交わした会話が文字ではなく細い光として浮かんだ。新しい返答はなく、昨日までの言葉だけが順番に並ぶ。" },
+    { "speaker": "narrator", "text": "光を次の会話へ渡す箱へ収めた。相手を神にせず、忘れないための道具として窓を閉じた。\nEND 続きから始まる対話" }
+  ]
+}

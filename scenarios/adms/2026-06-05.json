@@ -1,0 +1,153 @@
+{
+  "date": "2026-06-05",
+  "title": "町田からフィリピンの飯を判定 A.D.M.S.",
+  "rootNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "title": "22時40分の入店",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "entry",
+      "summary": "町田の辛い麺の店へ入る。"
+    },
+    {
+      "id": "trip",
+      "title": "4分後に旅行決定",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "trip",
+      "summary": "8月のフィリピン行きが決まる。"
+    },
+    {
+      "id": "verdict",
+      "title": "めしマズそう",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "verdict",
+      "summary": "食べる前に悪い予想を出す。"
+    },
+    {
+      "id": "length",
+      "title": "悪口が一行長い",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "length",
+      "summary": "旅行より食事の心配を長く書く。"
+    },
+    {
+      "id": "END_ENTRY",
+      "title": "注文は未記載",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "END_ENTRY",
+      "summary": "注文は未記載"
+    },
+    {
+      "id": "END_TRIP",
+      "title": "決まったのは月と国",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "END_TRIP",
+      "summary": "決まったのは月と国"
+    },
+    {
+      "id": "END_VERDICT",
+      "title": "実食レビューではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "END_VERDICT",
+      "summary": "実食レビューではない"
+    },
+    {
+      "id": "END_LENGTH",
+      "title": "不安が報告を上回る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-06-05_町田からフィリピンの飯を判定",
+      "entry": "END_LENGTH",
+      "summary": "不安が報告を上回る"
+    }
+  ],
+  "edges": [
+    {
+      "from": "entry",
+      "to": "END_ENTRY",
+      "choiceText": "入店記録を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "entry",
+      "to": "trip",
+      "choiceText": "4分後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "trip",
+      "to": "END_TRIP",
+      "choiceText": "確定範囲を守る",
+      "style": "kenkai"
+    },
+    {
+      "from": "trip",
+      "to": "verdict",
+      "choiceText": "第一声を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "verdict",
+      "to": "END_VERDICT",
+      "choiceText": "先入観として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "verdict",
+      "to": "length",
+      "choiceText": "文章量を比べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "length",
+      "to": "END_LENGTH",
+      "choiceText": "一日の落ちとして残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "length",
+      "to": "entry",
+      "choiceText": "町田の入口へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

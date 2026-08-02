@@ -1,0 +1,79 @@
+{
+  "title": "シラフ画面と未完成の測定部",
+  "subtitle": "表示はできたが換算は調査中",
+  "genre": "電子工作の進捗記録",
+  "date": "2026-04-16",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "display": { "name": "小さな画面", "color": "#76a9d4", "emoji": "▦" },
+    "sensor": { "name": "MQ-3", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "4月16日の進捗",
+    "choose_part": "表示と測定",
+    "display_ui": "三段の文字",
+    "sensor_graph": "換算グラフ",
+    "wordplay": "SHIRAFUとDEISUI",
+    "END_SCREEN": "装置の顔ができた",
+    "END_STATUS": "判定語を先に決める",
+    "END_GRAPH": "電圧と濃度の間",
+    "END_JOKE": "人だけ先に酔いたがる"
+  },
+  "mapSummaries": {
+    "standalone_start": "アルコールチェッカーの表示部分が形になった。",
+    "display_ui": "ALCOHOL CHECK、SHIRAFU、CLEAN AIRを表示する。",
+    "sensor_graph": "MQ-3電圧から濃度への換算を調べる。",
+    "wordplay": "未完成の装置と酔いたい本人の状態を比べる。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "マイコン電子工作の習作として作り始めたアルコールチェッカーが、4月16日に少し形になった。ブレッドボード上の小さな画面は動いたが、測定機能はまだ完成していない。" },
+    {
+      "choices": [
+        { "text": "画面に出た文字を見る", "goto": "display_ui" },
+        { "text": "測定部の課題を見る", "goto": "sensor_graph" },
+        { "text": "投稿の落ちを見る", "goto": "wordplay" }
+      ]
+    },
+    { "label": "display_ui" },
+    { "bg": "dawn" },
+    { "speaker": "display", "text": "一段目はALCOHOL CHECK。次にSHIRAFU、最後にCLEAN AIR。装置名、人の状態、空気の状態を小型画面へ分けて表示している。" },
+    {
+      "choices": [
+        { "text": "表示部分の成果として残す", "goto": "END_SCREEN" },
+        { "text": "状態名の意味を考える", "goto": "END_STATUS" }
+      ]
+    },
+    { "label": "sensor_graph" },
+    { "bg": "twilight" },
+    { "speaker": "sensor", "text": "MQ-3はアルコールへの反応を出力電圧として返す。その電圧をそのまま酔いの強さにはできない。別の画面でグラフを動かし、濃度との関係を確かめている。" },
+    {
+      "choices": [
+        { "text": "換算を未完成の核心に置く", "goto": "END_GRAPH" },
+        { "text": "現在の表示へ戻る", "goto": "END_STATUS" }
+      ]
+    },
+    { "label": "wordplay" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "進捗は現在SHIRAFUモード。それなのにワディーは、早くDEISUIになりたいと書いた。実際に飲酒試験をした記録ではなく、シラフと泥酔をUIの状態名にした冗談である。" },
+    {
+      "choices": [
+        { "text": "順序の逆転を受け取る", "goto": "END_JOKE" },
+        { "text": "装置側の現在地へ戻る", "goto": "END_GRAPH" }
+      ]
+    },
+    { "label": "END_SCREEN" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "測定結果を出せる装置にはまだなっていない。それでも、小さな画面へ装置名と状態を並べたことで、完成後に利用者が見る顔はできた。入力より先に出口を作った進捗だった。\nEND 装置の顔ができた" },
+    { "label": "END_STATUS" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "SHIRAFUとCLEAN AIRは、実測から出た判定ではなく試作表示である。だが数値を人へ伝えるときの状態名を先に決めたため、センサーの値を最終的にどう見せたいかは明確になった。\nEND 判定語を先に決める" },
+    { "label": "END_GRAPH" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "MQ-3の電圧とアルコール濃度は同じ量ではない。グラフで二つの関係を確認し、換算方法を作る必要がある。画面が完成らしく見えても、測定器の中心はまだ調査中だった。\nEND 電圧と濃度の間" },
+    { "label": "END_JOKE" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "装置は地道にSHIRAFU画面と換算グラフを作っているのに、製作者だけがDEISUIへ急ぎたがる。測定器より測られる側の欲望が先へ進んだことで、真面目な進捗報告に落ちが付いた。\nEND 人だけ先に酔いたがる" }
+  ]
+}

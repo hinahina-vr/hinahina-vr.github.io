@@ -1,0 +1,189 @@
+{
+  "date": "2026-06-12",
+  "title": "大往生の次の一行 A.D.M.S.",
+  "rootNodeId": "long_life",
+  "nodes": [
+    {
+      "id": "long_life",
+      "title": "長い人生の終わり",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "long_life",
+      "summary": "祖母の大往生を受け止める。"
+    },
+    {
+      "id": "aftermath",
+      "title": "家族内の争い",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "aftermath",
+      "summary": "残った家族の対立を知る。"
+    },
+    {
+      "id": "label",
+      "title": "お家騒動",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "label",
+      "summary": "家族内の争いへ大きな名を付ける。"
+    },
+    {
+      "id": "irony",
+      "title": "エキサイティング",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "irony",
+      "summary": "明るすぎる語で後日談を報告する。"
+    },
+    {
+      "id": "two_lines",
+      "title": "隣り合う二行",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "two_lines",
+      "summary": "穏やかな終わりと騒がしい始まりを並べる。"
+    },
+    {
+      "id": "END_LONG_LIFE",
+      "title": "年齢と死因は未記載",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "END_LONG_LIFE",
+      "summary": "年齢と死因は未記載"
+    },
+    {
+      "id": "END_AFTERMATH",
+      "title": "争点は未記載",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "END_AFTERMATH",
+      "summary": "争点は未記載"
+    },
+    {
+      "id": "END_LABEL",
+      "title": "誇張した呼び名",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "END_LABEL",
+      "summary": "誇張した呼び名"
+    },
+    {
+      "id": "END_IRONY",
+      "title": "楽しさではなく皮肉",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "END_IRONY",
+      "summary": "楽しさではなく皮肉"
+    },
+    {
+      "id": "END_TWO_LINES",
+      "title": "終わりと始まり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-06-12_大往生の次の一行",
+      "entry": "END_TWO_LINES",
+      "summary": "終わりと始まり"
+    }
+  ],
+  "edges": [
+    {
+      "from": "long_life",
+      "to": "END_LONG_LIFE",
+      "choiceText": "分かる範囲を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "long_life",
+      "to": "aftermath",
+      "choiceText": "後日談へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "aftermath",
+      "to": "END_AFTERMATH",
+      "choiceText": "争点を作らない",
+      "style": "kenkai"
+    },
+    {
+      "from": "aftermath",
+      "to": "label",
+      "choiceText": "付けられた名前を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "label",
+      "to": "END_LABEL",
+      "choiceText": "言葉の範囲を守る",
+      "style": "kenkai"
+    },
+    {
+      "from": "label",
+      "to": "irony",
+      "choiceText": "後日談の調子を聞く",
+      "style": "kenkai"
+    },
+    {
+      "from": "irony",
+      "to": "END_IRONY",
+      "choiceText": "皮肉として読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "irony",
+      "to": "two_lines",
+      "choiceText": "二行を並べ直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "two_lines",
+      "to": "END_TWO_LINES",
+      "choiceText": "二つを混ぜず残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "two_lines",
+      "to": "long_life",
+      "choiceText": "最初の一行へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

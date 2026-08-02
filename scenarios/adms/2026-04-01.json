@@ -1,0 +1,93 @@
+{
+  "date": "2026-04-01",
+  "title": "OPムービーから二年生へ A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "4月1日の最初",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-01_OPムービーから二年生へ",
+      "entry": "standalone_start",
+      "summary": "4月1日の最初"
+    },
+    {
+      "id": "choose_path",
+      "title": "二つの投稿と日付",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-01_OPムービーから二年生へ",
+      "entry": "choose_path",
+      "summary": "二つの投稿と日付"
+    },
+    {
+      "id": "END_MOVIE",
+      "title": "01時11分の気分",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-01_OPムービーから二年生へ",
+      "entry": "END_MOVIE",
+      "summary": "01時11分の気分"
+    },
+    {
+      "id": "END_PROMOTION",
+      "title": "12時45分の進級",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-01_OPムービーから二年生へ",
+      "entry": "END_PROMOTION",
+      "summary": "12時45分の進級"
+    },
+    {
+      "id": "END_TRUTH",
+      "title": "嘘の日の本当",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-01_OPムービーから二年生へ",
+      "entry": "END_TRUTH",
+      "summary": "嘘の日の本当"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_MOVIE",
+      "choiceText": "深夜のOPムービーを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_PROMOTION",
+      "choiceText": "大学2年目の開始を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_TRUTH",
+      "choiceText": "4月1日の真偽を確かめる",
+      "style": "kenkai"
+    }
+  ]
+}

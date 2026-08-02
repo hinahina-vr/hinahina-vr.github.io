@@ -1,0 +1,92 @@
+{
+  "title": "雪花科創城からSEG電子市場へ",
+  "subtitle": "複合地区、BREWTOWN、閉じた工場、電子市場",
+  "genre": "二つの産業の入口を訪ねる一日",
+  "date": "2026-05-05",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "brew": { "name": "雪花の街区", "color": "#72a8be", "emoji": "◆" },
+    "market": { "name": "SEG電子市場", "color": "#c79b62", "emoji": "▦" }
+  },
+  "mapTitles": {
+    "snow_city": "16時12分の雪花科創城",
+    "brewtown": "一般向けのBREWTOWN",
+    "brewery_gate": "関係者だけの工場",
+    "seg": "18時6分の電子市場",
+    "later_anger": "旅行後の青島宣言",
+    "END_DISTRICT": "工場だけではない街区",
+    "END_PUBLIC": "開かれた商業施設",
+    "END_DENIED": "入口で終わる見学",
+    "END_MARKET": "購入品は未記録",
+    "END_LATER": "後日まで残った怒り"
+  },
+  "mapSummaries": {
+    "snow_city": "研究、商業、住居を含む複合地区へ着く。",
+    "brewtown": "ビールを主題にした一般向け商業街区を見る。",
+    "brewery_gate": "関係者限定の工場見学には入れない。",
+    "seg": "夕方に華強北のSEG電子市場へ移る。",
+    "later_anger": "帰国後の雪花不買宣言へつながる。"
+  },
+  "scenario": [
+    { "label": "snow_city" },
+    { "bg": "station" },
+    { "speaker": "brew", "text": "5月5日16時12分、深圳市宝安区の雪花科創城へ行った。華潤置地と華潤雪花ビールが、研究、商業、住居などをまとめた複合地区である。" },
+    {
+      "choices": [
+        { "text": "地区全体の役割を残す", "goto": "END_DISTRICT" },
+        { "text": "26分後のBREWTOWNへ進む", "goto": "brewtown" }
+      ]
+    },
+    { "label": "brewtown" },
+    { "bg": "twilight" },
+    { "speaker": "brew", "text": "16時38分、地区内のBREWTOWNへ位置を残した。飲食店や酒場などが集まる、ビールをテーマにした一般向け商業街区である。" },
+    {
+      "choices": [
+        { "text": "公開された街区として残す", "goto": "END_PUBLIC" },
+        { "text": "目当ての工場見学へ進む", "goto": "brewery_gate" }
+      ]
+    },
+    { "label": "brewery_gate" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "雪花ビールの工場見学は関係者だけが対象だった。ワディーは入口から先へ進めず、製造設備、醸造工程、試飲を見た記録はない。" },
+    {
+      "choices": [
+        { "text": "入場不可の結果を残す", "goto": "END_DENIED" },
+        { "text": "次の目的地へ進む", "goto": "seg" }
+      ]
+    },
+    { "label": "seg" },
+    { "bg": "station_night" },
+    { "speaker": "market", "text": "18時6分、華強北のSEG電子市場へ移った。電子部品や機器を扱う巨大市場として知られるが、店内の棚、商品比較、購入品は記録されていない。" },
+    {
+      "choices": [
+        { "text": "市場への到着で閉じる", "goto": "END_MARKET" },
+        { "text": "旅行後の反応へ進む", "goto": "later_anger" }
+      ]
+    },
+    { "label": "later_anger" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "工場へ入れなかった不満は旅行後も残った。雪花はもう飲まない、一生青島ビールだけを飲むと宣言した。現地当日の発言ではない。" },
+    {
+      "choices": [
+        { "text": "後日の反応として残す", "goto": "END_LATER" },
+        { "text": "雪花科創城へ戻る", "goto": "snow_city" }
+      ]
+    },
+    { "label": "END_DISTRICT" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "雪花科創城は工場一棟ではない。研究、商業、住居を含む複合地区への到着として記録する。\nEND 工場だけではない街区" },
+    { "label": "END_PUBLIC" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "BREWTOWNは一般客向けの商業街区。関係者限定の工場とは公開範囲も役割も異なる。\nEND 開かれた商業施設" },
+    { "label": "END_DENIED" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "施設へ行ったが、工場内部には入れなかった。見学成功、製造工程の観察、試飲へ話を広げない。\nEND 入口で終わる見学" },
+    { "label": "END_MARKET" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "SEG電子市場へは到着した。巨大市場という背景は説明できても、何を見て買ったかは分からない。\nEND 購入品は未記録" },
+    { "label": "END_LATER" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "青島ビールだけ飲むという宣言は、入館拒否への怒りを示す後日の言葉。実行期間や味の比較結果ではない。\nEND 後日まで残った怒り" }
+  ]
+}

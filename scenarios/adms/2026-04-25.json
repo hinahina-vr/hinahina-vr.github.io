@@ -1,128 +1,266 @@
 {
   "date": "2026-04-25",
-  "title": "二十八万円の身体 A.D.M.S.",
+  "title": "深圳の構想から超会議へ A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "幕張メッセの入口",
+      "title": "午前2時46分の身体AI",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-25_展示ホールの質問",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
       "entry": "standalone_start",
-      "summary": "古いネット文化と新しい機械が同じ会場に並ぶ。"
+      "summary": "アニメ調の人形と会話AIを組み合わせたいと考える。"
     },
     {
-      "id": "robot_booth",
-      "title": "身体を持つAI",
+      "id": "shenzhen",
+      "title": "来週の深圳展示会",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 1,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-25_展示ホールの質問",
-      "entry": "robot_booth",
-      "summary": "会話する存在が服、仮面、関節を持ち始めている。"
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "shenzhen",
+      "summary": "翌週の深圳滞在で展示会へ行く案を調べる。"
     },
     {
-      "id": "ask_price",
-      "title": "二十八万円の内訳",
+      "id": "songs",
+      "title": "午前4時台の追加楽曲",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 6,
+      "icon": "◇",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "songs",
+      "summary": "音楽ゲームの追加楽曲と古いゲーム曲へ反応する。"
+    },
+    {
+      "id": "ticket",
+      "title": "280人中269番",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 2,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-25_展示ホールの質問",
-      "entry": "ask_price",
-      "summary": "価格だけでなく、保管と手入れの条件を聞く。"
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "ticket",
+      "summary": "入場整理券で269番を引く。"
     },
     {
-      "id": "END_MEASURE",
-      "title": "部屋を測って帰る",
+      "id": "makuhari",
+      "title": "海浜幕張から幕張メッセ",
       "realm": "kenkai",
-      "kind": "ending",
+      "kind": "branch",
       "layer": 3,
       "lane": 2,
-      "icon": "●",
-      "scenario": "2026-04-25_展示ホールの質問",
-      "entry": "END_MEASURE",
-      "summary": "部屋を測って帰る"
+      "icon": "◇",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "makuhari",
+      "summary": "海浜幕張駅から超会議の幕張メッセへ進む。"
     },
     {
-      "id": "old_culture",
-      "title": "電波ソングの人波",
+      "id": "doll",
+      "title": "28万円の人形",
       "realm": "kenkai",
       "kind": "branch",
-      "layer": 1,
-      "lane": 6,
+      "layer": 4,
+      "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-25_展示ホールの質問",
-      "entry": "old_culture",
-      "summary": "電波ソングの人波"
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "doll",
+      "summary": "黒白衣装の人形へ28万円と添える。"
     },
     {
-      "id": "END_MEMORY",
-      "title": "懐かしさを持ち帰る",
+      "id": "machida",
+      "title": "明日へ向かって",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 5,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "machida",
+      "summary": "町田の明日へ向かってへ入り、ラーメンを撮る。"
+    },
+    {
+      "id": "END_SPEC",
+      "title": "まだ構想のアニメAI人形",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_SPEC",
+      "summary": "まだ構想のアニメAI人形"
+    },
+    {
+      "id": "END_PLAN",
+      "title": "展示会は検討中",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 6,
       "icon": "●",
-      "scenario": "2026-04-25_展示ホールの質問",
-      "entry": "END_MEMORY",
-      "summary": "懐かしさを持ち帰る"
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_PLAN",
+      "summary": "展示会は検討中"
     },
     {
-      "id": "END_BUY",
-      "title": "予約票を受け取る",
+      "id": "END_SONG",
+      "title": "昔の曲が今も効く",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 10,
       "icon": "●",
-      "scenario": "2026-04-25_展示ホールの質問",
-      "entry": "END_BUY",
-      "summary": "予約票を受け取る"
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_SONG",
+      "summary": "昔の曲が今も効く"
+    },
+    {
+      "id": "END_QUEUE",
+      "title": "ほぼ最後尾",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_QUEUE",
+      "summary": "ほぼ最後尾"
+    },
+    {
+      "id": "END_EVENT",
+      "title": "確認できる会場記録",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_EVENT",
+      "summary": "確認できる会場記録"
+    },
+    {
+      "id": "END_PRICE",
+      "title": "価格だけの写真",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_PRICE",
+      "summary": "価格だけの写真"
+    },
+    {
+      "id": "END_RAMEN",
+      "title": "町田の山盛りラーメン",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-25_深圳の構想から超会議へ",
+      "entry": "END_RAMEN",
+      "summary": "町田の山盛りラーメン"
     }
   ],
   "edges": [
     {
       "from": "standalone_start",
-      "to": "robot_booth",
-      "choiceText": "二十八万円の人型製品を見に行く",
+      "to": "END_SPEC",
+      "choiceText": "現時点では構想だと確認する",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
-      "to": "old_culture",
-      "choiceText": "昔聞いた電波ソングのほうへ行く",
+      "to": "shenzhen",
+      "choiceText": "深圳の情報へ進む",
       "style": "kenkai"
     },
     {
-      "from": "robot_booth",
-      "to": "END_BUY",
-      "choiceText": "勢いのまま予約する",
+      "from": "standalone_start",
+      "to": "songs",
+      "choiceText": "明け方の音楽へ進む",
       "style": "kenkai"
     },
     {
-      "from": "robot_booth",
-      "to": "ask_price",
-      "choiceText": "毎日の置き場所と手入れを聞く",
+      "from": "shenzhen",
+      "to": "END_PLAN",
+      "choiceText": "政策ではなく本人の予想と分ける",
       "style": "kenkai"
     },
     {
-      "from": "ask_price",
-      "to": "END_MEASURE",
-      "choiceText": "進む",
+      "from": "shenzhen",
+      "to": "songs",
+      "choiceText": "4時台の曲へ進む",
       "style": "kenkai"
     },
     {
-      "from": "old_culture",
-      "to": "END_MEMORY",
-      "choiceText": "進む",
+      "from": "songs",
+      "to": "END_SONG",
+      "choiceText": "懐かしさを残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "songs",
+      "to": "ticket",
+      "choiceText": "午前10時の抽選へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "ticket",
+      "to": "END_QUEUE",
+      "choiceText": "遊技結果と区別する",
+      "style": "kenkai"
+    },
+    {
+      "from": "ticket",
+      "to": "makuhari",
+      "choiceText": "午後の海浜幕張へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "makuhari",
+      "to": "END_EVENT",
+      "choiceText": "記録された行程だけを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "makuhari",
+      "to": "doll",
+      "choiceText": "午後6時55分の写真へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "doll",
+      "to": "END_PRICE",
+      "choiceText": "写真と価格だけを残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "doll",
+      "to": "machida",
+      "choiceText": "町田へ戻る",
+      "style": "kenkai"
+    },
+    {
+      "from": "machida",
+      "to": "END_RAMEN",
+      "choiceText": "店名と料理写真で日を閉じる",
+      "style": "kenkai"
+    },
+    {
+      "from": "machida",
+      "to": "standalone_start",
+      "choiceText": "深夜の構想へ戻る",
       "style": "kenkai"
     }
   ]

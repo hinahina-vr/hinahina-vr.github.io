@@ -1,0 +1,77 @@
+{
+  "title": "町田に残った一件の位置",
+  "subtitle": "店名、欠けた注文、翌日の広州",
+  "genre": "少ない記録を正確に読む一日",
+  "date": "2026-05-01",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "checkin": { "name": "位置記録", "color": "#72a1cb", "emoji": "●" },
+    "airport": { "name": "翌日の空港", "color": "#c8a16e", "emoji": "▰" }
+  },
+  "mapTitles": {
+    "machida": "17時52分の町田",
+    "restaurant": "辛い料理で知られる店",
+    "missing": "注文と写真は空欄",
+    "guangzhou": "翌日の広州",
+    "END_CHECKIN": "確認できる一地点",
+    "END_MENU": "店の説明と本人の食事",
+    "END_BLANK": "空白を創作しない",
+    "END_BORDER": "国内最後の記録"
+  },
+  "mapSummaries": {
+    "machida": "蒙古タンメン中本町田店への位置記録を読む。",
+    "restaurant": "店の一般的な特徴と本人の体験を分ける。",
+    "missing": "料理名、写真、感想がないことを確かめる。",
+    "guangzhou": "翌日の広州白雲国際空港との順序を見る。"
+  },
+  "scenario": [
+    { "label": "machida" },
+    { "bg": "station" },
+    { "speaker": "checkin", "text": "5月1日17時52分、ワディーは日本の町田市にある蒙古タンメン中本へ位置を残した。この日の文章投稿はなく、確認できる行動記録はこの一件である。" },
+    {
+      "choices": [
+        { "text": "一地点の記録として残す", "goto": "END_CHECKIN" },
+        { "text": "店について分かる範囲へ進む", "goto": "restaurant" }
+      ]
+    },
+    { "label": "restaurant" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "蒙古タンメン中本は辛いラーメンで知られる。しかし店舗の一般的な特徴だけでは、本人がその日に何を注文したかは分からない。" },
+    {
+      "choices": [
+        { "text": "店の評判と食体験を分ける", "goto": "END_MENU" },
+        { "text": "記録されなかった項目を見る", "goto": "missing" }
+      ]
+    },
+    { "label": "missing" },
+    { "bg": "dawn" },
+    { "speaker": "checkin", "text": "位置ログには料理名も写真も味の感想もない。同行者、滞在時間、会計も不明である。短いからといって、赤いスープや汗の場面を足す根拠はない。" },
+    {
+      "choices": [
+        { "text": "欠けた項目をそのままにする", "goto": "END_BLANK" },
+        { "text": "次の日の位置へ進む", "goto": "guangzhou" }
+      ]
+    },
+    { "label": "guangzhou" },
+    { "bg": "station_night" },
+    { "speaker": "airport", "text": "翌日13時54分、次の位置記録は中国の広州白雲国際空港に移る。町田の中本は、時系列上、中国到着前に残った最後の国内立ち寄り先となった。" },
+    {
+      "choices": [
+        { "text": "記録上の境目として残す", "goto": "END_BORDER" },
+        { "text": "町田の夕方へ戻る", "goto": "machida" }
+      ]
+    },
+    { "label": "END_CHECKIN" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "確認できるのは17時52分、町田市、蒙古タンメン中本という三項目。一件だけでも、その日の居場所を示す記録として成立する。\nEND 確認できる一地点" },
+    { "label": "END_MENU" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "辛いラーメンで知られるのは店の情報。何を食べ、どう感じたかは本人の食事情報である。後者がないため、二つを同じ文章にはしない。\nEND 店の説明と本人の食事" },
+    { "label": "END_BLANK" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "料理写真も注文名も残らなかった。情報の少なさを失敗扱いせず、分からない部分を空白のまま守る。\nEND 空白を創作しない" },
+    { "label": "END_BORDER" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "翌日は広州の空港にいた。ただし出発空港や経路は不明である。中本を、確認できる国内最後の位置としてのみ置く。\nEND 国内最後の記録" }
+  ]
+}
