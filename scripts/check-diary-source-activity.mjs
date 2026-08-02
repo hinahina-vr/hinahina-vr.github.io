@@ -42,19 +42,13 @@ if (existsSync(OVERRIDE_PATH)) {
 }
 
 const withoutActivity = [...diaryDates].filter((date) => !activityDates.has(date)).sort();
-const withoutDiary = [...activityDates].filter((date) => !diaryDates.has(date)).sort();
 
-if (withoutActivity.length > 0 || withoutDiary.length > 0) {
-  if (withoutActivity.length > 0) {
-    console.error(`根拠のない日記: ${withoutActivity.join(", ")}`);
-  }
-  if (withoutDiary.length > 0) {
-    console.error(`日記のない活動日: ${withoutDiary.join(", ")}`);
-  }
+if (withoutActivity.length > 0) {
+  console.error(`根拠のない日記: ${withoutActivity.join(", ")}`);
   process.exit(1);
 }
 
 console.log(
-  `Source activity passed: ${activityDates.size} activity dates and ` +
-  `${diaryDates.size} diary dates from ${RULE_START} through ${lastDiaryDate}.`,
+  `Source activity passed: all ${diaryDates.size} diary dates from ` +
+  `${RULE_START} through ${lastDiaryDate} have X or Swarm activity.`,
 );

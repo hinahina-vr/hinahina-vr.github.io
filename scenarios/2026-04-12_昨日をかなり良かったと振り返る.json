@@ -1,0 +1,80 @@
+{
+  "title": "昨日をかなり良かったと振り返る",
+  "subtitle": "秋葉原と浅草橋を回った翌日",
+  "genre": "休日の回想",
+  "date": "2026-04-12",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "route": { "name": "昨日の行程", "color": "#76a9d4", "emoji": "▦" },
+    "review": { "name": "今日の感想", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "日曜午後の回想",
+    "choose_focus": "昨日のどこを見るか",
+    "microcomputer": "秋葉原で買う",
+    "asakusabashi": "浅草橋で食べる",
+    "return_akiba": "秋葉原へ戻る",
+    "END_DEVICE": "マイコンから始まる",
+    "END_LOOP": "目的を変えた往復",
+    "END_MEALS": "カニからステーキへ",
+    "END_REVIEW": "かなり良かった"
+  },
+  "mapSummaries": {
+    "standalone_start": "4月12日午後、前日の外出を一文で振り返る。",
+    "microcomputer": "最初は秋葉原でマイコンを購入した。",
+    "asakusabashi": "浅草橋へ移動してカニを食べた。",
+    "return_akiba": "秋葉原へ戻り、2軒とステーキへ進んだ。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "4月12日午後1時59分、ワディーは昨日の土曜日を振り返った。新しい外出の報告ではない。秋葉原と浅草橋を回った前日の行程を、かなり良かったと一文でまとめた。" },
+    { "label": "choose_focus" },
+    {
+      "choices": [
+        { "text": "最初の買い物からたどる", "goto": "microcomputer" },
+        { "text": "街の往復をたどる", "goto": "asakusabashi" },
+        { "text": "翌日に残った感想を見る", "goto": "END_REVIEW" }
+      ]
+    },
+    { "label": "microcomputer" },
+    { "bg": "station" },
+    { "speaker": "route", "text": "前日の始まりは秋葉原でのマイコン購入だった。マイコンは電子機器の制御などに使う小型コンピューターだが、製品名や用途は投稿に書かれていない。" },
+    {
+      "choices": [
+        { "text": "買い物を一日の起点に置く", "goto": "END_DEVICE" },
+        { "text": "その後の食事へ進む", "goto": "asakusabashi" }
+      ]
+    },
+    { "label": "asakusabashi" },
+    { "bg": "twilight" },
+    { "speaker": "route", "text": "秋葉原から浅草橋へ移り、カニを食べた。そのあと同じ秋葉原へ戻る。地図では往復だが、最初は買い物、戻ったあとは店巡りで目的が違う。" },
+    {
+      "choices": [
+        { "text": "往復の変化を残す", "goto": "END_LOOP" },
+        { "text": "秋葉原へ戻る", "goto": "return_akiba" }
+      ]
+    },
+    { "label": "return_akiba" },
+    { "bg": "station_night" },
+    { "speaker": "route", "text": "秋葉原へ戻ったワディーは、コンセプトカフェを2軒続けて回った。最後はステーキで締めた。店名、注文内容、支出額は書かれていない。" },
+    {
+      "choices": [
+        { "text": "食事と店巡りの並びを見る", "goto": "END_MEALS" },
+        { "text": "一日全体の評価へ進む", "goto": "END_REVIEW" }
+      ]
+    },
+    { "label": "END_DEVICE" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "カニやステーキが目立つ一日だが、出発点には電子工作の買い物がある。必要な物を手に入れたあと、食事と店巡りへ予定が広がった。食べ歩きだけの休日ではなかったことを、マイコンという一語が伝えている。\nEND マイコンから始まる" },
+    { "label": "END_LOOP" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "秋葉原から浅草橋へ行き、また秋葉原へ戻る。元の場所へ帰っても、用事はマイコン購入からコンセプトカフェ2軒へ切り替わっている。同じ街を二つの目的で使った往復だった。\nEND 目的を変えた往復" },
+    { "label": "END_MEALS" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "浅草橋のカニ、秋葉原のコンセプトカフェ2軒、最後のステーキ。何を飲み、いくら使ったかは作らない。確認できる三段の楽しみだけで、休日を最後まで延長したことが分かる。\nEND カニからステーキへ" },
+    { "label": "END_REVIEW" },
+    { "bg": "dawn" },
+    { "speaker": "review", "text": "一晩たった日曜の午後、前日の項目を並べ直して出た答えは、かなり良かった。どれか一つを選ぶ評価ではなく、買い物、移動、食事、店巡りを含む一日全体への短い肯定だった。\nEND かなり良かった" }
+  ]
+}

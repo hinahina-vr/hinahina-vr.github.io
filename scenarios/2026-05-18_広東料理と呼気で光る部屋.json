@@ -1,0 +1,57 @@
+{
+  "title": "広東料理と呼気で光る部屋",
+  "subtitle": "食べ歩きしおり、4地域、ESP32、身体参加",
+  "genre": "次の旅と身体を使う作品を同じ日に作る",
+  "date": "2026-05-18",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "guide": { "name": "旅のしおり", "color": "#c29458", "emoji": "◆" },
+    "device": { "name": "呼気装置", "color": "#6e9bb9", "emoji": "●" }
+  },
+  "mapTitles": {
+    "regions": "4地域の料理ページ",
+    "foods": "写真で空腹になる",
+    "sensor": "呼気を映像へ送る",
+    "ritual": "身体で参加する価値",
+    "END_REGIONS": "地域別に探す",
+    "END_FOODS": "食事から旅程を組む",
+    "END_SENSOR": "検査ではなく演出",
+    "END_RITUAL": "思想を実機にする"
+  },
+  "mapSummaries": {
+    "regions": "広東周辺の料理を4ページへ分ける。",
+    "foods": "料理写真を次の旅行候補にする。",
+    "sensor": "センサー値で画面表現を変える。",
+    "ritual": "身体を使う体験の価値を考える。"
+  },
+  "scenario": [
+    { "label": "regions" },
+    { "bg": "home_office" },
+    { "speaker": "guide", "text": "午前0時すぎ、広府、客家、潮州、順徳の料理を各1ページへ分けた食べ歩きしおりを作った。" },
+    { "choices": [{ "text": "地域分類を残す", "goto": "END_REGIONS" }, { "text": "料理写真へ進む", "goto": "foods" }] },
+    { "label": "foods" },
+    { "bg": "twilight" },
+    { "speaker": "guide", "text": "点心、叉焼、牛肉火鍋、煲仔飯を写真で並べた。表紙は広東おいしい旅ガイド。作りながら空腹になった。" },
+    { "choices": [{ "text": "食事中心の旅程にする", "goto": "END_FOODS" }, { "text": "午前3時台へ進む", "goto": "sensor" }] },
+    { "label": "sensor" },
+    { "bg": "station_night" },
+    { "speaker": "device", "text": "呼気のアルコールを測り、ESP32から数値を送る。値に応じて波紋、粒子、脈動、発光を変える作品だった。" },
+    { "choices": [{ "text": "映像参加装置として残す", "goto": "END_SENSOR" }, { "text": "作品の考えへ進む", "goto": "ritual" }] },
+    { "label": "ritual" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "人間の価値は身体や儀式的な体験へ寄るのではないか。その考えを小さな基板とセンサーで形にした。" },
+    { "choices": [{ "text": "実機の試作を残す", "goto": "END_RITUAL" }, { "text": "旅のしおりへ戻る", "goto": "regions" }] },
+    { "label": "END_REGIONS" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "広東料理を一括りにせず、土地ごとの食べ歩き候補として整理した。\nEND 地域別に探す" },
+    { "label": "END_FOODS" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "5月18日の実食記録ではない。写真を見ながら次の旅行で食べる候補を選んだ。\nEND 食事から旅程を組む" },
+    { "label": "END_SENSOR" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "飲酒の合否を出す装置ではなく、呼気をその場の映像へ参加させるインスタレーションである。\nEND 検査ではなく演出" },
+    { "label": "END_RITUAL" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "実機にはNOMISUGIやLEVEL 99が表示された。抽象的な考えを身体で試せる形へした。\nEND 思想を実機にする" }
+  ]
+}

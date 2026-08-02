@@ -1,0 +1,153 @@
+{
+  "date": "2026-06-25",
+  "title": "16時14分のリバティタワー A.D.M.S.",
+  "rootNodeId": "arrival",
+  "nodes": [
+    {
+      "id": "arrival",
+      "title": "16時14分",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "arrival",
+      "summary": "駿河台キャンパスの塔を訪れる。"
+    },
+    {
+      "id": "scale",
+      "title": "地上と地下",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "scale",
+      "summary": "地上23階と地下3階の規模を見る。"
+    },
+    {
+      "id": "anniversary",
+      "title": "創立120周年",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "anniversary",
+      "summary": "建物が生まれた理由を知る。"
+    },
+    {
+      "id": "inside",
+      "title": "塔の中身",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "inside",
+      "summary": "大学の日常を支える施設を確かめる。"
+    },
+    {
+      "id": "END_ARRIVAL",
+      "title": "16時14分の到着",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "END_ARRIVAL",
+      "summary": "16時14分の到着"
+    },
+    {
+      "id": "END_SCALE",
+      "title": "約120メートル",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "END_SCALE",
+      "summary": "約120メートル"
+    },
+    {
+      "id": "END_ANNIVERSARY",
+      "title": "大学の節目",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "END_ANNIVERSARY",
+      "summary": "大学の節目"
+    },
+    {
+      "id": "END_INSIDE",
+      "title": "記念と実用",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-06-25_16時14分のリバティタワー",
+      "entry": "END_INSIDE",
+      "summary": "記念と実用"
+    }
+  ],
+  "edges": [
+    {
+      "from": "arrival",
+      "to": "END_ARRIVAL",
+      "choiceText": "この日に分からないことを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "arrival",
+      "to": "scale",
+      "choiceText": "建物を見上げる",
+      "style": "kenkai"
+    },
+    {
+      "from": "scale",
+      "to": "END_SCALE",
+      "choiceText": "高さの表現を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "scale",
+      "to": "anniversary",
+      "choiceText": "120という数字を追う",
+      "style": "kenkai"
+    },
+    {
+      "from": "anniversary",
+      "to": "END_ANNIVERSARY",
+      "choiceText": "記念の意味を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "anniversary",
+      "to": "inside",
+      "choiceText": "塔の中へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "inside",
+      "to": "END_INSIDE",
+      "choiceText": "二つの役割を結ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "inside",
+      "to": "arrival",
+      "choiceText": "16時14分へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

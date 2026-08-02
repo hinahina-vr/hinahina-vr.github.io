@@ -1,0 +1,189 @@
+{
+  "date": "2026-07-11",
+  "title": "23時のAIとゼロ円の返答 A.D.M.S.",
+  "rootNodeId": "model",
+  "nodes": [
+    {
+      "id": "model",
+      "title": "23時までの試行",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "model",
+      "summary": "新しいモデルを夜まで動かす。"
+    },
+    {
+      "id": "slot",
+      "title": "9000回転の記憶",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "slot",
+      "summary": "過去の長時間遊技と比べる。"
+    },
+    {
+      "id": "criterion",
+      "title": "当たりが決まらない",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "criterion",
+      "summary": "成功条件のなさに気づく。"
+    },
+    {
+      "id": "complaint",
+      "title": "英語の問い合わせ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "complaint",
+      "summary": "動画広告について質問する。"
+    },
+    {
+      "id": "reply",
+      "title": "請求額0円",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "reply",
+      "summary": "無料契約という回答を受ける。"
+    },
+    {
+      "id": "END_MODEL",
+      "title": "名称と回数は不明",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "END_MODEL",
+      "summary": "名称と回数は不明"
+    },
+    {
+      "id": "END_SLOT",
+      "title": "数字の所属",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "END_SLOT",
+      "summary": "数字の所属"
+    },
+    {
+      "id": "END_CRITERION",
+      "title": "次への期待",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "END_CRITERION",
+      "summary": "次への期待"
+    },
+    {
+      "id": "END_COMPLAINT",
+      "title": "有料会員のつもり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "END_COMPLAINT",
+      "summary": "有料会員のつもり"
+    },
+    {
+      "id": "END_REPLY",
+      "title": "抗議終了",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-07-11_23時のAIとゼロ円の返答",
+      "entry": "END_REPLY",
+      "summary": "抗議終了"
+    }
+  ],
+  "edges": [
+    {
+      "from": "model",
+      "to": "END_MODEL",
+      "choiceText": "記録されていない情報を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "model",
+      "to": "slot",
+      "choiceText": "昔の熱中と比べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "slot",
+      "to": "END_SLOT",
+      "choiceText": "9000の意味を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "slot",
+      "to": "criterion",
+      "choiceText": "二つの違いを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "criterion",
+      "to": "END_CRITERION",
+      "choiceText": "止めにくさを残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "criterion",
+      "to": "complaint",
+      "choiceText": "もう一件のAI関連へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "complaint",
+      "to": "END_COMPLAINT",
+      "choiceText": "抗議の前提を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "complaint",
+      "to": "reply",
+      "choiceText": "返答を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "reply",
+      "to": "END_REPLY",
+      "choiceText": "請求額を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "reply",
+      "to": "model",
+      "choiceText": "23時の試行へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

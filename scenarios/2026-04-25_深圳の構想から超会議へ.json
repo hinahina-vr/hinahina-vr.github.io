@@ -1,0 +1,123 @@
+{
+  "title": "深圳の構想から超会議へ",
+  "subtitle": "身体を持つAI、悪い整理券、幕張と町田",
+  "genre": "長い外出日の記録",
+  "date": "2026-04-25",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "ticket": { "name": "入場整理券", "color": "#76a9d4", "emoji": "▦" },
+    "event": { "name": "超会議", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "午前2時46分の身体AI",
+    "shenzhen": "来週の深圳展示会",
+    "songs": "午前4時台の追加楽曲",
+    "ticket": "280人中269番",
+    "makuhari": "海浜幕張から幕張メッセ",
+    "doll": "28万円の人形",
+    "machida": "明日へ向かって",
+    "END_SPEC": "まだ構想のアニメAI人形",
+    "END_PLAN": "展示会は検討中",
+    "END_SONG": "昔の曲が今も効く",
+    "END_QUEUE": "ほぼ最後尾",
+    "END_EVENT": "確認できる会場記録",
+    "END_PRICE": "価格だけの写真",
+    "END_RAMEN": "町田の山盛りラーメン"
+  },
+  "mapSummaries": {
+    "standalone_start": "アニメ調の人形と会話AIを組み合わせたいと考える。",
+    "shenzhen": "翌週の深圳滞在で展示会へ行く案を調べる。",
+    "songs": "音楽ゲームの追加楽曲と古いゲーム曲へ反応する。",
+    "ticket": "入場整理券で269番を引く。",
+    "makuhari": "海浜幕張駅から超会議の幕張メッセへ進む。",
+    "doll": "黒白衣装の人形へ28万円と添える。",
+    "machida": "町田の明日へ向かってへ入り、ラーメンを撮る。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "4月25日午前2時46分、ワディーは会話AIへ現実の身体を与える製品を望んだ。写実的なリアルドールは苦手なので、アニメ調の人形とAIを組み合わせたいと考えた。" },
+    {
+      "choices": [
+        { "text": "現時点では構想だと確認する", "goto": "END_SPEC" },
+        { "text": "深圳の情報へ進む", "goto": "shenzhen" },
+        { "text": "明け方の音楽へ進む", "goto": "songs" }
+      ]
+    },
+    { "label": "shenzhen" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "中国の複数技術が合流すれば実現は近いと予想し、さらに安価な製品が日本の出生数を減らすという極端な未来まで書いた。3分後、深圳の第5世代ドール展示動画を見つけ、翌週の滞在中に展示会へ寄るか調べた。" },
+    {
+      "choices": [
+        { "text": "政策ではなく本人の予想と分ける", "goto": "END_PLAN" },
+        { "text": "4時台の曲へ進む", "goto": "songs" }
+      ]
+    },
+    { "label": "songs" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "午前4時台、ゆんゆん電波シンドローム、巫女みこナース、フロントウイング作品の追加楽曲を見た。最後にスイートレガシーのオープニング曲で気持ちが入った。幕張会場での演奏ではなく、外出前の画面上の出来事である。" },
+    {
+      "choices": [
+        { "text": "懐かしさを残す", "goto": "END_SONG" },
+        { "text": "午前10時の抽選へ進む", "goto": "ticket" }
+      ]
+    },
+    { "label": "ticket" },
+    { "bg": "station_night" },
+    { "speaker": "ticket", "text": "午前10時5分、町田のパチンコ店で入場整理券を引いた。参加者280人に対して269番。ほぼ最後尾の順番を見た本人の感想は、ゴミ、の2文字だった。" },
+    {
+      "choices": [
+        { "text": "遊技結果と区別する", "goto": "END_QUEUE" },
+        { "text": "午後の海浜幕張へ進む", "goto": "makuhari" }
+      ]
+    },
+    { "label": "makuhari" },
+    { "bg": "station" },
+    { "speaker": "event", "text": "午後1時54分に海浜幕張駅へ着き、午後3時20分に幕張メッセへ位置を残した。寿司と瓶ビール、超巨大トリィガチャ、白い衣装の出演者の写真があり、午後5時55分には海浜幕張のHUBへ移った。" },
+    {
+      "choices": [
+        { "text": "記録された行程だけを見る", "goto": "END_EVENT" },
+        { "text": "午後6時55分の写真へ進む", "goto": "doll" }
+      ]
+    },
+    { "label": "doll" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "午後6時55分、黒と白の衣装を着た人形を撮り、28万円とだけ書いた。メーカー、機能、動作、購入は記録されておらず、朝に構想した会話AI製品と同一かも分からない。" },
+    {
+      "choices": [
+        { "text": "写真と価格だけを残す", "goto": "END_PRICE" },
+        { "text": "町田へ戻る", "goto": "machida" }
+      ]
+    },
+    { "label": "machida" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "午後8時27分、町田の明日へ向かってへ入った。最後の写真には、もやしと豚肉が山盛りになったラーメンが写っている。" },
+    {
+      "choices": [
+        { "text": "店名と料理写真で日を閉じる", "goto": "END_RAMEN" },
+        { "text": "深夜の構想へ戻る", "goto": "standalone_start" }
+      ]
+    },
+    { "label": "END_SPEC" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "欲しいのは、写実的な人形ではなくアニメ調の身体で会話するAI。4月25日時点で所有した製品でも発売情報でもない。好みと既存技術を組み合わせた将来の仕様案だった。\nEND まだ構想のアニメAI人形" },
+    { "label": "END_PLAN" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "出生数を減らすという話は中国の現実政策ではなく、本人の極端な未来予想。確認できる行動は、翌週の深圳滞在に合わせてドール展示会へ行けるか調べ始めたことまでである。\nEND 展示会は検討中" },
+    { "label": "END_SONG" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "古い作品を知る年齢を自虐しながらも、追加楽曲の選び方を本格的だと見直した。昔の曲は会場で鳴ったのではない。明け方、一人の画面で現在の気分を強く動かした。\nEND 昔の曲が今も効く" },
+    { "label": "END_QUEUE" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "269は得点でも収支でもなく、280人の列における入場順。後ろには11人しかいない。台を打つ前の抽選で、朝の期待がほぼ最後尾へ送られた。\nEND ほぼ最後尾" },
+    { "label": "END_EVENT" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "駅、幕張メッセ、HUBの位置記録と数枚の写真はある。ステージ名、ガチャ結果、出演者との会話はない。超会議の一日は、確認できる場所と画像の範囲で残す。\nEND 確認できる会場記録" },
+    { "label": "END_PRICE" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "黒白衣装の人形と28万円。それ以上の説明は投稿にない。動作や会話を見たことにも、予約や購入をしたことにもせず、価格の強さで終わった一枚として保存する。\nEND 価格だけの写真" },
+    { "label": "END_RAMEN" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "幕張から町田へ戻り、明日へ向かってという店へ入った。最後に残ったのは、もやしと豚肉が高く積まれたラーメンの写真。長い一日は、未来の議論ではなく目の前の一杯で閉じた。\nEND 町田の山盛りラーメン" }
+  ]
+}

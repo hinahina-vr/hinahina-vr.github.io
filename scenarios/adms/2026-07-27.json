@@ -1,0 +1,225 @@
+{
+  "date": "2026-07-27",
+  "title": "九人の白髪アバターとOracle Hive A.D.M.S.",
+  "rootNodeId": "detect",
+  "nodes": [
+    {
+      "id": "detect",
+      "title": "九人を検出",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "detect",
+      "summary": "集合写真から人物の場所を見つける。"
+    },
+    {
+      "id": "replace",
+      "title": "同じアバターへ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "replace",
+      "summary": "姿勢と配置を残して見た目を替える。"
+    },
+    {
+      "id": "interface",
+      "title": "黒魔術風の画面",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "interface",
+      "summary": "Oracle Hiveの操作内容を確かめる。"
+    },
+    {
+      "id": "poster",
+      "title": "思わぬ映画との一致",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "poster",
+      "summary": "完成画像の思わぬ連想をたどる。"
+    },
+    {
+      "id": "video",
+      "title": "本当の目標",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "video",
+      "summary": "静止画の次に残った問題を見る。"
+    },
+    {
+      "id": "illness",
+      "title": "ノンアルの夜",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 5,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "illness",
+      "summary": "作業の終わりに起きた体調不良を見る。"
+    },
+    {
+      "id": "END_DETECT",
+      "title": "検出した範囲",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "END_DETECT",
+      "summary": "検出した範囲"
+    },
+    {
+      "id": "END_REPLACE",
+      "title": "静止画の完成",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "END_REPLACE",
+      "summary": "静止画の完成"
+    },
+    {
+      "id": "END_INTERFACE",
+      "title": "名前と機能",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "END_INTERFACE",
+      "summary": "名前と機能"
+    },
+    {
+      "id": "END_POSTER",
+      "title": "偶然の類似",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "END_POSTER",
+      "summary": "偶然の類似"
+    },
+    {
+      "id": "END_VIDEO",
+      "title": "未完成の動画",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "END_VIDEO",
+      "summary": "未完成の動画"
+    },
+    {
+      "id": "END_ILLNESS",
+      "title": "原因は不明",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 6,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-07-27_九人の白髪アバターとOracle Hive",
+      "entry": "END_ILLNESS",
+      "summary": "原因は不明"
+    }
+  ],
+  "edges": [
+    {
+      "from": "detect",
+      "to": "END_DETECT",
+      "choiceText": "確認できた範囲を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "detect",
+      "to": "replace",
+      "choiceText": "9人を置き換える",
+      "style": "kenkai"
+    },
+    {
+      "from": "replace",
+      "to": "END_REPLACE",
+      "choiceText": "完成形の範囲を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "replace",
+      "to": "interface",
+      "choiceText": "操作画面を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "interface",
+      "to": "END_INTERFACE",
+      "choiceText": "見た目と機能を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "interface",
+      "to": "poster",
+      "choiceText": "完成画像の連想を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "poster",
+      "to": "END_POSTER",
+      "choiceText": "比較の範囲を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "poster",
+      "to": "video",
+      "choiceText": "本来の目標へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "video",
+      "to": "END_VIDEO",
+      "choiceText": "未完成部分を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "video",
+      "to": "illness",
+      "choiceText": "作業の終わりを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "illness",
+      "to": "END_ILLNESS",
+      "choiceText": "原因を決めつけない",
+      "style": "kenkai"
+    },
+    {
+      "from": "illness",
+      "to": "detect",
+      "choiceText": "九人の検出へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

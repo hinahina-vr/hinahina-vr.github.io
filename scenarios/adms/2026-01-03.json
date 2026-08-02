@@ -1,0 +1,93 @@
+{
+  "date": "2026-01-03",
+  "title": "五分先の交換窓口 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "3つの別世界",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-03_五分先の交換窓口",
+      "entry": "standalone_start",
+      "summary": "3つの別世界"
+    },
+    {
+      "id": "choose_path",
+      "title": "交換するもの",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-03_五分先の交換窓口",
+      "entry": "choose_path",
+      "summary": "交換するもの"
+    },
+    {
+      "id": "END_GAME",
+      "title": "終わった物語の教室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-01-03_五分先の交換窓口",
+      "entry": "END_GAME",
+      "summary": "終わった物語の教室"
+    },
+    {
+      "id": "END_FIVE",
+      "title": "5分ずれた駅",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-01-03_五分先の交換窓口",
+      "entry": "END_FIVE",
+      "summary": "5分ずれた駅"
+    },
+    {
+      "id": "END_WINDOW",
+      "title": "顔だけ新しい窓口",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-01-03_五分先の交換窓口",
+      "entry": "END_WINDOW",
+      "summary": "顔だけ新しい窓口"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_GAME",
+      "choiceText": "教室の札を取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_FIVE",
+      "choiceText": "5分遅れの札を取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_WINDOW",
+      "choiceText": "窓口の顔を調べる",
+      "style": "kenkai"
+    }
+  ]
+}

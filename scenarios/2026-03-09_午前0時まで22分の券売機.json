@@ -1,0 +1,45 @@
+{
+  "title": "午前0時まで22分の券売機",
+  "subtitle": "七代目野中家へ入った夜の夢",
+  "genre": "深夜店舗記録の分岐夢",
+  "date": "2026-03-09",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "clock": { "name": "午前0時の時計", "color": "#c49b6d", "emoji": "○" }
+  },
+  "mapTitles": {
+    "standalone_start": "町田駅近くの入口",
+    "choose_path": "三つの記録ボタン",
+    "END_TIME": "23時38分",
+    "END_SHOP": "七代目の看板",
+    "END_EMPTY": "空の注文欄"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "street" },
+    { "speaker": "narrator", "text": "月曜の23時38分、町田駅近くの七代目野中家へ入った。2025年に開店した横浜家系ラーメン店で、野中家系列の7店舗目である。家系は濃い豚骨しょうゆ、太めの麺、海苔、ほうれん草を基本にするが、この夜の注文は記録されていない。" },
+    { "speaker": "narrator", "text": "夢の券売機には料理名がなく、時刻、店の来歴、注文不明という3つのボタンだけが光っていた。" },
+    { "speaker": "clock", "text": "日付が変わるまで22分です。確認できる記録を一つ選んでください。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "23時38分を押す", "goto": "END_TIME" },
+        { "text": "七代目の看板を押す", "goto": "END_SHOP" },
+        { "text": "注文不明を押す", "goto": "END_EMPTY" }
+      ]
+    },
+    { "label": "END_TIME" },
+    { "bg": "clock" },
+    { "speaker": "narrator", "text": "表示が23時38分で止まり、月曜の残り22分だけが券になって出てきた。" },
+    { "speaker": "narrator", "text": "深夜の感情を足さず、入店時刻として財布へしまった。\nEND 月曜最後の時刻" },
+    { "label": "END_SHOP" },
+    { "bg": "restaurant" },
+    { "speaker": "narrator", "text": "七代目の文字の下に、2025年開店、系列7店舗目と表示された。店名が順番を記録していた。" },
+    { "speaker": "clock", "text": "店舗の来歴は、本人の注文とは別の情報です。" },
+    { "speaker": "narrator", "text": "町田駅近くという場所を添えた。\nEND 店名の由来を残す" },
+    { "label": "END_EMPTY" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "家系の典型的な一杯が画面へ浮かんだが、注文欄へは転記しなかった。本人が何を選んだか分からないからだ。" },
+    { "speaker": "narrator", "text": "空の食券を受け取り、入店した事実だけを残した。\nEND 食べた物を創作しない" }
+  ]
+}

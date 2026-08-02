@@ -1,0 +1,77 @@
+{
+  "title": "画面の中にしかないもの",
+  "subtitle": "値段、品切れ、表示、諦め",
+  "genre": "見えるのに手に入らないものを考える昼",
+  "date": "2026-05-14",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "shop": { "name": "店の商品", "color": "#c09255", "emoji": "◆" },
+    "screen": { "name": "画面の中", "color": "#6e96bb", "emoji": "●" }
+  },
+  "mapTitles": {
+    "price": "値段で決められる現物",
+    "restock": "入荷を待てる品切れ",
+    "visible": "見えても受け取れない",
+    "return": "電源で何度でも現れる",
+    "END_PRICE": "購入判断が始まらない",
+    "END_RESTOCK": "待つ先がない",
+    "END_VISIBLE": "表示と所有は別",
+    "END_RETURN": "諦める機会がない"
+  },
+  "mapSummaries": {
+    "price": "店で買えるものとの違いを考える。",
+    "restock": "一時的な品切れと比較する。",
+    "visible": "画面までの近さと到達不能を分ける。",
+    "return": "再表示が欲望を終わらせない理由を読む。"
+  },
+  "scenario": [
+    { "label": "price" },
+    { "bg": "home_office" },
+    { "speaker": "shop", "text": "店にあるものなら、値段を見て買うか諦めるかを決められる。高くても、購入という行動の条件は見える。" },
+    {
+      "choices": [
+        { "text": "取引できない違いを残す", "goto": "END_PRICE" },
+        { "text": "品切れと比べる", "goto": "restock" }
+      ]
+    },
+    { "label": "restock" },
+    { "bg": "twilight" },
+    { "speaker": "shop", "text": "品切れなら、同じ商品が現実に存在し、次の入荷を待てる。画面の中にしかないものには、入荷日も受取先もない。" },
+    {
+      "choices": [
+        { "text": "待てない理由を残す", "goto": "END_RESTOCK" },
+        { "text": "画面へ進む", "goto": "visible" }
+      ]
+    },
+    { "label": "visible" },
+    { "bg": "station_night" },
+    { "speaker": "screen", "text": "電源を入れれば、欲しいものはすぐ見える。しかし手を伸ばしても、触れるのは画面まで。表示する機能は受け取る機能ではない。" },
+    {
+      "choices": [
+        { "text": "近さと所有を分ける", "goto": "END_VISIBLE" },
+        { "text": "何度も現れる理由へ進む", "goto": "return" }
+      ]
+    },
+    { "label": "return" },
+    { "bg": "home_office" },
+    { "speaker": "screen", "text": "見えなければ諦められるかもしれない。それでも画面は、電源を入れるたび同じものを現在へ戻す。その反復がいちばん困る。" },
+    {
+      "choices": [
+        { "text": "終わらない欲望として残す", "goto": "END_RETURN" },
+        { "text": "店の商品へ戻る", "goto": "price" }
+      ]
+    },
+    { "label": "END_PRICE" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "対象名は不明。問題は高価で買えないことではなく、価格も受取方法もなく購入判断を開始できないこと。\nEND 購入判断が始まらない" },
+    { "label": "END_RESTOCK" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "画面内の対象は一時的に売り切れているのではない。待つことで現実の在庫へ変わる予定がない。\nEND 待つ先がない" },
+    { "label": "END_VISIBLE" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "目から画面までの距離は短くても、対象へ到達する経路は存在しない。見ることと所有は別である。\nEND 表示と所有は別" },
+    { "label": "END_RETURN" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "完全な不在ではなく、いつでも再表示できる不可能。見えることが、諦めるための時間を始めさせない。\nEND 諦める機会がない" }
+  ]
+}

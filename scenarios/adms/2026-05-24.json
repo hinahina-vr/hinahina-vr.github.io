@@ -1,0 +1,189 @@
+{
+  "date": "2026-05-24",
+  "title": "五千万円より週三日 A.D.M.S.",
+  "rootNodeId": "drink",
+  "nodes": [
+    {
+      "id": "drink",
+      "title": "短時間で酔う平日",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "drink",
+      "summary": "疲れた平日は酒が早く回る。"
+    },
+    {
+      "id": "memory",
+      "title": "記憶も代金に入れる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "memory",
+      "summary": "思い出せない夜まで費用として考える。"
+    },
+    {
+      "id": "fde",
+      "title": "社内FDEを名乗りたい",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "fde",
+      "summary": "現場型技術者の社内版を考える。"
+    },
+    {
+      "id": "salary",
+      "title": "年収5000万円",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "salary",
+      "summary": "新しい肩書きへ高額な希望を付ける。"
+    },
+    {
+      "id": "workweek",
+      "title": "500万円で週3日",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "workweek",
+      "summary": "報酬より曜日と仕事の自由を選ぶ。"
+    },
+    {
+      "id": "END_DRINK",
+      "title": "疲労は本人の推測",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "END_DRINK",
+      "summary": "疲労は本人の推測"
+    },
+    {
+      "id": "END_MEMORY",
+      "title": "酒代だけではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "END_MEMORY",
+      "summary": "酒代だけではない"
+    },
+    {
+      "id": "END_FDE",
+      "title": "正式職ではなく役割案",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "END_FDE",
+      "summary": "正式職ではなく役割案"
+    },
+    {
+      "id": "END_SALARY",
+      "title": "会社の提示額ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "END_SALARY",
+      "summary": "会社の提示額ではない"
+    },
+    {
+      "id": "END_WORKWEEK",
+      "title": "副業の内容は未記載",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-24_五千万円より週三日",
+      "entry": "END_WORKWEEK",
+      "summary": "副業の内容は未記載"
+    }
+  ],
+  "edges": [
+    {
+      "from": "drink",
+      "to": "END_DRINK",
+      "choiceText": "原因の範囲を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "drink",
+      "to": "memory",
+      "choiceText": "見えない代金へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "memory",
+      "to": "END_MEMORY",
+      "choiceText": "費用を数え直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "memory",
+      "to": "fde",
+      "choiceText": "夜の肩書き案へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "fde",
+      "to": "END_FDE",
+      "choiceText": "案と正式職を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "fde",
+      "to": "salary",
+      "choiceText": "最初の希望額へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "salary",
+      "to": "END_SALARY",
+      "choiceText": "希望額として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "salary",
+      "to": "workweek",
+      "choiceText": "2分後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "workweek",
+      "to": "END_WORKWEEK",
+      "choiceText": "最後の優先順位を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "workweek",
+      "to": "drink",
+      "choiceText": "平日の酒へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

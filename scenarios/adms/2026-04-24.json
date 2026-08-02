@@ -1,116 +1,230 @@
 {
   "date": "2026-04-24",
-  "title": "十二の未読窓 A.D.M.S.",
+  "title": "神話製作機械とアネモイ A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "机いっぱいの出力",
+      "title": "午前2時37分の構成図",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-24_読む時間の配分",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
       "entry": "standalone_start",
-      "summary": "文章、画像、プログラムは速く作れるが、読む時間は増えない。"
+      "summary": "自己情報を大奥AI群と本人型AI群が段階的に読む。"
     },
     {
-      "id": "sort_queue",
-      "title": "読む順番を作る",
+      "id": "oracle",
+      "title": "神託が守る境界",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 1,
       "lane": 2,
       "icon": "◇",
-      "scenario": "2026-04-24_読む時間の配分",
-      "entry": "sort_queue",
-      "summary": "目的と締切で未読を分け、読む対象を減らす。"
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "oracle",
+      "summary": "神AIは選択肢を示すが現実へ介入しない。"
     },
     {
-      "id": "one_work",
-      "title": "一本を最後まで読む",
+      "id": "pachinko",
+      "title": "35分後の金色画面",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 1,
       "lane": 6,
       "icon": "◇",
-      "scenario": "2026-04-24_読む時間の配分",
-      "entry": "one_work",
-      "summary": "一つを最後まで読み、他人へ渡せる言葉にする。"
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "pachinko",
+      "summary": "構成図を金色のパチンコ演出風に描き直す。"
     },
     {
-      "id": "END_FINISH",
-      "title": "感想を一つ返す",
+      "id": "unbox",
+      "title": "午前11時14分の開封",
       "realm": "kenkai",
-      "kind": "ending",
+      "kind": "branch",
       "layer": 2,
       "lane": 2,
-      "icon": "●",
-      "scenario": "2026-04-24_読む時間の配分",
-      "entry": "END_FINISH",
-      "summary": "感想を一つ返す"
+      "icon": "◇",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "unbox",
+      "summary": "アネモイ初回限定版を駿河屋の箱から出す。"
     },
     {
-      "id": "END_EXHAUST",
-      "title": "全部を開いて疲れる",
+      "id": "consume",
+      "title": "消費AIという要求",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "consume",
+      "summary": "生成物が増えすぎるため消費AIを求める。"
+    },
+    {
+      "id": "wheat",
+      "title": "麦の説明は一語",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "wheat",
+      "summary": "ゲーム内の麦を調べると、よしと表示される。"
+    },
+    {
+      "id": "END_ARCH",
+      "title": "複数AIの分業",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 1,
       "lane": 10,
       "icon": "●",
-      "scenario": "2026-04-24_読む時間の配分",
-      "entry": "END_EXHAUST",
-      "summary": "全部を開いて疲れる"
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "END_ARCH",
+      "summary": "複数AIの分業"
     },
     {
-      "id": "END_FILTER",
-      "title": "選ぶ基準を残す",
+      "id": "END_CHOICE",
+      "title": "最後に選ぶのは本人",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 6,
       "icon": "●",
-      "scenario": "2026-04-24_読む時間の配分",
-      "entry": "END_FILTER",
-      "summary": "選ぶ基準を残す"
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "END_CHOICE",
+      "summary": "最後に選ぶのは本人"
+    },
+    {
+      "id": "END_GOLD",
+      "title": "設計を大当たり風に見せる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "END_GOLD",
+      "summary": "設計を大当たり風に見せる"
+    },
+    {
+      "id": "END_PACKAGE",
+      "title": "待っていた初回限定版",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "END_PACKAGE",
+      "summary": "待っていた初回限定版"
+    },
+    {
+      "id": "END_DEMAND",
+      "title": "作る速度と読む速度",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "END_DEMAND",
+      "summary": "作る速度と読む速度"
+    },
+    {
+      "id": "END_WHEAT",
+      "title": "よしだけでは足りない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-24_神話製作機械とアネモイ",
+      "entry": "END_WHEAT",
+      "summary": "よしだけでは足りない"
     }
   ],
   "edges": [
     {
       "from": "standalone_start",
-      "to": "END_EXHAUST",
-      "choiceText": "十二件を少しずつ確認する",
+      "to": "END_ARCH",
+      "choiceText": "大奥AI群の分業を見る",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
-      "to": "sort_queue",
-      "choiceText": "明日使う二件だけ残す",
+      "to": "oracle",
+      "choiceText": "最後の神託へ進む",
       "style": "kenkai"
     },
     {
       "from": "standalone_start",
-      "to": "one_work",
-      "choiceText": "いちばん古い下書きを最後まで読む",
+      "to": "pachinko",
+      "choiceText": "35分後の見せ方を見る",
       "style": "kenkai"
     },
     {
-      "from": "sort_queue",
-      "to": "END_FILTER",
-      "choiceText": "読まない三件を削除する",
+      "from": "oracle",
+      "to": "END_CHOICE",
+      "choiceText": "本人へ残された権限を確かめる",
       "style": "kenkai"
     },
     {
-      "from": "sort_queue",
-      "to": "one_work",
-      "choiceText": "明日の資料を一件読む",
+      "from": "oracle",
+      "to": "pachinko",
+      "choiceText": "金色の別画面へ進む",
       "style": "kenkai"
     },
     {
-      "from": "one_work",
-      "to": "END_FINISH",
-      "choiceText": "進む",
+      "from": "pachinko",
+      "to": "END_GOLD",
+      "choiceText": "機能と演出を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "pachinko",
+      "to": "unbox",
+      "choiceText": "午前11時の箱へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "unbox",
+      "to": "END_PACKAGE",
+      "choiceText": "現物と冗談を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "unbox",
+      "to": "consume",
+      "choiceText": "午後の消費AIへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "consume",
+      "to": "END_DEMAND",
+      "choiceText": "供給と消費の差を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "consume",
+      "to": "wheat",
+      "choiceText": "45分後のゲーム画面へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "wheat",
+      "to": "END_WHEAT",
+      "choiceText": "一語の説明へ突っ込む",
+      "style": "kenkai"
+    },
+    {
+      "from": "wheat",
+      "to": "standalone_start",
+      "choiceText": "構成図へ戻る",
       "style": "kenkai"
     }
   ]

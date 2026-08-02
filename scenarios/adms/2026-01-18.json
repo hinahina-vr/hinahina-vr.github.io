@@ -1,0 +1,93 @@
+{
+  "date": "2026-01-18",
+  "title": "No.1余市の最後の一滴 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "逆さの余市",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-18_No.1余市の最後の一滴",
+      "entry": "standalone_start",
+      "summary": "逆さの余市"
+    },
+    {
+      "id": "choose_path",
+      "title": "残す記録",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-18_No.1余市の最後の一滴",
+      "entry": "choose_path",
+      "summary": "残す記録"
+    },
+    {
+      "id": "END_NUMBER",
+      "title": "No.1の空き棚",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-01-18_No.1余市の最後の一滴",
+      "entry": "END_NUMBER",
+      "summary": "No.1の空き棚"
+    },
+    {
+      "id": "END_CODE",
+      "title": "コードDの分類室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-01-18_No.1余市の最後の一滴",
+      "entry": "END_CODE",
+      "summary": "コードDの分類室"
+    },
+    {
+      "id": "END_ICE",
+      "title": "氷の中の北海道",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-01-18_No.1余市の最後の一滴",
+      "entry": "END_ICE",
+      "summary": "氷の中の北海道"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_NUMBER",
+      "choiceText": "No.1の棚へ瓶を置く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_CODE",
+      "choiceText": "コードDの扉を開ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_ICE",
+      "choiceText": "最後の一滴を氷へ落とす",
+      "style": "kenkai"
+    }
+  ]
+}

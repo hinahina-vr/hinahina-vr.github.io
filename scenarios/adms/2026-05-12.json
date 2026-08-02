@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-12",
+  "title": "パラパラ映像から没入型恋愛ゲームへ A.D.M.S.",
+  "rootNodeId": "confusion",
+  "nodes": [
+    {
+      "id": "confusion",
+      "title": "GLSLが分からない",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "confusion",
+      "summary": "描画言語の理解不足を正直に認める。"
+    },
+    {
+      "id": "run_first",
+      "title": "先に動かして覚える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "run_first",
+      "summary": "AIで動かした結果から学ぶ。"
+    },
+    {
+      "id": "parapara",
+      "title": "59秒のパラパラ映像",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "parapara",
+      "summary": "光が空間全面へ流れる練習を見る。"
+    },
+    {
+      "id": "graduation",
+      "title": "卒業制作の構想",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "graduation",
+      "summary": "練習を卒業制作の形式へ育てる。"
+    },
+    {
+      "id": "END_CONFUSION",
+      "title": "AIで壁を越える",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "END_CONFUSION",
+      "summary": "AIで壁を越える"
+    },
+    {
+      "id": "END_LEARNING",
+      "title": "動作結果が教材",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "END_LEARNING",
+      "summary": "動作結果が教材"
+    },
+    {
+      "id": "END_VIDEO",
+      "title": "部屋全体が映像",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "END_VIDEO",
+      "summary": "部屋全体が映像"
+    },
+    {
+      "id": "END_PROJECT",
+      "title": "没入型恋愛ゲームへ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-12_パラパラ映像から没入型恋愛ゲームへ",
+      "entry": "END_PROJECT",
+      "summary": "没入型恋愛ゲームへ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "confusion",
+      "to": "END_CONFUSION",
+      "choiceText": "未理解と動作を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "confusion",
+      "to": "run_first",
+      "choiceText": "学び方へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "run_first",
+      "to": "END_LEARNING",
+      "choiceText": "動作結果から学ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "run_first",
+      "to": "parapara",
+      "choiceText": "練習動画へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "parapara",
+      "to": "END_VIDEO",
+      "choiceText": "練習成果を保存する",
+      "style": "kenkai"
+    },
+    {
+      "from": "parapara",
+      "to": "graduation",
+      "choiceText": "10分後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "graduation",
+      "to": "END_PROJECT",
+      "choiceText": "作品形式の決意を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "graduation",
+      "to": "confusion",
+      "choiceText": "GLSLの画面へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

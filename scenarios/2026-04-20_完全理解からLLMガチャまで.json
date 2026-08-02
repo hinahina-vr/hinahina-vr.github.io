@@ -1,0 +1,94 @@
+{
+  "title": "完全理解からLLMガチャまで",
+  "subtitle": "朝のESP32と夜の生成AI",
+  "genre": "技術と抽選の一日",
+  "date": "2026-04-20",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "device": { "name": "試作画面", "color": "#76a9d4", "emoji": "▦" },
+    "lottery": { "name": "LLMガチャ", "color": "#d0a86e", "emoji": "▣" }
+  },
+  "mapTitles": {
+    "standalone_start": "午前0時16分の完全理解",
+    "choose_day": "基板とガチャ",
+    "display": "NOMISUGI LEVEL 99",
+    "sobriety": "画面と本人の落差",
+    "image_model": "引けない画像モデル",
+    "llm_gacha": "生成が抽選に見える",
+    "END_MASTERY": "入口で完全と言う",
+    "END_DISPLAY": "表示テストの成果",
+    "END_SOBER": "機械だけが酔っている",
+    "END_UNAVAILABLE": "一生引けないという自虐",
+    "END_SLOT": "生成ボタンからレバーへ"
+  },
+  "mapSummaries": {
+    "standalone_start": "ESP32を完全に理解したという一文から始まる。",
+    "display": "試作画面にNOMISUGIとLEVEL 99を出す。",
+    "sobriety": "本人はシラフで、画面は実測結果ではない。",
+    "image_model": "GPT-image-2を使えない不満をガチャへ変える。",
+    "llm_gacha": "反復生成からパチスロを連想する。"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "4月20日午前0時16分、ワディーはESP32を完全に理解したと書いた。ESP32は無線通信機能を備えた小型マイコンで、アルコールチェッカーの表示器などを動かすために使っていた。" },
+    {
+      "choices": [
+        { "text": "完全理解という冗談を読む", "goto": "END_MASTERY" },
+        { "text": "56分後の進捗写真を見る", "goto": "display" },
+        { "text": "夜の生成AIへ進む", "goto": "image_model" }
+      ]
+    },
+    { "label": "display" },
+    { "bg": "station_night" },
+    { "speaker": "device", "text": "白いブレッドボードにESP32と小さな表示器がつながる。画面にはALCOHOL CHECK、NOMISUGI、LEVEL 99。飲みすぎをゲームの最大値のように見せる表示である。" },
+    {
+      "choices": [
+        { "text": "表示機能の成果として残す", "goto": "END_DISPLAY" },
+        { "text": "本人の状態を確かめる", "goto": "sobriety" }
+      ]
+    },
+    { "label": "sobriety" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "投稿文は、部屋にいます、ガンギマリです。しかし続けて、現在シラフモード、早くDEISUIになりたいとある。画面も文章も演出で、飲酒後の実測記録ではない。" },
+    {
+      "choices": [
+        { "text": "表示と実状態を分ける", "goto": "END_SOBER" },
+        { "text": "夜の別の抽選へ進む", "goto": "image_model" }
+      ]
+    },
+    { "label": "image_model" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "午後11時51分、今度はGPT-image-2を使えない状況を、LLM弱者男性なので一生引けない、と自虐した。原因や利用可能時期は書かれていない。" },
+    {
+      "choices": [
+        { "text": "今夜の自虐として受け取る", "goto": "END_UNAVAILABLE" },
+        { "text": "四分後の投稿へ進む", "goto": "llm_gacha" }
+      ]
+    },
+    { "label": "llm_gacha" },
+    { "bg": "station" },
+    { "speaker": "lottery", "text": "午後11時55分、生成AIへ何度も出力させる操作をLLMガチャと呼び、回しているとパチスロへ行きたくなると書いた。店へ行った記録ではなく、抽選感覚の連想である。" },
+    {
+      "choices": [
+        { "text": "生成と抽選の近さを見る", "goto": "END_SLOT" },
+        { "text": "朝の手作業と比べる", "goto": "END_DISPLAY" }
+      ]
+    },
+    { "label": "END_MASTERY" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "完全理解は全機能を習得した証明ではない。配線とプログラムが少しつながり、入口を越えた高揚を最大の言葉で祝った。学習の終点ではなく、手応えが光った瞬間だった。\nEND 入口で完全と言う" },
+    { "label": "END_DISPLAY" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "この日に確認できる電子工作の成果は、ESP32につないだ表示器へ三段の文字を出したこと。呼気やセンサー値はない。見せ方が形になった進捗として写真を残す。\nEND 表示テストの成果" },
+    { "label": "END_SOBER" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "画面はNOMISUGI LEVEL 99、本人はSHIRAFU、願望はDEISUI。三つが異なるから冗談になる。測定器の誤判定でも飲酒試験でもなく、機械だけが最大級に酔った顔をしていた。\nEND 機械だけが酔っている" },
+    { "label": "END_UNAVAILABLE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "一生引けないは将来予測ではない。GPT-image-2を今夜使えない不満を、ガチャの外れとして笑うための自虐だった。理由が分からない部分はそのまま残す。\nEND 一生引けないという自虐" },
+    { "label": "END_SLOT" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "望む結果まで生成を繰り返すと、創作のボタンが抽選機のレバーに見えてくる。LLMガチャという比喩は四分でパチスロ欲へつながった。実行ではなく、反復操作が呼んだ身体的な連想だった。\nEND 生成ボタンからレバーへ" }
+  ]
+}

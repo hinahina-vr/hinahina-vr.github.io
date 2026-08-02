@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-22",
+  "title": "酒飲み大学から麦畑へ A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "午前0時1分の勧誘広告",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "standalone_start",
+      "summary": "架空のZEN大学ウイスキー同好会広告を作る。"
+    },
+    {
+      "id": "song",
+      "title": "ヴォイのテーマソング",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "song",
+      "summary": "二日酔いや倍速視聴の歌詞へヴォイを重ねる。"
+    },
+    {
+      "id": "classes",
+      "title": "酒飲み向けの大学紹介",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 6,
+      "icon": "◇",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "classes",
+      "summary": "オンデマンド授業を酒飲み向けに言い換える。"
+    },
+    {
+      "id": "malt",
+      "title": "麦畑の別作品",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "malt",
+      "summary": "麦畑の架空恋愛作品ポスターを作る。"
+    },
+    {
+      "id": "anemoi",
+      "title": "開封前のアネモイ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "anemoi",
+      "summary": "翌日開封するアネモイを待つ。"
+    },
+    {
+      "id": "END_CLUB",
+      "title": "存在しない同好会",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "END_CLUB",
+      "summary": "存在しない同好会"
+    },
+    {
+      "id": "END_CHORUS",
+      "title": "先輩たちの合いの手",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "END_CHORUS",
+      "summary": "先輩たちの合いの手"
+    },
+    {
+      "id": "END_CLASS",
+      "title": "制度説明ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "END_CLASS",
+      "summary": "制度説明ではない"
+    },
+    {
+      "id": "END_POSTER",
+      "title": "公式ではないポスター",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "END_POSTER",
+      "summary": "公式ではないポスター"
+    },
+    {
+      "id": "END_WAIT",
+      "title": "本編より先に作った期待",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-22_酒飲み大学から麦畑へ",
+      "entry": "END_WAIT",
+      "summary": "本編より先に作った期待"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "END_CLUB",
+      "choiceText": "同好会の正体を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "song",
+      "choiceText": "左側の歌詞を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "classes",
+      "choiceText": "右側の大学紹介を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "song",
+      "to": "END_CHORUS",
+      "choiceText": "反復する声を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "song",
+      "to": "malt",
+      "choiceText": "45分後の画像へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "classes",
+      "to": "END_CLASS",
+      "choiceText": "現実の制度と分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "classes",
+      "to": "malt",
+      "choiceText": "もう一枚の広告を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "malt",
+      "to": "END_POSTER",
+      "choiceText": "架空作品として読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "malt",
+      "to": "anemoi",
+      "choiceText": "添えられた作品名を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "anemoi",
+      "to": "END_WAIT",
+      "choiceText": "開封前の期待を受け取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "anemoi",
+      "to": "standalone_start",
+      "choiceText": "最初の広告へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

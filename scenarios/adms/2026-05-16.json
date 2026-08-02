@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-16",
+  "title": "サンダースネイク公開と藤沢のカニ会 A.D.M.S.",
+  "rootNodeId": "pipeline",
+  "nodes": [
+    {
+      "id": "pipeline",
+      "title": "SpoutからDirectXへ",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "pipeline",
+      "summary": "映像を受け取り空間へ広げる仕組みを見る。"
+    },
+    {
+      "id": "stage_video",
+      "title": "緑の光の公開動画",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "stage_video",
+      "summary": "自作ステージの見た目と名前を知る。"
+    },
+    {
+      "id": "dj_guide",
+      "title": "深圳DJミニガイド",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "dj_guide",
+      "summary": "次の深圳旅行へ夜の候補を足す。"
+    },
+    {
+      "id": "crab",
+      "title": "藤沢のカニ会",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "crab",
+      "summary": "写真から夜の会食を確認する。"
+    },
+    {
+      "id": "END_PIPELINE",
+      "title": "別アプリの映像を共有",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "END_PIPELINE",
+      "summary": "別アプリの映像を共有"
+    },
+    {
+      "id": "END_STAGE",
+      "title": "名前付きで公開",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "END_STAGE",
+      "summary": "名前付きで公開"
+    },
+    {
+      "id": "END_DJ",
+      "title": "開催日は事前確認",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "END_DJ",
+      "summary": "開催日は事前確認"
+    },
+    {
+      "id": "END_CRAB",
+      "title": "カナイは誤記",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-16_サンダースネイク公開と藤沢のカニ会",
+      "entry": "END_CRAB",
+      "summary": "カナイは誤記"
+    }
+  ],
+  "edges": [
+    {
+      "from": "pipeline",
+      "to": "END_PIPELINE",
+      "choiceText": "技術構成を保存する",
+      "style": "kenkai"
+    },
+    {
+      "from": "pipeline",
+      "to": "stage_video",
+      "choiceText": "公開動画へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "stage_video",
+      "to": "END_STAGE",
+      "choiceText": "公開作品として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "stage_video",
+      "to": "dj_guide",
+      "choiceText": "11時50分へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "dj_guide",
+      "to": "END_DJ",
+      "choiceText": "会場候補と条件を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "dj_guide",
+      "to": "crab",
+      "choiceText": "藤沢の夜へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "crab",
+      "to": "END_CRAB",
+      "choiceText": "写真を根拠に訂正する",
+      "style": "kenkai"
+    },
+    {
+      "from": "crab",
+      "to": "pipeline",
+      "choiceText": "朝の制作へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-26",
+  "title": "200円と28万円の間 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "午後2時5分のビール評",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "standalone_start",
+      "summary": "クラフトビールから大手の価格と品質を見直す。"
+    },
+    {
+      "id": "dwango",
+      "title": "超会議後のドワンゴ評",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "dwango",
+      "summary": "ドワンゴを居場所を運営する会社と評価する。"
+    },
+    {
+      "id": "project",
+      "title": "第34回モルトバトル",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 6,
+      "icon": "◇",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "project",
+      "summary": "自作ウイスキー動画の編集ファイルを載せる。"
+    },
+    {
+      "id": "doll",
+      "title": "28万円を回収する冗談",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "doll",
+      "summary": "28万円の人形を性的な費用回収の冗談にする。"
+    },
+    {
+      "id": "contrast",
+      "title": "200円と28万円",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "contrast",
+      "summary": "約200円と28万円への異なる反応を比べる。"
+    },
+    {
+      "id": "END_BEER",
+      "title": "クラフトから大手を見る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "END_BEER",
+      "summary": "クラフトから大手を見る"
+    },
+    {
+      "id": "END_NICHE",
+      "title": "本人が見たニッチャー戦略",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "END_NICHE",
+      "summary": "本人が見たニッチャー戦略"
+    },
+    {
+      "id": "END_EDIT",
+      "title": "完成前のプロジェクト",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "END_EDIT",
+      "summary": "完成前のプロジェクト"
+    },
+    {
+      "id": "END_JOKE",
+      "title": "購入なしの費用回収",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "END_JOKE",
+      "summary": "購入なしの費用回収"
+    },
+    {
+      "id": "END_PRICES",
+      "title": "二つの価格反応",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-26_200円と28万円の間",
+      "entry": "END_PRICES",
+      "summary": "二つの価格反応"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "END_BEER",
+      "choiceText": "褒めた対象を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "dwango",
+      "choiceText": "前日の超会議の感想へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "project",
+      "choiceText": "夕方の編集ファイルへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "dwango",
+      "to": "END_NICHE",
+      "choiceText": "公式戦略と区別する",
+      "style": "kenkai"
+    },
+    {
+      "from": "dwango",
+      "to": "project",
+      "choiceText": "午後5時29分へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "project",
+      "to": "END_EDIT",
+      "choiceText": "制作途中として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "project",
+      "to": "doll",
+      "choiceText": "午後8時24分の人形へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "doll",
+      "to": "END_JOKE",
+      "choiceText": "実績ではないことを確認する",
+      "style": "kenkai"
+    },
+    {
+      "from": "doll",
+      "to": "contrast",
+      "choiceText": "午後の200円と並べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "contrast",
+      "to": "END_PRICES",
+      "choiceText": "異なる価格反応を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "contrast",
+      "to": "standalone_start",
+      "choiceText": "ビール評へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

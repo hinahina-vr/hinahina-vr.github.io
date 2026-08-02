@@ -1,0 +1,107 @@
+{
+  "title": "Tencent本社をKey本社と呼んだ日",
+  "subtitle": "ゲーム主題歌、酒の画像、旧作絵、本社の冗談、幸福人形、深圳再訪",
+  "genre": "旅行後の連想が次の旅へつながる一日",
+  "date": "2026-05-09",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "screen": { "name": "画面", "color": "#7294b6", "emoji": "●" },
+    "shenzhen": { "name": "深圳", "color": "#c48e58", "emoji": "◆" }
+  },
+  "mapTitles": {
+    "song": "absolute wishと白酒ポスター",
+    "alcohol_images": "酒にまつわる2画像",
+    "remake": "旧作絵を描き直す違和感",
+    "tencent": "Tencent本社をKey本社と呼ぶ",
+    "doll": "幸福人形の構造図",
+    "return_plan": "シルバーウイークの再訪",
+    "END_SONG": "実在の曲と架空画像",
+    "END_ALCOHOL": "出所の違う2枚",
+    "END_REMAKE": "昔の絵柄も作品",
+    "END_TENCENT": "社名のずれが冗談",
+    "END_DOLL": "柔らかい等身大人形",
+    "END_RETURN": "次も深圳へ"
+  },
+  "mapSummaries": {
+    "song": "ゲーム主題歌と創作ポスターの由来を分ける。",
+    "alcohol_images": "ニュース画面とウイスキー部屋を見る。",
+    "remake": "古いゲーム絵を置き換える問題を考える。",
+    "tencent": "写真と投稿文の社名のずれを読む。",
+    "doll": "等身大ぬいドールの内部構造を知る。",
+    "return_plan": "帰国直後に次の深圳行きを決める。"
+  },
+  "scenario": [
+    { "label": "song" },
+    { "bg": "home_office" },
+    { "speaker": "screen", "text": "日付が変わると、fripSideのabsolute wishの歌詞を抜き出した。添えたのはゲーム画面ではなく、秋葉原で2人が汾酒を飲む架空ポスターだった。" },
+    {
+      "choices": [
+        { "text": "曲と画像の出所を分ける", "goto": "END_SONG" },
+        { "text": "深夜の酒画像へ進む", "goto": "alcohol_images" }
+      ]
+    },
+    { "label": "alcohol_images" },
+    { "bg": "station_night" },
+    { "speaker": "screen", "text": "1時台には、暴力団分裂のニュース画面と、数十本のウイスキー瓶が並ぶ部屋の写真を保存した。2枚は同じ事件を写したものではない。" },
+    {
+      "choices": [
+        { "text": "別々の資料として残す", "goto": "END_ALCOHOL" },
+        { "text": "ゲームの新しい絵へ進む", "goto": "remake" }
+      ]
+    },
+    { "label": "remake" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "シュタインズ・ゲートのリニューアル絵を見て、KanonやAIRの原画を描き直すのと同じ違和感を覚えた。古い絵柄も作品の一部だと考えた。" },
+    {
+      "choices": [
+        { "text": "元の絵柄の価値を残す", "goto": "END_REMAKE" },
+        { "text": "深圳の本社写真へ進む", "goto": "tencent" }
+      ]
+    },
+    { "label": "tencent" },
+    { "bg": "twilight" },
+    { "speaker": "shenzhen", "text": "写真の建物にはTencentと大きく書かれている。ワディーは、中国IT企業Tencentの深圳本社をKey本社へ行ってきたと冗談で呼んだ。" },
+    {
+      "choices": [
+        { "text": "本当の社名と冗談を分ける", "goto": "END_TENCENT" },
+        { "text": "午後に見つけた人形へ進む", "goto": "doll" }
+      ]
+    },
+    { "label": "doll" },
+    { "bg": "home_office" },
+    { "speaker": "screen", "text": "15時51分、幸福人形という等身大ぬいドールの構造図を見た。金属骨格をスポンジや綿で包み、伸縮する布で覆う構造だった。" },
+    {
+      "choices": [
+        { "text": "構造図の内容を保存する", "goto": "END_DOLL" },
+        { "text": "一日の最後へ進む", "goto": "return_plan" }
+      ]
+    },
+    { "label": "return_plan" },
+    { "bg": "station_night" },
+    { "speaker": "shenzhen", "text": "22時57分、帰国から3日もたたないうちに、もう深圳へ行きたいと書いた。次はシルバーウイークと時期だけを決めた。" },
+    {
+      "choices": [
+        { "text": "再訪の意思を残す", "goto": "END_RETURN" },
+        { "text": "日付の最初へ戻る", "goto": "song" }
+      ]
+    },
+    { "label": "END_SONG" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "absolute wishは実在するゲーム主題歌。白酒ポスターは架空の場面であり、ゲームや現地撮影の画像ではない。\nEND 実在の曲と架空画像" },
+    { "label": "END_ALCOHOL" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "1枚はニュース映像、もう1枚はウイスキー瓶の多い部屋。共通する宴席や人物関係を作らない。\nEND 出所の違う2枚" },
+    { "label": "END_REMAKE" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "きれいに描き直すことが、元の作品を必ず良くするとは限らない。発売当時の絵柄も記憶を作っている。\nEND 昔の絵柄も作品" },
+    { "label": "END_TENCENT" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "訪れた建物はTencent本社。Key本社という呼び名は、見える社名と食い違わせた冗談である。\nEND 社名のずれが冗談" },
+    { "label": "END_DOLL" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "柔らかい素材を中心にした等身大人形なら現実的かもしれないと考えた。購入や手入れを実行した記録ではない。\nEND 柔らかい等身大人形" },
+    { "label": "END_RETURN" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "航空券や旅程は未定でも、行き先は再び深圳。帰国直後の気持ちは、次の旅の時期へ変わった。\nEND 次も深圳へ" }
+  ]
+}

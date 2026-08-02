@@ -1,0 +1,58 @@
+{
+  "title": "16時14分のリバティタワー",
+  "subtitle": "御茶ノ水に近い高層校舎の外側と内側を確かめる",
+  "genre": "一つの訪問記録から建物の背景をたどる",
+  "date": "2026-06-25",
+  "chars": {
+    "narrator": { "name": "", "color": "#9ea3a9", "emoji": "" },
+    "tower": { "name": "リバティタワー", "color": "#6f8e96", "emoji": "◆" },
+    "history": { "name": "創立120周年", "color": "#927b58", "emoji": "◇" },
+    "campus": { "name": "校舎の中", "color": "#728b69", "emoji": "●" }
+  },
+  "mapTitles": {
+    "arrival": "16時14分",
+    "scale": "地上と地下",
+    "anniversary": "創立120周年",
+    "inside": "塔の中身",
+    "END_ARRIVAL": "16時14分の到着",
+    "END_SCALE": "約120メートル",
+    "END_ANNIVERSARY": "大学の節目",
+    "END_INSIDE": "記念と実用"
+  },
+  "mapSummaries": {
+    "arrival": "駿河台キャンパスの塔を訪れる。",
+    "scale": "地上23階と地下3階の規模を見る。",
+    "anniversary": "建物が生まれた理由を知る。",
+    "inside": "大学の日常を支える施設を確かめる。"
+  },
+  "scenario": [
+    { "label": "arrival" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "16時14分、明治大学駿河台キャンパスのリバティタワーへ行った。御茶ノ水駅に近い場所にある。" },
+    { "choices": [{ "text": "この日に分からないことを見る", "goto": "END_ARRIVAL" }, { "text": "建物を見上げる", "goto": "scale" }] },
+    { "label": "scale" },
+    { "bg": "twilight" },
+    { "speaker": "tower", "text": "塔は地上23階、地下3階。高さは約120メートルある。" },
+    { "choices": [{ "text": "高さの表現を確かめる", "goto": "END_SCALE" }, { "text": "120という数字を追う", "goto": "anniversary" }] },
+    { "label": "anniversary" },
+    { "bg": "twilight" },
+    { "speaker": "history", "text": "リバティタワーは、明治大学の創立120周年を記念する建物として建てられた。" },
+    { "choices": [{ "text": "記念の意味を残す", "goto": "END_ANNIVERSARY" }, { "text": "塔の中へ進む", "goto": "inside" }] },
+    { "label": "inside" },
+    { "bg": "home_office" },
+    { "speaker": "campus", "text": "中には教室、図書館、事務室、スポーツホールがある。名称は塔でも、大学の日常に使われる校舎だ。" },
+    { "choices": [{ "text": "二つの役割を結ぶ", "goto": "END_INSIDE" }, { "text": "16時14分へ戻る", "goto": "arrival" }] },
+    { "label": "END_ARRIVAL" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "午後4時14分、ワディーは明治大学リバティタワーへ着いた。高層校舎の入口に立った場面が、この日の外出として残った。\nEND 16時14分の到着" },
+    { "label": "END_SCALE" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "高さは約120メートルとされる。120メートルちょうどだと読み替えず、概算として残す。\nEND 約120メートル" },
+    { "label": "END_ANNIVERSARY" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "高さの約120メートルと、創立120周年は同じ数字でも意味が異なる。後者は大学の歴史を示す。\nEND 大学の節目" },
+    { "label": "END_INSIDE" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "創立の節目を記念する建物であり、同時に学習、運営、運動へ使う校舎でもある。\nEND 記念と実用" }
+  ]
+}

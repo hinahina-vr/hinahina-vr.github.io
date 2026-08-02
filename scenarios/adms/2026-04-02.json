@@ -1,0 +1,93 @@
+{
+  "date": "2026-04-02",
+  "title": "124単位の地図 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "進級記念の公開",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-02_124単位の地図",
+      "entry": "standalone_start",
+      "summary": "進級記念の公開"
+    },
+    {
+      "id": "choose_path",
+      "title": "履修計画の三つの入口",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-02_124単位の地図",
+      "entry": "choose_path",
+      "summary": "履修計画の三つの入口"
+    },
+    {
+      "id": "END_MAP",
+      "title": "科目の前後関係",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-02_124単位の地図",
+      "entry": "END_MAP",
+      "summary": "科目の前後関係"
+    },
+    {
+      "id": "END_CREDITS",
+      "title": "124単位への進捗",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-02_124単位の地図",
+      "entry": "END_CREDITS",
+      "summary": "124単位への進捗"
+    },
+    {
+      "id": "END_NIGHT",
+      "title": "公開日の夜",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-02_124単位の地図",
+      "entry": "END_NIGHT",
+      "summary": "公開日の夜"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_MAP",
+      "choiceText": "前提科目をたどる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_CREDITS",
+      "choiceText": "単位の合計を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_NIGHT",
+      "choiceText": "夜の投稿まで進む",
+      "style": "kenkai"
+    }
+  ]
+}

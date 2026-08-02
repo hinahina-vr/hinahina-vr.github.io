@@ -1,63 +1,80 @@
 {
-  "title": "雨宿りの分岐",
-  "subtitle": "紀伊半島の旅が止まった夜",
-  "genre": "大雨の旅ノベル",
+  "title": "雨で止まった旅と三枚の麦畑",
+  "subtitle": "御坊駅、美浜町、画像の宴会をたどる",
+  "genre": "記憶を読み直す短編",
   "date": "2026-04-09",
   "chars": {
     "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
-    "board": { "name": "運行案内", "color": "#76a9d4", "emoji": "▦" },
-    "clerk": { "name": "宿の人", "color": "#d0a86e", "emoji": "☎" }
+    "memory": { "name": "旅の記憶", "color": "#76a9d4", "emoji": "▦" },
+    "image": { "name": "三枚の画像", "color": "#d0a86e", "emoji": "▣" }
   },
   "mapTitles": {
-    "standalone_start": "雨の御坊駅",
-    "choose_route": "今夜を決める",
-    "call_lodge": "美浜町へ電話する",
-    "choose_room": "空室が一つ",
-    "END_STATION": "始発を待つ",
-    "END_HOME": "旅を切り上げる",
-    "END_LODGE": "雨の宿へ向かう",
-    "END_DECLINE": "別の町を探す"
+    "standalone_start": "4月9日の回想",
+    "choose_memory": "どこから思い出すか",
+    "air_link": "美浜町とAIR",
+    "image_one": "麦畑の二枚",
+    "image_three": "三枚目の急転",
+    "END_RAIN": "雨で残った地名",
+    "END_FATE": "偶然についた名前",
+    "END_WHEAT": "麦を渡されたキャラクター",
+    "END_PARTY": "静かな景色の宴会"
   },
   "mapSummaries": {
-    "standalone_start": "大雨で列車が止まり、予定の先へ進めなくなった。",
-    "call_lodge": "美浜町の国民宿舎へ電話をかける。",
-    "END_LODGE": "偶然たどり着いた土地で、作品の記憶と旅が重なる。"
+    "standalone_start": "昔の紀伊半島旅行と、その約20分後に投稿した3枚の画像を思い出す。",
+    "air_link": "予定外の美浜町泊と恋愛ゲームAIRの関係をたどる。",
+    "image_one": "麦畑の少女から自作キャラクターへ、共通する麦を追う。",
+    "image_three": "アバターとボウモアが静かな景色を宴会へ変える。"
   },
   "scenario": [
     { "label": "standalone_start" },
     { "bg": "station_night" },
-    { "speaker": "narrator", "text": "青春18きっぷで紀伊半島を回る途中、大雨のため御坊駅で列車が止まった。今夜着く予定だった町はまだ先にある。ホームの向こうは雨で白く、宿を取らずに進んだ旅程だけが手元へ残った。" },
-    { "speaker": "board", "text": "この先は終日運休です。上り列車は一部動いています。待合室は閉めません。" },
-    { "label": "choose_route" },
+    { "speaker": "narrator", "text": "4月9日、青春18きっぷで紀伊半島を回った昔の旅を思い出した。大雨で列車が御坊駅に止まり、その夜は和歌山県美浜町の国民宿舎に泊まった。約20分後には、説明を付けず3枚の画像も投稿した。" },
+    { "speaker": "memory", "text": "旅と画像には、どちらにも予定から外れた変化がある。雨は列車を止め、最後の画像は静かな麦畑を宴会へ変えた。まず、どちらの記憶を開く。" },
+    { "label": "choose_memory" },
     {
       "choices": [
-        { "text": "駅で始発まで待つ", "goto": "END_STATION" },
-        { "text": "近くの宿へ片端から電話する", "goto": "call_lodge" },
-        { "text": "上り列車で来た道を戻る", "goto": "END_HOME" }
+        { "text": "御坊駅で止まった旅をたどる", "goto": "air_link" },
+        { "text": "麦畑の画像を順に見る", "goto": "image_one" }
       ]
     },
-    { "label": "call_lodge" },
+    { "label": "air_link" },
     { "bg": "twilight" },
-    { "speaker": "clerk", "text": "美浜町に一部屋だけ空いています。迎えには出られません。駅から二十分ほど歩きますが、川沿いを避ける道を案内します。" },
-    { "speaker": "narrator", "text": "美浜という地名を聞き、海辺の町を舞台にした恋愛ゲームAIRを思い出した。作品の場所へ偶然たどり着く旅は魅力的だ。でも今ほしいのは聖地ではなく、濡れた靴を脱ぎ、端末を充電できる部屋だった。" },
-    { "label": "choose_room" },
+    { "speaker": "narrator", "text": "美浜町は、Keyの恋愛ゲームAIRにゆかりのある場所の一つとされる。聖地を目指して始めた宿泊ではなく、大雨による足止めの先で、作品に結びつく土地と出会った。" },
     {
       "choices": [
-        { "text": "部屋を予約して道を聞く", "goto": "END_LODGE" },
-        { "text": "二十分歩くのをためらう", "goto": "END_DECLINE" }
+        { "text": "御坊駅と美浜町を旅の記録として残す", "goto": "END_RAIN" },
+        { "text": "なぜ運命と呼んだのか考える", "goto": "END_FATE" }
       ]
     },
-    { "label": "END_STATION" },
-    { "bg": "station" },
-    { "speaker": "narrator", "text": "濡れた靴のまま待合室の長椅子へ座った。照明は明るく、眠っても人の出入りで何度も目が覚める。朝、最初の列車が入ると、同じ夜を過ごした人たちが一斉に立った。旅は続けられたが、その日は車窓より眠気を見ていた。\nEND 長椅子の始発" },
-    { "label": "END_HOME" },
-    { "bg": "station" },
-    { "speaker": "narrator", "text": "動いている上り列車へ乗り、朝から通ってきた駅を一つずつ戻った。予定した一周は途中で終わったが、雨の入らない車内で充電器を差すと、判断を間違えた気はしなかった。青春18きっぷには、引き返す列車も同じ一日として残る。\nEND 戻るための一枚" },
-    { "label": "END_LODGE" },
+    { "label": "image_one" },
     { "bg": "dawn" },
-    { "speaker": "narrator", "text": "教えられた道を二十分歩き、ずぶ濡れで宿へ着いた。靴へ新聞紙を詰め、端末を充電し、窓の外に海の暗さを見る。そこで初めて、AIRを思い出す町へ来たことがうれしくなった。偶然を運命と呼べたのは、安全な部屋を取ったあとだった。\nEND 靴を脱いでからの聖地" },
-    { "label": "END_DECLINE" },
-    { "bg": "station_night" },
-    { "speaker": "narrator", "text": "二十分歩くのをためらって電話を切った。十分後、雨がさらに強くなり、同じ宿へかけ直す。その一室は別の人が予約していた。待合室で始発を待ちながら、断った部屋の乾いた布団ばかり思い浮かべた。\nEND 空室だった十分間" }
+    { "speaker": "image", "text": "1枚目には風車の立つ麦畑と銀髪の少女。2枚目には、麦を掲げる小さな自作キャラクター。広い景色にあった麦が、次の一枚では一人の持ち物になった。" },
+    {
+      "choices": [
+        { "text": "二枚の麦のつながりを見る", "goto": "END_WHEAT" },
+        { "text": "最後の一枚まで進む", "goto": "image_three" }
+      ]
+    },
+    { "label": "image_three" },
+    { "bg": "twilight" },
+    { "speaker": "image", "text": "3枚目も同じ麦畑だが、立っているのは2人のアバター。そばにはボウモアが3本あり、中央にバジリスクタイム風の題字が載る。実際の飲酒記録ではなく、画像の中に作られた宴会である。" },
+    {
+      "choices": [
+        { "text": "三枚目の落ちを受け取る", "goto": "END_PARTY" },
+        { "text": "一枚目から変化を見直す", "goto": "END_WHEAT" }
+      ]
+    },
+    { "label": "END_RAIN" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "大雨の御坊駅と、美浜町の国民宿舎で過ごした一夜。その二つの地名が、順調な乗り継ぎより長く記憶に残る旅を作った。\nEND 雨で残った地名" },
+    { "label": "END_FATE" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "大雨とAIRに因果関係があるわけではない。けれど、予定外の宿泊先が好きな作品にゆかりのある町だった。その重なりを年月のあとに運命と呼ぶことで、不便だった一夜が自分だけの物語になった。\nEND 偶然についた名前" },
+    { "label": "END_WHEAT" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "銀髪の少女が立つ麦畑から、小さな自作キャラクターの手へ麦が渡った。説明文がなくても、同じ題材が二枚を結んでいる。遠い作品風の景色は、二枚目でワディー自身の制作物へ近づいた。\nEND 麦を渡されたキャラクター" },
+    { "label": "END_PARTY" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "風車と少女で始まった3枚組は、アバター、3本のボウモア、別作品風の題字で終わる。同じ麦畑を使い続けたから、静けさから宴会への落差が際立った。懐かしい風景を、そのまま飾らず遊び直した一組だった。\nEND 静かな景色の宴会" }
   ]
 }

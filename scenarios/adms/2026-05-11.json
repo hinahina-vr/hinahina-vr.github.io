@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-11",
+  "title": "キック検出を止めて見る時間を考える A.D.M.S.",
+  "rootNodeId": "stage_stop",
+  "nodes": [
+    {
+      "id": "stage_stop",
+      "title": "午前1時に作業を中断",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "stage_stop",
+      "summary": "光るステージと未完成の音声解析を見る。"
+    },
+    {
+      "id": "nocode",
+      "title": "4分後の委員会",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "nocode",
+      "summary": "強い団体名が生まれた理由を知る。"
+    },
+    {
+      "id": "night_images",
+      "title": "深夜に残した2画像",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "night_images",
+      "summary": "少女画像と乳鳩ポスターを分ける。"
+    },
+    {
+      "id": "attention",
+      "title": "見る側へ報酬が移る未来",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "attention",
+      "summary": "AI時代に不足するものを考える。"
+    },
+    {
+      "id": "END_STAGE",
+      "title": "キック検出は未完成",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "END_STAGE",
+      "summary": "キック検出は未完成"
+    },
+    {
+      "id": "END_NOCODE",
+      "title": "会員のいない委員会",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "END_NOCODE",
+      "summary": "会員のいない委員会"
+    },
+    {
+      "id": "END_IMAGES",
+      "title": "別々の2作品",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "END_IMAGES",
+      "summary": "別々の2作品"
+    },
+    {
+      "id": "END_ATTENTION",
+      "title": "閲覧時間が希少になる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-11_キック検出を止めて見る時間を考える",
+      "entry": "END_ATTENTION",
+      "summary": "閲覧時間が希少になる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "stage_stop",
+      "to": "END_STAGE",
+      "choiceText": "未完成として保存する",
+      "style": "kenkai"
+    },
+    {
+      "from": "stage_stop",
+      "to": "nocode",
+      "choiceText": "4分後へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "nocode",
+      "to": "END_NOCODE",
+      "choiceText": "深夜の冗談として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "nocode",
+      "to": "night_images",
+      "choiceText": "画像の記録へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "night_images",
+      "to": "END_IMAGES",
+      "choiceText": "二つを別作品として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "night_images",
+      "to": "attention",
+      "choiceText": "23時33分へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "attention",
+      "to": "END_ATTENTION",
+      "choiceText": "未来の需給予測として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "attention",
+      "to": "stage_stop",
+      "choiceText": "午前1時へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

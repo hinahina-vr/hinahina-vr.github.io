@@ -1,0 +1,93 @@
+{
+  "date": "2026-01-07",
+  "title": "畳の上の古書市 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "畳の売り場",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-07_畳の上の古書市",
+      "entry": "standalone_start",
+      "summary": "畳の売り場"
+    },
+    {
+      "id": "choose_path",
+      "title": "5冊の扱い",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-07_畳の上の古書市",
+      "entry": "choose_path",
+      "summary": "5冊の扱い"
+    },
+    {
+      "id": "END_READ",
+      "title": "閉店後の読書室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-01-07_畳の上の古書市",
+      "entry": "END_READ",
+      "summary": "閉店後の読書室"
+    },
+    {
+      "id": "END_SELL",
+      "title": "値札の競り",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-01-07_畳の上の古書市",
+      "entry": "END_SELL",
+      "summary": "値札の競り"
+    },
+    {
+      "id": "END_KEEP",
+      "title": "空いた4冊分",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-01-07_畳の上の古書市",
+      "entry": "END_KEEP",
+      "summary": "空いた4冊分"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_READ",
+      "choiceText": "5冊を順に読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_SELL",
+      "choiceText": "すべてへ値札を付ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_KEEP",
+      "choiceText": "1冊だけ棚へ戻す",
+      "style": "kenkai"
+    }
+  ]
+}

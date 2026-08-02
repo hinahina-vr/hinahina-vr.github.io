@@ -1,0 +1,46 @@
+{
+  "title": "午後4時前の5階",
+  "subtitle": "鮨ながの店内を記録する夢",
+  "genre": "寿司店座席の分岐夢",
+  "date": "2026-03-14",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "guide": { "name": "5階の案内係", "color": "#9eaa9a", "emoji": "□" }
+  },
+  "mapTitles": {
+    "standalone_start": "町田駅近くのビル",
+    "choose_path": "鮨ながの三つの記録",
+    "END_COUNTER": "職人が見える席",
+    "END_ROOM": "区切られた個室",
+    "END_ENTRY": "15時53分の入口"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "building" },
+    { "speaker": "narrator", "text": "土曜日の午後3時53分、町田駅近くのビル5階にある鮨ながへ立ち寄った。江戸前鮨を出す店で、職人の仕事を見られるカウンターと区切られた個室がある。利用した席や注文は記録されていない。" },
+    { "speaker": "narrator", "text": "夢の5階には、カウンター、個室、入口の3枚の札があり、どの札にも料理名は書かれていなかった。" },
+    { "speaker": "guide", "text": "店の設備は説明できますが、本人の体験は立ち寄りまでです。何を記録しますか。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "カウンターの役割を見る", "goto": "END_COUNTER" },
+        { "text": "個室の区切りを見る", "goto": "END_ROOM" },
+        { "text": "入口の時刻だけ残す", "goto": "END_ENTRY" }
+      ]
+    },
+    { "label": "END_COUNTER" },
+    { "bg": "restaurant" },
+    { "speaker": "narrator", "text": "カウンター越しに職人の仕事が見える設計を記録した。ただし、本人がその席へ座ったとは書かなかった。" },
+    { "speaker": "guide", "text": "設備の特徴と利用の事実を分ければ、店を説明できます。" },
+    { "speaker": "narrator", "text": "空の座席札を戻した。\nEND 職人を見せる空間" },
+    { "label": "END_ROOM" },
+    { "bg": "room" },
+    { "speaker": "narrator", "text": "周囲から区切られた個室を見た。接待、祝い、同席者という物語は、どれも根拠がないため加えなかった。" },
+    { "speaker": "narrator", "text": "扉の外へ未確認と札を掛けた。\nEND 個室から目的を推測しない" },
+    { "label": "END_ENTRY" },
+    { "bg": "clock" },
+    { "speaker": "narrator", "text": "15時53分、ビル5階、鮨なが。その3項目だけを記録した。" },
+    { "speaker": "guide", "text": "注文がなくても、訪問した場所と時刻は残ります。" },
+    { "speaker": "narrator", "text": "午後4時へ変わる前に記録を閉じた。\nEND 立ち寄りだけを保存する" }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-01",
+  "title": "町田に残った一件の位置 A.D.M.S.",
+  "rootNodeId": "machida",
+  "nodes": [
+    {
+      "id": "machida",
+      "title": "17時52分の町田",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "machida",
+      "summary": "蒙古タンメン中本町田店への位置記録を読む。"
+    },
+    {
+      "id": "restaurant",
+      "title": "辛い料理で知られる店",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "restaurant",
+      "summary": "店の一般的な特徴と本人の体験を分ける。"
+    },
+    {
+      "id": "missing",
+      "title": "注文と写真は空欄",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "missing",
+      "summary": "料理名、写真、感想がないことを確かめる。"
+    },
+    {
+      "id": "guangzhou",
+      "title": "翌日の広州",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "guangzhou",
+      "summary": "翌日の広州白雲国際空港との順序を見る。"
+    },
+    {
+      "id": "END_CHECKIN",
+      "title": "確認できる一地点",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "END_CHECKIN",
+      "summary": "確認できる一地点"
+    },
+    {
+      "id": "END_MENU",
+      "title": "店の説明と本人の食事",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "END_MENU",
+      "summary": "店の説明と本人の食事"
+    },
+    {
+      "id": "END_BLANK",
+      "title": "空白を創作しない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "END_BLANK",
+      "summary": "空白を創作しない"
+    },
+    {
+      "id": "END_BORDER",
+      "title": "国内最後の記録",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-01_町田に残った一件の位置",
+      "entry": "END_BORDER",
+      "summary": "国内最後の記録"
+    }
+  ],
+  "edges": [
+    {
+      "from": "machida",
+      "to": "END_CHECKIN",
+      "choiceText": "一地点の記録として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "machida",
+      "to": "restaurant",
+      "choiceText": "店について分かる範囲へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "restaurant",
+      "to": "END_MENU",
+      "choiceText": "店の評判と食体験を分ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "restaurant",
+      "to": "missing",
+      "choiceText": "記録されなかった項目を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "missing",
+      "to": "END_BLANK",
+      "choiceText": "欠けた項目をそのままにする",
+      "style": "kenkai"
+    },
+    {
+      "from": "missing",
+      "to": "guangzhou",
+      "choiceText": "次の日の位置へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "guangzhou",
+      "to": "END_BORDER",
+      "choiceText": "記録上の境目として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "guangzhou",
+      "to": "machida",
+      "choiceText": "町田の夕方へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

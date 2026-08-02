@@ -1,0 +1,177 @@
+{
+  "date": "2026-04-13",
+  "title": "酒を測る装置の設計前夜 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "作りたい装置",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "standalone_start",
+      "summary": "マイコン電子工作の習作としてアルコールチェッカーを考える。"
+    },
+    {
+      "id": "choose_layer",
+      "title": "信号をどこから読むか",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "choose_layer",
+      "summary": "信号をどこから読むか"
+    },
+    {
+      "id": "sensor_voltage",
+      "title": "センサーの電圧",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "sensor_voltage",
+      "summary": "MQ-3はアルコールに応じて出力電圧を変える。"
+    },
+    {
+      "id": "conversion",
+      "title": "濃度への換算",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "conversion",
+      "summary": "電圧から濃度へ変えるにはセンサー特性が必要になる。"
+    },
+    {
+      "id": "simulation",
+      "title": "仮想画面の数値",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 6,
+      "icon": "◇",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "simulation",
+      "summary": "3.92Vと0.58mg/Lは仮想環境の表示である。"
+    },
+    {
+      "id": "END_PROJECT",
+      "title": "習作の目的",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "END_PROJECT",
+      "summary": "習作の目的"
+    },
+    {
+      "id": "END_VOLTAGE",
+      "title": "電圧は答えではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "END_VOLTAGE",
+      "summary": "電圧は答えではない"
+    },
+    {
+      "id": "END_CONVERSION",
+      "title": "単位の間をつなぐ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "END_CONVERSION",
+      "summary": "単位の間をつなぐ"
+    },
+    {
+      "id": "END_SIMULATION",
+      "title": "まだ実測ではない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 14,
+      "icon": "●",
+      "scenario": "2026-04-13_酒を測る装置の設計前夜",
+      "entry": "END_SIMULATION",
+      "summary": "まだ実測ではない"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_layer",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_layer",
+      "to": "END_PROJECT",
+      "choiceText": "なぜこの題材を選んだか見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_layer",
+      "to": "sensor_voltage",
+      "choiceText": "センサーが返す値を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_layer",
+      "to": "simulation",
+      "choiceText": "画面の数値を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "sensor_voltage",
+      "to": "END_VOLTAGE",
+      "choiceText": "生の信号として受け取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "sensor_voltage",
+      "to": "conversion",
+      "choiceText": "濃度へ変える方法を追う",
+      "style": "kenkai"
+    },
+    {
+      "from": "conversion",
+      "to": "END_CONVERSION",
+      "choiceText": "換算を装置の中心に置く",
+      "style": "kenkai"
+    },
+    {
+      "from": "conversion",
+      "to": "simulation",
+      "choiceText": "仮想回路で試す",
+      "style": "kenkai"
+    },
+    {
+      "from": "simulation",
+      "to": "END_SIMULATION",
+      "choiceText": "仮想値として保存する",
+      "style": "kenkai"
+    },
+    {
+      "from": "simulation",
+      "to": "END_CONVERSION",
+      "choiceText": "換算手順へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

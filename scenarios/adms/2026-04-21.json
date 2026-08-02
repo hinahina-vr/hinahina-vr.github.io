@@ -1,0 +1,189 @@
+{
+  "date": "2026-04-21",
+  "title": "25万8000円から美白広告まで A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "値札を見て解散",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "standalone_start",
+      "summary": "25万8000円を見て、ほしい品の購入を諦める。"
+    },
+    {
+      "id": "robot",
+      "title": "四足ロボットという別案",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "robot",
+      "summary": "Unitree GO2と着ぐるみマスクを代替案にする。"
+    },
+    {
+      "id": "body",
+      "title": "必要な素材を選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "body",
+      "summary": "服、髪、肌、抱擁に必要な要素を絞る。"
+    },
+    {
+      "id": "commercial",
+      "title": "CM出演の相談",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "commercial",
+      "summary": "CM出演の夢をAIへ相談し、否定的な返事を受ける。"
+    },
+    {
+      "id": "beauty_ad",
+      "title": "夜のLLMガチャ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "beauty_ad",
+      "summary": "架空の美白ドリンク広告を生成して遊ぶ。"
+    },
+    {
+      "id": "END_NO_BUY",
+      "title": "一生ほしい物を買わない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "END_NO_BUY",
+      "summary": "一生ほしい物を買わない"
+    },
+    {
+      "id": "END_ROBOT",
+      "title": "まだ構想のGO2",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "END_ROBOT",
+      "summary": "まだ構想のGO2"
+    },
+    {
+      "id": "END_CUES",
+      "title": "人らしさの手掛かり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "END_CUES",
+      "summary": "人らしさの手掛かり"
+    },
+    {
+      "id": "END_AI_REPLY",
+      "title": "企業ではなくAIの返事",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "END_AI_REPLY",
+      "summary": "企業ではなくAIの返事"
+    },
+    {
+      "id": "END_AD",
+      "title": "一人四役の架空広告",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-21_25万8000円から美白広告まで",
+      "entry": "END_AD",
+      "summary": "一人四役の架空広告"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "END_NO_BUY",
+      "choiceText": "買わなかった事実を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "standalone_start",
+      "to": "robot",
+      "choiceText": "3分後の代替案へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "robot",
+      "to": "END_ROBOT",
+      "choiceText": "未購入の構想として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "robot",
+      "to": "body",
+      "choiceText": "人の形をどこまで作るか考える",
+      "style": "kenkai"
+    },
+    {
+      "from": "body",
+      "to": "END_CUES",
+      "choiceText": "シャノンの定理という冗談を読む",
+      "style": "kenkai"
+    },
+    {
+      "from": "body",
+      "to": "commercial",
+      "choiceText": "舟唄から生まれたCM案へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "commercial",
+      "to": "END_AI_REPLY",
+      "choiceText": "現実の企業判断と区別する",
+      "style": "kenkai"
+    },
+    {
+      "from": "commercial",
+      "to": "beauty_ad",
+      "choiceText": "夜にできた広告を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "beauty_ad",
+      "to": "END_AD",
+      "choiceText": "架空広告の当たりを見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "beauty_ad",
+      "to": "standalone_start",
+      "choiceText": "最初の値札へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

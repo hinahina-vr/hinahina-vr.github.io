@@ -1,0 +1,122 @@
+{
+  "title": "鳩を食いそびれてGLSLを書く",
+  "subtitle": "AI実装、酒席、空港バーガー、文字、ESP32、乳鳩、音声FFT",
+  "genre": "旅の記憶と実装が一日中交差する記録",
+  "date": "2026-05-10",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "screen": { "name": "実装画面", "color": "#6f9db8", "emoji": "●" },
+    "trip": { "name": "深圳の記憶", "color": "#c18c58", "emoji": "◆" }
+  },
+  "mapTitles": {
+    "ai_idea": "深圳の着想をAIで実装",
+    "drinking": "飲み会と中国の助言",
+    "whopper": "香港空港のワッパー",
+    "voice_text": "声より文字で読みたい",
+    "esp32": "M5StackとESP32",
+    "pigeon": "食べ損ねた光明乳鳩",
+    "glsl": "GLSLと音声FFT",
+    "END_AI": "体験が制作の入力",
+    "END_DRINK": "酒席への気分は逆",
+    "END_WHOPPER": "約2000円でぼそぼそ",
+    "END_TEXT": "受け取る形式を選ぶ",
+    "END_ESP32": "期待と規制の想像",
+    "END_PIGEON": "次回に食べる",
+    "END_GLSL": "キック検出は未解決"
+  },
+  "mapSummaries": {
+    "ai_idea": "AIで着想を動く形へ進める。",
+    "drinking": "旅先の助言と現在の気分を比べる。",
+    "whopper": "香港空港で食べたバーガーを振り返る。",
+    "voice_text": "授業を音声で聞く負担を考える。",
+    "esp32": "AIとセンサーを結ぶ小型機器を見る。",
+    "pigeon": "実食できなかった料理を次回へ残す。",
+    "glsl": "派手な画面の裏で音声解析に詰まる。"
+  },
+  "scenario": [
+    { "label": "ai_idea" },
+    { "bg": "home_office" },
+    { "speaker": "screen", "text": "朝6時57分。深圳で得た着想をAIで企画へまとめ、動く形へ実装していた。作る力の差が縮まるほど、画面外の体験が材料になると考えた。" },
+    {
+      "choices": [
+        { "text": "現地体験の価値を残す", "goto": "END_AI" },
+        { "text": "夕方の酒の話へ進む", "goto": "drinking" }
+      ]
+    },
+    { "label": "drinking" },
+    { "bg": "twilight" },
+    { "speaker": "trip", "text": "中国で会った男性には、中国で稼ぐこつは酒を飲むことだと教えられた。ところが今のワディーには、飲み会そのものが煩わしかった。" },
+    {
+      "choices": [
+        { "text": "正反対の気分を記録する", "goto": "END_DRINK" },
+        { "text": "香港空港の食事へ進む", "goto": "whopper" }
+      ]
+    },
+    { "label": "whopper" },
+    { "bg": "station_night" },
+    { "speaker": "trip", "text": "香港空港のバーガーキングで食べたワッパーセットは約2000円。バンズも肉もぼそぼそしており、本人の評価はかなりまずい、だった。" },
+    {
+      "choices": [
+        { "text": "値段と食感を残す", "goto": "END_WHOPPER" },
+        { "text": "授業の話へ進む", "goto": "voice_text" }
+      ]
+    },
+    { "label": "voice_text" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "授業には声優がゲストで来た。しかし声優への関心が薄く、音声を聞き続けることを苦痛に感じ、全部文字で読みたいと考えた。" },
+    {
+      "choices": [
+        { "text": "形式への評価として残す", "goto": "END_TEXT" },
+        { "text": "小型機器の話へ進む", "goto": "esp32" }
+      ]
+    },
+    { "label": "esp32" },
+    { "bg": "home_office" },
+    { "speaker": "screen", "text": "17時48分、M5StackとAIの組み合わせからESP32の将来性を感じた。製造元の株を買いたいと思う一方、購入後に輸出規制で下落する未来まで想像した。" },
+    {
+      "choices": [
+        { "text": "希望と想像を分ける", "goto": "END_ESP32" },
+        { "text": "食べ損ねた料理へ進む", "goto": "pigeon" }
+      ]
+    },
+    { "label": "pigeon" },
+    { "bg": "twilight" },
+    { "speaker": "trip", "text": "深圳で食べ損ねた光明乳鳩を、旅行ガイド風の創作画像にした。ぱりぱりの皮と柔らかい肉は画像内の説明で、本人の実食感想ではない。" },
+    {
+      "choices": [
+        { "text": "次の深圳の目標にする", "goto": "END_PIGEON" },
+        { "text": "夜の実装へ進む", "goto": "glsl" }
+      ]
+    },
+    { "label": "glsl" },
+    { "bg": "station_night" },
+    { "speaker": "screen", "text": "21時すぎ、GLSLで派手に光る画面を書いていた。自分をパリピと呼んだが、実際には音声FFTからキックドラムだけを拾えずにいた。" },
+    {
+      "choices": [
+        { "text": "未解決の技術課題を残す", "goto": "END_GLSL" },
+        { "text": "朝の実装へ戻る", "goto": "ai_idea" }
+      ]
+    },
+    { "label": "END_AI" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "AIは着想を形にする距離を縮める。何を着想するかは、画面外で得た体験に支えられる。\nEND 体験が制作の入力" },
+    { "label": "END_DRINK" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "中国で聞いた成功の助言とは逆に、現在は酒席を負担に感じていた。原因は記録されていない。\nEND 酒席への気分は逆" },
+    { "label": "END_WHOPPER" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "香港空港のワッパーは、価格だけでなくバンズと肉の乾いた食感によって低い評価になった。\nEND 約2000円でぼそぼそ" },
+    { "label": "END_TEXT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "声優本人の評価ではなく、音声を聞き続けるより文字を自分の速さで読みたいという形式の選択である。\nEND 受け取る形式を選ぶ" },
+    { "label": "END_ESP32" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "ESP32への期待は本人の予測。株の購入も輸出規制も下落も、まだ起きていない想像である。\nEND 期待と規制の想像" },
+    { "label": "END_PIGEON" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "光明乳鳩はまだ食べていない。次の深圳旅行で必ず食べる料理として記録した。\nEND 次回に食べる" },
+    { "label": "END_GLSL" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "画面は派手に光っても、音声からキックだけを検出する処理は未完成。一日の最後は解析作業へ戻った。\nEND キック検出は未解決" }
+  ]
+}

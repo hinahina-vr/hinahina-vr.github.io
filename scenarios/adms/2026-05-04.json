@@ -1,0 +1,189 @@
+{
+  "date": "2026-05-04",
+  "title": "深圳の一杯からモルト広告まで A.D.M.S.",
+  "rootNodeId": "whisky",
+  "nodes": [
+    {
+      "id": "whisky",
+      "title": "深圳で汁を舐める",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "whisky",
+      "summary": "深夜のウイスキー写真と注文画面を読む。"
+    },
+    {
+      "id": "tencent",
+      "title": "本社の入口まで",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "tencent",
+      "summary": "Tencent本社へ行くが入口で止められる。"
+    },
+    {
+      "id": "afternoon",
+      "title": "大学からカフェへ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "afternoon",
+      "summary": "深圳大学とスターバックスの位置を追う。"
+    },
+    {
+      "id": "dental",
+      "title": "モルトデンタル",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "dental",
+      "summary": "麦芽口腔医院をモルトデンタルと読む。"
+    },
+    {
+      "id": "hair",
+      "title": "モルト植毛",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 4,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "hair",
+      "summary": "大麦微針植发をモルト植毛と呼ぶ。"
+    },
+    {
+      "id": "END_MENU",
+      "title": "表示と注文を分ける",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "END_MENU",
+      "summary": "表示と注文を分ける"
+    },
+    {
+      "id": "END_OUTSIDE",
+      "title": "外観だけの本社訪問",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "END_OUTSIDE",
+      "summary": "外観だけの本社訪問"
+    },
+    {
+      "id": "END_PLACES",
+      "title": "午後の三地点",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "END_PLACES",
+      "summary": "午後の三地点"
+    },
+    {
+      "id": "END_DENTAL",
+      "title": "歯科広告の言葉遊び",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "END_DENTAL",
+      "summary": "歯科広告の言葉遊び"
+    },
+    {
+      "id": "END_HAIR",
+      "title": "植毛広告を見ただけ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 5,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-04_深圳の一杯からモルト広告まで",
+      "entry": "END_HAIR",
+      "summary": "植毛広告を見ただけ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "whisky",
+      "to": "END_MENU",
+      "choiceText": "画面の銘柄を全注文にしない",
+      "style": "kenkai"
+    },
+    {
+      "from": "whisky",
+      "to": "tencent",
+      "choiceText": "午後のTencent本社へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "tencent",
+      "to": "END_OUTSIDE",
+      "choiceText": "訪問範囲を外観までにする",
+      "style": "kenkai"
+    },
+    {
+      "from": "tencent",
+      "to": "afternoon",
+      "choiceText": "深圳大学へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "afternoon",
+      "to": "END_PLACES",
+      "choiceText": "位置の順序だけを残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "afternoon",
+      "to": "dental",
+      "choiceText": "移動中の歯科広告へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "dental",
+      "to": "END_DENTAL",
+      "choiceText": "正式名ではない冗談として残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "dental",
+      "to": "hair",
+      "choiceText": "もう一枚の広告へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "hair",
+      "to": "END_HAIR",
+      "choiceText": "広告への反応で閉じる",
+      "style": "kenkai"
+    },
+    {
+      "from": "hair",
+      "to": "whisky",
+      "choiceText": "深夜のグラスへ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

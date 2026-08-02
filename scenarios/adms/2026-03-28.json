@@ -1,11 +1,11 @@
 {
   "date": "2026-03-28",
-  "title": "青いシートのプロフィール A.D.M.S.",
+  "title": "夜7時52分の一点 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "花見の二次会",
+      "title": "3月最後の土曜日",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,11 +13,11 @@
       "icon": "◇",
       "scenario": "2026-03-28_青いシートのプロフィール",
       "entry": "standalone_start",
-      "summary": "花見の二次会"
+      "summary": "3月最後の土曜日"
     },
     {
       "id": "choose_reply",
-      "title": "誤認を知った返事",
+      "title": "一点から読むもの",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,43 +25,43 @@
       "icon": "◇",
       "scenario": "2026-03-28_青いシートのプロフィール",
       "entry": "choose_reply",
-      "summary": "誤認を知った返事"
+      "summary": "一点から読むもの"
     },
     {
-      "id": "ask_reason",
-      "title": "根拠を聞く",
+      "id": "END_TIME",
+      "title": "19時52分",
       "realm": "kenkai",
-      "kind": "branch",
+      "kind": "ending",
       "layer": 2,
       "lane": 2,
-      "icon": "◇",
+      "icon": "●",
       "scenario": "2026-03-28_青いシートのプロフィール",
-      "entry": "ask_reason",
-      "summary": "根拠を聞く"
+      "entry": "END_TIME",
+      "summary": "19時52分"
     },
     {
-      "id": "END_CORRECT",
-      "title": "必要な情報だけ直す",
+      "id": "END_PLACE",
+      "title": "都心の大きな公園",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 6,
       "icon": "●",
       "scenario": "2026-03-28_青いシートのプロフィール",
-      "entry": "END_CORRECT",
-      "summary": "必要な情報だけ直す"
+      "entry": "END_PLACE",
+      "summary": "都心の大きな公園"
     },
     {
-      "id": "END_CONTEXT",
-      "title": "空白の埋め方を知る",
+      "id": "END_LIMIT",
+      "title": "描かない経路",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 3,
-      "lane": 2,
+      "layer": 2,
+      "lane": 10,
       "icon": "●",
       "scenario": "2026-03-28_青いシートのプロフィール",
-      "entry": "END_CONTEXT",
-      "summary": "空白の埋め方を知る"
+      "entry": "END_LIMIT",
+      "summary": "描かない経路"
     }
   ],
   "edges": [
@@ -73,20 +73,20 @@
     },
     {
       "from": "choose_reply",
-      "to": "END_CORRECT",
-      "choiceText": "思い込んでいたと謝る",
+      "to": "END_TIME",
+      "choiceText": "時刻から夜を読む",
       "style": "kenkai"
     },
     {
       "from": "choose_reply",
-      "to": "ask_reason",
-      "choiceText": "アイコンの作品を聞く",
+      "to": "END_PLACE",
+      "choiceText": "公園の位置を知る",
       "style": "kenkai"
     },
     {
-      "from": "ask_reason",
-      "to": "END_CONTEXT",
-      "choiceText": "好きになったきっかけを聞く",
+      "from": "choose_reply",
+      "to": "END_LIMIT",
+      "choiceText": "記録されていない線を見る",
       "style": "kenkai"
     }
   ]

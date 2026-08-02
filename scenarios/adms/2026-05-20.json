@@ -1,0 +1,153 @@
+{
+  "date": "2026-05-20",
+  "title": "百人の熱中と解けない数式 A.D.M.S.",
+  "rootNodeId": "shinagawa",
+  "nodes": [
+    {
+      "id": "shinagawa",
+      "title": "8時22分の品川",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "shinagawa",
+      "summary": "朝に残った場所と時刻を確かめる。"
+    },
+    {
+      "id": "attention",
+      "title": "百万人より百人",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "attention",
+      "summary": "繰り返し使われる時間を価値として考える。"
+    },
+    {
+      "id": "korean",
+      "title": "草原と韓国語3語",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "korean",
+      "summary": "白髪の人物と三つの単語のずれを見る。"
+    },
+    {
+      "id": "formula",
+      "title": "解けない数式",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 3,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "formula",
+      "summary": "人の熱中を冗談の変数へ変える。"
+    },
+    {
+      "id": "END_SHINAGAWA",
+      "title": "目的は書かれていない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 1,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "END_SHINAGAWA",
+      "summary": "目的は書かれていない"
+    },
+    {
+      "id": "END_ATTENTION",
+      "title": "広さより継続を選ぶ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "END_ATTENTION",
+      "summary": "広さより継続を選ぶ"
+    },
+    {
+      "id": "END_KOREAN",
+      "title": "意味と画像がつながらない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "END_KOREAN",
+      "summary": "意味と画像がつながらない"
+    },
+    {
+      "id": "END_FORMULA",
+      "title": "測定ではなく誇張",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-05-20_百人の熱中と解けない数式",
+      "entry": "END_FORMULA",
+      "summary": "測定ではなく誇張"
+    }
+  ],
+  "edges": [
+    {
+      "from": "shinagawa",
+      "to": "END_SHINAGAWA",
+      "choiceText": "訪問記録の範囲を確認する",
+      "style": "kenkai"
+    },
+    {
+      "from": "shinagawa",
+      "to": "attention",
+      "choiceText": "昼の考えへ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "attention",
+      "to": "END_ATTENTION",
+      "choiceText": "価値基準を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "attention",
+      "to": "korean",
+      "choiceText": "夜の画像を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "korean",
+      "to": "END_KOREAN",
+      "choiceText": "絵との不一致を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "korean",
+      "to": "formula",
+      "choiceText": "20分後の数式へ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "formula",
+      "to": "END_FORMULA",
+      "choiceText": "式の目的を確かめる",
+      "style": "kenkai"
+    },
+    {
+      "from": "formula",
+      "to": "shinagawa",
+      "choiceText": "朝の品川へ戻る",
+      "style": "kenkai"
+    }
+  ]
+}

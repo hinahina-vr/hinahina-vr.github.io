@@ -1,0 +1,77 @@
+{
+  "title": "キック検出を止めて見る時間を考える",
+  "subtitle": "音反応ステージ、ノーコード委員会、深夜画像、AI供給過多",
+  "genre": "未完成の実装から鑑賞者の価値へ進む一日",
+  "date": "2026-05-11",
+  "chars": {
+    "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
+    "stage": { "name": "音反応ステージ", "color": "#6e9fbd", "emoji": "●" },
+    "viewer": { "name": "見る人の時間", "color": "#c19158", "emoji": "◆" }
+  },
+  "mapTitles": {
+    "stage_stop": "午前1時に作業を中断",
+    "nocode": "4分後の委員会",
+    "night_images": "深夜に残した2画像",
+    "attention": "見る側へ報酬が移る未来",
+    "END_STAGE": "キック検出は未完成",
+    "END_NOCODE": "会員のいない委員会",
+    "END_IMAGES": "別々の2作品",
+    "END_ATTENTION": "閲覧時間が希少になる"
+  },
+  "mapSummaries": {
+    "stage_stop": "光るステージと未完成の音声解析を見る。",
+    "nocode": "強い団体名が生まれた理由を知る。",
+    "night_images": "少女画像と乳鳩ポスターを分ける。",
+    "attention": "AI時代に不足するものを考える。"
+  },
+  "scenario": [
+    { "label": "stage_stop" },
+    { "bg": "station_night" },
+    { "speaker": "stage", "text": "午前1時、音に反応する没入型ステージの作業を止めた。白い光の線は動いていたが、FFT後の音声からキックドラムだけを選べなかった。" },
+    {
+      "choices": [
+        { "text": "未完成として保存する", "goto": "END_STAGE" },
+        { "text": "4分後へ進む", "goto": "nocode" }
+      ]
+    },
+    { "label": "nocode" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "作業を切り上げた4分後、ノーコード撲滅委員会を発起した。会員も活動もなく、視覚的な部品だけでは音声処理を作れなかった苛立ちに付けた名前だった。" },
+    {
+      "choices": [
+        { "text": "深夜の冗談として残す", "goto": "END_NOCODE" },
+        { "text": "画像の記録へ進む", "goto": "night_images" }
+      ]
+    },
+    { "label": "night_images" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "深夜の1枚目は、背中合わせの少女2人と俺が望む永遠の題字。2枚目は、白髪の案内役が光明乳鳩を食べる中国語の宣伝ポスター風画像だった。" },
+    {
+      "choices": [
+        { "text": "二つを別作品として残す", "goto": "END_IMAGES" },
+        { "text": "23時33分へ進む", "goto": "attention" }
+      ]
+    },
+    { "label": "attention" },
+    { "bg": "home_office" },
+    { "speaker": "viewer", "text": "AIで作品の供給が需要を上回れば、消費していいねを押す側が金をもらう。作る道具が安くなるほど、見る人の時間へ値段がつくと予測した。" },
+    {
+      "choices": [
+        { "text": "未来の需給予測として残す", "goto": "END_ATTENTION" },
+        { "text": "午前1時へ戻る", "goto": "stage_stop" }
+      ]
+    },
+    { "label": "END_STAGE" },
+    { "bg": "station_night" },
+    { "speaker": "narrator", "text": "動画の見栄えと音声検出の精度は別。狙った拍を拾えず、音反応機能は中断の状態にある。\nEND キック検出は未完成" },
+    { "label": "END_NOCODE" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "ノーコード撲滅委員会は実在の活動団体ではない。波形処理にコードが必要だった夜の冗談である。\nEND 会員のいない委員会" },
+    { "label": "END_IMAGES" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "少女2人の題字画像と、深圳名物を紹介する乳鳩ポスター。共通の物語は作らない。\nEND 別々の2作品" },
+    { "label": "END_ATTENTION" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "現在の報酬制度ではなく、制作費が下がり続けた未来の予測。希少になるのは人間の注意である。\nEND 閲覧時間が希少になる" }
+  ]
+}

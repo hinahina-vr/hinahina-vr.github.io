@@ -4,6 +4,9 @@ import { basename, join } from "node:path";
 const ROOT = join(import.meta.dirname, "..");
 const DATE_PATTERN = /^(2026-\d{2}-\d{2})_/;
 const EXPECTED_VOICE_DIRECTORY_COUNT = 33;
+const EXPECTED_VOICES_PER_DATE = 33;
+const EXPECTED_DREAMS_PER_DATE = 1;
+const MAIN_DIARY_EXTENSIONS = new Set([".md", ".jpg", ".jpeg", ".png", ".webp"]);
 const FORBIDDEN = [
   "デジタルサドゥー",
   "画面の苦行",
@@ -17,6 +20,17 @@ function listMarkdown(dir) {
   return readdirSync(dir)
     .map((name) => join(dir, name))
     .filter((file) => statSync(file).isFile() && file.endsWith(".md"));
+}
+
+function listMainDiaryFiles(dir) {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .map((name) => join(dir, name))
+    .filter((file) => {
+      if (!statSync(file).isFile()) return false;
+      const extension = file.slice(file.lastIndexOf(".")).toLowerCase();
+      return MAIN_DIARY_EXTENSIONS.has(extension);
+    });
 }
 
 function dateOf(file) {
@@ -57,7 +71,8 @@ function jaccard(left, right) {
   return intersection / (left.size + right.size - intersection);
 }
 
-const mainFiles = listMarkdown(join(ROOT, "diary"));
+const mainFiles = listMainDiaryFiles(join(ROOT, "diary"));
+const mainDates = new Set(mainFiles.map(dateOf).filter(Boolean));
 const voiceDirs = readdirSync(ROOT)
   .filter((name) => name.startsWith("diary-"))
   .filter((name) => statSync(join(ROOT, name)).isDirectory());
@@ -103,8 +118,11 @@ for (const file of voiceFiles) {
 for (const mainFile of mainFiles) {
   const date = dateOf(mainFile);
   const voices = voicesByDate.get(date) ?? [];
-  if (voices.length < 1 || voices.length > 6) {
-    errors.push(`${date}: 大奥AIが ${voices.length} 件 (許容1-6件)`);
+  if (voices.length !== EXPECTED_VOICES_PER_DATE) {
+    errors.push(
+      `${date}: 大奥AIが ${voices.length} 件 ` +
+      `(期待値 ${EXPECTED_VOICES_PER_DATE} 件)`,
+    );
   }
 
   const roles = voices.map((item) => normalize(item.role ?? ""));
@@ -128,7 +146,45 @@ for (const mainFile of mainFiles) {
 const scenarioFiles = readdirSync(join(ROOT, "scenarios"))
   .filter((name) => /^2026-\d{2}-\d{2}_.+\.json$/.test(name))
   .map((name) => join(ROOT, "scenarios", name));
-const visibleFiles = [...mainFiles, ...voiceFiles, ...scenarioFiles];
+const dreamsByDate = new Map();
+for (const file of scenarioFiles) {
+  const date = dateOf(file);
+  if (!date) continue;
+  if (!dreamsByDate.has(date)) dreamsByDate.set(date, []);
+  dreamsByDate.get(date).push(file);
+}
+
+for (const date of mainDates) {
+  const dreams = dreamsByDate.get(date) ?? [];
+  if (dreams.length !== EXPECTED_DREAMS_PER_DATE) {
+    errors.push(
+      `${date}: 夢を見るが ${dreams.length} 件 ` +
+      `(期待値 ${EXPECTED_DREAMS_PER_DATE} 件)`,
+    );
+  }
+}
+
+for (const [date, voices] of voicesByDate) {
+  if (!mainDates.has(date)) {
+    for (const voice of voices) {
+      errors.push(`${voice.file}: 対応する本編日記がない`);
+    }
+  }
+}
+
+for (const [date, dreams] of dreamsByDate) {
+  if (!mainDates.has(date)) {
+    for (const dream of dreams) {
+      errors.push(`${dream}: 対応する本編日記がない`);
+    }
+  }
+}
+
+const visibleFiles = [
+  ...mainFiles.filter((file) => file.endsWith(".md")),
+  ...voiceFiles,
+  ...scenarioFiles,
+];
 
 for (const file of visibleFiles) {
   const raw = readFileSync(file, "utf8");

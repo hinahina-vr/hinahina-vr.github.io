@@ -1,0 +1,47 @@
+{
+  "title": "六軒目の翌日",
+  "subtitle": "前夜から会社まで続いた消耗の夢",
+  "genre": "疲労記録の分岐夢",
+  "date": "2026-04-06",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "guide": { "name": "翌日の記録係", "color": "#b57565", "emoji": "◇" }
+  },
+  "mapTitles": {
+    "standalone_start": "解散後から始まる月曜日",
+    "choose_path": "三つの消耗",
+    "END_SIX": "2軒と3軒と1軒",
+    "END_TALK": "罰ゲームと呼んだ会話",
+    "END_WORK": "会社で続く怒り"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "late_night_route" },
+    { "speaker": "narrator", "text": "前夜は居酒屋2軒、キャバクラ3軒、最後に焼肉店へ入り、六軒目でようやく解散した。信用できないと感じた酒を飲み、面白いと思えない相手との会話を続ける状況を罰ゲームと呼んだ。" },
+    { "speaker": "narrator", "text": "翌日の昼にも後遺症で具合が悪いと投稿した。夜には、会社にいると一生怒っていて疲れると書いた。" },
+    { "speaker": "guide", "text": "前夜の店数、望まない社交、職場で燃え続ける感情。どの負担を読み直しますか。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "六軒の内訳を数える", "goto": "END_SIX" },
+        { "text": "酒と会話を分ける", "goto": "END_TALK" },
+        { "text": "会社の怒りを見る", "goto": "END_WORK" }
+      ]
+    },
+    { "label": "END_SIX" },
+    { "bg": "six_doors" },
+    { "speaker": "narrator", "text": "二つの居酒屋、三つのキャバクラ、一つの焼肉店。六枚の扉が並んだ。注文や移動時刻はなく、最後の扉で解散したことだけが分かった。" },
+    { "speaker": "guide", "text": "店数は武勇伝ではなく、翌日まで負担が続いた夜の長さを示します。" },
+    { "speaker": "narrator", "text": "六枚目を閉じても、昼の具合の悪さは消えなかった。\nEND 終わりの遅い夜" },
+    { "label": "END_TALK" },
+    { "bg": "bottle_and_table" },
+    { "speaker": "narrator", "text": "机には角瓶の外見と、フェイクウイスキーという本人の評価が別々に置かれた。向かいの人物については、会話を面白いと思えなかったこと以外を描かなかった。" },
+    { "speaker": "guide", "text": "酒の成分も相手の人格も断定せず、本人が感じた不信と強制性を記録します。" },
+    { "speaker": "narrator", "text": "罰ゲームという札だけが、楽しくない社交の上へ残った。\nEND 不快感を二つに分ける" },
+    { "label": "END_WORK" },
+    { "bg": "red_office" },
+    { "speaker": "narrator", "text": "会社の画面は赤くなり、怒り続けて疲れるという一文が表示された。具体的な案件や相手は空欄だった。" },
+    { "speaker": "guide", "text": "怒りの正当性を裁く前に、感情を維持すること自体が負担になった記録として読みます。" },
+    { "speaker": "narrator", "text": "前夜の不調と職場の怒りを別の欄へ置き、月曜日を閉じた。\nEND 二種類の疲れを残す" }
+  ]
+}

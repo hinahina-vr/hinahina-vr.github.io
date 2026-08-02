@@ -1,0 +1,47 @@
+{
+  "title": "33秒差の二つの店名",
+  "subtitle": "町田の位置記録を検証する夢",
+  "genre": "チェックイン異常の分岐夢",
+  "date": "2026-04-04",
+  "chars": {
+    "narrator": { "name": "", "color": "#a8b6c6", "emoji": "" },
+    "guide": { "name": "秒針の記録係", "color": "#c49a6c", "emoji": "◇" }
+  },
+  "mapTitles": {
+    "standalone_start": "20時15分台の町田",
+    "choose_path": "二店舗と33秒",
+    "END_FISH": "魚介店の情報",
+    "END_HORSE": "馬肉専門店の情報",
+    "END_ANOMALY": "利用を確定しない"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "two_checkins" },
+    { "speaker": "narrator", "text": "夜8時15分台、町田で二つの店名が続けて記録された。最初は旬の魚介を出すさかなやキンボシ、その33秒後は明治17年創業の馬肉専門店、柿島屋だった。" },
+    { "speaker": "narrator", "text": "33秒で二店を利用して移動することはできない。最初の選択を直したのか、候補を続けて記録したのかは確認できていない。" },
+    { "speaker": "guide", "text": "夢の記録盤には、二店の情報と、解釈を保留する欄があります。どこを見ますか。" },
+    { "label": "choose_path" },
+    {
+      "choices": [
+        { "text": "さかなやキンボシを確認する", "goto": "END_FISH" },
+        { "text": "柿島屋を確認する", "goto": "END_HORSE" },
+        { "text": "33秒の意味を検証する", "goto": "END_ANOMALY" }
+      ]
+    },
+    { "label": "END_FISH" },
+    { "bg": "fish_restaurant" },
+    { "speaker": "narrator", "text": "さかなやキンボシの欄には、旬の魚介、刺身、囲炉裏焼きという店舗情報があった。当日の注文欄は空白だった。" },
+    { "speaker": "guide", "text": "店を説明する情報はあっても、本人が利用した証明とは別です。" },
+    { "speaker": "narrator", "text": "魚の絵を皿へ移さず、店の欄へ戻した。\nEND 店舗情報として読む" },
+    { "label": "END_HORSE" },
+    { "bg": "old_restaurant" },
+    { "speaker": "narrator", "text": "柿島屋の欄には、明治17年創業の馬肉専門店とあった。33秒後という時刻は表示されたが、入店や料理の記録はなかった。" },
+    { "speaker": "guide", "text": "古い店の来歴と、この夜の行動は別々に保存します。" },
+    { "speaker": "narrator", "text": "店の歴史を、本人の滞在時間へ書き換えなかった。\nEND 業態だけを確認する" },
+    { "label": "END_ANOMALY" },
+    { "bg": "clock" },
+    { "speaker": "narrator", "text": "秒針を進めると、二件の間に33個の目盛りが現れた。順序は確かでも、移動や滞在を入れる余白はなかった。" },
+    { "speaker": "guide", "text": "誤選択か候補記録かは仮説です。確認が取れるまで、両方を未確定で保ちます。" },
+    { "speaker": "narrator", "text": "二つの店名を消さず、その間へ未確認の札を置いた。\nEND 異常値を物語にしない" }
+  ]
+}

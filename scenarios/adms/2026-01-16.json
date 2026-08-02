@@ -1,0 +1,93 @@
+{
+  "date": "2026-01-16",
+  "title": "18時9分の専門店 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "到着だけの金曜日",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-16_18時9分の専門店",
+      "entry": "standalone_start",
+      "summary": "到着だけの金曜日"
+    },
+    {
+      "id": "choose_path",
+      "title": "店内の3通路",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-01-16_18時9分の専門店",
+      "entry": "choose_path",
+      "summary": "店内の3通路"
+    },
+    {
+      "id": "END_SILENT",
+      "title": "音のない試験室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-01-16_18時9分の専門店",
+      "entry": "END_SILENT",
+      "summary": "音のない試験室"
+    },
+    {
+      "id": "END_WATER",
+      "title": "青い配管の循環",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-01-16_18時9分の専門店",
+      "entry": "END_WATER",
+      "summary": "青い配管の循環"
+    },
+    {
+      "id": "END_BLANK",
+      "title": "空白の購入欄",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-01-16_18時9分の専門店",
+      "entry": "END_BLANK",
+      "summary": "空白の購入欄"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_SILENT",
+      "choiceText": "静音の通路へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_WATER",
+      "choiceText": "水冷の青い管を追う",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_BLANK",
+      "choiceText": "会計台の前へ立つ",
+      "style": "kenkai"
+    }
+  ]
+}

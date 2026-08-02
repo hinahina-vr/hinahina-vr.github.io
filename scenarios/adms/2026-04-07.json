@@ -1,0 +1,93 @@
+{
+  "date": "2026-04-07",
+  "title": "王将アイスの三つの面 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "夜10時4分の西友",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-07_王将アイスの三つの面",
+      "entry": "standalone_start",
+      "summary": "夜10時4分の西友"
+    },
+    {
+      "id": "choose_path",
+      "title": "箱と中身と年月",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-04-07_王将アイスの三つの面",
+      "entry": "choose_path",
+      "summary": "箱と中身と年月"
+    },
+    {
+      "id": "END_BOX",
+      "title": "王将角行金将",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-04-07_王将アイスの三つの面",
+      "entry": "END_BOX",
+      "summary": "王将角行金将"
+    },
+    {
+      "id": "END_FLAVOR",
+      "title": "三色の一本",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-07_王将アイスの三つの面",
+      "entry": "END_FLAVOR",
+      "summary": "三色の一本"
+    },
+    {
+      "id": "END_HISTORY",
+      "title": "昭和42年誕生",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-04-07_王将アイスの三つの面",
+      "entry": "END_HISTORY",
+      "summary": "昭和42年誕生"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_path",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_BOX",
+      "choiceText": "箱の駒を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_FLAVOR",
+      "choiceText": "一本の断面を見る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_path",
+      "to": "END_HISTORY",
+      "choiceText": "包装の年数を読む",
+      "style": "kenkai"
+    }
+  ]
+}
