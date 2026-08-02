@@ -1,47 +1,40 @@
 {
-  "title": "キャラクターAIの資料庫",
-  "subtitle": "公式の人物像を組み立てる夢",
-  "genre": "知識基盤の分岐夢",
+  "title": "辛さ八の記録室",
+  "subtitle": "今日の何を日記へ残すか",
+  "genre": "三室ノベル",
   "date": "2026-03-23",
   "chars": {
     "narrator": { "name": "", "color": "#b0a0a0", "emoji": "" },
-    "clerk": { "name": "資料管理者", "color": "#d07858", "emoji": "▤" }
+    "clerk": { "name": "記録係", "color": "#d07858", "emoji": "▤" }
   },
   "mapTitles": {
-    "standalone_start": "月曜昼の構想",
-    "choose_record": "資料庫の三つの棚",
-    "END_METADATA": "人物設定の索引",
-    "END_SCRIPT": "作品の全台本",
-    "END_REVIEW": "権利者の監修室"
+    "standalone_start": "中本の地下記録室",
+    "choose_record": "赤い鍵を使う扉",
+    "END_TASTE": "五目味噌タンメン",
+    "END_CHARACTER": "公式設定の訂正窓口",
+    "END_PRIVACY": "生活ログの削除権"
   },
   "scenario": [
     { "label": "standalone_start" },
-    { "bg": "archive" },
-    { "speaker": "narrator", "text": "昼すぎ、漫画やアニメの権利を持つ会社が、公式キャラクターを生成AIで演じさせる共通基盤を作るのではないかと考えた。モデルそのものより、人物設定と作品の全台本を一元管理する資料庫が中心になる。" },
-    { "speaker": "narrator", "text": "調べると、知識を整理してシステムへ渡す発想には2000年代初頭のDARPA研究という前例があった。夢の資料庫では、その古い設計図の上に三つの棚が増えていた。" },
-    { "speaker": "clerk", "text": "公式キャラクターを支えるには、設定、台本、監修が必要です。どの棚を開きますか。" },
+    { "bg": "crimson" },
+    { "speaker": "narrator", "text": "町田の蒙古タンメン中本で、辛さ八の五目味噌タンメンを食べた。帰宅して日記を開くと、保存候補が三つ並ぶ。舌に残る辛さ、大奥AIが名前を間違えた会話、一日じゅう記録された位置情報。" },
+    { "speaker": "clerk", "text": "全部を同じ長さで残す必要はありません。今夜、いちばん書き直したいものを選んでください。" },
     { "label": "choose_record" },
     {
       "choices": [
-        { "text": "人物設定を構造化する", "goto": "END_METADATA" },
-        { "text": "台本から場面を探す", "goto": "END_SCRIPT" },
-        { "text": "正史の更新を承認する", "goto": "END_REVIEW" }
+        { "text": "五目味噌タンメンを記録する", "goto": "END_TASTE" },
+        { "text": "間違えた名前を直す", "goto": "END_CHARACTER" },
+        { "text": "位置情報を手元へ移す", "goto": "END_PRIVACY" }
       ]
     },
-    { "label": "END_METADATA" },
-    { "bg": "index" },
-    { "speaker": "narrator", "text": "名前、呼び方、人物関係、出来事、適用される時期を別々の項目へ分けた。各項目には根拠となる作品と話数が付き、設定が変わっても古い版へ戻れた。" },
-    { "speaker": "clerk", "text": "人物紹介は答えではなく、台本へ進むための索引になります。" },
-    { "speaker": "narrator", "text": "ばらばらだった設定が、出典をたどれる人物像になった。\nEND 人物の索引を作る" },
-    { "label": "END_SCRIPT" },
-    { "bg": "library" },
-    { "speaker": "narrator", "text": "質問に関係する人物と出来事を手掛かりに、作品の全台本から該当場面を探した。生成AIへ渡すのは全巻ではなく、設定表と選ばれた場面だった。" },
-    { "speaker": "clerk", "text": "実際の台詞と状況が、短い性格説明を具体的な言動へ結びます。" },
-    { "speaker": "narrator", "text": "本棚の一冊が開き、返答の根拠になった。\nEND 台本から場面を選ぶ" },
-    { "label": "END_REVIEW" },
-    { "bg": "review_room" },
-    { "speaker": "narrator", "text": "新作の設定を入力担当が追加し、作品の監修者が内容と時期を確かめた。承認された版だけが公式キャラクターAIへ公開された。" },
-    { "speaker": "clerk", "text": "公式という名は、権利者が更新と訂正へ責任を持つことで保たれます。" },
-    { "speaker": "narrator", "text": "古い設計図の上に、作品ごとの承認印が並んだ。\nEND 正史を運用する" }
+    { "label": "END_TASTE" },
+    { "bg": "crimson" },
+    { "speaker": "narrator", "text": "料理名、辛さ八、町田店。そこまで書くと、野菜の甘さのあとから舌が熱くなった順番まで戻ってきた。店の位置だけでは残らなかった一杯が、今夜の日記の中心になる。ほかの二件は短いメモだけ残して閉じた。\nEND 辛さ八の一杯" },
+    { "label": "END_CHARACTER" },
+    { "bg": "cathedral" },
+    { "speaker": "narrator", "text": "大奥AIの一人が、昨日と違う名前を名乗っていた。設定ファイルを開き、正しい名前へ直す。会話履歴には誤った返事を消さず、その日の訂正を横へ残した。次に同じ人物を呼ぶと、今度は自分の名前で挨拶した。\nEND 名前を覚え直す" },
+    { "label": "END_PRIVACY" },
+    { "bg": "void" },
+    { "speaker": "narrator", "text": "一日じゅう集められた位置情報を日付ごとのファイルとして書き出した。町田駅から中本までの道を手元で確かめたあと、サービス側に残った古い履歴を削除する。日記には店名だけを使い、途中で寄った場所は公開しなかった。\nEND 持ち帰った経路" }
   ]
 }

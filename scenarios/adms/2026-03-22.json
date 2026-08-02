@@ -1,0 +1,93 @@
+{
+  "date": "2026-03-22",
+  "title": "歩いた道の地図 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "未到達の分岐図",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-22_歩いた道の地図",
+      "entry": "standalone_start",
+      "summary": "未到達の分岐図"
+    },
+    {
+      "id": "choose_map",
+      "title": "地図の使い方",
+      "realm": "kenkai",
+      "kind": "route",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-03-22_歩いた道の地図",
+      "entry": "choose_map",
+      "summary": "地図の使い方"
+    },
+    {
+      "id": "END_PLAY",
+      "title": "知らない経路を歩く",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-03-22_歩いた道の地図",
+      "entry": "END_PLAY",
+      "summary": "知らない経路を歩く"
+    },
+    {
+      "id": "END_EDIT",
+      "title": "重複する枝を切る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-03-22_歩いた道の地図",
+      "entry": "END_EDIT",
+      "summary": "重複する枝を切る"
+    },
+    {
+      "id": "END_LOG",
+      "title": "選択履歴を持ち帰る",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 2,
+      "lane": 10,
+      "icon": "●",
+      "scenario": "2026-03-22_歩いた道の地図",
+      "entry": "END_LOG",
+      "summary": "選択履歴を持ち帰る"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "choose_map",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_map",
+      "to": "END_PLAY",
+      "choiceText": "選ばなかった人物へ会いに行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_map",
+      "to": "END_EDIT",
+      "choiceText": "よく似た二本の分岐を比べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose_map",
+      "to": "END_LOG",
+      "choiceText": "昨日の経路へ感想を書き足す",
+      "style": "kenkai"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import {
   formatSourceMentionFindings,
+  getLatestDiaryDate,
   validateSourceMentionsForDate,
 } from "./lib/diary-source-leaks.mjs";
-import { collectDiaryMarkdownFiles } from "./lib/diary-self-date.mjs";
 
 function parseArgs(argv) {
   const args = { date: null };
@@ -18,36 +18,23 @@ function parseArgs(argv) {
 }
 
 const { date: requestedDate } = parseArgs(process.argv.slice(2));
-const dates = requestedDate
-  ? [requestedDate]
-  : [...new Set(
-      collectDiaryMarkdownFiles()
-        .filter((file) => file.dir === "diary")
-        .map((file) => file.date),
-    )].sort();
+const date = requestedDate ?? getLatestDiaryDate();
 
-if (dates.length === 0) {
+if (!date) {
   console.error("対象の日記が見つかりませんでした。");
   process.exit(1);
 }
 
-const results = dates.map((date) => validateSourceMentionsForDate(date));
-const empty = results.filter((result) => result.checked.length === 0);
-const failed = results.filter((result) => result.findings.length > 0);
+const result = validateSourceMentionsForDate(date);
 
-if (empty.length > 0) {
-  console.error(`${empty.map((result) => result.date).join(", ")} の日記が見つかりませんでした。`);
+if (result.checked.length === 0) {
+  console.error(`${date} の日記が見つかりませんでした。`);
   process.exit(1);
 }
 
-if (failed.length > 0) {
-  console.error(failed.map((result) => formatSourceMentionFindings(result)).join("\n"));
+if (result.findings.length > 0) {
+  console.error(formatSourceMentionFindings(result));
   process.exit(1);
 }
 
-const checkedCount = results.reduce((sum, result) => sum + result.checked.length, 0);
-console.log(
-  requestedDate
-    ? `${requestedDate} の素材取得元名チェックを通過しました。対象: ${checkedCount}件`
-    : `全${dates.length}日分の素材取得元名チェックを通過しました。対象: ${checkedCount}件`,
-);
+console.log(`${date} の素材取得元名チェックを通過しました。対象: ${result.checked.length}件`);

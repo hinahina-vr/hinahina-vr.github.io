@@ -5,7 +5,7 @@
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "新宿から秋葉原へ",
+      "title": "新宿駅の黄色い電車",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,11 +13,11 @@
       "icon": "◇",
       "scenario": "2026-03-20_各駅停車の秋葉原",
       "entry": "standalone_start",
-      "summary": "新宿から秋葉原へ"
+      "summary": "新宿駅の黄色い電車"
     },
     {
       "id": "choose_train",
-      "title": "三つの時刻を選ぶ",
+      "title": "移動方法を選ぶ",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,43 +25,43 @@
       "icon": "◇",
       "scenario": "2026-03-20_各駅停車の秋葉原",
       "entry": "choose_train",
-      "summary": "三つの時刻を選ぶ"
+      "summary": "移動方法を選ぶ"
     },
     {
-      "id": "END_ARRIVAL",
-      "title": "15時37分の駅",
+      "id": "END_LOCAL",
+      "title": "ミルクスタンドから歩く",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 2,
       "icon": "●",
       "scenario": "2026-03-20_各駅停車の秋葉原",
-      "entry": "END_ARRIVAL",
-      "summary": "15時37分の駅"
+      "entry": "END_LOCAL",
+      "summary": "ミルクスタンドから歩く"
     },
     {
-      "id": "END_CREATIVE",
-      "title": "19時28分の音楽バー",
+      "id": "END_RAPID",
+      "title": "早く着いて一軒選ぶ",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 6,
       "icon": "●",
       "scenario": "2026-03-20_各駅停車の秋葉原",
-      "entry": "END_CREATIVE",
-      "summary": "19時28分の音楽バー"
+      "entry": "END_RAPID",
+      "summary": "早く着いて一軒選ぶ"
     },
     {
-      "id": "END_FINALE",
-      "title": "21時20分の終点",
+      "id": "END_RETURN",
+      "title": "乗り過ごして戻る",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 10,
       "icon": "●",
       "scenario": "2026-03-20_各駅停車の秋葉原",
-      "entry": "END_FINALE",
-      "summary": "21時20分の終点"
+      "entry": "END_RETURN",
+      "summary": "乗り過ごして戻る"
     }
   ],
   "edges": [
@@ -73,20 +73,20 @@
     },
     {
       "from": "choose_train",
-      "to": "END_ARRIVAL",
-      "choiceText": "秋葉原への到着を見る",
+      "to": "END_LOCAL",
+      "choiceText": "各駅停車でゆっくり行く",
       "style": "kenkai"
     },
     {
       "from": "choose_train",
-      "to": "END_CREATIVE",
-      "choiceText": "音楽バーへの移動を見る",
+      "to": "END_RAPID",
+      "choiceText": "御茶ノ水で快速へ移る",
       "style": "kenkai"
     },
     {
       "from": "choose_train",
-      "to": "END_FINALE",
-      "choiceText": "最後の位置記録を見る",
+      "to": "END_RETURN",
+      "choiceText": "目覚ましをかけず眠る",
       "style": "kenkai"
     }
   ]

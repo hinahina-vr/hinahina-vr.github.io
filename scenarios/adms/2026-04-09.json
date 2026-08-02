@@ -1,11 +1,11 @@
 {
   "date": "2026-04-09",
-  "title": "雨で止まった旅と三枚の麦畑 A.D.M.S.",
+  "title": "雨宿りの分岐 A.D.M.S.",
   "rootNodeId": "standalone_start",
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "4月9日の回想",
+      "title": "雨の御坊駅",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,158 +13,134 @@
       "icon": "◇",
       "scenario": "2026-04-09_雨宿りの分岐",
       "entry": "standalone_start",
-      "summary": "昔の紀伊半島旅行と、その約20分後に投稿した3枚の画像を思い出す。"
+      "summary": "大雨で列車が止まり、予定の先へ進めなくなった。"
     },
     {
-      "id": "choose_memory",
-      "title": "どこから思い出すか",
+      "id": "choose_route",
+      "title": "今夜を決める",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
       "lane": 2,
       "icon": "◇",
       "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "choose_memory",
-      "summary": "どこから思い出すか"
+      "entry": "choose_route",
+      "summary": "今夜を決める"
     },
     {
-      "id": "air_link",
-      "title": "美浜町とAIR",
+      "id": "call_lodge",
+      "title": "美浜町へ電話する",
       "realm": "kenkai",
       "kind": "branch",
       "layer": 2,
       "lane": 2,
       "icon": "◇",
       "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "air_link",
-      "summary": "予定外の美浜町泊と恋愛ゲームAIRの関係をたどる。"
+      "entry": "call_lodge",
+      "summary": "美浜町の国民宿舎へ電話をかける。"
     },
     {
-      "id": "image_one",
-      "title": "麦畑の二枚",
+      "id": "choose_room",
+      "title": "空室が一つ",
       "realm": "kenkai",
-      "kind": "branch",
-      "layer": 2,
-      "lane": 6,
-      "icon": "◇",
-      "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "image_one",
-      "summary": "麦畑の少女から自作キャラクターへ、共通する麦を追う。"
-    },
-    {
-      "id": "image_three",
-      "title": "三枚目の急転",
-      "realm": "kenkai",
-      "kind": "branch",
+      "kind": "route",
       "layer": 3,
       "lane": 2,
       "icon": "◇",
       "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "image_three",
-      "summary": "アバターとボウモアが静かな景色を宴会へ変える。"
+      "entry": "choose_room",
+      "summary": "空室が一つ"
     },
     {
-      "id": "END_RAIN",
-      "title": "雨で残った地名",
+      "id": "END_STATION",
+      "title": "始発を待つ",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 3,
+      "layer": 2,
       "lane": 6,
       "icon": "●",
       "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "END_RAIN",
-      "summary": "雨で残った地名"
+      "entry": "END_STATION",
+      "summary": "始発を待つ"
     },
     {
-      "id": "END_FATE",
-      "title": "偶然についた名前",
+      "id": "END_HOME",
+      "title": "旅を切り上げる",
       "realm": "kenkai",
       "kind": "ending",
-      "layer": 3,
+      "layer": 2,
       "lane": 10,
       "icon": "●",
       "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "END_FATE",
-      "summary": "偶然についた名前"
+      "entry": "END_HOME",
+      "summary": "旅を切り上げる"
     },
     {
-      "id": "END_WHEAT",
-      "title": "麦を渡されたキャラクター",
-      "realm": "kenkai",
-      "kind": "ending",
-      "layer": 3,
-      "lane": 14,
-      "icon": "●",
-      "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "END_WHEAT",
-      "summary": "麦を渡されたキャラクター"
-    },
-    {
-      "id": "END_PARTY",
-      "title": "静かな景色の宴会",
+      "id": "END_LODGE",
+      "title": "雨の宿へ向かう",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 4,
       "lane": 2,
       "icon": "●",
       "scenario": "2026-04-09_雨宿りの分岐",
-      "entry": "END_PARTY",
-      "summary": "静かな景色の宴会"
+      "entry": "END_LODGE",
+      "summary": "偶然たどり着いた土地で、作品の記憶と旅が重なる。"
+    },
+    {
+      "id": "END_DECLINE",
+      "title": "別の町を探す",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 4,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-04-09_雨宿りの分岐",
+      "entry": "END_DECLINE",
+      "summary": "別の町を探す"
     }
   ],
   "edges": [
     {
       "from": "standalone_start",
-      "to": "choose_memory",
+      "to": "choose_route",
       "choiceText": "進む",
       "style": "kenkai"
     },
     {
-      "from": "choose_memory",
-      "to": "air_link",
-      "choiceText": "御坊駅で止まった旅をたどる",
+      "from": "choose_route",
+      "to": "END_STATION",
+      "choiceText": "駅で始発まで待つ",
       "style": "kenkai"
     },
     {
-      "from": "choose_memory",
-      "to": "image_one",
-      "choiceText": "麦畑の画像を順に見る",
+      "from": "choose_route",
+      "to": "call_lodge",
+      "choiceText": "近くの宿へ片端から電話する",
       "style": "kenkai"
     },
     {
-      "from": "air_link",
-      "to": "END_RAIN",
-      "choiceText": "御坊駅と美浜町を旅の記録として残す",
+      "from": "choose_route",
+      "to": "END_HOME",
+      "choiceText": "上り列車で来た道を戻る",
       "style": "kenkai"
     },
     {
-      "from": "air_link",
-      "to": "END_FATE",
-      "choiceText": "なぜ運命と呼んだのか考える",
+      "from": "call_lodge",
+      "to": "choose_room",
+      "choiceText": "進む",
       "style": "kenkai"
     },
     {
-      "from": "image_one",
-      "to": "END_WHEAT",
-      "choiceText": "二枚の麦のつながりを見る",
+      "from": "choose_room",
+      "to": "END_LODGE",
+      "choiceText": "部屋を予約して道を聞く",
       "style": "kenkai"
     },
     {
-      "from": "image_one",
-      "to": "image_three",
-      "choiceText": "最後の一枚まで進む",
-      "style": "kenkai"
-    },
-    {
-      "from": "image_three",
-      "to": "END_PARTY",
-      "choiceText": "三枚目の落ちを受け取る",
-      "style": "kenkai"
-    },
-    {
-      "from": "image_three",
-      "to": "END_WHEAT",
-      "choiceText": "一枚目から変化を見直す",
+      "from": "choose_room",
+      "to": "END_DECLINE",
+      "choiceText": "二十分歩くのをためらう",
       "style": "kenkai"
     }
   ]

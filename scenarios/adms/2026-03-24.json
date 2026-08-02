@@ -5,7 +5,7 @@
   "nodes": [
     {
       "id": "standalone_start",
-      "title": "火曜夜の二つの記録",
+      "title": "魚晴のカウンター",
       "realm": "kenkai",
       "kind": "root",
       "layer": 0,
@@ -13,11 +13,11 @@
       "icon": "◇",
       "scenario": "2026-03-24_魚晴と予約画面",
       "entry": "standalone_start",
-      "summary": "火曜夜の二つの記録"
+      "summary": "魚晴のカウンター"
     },
     {
       "id": "choose_order",
-      "title": "48分の間を選ぶ",
+      "title": "今夜決めるもの",
       "realm": "kenkai",
       "kind": "route",
       "layer": 1,
@@ -25,43 +25,43 @@
       "icon": "◇",
       "scenario": "2026-03-24_魚晴と予約画面",
       "entry": "choose_order",
-      "summary": "48分の間を選ぶ"
+      "summary": "今夜決めるもの"
     },
     {
-      "id": "END_VENUE",
-      "title": "魚晴という場所",
+      "id": "END_MEAL",
+      "title": "しめさばを食べる",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 2,
       "icon": "●",
       "scenario": "2026-03-24_魚晴と予約画面",
-      "entry": "END_VENUE",
-      "summary": "魚晴という場所"
+      "entry": "END_MEAL",
+      "summary": "しめさばを食べる"
     },
     {
-      "id": "END_PENDING",
-      "title": "未予約という状態",
+      "id": "END_PACKAGE",
+      "title": "箱を予約する",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 6,
       "icon": "●",
       "scenario": "2026-03-24_魚晴と予約画面",
-      "entry": "END_PENDING",
-      "summary": "未予約という状態"
+      "entry": "END_PACKAGE",
+      "summary": "箱を予約する"
     },
     {
-      "id": "END_TIMELINE",
-      "title": "二件を時刻順に置く",
+      "id": "END_DOWNLOAD",
+      "title": "遊ぶ日を予約する",
       "realm": "kenkai",
       "kind": "ending",
       "layer": 2,
       "lane": 10,
       "icon": "●",
       "scenario": "2026-03-24_魚晴と予約画面",
-      "entry": "END_TIMELINE",
-      "summary": "二件を時刻順に置く"
+      "entry": "END_DOWNLOAD",
+      "summary": "遊ぶ日を予約する"
     }
   ],
   "edges": [
@@ -73,20 +73,20 @@
     },
     {
       "from": "choose_order",
-      "to": "END_VENUE",
-      "choiceText": "魚晴の店の特徴を見る",
+      "to": "END_MEAL",
+      "choiceText": "スマートフォンを伏せて食べる",
       "style": "kenkai"
     },
     {
       "from": "choose_order",
-      "to": "END_PENDING",
-      "choiceText": "未予約の状態を残す",
+      "to": "END_PACKAGE",
+      "choiceText": "限定版をその場で予約する",
       "style": "kenkai"
     },
     {
       "from": "choose_order",
-      "to": "END_TIMELINE",
-      "choiceText": "二つの時刻を結ぶ",
+      "to": "END_DOWNLOAD",
+      "choiceText": "発売日の夜だけ予定へ入れる",
       "style": "kenkai"
     }
   ]

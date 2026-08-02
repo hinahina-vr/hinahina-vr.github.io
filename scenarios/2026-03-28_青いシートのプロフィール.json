@@ -1,46 +1,44 @@
 {
-  "title": "夜7時52分の一点",
-  "subtitle": "代々木公園の位置記録を読む夢",
-  "genre": "夜の地図分岐夢",
+  "title": "青いシートのプロフィール",
+  "subtitle": "アイコンから作った人物像",
+  "genre": "花見の会話ノベル",
   "date": "2026-03-28",
   "chars": {
     "narrator": { "name": "", "color": "#a4a8be", "emoji": "" },
-    "member": { "name": "地図の一点", "color": "#78a7b8", "emoji": "●" }
+    "member": { "name": "同好会の人", "color": "#78a7b8", "emoji": "●" }
   },
   "mapTitles": {
-    "standalone_start": "3月最後の土曜日",
-    "choose_reply": "一点から読むもの",
-    "END_TIME": "19時52分",
-    "END_PLACE": "都心の大きな公園",
-    "END_LIMIT": "描かない経路"
+    "standalone_start": "花見の二次会",
+    "choose_reply": "誤認を知った返事",
+    "ask_reason": "根拠を聞く",
+    "END_CORRECT": "必要な情報だけ直す",
+    "END_CONTEXT": "空白の埋め方を知る"
   },
   "scenario": [
     { "label": "standalone_start" },
-    { "bg": "night_map" },
-    { "speaker": "narrator", "text": "3月最後の土曜日、午後7時52分に代々木公園へいた。原宿駅や明治神宮の近くに広がる、東京都心の大きな公園である。この日に残った外出先は、その一地点だけだった。" },
-    { "speaker": "member", "text": "夢の地図には、時刻、場所、空白の三つの層があります。どれを開きますか。" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "大学の花見で、連絡アプリの名前を頼りに参加者を探した。女の子のアイコンを使っていた人へ声をかけると、振り向いたのは男性だった。驚いた顔を隠せず、自分から余計な説明を始めてしまう。" },
+    { "speaker": "member", "text": "このアイコン、好きなゲームのキャラクターなんです。会う前は女性だと思っていましたか。" },
     { "label": "choose_reply" },
     {
       "choices": [
-        { "text": "時刻から夜を読む", "goto": "END_TIME" },
-        { "text": "公園の位置を知る", "goto": "END_PLACE" },
-        { "text": "記録されていない線を見る", "goto": "END_LIMIT" }
+        { "text": "思い込んでいたと謝る", "goto": "END_CORRECT" },
+        { "text": "アイコンの作品を聞く", "goto": "ask_reason" }
       ]
     },
-    { "label": "END_TIME" },
-    { "bg": "clock" },
-    { "speaker": "narrator", "text": "19時52分の数字を押すと、地図の昼色が消えた。日没後に訪れたことは分かるが、照明や人通りの情報は現れなかった。" },
-    { "speaker": "member", "text": "一つの時刻が、土曜の公園を夜の場面へ変えます。" },
-    { "speaker": "narrator", "text": "時計の針だけが公園の上で止まった。\nEND 夜という時間を残す" },
-    { "label": "END_PLACE" },
-    { "bg": "city_map" },
-    { "speaker": "narrator", "text": "地図を引くと、代々木公園の近くに原宿駅と明治神宮が見えた。二つは場所を説明する目印であり、この日の訪問先としては光らなかった。" },
-    { "speaker": "member", "text": "一点の名前でも、周辺を示せば初めての読者が東京の地図へ置けます。" },
-    { "speaker": "narrator", "text": "都心の中に、公園の広い面だけが残った。\nEND 場所の広がりを知る" },
-    { "label": "END_LIMIT" },
-    { "bg": "blank_map" },
-    { "speaker": "narrator", "text": "公園へ入る前と出たあとの線は白紙だった。園内の道、同行者、目的も描かれていない。" },
-    { "speaker": "member", "text": "空白へ花見や集まりを書き足さなくても、一地点の日記は成立します。" },
-    { "speaker": "narrator", "text": "地図の一点を消さず、線だけを白いまま閉じた。\nEND 一件を一件として保存する" }
+    { "label": "ask_reason" },
+    { "bg": "station" },
+    { "speaker": "member", "text": "昔から好きなゲームのヒロインです。自分の顔に似せて選んだわけではなく、この絵を見ると落ち着くので使っています。" },
+    {
+      "choices": [
+        { "text": "好きになったきっかけを聞く", "goto": "END_CONTEXT" }
+      ]
+    },
+    { "label": "END_CORRECT" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "女性だと勝手に思っていました、と謝ると、相手は気にしていない様子で自分の名前をもう一度教えてくれた。持ってきた酒の話へ移り、二人で紙コップを探す。帰るころには、アイコンではなく、目の前で呼んだ名前から相手を思い出せるようになった。\nEND 名前で会い直す" },
+    { "label": "END_CONTEXT" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "作品の話を聞くと、二人とも同じ時代のゲームを遊んでいたことが分かった。相手がそのヒロインを選んだ理由は、性別ではなく、昔つらい時期に物語へ助けられたからだった。帰りの連絡画面には同じアイコンがあるが、もう身体の代わりには見えなかった。\nEND 好きな絵の理由" }
   ]
 }

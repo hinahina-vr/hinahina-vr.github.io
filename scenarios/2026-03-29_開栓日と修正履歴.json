@@ -1,0 +1,40 @@
+{
+  "title": "開栓日と修正履歴",
+  "subtitle": "花見の翌日に残った三つ",
+  "genre": "休日の三択ノベル",
+  "date": "2026-03-29",
+  "chars": {
+    "narrator": { "name": "", "color": "#aaa0a0", "emoji": "" },
+    "ledger": { "name": "台帳", "color": "#c19b63", "emoji": "▤" }
+  },
+  "mapTitles": {
+    "standalone_start": "五本の瓶と未修正画面",
+    "choose_task": "先に終える作業",
+    "END_BOTTLES": "飲む順番を決める",
+    "END_PATCH": "文字送りを直す",
+    "END_RAMEN": "因果を作らず食べる"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "花見の翌日。部屋には飲みかけのウイスキーが五本、制作中の分岐物語へ書いた修正メモ、それに二日酔いの重い身体が残った。昨夜の締めに新宿の岐阜屋で食べた味噌ラーメンまで、まだ腹にいる気がする。" },
+    { "speaker": "ledger", "text": "日曜日の午後です。酒棚を整理する、物語を直す、外へ出て昼を食べる。今日はどれか一つで十分です。" },
+    { "label": "choose_task" },
+    {
+      "choices": [
+        { "text": "飲みかけの五本を整理する", "goto": "END_BOTTLES" },
+        { "text": "読めなかった画面を直す", "goto": "END_PATCH" },
+        { "text": "岐阜屋で昼を食べる", "goto": "END_RAMEN" }
+      ]
+    },
+    { "label": "END_BOTTLES" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "五本を開栓日の順に並べ、ラベルの裏へ日付を書いた。いちばん古い一本は残りわずかだったので、次に飲む印をつける。昨日の酒が残る今日は栓を開けず、棚だけ片づけた。夕方、瓶は五本のままだが、次に迷う時間は減っていた。\nEND 飲まない酒棚整理" },
+    { "label": "END_PATCH" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "花見の前夜に急いで作った画面を開く。文字送りを遅くし、前の選択肢へ戻るボタンを置いた。夜、自分で最初から遊ぶと、昨日は速すぎて読めなかった人物の言葉が最後まで残る。修正メモを消し、今度はそこで一度手を止めた。\nEND 読める速さ" },
+    { "label": "END_RAMEN" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "新宿の岐阜屋へ行ったが、昨夜と同じ味噌ラーメンではなく、軽い定食を頼んだ。花見帰りの深夜には劇的にうまかった店も、昼の素面では普通の町中華だった。その普通さに安心し、酒棚も修正メモも明日へ残して帰った。\nEND 昼の岐阜屋" }
+  ]
+}

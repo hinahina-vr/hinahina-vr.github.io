@@ -1,0 +1,51 @@
+{
+  "title": "数字の外の二日酔い",
+  "subtitle": "昨夜の秋葉原から戻れない",
+  "genre": "二日酔いの一日",
+  "date": "2026-03-21",
+  "chars": {
+    "narrator": { "name": "", "color": "#94a0b5", "emoji": "" },
+    "watch": { "name": "腕時計", "color": "#72b6aa", "emoji": "◉" }
+  },
+  "mapTitles": {
+    "standalone_start": "夕方の布団",
+    "choose_recovery": "次の行動",
+    "check_symptoms": "症状を確認する",
+    "ask_help": "連絡を入れる",
+    "END_RECOVERY": "数字ではなく行動で戻る",
+    "END_SUPPORT": "一人で判断しない"
+  },
+  "scenario": [
+    { "label": "standalone_start" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "前夜は秋葉原で何軒か飲み、最後に餃子を食べて帰った。次に目を開けると、カーテンの隙間はもう夕方だった。腕時計のSpO2は九十八パーセント。立ち上がると、その正常そうな数字ごと床が傾いた。" },
+    { "speaker": "watch", "text": "測ったのは血中酸素の目安です。酔いが残っているか、歩いてよいかは表示できません。" },
+    { "label": "choose_recovery" },
+    {
+      "choices": [
+        { "text": "壁につかまって水を取りに行く", "goto": "check_symptoms" },
+        { "text": "一人でいることを家族へ伝える", "goto": "ask_help" }
+      ]
+    },
+    { "label": "check_symptoms" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "壁へ手をつきながら台所へ行き、水を少しずつ飲んだ。吐かずにコップを置けたので、しばらく床へ座る。夜十時を過ぎたころ、冷蔵庫の豆腐なら食べたいと思った。朝から初めて、自分の身体から前向きな返事が来た。" },
+    {
+      "choices": [
+        { "text": "豆腐を半分食べて休む", "goto": "END_RECOVERY" }
+      ]
+    },
+    { "label": "ask_help" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "二日酔いで動けず、一人でいる、と家族へ送った。すぐ、水は飲めるか、呼びかけに普通に答えられるか、と返事が来る。腕時計の表示は変わらないが、自分の次の返事を待つ人が画面の外にできた。" },
+    {
+      "choices": [
+        { "text": "水は飲める、起きたらまた送る、と返す", "goto": "END_SUPPORT" }
+      ]
+    },
+    { "label": "END_RECOVERY" },
+    { "speaker": "narrator", "text": "その日はコードも日記も書かなかった。流しには豆腐の容器と水のコップだけが残る。深夜にもう一度立つと、今度は壁へ触れず歩けた。九十八という表示ではなく、自分で台所から戻れたことを回復の印にした。\nEND 台所から戻る" },
+    { "label": "END_SUPPORT" },
+    { "speaker": "narrator", "text": "枕元へ水を置き、起きたらまた連絡すると送った。ひどくなったら電話することも決める。時計は九十八のまま黙っていたが、朝に確認してくれる相手がいるだけで、一人きりの長い夜ではなくなった。\nEND 起きたら送る" }
+  ]
+}

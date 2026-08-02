@@ -1,47 +1,40 @@
 {
   "title": "魚晴と予約画面",
-  "subtitle": "確定した場所と未定の買い物",
-  "genre": "二時刻の分岐夢",
+  "subtitle": "今夜の皿と来月のゲーム",
+  "genre": "カウンターノベル",
   "date": "2026-03-24",
   "chars": {
     "narrator": { "name": "", "color": "#a0a8b4", "emoji": "" },
-    "menu": { "name": "時刻表", "color": "#72a0c8", "emoji": "▣" }
+    "menu": { "name": "予約画面", "color": "#72a0c8", "emoji": "▣" }
   },
   "mapTitles": {
-    "standalone_start": "火曜夜の二つの記録",
-    "choose_order": "48分の間を選ぶ",
-    "END_VENUE": "魚晴という場所",
-    "END_PENDING": "未予約という状態",
-    "END_TIMELINE": "二件を時刻順に置く"
+    "standalone_start": "魚晴のカウンター",
+    "choose_order": "今夜決めるもの",
+    "END_MEAL": "しめさばを食べる",
+    "END_PACKAGE": "箱を予約する",
+    "END_DOWNLOAD": "遊ぶ日を予約する"
   },
   "scenario": [
     { "label": "standalone_start" },
-    { "bg": "night_city" },
-    { "speaker": "narrator", "text": "火曜日の午後10時30分、町田駅近くの魚晴へ立ち寄った。朝に仕入れた鮮魚と地酒を出す居酒屋だが、この日の注文は記録されていない。" },
-    { "speaker": "narrator", "text": "午後11時18分には、Keyのanemoiをまだ予約しておらず、どこで予約するか考えていると書いた。店舗、版、特典、予約完了の情報はない。" },
-    { "speaker": "menu", "text": "二つの記録は48分離れています。場所、買い物の状態、時刻のつながりから一つを選んでください。" },
+    { "bg": "twilight" },
+    { "speaker": "narrator", "text": "火曜日の夜、魚晴のカウンターでしめさばを頼んだ。料理が来たところで、来月発売のゲームanemoiが予約開始になったと気づく。限定版の特典を読んでいるうちに、目の前の魚へ箸をつけないまま数分が過ぎた。" },
+    { "speaker": "menu", "text": "店員が、魚、乾いちゃいますよ、と笑った。予約画面には、限定版は在庫がなくなり次第終了、と出ている。" },
     { "label": "choose_order" },
     {
       "choices": [
-        { "text": "魚晴の店の特徴を見る", "goto": "END_VENUE" },
-        { "text": "未予約の状態を残す", "goto": "END_PENDING" },
-        { "text": "二つの時刻を結ぶ", "goto": "END_TIMELINE" }
+        { "text": "スマートフォンを伏せて食べる", "goto": "END_MEAL" },
+        { "text": "限定版をその場で予約する", "goto": "END_PACKAGE" },
+        { "text": "発売日の夜だけ予定へ入れる", "goto": "END_DOWNLOAD" }
       ]
     },
-    { "label": "END_VENUE" },
-    { "bg": "restaurant" },
-    { "speaker": "narrator", "text": "魚晴について、町田駅の近くにあり、当日朝に仕入れた鮮魚と地酒を出す店だと確認した。夢の卓上には料理も酒も置かなかった。" },
-    { "speaker": "menu", "text": "店舗の特徴は説明できますが、本人の注文とは別の情報です。" },
-    { "speaker": "narrator", "text": "22時30分という時刻だけが空の卓上に灯った。\nEND 訪問先を記録する" },
-    { "label": "END_PENDING" },
-    { "bg": "preorder" },
-    { "speaker": "narrator", "text": "anemoiの欄へ未予約と入力した。購入先も版も空欄にし、予約完了の印は付けなかった。" },
-    { "speaker": "menu", "text": "問いを書いたことと、申込みを終えたことは別の状態です。" },
-    { "speaker": "narrator", "text": "予約先の欄は、次の記録を待った。\nEND 未決定を保存する" },
-    { "label": "END_TIMELINE" },
-    { "bg": "clock" },
-    { "speaker": "narrator", "text": "22時30分の魚晴と23時18分の投稿を一本の時刻線へ置いた。投稿した場所や48分間の行動は、線の上へ描かなかった。" },
-    { "speaker": "menu", "text": "確認できる順序だけで、外出から予約検討へ移った夜を示せます。" },
-    { "speaker": "narrator", "text": "確定した場所と未定の買い物が、別々の印で並んだ。\nEND 二つの時刻を結ぶ" }
+    { "label": "END_MEAL" },
+    { "bg": "dawn" },
+    { "speaker": "narrator", "text": "画面を伏せると、隣の客の声と包丁の音が戻ってきた。しめさばは酢が強すぎず、脂が残っている。帰宅後にもう一度予約ページを開くと限定版は売り切れていたが、通常版は買えた。少し惜しくても、魚の味を忘れるよりはよかった。\nEND しめさばを選んだ夜" },
+    { "label": "END_PACKAGE" },
+    { "bg": "station" },
+    { "speaker": "narrator", "text": "特典を見比べ、限定版の予約を確定した。顔を上げると、しめさばはまだ皿に残っている。冷たさは少し抜けていたが、今度は画面を閉じて食べた。帰り道では味より、来月届く大きな箱を本棚のどこへ置くか考えていた。\nEND 本棚の空き一段" },
+    { "label": "END_DOWNLOAD" },
+    { "bg": "home_office" },
+    { "speaker": "narrator", "text": "限定版の購入は決めず、発売日の夜だけ予定表へ入れた。帰宅してからダウンロード版を予約すれば、箱も特典も増えない。代わりに来月の平日へ、ゲームを始めるための空白ができた。今夜はしめさばの皿だけをきれいに空けた。\nEND 来月の空白" }
   ]
 }

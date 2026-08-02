@@ -32880,20 +32880,7 @@ void main() {
         if (!this.kongouActive) {
           return;
         }
-        if (this.isMakuhariDreamEffect()) {
-          const now2 = performance.now();
-          if (now2 - this.makuhariLastFrame < this.makuhariFrameInterval) {
-            this.animId = requestAnimationFrame(this.drawKongou);
-            return;
-          }
-          this.makuhariLastFrame = now2;
-        }
         this._lerpColors();
-        if (this.isMakuhariDreamEffect()) {
-          this.drawMakuhariDream();
-          this.animId = requestAnimationFrame(this.drawKongou);
-          return;
-        }
         const width = this.$canvas.width;
         const height = this.$canvas.height;
         const time = Date.now() * 1e-3;
@@ -33128,17 +33115,6 @@ void main() {
       this.kStars = [];
       this.kNebula = [];
       this.kPillars = [];
-      this.makuhariParticles = [];
-      this.makuhariSouls = this.makuhariParticles;
-      this.makuhariDepthLines = [];
-      this.makuhariFlares = [];
-      this.makuhariShift = null;
-      this.dreamEffectProfile = "default";
-      this._choiceTargetCache = [];
-      this._choiceTargetLast = 0;
-      this.makuhariLastFrame = 0;
-      this.makuhariLastPaint = 0;
-      this.makuhariFrameInterval = 1e3 / 20;
       this.bgColor = { h: 240, s: 50, l: 12 };
       this.bgClearColor = "rgba(10,10,46,0.15)";
       this.starColor = "200,180,255";
@@ -33197,12 +33173,6 @@ void main() {
       if (this.$titleSecondarySubtitle) {
         this.$titleSecondarySubtitle.textContent = this.scenario.genre || "群像哲学ノベル";
       }
-      const previousEffectProfile = this.dreamEffectProfile;
-      this.dreamEffectProfile = this.resolveDreamEffectProfile();
-      document.body.classList.toggle("dream-profile-makuhari", this.isMakuhariDreamEffect());
-      if (previousEffectProfile !== this.dreamEffectProfile && this.kongouActive) {
-        this.initKongou();
-      }
       if (!preserveAtmosphere) {
         const isGenkai = (this.scenario.genre || "").includes("幻界");
         document.body.classList.toggle("realm-genkai", isGenkai);
@@ -33249,14 +33219,6 @@ void main() {
         }
       }
       return null;
-    }
-    resolveDreamEffectProfile() {
-      const scenarioName = this.scenario?.scenarioName || "";
-      const date = this.extractScenarioDate();
-      return date === "2026-04-25" || scenarioName.startsWith("2026-04-25_") ? "makuhari" : "default";
-    }
-    isMakuhariDreamEffect() {
-      return this.dreamEffectProfile === "makuhari";
     }
     isChoiceLocked(choice) {
       if (!choice) {
@@ -34023,21 +33985,8 @@ void main() {
       this.kStars.length = 0;
       this.kNebula.length = 0;
       this.kPillars.length = 0;
-      this.makuhariParticles.length = 0;
-      this.makuhariSouls = this.makuhariParticles;
-      this.makuhariDepthLines.length = 0;
-      this.makuhariFlares.length = 0;
-      this.makuhariShift = null;
-      this._choiceTargetCache = [];
-      this._choiceTargetLast = 0;
-      this.makuhariLastFrame = 0;
-      this.makuhariLastPaint = 0;
       const width = this.$canvas.width;
       const height = this.$canvas.height;
-      if (this.isMakuhariDreamEffect()) {
-        this.initMakuhariDream(width, height);
-        return;
-      }
       for (let index = 0; index < 8; index += 1) {
         this.kStreams.push({
           y: Math.random() * height,
@@ -34086,470 +34035,6 @@ void main() {
           drift: (Math.random() - 0.5) * 2 + (Math.random() > 0.5 ? 0.5 : -0.5)
         });
       }
-    }
-    initMakuhariDream(width, height) {
-      const area = width * height;
-      const particleCount = Math.min(64, Math.max(38, Math.round(area / 24e3)));
-      const lineCount = Math.min(12, Math.max(7, Math.round(area / 13e4)));
-      for (let index = 0; index < particleCount; index += 1) {
-        const particle = this.resetMakuhariParticle({}, width, height);
-        particle.route = index % 3;
-        this.makuhariParticles.push(particle);
-      }
-      for (let index = 0; index < lineCount; index += 1) {
-        this.makuhariDepthLines.push({
-          angle: Math.PI * 2 * index / lineCount + (Math.random() - 0.5) * 0.12,
-          phase: Math.random() * Math.PI * 2,
-          radius: 0.35 + Math.random() * 0.95,
-          speed: 0.18 + Math.random() * 0.55,
-          length: 0.18 + Math.random() * 0.36,
-          route: index % 3
-        });
-      }
-    }
-    resetMakuhariParticle(particle = {}, width = this.$canvas.width, height = this.$canvas.height) {
-      const maxRadius = Math.hypot(width, height) * 0.5;
-      particle.x = Math.random() * width;
-      particle.y = Math.random() * height * 0.82;
-      particle.prevX = particle.x;
-      particle.prevY = particle.y;
-      particle.vx = (Math.random() - 0.5) * 0.45;
-      particle.vy = (Math.random() - 0.5) * 0.36;
-      particle.z = 0.06 + Math.random() * 0.92;
-      particle.size = 0.7 + Math.random() * 1.6;
-      particle.mix = Math.random();
-      particle.seed = Math.random() * Math.PI * 2;
-      particle.speed = 0.48 + Math.random() * 1.05;
-      particle.route = Math.floor(Math.random() * 3);
-      particle.angle = Math.random() * Math.PI * 2;
-      particle.radius = 22 + Math.random() * maxRadius;
-      particle.tunnelSpeed = 24e-4 + Math.random() * 48e-4;
-      return particle;
-    }
-    getMakuhariChoiceTargets() {
-      const now2 = performance.now();
-      if (now2 - this._choiceTargetLast < 280) {
-        return this._choiceTargetCache;
-      }
-      this._choiceTargetLast = now2;
-      if (!this.showingChoice || !this.$choiceContainer || this.$choiceContainer.style.display === "none") {
-        this._choiceTargetCache = [];
-        return this._choiceTargetCache;
-      }
-      const canvasRect = this.$canvas.getBoundingClientRect();
-      if (this.isMakuhariDreamEffect()) {
-        this.$hud?.classList.add("is-choice-suspended");
-        document.body.classList.add("dream-choice-open");
-      }
-      this._choiceTargetCache = Array.from(this.$choiceContainer.querySelectorAll(".choice-btn")).filter((button) => button.dataset.locked !== "true" && !button.disabled).map((button, index) => {
-        const rect = button.getBoundingClientRect();
-        return {
-          x: rect.left + rect.width * 0.5 - canvasRect.left,
-          y: rect.top + rect.height * 0.5 - canvasRect.top,
-          width: rect.width,
-          height: rect.height,
-          index,
-          weight: 1 + index * 0.12,
-          color: this.getMakuhariRouteColor(index)
-        };
-      });
-      return this._choiceTargetCache;
-    }
-    getMakuhariShiftState(centerX, centerY) {
-      if (!this.makuhariShift) {
-        return {
-          active: false,
-          progress: 1,
-          power: 0,
-          x: centerX,
-          y: centerY,
-          routeIndex: 0,
-          color: this.getMakuhariRouteColor(0)
-        };
-      }
-      const elapsed = performance.now() - this.makuhariShift.start;
-      const progress = Math.max(0, Math.min(1, elapsed / this.makuhariShift.duration));
-      if (progress >= 1) {
-        this.makuhariShift = null;
-        return {
-          active: false,
-          progress: 1,
-          power: 0,
-          x: centerX,
-          y: centerY,
-          routeIndex: 0,
-          color: this.getMakuhariRouteColor(0)
-        };
-      }
-      const power = Math.sin(progress * Math.PI);
-      const routeIndex = this.makuhariShift.routeIndex || 0;
-      return {
-        active: true,
-        progress,
-        power,
-        x: this.makuhariShift.x + (centerX - this.makuhariShift.x) * Math.min(1, progress * 1.35),
-        y: this.makuhariShift.y + (centerY - this.makuhariShift.y) * Math.min(1, progress * 1.35),
-        routeIndex,
-        color: this.makuhariShift.color || this.getMakuhariRouteColor(routeIndex)
-      };
-    }
-    getMakuhariRouteColor(index = 0) {
-      const colors = [
-        [116, 242, 224],
-        [76, 198, 232],
-        [150, 230, 216]
-      ];
-      return colors[(index % colors.length + colors.length) % colors.length];
-    }
-    mixMakuhariColor(color, target, amount) {
-      const ratio = Math.max(0, Math.min(1, amount));
-      return [
-        Math.round(color[0] + (target[0] - color[0]) * ratio),
-        Math.round(color[1] + (target[1] - color[1]) * ratio),
-        Math.round(color[2] + (target[2] - color[2]) * ratio)
-      ];
-    }
-    makuhariRgba(color, alpha) {
-      return `rgba(${color[0]},${color[1]},${color[2]},${Math.max(0, Math.min(1, alpha))})`;
-    }
-    drawMakuhariDot(x, y, color, alpha, size) {
-      const ctx = this.ctx;
-      if (size > 1.65 || alpha > 0.32) {
-        ctx.beginPath();
-        ctx.arc(x, y, Math.min(size * 4.2, 18), 0, Math.PI * 2);
-        ctx.fillStyle = this.makuhariRgba(color, alpha * 0.08);
-        ctx.fill();
-      }
-      ctx.beginPath();
-      ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fillStyle = this.makuhariRgba(color, alpha);
-      ctx.fill();
-    }
-    drawMakuhariDream() {
-      const width = this.$canvas.width;
-      const height = this.$canvas.height;
-      if (!width || !height) {
-        return;
-      }
-      const ctx = this.ctx;
-      const now2 = performance.now();
-      const dt = Math.min(66, Math.max(16, this.makuhariLastPaint ? now2 - this.makuhariLastPaint : this.makuhariFrameInterval));
-      this.makuhariLastPaint = now2;
-      const time = now2 * 1e-3;
-      const centerX = width * (0.52 + Math.sin(time * 0.19) * 0.035);
-      const centerY = height * (0.44 + Math.cos(time * 0.17) * 0.045);
-      const choiceTargets = this.getMakuhariChoiceTargets();
-      const shift = this.getMakuhariShiftState(centerX, centerY);
-      ctx.save();
-      ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = this.bgClearColor;
-      ctx.fillRect(0, 0, width, height);
-      const wash = ctx.createLinearGradient(0, 0, width, height);
-      wash.addColorStop(0, "rgba(28,96,134,0.12)");
-      wash.addColorStop(0.52, "rgba(12,80,92,0.045)");
-      wash.addColorStop(1, "rgba(62,66,122,0.08)");
-      ctx.fillStyle = wash;
-      ctx.fillRect(0, 0, width, height);
-      const baseGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(width, height) * 0.78);
-      baseGlow.addColorStop(0, `rgba(${this.starGlowColor},${0.08 + shift.power * 0.08})`);
-      baseGlow.addColorStop(0.42, `rgba(${this.starColor},${0.035 + shift.power * 0.045})`);
-      baseGlow.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = baseGlow;
-      ctx.fillRect(0, 0, width, height);
-      if (choiceTargets.length && !shift.active) {
-        this.drawMakuhariDepthLines(time, centerX, centerY, shift, 0.5);
-        this.drawMakuhariChoiceThreads(choiceTargets, centerX, centerY, shift);
-        this.updateAndDrawMakuhariCausality(time, dt, choiceTargets);
-      } else {
-        this.drawMakuhariTunnel(time, dt, centerX, centerY, shift);
-        if (choiceTargets.length) {
-          this.drawMakuhariChoiceThreads(choiceTargets, centerX, centerY, shift);
-        }
-      }
-      this.drawMakuhariFlares(time);
-      this.drawMakuhariWorldlineShift(time, centerX, centerY, shift);
-      ctx.restore();
-    }
-    drawMakuhariDepthLines(time, centerX, centerY, shift, visibility = 1) {
-      const ctx = this.ctx;
-      const width = this.$canvas.width;
-      const height = this.$canvas.height;
-      const maxRadius = Math.hypot(width, height) * 0.62;
-      const minRadius = Math.min(width, height) * 0.045;
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      ctx.lineCap = "round";
-      for (const line of this.makuhariDepthLines) {
-        const sweep = ((time * line.speed * (0.025 + shift.power * 0.1) + line.phase) % 1 + 1) % 1;
-        const angle = line.angle + Math.sin(time * 0.24 + line.phase) * 0.08 + shift.power * 0.12;
-        const inner = minRadius + maxRadius * sweep * 0.18;
-        const outer = inner + maxRadius * line.length * (0.42 + shift.power * 1.85);
-        const alpha = (0.03 + sweep * 0.04 + shift.power * 0.11) * (1 - sweep * 0.35) * visibility;
-        const cos = Math.cos(angle);
-        const sin = Math.sin(angle);
-        const color = this.mixMakuhariColor(this.getMakuhariRouteColor(line.route), [218, 255, 248], 0.32);
-        ctx.beginPath();
-        ctx.moveTo(centerX + cos * inner, centerY + sin * inner);
-        ctx.lineTo(centerX + cos * outer, centerY + sin * outer);
-        ctx.strokeStyle = this.makuhariRgba(color, alpha);
-        ctx.lineWidth = 0.8 + shift.power * 1.2;
-        ctx.stroke();
-      }
-      ctx.restore();
-    }
-    drawMakuhariChoiceThreads(targets, centerX, centerY, shift) {
-      if (!targets.length) {
-        return;
-      }
-      const ctx = this.ctx;
-      const time = performance.now() * 1e-3;
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      ctx.lineCap = "round";
-      for (const target of targets) {
-        const color = target.color || this.getMakuhariRouteColor(target.index);
-        const sway = Math.sin(time * 0.74 + target.index) * 28;
-        const ctrlX = (centerX + target.x) * 0.5 + sway;
-        const ctrlY = Math.min(centerY, target.y) - 80 - target.index * 16;
-        const gradient = ctx.createLinearGradient(centerX, centerY, target.x, target.y);
-        gradient.addColorStop(0, this.makuhariRgba(color, 0));
-        gradient.addColorStop(0.48, this.makuhariRgba(this.mixMakuhariColor(color, [218, 255, 248], 0.28), 0.18 + shift.power * 0.1));
-        gradient.addColorStop(1, this.makuhariRgba(this.mixMakuhariColor(color, [240, 255, 250], 0.45), 0.36 + shift.power * 0.18));
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.quadraticCurveTo(ctrlX, ctrlY, target.x, target.y);
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 2.2 + target.weight * 0.9 + shift.power * 1.2;
-        ctx.shadowBlur = shift.power > 0.18 ? 8 : 0;
-        ctx.stroke();
-        const railWidth = Math.max(54, target.width * 0.42);
-        ctx.beginPath();
-        ctx.moveTo(target.x - railWidth * 0.5, target.y + target.height * 0.38);
-        ctx.lineTo(target.x + railWidth * 0.5, target.y + target.height * 0.38);
-        ctx.strokeStyle = this.makuhariRgba(color, 0.3 + shift.power * 0.12);
-        ctx.lineWidth = 1.35 + shift.power * 0.8;
-        ctx.stroke();
-      }
-      ctx.restore();
-    }
-    updateAndDrawMakuhariCausality(time, dt, targets) {
-      if (!targets.length) {
-        return;
-      }
-      const ctx = this.ctx;
-      const width = this.$canvas.width;
-      const height = this.$canvas.height;
-      const margin = 90;
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      const dtScale = Math.max(0.65, Math.min(2.4, dt / 16.67));
-      for (let index = 0; index < this.makuhariParticles.length; index += 1) {
-        const particle = this.makuhariParticles[index];
-        const target = targets[particle.route % targets.length];
-        if (!target) {
-          continue;
-        }
-        particle.prevX = particle.x;
-        particle.prevY = particle.y;
-        const dx = target.x - particle.x;
-        const dy = target.y - particle.y;
-        const dist = Math.max(34, Math.hypot(dx, dy));
-        const pulse = Math.pow((Math.sin(time * particle.speed * 1.6 + particle.seed) + 1) * 0.5, 2.2);
-        const pull = (6e-5 + particle.z * 44e-6) * target.weight;
-        const orbit = Math.sin(time * (0.68 + particle.speed * 0.18) + particle.seed) * 0.019;
-        particle.vx += (dx * pull + -dy / dist * orbit) * dtScale;
-        particle.vy += (dy * pull + dx / dist * orbit) * dtScale;
-        particle.vx += Math.sin(time * 0.9 + particle.seed) * 5e-3 * dtScale;
-        particle.vy += Math.cos(time * 0.82 + particle.seed * 0.7) * 4e-3 * dtScale;
-        particle.vx *= 0.965;
-        particle.vy *= 0.965;
-        particle.x += particle.vx * (1.08 + particle.z * 0.42) * dtScale;
-        particle.y += particle.vy * (1.08 + particle.z * 0.42) * dtScale;
-        if (particle.x < -margin) particle.x = width + margin;
-        if (particle.x > width + margin) particle.x = -margin;
-        if (particle.y < -margin) particle.y = height + margin;
-        if (particle.y > height + margin) particle.y = -margin;
-        if (dist < 22 + target.height * 0.16) {
-          this.resetMakuhariParticle(particle, width, height);
-          particle.y = Math.random() * height * 0.5;
-          particle.route = target.index;
-        }
-        const routeColor = target.color || this.getMakuhariRouteColor(target.index);
-        const color = this.mixMakuhariColor(routeColor, [220, 255, 248], 0.2 + particle.mix * 0.24);
-        const alpha = Math.max(0.07, Math.min(0.82, 0.1 + particle.z * 0.34 + (1 - Math.min(dist / 460, 1)) * 0.34));
-        const size = particle.size * (0.82 + particle.z * 0.92 + pulse * 0.35);
-        ctx.beginPath();
-        ctx.moveTo(particle.prevX, particle.prevY);
-        ctx.lineTo(particle.x, particle.y);
-        ctx.strokeStyle = this.makuhariRgba(color, alpha * 0.55);
-        ctx.lineWidth = Math.max(0.85, size * 0.56);
-        ctx.stroke();
-        this.drawMakuhariDot(particle.x, particle.y, color, alpha, size);
-      }
-      ctx.restore();
-    }
-    drawMakuhariTunnel(time, dt, centerX, centerY, shift) {
-      const ctx = this.ctx;
-      const width = this.$canvas.width;
-      const height = this.$canvas.height;
-      const pale = [218, 255, 248];
-      const active = shift.active;
-      const speed = active ? 0.58 + shift.power * 0.95 : 0.16;
-      const coreRadius = Math.min(width, height) * (active ? 0.22 + shift.power * 0.12 : 0.18);
-      this.drawMakuhariDepthLines(time, centerX, centerY, shift, active ? 1 : 0.68);
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      ctx.lineCap = "round";
-      for (const particle of this.makuhariParticles) {
-        const previousZ = particle.z;
-        particle.z += particle.tunnelSpeed * dt * speed;
-        if (particle.z > 1.08) {
-          this.resetMakuhariParticle(particle, width, height);
-          particle.z = 0.025 + Math.random() * 0.12;
-        }
-        const warp = Math.sin(time * (active ? 1.26 : 0.62) + particle.seed + particle.z * 5) * (active ? 0.1 + shift.power * 0.28 : 0.045);
-        const angle = particle.angle + warp + time * (active ? 0.035 : 0.012) * (particle.route - 1);
-        const scale = 0.08 + particle.z * particle.z * 2.65;
-        const previousScale = 0.08 + previousZ * previousZ * 2.65;
-        const radius = particle.radius * scale;
-        const previousRadius = particle.radius * previousScale;
-        particle.prevX = centerX + Math.cos(angle) * previousRadius;
-        particle.prevY = centerY + Math.sin(angle) * previousRadius * 0.72;
-        particle.x = centerX + Math.cos(angle) * radius;
-        particle.y = centerY + Math.sin(angle) * radius * 0.72;
-        const baseColor = active ? shift.color : this.getMakuhariRouteColor(particle.route);
-        const color = this.mixMakuhariColor(baseColor, pale, 0.24 + particle.mix * 0.3);
-        const alpha = Math.max(0.05, Math.min(active ? 0.88 : 0.46, (active ? 0.12 : 0.07) + particle.z * (active ? 0.58 : 0.32)));
-        const lineWidth = Math.max(0.75, particle.size * (0.46 + particle.z * (active ? 1.75 : 1.1)));
-        ctx.beginPath();
-        ctx.moveTo(particle.prevX, particle.prevY);
-        ctx.lineTo(particle.x, particle.y);
-        ctx.strokeStyle = this.makuhariRgba(color, alpha * (active ? 0.74 : 0.48));
-        ctx.lineWidth = lineWidth;
-        ctx.stroke();
-        if (active || particle.z > 0.52 || particle.mix > 0.58) {
-          this.drawMakuhariDot(particle.x, particle.y, color, alpha * 0.56, particle.size * (0.7 + particle.z));
-        }
-      }
-      const core = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius);
-      core.addColorStop(0, this.makuhariRgba(pale, active ? 0.16 * shift.power : 0.055));
-      core.addColorStop(0.28, this.makuhariRgba(active ? shift.color : [92, 210, 224], active ? 0.08 * shift.power : 0.028));
-      core.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = core;
-      ctx.fillRect(centerX - coreRadius, centerY - coreRadius, coreRadius * 2, coreRadius * 2);
-      ctx.restore();
-    }
-    drawMakuhariFlares(time) {
-      if (!this.makuhariFlares.length) {
-        return;
-      }
-      const ctx = this.ctx;
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      ctx.lineCap = "round";
-      this.makuhariFlares = this.makuhariFlares.filter((flare) => {
-        const age = performance.now() - flare.start;
-        const progress = age / flare.duration;
-        if (progress >= 1) {
-          return false;
-        }
-        flare.x += flare.vx * (1 - progress * 0.55);
-        flare.y += flare.vy * (1 - progress * 0.55);
-        const alpha = (1 - progress) * 0.34;
-        const length = flare.length * (1 + progress * 1.6);
-        ctx.beginPath();
-        ctx.moveTo(flare.x - flare.vx * length, flare.y - flare.vy * length);
-        ctx.lineTo(flare.x + flare.vx * length * 0.35, flare.y + flare.vy * length * 0.35);
-        ctx.strokeStyle = this.makuhariRgba(flare.color, alpha);
-        ctx.lineWidth = flare.width * (1 - progress * 0.25);
-        ctx.stroke();
-        return true;
-      });
-      ctx.restore();
-    }
-    drawMakuhariWorldlineShift(time, centerX, centerY, shift) {
-      if (!shift.active) {
-        return;
-      }
-      const ctx = this.ctx;
-      const width = this.$canvas.width;
-      const height = this.$canvas.height;
-      const radius = Math.hypot(width, height);
-      const rayCount = 14;
-      const pale = [220, 255, 248];
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      ctx.lineCap = "round";
-      for (let index = 0; index < rayCount; index += 1) {
-        const angle = Math.PI * 2 * index / rayCount + time * 0.18 + Math.sin(index) * 0.08;
-        const wobble = Math.sin(time * 2.4 + index * 1.7) * 0.12;
-        const inner = 18 + shift.progress * 44;
-        const outer = radius * (0.35 + shift.power * 0.42 + index % 5 * 0.018);
-        const color = this.mixMakuhariColor(shift.color, pale, 0.18 + index % 4 * 0.08);
-        ctx.beginPath();
-        ctx.moveTo(shift.x + Math.cos(angle + wobble) * inner, shift.y + Math.sin(angle + wobble) * inner);
-        ctx.lineTo(shift.x + Math.cos(angle) * outer, shift.y + Math.sin(angle) * outer);
-        ctx.strokeStyle = this.makuhariRgba(color, shift.power * (0.08 + index % 3 * 0.018));
-        ctx.lineWidth = 0.8 + shift.power * 1.8;
-        ctx.stroke();
-      }
-      const core = ctx.createRadialGradient(shift.x, shift.y, 0, shift.x, shift.y, 160 + shift.power * 220);
-      core.addColorStop(0, this.makuhariRgba(pale, 0.16 * shift.power));
-      core.addColorStop(0.22, this.makuhariRgba(shift.color, 0.1 * shift.power));
-      core.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = core;
-      ctx.fillRect(0, 0, width, height);
-      const lineGradient = ctx.createLinearGradient(centerX, centerY, shift.x, shift.y);
-      lineGradient.addColorStop(0, this.makuhariRgba(shift.color, 0));
-      lineGradient.addColorStop(1, this.makuhariRgba(pale, 0.2 * shift.power));
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.quadraticCurveTo((centerX + shift.x) * 0.5 + Math.sin(time * 4.2) * 72, centerY - 80 - shift.power * 50, shift.x, shift.y);
-      ctx.strokeStyle = lineGradient;
-      ctx.lineWidth = 2.2 + shift.power * 2.6;
-      ctx.stroke();
-      ctx.restore();
-    }
-    triggerMakuhariWorldlineShift(choice, button) {
-      if (!this.isMakuhariDreamEffect() || !button) {
-        return 0;
-      }
-      const rect = button.getBoundingClientRect();
-      const canvasRect = this.$canvas.getBoundingClientRect();
-      const x = rect.left + rect.width * 0.5 - canvasRect.left;
-      const y = rect.top + rect.height * 0.5 - canvasRect.top;
-      const routeIndex = Number(button.dataset.routeIndex || 0);
-      const color = this.getMakuhariRouteColor(Number.isFinite(routeIndex) ? routeIndex : 0);
-      this.makuhariShift = {
-        start: performance.now(),
-        duration: 760,
-        x,
-        y,
-        label: choice?.goto || "",
-        routeIndex,
-        color
-      };
-      const centerX = this.$canvas.width * 0.52;
-      const centerY = this.$canvas.height * 0.46;
-      const baseAngle = Math.atan2(centerY - y, centerX - x);
-      for (let index = 0; index < 10; index += 1) {
-        const angle = baseAngle + (Math.random() - 0.5) * 1.35;
-        const speed = 1 + Math.random() * 2.2;
-        this.makuhariFlares.push({
-          x,
-          y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          color: this.mixMakuhariColor(color, [226, 255, 250], Math.random() * 0.38),
-          width: 0.8 + Math.random() * 1.5,
-          length: 5 + Math.random() * 15,
-          start: performance.now(),
-          duration: 520 + Math.random() * 260
-        });
-      }
-      return 520;
     }
     // ── Color fade helpers ──
     _parseRgba(str) {
@@ -34641,37 +34126,14 @@ void main() {
         akihabara: { h: 280, s: 50, l: 12, clear: "rgba(18,8,30,0.14)", star: { r: 220, g: 170, b: 255 }, glow: { r: 180, g: 130, b: 220 } },
         default: { h: 240, s: 50, l: 12, clear: "rgba(10,10,46,0.15)", star: { r: 200, g: 180, b: 255 }, glow: { r: 160, g: 140, b: 220 } }
       };
-      const makuhariPresets = {
-        home_office: { h: 188, s: 46, l: 8, clear: "rgba(3,18,24,0.18)", star: { r: 154, g: 246, b: 232 }, glow: { r: 88, g: 198, b: 190 } },
-        parameter_archive: { h: 174, s: 48, l: 9, clear: "rgba(3,20,19,0.17)", star: { r: 176, g: 250, b: 232 }, glow: { r: 112, g: 210, b: 192 } },
-        anison_club: { h: 202, s: 46, l: 8, clear: "rgba(4,12,28,0.17)", star: { r: 156, g: 220, b: 250 }, glow: { r: 96, g: 176, b: 218 } },
-        station_night: { h: 214, s: 44, l: 7, clear: "rgba(4,8,24,0.18)", star: { r: 150, g: 206, b: 250 }, glow: { r: 92, g: 158, b: 214 } },
-        neon_arcade: { h: 184, s: 52, l: 8, clear: "rgba(2,18,26,0.17)", star: { r: 150, g: 246, b: 238 }, glow: { r: 76, g: 202, b: 204 } },
-        chorus_morning: { h: 168, s: 42, l: 10, clear: "rgba(5,22,20,0.16)", star: { r: 190, g: 252, b: 226 }, glow: { r: 126, g: 214, b: 184 } },
-        default: { h: 188, s: 46, l: 8, clear: "rgba(3,18,24,0.18)", star: { r: 154, g: 246, b: 232 }, glow: { r: 88, g: 198, b: 190 } }
-      };
       const bgKey = typeof bg === "string" ? bg : bg.preset || "default";
-      const profilePresets = this.isMakuhariDreamEffect() ? makuhariPresets : null;
-      const preset = profilePresets?.[bgKey] || presets[bgKey] || profilePresets?.default || presets.default;
+      const preset = presets[bgKey] || presets.default;
       this._setColorTarget(
         { h: preset.h, s: preset.s, l: preset.l },
         preset.clear,
         preset.star,
         preset.glow
       );
-      if (this.isMakuhariDreamEffect()) {
-        if (this._bgSwapTimer) {
-          clearTimeout(this._bgSwapTimer);
-          this._bgSwapTimer = null;
-        }
-        const bgImage = document.getElementById("scene-bg-img");
-        if (bgImage) {
-          bgImage.style.opacity = "0";
-          bgImage.removeAttribute("src");
-          delete bgImage.dataset.currentSrc;
-        }
-        return Promise.resolve();
-      }
       const bgImageKey = bgKey.replace(/[^a-z0-9_]/gi, "_");
       const scenarioDir = this._bgBaseDir || this.scenario.scenarioName || "";
       const baseDir = scenarioDir ? `./scenarios/bg/${encodeURIComponent(scenarioDir)}` : `./scenarios/bg`;
@@ -35207,10 +34669,6 @@ void main() {
       const token = this.renderToken;
       this.updateProgress();
       this.syncBgmForIndex(index);
-      if (step.kind !== "choices") {
-        this.$hud?.classList.remove("is-choice-suspended");
-        document.body.classList.remove("dream-choice-open");
-      }
       if (step.kind === "label") {
         this.setCurrentScenarioEntry(step.label || null);
         this.markScenarioVisit(step.label || null);
@@ -35333,17 +34791,12 @@ void main() {
       if (step.kind === "choices") {
         this.showingChoice = true;
         this.voiceController.stopCurrent();
-        if (this.isMakuhariDreamEffect()) {
-          this.$hud?.classList.add("is-choice-suspended");
-          document.body.classList.add("dream-choice-open");
-        }
         this.$choiceContainer.innerHTML = "";
         for (const choice of step.choices) {
           const locked = this.isChoiceLocked(choice);
           const button = document.createElement("button");
           button.className = "choice-btn";
           button.type = "button";
-          button.dataset.routeIndex = String(this.$choiceContainer.children.length);
           button.dataset.locked = locked ? "true" : "false";
           if (locked) {
             button.classList.add("locked");
@@ -35378,37 +34831,22 @@ void main() {
             event.stopPropagation();
             this.rememberChoiceSnapshot(this.captureChoiceSnapshot(index));
             this.showingChoice = false;
-            for (const choiceButton of this.getVisibleChoiceButtons()) {
-              choiceButton.disabled = true;
-            }
-            button.classList.add("is-selected");
-            const transitionDelay = this.triggerMakuhariWorldlineShift(choice, button);
             if (choice.flag) {
               this.flags.add(choice.flag);
               console.log(`[choice flag] set: ${choice.flag}`, [...this.flags]);
             }
             this.$choiceContainer.classList.remove("visible");
-            this.$choiceContainer.classList.toggle("worldline-shifting", transitionDelay > 0);
             window.setTimeout(() => {
               this.$choiceContainer.style.display = "none";
-              this.$choiceContainer.classList.remove("worldline-shifting");
-              document.body.classList.remove("dream-choice-open");
             }, 400);
-            const proceed = () => {
-              if (choice.goto) {
-                const targetIndex = this.resolveLabelStepIndex(choice.goto);
-                if (targetIndex >= 0) {
-                  this.showStep(targetIndex);
-                  return;
-                }
+            if (choice.goto) {
+              const targetIndex = this.resolveLabelStepIndex(choice.goto);
+              if (targetIndex >= 0) {
+                this.showStep(targetIndex);
+                return;
               }
-              this.showStep(index + 1);
-            };
-            if (transitionDelay > 0) {
-              window.setTimeout(proceed, transitionDelay);
-            } else {
-              proceed();
             }
+            this.showStep(index + 1);
           });
           this.$choiceContainer.appendChild(button);
         }
