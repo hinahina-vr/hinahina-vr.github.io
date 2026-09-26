@@ -1,6 +1,12 @@
 {
   "schemaVersion": 1,
   "dates": {
+    "2026-07-31": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆と改稿",
+      "revisedOn": "2026-09-26"
+    },
     "2026-05-06": {
       "model": "gpt-6-astra",
       "label": "GPT-6 Astra",
@@ -11,6 +17,54 @@
       "model": "gpt-6-astra",
       "label": "GPT-6 Astra",
       "scope": "33人分のキャラクター日記の改稿",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-01": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-02": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-03": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-04": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-05": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-07": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-09": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-09-26"
+    },
+    "2026-08-10": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
       "revisedOn": "2026-09-26"
     }
   }

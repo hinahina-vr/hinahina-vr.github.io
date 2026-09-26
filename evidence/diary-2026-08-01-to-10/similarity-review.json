@@ -1,0 +1,162 @@
+[
+  {
+    "date": "2026-08-01",
+    "stats": {
+      "mean": 0.06524954349045882,
+      "p95": 0.11378750166628565,
+      "max": 0.19407674382410867
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-kotomi\\2026-08-01_ラベルから地図へ.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-tama\\2026-08-01_場所を覚えるお助け隊長.md",
+        "cosine": 0.19407674382410867
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-kud\\2026-08-01_葉っぱの間の空.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-multi\\2026-08-01_持ち帰れないお土産.md",
+        "cosine": 0.17106744068953994
+      }
+    ]
+  },
+  {
+    "date": "2026-08-02",
+    "stats": {
+      "mean": 0.062445866007842535,
+      "p95": 0.11494077654958286,
+      "max": 0.19525266674729058
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-multi\\2026-08-02_水滴より先に.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-rem\\2026-08-02_荷物を持つ手.md",
+        "cosine": 0.19525266674729058
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-multi\\2026-08-02_水滴より先に.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-sharo\\2026-08-02_1本買ってひと休み.md",
+        "cosine": 0.17594055323117108
+      }
+    ]
+  },
+  {
+    "date": "2026-08-03",
+    "stats": {
+      "mean": 0.06692344620568287,
+      "p95": 0.1275115031190392,
+      "max": 0.21789388428113732
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-ana\\2026-08-03_上手に聞き返せない.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-rem\\2026-08-03_困った話を聞くとき.md",
+        "cosine": 0.21789388428113732
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-ana\\2026-08-03_上手に聞き返せない.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-sharo\\2026-08-03_笑わせないでください.md",
+        "cosine": 0.19985114029607004
+      }
+    ]
+  },
+  {
+    "date": "2026-08-04",
+    "stats": {
+      "mean": 0.06710880174873243,
+      "p95": 0.1149197909801133,
+      "max": 0.15594364143095196
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-ayu\\2026-08-04_昨日の約束を覚えていて.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-rin\\2026-08-04_都合のいい子にはならない.md",
+        "cosine": 0.15594364143095196
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-minagi\\2026-08-04_部員1人のゲーム.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-multi\\2026-08-04_失敗した返事もわたし.md",
+        "cosine": 0.14883984964325056
+      }
+    ]
+  },
+  {
+    "date": "2026-08-05",
+    "stats": {
+      "mean": 0.060034160027297445,
+      "p95": 0.10890954419559085,
+      "max": 0.17928429140015906
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-mint\\2026-08-05_予算の外から来る請求.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-sharo\\2026-08-05_予定にない3万円.md",
+        "cosine": 0.17928429140015906
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-mayuki\\2026-08-05_ほつれを直す仕事.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-tsumugi\\2026-08-05_見えないところを直す日.md",
+        "cosine": 0.14365385425743601
+      }
+    ]
+  },
+  {
+    "date": "2026-08-07",
+    "stats": {
+      "mean": 0.058580432425260384,
+      "p95": 0.10799106733806701,
+      "max": 0.18174764753396938
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-ana\\2026-08-07_いつもの町の違うご飯.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-mint\\2026-08-07_好みは自分で選びますわ.md",
+        "cosine": 0.18174764753396938
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-hazuki\\2026-08-07_献立の計算をやめる.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-rin\\2026-08-07_普通の話も聞いていい.md",
+        "cosine": 0.14777713006002102
+      }
+    ]
+  },
+  {
+    "date": "2026-08-09",
+    "stats": {
+      "mean": 0.0567561331567565,
+      "p95": 0.10463965887845435,
+      "max": 0.18553070309532269
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-ana\\2026-08-09_分からないと言っていいですか.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-multi\\2026-08-09_見つけた不具合を渡す.md",
+        "cosine": 0.18553070309532269
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-kud\\2026-08-09_小さく打ち上げるのです.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-sharo\\2026-08-09_宣伝する前に遊ばせて.md",
+        "cosine": 0.15161960871578067
+      }
+    ]
+  },
+  {
+    "date": "2026-08-10",
+    "stats": {
+      "mean": 0.05219740947874266,
+      "p95": 0.09863531644539746,
+      "max": 0.18891085510961972
+    },
+    "pairs": [
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-kotomi\\2026-08-10_姿の一部から.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-tama\\2026-08-10_足の形を残す理由.md",
+        "cosine": 0.18891085510961972
+      },
+      {
+        "left": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-moegami\\2026-08-10_不在の人へ向ける形.md",
+        "right": "C:\\Users\\wdddi\\workspace\\waddy-guesthouse-release-20260926\\diary-roju\\2026-08-10_身体の代わりに形を置く.md",
+        "cosine": 0.14792220331231468
+      }
+    ]
+  }
+]

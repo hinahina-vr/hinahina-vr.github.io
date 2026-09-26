@@ -1,0 +1,23 @@
+{
+  "date": "2026-07-31",
+  "base": "http://127.0.0.1:8188/",
+  "voices": {
+    "count": 33,
+    "allParagraphs": true,
+    "titles": true,
+    "individualPages": 33,
+    "model": true,
+    "mobileOverflow": false
+  },
+  "main": {
+    "cover": {
+      "width": 1536,
+      "height": 1024
+    },
+    "dreamLink": true,
+    "mobileOverflow": false,
+    "allParagraphs": true,
+    "rejectedProseAbsent": true
+  },
+  "regression": "May 5 voice bundle retains 33 cards"
+}

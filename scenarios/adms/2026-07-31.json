@@ -1,0 +1,93 @@
+{
+  "date": "2026-07-31",
+  "title": "消灯係は眠らない A.D.M.S.",
+  "rootNodeId": "desk",
+  "nodes": [
+    {
+      "id": "desk",
+      "title": "ゲストハウスの見取り図",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-31_寝る前に片づける机",
+      "entry": "desk",
+      "summary": "Photoshopのレイヤーが、住人の部屋を描いた透明な紙になっている。"
+    },
+    {
+      "id": "night",
+      "title": "消灯すると部屋が消える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-31_寝る前に片づける机",
+      "entry": "night",
+      "summary": "消灯を頼むと、見取り図の部屋ごと非表示になってしまう。"
+    },
+    {
+      "id": "door",
+      "title": "ここにいる声を数える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-07-31_寝る前に片づける机",
+      "entry": "door",
+      "summary": "住人の声を頼りに、消えた部屋への帰り道を探す。"
+    },
+    {
+      "id": "END_SAVE",
+      "title": "灯りを別に描く",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-07-31_寝る前に片づける机",
+      "entry": "END_SAVE",
+      "summary": "灯りを別に描く"
+    },
+    {
+      "id": "END_REST",
+      "title": "帳面を閉じてもここにいる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-07-31_寝る前に片づける机",
+      "entry": "END_REST",
+      "summary": "帳面を閉じてもここにいる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "desk",
+      "to": "night",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "night",
+      "to": "door",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "door",
+      "to": "END_SAVE",
+      "choiceText": "京子と灯りだけのレイヤーを作る",
+      "style": "kenkai"
+    },
+    {
+      "from": "door",
+      "to": "END_REST",
+      "choiceText": "葉月に頼んで見取り図を閉じる",
+      "style": "kenkai"
+    }
+  ]
+}

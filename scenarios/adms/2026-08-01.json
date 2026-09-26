@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-01",
+  "title": "森に返す椅子 A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "森のテラス",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-01_森に返す椅子",
+      "entry": "start",
+      "summary": "森のテラスで帰りの合図を待つ。"
+    },
+    {
+      "id": "turn",
+      "title": "根を張った椅子",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-01_森に返す椅子",
+      "entry": "turn",
+      "summary": "椅子が木になり、出口を塞いでしまう。"
+    },
+    {
+      "id": "choose",
+      "title": "席を立つ前に",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-01_森に返す椅子",
+      "entry": "choose",
+      "summary": "森に席を残すか、宿へ招くか。"
+    },
+    {
+      "id": "END_A",
+      "title": "木陰の待ち合わせ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-01_森に返す椅子",
+      "entry": "END_A",
+      "summary": "木陰の待ち合わせ"
+    },
+    {
+      "id": "END_B",
+      "title": "持って帰れる席",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-01_森に返す椅子",
+      "entry": "END_B",
+      "summary": "持って帰れる席"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "森のテラスでまた会う",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "小さな芽を宿へ招く",
+      "style": "kenkai"
+    }
+  ]
+}

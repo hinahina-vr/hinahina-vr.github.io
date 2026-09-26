@@ -1,0 +1,176 @@
+{
+  "testedAt": "2026-09-26T08:55:35.931Z",
+  "base": "http://127.0.0.1:8188/",
+  "dates": [
+    "2026-08-01",
+    "2026-08-02",
+    "2026-08-03",
+    "2026-08-04",
+    "2026-08-05",
+    "2026-08-07",
+    "2026-08-09",
+    "2026-08-10"
+  ],
+  "prose": [
+    {
+      "date": "2026-08-01",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-01_白州まで来た.png": "8198fa7298de6f9e1a55e8451ddf53968a8bd23db6a836bb286af9c25715ec36",
+        "scenarios/bg/2026-08-01_森に返す椅子/scene.png": "8198fa7298de6f9e1a55e8451ddf53968a8bd23db6a836bb286af9c25715ec36"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-02",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-02_韮崎でポカリ.png": "18a4f1696b19274ed06203ae1eb63cdb3dd3a26a6d4c67492b5c7a296bffe69f",
+        "scenarios/bg/2026-08-02_発車までの絵葉書/scene.png": "18a4f1696b19274ed06203ae1eb63cdb3dd3a26a6d4c67492b5c7a296bffe69f"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-03_白州の余韻がかゆい.png": "8cf3f8d9da7935fb670ed253f4a88b4ac8b9b51b1ec3f00e78085fa180dbf688",
+        "scenarios/bg/2026-08-03_森の苦情受付/scene.png": "8cf3f8d9da7935fb670ed253f4a88b4ac8b9b51b1ec3f00e78085fa180dbf688"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-04_遊ぶほうを待っている.png": "2f4e27507bb5e6e1f6f573e17cfc8237d5b15a7620f9292917e27eea643e0270",
+        "scenarios/bg/2026-08-04_開始ボタンの向こう/scene.png": "2f4e27507bb5e6e1f6f573e17cfc8237d5b15a7620f9292917e27eea643e0270"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-05_自由工作は換気扇.png": "6679632742d3946822eabb30952855812ec791c14fea4fd83cac36baa4d1143b",
+        "scenarios/bg/2026-08-05_家電の夏休み/scene.png": "6679632742d3946822eabb30952855812ec791c14fea4fd83cac36baa4d1143b"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-07_町田で麻辣湯.png": "f722ff9d271e3b5e8fd6cdd64479f1bf5dedb9b8f9706daa2c8b9fd9eec3a297",
+        "scenarios/bg/2026-08-07_どんぶりの町/scene.png": "f722ff9d271e3b5e8fd6cdd64479f1bf5dedb9b8f9706daa2c8b9fd9eec3a297"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-09",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-09_1人ゲームサークルの制作会議.png": "13428556c648b2ad5c68f6988709fb5e6fe01633e635e5f43133303dbb4b8d4c",
+        "scenarios/bg/2026-08-09_会議室から出るゲーム/scene.png": "13428556c648b2ad5c68f6988709fb5e6fe01633e635e5f43133303dbb4b8d4c"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-10_東京駅から妙高へ.png": "859811f05a1c2537cbfc53129c48d607b8c16c611abea3da1931d13afb8dc670",
+        "scenarios/bg/2026-08-10_足跡のない帰り道/scene.png": "859811f05a1c2537cbfc53129c48d607b8c16c611abea3da1931d13afb8dc670"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    }
+  ]
+}

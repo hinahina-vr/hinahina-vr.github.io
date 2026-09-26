@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-02",
+  "title": "発車までの絵葉書 A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "白紙の乗車券",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-02_発車までの絵葉書",
+      "entry": "start",
+      "summary": "列車に乗るには、白紙の絵葉書を仕上げる必要がある。"
+    },
+    {
+      "id": "turn",
+      "title": "写真の外にいる人",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-02_発車までの絵葉書",
+      "entry": "turn",
+      "summary": "写したいものが増えて、葉書が重くなる。"
+    },
+    {
+      "id": "choose",
+      "title": "宛先を選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-02_発車までの絵葉書",
+      "entry": "choose",
+      "summary": "写真を送るか、自分で届けるか。"
+    },
+    {
+      "id": "END_A",
+      "title": "宿に届いた夏",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-02_発車までの絵葉書",
+      "entry": "END_A",
+      "summary": "宿に届いた夏"
+    },
+    {
+      "id": "END_B",
+      "title": "持ち帰った空",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-02_発車までの絵葉書",
+      "entry": "END_B",
+      "summary": "持ち帰った空"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "宿へ投函する",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "葉書を持って列車に乗る",
+      "style": "kenkai"
+    }
+  ]
+}

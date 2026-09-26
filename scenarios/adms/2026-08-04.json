@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-04",
+  "title": "開始ボタンの向こう A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "終わらない設定画面",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-04_開始ボタンの向こう",
+      "entry": "start",
+      "summary": "開始を押しても設定画面へ戻される。"
+    },
+    {
+      "id": "turn",
+      "title": "名前のない広場",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-04_開始ボタンの向こう",
+      "entry": "turn",
+      "summary": "住人が裏口を見つけ、未完成の広場へ出る。"
+    },
+    {
+      "id": "choose",
+      "title": "最初の遊び",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-04_開始ボタンの向こう",
+      "entry": "choose",
+      "summary": "短い冒険か、その場での会話かを選ぶ。"
+    },
+    {
+      "id": "END_A",
+      "title": "パン屋までの冒険",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-04_開始ボタンの向こう",
+      "entry": "END_A",
+      "summary": "パン屋までの冒険"
+    },
+    {
+      "id": "END_B",
+      "title": "広場の長いおしゃべり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-04_開始ボタンの向こう",
+      "entry": "END_B",
+      "summary": "広場の長いおしゃべり"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "鍵を持ってパン屋へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "広場のベンチに座る",
+      "style": "kenkai"
+    }
+  ]
+}

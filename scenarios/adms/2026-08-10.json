@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-10",
+  "title": "足跡のない帰り道 A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "池の向こうの駅",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-10_足跡のない帰り道",
+      "entry": "start",
+      "summary": "旅の場所が池に映り、帰る駅だけが遠ざかる。"
+    },
+    {
+      "id": "turn",
+      "title": "誰の足で帰るか",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-10_足跡のない帰り道",
+      "entry": "turn",
+      "summary": "石の足跡を借りると、持ち主の行き先へ進んでしまう。"
+    },
+    {
+      "id": "choose",
+      "title": "水辺の分かれ道",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-10_足跡のない帰り道",
+      "entry": "choose",
+      "summary": "自分の足跡をつけるか、岸から迎えを呼ぶか。"
+    },
+    {
+      "id": "END_A",
+      "title": "自分たちの足跡",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-10_足跡のない帰り道",
+      "entry": "END_A",
+      "summary": "自分たちの足跡"
+    },
+    {
+      "id": "END_B",
+      "title": "迎えの灯り",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-10_足跡のない帰り道",
+      "entry": "END_B",
+      "summary": "迎えの灯り"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "自分たちの足跡をつけて歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "岸に灯りを置いて迎えを待つ",
+      "style": "kenkai"
+    }
+  ]
+}

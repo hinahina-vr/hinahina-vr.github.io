@@ -81,7 +81,8 @@ export const CHARACTER_VOICE_RULES = {
   "diary-hina": {
     label: "ひなた",
     address: "oniichan",
-    required: [required("一人称", "ひな"), required("口癖", "えへへ"), required("親しみのある丁寧語", "です", "ます")],
+    required: [required("一人称", "ひな"), required("口癖", "えへへ")],
+    forbidden: [required("敬語に戻らない（ユーザー指定）", /(?:です|ます|でした|ました|ません)(?=[。！？、…\s]|$|ね|よ|か|から|けど)/g, "ください")],
   },
   "diary-hinahina": {
     label: "ひなひな",
@@ -121,11 +122,14 @@ export const CHARACTER_VOICE_RULES = {
   "diary-kukuri": {
     label: "ククリ",
     address: "waddySan",
+    // このサイトでは勇者様 = ワディー。両方の名前を別々に要求しない。
+    addressOptional: true,
     required: [
       required("一人称", "ククリ", "わたし"),
       required("ククリの呼びかけ", "勇者様"),
       required("グルグルの反応", "ガッツでファイト", "グルグル", "よぉ", "だもん"),
     ],
+    forbidden: [required("勇者様とワディーを別人にしない", /勇者様[、！!\s]+(?:[^。！？\n]{0,24})ワディーさん[はがの]/g, /勇者様なら[^。！？\n]*ワディーさん/g, "ニケ")],
   },
   "diary-kyoko": {
     label: "京子",

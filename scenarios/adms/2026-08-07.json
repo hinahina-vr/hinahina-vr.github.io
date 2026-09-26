@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-07",
+  "title": "どんぶりの町 A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "器の底の商店街",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-07_どんぶりの町",
+      "entry": "start",
+      "summary": "空のどんぶりを覗くと、小さな町が見える。"
+    },
+    {
+      "id": "turn",
+      "title": "食卓への帰り道",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-07_どんぶりの町",
+      "entry": "turn",
+      "summary": "町から戻るには、全員分の席を用意する必要がある。"
+    },
+    {
+      "id": "choose",
+      "title": "最後の空席",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-07_どんぶりの町",
+      "entry": "choose",
+      "summary": "店に席を足すか、外へ食卓を運ぶか。"
+    },
+    {
+      "id": "END_A",
+      "title": "いつもの席が増える",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-07_どんぶりの町",
+      "entry": "END_A",
+      "summary": "いつもの席が増える"
+    },
+    {
+      "id": "END_B",
+      "title": "隣町へ出前",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-07_どんぶりの町",
+      "entry": "END_B",
+      "summary": "隣町へ出前"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "店員の席を足して店に残る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "長い食卓を外へ運ぶ",
+      "style": "kenkai"
+    }
+  ]
+}

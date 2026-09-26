@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-09",
+  "title": "会議室から出るゲーム A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "席が1つの制作会議",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-09_会議室から出るゲーム",
+      "entry": "start",
+      "summary": "役職札ばかり増える会議室に閉じ込められる。"
+    },
+    {
+      "id": "turn",
+      "title": "受け渡し窓口",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-09_会議室から出るゲーム",
+      "entry": "turn",
+      "summary": "担当ごとの窓口で、小さな遊びをつなぐ。"
+    },
+    {
+      "id": "choose",
+      "title": "最初の客を迎える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-09_会議室から出るゲーム",
+      "entry": "choose",
+      "summary": "短く完成させるか、試遊してもらうか。"
+    },
+    {
+      "id": "END_A",
+      "title": "短いゲームの完成",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-09_会議室から出るゲーム",
+      "entry": "END_A",
+      "summary": "短いゲームの完成"
+    },
+    {
+      "id": "END_B",
+      "title": "試遊の忘れ物",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-09_会議室から出るゲーム",
+      "entry": "END_B",
+      "summary": "試遊の忘れ物"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "短いゲームとして箱に収める",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "外で待つ客に遊んでもらう",
+      "style": "kenkai"
+    }
+  ]
+}

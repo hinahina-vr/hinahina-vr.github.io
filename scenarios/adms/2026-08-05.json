@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-05",
+  "title": "家電の夏休み A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "台所の休暇届",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-05_家電の夏休み",
+      "entry": "start",
+      "summary": "宿の家電が休暇届を並べて止まってしまう。"
+    },
+    {
+      "id": "turn",
+      "title": "風の通り道",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-05_家電の夏休み",
+      "entry": "turn",
+      "summary": "箱の換気扇が、溜まった用事を紙の風で吹き出す。"
+    },
+    {
+      "id": "choose",
+      "title": "家の当番表",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-05_家電の夏休み",
+      "entry": "choose",
+      "summary": "交代制にするか、今夜の仕事を減らすか。"
+    },
+    {
+      "id": "END_A",
+      "title": "交代で休む家",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-05_家電の夏休み",
+      "entry": "END_A",
+      "summary": "交代で休む家"
+    },
+    {
+      "id": "END_B",
+      "title": "静かな夕食",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-05_家電の夏休み",
+      "entry": "END_B",
+      "summary": "静かな夕食"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "台所の当番を交代で引き受ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "今夜は手をかけない夕食にする",
+      "style": "kenkai"
+    }
+  ]
+}

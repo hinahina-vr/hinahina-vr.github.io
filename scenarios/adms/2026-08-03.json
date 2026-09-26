@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-03",
+  "title": "森の苦情受付 A.D.M.S.",
+  "rootNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "title": "葉っぱの受付票",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-03_森の苦情受付",
+      "entry": "start",
+      "summary": "虫への苦情を届けに森の受付へ行く。"
+    },
+    {
+      "id": "turn",
+      "title": "小さな側の言い分",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-03_森の苦情受付",
+      "entry": "turn",
+      "summary": "虫の側にも、人間への苦情が積もっていた。"
+    },
+    {
+      "id": "choose",
+      "title": "道の引き直し",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-03_森の苦情受付",
+      "entry": "choose",
+      "summary": "道を譲って歩くか、その場で見学するか。"
+    },
+    {
+      "id": "END_A",
+      "title": "遠回りの客",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-03_森の苦情受付",
+      "entry": "END_A",
+      "summary": "遠回りの客"
+    },
+    {
+      "id": "END_B",
+      "title": "動かない見学者",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-03_森の苦情受付",
+      "entry": "END_B",
+      "summary": "動かない見学者"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "虫の暮らしを避けて遠回りする",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "切り株のそばで見学する",
+      "style": "kenkai"
+    }
+  ]
+}

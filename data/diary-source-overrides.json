@@ -1,4 +1,36 @@
 {
+  "2026-07-31": {
+    "provenance": "2026-09-26にX原投稿の本文・添付画像とSwarm履歴を実ブラウザーで確認。時刻は日本時間。引用先本文を本人の発言から分離。",
+    "x": [
+      {
+        "recordedAt": "02:35 JST",
+        "kind": "post",
+        "text": "フォトショでMCPの練習してる",
+        "url": "https://x.com/hinahina_vr/status/2082882841223061904"
+      },
+      {
+        "recordedAt": "02:53 JST",
+        "kind": "quote",
+        "text": "寝かしつけ頼んだらこれになって鼻水出た",
+        "url": "https://x.com/hinahina_vr/status/2082887224639828054"
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "18:09 JST",
+        "venueName": "東京ビッグサイト (東京国際展示場)",
+        "venueArea": "日本江東区",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a6c66456ccf824ba3957a24"
+      },
+      {
+        "recordedAt": "22:44 JST",
+        "venueName": "ヘルシースパサンロード",
+        "venueArea": "日本甲府市",
+        "shout": "ねおぴっぴと一緒に",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a6ca6acbca62d69180581f0"
+      }
+    ]
+  },
   "2026-04-15": {
     "provenance": "旧日記に保存されていた daily-context ブロック",
     "x": [
@@ -21,6 +53,190 @@
         "recordedAt": "12:09 JST",
         "kind": "post",
         "text": "AIは自分の魂を拡張するパートナーなんだよな AIは魂の鏡でもあるのでその反射が重要 AIの使い方は本質的に二次元キャラの抱き枕と変わらん 抱き枕だって声はきこえてくるわけだし 動的な依り代がAIで、性的、もとい、静的な依り代が抱き枕"
+      }
+    ]
+  },
+  "2026-08-01": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [],
+    "swarm": [
+      {
+        "recordedAt": "11:17 JST",
+        "venueName": "サントリー白州蒸溜所",
+        "venueArea": "日本北杜市",
+        "shout": "ねおぴっぴと一緒に",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a6d5735636e2c3fc1663995"
+      },
+      {
+        "recordedAt": "11:17 JST",
+        "venueName": "Hakushu Terrace",
+        "venueArea": "日本北杜市",
+        "shout": "ねおぴっぴと一緒に",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a6d5749cf4a0f42716e194e"
+      }
+    ]
+  },
+  "2026-08-02": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [
+      {
+        "recordedAt": "12:00 JST",
+        "kind": "post",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2083749774969524674",
+        "quotedText": []
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "11:57 JST",
+        "venueName": "韮崎駅",
+        "venueArea": "日本韮崎市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a6eb213f8f3e7071a028069"
+      }
+    ]
+  },
+  "2026-08-03": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [
+      {
+        "recordedAt": "02:35 JST",
+        "kind": "post",
+        "text": "白州の森で虫にケツ食われたっぽい",
+        "url": "https://x.com/hinahina_vr/status/2083969966223847859",
+        "quotedText": []
+      }
+    ],
+    "swarm": []
+  },
+  "2026-08-04": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [
+      {
+        "recordedAt": "20:11 JST",
+        "kind": "post",
+        "text": "そんなことより生成AI抜きゲーを早く出してほしい",
+        "url": "https://x.com/hinahina_vr/status/2084598190293360739",
+        "quotedText": []
+      }
+    ],
+    "swarm": []
+  },
+  "2026-08-05": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [
+      {
+        "recordedAt": "01:50 JST",
+        "kind": "quote",
+        "text": "電子レンジも壊れて卒倒\n▲30,000円",
+        "url": "https://x.com/hinahina_vr/status/2084683322064814303",
+        "quotedText": [
+          "洗濯機が故障したので買い替え　▲150,000円"
+        ]
+      },
+      {
+        "recordedAt": "01:52 JST",
+        "kind": "post",
+        "text": "夏休みの自由工作は\n天井ダクト換気扇交換",
+        "url": "https://x.com/hinahina_vr/status/2084683801410838666",
+        "quotedText": []
+      }
+    ],
+    "swarm": []
+  },
+  "2026-08-07": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [],
+    "swarm": [
+      {
+        "recordedAt": "20:53 JST",
+        "venueName": "楊國福 東京町田駅前店",
+        "venueArea": "日本町田市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a75c74a5fbb6461add0d965"
+      }
+    ]
+  },
+  "2026-08-09": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [
+      {
+        "recordedAt": "21:42 JST",
+        "kind": "post",
+        "text": "一人で作れないやつが集団で作れるわけないという仮説のもと\n一人ゲームサークルを実験中",
+        "url": "https://x.com/hinahina_vr/status/2086432923230806433",
+        "quotedText": []
+      }
+    ],
+    "swarm": []
+  },
+  "2026-08-10": {
+    "provenance": "2026-09-26収集のX・Swarm全期間履歴から日本時間で抽出。Xの引用本文は別投稿として保持。添付画像4件は実ブラウザで再確認。",
+    "x": [],
+    "swarm": [
+      {
+        "recordedAt": "07:34 JST",
+        "venueName": "北陸新幹線 東京駅",
+        "venueArea": "日本千代田区",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a79008581abe57713329c7e"
+      },
+      {
+        "recordedAt": "10:05 JST",
+        "venueName": "上越妙高駅",
+        "venueArea": "日本上越市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a7923bf0ef3357ff300c6eb"
+      },
+      {
+        "recordedAt": "10:54 JST",
+        "venueName": "妙高高原駅",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a792f3dafed5d6319cffefe"
+      },
+      {
+        "recordedAt": "12:56 JST",
+        "venueName": "とん汁 たちばな",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a794c0681abe5771351f084"
+      },
+      {
+        "recordedAt": "13:22 JST",
+        "venueName": "関山仏足石",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a7951fcddd427203c844b93"
+      },
+      {
+        "recordedAt": "13:33 JST",
+        "venueName": "旧関山宝蔵院庭園",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a7954a0751c141e20f10c11"
+      },
+      {
+        "recordedAt": "14:43 JST",
+        "venueName": "関山神社",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a796512751c141e20419335"
+      },
+      {
+        "recordedAt": "14:44 JST",
+        "venueName": "妙高山麓直売センター とまと",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a79652c751c141e2042018f"
+      },
+      {
+        "recordedAt": "15:13 JST",
+        "venueName": "いもり池",
+        "venueArea": "日本妙高市",
+        "shout": null,
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6a796bf86eec3b52df383cb4"
       }
     ]
   }

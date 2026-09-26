@@ -1,0 +1,9 @@
+✓ diary-roju.html generated (2026-08: 8 entries)
+✓ diary-roju-2026-07.html generated (11 entries)
+✓ diary-roju-2026-06.html generated (12 entries)
+✓ diary-roju-2026-05.html generated (23 entries)
+✓ diary-roju-2026-04.html generated (24 entries)
+✓ diary-roju-2026-03.html generated (8 entries)
+✓ diary-roju-2026-02.html generated (6 entries)
+✓ diary-roju-2026-01.html generated (11 entries)
+✓ Total: 103 roju entries across 8 months
