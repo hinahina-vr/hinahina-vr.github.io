@@ -8,6 +8,7 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
+import { readDiaryTitle, escapeDiaryTitle } from "./lib/diary-title.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-roju");
@@ -35,7 +36,7 @@ function formatMonthLabel(monthKey) {
 function renderFullEntry(entry) {
   return `          <li id="${entry.date}">
             <p class="entry-date">${formatDate(entry.date)}</p>
-            <h3 class="entry-title">${entry.title}</h3>
+            <h3 class="entry-title">${escapeDiaryTitle(entry.title)}</h3>
             ${entry.html}
           </li>`;
 }
@@ -43,7 +44,7 @@ function renderFullEntry(entry) {
 function renderTitleOnly(entry, monthKey) {
   return `              <li>
                 <span class="backnum-date">${entry.date}</span>
-                <a href="./diary-roju-${monthKey}.html#${entry.date}" class="backnum-title">${entry.title}</a>
+                <a href="./diary-roju-${monthKey}.html#${entry.date}" class="backnum-title">${escapeDiaryTitle(entry.title)}</a>
               </li>`;
 }
 
@@ -292,7 +293,7 @@ async function main() {
     const cleaned = stripDailyContextBlock(raw);
     const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
     const html = await marked.parse(body);
-    entries.push({ ...meta, html });
+    entries.push({ ...meta, title: readDiaryTitle(cleaned, meta.title), html });
   }
 
   entries.sort((a, b) => b.date.localeCompare(a.date));

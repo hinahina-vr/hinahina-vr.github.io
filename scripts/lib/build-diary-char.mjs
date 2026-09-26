@@ -6,6 +6,7 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { marked } from "marked";
 import { stripDailyContextBlock } from "./daily-context.mjs";
+import { readDiaryTitle, escapeDiaryTitle } from "./diary-title.mjs";
 import { injectSiteModeAssets } from "./site-mode-assets.mjs";
 
 /**
@@ -47,9 +48,10 @@ export async function buildCharDiary(config) {
     }
     const raw = await readFile(join(DIARY_DIR, file), "utf-8");
     const cleaned = stripDailyContextBlock(raw);
+    const title = readDiaryTitle(cleaned, meta.title);
     const body = cleaned.replace(/^\uFEFF?/, "").replace(/^#[^\r\n]+[\r\n]+/, "").trim();
     const html = await marked.parse(body);
-    entries.push({ ...meta, html });
+    entries.push({ ...meta, title, html });
   }
 
   entries.sort((a, b) => b.date.localeCompare(a.date));
@@ -62,7 +64,7 @@ export async function buildCharDiary(config) {
       const dow = WEEKDAYS[d.getDay()];
       return `          <li id="${e.date}">
             <p class="entry-date">${e.date}（${dow}）</p>
-            <h3 class="entry-title">${e.title}</h3>
+            <h3 class="entry-title">${escapeDiaryTitle(e.title)}</h3>
             ${e.html}
           </li>`;
     })
