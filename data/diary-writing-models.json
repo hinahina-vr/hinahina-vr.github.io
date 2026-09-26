@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "dates": {
+    "2026-05-05": {
+      "model": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "scope": "33人分のキャラクター日記の改稿",
+      "revisedOn": "2026-09-26"
+    }
+  }
+}

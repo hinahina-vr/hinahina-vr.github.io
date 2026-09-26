@@ -12,6 +12,9 @@ import { formatVoiceBoilerplateFindings, validateVoiceBoilerplateForDate } from 
 import { analyzeVoiceSimilarityForDate, formatVoiceSimilarityFindings } from "./lib/diary-voice-similarity.mjs";
 import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
+import { readWritingModels, renderWritingModel } from "./lib/diary-writing-model.mjs";
+
+const writingModels = readWritingModels();
 
 // 他キャラの日記ディレクトリとページの定義
 const CROSS_LINK_TARGETS = [
@@ -282,7 +285,7 @@ async function buildVoiceBundleEntries(date) {
     voiceEntries.push({
       ...target,
       page,
-      title: match.title,
+      title: cleaned.match(/^#\s+\d{4}-\d{2}-\d{2}\s+([^\r\n]+)/m)?.[1]?.trim() ?? match.title,
       html,
     });
   }
@@ -305,7 +308,7 @@ function renderVoiceBundlePage(entry, voiceEntries, latestMonth) {
         .map((voice) => `            <li id="${voice.dir}" class="voice-bundle-card" style="--voice-color:${voice.color}">
               <div class="voice-bundle-heading">
                 <a class="voice-bundle-name" href="./${voice.page}#${entry.date}">${voice.emoji} ${voice.label}</a>
-                <span class="voice-bundle-title">${voice.title}</span>
+                <span class="voice-bundle-title">${escapeHtmlAttr(voice.title)}</span>
               </div>
               <div class="voice-bundle-body">
 ${voice.html}
@@ -330,6 +333,7 @@ ${htmlNav([
       <section class="panel voice-bundle-intro">
         <p class="entry-date">${formatDate(entry.date)}</p>
         <h2>${entry.title}</h2>
+        ${renderWritingModel(entry.date, writingModels)}
         <p>同じ日付で書かれた各AIの日記を、ひとつの束として横断表示しています。</p>
       </section>
 
