@@ -1,0 +1,551 @@
+{
+  "testedAt": "2026-09-26T09:07:43.419Z",
+  "base": "https://hinahina-vr.github.io/",
+  "dates": [
+    "2026-08-01",
+    "2026-08-02",
+    "2026-08-03",
+    "2026-08-04",
+    "2026-08-05",
+    "2026-08-07",
+    "2026-08-09",
+    "2026-08-10"
+  ],
+  "prose": [
+    {
+      "date": "2026-08-01",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-01_白州まで来た.png": "8198fa7298de6f9e1a55e8451ddf53968a8bd23db6a836bb286af9c25715ec36",
+        "scenarios/bg/2026-08-01_森に返す椅子/scene.png": "8198fa7298de6f9e1a55e8451ddf53968a8bd23db6a836bb286af9c25715ec36"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-02",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-02_韮崎でポカリ.png": "18a4f1696b19274ed06203ae1eb63cdb3dd3a26a6d4c67492b5c7a296bffe69f",
+        "scenarios/bg/2026-08-02_発車までの絵葉書/scene.png": "18a4f1696b19274ed06203ae1eb63cdb3dd3a26a6d4c67492b5c7a296bffe69f"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-03_白州の余韻がかゆい.png": "8cf3f8d9da7935fb670ed253f4a88b4ac8b9b51b1ec3f00e78085fa180dbf688",
+        "scenarios/bg/2026-08-03_森の苦情受付/scene.png": "8cf3f8d9da7935fb670ed253f4a88b4ac8b9b51b1ec3f00e78085fa180dbf688"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-04_遊ぶほうを待っている.png": "2f4e27507bb5e6e1f6f573e17cfc8237d5b15a7620f9292917e27eea643e0270",
+        "scenarios/bg/2026-08-04_開始ボタンの向こう/scene.png": "2f4e27507bb5e6e1f6f573e17cfc8237d5b15a7620f9292917e27eea643e0270"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-05_自由工作は換気扇.png": "6679632742d3946822eabb30952855812ec791c14fea4fd83cac36baa4d1143b",
+        "scenarios/bg/2026-08-05_家電の夏休み/scene.png": "6679632742d3946822eabb30952855812ec791c14fea4fd83cac36baa4d1143b"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-07_町田で麻辣湯.png": "f722ff9d271e3b5e8fd6cdd64479f1bf5dedb9b8f9706daa2c8b9fd9eec3a297",
+        "scenarios/bg/2026-08-07_どんぶりの町/scene.png": "f722ff9d271e3b5e8fd6cdd64479f1bf5dedb9b8f9706daa2c8b9fd9eec3a297"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-09",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-09_1人ゲームサークルの制作会議.png": "13428556c648b2ad5c68f6988709fb5e6fe01633e635e5f43133303dbb4b8d4c",
+        "scenarios/bg/2026-08-09_会議室から出るゲーム/scene.png": "13428556c648b2ad5c68f6988709fb5e6fe01633e635e5f43133303dbb4b8d4c"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "voices": {
+        "cards": 33,
+        "allParagraphs": true,
+        "individualPages": 33,
+        "model": true,
+        "mobileOverflow": false
+      },
+      "assetHashes": {
+        "assets/diary-covers/2026-08-10_東京駅から妙高へ.png": "859811f05a1c2537cbfc53129c48d607b8c16c611abea3da1931d13afb8dc670",
+        "scenarios/bg/2026-08-10_足跡のない帰り道/scene.png": "859811f05a1c2537cbfc53129c48d607b8c16c611abea3da1931d13afb8dc670"
+      },
+      "main": {
+        "allParagraphs": true,
+        "cover": true,
+        "dreamLink": true,
+        "mobileOverflow": false
+      }
+    }
+  ],
+  "dreams": [
+    {
+      "date": "2026-08-01",
+      "cast": 33,
+      "seen": [
+        "【ひなひな】",
+        "【シャロ】",
+        "【マルチ】",
+        "【物理おじ】",
+        "【ねむりん】",
+        "【京子】",
+        "【クド】",
+        "【たまちゃん】",
+        "【キク8号】",
+        "【ことみ】",
+        "【あゆ】",
+        "【アナ】",
+        "【ミント】",
+        "【でじこ】",
+        "【みつば】",
+        "【えここ】",
+        "【レム】",
+        "【美凪】",
+        "【瑠璃子】",
+        "【りん】",
+        "【真雪】",
+        "【フェイリス】",
+        "【ククリ】",
+        "【葉月】",
+        "【ヒナ】",
+        "【みぃ】",
+        "【ロッテ】",
+        "【りぜる】",
+        "【ひな】",
+        "【紬】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "木陰の待ち合わせ",
+        "持って帰れる席"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-02",
+      "cast": 33,
+      "seen": [
+        "【あゆ】",
+        "【京子】",
+        "【えここ】",
+        "【クド】",
+        "【物理おじ】",
+        "【キク8号】",
+        "【シャロ】",
+        "【マルチ】",
+        "【ねむりん】",
+        "【りん】",
+        "【たまちゃん】",
+        "【ことみ】",
+        "【美凪】",
+        "【みつば】",
+        "【でじこ】",
+        "【ミント】",
+        "【アナ】",
+        "【紬】",
+        "【真雪】",
+        "【レム】",
+        "【フェイリス】",
+        "【瑠璃子】",
+        "【ヒナ】",
+        "【みぃ】",
+        "【葉月】",
+        "【ロッテ】",
+        "【りぜる】",
+        "【ククリ】",
+        "【ひな】",
+        "【ひなひな】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "宿に届いた夏",
+        "持ち帰った空"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-03",
+      "cast": 33,
+      "seen": [
+        "【ひなひな】",
+        "【みつば】",
+        "【あゆ】",
+        "【キク8号】",
+        "【マルチ】",
+        "【りん】",
+        "【アナ】",
+        "【ことみ】",
+        "【物理おじ】",
+        "【京子】",
+        "【美凪】",
+        "【クド】",
+        "【えここ】",
+        "【シャロ】",
+        "【レム】",
+        "【たまちゃん】",
+        "【みぃ】",
+        "【ヒナ】",
+        "【葉月】",
+        "【ロッテ】",
+        "【ミント】",
+        "【フェイリス】",
+        "【でじこ】",
+        "【真雪】",
+        "【ねむりん】",
+        "【瑠璃子】",
+        "【ククリ】",
+        "【りぜる】",
+        "【ひな】",
+        "【紬】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "遠回りの客",
+        "動かない見学者"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-04",
+      "cast": 33,
+      "seen": [
+        "【ひなひな】",
+        "【シャロ】",
+        "【キク8号】",
+        "【物理おじ】",
+        "【京子】",
+        "【マルチ】",
+        "【クド】",
+        "【りん】",
+        "【あゆ】",
+        "【レム】",
+        "【えここ】",
+        "【みつば】",
+        "【でじこ】",
+        "【ミント】",
+        "【たまちゃん】",
+        "【みぃ】",
+        "【ヒナ】",
+        "【葉月】",
+        "【ロッテ】",
+        "【アナ】",
+        "【ことみ】",
+        "【フェイリス】",
+        "【真雪】",
+        "【美凪】",
+        "【ねむりん】",
+        "【瑠璃子】",
+        "【ククリ】",
+        "【りぜる】",
+        "【ひな】",
+        "【紬】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "パン屋までの冒険",
+        "広場の長いおしゃべり"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-05",
+      "cast": 33,
+      "seen": [
+        "【真雪】",
+        "【ひなひな】",
+        "【シャロ】",
+        "【あゆ】",
+        "【レム】",
+        "【マルチ】",
+        "【みつば】",
+        "【でじこ】",
+        "【ミント】",
+        "【キク8号】",
+        "【物理おじ】",
+        "【京子】",
+        "【アナ】",
+        "【ことみ】",
+        "【紬】",
+        "【クド】",
+        "【えここ】",
+        "【りん】",
+        "【たまちゃん】",
+        "【ヒナ】",
+        "【みぃ】",
+        "【葉月】",
+        "【ロッテ】",
+        "【フェイリス】",
+        "【美凪】",
+        "【ねむりん】",
+        "【瑠璃子】",
+        "【ククリ】",
+        "【りぜる】",
+        "【ひな】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "交代で休む家",
+        "静かな夕食"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-07",
+      "cast": 33,
+      "seen": [
+        "【あゆ】",
+        "【ひなひな】",
+        "【シャロ】",
+        "【物理おじ】",
+        "【キク8号】",
+        "【りん】",
+        "【マルチ】",
+        "【ミント】",
+        "【でじこ】",
+        "【みつば】",
+        "【たまちゃん】",
+        "【ことみ】",
+        "【京子】",
+        "【クド】",
+        "【レム】",
+        "【美凪】",
+        "【真雪】",
+        "【アナ】",
+        "【えここ】",
+        "【みぃ】",
+        "【ヒナ】",
+        "【葉月】",
+        "【ロッテ】",
+        "【フェイリス】",
+        "【瑠璃子】",
+        "【ねむりん】",
+        "【紬】",
+        "【ククリ】",
+        "【りぜる】",
+        "【ひな】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "いつもの席が増える",
+        "隣町へ出前"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-09",
+      "cast": 33,
+      "seen": [
+        "【ひなひな】",
+        "【京子】",
+        "【キク8号】",
+        "【りん】",
+        "【ミント】",
+        "【シャロ】",
+        "【ことみ】",
+        "【ククリ】",
+        "【たまちゃん】",
+        "【あゆ】",
+        "【物理おじ】",
+        "【マルチ】",
+        "【真雪】",
+        "【アナ】",
+        "【クド】",
+        "【美凪】",
+        "【瑠璃子】",
+        "【えここ】",
+        "【フェイリス】",
+        "【でじこ】",
+        "【みつば】",
+        "【葉月】",
+        "【ヒナ】",
+        "【みぃ】",
+        "【ロッテ】",
+        "【レム】",
+        "【ねむりん】",
+        "【紬】",
+        "【りぜる】",
+        "【ひな】",
+        "【萌神】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "短いゲームの完成",
+        "試遊の忘れ物"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    },
+    {
+      "date": "2026-08-10",
+      "cast": 33,
+      "seen": [
+        "【ひなひな】",
+        "【クド】",
+        "【キク8号】",
+        "【物理おじ】",
+        "【ことみ】",
+        "【あゆ】",
+        "【レム】",
+        "【マルチ】",
+        "【りん】",
+        "【瑠璃子】",
+        "【ねむりん】",
+        "【萌神】",
+        "【ミント】",
+        "【京子】",
+        "【シャロ】",
+        "【たまちゃん】",
+        "【みぃ】",
+        "【ヒナ】",
+        "【葉月】",
+        "【真雪】",
+        "【ロッテ】",
+        "【えここ】",
+        "【アナ】",
+        "【美凪】",
+        "【みつば】",
+        "【でじこ】",
+        "【フェイリス】",
+        "【ククリ】",
+        "【りぜる】",
+        "【ひな】",
+        "【紬】",
+        "【路樹】",
+        "【みとら】"
+      ],
+      "endings": [
+        "自分たちの足跡",
+        "迎えの灯り"
+      ],
+      "classicBothBranches": true,
+      "immersiveDesktop": true,
+      "immersiveMobile": true
+    }
+  ],
+  "regression": {
+    "may5": true,
+    "july31": true,
+    "eligibleDaysOnly": true
+  }
+}
