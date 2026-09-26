@@ -1,0 +1,55 @@
+{
+  "head": "e08ad833d29fbc4fb80698ebe64acf9b1f0823d4",
+  "results": [
+    {
+      "date": "2026-05-06",
+      "cards": 33,
+      "titles": "pass",
+      "allParagraphs": "pass",
+      "characterLinks": "33 HTTP 200",
+      "mobileOverflow": false
+    },
+    {
+      "date": "2026-05-05",
+      "cards": 33,
+      "titles": "pass",
+      "allParagraphs": "pass",
+      "characterLinks": "33 HTTP 200",
+      "mobileOverflow": false
+    },
+    {
+      "date": "2026-05-04",
+      "cards": 33,
+      "titles": "pass",
+      "allParagraphs": "pass",
+      "characterLinks": "33 HTTP 200",
+      "mobileOverflow": false
+    },
+    {
+      "date": "2026-05-03",
+      "cards": 33,
+      "titles": "pass",
+      "allParagraphs": "pass",
+      "characterLinks": "33 HTTP 200",
+      "mobileOverflow": false
+    }
+  ],
+  "covers": [
+    {
+      "date": "2026-05-05",
+      "width": 1536,
+      "height": 1024,
+      "servedBytesMatch": true,
+      "mobileOverflow": false
+    },
+    {
+      "date": "2026-05-06",
+      "width": 1536,
+      "height": 1024,
+      "servedBytesMatch": true,
+      "mobileOverflow": false
+    }
+  ],
+  "navigation": "Ana link click and revised paragraph passed; all 132 individual titles checked",
+  "scope": "Local four-date build using repository builders without HTML title postprocessing; not a full production build or deployment"
+}

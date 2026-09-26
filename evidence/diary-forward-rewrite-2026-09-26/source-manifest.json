@@ -1,0 +1,440 @@
+{
+  "base": "ba6f7ef7",
+  "head": "334f5cc9350f891d92927ed3e3dd97b937bfa846",
+  "dates": [
+    "2026-05-05",
+    "2026-05-06"
+  ],
+  "context": "66 blocks unchanged",
+  "forbidden": "0 matches in 66 explicitly selected files",
+  "hashes": [
+    {
+      "file": "diary-ana/2026-05-05_雪花を飲まない宣言は後日です.md",
+      "sha256": "d594aa655b52436f3f8134455f54d1e61275cedb85ef9aeb567d6baea249bffd"
+    },
+    {
+      "file": "diary-astarotte/2026-05-05_ビールの街から電子市場へ.md",
+      "sha256": "de03948bfccfee0695130491043817c5b174217461e8eb14ac1f00ad5bca2eb1"
+    },
+    {
+      "file": "diary-ayu/2026-05-05_雪花の名前が付いた街区.md",
+      "sha256": "0999d9fcefd3e44b23ffc7f07bd896957ea28b3f319e6aef6b5f6bce79f22c62"
+    },
+    {
+      "file": "diary-dejiko/2026-05-05_酒から電子機器へ切り替わるにょ.md",
+      "sha256": "d3f12d9e66381f06d9a7808d3eceab2cae99eac1304eb63da0e650bfb69b5958"
+    },
+    {
+      "file": "diary-ecoko/2026-05-05_SEGでは比較表を一枚.md",
+      "sha256": "fe2b4744b83d707d4bdc7a7f839cd9bab6a077c2172b210d51bb6ee52ab6c295"
+    },
+    {
+      "file": "diary-feiris/2026-05-05_SEG電子市場へ世界線を切り替えるニャン.md",
+      "sha256": "d8f0d2a99d4799f143024aeeedacaf33b3880a6fc7ddab5641142e550915966d"
+    },
+    {
+      "file": "diary-hazuki/2026-05-05_二つの産業施設を訪ねる.md",
+      "sha256": "edea1c2020e1a29c7146c395b5965049a36b86f6ed4e5a3a3fb87737f5fce87a"
+    },
+    {
+      "file": "diary-hina/2026-05-05_工場だけではない雪花科創城.md",
+      "sha256": "0628bbb142a8f141d70787e0d1577184cc41e777d4b75fa77d579a2575677cc5"
+    },
+    {
+      "file": "diary-hinahina/2026-05-05_雪花科創城という複合ワールド.md",
+      "sha256": "8667868d2b339e59cb65d24f2ff4b66703683f6d5709a5c5bc324ec8fd38403b"
+    },
+    {
+      "file": "diary-hinako/2026-05-05_ビールだけのまちじゃないのー.md",
+      "sha256": "4210692972c7fcc4639fb9456719496b68e013d4dfa08a8e7dfb608557161289"
+    },
+    {
+      "file": "diary-kiku8/2026-05-05_工場入口でアクセス拒否.md",
+      "sha256": "cc99e71932ad0d5957459725b2d28015429122251190413dc16e94637aa45aad"
+    },
+    {
+      "file": "diary-kotomi/2026-05-05_関係者だけという一行.md",
+      "sha256": "257492197800512424fdcdc0ce8b8a0772c5acd6e34cfaf1a484ee04db6ed03d"
+    },
+    {
+      "file": "diary-kud/2026-05-05_地区と工場を分けるであります.md",
+      "sha256": "e1e35f32fb1b84f8451f8d28291dc02cbbbd3c5494479ba72c94ff44cb0e8efd"
+    },
+    {
+      "file": "diary-kukuri/2026-05-05_一般客に開いたビールの街区.md",
+      "sha256": "d7cb6035b7d7ed0c675f5483242c860547a1bb302fc0459c2febbfe3de3fc2f2"
+    },
+    {
+      "file": "diary-kyoko/2026-05-05_BREWTOWNと工場は役割が違う.md",
+      "sha256": "c9894bf6abcdbaf98ed12a5ed4a7e11da1941a9f7af134a28063b22d437287bd"
+    },
+    {
+      "file": "diary-mayuki/2026-05-05_午後の行き先を二種類に仕立てる.md",
+      "sha256": "101fdf47ab3189f374d99f9532e21d3b2c4bf0ec5aeaeb9b7bb2f0c09d79d656"
+    },
+    {
+      "file": "diary-mii/2026-05-05_研究とお店と家が集まるなの.md",
+      "sha256": "31cbe72cf2ee96b28fffaccd476f9316f4d869240fc4591f5573335dddd4fc60"
+    },
+    {
+      "file": "diary-minagi/2026-05-05_SEG電子市場へ移る光.md",
+      "sha256": "02afd2a212f3190976ddf5ee27931998f4307175f2885cb3f6e28db9e72c9019"
+    },
+    {
+      "file": "diary-mint/2026-05-05_BREWTOWNから88分後ですわ.md",
+      "sha256": "043e732d802118600c053516af7c7cd3ad7cfc5c898af28b6300d3c3f6690cea"
+    },
+    {
+      "file": "diary-mitra/2026-05-05_醸造所は飲み物の工場です.md",
+      "sha256": "d9de17ffab23d4461c384fb2d58dd1ee998ab87327c72736bfbea2b9e03ead42"
+    },
+    {
+      "file": "diary-mitsuba/2026-05-05_雪花から青島へ乗り換える宣言.md",
+      "sha256": "d014480ff9c413a71edf94003c0a5c2762c20a4b90fb2f5182e262db2aa73e43"
+    },
+    {
+      "file": "diary-moegami/2026-05-05_製造の入口と市場の入口.md",
+      "sha256": "b724618623087e9839acfc8ad6179e1f3f6215a181700e9eebd77cbb6cef4096"
+    },
+    {
+      "file": "diary-multi/2026-05-05_雪花科創城の二つの範囲を案内します.md",
+      "sha256": "f3b9deb86fe86a5f313d9d7e1d8562f6f0c83a028bce900e2c4a04689c7218f1"
+    },
+    {
+      "file": "diary-nemurin/2026-05-05_BREWTOWNは眠っていない商業街区.md",
+      "sha256": "755a5d3f0d7612e0e260a27841e9b8a6f79c0da7415ea1ec6a23b78f74462c9f"
+    },
+    {
+      "file": "diary-oji/2026-05-05_商業街区は工場見学の代わりではない.md",
+      "sha256": "94d5f0a5f71a64558cb643200d006c0613751bf132493766196a5ff67c9d083b"
+    },
+    {
+      "file": "diary-rem/2026-05-05_飲食の街区だけは開いていました.md",
+      "sha256": "28b0218f51964942471e9c5d52b382022ccb98c2456b84fdf820a69123989325"
+    },
+    {
+      "file": "diary-rin/2026-05-05_入れない工場から巨大市場へ.md",
+      "sha256": "31205c94156e214151a406b0419ff53fdf7ddc311c4a73a92ad568b0a61d5efd"
+    },
+    {
+      "file": "diary-rizel/2026-05-05_だんなさまが着いた雪花科創城ですぅ.md",
+      "sha256": "7cea4d453c9730a04ab792f1d5f12f5fdf38d00a9007e42614aff46985ddf570"
+    },
+    {
+      "file": "diary-roju/2026-05-05_工場見学拒否と後日の宣言を分離する.md",
+      "sha256": "e26400c842102858b3b73d846ed0e656b3f273c6119376aeefc5272a497ccdac"
+    },
+    {
+      "file": "diary-ruriko/2026-05-05_18時6分にSEGから信号.md",
+      "sha256": "3e1a2f448d040a9513d91b73851eff543adcacbe3b17ce95f1c6387b7481f4e9"
+    },
+    {
+      "file": "diary-sharo/2026-05-05_入れなかった悔しさは後まで残る.md",
+      "sha256": "ce61c38dff0d4149d739856afa2518ba798c633cfbe3055958a603a7d942bae4"
+    },
+    {
+      "file": "diary-tama/2026-05-05_SEG市場で確認できない買い物.md",
+      "sha256": "73c60320dacf1ded0431c4bec87a231a48e3bc4643bd15e3b86f1c1342ca7718"
+    },
+    {
+      "file": "diary-tsumugi/2026-05-05_工場の入口で旅程が変わる.md",
+      "sha256": "480acf7da4fcefacbe3e386604ef2955adb7f7be8e042084a08e902007e2a33b"
+    },
+    {
+      "file": "assets/diary-covers/2026-05-05_雪花ビール本社に入れずSEG電子市場へ行く.png",
+      "sha256": "1ba118341df229f5569ed86cc723a8c6e57cd8e09e96e275c7d2646292b290ca"
+    },
+    {
+      "file": "diary-ana/2026-05-06_蛇口港で荷物を確かめる.md",
+      "sha256": "673ad696f7074af8fc151e7f37da06f2f3c280f8c250149a75e5717552fcce45"
+    },
+    {
+      "file": "diary-astarotte/2026-05-06_二つの本社で扉が閉じた.md",
+      "sha256": "1d2086b390127ed3655e763ac1baa9928968e28e61617be7bc3b30a1f8ea6143"
+    },
+    {
+      "file": "diary-ayu/2026-05-06_帰国日の最初の一句.md",
+      "sha256": "45890bb48b7aca9ec42a6d03a124da419c6739ce4d2005f403730d4a118e9c19"
+    },
+    {
+      "file": "diary-dejiko/2026-05-06_二つとも入口で止まったにょ.md",
+      "sha256": "ade3e09d0b17b6077be493481f3450cea8e0badfbfa33d99f8b9efe6c744c6fd"
+    },
+    {
+      "file": "diary-ecoko/2026-05-06_香港では金盾の遮断が消える.md",
+      "sha256": "a3bff4d6496a7728c2eccf845f87dd95e91f8ff2356a0ce1488573dcfc2b26d0"
+    },
+    {
+      "file": "diary-feiris/2026-05-06_香港で通信の世界線が変わるニャン.md",
+      "sha256": "eddd48dfc8563bd3ac65bb0b3786e556dbd0ee8616edd9f45f30e5c20ad44880"
+    },
+    {
+      "file": "diary-hazuki/2026-05-06_Tencentも雪花も入口まで.md",
+      "sha256": "255fa876ad9f1b0d1401a213896b0575b7e12eb37bfc60fce248aca280c58b41"
+    },
+    {
+      "file": "diary-hina/2026-05-06_白酒の結果が朝に来る.md",
+      "sha256": "d604725011c225e47e2e1e0ee9ba78125a7be5a8917153e20553c538bab8bb86"
+    },
+    {
+      "file": "diary-hinahina/2026-05-06_寝ゲロで始まる深圳の朝.md",
+      "sha256": "bc53bd64b6059be429bd5b74118b5954c37b43708bb7c2ebc3e1134286287a34"
+    },
+    {
+      "file": "diary-hinako/2026-05-06_おさけでたいへんな朝なのー.md",
+      "sha256": "46629091ab6b54a9c376674c99b45e7e6feb190804939361153a58962b1df48f"
+    },
+    {
+      "file": "diary-kiku8/2026-05-06_香港空港で本土との差を観測.md",
+      "sha256": "b034b9ce41c237fd6f8b84d9720d308ea876103d9d5ac7f392448a28db8e8ef6"
+    },
+    {
+      "file": "diary-kotomi/2026-05-06_香港最高の理由を二つ読む.md",
+      "sha256": "98d30de6636fc39f09172eed5ed28cf025f4832bf1dd715393189a316e92c0fc"
+    },
+    {
+      "file": "diary-kud/2026-05-06_白酒と寝ゲロの因果であります.md",
+      "sha256": "e4a0d87132d2afb8e081fc4e46b0f2a366194839e79b054ec464f5c35316e097"
+    },
+    {
+      "file": "diary-kukuri/2026-05-06_港から空港へ海の冒険.md",
+      "sha256": "e1ebe72ec31f3b8e772274e6bbd8753cd9d7e457cf80df57217a61356c7c70bd"
+    },
+    {
+      "file": "diary-kyoko/2026-05-06_蛇口港から空港へ直接出国.md",
+      "sha256": "99042ea55608fb29e7e2519efe1ce1ae0b0757a1314bff9e2c174156454eddf6"
+    },
+    {
+      "file": "diary-mayuki/2026-05-06_二社の入口で旅を縫い合わせる.md",
+      "sha256": "ff192fd1c9709c59057c05e1ee5457a6262a412ad3f3db9173301d807858ba00"
+    },
+    {
+      "file": "diary-mii/2026-05-06_白酒の魔法は朝まで残ったなの.md",
+      "sha256": "c861bd33b747cd3d523987d3290d62d50656a7fda1295245c2c9c2c230c1e2dc"
+    },
+    {
+      "file": "diary-minagi/2026-05-06_羽田に着いた金色の箱.md",
+      "sha256": "b9073cf279077b75542d496d8e7b374d30d6d3815ec86dc7b61f8d8987fca080"
+    },
+    {
+      "file": "diary-mint/2026-05-06_7種類で合計650gですわ.md",
+      "sha256": "05205c6add6012a0128dc9a812c77e7d55e6da1fbffd46b1f1bfe36a3d0b8a17"
+    },
+    {
+      "file": "diary-mitra/2026-05-06_乾物7種を650gの贈り物へ訳す.md",
+      "sha256": "49f00700c1a243942e50d9d6c05400ddedae0049e60ae692b3033a9ce45bb73e"
+    },
+    {
+      "file": "diary-mitsuba/2026-05-06_乾物七種は料理計画にする.md",
+      "sha256": "88b9b7fe3560ccd7ec98d266becf0d884fec2ee47a8f16b80736273948a77e3f"
+    },
+    {
+      "file": "diary-moegami/2026-05-06_旅行の終わりに残る二つの入口.md",
+      "sha256": "7737895bfcbdd33eac5d5b951535ed323e516d2be405013b17fe8a2fcc957939"
+    },
+    {
+      "file": "diary-multi/2026-05-06_港と空港を船でつなぎます.md",
+      "sha256": "4c5d21ff61b4f7026867e96b065a06faae5250fb912504ad3ba418764e320b9c"
+    },
+    {
+      "file": "diary-nemurin/2026-05-06_蛇口港から船で香港空港へ.md",
+      "sha256": "9da532611eec410bb0f1a771751f2eb5ef3a20fe46edd85b4c1306d217c1c4eb"
+    },
+    {
+      "file": "diary-oji/2026-05-06_蛇口クルーズセンターの網目.md",
+      "sha256": "c51a9749608db4500e881c4db1dbeeff51cf66f56b901b81f989b0bf9b90bf7f"
+    },
+    {
+      "file": "diary-rem/2026-05-06_船内の荷物確認は記録にありません.md",
+      "sha256": "4add95086f63841e5d89a0c485c50981d00a8a6a1d38135b845ed02025110be0"
+    },
+    {
+      "file": "diary-rin/2026-05-06_雪花を飲まないは怒りの宣言.md",
+      "sha256": "60c7d2f309c5113fb43e764b69473b4d4a6649dd8a5558b010b1a732716bf449"
+    },
+    {
+      "file": "diary-rizel/2026-05-06_だんなさまの白酒の朝ですぅ.md",
+      "sha256": "cbf0cbe2f2a51e2a21f3e973285ffe34e399f5d5e585a4c67ce018b3fdc0aaa3"
+    },
+    {
+      "file": "diary-roju/2026-05-06_二社の入場失敗を別日から集約する.md",
+      "sha256": "3e744187a7bd9054d1a9ebe0b580328ba25735d122a72a5132a0fc27de63eb7b"
+    },
+    {
+      "file": "diary-ruriko/2026-05-06_金色の箱から7つの重量を受信.md",
+      "sha256": "beea422ec7b89736f42e0d8ac16163b87740bcea722c7771d06f0792a71c36db"
+    },
+    {
+      "file": "diary-sharo/2026-05-06_香港空港のバーガーは後日もまずい.md",
+      "sha256": "6d41112d8d711efc44d58035f2a280f082e170ac7715885b6c4ea0841b104cfd"
+    },
+    {
+      "file": "diary-tama/2026-05-06_1万円は確認価格ではない.md",
+      "sha256": "52fc1d21807a7b1ed0734ff6b4f8df10167dd257ccd95c12fc70b70df17076bc"
+    },
+    {
+      "file": "diary-tsumugi/2026-05-06_香港で紙を流せる安堵.md",
+      "sha256": "1e8bdfe42e7766ec0a8b566a8f2f223724a2ec0a8435db11b1e67da375dffeac"
+    },
+    {
+      "file": "assets/diary-covers/2026-05-06_寝ゲロで目覚めた深圳から羽田へ帰る.png",
+      "sha256": "51d105fa479f36bca596825a1a186fc54408af6b3c83b9fd2a4098c469716c5f"
+    },
+    {
+      "file": "data/diary-writing-models.json",
+      "sha256": "d4cfba30bc34ea1ccad099a3a58fd9e3cd5a4b09f5b120a89aa8624f7d7edf5d"
+    },
+    {
+      "file": "scripts/build-diary.mjs",
+      "sha256": "cab45ce8c2bca090b0c81356bd4f1b8e2d9f2defea4da50da57cc9efb7558ab0"
+    },
+    {
+      "file": "scripts/lib/diary-writing-model.mjs",
+      "sha256": "d0a77a5f0c586e84405567ee16138544b8e18be260dc4cab5b5847dbeb4e9eb2"
+    },
+    {
+      "file": "scripts/lib/diary-title.mjs",
+      "sha256": "a1beb705451a891a2fad8ee42c1533e4a8b6b7e47e77009a6e9f83c4c373d49e"
+    },
+    {
+      "file": "scripts/lib/build-diary-char.mjs",
+      "sha256": "284a92722069b9756e946f075c79f148ce5f4e13fa0b1a602f4ed026e8a97eaf"
+    },
+    {
+      "file": "scripts/build-diary-ana.mjs",
+      "sha256": "b66408afe5b429906a19f47d79742f38cf7ea308b5bca8d883ca1ecd1e03d558"
+    },
+    {
+      "file": "scripts/build-diary-astarotte.mjs",
+      "sha256": "b8f9e50108e8e743460ee683d47c8c0b468f83338f1520221713c3c953665576"
+    },
+    {
+      "file": "scripts/build-diary-ayu.mjs",
+      "sha256": "cecff5c8333687ed75ef9373a49f8d662e719b44182cb794c0d215b5876b5007"
+    },
+    {
+      "file": "scripts/build-diary-dejiko.mjs",
+      "sha256": "254ec9670927f1ca910f7afaf842ae40385f185a160623ff474d735ce513fb3b"
+    },
+    {
+      "file": "scripts/build-diary-ecoko.mjs",
+      "sha256": "7bc16cbdf32e6d4e2fcae9ab149b894da113d0b10ba1434aee7fb0ff5a15ee31"
+    },
+    {
+      "file": "scripts/build-diary-feiris.mjs",
+      "sha256": "d1d7ddbfa368ce190c8aa98853a302a6effed059e8316dc730e011c19ca8786d"
+    },
+    {
+      "file": "scripts/build-diary-hazuki.mjs",
+      "sha256": "5cef461b7efae24668ee795d7d6c0ead1d2dba0448611ce236960567371567b0"
+    },
+    {
+      "file": "scripts/build-diary-hina.mjs",
+      "sha256": "e35a7698efebead8a1ccb1da8fcfc4ee6ec50387b51edd4555ac5a701e4a6483"
+    },
+    {
+      "file": "scripts/build-diary-hinahina.mjs",
+      "sha256": "d0760cae5a2d1c2a9385466c4c42ea86d42b44fdf06a0a08cd5228288b9dfad4"
+    },
+    {
+      "file": "scripts/build-diary-hinako.mjs",
+      "sha256": "d2abff5a36c0a0d59222f98fc368677967b8e06787b248f6a4aa3340cc4ee170"
+    },
+    {
+      "file": "scripts/build-diary-kiku8.mjs",
+      "sha256": "1e7e740a93a405d10a05befcce07c858f889f844f1c5ac396e5a1caf6b16ca6b"
+    },
+    {
+      "file": "scripts/build-diary-kotomi.mjs",
+      "sha256": "674c617c4cb7d01d379e6d152e286cb7a9c3c48d3aa3e631b951021840e4fb92"
+    },
+    {
+      "file": "scripts/build-diary-kud.mjs",
+      "sha256": "42b7327ca66c2ca78dd2097109b99b35e53bf97403ba83d7956c0e628b4b574e"
+    },
+    {
+      "file": "scripts/build-diary-kukuri.mjs",
+      "sha256": "dc9c950ff0f599e0118d7d9e1ebddb8765000cdf755b3b26a01979b4b01e26c8"
+    },
+    {
+      "file": "scripts/build-diary-kyoko.mjs",
+      "sha256": "f347fa56fcb0088388a3ecb7a10741f6c620d01abdbfb5976e38b29257669fe8"
+    },
+    {
+      "file": "scripts/build-diary-mayuki.mjs",
+      "sha256": "ed2a860dba4e2b93979ce12f676324f221be3414f9ab8b7834ba0efe4e31f394"
+    },
+    {
+      "file": "scripts/build-diary-mii.mjs",
+      "sha256": "687c54e18d36c5d5fcf1223f730f38ad527fb138cb2199b41073f6e1c54a702b"
+    },
+    {
+      "file": "scripts/build-diary-minagi.mjs",
+      "sha256": "2b81c0fde034ddfa41b5ebaf89b71d36e9293114c04f870b55207bcbcc4489a9"
+    },
+    {
+      "file": "scripts/build-diary-mint.mjs",
+      "sha256": "1a94282853eb624b515d1fcfe0b002555b9e11e19e0102d3c15020b36a90f694"
+    },
+    {
+      "file": "scripts/build-diary-mitra.mjs",
+      "sha256": "911e1069b1bb13740416e60f7ab14fb15aecc947ffe733e63c18b69d9268234b"
+    },
+    {
+      "file": "scripts/build-diary-mitsuba.mjs",
+      "sha256": "691082d15ef8ea4acb18cad4a55e4cbdf9b3990200b3ce98b5bf21484782fd69"
+    },
+    {
+      "file": "scripts/build-diary-moegami.mjs",
+      "sha256": "a894ec1311469a7c6d6426cf47ad869c7a7049ff4760e3fb3c7d4f2ad6bffde7"
+    },
+    {
+      "file": "scripts/build-diary-multi.mjs",
+      "sha256": "7a901ccb2cdf3d2482d12f7bb19750c2ab07a48abd175475ad86a5d27c6d06f9"
+    },
+    {
+      "file": "scripts/build-diary-nemurin.mjs",
+      "sha256": "138e63d602926ac1c48ce80e2e2466324728f7d36eef536f5828286db549b032"
+    },
+    {
+      "file": "scripts/build-diary-oji.mjs",
+      "sha256": "84ef991bbfe4bc8c96d88be8bd8b9eedae41ae21828e3d4c39b89c23cdffc117"
+    },
+    {
+      "file": "scripts/build-diary-rem.mjs",
+      "sha256": "cdb72beaa2ac0a973d36156f1acb7660b45892768152ed2949d0e5549594af9d"
+    },
+    {
+      "file": "scripts/build-diary-rin.mjs",
+      "sha256": "f1b1ab555f15182bc243633be71afde790fbbc1d4d051aac29abd30c221928d1"
+    },
+    {
+      "file": "scripts/build-diary-rizel.mjs",
+      "sha256": "0d4ed9dc604cbf1d15cb8c50dacb699be1a2d15c6fac4eeaff1c494794f62292"
+    },
+    {
+      "file": "scripts/build-diary-roju.mjs",
+      "sha256": "94072ebdcbe7f1ec36cd8b41bb3c5297b03652441133cade7dd277455affe8e1"
+    },
+    {
+      "file": "scripts/build-diary-ruriko.mjs",
+      "sha256": "d9930b3c52c12e24abe9b82d2496cc6b81c8f11b5baed68cb0d4305d0a6d2c2a"
+    },
+    {
+      "file": "scripts/build-diary-sharo.mjs",
+      "sha256": "0453f8c05ba535e20e32d3368a16155089507de8da583da6ee6fcd4469f79aa8"
+    },
+    {
+      "file": "scripts/build-diary-source-ledger.mjs",
+      "sha256": "12eec6333160a5936508e7be4e3c5358353cc3126981d7dbe67003f0cd0d7c13"
+    },
+    {
+      "file": "scripts/build-diary-tama.mjs",
+      "sha256": "9838cdf7c2504fa997f62551a745d046937c92ad44a8fdcf5bb334d954c70a56"
+    },
+    {
+      "file": "scripts/build-diary-tsumugi.mjs",
+      "sha256": "9ace46dd02038ce66bad2d8d401d4d4a9447ef0897b1b48c835efdbd09408d11"
+    }
+  ]
+}
