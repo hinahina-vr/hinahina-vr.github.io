@@ -1058,6 +1058,78 @@
       "prompt": "A literary Japanese diary cover illustration, no text. Title mood: 空白の食器棚. Summary: 記録に残らない時間ほど、あとで形を思い出しにくい。けれど、生活はそういう時間でできている。コップを洗う。机の端に寄ったものを戻す。開きっぱなしの箱を閉める。どれも人に話すほどではないが、放っておくと部屋の気配が濁る。 台所の棚には、外へ出ていかない日付がしまわれている。皿の重なり、乾いた箸、少し残った茶葉。そういうものは何も主張しない。けれど、手で触ると、生活がまだ破れていないことだけは分かる。 言葉を外へ出さない時間にも、内側では小さ. Create a cinematic scene with strong atmosphere, restrained symbolism, and a handcrafted retro-web warmth.",
       "summary": "記録に残らない時間ほど、あとで形を思い出しにくい。けれど、生活はそういう時間でできている。コップを洗う。机の端に寄ったものを戻す。開きっぱなしの箱を閉める。どれも人に話すほどではないが、放っておくと部屋の気配が濁る。 台所の棚には、外へ出ていかない日付がしまわれている。皿の重なり、乾いた箸、少し残った茶葉。そういうものは何も主張しない。けれど、手で触ると、生活がまだ破れていないことだけは分かる。 言葉を外へ出さない時間にも、内側では小さ",
       "updatedAt": "2026-05-24T19:05:47.175Z"
+    },
+    "2026-08-11_湖畔の電話ボックス": {
+      "slug": "2026-08-11_湖畔の電話ボックス",
+      "date": "2026-08-11",
+      "title": "湖畔の電話ボックス",
+      "coverSrc": "./assets/diary-covers/2026-08-11_湖畔の電話ボックス.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "A quiet, understated hand-painted diary-cover illustration of an old narrow rounded-roof public telephone booth wrapped in green vines and orange flowers by Lake Nojiri, soft pencil lines and gouache on warm off-white paper. A modest ordinary scene, no letters, logos, dramatic lighting or glossy AI finish.",
+      "promptProvenance": "reconstructed from generation instruction",
+      "summary": "湖畔の電話ボックスを題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-12_1か月ぶりの酒": {
+      "slug": "2026-08-12_1か月ぶりの酒",
+      "date": "2026-08-12",
+      "title": "1か月ぶりの酒",
+      "coverSrc": "./assets/diary-covers/2026-08-12_1か月ぶりの酒.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration for August 12. A phone lying casually on a wooden desk beside a small open Japanese history book. On the phone only plain unreadable gray chat bubbles, no writing. The open book shows a simple little ink sketch of a feudal castle, but NO readable type. A wry, mundane still life about asking an AI silly questions about history. No sexual content, no people. Medium: understated hand-painted gouache travel sketch with graphite pencil marks on off-white paper; economical irregular lines, asymmetrical crop, broad simple color shapes, a few deliberately unfinished edges. Restrained earthy colors, soft natural light. It should look like a modest observed sketch, not a grand allegory. No words, readable letters, logos, watermarks, fantasy symbols, sparkles, cinematic bloom, plastic gloss, photorealistic rendering or overdesigned composition.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "1か月ぶりの酒を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-13_旅の前に増える仕事": {
+      "slug": "2026-08-13_旅の前に増える仕事",
+      "date": "2026-08-13",
+      "title": "旅の前に増える仕事",
+      "coverSrc": "./assets/diary-covers/2026-08-13_旅の前に増える仕事.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration for August 13. An inexpensive pair of wired headphones curled beside a small travel bag and a slim portable music player on a desk. A single blank airline itinerary sheet partly peeks out. An intimate still life about listening to an old song before a trip to the Philippines. Ordinary, slightly disordered arrangement, no extra decorative props, no people. Medium: understated hand-painted gouache travel sketch with graphite pencil marks on off-white paper; economical irregular lines, asymmetrical crop, broad simple color shapes, a few deliberately unfinished edges. Restrained earthy colors, soft natural light. It should look like a modest observed sketch, not a grand allegory. No words, readable letters, logos, watermarks, fantasy symbols, sparkles, cinematic bloom, plastic gloss, photorealistic rendering or overdesigned composition.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "旅の前に増える仕事を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-16_セブから自宅のPCを動かす": {
+      "slug": "2026-08-16_セブから自宅のPCを動かす",
+      "date": "2026-08-16",
+      "title": "セブから自宅のPCを動かす",
+      "coverSrc": "./assets/diary-covers/2026-08-16_セブから自宅のPCを動かす.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration for August 16. A simple laptop on a compact hotel desk near a half-open curtain; the display has a sparse gray code-editor layout without any legible letters, a small cable leads to a mouse. Off to one side is the cropped edge of a travel bag. The story is remotely using a home PC while in Cebu. Asymmetrical quiet composition, everyday working objects, no dramatic night lighting, no people. Hand-drawn travel notebook illustration: graphite and opaque gouache on off-white paper, irregular spare line work, patches of flat muted paint, economical details. Human sketch with an off-center crop, not a polished architectural visualization. No readable text, letters, logos, watermark, sparkles, fantasy light, heavy bloom, glossy rendering, exaggerated depth of field or overdecorated border.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "セブから自宅のPCを動かすを題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-17_プソビレッジに立ち寄る": {
+      "slug": "2026-08-17_プソビレッジに立ち寄る",
+      "date": "2026-08-17",
+      "title": "プソビレッジに立ち寄る",
+      "coverSrc": "./assets/diary-covers/2026-08-17_プソビレッジに立ち寄る.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration for August 17. A quiet corner table in a modest covered tropical food court: a plain blue plastic chair pulled out beside a worn rectangular table, blurred neighboring food stalls beyond, simple metal roof beams above. No meal on the table; the subject is the place visited, not an invented dish. Midday neutral colors, a little green visible through the far opening, no identifiable people. Hand-drawn travel notebook illustration: graphite and opaque gouache on off-white paper, irregular spare line work, patches of flat muted paint, economical details. Human sketch with an off-center crop, not a polished architectural visualization. No readable text, letters, logos, watermark, sparkles, fantasy light, heavy bloom, glossy rendering, exaggerated depth of field or overdecorated border.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "プソビレッジに立ち寄るを題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-19_みんなに渡した旅のしおり": {
+      "slug": "2026-08-19_みんなに渡した旅のしおり",
+      "date": "2026-08-19",
+      "title": "みんなに渡した旅のしおり",
+      "coverSrc": "./assets/diary-covers/2026-08-19_みんなに渡した旅のしおり.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. A close overhead view of a smartphone showing a simple travel itinerary with small colored rectangles and a rough island outline, but no readable letters; a second phone rests nearby showing the same layout. On an ordinary tabletop with one pencil. The story is a personally built travel guide shared with friends, human scale, no corporate dashboard, no hands. Medium: restrained gouache and pencil notebook drawing on warm ivory paper, human irregular lines, loose edges, muted color patches and deliberate empty areas. Keep the arrangement casually asymmetrical and the objects few. No readable words, logos, watermark, decorative border, circuitry overlays, holograms, cinematic bloom, sparkles, plastic gloss, hyperrealism or dramatic symbolism.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "みんなに渡した旅のしおりを題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
     }
   }
 }

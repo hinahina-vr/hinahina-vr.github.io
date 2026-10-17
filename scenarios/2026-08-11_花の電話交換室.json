@@ -1,0 +1,392 @@
+{
+  "title": "花の電話交換室",
+  "date": "2026-08-11",
+  "subtitle": "湖畔の電話ボックスから始まる夢",
+  "genre": "創作の夢・実際の行動記録とは別のお話",
+  "mapTitles": {
+    "standalone_start": "鳴っている花",
+    "turn": "花を選ぶ交換手",
+    "choose": "家への電話",
+    "END_A": "帰宅を待つ録音",
+    "END_B": "夜まで咲く花"
+  },
+  "mapSummaries": {
+    "standalone_start": "電話ボックスの花から、住人の呼び出し音がする。",
+    "turn": "同じ花へ話すと声が渋滞する。交換室に道が開く。",
+    "choose": "みんなで留守番電話を残すか、花ごとに電話をかけるか。"
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "narrator",
+      "text": "湖畔の電話ボックスで、橙色の花が鳴っていた。扉を開けると、受話器の代わりに細い蔓が垂れている。ワディーが先を持ち上げると、ゲストハウスの呼び鈴が聞こえた。"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、ひなにも聞かせて。そっちのおうちに、誰かいるのかな。"
+    },
+    {
+      "speaker": "hinahina",
+      "text": "私たち全員こっちにいるんだけどねえ。留守番、頼んだっけ。"
+    },
+    {
+      "speaker": "multi",
+      "text": "はわわ、留守番電話の設定を忘れていました。呼び出しだけ続いています。"
+    },
+    {
+      "speaker": "kiku8",
+      "text": "着信先は同じです。ただし、花ごとに時刻が違います。"
+    },
+    {
+      "speaker": "kotomi",
+      "text": "この花は朝なの。やかんの音がするの。"
+    },
+    {
+      "speaker": "minagi",
+      "text": "……こちらは夕方です。炊飯器が、もうすぐ鳴りそうです。"
+    },
+    {
+      "speaker": "ayu",
+      "text": "ボクの花、玄関で誰かが靴を探してる。あ、それボクの声だよ。"
+    },
+    {
+      "speaker": "ruriko",
+      "text": "……家に残った音。花の奥で鳴っている。返事は、まだ。"
+    },
+    {
+      "speaker": "kud",
+      "text": "わふー、私の花は呼び出し音が英語です！　数字を押すところがありませんっ。"
+    },
+    {
+      "speaker": "ana",
+      "text": "花の色で選ぶのでしょうか。押してしまうと、潰れそうです。"
+    },
+    {
+      "speaker": "mii",
+      "text": "みぃタンはね、黄色にするの！　あれ、みんなの声が混ざっちゃったよー。"
+    },
+    {
+      "label": "turn"
+    },
+    {
+      "speaker": "narrator",
+      "text": "蔓がからまり、電話ボックスの床に花びらが積もり始めた。全員が同じ電話へ話していた。床板の下から小さな階段が現れ、根の間に電話交換室が見えた。"
+    },
+    {
+      "speaker": "sharo",
+      "text": "いったん話すのを止めてください！　これじゃ誰が呼んでいるか分かりません。"
+    },
+    {
+      "speaker": "rin",
+      "text": "受話器を置く台がないじゃん。誰か、蔓の端を持って。"
+    },
+    {
+      "speaker": "rem",
+      "text": "レムが預かります。強く引っ張らず、そのまま渡してください。"
+    },
+    {
+      "speaker": "hinako",
+      "text": "ヒナ、からまったとこをほどく！　おにいたまの声、出てこられる？"
+    },
+    {
+      "speaker": "kyoko",
+      "text": "交換手ごっこじゃん！　あたし、かっこいい椅子のところ行く！"
+    },
+    {
+      "speaker": "mitsuba",
+      "text": "その椅子、切り株よ。座る前に虫くらい見なさい。"
+    },
+    {
+      "speaker": "astarotte",
+      "text": "私の花まで勝手につなぐでないぞ。かける相手くらい、自分で決めるのだ。"
+    },
+    {
+      "speaker": "mint",
+      "text": "でしたら花を持った方から順に。お名前の札を添えれば、取り違えませんわ。"
+    },
+    {
+      "speaker": "tama",
+      "text": "たまちゃんが札を書くよ！　ひらがななら、みんな読めるよね。"
+    },
+    {
+      "speaker": "hazuki",
+      "text": "わたしは花びらに描くわ。あっ、落ちた！　……笑わないでよ。"
+    },
+    {
+      "speaker": "mayuki",
+      "text": "もう、札まで遊び道具にしないで。糸で結んでおくから貸して。"
+    },
+    {
+      "speaker": "ecoko",
+      "text": "えここ、落ちた花びら集めるね。床がふわふわで、踏むのもったいないな。"
+    },
+    {
+      "speaker": "dejiko",
+      "text": "交換室は大忙しにょ。お代は花びらでいいにょ？"
+    },
+    {
+      "speaker": "feiris",
+      "text": "お客様が全部身内ニャ。先に電話を通してから相談するニャン。"
+    },
+    {
+      "speaker": "moegami",
+      "text": "根の先に、家。声の通る道がある。花も、小さな通信機なのかもしれない。"
+    },
+    {
+      "speaker": "oji",
+      "text": "同時に33本は無理がある。順番にかけるか、1本の録音へまとめるかだ。"
+    },
+    {
+      "speaker": "roju",
+      "text": "俺は録音を残す案もあると思う。留守の家なら、帰ってから聞けるからな。"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、わたしの花を隣につないでいい？　電話でも隣がいいな。"
+    },
+    {
+      "speaker": "rizel",
+      "text": "だんなさまー、りぜるは声でお迎えしたいですぅ。帰ったらびっくりするかな。"
+    },
+    {
+      "speaker": "nemurin",
+      "text": "ねむりん、おかえりって先に言っとくねぇ。電話の途中で寝ちゃうかも。"
+    },
+    {
+      "speaker": "tsumugi",
+      "text": "帰る家から、自分たちの声が聞こえるのですね。少し不思議です。"
+    },
+    {
+      "speaker": "mitra",
+      "text": "ふふ、みとらにも湖の風が聞こえる。電話の向こうは静かだね。今は、返事を待てそうかな。"
+    },
+    {
+      "label": "choose"
+    },
+    {
+      "choices": [
+        {
+          "text": "みんなで留守番電話を残す",
+          "goto": "END_A"
+        },
+        {
+          "text": "花ごとに順番に電話をかける",
+          "goto": "END_B"
+        }
+      ]
+    },
+    {
+      "label": "END_A"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、おかえり。……えへへ、まだ帰ってないのに言っちゃった。"
+    },
+    {
+      "speaker": "rin",
+      "text": "笑った声もそのまま残しなよ。取り直すほど大げさな用事じゃないし。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "録音が終わると、橙色の花が1輪閉じた。家の玄関に、小さな再生ボタンが置かれた。ワディーが帰って押すまで、笑い声も言い間違いも、その中で待っていた。\n── END：帰宅を待つ録音"
+    },
+    {
+      "label": "END_B"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様の番、次だよ。わたしの声、ちゃんと家まで届いたよ。"
+    },
+    {
+      "speaker": "rem",
+      "text": "電話が終わった方はこちらへ。皆さんの席を、湖の見える向きに並べました。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "電話を終えた花から、そっと葉の下へ隠れた。最後の花が静かになる頃、電話ボックスには夕暮れが差していた。家の呼び鈴はもう鳴らず、湖畔には椅子を寄せる音がした。\n── END：夜まで咲く花"
+    }
+  ],
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#d7d3c8",
+      "emoji": ""
+    },
+    "hinahina": {
+      "name": "ひなひな",
+      "color": "#ef8ab0",
+      "emoji": "♥"
+    },
+    "ana": {
+      "name": "アナ",
+      "color": "#a8d8bc",
+      "emoji": "◇"
+    },
+    "kiku8": {
+      "name": "キク8号",
+      "color": "#a4bddf",
+      "emoji": "☆"
+    },
+    "multi": {
+      "name": "マルチ",
+      "color": "#91c7b4",
+      "emoji": "◇"
+    },
+    "sharo": {
+      "name": "シャロ",
+      "color": "#e6c785",
+      "emoji": "☕"
+    },
+    "mint": {
+      "name": "ミント",
+      "color": "#acccb3",
+      "emoji": "◇"
+    },
+    "tama": {
+      "name": "たまちゃん",
+      "color": "#e8a2c1",
+      "emoji": "♥"
+    },
+    "mayuki": {
+      "name": "真雪",
+      "color": "#a0c4dd",
+      "emoji": "◇"
+    },
+    "astarotte": {
+      "name": "ロッテ",
+      "color": "#dca8ba",
+      "emoji": "♕"
+    },
+    "minagi": {
+      "name": "美凪",
+      "color": "#beb1d9",
+      "emoji": "☆"
+    },
+    "ruriko": {
+      "name": "瑠璃子",
+      "color": "#b1a4d7",
+      "emoji": "◇"
+    },
+    "roju": {
+      "name": "路樹",
+      "color": "#d0b085",
+      "emoji": "◆"
+    },
+    "feiris": {
+      "name": "フェイリス",
+      "color": "#efb2c9",
+      "emoji": "♡"
+    },
+    "dejiko": {
+      "name": "でじこ",
+      "color": "#98c795",
+      "emoji": "☆"
+    },
+    "mii": {
+      "name": "みぃ",
+      "color": "#e0b896",
+      "emoji": "☆"
+    },
+    "hinako": {
+      "name": "ヒナ",
+      "color": "#e8c69c",
+      "emoji": "♡"
+    },
+    "nemurin": {
+      "name": "ねむりん",
+      "color": "#bcaad7",
+      "emoji": "☾"
+    },
+    "rin": {
+      "name": "りん",
+      "color": "#c2bcc4",
+      "emoji": "◆"
+    },
+    "moegami": {
+      "name": "萌神",
+      "color": "#dbb37f",
+      "emoji": "☆"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#c8b2dd",
+      "emoji": "◇"
+    },
+    "kotomi": {
+      "name": "ことみ",
+      "color": "#adbcdc",
+      "emoji": "◇"
+    },
+    "kud": {
+      "name": "クド",
+      "color": "#d2c6a0",
+      "emoji": "☆"
+    },
+    "kukuri": {
+      "name": "ククリ",
+      "color": "#d5b4d4",
+      "emoji": "♡"
+    },
+    "kyoko": {
+      "name": "京子",
+      "color": "#e5b888",
+      "emoji": "☆"
+    },
+    "oji": {
+      "name": "物理おじ",
+      "color": "#c5c0b1",
+      "emoji": "□"
+    },
+    "rem": {
+      "name": "レム",
+      "color": "#a4cedf",
+      "emoji": "◇"
+    },
+    "ayu": {
+      "name": "あゆ",
+      "color": "#e2c48e",
+      "emoji": "☆"
+    },
+    "mitsuba": {
+      "name": "みつば",
+      "color": "#dfa5a9",
+      "emoji": "◆"
+    },
+    "hina": {
+      "name": "ひな",
+      "color": "#e1baca",
+      "emoji": "♡"
+    },
+    "hazuki": {
+      "name": "葉月",
+      "color": "#e2ab98",
+      "emoji": "◆"
+    },
+    "rizel": {
+      "name": "りぜる",
+      "color": "#edb8ce",
+      "emoji": "♡"
+    },
+    "tsumugi": {
+      "name": "紬",
+      "color": "#c0cbd0",
+      "emoji": "◇"
+    },
+    "ecoko": {
+      "name": "えここ",
+      "color": "#a5d7d4",
+      "emoji": "☆"
+    }
+  }
+}

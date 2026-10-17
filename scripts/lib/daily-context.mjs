@@ -327,7 +327,11 @@ export async function pathExists(path) {
 }
 
 export function stripDailyContextBlock(markdown) {
-  return normalizeNewlines(markdown).replace(DAILY_CONTEXT_BLOCK_RE, "\n").replace(/\n{3,}/g, "\n\n").trimEnd();
+  return normalizeNewlines(markdown)
+    .replace(DAILY_CONTEXT_BLOCK_RE, "\n")
+    .replace(BUNGOU_STYLE_BLOCK_RE, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trimEnd();
 }
 
 export function upsertDailyContextBlock(markdown, block) {

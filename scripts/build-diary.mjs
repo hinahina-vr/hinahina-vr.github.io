@@ -13,6 +13,7 @@ import { analyzeVoiceSimilarityForDate, formatVoiceSimilarityFindings } from "./
 import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 import { readWritingModels, renderWritingModel } from "./lib/diary-writing-model.mjs";
+import { includesDiaryBuildMonth, parseDiaryBuildDates, validateDiaryBuildDates } from "./lib/diary-build-selection.mjs";
 
 const writingModels = readWritingModels();
 
@@ -408,6 +409,7 @@ function htmlFooter() {
 }
 
 async function main() {
+  const selectedDates = parseDiaryBuildDates(process.argv.slice(2));
   const dreamRootMap = buildDreamRootMap();
   const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md") && !f.includes("下書き"));
 
@@ -427,6 +429,7 @@ async function main() {
 
   // 日付の新しい順にソート
   entries.sort((a, b) => b.date.localeCompare(a.date));
+  validateDiaryBuildDates(selectedDates, entries, join(OUT_DIR, "diary.html"));
 
   // 月ごとにグルーピング（キーの降順を維持）
   const monthMap = new Map();
@@ -442,7 +445,7 @@ async function main() {
   const latestEntries = monthMap.get(latestMonth);
   const latestDate = latestEntries[0]?.date;
   if (latestDate && process.env.WADDY_SKIP_CHARACTER_VOICE_CHECK !== "1") {
-    const voiceCheck = validateAllCharacterVoices();
+    const voiceCheck = validateAllCharacterVoices(selectedDates ? { dates: [...selectedDates] } : {});
     if (voiceCheck.findings.length > 0) {
       throw new Error(formatVoiceFindings(voiceCheck));
     }
@@ -520,6 +523,7 @@ ${htmlFooter()}`;
 
   // --- 過去月の個別ページ diary-YYYY-MM.html ---
   for (const m of pastMonths) {
+    if (!includesDiaryBuildMonth(selectedDates, m)) continue;
     const mEntries = monthMap.get(m);
     const mEntriesHtml = mEntries.map(renderFullEntry).join("\n");
 
@@ -570,11 +574,12 @@ ${htmlFooter()}`;
     .filter((file) => /^diary-voices-\d{4}-\d{2}-\d{2}\.html$/.test(file))
     .filter((file) => !entryByDate.has(file.match(/^diary-voices-(\d{4}-\d{2}-\d{2})\.html$/)?.[1]));
   for (const file of staleVoicePages) {
-    await unlink(join(OUT_DIR, file));
+    if (!selectedDates) await unlink(join(OUT_DIR, file));
   }
 
   let voiceBundleCount = 0;
   for (const entry of entryByDate.values()) {
+    if (selectedDates && !selectedDates.has(entry.date)) continue;
     const voiceEntries = await buildVoiceBundleEntries(entry.date);
     if (voiceEntries.length === 0) continue;
 

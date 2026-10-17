@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-12",
+  "title": "グラスの中の城 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "小さな城門",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-12_グラスの中の城",
+      "entry": "standalone_start",
+      "summary": "グラスの氷に小さな城ができ、住人たちが台所へ招かれる。"
+    },
+    {
+      "id": "turn",
+      "title": "おしゃべりな巻物",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-12_グラスの中の城",
+      "entry": "turn",
+      "summary": "質問に答える巻物が、知らない答えまで次々に作る。"
+    },
+    {
+      "id": "choose",
+      "title": "城の過ごし方",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-12_グラスの中の城",
+      "entry": "choose",
+      "summary": "古い帳面を探しに行くか、城の台所で自分たちの献立を作るか。"
+    },
+    {
+      "id": "END_A",
+      "title": "蔵に残った献立",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-12_グラスの中の城",
+      "entry": "END_A",
+      "summary": "蔵に残った献立"
+    },
+    {
+      "id": "END_B",
+      "title": "空の札の献立",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-12_グラスの中の城",
+      "entry": "END_B",
+      "summary": "空の札の献立"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "古い帳面を探しに行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "今夜の献立をみんなで作る",
+      "style": "kenkai"
+    }
+  ]
+}

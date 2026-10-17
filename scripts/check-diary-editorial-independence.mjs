@@ -1,3 +1,4 @@
+import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { basename, join } from "node:path";
 
@@ -38,7 +39,7 @@ function dateOf(file) {
 }
 
 function visibleBody(raw) {
-  return raw
+  return stripDailyContextBlock(raw)
     .replace(/^# .+$/m, "")
     .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/<[^>]+>/g, " ")

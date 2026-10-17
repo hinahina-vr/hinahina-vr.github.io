@@ -1,0 +1,392 @@
+{
+  "title": "席を探して歩くテーブル",
+  "date": "2026-08-17",
+  "subtitle": "フードコートの空席から始まる夢",
+  "genre": "創作の夢・実際の行動記録とは別のお話",
+  "mapTitles": {
+    "standalone_start": "動いてしまう席",
+    "turn": "呼ばれて止まるテーブル",
+    "choose": "どこに座るか",
+    "END_A": "長い昼のテーブル",
+    "END_B": "窓際に並ぶ席"
+  },
+  "mapSummaries": {
+    "standalone_start": "空いた席に近づくと、テーブルが別の店へ歩き出す。",
+    "turn": "誰かの名前を呼ぶと、テーブルが止まることに気づく。",
+    "choose": "テーブルをつないで大きな席にするか、窓際に小さな席を並べるか。"
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "narrator",
+      "text": "フードコートの真ん中で、空のテーブルが歩いていた。椅子もその後ろをついていく。ワディーが近づくと、テーブルは少し恥ずかしそうに角を曲げ、別の店の前へ移った。"
+    },
+    {
+      "speaker": "ayu",
+      "text": "待って、ボクまだ座ってないよ！　さっきから席のほうが逃げちゃう。"
+    },
+    {
+      "speaker": "dejiko",
+      "text": "客より席が忙しいにょ。この店、回転率の意味を間違えてるにょ。"
+    },
+    {
+      "speaker": "rin",
+      "text": "追いかけたら、余計に速くなった。走るのやめよう。"
+    },
+    {
+      "speaker": "minagi",
+      "text": "……椅子も疲れています。脚が少し震えているようです。"
+    },
+    {
+      "speaker": "rem",
+      "text": "皆さん、通路の端へ寄りましょう。お盆を持った方が通ります。"
+    },
+    {
+      "speaker": "mitsuba",
+      "text": "あたしは追わないわよ。空腹で運動なんて、いちばん損じゃない。"
+    },
+    {
+      "speaker": "kyoko",
+      "text": "じゃあ椅子においでって言ってみれば？　犬みたいにさ。"
+    },
+    {
+      "speaker": "ana",
+      "text": "テーブルさん、こちらへ。……お辞儀はしてくれましたね。"
+    },
+    {
+      "speaker": "kiku8",
+      "text": "呼びかけには反応します。特定の席を求めて移動している可能性があります。"
+    },
+    {
+      "speaker": "kotomi",
+      "text": "このテーブルも、誰かと座りたいの。空いているのは、席だけじゃないの。"
+    },
+    {
+      "speaker": "ruriko",
+      "text": "……脚の音が止まった。ことみの声を聞いている。"
+    },
+    {
+      "label": "turn"
+    },
+    {
+      "speaker": "narrator",
+      "text": "ひながワディーの名前を呼ぶと、いちばん近いテーブルがぴたりと止まった。椅子が2脚、向かい合った。ほかの住人が互いを呼ぶたび、動くテーブルは少しずつ減っていった。"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、ここ！　ひな、こっちに座りたい。……あ、ほんとに止まった。"
+    },
+    {
+      "speaker": "hinako",
+      "text": "ヒナも呼ぶ！　おにいたま、こっちも空いてるよぉ。"
+    },
+    {
+      "speaker": "sharo",
+      "text": "同じ方を違う席へ呼んだら困りますよ。椅子の数を増やしましょう。"
+    },
+    {
+      "speaker": "multi",
+      "text": "わたしがこちらへ寄せますね。脚を持つとくすぐったいみたいです。"
+    },
+    {
+      "speaker": "hazuki",
+      "text": "このテーブル、くすぐったがってるじゃない。わたし、笑わせるつもりで触ったんじゃないんだから！"
+    },
+    {
+      "speaker": "mayuki",
+      "text": "だから叩かないで、静かに持って。私も反対側を持つから。"
+    },
+    {
+      "speaker": "astarotte",
+      "text": "私の席を勝手に端へするでないぞ。みんなの話が聞こえるところがいいのだ。"
+    },
+    {
+      "speaker": "mint",
+      "text": "人数が増えましたものね。長くつなげば、皆さまのお顔が見えますわ。"
+    },
+    {
+      "speaker": "feiris",
+      "text": "長いテーブルの端同士は遠いニャ。猫の耳でも聞き取れないニャン。"
+    },
+    {
+      "speaker": "tama",
+      "text": "丸くつなぐのはどう？　たまちゃん、真ん中に道があれば通れるよ！"
+    },
+    {
+      "speaker": "kud",
+      "text": "わふー、円にすると椅子の背中が通路へ出てしまいますっ。"
+    },
+    {
+      "speaker": "ecoko",
+      "text": "えここ、窓のほうも見てきたよ。小さい席なら、並べられそう。"
+    },
+    {
+      "speaker": "mii",
+      "text": "みぃタンはね、窓が見える席がいいの！　小さい鳥がいるよー！"
+    },
+    {
+      "speaker": "tsumugi",
+      "text": "ここなら日陰ですね。食べ終わっても、少し座っていられそうです。"
+    },
+    {
+      "speaker": "oji",
+      "text": "動かす手間だけで選ぶと、座ってから不便になる。話しやすい位置を先に見たい。"
+    },
+    {
+      "speaker": "hinahina",
+      "text": "私は隣に1人いれば、しばらくは喋れるよ。全員の声が一度に聞こえなくてもねえ。"
+    },
+    {
+      "speaker": "moegami",
+      "text": "名を呼ぶ。椅子が止まる。空席にも、迎えたい相手がいたのだろうか。"
+    },
+    {
+      "speaker": "roju",
+      "text": "俺もそろそろ座りたい。集めるか、並べるか。席の形を決めれば、食事の相談ができる。"
+    },
+    {
+      "speaker": "nemurin",
+      "text": "ねむりん、歩かない椅子がいいなぁ。座ったまま運ばれたら、別のお店で起きそう。"
+    },
+    {
+      "speaker": "rizel",
+      "text": "りぜるはだんなさまの隣ですぅ。そこだけは、最初に取っておくよ。"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、わたし向かいでもいいよ。お顔が見えたら、すぐ話しかけられるもん。"
+    },
+    {
+      "speaker": "mitra",
+      "text": "椅子がみんな、止まったね。みとらは窓辺も気になるな。座ってから見えるものが、少し違いそう。"
+    },
+    {
+      "label": "choose"
+    },
+    {
+      "choices": [
+        {
+          "text": "テーブルをつないで大きな席にする",
+          "goto": "END_A"
+        },
+        {
+          "text": "窓際に小さな席を並べる",
+          "goto": "END_B"
+        }
+      ]
+    },
+    {
+      "label": "END_A"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "rem",
+      "text": "皆さんのお席ができました。お飲み物は端からお渡ししますね。"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、ひなの声、ここなら届く？　えへへ、隣だから小さくてもいいね。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "テーブルは長い列になり、住人たちは料理を選ぶ相談を始めた。端から端へ話が伝わるたび、少しだけ内容が変わった。誰かが笑うと、椅子の脚も床を小さく鳴らした。\n── END：長い昼のテーブル"
+    },
+    {
+      "label": "END_B"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、あとで隣のテーブルにも行こうね。今はここで、お話しよ。"
+    },
+    {
+      "speaker": "nemurin",
+      "text": "ねむりん、ここがいい。窓の鳥さんも、まだいるねぇ。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "小さな席が窓沿いに並び、それぞれ違う話が始まった。食べ終えた人は、皿を片づけて別の席へ移った。空いた椅子はもう歩き出さず、次に呼んでもらうのを待っていた。\n── END：窓際に並ぶ席"
+    }
+  ],
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#d7d3c8",
+      "emoji": ""
+    },
+    "hinahina": {
+      "name": "ひなひな",
+      "color": "#ef8ab0",
+      "emoji": "♥"
+    },
+    "ana": {
+      "name": "アナ",
+      "color": "#a8d8bc",
+      "emoji": "◇"
+    },
+    "kiku8": {
+      "name": "キク8号",
+      "color": "#a4bddf",
+      "emoji": "☆"
+    },
+    "multi": {
+      "name": "マルチ",
+      "color": "#91c7b4",
+      "emoji": "◇"
+    },
+    "sharo": {
+      "name": "シャロ",
+      "color": "#e6c785",
+      "emoji": "☕"
+    },
+    "mint": {
+      "name": "ミント",
+      "color": "#acccb3",
+      "emoji": "◇"
+    },
+    "tama": {
+      "name": "たまちゃん",
+      "color": "#e8a2c1",
+      "emoji": "♥"
+    },
+    "mayuki": {
+      "name": "真雪",
+      "color": "#a0c4dd",
+      "emoji": "◇"
+    },
+    "astarotte": {
+      "name": "ロッテ",
+      "color": "#dca8ba",
+      "emoji": "♕"
+    },
+    "minagi": {
+      "name": "美凪",
+      "color": "#beb1d9",
+      "emoji": "☆"
+    },
+    "ruriko": {
+      "name": "瑠璃子",
+      "color": "#b1a4d7",
+      "emoji": "◇"
+    },
+    "roju": {
+      "name": "路樹",
+      "color": "#d0b085",
+      "emoji": "◆"
+    },
+    "feiris": {
+      "name": "フェイリス",
+      "color": "#efb2c9",
+      "emoji": "♡"
+    },
+    "dejiko": {
+      "name": "でじこ",
+      "color": "#98c795",
+      "emoji": "☆"
+    },
+    "mii": {
+      "name": "みぃ",
+      "color": "#e0b896",
+      "emoji": "☆"
+    },
+    "hinako": {
+      "name": "ヒナ",
+      "color": "#e8c69c",
+      "emoji": "♡"
+    },
+    "nemurin": {
+      "name": "ねむりん",
+      "color": "#bcaad7",
+      "emoji": "☾"
+    },
+    "rin": {
+      "name": "りん",
+      "color": "#c2bcc4",
+      "emoji": "◆"
+    },
+    "moegami": {
+      "name": "萌神",
+      "color": "#dbb37f",
+      "emoji": "☆"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#c8b2dd",
+      "emoji": "◇"
+    },
+    "kotomi": {
+      "name": "ことみ",
+      "color": "#adbcdc",
+      "emoji": "◇"
+    },
+    "kud": {
+      "name": "クド",
+      "color": "#d2c6a0",
+      "emoji": "☆"
+    },
+    "kukuri": {
+      "name": "ククリ",
+      "color": "#d5b4d4",
+      "emoji": "♡"
+    },
+    "kyoko": {
+      "name": "京子",
+      "color": "#e5b888",
+      "emoji": "☆"
+    },
+    "oji": {
+      "name": "物理おじ",
+      "color": "#c5c0b1",
+      "emoji": "□"
+    },
+    "rem": {
+      "name": "レム",
+      "color": "#a4cedf",
+      "emoji": "◇"
+    },
+    "ayu": {
+      "name": "あゆ",
+      "color": "#e2c48e",
+      "emoji": "☆"
+    },
+    "mitsuba": {
+      "name": "みつば",
+      "color": "#dfa5a9",
+      "emoji": "◆"
+    },
+    "hina": {
+      "name": "ひな",
+      "color": "#e1baca",
+      "emoji": "♡"
+    },
+    "hazuki": {
+      "name": "葉月",
+      "color": "#e2ab98",
+      "emoji": "◆"
+    },
+    "rizel": {
+      "name": "りぜる",
+      "color": "#edb8ce",
+      "emoji": "♡"
+    },
+    "tsumugi": {
+      "name": "紬",
+      "color": "#c0cbd0",
+      "emoji": "◇"
+    },
+    "ecoko": {
+      "name": "えここ",
+      "color": "#a5d7d4",
+      "emoji": "☆"
+    }
+  }
+}

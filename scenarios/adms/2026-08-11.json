@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-11",
+  "title": "花の電話交換室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "鳴っている花",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-11_花の電話交換室",
+      "entry": "standalone_start",
+      "summary": "電話ボックスの花から、住人の呼び出し音がする。"
+    },
+    {
+      "id": "turn",
+      "title": "花を選ぶ交換手",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-11_花の電話交換室",
+      "entry": "turn",
+      "summary": "同じ花へ話すと声が渋滞する。交換室に道が開く。"
+    },
+    {
+      "id": "choose",
+      "title": "家への電話",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-11_花の電話交換室",
+      "entry": "choose",
+      "summary": "みんなで留守番電話を残すか、花ごとに電話をかけるか。"
+    },
+    {
+      "id": "END_A",
+      "title": "帰宅を待つ録音",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-11_花の電話交換室",
+      "entry": "END_A",
+      "summary": "帰宅を待つ録音"
+    },
+    {
+      "id": "END_B",
+      "title": "夜まで咲く花",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-11_花の電話交換室",
+      "entry": "END_B",
+      "summary": "夜まで咲く花"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "みんなで留守番電話を残す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "花ごとに順番に電話をかける",
+      "style": "kenkai"
+    }
+  ]
+}

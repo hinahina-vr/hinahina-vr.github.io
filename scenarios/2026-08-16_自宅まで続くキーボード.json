@@ -1,0 +1,392 @@
+{
+  "title": "自宅まで続くキーボード",
+  "date": "2026-08-16",
+  "subtitle": "旅先の机から部屋へつながる夢",
+  "genre": "創作の夢・実際の行動記録とは別のお話",
+  "mapTitles": {
+    "standalone_start": "キーの向こうの部屋",
+    "turn": "家の窓を開く手",
+    "choose": "机を離れる時間",
+    "END_A": "机に残す続き",
+    "END_B": "旅先の椅子へ"
+  },
+  "mapSummaries": {
+    "standalone_start": "キーボードの隙間に、自宅へ続く小さな廊下が現れる。",
+    "turn": "家へ入れた住人たちが、旅先に残る人との連絡方法を探す。",
+    "choose": "家の作業を1つ進めるか、窓を閉じて旅先で休むか。"
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "narrator",
+      "text": "セブの机でキーを押すと、キーボードが少しずつ伸びた。白いキーが敷石になり、黒い隙間が廊下になった。その先に、自宅の机と、誰も座っていない椅子が見えていた。"
+    },
+    {
+      "speaker": "oji",
+      "text": "旅先から自宅のPCへ接続する。廊下ができたが、まず入力が届くか確認する。"
+    },
+    {
+      "speaker": "kiku8",
+      "text": "こちらのキーと、向こうの画面が同時に動いています。"
+    },
+    {
+      "speaker": "rin",
+      "text": "靴でキーを踏むなよ。変な文章が入るから。"
+    },
+    {
+      "speaker": "hazuki",
+      "text": "わたしは端を歩くわよ。……あっ、スペース踏んじゃった。見てたなら先に言いなさいよ！"
+    },
+    {
+      "speaker": "kotomi",
+      "text": "空白が広がったの。今なら、みんな並んで通れるの。"
+    },
+    {
+      "speaker": "kyoko",
+      "text": "じゃあもっと広げよう！　……って、廊下が広すぎて机に届かない！"
+    },
+    {
+      "speaker": "sharo",
+      "text": "余計なキーを踏まないでください！　ここが通路だと思うから間違うんです。"
+    },
+    {
+      "speaker": "hinahina",
+      "text": "通路にも見えるしねえ。私、旅先の椅子を見張ってる。勝手にどこか行かれたら困るし。"
+    },
+    {
+      "speaker": "rem",
+      "text": "レムは向こうで待ちます。段差がありますから、足元にお気をつけください。"
+    },
+    {
+      "speaker": "multi",
+      "text": "はわわ、机の下が入口でした。頭をぶつけないように、こちらへ。"
+    },
+    {
+      "speaker": "mint",
+      "text": "家の中へ入るにも、こんな道があるのですわね。荷物は先にお渡しします。"
+    },
+    {
+      "label": "turn"
+    },
+    {
+      "speaker": "narrator",
+      "text": "家へ入った住人が机のライトをつけると、旅先の画面も明るくなった。けれど声は廊下を渡ってこなかった。ワディーの手だけが、画面の向こうの窓を動かしている。"
+    },
+    {
+      "speaker": "ruriko",
+      "text": "……見えている。声だけが、廊下を渡ってこない。"
+    },
+    {
+      "speaker": "kud",
+      "text": "手を振ってみますっ！　見えましたか？　大きく振ります！"
+    },
+    {
+      "speaker": "ana",
+      "text": "お口の動きだけでは、違う言葉に見えてしまいますね。"
+    },
+    {
+      "speaker": "tama",
+      "text": "たまちゃん、紙に書くよ。今なら何をしてほしいか、ひとことずつ！"
+    },
+    {
+      "speaker": "mayuki",
+      "text": "文字の向きが逆。画面へ向けるなら、こっちに持って。"
+    },
+    {
+      "speaker": "dejiko",
+      "text": "看板なら得意にょ。大きく書いて、部屋の隅まで見せるにょ。"
+    },
+    {
+      "speaker": "feiris",
+      "text": "それ、お店の宣伝ニャ。今は連絡だけにしておくニャン。"
+    },
+    {
+      "speaker": "minagi",
+      "text": "……炊飯器の予約を、見ておきます。帰った時のごはんが気になりました。"
+    },
+    {
+      "speaker": "ayu",
+      "text": "ボクはおやつの棚を見たい。あ、手が届く！　画面の中って便利だね。"
+    },
+    {
+      "speaker": "mitsuba",
+      "text": "勝手に食べたら、留守の犯人すぐ分かるわよ。全部見えてるんだから。"
+    },
+    {
+      "speaker": "ecoko",
+      "text": "えここは冷蔵庫の扉を閉めるね。お部屋だけなのに、冷たい風が外まで来そう。"
+    },
+    {
+      "speaker": "mii",
+      "text": "みぃタンはね、ここにいるよーって書いたの！　お兄タン、見える？"
+    },
+    {
+      "speaker": "hinako",
+      "text": "ヒナもここ！　おにいたま、画面に近づいたら、お顔も大きくなる？"
+    },
+    {
+      "speaker": "astarotte",
+      "text": "近すぎるのだ。あなたの顔しか見えなくなるぞ。……私も、向こうを見たいんだから。"
+    },
+    {
+      "speaker": "nemurin",
+      "text": "ねむりん、家の椅子に座っちゃった。こっちも眠れるねぇ。"
+    },
+    {
+      "speaker": "tsumugi",
+      "text": "家のカーテンは動いていませんね。こちらの風とは、別の時間を過ごしているのですね。"
+    },
+    {
+      "speaker": "moegami",
+      "text": "遠い部屋の灯り。ここから消せる。消えたあとも、部屋は残る。"
+    },
+    {
+      "speaker": "roju",
+      "text": "作業を1つ選んで終わるか、ここで閉じるか。俺には、旅先の椅子も気になるな。"
+    },
+    {
+      "speaker": "rizel",
+      "text": "だんなさまが戻るほうへ、りぜるも行くですぅ。向こうに置いていかないでね。"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、廊下が消える前にみんな集まろう？　わたし、最後まで数えてるから。"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、手だけじゃなくて、こっちも見て。ひな、おにいちゃんの隣にいるよ。"
+    },
+    {
+      "speaker": "mitra",
+      "text": "家の灯りも、旅先の窓も見えるね。みとらは今、こちらを通る雲を見てる。まだゆっくり動いてるよ。"
+    },
+    {
+      "label": "choose"
+    },
+    {
+      "choices": [
+        {
+          "text": "家の作業を1つだけ進める",
+          "goto": "END_A"
+        },
+        {
+          "text": "窓を閉じて旅先で休む",
+          "goto": "END_B"
+        }
+      ]
+    },
+    {
+      "label": "END_A"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "oji",
+      "text": "保存できた。ここまでにして、次の仕事は増やさないよ。"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、おつかれさま。ひな、待ってたから、少しぎゅってして。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "画面の向こうでファイルが閉じ、家のライトが消えた。住人たちはキーの廊下を渡り、旅先の机へ集まった。最後の1人が抜けると、長かったキーボードはワディーの手元へ収まった。\n── END：机に残す続き"
+    },
+    {
+      "label": "END_B"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、全員いるよ。今度はこっちのお部屋で休もうね。"
+    },
+    {
+      "speaker": "hinahina",
+      "text": "椅子はちゃんと預かってたよ。あとは座るだけ。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "家の窓を閉じると、廊下は短く畳まれた。自宅は遠くなったが、消えたわけではなかった。ワディーが旅先の椅子へ腰を下ろすと、隣でひなが同じ向きに足を揺らした。\n── END：旅先の椅子へ"
+    }
+  ],
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#d7d3c8",
+      "emoji": ""
+    },
+    "hinahina": {
+      "name": "ひなひな",
+      "color": "#ef8ab0",
+      "emoji": "♥"
+    },
+    "ana": {
+      "name": "アナ",
+      "color": "#a8d8bc",
+      "emoji": "◇"
+    },
+    "kiku8": {
+      "name": "キク8号",
+      "color": "#a4bddf",
+      "emoji": "☆"
+    },
+    "multi": {
+      "name": "マルチ",
+      "color": "#91c7b4",
+      "emoji": "◇"
+    },
+    "sharo": {
+      "name": "シャロ",
+      "color": "#e6c785",
+      "emoji": "☕"
+    },
+    "mint": {
+      "name": "ミント",
+      "color": "#acccb3",
+      "emoji": "◇"
+    },
+    "tama": {
+      "name": "たまちゃん",
+      "color": "#e8a2c1",
+      "emoji": "♥"
+    },
+    "mayuki": {
+      "name": "真雪",
+      "color": "#a0c4dd",
+      "emoji": "◇"
+    },
+    "astarotte": {
+      "name": "ロッテ",
+      "color": "#dca8ba",
+      "emoji": "♕"
+    },
+    "minagi": {
+      "name": "美凪",
+      "color": "#beb1d9",
+      "emoji": "☆"
+    },
+    "ruriko": {
+      "name": "瑠璃子",
+      "color": "#b1a4d7",
+      "emoji": "◇"
+    },
+    "roju": {
+      "name": "路樹",
+      "color": "#d0b085",
+      "emoji": "◆"
+    },
+    "feiris": {
+      "name": "フェイリス",
+      "color": "#efb2c9",
+      "emoji": "♡"
+    },
+    "dejiko": {
+      "name": "でじこ",
+      "color": "#98c795",
+      "emoji": "☆"
+    },
+    "mii": {
+      "name": "みぃ",
+      "color": "#e0b896",
+      "emoji": "☆"
+    },
+    "hinako": {
+      "name": "ヒナ",
+      "color": "#e8c69c",
+      "emoji": "♡"
+    },
+    "nemurin": {
+      "name": "ねむりん",
+      "color": "#bcaad7",
+      "emoji": "☾"
+    },
+    "rin": {
+      "name": "りん",
+      "color": "#c2bcc4",
+      "emoji": "◆"
+    },
+    "moegami": {
+      "name": "萌神",
+      "color": "#dbb37f",
+      "emoji": "☆"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#c8b2dd",
+      "emoji": "◇"
+    },
+    "kotomi": {
+      "name": "ことみ",
+      "color": "#adbcdc",
+      "emoji": "◇"
+    },
+    "kud": {
+      "name": "クド",
+      "color": "#d2c6a0",
+      "emoji": "☆"
+    },
+    "kukuri": {
+      "name": "ククリ",
+      "color": "#d5b4d4",
+      "emoji": "♡"
+    },
+    "kyoko": {
+      "name": "京子",
+      "color": "#e5b888",
+      "emoji": "☆"
+    },
+    "oji": {
+      "name": "物理おじ",
+      "color": "#c5c0b1",
+      "emoji": "□"
+    },
+    "rem": {
+      "name": "レム",
+      "color": "#a4cedf",
+      "emoji": "◇"
+    },
+    "ayu": {
+      "name": "あゆ",
+      "color": "#e2c48e",
+      "emoji": "☆"
+    },
+    "mitsuba": {
+      "name": "みつば",
+      "color": "#dfa5a9",
+      "emoji": "◆"
+    },
+    "hina": {
+      "name": "ひな",
+      "color": "#e1baca",
+      "emoji": "♡"
+    },
+    "hazuki": {
+      "name": "葉月",
+      "color": "#e2ab98",
+      "emoji": "◆"
+    },
+    "rizel": {
+      "name": "りぜる",
+      "color": "#edb8ce",
+      "emoji": "♡"
+    },
+    "tsumugi": {
+      "name": "紬",
+      "color": "#c0cbd0",
+      "emoji": "◇"
+    },
+    "ecoko": {
+      "name": "えここ",
+      "color": "#a5d7d4",
+      "emoji": "☆"
+    }
+  }
+}

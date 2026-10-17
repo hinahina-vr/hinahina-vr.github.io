@@ -10,6 +10,7 @@ import { marked } from "marked";
 import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import { readDiaryTitle, escapeDiaryTitle } from "./lib/diary-title.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
+import { includesDiaryBuildMonth, parseDiaryBuildDates, validateDiaryBuildDates } from "./lib/diary-build-selection.mjs";
 
 const DIARY_DIR = join(import.meta.dirname, "..", "diary-roju");
 const OUT_DIR = join(import.meta.dirname, "..");
@@ -280,6 +281,7 @@ ${extraSections}
 }
 
 async function main() {
+  const selectedDates = parseDiaryBuildDates(process.argv.slice(2));
   const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md"));
 
   const entries = [];
@@ -297,6 +299,7 @@ async function main() {
   }
 
   entries.sort((a, b) => b.date.localeCompare(a.date));
+  validateDiaryBuildDates(selectedDates, entries, join(OUT_DIR, "diary-roju.html"));
 
   const monthMap = new Map();
   for (const entry of entries) {
@@ -348,6 +351,7 @@ ${archiveItems}
   console.log(`✓ diary-roju.html generated (${latestMonth}: ${monthMap.get(latestMonth).length} entries)`);
 
   for (const monthKey of pastMonths) {
+    if (!includesDiaryBuildMonth(selectedDates, monthKey)) continue;
     const monthEntries = monthMap.get(monthKey);
     const monthEntriesHtml = monthEntries.map(renderFullEntry).join("\n");
     const otherMonthLinks = months

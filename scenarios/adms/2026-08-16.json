@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-16",
+  "title": "自宅まで続くキーボード A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "キーの向こうの部屋",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-16_自宅まで続くキーボード",
+      "entry": "standalone_start",
+      "summary": "キーボードの隙間に、自宅へ続く小さな廊下が現れる。"
+    },
+    {
+      "id": "turn",
+      "title": "家の窓を開く手",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-16_自宅まで続くキーボード",
+      "entry": "turn",
+      "summary": "家へ入れた住人たちが、旅先に残る人との連絡方法を探す。"
+    },
+    {
+      "id": "choose",
+      "title": "机を離れる時間",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-16_自宅まで続くキーボード",
+      "entry": "choose",
+      "summary": "家の作業を1つ進めるか、窓を閉じて旅先で休むか。"
+    },
+    {
+      "id": "END_A",
+      "title": "机に残す続き",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-16_自宅まで続くキーボード",
+      "entry": "END_A",
+      "summary": "机に残す続き"
+    },
+    {
+      "id": "END_B",
+      "title": "旅先の椅子へ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-16_自宅まで続くキーボード",
+      "entry": "END_B",
+      "summary": "旅先の椅子へ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "家の作業を1つだけ進める",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "窓を閉じて旅先で休む",
+      "style": "kenkai"
+    }
+  ]
+}

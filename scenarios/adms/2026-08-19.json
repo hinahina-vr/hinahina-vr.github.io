@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-19",
+  "title": "しおりからはみ出す道 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "床に広がる旅程",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-19_しおりからはみ出す道",
+      "entry": "standalone_start",
+      "summary": "旅のしおりを開くと、書かれた道が床へ広がる。"
+    },
+    {
+      "id": "turn",
+      "title": "それぞれの寄り道",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-19_しおりからはみ出す道",
+      "entry": "turn",
+      "summary": "住人が余白へ書き加えた寄り道が、本当の道になる。"
+    },
+    {
+      "id": "choose",
+      "title": "合流する場所",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-19_しおりからはみ出す道",
+      "entry": "choose",
+      "summary": "大きなしおりを一緒に持つか、小さく分けて合流の約束をするか。"
+    },
+    {
+      "id": "END_A",
+      "title": "みんなで開く地図",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-19_しおりからはみ出す道",
+      "entry": "END_A",
+      "summary": "みんなで開く地図"
+    },
+    {
+      "id": "END_B",
+      "title": "待ち合わせのベンチ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-19_しおりからはみ出す道",
+      "entry": "END_B",
+      "summary": "待ち合わせのベンチ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "大きなしおりを一緒に持って歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "しおりを分けて、時計の下で合流する",
+      "style": "kenkai"
+    }
+  ]
+}

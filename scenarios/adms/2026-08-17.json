@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-17",
+  "title": "席を探して歩くテーブル A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "動いてしまう席",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-17_席を探して歩くテーブル",
+      "entry": "standalone_start",
+      "summary": "空いた席に近づくと、テーブルが別の店へ歩き出す。"
+    },
+    {
+      "id": "turn",
+      "title": "呼ばれて止まるテーブル",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-17_席を探して歩くテーブル",
+      "entry": "turn",
+      "summary": "誰かの名前を呼ぶと、テーブルが止まることに気づく。"
+    },
+    {
+      "id": "choose",
+      "title": "どこに座るか",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-17_席を探して歩くテーブル",
+      "entry": "choose",
+      "summary": "テーブルをつないで大きな席にするか、窓際に小さな席を並べるか。"
+    },
+    {
+      "id": "END_A",
+      "title": "長い昼のテーブル",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-17_席を探して歩くテーブル",
+      "entry": "END_A",
+      "summary": "長い昼のテーブル"
+    },
+    {
+      "id": "END_B",
+      "title": "窓際に並ぶ席",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-17_席を探して歩くテーブル",
+      "entry": "END_B",
+      "summary": "窓際に並ぶ席"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "テーブルをつないで大きな席にする",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "窓際に小さな席を並べる",
+      "style": "kenkai"
+    }
+  ]
+}

@@ -239,5 +239,183 @@
         "url": "https://ja.swarmapp.com/user/793288/checkin/6a796bf86eec3b52df383cb4"
       }
     ]
+  },
+  "2026-08-11": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "10:50 JST",
+        "kind": "post",
+        "text": "野尻湖畔にて",
+        "url": "https://x.com/hinahina_vr/status/2086993575691321452",
+        "observedImageIds": [
+          "HPZ9jqWbEAAQLFU"
+        ]
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "10:46 JST",
+        "venueName": "野尻湖",
+        "venueArea": "日本信濃町",
+        "checkinId": "6a7a7ef93df90a5fa78bd7d9",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "13:18 JST",
+        "venueName": "上里カンターレ",
+        "venueArea": "日本上里町",
+        "checkinId": "6a7aa278ad84b211effa09fd",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "13:58 JST",
+        "venueName": "上里SA (上り)",
+        "venueArea": "日本上里町",
+        "checkinId": "6a7aabdee705e4408e3e1199",
+        "url": "https://ja.swarmapp.com/history"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-12": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "12:49 JST",
+        "kind": "post",
+        "text": "7月丸一ヶ月禁酒して飲酒再開した\nひどい二日酔いにならなくてとてもいい",
+        "url": "https://x.com/hinahina_vr/status/2087386009369755964",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:46 JST",
+        "kind": "post",
+        "text": "日本史の勉強もしないとね",
+        "url": "https://x.com/hinahina_vr/status/2087551203685355590",
+        "observedImageIds": [
+          "HPh4v2qaQAAO5Rj",
+          "HPh4wOVasAEHIoZ"
+        ]
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-13": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "01:49 JST",
+        "kind": "quote",
+        "text": "サークルクラッシャー大暴れ中",
+        "url": "https://x.com/hinahina_vr/status/2087582377682129323",
+        "observedImageIds": [
+          "HPiVAjYaUAQWvA7"
+        ]
+      },
+      {
+        "recordedAt": "22:12 JST",
+        "kind": "post",
+        "text": "明日からヒリピン行くので予習してる\nあゝモンテンルパの夜は更けて　渡辺はま子",
+        "url": "https://x.com/hinahina_vr/status/2087890036796871050",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:14 JST",
+        "kind": "post",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2087890569922306353",
+        "observedImageIds": [
+          "HPmtW9MbIAA5adh"
+        ]
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-16": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "01:46 JST",
+        "kind": "post",
+        "text": "ヒリピン、いまのところの評価TierEぐらい\nTierGはグアム",
+        "url": "https://x.com/hinahina_vr/status/2088668594335088781",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "01:51 JST",
+        "kind": "post",
+        "text": "付き合いで連行されたゴーゴーがまじで地獄だった\nまず、ハコ全体が便所みたいな臭いがする\nバカ高い・ババアしかいない・チップ乞食・便所が汚い\n女嫌いがますます捗った　ヒリピンはカス",
+        "url": "https://x.com/hinahina_vr/status/2088669957433520623",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "15:52 JST",
+        "kind": "post",
+        "text": "ヒリピンにいても自宅のPCにリモート接続してCodexをぶん回してるよ",
+        "url": "https://x.com/hinahina_vr/status/2088881664068079659",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "14:15 JST",
+        "venueName": "Carlo’s Batchoy",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a81477cc0b3e425ca7be835",
+        "url": "https://ja.swarmapp.com/history"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-17": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [],
+    "swarm": [
+      {
+        "recordedAt": "15:32 JST",
+        "venueName": "Puso Village",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a82aaf5393ada58d96ffd63",
+        "url": "https://ja.swarmapp.com/history"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-19": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "00:02 JST",
+        "kind": "post",
+        "text": "今回の旅行はAIフル活用だった\n旅のしおりサイト作ってみんなに共有した",
+        "url": "https://x.com/hinahina_vr/status/2089729703309644138",
+        "observedImageIds": [
+          "HQA2EW-bkAApptQ"
+        ]
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
   }
 }

@@ -1,4 +1,5 @@
 import path from "node:path";
+import { stripDailyContextBlock } from "./lib/daily-context.mjs";
 import {
   collectDiaryMarkdownFiles,
   readDiaryFile,
@@ -156,7 +157,7 @@ const findings = [];
 
 for (const file of files) {
   const markdown = readDiaryFile(file);
-  const { body } = splitDiaryMarkdown(markdown);
+  const { body } = splitDiaryMarkdown(stripDailyContextBlock(markdown));
   const matches = collectReadabilityFindings(body);
 
   if (matches.length === 0) continue;

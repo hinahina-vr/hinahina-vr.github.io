@@ -1,0 +1,392 @@
+{
+  "title": "勝手に働く旅行鞄",
+  "date": "2026-08-13",
+  "subtitle": "旅の支度にまぎれこんだ、紙の仕事の夢",
+  "genre": "創作の夢・実際の行動記録とは別のお話",
+  "mapTitles": {
+    "standalone_start": "閉まらない鞄",
+    "turn": "頼んでいない支度",
+    "choose": "旅に連れていくもの",
+    "END_A": "薄い封筒の旅",
+    "END_B": "机で待つ鞄たち"
+  },
+  "mapSummaries": {
+    "standalone_start": "旅行鞄が勝手に準備を進め、紙の仕事を増やし始める。",
+    "turn": "鞄が休むには、増えた紙を受け取るか、仕事を断る必要がある。",
+    "choose": "今の紙だけ持っていくか、紙を机へ置いて出かけるか。"
+  },
+  "scenario": [
+    {
+      "label": "standalone_start"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "narrator",
+      "text": "旅の支度をしていると、旅行鞄から小さな手が出てきた。畳んだ服を収めたあと、その手は勝手に机の上の紙を取り込んだ。鞄の留め具には準備中の札がぶら下がっていた。"
+    },
+    {
+      "speaker": "multi",
+      "text": "お着替えは全部入りました。でも、鞄がまだ口を開けています。"
+    },
+    {
+      "speaker": "hinahina",
+      "text": "暇になるのが嫌なのかな。この鞄、仕事を探す顔してるねえ。"
+    },
+    {
+      "speaker": "oji",
+      "text": "持ち物は揃ったのに未完了が増える。依頼されていない仕事を、自分で作っている。"
+    },
+    {
+      "speaker": "sharo",
+      "text": "持ち主に聞いてから増やしてください！　閉められないと出発できません。"
+    },
+    {
+      "speaker": "dejiko",
+      "text": "追加料金も払わずに働きすぎにょ。店なら棚卸しが終わらないにょ。"
+    },
+    {
+      "speaker": "kiku8",
+      "text": "重量が増加中です。取り出した紙の分だけ、新しい紙が入ります。"
+    },
+    {
+      "speaker": "kyoko",
+      "text": "じゃあ輪っかにつないだら？　出た紙をそのまま入れる永久機関！"
+    },
+    {
+      "speaker": "rin",
+      "text": "余計に終わらなくなるだろ。それ、ハサミ置きな。"
+    },
+    {
+      "speaker": "mayuki",
+      "text": "服に紙屑がついちゃった。ちゃんと取ってから閉めたいのに。"
+    },
+    {
+      "speaker": "astarotte",
+      "text": "働けばよいというものではないのだ。私のリボンまで書類につけるでないぞ。"
+    },
+    {
+      "speaker": "mitsuba",
+      "text": "そのリボン、承認の印に使われてるわよ。勝手に偉くなったわね。"
+    },
+    {
+      "label": "turn"
+    },
+    {
+      "speaker": "narrator",
+      "text": "鞄の底から、椅子に座った小さな鞄が出てきた。その中にも、もっと小さな鞄がいた。みんな上の鞄のために紙を書いている。いちばん小さい鞄だけが、空の砂浜を描いていた。"
+    },
+    {
+      "speaker": "kotomi",
+      "text": "いちばん小さい子は、旅の絵を描いているの。書類じゃないの。"
+    },
+    {
+      "speaker": "ana",
+      "text": "この絵を先に見せてあげたら、支度が終わったと分かるでしょうか。"
+    },
+    {
+      "speaker": "kud",
+      "text": "わふー、私が届けます！　小さな階段を作ってくださいっ。"
+    },
+    {
+      "speaker": "hazuki",
+      "text": "わたしの定規を使って。坂道にすれば、運べるでしょ。……滑らないように押さえてるわよ。"
+    },
+    {
+      "speaker": "tama",
+      "text": "たまちゃん、橋をつなぐ！　鞄の中に町ができちゃったね。"
+    },
+    {
+      "speaker": "mii",
+      "text": "みぃタンはね、下で応援するの！　砂浜の絵、折らないで持ってきてねー！"
+    },
+    {
+      "speaker": "ecoko",
+      "text": "えここ、風を止めるね。紙が飛ぶと、また探す仕事が増えちゃう。"
+    },
+    {
+      "speaker": "rem",
+      "text": "机の上を空けました。取り出した紙はこちらへ置けます。"
+    },
+    {
+      "speaker": "minagi",
+      "text": "……お弁当の隙間まで埋まっています。そこは、空けておきたいです。"
+    },
+    {
+      "speaker": "ayu",
+      "text": "ボクのおやつも奥だよ。出発する前に、食べられなくなっちゃう。"
+    },
+    {
+      "speaker": "feiris",
+      "text": "鞄の皆様、休暇の時間ニャ！　これ以上の仕事は受け付けないニャン。"
+    },
+    {
+      "speaker": "moegami",
+      "text": "最も小さな鞄に、海。旅の絵が、仕事の下に埋まっていた。"
+    },
+    {
+      "speaker": "ruriko",
+      "text": "……絵が届いた。下から順に、紙の音が止まっている。"
+    },
+    {
+      "speaker": "tsumugi",
+      "text": "旅の途中で開くなら、紙の束も薄いほうがよさそうです。"
+    },
+    {
+      "speaker": "roju",
+      "text": "今の分だけ畳むか、帰るまで机へ置くか。俺なら、その2つから選ぶな。"
+    },
+    {
+      "speaker": "nemurin",
+      "text": "ねむりん、その小さい鞄に枕あげたいなぁ。ずっと座ってたんだね。"
+    },
+    {
+      "speaker": "hinako",
+      "text": "おにいたま、お服はヒナが押さえてる！　紙だけなら、すっと抜けるよ。"
+    },
+    {
+      "speaker": "rizel",
+      "text": "だんなさま、鞄が閉まったらりぜると手をつなぐですぅ。もう荷物を増やさないよ。"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、海の絵、こっち向きだよ。持っていくなら、見えるところにしようね。"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、ひなも出かける準備できた。あと、そばにいていい？　待ってる間だけでも。"
+    },
+    {
+      "speaker": "mint",
+      "text": "荷札の表を空けておきましたわ。旅の行き先をご自分でお書きになれます。"
+    },
+    {
+      "speaker": "mitra",
+      "text": "いちばん小さい鞄も、椅子を降りたね。みとらは、その子が海を見られるか少し気になってる。"
+    },
+    {
+      "label": "choose"
+    },
+    {
+      "choices": [
+        {
+          "text": "今ある紙だけを封筒に収める",
+          "goto": "END_A"
+        },
+        {
+          "text": "紙を机へ置いて出発する",
+          "goto": "END_B"
+        }
+      ]
+    },
+    {
+      "label": "END_A"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "oji",
+      "text": "これで終わり。封筒を閉じて、今からの追加分は受け取らないよ。"
+    },
+    {
+      "speaker": "kukuri",
+      "text": "勇者様、海の絵をいちばん上にしたよ。開いたらすぐ見えるね。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "紙は小さな封筒に収まり、鞄の手はそれを丁寧に挟んだ。留め具が閉まると、鞄はただの旅行鞄になった。転がし始めた車輪から、波に似た音がした。\n── END：薄い封筒の旅"
+    },
+    {
+      "label": "END_B"
+    },
+    {
+      "bg": "scene"
+    },
+    {
+      "speaker": "hina",
+      "text": "おにいちゃん、手が空いたね。じゃあ、ひなの手、持っていって。"
+    },
+    {
+      "speaker": "hinahina",
+      "text": "留守番の仕事も増やさないでねえ。私たちが帰るまで、机で寝てて。"
+    },
+    {
+      "speaker": "narrator",
+      "text": "小さな鞄たちは紙を布団にして、机の上で眠った。旅行鞄には服と必要な品だけが残った。扉を閉めるとき、机から最後のあくびが聞こえた。\n── END：机で待つ鞄たち"
+    }
+  ],
+  "chars": {
+    "narrator": {
+      "name": "",
+      "color": "#d7d3c8",
+      "emoji": ""
+    },
+    "hinahina": {
+      "name": "ひなひな",
+      "color": "#ef8ab0",
+      "emoji": "♥"
+    },
+    "ana": {
+      "name": "アナ",
+      "color": "#a8d8bc",
+      "emoji": "◇"
+    },
+    "kiku8": {
+      "name": "キク8号",
+      "color": "#a4bddf",
+      "emoji": "☆"
+    },
+    "multi": {
+      "name": "マルチ",
+      "color": "#91c7b4",
+      "emoji": "◇"
+    },
+    "sharo": {
+      "name": "シャロ",
+      "color": "#e6c785",
+      "emoji": "☕"
+    },
+    "mint": {
+      "name": "ミント",
+      "color": "#acccb3",
+      "emoji": "◇"
+    },
+    "tama": {
+      "name": "たまちゃん",
+      "color": "#e8a2c1",
+      "emoji": "♥"
+    },
+    "mayuki": {
+      "name": "真雪",
+      "color": "#a0c4dd",
+      "emoji": "◇"
+    },
+    "astarotte": {
+      "name": "ロッテ",
+      "color": "#dca8ba",
+      "emoji": "♕"
+    },
+    "minagi": {
+      "name": "美凪",
+      "color": "#beb1d9",
+      "emoji": "☆"
+    },
+    "ruriko": {
+      "name": "瑠璃子",
+      "color": "#b1a4d7",
+      "emoji": "◇"
+    },
+    "roju": {
+      "name": "路樹",
+      "color": "#d0b085",
+      "emoji": "◆"
+    },
+    "feiris": {
+      "name": "フェイリス",
+      "color": "#efb2c9",
+      "emoji": "♡"
+    },
+    "dejiko": {
+      "name": "でじこ",
+      "color": "#98c795",
+      "emoji": "☆"
+    },
+    "mii": {
+      "name": "みぃ",
+      "color": "#e0b896",
+      "emoji": "☆"
+    },
+    "hinako": {
+      "name": "ヒナ",
+      "color": "#e8c69c",
+      "emoji": "♡"
+    },
+    "nemurin": {
+      "name": "ねむりん",
+      "color": "#bcaad7",
+      "emoji": "☾"
+    },
+    "rin": {
+      "name": "りん",
+      "color": "#c2bcc4",
+      "emoji": "◆"
+    },
+    "moegami": {
+      "name": "萌神",
+      "color": "#dbb37f",
+      "emoji": "☆"
+    },
+    "mitra": {
+      "name": "みとら",
+      "color": "#c8b2dd",
+      "emoji": "◇"
+    },
+    "kotomi": {
+      "name": "ことみ",
+      "color": "#adbcdc",
+      "emoji": "◇"
+    },
+    "kud": {
+      "name": "クド",
+      "color": "#d2c6a0",
+      "emoji": "☆"
+    },
+    "kukuri": {
+      "name": "ククリ",
+      "color": "#d5b4d4",
+      "emoji": "♡"
+    },
+    "kyoko": {
+      "name": "京子",
+      "color": "#e5b888",
+      "emoji": "☆"
+    },
+    "oji": {
+      "name": "物理おじ",
+      "color": "#c5c0b1",
+      "emoji": "□"
+    },
+    "rem": {
+      "name": "レム",
+      "color": "#a4cedf",
+      "emoji": "◇"
+    },
+    "ayu": {
+      "name": "あゆ",
+      "color": "#e2c48e",
+      "emoji": "☆"
+    },
+    "mitsuba": {
+      "name": "みつば",
+      "color": "#dfa5a9",
+      "emoji": "◆"
+    },
+    "hina": {
+      "name": "ひな",
+      "color": "#e1baca",
+      "emoji": "♡"
+    },
+    "hazuki": {
+      "name": "葉月",
+      "color": "#e2ab98",
+      "emoji": "◆"
+    },
+    "rizel": {
+      "name": "りぜる",
+      "color": "#edb8ce",
+      "emoji": "♡"
+    },
+    "tsumugi": {
+      "name": "紬",
+      "color": "#c0cbd0",
+      "emoji": "◇"
+    },
+    "ecoko": {
+      "name": "えここ",
+      "color": "#a5d7d4",
+      "emoji": "☆"
+    }
+  }
+}

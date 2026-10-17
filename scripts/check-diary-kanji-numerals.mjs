@@ -114,6 +114,7 @@ function collectKanjiNumericFindings(text) {
     while ((match = KANJI_NUMERIC_VALUE_RE.exec(line)) !== null) {
       const value = match[0];
       if (ALLOWED_IDIOMS.has(value)) continue;
+      if (value === "二日" && line.startsWith("二日酔い", match.index)) continue;
 
       findings.push({
         line: lineIndex + 1,

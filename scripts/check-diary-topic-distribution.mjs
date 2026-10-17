@@ -96,6 +96,15 @@ if (files.length === 0) {
   process.exit(1);
 }
 
+// Rule 10 limits concentration when the main diary has multiple topics.
+// A single-topic exception requires an explicit topic declaration in the main
+// diary's non-public context. Missing declarations keep the existing limit.
+const mainFile = fs.readdirSync(path.join(repoRoot, "diary"))
+  .find((name) => name.startsWith(date + "_") && name.endsWith(".md"));
+const mainTopics = mainFile
+  ? extractTopics(fs.readFileSync(path.join(repoRoot, "diary", mainFile), "utf8"))
+  : [];
+const singleTopic = mainTopics.length === 1 ? mainTopics[0].key : null;
 const topicCounts = new Map();
 const signatureCounts = new Map();
 const missingTopics = [];
@@ -125,7 +134,7 @@ const hardLimit = Math.max(1, Math.floor(total / 3));
 const signatureLimit = Math.max(3, Math.floor(total / 5));
 
 const overloadedTopics = [...topicCounts.entries()]
-  .filter(([, count]) => count > hardLimit)
+  .filter(([key, count]) => count > hardLimit && !(singleTopic === key && topicCounts.size === 1))
   .sort((a, b) => b[1] - a[1]);
 
 const repeatedSignatures = [...signatureCounts.entries()]
@@ -134,7 +143,7 @@ const repeatedSignatures = [...signatureCounts.entries()]
 
 console.log(`${date} の話題分散を検査します。`);
 console.log(`対象日記数: ${files.length}件`);
-console.log(`1話題あたりの上限目安: ${hardLimit}件`);
+console.log(singleTopic ? `本編は明示された単一話題 ${singleTopic}（分散上限の対象外・本文の独立性は別途検査）` : `1話題あたりの上限目安: ${hardLimit}件`);
 console.log(`同一組み合わせの注意目安: ${signatureLimit}件`);
 console.log("");
 console.log("話題ごとの出現数:");

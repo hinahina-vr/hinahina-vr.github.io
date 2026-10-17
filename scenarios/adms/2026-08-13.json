@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-13",
+  "title": "勝手に働く旅行鞄 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "閉まらない鞄",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-13_勝手に働く旅行鞄",
+      "entry": "standalone_start",
+      "summary": "旅行鞄が勝手に準備を進め、紙の仕事を増やし始める。"
+    },
+    {
+      "id": "turn",
+      "title": "頼んでいない支度",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-13_勝手に働く旅行鞄",
+      "entry": "turn",
+      "summary": "鞄が休むには、増えた紙を受け取るか、仕事を断る必要がある。"
+    },
+    {
+      "id": "choose",
+      "title": "旅に連れていくもの",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-13_勝手に働く旅行鞄",
+      "entry": "choose",
+      "summary": "今の紙だけ持っていくか、紙を机へ置いて出かけるか。"
+    },
+    {
+      "id": "END_A",
+      "title": "薄い封筒の旅",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-13_勝手に働く旅行鞄",
+      "entry": "END_A",
+      "summary": "薄い封筒の旅"
+    },
+    {
+      "id": "END_B",
+      "title": "机で待つ鞄たち",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-13_勝手に働く旅行鞄",
+      "entry": "END_B",
+      "summary": "机で待つ鞄たち"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "今ある紙だけを封筒に収める",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "紙を机へ置いて出発する",
+      "style": "kenkai"
+    }
+  ]
+}
