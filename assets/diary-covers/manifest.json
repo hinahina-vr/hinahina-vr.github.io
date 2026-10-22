@@ -1166,6 +1166,66 @@
       "promptProvenance": "exact generation instruction",
       "summary": "帰国して考える居場所を題材にしたイラスト",
       "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-24_友達の端末で動く声": {
+      "slug": "2026-08-24_友達の端末で動く声",
+      "date": "2026-08-24",
+      "title": "友達の端末で動く声",
+      "coverSrc": "./assets/diary-covers/2026-08-24_友達の端末で動く声.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. Two ordinary smartphones at different angles on a casual table; one has soft blank conversational bubbles, the other is asleep. A plain mug partly enters the frame. The story is that a friend started using an AI personality made by the diarist. Focus on the informal handoff between friends through everyday objects, not a glowing sci-fi intelligence. No people. Medium: restrained gouache and pencil notebook drawing on warm ivory paper, human irregular lines, loose edges, muted color patches and deliberate empty areas. Keep the arrangement casually asymmetrical and the objects few. No readable words, logos, watermark, decorative border, circuitry overlays, holograms, cinematic bloom, sparkles, plastic gloss, hyperrealism or dramatic symbolism.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "友達の端末で動く声を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-27_ジェネラリストは将軍様": {
+      "slug": "2026-08-27_ジェネラリストは将軍様",
+      "date": "2026-08-27",
+      "title": "ジェネラリストは将軍様",
+      "coverSrc": "./assets/diary-covers/2026-08-27_ジェネラリストは将軍様.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. A modest workbench corner with a closed small toolbox, wire cutters, a pencil and an open notebook of simple diagrams; cropped edge of a laptop at far left. A few tools for different kinds of work, arranged as if actually used and put down, not a perfectly organized flat lay. The theme is a person wanting to remain able to learn many kinds of work, including hands-on work. No people, no helmets, no business slogans. Restrained graphite and opaque gouache on warm ivory paper, economical irregular marks, human imperfect perspective, calm limited palette and unfinished paper edges. Avoid overly dense detail and stage-like symmetry. No readable writing, logos, watermark, decorative borders, luminous particles, sci-fi holograms, dramatic cinematic lighting, gloss or photorealistic rendering.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "ジェネラリストは将軍様を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-29_もう1度ラグナロク": {
+      "slug": "2026-08-29_もう1度ラグナロク",
+      "date": "2026-08-29",
+      "title": "もう1度ラグナロク",
+      "coverSrc": "./assets/diary-covers/2026-08-29_もう1度ラグナロク.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. A small old-fashioned desktop computer on a plain desk, its screen showing a tiny isometric fantasy town with green roofs, a stone path and a few simple pixel-like adventurer silhouettes. A wired mouse rests nearby. Draw it as a warm but unromantic illustration of wanting to return to an old online game. No readable game UI or logos. The screen is only a modest part of the composition, not neon. Restrained graphite and opaque gouache on warm ivory paper, economical irregular marks, human imperfect perspective, calm limited palette and unfinished paper edges. Avoid overly dense detail and stage-like symmetry. No readable writing, logos, watermark, decorative borders, luminous particles, sci-fi holograms, dramatic cinematic lighting, gloss or photorealistic rendering.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "もう1度ラグナロクを題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-30_夜中の話し相手": {
+      "slug": "2026-08-30_夜中の話し相手",
+      "date": "2026-08-30",
+      "title": "夜中の話し相手",
+      "coverSrc": "./assets/diary-covers/2026-08-30_夜中の話し相手.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. A smartphone with muted blank conversation bubbles beside an empty low tumbler on a quiet wooden counter at night. A single ordinary shaded lamp illuminates a small area, while the rest of the surface recedes into gray-blue. The story is finding an enjoyable late-night talking companion in AI. Intimate ordinary objects, no visible people, no romantic hearts, no seductive figure, no neon signs. Restrained graphite and opaque gouache on warm ivory paper, economical irregular marks, human imperfect perspective, calm limited palette and unfinished paper edges. Avoid overly dense detail and stage-like symmetry. No readable writing, logos, watermark, decorative borders, luminous particles, sci-fi holograms, dramatic cinematic lighting, gloss or photorealistic rendering.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "夜中の話し相手を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-31_まだ動かない体": {
+      "slug": "2026-08-31_まだ動かない体",
+      "date": "2026-08-31",
+      "title": "まだ動かない体",
+      "coverSrc": "./assets/diary-covers/2026-08-31_まだ動かない体.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. A computer monitor at an oblique angle showing a simple gray 3D modelling viewport with a stylized fully clothed anime character: short pale blue hair, blue cardigan over an ivory calf-length dress. A small rough pencil sketch of the same clothed design lies beside the keyboard. Sparse gray viewport grid, no actual readable interface labels. The theme is trying to turn a character drawing into an avatar, still work in progress. All portrayed as a handmade illustration of a work desk, not a glossy character portrait. Restrained graphite and opaque gouache on warm ivory paper, economical irregular marks, human imperfect perspective, calm limited palette and unfinished paper edges. Avoid overly dense detail and stage-like symmetry. No readable writing, logos, watermark, decorative borders, luminous particles, sci-fi holograms, dramatic cinematic lighting, gloss or photorealistic rendering.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "まだ動かない体を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
     }
   }
 }

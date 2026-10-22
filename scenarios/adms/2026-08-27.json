@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-27",
+  "title": "将軍様の工具箱 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "冠の入った工具箱",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-27_将軍様の工具箱",
+      "entry": "standalone_start",
+      "summary": "万能の工具箱を開くと、道具より先に将軍の冠が出てくる。"
+    },
+    {
+      "id": "turn",
+      "title": "名前より先の仕事",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-27_将軍様の工具箱",
+      "entry": "turn",
+      "summary": "住人たちが肩書きの札を外し、目の前の作業へ手を出す。"
+    },
+    {
+      "id": "choose",
+      "title": "最初に直すもの",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-27_将軍様の工具箱",
+      "entry": "choose",
+      "summary": "開かない窓を直すか、小鳥の家を作るか。"
+    },
+    {
+      "id": "END_A",
+      "title": "開いた工房の窓",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-27_将軍様の工具箱",
+      "entry": "END_A",
+      "summary": "開いた工房の窓"
+    },
+    {
+      "id": "END_B",
+      "title": "庭に掛けた小さな家",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-27_将軍様の工具箱",
+      "entry": "END_B",
+      "summary": "庭に掛けた小さな家"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "開かない窓を直す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "小鳥の家を作る",
+      "style": "kenkai"
+    }
+  ]
+}

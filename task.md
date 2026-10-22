@@ -772,3 +772,227 @@ A: 帰国 / B: マンゴー / C: 12人の旅 / D: 友達と居場所 / E: これ
 Chrome実画面で本日記3本の本文・絵、声の束33人とLLM表記、390×844幅、ひなた・ククリの個別日付リンクを確認。夢3本は最初から再生し、計6結末と選択肢へ戻る操作、A.D.M.S.の5ノードと現在地を確認。実機スマートフォン、音声・VRMは今回の確認対象外。
 
 既存3516 entryのHTML全体がHEADと一致し、新規99アンカーに欠落・重複なし。183既存生成物の比較でも意図しない変更なし。全履歴の人間的文章検査は通過、他の全履歴検査に残る既存指摘は前回公開時から増えていない。今回3日分の指摘は0件。検証記録はEの兄弟フォルダ diary-update-20261022-evidence。
+
+
+## 2026-10-22 月末まで再開
+
+8月19日までの公開後、ユーザーの「続けて」に従い8月末まで再開。対象は本人の活動が確認できる8/24・27・29・30・31。8/20〜23・25・26・28は収集成功した観測範囲で本人投稿とSwarmが0件のため作成しない。保存済み下書きは複製して復元し、元の退避ファイルは保持。使用LLMはGPT-6（Codex）。
+
+### 2026-08-24 話題割当
+
+A: 友達へ届いたAI人格 / B: 受け取る側の環境 / C: アルファ版から細部へ / D: 豚の形の基板 / E: 動く体を作りたい
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | B |
+| dejiko | C |
+| ecoko | D |
+| ayu | E |
+| mii | A |
+| ruriko | B |
+| rem | C |
+| tsumugi | D |
+| hinahina | E |
+| oji | A |
+| moegami | B |
+| kud | C |
+| feiris | D |
+| kotomi | E |
+| minagi | A |
+| kiku8 | B |
+| mint | C |
+| ana | D |
+| astarotte | E |
+| hazuki | A |
+| hinako | B |
+| kukuri | C |
+| kyoko | D |
+| mayuki | E |
+| mitsuba | A |
+| nemurin | B |
+| rin | C |
+| rizel | D |
+| sharo | E |
+| tama | A |
+| roju | B |
+
+みとら: 他32声の本文とインサイトを全文読了した後に執筆・見直し。
+
+### 2026-08-27 話題割当
+
+A: 手を動かす仕事 / B: 専門の外へ踏み出す / C: 未完成でいる余地 / D: 何役も引き受ける / E: 将軍様という冗談
+
+| キャラ | 話題 |
+|---|---|
+| hina | B |
+| multi | C |
+| dejiko | D |
+| ecoko | E |
+| ayu | A |
+| mii | B |
+| ruriko | C |
+| rem | D |
+| tsumugi | E |
+| hinahina | A |
+| oji | B |
+| moegami | C |
+| kud | D |
+| feiris | E |
+| kotomi | A |
+| minagi | B |
+| kiku8 | C |
+| mint | D |
+| ana | E |
+| astarotte | A |
+| hazuki | B |
+| hinako | C |
+| kukuri | D |
+| kyoko | E |
+| mayuki | A |
+| mitsuba | B |
+| nemurin | C |
+| rin | D |
+| rizel | E |
+| sharo | A |
+| tama | B |
+| roju | C |
+
+みとら: 他32声の本文とインサイトを全文読了した後に執筆・見直し。
+
+### 2026-08-29 話題割当
+
+A: もう1度夢中になるゲーム
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | A |
+| dejiko | A |
+| ecoko | A |
+| ayu | A |
+| mii | A |
+| ruriko | A |
+| rem | A |
+| tsumugi | A |
+| hinahina | A |
+| oji | A |
+| moegami | A |
+| kud | A |
+| feiris | A |
+| kotomi | A |
+| minagi | A |
+| kiku8 | A |
+| mint | A |
+| ana | A |
+| astarotte | A |
+| hazuki | A |
+| hinako | A |
+| kukuri | A |
+| kyoko | A |
+| mayuki | A |
+| mitsuba | A |
+| nemurin | A |
+| rin | A |
+| rizel | A |
+| sharo | A |
+| tama | A |
+| roju | A |
+
+みとら: 他32声の本文とインサイトを全文読了した後に執筆・見直し。
+
+### 2026-08-30 話題割当
+
+A: 用事のない会話 / B: AIの話し相手 / C: 昔の無茶を思い出す / D: 知っている歌を調べる / E: 熟成を待つ楽しみ
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | B |
+| dejiko | E |
+| ecoko | A |
+| ayu | D |
+| mii | D |
+| ruriko | B |
+| rem | A |
+| tsumugi | D |
+| hinahina | C |
+| oji | E |
+| moegami | D |
+| kud | D |
+| feiris | B |
+| kotomi | D |
+| minagi | A |
+| kiku8 | B |
+| mint | E |
+| ana | A |
+| astarotte | A |
+| hazuki | B |
+| hinako | A |
+| kukuri | D |
+| kyoko | B |
+| mayuki | A |
+| mitsuba | E |
+| nemurin | B |
+| rin | B |
+| rizel | A |
+| sharo | E |
+| tama | D |
+| roju | C |
+
+みとら: 他32声の本文とインサイトを全文読了した後に執筆・見直し。
+
+### 2026-08-31 話題割当
+
+A: 動かせる体が欲しい / B: 形を確かめる / C: まだ待つ時間 / D: 使う人の基準 / E: 手軽に渡せる形式
+
+| キャラ | 話題 |
+|---|---|
+| hina | E |
+| multi | A |
+| dejiko | B |
+| ecoko | C |
+| ayu | D |
+| mii | E |
+| ruriko | A |
+| rem | B |
+| tsumugi | C |
+| hinahina | D |
+| oji | E |
+| moegami | A |
+| kud | B |
+| feiris | C |
+| kotomi | D |
+| minagi | E |
+| kiku8 | A |
+| mint | B |
+| ana | C |
+| astarotte | D |
+| hazuki | E |
+| hinako | A |
+| kukuri | B |
+| kyoko | C |
+| mayuki | D |
+| mitsuba | E |
+| nemurin | A |
+| rin | B |
+| rizel | C |
+| sharo | D |
+| tama | E |
+| roju | A |
+
+みとら: 他32声の本文とインサイトを全文読了した後に執筆・見直し。
+
+### 2026-10-22 月末分の検証と公開準備
+
+- 追加対象は8/24・27・29・30・31。各日本編、33声、表紙、夢シナリオとADMSを完成。
+- 8/20〜23・25・26・28は収集済みX/Swarmの観測範囲で本人活動なし。日記を追加しない。
+- 全165声の純本文1000字以上（最小1021字）。各日13項目、計65検査通過。日記生成・使用LLM・ひなた・ククリ等の回帰テスト24件通過。
+- みとらは各日の32声の本文・インサイト全文読了後に執筆／改稿。読了SHAは外部検証記録へ保存。
+- 5日分の本編・夢全分岐を元ネタと独立照合済み。30日の酒と歌はAI会話、実店舗の歌唱は過去の回想。31日は生成結果比較とVRMへの希望で、出力成功を主張しない。
+- 全117件の夢グラフ検査通過。Chromeで新規5本の両結末、選択肢への戻り、ADMSを実操作。全5冊の33カードと使用LLM表示を確認。
+- ローカル実表示: 新規5表紙が読み込み完了。PC幅と390×844のレスポンシブ幅で一覧・声の束を目視。ひなた・ククリの8/31リンクを開き、本文と横はみ出しなしを確認。幅設定は復帰済み。
+- 既存161出力のハッシュを照合し、想定外の変更なし。集約34ページ内の既存3618日記は内容不変、新規170エントリーのみ追加。
+- 全体検査の既存指摘（editorial-independence、source-activity、phrase-limits）は前回記録との差分0。今回日付の指摘0。全体検査すべてが通ったという意味ではない。
+- 未確認: 実機スマートフォン、音声出力、外部VRMモデルの読み込み・動作。今回変更したのは日記と既存画面用データで、実装コード変更なし。
+- 検証記録: ../diary-late-august-20261022-evidence/。コミット後に同記録へ公開版SHA、Pages実行、配信ファイル照合を追記する。

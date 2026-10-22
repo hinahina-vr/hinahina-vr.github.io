@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-31",
+  "title": "最初の一歩の試着室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "絵から降りる足",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-31_最初の一歩の試着室",
+      "entry": "standalone_start",
+      "summary": "描いた少女が絵から降りようとし、動き方をまだ知らない体に戸惑う。"
+    },
+    {
+      "id": "turn",
+      "title": "鏡の前の動き",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-31_最初の一歩の試着室",
+      "entry": "turn",
+      "summary": "住人たちは鏡の前で小さな動きを試し、できる範囲を探す。"
+    },
+    {
+      "id": "choose",
+      "title": "次に作る動作",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-31_最初の一歩の試着室",
+      "entry": "choose",
+      "summary": "最初の一歩を試すか、座って顔の動きを確かめるか。"
+    },
+    {
+      "id": "END_A",
+      "title": "線までの1歩",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-31_最初の一歩の試着室",
+      "entry": "END_A",
+      "summary": "線までの1歩"
+    },
+    {
+      "id": "END_B",
+      "title": "座って交わす挨拶",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-31_最初の一歩の試着室",
+      "entry": "END_B",
+      "summary": "座って交わす挨拶"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "床の目印まで1歩だけ進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "台に座って、顔の動きを確かめる",
+      "style": "kenkai"
+    }
+  ]
+}

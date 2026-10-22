@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-29",
+  "title": "名前を入れる前の町 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "まだ始めていない町",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-29_名前を入れる前の町",
+      "entry": "standalone_start",
+      "summary": "古い画面の向こうに、名前を待つ冒険者の町が開く。"
+    },
+    {
+      "id": "turn",
+      "title": "空欄の冒険者名簿",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-29_名前を入れる前の町",
+      "entry": "turn",
+      "summary": "住人たちは装備を試しながら、自分で始める時間を探す。"
+    },
+    {
+      "id": "choose",
+      "title": "最初の予定",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-29_名前を入れる前の町",
+      "entry": "choose",
+      "summary": "町の外へ最初の冒険に出るか、仲間を誘う約束を書くか。"
+    },
+    {
+      "id": "END_A",
+      "title": "門の外の最初の道",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-29_名前を入れる前の町",
+      "entry": "END_A",
+      "summary": "門の外の最初の道"
+    },
+    {
+      "id": "END_B",
+      "title": "広場で待つ約束",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-29_名前を入れる前の町",
+      "entry": "END_B",
+      "summary": "広場で待つ約束"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "町の外へ最初の冒険に出る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "仲間を誘う約束を書いておく",
+      "style": "kenkai"
+    }
+  ]
+}

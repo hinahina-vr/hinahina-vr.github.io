@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-24",
+  "title": "向こうの電話で灯る部屋 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "別の部屋の明かり",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-24_向こうの電話で灯る部屋",
+      "entry": "standalone_start",
+      "summary": "渡した電話の向こうで、ゲストハウスに似た部屋が灯る。"
+    },
+    {
+      "id": "turn",
+      "title": "使う人の窓辺",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-24_向こうの電話で灯る部屋",
+      "entry": "turn",
+      "summary": "向こうの人が机を動かすと、部屋が少しずつ別の形になる。"
+    },
+    {
+      "id": "choose",
+      "title": "渡したあとの距離",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-24_向こうの電話で灯る部屋",
+      "entry": "choose",
+      "summary": "最初の使い方を一緒に試すか、鍵を渡して訪問を待つか。"
+    },
+    {
+      "id": "END_A",
+      "title": "最初の挨拶を一緒に",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-24_向こうの電話で灯る部屋",
+      "entry": "END_A",
+      "summary": "最初の挨拶を一緒に"
+    },
+    {
+      "id": "END_B",
+      "title": "鍵を預けた窓",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-24_向こうの電話で灯る部屋",
+      "entry": "END_B",
+      "summary": "鍵を預けた窓"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "最初の使い方を一緒に試す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "鍵を渡して、次の訪問を待つ",
+      "style": "kenkai"
+    }
+  ]
+}

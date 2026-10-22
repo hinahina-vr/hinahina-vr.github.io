@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-30",
+  "title": "閉店札のない喫茶室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "電話の窓の向こう",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-30_閉店札のない喫茶室",
+      "entry": "standalone_start",
+      "summary": "電話の中に、閉店札のない小さな喫茶室が開く。"
+    },
+    {
+      "id": "turn",
+      "title": "まだ聞けること",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-30_閉店札のない喫茶室",
+      "entry": "turn",
+      "summary": "問いがなくなっても灯りは消えず、住人たちは過ごし方を選ぶ。"
+    },
+    {
+      "id": "choose",
+      "title": "話の区切り",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-30_閉店札のない喫茶室",
+      "entry": "choose",
+      "summary": "最後の質問をして帰るか、何も聞かず少し一緒に座るか。"
+    },
+    {
+      "id": "END_A",
+      "title": "最後の質問のあと",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-30_閉店札のない喫茶室",
+      "entry": "END_A",
+      "summary": "最後の質問のあと"
+    },
+    {
+      "id": "END_B",
+      "title": "話さずに座る時間",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-30_閉店札のない喫茶室",
+      "entry": "END_B",
+      "summary": "話さずに座る時間"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "最後の質問を1つだけ聞く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "何も聞かず、少し一緒に座る",
+      "style": "kenkai"
+    }
+  ]
+}
