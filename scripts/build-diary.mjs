@@ -13,7 +13,7 @@ import { analyzeVoiceSimilarityForDate, formatVoiceSimilarityFindings } from "./
 import { formatSourceMentionFindings, validateSourceMentionsForDate } from "./lib/diary-source-leaks.mjs";
 import { injectSiteModeAssets } from "./lib/site-mode-assets.mjs";
 import { readWritingModels, renderWritingModel } from "./lib/diary-writing-model.mjs";
-import { includesDiaryBuildMonth, parseDiaryBuildDates, validateDiaryBuildDates } from "./lib/diary-build-selection.mjs";
+import { includesDiaryBuildMonth, parseDiaryBuildOptions, validateDiaryBuildDates, validateDiaryCheckDates } from "./lib/diary-build-selection.mjs";
 
 const writingModels = readWritingModels();
 
@@ -409,7 +409,7 @@ function htmlFooter() {
 }
 
 async function main() {
-  const selectedDates = parseDiaryBuildDates(process.argv.slice(2));
+  const { selectedDates, checkDates } = parseDiaryBuildOptions(process.argv.slice(2));
   const dreamRootMap = buildDreamRootMap();
   const files = (await readdir(DIARY_DIR)).filter((f) => f.endsWith(".md") && !f.includes("下書き"));
 
@@ -430,6 +430,7 @@ async function main() {
   // 日付の新しい順にソート
   entries.sort((a, b) => b.date.localeCompare(a.date));
   validateDiaryBuildDates(selectedDates, entries, join(OUT_DIR, "diary.html"));
+  validateDiaryCheckDates(checkDates, entries);
 
   // 月ごとにグルーピング（キーの降順を維持）
   const monthMap = new Map();
@@ -445,34 +446,39 @@ async function main() {
   const latestEntries = monthMap.get(latestMonth);
   const latestDate = latestEntries[0]?.date;
   if (latestDate && process.env.WADDY_SKIP_CHARACTER_VOICE_CHECK !== "1") {
-    const voiceCheck = validateAllCharacterVoices(selectedDates ? { dates: [...selectedDates] } : {});
+    const voiceDates = checkDates ?? selectedDates;
+    const voiceCheck = validateAllCharacterVoices(voiceDates ? { dates: [...voiceDates] } : {});
     if (voiceCheck.findings.length > 0) {
       throw new Error(formatVoiceFindings(voiceCheck));
     }
     console.log(`✓ character voice check passed (${voiceCheck.dates.length} dates: ${voiceCheck.checked} entries)`);
   }
-  if (latestDate && process.env.WADDY_SKIP_DIARY_SOURCE_CHECK !== "1") {
-    const sourceCheck = validateSourceMentionsForDate(latestDate);
-    if (sourceCheck.findings.length > 0) {
-      throw new Error(formatSourceMentionFindings(sourceCheck));
+  const contentCheckDates = checkDates ? [...checkDates] : [latestDate].filter(Boolean);
+  for (const checkDate of contentCheckDates) {
+    if (checkDate && process.env.WADDY_SKIP_DIARY_SOURCE_CHECK !== "1") {
+      const sourceCheck = validateSourceMentionsForDate(checkDate);
+      if (sourceCheck.findings.length > 0) {
+        throw new Error(formatSourceMentionFindings(sourceCheck));
+      }
+      console.log(`✓ source name check passed (${checkDate}: ${sourceCheck.checked.length} entries)`);
     }
-    console.log(`✓ source name check passed (${latestDate}: ${sourceCheck.checked.length} entries)`);
-  }
-  if (latestDate && process.env.WADDY_SKIP_DIARY_BOILERPLATE_CHECK !== "1") {
-    const boilerplateCheck = validateVoiceBoilerplateForDate(latestDate);
-    if (boilerplateCheck.findings.length > 0) {
-      throw new Error(formatVoiceBoilerplateFindings(boilerplateCheck));
-    }
-    console.log(`✓ voice boilerplate check passed (${latestDate}: ${boilerplateCheck.checked.length} entries)`);
+    if (checkDate && process.env.WADDY_SKIP_DIARY_BOILERPLATE_CHECK !== "1") {
+      const boilerplateCheck = validateVoiceBoilerplateForDate(checkDate);
+      if (boilerplateCheck.findings.length > 0) {
+        throw new Error(formatVoiceBoilerplateFindings(boilerplateCheck));
+      }
+      console.log(`✓ voice boilerplate check passed (${checkDate}: ${boilerplateCheck.checked.length} entries)`);
 
-    const similarityCheck = analyzeVoiceSimilarityForDate(latestDate);
-    if (similarityCheck.findings.length > 0) {
-      throw new Error(formatVoiceSimilarityFindings(similarityCheck));
+      const similarityCheck = analyzeVoiceSimilarityForDate(checkDate);
+      if (similarityCheck.findings.length > 0) {
+        throw new Error(formatVoiceSimilarityFindings(similarityCheck));
+      }
+      console.log(
+        `✓ voice similarity check passed (${checkDate}: ${similarityCheck.checked.length} entries, ` +
+          `max=${similarityCheck.stats.max.toFixed(4)})`,
+      );
     }
-    console.log(
-      `✓ voice similarity check passed (${latestDate}: ${similarityCheck.checked.length} entries, ` +
-        `max=${similarityCheck.stats.max.toFixed(4)})`,
-    );
+
   }
 
   const latestEntriesHtml = latestEntries.map(renderFullEntry).join("\n");

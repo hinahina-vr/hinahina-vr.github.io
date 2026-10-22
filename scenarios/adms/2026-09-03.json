@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-03",
+  "title": "まだ開かない扉 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "まだ開かない扉",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-03_まだ開かない扉",
+      "entry": "standalone_start",
+      "summary": "部屋の真ん中に、扉だけが立っていた。壁も廊下もなく、裏へ回っても同じ部屋だった。ワディーが取っ手へ手を伸ばすと、小さなランプが点いた。扉は開かず、下の隙間から白い紙が1枚出てきた。紙には何も書かれていなかった。"
+    },
+    {
+      "id": "turn",
+      "title": "手を動かす住人たち",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-03_まだ開かない扉",
+      "entry": "turn",
+      "summary": "空白の紙は、引き出してもまた出てきた。京子が折り始め、あゆが丸めた切れ端を拾う。扉の前には、いつの間にか紙の船と動物が並んだ。ランプは点いたままで、取っ手はまだ固かった。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-03_まだ開かない扉",
+      "entry": "choose",
+      "summary": "紙の船を走らせて待つ、または扉のそばで椅子を寄せる"
+    },
+    {
+      "id": "END_A",
+      "title": "机の向こう岸",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-03_まだ開かない扉",
+      "entry": "END_A",
+      "summary": "机の向こう岸"
+    },
+    {
+      "id": "END_B",
+      "title": "椅子の列",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-03_まだ開かない扉",
+      "entry": "END_B",
+      "summary": "椅子の列"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "紙の船を走らせて待つ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "扉のそばで椅子を寄せる",
+      "style": "kenkai"
+    }
+  ]
+}

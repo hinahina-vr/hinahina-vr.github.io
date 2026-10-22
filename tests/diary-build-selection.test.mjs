@@ -149,3 +149,136 @@ test("selected build validates selected voices while preserving failures for cha
   assert.notEqual(full.status, 0);
   assert.match(full.stderr, /2026-08-10/);
 });
+
+test("check-date scope rebuilds all month navigation and still rejects invalid authored content", async (t) => {
+  fs.mkdirSync(fixtureParent, { recursive: true });
+  const fixture = fs.mkdtempSync(path.join(fixtureParent, "diary-build-check-dates-"));
+  t.after(() => {
+    const resolved = path.resolve(fixture);
+    assert.ok(resolved.startsWith(`${path.resolve(fixtureParent)}${path.sep}`));
+    fs.rmSync(resolved, { recursive: true, force: true });
+  });
+  fs.mkdirSync(path.join(fixture, "scripts"));
+  fs.cpSync(path.join(repo, "scripts/lib"), path.join(fixture, "scripts/lib"), { recursive: true });
+  for (const name of ["build-diary.mjs", "build-diary-roju.mjs"]) {
+    fs.copyFileSync(path.join(repo, "scripts", name), path.join(fixture, "scripts", name));
+  }
+  fs.mkdirSync(path.join(fixture, "diary"));
+  for (const date of ["2026-07-31", "2026-08-10", "2026-08-19"]) {
+    fs.writeFileSync(path.join(fixture, "diary", `${date}_記憶.md`), `# ${date} 記憶\n\nその日の本文。\n`);
+  }
+  const voiceDirs = fs.readdirSync(repo).filter(name => name.startsWith("diary-") && fs.statSync(path.join(repo, name)).isDirectory());
+  assert.equal(voiceDirs.length, 33);
+  const originals = new Map();
+  for (const dir of voiceDirs) {
+    const file = fs.readdirSync(path.join(repo, dir)).find(name => name.startsWith("2026-08-19_") && name.endsWith(".md"));
+    assert.ok(file, `missing real authored fixture: ${dir}`);
+    const text = fs.readFileSync(path.join(repo, dir, file), "utf8");
+    originals.set(dir, { file, text });
+    fs.mkdirSync(path.join(fixture, dir));
+    fs.writeFileSync(path.join(fixture, dir, file), text);
+  }
+  fs.writeFileSync(path.join(fixture, "diary-roju/2026-07-31_履歴.md"), "# 2026-07-31 履歴\n\n昔の評定。\n");
+  const env = { ...process.env };
+  for (const key of Object.keys(env)) if (key.startsWith("WADDY_SKIP_")) delete env[key];
+  const run = (script, args = []) => spawnSync(process.execPath, [path.join(fixture, "scripts", script), ...args], {
+    cwd: fixture, encoding: "utf8", env, maxBuffer: 4 * 1024 * 1024,
+  });
+  const pass = result => assert.equal(result.status, 0, result.stdout + result.stderr);
+  const read = name => fs.readFileSync(path.join(fixture, name), "utf8");
+  const outputSnapshot = () => Object.fromEntries(fs.readdirSync(fixture).filter(name => name.endsWith(".html")).sort().map(name => [name, read(name)]));
+  const scope = ["--check-dates", "2026-09-01,2026-09-02"];
+
+  pass(run("build-diary.mjs", ["--dates", "2026-08-19"]));
+  pass(run("build-diary-roju.mjs"));
+  assert.match(read("diary-voices-2026-08-19.html"), /href="\.\/diary\.html#2026-08-19_記憶"/);
+  assert.match(read("diary-voices-2026-08-19.html"), /href="\.\/diary-roju\.html#2026-08-19"/);
+  fs.writeFileSync(path.join(fixture, "diary-2026-07.html"), "old July navigation");
+  const stale = "diary-voices-1999-01-01.html";
+  fs.writeFileSync(path.join(fixture, stale), "stale output");
+  for (const date of ["2026-09-01", "2026-09-02"]) {
+    fs.writeFileSync(path.join(fixture, "diary", `${date}_新月.md`), `# ${date} 新月\n\n新しい月の本文。\n`);
+    for (const [dir, { file, text }] of originals) {
+      fs.writeFileSync(path.join(fixture, dir, file.replace("2026-08-19", date)), text.replaceAll("2026-08-19", date));
+    }
+  }
+
+  await t.test("no arguments retain historical errors and partial output still rejects month rollover", () => {
+    const before = outputSnapshot();
+    const full = run("build-diary.mjs");
+    assert.notEqual(full.status, 0);
+    assert.match(full.stderr, /2026-08-10/);
+    assert.deepEqual(outputSnapshot(), before);
+    for (const script of ["build-diary.mjs", "build-diary-roju.mjs"]) {
+      const partial = run(script, ["--dates", "2026-09-01"]);
+      assert.notEqual(partial.status, 0);
+      assert.match(partial.stderr, /month rollover/);
+      assert.deepEqual(outputSnapshot(), before);
+    }
+  });
+
+  await t.test("check dates reject empty, malformed, nonexistent and mixed selections before output", () => {
+    const before = outputSnapshot();
+    for (const args of [
+      ["--check-dates"], ["--check-dates", ""], ["--check-dates", " "],
+      ["--check-dates", "2026-09-01,"], ["--check-dates", "2026-02-30"],
+      ["--check-dates", "2026-09-09"], ["--check-dates", "2026-09-01,2026-09-09"],
+      ["--check-dates", "2026-09-01", "--dates", "2026-09-01"],
+      ["--dates", "2026-09-01", "--check-dates", "2026-09-01"],
+    ]) {
+      assert.notEqual(run("build-diary.mjs", args).status, 0, JSON.stringify(args));
+      assert.deepEqual(outputSnapshot(), before);
+    }
+    assert.notEqual(run("build-diary-roju.mjs", scope).status, 0);
+    assert.deepEqual(outputSnapshot(), before);
+  });
+
+  await t.test("check-only date selection rewrites archives and old bundles for the new month", () => {
+    const result = run("build-diary.mjs", scope);
+    pass(result);
+    assert.match(result.stdout, /character voice check passed \(2 dates: 66 entries\)/);
+    for (const date of ["2026-09-01", "2026-09-02"]) {
+      for (const label of ["source name", "voice boilerplate", "voice similarity"]) {
+        assert.ok(result.stdout.includes(`${label} check passed (${date}:`), result.stdout);
+      }
+      assert.ok(fs.existsSync(path.join(fixture, `diary-voices-${date}.html`)));
+    }
+    pass(run("build-diary-roju.mjs"));
+    assert.match(read("diary.html"), /<h2>2026年9月<\/h2>/);
+    assert.match(read("diary-2026-08.html"), /id="2026-08-19_記憶"/);
+    assert.match(read("diary-2026-08.html"), /href="\.\/diary-roju-2026-08\.html#2026-08-19"/);
+    assert.match(read("diary-2026-07.html"), /href="\.\/diary\.html">2026年9月<\/a>/);
+    assert.match(read("diary-voices-2026-08-19.html"), /href="\.\/diary-2026-08\.html#2026-08-19_記憶"/);
+    assert.match(read("diary-voices-2026-08-19.html"), /href="\.\/diary-roju-2026-08\.html#2026-08-19"/);
+    assert.match(read("diary-roju-2026-08.html"), /id="2026-08-19"/);
+    assert.match(read("diary-roju-2026-07.html"), /href="\.\/diary-roju\.html">2026年9月<\/a>/);
+    assert.equal(fs.existsSync(path.join(fixture, stale)), false);
+  });
+
+  await t.test("every explicitly checked date rejects voice, source and boilerplate errors before any output", () => {
+    const { file, text } = originals.get("diary-hina");
+    const hina = path.join(fixture, "diary-hina", file.replace("2026-08-19", "2026-09-01"));
+    const original = text.replaceAll("2026-08-19", "2026-09-01");
+    // September 1 is not the newest date. These mutations must still fail.
+    for (const [sentence, expected] of [
+      ["ひなは敬語で話します。", /敬語/],
+      ["ひな、Twitterを見たよ。", /素材取得元/],
+      ["ひな、その声では分からないよ。", /共通テンプレ/],
+    ]) {
+      fs.writeFileSync(hina, original.replace(/\r?\n\r?\n/, `\n\n${sentence}\n\n`));
+      fs.writeFileSync(path.join(fixture, stale), "must survive validation failure");
+      const before = outputSnapshot();
+      const failed = run("build-diary.mjs", scope);
+      assert.notEqual(failed.status, 0, sentence);
+      assert.match(failed.stderr, expected);
+      assert.match(failed.stderr, /2026-09-01/);
+      assert.deepEqual(outputSnapshot(), before);
+      fs.writeFileSync(hina, original);
+    }
+    const before = outputSnapshot();
+    const full = run("build-diary.mjs");
+    assert.notEqual(full.status, 0);
+    assert.match(full.stderr, /2026-08-10/);
+    assert.deepEqual(outputSnapshot(), before);
+  });
+});

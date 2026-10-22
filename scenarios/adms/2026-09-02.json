@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-02",
+  "title": "青い点の廊下 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "青い点の廊下",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-02_青い点の廊下",
+      "entry": "standalone_start",
+      "summary": "ゲストハウスの廊下が、青い点で埋まっていた。床にも天井にも細い糸が渡され、その先は暗くて見えない。ワディーが足を止めると、隣のひなたも止まった。2人の影だけが、光の列の途中に残った。"
+    },
+    {
+      "id": "turn",
+      "title": "手を動かす住人たち",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-02_青い点の廊下",
+      "entry": "turn",
+      "summary": "キク8号が足元の糸を持ち上げた。触れていた点が順に消え、壁の向こうまで続いているように見えた廊下に、普通の扉が現れた。扉の横には、色のない丸い取っ手が2つ付いていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-02_青い点の廊下",
+      "entry": "choose",
+      "summary": "青い光を床へ集める、または光を少し消して扉を開ける"
+    },
+    {
+      "id": "END_A",
+      "title": "足元の小さな星",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-02_青い点の廊下",
+      "entry": "END_A",
+      "summary": "足元の小さな星"
+    },
+    {
+      "id": "END_B",
+      "title": "普通の扉の先",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-02_青い点の廊下",
+      "entry": "END_B",
+      "summary": "普通の扉の先"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "青い光を床へ集める",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "光を少し消して扉を開ける",
+      "style": "kenkai"
+    }
+  ]
+}

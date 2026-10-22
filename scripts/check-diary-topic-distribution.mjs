@@ -101,9 +101,12 @@ if (files.length === 0) {
 // diary's non-public context. Missing declarations keep the existing limit.
 const mainFile = fs.readdirSync(path.join(repoRoot, "diary"))
   .find((name) => name.startsWith(date + "_") && name.endsWith(".md"));
-const mainTopics = mainFile
-  ? extractTopics(fs.readFileSync(path.join(repoRoot, "diary", mainFile), "utf8"))
-  : [];
+const mainMarkdown = mainFile ? fs.readFileSync(path.join(repoRoot, "diary", mainFile), "utf8") : "";
+const mainTopics = extractTopics(mainMarkdown);
+// A documented source limitation may leave only two real topics. Keep their
+// allocation balanced and reject topics outside that declaration.
+const twoSourceTopics = mainTopics.length === 2 && new Set(mainTopics.map(t => t.key)).size === 2
+  && mainMarkdown.includes("<!-- topic-distribution-exception: 2-source-topics -->");
 const singleTopic = mainTopics.length === 1 ? mainTopics[0].key : null;
 const topicCounts = new Map();
 const signatureCounts = new Map();
@@ -130,7 +133,11 @@ for (const file of files) {
 }
 
 const total = files.length - missingTopics.length;
-const hardLimit = Math.max(1, Math.floor(total / 3));
+// Ceil permits the unavoidable extra person when 31 voices share 3 topics.
+const hardLimit = Math.max(1, Math.ceil(total / (twoSourceTopics ? 2 : 3)));
+const unknownTopics = twoSourceTopics
+  ? [...topicCounts.keys()].filter(key => !mainTopics.some(topic => topic.key === key))
+  : [];
 const signatureLimit = Math.max(3, Math.floor(total / 5));
 
 const overloadedTopics = [...topicCounts.entries()]
@@ -144,6 +151,7 @@ const repeatedSignatures = [...signatureCounts.entries()]
 console.log(`${date} の話題分散を検査します。`);
 console.log(`対象日記数: ${files.length}件`);
 console.log(singleTopic ? `本編は明示された単一話題 ${singleTopic}（分散上限の対象外・本文の独立性は別途検査）` : `1話題あたりの上限目安: ${hardLimit}件`);
+if (twoSourceTopics) console.log("本編は観測された2話題の明示例外（均等配分・本文の独立性は別途検査）");
 console.log(`同一組み合わせの注意目安: ${signatureLimit}件`);
 console.log("");
 console.log("話題ごとの出現数:");
@@ -167,7 +175,8 @@ if (missingTopics.length > 0) {
   }
 }
 
-if (overloadedTopics.length > 0 || missingTopics.length > 0) {
+if (overloadedTopics.length > 0 || missingTopics.length > 0 || unknownTopics.length > 0) {
+  if (unknownTopics.length) console.error("2話題の例外に未宣言の話題があります: " + unknownTopics.join(", "));
   if (overloadedTopics.length > 0) {
     console.log("");
     console.error("話題が集中しすぎています:");

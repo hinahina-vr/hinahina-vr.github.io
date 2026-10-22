@@ -72,3 +72,31 @@ test('character names containing 千 do not suppress real numeric amounts',t=>{
   result=run('check-diary-kanji-numerals.mjs');assert.equal(result.status,1,value);assert.ok(result.stderr.includes('「'+finding+'」'),result.stderr);
  }
 });
+
+test('31 voices can split 11/10/10 across three topics but 12/10/9 still fails',t=>{
+ const {root,main,run}=fixture(t);
+ const block=topics=>'<!-- daily-context:start -->\n### 本日の話題\n'+topics+'\n<!-- daily-context:end -->';
+ fs.writeFileSync(main,'# 2026-08-29 遊び\n本文。\n'+block('- A. 工作\n- B. 食事\n- C. 散歩'));
+ for(let i=0;i<31;i++){
+  const dir=path.join(root,'diary-voice'+i);fs.mkdirSync(dir);
+  fs.writeFileSync(path.join(dir,'2026-08-29_遊び.md'),'# 2026-08-29 遊び\n本文。\n'+block('- '+(i<11?'A':i<21?'B':'C')+'. 話題'));
+ }
+ let result=run('check-diary-topic-distribution.mjs');assert.equal(result.status,0,result.stdout+result.stderr);assert.match(result.stdout,/上限目安: 11件/);
+ fs.writeFileSync(path.join(root,'diary-voice30','2026-08-29_遊び.md'),'# 2026-08-29 遊び\n本文。\n'+block('- A. 工作'));
+ result=run('check-diary-topic-distribution.mjs');assert.equal(result.status,1);assert.match(result.stderr,/A: 12件/);
+});
+
+test('two observed source topics need an explicit exception and still reject skew, unknown topics and missing metadata',t=>{
+ const {root,main,run}=fixture(t);
+ const block=topics=>'<!-- daily-context:start -->\n### 本日の話題\n'+topics+'\n<!-- daily-context:end -->';
+ const mainBody='# 2026-08-29 遊び\n本文。\n'+block('- A. 工作\n- B. 食事');
+ const marker='\n<!-- topic-distribution-exception: 2-source-topics -->\n';
+ const write=(i,topics)=>fs.writeFileSync(path.join(root,'diary-voice'+i,'2026-08-29_遊び.md'),'# 2026-08-29 遊び\n本文。\n'+block(topics));
+ for(let i=0;i<31;i++){fs.mkdirSync(path.join(root,'diary-voice'+i));write(i,'- '+(i<16?'A':'B')+'. 話題');}
+ fs.writeFileSync(main,mainBody);assert.equal(run('check-diary-topic-distribution.mjs').status,1,'no implicit exception');
+ fs.writeFileSync(main,mainBody+marker);let result=run('check-diary-topic-distribution.mjs');assert.equal(result.status,0,result.stdout+result.stderr);
+ write(30,'- A. 工作');assert.equal(run('check-diary-topic-distribution.mjs').status,1,'17/14 is skewed');
+ write(30,'- C. 未観測');result=run('check-diary-topic-distribution.mjs');assert.equal(result.status,1);assert.match(result.stderr,/未宣言/);
+ write(30,'');assert.equal(run('check-diary-topic-distribution.mjs').status,1,'missing metadata still fails');
+ write(30,'- B. 食事');fs.writeFileSync(main,'# 2026-08-29 遊び\n本文。\n'+block('- A. 工作\n- B. 食事\n- C. 散歩')+marker);assert.equal(run('check-diary-topic-distribution.mjs').status,1,'marker cannot exempt a three-topic day');
+});

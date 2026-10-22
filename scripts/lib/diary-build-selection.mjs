@@ -15,12 +15,29 @@ export function parseDiaryBuildDates(argv) {
   return new Set(dates);
 }
 
-export function validateDiaryBuildDates(selectedDates, entries, currentPage) {
-  if (!selectedDates) return;
+// Main diary builds can check explicit dates while regenerating every output.
+// Keep the legacy parser unchanged for builders that only select output dates.
+export function parseDiaryBuildOptions(argv) {
+  if (argv[0] === "--check-dates") {
+    if (argv.length !== 2) {
+      throw new Error("Usage: --check-dates YYYY-MM-DD,YYYY-MM-DD (cannot combine with --dates)");
+    }
+    return { selectedDates: null, checkDates: parseDiaryBuildDates(["--dates", argv[1]]) };
+  }
+  return { selectedDates: parseDiaryBuildDates(argv), checkDates: null };
+}
+
+export function validateDiaryCheckDates(dates, entries) {
+  if (!dates) return;
   const available = new Set(entries.map((entry) => entry.date));
-  for (const date of selectedDates) {
+  for (const date of dates) {
     if (!available.has(date)) throw new Error(`Selected diary does not exist: ${date}`);
   }
+}
+
+export function validateDiaryBuildDates(selectedDates, entries, currentPage) {
+  if (!selectedDates) return;
+  validateDiaryCheckDates(selectedDates, entries);
   // A month rollover changes old bundle/archive navigation, so it needs a full build.
   const latestMonth = entries.map((entry) => entry.month).sort().at(-1);
   if (existsSync(currentPage)) {

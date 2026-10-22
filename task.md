@@ -996,3 +996,239 @@ A: 動かせる体が欲しい / B: 形を確かめる / C: まだ待つ時間 /
 - 全体検査の既存指摘（editorial-independence、source-activity、phrase-limits）は前回記録との差分0。今回日付の指摘0。全体検査すべてが通ったという意味ではない。
 - 未確認: 実機スマートフォン、音声出力、外部VRMモデルの読み込み・動作。今回変更したのは日記と既存画面用データで、実装コード変更なし。
 - 検証記録: ../diary-late-august-20261022-evidence/。コミット後に同記録へ公開版SHA、Pages実行、配信ファイル照合を追記する。
+## 2026-10-22 9月第1週の更新計画
+
+- 公開対象は2026-09-01・02・03・05・06。04・07は本人の投稿とチェックインの確認済み範囲で活動なし。
+- 9月8日以降は今回の公開範囲に含めない。後半の原文は予備観測のみ、画像・長文の精査前。
+- 作業・成果物・証跡はEドライブ。証跡: ../diary-september-20261022-evidence/。
+- 本人の出来事を足さず、33声は各キャラクターの暮らしとして書く。ひなたは甘い常体・ひな/おにいちゃん、ククリの勇者様はワディー本人。
+- みとらは32声の本文とインサイト全文を読みSHAを保存してから最後に執筆する。声の束冒頭の使用LLMはGPT-6（Codex）。
+
+### 2026-09-01 話題割当（執筆前）
+
+- A. 絵から立体になったメイド服
+- B. 自分の遊びたい場所へ連れていきたい
+- C. 入ったことのない店の閉店
+
+| キャラ | 話題 |
+|---|---|
+| hina | B |
+| multi | A |
+| dejiko | C |
+| ecoko | C |
+| ayu | C |
+| mii | A |
+| ruriko | C |
+| rem | C |
+| tsumugi | C |
+| hinahina | B |
+| oji | B |
+| moegami | B |
+| kud | A |
+| feiris | C |
+| kotomi | A |
+| minagi | A |
+| kiku8 | A |
+| mint | B |
+| ana | A |
+| astarotte | A |
+| hazuki | A |
+| hinako | B |
+| kukuri | A |
+| kyoko | B |
+| mayuki | A |
+| mitsuba | C |
+| nemurin | C |
+| rin | B |
+| rizel | B |
+| sharo | C |
+| tama | B |
+| roju | C |
+
+みとら: 全32声読了後の統合。
+
+### 2026-09-02 話題割当（執筆前）
+
+- A. 画面の奥へ続く青い光
+
+例外: 観測した元ネタは光の空間の画面1件だけ。話題を架空に増やさず全員Aとする。光・反射に触れた各自の異なる生活を描き、同じ比喩や作業・結論の反復を避ける。
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | A |
+| dejiko | A |
+| ecoko | A |
+| ayu | A |
+| mii | A |
+| ruriko | A |
+| rem | A |
+| tsumugi | A |
+| hinahina | A |
+| oji | A |
+| moegami | A |
+| kud | A |
+| feiris | A |
+| kotomi | A |
+| minagi | A |
+| kiku8 | A |
+| mint | A |
+| ana | A |
+| astarotte | A |
+| hazuki | A |
+| hinako | A |
+| kukuri | A |
+| kyoko | A |
+| mayuki | A |
+| mitsuba | A |
+| nemurin | A |
+| rin | A |
+| rizel | A |
+| sharo | A |
+| tama | A |
+| roju | A |
+
+みとら: 全32声読了後の統合。
+
+### 2026-09-03 話題割当（執筆前）
+
+- A. 待ちきれない新しい道具
+
+例外: 元ネタは待ち望む短い言葉1件のみ。未提供の機能・試用・成果を捏造しない。全員Aの例外、待ち時間に起きる各自の具体的な生活へ展開する。
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | A |
+| dejiko | A |
+| ecoko | A |
+| ayu | A |
+| mii | A |
+| ruriko | A |
+| rem | A |
+| tsumugi | A |
+| hinahina | A |
+| oji | A |
+| moegami | A |
+| kud | A |
+| feiris | A |
+| kotomi | A |
+| minagi | A |
+| kiku8 | A |
+| mint | A |
+| ana | A |
+| astarotte | A |
+| hazuki | A |
+| hinako | A |
+| kukuri | A |
+| kyoko | A |
+| mayuki | A |
+| mitsuba | A |
+| nemurin | A |
+| rin | A |
+| rizel | A |
+| sharo | A |
+| tama | A |
+| roju | A |
+
+みとら: 全32声読了後の統合。
+
+### 2026-09-05 話題割当（執筆前）
+
+- A. できなかったことをもう1度試す
+- B. 好きなキャラクターを立体にする
+- C. 作りたいものは無機物ではない
+- D. 人物の顔に別の顔を重ねる
+- E. 動画の動きの中に好きな顔がある
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | B |
+| dejiko | C |
+| ecoko | D |
+| ayu | E |
+| mii | A |
+| ruriko | B |
+| rem | C |
+| tsumugi | D |
+| hinahina | E |
+| oji | A |
+| moegami | B |
+| kud | C |
+| feiris | D |
+| kotomi | E |
+| minagi | A |
+| kiku8 | B |
+| mint | C |
+| ana | D |
+| astarotte | E |
+| hazuki | A |
+| hinako | B |
+| kukuri | C |
+| kyoko | D |
+| mayuki | E |
+| mitsuba | A |
+| nemurin | B |
+| rin | C |
+| rizel | D |
+| sharo | E |
+| tama | A |
+| roju | B |
+
+みとら: 全32声読了後の統合。
+
+### 2026-09-06 話題割当（執筆前）
+
+- A. 自分の好きなアバターを作れる人が増える期待
+- B. AIの利用枠をおかわりしたくなる気持ち
+
+例外: 元ネタはアバターへの期待と利用枠をおかわりに見立てた漫画の2話題。各16声で1/3を超えるが話題を架空に増やさない。各自の生活の具体物・行動・結末を変え、同じ説明の反復を避ける。
+
+| キャラ | 話題 |
+|---|---|
+| hina | A |
+| multi | B |
+| dejiko | A |
+| ecoko | B |
+| ayu | A |
+| mii | B |
+| ruriko | A |
+| rem | B |
+| tsumugi | A |
+| hinahina | B |
+| oji | A |
+| moegami | B |
+| kud | A |
+| feiris | B |
+| kotomi | A |
+| minagi | B |
+| kiku8 | A |
+| mint | B |
+| ana | A |
+| astarotte | B |
+| hazuki | A |
+| hinako | B |
+| kukuri | A |
+| kyoko | B |
+| mayuki | A |
+| mitsuba | B |
+| nemurin | A |
+| rin | B |
+| rizel | A |
+| sharo | B |
+| tama | A |
+| roju | B |
+
+みとら: 全32声読了後の統合。
+
+## 2026-10-22 9月1〜7日分の制作・公開前検証完了
+
+- 対象は本人のX活動がある9月1・2・3・5・6日。9月4・7日は対象活動なし。Swarmも9月1〜7日のチェックインなしを月境界を含む履歴で確認。9月8日以降は今回未着手。
+- 本日記5本、各日33人の声（計165本）、表紙5枚、夢5本を制作。みとらは他32人の全文読了後に執筆し、読了対象のSHAを記録した。声の束の先頭に使用LLM GPT-6（Codex）と執筆範囲を表示。
+- 165本は見出し・インサイト・コメントを除く本文で1000文字以上。5日×13項目の65検査に合格。夢グラフ122本検証に合格。今回の夢は全5本で両分岐のFIN、選択肢へ戻る操作、ADMS遷移表示を実Chromeで確認。
+- 話題分配検査の端数処理と2話題例外を修正。9月への月替わりは全ページを再生成する必要があるため、build-diary.mjsに --check-dates を追加。指定した全日付の検査を出力前に実行し、既存記事を含む全月HTMLを生成する。--datesとの併用は拒否し、従来の引数なし検査は変更しない。
+- 最新コードで回帰テスト31件に合格（うち月替わり14件）。本日記・33キャラの全ビルドに合格。保存監査で既存3980記事の本文変更・欠落0、追加170、8月アーカイブへの移動44。旧声の束117ページは日付リンク以外の内容を維持。
+- 実Chromeで5日分の表紙表示、全5束の各33人とLLM先頭表記、ひなた・ククリの9月6日リンクを確認。8月アーカイブ22件、8月31日束から旧本日記・旧老中評定への移動と9月への復帰を確認。390×844で本日記と9月6日束の横はみ出しなし、夢9月6日の両分岐操作を確認。実機スマホ・音声・VRMの検証ではない。
+- 過去全件に対する既存の独立性・活動日・語句制限の警告は残るが、前回報告との比較で増加なし。今回5日の指摘は0。過去分を含む全検査が合格したとは扱わない。
+- 詳細証跡: E:/CodexData/home/visualizations/2026/09/26/01a0dba2-8b40-7701-830b-a38e6126aeeb/diary-september-20261022-evidence/ 。公開コミットSHA、Pages結果、配信ファイル照合、公開画面の確認は同フォルダーの公開記録へ保存する。

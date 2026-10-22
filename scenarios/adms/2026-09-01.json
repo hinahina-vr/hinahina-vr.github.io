@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-01",
+  "title": "リボンの仕立て室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "リボンの仕立て室",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-01_リボンの仕立て室",
+      "entry": "standalone_start",
+      "summary": "紙の服を着た人形が、ゲストハウスの廊下に並んでいた。正面から見ると立派なのに、後ろへ回ると真っ白だ。ワディーが最後の人形を持ち上げると、背中へ結ぶはずの青いリボンが床に落ちた。"
+    },
+    {
+      "id": "turn",
+      "title": "手を動かす住人たち",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-01_リボンの仕立て室",
+      "entry": "turn",
+      "summary": "作業台の上へ、色の違う布が少しずつ増えていった。人形はまだ立ったままだが、ククリが布を当てるたび、後ろを見たそうに首をかしげた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-01_リボンの仕立て室",
+      "entry": "choose",
+      "summary": "青いリボンを結んで送り出す、または白い背中に服の模様を描く"
+    },
+    {
+      "id": "END_A",
+      "title": "背中の結び目",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-01_リボンの仕立て室",
+      "entry": "END_A",
+      "summary": "背中の結び目"
+    },
+    {
+      "id": "END_B",
+      "title": "白い紙の余白",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-01_リボンの仕立て室",
+      "entry": "END_B",
+      "summary": "白い紙の余白"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "青いリボンを結んで送り出す",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "白い背中に服の模様を描く",
+      "style": "kenkai"
+    }
+  ]
+}

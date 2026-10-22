@@ -1226,6 +1226,66 @@
       "promptProvenance": "exact generation instruction",
       "summary": "まだ動かない体を題材にしたイラスト",
       "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-09-01_背中にもリボン": {
+      "slug": "2026-09-01_背中にもリボン",
+      "date": "2026-09-01",
+      "title": "背中にもリボン",
+      "coverSrc": "./assets/diary-covers/2026-09-01_背中にもリボン.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover. A small character-design work area, seen close and obliquely: three simple drawing sheets pinned to a plain board show front, side and back views of the same fully clothed chibi maid, short silver-white bob, pink beret and pink dress, white apron, blue ribbons. The back-view ribbon is the clear visual focus. An ordinary pencil lies along the bottom edge. This is a quiet hand-drawn illustration about discovering the back of a character, not a glossy character poster. Restrained pencil and opaque gouache on warm uncoated paper, irregular economical lines, limited dusty pink, gray and muted blue, visible uneven paint edges, asymmetrical composition with room to breathe. No readable words, interface text, logos, watermark, sparkling particles, gradients, shiny skin, neon, cinematic lighting, photorealism or ornate border.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "背中にもリボンを題材にしたイラスト",
+      "updatedAt": "2026-10-22T00:00:00Z"
+    },
+    "2026-09-02_青い光の奥": {
+      "slug": "2026-09-02_青い光の奥",
+      "date": "2026-09-02",
+      "title": "青い光の奥",
+      "coverSrc": "./assets/diary-covers/2026-09-02_青い光の奥.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover. A close cropped ordinary computer screen showing a modest blue light installation: many small pale blue dots along thin lines recede toward a deep central vanishing point. The monitor's dark gray lower rim and a tiny part of its stand anchor this as a screen image. The image itself is a painted notebook observation, not a real travel photograph or a sci-fi portal. Dry gouache and broken graphite on warm ivory paper, rough marks and restrained cyan, blue-black and off-white, uneven dots, loose perspective, few details and unpainted margins. Light points belong only inside the screen. No readable text, logos, watermark, glossy rendering, lens flares, decorative sparkles outside the installation, cyberpunk accents, perfect symmetry or cinematic bloom.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "青い光の奥を題材にしたイラスト",
+      "updatedAt": "2026-10-22T00:00:00Z"
+    },
+    "2026-09-03_アストラルテレポーター待ち": {
+      "slug": "2026-09-03_アストラルテレポーター待ち",
+      "date": "2026-09-03",
+      "title": "アストラルテレポーター待ち",
+      "coverSrc": "./assets/diary-covers/2026-09-03_アストラルテレポーター待ち.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover, quiet visual interpretation of waiting impatiently for a new creative tool to become available. A plain desktop monitor almost edge-on on a modest desk, mostly gray blank screen with one small unfinished horizontal progress line. A nearby empty wooden chair is pulled a little away from the desk, as though its user will return soon. No person, no science-fiction teleporter, no claim of actual loading or arrival. Restrained pencil and thin opaque gouache on warm ivory paper, human irregular lines, imperfect simple perspective, muted moss gray, sand and slate, broad empty space, no theatrical mood. No readable text, numbers, logos, watermark, decorative borders, neon, light particles, photorealism, shiny surfaces or cinematic lighting.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "アストラルテレポーター待ちを題材にしたイラスト",
+      "updatedAt": "2026-10-22T00:00:00Z"
+    },
+    "2026-09-05_顔を重ねる": {
+      "slug": "2026-09-05_顔を重ねる",
+      "date": "2026-09-05",
+      "title": "顔を重ねる",
+      "coverSrc": "./assets/diary-covers/2026-09-05_顔を重ねる.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover. A plain laptop seen from a side angle; on its screen is a simple filmstrip of three small frames of a fully clothed adult figure in a gray jacket and jeans, with a small cartoon head wearing a pink beret composited over the head in each frame. Beside the laptop is a loose small pencil sketch of the same silver-haired cartoon head, fully innocent and expression-focused. Show the idea of replacing a face in video through ordinary work objects. No dense software UI or labels. Graphite and matte gouache on warm textured paper, sparse irregular drawing, quiet gray and pink with a little blue, asymmetrical crop, visible patchy brush marks. No readable text, logos, watermark, glossy anime portrait, glowing circuitry, magical particles, photorealism or ornate border.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "顔を重ねるを題材にしたイラスト",
+      "updatedAt": "2026-10-22T00:00:00Z"
+    },
+    "2026-09-06_おかわりが欲しい": {
+      "slug": "2026-09-06_おかわりが欲しい",
+      "date": "2026-09-06",
+      "title": "おかわりが欲しい",
+      "coverSrc": "./assets/diary-covers/2026-09-06_おかわりが欲しい.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover, an ordinary visual metaphor for wanting another turn with a creative tool. Close view of an empty small ceramic cup on a simple desk with the cropped corner of a computer keyboard beyond it; the cup's empty inside is clearly visible. A pale blue small cloth lies loosely beside it. No alcohol, no pouring hand, no person and no digital logo. Dry brush gouache and graphite on warm uncoated paper, understated humorous still life, off-center cup, imperfect ellipse and irregular shadow, quiet ivory, slate and muted blue, economical marks and broad paper showing. No readable words, watermark, logos, decorative particles, neon, gloss, photorealism or cinematic staging.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "おかわりが欲しいを題材にしたイラスト",
+      "updatedAt": "2026-10-22T00:00:00Z"
     }
   }
 }

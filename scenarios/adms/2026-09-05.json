@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-05",
+  "title": "顔を借りる映写室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "顔を借りる映写室",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-05_顔を借りる映写室",
+      "entry": "standalone_start",
+      "summary": "映写室に入ると、スクリーンの人物がこちらを見た。灰色の上着を着た体に、顔だけがなかった。机には丸い仮面とピンクの帽子が置かれ、横の小窓からは、舞台袖のような狭い場所が見えた。"
+    },
+    {
+      "id": "turn",
+      "title": "手を動かす住人たち",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-05_顔を借りる映写室",
+      "entry": "turn",
+      "summary": "京子が小窓の前で腕を振ると、スクリーンの人物も腕を振った。帽子を持ち上げた時だけ、顔が少し遅れた。りんが笑い、マルチが椅子を小窓の下へ運んだ。顔を合わせるには、立つ場所を決めたほうがよさそうだった。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-05_顔を借りる映写室",
+      "entry": "choose",
+      "summary": "丸い仮面で大きく身振りする、または帽子の顔で客席へ挨拶する"
+    },
+    {
+      "id": "END_A",
+      "title": "仮面の大芝居",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-05_顔を借りる映写室",
+      "entry": "END_A",
+      "summary": "仮面の大芝居"
+    },
+    {
+      "id": "END_B",
+      "title": "客席へ向く顔",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-05_顔を借りる映写室",
+      "entry": "END_B",
+      "summary": "客席へ向く顔"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "丸い仮面で大きく身振りする",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "帽子の顔で客席へ挨拶する",
+      "style": "kenkai"
+    }
+  ]
+}
