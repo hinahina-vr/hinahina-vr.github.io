@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-09",
+  "title": "顔だけ先に返事をする店 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "顔だけ先に返事をする店",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-09_顔だけ先に返事をする店",
+      "entry": "standalone_start",
+      "summary": "ゲストハウスの壁に、小さな顔が32個並んでいた。灰色の髪に、ピンクのベレー帽。どれも同じ子なのに、ワディーが近づくと違う顔で振り向く。ひなひなは、その前で腕を組んでいた。"
+    },
+    {
+      "id": "turn",
+      "title": "最後の顔はまだ眠い",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-09_顔だけ先に返事をする店",
+      "entry": "turn",
+      "summary": "ワディーがグラスを持ち上げると、壁の顔が一斉に反応した。満足そうな顔、まだ迷っている顔、何も言わず目を細める顔。最後の1つだけは、口を開いたまま返事を決められずにいた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-09_顔だけ先に返事をする店",
+      "entry": "choose",
+      "summary": "迷っている顔と黙って頷く、またはいちばん大きな声の顔を呼ぶ"
+    },
+    {
+      "id": "END_A",
+      "title": "うめかものまま",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-09_顔だけ先に返事をする店",
+      "entry": "END_A",
+      "summary": "うめかものまま"
+    },
+    {
+      "id": "END_B",
+      "title": "壁いっぱいのブオー",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-09_顔だけ先に返事をする店",
+      "entry": "END_B",
+      "summary": "壁いっぱいのブオー"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "迷っている顔と黙って頷く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "いちばん大きな声の顔を呼ぶ",
+      "style": "kenkai"
+    }
+  ]
+}

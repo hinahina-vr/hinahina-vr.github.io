@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-12",
+  "title": "計画表にない午後 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "計画表にない午後",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-12_計画表にない午後",
+      "entry": "standalone_start",
+      "summary": "壁いっぱいの計画表から、色のついた四角が飛び出していた。ワディーが最初の四角を踏むと、それは床になった。次の四角は階段になり、ひなひながその上から、まだ空白の部屋を覗いていた。"
+    },
+    {
+      "id": "turn",
+      "title": "予定の外へ伸びる廊下",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-12_計画表にない午後",
+      "entry": "turn",
+      "summary": "用意されていた四角を全部踏むと、廊下の先に何も書かれていない扉が現れた。そこだけは、予定表に載っていない。隙間から、甘い匂いと賑やかな声が漏れていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-12_計画表にない午後",
+      "entry": "choose",
+      "summary": "予定にない扉を開ける、またはできた部屋へ椅子を運ぶ"
+    },
+    {
+      "id": "END_A",
+      "title": "おまけの台所",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-12_計画表にない午後",
+      "entry": "END_A",
+      "summary": "おまけの台所"
+    },
+    {
+      "id": "END_B",
+      "title": "最初の部屋で休む",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-12_計画表にない午後",
+      "entry": "END_B",
+      "summary": "最初の部屋で休む"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "予定にない扉を開ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "できた部屋へ椅子を運ぶ",
+      "style": "kenkai"
+    }
+  ]
+}

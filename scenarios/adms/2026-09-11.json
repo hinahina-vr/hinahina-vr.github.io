@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-11",
+  "title": "門の向こうで名前を呼ぶ A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "門の向こうで名前を呼ぶ",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-11_門の向こうで名前を呼ぶ",
+      "entry": "standalone_start",
+      "summary": "ワディーの前に、まだ誰も通っていない城門が立っていた。門の向こうから、冒険の始まりの音楽が少しだけ聞こえる。ククリは杖を抱え、扉が開く隙間をじっと見つめていた。"
+    },
+    {
+      "id": "turn",
+      "title": "最初の道を選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-11_門の向こうで名前を呼ぶ",
+      "entry": "turn",
+      "summary": "門が開いた。道はすぐに2つに分かれ、片方には小さな橋、もう片方には低い丘が見える。案内板には何も書かれていなかった。ワディーたちの足元に、最初の足跡が並んだ。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-11_門の向こうで名前を呼ぶ",
+      "entry": "choose",
+      "summary": "小さな橋を渡る、または丘へ上って道を探す"
+    },
+    {
+      "id": "END_A",
+      "title": "橋の下から聞こえる歌",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-11_門の向こうで名前を呼ぶ",
+      "entry": "END_A",
+      "summary": "橋の下から聞こえる歌"
+    },
+    {
+      "id": "END_B",
+      "title": "丘から見える屋根",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-11_門の向こうで名前を呼ぶ",
+      "entry": "END_B",
+      "summary": "丘から見える屋根"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "小さな橋を渡る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "丘へ上って道を探す",
+      "style": "kenkai"
+    }
+  ]
+}

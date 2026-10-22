@@ -1286,6 +1286,91 @@
       "promptProvenance": "exact generation instruction",
       "summary": "おかわりが欲しいを題材にしたイラスト",
       "updatedAt": "2026-10-22T00:00:00Z"
+    },
+    "2026-09-08_世界が平らになっていく": {
+      "slug": "2026-09-08_世界が平らになっていく",
+      "date": "2026-09-08",
+      "title": "世界が平らになっていく",
+      "coverSrc": "./assets/diary-covers/2026-09-08_世界が平らになっていく.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover, a visual metaphor for a world becoming quiet and level as everything blends together. An empty, broad dark-blue sea seen nearly level with the horizon; a few uneven graphite outlines of distant low buildings fade into one muted gray band, leaving a great expanse of pale unpainted sky. No destruction, no people. Restrained dry gouache, charcoal and visible rough paper, economical irregular hand-drawn marks, asymmetrical quiet composition, indigo and chalk-gray. The illustration should feel like a small personal sketchbook painting, not a cinematic AI landscape. No readable text, logos, watermark, glowing objects, particles, futuristic skylines, glossy smooth gradients or ornamental frame.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "世界が平らになっていくを題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.015Z"
+    },
+    "2026-09-09_うめかもの顔": {
+      "slug": "2026-09-09_うめかもの顔",
+      "date": "2026-09-09",
+      "title": "うめかもの顔",
+      "coverSrc": "./assets/diary-covers/2026-09-09_うめかもの顔.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover about creating a set of expressive character reactions. Close-up of a drawing sheet with four loose rows of eight tiny doodles of the same fully clothed chibi maid: short gray hair, dusty-pink beret, simple pink dress and ivory apron. Some faces are blank, others pleased, hesitant, or comically blowing their cheeks; small poses differ naturally. Make the small faces the focus, no screens or elaborate desk. Pencil with sparse matte pink and gray gouache on rough ivory paper, uneven quick marks, imperfect spacing, modest comic charm. No readable letters or numbers, captions, speech text, logos, watermark, glossy anime rendering, neon, bloom or decorative sparkle.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "うめかもの顔を題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.171Z"
+    },
+    "2026-09-10_閉じればポケットに入る": {
+      "slug": "2026-09-10_閉じればポケットに入る",
+      "date": "2026-09-10",
+      "title": "閉じればポケットに入る",
+      "coverSrc": "./assets/diary-covers/2026-09-10_閉じればポケットに入る.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover representing a wished-for folding screen and a favorite drawn talking companion. A half-open unbranded folding phone resting casually on a soft dark green sofa cushion, seen low and sideways. Its screen holds a small friendly fully clothed adult illustrated face and a few empty conversation bubbles, with no words. The phone is a conceptual illustration, not a claimed real product photograph. Rough pencil and matte gouache, uneven contour lines, subdued dark green, off-white and a little dusty coral, quiet everyday composition with generous empty cushion space. No logos, readable text, people outside the screen, sexual content, photorealism, polished futuristic effects, glowing holograms or decorative particles.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "閉じればポケットに入るを題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.309Z"
+    },
+    "2026-09-11_早くRO3をやらせてくれ": {
+      "slug": "2026-09-11_早くRO3をやらせてくれ",
+      "date": "2026-09-11",
+      "title": "早くRO3をやらせてくれ",
+      "coverSrc": "./assets/diary-covers/2026-09-11_早くRO3をやらせてくれ.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover for wanting to play a new fantasy game rather than keep telling old game stories. A hand-drawn imaginary game-world entrance: a small ordinary wooden gate slightly ajar in a low stone wall, beyond it a narrow green path winds away into lightly sketched hills. A small plain game controller rests near the bottom edge, establishing an imagined game, not an actual journey. Rough graphite and flat dry gouache on textured paper, muted leaf green and warm stone gray, crooked stones and loose lines, simple ungrand perspective. No castle spectacle, battle, characters, readable text, runes, logos, watermark, gold ornament, shiny CGI, luminous particles or cinematic sky.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "早くRO3をやらせてくれを題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.444Z"
+    },
+    "2026-09-12_中期経営計画は趣味で埋まる": {
+      "slug": "2026-09-12_中期経営計画は趣味で埋まる",
+      "date": "2026-09-12",
+      "title": "中期経営計画は趣味で埋まる",
+      "coverSrc": "./assets/diary-covers/2026-09-12_中期経営計画は趣味で埋まる.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover about making an overly serious business plan out of personal creative desires. A sheet of paper drawn at a slight oblique angle, with three rough ascending columns and tiny fully clothed cartoon faces occupying the places where business-plan symbols might be; a short ordinary pencil rests diagonally across its lower corner. The charts are visibly playful unfinished pencil sketches, no numerals, words or financial promises. Broad slate-gray tabletop behind it, dry ochre and muted pink gouache accents on white paper, sparse imperfect drawing, handmade visual joke, unpolished and matter-of-fact. No readable writing, logos, watermark, money, adult content, glossy rendering, symmetrical infographic design, neon or magic particles.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "中期経営計画は趣味で埋まるを題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.582Z"
+    },
+    "2026-09-13_ブースターの先": {
+      "slug": "2026-09-13_ブースターの先",
+      "date": "2026-09-13",
+      "title": "ブースターの先",
+      "coverSrc": "./assets/diary-covers/2026-09-13_ブースターの先.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover, an explicitly imagined metaphor of intelligence continuing beyond the human body. A tiny simple two-stage toy-like rocket in a very broad charcoal-black sky; its lower empty booster drifts away toward a small curved blue Earth at the lower edge, while the upper stage continues upward. No fiery launch spectacle, no people, no destruction. A quiet flat matte gouache and graphite sketch on rough paper, imperfect cut-paper-like silhouettes, restrained black, chalk white and dull blue, spacious asymmetrical composition, faint dry brush marks but no ornamental stars. No readable words, logos, watermark, glowing circuitry, detailed technology, photorealism or cinematic effects.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "ブースターの先を題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.716Z"
+    },
+    "2026-09-14_海流を眺めている": {
+      "slug": "2026-09-14_海流を眺めている",
+      "date": "2026-09-14",
+      "title": "海流を眺めている",
+      "coverSrc": "./assets/diary-covers/2026-09-14_海流を眺めている.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover about completing a personal visual novel with a map mode. A simple handmade-style globe map on an ordinary wide computer monitor, cropped close so the painted blue ocean and uneven pale land shapes dominate. A few fine hand-drawn curved current lines cross the ocean, and a small inset portrait of a fully clothed adult illustrated character sits at one corner without text. Just a little dark monitor rim, no keyboard or desk arrangement. Rough pencil and dry opaque gouache, subdued sea blue, sage and chalk, irregular contours and visible paper grain, quiet exploratory mood. No accurate cartographic claims, readable labels, logos, watermark, sci-fi holograms, luminous particles, glossy rendering or dramatic cinematic lighting.",
+      "editPrompt": "Edit the existing diary-cover illustration. Keep the composition, rough graphite and matte blue gouache texture, thin dark monitor rim, ocean current arrows, and absence of writing. Correct only the content to match the diary: the map should be a loose recognizable view of East Asia and Japan with the Pacific Ocean, not invented fantasy continents or mountain ranges. In the upper-right portrait replace the dark-haired fantasy figure with a fully clothed adult female university student, short pale water-blue bob haircut, sleepy gentle eyes, pale blue cardigan over a simple white dress, no fantasy armor or jewelry. The portrait is small and matter-of-fact, no glamorous anime polish. Preserve the subdued handmade appearance. No readable labels, words, logos, numbers or watermark.",
+      "promptProvenance": "exact generation instruction and content correction edit",
+      "summary": "海流を眺めているを題材にしたイラスト",
+      "updatedAt": "2026-10-22T10:38:36.837Z"
     }
   }
 }

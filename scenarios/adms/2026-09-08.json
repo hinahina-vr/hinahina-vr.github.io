@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-08",
+  "title": "水平線の向こうにある階段 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "水平線の向こうにある階段",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-08_水平線の向こうにある階段",
+      "entry": "standalone_start",
+      "summary": "目を開けると、町も山も水平線と同じ高さになっていた。ワディーの足元だけに、海へ下りる階段が残っている。波は来ない。紬がいちばん下の段に座り、靴の先で青い面をそっと押した。"
+    },
+    {
+      "id": "turn",
+      "title": "水の上に残る段",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-08_水平線の向こうにある階段",
+      "entry": "turn",
+      "summary": "下の段が1つ、海の上へ離れていった。その上には、いつの間にか小さな椅子が載っていた。次の段もゆっくり緩み始める。階段を下りるたびに、海へ出る船が1つずつできるらしい。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-08_水平線の向こうにある階段",
+      "entry": "choose",
+      "summary": "離れる段へ乗って海に出る、または階段に座って町の音を聞く"
+    },
+    {
+      "id": "END_A",
+      "title": "青い面を渡る椅子",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-08_水平線の向こうにある階段",
+      "entry": "END_A",
+      "summary": "青い面を渡る椅子"
+    },
+    {
+      "id": "END_B",
+      "title": "まだ聞こえる町",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-08_水平線の向こうにある階段",
+      "entry": "END_B",
+      "summary": "まだ聞こえる町"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "離れる段へ乗って海に出る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "階段に座って町の音を聞く",
+      "style": "kenkai"
+    }
+  ]
+}

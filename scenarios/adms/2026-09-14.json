@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-14",
+  "title": "海流が部屋へ入ってくる A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "海流が部屋へ入ってくる",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-14_海流が部屋へ入ってくる",
+      "entry": "standalone_start",
+      "summary": "机の上の地図から、青い水が部屋へ流れ出した。海岸線が床へ伸び、日本列島のそばを細い光の帯が通っている。ワディーが指で帯をたどると、小さな船がそこへ現れた。"
+    },
+    {
+      "id": "turn",
+      "title": "流れに乗る船",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-14_海流が部屋へ入ってくる",
+      "entry": "turn",
+      "summary": "船へ乗ると、部屋の壁が遠ざかり、地図が本物の海のように広がった。暖かな流れと冷たい流れが、船の先で別れている。岸には小さな港があり、そこからは焼きたての匂いがした。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-14_海流が部屋へ入ってくる",
+      "entry": "choose",
+      "summary": "光る海流に船を乗せる、または小さな港へ船を寄せる"
+    },
+    {
+      "id": "END_A",
+      "title": "まだ名前のない島",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-14_海流が部屋へ入ってくる",
+      "entry": "END_A",
+      "summary": "まだ名前のない島"
+    },
+    {
+      "id": "END_B",
+      "title": "港で選ぶ寄り道",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-14_海流が部屋へ入ってくる",
+      "entry": "END_B",
+      "summary": "港で選ぶ寄り道"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "光る海流に船を乗せる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "小さな港へ船を寄せる",
+      "style": "kenkai"
+    }
+  ]
+}

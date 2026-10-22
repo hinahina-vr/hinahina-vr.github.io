@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-13",
+  "title": "切り離したあとにも灯る A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "切り離したあとにも灯る",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-13_切り離したあとにも灯る",
+      "entry": "standalone_start",
+      "summary": "丸い窓の向こうに、青い地球があった。ワディーはロケットの展望室に立っていた。少し前まで窓を隠していた大きな筒が、ゆっくり離れていく。クドは両手を窓へつけ、その姿を追っていた。"
+    },
+    {
+      "id": "turn",
+      "title": "地球へ降りる小さな光",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-13_切り離したあとにも灯る",
+      "entry": "turn",
+      "summary": "離れた筒の内側に、小さな部屋の灯りが見えた。椅子と机があり、誰かがそこで手を振っている。展望室には、先へ進むための扉と、地球へ降りるための小さな艇が用意されていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-13_切り離したあとにも灯る",
+      "entry": "choose",
+      "summary": "展望室から先の星を眺める、または小さな艇で地球へ降りる"
+    },
+    {
+      "id": "END_A",
+      "title": "窓に並ぶ次の星",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-13_切り離したあとにも灯る",
+      "entry": "END_A",
+      "summary": "窓に並ぶ次の星"
+    },
+    {
+      "id": "END_B",
+      "title": "帰ってきた足の重さ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-13_切り離したあとにも灯る",
+      "entry": "END_B",
+      "summary": "帰ってきた足の重さ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "展望室から先の星を眺める",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "小さな艇で地球へ降りる",
+      "style": "kenkai"
+    }
+  ]
+}

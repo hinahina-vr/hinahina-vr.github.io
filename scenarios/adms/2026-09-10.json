@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-10",
+  "title": "折り目の向こうの昼寝 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "折り目の向こうの昼寝",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-10_折り目の向こうの昼寝",
+      "entry": "standalone_start",
+      "summary": "ソファの上に、折り畳める小さな窓があった。ワディーが開くと、向こう側に草原が広がった。半分閉じれば夕方になり、また開けば明るくなる。ねむりんは、もう窓の縁へ枕を置いていた。"
+    },
+    {
+      "id": "turn",
+      "title": "ポケットへ入る広さ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-10_折り目の向こうの昼寝",
+      "entry": "turn",
+      "summary": "窓の中から風が吹き、枕が草原へ転がった。拾いに行ったりんが顔を出すと、窓の縁はワディーの手のひらほどに縮んでいた。それでも、向こうの草原の広さは変わらない。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-10_折り目の向こうの昼寝",
+      "entry": "choose",
+      "summary": "窓を開いたまま草原へ入る、または枕を拾って窓を畳む"
+    },
+    {
+      "id": "END_A",
+      "title": "坂の上の大きな空",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-10_折り目の向こうの昼寝",
+      "entry": "END_A",
+      "summary": "坂の上の大きな空"
+    },
+    {
+      "id": "END_B",
+      "title": "閉じた窓の寝息",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-10_折り目の向こうの昼寝",
+      "entry": "END_B",
+      "summary": "閉じた窓の寝息"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "窓を開いたまま草原へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "枕を拾って窓を畳む",
+      "style": "kenkai"
+    }
+  ]
+}
