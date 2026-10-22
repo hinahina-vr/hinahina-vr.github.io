@@ -115,6 +115,8 @@ function collectKanjiNumericFindings(text) {
       const value = match[0];
       if (ALLOWED_IDIOMS.has(value)) continue;
       if (value === "二日" && line.startsWith("二日酔い", match.index)) continue;
+      // Character names are not amounts; compound numbers still match in full.
+      if (value === "千" && ["千佳", "千夜"].some((name) => line.startsWith(name, match.index))) continue;
 
       findings.push({
         line: lineIndex + 1,

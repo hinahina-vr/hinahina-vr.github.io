@@ -417,5 +417,146 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）"
     }
+  },
+  "2026-08-14": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [],
+    "swarm": [
+      {
+        "recordedAt": "15:40 JST",
+        "venueName": "成田国際空港 (NRT)",
+        "venueArea": "日本成田市",
+        "checkinId": "6a7eb843781fd3349bc21a0c",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "15:40 JST",
+        "venueName": "IASS Executive Lounge 1",
+        "venueArea": "日本成田市",
+        "checkinId": "6a7eb84b38d0fe588f0ecebd",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "23:48 JST",
+        "venueName": "マクタン・セブ国際空港 (CEB)",
+        "venueArea": "フィリピン共和国ラプ・ラプ市",
+        "checkinId": "6a7f2ad740c46543ebe7db1c",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "23:49 JST",
+        "venueName": "マクタン・セブ国際空港 (CEB)",
+        "venueArea": "フィリピン共和国ラプ・ラプ市",
+        "checkinId": "6a7f2aee40c46543ebe86a26",
+        "url": "https://ja.swarmapp.com/history"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-15": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "11:48 JST",
+        "kind": "post",
+        "text": "ヒリピンはカス",
+        "url": "https://x.com/hinahina_vr/status/2088457753127997898",
+        "observedImageIds": [
+          "HPuxMrubMAAUXmw"
+        ]
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "13:02 JST",
+        "venueName": "Fort San Pedro",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a7fe4bc07f55d0a2caa08e9",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "13:19 JST",
+        "venueName": "Port of Cebu",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a7fe8c205b85e200269de7c",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "14:34 JST",
+        "venueName": "Jollibee",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a7ffa806fb1a6214e20d0a0",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "15:12 JST",
+        "venueName": "Jollibee",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a800349d496ae3cf33e40d2",
+        "url": "https://ja.swarmapp.com/history"
+      },
+      {
+        "recordedAt": "15:48 JST",
+        "venueName": "Turning Wheels Craft Brewery",
+        "venueArea": "Cebu City, フィリピン共和国",
+        "checkinId": "6a800bd607f55d0a2c5a3406",
+        "url": "https://ja.swarmapp.com/history"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-08-18": {
+    "provenance": "2026-10-18にログイン済みChromeの本人検索結果とチェックイン履歴を実ブラウザーで確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "21:48 JST",
+        "kind": "post",
+        "text": "ヒリピンから帰国\nマンゴーがうまかった",
+        "url": "https://x.com/hinahina_vr/status/2089696004807532955",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:25 JST",
+        "kind": "post",
+        "text": "ヒリピン物価安いんで日本人のアーリーリタイヤ組がそこそこいるんだけど\n覇気がないオッサンがスーパーで日用品大量に買い込んでるの見ると\nコンドミニアムの漫然とした生活も想像できちゃってあんまり憧れなかった\nあとは死ぬだけ　みたいな",
+        "url": "https://x.com/hinahina_vr/status/2089720286967124378",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:27 JST",
+        "kind": "quote",
+        "text": "今回のヒリピン旅の気づきとしては\nリタイアの準備はお金じゃなくて\n友達と居場所作った方がいいね　でした\nちなみに男12人で行った",
+        "url": "https://x.com/hinahina_vr/status/2089720843970785606",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:37 JST",
+        "kind": "post",
+        "text": "ヒリピナイズされたウォルフグングがあるんだ\nでもねえ　牛肉は焼いた方がうまいと思うんだ",
+        "url": "https://x.com/hinahina_vr/status/2089723377305231376",
+        "observedImageIds": [
+          "HQAwIu8bAAALqlo"
+        ]
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "15:38 JST",
+        "venueName": "成田国際空港 (NRT)",
+        "venueArea": "日本成田市",
+        "checkinId": "6a83fdee1c09183a403db608",
+        "url": "https://ja.swarmapp.com/history"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
   }
 }

@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-15",
+  "title": "画面の裏の小さな通り A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "扉のない店",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-15_画面の裏の小さな通り",
+      "entry": "standalone_start",
+      "summary": "手のひらの画面に入口のない店が現れる。"
+    },
+    {
+      "id": "turn",
+      "title": "端から続く階段",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-15_画面の裏の小さな通り",
+      "entry": "turn",
+      "summary": "店の側面に、表通りへ出る小さな階段が見つかる。"
+    },
+    {
+      "id": "choose",
+      "title": "電話をしまう場所",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-15_画面の裏の小さな通り",
+      "entry": "choose",
+      "summary": "通りを歩くか、店へ手紙を置いて別の日を待つか。"
+    },
+    {
+      "id": "END_A",
+      "title": "日陰を選ぶ散歩",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-15_画面の裏の小さな通り",
+      "entry": "END_A",
+      "summary": "日陰を選ぶ散歩"
+    },
+    {
+      "id": "END_B",
+      "title": "窓辺に置く手紙",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-15_画面の裏の小さな通り",
+      "entry": "END_B",
+      "summary": "窓辺に置く手紙"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "電話をしまって通りを歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "店へ手紙を置いて帰る",
+      "style": "kenkai"
+    }
+  ]
+}

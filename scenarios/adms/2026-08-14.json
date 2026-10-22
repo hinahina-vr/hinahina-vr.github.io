@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-14",
+  "title": "夜を運ぶ到着ロビー A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "窓の向こうの波",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-14_夜を運ぶ到着ロビー",
+      "entry": "standalone_start",
+      "summary": "到着ロビーの窓に夜の海が満ち、椅子がゆっくり動く。"
+    },
+    {
+      "id": "turn",
+      "title": "椅子の桟橋",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-14_夜を運ぶ到着ロビー",
+      "entry": "turn",
+      "summary": "荷物を受け取った人から、椅子の桟橋へ招かれる。"
+    },
+    {
+      "id": "choose",
+      "title": "到着したあとの行き先",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-14_夜を運ぶ到着ロビー",
+      "entry": "choose",
+      "summary": "椅子の船で宿へ向かうか、空港の窓辺で夜明けを待つか。"
+    },
+    {
+      "id": "END_A",
+      "title": "宿へ向かう帆",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-14_夜を運ぶ到着ロビー",
+      "entry": "END_A",
+      "summary": "宿へ向かう帆"
+    },
+    {
+      "id": "END_B",
+      "title": "窓辺の夜明け",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-14_夜を運ぶ到着ロビー",
+      "entry": "END_B",
+      "summary": "窓辺の夜明け"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "椅子の船で宿へ向かう",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "ロビーの窓辺で夜明けを待つ",
+      "style": "kenkai"
+    }
+  ]
+}

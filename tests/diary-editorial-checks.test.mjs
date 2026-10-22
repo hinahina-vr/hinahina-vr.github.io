@@ -61,3 +61,14 @@ test('editorial independence ignores hidden source metadata and still rejects a 
  fs.writeFileSync(main,'# 2026-08-29 遊び\n\nSwarmの記録を見た。\n\n'+metadata);
  result=run('check-diary-editorial-independence.mjs');assert.equal(result.status,1);assert.match(result.stderr,/禁止語 Swarm/);
 });
+
+
+test('character names containing 千 do not suppress real numeric amounts',t=>{
+ const {main,run}=fixture(t);
+ fs.writeFileSync(main,'# 2026-08-29 お迎え\n\n千佳ちゃんに挨拶した。千夜の鞄を見た。');
+ let result=run('check-diary-kanji-numerals.mjs');assert.equal(result.status,0,result.stderr);
+ for(const [value, finding] of [['千円','千円'],['千人','千人'],['数千','数千'],['一千夜','一千']]) {
+  fs.writeFileSync(main,'# 2026-08-29 お迎え\n\n千佳ちゃんに挨拶した。千夜の鞄を見た。'+value+'。');
+  result=run('check-diary-kanji-numerals.mjs');assert.equal(result.status,1,value);assert.ok(result.stderr.includes('「'+finding+'」'),result.stderr);
+ }
+});

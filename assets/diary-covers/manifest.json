@@ -1130,6 +1130,42 @@
       "promptProvenance": "exact generation instruction",
       "summary": "みんなに渡した旅のしおりを題材にしたイラスト",
       "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-14_夜のセブ空港": {
+      "slug": "2026-08-14_夜のセブ空港",
+      "date": "2026-08-14",
+      "title": "夜のセブ空港",
+      "coverSrc": "./assets/diary-covers/2026-08-14_夜のセブ空港.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration for August 14. An unoccupied row of airport lounge seats, cropped rolling suitcase in foreground, a distant aircraft silhouette outside a broad window. Late afternoon gray-blue light, destination is Cebu from Narita but no identifying text or signage. Ordinary pre-departure waiting with generous open space. No people. Medium: understated hand-painted gouache travel sketch with graphite pencil marks on off-white paper; economical irregular lines, asymmetrical crop, broad simple color shapes, a few deliberately unfinished edges. Restrained earthy colors, soft natural light. It should look like a modest observed sketch, not a grand allegory. No words, readable letters, logos, watermarks, fantasy symbols, sparkles, cinematic bloom, plastic gloss, photorealistic rendering or overdesigned composition.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "夜のセブ空港を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-15_海外で開かない画面": {
+      "slug": "2026-08-15_海外で開かない画面",
+      "date": "2026-08-15",
+      "title": "海外で開かない画面",
+      "coverSrc": "./assets/diary-covers/2026-08-15_海外で開かない画面.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration for August 15. A close crop of a smartphone resting on the edge of a simple cafe table, its screen showing only a small yellow warning triangle above two blank gray bars. Through an open doorway, a plain tropical street with a low weathered wall and green foliage. The story is about a familiar service being unavailable abroad. No words or app names, no people. Hand-drawn travel notebook illustration: graphite and opaque gouache on off-white paper, irregular spare line work, patches of flat muted paint, economical details. Human sketch with an off-center crop, not a polished architectural visualization. No readable text, letters, logos, watermark, sparkles, fantasy light, heavy bloom, glossy rendering, exaggerated depth of field or overdecorated border.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "海外で開かない画面を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
+    },
+    "2026-08-18_帰国して考える居場所": {
+      "slug": "2026-08-18_帰国して考える居場所",
+      "date": "2026-08-18",
+      "title": "帰国して考える居場所",
+      "coverSrc": "./assets/diary-covers/2026-08-18_帰国して考える居場所.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary cover illustration. A ripe yellow mango and one cut mango cheek on a small plain ceramic plate, on a sparse table. In the upper background only the cropped corner of a travel suitcase, slightly out of focus in the painterly sense. The subject is a simple good taste remembered after returning from the Philippines. Food study, not a luxury product advertisement; low side angle, plenty of unpainted space. Medium: restrained gouache and pencil notebook drawing on warm ivory paper, human irregular lines, loose edges, muted color patches and deliberate empty areas. Keep the arrangement casually asymmetrical and the objects few. No readable words, logos, watermark, decorative border, circuitry overlays, holograms, cinematic bloom, sparkles, plastic gloss, hyperrealism or dramatic symbolism.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "帰国して考える居場所を題材にしたイラスト",
+      "updatedAt": "2026-10-18T00:00:00Z"
     }
   }
 }

@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-18",
+  "title": "12脚の椅子の行き先 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "鞄から出てくる椅子",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-18_12脚の椅子の行き先",
+      "entry": "standalone_start",
+      "summary": "帰国した鞄から12脚の椅子が現れ、置く家を探し始める。"
+    },
+    {
+      "id": "turn",
+      "title": "まだ決めていない住所",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-18_12脚の椅子の行き先",
+      "entry": "turn",
+      "summary": "立派な家にも小さな家にも、呼び合うための席が空いている。"
+    },
+    {
+      "id": "choose",
+      "title": "最初の招待",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-08-18_12脚の椅子の行き先",
+      "entry": "choose",
+      "summary": "家へ人を招くか、椅子を持って誰かを訪ねるか。"
+    },
+    {
+      "id": "END_A",
+      "title": "招待状を書く夜",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-08-18_12脚の椅子の行き先",
+      "entry": "END_A",
+      "summary": "招待状を書く夜"
+    },
+    {
+      "id": "END_B",
+      "title": "椅子を持って訪ねる",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-08-18_12脚の椅子の行き先",
+      "entry": "END_B",
+      "summary": "椅子を持って訪ねる"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "家へ人を招く準備をする",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "誰かの家を訪ねる相談をする",
+      "style": "kenkai"
+    }
+  ]
+}
