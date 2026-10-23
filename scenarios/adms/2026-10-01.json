@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-01",
+  "title": "湯気の受取所 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "湯気の受取所",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-01_湯気の受取所",
+      "entry": "standalone_start",
+      "summary": "夢の公園に、小さな荷物の受取所があった。頭の上から羽音がして、紙箱を下げた機械が降りてきた。マルチが両手を伸ばすと、箱は手のひらに収まった。"
+    },
+    {
+      "id": "turn",
+      "title": "箱の軽い荷物",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-01_湯気の受取所",
+      "entry": "turn",
+      "summary": "はわわ。お食事が、先に歩いていってしまいました。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-01_湯気の受取所",
+      "entry": "choose",
+      "summary": "足跡をたどる、または雲を空へ放す"
+    },
+    {
+      "id": "END_A",
+      "title": "ベンチの先客",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-01_湯気の受取所",
+      "entry": "END_A",
+      "summary": "ベンチの先客"
+    },
+    {
+      "id": "END_B",
+      "title": "湯気の横断歩道",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-01_湯気の受取所",
+      "entry": "END_B",
+      "summary": "湯気の横断歩道"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "足跡をたどる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "雲を空へ放す",
+      "style": "kenkai"
+    }
+  ]
+}

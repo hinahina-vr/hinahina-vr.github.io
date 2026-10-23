@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-02",
+  "title": "カップの駅 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "カップの駅",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-02_カップの駅",
+      "entry": "standalone_start",
+      "summary": "夢の喫茶店で、ひなひながコーヒーをかき混ぜていた。スプーンがカップの縁に当たるたび、遠い駅の音がした。"
+    },
+    {
+      "id": "turn",
+      "title": "冷める前の出発",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-02_カップの駅",
+      "entry": "turn",
+      "summary": "こっちの駅、まだ降りたことない。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-02_カップの駅",
+      "entry": "choose",
+      "summary": "小さな列車に乗る、またはカップへ列車を返す"
+    },
+    {
+      "id": "END_A",
+      "title": "砂糖の切符",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-02_カップの駅",
+      "entry": "END_A",
+      "summary": "砂糖の切符"
+    },
+    {
+      "id": "END_B",
+      "title": "飲み終わった駅",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-02_カップの駅",
+      "entry": "END_B",
+      "summary": "飲み終わった駅"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "小さな列車に乗る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "カップへ列車を返す",
+      "style": "kenkai"
+    }
+  ]
+}

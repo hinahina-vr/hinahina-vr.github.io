@@ -1541,6 +1541,30 @@
       "promptProvenance": "exact generation instruction",
       "summary": "手打ちのコードを工芸に見立てた日記の、素朴なキーボードの挿絵",
       "updatedAt": "2026-10-23T12:04:35.979Z"
+    },
+    "2026-10-01_空からチキン": {
+      "slug": "2026-10-01_空からチキン",
+      "date": "2026-10-01",
+      "title": "空からチキン",
+      "coverSrc": "./assets/diary-covers/2026-10-01_空からチキン.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Asset: wide 3:2 diary cover for 空からチキン. A small everyday delivery drone carrying a plain paper food box approaches a low collection locker at a public park, with a glimpse of a dense modern southern Chinese city skyline far behind. The box contains chicken but is closed; no food spilling or floating. No people. Make this an unpretentious loose ink and muted watercolor sketch on off-white paper, a few bold black outlines with imperfect hand-drawn perspective, pale concrete gray, dull yellow locker, dusty green trees, plenty of blank paper. The drone has four coherent arms with rotors, modest scale. Flat late afternoon daylight, no sunset glamour. No logos, lettering, numerals, captions, brand marks, UI, fantasy energy, polished 3D surfaces, bloom, sparkles, photoreal product ad style or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "空から届く食事の受取所を描いた挿絵",
+      "updatedAt": "2026-10-23T13:06:03.403Z"
+    },
+    "2026-10-02_ラッキンが恋しい": {
+      "slug": "2026-10-02_ラッキンが恋しい",
+      "date": "2026-10-02",
+      "title": "ラッキンが恋しい",
+      "coverSrc": "./assets/diary-covers/2026-10-02_ラッキンが恋しい.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Asset: wide 3:2 diary cover for ラッキンが恋しい. An ordinary unbranded clear plastic cup of iced milky coffee and a plain lidded paper tea cup, close together on a modest wooden cafe table. Behind them is a very spare open notebook with only a few loose small sketches of a distant city wall and a river bridge, no writing or map labels. A quiet, personal travel reminiscence. Draw in irregular colored pencil and dry opaque paint on warm gray paper, with visible erased construction lines and broad unfinished areas, limited cool brown, faded blue and chalk cream. Off-center observational composition, subdued plain window light. No people, logos, text, decorative symbols, hearts, magical glow, faux-calligraphy, perfect symmetry, commercial gloss, cinematic bokeh or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "飲み物と次の旅の空想を描いた挿絵",
+      "updatedAt": "2026-10-23T13:06:03.569Z"
     }
   }
 }

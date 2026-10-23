@@ -1969,5 +1969,99 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）"
     }
+  },
+  "2026-10-01": {
+    "provenance": "2026-10-23にログイン済みChromeの表示本文・time要素・添付画像全6枚とSwarm履歴をCUAで実観察。時刻は日本時間。絵日記は過去の旅を描いたもの。画像内の当日訪問や空想先への訪問を推測しない。",
+    "x": [
+      {
+        "recordedAt": "00:19 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 4日目②",
+        "url": "https://x.com/hinahina_vr/status/2105316537955663995",
+        "observedImageIds": [
+          "2105316537955663995"
+        ],
+        "imageObservation": "4日目②。過去の旅を描く絵日記。PonyAIのエリアでアプリで呼ぶ、運転席に誰もいない車、18kmで20元。ペンギン島のテンセント施設、社員住居もすぐそばという漫画内の説明。キャラクター3人で置き換えた絵。10/1に現地訪問した証拠ではない。"
+      },
+      {
+        "recordedAt": "00:23 JST",
+        "kind": "post",
+        "text": "きょう国慶節か",
+        "url": "https://x.com/hinahina_vr/status/2105317603103461822",
+        "observedImageIds": [
+          "2105317603103461822"
+        ],
+        "imageObservation": "国慶節に添えた白黒漫画の1ページ。中国の建国を宣言する描写。作品名不明。本文に作品名や政治的意図を推測しない。"
+      },
+      {
+        "recordedAt": "00:46 JST",
+        "kind": "post",
+        "text": "6.1 Solでいよいよ供給過多になり消費AIが登場する\nだって地球って循環するものだから",
+        "url": "https://x.com/hinahina_vr/status/2105323459287155069",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:45 JST",
+        "kind": "post",
+        "text": "集団訴訟イベント当選",
+        "url": "https://x.com/hinahina_vr/status/2105655421327601872",
+        "observedImageIds": [
+          "2105655421327601872"
+        ],
+        "imageObservation": "タイムズカーから個人情報漏えい確認対象者へ送った通知の画像。本人はこれを集団訴訟イベント当選と冗談にしている。実際の訴訟への参加・当選ではない。画像には氏名等の情報項目の列挙のみで実値はない。法的手続きを推測しない。"
+      },
+      {
+        "recordedAt": "23:55 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 4日目③",
+        "url": "https://x.com/hinahina_vr/status/2105672880189251919",
+        "observedImageIds": [
+          "2105672880189251919"
+        ],
+        "imageObservation": "4日目③。過去の深セン旅行を漫画化。人材公園、まめまめが美団でKFCを注文、ドローンで到着、江西料理が激辛だが美味しい、深セン最後の夜景。実在本人が10/1に食事/訪問したと扱わない。"
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-10-02": {
+    "provenance": "2026-10-23にログイン済みChromeの表示本文・time要素・添付画像全6枚とSwarm履歴をCUAで実観察。時刻は日本時間。絵日記は過去の旅を描いたもの。画像内の当日訪問や空想先への訪問を推測しない。",
+    "x": [
+      {
+        "recordedAt": "02:18 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 最終日",
+        "url": "https://x.com/hinahina_vr/status/2105708894274375836",
+        "observedImageIds": [
+          "2105708894274375836"
+        ],
+        "imageObservation": "5日目帰国。ホテル前でまめまめとの別れ、ホテルから深セン空港へタクシー、空港で最後のラッキン。中国大陸を眺める機内、また行きたい、小野妹子/遣隋使の格好はひなひな妄想と明示。次の旅の空想。10/2に帰国した証拠ではない。"
+      },
+      {
+        "recordedAt": "02:18 JST",
+        "kind": "post",
+        "text": "深セン絵日記、ごちうさの世界に生まれた気分になる",
+        "url": "https://x.com/hinahina_vr/status/2105709019742769340",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "12:11 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 後日談①",
+        "url": "https://x.com/hinahina_vr/status/2105858132014719262",
+        "observedImageIds": [
+          "2105858132014719262"
+        ],
+        "imageObservation": "後日談①。日本でラッキンとCHAGEEが恋しい。次の旅を脳内シミュレーション。カシュガル、西安、丹東/鴨緑江、満洲里の4景。あくまで行きたい先の想像、訪問済み・予約済みではない。"
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
   }
 }
