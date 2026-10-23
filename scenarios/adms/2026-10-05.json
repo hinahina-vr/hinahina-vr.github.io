@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-05",
+  "title": "水玉工場の昼休み A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "水玉工場の昼休み",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-05_水玉工場の昼休み",
+      "entry": "standalone_start",
+      "summary": "配管の中を、丸い水玉がころころ転がっていた。工場なのに床は乾いていて、水玉だけが柔らかく跳ねる。"
+    },
+    {
+      "id": "turn",
+      "title": "休憩ベルを待つ丸い水",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-05_水玉工場の昼休み",
+      "entry": "turn",
+      "summary": "配管のふたが開き、水玉たちが次々に出てきた。出口には、雲の絵と花の絵がある。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-05_水玉工場の昼休み",
+      "entry": "choose",
+      "summary": "雲の出口へついていく、または花の出口へついていく"
+    },
+    {
+      "id": "END_A",
+      "title": "昼寝する雲",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-05_水玉工場の昼休み",
+      "entry": "END_A",
+      "summary": "昼寝する雲"
+    },
+    {
+      "id": "END_B",
+      "title": "花が持っていた時計",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-05_水玉工場の昼休み",
+      "entry": "END_B",
+      "summary": "花が持っていた時計"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "雲の出口へついていく",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "花の出口へついていく",
+      "style": "kenkai"
+    }
+  ]
+}

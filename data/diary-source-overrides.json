@@ -2063,5 +2063,313 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）"
     }
+  },
+  "2026-10-03": {
+    "provenance": "2026-10-23T14:28:42.512Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。 添付画像は同日のChrome画面で実読し、アプリ機能の実演・ミーム・過去の旅と当日行動を区別。",
+    "x": [
+      {
+        "recordedAt": "21:28 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 後日談②\nhttps://chinameng.pages.dev",
+        "url": "https://x.com/hinahina_vr/status/2106360773832577186",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106360773832577186/photo/1"
+        ],
+        "observedImageDescription": "ひなひなの深セン絵日記・後日談②『妄想から、アプリへ』。中国の地下鉄と新幹線の進化を回想し、地図と路線を組み合わせたアプリを作ろうとする流れ。ノートPCに『一帯一旅』と中国地図を表示し、chinameng.pages.devを紹介。旅の記憶からアプリ制作へ移る漫画。10月3日の中国訪問や乗車ではない。"
+      },
+      {
+        "recordedAt": "21:32 JST",
+        "kind": "quote",
+        "text": "https://chinameng.pages.dev",
+        "url": "https://x.com/hinahina_vr/status/2106361763763748881",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106361763763748881/photo/1"
+        ],
+        "observedImageDescription": "赤を基調に3人のデフォルメキャラを配した『中国、どこ行く？』『一帯一旅 — 中国の街をめぐる旅の地図』の紹介ポスター。各都市の名物、中国の世界遺産、鉄道の経路検索、日本からの直行便ルートの4項目。地図をひらいて旅を探す案内とchinameng.pages.dev。実際に旅行を予約した画像ではない。"
+      },
+      {
+        "recordedAt": "21:35 JST",
+        "kind": "quote",
+        "text": "こだわりポイント①\n全州の名物を集めたところ\nグルメ、汁、珍味、奇祭をホームページリンク付きで収録",
+        "url": "https://x.com/hinahina_vr/status/2106362400312381490",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106362400312381490/photo/1"
+        ],
+        "observedImageDescription": "中国地図上の莆田を選択したガイド画面。福建・市・県ガイド、食べ物・珍味・祭り・風習のリンクを並べ、媽祖祭典について『旅のひとくち案内』を表示している。『この都市をAIに質問』ボタンも見える。本文の名物/奇祭収録の説明に対応する機能画面。画面中の祭典説明を外部資料として検証したわけではなく、本人の訪問事実を示すものでもない。"
+      },
+      {
+        "recordedAt": "21:45 JST",
+        "kind": "quote",
+        "text": "こだわりポイント②\n鉄道の乗換案内ができる\n中国の国鉄アプリ12306にダイレクトコネクトしてそのまま予約できる",
+        "url": "https://x.com/hinahina_vr/status/2106364979540848743",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106364979540848743/photo/1",
+          "https://x.com/hinahina_vr/status/2106364979540848743/photo/2",
+          "https://x.com/hinahina_vr/status/2106364979540848743/photo/3"
+        ],
+        "observedImageDescription": "3枚とも実閲覧。1枚目は中国地図上の上海→北京南を高鉄で結ぶ選択画面。約1,444.8kmの概算、駅情報、12306公式Webで検索する入口、乗車日2026/10/04が表示される。2枚目は中国鉄路12306の上海→北京南・10月4日の列車一覧と予約ボタン。3枚目はCHINAMENG / RAILWAY ROUTEの上海→北京南の経路図と約1,444.8km表示。3枚目にはOpenStreetMap線路形状から算出した概算距離で公式営業キロ・運行経路ではない旨の注記。これらは機能紹介の画像であり予約完了・購入・乗車の証拠ではない。"
+      },
+      {
+        "recordedAt": "23:02 JST",
+        "kind": "post",
+        "text": "mood:\n【NEUTRINO】インターナショナル(国際歌)/L'Internationale（東北きりたん・イタコ・ずん子・琴葉茜・葵）\nhttps://youtu.be/oHpsev_I-9E?si=3apKYRL1vB3dcxA9\n@YouTube より",
+        "url": "https://x.com/hinahina_vr/status/2106384346806620227",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-10-04": {
+    "provenance": "2026-10-23T14:28:42.512Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。 添付画像は同日のChrome画面で実読し、アプリ機能の実演・ミーム・過去の旅と当日行動を区別。",
+    "x": [
+      {
+        "recordedAt": "08:35 JST",
+        "kind": "post",
+        "text": "AIでだれもがプラットフォーマーを目指して散っていくんだ\n面よりも線、線よりも点で世界に一つだけの超役に立つもの作ったほうがいい\nコミュニティとか家族に還元できるようなものを",
+        "url": "https://x.com/hinahina_vr/status/2106528711420137778",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "17:30 JST",
+        "kind": "post",
+        "text": "久々に渋谷歩いたけどゴミ化に拍車が掛かってた\n近寄りたくない街、心のワーストテン第1位",
+        "url": "https://x.com/hinahina_vr/status/2106663224158650771",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "17:53 JST",
+        "kind": "post",
+        "text": "新興宗教",
+        "url": "https://x.com/hinahina_vr/status/2106669136961228908",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106669136961228908/photo/1",
+          "https://x.com/hinahina_vr/status/2106669136961228908/photo/2"
+        ],
+        "observedImageDescription": "1枚目は國學院大學神殿の由緒看板、2枚目は木の鳥居・石灯籠・社殿。本人の『新興宗教』は添えた言葉で、実際に新興宗教施設と判定しない。"
+      },
+      {
+        "recordedAt": "17:55 JST",
+        "kind": "post",
+        "text": "水質有害物質特論がムズすぎてハゲ散らかした",
+        "url": "https://x.com/hinahina_vr/status/2106669406784983217",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106669406784983217/photo/1"
+        ],
+        "observedImageDescription": "令和8年度公害防止管理者等国家試験の受験票、水質関係第1種。会場國學院大學渋谷キャンパス、09:35開始〜16:35終了の5科目。氏名等は消しゴムで隠されている。受験番号/氏名を転記しない。"
+      },
+      {
+        "recordedAt": "21:57 JST",
+        "kind": "reply",
+        "text": "ビンロウ？",
+        "url": "https://x.com/hinahina_vr/status/2106730337514754199",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:04 JST",
+        "kind": "post",
+        "text": "インターネット大学\nそれなりに勉強したいならいいが\n遊びたいなら全くよくない\nガチ勉強は総合大学に劣る\nゆえに\nそこそこの単科大学こそやるべき\n高野山大学とか",
+        "url": "https://x.com/hinahina_vr/status/2106732128872595884",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:06 JST",
+        "kind": "quote",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2106732781669904563",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106732781669904563/photo/1"
+        ],
+        "observedImageDescription": "黒地のQ&A風画像。入学したら恋愛することはできますか？に仏教経文風の文句を並べて答える画像。出典大学は画面では未確認、公式回答とは断定しない。本人本文空欄、引用本文混入除去済み。"
+      },
+      {
+        "recordedAt": "22:11 JST",
+        "kind": "reply",
+        "text": "石灰塗り込みすぎたね",
+        "url": "https://x.com/hinahina_vr/status/2106733868825116828",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:20 JST",
+        "kind": "reply",
+        "text": "生ビンロウのほうが遥かにエグいらしいのでやりたい",
+        "url": "https://x.com/hinahina_vr/status/2106736321696014423",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:45 JST",
+        "kind": "quote",
+        "text": "ZEN大卒業したら宗教やりたいので\n高野山大学は真面目にアリなんだよな\nスクーリングが問題\n\nhttps://koyasan-u.ac.jp/faculty/literature/culture.php",
+        "url": "https://x.com/hinahina_vr/status/2106742409816314121",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:48 JST",
+        "kind": "post",
+        "text": "宗教履修してる学生てめちゃおもろいか\nめちゃ病んでるかどっちかだと思うんだよね\n\nきょう國學院行ってきたんだけど\nナコルルみたいなカッコしてる女学生いて\n卑弥呼様ー！！つった",
+        "url": "https://x.com/hinahina_vr/status/2106743332668117393",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "08:54 JST",
+        "venueName": "富士そば 渋谷東口店",
+        "venueArea": "日本渋谷区",
+        "checkinId": "6ac1959baa12f774cd5f15a0",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ac1959baa12f774cd5f15a0",
+        "shout": null
+      },
+      {
+        "recordedAt": "16:45 JST",
+        "venueName": "國學院大學 渋谷キャンパス",
+        "venueArea": "日本東京",
+        "checkinId": "6ac2040a63023772f008a8d1",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ac2040a63023772f008a8d1",
+        "shout": null
+      },
+      {
+        "recordedAt": "16:45 JST",
+        "venueName": "渋谷氷川神社",
+        "venueArea": "日本東京",
+        "checkinId": "6ac2041379377526ce3dcfbd",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ac2041379377526ce3dcfbd",
+        "shout": null
+      },
+      {
+        "recordedAt": "16:50 JST",
+        "venueName": "國學院大學神殿",
+        "venueArea": "日本渋谷区",
+        "checkinId": "6ac2054df8a70b174424292c",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ac2054df8a70b174424292c",
+        "shout": null
+      },
+      {
+        "recordedAt": "16:51 JST",
+        "venueName": "國學院大學博物館",
+        "venueArea": "日本渋谷区",
+        "checkinId": "6ac2059f79377526ce45cc3a",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ac2059f79377526ce45cc3a",
+        "shout": null
+      },
+      {
+        "recordedAt": "17:33 JST",
+        "venueName": "渋谷駅",
+        "venueArea": "日本東京",
+        "checkinId": "6ac20f46d02b4d70f2355533",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ac20f46d02b4d70f2355533",
+        "shout": "屎尿を煮詰めたような街"
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-10-05": {
+    "provenance": "2026-10-23T14:28:42.512Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。 添付画像は同日のChrome画面で実読し、アプリ機能の実演・ミーム・過去の旅と当日行動を区別。",
+    "x": [
+      {
+        "recordedAt": "00:10 JST",
+        "kind": "quote",
+        "text": "こだわりポイント③\nメトロ風路線図ナビ",
+        "url": "https://x.com/hinahina_vr/status/2106763977036595558",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106763977036595558/photo/1"
+        ],
+        "observedImageDescription": "高鉄路線図。北京南・上海虹橋・昆明南など、中国各地の駅が多色の線で結ばれ、右下にズーム等の地図ボタン。メトロ風路線図ナビの機能紹介。"
+      },
+      {
+        "recordedAt": "00:20 JST",
+        "kind": "post",
+        "text": "mood:\n学会歌「威風堂々の歌」 | 創価学会公式\nhttps://youtu.be/-Tyy3zTbVWc?si=aVr3NHMUgKtXH8Uu\n@YouTube より",
+        "url": "https://x.com/hinahina_vr/status/2106766378984468796",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "00:42 JST",
+        "kind": "post",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2106771841599868969",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106771841599868969/photo/1",
+          "https://x.com/hinahina_vr/status/2106771841599868969/photo/2",
+          "https://x.com/hinahina_vr/status/2106771841599868969/photo/3"
+        ],
+        "observedImageDescription": "1枚目は温泉・昆明南の路線図断片。2枚目は温泉駅/Wenquanの解説ページと駅写真。3枚目は天下第一湯の文字と赤い提灯がある中庭の写真。添付した観光資料であり10/5現地訪問は示さない。"
+      },
+      {
+        "recordedAt": "01:35 JST",
+        "kind": "post",
+        "text": "AGI",
+        "url": "https://x.com/hinahina_vr/status/2106785236097060907",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2106785236097060907/photo/1"
+        ],
+        "observedImageDescription": "AIとの会話スクリーンショット。下ネタ交じりにマッサージを尋ね、AIが中国の大型浴場について返答している。AI回答内容の正確性は未検証、本人のサービス利用や訪問事実ではない。本文AGIはこの返答への冗談。"
+      },
+      {
+        "recordedAt": "21:20 JST",
+        "kind": "quote",
+        "text": "🌸 公害総論 11/15\n🌸 水質概論 9/10\n🌸 汚水処理特論 16/25\n💀 水質有害物質特論 5/15\n🌸 大規模水質特論 7/10\n\nもう一回遊べるドン",
+        "url": "https://x.com/hinahina_vr/status/2107083521848398187",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:12 JST",
+        "kind": "quote",
+        "text": "ムカついたので水質有害物質特論に特化した\n超ニッチゲーを開発している\nバイトヘル2026",
+        "url": "https://x.com/hinahina_vr/status/2107096584513351799",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2107096584513351799/photo/1"
+        ],
+        "observedImageDescription": "ひなひなのおしごと/水質 ウイスキー蒸溜所の開発画面。タンク・配管・かいとひなひなのキャラ、排水を製品系統へ戻さないの掲示、模擬の有機物負荷パネル。数値はゲーム内研修設定で実際の排水データではない。"
+      },
+      {
+        "recordedAt": "22:21 JST",
+        "kind": "reply",
+        "text": "明日からこれ",
+        "url": "https://x.com/hinahina_vr/status/2107098830483386689",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2107098830483386689/photo/1"
+        ],
+        "observedImageDescription": "把握現在 決戦六月の赤い横断幕の下で机に向かう学生たちの写真を使ったミーム。本人の現場写真ではなく、翌日から勉強する気分を表す。問題集の写真ではない。"
+      },
+      {
+        "recordedAt": "23:02 JST",
+        "kind": "post",
+        "text": "次のお苦しみはこちら\n今年は化学ざんまい",
+        "url": "https://x.com/hinahina_vr/status/2107109283884404949",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2107109283884404949/photo/1"
+        ],
+        "observedImageDescription": "黄色・赤の表紙。乙種1・2・3・5・6類 危険物取扱者試験 テキスト＆問題集 第2版、科目免除者用。次に勉強する本。購入日・受験日・申し込み・合格は未確認。"
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-10-06": {
+    "provenance": "2026-10-23T14:28:42.512Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。 添付画像は同日のChrome画面で実読し、アプリ機能の実演・ミーム・過去の旅と当日行動を区別。",
+    "x": [
+      {
+        "recordedAt": "23:38 JST",
+        "kind": "post",
+        "text": "情報漏洩しまくらないと情報統合思念体になれないだろ",
+        "url": "https://x.com/hinahina_vr/status/2107480604787020023",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
   }
 }

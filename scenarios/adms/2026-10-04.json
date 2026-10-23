@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-04",
+  "title": "消しゴムの下の教室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "消しゴムの下の教室",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-04_消しゴムの下の教室",
+      "entry": "standalone_start",
+      "summary": "答案用紙の上に、小さな教室があった。机は升目に沿って並び、窓の外は真っ白だった。"
+    },
+    {
+      "id": "turn",
+      "title": "最後の机が消えない",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-04_消しゴムの下の教室",
+      "entry": "turn",
+      "summary": "忘れ物のある机でしょうか。中を見てみますね。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-04_消しゴムの下の教室",
+      "entry": "choose",
+      "summary": "最後の席に座る、または窓の絵を壁へ掛ける"
+    },
+    {
+      "id": "END_A",
+      "title": "放課後の1席",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-04_消しゴムの下の教室",
+      "entry": "END_A",
+      "summary": "放課後の1席"
+    },
+    {
+      "id": "END_B",
+      "title": "窓から帰る教室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-04_消しゴムの下の教室",
+      "entry": "END_B",
+      "summary": "窓から帰る教室"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "最後の席に座る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "窓の絵を壁へ掛ける",
+      "style": "kenkai"
+    }
+  ]
+}

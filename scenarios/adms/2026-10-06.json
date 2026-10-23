@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-06",
+  "title": "落とし物係は名前を知らない A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "落とし物係は名前を知らない",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-06_落とし物係は名前を知らない",
+      "entry": "standalone_start",
+      "summary": "夜の廊下に、落とし物の受付が開いていた。棚にあるのは帽子でも傘でもなく、誰かの名前が書かれた小さな札だった。"
+    },
+    {
+      "id": "turn",
+      "title": "受付に残った空白の札",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-06_落とし物係は名前を知らない",
+      "entry": "turn",
+      "summary": "受付の椅子が2つ、こちらへ向いた。台帳には名前を書く欄だけがあり、どのページも空白だった。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-06_落とし物係は名前を知らない",
+      "entry": "choose",
+      "summary": "札に仮の名前をつける、または声の主を待つ"
+    },
+    {
+      "id": "END_A",
+      "title": "仮の名前でお帰りなさい",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-06_落とし物係は名前を知らない",
+      "entry": "END_A",
+      "summary": "仮の名前でお帰りなさい"
+    },
+    {
+      "id": "END_B",
+      "title": "名前より先に来た声",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-06_落とし物係は名前を知らない",
+      "entry": "END_B",
+      "summary": "名前より先に来た声"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "札に仮の名前をつける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "声の主を待つ",
+      "style": "kenkai"
+    }
+  ]
+}

@@ -1565,6 +1565,54 @@
       "promptProvenance": "exact generation instruction",
       "summary": "飲み物と次の旅の空想を描いた挿絵",
       "updatedAt": "2026-10-23T13:06:03.569Z"
+    },
+    "2026-10-03_旅の地図を作った": {
+      "slug": "2026-10-03_旅の地図を作った",
+      "date": "2026-10-03",
+      "title": "旅の地図を作った",
+      "coverSrc": "./assets/diary-covers/2026-10-03_旅の地図を作った.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 editorial diary cover for October 3, a personal story about making a Chinese railway travel map application. Quiet close view of an open laptop on a plain desk, its screen showing a deliberately simplified China-shaped outline and a handful of colored railway lines and circular stops, no legible labels or UI text. One human hand rests beside trackpad, fingers naturally relaxed. Cropped observational composition, off-center laptop, ordinary work moment. Draw with dry graphite and sparse flat gouache on warm uncoated paper, assured irregular contour, limited vermilion/ink blue/sage palette, broad untouched paper. Aim for an authored magazine sketch, not generic glossy AI concept art. No glow, no bokeh, no sparkles, no excessive detail, no photoreal rendering, no floating symbols, no coffee props, no logos or text or watermarks. Only laptop, hand, desk.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-23T14:43:42.616Z"
+    },
+    "2026-10-04_水質有害物質特論が強い": {
+      "slug": "2026-10-04_水質有害物質特論が強い",
+      "date": "2026-10-04",
+      "title": "水質有害物質特論が強い",
+      "coverSrc": "./assets/diary-covers/2026-10-04_水質有害物質特論が強い.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 Japanese personal diary cover for a long day of written qualification examinations. Close oblique view of an ordinary pale wood classroom desk: a slightly creased examination admission sheet with an empty blue-outlined table, one simple blue-white-black sleeved eraser lying over the upper part, and the corner of a closed plain white test booklet behind. No hand or person, no extra props. All forms entirely blank with ruled lines only, absolutely no text, numbers or letters. Restrained hand-painted editorial illustration: graphite contours, dry watercolor, asymmetrical cropping, visible paper and a few scuffs, neutral daylight and short soft shadows. Dusty ultramarine, ochre, off-white, graphite gray. Physical, quiet, personal, unglamorous. Avoid glossy AI rendering, glow, bokeh, sparkles, decorative symbols, logos, readable text, watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-23T14:43:42.741Z"
+    },
+    "2026-10-05_バイトヘル2026": {
+      "slug": "2026-10-05_バイトヘル2026",
+      "date": "2026-10-05",
+      "title": "バイトヘル2026",
+      "coverSrc": "./assets/diary-covers/2026-10-05_バイトヘル2026.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 personal diary editorial illustration for making a very niche water-treatment learning game. A modest desktop monitor seen at slight angle showing a low-detail miniature distillery game scene: three cylindrical process tanks and coherent connected pipes on a flat floor, one copper pot still at the rear, two tiny simple fully clothed chibi workers in blue and pale pink work clothes. No readable UI text. Beside monitor a closed yellow study book with a red band and no writing, just one book. Cropped desk. Draw with intentionally economical ink contours and dry gouache on off-white paper, a few broad flat blue-gray, copper and dull yellow areas, slight hand-made asymmetry. Eye-level ordinary view, no dramatic effects. No shiny 3D rendering, bloom, cinematic glow, sparkles, illegible pseudo-letters, chemical symbols, logos, watermark. The image is an illustrative game scene, not a technical engineering diagram.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-23T14:43:42.852Z"
+    },
+    "2026-10-06_情報統合思念体への道": {
+      "slug": "2026-10-06_情報統合思念体への道",
+      "date": "2026-10-06",
+      "title": "情報統合思念体への道",
+      "coverSrc": "./assets/diary-covers/2026-10-06_情報統合思念体への道.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 conceptual diary cover about the joke of becoming a collective information entity by leaking one's own information. A single simple human side-profile silhouette drawn in dark blue pencil; the back of the head breaks gently into a small number of plain rectangular paper scraps drifting sideways, while the face remains ordinary and calm. The paper scraps are entirely blank, clearly metaphorical. No literal wound or anatomy, no gore. Minimal editorial spot illustration, flat dry gouache and graphite on light gray uncoated paper, broad empty space, about three subdued colors: navy, faded mustard, paper gray. Incomplete loose contours with deliberate confident marks, modest scale, dry humor rather than ominous technology. No robot, circuits, code, digits, letters, logos, locks, icons, cosmic scenery, glow, neon, glossy AI art, decorative confetti or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-23T14:43:42.987Z"
     }
   }
 }

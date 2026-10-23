@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-03",
+  "title": "折り目の向こうの屋台 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "折り目の向こうの屋台",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-03_折り目の向こうの屋台",
+      "entry": "standalone_start",
+      "summary": "机に広げた地図の上で、小さな提灯が灯った。紙に描かれた道の端から、湯気が上がっている。"
+    },
+    {
+      "id": "turn",
+      "title": "地図を起こすと道が立つ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-03_折り目の向こうの屋台",
+      "entry": "turn",
+      "summary": "あたしがこっちを持つね。えここちゃんは、そっちをお願い。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-03_折り目の向こうの屋台",
+      "entry": "choose",
+      "summary": "屋台の前に椅子を描く、または余白まで道を描く"
+    },
+    {
+      "id": "END_A",
+      "title": "動かないおかわり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-03_折り目の向こうの屋台",
+      "entry": "END_A",
+      "summary": "動かないおかわり"
+    },
+    {
+      "id": "END_B",
+      "title": "白い町の最初のお店",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-03_折り目の向こうの屋台",
+      "entry": "END_B",
+      "summary": "白い町の最初のお店"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "屋台の前に椅子を描く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "余白まで道を描く",
+      "style": "kenkai"
+    }
+  ]
+}
