@@ -1175,5 +1175,353 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）"
     }
+  },
+  "2026-09-15": {
+    "provenance": "2026-10-23T07:15:02.000Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "12:27 JST",
+        "kind": "post",
+        "text": "防衛AIは日本を守れるか～防衛省と契約のスカイゲート社長に聞く「アラヤシキ」の実力【豊島晋作のテレ東ワールドポリティクス】",
+        "url": "https://x.com/hinahina_vr/status/2099701569759609240",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "12:28 JST",
+        "kind": "post",
+        "text": "AIでメガテンみたいな世界になってきてとてもいい\nAIは悪魔召喚プログラム\n悪魔は人智そのもの",
+        "url": "https://x.com/hinahina_vr/status/2099701953416622362",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-16": {
+    "provenance": "2026-10-23T07:15:02.000Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "23:10 JST",
+        "kind": "post",
+        "text": "人類滅亡しちゃったんだ",
+        "url": "https://x.com/hinahina_vr/status/2100225921139761410",
+        "observedImageIds": [
+          "HSWATwSbEAA4PRs"
+        ]
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-18": {
+    "provenance": "2026-10-23T07:15:02.000Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [],
+    "swarm": [
+      {
+        "recordedAt": "18:06 JST",
+        "venueName": "ユナイテッドクラブ",
+        "venueArea": "日本成田市",
+        "checkinId": "6aacff2297d8290ede695a17",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aacff2297d8290ede695a17",
+        "shout": null
+      },
+      {
+        "recordedAt": "18:07 JST",
+        "venueName": "成田国際空港 (NRT)",
+        "venueArea": "日本成田市",
+        "checkinId": "6aacff35ea723a7b201992de",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aacff35ea723a7b201992de",
+        "shout": null
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-19": {
+    "provenance": "2026-10-23T07:15:02.000Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "04:26 JST",
+        "kind": "post",
+        "text": "APEC出席のため深センいます",
+        "url": "https://x.com/hinahina_vr/status/2101030039718625766",
+        "observedImageIds": [
+          "HShbqq-aEAAtSwq"
+        ]
+      },
+      {
+        "recordedAt": "04:27 JST",
+        "kind": "post",
+        "text": "晩餐会",
+        "url": "https://x.com/hinahina_vr/status/2101030467999015293",
+        "observedImageIds": [
+          "HShcCxcaIAAAZFH",
+          "HShcD60aUAEJIRs"
+        ]
+      },
+      {
+        "recordedAt": "18:12 JST",
+        "kind": "post",
+        "text": "ファーチァンベイいます",
+        "url": "https://x.com/hinahina_vr/status/2101238005432516860",
+        "observedImageIds": [
+          "HSkYqnVaAAAMUOb",
+          "HSkYv1yaYAAAepC",
+          "HSkYyDBaAAAXwd7",
+          "HSkY0EFbMAEMFos"
+        ]
+      },
+      {
+        "recordedAt": "19:43 JST",
+        "kind": "post",
+        "text": "前作ったプロダクトをファーチァンベイで進化させてこれにしたい",
+        "url": "https://x.com/hinahina_vr/status/2101260815634403802",
+        "observedImageIds": [
+          "HSktjoXa0AAdv4K",
+          "HSktkXlaUAAWG7s"
+        ]
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "00:42 JST",
+        "venueName": "深圳宝安国際空港 (SZX)",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aad5bda3577b84f120e7f27",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aad5bda3577b84f120e7f27",
+        "shout": null
+      },
+      {
+        "recordedAt": "14:14 JST",
+        "venueName": "唐宫海鲜舫",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aae1a280811d91f91ccbeef",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aae1a280811d91f91ccbeef",
+        "shout": null
+      },
+      {
+        "recordedAt": "14:53 JST",
+        "venueName": "Huaqiang Electronics Market",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aae236933d4a80da12c405a",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aae236933d4a80da12c405a",
+        "shout": null
+      },
+      {
+        "recordedAt": "15:35 JST",
+        "venueName": "SEG Electronic Market",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aae2d31d06efd7b08c6bced",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aae2d31d06efd7b08c6bced",
+        "shout": null
+      },
+      {
+        "recordedAt": "21:55 JST",
+        "venueName": "潮汕大目牛肉火锅 Chaoshan Damu",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aae863b6f1928468523f458",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aae863b6f1928468523f458",
+        "shout": null
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-20": {
+    "provenance": "2026-10-23T07:15:02.000Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "10:50 JST",
+        "kind": "post",
+        "text": "高铁で广州へ",
+        "url": "https://x.com/hinahina_vr/status/2101489165619933467",
+        "observedImageIds": [
+          "HSn9Pr1agAAnbT_"
+        ]
+      },
+      {
+        "recordedAt": "13:50 JST",
+        "kind": "post",
+        "text": "オタクのファーチァンベイいます",
+        "url": "https://x.com/hinahina_vr/status/2101534317738697057",
+        "observedImageIds": [
+          "HSomQsMbAAA9Nbn",
+          "HSomR53a8AAaKg1",
+          "HSomSvdb0AAEZeL",
+          "HSomTu6acAEUBHO"
+        ]
+      },
+      {
+        "recordedAt": "16:06 JST",
+        "kind": "post",
+        "text": "伟大的",
+        "url": "https://x.com/hinahina_vr/status/2101568645323493839",
+        "observedImageIds": [
+          "HSpFiMEa4AADY8h"
+        ]
+      },
+      {
+        "recordedAt": "21:37 JST",
+        "kind": "post",
+        "text": "ドリアンとバカでかいブルーベリーうめねえ",
+        "url": "https://x.com/hinahina_vr/status/2101652055140257901",
+        "observedImageIds": [
+          "HSqRY3zbwAAl0I4",
+          "HSqRZq_bMAAquWG"
+        ]
+      },
+      {
+        "recordedAt": "21:41 JST",
+        "kind": "quote",
+        "text": "ベトナムのドリアンそんな美味くないと思ってたけどうめねえ",
+        "url": "https://x.com/hinahina_vr/status/2101653010825068678",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "09:19 JST",
+        "venueName": "深圳羅湖国境",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aaf2691d06efd7b08153c74",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf2691d06efd7b08153c74",
+        "shout": null
+      },
+      {
+        "recordedAt": "09:21 JST",
+        "venueName": "羅湖駅",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aaf27035426460baedcec9b",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf27035426460baedcec9b",
+        "shout": null
+      },
+      {
+        "recordedAt": "09:26 JST",
+        "venueName": "深圳駅",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aaf28230811d91f9177dbe1",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf28230811d91f9177dbe1",
+        "shout": "ねおぴっぴと一緒に"
+      },
+      {
+        "recordedAt": "11:22 JST",
+        "venueName": "広州駅",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf43632ee69029d45f2aa3",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf43632ee69029d45f2aa3",
+        "shout": null
+      },
+      {
+        "recordedAt": "11:38 JST",
+        "venueName": "公園前駅",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf4733346520364a7a4cf6",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf4733346520364a7a4cf6",
+        "shout": null
+      },
+      {
+        "recordedAt": "11:48 JST",
+        "venueName": "Comic City",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf498d0811d91f91fd5dd6",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf498d0811d91f91fd5dd6",
+        "shout": null
+      },
+      {
+        "recordedAt": "14:30 JST",
+        "venueName": "捷登都会",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf6f81da0e2b1ad6e5141b",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf6f81da0e2b1ad6e5141b",
+        "shout": null
+      },
+      {
+        "recordedAt": "15:03 JST",
+        "venueName": "Chagee 霸王茶姬",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf77352ee69029d454c183",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf77352ee69029d454c183",
+        "shout": null
+      },
+      {
+        "recordedAt": "15:14 JST",
+        "venueName": "Great Buddha Temple",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf79c413b6906ef8476887",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf79c413b6906ef8476887",
+        "shout": null
+      },
+      {
+        "recordedAt": "15:23 JST",
+        "venueName": "北京路歩行者天国",
+        "venueArea": "中国広州市",
+        "checkinId": "6aaf7bd24c84a8077ad95ed8",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aaf7bd24c84a8077ad95ed8",
+        "shout": null
+      },
+      {
+        "recordedAt": "18:02 JST",
+        "venueName": "深圳駅",
+        "venueArea": "中国深セン市",
+        "checkinId": "6aafa12e654bca48ecff77bc",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6aafa12e654bca48ecff77bc",
+        "shout": null
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-21": {
+    "provenance": "2026-10-23T07:15:02.000Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "01:26 JST",
+        "kind": "post",
+        "text": "深センでビンロウ噛みながら\nいーあるふぁんくらぶしてる",
+        "url": "https://x.com/hinahina_vr/status/2101709595047776612",
+        "observedImageIds": [
+          "HSrFtW6b0AAY8bf",
+          "HSrFui9boAAaAbq"
+        ]
+      },
+      {
+        "recordedAt": "22:52 JST",
+        "kind": "quote",
+        "text": "伏線微回収　からい",
+        "url": "https://x.com/hinahina_vr/status/2102033304589635898",
+        "observedImageIds": [
+          "HSvrLYPaoAAtTiy",
+          "HSvr50eaMAAm21U",
+          "HSvsCz_a0AACNta",
+          "HSvsG9xbEAA6cAw"
+        ]
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "18:53 JST",
+        "venueName": "Shenzhen Talent Theme Park",
+        "venueArea": "中国深セン市",
+        "checkinId": "6ab0fead0811d91f91797aa6",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ab0fead0811d91f91797aa6",
+        "shout": null
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
   }
 }

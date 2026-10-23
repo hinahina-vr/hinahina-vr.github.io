@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-19",
+  "title": "箱の中の客席 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "箱の中の客席",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-19_箱の中の客席",
+      "entry": "standalone_start",
+      "summary": "夢の中で、60cmの黒い箱が目の高さに浮いていた。斜めの板の奥に、さらに小さな客席がある。ワディーが近づくと、客席にいたフェイリスもこちらへ身を乗り出した。"
+    },
+    {
+      "id": "turn",
+      "title": "小さな幕が上がる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-19_箱の中の客席",
+      "entry": "turn",
+      "summary": "箱の手前に階段が伸びた。足を乗せると、ワディーの靴が客席に入る大きさまで縮む。手を離していない箱の縁は、まだ机の上の小さな物に感じられた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-19_箱の中の客席",
+      "entry": "choose",
+      "summary": "階段を下りて客席へ入る、または箱の外から光を動かす"
+    },
+    {
+      "id": "END_A",
+      "title": "客席から見上げる手",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-19_箱の中の客席",
+      "entry": "END_A",
+      "summary": "客席から見上げる手"
+    },
+    {
+      "id": "END_B",
+      "title": "猫の影の舞台",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-19_箱の中の客席",
+      "entry": "END_B",
+      "summary": "猫の影の舞台"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "階段を下りて客席へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "箱の外から光を動かす",
+      "style": "kenkai"
+    }
+  ]
+}

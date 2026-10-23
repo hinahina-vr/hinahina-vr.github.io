@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-20",
+  "title": "ブルーベリーの駅 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "ブルーベリーの駅",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-20_ブルーベリーの駅",
+      "entry": "standalone_start",
+      "summary": "夢の広場には、ワディーの背丈ほどあるブルーベリーが置かれていた。表面の粉を指でこすると、小さな窓が現れる。窓の向こうで、あゆが両手を振っていた。"
+    },
+    {
+      "id": "turn",
+      "title": "転がる行き先",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-20_ブルーベリーの駅",
+      "entry": "turn",
+      "summary": "全員が乗ると、床が水平のまま外側だけが転がり始めた。窓の外には黄色い丘が続く。ドリアンの果肉だと気づいた時には、駅の屋根ほど大きくなっていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-20_ブルーベリーの駅",
+      "entry": "choose",
+      "summary": "黄色い丘の間へ入る、または小さいブルーベリーを追う"
+    },
+    {
+      "id": "END_A",
+      "title": "日陰の停車場",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-20_ブルーベリーの駅",
+      "entry": "END_A",
+      "summary": "日陰の停車場"
+    },
+    {
+      "id": "END_B",
+      "title": "トレーの端が見えた",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-20_ブルーベリーの駅",
+      "entry": "END_B",
+      "summary": "トレーの端が見えた"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "黄色い丘の間へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "小さいブルーベリーを追う",
+      "style": "kenkai"
+    }
+  ]
+}

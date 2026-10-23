@@ -1371,6 +1371,79 @@
       "promptProvenance": "exact generation instruction and content correction edit",
       "summary": "海流を眺めているを題材にしたイラスト",
       "updatedAt": "2026-10-22T10:38:36.837Z"
+    },
+    "2026-09-18_成田国際空港": {
+      "slug": "2026-09-18_成田国際空港",
+      "date": "2026-09-18",
+      "title": "成田国際空港",
+      "coverSrc": "./assets/diary-covers/2026-09-18_成田国際空港.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. A landscape 3:2 diary cover: a quiet airport terminal seating area, seen obliquely at ordinary eye level. A short row of charcoal-gray upholstered linked chairs and broad tall terminal windows, with a simple airport apron visible beyond. Crop the architecture asymmetrically; emphasize the long horizontal seat row and blank space above, no central hero object. Dry gouache and loose graphite on visibly fibrous warm gray paper, restrained blue-gray, charcoal, muted ochre. Slightly imperfect lines, broad flat brush shapes and a few unfinished edges, like a compact travel sketch rather than polished digital concept art. Ordinary interior light, no sunset, no dramatic rays. No people, luggage, meals, readable text, logos, flags, signage symbols, lettering, watermark, glowing particles, glossy surfaces or photoreal finish. This is an illustrative cover for a brief visit to Narita airport and a lounge, not a documentary reconstruction.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "成田国際空港を題材にしたイラスト",
+      "updatedAt": "2026-10-23T07:44:50.648Z"
+    },
+    "2026-09-19_60cmの箱": {
+      "slug": "2026-09-19_60cmの箱",
+      "date": "2026-09-19",
+      "title": "60cmの箱",
+      "coverSrc": "./assets/diary-covers/2026-09-19_60cmの箱.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 handmade diary cover about an imagined tabletop character display that has not been built yet. A sparse rough concept sketch of a small matte charcoal cube enclosure, its open front seen from a slightly elevated angle. Inside is one diagonally inclined half-mirror sheet above a flat bottom display; a tiny pale mint fully clothed adult female silhouette stands as a reflected image in the empty center, visibly an optical illusion not a real person. Keep the diagram understandable but informal: unfinished graphite outlines of the top and side, broad dry gouache strokes, no labels or dimension marks. Cube takes up about half the page with ample off-white paper left bare. Muted charcoal, sage and dull blue; uneven pen pressure, smudges and overlapping exploratory lines. No photoreal product advertisement, no science-fiction holographic rays, no sparks, no floating UI, no circuitry ornaments, no polished anime eyes, no readable words, numbers, logos, watermark or magical symbols.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "60cmの箱を題材にしたイラスト",
+      "updatedAt": "2026-10-23T07:44:51.255Z"
+    },
+    "2026-09-20_ドリアンを見直した": {
+      "slug": "2026-09-20_ドリアンを見直した",
+      "date": "2026-09-20",
+      "title": "ドリアンを見直した",
+      "coverSrc": "./assets/diary-covers/2026-09-20_ドリアンを見直した.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover, very close informal still life of a white rectangular takeaway tray holding several soft yellow pieces of durian flesh, and one exceptionally large blue-black blueberry sitting just beside the tray. Only these objects on a plain warm gray tabletop; no fruit shells, utensils, labels or decorative ingredients. Crop a little of the tray at the left, leave quiet negative space at right. Hand-painted dry opaque gouache with loose graphite edges on coarse off-white paper, butter yellow, dusty indigo and warm gray; uneven strokes, slightly flattened perspective, a few rubbed pencil marks, appealing but ordinary food. Avoid glossy photoreal commercial food photography, smooth digital gradients, fake lens blur, rich dramatic lighting, sparkles, symmetrical arrangements, text, numbers, logos and watermark.",
+      "editPrompt": "Edit the existing durian-and-blueberry diary cover. Preserve the dry gouache texture, pencil edges, cropped tray on the left, colors, paper, and all durian pieces. Correct only the blueberry scale: make its diameter roughly one quarter of its current diameter, a plausible unusually large blueberry about 2 to 3 cm wide beside a takeaway tray about 20 cm across. It must be small compared with a single durian segment, not an apple-sized fantasy blueberry. Keep it in the same general right-hand area with ample empty tabletop around it. No new objects or writing.",
+      "promptProvenance": "exact generation instruction and scale correction edit",
+      "summary": "ドリアンを見直したを題材にしたイラスト",
+      "updatedAt": "2026-10-23T07:44:51.797Z"
+    },
+    "2026-09-21_深センでいーあるふぁんくらぶ": {
+      "slug": "2026-09-21_深センでいーあるふぁんくらぶ",
+      "date": "2026-09-21",
+      "title": "深センでいーあるふぁんくらぶ",
+      "coverSrc": "./assets/diary-covers/2026-09-21_深センでいーあるふぁんくらぶ.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. A landscape 3:2 handmade travel-diary cover, close oblique overhead view of a wide shallow oval metal serving platter holding a cooked fish under a generous rough mound of chopped red-orange chili topping, a little red oil and a few chopped green scallions. The fish is mostly covered, no dramatic visible eye. Crop the platter at one edge of the picture. An ordinary pale tabletop surrounds it; no other dishes, utensils, menus, people or objects. Rough dry gouache and graphite drawing on warm off-white paper, broad brick-red brushstrokes, muted orange, gray metal and tiny sage accents. Sketchbook quality with uneven contours and visible pale paper between strokes, appetizing but matter-of-fact. No glossy food-ad rendering, shine, steam effects, ornamental swirls, saturated neon, cinematic lighting, text, numbers, brand labels, logos or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "深センでいーあるふぁんくらぶを題材にしたイラスト",
+      "updatedAt": "2026-10-23T07:44:52.207Z"
+    },
+    "2026-09-15_悪魔召喚プログラム": {
+      "slug": "2026-09-15_悪魔召喚プログラム",
+      "date": "2026-09-15",
+      "title": "悪魔召喚プログラム",
+      "coverSrc": "./assets/diary-covers/2026-09-15_悪魔召喚プログラム.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 editorial diary illustration for the idea of AI as a demon-summoning program made from human imagination. Close crop of an ordinary dark computer monitor, no keyboard, furniture or room props. From the flat pale gray screen, two small irregular charcoal silhouettes with tiny horns seem to lean forward, like simple ink-blot creatures in a hand-drawn sketch, curious and awkward rather than frightening. They are explicitly imaginary shapes, not realistic monsters. Dry black gouache and graphite, muted moss-gray shadows on visibly textured warm off-white paper; very limited color, spare asymmetrical composition, broad unpolished marks and breathing space. No magic circle, glyphs, occult emblems, circuitry patterns, glowing eyes, neon, sparks, dramatic backlight, glossy rendering, polished anime faces, letters, words, labels, logos or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "悪魔召喚プログラムを題材にしたイラスト",
+      "updatedAt": "2026-10-23T07:44:49.443Z"
+    },
+    "2026-09-16_滅亡後の影響": {
+      "slug": "2026-09-16_滅亡後の影響",
+      "date": "2026-09-16",
+      "title": "滅亡後の影響",
+      "coverSrc": "./assets/diary-covers/2026-09-16_滅亡後の影響.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 handmade editorial diary cover about the strange wording of an oversized news headline on a video thumbnail. Close angled view of a thin ordinary rectangular display, with its black rim partly cropped. The screen layout has one heavy oversized vermilion rectangular brush block, one heavy charcoal block below it, and several much smaller faint gray horizontal brush lines underneath. These shapes suggest a loud headline and a tiny qualifying subtitle WITHOUT any letters or pseudo-letters whatsoever. Blank off-white background, no people or other objects, no icons. The visual joke is the size imbalance between the large assertive red and black blocks and the almost overlooked little gray lines. Rough graphite and matte dry gouache on textured paper, slightly crooked perspective and irregular hand-painted edges. Very spare red, charcoal and chalk palette; no smooth UI graphics, no photoreal screenshot, no text, numbers, logos, watermarks, extra symbols, circuitry, sparks or cinematic glow.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "滅亡後の影響を題材にしたイラスト",
+      "updatedAt": "2026-10-23T07:44:49.999Z"
     }
   }
 }

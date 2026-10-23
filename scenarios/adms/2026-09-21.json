@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-21",
+  "title": "歌う木陰 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "歌う木陰",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-21_歌う木陰",
+      "entry": "standalone_start",
+      "summary": "夢の公園で、赤い唐辛子が枝からぶら下がっていた。風が通ると笛のように鳴る。ワディーが立ち止まると、シャロがその下で両耳を押さえていた。"
+    },
+    {
+      "id": "turn",
+      "title": "続きを知らない歌",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-21_歌う木陰",
+      "entry": "turn",
+      "summary": "木々の歌が途中で止まった。次の音を待って、枝先がワディーの方を向く。足元に落ちた唐辛子は、細長い笛になっていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-21_歌う木陰",
+      "entry": "choose",
+      "summary": "笛で短い続きを吹く、またはベンチで拍子を取る"
+    },
+    {
+      "id": "END_A",
+      "title": "木が吹き返した音",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-21_歌う木陰",
+      "entry": "END_A",
+      "summary": "木が吹き返した音"
+    },
+    {
+      "id": "END_B",
+      "title": "足元だけの合唱",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-21_歌う木陰",
+      "entry": "END_B",
+      "summary": "足元だけの合唱"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "笛で短い続きを吹く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "ベンチで拍子を取る",
+      "style": "kenkai"
+    }
+  ]
+}

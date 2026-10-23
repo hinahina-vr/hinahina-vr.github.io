@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-15",
+  "title": "呼び出し口の向こう A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "呼び出し口の向こう",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-15_呼び出し口の向こう",
+      "entry": "standalone_start",
+      "summary": "夢の中では、画面の下に小さな引き出しがついていた。ワディーが開けると、角の生えた黒い影が、内側から同じようにこちらをのぞいた。影の後ろには、列ができている。"
+    },
+    {
+      "id": "turn",
+      "title": "まだ用事を聞いていない",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-15_呼び出し口の向こう",
+      "entry": "turn",
+      "summary": "引き出しをもう少し開けると、奥に階段が見えた。下から、逆さ向きのワディーの顔がのぞいている。向こうにも画面があり、こちらを呼ぼうとしているらしい。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-15_呼び出し口の向こう",
+      "entry": "choose",
+      "summary": "引き出しを大きく開ける、または小さな階段を下りる"
+    },
+    {
+      "id": "END_A",
+      "title": "椅子の足が足りない",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-15_呼び出し口の向こう",
+      "entry": "END_A",
+      "summary": "椅子の足が足りない"
+    },
+    {
+      "id": "END_B",
+      "title": "呼ばれてきました",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-15_呼び出し口の向こう",
+      "entry": "END_B",
+      "summary": "呼ばれてきました"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "引き出しを大きく開ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "小さな階段を下りる",
+      "style": "kenkai"
+    }
+  ]
+}

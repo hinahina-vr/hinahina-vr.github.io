@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-18",
+  "title": "椅子が先に出発する A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "椅子が先に出発する",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-18_椅子が先に出発する",
+      "entry": "standalone_start",
+      "summary": "夢の空港で、ワディーは横に長い椅子へ座っていた。窓の外には別の空港があり、その窓の中にも同じ椅子が見える。ひなたが隣へ座ると、列全体が少し滑った。"
+    },
+    {
+      "id": "turn",
+      "title": "窓を追い越す",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-18_椅子が先に出発する",
+      "entry": "turn",
+      "summary": "椅子の列は細長い通路へ入った。先は大きな窓と、窓のない扉に分かれている。肘掛けには、小さな左右の取っ手がついていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-18_椅子が先に出発する",
+      "entry": "choose",
+      "summary": "窓の方へ椅子を向ける、または風の来る扉を開ける"
+    },
+    {
+      "id": "END_A",
+      "title": "窓の外にも待合室",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-18_椅子が先に出発する",
+      "entry": "END_A",
+      "summary": "窓の外にも待合室"
+    },
+    {
+      "id": "END_B",
+      "title": "出発するのは椅子だけ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-18_椅子が先に出発する",
+      "entry": "END_B",
+      "summary": "出発するのは椅子だけ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "窓の方へ椅子を向ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "風の来る扉を開ける",
+      "style": "kenkai"
+    }
+  ]
+}

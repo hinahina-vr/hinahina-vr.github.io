@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-16",
+  "title": "滅亡後も営業中 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "滅亡後も営業中",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-16_滅亡後も営業中",
+      "entry": "standalone_start",
+      "summary": "夢の街には、人類滅亡後の案内所があった。ワディーが入口へ近づくと、整理券を渡された。前には長い列がある。後ろにも、もう誰かが並んでいる。"
+    },
+    {
+      "id": "turn",
+      "title": "誰もいないはずの列",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-16_滅亡後も営業中",
+      "entry": "turn",
+      "summary": "ひなひなが後ろを向くと、小窓からプリンが出てきた。でじこが振り返った途端、皿だけが戻っていく。ワディーは皿を受け止めた。まだ中身は空だった。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-16_滅亡後も営業中",
+      "entry": "choose",
+      "summary": "背中を向けて注文する、または休憩室をのぞく"
+    },
+    {
+      "id": "END_A",
+      "title": "背中どうしの喫茶店",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-16_滅亡後も営業中",
+      "entry": "END_A",
+      "summary": "背中どうしの喫茶店"
+    },
+    {
+      "id": "END_B",
+      "title": "係も並んでいた",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-16_滅亡後も営業中",
+      "entry": "END_B",
+      "summary": "係も並んでいた"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "背中を向けて注文する",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "休憩室をのぞく",
+      "style": "kenkai"
+    }
+  ]
+}
