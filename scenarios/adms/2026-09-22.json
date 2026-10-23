@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-22",
+  "title": "待合椅子の出発 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "待合椅子の出発",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-22_待合椅子の出発",
+      "entry": "standalone_start",
+      "summary": "夢の空港で、ワディーは青い待合椅子に座っていた。窓の外の飛行機は動かない。代わりに、椅子の脚から小さな車輪が出てきた。"
+    },
+    {
+      "id": "turn",
+      "title": "窓の向こうに座る",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-22_待合椅子の出発",
+      "entry": "turn",
+      "summary": "椅子は窓の敷居で止まった。外には雲ほど大きなクッションが敷かれている。室内の床には、家の玄関まで続く短い廊下が現れた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-22_待合椅子の出発",
+      "entry": "choose",
+      "summary": "窓の外へ椅子を進める、または玄関へ向きを変える"
+    },
+    {
+      "id": "END_A",
+      "title": "雲の座り心地",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-22_待合椅子の出発",
+      "entry": "END_A",
+      "summary": "雲の座り心地"
+    },
+    {
+      "id": "END_B",
+      "title": "ただいまの椅子",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-22_待合椅子の出発",
+      "entry": "END_B",
+      "summary": "ただいまの椅子"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "窓の外へ椅子を進める",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "玄関へ向きを変える",
+      "style": "kenkai"
+    }
+  ]
+}

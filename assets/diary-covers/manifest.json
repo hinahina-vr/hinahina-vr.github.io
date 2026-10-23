@@ -1444,6 +1444,91 @@
       "promptProvenance": "exact generation instruction",
       "summary": "滅亡後の影響を題材にしたイラスト",
       "updatedAt": "2026-10-23T07:44:49.999Z"
+    },
+    "2026-09-22_紙を流せる": {
+      "slug": "2026-09-22_紙を流せる",
+      "date": "2026-09-22",
+      "title": "紙を流せる",
+      "coverSrc": "./assets/diary-covers/2026-09-22_紙を流せる.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. A landscape 3:2 diary cover, intended as a modest handmade Japanese travel sketch. An almost empty airport waiting area in Shenzhen: a cropped row of dull blue-gray seats and a large window with one small distant passenger aircraft on the apron. No people, no baggage labels or readable signage. Broad uneven gouache strokes over rough off-white paper, loose graphite construction lines, slightly awkward honest perspective, muted slate and dusty ochre, patches of unpainted paper. Close everyday observation, quiet afternoon, asymmetrical framing, ordinary flat daylight. No cinematic lighting, glow, glossy gradients, perfect vector edges, decorative sparkles, dramatic sky, lettering, logos or watermark. A single restrained scene, not a collage.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "紙を流せるを題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:57.362Z"
+    },
+    "2026-09-23_路地に残る遊び": {
+      "slug": "2026-09-23_路地に残る遊び",
+      "date": "2026-09-23",
+      "title": "路地に残る遊び",
+      "coverSrc": "./assets/diary-covers/2026-09-23_路地に残る遊び.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover. Close oblique view of an open cheap paper sketchbook on a plain table. The pages contain a few loose hand-painted travel comic panels: a simple pale airplane silhouette, a bowl of rice porridge, a crowded low shopfront, a squat city train. Panels have irregular pencilled borders and no lettering or people. These are drawings inside a notebook, clearly recollections rather than a real travel scene. Dry gouache, colored pencil and graphite on visibly coarse off-white paper, economical unpolished marks, flat muted brick red and slate green with paper left bare, imperfect asymmetrical layout. No caption, no readable text, no brands, no watermark, no cinematic glow, no luminous gradients, no ornamental flowers or sparkles.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "路地に残る遊びを題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:57.484Z"
+    },
+    "2026-09-24_13時間でウルムチ": {
+      "slug": "2026-09-24_13時間でウルムチ",
+      "date": "2026-09-24",
+      "title": "13時間でウルムチ",
+      "coverSrc": "./assets/diary-covers/2026-09-24_13時間でウルムチ.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover: a close oblique view of an ordinary laptop on a desk, with a simple dark blue map on its screen, a thin red railway line running far toward the upper left through several unlabelled ochre city dots. A geographical map in progress, not an infographic. No readable letters, numbers or interface labels. One loosely rendered trackpad and keyboard, no extra props. Paint this whole scene as a rough gouache-and-graphite notebook drawing on ivory paper; dry uneven paint edges, hand pressure visible, flat modest light, slate blue, brick red, dull brown. Off-center composition with generous blank paper, imperfect but plausible perspective. No glossy product rendering, glow, sparkles, celestial effects, logos, typography or watermark.",
+      "editPrompt": "Edit only the display content on the laptop screen. Remove every geographic outline, island, coast, land mass, water texture and shaded country-like shape from the screen. Replace that screen background with a simple even dark slate blue gouache wash. Retain only a thin hand-drawn muted red railway route running toward the upper left through several unlabelled ochre station dots, with two short branching routes. This is a schematic route display, not a geographic map. No letters or numbers. Keep the laptop, keyboard, desk, overall composition, paper texture and rough handmade medium exactly as they are.",
+      "promptProvenance": "exact generation instruction and map abstraction edit",
+      "summary": "13時間でウルムチを題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:57.617Z"
+    },
+    "2026-09-25_行けなかった店のこと": {
+      "slug": "2026-09-25_行けなかった店のこと",
+      "date": "2026-09-25",
+      "title": "行けなかった店のこと",
+      "coverSrc": "./assets/diary-covers/2026-09-25_行けなかった店のこと.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover, an unpretentious hand-drawn observation of two takeaway cups on a small cafe counter: one plain milky tea in a white paper cup with a lid, the other dark coffee in a smaller plain cup. Crop the counter at an angle, show only a dim shop interior with one empty stool beyond. No writing anywhere, no logo, no people. Restrained gouache and soft colored pencil on rough pale paper, rubbed graphite, muted warm gray, olive, tea brown. Broad simple shapes, uneven handmade marks, slightly off perspective, natural flat daylight. This is a modest visual recollection of drinks missed after a trip. Avoid polished advertising photography, realistic condensation, glossy 3D, neat symmetry, rays, glow, sparkles, captions, watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "行けなかった店のことを題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:57.731Z"
+    },
+    "2026-09-26_ひなの後ろから編集者が出てきた": {
+      "slug": "2026-09-26_ひなの後ろから編集者が出てきた",
+      "date": "2026-09-26",
+      "title": "ひなの後ろから編集者が出てきた",
+      "coverSrc": "./assets/diary-covers/2026-09-26_ひなの後ろから編集者が出てきた.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. A landscape 3:2 humble diary sketch: one broad ceramic bowl of plain Japanese udon, a few thick white noodles visible in light brown broth, with an ordinary pair of wooden chopsticks resting beside it on a small kitchen table. No meat, no tempura, no decorative side dishes, no other objects or writing. Crop the bowl slightly near the lower left, leave quiet paper space above it. Rough gouache and graphite drawn directly on cream paper, broad confident but uneven strokes, visible pencil corrections, muted blue-gray bowl, ochre broth, neutral flat light, no dramatic steam. An everyday sketch rather than food photography. Avoid appetizing glossy highlights, digital smoothness, bokeh, perfect symmetry, overly detailed texture, letters, logos, watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "ひなの後ろから編集者が出てきたを題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:57.841Z"
+    },
+    "2026-09-27_ペルソナAIのいる夜を考えた": {
+      "slug": "2026-09-27_ペルソナAIのいる夜を考えた",
+      "date": "2026-09-27",
+      "title": "ペルソナAIのいる夜を考えた",
+      "coverSrc": "./assets/diary-covers/2026-09-27_ペルソナAIのいる夜を考えた.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 small literary diary cover: an imagined Chinese street-side tea table under a patched canvas awning. Two empty low wooden stools face a square table with a plain teapot and two little cups, with a narrow glimpse of a simple noodle stall behind. The people have stepped out of the picture; no human figures, no faces, no robots, no drug paraphernalia. The composition feels like a quiet scene from a fictional future that still looks ordinary. Rough dry gouache and dark pencil on ivory paper, minimal unsentimental detail, worn surfaces, uneven perspective and unpainted margins. Muted moss green, brown, chalk white and a small patch of dull vermilion. Flat late-afternoon shade. No calligraphy, text, labels, logos, neon, cyberpunk, haze, glowing rays, symmetrical staging or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "ペルソナAIのいる夜を考えたを題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:57.964Z"
+    },
+    "2026-09-28_20年くらい前の記憶": {
+      "slug": "2026-09-28_20年くらい前の記憶",
+      "date": "2026-09-28",
+      "title": "20年くらい前の記憶",
+      "coverSrc": "./assets/diary-covers/2026-09-28_20年くらい前の記憶.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 diary cover. A small humorous editorial still life: one pair of worn soft red boxing gloves lying limp beside an ordinary black computer keyboard on a plain gray desk; just the dark blank lower corner of a monitor is visible at the top. This is an obvious visual metaphor for a tiring argument with a computer, not a real boxing match. No person, injuries, faces, angels, devils, screens showing messages, letters, numerals or logos. Broad rough gouache shapes and visible rubbed pencil on uncoated ivory paper. Spare off-center composition, dirty red, graphite, muted gray, unpainted margins, dry irregular strokes and plain flat room light. Avoid cinematic or supernatural lighting, colorful glow, futuristic UI, digital polish, photoreal product staging, symmetry, caption or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "20年くらい前の記憶を題材にしたイラスト",
+      "updatedAt": "2026-10-23T10:11:58.079Z"
     }
   }
 }

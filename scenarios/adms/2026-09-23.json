@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-23",
+  "title": "コマから出てきた湯気 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "コマから出てきた湯気",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-23_コマから出てきた湯気",
+      "entry": "standalone_start",
+      "summary": "夢の中で絵日記を開くと、粥のコマから湯気が上がった。紙は濡れていない。ククリが顔を近づけると、湯気だけが鼻の先をくすぐった。"
+    },
+    {
+      "id": "turn",
+      "title": "白い余白の食卓",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-23_コマから出てきた湯気",
+      "entry": "turn",
+      "summary": "ワディーがページの端を持つと、絵の中の店主が手を振った。紙をめくれば店も畳まれそうだ。ククリは白い余白へ、小さな椅子を鉛筆で描いた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-23_コマから出てきた湯気",
+      "entry": "choose",
+      "summary": "絵の街の通路へ入る、または余白に食卓を描く"
+    },
+    {
+      "id": "END_A",
+      "title": "縁取りのある街",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-23_コマから出てきた湯気",
+      "entry": "END_A",
+      "summary": "縁取りのある街"
+    },
+    {
+      "id": "END_B",
+      "title": "まだ白い席",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-23_コマから出てきた湯気",
+      "entry": "END_B",
+      "summary": "まだ白い席"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "絵の街の通路へ入る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "余白に食卓を描く",
+      "style": "kenkai"
+    }
+  ]
+}

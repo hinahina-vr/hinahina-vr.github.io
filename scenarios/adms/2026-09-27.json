@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-27",
+  "title": "代わりの顔はお腹がすかない A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "代わりの顔はお腹がすかない",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-27_代わりの顔はお腹がすかない",
+      "entry": "standalone_start",
+      "summary": "夢の茶店では、客の顔を描いた札がテーブルの上で話していた。本人たちは椅子でうとうとしている。ワディーの札も、よく似た声で注文を続けた。"
+    },
+    {
+      "id": "turn",
+      "title": "椅子の下から呼ぶ声",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-27_代わりの顔はお腹がすかない",
+      "entry": "turn",
+      "summary": "湯気の立つ皿が来た。札には口が描いてあるが、箸を持つ手がない。ひなひなは自分の札を皿の前に置いて眺めた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-27_代わりの顔はお腹がすかない",
+      "entry": "choose",
+      "summary": "札を立てたまま食べる、または札を伏せて食べる"
+    },
+    {
+      "id": "END_A",
+      "title": "解説より先のひと口",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-27_代わりの顔はお腹がすかない",
+      "entry": "END_A",
+      "summary": "解説より先のひと口"
+    },
+    {
+      "id": "END_B",
+      "title": "湯呑みの音",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-27_代わりの顔はお腹がすかない",
+      "entry": "END_B",
+      "summary": "湯呑みの音"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "札を立てたまま食べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "札を伏せて食べる",
+      "style": "kenkai"
+    }
+  ]
+}

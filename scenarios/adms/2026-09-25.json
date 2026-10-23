@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-25",
+  "title": "曲がるたびにお茶の店 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "曲がるたびにお茶の店",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-25_曲がるたびにお茶の店",
+      "entry": "standalone_start",
+      "summary": "夢の商店街では、行きたい茶の店がいつも次の角にあった。角を曲がると、さらに先で湯気が立っている。あゆが立ち止まって頬をふくらませた。"
+    },
+    {
+      "id": "turn",
+      "title": "逃げる看板の足",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-25_曲がるたびにお茶の店",
+      "entry": "turn",
+      "summary": "店は広場で休憩を始めた。看板の足がカウンターの下へ引っ込み、椅子が外へ出てくる。追いついたワディーとあゆの前には、持ち帰り用の窓と店内への扉が並んだ。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-25_曲がるたびにお茶の店",
+      "entry": "choose",
+      "summary": "窓からお茶を受け取る、またはあゆと店内へ入る"
+    },
+    {
+      "id": "END_A",
+      "title": "追いかけてきた椅子",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-25_曲がるたびにお茶の店",
+      "entry": "END_A",
+      "summary": "追いかけてきた椅子"
+    },
+    {
+      "id": "END_B",
+      "title": "席ごと散歩",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-25_曲がるたびにお茶の店",
+      "entry": "END_B",
+      "summary": "席ごと散歩"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "窓からお茶を受け取る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "あゆと店内へ入る",
+      "style": "kenkai"
+    }
+  ]
+}

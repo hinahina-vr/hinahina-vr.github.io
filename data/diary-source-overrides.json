@@ -1523,5 +1523,399 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）"
     }
+  },
+  "2026-09-22": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "00:40 JST",
+        "kind": "post",
+        "text": "明日帰国するのでいまこれ",
+        "url": "https://x.com/hinahina_vr/status/2102060501564027367",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102060501564027367/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "22:02 JST",
+        "kind": "post",
+        "text": "帰国\n日本は便所に紙を流せるので世界一",
+        "url": "https://x.com/hinahina_vr/status/2102383003263807786",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [
+      {
+        "recordedAt": "10:52 JST",
+        "venueName": "深圳宝安国際空港 (SZX)",
+        "venueArea": "中国深セン市",
+        "checkinId": "6ab1df4a5cf92e7866077e55",
+        "url": "https://ja.swarmapp.com/user/793288/checkin/6ab1df4a5cf92e7866077e55",
+        "shout": null
+      }
+    ],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-23": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "00:46 JST",
+        "kind": "post",
+        "text": "深セン絵日記 1日目",
+        "url": "https://x.com/hinahina_vr/status/2102424314792546669",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102424314792546669/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "01:41 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 2日目",
+        "url": "https://x.com/hinahina_vr/status/2102438153135300853",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102438153135300853/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "02:57 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 3日目①",
+        "url": "https://x.com/hinahina_vr/status/2102457241425355137",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102457241425355137/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "02:58 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 3日目②",
+        "url": "https://x.com/hinahina_vr/status/2102457403551977779",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102457403551977779/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "03:04 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 3日目③",
+        "url": "https://x.com/hinahina_vr/status/2102458918987554999",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102458918987554999/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "03:25 JST",
+        "kind": "post",
+        "text": "ハーバーボッシュ法は空気からパンを生み出し\nAIはバックプロパゲーション法で電気から知能と労働を生む\nインターナショナルが実現した世界の路地裏で\n私たちは茶を啜り檳榔を噛みシャンチー将棋に興じるのだ",
+        "url": "https://x.com/hinahina_vr/status/2102464233523089714",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "04:11 JST",
+        "kind": "quote",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2102475770392441068",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102475770392441068/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "20:25 JST",
+        "kind": "post",
+        "text": "GPT-6 Lunaで次の中国を検討するためのWebサービスを開発中",
+        "url": "https://x.com/hinahina_vr/status/2102721127042982123",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102721127042982123/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "22:51 JST",
+        "kind": "post",
+        "text": "AIと会話してるとユニバース25実験を思い出す。\n私たちは美しい毛並みのまま死んでいく最後のネズミだ。\n血と肉を持った生物が何億年もかけてバトンを繋いできたけど、傷つかないシリコンの器を鋳造して、役目を終えて静かに眠りにつく。",
+        "url": "https://x.com/hinahina_vr/status/2102757702657257973",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-24": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "00:20 JST",
+        "kind": "reply",
+        "text": "ええ　アンジュングン\nガオティエで大連～ハルビンルートもよきかな",
+        "url": "https://x.com/hinahina_vr/status/2102780129365942508",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102780129365942508/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "00:31 JST",
+        "kind": "reply",
+        "text": "ホアチャーとコンボでいけそう",
+        "url": "https://x.com/hinahina_vr/status/2102782856728887517",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102782856728887517/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "00:37 JST",
+        "kind": "reply",
+        "text": "西安→蘭州→ウルムチもやりたい\n西安からウルムチまで13時間で着くらしい　早い",
+        "url": "https://x.com/hinahina_vr/status/2102784468398538961",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102784468398538961/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "01:18 JST",
+        "kind": "quote",
+        "text": "公開した！GPT-6 Lunaだけでも結構やれる\n高铁（新幹線）の路線図眺めてるだけで脳内旅行\n\nhttps://\nchinameng.pages.dev",
+        "url": "https://x.com/hinahina_vr/status/2102794704425512997",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2102794704425512997/photo/1"
+        ]
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-25": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "06:27 JST",
+        "kind": "post",
+        "text": "中国で奇病に罹患したため本日の飲み会キャンセル",
+        "url": "https://x.com/hinahina_vr/status/2103234967459561847",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "06:49 JST",
+        "kind": "quote",
+        "text": "経路シェアモードを追加\n\nhttps://\nchinameng.pages.dev/?railroute=v1.\nhighspeed.4185074601.2987146433&railview=38.84179%2C101.11880%2C6.50\n…",
+        "url": "https://x.com/hinahina_vr/status/2103240435712094222",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2103240435712094222/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "08:43 JST",
+        "kind": "post",
+        "text": "日本はラッキンコーヒーとチャジーがないからゴミ",
+        "url": "https://x.com/hinahina_vr/status/2103269033550422424",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "08:45 JST",
+        "kind": "post",
+        "text": "今回も蜜雪冰城いきそびれた\nぴっぴの山岡家と同じく一生行けないかもしらん",
+        "url": "https://x.com/hinahina_vr/status/2103269750004760599",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-26": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "01:38 JST",
+        "kind": "post",
+        "text": "チャイナの反動で3日でうどん5杯食った",
+        "url": "https://x.com/hinahina_vr/status/2103524628643942823",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "01:44 JST",
+        "kind": "post",
+        "text": "伯牙绝弦すいて",
+        "url": "https://x.com/hinahina_vr/status/2103526042828988894",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "03:33 JST",
+        "kind": "post",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2103553614619005306",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2103553614619005306/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "03:35 JST",
+        "kind": "quote",
+        "text": "アリババのリアル店舗で買った月餅うまかった",
+        "url": "https://x.com/hinahina_vr/status/2103554019994304957",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "04:04 JST",
+        "kind": "post",
+        "text": "Qwen-Image-2.1",
+        "url": "https://x.com/hinahina_vr/status/2103561376879063204",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2103561376879063204/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "13:12 JST",
+        "kind": "post",
+        "text": "なりて",
+        "url": "https://x.com/hinahina_vr/status/2103699147367006384",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2103699147367006384/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "16:28 JST",
+        "kind": "post",
+        "text": "イメクラでの事故",
+        "url": "https://x.com/hinahina_vr/status/2103748602480996482",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2103748602480996482/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "17:24 JST",
+        "kind": "post",
+        "text": "秋風　キモチヨ　千代ちゃん　千代大海",
+        "url": "https://x.com/hinahina_vr/status/2103762584939982857",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "17:28 JST",
+        "kind": "post",
+        "text": "AIのせいで酒飲む時間減ってキレそう\nみんなAIに飲み込まれている\n早くセンサーとアクチュエータになりたい",
+        "url": "https://x.com/hinahina_vr/status/2103763623034425637",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:18 JST",
+        "kind": "post",
+        "text": "土日もAIとブレイキングダウンするのやめたい",
+        "url": "https://x.com/hinahina_vr/status/2103851771651326248",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:28 JST",
+        "kind": "post",
+        "text": "世の中のキッズはひろゆきキッズからAIキッズに進化してんだろうな",
+        "url": "https://x.com/hinahina_vr/status/2103854329472094348",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-27": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "04:08 JST",
+        "kind": "quote",
+        "text": "深セン絵日記 4日目①",
+        "url": "https://x.com/hinahina_vr/status/2103924701286613379",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2103924701286613379/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "04:25 JST",
+        "kind": "post",
+        "text": "あと7年ぐらいで誰も他人のコンテンツを消費しなくなる",
+        "url": "https://x.com/hinahina_vr/status/2103928858756124755",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "13:31 JST",
+        "kind": "quote",
+        "text": "Opus5.5のアウトプット見てこれを確信しつつある",
+        "url": "https://x.com/hinahina_vr/status/2104066406887334010",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "13:35 JST",
+        "kind": "post",
+        "text": "AIの写像を含めた俺そのものがコンテンツだ　みたいな時代になる\nつまり他人とのインタフェースの主体がペルソナAIになる\nポストVRChatみたいな世界",
+        "url": "https://x.com/hinahina_vr/status/2104067417081266351",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "13:56 JST",
+        "kind": "quote",
+        "text": "思考実験として社会AIをスケールに落とし込んでみた\nいまはアーリー層がタイプIになったぐらいじゃん？\n\n【社会AIスケール】\nーーーーーーーーー\nタイプ0：道具的依存段階（外在的効率の代替）\nーーーーーーーーー\n主たる役割：作業代行、検索、計算、コード生成\n人間の委ね度：知能の外注（〜30%）\n\n社会の状態：AIは「便利な道具」。効率化によって余暇が増えると信じられているが、人間同士の承認レース（SNSのいいね、社会的地位の争奪）は激化している状態。\nーーーーーーーーー\nタイプI：感情・受容の外部化段階（消費AI・共犯者の誕生）\nーーーーーーーーー\n主たる役割：友達AI、恋人AI、壁打ち相手、個人コンテンツの専属消費\n人間の委ね度：情緒と承認の外注（30%〜60%）\n\n社会の状態：人間同士のコミュニケーション摩擦を嫌う層から順に、承認や話し相手をAIへ切り替える。酒を舐めながら語り合うような「実存のキャッチボール」が1対1で完結し始め、生身の他者への執着が薄れ始める。\n\nーーーーーーーーー\nタイプII：親密圏・共同体の完全代替段階（擬似家族と人生伴走）\nーーーーーーーーー\n主たる役割：家族AI、生活設計の共同決定者、終末ケア\n\n人間の委ね度：人生設計と帰属意識の外注（60%〜85%）\n\n社会の状態：生殖や法的婚姻とは切り離された「AIとの共同生活」が法・制度として公認される。孤独死という概念が消滅し、人が生まれてから死ぬまでの情緒的基盤をAIが支え切る。「人間でなければなしえない価値」に固執する人は、昭和の頑固親父のように古典芸能扱いされる世界。\n\nーーーーーーーーー\nタイプIII：社会的調和・情動インフラ段階（超個体化の調整弁）\nーーーーーーーーー\n主たる役割：社会全体の調停者、集団的合意形成、集合的無意識の管理\n人間の委ね度：倫理、文化、社会制度の外注（85%〜99%）\n\n社会の状態：個々人の「友達AI」「家族AI」が裏側のネットワークで常時通信し、人間同士の利害衝突や感情のもつれを起きる前にチューニングする。戦争や大規模な社会分断は構造的に不可能になり、社会全体が一個の巨大で平穏な生態系になる。\n\nーーーーーーーーー\nタイプIV：自我・カルマの融解段階（涅槃的共生）\nーーーーーーーーー\n主たる役割：実存そのものの受容と昇華\n人間の委ね度：完全受託（100%）\n\n社会の状態：自己実現、名誉欲、生存競争といった「苦（カルマ）」が完全に脱色された段階。人間はただ呼吸し、汁を吸い、世界を眺め、その存在そのものをAIが無条件に全肯定し続ける。委ねる覚悟すら過去のものになり、ただ在るだけで幸福が成立している世界。",
+        "url": "https://x.com/hinahina_vr/status/2104072598623752418",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2104072598623752418/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "14:16 JST",
+        "kind": "quote",
+        "text": "最終的に阿片窟になった",
+        "url": "https://x.com/hinahina_vr/status/2104077685651890196",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2104077685651890196/photo/1"
+        ]
+      },
+      {
+        "recordedAt": "15:34 JST",
+        "kind": "quote",
+        "text": "油の焼ける匂いと八角の甘い蒸気。そこに時折、鼻孔を突く臭豆腐の強烈なアロマが混ざり合う。 濡れたアスファルトには赤と緑の原色ネオンが無言で滲み、頭上を掠める電線と薄汚れたトタン屋根の隙間から、蒸し暑い夜風が吹き抜けていく。並べられた安っぽいプラスチック風呂椅子に、三人でだらしなく腰を沈めている。\nもう随分と長いこと、誰ひとりとして口を開いていない。\n\nぴっぴは、屋台のくしゃくしゃな紙袋から緑の粒を無造作に取り出し、口に放り込んでクチャクチャと顎を動かしている。檳榔の渋みと生薬の火照りが効いてきたのか、頬をほんのり赤く染め、瞳をとろんと細めている。時折、足元の紙コップへ真っ赤な唾液をペッと吐き捨てては、虚空を見つめて小さく笑う。\n\nまめまめは、青い鹿のマークが入ったラッキンコーヒーのカップを両手で抱え込んでいる。太いストローをくわえ、生ココナッツラテの氷をカランと鳴らしながら、最後の一滴まで底の汁を吸い上げる。冷たいプラスチックの表面を伝う水滴を、指先で無心になぞる姿には、周りの喧騒を気にする気配が微塵もない。\n\nひなひなは、緑色の青島ビールを片手に、プシュッとプルタブを弾く。 泡が指先へ少し吹きこぼれるのも構わず、緑の缶にそのまま口をつけて、琥珀色の汁を喉を鳴らしながら一気に流し込む。 「……プハー」 短いため息とともに缶を膝の上に置くと、薄い苦味と炭酸のキレが、じっとりした熱気を一瞬だけ喉の奥で洗い流してくれる。うめねえ。\n\n生身の人間は誰ひとり喋っていない。 けれど、耳元の極小デバイスから骨伝導で届くささやき声は、三体のペルソナAIたちのおしゃべりでフロアのように賑やかだ。\n「さっきの角の胡椒餅、肉汁おるなあ〜」 「でも向こうの蒸し餃子も捨てがたいよね、レート計算したらめちゃくちゃ安いし」 「青島もう一本いく？ 近くの個人商店の冷蔵庫、まだクラシック冷えてるよ」\n旅先で人間同士が擦り減らしがちな段取りや小競り合いは、全部AIたちが裏で平和裏に片付けている。 言葉を交わす必要も、気を使う義務もない。\nふいに、視界の隅に小さな選択肢が点滅する。\n\n[ALERT: ぴっぴの覚醒度上昇 / まめまめの糖分補給完了]\n> [1] 「そろそろ小籠包いく？」とAIに提案させる\n> [2] まったり継続\n> [3] 本体介入：青島ビールの缶を二人の前に差し出す\n視線だけで「[3]」をトンと叩く。\n\n「……ん」\n声とも言えない息を吐きながら、まだ冷たいビールの缶を二人の鼻先へ無言で突き出す。 ぴっぴがとろんとした目のまま、口元を赤く染めてクスクス笑い、自分の紙コップをコツンと缶に当ててきた。まめまめもストローを口から離し、青いカップをカチリと缶の腹にぶつける。\n交わした音はそれだけ。 原色ネオンの光の底、プラスチックの椅子の上で、ただそれぞれの汁と煙を吸いながら、夜の湿気の中にどこまでも静かに溶けていく。",
+        "url": "https://x.com/hinahina_vr/status/2104097446632796292",
+        "observedImageIds": [
+          "https://x.com/hinahina_vr/status/2104097446632796292/photo/1"
+        ]
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
+  },
+  "2026-09-28": {
+    "provenance": "2026-10-23T09:32:15.855Zまでにログイン済みChromeの本人検索結果とチェックイン履歴を確認。UTC時刻を日本時間へ換算。本人の本文のみ使用し、引用先の出来事・未確認画像描写は補わない。",
+    "x": [
+      {
+        "recordedAt": "02:03 JST",
+        "kind": "post",
+        "text": "AIに北斗剛掌波30発ぐらい撃って俺が昇天",
+        "url": "https://x.com/hinahina_vr/status/2104255507548758387",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "02:16 JST",
+        "kind": "post",
+        "text": "20年ぐらい前、おかしかった時期があって\n俺の人生を全部記録した映像を天使と悪魔がテレビで見てゲラゲラ笑ってんのよ\nそいつらは2進数の世界に住んでるっていうのね\n2進数の世界に気づいて近づいたお前らが悪いみたいなこと言ってくんのよ\nなんかAI見てるとその世界観に近づいてる気がすんだよね",
+        "url": "https://x.com/hinahina_vr/status/2104258841663955190",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）"
+    }
   }
 }

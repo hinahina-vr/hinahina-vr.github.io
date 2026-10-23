@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-24",
+  "title": "机を渡る赤い線 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "机を渡る赤い線",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-24_机を渡る赤い線",
+      "entry": "standalone_start",
+      "summary": "夢の路線図から、赤い線が1本ほどけてきた。机の端まで伸びると、その上を消しゴムほどの列車が走り出した。"
+    },
+    {
+      "id": "turn",
+      "title": "端まで来た列車",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-24_机を渡る赤い線",
+      "entry": "turn",
+      "summary": "列車の扉が開き、折り畳まれた風景が出てきた。駅の柱、山、細長い川。どれも机に置けば起き上がる紙細工だった。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-24_机を渡る赤い線",
+      "entry": "choose",
+      "summary": "線を机の端まで描く、または風景を机に並べる"
+    },
+    {
+      "id": "END_A",
+      "title": "窓際行き",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-24_机を渡る赤い線",
+      "entry": "END_A",
+      "summary": "窓際行き"
+    },
+    {
+      "id": "END_B",
+      "title": "手帳駅前",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-24_机を渡る赤い線",
+      "entry": "END_B",
+      "summary": "手帳駅前"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "線を机の端まで描く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "風景を机に並べる",
+      "style": "kenkai"
+    }
+  ]
+}

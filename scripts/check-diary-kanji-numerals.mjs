@@ -1,4 +1,5 @@
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   collectDiaryMarkdownFiles,
   readDiaryFile,
@@ -102,7 +103,7 @@ function maskIgnoredInlineMarkup(line) {
     .replace(/\[[^\]]+\]\([^)]+\)/g, (match) => " ".repeat(match.length));
 }
 
-function collectKanjiNumericFindings(text) {
+export function collectKanjiNumericFindings(text) {
   const findings = [];
   const lines = text.split(/\r?\n/);
 
@@ -117,6 +118,7 @@ function collectKanjiNumericFindings(text) {
       if (value === "二日" && line.startsWith("二日酔い", match.index)) continue;
       // Character names are not amounts; compound numbers still match in full.
       if (value === "千" && ["千佳", "千夜"].some((name) => line.startsWith(name, match.index))) continue;
+      if (value === "千代" && ["千代ちゃん", "千代大海"].some((name) => line.startsWith(name, match.index))) continue;
 
       findings.push({
         line: lineIndex + 1,
@@ -129,47 +131,49 @@ function collectKanjiNumericFindings(text) {
   return findings;
 }
 
-const args = parseArgs(process.argv.slice(2));
-const date = args.date ?? (args.all ? null : getLatestDiaryDate());
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  const args = parseArgs(process.argv.slice(2));
+  const date = args.date ?? (args.all ? null : getLatestDiaryDate());
 
-if (!args.all && !date) {
-  console.error("対象の日記が見つかりませんでした。");
-  process.exit(1);
-}
-
-const files = collectDiaryMarkdownFiles()
-  .filter((file) => args.all || file.date === date);
-
-if (files.length === 0) {
-  console.error(date ? `${date} の日記が見つかりませんでした。` : "対象の日記が見つかりませんでした。");
-  process.exit(1);
-}
-
-const findings = [];
-
-for (const file of files) {
-  const markdown = readDiaryFile(file);
-  const { heading, body } = splitDiaryMarkdown(markdown);
-  const matches = collectKanjiNumericFindings(`${heading}\n${body}`);
-
-  if (matches.length === 0) continue;
-
-  findings.push({
-    file: path.relative(repoRoot, file.fullPath),
-    matches,
-  });
-}
-
-if (findings.length === 0) {
-  console.log(date ? `${date} の漢数字表記チェックを通過しました。` : "漢数字表記チェックを通過しました。");
-  process.exit(0);
-}
-
-console.error("日記本文に、漢数字の数値表記が残っています。数値は半角数字で書いてください。");
-for (const finding of findings) {
-  console.error(`- ${finding.file}`);
-  for (const match of finding.matches) {
-    console.error(`  - ${match.line}:${match.column} 「${match.value}」`);
+  if (!args.all && !date) {
+    console.error("対象の日記が見つかりませんでした。");
+    process.exit(1);
   }
+
+  const files = collectDiaryMarkdownFiles()
+    .filter((file) => args.all || file.date === date);
+
+  if (files.length === 0) {
+    console.error(date ? `${date} の日記が見つかりませんでした。` : "対象の日記が見つかりませんでした。");
+    process.exit(1);
+  }
+
+  const findings = [];
+
+  for (const file of files) {
+    const markdown = readDiaryFile(file);
+    const { heading, body } = splitDiaryMarkdown(markdown);
+    const matches = collectKanjiNumericFindings(`${heading}\n${body}`);
+
+    if (matches.length === 0) continue;
+
+    findings.push({
+      file: path.relative(repoRoot, file.fullPath),
+      matches,
+    });
+  }
+
+  if (findings.length === 0) {
+    console.log(date ? `${date} の漢数字表記チェックを通過しました。` : "漢数字表記チェックを通過しました。");
+    process.exit(0);
+  }
+
+  console.error("日記本文に、漢数字の数値表記が残っています。数値は半角数字で書いてください。");
+  for (const finding of findings) {
+    console.error(`- ${finding.file}`);
+    for (const match of finding.matches) {
+      console.error(`  - ${match.line}:${match.column} 「${match.value}」`);
+    }
+  }
+  process.exit(1);
 }
-process.exit(1);

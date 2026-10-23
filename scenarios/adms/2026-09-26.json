@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-26",
+  "title": "丼の中の長い道 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "丼の中の長い道",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-26_丼の中の長い道",
+      "entry": "standalone_start",
+      "summary": "夢の食卓に、大きなうどんの丼が置かれていた。箸で持ち上げた麺はどこまでも続き、テーブルを渡って部屋の外へ伸びている。"
+    },
+    {
+      "id": "turn",
+      "title": "麺の先の曲がり角",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-26_丼の中の長い道",
+      "entry": "turn",
+      "summary": "橋の下にも丼があった。上の丼と下の丼のどちらから麺が出ているのか、見ただけではわからない。ワディーが箸を下げると、橋は少しだけ低くなった。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-26_丼の中の長い道",
+      "entry": "choose",
+      "summary": "2つの丼を並べる、または長い麺を大皿へ置く"
+    },
+    {
+      "id": "END_A",
+      "title": "向かい合う丼",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-26_丼の中の長い道",
+      "entry": "END_A",
+      "summary": "向かい合う丼"
+    },
+    {
+      "id": "END_B",
+      "title": "白い渦巻き",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-26_丼の中の長い道",
+      "entry": "END_B",
+      "summary": "白い渦巻き"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "2つの丼を並べる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "長い麺を大皿へ置く",
+      "style": "kenkai"
+    }
+  ]
+}

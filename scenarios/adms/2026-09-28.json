@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-28",
+  "title": "対戦相手も休憩中 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "対戦相手も休憩中",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-28_対戦相手も休憩中",
+      "entry": "standalone_start",
+      "summary": "夢の中に、小さなゲーム台があった。画面には誰もいないリングが映っている。ワディーがボタンを押すと、ゴングの代わりにあくびが鳴った。"
+    },
+    {
+      "id": "turn",
+      "title": "押しても鳴らないゴング",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-28_対戦相手も休憩中",
+      "entry": "turn",
+      "summary": "画面の下に細い扉が開いた。中にはリングへ続く階段と、休憩室へ続く短い廊下がある。グローブは廊下の先で湯呑みを持っていた。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-28_対戦相手も休憩中",
+      "entry": "choose",
+      "summary": "リングの座布団へ行く、または休憩室をのぞく"
+    },
+    {
+      "id": "END_A",
+      "title": "判定は昼寝",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-28_対戦相手も休憩中",
+      "entry": "END_A",
+      "summary": "判定は昼寝"
+    },
+    {
+      "id": "END_B",
+      "title": "グローブの茶休み",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-28_対戦相手も休憩中",
+      "entry": "END_B",
+      "summary": "グローブの茶休み"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "リングの座布団へ行く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "休憩室をのぞく",
+      "style": "kenkai"
+    }
+  ]
+}
