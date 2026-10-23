@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-07",
+  "title": "眠い荷物が着く港 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "眠い荷物が着く港",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-07_眠い荷物が着く港",
+      "entry": "standalone_start",
+      "summary": "夢の中で、細い橋が小さな島へ続いていた。倉庫の戸は開いていて、奥の黒い棚から、誰かのあくびが聞こえる。"
+    },
+    {
+      "id": "turn",
+      "title": "倉庫からあくびが聞こえる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-07_眠い荷物が着く港",
+      "entry": "turn",
+      "summary": "雲を運ぶ船です。桟橋まで、あと少しです。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-07_眠い荷物が着く港",
+      "entry": "choose",
+      "summary": "鈴を鳴らして小舟を呼ぶ、または桟橋に座って雲を待つ"
+    },
+    {
+      "id": "END_A",
+      "title": "あくびの返事",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-07_眠い荷物が着く港",
+      "entry": "END_A",
+      "summary": "あくびの返事"
+    },
+    {
+      "id": "END_B",
+      "title": "雲の舟に空きがある",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-07_眠い荷物が着く港",
+      "entry": "END_B",
+      "summary": "雲の舟に空きがある"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "鈴を鳴らして小舟を呼ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "桟橋に座って雲を待つ",
+      "style": "kenkai"
+    }
+  ]
+}

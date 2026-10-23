@@ -1613,6 +1613,18 @@
       "promptProvenance": "exact generation instruction",
       "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
       "updatedAt": "2026-10-23T14:43:42.987Z"
+    },
+    "2026-10-07_出島リージョン": {
+      "slug": "2026-10-07_出島リージョン",
+      "date": "2026-10-07",
+      "title": "出島リージョン",
+      "coverSrc": "./assets/diary-covers/2026-10-07_出島リージョン.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 editorial spot illustration for a Japanese personal diary joke about a digital sakoku: all foreign communications routed through a Dejima cloud region. A tiny fan-shaped artificial island sitting in quiet pale-blue water, with one narrow wooden bridge connecting it to a cropped shoreline. On the island sits a single modest wooden warehouse; inside its open front are two plainly drawn dark server cabinets, no lights or readable labels. Clearly an imagined visual joke, not a historical reconstruction or architectural technical plan. Overhead oblique viewpoint, lots of untouched warm paper, modest asymmetrical composition. Dry graphite contours with restrained flat gouache washes, slightly uneven hand-made lines, muted indigo, dull ochre and soft gray. Keep it economical and warm with dry humor. No people, no glow or neon, no dramatic sky, no floating digital symbols, no glossy rendering, no bokeh, no text, no letters, no logos or watermark.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-23T16:28:40.933Z"
     }
   }
 }
