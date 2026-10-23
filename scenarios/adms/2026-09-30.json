@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-30",
+  "title": "空白をひと目 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "空白をひと目",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-30_空白をひと目",
+      "entry": "standalone_start",
+      "summary": "夢の手芸教室に、針のない机が並んでいた。机にあるのは、白いキーボードと小さな画面。ワディーがキーを押すたび、画面の下から毛糸が少しずつ出てきた。"
+    },
+    {
+      "id": "turn",
+      "title": "編めてしまった余白",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-30_空白をひと目",
+      "entry": "turn",
+      "summary": "なんで横へ行くにょ。まだ首に巻いてないのに。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-09-30_空白をひと目",
+      "entry": "choose",
+      "summary": "空白を広く編む、または端からほどいてみる"
+    },
+    {
+      "id": "END_A",
+      "title": "机の下の窓",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-09-30_空白をひと目",
+      "entry": "END_A",
+      "summary": "机の下の窓"
+    },
+    {
+      "id": "END_B",
+      "title": "丸いキーの帰り道",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-09-30_空白をひと目",
+      "entry": "END_B",
+      "summary": "丸いキーの帰り道"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "空白を広く編む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "端からほどいてみる",
+      "style": "kenkai"
+    }
+  ]
+}

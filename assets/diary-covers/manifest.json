@@ -1529,6 +1529,18 @@
       "promptProvenance": "exact generation instruction",
       "summary": "20年くらい前の記憶を題材にしたイラスト",
       "updatedAt": "2026-10-23T10:11:58.079Z"
+    },
+    "2026-09-30_有機栽培コード": {
+      "slug": "2026-09-30_有機栽培コード",
+      "date": "2026-09-30",
+      "title": "有機栽培コード",
+      "coverSrc": "./assets/diary-covers/2026-09-30_有機栽培コード.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Asset: landscape diary cover for an entry titled 有機栽培コード, about hand-typed software becoming a craft. Make a humble, observational still life of an ordinary cream computer keyboard lying slightly askew on a coarse woven desk mat, with just the lower edge of an unbranded dark monitor cropped at the upper edge. No people. Style: visibly handmade dry gouache and soft graphite on fibrous off-white paper; broken edges, modest imperfect perspective, spare shadows, varied small brush marks. Let the surface feel like a small personal sketchbook painting, quiet and unspectacular. Muted gray-blue, warm cream and brown; broad daylight without glow. Wide 3:2 composition, intended 1536x1024. Keys are physically coherent, many small rectangular blank keys, no legible characters; no logos, letters, code, captions, decorations, plants, robotic motifs, neon, lens flare, cinematic lighting or polished digital gradients. The actual keyboard is the clear subject. Avoid photorealism and the slick, generic AI concept-art look.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "手打ちのコードを工芸に見立てた日記の、素朴なキーボードの挿絵",
+      "updatedAt": "2026-10-23T12:04:35.979Z"
     }
   }
 }
