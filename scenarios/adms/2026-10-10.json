@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-10",
+  "title": "話を待っている応接室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "話を待っている応接室",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-10_話を待っている応接室",
+      "entry": "standalone_start",
+      "summary": "夢の中で、マルチとシャロは小さな応接室へ入った。机の上には、閉じた紙のフォルダーが1つあった。"
+    },
+    {
+      "id": "turn",
+      "title": "まだ閉じている資料",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-10_話を待っている応接室",
+      "entry": "turn",
+      "summary": "中のお話が、外へ出たいのかもしれません。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-10_話を待っている応接室",
+      "entry": "choose",
+      "summary": "窓を開けてみる、または椅子へ座って待つ"
+    },
+    {
+      "id": "END_A",
+      "title": "空に続く資料の束",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-10_話を待っている応接室",
+      "entry": "END_A",
+      "summary": "空に続く資料の束"
+    },
+    {
+      "id": "END_B",
+      "title": "椅子が覚えていた声",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-10_話を待っている応接室",
+      "entry": "END_B",
+      "summary": "椅子が覚えていた声"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "窓を開けてみる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "椅子へ座って待つ",
+      "style": "kenkai"
+    }
+  ]
+}

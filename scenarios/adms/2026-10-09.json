@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-09",
+  "title": "人形のための出番 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "人形のための出番",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-09_人形のための出番",
+      "entry": "standalone_start",
+      "summary": "夢の中の机には、木の人形が立っていた。足元に、青いマントと黄色い帽子、赤い縞の服が並んでいる。"
+    },
+    {
+      "id": "turn",
+      "title": "衣装が先に選んでいる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-09_人形のための出番",
+      "entry": "turn",
+      "summary": "どんな役がいいか、フェイリスに教えてほしいニャン。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-09_人形のための出番",
+      "entry": "choose",
+      "summary": "黄色い帽子をかぶせる、または青いマントを掛ける"
+    },
+    {
+      "id": "END_A",
+      "title": "帽子の中の拍手",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-09_人形のための出番",
+      "entry": "END_A",
+      "summary": "帽子の中の拍手"
+    },
+    {
+      "id": "END_B",
+      "title": "長い裾の舞台",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-09_人形のための出番",
+      "entry": "END_B",
+      "summary": "長い裾の舞台"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "黄色い帽子をかぶせる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "青いマントを掛ける",
+      "style": "kenkai"
+    }
+  ]
+}

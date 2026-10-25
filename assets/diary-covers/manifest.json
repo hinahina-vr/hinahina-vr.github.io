@@ -1625,6 +1625,30 @@
       "promptProvenance": "exact generation instruction",
       "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
       "updatedAt": "2026-10-23T16:28:40.933Z"
+    },
+    "2026-10-09_自由化の前に学割": {
+      "slug": "2026-10-09_自由化の前に学割",
+      "date": "2026-10-09",
+      "title": "自由化の前に学割",
+      "coverSrc": "./assets/diary-covers/2026-10-09_自由化の前に学割.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. A restrained landscape 3:2 editorial illustration for a Japanese personal diary about wanting inexpensive freely selectable avatars. One plain wooden artist's mannequin seen from the back, standing on a small bare tabletop. Beside it lie three simple interchangeable paper costume pieces: a blue cape, a yellow hat, and a red striped shirt, cut from colored paper, all physically plausible and modest. The wooden mannequin is a neutral art object, not a person. Focus on the charming unfinished workbench with only these objects, a few pencil guide marks and blank warm paper around it. Dry pencil contours and matte flat gouache, visibly uneven handmade edges, asymmetrical casual composition, muted blue and brick red, no saturated glow. This is a drawn visual metaphor, not a screenshot or technical UI. No writing, no letters, no labels, no logo, no watermark, no extra fingers, no photorealism, no shiny 3D render, no magical effects, no bokeh.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-25T05:04:36.735Z"
+    },
+    "2026-10-10_画面の中の知財事務所": {
+      "slug": "2026-10-10_画面の中の知財事務所",
+      "date": "2026-10-10",
+      "title": "画面の中の知財事務所",
+      "coverSrc": "./assets/diary-covers/2026-10-10_画面の中の知財事務所.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Landscape 3:2 editorial illustration for a Japanese diary about making a little fictional intellectual-property office inside a videogame. A modest miniature meeting room seen diagonally from above as a cutaway cardboard stage: one square wooden table, two different plain chairs on opposite sides, one closed buff paper folder on the table, a small plain window, low pale blue-gray partitions. No people. The composition should feel like a small handmade theatre model that is waiting for its actors. Off-center room with generous blank warm off-white paper outside it. Simple confident pencil lines and flat matte gouache washes, slightly irregular edges, restrained ochre and muted teal. Quiet dry humor, natural small shadows, economical detail. No lettering, no documents with readable writing, no logos, no watermark, no screens, no glossy 3D finish, no floating icons, no digital glow, no cinematic bokeh or dramatic light.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-25T05:04:36.905Z"
     }
   }
 }
