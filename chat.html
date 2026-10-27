@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ワディーゲストハウスの住人と、あなたのOpenRouter APIキーでおしゃべり。人格ごとの追加設定にも対応。" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://openrouter.ai; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>住人とおしゃべり | ワディーゲストハウス</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./assets/chat.css" />
+  <link rel="stylesheet" href="./assets/chat-immersive.css" />
+</head>
+<body>
+  <main class="page-frame chat-page">
+    <div id="soul-stage" aria-hidden="true" hidden>
+      <canvas id="soul-canvas"></canvas>
+      <div id="soul-fallback"></div>
+      <div class="soul-shade"></div>
+    </div>
+    <header class="chat-page-header">
+      <p class="smallline">Waddy Guesthouse / Chat</p>
+      <h1>住人とおしゃべり</h1>
+      <p>いつもの住人と、あなたのペースで。</p>
+      <nav aria-label="サイト内のページ"><a href="./index.html">ホーム</a><a href="./characters.html">住人紹介</a></nav>
+      <div class="chat-toolbar" aria-label="表示と会話の操作">
+        <div class="immersive-tools">
+          <button id="open-residents" type="button" aria-label="話す相手を選ぶ" title="話す相手を選ぶ（Ctrl / ⌘ + K）"><span aria-hidden="true">♧</span><span class="tool-label">相手</span></button>
+          <button id="open-history" type="button" aria-label="会話の履歴を開く"><span aria-hidden="true">≡</span><span class="tool-label">履歴</span></button>
+          <button id="open-settings" type="button" aria-label="会話の設定を開く"><span aria-hidden="true">⚙</span><span class="tool-label">設定</span></button>
+          <button id="chat-fullscreen" type="button" aria-label="ブラウザを全画面にする" title="ブラウザを全画面にする"><span aria-hidden="true">⛶</span><span class="tool-label">全画面</span></button>
+        </div>
+        <button id="immersive-toggle" type="button" aria-pressed="false"><span aria-hidden="true">✧</span><span id="immersive-toggle-label">没入モード</span></button>
+      </div>
+      <button id="open-wardrobe" class="wardrobe-launch immersive-only" type="button"><span aria-hidden="true">♡</span> 着せ替え</button>
+    </header>
+    <div class="soul-presence immersive-only" aria-hidden="true"><span id="soul-session" class="soul-session">SOUL / CONNECT</span><p id="soul-presence-text">ここにいるよ</p></div>
+    <p id="view-status" class="immersive-only" role="status"></p>
+
+    <details id="connection" class="chat-panel connection-panel" open>
+      <summary>OpenRouterの接続設定 <span id="connection-state">未設定</span></summary>
+      <form id="connection-form">
+        <p class="help">会話はブラウザからOpenRouterへ直接送信するよ。利用料は、入力したAPIキーのOpenRouterアカウントにかかるよ。</p>
+        <label for="api-key">OpenRouter APIキー</label>
+        <div class="key-row"><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-…" /><button id="toggle-key" type="button" aria-pressed="false">表示</button></div>
+        <label class="check-row"><input id="remember-key" type="checkbox" />このブラウザにAPIキーを保存する</label>
+        <p id="key-note" class="help">チェックしなければ、このページを閉じたときにキーは消えるよ。</p>
+        <label for="model-id">モデル</label>
+        <div class="model-row"><input id="model-id" type="text" list="model-options" maxlength="200" autocomplete="off" spellcheck="false" placeholder="モデルIDを入力、または一覧から選ぶ" /><button id="load-models" type="button">モデル一覧を取得</button></div>
+        <datalist id="model-options"></datalist>
+        <p id="model-note" class="help">初期設定はDeepSeek V4.1 Flash。ほかのモデルにも変更できるよ。</p>
+        <div class="action-row"><button type="submit" class="primary">この接続設定を使う</button><button id="forget-key" type="button">APIキーを消す</button></div>
+        <p id="connection-message" class="help" role="status"></p>
+      </form>
+    </details>
+
+    <div class="chat-layout">
+      <aside class="chat-panel resident-panel">
+        <h2>話す相手</h2>
+        <label class="visually-hidden" for="persona-search">住人を探す</label>
+        <input id="persona-search" type="search" placeholder="名前で探す" autocomplete="off" />
+        <label class="visually-hidden" for="persona-select">人格を選ぶ</label>
+        <select id="persona-select" size="10" disabled></select>
+        <p id="persona-count" class="help" role="status">住人を読み込んでいるよ。</p>
+      </aside>
+
+      <section class="chat-panel conversation-panel" aria-label="会話">
+        <header class="conversation-header">
+          <div><h2 id="conversation-title">住人を選んでね</h2><p id="active-model" class="help">モデル未設定</p></div>
+          <button id="clear-conversation" type="button">会話を消す</button>
+        </header>
+        <div id="transcript" role="log" aria-label="会話の履歴" aria-live="off" tabindex="0"><p class="empty-chat">今日は何を話そう？</p></div>
+        <p id="chat-status" role="status" class="help">接続設定を入力すると話せるよ。</p>
+        <p id="chat-error" role="alert" hidden></p>
+        <button id="retry" type="button" hidden>もう一度送る</button>
+        <form id="message-form">
+          <label for="message" class="visually-hidden">メッセージ</label>
+          <textarea id="message" rows="3" maxlength="6000" placeholder="話しかけてみてね" disabled></textarea>
+          <div class="composer-footer"><span id="composer-hint" class="help">Enterで改行 · Ctrl / ⌘ + Enterで送信</span><div><button id="composer-settings" class="immersive-only primary" type="button" hidden>接続設定を開く</button><button id="stop" type="button" hidden>受信を止める</button><button id="send" class="primary" type="submit" disabled>送信 <span class="immersive-only" aria-hidden="true">↵</span></button></div></div>
+        </form>
+
+        <details class="additional-settings">
+          <summary>この人格の追加設定</summary>
+          <p class="help">好きな話題や返事の長さなどを追加できるよ。もとの性格・口調を保って反映するよ。</p>
+          <label for="personality">追加の性格・会話の好み</label>
+          <textarea id="personality" rows="4" maxlength="3000" placeholder="例：映画の話が好き。返事は少し短めに。"></textarea>
+          <div class="action-row"><button id="save-personality" type="button">この人格の設定を保存</button><button id="reset-personality" type="button">追加設定を空にする</button></div>
+          <p id="personality-status" class="help" role="status">保存した設定は、次の送信から使うよ。</p>
+        </details>
+        <div class="history-settings">
+          <label class="check-row"><input id="remember-history" type="checkbox" />会話履歴をこのブラウザに保存する</label>
+          <button id="export-conversation" type="button">会話を書き出す</button>
+          <p class="help">追加設定と保存した会話は、このブラウザだけで使うよ。書き出すファイルには会話と追加設定が入るよ。</p>
+        </div>
+      </section>
+    </div>
+    <dialog id="chat-drawer" class="chat-drawer" aria-labelledby="drawer-title">
+      <header class="drawer-header"><h2 id="drawer-title">会話の設定</h2><button id="drawer-close" type="button" aria-label="パネルを閉じる">閉じる <span aria-hidden="true">×</span></button></header>
+      <div id="drawer-content"></div>
+      <button id="back-to-conversation" type="button">会話に戻る <span aria-hidden="true">↵</span></button>
+    </dialog>
+    <section id="immersive-preferences" hidden>
+      <h3>光の表示</h3>
+      <label for="soul-intensity">明るさ</label><input id="soul-intensity" type="range" min="20" max="100" value="65" />
+      <label class="check-row"><input id="soul-reduced-motion" type="checkbox" />光の動きを抑える</label>
+      <p id="soul-render-note" class="help">入力と返事に合わせて、光の動きが変わるよ。</p>
+    </section>
+    <section id="soul-wardrobe" hidden>
+      <p class="help">気分に合わせて選んでね。着せ替えは、このブラウザで覚えておくよ。</p>
+      <fieldset class="wardrobe-grid"><legend class="visually-hidden">魂の着せ替え</legend><div id="wardrobe-choices"></div></fieldset>
+      <p id="wardrobe-status" class="help" role="status"></p>
+    </section>
+    <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
+  </main>
+  <script type="module" src="./src/chat/app.mjs"></script>
+</body>
+</html>
