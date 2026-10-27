@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="ワディーゲストハウスの住人と、あなたのOpenRouter APIキーでおしゃべり。人格ごとの追加設定にも対応。" />
   <meta name="referrer" content="no-referrer" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://openrouter.ai; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://openrouter.ai; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'" />
   <title>住人とおしゃべり | ワディーゲストハウス</title>
+  <link rel="preload" href="./assets/chat/fonts/zen-maru-gothic-regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./assets/chat.css?v=20261028-r2" />
-  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r2" />
+  <link rel="stylesheet" href="./assets/chat.css?v=20261028-r3" />
+  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r3" />
+  <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r3" />
 </head>
 <body>
   <main class="page-frame chat-page">
@@ -40,18 +42,22 @@
     <p id="view-status" class="immersive-only" role="status"></p>
 
     <details id="connection" class="chat-panel connection-panel" open>
-      <summary>OpenRouterの接続設定 <span id="connection-state">未設定</span></summary>
+      <summary><span class="settings-section-icon" aria-hidden="true">◈</span> 接続設定 <span id="connection-state">未設定</span></summary>
       <form id="connection-form">
         <p class="help">会話はブラウザからOpenRouterへ直接送信するよ。利用料は、入力したAPIキーのOpenRouterアカウントにかかるよ。</p>
-        <label for="api-key">OpenRouter APIキー</label>
+        <fieldset class="settings-card"><legend>OpenRouterにつなぐ</legend>
+        <label for="api-key">APIキー</label>
         <div class="key-row"><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-…" /><button id="toggle-key" type="button" aria-pressed="false">表示</button></div>
-        <label class="check-row"><input id="remember-key" type="checkbox" />このブラウザにAPIキーを保存する</label>
+        <label class="check-row settings-switch"><input id="remember-key" type="checkbox" /><span>このブラウザにAPIキーを保存する<small>自分の端末で、保存したいときだけオンにしてね。</small></span></label>
         <p id="key-note" class="help">チェックしなければ、このページを閉じたときにキーは消えるよ。</p>
+        </fieldset>
+        <fieldset class="settings-card"><legend>お話しするモデル</legend>
         <label for="model-id">モデル</label>
         <div class="model-row"><input id="model-id" type="text" list="model-options" maxlength="200" autocomplete="off" spellcheck="false" placeholder="モデルIDを入力、または一覧から選ぶ" /><button id="load-models" type="button">モデル一覧を取得</button></div>
         <datalist id="model-options"></datalist>
         <p id="model-note" class="help">初期設定はDeepSeek V4.1 Flash。ほかのモデルにも変更できるよ。</p>
-        <div class="action-row"><button type="submit" class="primary">この接続設定を使う</button><button id="forget-key" type="button">APIキーを消す</button></div>
+        </fieldset>
+        <div class="action-row settings-actions"><button type="submit" class="primary">この接続設定を使う</button><button id="forget-key" type="button">APIキーを消す</button></div>
         <p id="connection-message" class="help" role="status"></p>
       </form>
     </details>
@@ -82,30 +88,44 @@
         </form>
 
         <details class="additional-settings">
-          <summary>この人格の追加設定</summary>
+          <summary><span class="settings-section-icon" aria-hidden="true">♡</span> 性格・会話の好み</summary>
+          <div class="settings-persona-card"><img id="settings-persona-art" alt="" /><div><small>この子とのおしゃべり</small><h3 id="settings-persona-name">住人を選んでね</h3></div><span aria-hidden="true">✦</span></div>
           <p class="help">好きな話題や返事の長さなどを追加できるよ。もとの性格・口調を保って反映するよ。</p>
+          <fieldset class="settings-card"><legend>あなたの好みをプラス</legend>
           <label for="personality">追加の性格・会話の好み</label>
           <textarea id="personality" rows="4" maxlength="3000" placeholder="例：映画の話が好き。返事は少し短めに。"></textarea>
-          <div class="action-row"><button id="save-personality" type="button">この人格の設定を保存</button><button id="reset-personality" type="button">追加設定を空にする</button></div>
+          <div class="settings-preset-row" aria-label="好みの入力例"><button type="button" data-setting-prompt="返事は短めに。">＋ 短めの返事</button><button type="button" data-setting-prompt="急がず、ひとつずつ話して。">＋ ゆっくりお話</button><button type="button" data-setting-prompt="説明するときは、具体例も添えて。">＋ 具体例もほしい</button></div>
+          </fieldset>
+          <div class="action-row settings-actions"><button id="save-personality" class="primary" type="button">この人格の設定を保存</button><button id="reset-personality" type="button">追加設定を空にする</button></div>
           <p id="personality-status" class="help" role="status">保存した設定は、次の送信から使うよ。</p>
         </details>
         <div class="history-settings">
-          <label class="check-row"><input id="remember-history" type="checkbox" />会話履歴をこのブラウザに保存する</label>
+          <h3 class="settings-section-title">保存・履歴</h3>
+          <label class="check-row settings-switch"><input id="remember-history" type="checkbox" /><span>会話履歴をこのブラウザに保存する<small>次に会ったときも、これまでの会話を読めるよ。</small></span></label>
           <button id="export-conversation" type="button">会話を書き出す</button>
           <p class="help">追加設定と保存した会話は、このブラウザだけで使うよ。書き出すファイルには会話と追加設定が入るよ。</p>
         </div>
       </section>
     </div>
     <dialog id="chat-drawer" class="chat-drawer" aria-labelledby="drawer-title">
-      <header class="drawer-header"><h2 id="drawer-title">会話の設定</h2><button id="drawer-close" type="button" aria-label="パネルを閉じる">閉じる <span aria-hidden="true">×</span></button></header>
+      <header class="drawer-header"><div><p class="drawer-caption">ワディーゲストハウス</p><h2 id="drawer-title">おしゃべり設定</h2></div><button id="drawer-close" type="button" aria-label="パネルを閉じる">閉じる <span aria-hidden="true">×</span></button></header>
+      <nav id="settings-tabs" role="tablist" aria-label="設定のカテゴリ" hidden>
+        <button id="settings-tab-connection" type="button" role="tab" aria-controls="settings-panel-connection" aria-selected="true" data-settings-tab="connection"><span aria-hidden="true">◈</span><span>接続<small>API・モデル</small></span></button>
+        <button id="settings-tab-personality" type="button" role="tab" aria-controls="settings-panel-personality" aria-selected="false" tabindex="-1" data-settings-tab="personality"><span aria-hidden="true">♡</span><span>性格・好み<small>おしゃべりの好み</small></span></button>
+        <button id="settings-tab-visuals" type="button" role="tab" aria-controls="settings-panel-visuals" aria-selected="false" tabindex="-1" data-settings-tab="visuals"><span aria-hidden="true">✧</span><span>画面・演出<small>背景・光・動き</small></span></button>
+        <button id="settings-tab-history" type="button" role="tab" aria-controls="settings-panel-history" aria-selected="false" tabindex="-1" data-settings-tab="history"><span aria-hidden="true">▤</span><span>保存・履歴<small>記録・書き出し</small></span></button>
+      </nav>
       <div id="drawer-content"></div>
       <button id="back-to-conversation" type="button">会話に戻る <span aria-hidden="true">↵</span></button>
     </dialog>
     <section id="immersive-preferences" hidden>
-      <h3>背景と光の表示</h3>
+      <h3 class="settings-section-title">画面・演出</h3>
+      <p class="help">ふたりの時間に合う、背景や光を選んでね。</p>
+      <fieldset class="settings-card"><legend>お部屋の雰囲気</legend>
       <label for="soul-scene">背景</label><select id="soul-scene"><option value="bedroom">大奥の寝室</option><option value="light">淡い光</option></select>
-      <label for="soul-intensity">明るさ</label><input id="soul-intensity" type="range" min="20" max="100" value="65" />
-      <label class="check-row"><input id="soul-reduced-motion" type="checkbox" />動きを抑える</label>
+      <label for="soul-intensity" class="settings-range-label">光の明るさ <output id="soul-intensity-value" for="soul-intensity">65%</output></label><input id="soul-intensity" type="range" min="20" max="100" value="65" />
+      </fieldset>
+      <label class="check-row settings-switch"><input id="soul-reduced-motion" type="checkbox" /><span>動きを抑える<small>光やキャラクターを、静かに表示するよ。</small></span></label>
       <p id="soul-render-note" class="help">入力と返事に合わせて、光の動きが変わるよ。</p>
     </section>
     <section id="soul-wardrobe" hidden>
@@ -115,6 +135,6 @@
     </section>
     <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
   </main>
-  <script type="module" src="./src/chat/app.mjs?v=20261028-r2"></script>
+  <script type="module" src="./src/chat/app.mjs?v=20261028-r3"></script>
 </body>
 </html>

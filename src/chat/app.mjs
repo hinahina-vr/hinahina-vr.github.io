@@ -2,7 +2,7 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs?v=20261028-r2';
+import { createChatView } from './immersive.mjs?v=20261028-r3';
 
 const $ = id => document.getElementById(id);
 let storage;
@@ -91,8 +91,8 @@ async function selectPersona(id) {
     if (sequence !== loadSequence) return;
     if (data.id !== id || typeof data.base !== 'string') throw new Error('profile');
     persona = data;
-    view.setPersona(id);
     $('conversation-title').textContent = `${data.emoji} ${data.name}`;
+    view.setPersona(id);
     $('personality').value = state.additions[id] || '';
     $('personality-status').textContent = '保存した設定は、次の送信から使うよ。';
     $('message').value = drafts.get(id) || '';

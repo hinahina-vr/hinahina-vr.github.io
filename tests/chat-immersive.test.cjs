@@ -156,6 +156,7 @@ async function check(name, fn) { await fn(); checks.push({ name, passed: true })
   await check('設定パネルで追加設定と明るさを保存し、動きを抑えられる', async () => {
     await page.locator('#open-settings').click();
     await page.locator('#personality').fill('ゆっくり短く話す'); await page.locator('#save-personality').click();
+    await page.locator('#settings-tab-visuals').click();
     await page.locator('#soul-reduced-motion').check(); await page.locator('#soul-intensity').fill('40'); await page.locator('#soul-intensity').dispatchEvent('input');
     await page.locator('#back-to-conversation').click();
     await page.waitForFunction(() => !document.querySelector('#chat-drawer').open);
@@ -190,6 +191,7 @@ async function check(name, fn) { await fn(); checks.push({ name, passed: true })
     await page.waitForFunction(() => Math.abs(document.querySelector('main').getBoundingClientRect().height - innerHeight) < 1);
     const input = await page.locator('#message').boundingBox(); assert.ok(input.y >= 0 && input.y + input.height <= 480, JSON.stringify(input));
     await page.locator('#open-settings').click();
+    await page.locator('#settings-tab-connection').click();
     await page.locator('#remember-key').check(); await page.locator('#remember-key').uncheck();
     await page.locator('#drawer-close').click();
     await page.waitForFunction(() => !document.querySelector('#chat-drawer').open);
@@ -212,7 +214,7 @@ async function check(name, fn) { await fn(); checks.push({ name, passed: true })
     await fp.waitForFunction(() => document.body.dataset.soulRenderer === 'fallback' && !document.querySelector('#message').disabled);
     await fp.locator('#message').fill('光がなくても下書きできる');
     assert.equal(await fp.locator('#message').inputValue(), '光がなくても下書きできる');
-    await fp.locator('#open-settings').click(); assert.equal(await fp.locator('#soul-reduced-motion').isChecked(), true);
+    await fp.locator('#open-settings').click(); await fp.locator('#settings-tab-visuals').click(); assert.equal(await fp.locator('#soul-reduced-motion').isChecked(), true);
     await fallback.close();
   });
   assert.deepEqual(errors, []);

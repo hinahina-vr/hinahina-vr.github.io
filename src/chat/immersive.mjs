@@ -28,6 +28,7 @@ export function createChatView() {
   let moved = [];
   let noticeTimer;
   let drawerKind;
+  const settingsTabs = [...document.querySelectorAll("[data-settings-tab]")];
   let returnFocus;
   let focusComposerAfterClose = false;
 
@@ -98,10 +99,12 @@ export function createChatView() {
   function restore() {
     for (const entry of moved) {
       entry.marker.replaceWith(entry.node);
-      if (entry.open !== undefined) entry.node.open = entry.open;
+      if (entry.open !== undefined) { entry.node.open = entry.open; entry.node.querySelector('summary').inert = entry.summaryInert; }
       entry.node.hidden = entry.hidden;
     }
     moved = []; drawerKind = null;
+    $("drawer-content").replaceChildren();
+    $("settings-tabs").hidden = true;
   }
   function closeDrawer(focusMessage = false) {
     focusComposerAfterClose = focusMessage;
@@ -109,7 +112,7 @@ export function createChatView() {
     else if (focusMessage) $('message').focus();
   }
   function openDrawer(kind) {
-    if (!immersive || (kind === 'residents' && state.busy)) return;
+    if ((!immersive && kind !== 'settings') || (kind === 'residents' && state.busy)) return;
     if (drawer.open) {
       if (drawerKind === kind) return;
       drawer.addEventListener('close', () => openDrawer(kind), { once: true }); drawer.close(); return;
@@ -120,21 +123,58 @@ export function createChatView() {
       : kind === 'wardrobe' ? [$('soul-wardrobe')]
       : kind === 'history' ? [$('transcript'), $('clear-conversation'), $('export-conversation')]
       : [$('connection'), document.querySelector('.additional-settings'), document.querySelector('.history-settings'), $('immersive-preferences')];
-    $('drawer-title').textContent = { residents: '話す相手を選ぶ', history: '会話の履歴', settings: '会話の設定', wardrobe: '魂の着せ替え' }[kind];
-    for (const node of nodes) {
+    $('drawer-title').textContent = { residents: '話す相手を選ぶ', history: '会話の履歴', settings: 'おしゃべり設定', wardrobe: '魂の着せ替え' }[kind];
+    $('settings-tabs').hidden = kind !== 'settings';
+    const categories = ['connection', 'personality', 'history', 'visuals'];
+    for (const [index, node] of nodes.entries()) {
       const marker = document.createComment('chat-panel-position'); node.before(marker);
-      moved.push({ marker, node, hidden: node.hidden, open: node.tagName === 'DETAILS' ? node.open : undefined });
-      $('drawer-content').append(node); node.hidden = false;
-      if (node.tagName === 'DETAILS') node.open = true;
+      moved.push({ marker, node, hidden: node.hidden, open: node.tagName === 'DETAILS' ? node.open : undefined, summaryInert: node.querySelector('summary')?.inert });
+      if (kind === 'settings') {
+        const category = categories[index], panel = document.createElement('section');
+        panel.id = 'settings-panel-' + category; panel.className = 'settings-tab-panel';
+        panel.setAttribute('role', 'tabpanel'); panel.setAttribute('aria-labelledby', 'settings-tab-' + category); panel.tabIndex = 0;
+        panel.append(node); $('drawer-content').append(panel);
+      } else $('drawer-content').append(node);
+      node.hidden = false;
+      if (node.tagName === 'DETAILS') { node.open = true; node.querySelector('summary').inert = kind === 'settings'; }
     }
     drawer.dataset.panel = kind; drawer.showModal();
     if (kind === 'residents') $('persona-search').focus();
     if (kind === 'history') { $('transcript').scrollTop = $('transcript').scrollHeight; $('transcript').focus(); }
-    if (kind === 'settings') (state.connected ? $('personality') : $('api-key')).focus();
+    if (kind === 'settings') {
+      selectSettingsTab(state.connected ? 'personality' : 'connection');
+      (state.connected ? $('personality') : $('api-key')).focus();
+    }
   }
+  function selectSettingsTab(id, focus = false) {
+    for (const tab of settingsTabs) {
+      const selected = tab.dataset.settingsTab === id;
+      tab.setAttribute('aria-selected', String(selected)); tab.tabIndex = selected ? 0 : -1;
+      const panel = $(tab.getAttribute('aria-controls')); if (panel) panel.hidden = !selected;
+      if (selected && focus) tab.focus();
+    }
+    $('drawer-content').scrollTop = 0;
+  }
+  for (const tab of settingsTabs) {
+    tab.addEventListener('click', () => selectSettingsTab(tab.dataset.settingsTab));
+    tab.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const index = settingsTabs.indexOf(tab);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? settingsTabs.length - 1 : (index + (['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1) + settingsTabs.length) % settingsTabs.length;
+      selectSettingsTab(settingsTabs[next].dataset.settingsTab, true);
+    });
+  }
+  for (const button of document.querySelectorAll('[data-setting-prompt]')) button.addEventListener('click', () => {
+    const input = $('personality'), value = input.value.trim();
+    if (input.disabled || $('save-personality').disabled) return;
+    const prompt = button.dataset.settingPrompt;
+    if (!value.split('\n').includes(prompt)) input.value = (value ? value + '\n' : '') + prompt;
+    input.dispatchEvent(new Event('input', { bubbles: true })); input.focus();
+  });
   drawer.addEventListener('close', () => {
     restore();
-    if (immersive) { if (focusComposerAfterClose) $('message').focus(); else returnFocus?.focus(); }
+    if (focusComposerAfterClose) $('message').focus(); else returnFocus?.focus();
     focusComposerAfterClose = false;
   });
   $('drawer-close').addEventListener('click', () => closeDrawer());
@@ -176,10 +216,11 @@ export function createChatView() {
   });
   document.body.classList.toggle('soul-reduced', reduced); $('soul-scene').value = scene; document.body.dataset.soulScene = scene;
   $('soul-scene').addEventListener('change', () => { scene = $('soul-scene').value; document.body.dataset.soulScene = scene; renderer?.setScene(scene); persist(); });
-  $('soul-reduced-motion').checked = reduced; $('soul-intensity').value = String(intensity);
+  $('soul-reduced-motion').checked = reduced; $('soul-intensity').value = String(intensity); $('soul-intensity-value').value = intensity + '%';
   function configureVisuals() {
     reduced = $('soul-reduced-motion').checked; intensity = Number($('soul-intensity').value);
     document.body.classList.toggle('soul-reduced', reduced);
+    $('soul-intensity-value').value = intensity + '%';
     renderer?.configure({ reduced, brightness: .35 + intensity / 80 }); persist();
   }
   $('soul-reduced-motion').addEventListener('change', configureVisuals);
@@ -216,7 +257,9 @@ export function createChatView() {
     setPersona(id) {
       if (/^[a-z0-9-]+$/.test(id) && activePersona !== id) {
         activePersona = id; document.body.dataset.soulCharacter = id; document.body.dataset.soulArt = 'loading';
+        $('settings-persona-name').textContent = $('conversation-title').textContent;
         portrait.src = new URL('../../assets/chat/characters/' + id + '.webp?v=' + VISUAL_VERSION, import.meta.url).href;
+        $('settings-persona-art').src = portrait.src;
         for (const image of document.querySelectorAll('.mini-soul img')) image.src = portrait.src;
       }
       const hash = [...id].reduce((sum, c) => sum + c.charCodeAt(0), 0);

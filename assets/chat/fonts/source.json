@@ -1,0 +1,24 @@
+{
+  "family": "Zen Maru Gothic",
+  "source": "https://github.com/google/fonts/tree/main/ofl/zenmarugothic",
+  "specimen": "https://fonts.google.com/specimen/Zen+Maru+Gothic",
+  "license": "SIL Open Font License 1.1",
+  "conversion": "Lossless TTF to WOFF2, full character coverage retained; fontTools 4.68.0 with Brotli 1.2.1",
+  "files": [
+    {
+      "file": "zen-maru-gothic-regular.woff2",
+      "bytes": 1558536,
+      "sha256": "c3be42af661d5a9bb0abbf7e916c421e1297c58b941dc487f6353eaba86fec39"
+    },
+    {
+      "file": "zen-maru-gothic-bold.woff2",
+      "bytes": 1616204,
+      "sha256": "9bfb0098bd2566faeb431f93603d2d49c4ba61bfa6b971ecfcdc70d48ce83b4b"
+    },
+    {
+      "file": "OFL.txt",
+      "bytes": 4402,
+      "sha256": "2a20cf7ce1909d8ee1e949095d340f7d7656705f7c810a2d6faf56800ad0cb3d"
+    }
+  ]
+}

@@ -39,11 +39,11 @@ async function check(name,fn){await fn();checks.push({name,passed:true});console
  });
  await check('背景の変更と再読み込み後の復元が会話や着せ替えを変更しない',async()=>{
   await p.locator('#message').fill('書きかけ');
-  await p.locator('#open-settings').click();await p.locator('#soul-scene').selectOption('light');await p.locator('#back-to-conversation').click();
+  await p.locator('#open-settings').click();await p.locator('#settings-tab-visuals').click();await p.locator('#soul-scene').selectOption('light');await p.locator('#back-to-conversation').click();
   assert.equal(await p.locator('#message').inputValue(),'書きかけ');assert.equal(await p.evaluate(()=>document.body.dataset.soulCharacter),'hina');assert.equal(await p.evaluate(()=>document.body.dataset.soulTheme),'sakura');
   await p.reload();await p.waitForFunction(()=>document.body.dataset.soulArt==='ready');
   assert.equal(await p.evaluate(()=>document.body.dataset.soulScene),'light');
-  await p.locator('#open-settings').click();await p.locator('#soul-scene').selectOption('bedroom');await p.locator('#back-to-conversation').click();
+  await p.locator('#open-settings').click();await p.locator('#settings-tab-visuals').click();await p.locator('#soul-scene').selectOption('bedroom');await p.locator('#back-to-conversation').click();
  });
  await check('33人を実際に選択し、それぞれ別の立ち絵を読み込んで表示する',async()=>{
   fs.mkdirSync(path.join(output,'residents'),{recursive:true});
