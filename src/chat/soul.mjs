@@ -10,6 +10,7 @@ uniform vec2 uResolution;
 uniform vec3 uTint;
 uniform float uTime;
 uniform float uBrightness;
+uniform lowp float uRoom;
 uniform float uScale;
 uniform lowp float uTheme;
 uniform float uEnergy;
@@ -29,34 +30,6 @@ void main() {
     if (uTheme > 1.5 && uTheme < 2.5) { top = vec3(.87, .97, .93); bottom = vec3(.98, 1., .94); }
     if (uTheme > 2.5) { top = vec3(1., .94, .81); bottom = vec3(1., .985, .945); }
     vec3 color = mix(bottom, top, (vUv.y + 1.) * .5) + (grain - .5) * .007;
-    q -= vec2(uPointer.x * .008, sin(uTime * .7) * .018 + uPointer.y * .004);
-    vec2 ground = q + vec2(0., .51);
-    color = mix(color, uTint * .55 + .4, ellipse(ground, vec2(.28, .028)) * .13);
-    if (uTheme > 2.5) {
-      float wing = ellipse(q - vec2(.39, .04), vec2(.14, .1)) + ellipse(q + vec2(.39, -.04), vec2(.14, .1));
-      color = mix(color, vec3(1., .99, .94), clamp(wing, 0., 1.) * .9);
-    }
-    float angle = atan(q.y, q.x);
-    float radius = .42 + .006 * sin(angle * 3. + uTime * .8) + .005 * sin(uTime * 1.1) + uEnergy * .008;
-    float d = length(q / vec2(1., .94)) - radius;
-    float glow = exp(-max(d, 0.) * 15.) * .19 * uBrightness;
-    color = mix(color, vec3(1.), min(glow, .5));
-    float body = 1. - smoothstep(-.004, .008, d);
-    vec3 mochi = mix(vec3(1., .997, .99), uTint * .28 + .72, smoothstep(.03, .46, length(q)) * .8);
-    mochi += vec3(.02) * exp(-dot(q - vec2(-.12, .17), q - vec2(-.12, .17)) * 75.);
-    color = mix(color, mochi, body);
-    float cheek = exp(-dot((q - vec2(.17, -.035)) * 23., (q - vec2(.17, -.035)) * 23.)) + exp(-dot((q + vec2(.17, .035)) * 23., (q + vec2(.17, .035)) * 23.));
-    color = mix(color, vec3(1., .57, .67), cheek * .4 * body);
-    float blink = max(.12, smoothstep(.0, .025, abs(fract(uTime * .12) - .5)));
-    float eyes = ellipse(q - vec2(.105, .035), vec2(.016, .029 * blink)) + ellipse(q + vec2(.105, -.035), vec2(.016, .029 * blink));
-    vec3 ink = vec3(.38, .27, .39);
-    color = mix(color, ink, clamp(eyes, 0., 1.) * body);
-    float glint = ellipse(q - vec2(.109, .046), vec2(.0045, .006)) + ellipse(q + vec2(.101, -.046), vec2(.0045, .006));
-    color = mix(color, vec3(1.), clamp(glint, 0., 1.) * blink * body);
-    vec2 mouth = q + vec2(0., .065);
-    float smile = (1. - smoothstep(.003, .008, abs(length(mouth - vec2(0., .028)) - .05))) * (1. - smoothstep(.008, .02, mouth.y)) * (1. - smoothstep(.04, .052, abs(mouth.x)));
-    if (uEnergy > .65) smile = ellipse(mouth + vec2(0., .005), vec2(.024, .016 + .006 * sin(uTime * 5.)));
-    color = mix(color, ink, smile * .85 * body);
     vec2 floating = vec2(sin(uTime * .45) * .015, cos(uTime * .6) * .018);
     if (uTheme < .5) {
       float hearts = heart(q - vec2(.55, .27) - floating) + heart(q + vec2(.52, .2) + floating);
@@ -67,13 +40,11 @@ void main() {
     } else if (uTheme < 2.5) {
       float bubbles = (1. - smoothstep(.002, .005, abs(length(q - vec2(.53, .22) - floating) - .045))) + (1. - smoothstep(.002, .005, abs(length(q + vec2(.50, .16) + floating) - .03)));
       color = mix(color, vec3(.48, .78, .71), clamp(bubbles, 0., 1.) * .55);
-      float leaves = ellipse(q - vec2(.045, .44), vec2(.07, .033)) + ellipse(q - vec2(-.045, .45), vec2(.06, .03));
-      color = mix(color, vec3(.43, .76, .61), clamp(leaves, 0., 1.) * .8);
     } else {
       float stars = star(q - vec2(.55, .30) - floating) + star(q + vec2(.52, .25) + floating);
       color = mix(color, vec3(.95, .7, .34), clamp(stars, 0., 1.) * .75);
     }
-    gl_FragColor = vec4(color, 1.); return;
+    gl_FragColor = vec4(color, mix(1., .12, uRoom)); return;
   }
   vec3 night = vec3(.012, .017, .033);
   vec3 color = night + uTint * halo * .075 * uBrightness;
@@ -181,9 +152,9 @@ export class SoulRenderer {
   constructor(canvas, onAvailability) {
     this.canvas = canvas; this.onAvailability = onAvailability;
     this.active = false; this.reduced = false; this.energy = 0; this.targetEnergy = .03;
-    this.brightness = 1; this.theme = 0; this.tint = [.83, .65, .87]; this.pointer = [0, 0]; this.pointerTarget = [0, 0];
+    this.brightness = 1; this.room = true; this.theme = 0; this.tint = [.83, .65, .87]; this.pointer = [0, 0]; this.pointerTarget = [0, 0];
     this.time = 0; this.lastFrame = 0; this.frame = 0; this.frameCount = 0;
-    this.gl = canvas.getContext('webgl', { alpha: false, antialias: false, depth: false, powerPreference: 'low-power', preserveDrawingBuffer: false });
+    this.gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: false, depth: false, powerPreference: 'low-power', preserveDrawingBuffer: false });
     if (!this.gl) { this.onAvailability(false); return; }
     canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); this.stop(); this.onAvailability(false); });
     canvas.addEventListener('webglcontextrestored', () => { try { this.setup(); this.onAvailability(true); if (this.active) this.start(); } catch { this.onAvailability(false); } });
@@ -198,7 +169,7 @@ export class SoulRenderer {
     this.points = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, this.points);
     const points = makePoints(); this.pointCount = points.length / 4; gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
     this.locations = new Map();
-    for (const p of [this.background, this.soul]) this.locations.set(p, Object.fromEntries(['uTime', 'uEnergy', 'uDpr', 'uScale', 'uResolution', 'uPointer', 'uTint', 'uBrightness', 'uTheme'].map(name => [name, gl.getUniformLocation(p, name)])));
+    for (const p of [this.background, this.soul]) this.locations.set(p, Object.fromEntries(['uTime', 'uEnergy', 'uDpr', 'uScale', 'uResolution', 'uPointer', 'uTint', 'uBrightness', 'uTheme', 'uRoom'].map(name => [name, gl.getUniformLocation(p, name)])));
     gl.disable(gl.DEPTH_TEST); this.resize();
   }
   resize() {
@@ -214,7 +185,7 @@ export class SoulRenderer {
     gl.uniform1f(u.uScale, Math.min(1, this.width / this.height * 1.35));
     gl.uniform2f(u.uResolution, this.width, this.height); gl.uniform2f(u.uPointer, ...this.pointer);
     gl.uniform3f(u.uTint, ...this.tint); gl.uniform1f(u.uBrightness, this.brightness);
-    gl.uniform1f(u.uTheme, this.theme);
+    gl.uniform1f(u.uTheme, this.theme); gl.uniform1f(u.uRoom, this.room ? 1 : 0);
   }
   draw() {
     const gl = this.gl;
@@ -240,6 +211,7 @@ export class SoulRenderer {
   setActive(active) { this.active = active; active ? this.start() : this.stop(); }
   configure({ reduced, brightness }) { this.reduced = reduced; this.brightness = brightness; this.stop(); if (this.active) { this.draw(); this.start(); } }
   setTint(tint) { this.tint = tint; if (this.active && this.reduced) this.draw(); }
+  setScene(scene) { this.room = scene === 'bedroom'; if (this.active) this.draw(); }
   setTheme(theme) { this.theme = theme; if (this.active) this.draw(); }
   setEnergy(value) { this.targetEnergy = value; if (this.reduced && this.active) { this.energy = value; this.draw(); } }
   pulse() { if (!this.reduced) this.energy = Math.min(1, this.energy + .1); }

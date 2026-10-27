@@ -6,6 +6,7 @@
         "test:chat": "node --test tests/chat-core.test.mjs",
         "test:chat-ui": "node tests/chat-browser.test.cjs",
         "test:chat-immersive": "node tests/chat-immersive.test.cjs",
+        "test:chat-art": "node tests/chat-art.test.cjs",
         "auth:daily-sources": "node scripts/auth-daily-sources.mjs",
         "collect:daily-context": "node scripts/collect-daily-context.mjs",
         "check:draft-daily-context": "node scripts/check-draft-daily-context.mjs",

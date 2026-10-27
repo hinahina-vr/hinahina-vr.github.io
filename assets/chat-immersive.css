@@ -163,3 +163,37 @@ body.chat-immersive { overflow: hidden; background: #05070e; }
   .wardrobe-option small { font-size: 9px; }
 }
 @media (max-height: 580px) { .chat-immersive .chat-page-header > .wardrobe-launch { top: 64px; } }
+
+/* Character portraits stay available when WebGL is unavailable. */
+#soul-room { position: absolute; inset: 0; background: url('./chat/scenes/ooku-bedroom.webp') center / cover no-repeat; }
+#soul-canvas, .soul-shade { position: absolute; inset: 0; }
+#soul-character-wrap { position: absolute; inset: 112px 20px 244px; display: flex; align-items: center; justify-content: center; }
+#soul-character { display: block; width: 100%; height: 100%; max-width: 560px; object-fit: contain; filter: drop-shadow(0 8px 12px #442f351f); animation: resident-breathe 7s ease-in-out infinite; transform-origin: 50% 85%; }
+[data-soul-art=loading] #soul-character, [data-soul-art=unavailable] #soul-character { visibility: hidden; }
+[data-soul-theme=night] #soul-character-wrap, [data-soul-theme=night] #soul-room, [data-soul-scene=light] #soul-room { display: none; }
+body.soul-reduced #soul-character, body:not(.chat-immersive) #soul-character { animation: none; }
+body[data-soul-phase=waiting] #soul-character { animation-duration: 5s; }
+body[data-soul-phase=replying] #soul-character { animation-duration: 3s; }
+#soul-fallback, .chat-immersive:not([data-soul-theme=night]) #soul-fallback { display: none; }
+[data-soul-renderer=fallback][data-soul-theme=night] #soul-fallback { display: block; }
+.mini-soul:has(img) { background: transparent; box-shadow: none !important; width: 48px; height: 60px; border-radius: 0; }
+.mini-soul img { width: 100%; height: 100%; object-fit: contain; }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-shade { background: linear-gradient(180deg, #fff5f31a, transparent 20%, transparent 55%, #fff4f58c); }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .conversation-header { padding: 5px 12px; margin: -5px 0 0 -12px; border-radius: 16px; background: #fff7f1e6; backdrop-filter: blur(12px); }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-presence { background: #fff8f1dd; border-radius: 20px; padding: 10px 20px; backdrop-filter: blur(10px); top: 76px; }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #soul-presence-text { margin: 8px 0 0; }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #transcript { border-radius: 18px; background: #fffaf2e6; backdrop-filter: blur(16px); }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #chat-status { width: fit-content; max-width: 100%; margin-inline: auto; padding: 3px 12px; border-radius: 12px; background: #fffaf2eb; color: #806783; }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #view-status:not(:empty) { width: fit-content; padding: 8px 16px; border-radius: 14px; background: #fffaf2ee; }
+@keyframes resident-breathe { 0%, 100% { transform: translateY(0) rotate(-.35deg) scale(1); } 50% { transform: translateY(-5px) rotate(.35deg) scale(1.012); } }
+@media (max-width: 720px) {
+  #soul-character-wrap { inset: 140px 14px 244px; }
+  .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .conversation-header { padding: 5px 8px; margin-left: -2px; }
+  .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-presence { top: 80px; padding: 8px 16px; }
+  .mini-soul:has(img) { width: 36px; height: 46px; }
+}
+@media (max-height: 580px) { #soul-character-wrap { inset: 80px 16px 172px; } }
+@media (prefers-reduced-motion: reduce) { #soul-character { animation: none; } }
+
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #immersive-toggle { background: #fff8f1ed; color: #796282; }
+@media(max-width:720px) { .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .conversation-header { box-sizing:border-box; max-width:calc(100vw - 286px); } .chat-immersive[data-soul-scene=bedroom] .conversation-header :is(h2, #active-model) { max-width:100%; } }

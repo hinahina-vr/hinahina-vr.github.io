@@ -14,9 +14,11 @@
 <body>
   <main class="page-frame chat-page">
     <div id="soul-stage" aria-hidden="true" hidden>
+      <div id="soul-room"></div>
       <canvas id="soul-canvas"></canvas>
       <div id="soul-fallback"></div>
       <div class="soul-shade"></div>
+      <div id="soul-character-wrap"><img id="soul-character" alt="" decoding="async" /></div>
     </div>
     <header class="chat-page-header">
       <p class="smallline">Waddy Guesthouse / Chat</p>
@@ -100,9 +102,10 @@
       <button id="back-to-conversation" type="button">会話に戻る <span aria-hidden="true">↵</span></button>
     </dialog>
     <section id="immersive-preferences" hidden>
-      <h3>光の表示</h3>
+      <h3>背景と光の表示</h3>
+      <label for="soul-scene">背景</label><select id="soul-scene"><option value="bedroom">大奥の寝室</option><option value="light">淡い光</option></select>
       <label for="soul-intensity">明るさ</label><input id="soul-intensity" type="range" min="20" max="100" value="65" />
-      <label class="check-row"><input id="soul-reduced-motion" type="checkbox" />光の動きを抑える</label>
+      <label class="check-row"><input id="soul-reduced-motion" type="checkbox" />動きを抑える</label>
       <p id="soul-render-note" class="help">入力と返事に合わせて、光の動きが変わるよ。</p>
     </section>
     <section id="soul-wardrobe" hidden>

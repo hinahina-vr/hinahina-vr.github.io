@@ -10,6 +10,11 @@ export function createChatView() {
   let stored = {};
   try { storage = localStorage; stored = JSON.parse(storage.getItem(VISUAL_KEY) || '{}') || {}; } catch { /* Visual preferences are optional. */ }
   let immersive = false;
+  let scene = stored.scene === 'light' ? 'light' : 'bedroom';
+  let activePersona = '';
+  const portrait = $('soul-character');
+  portrait.addEventListener('load', () => { document.body.dataset.soulArt = 'ready'; });
+  portrait.addEventListener('error', () => { document.body.dataset.soulArt = 'unavailable'; });
   let reduced = typeof stored.reduced === 'boolean' ? stored.reduced : prefersReduced.matches;
   let intensity = Number.isFinite(stored.intensity) ? Math.max(20, Math.min(100, stored.intensity)) : 65;
   let theme = SOUL_THEMES.some(t => t.id === stored.theme) ? stored.theme : 'sakura';
@@ -26,7 +31,7 @@ export function createChatView() {
   let focusComposerAfterClose = false;
 
   function persist() {
-    try { storage?.setItem(VISUAL_KEY, JSON.stringify({ mode: immersive ? 'immersive' : 'classic', reduced, intensity, theme })); } catch { /* Keep using the in-memory choice. */ }
+    try { storage?.setItem(VISUAL_KEY, JSON.stringify({ mode: immersive ? 'immersive' : 'classic', reduced, intensity, theme, scene })); } catch { /* Keep using the in-memory choice. */ }
   }
   function applyTheme() {
     const index = SOUL_THEMES.findIndex(t => t.id === theme), item = SOUL_THEMES[index];
@@ -41,7 +46,7 @@ export function createChatView() {
     const label = document.createElement('label'); label.className = 'wardrobe-option'; label.dataset.theme = item.id;
     const input = document.createElement('input'); input.type = 'radio'; input.name = 'soul-theme'; input.value = item.id;
     const preview = document.createElement('span'); preview.className = 'wardrobe-preview'; preview.setAttribute('aria-hidden', 'true');
-    const mini = document.createElement('span'); mini.className = 'mini-soul'; mini.textContent = item.id === 'night' ? '✧' : '· ᴗ ·';
+    const mini = document.createElement('span'); mini.className = 'mini-soul'; if (item.id === 'night') mini.textContent = '✧'; else { const art = document.createElement('img'); art.alt = ''; mini.append(art); }
     const mark = document.createElement('span'); mark.className = 'wardrobe-symbol'; mark.textContent = item.symbol; preview.append(mini, mark);
     const name = document.createElement('strong'); name.textContent = item.name;
     const description = document.createElement('small'); description.textContent = item.description;
@@ -84,7 +89,7 @@ export function createChatView() {
     try {
       const { SoulRenderer } = await import('./soul.mjs');
       renderer = new SoulRenderer($('soul-canvas'), setAvailability);
-      applyTheme(); renderer.configure({ reduced, brightness: .35 + intensity / 80 });
+      applyTheme(); renderer.setScene(scene); renderer.configure({ reduced, brightness: .35 + intensity / 80 });
       renderer.setActive(immersive); refreshPhase();
     } catch { setAvailability(false); }
     finally { rendererLoading = false; }
@@ -168,6 +173,8 @@ export function createChatView() {
     $('chat-fullscreen').setAttribute('aria-label', active ? 'ブラウザの全画面を終了する' : 'ブラウザを全画面にする');
     $('chat-fullscreen').title = active ? 'ブラウザの全画面を終了する' : 'ブラウザを全画面にする'; viewport();
   });
+  document.body.classList.toggle('soul-reduced', reduced); $('soul-scene').value = scene; document.body.dataset.soulScene = scene;
+  $('soul-scene').addEventListener('change', () => { scene = $('soul-scene').value; document.body.dataset.soulScene = scene; renderer?.setScene(scene); persist(); });
   $('soul-reduced-motion').checked = reduced; $('soul-intensity').value = String(intensity);
   function configureVisuals() {
     reduced = $('soul-reduced-motion').checked; intensity = Number($('soul-intensity').value);
@@ -206,6 +213,11 @@ export function createChatView() {
   return {
     update(next) { if (!next.busy || !state.busy) replying = false; state = next; refreshPhase(); },
     setPersona(id) {
+      if (/^[a-z0-9-]+$/.test(id) && activePersona !== id) {
+        activePersona = id; document.body.dataset.soulCharacter = id; document.body.dataset.soulArt = 'loading';
+        portrait.src = new URL('../../assets/chat/characters/' + id + '.webp', import.meta.url).href;
+        for (const image of document.querySelectorAll('.mini-soul img')) image.src = portrait.src;
+      }
       const hash = [...id].reduce((sum, c) => sum + c.charCodeAt(0), 0);
       personaTint = id === 'hina' ? PALETTE[0] : PALETTE[hash % PALETTE.length];
       applyTheme();
