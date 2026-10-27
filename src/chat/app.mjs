@@ -2,7 +2,7 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs';
+import { createChatView } from './immersive.mjs?v=20261028-r2';
 
 const $ = id => document.getElementById(id);
 let storage;
@@ -85,7 +85,7 @@ async function selectPersona(id) {
   $('conversation-title').textContent = '読み込み中…';
   $('transcript').replaceChildren(); setError(); updateReady();
   try {
-    const response = await fetch(`./assets/chat/personas/${id}.json`, { credentials: 'omit' });
+    const response = await fetch(`./assets/chat/personas/${id}.json`, { credentials: 'omit', cache: 'no-cache' });
     if (!response.ok) throw new Error('profile');
     const data = await response.json();
     if (sequence !== loadSequence) return;

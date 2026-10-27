@@ -1,4 +1,5 @@
 import { SOUL_THEMES } from './themes.mjs';
+const VISUAL_VERSION = '20261028-r2';
 const VISUAL_KEY = 'waddy-chat-visual-v1';
 const PALETTE = [[.87, .62, .76], [.62, .75, .98], [.78, .67, .96], [.72, .88, .84], [.95, .8, .59], [.75, .79, .97]];
 
@@ -87,7 +88,7 @@ export function createChatView() {
     if (rendererLoading || renderer) return;
     rendererLoading = true;
     try {
-      const { SoulRenderer } = await import('./soul.mjs');
+      const { SoulRenderer } = await import('./soul.mjs?v=' + VISUAL_VERSION);
       renderer = new SoulRenderer($('soul-canvas'), setAvailability);
       applyTheme(); renderer.setScene(scene); renderer.configure({ reduced, brightness: .35 + intensity / 80 });
       renderer.setActive(immersive); refreshPhase();
@@ -215,7 +216,7 @@ export function createChatView() {
     setPersona(id) {
       if (/^[a-z0-9-]+$/.test(id) && activePersona !== id) {
         activePersona = id; document.body.dataset.soulCharacter = id; document.body.dataset.soulArt = 'loading';
-        portrait.src = new URL('../../assets/chat/characters/' + id + '.webp', import.meta.url).href;
+        portrait.src = new URL('../../assets/chat/characters/' + id + '.webp?v=' + VISUAL_VERSION, import.meta.url).href;
         for (const image of document.querySelectorAll('.mini-soul img')) image.src = portrait.src;
       }
       const hash = [...id].reduce((sum, c) => sum + c.charCodeAt(0), 0);

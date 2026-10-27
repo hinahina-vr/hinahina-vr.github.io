@@ -17,34 +17,38 @@ uniform float uEnergy;
 uniform vec2 uPointer;
 float ellipse(vec2 p, vec2 radius) { return 1. - smoothstep(.9, 1., length(p / radius)); }
 float star(vec2 p) { float a = atan(p.y, p.x); float r = .047 * (.72 + .28 * cos(a * 5.)); return 1. - smoothstep(r - .004, r + .004, length(p)); }
-float heart(vec2 p) { p *= 16.; float a = dot(p, p) - 1.; float d = a * a * a - p.x * p.x * p.y * p.y * p.y; return 1. - smoothstep(-.03, .04, d); }
+float heart(vec2 p) { p *= 16.; if (max(abs(p.x), abs(p.y)) > 1.5) return 0.; float a = dot(p, p) - 1.; float d = a * a * a - p.x * p.x * p.y * p.y * p.y; return 1. - smoothstep(-.03, .04, d); }
 void main() {
   vec2 p = vUv; p.x *= uResolution.x / uResolution.y;
   vec2 q = (p - vec2(0., .14)) / uScale;
   float halo = exp(-length(q) * 3.2);
   float innerGlow = exp(-dot(q, q) * 22.);
-  float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
+  float grain = fract(sin(dot(mod(gl_FragCoord.xy, vec2(71.)), vec2(.129898, .78233))) * 437.585);
   if (uTheme < 3.5) {
     vec3 top = vec3(1., .91, .95), bottom = vec3(1., .975, .925);
     if (uTheme > .5 && uTheme < 1.5) { top = vec3(.88, .94, 1.); bottom = vec3(1., .98, .95); }
     if (uTheme > 1.5 && uTheme < 2.5) { top = vec3(.87, .97, .93); bottom = vec3(.98, 1., .94); }
     if (uTheme > 2.5) { top = vec3(1., .94, .81); bottom = vec3(1., .985, .945); }
     vec3 color = mix(bottom, top, (vUv.y + 1.) * .5) + (grain - .5) * .007;
+    float decoration = 0.;
+    vec3 ornament = vec3(1.);
     vec2 floating = vec2(sin(uTime * .45) * .015, cos(uTime * .6) * .018);
     if (uTheme < .5) {
       float hearts = heart(q - vec2(.55, .27) - floating) + heart(q + vec2(.52, .2) + floating);
-      color = mix(color, vec3(.97, .64, .77), clamp(hearts, 0., 1.) * .7);
+      decoration = clamp(hearts, 0., 1.) * .7; ornament = vec3(.97, .64, .77);
     } else if (uTheme < 1.5) {
       float stars = star(q - vec2(.51, .30) - floating) + star(q + vec2(.51, .19) + floating) + star(q - vec2(-.37, .47));
-      color = mix(color, vec3(1., .79, .45), clamp(stars, 0., 1.) * .8);
+      decoration = clamp(stars, 0., 1.) * .8; ornament = vec3(1., .79, .45);
     } else if (uTheme < 2.5) {
       float bubbles = (1. - smoothstep(.002, .005, abs(length(q - vec2(.53, .22) - floating) - .045))) + (1. - smoothstep(.002, .005, abs(length(q + vec2(.50, .16) + floating) - .03)));
-      color = mix(color, vec3(.48, .78, .71), clamp(bubbles, 0., 1.) * .55);
+      decoration = clamp(bubbles, 0., 1.) * .55; ornament = vec3(.48, .78, .71);
     } else {
       float stars = star(q - vec2(.55, .30) - floating) + star(q + vec2(.52, .25) + floating);
-      color = mix(color, vec3(.95, .7, .34), clamp(stars, 0., 1.) * .75);
+      decoration = clamp(stars, 0., 1.) * .75; ornament = vec3(.95, .7, .34);
     }
-    gl_FragColor = vec4(color, mix(1., .12, uRoom)); return;
+    if (uRoom > .5) { gl_FragColor = vec4(ornament * decoration, decoration); }
+    else { gl_FragColor = vec4(mix(color, ornament, decoration), 1.); }
+    return;
   }
   vec3 night = vec3(.012, .017, .033);
   vec3 color = night + uTint * halo * .075 * uBrightness;
@@ -114,7 +118,7 @@ void main() {
   if (d > 1.) discard;
   float light = exp(-d * d * 4.) * .45 + exp(-d * d * 18.) * .7;
   if (uTheme > 3.5) gl_FragColor = vec4(vColor * light * vAlpha * uBrightness, 1.);
-  else gl_FragColor = vec4(vColor * .5 + .48, light * vAlpha * uBrightness);
+  else { float alpha = clamp(light * vAlpha * uBrightness, 0., 1.); gl_FragColor = vec4((vColor * .5 + .48) * alpha, alpha); }
 }
 `;
 
@@ -154,7 +158,7 @@ export class SoulRenderer {
     this.active = false; this.reduced = false; this.energy = 0; this.targetEnergy = .03;
     this.brightness = 1; this.room = true; this.theme = 0; this.tint = [.83, .65, .87]; this.pointer = [0, 0]; this.pointerTarget = [0, 0];
     this.time = 0; this.lastFrame = 0; this.frame = 0; this.frameCount = 0;
-    this.gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: false, depth: false, powerPreference: 'low-power', preserveDrawingBuffer: false });
+    this.gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, powerPreference: 'low-power', preserveDrawingBuffer: false });
     if (!this.gl) { this.onAvailability(false); return; }
     canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); this.stop(); this.onAvailability(false); });
     canvas.addEventListener('webglcontextrestored', () => { try { this.setup(); this.onAvailability(true); if (this.active) this.start(); } catch { this.onAvailability(false); } });
@@ -190,9 +194,10 @@ export class SoulRenderer {
   draw() {
     const gl = this.gl;
     if (!gl || gl.isContextLost() || !this.background) return;
+    gl.clearColor(0., 0., 0., 0.); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.disable(gl.BLEND); gl.useProgram(this.background); gl.bindBuffer(gl.ARRAY_BUFFER, this.quad);
     gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0); this.uniforms(this.background); gl.drawArrays(gl.TRIANGLES, 0, 6);
-    gl.enable(gl.BLEND); gl.blendFunc(this.theme === 4 ? gl.ONE : gl.SRC_ALPHA, this.theme === 4 ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); gl.useProgram(this.soul); gl.bindBuffer(gl.ARRAY_BUFFER, this.points);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, this.theme === 4 ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); gl.useProgram(this.soul); gl.bindBuffer(gl.ARRAY_BUFFER, this.points);
     gl.vertexAttribPointer(0, 4, gl.FLOAT, false, 0, 0); this.uniforms(this.soul); gl.drawArrays(gl.POINTS, 0, this.pointCount);
     this.canvas.dataset.frames = String(++this.frameCount);
   }

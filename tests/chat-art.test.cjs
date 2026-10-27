@@ -34,6 +34,7 @@ async function check(name,fn){await fn();checks.push({name,passed:true});console
   assert.ok(await p.locator('#soul-room').isVisible());
   assert.equal(await p.evaluate(()=>document.body.dataset.soulCharacter),'hina');
   assert.equal(requests.size,1);
+  const presence=await p.locator('.soul-presence').boundingBox(),portrait=await p.locator('#soul-character').boundingBox();assert.ok(presence.y+presence.height<=portrait.y,'Status label must not cover hair or head ornaments: '+JSON.stringify({presence,portrait}));
   await p.screenshot({path:path.join(output,'character-desktop.png')});
  });
  await check('背景の変更と再読み込み後の復元が会話や着せ替えを変更しない',async()=>{
@@ -69,7 +70,7 @@ async function check(name,fn){await fn();checks.push({name,passed:true});console
   await p.setViewportSize({width:390,height:480});await p.waitForFunction(()=>Math.abs(document.querySelector('main').getBoundingClientRect().height-innerHeight)<1);await p.screenshot({path:path.join(output,'character-short.png')});
  });
  await check('画像の読み込みに失敗した時に別人格の古い絵を表示しない',async()=>{
-  await p.route('**/chat/characters/mitra.webp',r=>r.abort());
+  await p.route('**/chat/characters/mitra.webp*',r=>r.abort());
   await p.locator('#open-residents').click();await p.locator('#persona-select').selectOption('mitra');await p.waitForFunction(()=>document.body.dataset.soulArt==='unavailable');await p.locator('#drawer-close').click();
   assert.equal(await p.locator('#soul-character').isVisible(),false);await p.locator('#message').fill('画像がなくても書ける');
  });

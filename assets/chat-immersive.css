@@ -178,10 +178,10 @@ body[data-soul-phase=replying] #soul-character { animation-duration: 3s; }
 [data-soul-renderer=fallback][data-soul-theme=night] #soul-fallback { display: block; }
 .mini-soul:has(img) { background: transparent; box-shadow: none !important; width: 48px; height: 60px; border-radius: 0; }
 .mini-soul img { width: 100%; height: 100%; object-fit: contain; }
-.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-shade { background: linear-gradient(180deg, #fff5f31a, transparent 20%, transparent 55%, #fff4f58c); }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-shade { background: linear-gradient(180deg, #fff5f31a, transparent 20%, transparent 70%, #fff4f52b); }
 .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .conversation-header { padding: 5px 12px; margin: -5px 0 0 -12px; border-radius: 16px; background: #fff7f1e6; backdrop-filter: blur(12px); }
-.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-presence { background: #fff8f1dd; border-radius: 20px; padding: 10px 20px; backdrop-filter: blur(10px); top: 76px; }
-.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #soul-presence-text { margin: 8px 0 0; }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-presence { background: #fff8f1dd; border-radius: 20px; padding: 8px 16px; backdrop-filter: blur(10px); top: 64px; }
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #soul-presence-text { margin: 0; line-height: 1.4; }
 .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #transcript { border-radius: 18px; background: #fffaf2e6; backdrop-filter: blur(16px); }
 .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #chat-status { width: fit-content; max-width: 100%; margin-inline: auto; padding: 3px 12px; border-radius: 12px; background: #fffaf2eb; color: #806783; }
 .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #view-status:not(:empty) { width: fit-content; padding: 8px 16px; border-radius: 14px; background: #fffaf2ee; }
@@ -197,3 +197,5 @@ body[data-soul-phase=replying] #soul-character { animation-duration: 3s; }
 
 .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) #immersive-toggle { background: #fff8f1ed; color: #796282; }
 @media(max-width:720px) { .chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .conversation-header { box-sizing:border-box; max-width:calc(100vw - 286px); } .chat-immersive[data-soul-scene=bedroom] .conversation-header :is(h2, #active-model) { max-width:100%; } }
+
+.chat-immersive[data-soul-scene=bedroom]:not([data-soul-theme=night]) .soul-presence .soul-session { display: none; }

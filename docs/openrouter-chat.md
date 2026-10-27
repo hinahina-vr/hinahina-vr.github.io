@@ -56,6 +56,7 @@ npm run test:chat
 npm run test:chat-ui
 npm run test:chat-immersive
 npm run test:chat-art
+npm run test:chat-bedroom
 ```
 
 `build:chat` は住人紹介の33人を確認し、各人の既存設定から `assets/chat/catalog.json` と `assets/chat/personas/*.json` を生成する。元の設定ファイルは変更しない。公開はHTML・CSS・JavaScript・JSONの静的ファイルだけでよい。
