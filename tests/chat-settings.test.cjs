@@ -92,6 +92,9 @@ async function check(name,fn){await fn();checks.push({name,passed:true});console
     assert.equal(await p.locator('#api-key').count(),1);assert.equal(await p.locator('#personality').count(),1);
     assert.equal(await p.locator('.additional-settings summary').evaluate(e=>e.inert),false);
     await p.locator('.additional-settings summary').click();assert.ok(await p.locator('#personality').isVisible());
+    await p.evaluate(()=>{document.querySelector('#open-settings').click();document.querySelector('#back-to-conversation').click();document.querySelector('#open-settings').click();});
+    await p.waitForFunction(()=>document.querySelector('#chat-drawer').open&&document.querySelector('#settings-panel-personality'));
+    await close();assert.equal(await p.locator('.additional-settings summary').evaluate(e=>e.inert),false);
     await p.locator('#immersive-toggle').click();
   });
   await check('スマホ幅・低い画面でも全タブと閉じる操作が使え、横にはみ出さない',async()=>{

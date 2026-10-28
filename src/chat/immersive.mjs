@@ -6,6 +6,7 @@ const PALETTE = [[.87, .62, .76], [.62, .75, .98], [.78, .67, .96], [.72, .88, .
 export function createChatView() {
   const $ = id => document.getElementById(id);
   const drawer = $('chat-drawer');
+  const mobileLayout = matchMedia('(max-width: 720px), (max-width: 1000px) and (max-height: 600px)');
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)');
   let storage;
   let stored = {};
@@ -28,6 +29,8 @@ export function createChatView() {
   let moved = [];
   let noticeTimer;
   let drawerKind;
+  let closePending = false;
+  let pendingDrawerKind = null;
   const settingsTabs = [...document.querySelectorAll("[data-settings-tab]")];
   let returnFocus;
   let focusComposerAfterClose = false;
@@ -59,16 +62,26 @@ export function createChatView() {
     clearTimeout(noticeTimer); $('view-status').textContent = message;
     noticeTimer = setTimeout(() => { $('view-status').textContent = ''; }, 5000);
   }
+  function reserveCharacterSpace() {
+    if (!immersive || mobileLayout.matches) return;
+    const panel = document.querySelector('.conversation-panel');
+    const reserve = panel.getBoundingClientRect().height + parseFloat(getComputedStyle(panel).bottom) + 16;
+    document.documentElement.style.setProperty('--chat-reserved', Math.ceil(reserve) + 'px');
+  }
   function viewport() {
     const v = window.visualViewport;
     const height = v && v.scale === 1 ? v.height : innerHeight;
-    document.documentElement.style.setProperty('--chat-height', `${Math.round(height)}px`);
-    if (immersive) renderer?.resize();
+    document.documentElement.style.setProperty('--chat-height', Math.round(height) + 'px');
+    document.documentElement.style.setProperty('--chat-viewport-top', (v && v.scale === 1 ? Math.round(v.offsetTop) : 0) + 'px');
+    document.documentElement.style.setProperty('--mobile-chat-height', Math.round(Math.max(196, Math.min(380, height * .44))) + 'px');
+    if (immersive) { autoSize(); renderer?.resize(); reserveCharacterSpace(); }
   }
   function autoSize() {
     if (!immersive) { $('message').style.removeProperty('height'); return; }
+    const height = window.visualViewport?.height || innerHeight;
+    const maximum = mobileLayout.matches ? height < 580 ? 64 : 88 : 140;
     $('message').style.height = '0px';
-    $('message').style.height = `${Math.max(46, Math.min(140, $('message').scrollHeight))}px`;
+    $('message').style.height = Math.max(44, Math.min(maximum, $('message').scrollHeight)) + 'px';
   }
   function refreshPhase() {
     const phase = state.busy ? replying ? 'replying' : 'waiting' : state.typing ? 'typing' : 'idle';
@@ -78,7 +91,7 @@ export function createChatView() {
     $('soul-session').textContent = state.connected ? 'SOUL / CONNECTED' : 'SOUL / SPACE';
     renderer?.setEnergy({ idle: .03, typing: .2, waiting: .5, replying: .85 }[phase]);
     $('composer-settings').hidden = !immersive || state.connected;
-    $('open-residents').disabled = state.busy;
+    $('open-residents').disabled = state.busy; $('change-resident').disabled = state.busy;
     autoSize();
   }
   function setAvailability(available) {
@@ -108,22 +121,24 @@ export function createChatView() {
   }
   function closeDrawer(focusMessage = false) {
     focusComposerAfterClose = focusMessage;
-    if (drawer.open) drawer.close();
+    if (drawer.open) { closePending = true; drawer.close(); restore(); }
     else if (focusMessage) $('message').focus();
   }
   function openDrawer(kind) {
-    if ((!immersive && kind !== 'settings') || (kind === 'residents' && state.busy)) return;
+    if ((!immersive && kind !== 'settings' && kind !== 'residents') || (kind === 'residents' && state.busy)) return;
+    if (closePending || (!drawer.open && moved.length)) { pendingDrawerKind = kind; return; }
     if (drawer.open) {
       if (drawerKind === kind) return;
-      drawer.addEventListener('close', () => openDrawer(kind), { once: true }); drawer.close(); return;
+      pendingDrawerKind = kind; closeDrawer(); return;
     }
     returnFocus = document.activeElement;
     drawerKind = kind;
     const nodes = kind === 'residents' ? [document.querySelector('.resident-panel')]
+      : kind === 'menu' ? [$('open-residents'), $('open-wardrobe'), $('chat-fullscreen'), $('immersive-toggle')].filter(node => !node.hidden)
       : kind === 'wardrobe' ? [$('soul-wardrobe')]
       : kind === 'history' ? [$('transcript'), $('clear-conversation'), $('export-conversation')]
       : [$('connection'), document.querySelector('.additional-settings'), document.querySelector('.history-settings'), $('immersive-preferences')];
-    $('drawer-title').textContent = { residents: '話す相手を選ぶ', history: '会話の履歴', settings: 'おしゃべり設定', wardrobe: '魂の着せ替え' }[kind];
+    $('drawer-title').textContent = { residents: '話す相手を選ぶ', history: '会話の履歴', settings: 'おしゃべり設定', wardrobe: '魂の着せ替え', menu: '表示と相手' }[kind];
     $('settings-tabs').hidden = kind !== 'settings';
     const categories = ['connection', 'personality', 'history', 'visuals'];
     for (const [index, node] of nodes.entries()) {
@@ -173,7 +188,8 @@ export function createChatView() {
     input.dispatchEvent(new Event('input', { bubbles: true })); input.focus();
   });
   drawer.addEventListener('close', () => {
-    restore();
+    restore(); closePending = false;
+    if (pendingDrawerKind) { const kind = pendingDrawerKind; pendingDrawerKind = null; focusComposerAfterClose = false; openDrawer(kind); return; }
     if (focusComposerAfterClose) $('message').focus(); else returnFocus?.focus();
     focusComposerAfterClose = false;
   });
@@ -184,14 +200,14 @@ export function createChatView() {
     if (event.target === drawer && (event.clientX < b.left || event.clientX > b.right || event.clientY < b.top || event.clientY > b.bottom)) closeDrawer();
   });
   function setMode(enabled, persistChoice = true) {
-    if (!enabled && drawer.open) { drawer.close(); restore(); }
+    if (!enabled && drawer.open) { pendingDrawerKind = null; closeDrawer(); }
     immersive = enabled;
     document.body.classList.toggle('chat-immersive', enabled);
     $('soul-stage').hidden = !enabled;
     $('immersive-toggle').setAttribute('aria-pressed', String(enabled));
     $('immersive-toggle-label').textContent = enabled ? '通常表示' : '没入モード';
     $('immersive-toggle').title = enabled ? '通常表示に戻る（Esc）' : '没入モードで話す';
-    $('composer-hint').textContent = enabled ? 'Enterで送信 · Shift + Enterで改行' : 'Enterで改行 · Ctrl / ⌘ + Enterで送信';
+    $('composer-hint').textContent = enabled ? mobileLayout.matches ? 'Enterで改行 · ボタンで送信' : 'Enterで送信 · Shift + Enterで改行' : 'Enterで改行 · Ctrl / ⌘ + Enterで送信';
     const url = new URL(location.href); url.searchParams.set('mode', enabled ? 'immersive' : 'classic'); history.replaceState(null, '', url);
     if (persistChoice) persist();
     viewport(); refreshPhase(); renderer?.setActive(enabled);
@@ -200,6 +216,8 @@ export function createChatView() {
   }
   $('immersive-toggle').addEventListener('click', () => setMode(!immersive));
   $('open-residents').addEventListener('click', () => openDrawer('residents'));
+  $('change-resident').addEventListener('click', () => openDrawer('residents'));
+  $('open-chat-menu').addEventListener('click', () => openDrawer('menu'));
   $('open-history').addEventListener('click', () => openDrawer('history'));
   $('open-settings').addEventListener('click', () => openDrawer('settings'));
   $('open-wardrobe').addEventListener('click', () => openDrawer('wardrobe'));
@@ -230,13 +248,17 @@ export function createChatView() {
   });
   window.addEventListener('resize', viewport);
   window.visualViewport?.addEventListener('resize', viewport);
+  window.visualViewport?.addEventListener('scroll', viewport);
+  mobileLayout.addEventListener('change', viewport);
+  const conversationResize = new ResizeObserver(reserveCharacterSpace);
+  conversationResize.observe(document.querySelector('.conversation-panel'));
   document.addEventListener('visibilitychange', () => { document.hidden ? renderer?.stop() : immersive && renderer?.start(); });
   window.addEventListener('pagehide', () => renderer?.stop());
   window.addEventListener('pageshow', () => { if (immersive) renderer?.start(); });
   window.addEventListener('pointermove', event => { if (immersive && !drawer.open) renderer?.setPointer(event.clientX / innerWidth * 2 - 1, 1 - event.clientY / innerHeight * 2); }, { passive: true });
   $('message').addEventListener('input', () => { autoSize(); renderer?.pulse(); });
   $('message').addEventListener('keydown', event => {
-    if (!immersive || event.isComposing || event.keyCode === 229) return;
+    if (!immersive || mobileLayout.matches || event.isComposing || event.keyCode === 229) return;
     if (event.key === 'Enter' && !event.shiftKey && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault(); if (!$('send').disabled) $('message-form').requestSubmit();
     }
@@ -250,7 +272,7 @@ export function createChatView() {
   });
   const queryMode = new URL(location.href).searchParams.get('mode');
   applyTheme();
-  setMode(queryMode === 'immersive' || (queryMode !== 'classic' && stored.mode === 'immersive'), false);
+  setMode(queryMode === 'immersive' || (queryMode !== 'classic' && (stored.mode === 'immersive' || (!stored.mode && mobileLayout.matches))), false);
 
   return {
     update(next) { if (!next.busy || !state.busy) replying = false; state = next; refreshPhase(); },

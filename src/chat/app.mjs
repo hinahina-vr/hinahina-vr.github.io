@@ -2,7 +2,7 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs?v=20261028-r3';
+import { createChatView } from './immersive.mjs?v=20261028-r4';
 
 const $ = id => document.getElementById(id);
 let storage;

@@ -64,14 +64,14 @@ async function check(name,fn){await fn();checks.push({name,passed:true});console
  });
  await check('スマホで人格名とボタンが重ならず、立ち絵も画面内に収まる',async()=>{
   await p.setViewportSize({width:390,height:844});await p.waitForFunction(()=>Math.abs(document.querySelector('main').getBoundingClientRect().height-innerHeight)<1);
-  const title=await p.locator('.conversation-header').boundingBox(),button=await p.locator('#open-residents').boundingBox();assert.ok(title.x+title.width<=button.x,title.x+title.width+' > '+button.x);
+  const title=await p.locator('.conversation-header').boundingBox(),button=await p.locator('#open-history').boundingBox();assert.ok(title.x+title.width<=button.x,title.x+title.width+' > '+button.x);
   for(const s of ['#soul-character','#message']){const b=await p.locator(s).boundingBox();assert.ok(b&&b.x>=0&&b.y>=0&&b.x+b.width<=391&&b.y+b.height<=845,s);}
   await p.screenshot({path:path.join(output,'character-mobile.png')});
   await p.setViewportSize({width:390,height:480});await p.waitForFunction(()=>Math.abs(document.querySelector('main').getBoundingClientRect().height-innerHeight)<1);await p.screenshot({path:path.join(output,'character-short.png')});
  });
  await check('画像の読み込みに失敗した時に別人格の古い絵を表示しない',async()=>{
   await p.route('**/chat/characters/mitra.webp*',r=>r.abort());
-  await p.locator('#open-residents').click();await p.locator('#persona-select').selectOption('mitra');await p.waitForFunction(()=>document.body.dataset.soulArt==='unavailable');await p.locator('#drawer-close').click();
+  await p.locator('#change-resident').click();await p.locator('#persona-select').selectOption('mitra');await p.waitForFunction(()=>document.body.dataset.soulArt==='unavailable');await p.locator('#drawer-close').click();
   assert.equal(await p.locator('#soul-character').isVisible(),false);await p.locator('#message').fill('画像がなくても書ける');
  });
  await check('WebGLなしでも立ち絵と寝室を表示し、OSの動きを減らす設定を守る',async()=>{

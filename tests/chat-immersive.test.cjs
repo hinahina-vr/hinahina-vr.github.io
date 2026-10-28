@@ -183,7 +183,7 @@ async function check(name, fn) { await fn(); checks.push({ name, passed: true })
   await check('スマホと低い画面でも入力・設定を操作できる', async () => {
     await page.setViewportSize({ width: 390, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-    for (const selector of ['#message', '#open-residents', '#open-history', '#open-settings', '#immersive-toggle']) {
+    for (const selector of ['#message', '#change-resident', '#open-history', '#open-settings', '#open-chat-menu']) {
       const b = await page.locator(selector).boundingBox(); assert.ok(b && b.x >= 0 && b.y >= 0 && b.x + b.width <= 391 && b.y + b.height <= 845, selector + ': ' + JSON.stringify(b));
     }
     await page.screenshot({ path: path.join(output, 'immersive-mobile.png') });

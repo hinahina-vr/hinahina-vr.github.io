@@ -9,9 +9,10 @@
   <title>住人とおしゃべり | ワディーゲストハウス</title>
   <link rel="preload" href="./assets/chat/fonts/zen-maru-gothic-regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./assets/chat.css?v=20261028-r3" />
-  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r3" />
-  <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r3" />
+  <link rel="stylesheet" href="./assets/chat.css?v=20261028-r4" />
+  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r4" />
+  <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r4" />
+  <link rel="stylesheet" href="./assets/chat-mobile.css?v=20261028-r4" />
 </head>
 <body>
   <main class="page-frame chat-page">
@@ -32,6 +33,7 @@
           <button id="open-residents" type="button" aria-label="話す相手を選ぶ" title="話す相手を選ぶ（Ctrl / ⌘ + K）"><span aria-hidden="true">♧</span><span class="tool-label">相手</span></button>
           <button id="open-history" type="button" aria-label="会話の履歴を開く"><span aria-hidden="true">≡</span><span class="tool-label">履歴</span></button>
           <button id="open-settings" type="button" aria-label="会話の設定を開く"><span aria-hidden="true">⚙</span><span class="tool-label">設定</span></button>
+          <button id="open-chat-menu" class="mobile-chat-only" type="button" aria-label="表示と相手のメニューを開く"><span aria-hidden="true">⋯</span><span class="tool-label">メニュー</span></button>
           <button id="chat-fullscreen" type="button" aria-label="ブラウザを全画面にする" title="ブラウザを全画面にする"><span aria-hidden="true">⛶</span><span class="tool-label">全画面</span></button>
         </div>
         <button id="immersive-toggle" type="button" aria-pressed="false"><span aria-hidden="true">✧</span><span id="immersive-toggle-label">没入モード</span></button>
@@ -74,13 +76,15 @@
 
       <section class="chat-panel conversation-panel" aria-label="会話">
         <header class="conversation-header">
-          <div><h2 id="conversation-title">住人を選んでね</h2><p id="active-model" class="help">モデル未設定</p></div>
+          <div><h2><button id="change-resident" type="button" aria-label="話す相手を選ぶ"><span id="conversation-title">住人を選んでね</span><small class="mobile-chat-only">相手を変更 <span aria-hidden="true">⌄</span></small></button></h2><p id="active-model" class="help">モデル未設定</p></div>
           <button id="clear-conversation" type="button">会話を消す</button>
         </header>
         <div id="transcript" role="log" aria-label="会話の履歴" aria-live="off" tabindex="0"><p class="empty-chat">今日は何を話そう？</p></div>
+        <div class="chat-feedback">
         <p id="chat-status" role="status" class="help">接続設定を入力すると話せるよ。</p>
         <p id="chat-error" role="alert" hidden></p>
         <button id="retry" type="button" hidden>もう一度送る</button>
+        </div>
         <form id="message-form">
           <label for="message" class="visually-hidden">メッセージ</label>
           <textarea id="message" rows="3" maxlength="6000" placeholder="話しかけてみてね" disabled></textarea>
@@ -135,6 +139,6 @@
     </section>
     <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
   </main>
-  <script type="module" src="./src/chat/app.mjs?v=20261028-r3"></script>
+  <script type="module" src="./src/chat/app.mjs?v=20261028-r4"></script>
 </body>
 </html>
