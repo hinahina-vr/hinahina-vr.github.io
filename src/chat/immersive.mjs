@@ -15,6 +15,8 @@ export function createChatView() {
   let scene = stored.scene === 'light' ? 'light' : 'bedroom';
   let chatSpace = stored.chatSpace === 'conversation' ? 'conversation' : 'character';
   let followingLatest = true;
+  let activeReplyNode = null;
+  let replyStartHeld = false;
   let activePersona = '';
   const portrait = $('soul-character');
   portrait.addEventListener('load', () => { document.body.dataset.soulArt = 'ready'; });
@@ -75,6 +77,16 @@ export function createChatView() {
     $('transcript').scrollTop = $('transcript').scrollHeight;
     updateReadingIndicator();
   }
+  function updateReplyReading() {
+    const transcript = $('transcript');
+    if (!followingLatest) { updateReadingIndicator(); return; }
+    if (immersive && mobileLayout.matches && activeReplyNode?.isConnected && !replyStartHeld && transcript.clientHeight >= 56 && activeReplyNode.getBoundingClientRect().height > transcript.clientHeight) {
+      replyStartHeld = true; followingLatest = false;
+      const top = activeReplyNode.getBoundingClientRect().top - transcript.getBoundingClientRect().top;
+      transcript.scrollTop += top - parseFloat(getComputedStyle(transcript).paddingTop);
+      updateReadingIndicator();
+    } else scrollLatest();
+  }
   function applyChatSpace() {
     const expanded = chatSpace === 'conversation';
     document.body.dataset.chatSpace = chatSpace;
@@ -87,7 +99,7 @@ export function createChatView() {
     followingLatest = node.scrollHeight - node.scrollTop - node.clientHeight <= 32;
     updateReadingIndicator();
   }, { passive: true });
-  $('latest-chat').addEventListener('click', scrollLatest);
+  $('latest-chat').addEventListener('click', () => { replyStartHeld = true; scrollLatest(); });
   $('chat-space-toggle').addEventListener('click', () => {
     const follow = followingLatest, position = $('transcript').scrollTop;
     chatSpace = chatSpace === 'conversation' ? 'character' : 'conversation';
@@ -106,7 +118,7 @@ export function createChatView() {
     const height = v && v.scale === 1 ? v.height : innerHeight;
     document.documentElement.style.setProperty('--chat-height', Math.round(height) + 'px');
     document.documentElement.style.setProperty('--chat-viewport-top', (v && v.scale === 1 ? Math.round(v.offsetTop) : 0) + 'px');
-    document.documentElement.style.setProperty('--mobile-chat-height', Math.round(Math.min(Math.max(120, height - 164), Math.max(196, Math.min(chatSpace === 'conversation' ? 520 : 380, height * (chatSpace === 'conversation' ? .6 : .44))))) + 'px');
+    document.documentElement.style.setProperty('--mobile-chat-height', Math.round(Math.min(Math.max(120, height - 164), Math.max(196, Math.min(chatSpace === 'conversation' ? 600 : 460, height * (chatSpace === 'conversation' ? .7 : .56))))) + 'px');
     document.body.dataset.chatCompact = String(height < 580);
     if (immersive) { autoSize(); renderer?.resize(); reserveCharacterSpace(); }
     updateReadingIndicator();
@@ -290,7 +302,7 @@ export function createChatView() {
   mobileLayout.addEventListener('change', viewport);
   const conversationResize = new ResizeObserver(reserveCharacterSpace);
   conversationResize.observe(document.querySelector('.conversation-panel'));
-  const readingResize = new ResizeObserver(() => { if (followingLatest && !drawer.open) scrollLatest(); else updateReadingIndicator(); });
+  const readingResize = new ResizeObserver(() => { if (!drawer.open) updateReplyReading(); else updateReadingIndicator(); });
   readingResize.observe($('transcript')); readingResize.observe($('message-form'));
   document.addEventListener('visibilitychange', () => { document.hidden ? renderer?.stop() : immersive && renderer?.start(); });
   window.addEventListener('pagehide', () => renderer?.stop());
@@ -315,8 +327,9 @@ export function createChatView() {
   setMode(queryMode === 'immersive' || (queryMode !== 'classic' && (stored.mode === 'immersive' || (!stored.mode && mobileLayout.matches))), false);
 
   return {
-    conversationRendered() { scrollLatest(); },
-    transcriptChanged() { if (followingLatest) scrollLatest(); else updateReadingIndicator(); },
+    conversationRendered() { activeReplyNode = null; replyStartHeld = false; scrollLatest(); },
+    startReply(node) { activeReplyNode = node; replyStartHeld = false; updateReplyReading(); },
+    transcriptChanged() { updateReplyReading(); },
     replyFinished() { if (!mobileLayout.matches && !drawer.open && [document.body, $('message'), $('send'), $('stop')].includes(document.activeElement)) $('message').focus(); updateReadingIndicator(); },
     update(next) { if (!next.busy || !state.busy) replying = false; state = next; refreshPhase(); },
     setPersona(id) {

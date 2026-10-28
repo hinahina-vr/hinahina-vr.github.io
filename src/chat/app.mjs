@@ -2,7 +2,7 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs?v=20261028-r5';
+import { createChatView } from './immersive.mjs?v=20261028-r6';
 
 const $ = id => document.getElementById(id);
 let storage;
@@ -204,7 +204,7 @@ async function send(retry = false) {
   }
   retryAvailable = false; setError(); renderConversation();
   const pending = renderMessage({ role: 'assistant', content: '' }, true);
-  view.transcriptChanged();
+  view.startReply(pending.node);
   const request = new AbortController(); activeRequest = request;
   const timeout = setTimeout(() => request.abort(new DOMException('timeout', 'TimeoutError')), 120000);
   $('chat-status').textContent = `${persona.name}の返事を待っているよ。`; updateReady();
