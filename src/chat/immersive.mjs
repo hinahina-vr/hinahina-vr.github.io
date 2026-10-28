@@ -13,6 +13,8 @@ export function createChatView() {
   try { storage = localStorage; stored = JSON.parse(storage.getItem(VISUAL_KEY) || '{}') || {}; } catch { /* Visual preferences are optional. */ }
   let immersive = false;
   let scene = stored.scene === 'light' ? 'light' : 'bedroom';
+  let chatSpace = stored.chatSpace === 'conversation' ? 'conversation' : 'character';
+  let followingLatest = true;
   let activePersona = '';
   const portrait = $('soul-character');
   portrait.addEventListener('load', () => { document.body.dataset.soulArt = 'ready'; });
@@ -36,7 +38,7 @@ export function createChatView() {
   let focusComposerAfterClose = false;
 
   function persist() {
-    try { storage?.setItem(VISUAL_KEY, JSON.stringify({ mode: immersive ? 'immersive' : 'classic', reduced, intensity, theme, scene })); } catch { /* Keep using the in-memory choice. */ }
+    try { storage?.setItem(VISUAL_KEY, JSON.stringify({ mode: immersive ? 'immersive' : 'classic', reduced, intensity, theme, scene, chatSpace })); } catch { /* Keep using the in-memory choice. */ }
   }
   function applyTheme() {
     const index = SOUL_THEMES.findIndex(t => t.id === theme), item = SOUL_THEMES[index];
@@ -62,6 +64,37 @@ export function createChatView() {
     clearTimeout(noticeTimer); $('view-status').textContent = message;
     noticeTimer = setTimeout(() => { $('view-status').textContent = ''; }, 5000);
   }
+  function updateReadingIndicator() {
+    const transcript = $('transcript');
+    const distance = transcript.scrollHeight - transcript.scrollTop - transcript.clientHeight;
+    $('latest-chat').hidden = !immersive || !mobileLayout.matches || drawer.open || !$('chat-error').hidden || transcript.clientHeight < 56 || distance <= 32 || !transcript.querySelector('.chat-message');
+    document.documentElement.style.setProperty('--composer-space', $('message-form').offsetHeight + 'px');
+  }
+  function scrollLatest() {
+    followingLatest = true;
+    $('transcript').scrollTop = $('transcript').scrollHeight;
+    updateReadingIndicator();
+  }
+  function applyChatSpace() {
+    const expanded = chatSpace === 'conversation';
+    document.body.dataset.chatSpace = chatSpace;
+    $('chat-space-toggle').setAttribute('aria-pressed', String(expanded));
+    $('chat-space-toggle').setAttribute('aria-label', expanded ? 'キャラの表示を大きくする' : '会話欄を広げる');
+    $('chat-space-toggle').textContent = expanded ? 'キャラを大きく ↕' : '会話を広く ↕';
+  }
+  $('transcript').addEventListener('scroll', () => {
+    const node = $('transcript');
+    followingLatest = node.scrollHeight - node.scrollTop - node.clientHeight <= 32;
+    updateReadingIndicator();
+  }, { passive: true });
+  $('latest-chat').addEventListener('click', scrollLatest);
+  $('chat-space-toggle').addEventListener('click', () => {
+    const follow = followingLatest, position = $('transcript').scrollTop;
+    chatSpace = chatSpace === 'conversation' ? 'character' : 'conversation';
+    applyChatSpace(); persist(); viewport();
+    if (follow) scrollLatest(); else { $('transcript').scrollTop = position; updateReadingIndicator(); }
+  });
+  applyChatSpace();
   function reserveCharacterSpace() {
     if (!immersive || mobileLayout.matches) return;
     const panel = document.querySelector('.conversation-panel');
@@ -73,26 +106,31 @@ export function createChatView() {
     const height = v && v.scale === 1 ? v.height : innerHeight;
     document.documentElement.style.setProperty('--chat-height', Math.round(height) + 'px');
     document.documentElement.style.setProperty('--chat-viewport-top', (v && v.scale === 1 ? Math.round(v.offsetTop) : 0) + 'px');
-    document.documentElement.style.setProperty('--mobile-chat-height', Math.round(Math.max(196, Math.min(380, height * .44))) + 'px');
+    document.documentElement.style.setProperty('--mobile-chat-height', Math.round(Math.min(Math.max(120, height - 164), Math.max(196, Math.min(chatSpace === 'conversation' ? 520 : 380, height * (chatSpace === 'conversation' ? .6 : .44))))) + 'px');
+    document.body.dataset.chatCompact = String(height < 580);
     if (immersive) { autoSize(); renderer?.resize(); reserveCharacterSpace(); }
+    updateReadingIndicator();
   }
   function autoSize() {
     if (!immersive) { $('message').style.removeProperty('height'); return; }
     const height = window.visualViewport?.height || innerHeight;
-    const maximum = mobileLayout.matches ? height < 580 ? 64 : 88 : 140;
+    const maximum = mobileLayout.matches ? height < 580 ? 56 : 88 : 140;
     $('message').style.height = '0px';
     $('message').style.height = Math.max(44, Math.min(maximum, $('message').scrollHeight)) + 'px';
   }
   function refreshPhase() {
     const phase = state.busy ? replying ? 'replying' : 'waiting' : state.typing ? 'typing' : 'idle';
     document.body.dataset.soulPhase = phase;
+    const activity = phase === 'waiting' ? '返事を考えてる…' : phase === 'replying' ? 'お返事が届いてる…' : '';
+    $('mobile-chat-activity').textContent = activity; $('mobile-chat-activity').hidden = !activity;
+    $('mobile-chat-heading').hidden = !!activity;
     document.body.dataset.chatConnected = String(state.connected);
     $('soul-presence-text').textContent = { idle: 'ここにいるよ', typing: 'あなたのペースで', waiting: '言葉を探している', replying: 'ことばが届いている' }[phase];
     $('soul-session').textContent = state.connected ? 'SOUL / CONNECTED' : 'SOUL / SPACE';
     renderer?.setEnergy({ idle: .03, typing: .2, waiting: .5, replying: .85 }[phase]);
     $('composer-settings').hidden = !immersive || state.connected;
     $('open-residents').disabled = state.busy; $('change-resident').disabled = state.busy;
-    autoSize();
+    autoSize(); updateReadingIndicator();
   }
   function setAvailability(available) {
     document.body.dataset.soulRenderer = available ? 'webgl' : 'fallback';
@@ -153,7 +191,7 @@ export function createChatView() {
       node.hidden = false;
       if (node.tagName === 'DETAILS') { node.open = true; node.querySelector('summary').inert = kind === 'settings'; }
     }
-    drawer.dataset.panel = kind; drawer.showModal();
+    drawer.dataset.panel = kind; drawer.showModal(); updateReadingIndicator();
     if (kind === 'residents') $('persona-search').focus();
     if (kind === 'history') { $('transcript').scrollTop = $('transcript').scrollHeight; $('transcript').focus(); }
     if (kind === 'settings') {
@@ -188,7 +226,7 @@ export function createChatView() {
     input.dispatchEvent(new Event('input', { bubbles: true })); input.focus();
   });
   drawer.addEventListener('close', () => {
-    restore(); closePending = false;
+    restore(); closePending = false; updateReadingIndicator();
     if (pendingDrawerKind) { const kind = pendingDrawerKind; pendingDrawerKind = null; focusComposerAfterClose = false; openDrawer(kind); return; }
     if (focusComposerAfterClose) $('message').focus(); else returnFocus?.focus();
     focusComposerAfterClose = false;
@@ -252,6 +290,8 @@ export function createChatView() {
   mobileLayout.addEventListener('change', viewport);
   const conversationResize = new ResizeObserver(reserveCharacterSpace);
   conversationResize.observe(document.querySelector('.conversation-panel'));
+  const readingResize = new ResizeObserver(() => { if (followingLatest && !drawer.open) scrollLatest(); else updateReadingIndicator(); });
+  readingResize.observe($('transcript')); readingResize.observe($('message-form'));
   document.addEventListener('visibilitychange', () => { document.hidden ? renderer?.stop() : immersive && renderer?.start(); });
   window.addEventListener('pagehide', () => renderer?.stop());
   window.addEventListener('pageshow', () => { if (immersive) renderer?.start(); });
@@ -275,6 +315,9 @@ export function createChatView() {
   setMode(queryMode === 'immersive' || (queryMode !== 'classic' && (stored.mode === 'immersive' || (!stored.mode && mobileLayout.matches))), false);
 
   return {
+    conversationRendered() { scrollLatest(); },
+    transcriptChanged() { if (followingLatest) scrollLatest(); else updateReadingIndicator(); },
+    replyFinished() { if (!mobileLayout.matches && !drawer.open && [document.body, $('message'), $('send'), $('stop')].includes(document.activeElement)) $('message').focus(); updateReadingIndicator(); },
     update(next) { if (!next.busy || !state.busy) replying = false; state = next; refreshPhase(); },
     setPersona(id) {
       if (/^[a-z0-9-]+$/.test(id) && activePersona !== id) {

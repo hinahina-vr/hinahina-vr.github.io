@@ -2,7 +2,7 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs?v=20261028-r4';
+import { createChatView } from './immersive.mjs?v=20261028-r5';
 
 const $ = id => document.getElementById(id);
 let storage;
@@ -61,6 +61,7 @@ function renderConversation() {
     empty.className = 'empty-chat'; empty.textContent = '今日は何を話そう？'; $('transcript').append(empty);
   } else messages().forEach(m => renderMessage(m));
   $('transcript').scrollTop = $('transcript').scrollHeight;
+  view.conversationRendered();
 }
 
 function fillSelect() {
@@ -203,13 +204,13 @@ async function send(retry = false) {
   }
   retryAvailable = false; setError(); renderConversation();
   const pending = renderMessage({ role: 'assistant', content: '' }, true);
+  view.transcriptChanged();
   const request = new AbortController(); activeRequest = request;
   const timeout = setTimeout(() => request.abort(new DOMException('timeout', 'TimeoutError')), 120000);
   $('chat-status').textContent = `${persona.name}の返事を待っているよ。`; updateReady();
-  const transcript = $('transcript');
   try {
     const answer = await sendCompletion({ apiKey, model: state.model, persona, addition: state.additions[state.selected], history: messages(), signal: request.signal,
-      onText: text => { const atBottom = transcript.scrollHeight - transcript.scrollTop - transcript.clientHeight < 120; pending.body.textContent = text; view.replyPulse(); if (atBottom) transcript.scrollTop = transcript.scrollHeight; },
+      onText: text => { pending.body.textContent = text; view.replyPulse(); view.transcriptChanged(); },
       onModel: model => { $('active-model').textContent = model; },
     });
     messages().push({ role: 'assistant', content: answer });
@@ -225,7 +226,7 @@ async function send(retry = false) {
       setError(error instanceof ChatError ? error.message : '返事を受け取れなかった。もう一度送ってね。');
       $('chat-status').textContent = '送信できなかった会話は、もう一度送れるよ。';
     }
-  } finally { clearTimeout(timeout); activeRequest = null; updateReady(); $('message').focus(); }
+  } finally { clearTimeout(timeout); activeRequest = null; updateReady(); view.replyFinished(); }
 }
 $('message-form').addEventListener('submit', event => { event.preventDefault(); void send(); });
 $('retry').addEventListener('click', () => { void send(true); });

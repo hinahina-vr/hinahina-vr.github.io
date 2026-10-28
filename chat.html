@@ -9,10 +9,10 @@
   <title>住人とおしゃべり | ワディーゲストハウス</title>
   <link rel="preload" href="./assets/chat/fonts/zen-maru-gothic-regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./assets/chat.css?v=20261028-r4" />
-  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r4" />
-  <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r4" />
-  <link rel="stylesheet" href="./assets/chat-mobile.css?v=20261028-r4" />
+  <link rel="stylesheet" href="./assets/chat.css?v=20261028-r5" />
+  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r5" />
+  <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r5" />
+  <link rel="stylesheet" href="./assets/chat-mobile.css?v=20261028-r5" />
 </head>
 <body>
   <main class="page-frame chat-page">
@@ -79,7 +79,9 @@
           <div><h2><button id="change-resident" type="button" aria-label="話す相手を選ぶ"><span id="conversation-title">住人を選んでね</span><small class="mobile-chat-only">相手を変更 <span aria-hidden="true">⌄</span></small></button></h2><p id="active-model" class="help">モデル未設定</p></div>
           <button id="clear-conversation" type="button">会話を消す</button>
         </header>
+        <div id="chat-panel-toolbar" class="mobile-chat-only"><div><span id="mobile-chat-heading">おしゃべり</span><span id="mobile-chat-activity" aria-hidden="true" hidden></span></div><button id="chat-space-toggle" type="button" aria-pressed="false">会話を広く <span aria-hidden="true">↕</span></button></div>
         <div id="transcript" role="log" aria-label="会話の履歴" aria-live="off" tabindex="0"><p class="empty-chat">今日は何を話そう？</p></div>
+        <button id="latest-chat" class="mobile-chat-only" type="button" hidden>最新の会話へ <span aria-hidden="true">↓</span></button>
         <div class="chat-feedback">
         <p id="chat-status" role="status" class="help">接続設定を入力すると話せるよ。</p>
         <p id="chat-error" role="alert" hidden></p>
@@ -88,7 +90,7 @@
         <form id="message-form">
           <label for="message" class="visually-hidden">メッセージ</label>
           <textarea id="message" rows="3" maxlength="6000" placeholder="話しかけてみてね" disabled></textarea>
-          <div class="composer-footer"><span id="composer-hint" class="help">Enterで改行 · Ctrl / ⌘ + Enterで送信</span><div><button id="composer-settings" class="immersive-only primary" type="button" hidden>接続設定を開く</button><button id="stop" type="button" hidden>受信を止める</button><button id="send" class="primary" type="submit" disabled>送信 <span class="immersive-only" aria-hidden="true">↵</span></button></div></div>
+          <div class="composer-footer"><span id="composer-hint" class="help">Enterで改行 · Ctrl / ⌘ + Enterで送信</span><div><button id="composer-settings" class="immersive-only primary" type="button" hidden>接続設定を開く</button><button id="stop" type="button" aria-label="受信を止める" hidden>停止</button><button id="send" class="primary" type="submit" disabled>送信 <span class="immersive-only" aria-hidden="true">↵</span></button></div></div>
         </form>
 
         <details class="additional-settings">
@@ -139,6 +141,6 @@
     </section>
     <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
   </main>
-  <script type="module" src="./src/chat/app.mjs?v=20261028-r4"></script>
+  <script type="module" src="./src/chat/app.mjs?v=20261028-r5"></script>
 </body>
 </html>
