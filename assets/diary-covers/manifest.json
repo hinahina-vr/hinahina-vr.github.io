@@ -1673,6 +1673,78 @@
       "promptProvenance": "exact generation instruction",
       "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
       "updatedAt": "2026-10-25T05:54:13.294Z"
+    },
+    "2026-10-14_やってないねん": {
+      "slug": "2026-10-14_やってないねん",
+      "date": "2026-10-14",
+      "title": "やってないねん",
+      "coverSrc": "./assets/diary-covers/2026-10-14_やってないねん.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story.\nAsset type: original diary cover and visual-novel background, a single landscape illustration, requested output 1536 x 1024 pixels (3:2).\nStyle/medium: handmade Japanese picture-book illustration combining woodcut print and matte paper collage. Uneven ink edges, visible paper fibers, restrained colors, clear shapes. The texture must feel printed and cut by hand. No glossy digital glow, no 3D rendering, no generic digital airbrush.\nComposition: wide landscape with an interesting readable midground and a quiet uncluttered lower foreground reserved for a future game dialogue overlay; do not render an overlay. Show the requested scene as one coherent picture, not panels.\nConstraints: opaque background. No text, letters, numbers, logo, watermark, people or recognizable characters. Do not add unrelated characters or narrative props. This is an imaginative illustration, not a photograph of an actual event.\nScene: A tiny old amusement-park railway ticket office. On the worn wooden counter, a red-ink rubber stamp and punched blank paper tickets. Through the window, a cream-and-red miniature tram. Warm afternoon. The blank tickets suggest playful choices and permission. Color palette red, ochre and cream. Absolutely no writing on the tickets.",
+      "promptProvenance": "exact generation instruction; cover-generation-review-B.json",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-28T05:40:14.756Z"
+    },
+    "2026-10-15_23年前のメール": {
+      "slug": "2026-10-15_23年前のメール",
+      "date": "2026-10-15",
+      "title": "23年前のメール",
+      "coverSrc": "./assets/diary-covers/2026-10-15_23年前のメール.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story.\nAsset type: original diary cover and visual-novel background, a single landscape illustration, requested output 1536 x 1024 pixels (3:2).\nStyle/medium: handmade Japanese picture-book illustration combining woodcut print and matte paper collage. Uneven ink edges, visible paper fibers, restrained colors, clear shapes. The texture must feel printed and cut by hand. No glossy digital glow, no 3D rendering, no generic digital airbrush.\nComposition: wide landscape with an interesting readable midground and a quiet uncluttered lower foreground reserved for a future game dialogue overlay; do not render an overlay. Show the requested scene as one coherent picture, not panels.\nConstraints: opaque background. No text, letters, numbers, logo, watermark, people or recognizable characters. Do not add unrelated characters or narrative props. This is an imaginative illustration, not a photograph of an actual event.\nScene: A shallow open wooden desk drawer containing plain old envelopes, and an unmarked letter lying on the desktop. Late-autumn sunlight enters through an open veranda door. A few pale paper shapes lie on the floor. Nostalgic, quiet. Color palette peach, brown and moss. No readable email or invented writing.",
+      "promptProvenance": "exact generation instruction; cover-generation-review-B.json",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-28T05:40:14.756Z"
+    },
+    "2026-10-16_DNAは抽出の工程へ": {
+      "slug": "2026-10-16_DNAは抽出の工程へ",
+      "date": "2026-10-16",
+      "title": "DNAは抽出の工程へ",
+      "coverSrc": "./assets/diary-covers/2026-10-16_DNAは抽出の工程へ.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story.\nAsset type: original diary cover and visual-novel background, a single landscape illustration, requested output 1536 x 1024 pixels (3:2).\nStyle/medium: handmade Japanese picture-book illustration combining woodcut print and matte paper collage. Uneven ink edges, visible paper fibers, restrained colors, clear shapes. The texture must feel printed and cut by hand. No glossy digital glow, no 3D rendering, no generic digital airbrush.\nComposition: wide landscape with an interesting readable midground and a quiet uncluttered lower foreground reserved for a future game dialogue overlay; do not render an overlay. Show the requested scene as one coherent picture, not panels.\nConstraints: opaque background. No text, letters, numbers, logo, watermark, people or recognizable characters. Do not add unrelated characters or narrative props. This is an imaginative illustration, not a photograph of an actual event.\nScene: Clear small glass jars containing dried leaves and tiny garden seeds on a wooden shelf beside a green sunlit window. One jar is empty and catches the daylight. A garden is visible outside. Color palette green, amber and cream. No labels, DNA diagrams or medical results.",
+      "promptProvenance": "exact generation instruction; cover-generation-review-B.json",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-28T05:40:14.756Z"
+    },
+    "2026-10-17_入れ替わるのは断る": {
+      "slug": "2026-10-17_入れ替わるのは断る",
+      "date": "2026-10-17",
+      "title": "入れ替わるのは断る",
+      "coverSrc": "./assets/diary-covers/2026-10-17_入れ替わるのは断る.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story.\nAsset type: original diary cover and visual-novel background, a single landscape illustration, requested output 1536 x 1024 pixels (3:2).\nStyle/medium: handmade Japanese picture-book illustration combining woodcut print and matte paper collage. Uneven ink edges, visible paper fibers, restrained colors, clear shapes. The texture must feel printed and cut by hand. No glossy digital glow, no 3D rendering, no generic digital airbrush.\nComposition: wide landscape with an interesting readable midground and a quiet uncluttered lower foreground reserved for a future game dialogue overlay; do not render an overlay. Show the requested scene as one coherent picture, not panels.\nConstraints: opaque background. No text, letters, numbers, logo, watermark, people or recognizable characters. Do not add unrelated characters or narrative props. This is an imaginative illustration, not a photograph of an actual event.\nScene: A small handmade wooden puppet theatre with faded red curtains in a cozy playroom. A paper gold crown rests on an empty chair. A few very simple inanimate wooden puppets stand at the sides of the little theatre. Loose ribbons lie on the floor, unattached to anything. Color palette dusty pink, navy and brown. Warm and reassuring, never creepy or horror. The puppets are generic plain wooden toys, not recognizable characters.",
+      "promptProvenance": "exact generation instruction; cover-generation-review-B.json",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-28T05:40:14.756Z"
+    },
+    "2026-10-18_次の面白いこと": {
+      "slug": "2026-10-18_次の面白いこと",
+      "date": "2026-10-18",
+      "title": "次の面白いこと",
+      "coverSrc": "./assets/diary-covers/2026-10-18_次の面白いこと.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story.\nAsset type: original diary cover and visual-novel background, a single landscape illustration, requested output 1536 x 1024 pixels (3:2).\nStyle/medium: handmade Japanese picture-book illustration combining woodcut print and matte paper collage. Uneven ink edges, visible paper fibers, restrained colors, clear shapes. The texture must feel printed and cut by hand. No glossy digital glow, no 3D rendering, no generic digital airbrush.\nComposition: wide landscape with an interesting readable midground and a quiet uncluttered lower foreground reserved for a future game dialogue overlay; do not render an overlay. Show the requested scene as one coherent picture, not panels.\nConstraints: opaque background. No text, letters, numbers, logo, watermark, people or recognizable characters. Do not add unrelated characters or narrative props. This is an imaginative illustration, not a photograph of an actual event.\nScene: An unlabelled hand-drawn map lies on a forest park bench at a fork in a walking path, held at the corners by small acorns. Autumn trees surround the welcoming fork. Color palette ochre, moss and pale sky. Quiet feeling of choosing a pleasant detour. The map has only simple unlabeled paths and natural shapes, absolutely no letters or numbers.\n\nUse case: precise-object-edit. Edit the supplied image only to improve the framing for a visual-novel background. Keep the same handmade Japanese picture-book woodcut and matte-paper-collage look, autumn color palette, forest setting, two forked walking paths, lake view, plain unlabeled map and four acorns. Move the bench with its map farther back into the middle distance, so the entire map is clearly visible above the bottom third. Let the bottom 25–30 percent be a quiet simple sandy path with sparse low-contrast leaves, enough empty foreground for a future dialogue box. Do not draw a dialogue box. Preserve an inviting calm daytime atmosphere, paper fibers and uneven printed edges. The map has no text. No people, recognizable characters, letters, numbers, logos, watermark, glossy digital glow, 3D or unrelated new props. Keep the full landscape image at 1536 x 1024 pixels, opaque background. No other scene changes.",
+      "promptProvenance": "exact generation instruction followed by exact edit instruction; cover-generation-review-B.json",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-28T05:40:14.756Z"
+    },
+    "2026-10-19_世界はまだひらかれている": {
+      "slug": "2026-10-19_世界はまだひらかれている",
+      "date": "2026-10-19",
+      "title": "世界はまだひらかれている",
+      "coverSrc": "./assets/diary-covers/2026-10-19_世界はまだひらかれている.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story.\nAsset type: original diary cover and visual-novel background, a single landscape illustration, requested output 1536 x 1024 pixels (3:2).\nStyle/medium: handmade Japanese picture-book illustration combining woodcut print and matte paper collage. Uneven ink edges, visible paper fibers, restrained colors, clear shapes. The texture must feel printed and cut by hand. No glossy digital glow, no 3D rendering, no generic digital airbrush.\nComposition: wide landscape with an interesting readable midground and a quiet uncluttered lower foreground reserved for a future game dialogue overlay; do not render an overlay. Show the requested scene as one coherent picture, not panels.\nConstraints: opaque background. No text, letters, numbers, logo, watermark, people or recognizable characters. Do not add unrelated characters or narrative props. This is an imaginative illustration, not a photograph of an actual event.\nScene: A quiet old seaside classroom. A shell rests on a wooden desk. An open window looks toward gently layered coastal cliffs and the sea. Early evening stars are subtly reflected in the window glass. Color palette muted deep teal, plum and sand. Peaceful and grounded. No neon science-fiction city and no blackboard writing.",
+      "promptProvenance": "exact generation instruction; cover-generation-review-B.json",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-28T05:40:14.756Z"
     }
   }
 }

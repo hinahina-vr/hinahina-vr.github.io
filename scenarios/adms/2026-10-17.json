@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-17",
+  "title": "王冠を置いて開幕する A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "王冠を置いて開幕する",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-17_王冠を置いて開幕する",
+      "entry": "standalone_start",
+      "summary": "小さな木の劇場で、幕が開いている。月の絵の前に立つ人形は、動かない。ククリが椅子の紙の王冠を持つと、人形が深くお辞儀をした。"
+    },
+    {
+      "id": "turn",
+      "title": "お辞儀のあとの役を決める",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-17_王冠を置いて開幕する",
+      "entry": "turn",
+      "summary": "ヒナばっかり、王さま？　お人形さんも、かぶりたいのかな。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-17_王冠を置いて開幕する",
+      "entry": "choose",
+      "summary": "人形に王冠を載せる、または王冠を持って挨拶する"
+    },
+    {
+      "id": "END_A",
+      "title": "いちばん前のお客さん",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-17_王冠を置いて開幕する",
+      "entry": "END_A",
+      "summary": "いちばん前のお客さん"
+    },
+    {
+      "id": "END_B",
+      "title": "帽子の代わりにご挨拶",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-17_王冠を置いて開幕する",
+      "entry": "END_B",
+      "summary": "帽子の代わりにご挨拶"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "人形に王冠を載せる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "王冠を持って挨拶する",
+      "style": "kenkai"
+    }
+  ]
+}

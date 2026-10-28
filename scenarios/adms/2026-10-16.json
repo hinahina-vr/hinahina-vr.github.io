@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-16",
+  "title": "空っぽの瓶に雨が鳴る A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "空っぽの瓶に雨が鳴る",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-16_空っぽの瓶に雨が鳴る",
+      "entry": "standalone_start",
+      "summary": "窓辺には、花や葉を詰めた瓶が並んでいた。その端に空っぽの瓶がある。マルチが近づくと、蓋の下から雨の音が聞こえた。"
+    },
+    {
+      "id": "turn",
+      "title": "雨音が机へ移った",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-16_空っぽの瓶に雨が鳴る",
+      "entry": "turn",
+      "summary": "少し傾けたら、どうなるでしょうか。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-16_空っぽの瓶に雨が鳴る",
+      "entry": "choose",
+      "summary": "蓋を開けてみる、または指で机を叩いてみる"
+    },
+    {
+      "id": "END_A",
+      "title": "庭へ帰った雨",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-16_空っぽの瓶に雨が鳴る",
+      "entry": "END_A",
+      "summary": "庭へ帰った雨"
+    },
+    {
+      "id": "END_B",
+      "title": "晴れた窓辺の合奏",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-16_空っぽの瓶に雨が鳴る",
+      "entry": "END_B",
+      "summary": "晴れた窓辺の合奏"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "蓋を開けてみる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "指で机を叩いてみる",
+      "style": "kenkai"
+    }
+  ]
+}

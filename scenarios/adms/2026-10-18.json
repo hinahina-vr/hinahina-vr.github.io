@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-18",
+  "title": "どんぐりが地図を歩いた A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "どんぐりが地図を歩いた",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-18_どんぐりが地図を歩いた",
+      "entry": "standalone_start",
+      "summary": "秋の分かれ道に、ベンチがある。地図の角を押さえていたどんぐりが1個、紙の上を転がり始めた。京子は落ちないよう手を出した。"
+    },
+    {
+      "id": "turn",
+      "title": "小さな旅人の行き先",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-18_どんぐりが地図を歩いた",
+      "entry": "turn",
+      "summary": "湖もあるよぉ。そこで待ってたら、会えるかな。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-18_どんぐりが地図を歩いた",
+      "entry": "choose",
+      "summary": "湖へ続く道を歩く、または地図に続きを描く"
+    },
+    {
+      "id": "END_A",
+      "title": "湖のそばで待ち合わせ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-18_どんぐりが地図を歩いた",
+      "entry": "END_A",
+      "summary": "湖のそばで待ち合わせ"
+    },
+    {
+      "id": "END_B",
+      "title": "地図にも昼寝の場所",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-18_どんぐりが地図を歩いた",
+      "entry": "END_B",
+      "summary": "地図にも昼寝の場所"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "湖へ続く道を歩く",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "地図に続きを描く",
+      "style": "kenkai"
+    }
+  ]
+}

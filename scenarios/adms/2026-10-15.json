@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-15",
+  "title": "空の封筒から鳥が出る A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "空の封筒から鳥が出る",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-15_空の封筒から鳥が出る",
+      "entry": "standalone_start",
+      "summary": "開いた引出しに、宛名のない封筒が並んでいる。あゆが机の上の1枚を開くと、白い鳥が顔を出した。羽は折り紙でできていた。"
+    },
+    {
+      "id": "turn",
+      "title": "返事の代わりに羽ばたいた",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-15_空の封筒から鳥が出る",
+      "entry": "turn",
+      "summary": "紙を見ているの。何か、作りたいのかもしれないの。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-15_空の封筒から鳥が出る",
+      "entry": "choose",
+      "summary": "封筒を巣にする、または白い紙を鳥へ渡す"
+    },
+    {
+      "id": "END_A",
+      "title": "封筒の巣でひと休み",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-15_空の封筒から鳥が出る",
+      "entry": "END_A",
+      "summary": "封筒の巣でひと休み"
+    },
+    {
+      "id": "END_B",
+      "title": "机から縁側へ出航",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-15_空の封筒から鳥が出る",
+      "entry": "END_B",
+      "summary": "机から縁側へ出航"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "封筒を巣にする",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "白い紙を鳥へ渡す",
+      "style": "kenkai"
+    }
+  ]
+}

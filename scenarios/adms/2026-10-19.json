@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-19",
+  "title": "貝殻の終業ベル A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "貝殻の終業ベル",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-19_貝殻の終業ベル",
+      "entry": "standalone_start",
+      "summary": "夕暮れの教室で、机の上の貝殻が鳴った。波の音かと思うと、最後に小さなベルが続く。紬は窓の海から、机へ顔を向けた。"
+    },
+    {
+      "id": "turn",
+      "title": "授業のない放課後",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-19_貝殻の終業ベル",
+      "entry": "turn",
+      "summary": "呼びかけてみるのはいかがでしょうか。返事を待っている可能性もあります。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-19_貝殻の終業ベル",
+      "entry": "choose",
+      "summary": "貝殻を窓辺へ運ぶ、または貝殻へ返事をする"
+    },
+    {
+      "id": "END_A",
+      "title": "窓の外へ聞かせる音",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-19_貝殻の終業ベル",
+      "entry": "END_A",
+      "summary": "窓の外へ聞かせる音"
+    },
+    {
+      "id": "END_B",
+      "title": "貝殻へ出席の返事",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-19_貝殻の終業ベル",
+      "entry": "END_B",
+      "summary": "貝殻へ出席の返事"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "貝殻を窓辺へ運ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "貝殻へ返事をする",
+      "style": "kenkai"
+    }
+  ]
+}

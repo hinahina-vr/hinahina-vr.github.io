@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-14",
+  "title": "切符に小さな丸を押す A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "切符に小さな丸を押す",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-14_切符に小さな丸を押す",
+      "entry": "standalone_start",
+      "summary": "遊園地の停留所で、赤い電車が待っている。窓口の台には白い切符とスタンプ。でじこは切符を1枚つまみ、窓の向こうを見た。"
+    },
+    {
+      "id": "turn",
+      "title": "丸の中を電車が通る",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-14_切符に小さな丸を押す",
+      "entry": "turn",
+      "summary": "お待ちになって。丸をひと回りして、こちらへ帰ってきましたわ。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-14_切符に小さな丸を押す",
+      "entry": "choose",
+      "summary": "切符を入れて乗る、または切符を窓へかざす"
+    },
+    {
+      "id": "END_A",
+      "title": "窓の続きへ出発",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-14_切符に小さな丸を押す",
+      "entry": "END_A",
+      "summary": "窓の続きへ出発"
+    },
+    {
+      "id": "END_B",
+      "title": "丸い窓のおみやげ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-14_切符に小さな丸を押す",
+      "entry": "END_B",
+      "summary": "丸い窓のおみやげ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "切符を入れて乗る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "切符を窓へかざす",
+      "style": "kenkai"
+    }
+  ]
+}
