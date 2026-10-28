@@ -1649,6 +1649,30 @@
       "promptProvenance": "exact generation instruction",
       "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
       "updatedAt": "2026-10-25T05:04:36.905Z"
+    },
+    "2026-10-11_AI全振りおじさん": {
+      "slug": "2026-10-11_AI全振りおじさん",
+      "date": "2026-10-11",
+      "title": "AI全振りおじさん",
+      "coverSrc": "./assets/diary-covers/2026-10-11_AI全振りおじさん.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Asset: landscape Japanese personal diary cover and fictional dream background, 1536x1024 aspect. A quiet black computer terminal on an old wooden desk, seen obliquely, with a small cluster of exuberant cut-paper bursts, pink cap silhouettes, bright stylized flowers and little blank pennant shapes gathered beside the monitor as a playful visual echo of enthusiastic jackpot imagery. No people, no faces. Keep the terminal calm and simple with a few small cream dashes instead of legible code. The excitement belongs to the paper collage, not money. Medium: restrained handmade Japanese small-press editorial print, dry gouache and coarse woodcut edges, visible off-white paper grain, deliberately flat shapes and a limited charcoal, faded vermilion, muted pink, dull ochre palette. Plenty of quiet unprinted paper at the top; asymmetrical, intimate, slightly humorous composition. No readable text, no logos, no casino machines, no coins, no cash, no glossy 3D, no glow, no sparkles, no perfect digital gradients, no cinematic lighting. This is an imaginative illustration, not a record of actual activity.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-25T05:54:13.175Z"
+    },
+    "2026-10-12_ごち革": {
+      "slug": "2026-10-12_ごち革",
+      "date": "2026-10-12",
+      "title": "ごち革",
+      "coverSrc": "./assets/diary-covers/2026-10-12_ごち革.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Asset: landscape Japanese diary cover and fictional dream background, 1536x1024 aspect. On a simple table sits a closed white paperback, viewed from above at a slight angle, with a plain deep-blue paper band across its lower third and an entirely blank cover. A small fan of thin red, rose-pink and white fibers emerges from between the pages, echoing an optical-fiber photograph but depicted as physical fine threads without digital glow. A restrained witty still life about a very serious-looking book with an unexpectedly playful name. The book must remain an invented unlabelled object, not an identifiable real publication. Medium: handmade woodcut and dry gouache editorial illustration, coarse ink edges and warm off-white paper grain. Muted Prussian blue, faded red and charcoal, large quiet negative space, asymmetrical composition. No people, no hands, no legible text, no symbols, no logo, no extra books, no perfect gradients, no glossy render, no cinematic lighting, no sparkles. Clear simple silhouette, lived-in print quality.",
+      "promptProvenance": "exact generation instruction",
+      "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
+      "updatedAt": "2026-10-25T05:54:13.294Z"
     }
   }
 }

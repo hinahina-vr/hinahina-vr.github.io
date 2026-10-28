@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-11",
+  "title": "紙吹雪の止まるキー A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "紙吹雪の止まるキー",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-11_紙吹雪の止まるキー",
+      "entry": "standalone_start",
+      "summary": "机の上に黒い端末がある。画面の短い線が静かに点滅し、その横には紙で切った帽子や花が積まれていた。ここから先は、日記から続く創作の夢だ。"
+    },
+    {
+      "id": "turn",
+      "title": "画面は次を待っている",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-11_紙吹雪の止まるキー",
+      "entry": "turn",
+      "summary": "机の端で、紙の帽子がふわりと起き上がる。画面の短い線は、まだ同じ場所で点滅している。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-11_紙吹雪の止まるキー",
+      "entry": "choose",
+      "summary": "紙の帽子をかぶる、または飾りを画面へ返す"
+    },
+    {
+      "id": "END_A",
+      "title": "机の上のお祭り",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-11_紙吹雪の止まるキー",
+      "entry": "END_A",
+      "summary": "机の上のお祭り"
+    },
+    {
+      "id": "END_B",
+      "title": "小さな花の行",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-11_紙吹雪の止まるキー",
+      "entry": "END_B",
+      "summary": "小さな花の行"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "紙の帽子をかぶる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "飾りを画面へ返す",
+      "style": "kenkai"
+    }
+  ]
+}

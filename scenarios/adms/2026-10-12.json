@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-12",
+  "title": "青い帯をほどく店 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "青い帯をほどく店",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-12_青い帯をほどく店",
+      "entry": "standalone_start",
+      "summary": "海の見える部屋に、机が1つある。無地の白い本には青い帯が巻かれ、ページの間から赤や桃色の糸がのぞいていた。これは日記の表紙から始まる、創作の夢だ。"
+    },
+    {
+      "id": "turn",
+      "title": "注文より先に糸が出た",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-12_青い帯をほどく店",
+      "entry": "turn",
+      "summary": "猫の本なら、先にそう書いておけばよいのだ。……だが、表紙に耳はないな。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-12_青い帯をほどく店",
+      "entry": "choose",
+      "summary": "本を開いてみる、または青い帯をしおりにする"
+    },
+    {
+      "id": "END_A",
+      "title": "ページから来た風",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-12_青い帯をほどく店",
+      "entry": "END_A",
+      "summary": "ページから来た風"
+    },
+    {
+      "id": "END_B",
+      "title": "帰り道のしおり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-12_青い帯をほどく店",
+      "entry": "END_B",
+      "summary": "帰り道のしおり"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "本を開いてみる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "青い帯をしおりにする",
+      "style": "kenkai"
+    }
+  ]
+}
