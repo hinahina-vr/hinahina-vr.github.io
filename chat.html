@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261029-r2" />
   <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r6" />
   <link rel="stylesheet" href="./assets/chat-mobile.css?v=20261028-r6" />
-  <link rel="stylesheet" href="./assets/hinata-motion.css?v=20261029-r11" />
+  <link rel="stylesheet" href="./assets/hinata-motion.css?v=20261030-cute1" />
   <link rel="stylesheet" href="./assets/chat-demo.css?v=20261029-r2" />
+  <link rel="stylesheet" href="./assets/chat-galge.css?v=20261030-cute1" />
 </head>
 <body>
   <main class="page-frame chat-page">
@@ -28,6 +29,7 @@
     <button id="hinata-touch" type="button" aria-label="ひなたにふれる。タップでなでる" hidden></button>
     <button id="hinata-pat" type="button" aria-label="ひなたをなでる" hidden><span aria-hidden="true">♡</span> なでる<span class="pat-heart" aria-hidden="true">♥</span></button>
     <button id="hinata-wave" type="button" aria-label="ひなたに手を振ってもらう" hidden>手を振って</button>
+    <button id="vn-title-open" class="game-brand" type="button" aria-label="タイトルメニューを開く"><span class="vn-brand-name">ワディーゲストハウス</span><span class="vn-menu-title">タイトルへ</span><small>WADDY GUESTHOUSE</small></button>
     <header class="chat-page-header">
       <p class="smallline">Waddy Guesthouse / Chat</p>
       <h1>住人とおしゃべり</h1>
@@ -35,9 +37,10 @@
       <nav aria-label="サイト内のページ"><a href="./index.html">ホーム</a><a href="./characters.html">住人紹介</a></nav>
       <div class="chat-toolbar" aria-label="表示と会話の操作">
         <div class="immersive-tools">
-          <button id="open-residents" type="button" aria-label="話す相手を選ぶ" title="話す相手を選ぶ（Ctrl / ⌘ + K）"><span aria-hidden="true">♧</span><span class="tool-label">相手</span></button>
-          <button id="open-history" type="button" aria-label="会話の履歴を開く"><span aria-hidden="true">≡</span><span class="tool-label">履歴</span></button>
-          <button id="open-settings" type="button" aria-label="会話の設定を開く"><span aria-hidden="true">⚙</span><span class="tool-label">設定</span></button>
+          <button id="vn-hide-ui" type="button" aria-pressed="false" aria-label="会話窓を隠してキャラクターを見る"><span aria-hidden="true">◇</span><span class="tool-label">画面だけ</span></button>
+          <button id="open-residents" type="button" aria-label="話す相手を選ぶ" title="話す相手を選ぶ（Ctrl / ⌘ + K）"><span aria-hidden="true">♧</span><span class="tool-label">住人選択</span></button>
+          <button id="open-history" type="button" aria-label="会話の履歴を開く"><span aria-hidden="true">≡</span><span class="tool-label">バックログ</span></button>
+          <button id="open-settings" type="button" aria-label="会話の設定を開く"><span aria-hidden="true">⚙</span><span class="tool-label">環境設定</span></button>
           <button id="open-chat-menu" class="mobile-chat-only" type="button" aria-label="表示と相手のメニューを開く"><span aria-hidden="true">⋯</span><span class="tool-label">メニュー</span></button>
           <button id="chat-fullscreen" type="button" aria-label="ブラウザを全画面にする" title="ブラウザを全画面にする"><span aria-hidden="true">⛶</span><span class="tool-label">全画面</span></button>
         </div>
@@ -73,9 +76,11 @@
       <aside class="chat-panel resident-panel">
         <h2>話す相手</h2>
         <label class="visually-hidden" for="persona-search">住人を探す</label>
-        <input id="persona-search" type="search" placeholder="名前で探す" autocomplete="off" />
+
         <label class="visually-hidden" for="persona-select">人格を選ぶ</label>
         <select id="persona-select" size="10" disabled></select>
+        <section id="vn-resident-preview" aria-label="選んだ住人"><p class="vn-preview-kicker">YOUR PARTNER</p><div class="vn-preview-stage"><img id="vn-preview-art" alt="" /></div><h3 id="vn-preview-name"></h3><p id="vn-preview-state"></p></section>
+        <div class="vn-resident-browser"><div class="vn-resident-search"><input id="persona-search" aria-label="住人を探す" type="search" placeholder="名前で探す" autocomplete="off" /><span id="vn-resident-count" role="status"></span></div><div id="vn-residents" role="group" aria-label="住人のカード"></div><p id="vn-no-residents" hidden>見つからなかったよ。名前を変えて探してみてね。</p><p class="resident-hint">気になる住人をタップして、おしゃべり。</p></div>
         <p id="persona-count" class="help" role="status">住人を読み込んでいるよ。</p>
       </aside>
 
@@ -84,6 +89,7 @@
           <div><h2><button id="change-resident" type="button" aria-label="話す相手を選ぶ"><span id="conversation-title">住人を選んでね</span><small class="mobile-chat-only">相手を変更 <span aria-hidden="true">⌄</span></small></button></h2><p id="active-model" class="help">モデル未設定</p></div>
           <button id="clear-conversation" type="button">会話を消す</button>
         </header>
+        <p class="vn-scene-label immersive-only"><span>ふたりの時間</span><span>WADDY GUESTHOUSE</span></p>
         <div id="chat-panel-toolbar" class="mobile-chat-only"><div><span id="mobile-chat-heading">おしゃべり</span><span id="mobile-chat-activity" aria-hidden="true" hidden></span></div><button id="chat-space-toggle" type="button" aria-pressed="false">会話を広く <span aria-hidden="true">↕</span></button></div>
         <div id="transcript" role="log" aria-label="会話の履歴" aria-live="off" tabindex="0"><p class="empty-chat">今日は何を話そう？</p></div>
         <button id="latest-chat" class="mobile-chat-only" type="button" hidden>最新の会話へ <span aria-hidden="true">↓</span></button>
@@ -127,7 +133,7 @@
         <button id="settings-tab-visuals" type="button" role="tab" aria-controls="settings-panel-visuals" aria-selected="false" tabindex="-1" data-settings-tab="visuals"><span aria-hidden="true">✧</span><span>画面・演出<small>背景・光・動き</small></span></button>
         <button id="settings-tab-history" type="button" role="tab" aria-controls="settings-panel-history" aria-selected="false" tabindex="-1" data-settings-tab="history"><span aria-hidden="true">▤</span><span>保存・履歴<small>記録・書き出し</small></span></button>
       </nav>
-      <div id="drawer-content"></div>
+      <img id="vn-menu-portrait" alt="" aria-hidden="true" /><div id="drawer-content"></div>
       <button id="back-to-conversation" type="button">会話に戻る <span aria-hidden="true">↵</span></button>
     </dialog>
     <section id="immersive-preferences" hidden>
@@ -147,8 +153,25 @@
       <fieldset class="wardrobe-grid"><legend class="visually-hidden">魂の着せ替え</legend><div id="wardrobe-choices"></div></fieldset>
       <p id="wardrobe-status" class="help" role="status"></p>
     </section>
+    <button id="vn-show-ui" type="button">会話に戻る <span aria-hidden="true">↵</span></button>
+
+    <dialog id="vn-title" aria-labelledby="vn-title-name">
+      <div class="vn-title-content">
+        <p class="vn-eyebrow">WADDY GUESTHOUSE</p>
+        <h1 id="vn-title-name">ワディー<br><span>ゲストハウス</span></h1>
+        <p class="vn-title-copy">おかえり。<br>きょうも、きみのとなりに。</p>
+        <nav aria-label="タイトルメニュー">
+          <button id="vn-resume" type="button"><span>ふたりの時間へ</span><small><span id="vn-title-persona">ひなた</span>とおしゃべり</small><b aria-hidden="true">›</b></button>
+          <button id="vn-choose" type="button">住人を選ぶ <small>CHARACTERS</small></button>
+          <button id="vn-config" type="button">環境設定 <small>CONFIGURATION</small></button>
+        </nav>
+        <p class="vn-title-note">キーなしで、短いおしゃべりをおためし。<br>APIキーがあれば、もっと自由に話せるよ。</p>
+        <a href="./index.html" class="vn-title-home">ゲストハウスのホームへ ↗</a>
+      </div>
+      <span class="vn-title-caption" aria-hidden="true">灯りのついている場所で、待っている。</span>
+    </dialog>
     <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
   </main>
-  <script type="module" src="./src/chat/app.mjs?v=20261029-r11"></script>
+  <script type="module" src="./src/chat/app.mjs?v=20261030-cute1"></script>
 </body>
 </html>

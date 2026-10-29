@@ -17,7 +17,17 @@ uniform float uEnergy;
 uniform vec2 uPointer;
 float ellipse(vec2 p, vec2 radius) { return 1. - smoothstep(.9, 1., length(p / radius)); }
 float star(vec2 p) { float a = atan(p.y, p.x); float r = .047 * (.72 + .28 * cos(a * 5.)); return 1. - smoothstep(r - .004, r + .004, length(p)); }
-float heart(vec2 p) { p *= 16.; if (max(abs(p.x), abs(p.y)) > 1.5) return 0.; float a = dot(p, p) - 1.; float d = a * a * a - p.x * p.x * p.y * p.y * p.y; return 1. - smoothstep(-.03, .04, d); }
+// A distance field keeps the cleft and tip equally sharp; the old polynomial
+// flattened near its zero gradient and left soft streaks below the lobes.
+float heart(vec2 p) {
+  p *= 16.;
+  vec2 diamond = abs(vec2(p.x + p.y, p.y - p.x) * .70710678) - vec2(.5);
+  float body = length(max(diamond, 0.)) + min(max(diamond.x, diamond.y), 0.);
+  float lobes = length(vec2(abs(p.x) - .35355339, p.y - .35355339)) - .5;
+  float distance = min(body, lobes);
+  float pixel = 32. / (uResolution.y * uScale);
+  return 1. - smoothstep(-pixel, pixel, distance);
+}
 void main() {
   vec2 p = vUv; p.x *= uResolution.x / uResolution.y;
   vec2 q = (p - vec2(0., .14)) / uScale;
@@ -35,7 +45,7 @@ void main() {
     vec2 floating = vec2(sin(uTime * .45) * .015, cos(uTime * .6) * .018);
     if (uTheme < .5) {
       float hearts = heart(q - vec2(.55, .27) - floating) + heart(q + vec2(.52, .2) + floating);
-      decoration = clamp(hearts, 0., 1.) * .7; ornament = vec3(.97, .64, .77);
+      decoration = clamp(hearts, 0., 1.) * .88; ornament = vec3(.98, .55, .72);
     } else if (uTheme < 1.5) {
       float stars = star(q - vec2(.51, .30) - floating) + star(q + vec2(.51, .19) + floating) + star(q - vec2(-.37, .47));
       decoration = clamp(stars, 0., 1.) * .8; ornament = vec3(1., .79, .45);

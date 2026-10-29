@@ -2,7 +2,8 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs?v=20261029-r11';
+import { createGameUI } from './game-ui.mjs?v=20261030-cute1';
+import { createChatView } from './immersive.mjs?v=20261030-cute1';
 import { DEMO_CHOICES, demoGreeting, streamDemo } from './demo.mjs?v=20261029-r2';
 
 const $ = id => document.getElementById(id);
@@ -18,6 +19,7 @@ const drafts = new Map();
 const demoConversations = Object.create(null);
 let retryAvailable = false;
 const view = createChatView();
+createGameUI();
 
 $('api-key').value = apiKey;
 $('remember-key').checked = !!apiKey;

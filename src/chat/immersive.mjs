@@ -1,5 +1,6 @@
+import { portraitUrl } from './portraits.mjs?v=20261030-cute1';
 import { SOUL_THEMES } from './themes.mjs';
-const VISUAL_VERSION = '20261029-r11';
+const VISUAL_VERSION = '20261030-heart1';
 const VISUAL_KEY = 'waddy-chat-visual-v1';
 const PALETTE = [[.87, .62, .76], [.62, .75, .98], [.78, .67, .96], [.72, .88, .84], [.95, .8, .59], [.75, .79, .97]];
 
@@ -52,7 +53,7 @@ export function createChatView() {
     if (!hinata && !hinataLoading) {
       hinataLoading = true;
       try {
-        const { HinataMotion } = await import('./hinata-layered.mjs?v=20261029-r11');
+        const { HinataMotion } = await import('./hinata-cute.mjs?v=20261030-cute1');
         // Another resident may have been selected while the module was loading.
         if (wanted()) hinata = new HinataMotion(portrait, $('hinata-pat'));
       } catch { document.body.dataset.hinaMotion = 'off'; }
@@ -206,11 +207,11 @@ export function createChatView() {
     returnFocus = document.activeElement;
     drawerKind = kind;
     const nodes = kind === 'residents' ? [document.querySelector('.resident-panel')]
-      : kind === 'menu' ? [$('open-residents'), $('open-wardrobe'), $('chat-fullscreen'), $('immersive-toggle')].filter(node => !node.hidden)
+      : kind === 'menu' ? [$('open-residents'), $('open-wardrobe'), $('vn-title-open'), $('vn-hide-ui'), $('chat-fullscreen'), $('immersive-toggle')].filter(node => !node.hidden)
       : kind === 'wardrobe' ? [$('soul-wardrobe')]
       : kind === 'history' ? [$('transcript'), $('clear-conversation'), $('export-conversation')]
       : [$('connection'), document.querySelector('.additional-settings'), document.querySelector('.history-settings'), $('immersive-preferences')];
-    $('drawer-title').textContent = { residents: '話す相手を選ぶ', history: '会話の履歴', settings: 'おしゃべり設定', wardrobe: '魂の着せ替え', menu: '表示と相手' }[kind];
+    $('drawer-title').textContent = { residents: '住人選択', history: 'バックログ', settings: '環境設定', wardrobe: '着せ替え', menu: 'ゲームメニュー' }[kind];
     $('settings-tabs').hidden = kind !== 'settings';
     const categories = ['connection', 'personality', 'history', 'visuals'];
     for (const [index, node] of nodes.entries()) {
@@ -226,11 +227,12 @@ export function createChatView() {
       if (node.tagName === 'DETAILS') { node.open = true; node.querySelector('summary').inert = kind === 'settings'; }
     }
     drawer.dataset.panel = kind; drawer.showModal(); updateReadingIndicator();
-    if (kind === 'residents') $('persona-search').focus();
+    document.dispatchEvent(new CustomEvent('chat:panel-open',{detail:kind}));
+    if (kind === 'residents') { if (!mobileLayout.matches) $('persona-search').focus(); else document.querySelector('#vn-residents button[aria-pressed=true]')?.focus({preventScroll:true}); }
     if (kind === 'history') { $('transcript').scrollTop = $('transcript').scrollHeight; $('transcript').focus(); }
     if (kind === 'settings') {
       selectSettingsTab(state.connected ? 'personality' : 'connection');
-      (state.connected ? $('personality') : $('api-key')).focus();
+      $('settings-tab-' + (state.connected ? 'personality' : 'connection')).focus({preventScroll:true});
     }
   }
   function selectSettingsTab(id, focus = false) {
@@ -288,6 +290,7 @@ export function createChatView() {
     else if (document.fullscreenElement) void document.exitFullscreen().catch(() => {});
   }
   $('immersive-toggle').addEventListener('click', () => setMode(!immersive));
+  for (const id of ['vn-title-open', 'vn-hide-ui']) $(id).addEventListener('click', () => { if (drawer.open) closeDrawer(); }, true);
   $('open-residents').addEventListener('click', () => openDrawer('residents'));
   $('change-resident').addEventListener('click', () => openDrawer('residents'));
   $('open-chat-menu').addEventListener('click', () => openDrawer('menu'));
@@ -366,8 +369,7 @@ export function createChatView() {
       if (/^[a-z0-9-]+$/.test(id) && activePersona !== id) {
         activePersona = id; document.body.dataset.soulCharacter = id; document.body.dataset.soulArt = 'loading';
         $('settings-persona-name').textContent = $('conversation-title').textContent;
-        const portraitFile = id === 'hina' ? 'hina-indoor.png' : id + '.webp';
-        portrait.src = new URL('../../assets/chat/characters/' + portraitFile + '?v=' + VISUAL_VERSION, import.meta.url).href;
+        portrait.src = portraitUrl(id);
         $('settings-persona-art').src = portrait.src;
         for (const image of document.querySelectorAll('.mini-soul img')) image.src = portrait.src;
       }
