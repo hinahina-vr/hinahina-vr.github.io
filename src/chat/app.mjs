@@ -2,7 +2,8 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createChatView } from './immersive.mjs?v=20261028-r6';
+import { createChatView } from './immersive.mjs?v=20261029-r11';
+import { DEMO_CHOICES, demoGreeting, streamDemo } from './demo.mjs?v=20261029-r2';
 
 const $ = id => document.getElementById(id);
 let storage;
@@ -14,6 +15,7 @@ let persona = null;
 let activeRequest = null;
 let loadSequence = 0;
 const drafts = new Map();
+const demoConversations = Object.create(null);
 let retryAvailable = false;
 const view = createChatView();
 
@@ -24,25 +26,38 @@ $('remember-history').checked = state.rememberHistory;
 
 function save() { return saveState(storage, state); }
 function setError(message = '') { $('chat-error').textContent = message; $('chat-error').hidden = !message; }
-function messages() { return state.conversations[state.selected] ||= []; }
+function isDemo() { return !apiKey; }
+function messages() { return (isDemo() ? demoConversations : state.conversations)[state.selected] ||= []; }
+function replaceMessages(items) { (isDemo() ? demoConversations : state.conversations)[state.selected] = items; }
+function connectionChanged() {
+  activeRequest?.abort(); activeRequest = null; retryAvailable = false;
+  if (persona) renderConversation();
+  updateReady();
+}
 function updateReady() {
   const busy = !!activeRequest;
-  $('send').disabled = busy || !persona || !apiKey || !state.model || !currentDraft().trim();
+  const demo = isDemo();
+  $('send').disabled = busy || !persona || (!demo && !state.model) || !currentDraft().trim();
   $('message').disabled = !persona || busy;
   $('stop').hidden = !busy;
   $('persona-select').disabled = busy || !catalog.length;
   $('persona-search').disabled = busy;
   for (const id of ['clear-conversation', 'save-personality', 'reset-personality']) $(id).disabled = busy || !persona;
-  $('connection-state').textContent = apiKey && state.model ? '設定済み' : '未設定';
-  $('active-model').textContent = state.model || 'モデル未設定';
-  $('retry').hidden = busy || !retryAvailable || !apiKey || !state.model;
+  $('connection-state').textContent = demo ? 'おためし' : state.model ? '設定済み' : '未設定';
+  $('active-model').textContent = demo ? 'おためし · 定型の返事' : state.model || 'モデル未設定';
+  $('demo-notice').hidden = !demo;
+  $('clear-conversation').textContent = demo ? 'おためしの会話を消す' : '会話を消す';
+  $('export-conversation').textContent = demo ? 'おためしの会話を書き出す' : '会話を書き出す';
+  document.body.dataset.chatDemo = String(demo);
+  $('retry').hidden = busy || !retryAvailable || (!demo && !state.model);
   view.update({ busy, connected: !!apiKey && !!state.model, typing: !!currentDraft().trim() });
 }
 
 function currentDraft() { return $('message').value; }
-function renderMessage(message, incomplete = false) {
+function renderMessage(message, incomplete = false, demo = isDemo()) {
   const node = document.createElement('article');
   node.className = `chat-message ${message.role}${incomplete ? ' incomplete' : ''}`;
+  if (demo && message.role === 'assistant') node.classList.add('demo-reply');
   const speaker = document.createElement('p');
   speaker.className = 'speaker';
   speaker.textContent = message.role === 'user' ? 'あなた' : persona.name;
@@ -56,9 +71,23 @@ function renderMessage(message, incomplete = false) {
 
 function renderConversation() {
   $('transcript').replaceChildren();
+  // Saved conversations stay readable after a key is removed or expires from memory.
+  if (isDemo()) (state.conversations[state.selected] || []).forEach(m => renderMessage(m, false, false));
   if (!messages().length) {
-    const empty = document.createElement('p');
-    empty.className = 'empty-chat'; empty.textContent = '今日は何を話そう？'; $('transcript').append(empty);
+    if (isDemo()) {
+      const greeting = renderMessage({ role: 'assistant', content: demoGreeting(persona.id) });
+      greeting.node.dataset.demoGreeting = 'true';
+      const choices = document.createElement('div'); choices.className = 'demo-choices'; choices.setAttribute('aria-label', 'おためしの話題');
+      for (const text of DEMO_CHOICES) {
+        const button = document.createElement('button'); button.type = 'button'; button.textContent = text;
+        button.addEventListener('click', () => { if (activeRequest) return; $('message').value = text; updateReady(); void send(); });
+        choices.append(button);
+      }
+      $('transcript').append(choices);
+    } else {
+      const empty = document.createElement('p');
+      empty.className = 'empty-chat'; empty.textContent = '今日は何を話そう？'; $('transcript').append(empty);
+    }
   } else messages().forEach(m => renderMessage(m));
   $('transcript').scrollTop = $('transcript').scrollHeight;
   view.conversationRendered();
@@ -97,7 +126,7 @@ async function selectPersona(id) {
     $('personality').value = state.additions[id] || '';
     $('personality-status').textContent = '保存した設定は、次の送信から使うよ。';
     $('message').value = drafts.get(id) || '';
-    $('chat-status').textContent = apiKey && state.model ? '話しかけてみてね。' : '接続設定を入力すると話せるよ。';
+    $('chat-status').textContent = isDemo() ? 'キーなしでおためし中。用意したセリフで返すよ。' : '話しかけてみてね。';
     renderConversation(); save();
     const url = new URL(location.href); url.searchParams.set('persona', id); history.replaceState(null, '', url);
   } catch {
@@ -139,15 +168,15 @@ $('connection-form').addEventListener('submit', event => {
     ? 'このページでは使えるよ。ブラウザへの保存はできなかった。'
     : $('remember-key').checked ? 'APIキーをこのブラウザに保存したよ。' : 'このページでAPIキーを使うよ。保存はしていないよ。';
   $('api-key').type = 'password'; $('toggle-key').textContent = '表示'; $('toggle-key').setAttribute('aria-pressed', 'false');
-  $('chat-status').textContent = '話しかけてみてね。'; setError(); updateReady();
+  $('chat-status').textContent = '接続したよ。ここからは自由に話しかけてね。'; setError(); connectionChanged();
   view.connectionApplied();
 });
 $('forget-key').addEventListener('click', () => {
-  activeRequest?.abort(); apiKey = ''; $('api-key').value = ''; $('remember-key').checked = false;
+  apiKey = ''; $('api-key').value = ''; $('remember-key').checked = false;
   const removed = persistKey(storage, '', false);
   setError();
   $('connection-message').textContent = removed ? 'APIキーを消したよ。' : 'キーの使用を止めたよ。保存データはブラウザのサイトデータ設定から削除してね。';
-  $('chat-status').textContent = '接続設定にAPIキーを入力してね。'; updateReady();
+  $('chat-status').textContent = 'おためしに戻ったよ。キーなしでも短いお話ができるよ。'; connectionChanged();
 });
 $('load-models').addEventListener('click', async () => {
   $('load-models').disabled = true; $('model-note').textContent = 'OpenRouterからモデル一覧を取得しているよ。';
@@ -165,7 +194,7 @@ $('load-models').addEventListener('click', async () => {
 $('personality').addEventListener('input', () => { $('personality-status').textContent = '未保存。保存すると次の送信から反映するよ。'; });
 $('save-personality').addEventListener('click', () => {
   state.additions[state.selected] = $('personality').value.trim();
-  $('personality-status').textContent = save() ? 'この人格の追加設定を保存したよ。次の送信から使うよ。' : 'このページでは反映できるよ。ブラウザへの保存はできなかった。';
+  $('personality-status').textContent = save() ? isDemo() ? '保存したよ。APIキーを設定して話すときに使うよ。' : 'この人格の追加設定を保存したよ。次の送信から使うよ。' : 'このページでは反映できるよ。ブラウザへの保存はできなかった。';
 });
 $('reset-personality').addEventListener('click', () => {
   delete state.additions[state.selected]; $('personality').value = '';
@@ -173,16 +202,17 @@ $('reset-personality').addEventListener('click', () => {
 });
 $('remember-history').addEventListener('change', () => {
   state.rememberHistory = $('remember-history').checked;
-  $('chat-status').textContent = save() ? state.rememberHistory ? 'このブラウザに会話を保存するよ。' : '保存した履歴を削除したよ。今のページでは会話を続けられるよ。' : 'ブラウザの保存データを更新できなかった。';
+  $('chat-status').textContent = save() ? state.rememberHistory ? isDemo() ? '接続後の会話を保存するよ。おためしの会話は、このページだけに残るよ。' : 'このブラウザに会話を保存するよ。' : '保存した履歴を削除したよ。今のページでは会話を続けられるよ。' : 'ブラウザの保存データを更新できなかった。';
 });
 $('clear-conversation').addEventListener('click', () => {
-  if (!persona || !messages().length || !window.confirm(`${persona.name}との会話を消す？`)) return;
-  state.conversations[state.selected] = []; retryAvailable = false; save(); renderConversation(); setError(); updateReady();
+  if (!persona || !messages().length || !window.confirm(`${persona.name}との${isDemo() ? 'おためしの' : ''}会話を消す？`)) return;
+  replaceMessages([]); retryAvailable = false; save(); renderConversation(); setError(); updateReady();
   $('chat-status').textContent = '会話を消したよ。';
 });
 $('export-conversation').addEventListener('click', () => {
   if (!persona) return;
-  const data = exportConversation(state.selected, messages(), state.additions[state.selected]);
+  let data = exportConversation(state.selected, messages(), isDemo() ? '' : state.additions[state.selected]);
+  if (isDemo()) data = JSON.stringify({ ...JSON.parse(data), mode: 'demo', replySource: 'preset' }, null, 2);
   const url = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
   const link = document.createElement('a'); link.href = url; link.download = `waddy-chat-${state.selected}.json`;
   document.body.append(link); link.click(); link.remove();
@@ -190,8 +220,9 @@ $('export-conversation').addEventListener('click', () => {
 });
 
 async function send(retry = false) {
-  if (activeRequest || !persona || !apiKey || !state.model) return;
-  if ($('personality').value.trim() !== (state.additions[state.selected] || '')) {
+  if (activeRequest || !persona || (!isDemo() && !state.model)) return;
+  const demo = isDemo();
+  if (!demo && $('personality').value.trim() !== (state.additions[state.selected] || '')) {
     setError('追加設定が未保存だよ。保存するか、元の内容に戻してから送ってね。'); return;
   }
   const text = currentDraft().trim();
@@ -199,7 +230,7 @@ async function send(retry = false) {
   if (retry && (messages().at(-1)?.role !== 'user' || !retryAvailable)) return;
   if (!retry) {
     messages().push({ role: 'user', content: text });
-    state.conversations[state.selected] = messages().slice(-MAX_HISTORY);
+    replaceMessages(messages().slice(-MAX_HISTORY));
     $('message').value = ''; drafts.delete(state.selected); save();
   }
   retryAvailable = false; setError(); renderConversation();
@@ -209,14 +240,18 @@ async function send(retry = false) {
   const timeout = setTimeout(() => request.abort(new DOMException('timeout', 'TimeoutError')), 120000);
   $('chat-status').textContent = `${persona.name}の返事を待っているよ。`; updateReady();
   try {
-    const answer = await sendCompletion({ apiKey, model: state.model, persona, addition: state.additions[state.selected], history: messages(), signal: request.signal,
-      onText: text => { pending.body.textContent = text; view.replyPulse(); view.transcriptChanged(); },
-      onModel: model => { $('active-model').textContent = model; },
-    });
+    const onText = text => { if (activeRequest !== request) return; pending.body.textContent = text; view.replyPulse(); view.transcriptChanged(); };
+    const answer = demo
+      ? await streamDemo({ id: persona.id, text: messages().at(-1).content, history: messages(), signal: request.signal, onText })
+      : await sendCompletion({ apiKey, model: state.model, persona, addition: state.additions[state.selected], history: messages(), signal: request.signal, onText,
+        onModel: model => { if (activeRequest === request) $('active-model').textContent = model; },
+      });
+    if (activeRequest !== request) return;
     messages().push({ role: 'assistant', content: answer });
-    state.conversations[state.selected] = messages().slice(-MAX_HISTORY); save(); pending.node.classList.remove('incomplete');
-    $('chat-status').textContent = '返事が届いたよ。';
+    replaceMessages(messages().slice(-MAX_HISTORY)); save(); pending.node.classList.remove('incomplete');
+    $('chat-status').textContent = demo ? 'おためしの返事だよ。APIキーを入れると、もっと自由に話せるよ。' : '返事が届いたよ。';
   } catch (error) {
+    if (activeRequest !== request) return;
     // Partial replies remain visibly marked, but never enter the next request or saved history.
     if (!pending.body.textContent) pending.node.remove();
     retryAvailable = true;
@@ -226,7 +261,7 @@ async function send(retry = false) {
       setError(error instanceof ChatError ? error.message : '返事を受け取れなかった。もう一度送ってね。');
       $('chat-status').textContent = '送信できなかった会話は、もう一度送れるよ。';
     }
-  } finally { clearTimeout(timeout); activeRequest = null; updateReady(); view.replyFinished(); }
+  } finally { clearTimeout(timeout); if (activeRequest === request) { activeRequest = null; updateReady(); view.replyFinished(); } }
 }
 $('message-form').addEventListener('submit', event => { event.preventDefault(); void send(); });
 $('retry').addEventListener('click', () => { void send(true); });
@@ -235,7 +270,7 @@ $('stop').addEventListener('click', () => activeRequest?.abort());
 // Revoking key/history persistence in another tab takes effect here as well.
 window.addEventListener('storage', event => {
   if (event.key === API_KEY_STORAGE_KEY) {
-    activeRequest?.abort(); apiKey = readRememberedKey(storage); $('api-key').value = apiKey; $('remember-key').checked = !!apiKey; updateReady();
+    apiKey = readRememberedKey(storage); $('api-key').value = apiKey; $('remember-key').checked = !!apiKey; connectionChanged();
   }
   if (event.key === STORAGE_KEY && readState(storage).rememberHistory === false) state.rememberHistory = $('remember-history').checked = false;
 });

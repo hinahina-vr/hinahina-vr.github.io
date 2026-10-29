@@ -1,0 +1,15 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>ひなた 透けと衣装の比較</title>
+<style>body{margin:0;background:#eee5e8;font:16px sans-serif;color:#41313b}h1,p{margin:12px 25px}canvas{display:block;margin:0 25px;width:1440px;height:850px}button,select{font:inherit;padding:10px;margin:8px}output{margin:15px}.labels{width:1440px;display:flex;margin:0 25px}.labels b{width:720px;text-align:center;padding:10px 0;font-size:22px}</style>
+<h1>ひなた — 腰の透けと衣装の比較</h1><p>左：腰が透けるr10。右：衣装を足して表情と動きを整理したr11。実際のチャットでは衣装の下端は会話欄の後ろに入る。</p><div class="labels"><b>修正前 r10（腰が透ける）</b><b>修正後 r11</b></div>
+<canvas id="comparison"></canvas><button data-wave="0">待機</button><button data-wave="0.25">25%</button><button data-wave="0.5">50%</button><button data-wave="0.75">75%</button><button data-wave="1">手を上げる</button><button id="wrist">手首を振る</button><select aria-label="表情" id="expression"><option>idle</option><option>smile</option><option>talk</option><option>wink</option></select><output id="status">読み込み中</output>
+<script type="module">
+import{Application,Texture,Container}from'../../src/chat/vendor/pixi-hinata.mjs';
+import{HinataRig as Before}from'./before-r10-hinata-rig.mjs';
+import{HinataRig as After}from'../../src/chat/hinata-rig.mjs?v=20261029-r11';
+const app=new Application();await app.init({canvas:document.querySelector('canvas'),width:1440,height:850,background:0x8a777f,antialias:true,preference:'webgl',autoStart:false,sharedTicker:false,manageImports:false});
+const load=name=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(Texture.from(i).source);i.onerror=reject;i.src='../../assets/chat/hina-rig/'+name;});
+const sources=await Promise.all(['core-v2.png','arms-posed-v5.png','hair-v2.png','outfit-lower-v1.png'].map(load));const newSources=[sources[0],await load('arms-posed-v5.png'),sources[2],sources[3]];const rigs=[];
+for(let col=0;col<2;col++){const cell=new Container();app.stage.addChild(cell);cell.position.set(col*720+92,0);cell.scale.set(.67);const rig=new(col?After:Before)(col?newSources:sources);cell.addChild(rig.root);rigs.push(rig);}
+let wave=1,time=.34;function render(){for(const rig of rigs)rig.update({time,energy:1.25,head:0,body:0,bounce:0,hairLag:0,expression:document.querySelector('#expression').value,wave,talking:0,happy:0,lookY:0});app.render();document.querySelector('#status').textContent=`描画完了 / wave ${wave} / time ${time.toFixed(2)}`;document.body.dataset.ready='true';}
+document.querySelectorAll('[data-wave]').forEach(b=>b.onclick=()=>{wave=Number(b.dataset.wave);render();});document.querySelector('#wrist').onclick=()=>{time+=.17;render();};document.querySelector('#expression').onchange=render;render();
+</script></html>

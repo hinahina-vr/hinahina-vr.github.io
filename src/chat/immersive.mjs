@@ -1,5 +1,5 @@
 import { SOUL_THEMES } from './themes.mjs';
-const VISUAL_VERSION = '20261028-r2';
+const VISUAL_VERSION = '20261029-r11';
 const VISUAL_KEY = 'waddy-chat-visual-v1';
 const PALETTE = [[.87, .62, .76], [.62, .75, .98], [.78, .67, .96], [.72, .88, .84], [.95, .8, .59], [.75, .79, .97]];
 
@@ -18,9 +18,13 @@ export function createChatView() {
   let activeReplyNode = null;
   let replyStartHeld = false;
   let activePersona = '';
+  let characterMotion = stored.characterMotion !== false;
+  let hinataEnergy = [.5, .85, 1.25].includes(stored.hinataEnergy) ? stored.hinataEnergy : 1.25;
+  let hinata = null;
+  let hinataLoading = false;
   const portrait = $('soul-character');
-  portrait.addEventListener('load', () => { document.body.dataset.soulArt = 'ready'; });
-  portrait.addEventListener('error', () => { document.body.dataset.soulArt = 'unavailable'; });
+  portrait.addEventListener('load', () => { document.body.dataset.soulArt = 'ready'; void syncHinata(); });
+  portrait.addEventListener('error', () => { document.body.dataset.soulArt = 'unavailable'; hinata?.setActive(false); });
   let reduced = typeof stored.reduced === 'boolean' ? stored.reduced : prefersReduced.matches;
   let intensity = Number.isFinite(stored.intensity) ? Math.max(20, Math.min(100, stored.intensity)) : 65;
   let theme = SOUL_THEMES.some(t => t.id === stored.theme) ? stored.theme : 'sakura';
@@ -40,7 +44,23 @@ export function createChatView() {
   let focusComposerAfterClose = false;
 
   function persist() {
-    try { storage?.setItem(VISUAL_KEY, JSON.stringify({ mode: immersive ? 'immersive' : 'classic', reduced, intensity, theme, scene, chatSpace })); } catch { /* Keep using the in-memory choice. */ }
+    try { storage?.setItem(VISUAL_KEY, JSON.stringify({ mode: immersive ? 'immersive' : 'classic', reduced, intensity, theme, scene, chatSpace, characterMotion, hinataEnergy })); } catch { /* Keep using the in-memory choice. */ }
+  }
+  async function syncHinata() {
+    const wanted = () => immersive && activePersona === 'hina' && theme !== 'night' && characterMotion && document.body.dataset.soulArt === 'ready';
+    if (!wanted()) { hinata?.setActive(false); $('hinata-pat').hidden = true; $('hinata-touch').hidden = true; $('hinata-wave').hidden = true; return; }
+    if (!hinata && !hinataLoading) {
+      hinataLoading = true;
+      try {
+        const { HinataMotion } = await import('./hinata-layered.mjs?v=20261029-r11');
+        // Another resident may have been selected while the module was loading.
+        if (wanted()) hinata = new HinataMotion(portrait, $('hinata-pat'));
+      } catch { document.body.dataset.hinaMotion = 'off'; }
+      finally { hinataLoading = false; }
+    }
+    hinata?.configure(reduced, hinataEnergy);
+    hinata?.setPhase(document.body.dataset.soulPhase || 'idle');
+    hinata?.setActive(wanted());
   }
   function applyTheme() {
     const index = SOUL_THEMES.findIndex(t => t.id === theme), item = SOUL_THEMES[index];
@@ -50,6 +70,7 @@ export function createChatView() {
     renderer?.setTheme(index); renderer?.setTint(tint);
     $('wardrobe-status').textContent = `${item.name}を着ているよ。`;
     for (const radio of document.querySelectorAll('input[name=soul-theme]')) radio.checked = radio.value === theme;
+    void syncHinata();
   }
   for (const item of SOUL_THEMES) {
     const label = document.createElement('label'); label.className = 'wardrobe-option'; label.dataset.theme = item.id;
@@ -133,6 +154,7 @@ export function createChatView() {
   function refreshPhase() {
     const phase = state.busy ? replying ? 'replying' : 'waiting' : state.typing ? 'typing' : 'idle';
     document.body.dataset.soulPhase = phase;
+    hinata?.setPhase(phase);
     const activity = phase === 'waiting' ? '返事を考えてる…' : phase === 'replying' ? 'お返事が届いてる…' : '';
     $('mobile-chat-activity').textContent = activity; $('mobile-chat-activity').hidden = !activity;
     $('mobile-chat-heading').hidden = !!activity;
@@ -140,7 +162,7 @@ export function createChatView() {
     $('soul-presence-text').textContent = { idle: 'ここにいるよ', typing: 'あなたのペースで', waiting: '言葉を探している', replying: 'ことばが届いている' }[phase];
     $('soul-session').textContent = state.connected ? 'SOUL / CONNECTED' : 'SOUL / SPACE';
     renderer?.setEnergy({ idle: .03, typing: .2, waiting: .5, replying: .85 }[phase]);
-    $('composer-settings').hidden = !immersive || state.connected;
+    $('composer-settings').hidden = true;
     $('open-residents').disabled = state.busy; $('change-resident').disabled = state.busy;
     autoSize(); updateReadingIndicator();
   }
@@ -261,6 +283,7 @@ export function createChatView() {
     const url = new URL(location.href); url.searchParams.set('mode', enabled ? 'immersive' : 'classic'); history.replaceState(null, '', url);
     if (persistChoice) persist();
     viewport(); refreshPhase(); renderer?.setActive(enabled);
+    void syncHinata();
     if (enabled) { void ensureRenderer(); }
     else if (document.fullscreenElement) void document.exitFullscreen().catch(() => {});
   }
@@ -272,6 +295,7 @@ export function createChatView() {
   $('open-settings').addEventListener('click', () => openDrawer('settings'));
   $('open-wardrobe').addEventListener('click', () => openDrawer('wardrobe'));
   $('composer-settings').addEventListener('click', () => openDrawer('settings'));
+  $('demo-connect').addEventListener('click', () => openDrawer('settings'));
   $('chat-fullscreen').hidden = !document.fullscreenEnabled;
   $('chat-fullscreen').addEventListener('click', async () => {
     try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); }
@@ -290,7 +314,12 @@ export function createChatView() {
     document.body.classList.toggle('soul-reduced', reduced);
     $('soul-intensity-value').value = intensity + '%';
     renderer?.configure({ reduced, brightness: .35 + intensity / 80 }); persist();
+    hinata?.configure(reduced, hinataEnergy);
   }
+  $('character-motion').checked = characterMotion;
+  $('hinata-energy').value = String(hinataEnergy);
+  $('hinata-energy').addEventListener('change', () => { hinataEnergy = Number($('hinata-energy').value); hinata?.configure(reduced, hinataEnergy); persist(); });
+  $('character-motion').addEventListener('change', () => { characterMotion = $('character-motion').checked; void syncHinata(); persist(); });
   $('soul-reduced-motion').addEventListener('change', configureVisuals);
   $('soul-intensity').addEventListener('input', configureVisuals);
   prefersReduced.addEventListener('change', event => {
@@ -308,6 +337,7 @@ export function createChatView() {
   window.addEventListener('pagehide', () => renderer?.stop());
   window.addEventListener('pageshow', () => { if (immersive) renderer?.start(); });
   window.addEventListener('pointermove', event => { if (immersive && !drawer.open) renderer?.setPointer(event.clientX / innerWidth * 2 - 1, 1 - event.clientY / innerHeight * 2); }, { passive: true });
+  document.documentElement.addEventListener('pointerleave', () => hinata?.setPointer(0, 0));
   $('message').addEventListener('input', () => { autoSize(); renderer?.pulse(); });
   $('message').addEventListener('keydown', event => {
     if (!immersive || mobileLayout.matches || event.isComposing || event.keyCode === 229) return;
@@ -336,7 +366,8 @@ export function createChatView() {
       if (/^[a-z0-9-]+$/.test(id) && activePersona !== id) {
         activePersona = id; document.body.dataset.soulCharacter = id; document.body.dataset.soulArt = 'loading';
         $('settings-persona-name').textContent = $('conversation-title').textContent;
-        portrait.src = new URL('../../assets/chat/characters/' + id + '.webp?v=' + VISUAL_VERSION, import.meta.url).href;
+        const portraitFile = id === 'hina' ? 'hina-indoor.png' : id + '.webp';
+        portrait.src = new URL('../../assets/chat/characters/' + portraitFile + '?v=' + VISUAL_VERSION, import.meta.url).href;
         $('settings-persona-art').src = portrait.src;
         for (const image of document.querySelectorAll('.mini-soul img')) image.src = portrait.src;
       }
@@ -344,7 +375,7 @@ export function createChatView() {
       personaTint = id === 'hina' ? PALETTE[0] : PALETTE[hash % PALETTE.length];
       applyTheme();
     },
-    replyPulse() { replying = true; refreshPhase(); renderer?.pulse(); },
+    replyPulse() { replying = true; refreshPhase(); renderer?.pulse(); hinata?.speech(); },
     connectionApplied() { if (immersive && drawerKind === 'settings') { closeDrawer(true); notice('接続設定を反映したよ。'); } },
   };
 }

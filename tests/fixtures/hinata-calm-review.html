@@ -1,0 +1,69 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>ひなた r11 動きと不透明度の検証</title>
+<link rel="stylesheet" href="../../assets/hinata-motion.css">
+<style>body{margin:0;background:#eadfe4;color:#443341;font:16px sans-serif;display:flex;gap:24px}.chat-page{position:relative;width:920px;height:900px;flex-shrink:0}#soul-character-wrap{position:absolute;inset:0 0 80px;display:flex;justify-content:center}#soul-character{width:560px;height:820px;object-fit:contain}#transcript{position:absolute;top:820px;left:90px;right:90px;height:80px;background:#fff5f7;border-radius:20px;z-index:2}aside{padding:20px;width:420px}button,select{font:inherit;padding:12px;margin:6px}output,pre{display:block;white-space:pre-wrap;font:13px monospace}#recording{width:100%;max-height:290px}#hinata-live{filter:none}</style>
+<div class="chat-page"><div id="soul-character-wrap"><img id="soul-character" alt="ひなた" src="../../assets/chat/characters/hina-indoor.png"></div>
+<button id="hinata-touch" aria-label="ひなたにふれる"></button><button id="hinata-wave">手を振って</button><button id="hinata-pat">なでる</button><div id="transcript">実装をそのまま使った動作検証。入力欄や通信は含まない。</div><dialog id="chat-drawer"></dialog></div>
+<aside><h1>r11 動きと透けの検証</h1><button id="regression">回帰検査を実行</button><button id="record">20秒の動きを記録</button><label>表情<select id="expression"><option>idle</option><option>blink</option><option>talk</option><option>smile</option><option>wink</option></select></label><button id="resume">通常の動きに戻す</button><output id="status">読み込み中</output><pre id="results"></pre><video id="recording" controls></video></aside>
+<script type="module">
+import {HinataMotion} from '../../src/chat/hinata-layered.mjs?v=20261029-r11';
+import {HinataRig as Before} from './before-r10-hinata-rig.mjs';
+const $=s=>document.querySelector(s), image=$('#soul-character');
+if(!image.complete)await new Promise(r=>image.onload=r);
+const motion=new HinataMotion(image,$('#hinata-pat'));await motion.initializing;motion.setActive(true);
+$('#status').textContent='描画準備完了';document.body.dataset.ready='true';
+const neutral={time:0,energy:0,head:0,body:0,bounce:0,hairLag:0,expression:'idle',wave:0,talking:0,happy:0,lookY:0};
+function pixel(rig,x,y){const p=rig.root.toGlobal({x,y}),gl=motion.app.renderer.gl,a=new Uint8Array(4),d=motion.canvas.width/motion.app.screen.width;gl.readPixels(Math.round(p.x*d),motion.canvas.height-1-Math.round(p.y*d),1,1,gl.RGBA,gl.UNSIGNED_BYTE,a);return [...a];}
+function render(expression='idle'){motion.rig.update({...neutral,expression});motion.app.render();}
+$('#expression').onchange=()=>{motion.stop();render($('#expression').value);$('#status').textContent='表情: '+$('#expression').value;};
+$('#resume').onclick=()=>{motion.greetUntil=0;motion.waveUntil=0;motion.setPhase('idle');motion.start();$('#status').textContent='通常の動き';};
+$('#regression').onclick=()=>{
+ motion.stop();const checks=[];const check=(name,ok,detail)=>{checks.push({name,passed:!!ok,detail});if(!ok)throw Error(name);};
+ try{
+  render();
+  const after=[590,610,630,670].map(y=>pixel(motion.rig,230,y)[3]);
+  const before=new Before(motion.sources);motion.scene.removeChild(motion.rig.root);motion.scene.addChild(before.root);before.update(neutral);motion.app.render();
+  const old=[590,610,630,670].map(y=>pixel(before,230,y)[3]);
+  motion.scene.removeChild(before.root);motion.scene.addChild(motion.rig.root);render();
+  check('r10の腰の透けを再現し、r11の同じ座標で不透明を確認',Math.min(...old)<100&&after.every(a=>a>=250),{before:old,after});
+  check('画面全体に下端フェードをかけない',getComputedStyle(motion.canvas).maskImage==='none');
+  const sample=()=>[480,510,550,570].flatMap(y=>[195,230,265].flatMap(x=>pixel(motion.rig,x,y)));
+  const body=JSON.stringify(sample());let stable=true;
+  for(const expression of ['blink','talk','smile','wink','greeting']){render(expression);stable&&=JSON.stringify(sample())===body;}
+  check('表情を切り替えても首より下の描画ピクセルが変わらない',stable);
+  motion.greetUntil=motion.waveUntil=motion.happyUntil=motion.speechUntil=0;motion.look=[0,0];motion.targetLook=[0,0];motion.setPhase('idle');
+  for(const j of Object.values(motion.joints)){j.x=0;j.v=0;}
+  let waveMax=0,tiltMax=0,bodyMax=0;
+  for(let i=0;i<=600;i++){motion.time=i/30;motion.draw(100000+i*1000/30,1/30);waveMax=Math.max(waveMax,+motion.canvas.dataset.wave);tiltMax=Math.max(tiltMax,Math.abs(+motion.canvas.dataset.tilt));bodyMax=Math.max(bodyMax,Math.abs(+motion.canvas.dataset.body));}
+  check('20秒待機しても勝手に手を振らず、体の揺れを小さく保つ',waveMax===0&&tiltMax<.01&&bodyMax<.004,{waveMax,tiltMax,bodyMax});
+  motion.waveUntil=203600;let peak=0,step=0,previous=0;
+  for(let i=0;i<=180;i++){motion.time=20+i/30;motion.draw(200000+i*1000/30,1/30);const w=+motion.canvas.dataset.wave;peak=Math.max(peak,w);step=Math.max(step,Math.abs(w-previous));previous=w;}
+  check('手振りは滑らかに始まり、待機姿勢へ戻る',peak>.95&&step<.06&&previous<.002,{peak,largestStep:step,end:previous});
+  motion.happyUntil=301900;motion.pats=1;motion.waveUntil=0;motion.time=30;motion.draw(300500,1/30);
+  check('なでた笑顔に自動の手振りを重ねない',motion.canvas.dataset.expression==='smile'&&+motion.canvas.dataset.wave<.002);
+  $('#status').textContent='回帰検査: '+checks.length+'件合格';document.body.dataset.tests='passed';
+ }catch(e){$('#status').textContent='回帰検査失敗: '+e.message;document.body.dataset.tests='failed';}
+ $('#results').textContent=JSON.stringify(checks,null,2);motion.happyUntil=0;motion.waveUntil=0;render();
+};
+$('#record').onclick=async()=>{
+ motion.stop();motion.greetUntil=motion.waveUntil=motion.happyUntil=motion.speechUntil=0;motion.time=0;motion.setPointer(0,0);for(const j of Object.values(motion.joints)){j.x=0;j.v=0;}
+ const out=document.createElement('canvas');out.width=720;out.height=760;const ctx=out.getContext('2d');const stream=out.captureStream(30),chunks=[];
+ const recorder=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9',videoBitsPerSecond:2200000});recorder.ondataavailable=e=>chunks.push(e.data);
+ let start=0,last=0,raf,waved=false,patted=false;$('#record').disabled=true;$('#status').textContent='20秒の動作を録画中';
+ recorder.start();
+ function tick(now){
+  if(!start)start=last=now;const t=(now-start)/1000,dt=Math.min(.04,(now-last)/1000);last=now;motion.time+=dt;
+  if(t>=5&&!waved){motion.waveUntil=now+3600;waved=true;}
+  if(t>=15&&!patted){motion.pats++;motion.happyUntil=now+1900;patted=true;}
+  const talking=t>=11&&t<14;motion.setPhase(talking?'replying':'idle');if(talking)motion.speechUntil=now+300;
+  motion.draw(now,dt);
+  ctx.fillStyle='#8a777f';ctx.fillRect(0,0,720,760);ctx.drawImage(motion.canvas,0,0,720,720);
+  ctx.fillStyle='#fff5f8';ctx.font='20px sans-serif';ctx.fillText((t<5?'待機':t<10?'手振り':t<15?'会話の表情':t<18?'なでる':'待機')+' / '+t.toFixed(1)+' 秒',24,746);
+  if(t<20)raf=requestAnimationFrame(tick);else recorder.stop();
+ }
+ recorder.onstop=async()=>{cancelAnimationFrame(raf);stream.getTracks().forEach(t=>t.stop());const blob=new Blob(chunks,{type:'video/webm'});$('#recording').src=URL.createObjectURL(blob);
+  try{const r=await fetch('http://127.0.0.1:8795/video',{method:'POST',headers:{'Content-Type':'video/webm'},body:blob});if(!r.ok)throw Error('save');$('#status').textContent='20秒の動画をEドライブに保存した';}
+  catch{$('#status').textContent='動画は画面内で再生可能。Eドライブへの保存は失敗';}
+  $('#record').disabled=false;motion.setPhase('idle');motion.start();
+ };raf=requestAnimationFrame(tick);
+};
+</script></html>

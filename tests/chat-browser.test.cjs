@@ -188,7 +188,8 @@ function reply(text, model = 'test/actual-model') { return `: heartbeat\n\ndata:
     await page.locator('#remember-history').uncheck();
     assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('waddy-chat-v1')).conversations), {});
     await page.reload(); await page.waitForFunction(() => !document.querySelector('#message').disabled);
-    assert.equal(await page.locator('.chat-message').count(), 0);
+    assert.equal(await page.locator('.chat-message.user').count(), 0);
+    assert.equal(await page.locator('[data-demo-greeting]').count(), 1);
     assert.equal(await page.locator('#personality').inputValue(), '映画が好き。短めに話す。');
   });
   await check('住人紹介の33リンクとホームからチャットへ進める', async () => {

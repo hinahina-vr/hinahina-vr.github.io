@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="ワディーゲストハウスの住人と、あなたのOpenRouter APIキーでおしゃべり。人格ごとの追加設定にも対応。" />
+  <meta name="description" content="ワディーゲストハウスの住人と、キーなしで短いおしゃべりをおためし。OpenRouterのAPIキーを入れると、もっと自由に話せるよ。" />
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://openrouter.ai; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'" />
   <title>住人とおしゃべり | ワディーゲストハウス</title>
   <link rel="preload" href="./assets/chat/fonts/zen-maru-gothic-regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./assets/chat.css?v=20261028-r6" />
-  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261028-r6" />
+  <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261029-r2" />
   <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r6" />
   <link rel="stylesheet" href="./assets/chat-mobile.css?v=20261028-r6" />
+  <link rel="stylesheet" href="./assets/hinata-motion.css?v=20261029-r11" />
+  <link rel="stylesheet" href="./assets/chat-demo.css?v=20261029-r2" />
 </head>
 <body>
   <main class="page-frame chat-page">
@@ -23,6 +25,9 @@
       <div class="soul-shade"></div>
       <div id="soul-character-wrap"><img id="soul-character" alt="" decoding="async" /></div>
     </div>
+    <button id="hinata-touch" type="button" aria-label="ひなたにふれる。タップでなでる" hidden></button>
+    <button id="hinata-pat" type="button" aria-label="ひなたをなでる" hidden><span aria-hidden="true">♡</span> なでる<span class="pat-heart" aria-hidden="true">♥</span></button>
+    <button id="hinata-wave" type="button" aria-label="ひなたに手を振ってもらう" hidden>手を振って</button>
     <header class="chat-page-header">
       <p class="smallline">Waddy Guesthouse / Chat</p>
       <h1>住人とおしゃべり</h1>
@@ -46,7 +51,7 @@
     <details id="connection" class="chat-panel connection-panel" open>
       <summary><span class="settings-section-icon" aria-hidden="true">◈</span> 接続設定 <span id="connection-state">未設定</span></summary>
       <form id="connection-form">
-        <p class="help">会話はブラウザからOpenRouterへ直接送信するよ。利用料は、入力したAPIキーのOpenRouterアカウントにかかるよ。</p>
+        <p class="help">キーなしでも、定型の返事でおためしできるよ。APIキーを入れると、AIと自由におしゃべりできる。会話はブラウザからOpenRouterへ直接送信し、利用料は入力したキーのアカウントにかかるよ。</p>
         <fieldset class="settings-card"><legend>OpenRouterにつなぐ</legend>
         <label for="api-key">APIキー</label>
         <div class="key-row"><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-…" /><button id="toggle-key" type="button" aria-pressed="false">表示</button></div>
@@ -83,10 +88,11 @@
         <div id="transcript" role="log" aria-label="会話の履歴" aria-live="off" tabindex="0"><p class="empty-chat">今日は何を話そう？</p></div>
         <button id="latest-chat" class="mobile-chat-only" type="button" hidden>最新の会話へ <span aria-hidden="true">↓</span></button>
         <div class="chat-feedback">
-        <p id="chat-status" role="status" class="help">接続設定を入力すると話せるよ。</p>
+        <p id="chat-status" role="status" class="help">キーなしで短いお話をおためしできるよ。</p>
         <p id="chat-error" role="alert" hidden></p>
         <button id="retry" type="button" hidden>もう一度送る</button>
         </div>
+        <div id="demo-notice" hidden><span>おためし <small>· 定型の返事</small></span><button id="demo-connect" type="button">APIキーでもっと話す <span aria-hidden="true">›</span></button></div>
         <form id="message-form">
           <label for="message" class="visually-hidden">メッセージ</label>
           <textarea id="message" rows="3" maxlength="6000" placeholder="話しかけてみてね" disabled></textarea>
@@ -96,7 +102,7 @@
         <details class="additional-settings">
           <summary><span class="settings-section-icon" aria-hidden="true">♡</span> 性格・会話の好み</summary>
           <div class="settings-persona-card"><img id="settings-persona-art" alt="" /><div><small>この子とのおしゃべり</small><h3 id="settings-persona-name">住人を選んでね</h3></div><span aria-hidden="true">✦</span></div>
-          <p class="help">好きな話題や返事の長さなどを追加できるよ。もとの性格・口調を保って反映するよ。</p>
+          <p class="help">好きな話題や返事の長さなどを追加できるよ。もとの性格・口調を保って、APIキーを使う会話に反映するよ。</p>
           <fieldset class="settings-card"><legend>あなたの好みをプラス</legend>
           <label for="personality">追加の性格・会話の好み</label>
           <textarea id="personality" rows="4" maxlength="3000" placeholder="例：映画の話が好き。返事は少し短めに。"></textarea>
@@ -131,6 +137,8 @@
       <label for="soul-scene">背景</label><select id="soul-scene"><option value="bedroom">大奥の寝室</option><option value="light">淡い光</option></select>
       <label for="soul-intensity" class="settings-range-label">光の明るさ <output id="soul-intensity-value" for="soul-intensity">65%</output></label><input id="soul-intensity" type="range" min="20" max="100" value="65" />
       </fieldset>
+      <label class="check-row settings-switch"><input id="character-motion" type="checkbox" checked /><span>ひなたのしぐさ<small>話すと表情が変わるよ。タップすると、なでられてにっこり。</small></span></label>
+      <label for="hinata-energy">ひなたの動き</label><select id="hinata-energy"><option value="0.5">おだやか</option><option value="0.85">よく動く</option><option value="1.25" selected>元気いっぱい</option></select>
       <label class="check-row settings-switch"><input id="soul-reduced-motion" type="checkbox" /><span>動きを抑える<small>光やキャラクターを、静かに表示するよ。</small></span></label>
       <p id="soul-render-note" class="help">入力と返事に合わせて、光の動きが変わるよ。</p>
     </section>
@@ -141,6 +149,6 @@
     </section>
     <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
   </main>
-  <script type="module" src="./src/chat/app.mjs?v=20261028-r6"></script>
+  <script type="module" src="./src/chat/app.mjs?v=20261029-r11"></script>
 </body>
 </html>

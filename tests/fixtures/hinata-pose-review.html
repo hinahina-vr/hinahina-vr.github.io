@@ -1,0 +1,17 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>ひなたの関節検査</title>
+<style>body{margin:0;background:#ead8cb;font:16px sans-serif;display:flex;justify-content:center;gap:16px}canvas{width:720px;height:850px;background:#8a777f}aside{width:240px;padding:20px}button,select{display:block;padding:12px;margin:8px 0;width:100%;font:inherit}output{display:block;white-space:pre-wrap}</style>
+<canvas id="stage"></canvas><aside><h1>関節の確認</h1><button data-wave="0">待機</button><button data-wave="0.25">持ち上げ 25%</button><button data-wave="0.5">持ち上げ 50%</button><button data-wave="0.75">持ち上げ 75%</button><button data-wave="1">手を上げる</button><button id="wrist">手首を振る</button><select id="expression" aria-label="表情"><option>idle</option><option>blink</option><option>talk</option><option>smile</option><option>wink</option></select><output id="info"></output></aside>
+<script type="module">
+import {Application,Texture} from '../../src/chat/vendor/pixi-hinata.mjs';
+import {HinataRig} from '../../src/chat/hinata-rig.mjs?v=20261029-r11';
+const app=new Application();await app.init({canvas:document.querySelector('#stage'),width:720,height:850,backgroundAlpha:0,antialias:true,preference:'webgl',autoStart:false,sharedTicker:false,manageImports:false});
+const load=name=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(Texture.from(i).source);i.onerror=reject;i.src='../../assets/chat/hina-rig/'+name;});
+const rig=new HinataRig(await Promise.all(['core-v2.png','arms-posed-v5.png','hair-v2.png','outfit-lower-v1.png'].map(load)));
+app.stage.addChild(rig.root);app.stage.scale.set(.67);app.stage.x=92;
+let wave=0,time=0;
+function render(){const pose=rig.update({time,energy:1.25,head:0,body:0,bounce:0,hairLag:0,expression:document.querySelector('#expression').value,wave,talking:0,happy:0,lookY:0});app.render();document.querySelector('#info').textContent=JSON.stringify({wave,time,...pose},null,2);document.body.dataset.ready='true';}
+document.querySelectorAll('[data-wave]').forEach(b=>b.onclick=()=>{wave=Number(b.dataset.wave);render();});
+document.querySelector('#wrist').onclick=()=>{time+=.17;render();};
+document.querySelector('#expression').onchange=render;
+render();
+</script></html>

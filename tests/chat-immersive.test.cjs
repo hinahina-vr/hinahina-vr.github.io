@@ -99,7 +99,7 @@ async function check(name, fn) { await fn(); checks.push({ name, passed: true })
   });
   await check('入力中の文章を保ったまま接続設定を開き、保存同意なしで使える', async () => {
     await page.locator('#message').fill('こんにちは');
-    await page.locator('#composer-settings').click();
+    await page.locator('#demo-connect').click();
     await page.locator('#chat-drawer[open]').waitFor();
     assert.equal(await page.locator('#remember-key').isChecked(), false);
     assert.equal(await page.locator('#model-id').inputValue(), 'deepseek/deepseek-v4.1-flash');

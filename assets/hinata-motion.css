@@ -1,0 +1,15 @@
+#hinata-live { position: absolute; pointer-events: none; filter: drop-shadow(0 8px 12px #442f351f); }
+#hinata-live[hidden], #hinata-wave[hidden], #hinata-pat[hidden], #hinata-touch[hidden] { display: none !important; }
+.chat-page #hinata-touch, .chat-page #hinata-touch:hover { position: fixed; z-index: 0; padding: 0; margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; transform: none; touch-action: none; cursor: grab; -webkit-tap-highlight-color: transparent; }
+.chat-page #hinata-touch:active { cursor: grabbing; }
+.chat-page #hinata-touch:focus-visible { outline: 2px dashed #cf9abb; outline-offset: -6px; border-radius: 30px; }
+body[data-hina-motion=ready] #soul-character { opacity: 0; animation: none; }
+.chat-page :is(#hinata-pat, #hinata-wave) { position: fixed; z-index: 1; min-height: 44px; padding: 8px 15px; border: 1px solid #d5a8c9a8; border-radius: 999px; color: #945779; background: #fff6f9ed; box-shadow: 0 3px 16px #6f3c6814; font: 700 12px 'Zen Maru Gothic', sans-serif; letter-spacing: .03em; cursor: pointer; touch-action: manipulation; }
+.chat-page :is(#hinata-pat, #hinata-wave) > span:first-child { font-size: 18px; vertical-align: -1px; margin-right: 3px; }
+.chat-page :is(#hinata-pat, #hinata-wave):hover, .chat-page :is(#hinata-pat, #hinata-wave).is-happy { background: #ffe4ef; border-color: #ce87b1; }
+.chat-page :is(#hinata-pat, #hinata-wave):focus-visible { outline: 3px solid #ad6fba; outline-offset: 3px; }
+#hinata-pat .pat-heart { position: absolute; left: 50%; top: 0; opacity: 0; color: #e98cb8; pointer-events: none; font-size: 19px; }
+#hinata-pat.is-happy .pat-heart { animation: hinata-heart 1.5s ease-out both; }
+@keyframes hinata-heart { 0% { opacity: 0; transform: translate(-50%, 0) scale(.5); } 18% { opacity: .9; } 100% { opacity: 0; transform: translate(-40%, -42px) scale(1); } }
+body.soul-reduced #hinata-pat .pat-heart { animation: none; }
+@media (prefers-reduced-motion: reduce) { #hinata-pat .pat-heart { animation: none !important; } }
