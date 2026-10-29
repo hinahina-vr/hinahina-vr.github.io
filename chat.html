@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="./assets/chat-immersive.css?v=20261029-r2" />
   <link rel="stylesheet" href="./assets/chat-settings.css?v=20261028-r6" />
   <link rel="stylesheet" href="./assets/chat-mobile.css?v=20261028-r6" />
-  <link rel="stylesheet" href="./assets/hinata-motion.css?v=20261030-cute1" />
+  <link rel="stylesheet" href="./assets/hinata-motion.css?v=20261030-diary2" />
   <link rel="stylesheet" href="./assets/chat-demo.css?v=20261029-r2" />
-  <link rel="stylesheet" href="./assets/chat-galge.css?v=20261030-cute1" />
+  <link rel="stylesheet" href="./assets/chat-galge.css?v=20261030-diary2" />
 </head>
 <body>
   <main class="page-frame chat-page">
@@ -54,7 +54,7 @@
     <details id="connection" class="chat-panel connection-panel" open>
       <summary><span class="settings-section-icon" aria-hidden="true">◈</span> 接続設定 <span id="connection-state">未設定</span></summary>
       <form id="connection-form">
-        <p class="help">キーなしでも、定型の返事でおためしできるよ。APIキーを入れると、AIと自由におしゃべりできる。会話はブラウザからOpenRouterへ直接送信し、利用料は入力したキーのアカウントにかかるよ。</p>
+        <p class="help">キーなしでも全員とおためしで話せるよ。返事は用意したセリフだけで、自由な質問への回答や追加の性格設定の反映にはAPIキーが必要。会話はブラウザからOpenRouterへ直接送信し、利用料は入力したキーのアカウントにかかるよ。</p>
         <fieldset class="settings-card"><legend>OpenRouterにつなぐ</legend>
         <label for="api-key">APIキー</label>
         <div class="key-row"><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-…" /><button id="toggle-key" type="button" aria-pressed="false">表示</button></div>
@@ -79,15 +79,15 @@
 
         <label class="visually-hidden" for="persona-select">人格を選ぶ</label>
         <select id="persona-select" size="10" disabled></select>
-        <section id="vn-resident-preview" aria-label="選んだ住人"><p class="vn-preview-kicker">YOUR PARTNER</p><div class="vn-preview-stage"><img id="vn-preview-art" alt="" /></div><h3 id="vn-preview-name"></h3><p id="vn-preview-state"></p></section>
-        <div class="vn-resident-browser"><div class="vn-resident-search"><input id="persona-search" aria-label="住人を探す" type="search" placeholder="名前で探す" autocomplete="off" /><span id="vn-resident-count" role="status"></span></div><div id="vn-residents" role="group" aria-label="住人のカード"></div><p id="vn-no-residents" hidden>見つからなかったよ。名前を変えて探してみてね。</p><p class="resident-hint">気になる住人をタップして、おしゃべり。</p></div>
+        <section id="vn-resident-preview" aria-label="選んだ住人"><p class="vn-preview-kicker">YOUR PARTNER</p><div class="vn-preview-stage"><img id="vn-preview-art" alt="" /></div><p id="vn-preview-group" class="vn-preview-group"></p><h3 id="vn-preview-name"></h3><p id="vn-preview-state"></p></section>
+        <div class="vn-resident-browser"><div class="vn-resident-search"><input id="persona-search" aria-label="住人を探す" type="search" placeholder="名前で探す" autocomplete="off" /><span id="vn-resident-count" role="status"></span></div><div class="vn-resident-filters"><div id="vn-group-filters" role="group" aria-label="AIの分類"></div><p id="vn-group-description"></p></div><div id="vn-residents" role="group" aria-label="住人のカード"></div><div id="vn-no-residents" hidden><p>この条件では見つからなかったよ。</p><button id="vn-clear-filters" type="button">絞り込みを解除</button></div><p class="resident-hint">気になる住人をタップして、おしゃべり。</p></div>
         <p id="persona-count" class="help" role="status">住人を読み込んでいるよ。</p>
       </aside>
 
       <section class="chat-panel conversation-panel" aria-label="会話">
         <header class="conversation-header">
           <div><h2><button id="change-resident" type="button" aria-label="話す相手を選ぶ"><span id="conversation-title">住人を選んでね</span><small class="mobile-chat-only">相手を変更 <span aria-hidden="true">⌄</span></small></button></h2><p id="active-model" class="help">モデル未設定</p></div>
-          <button id="clear-conversation" type="button">会話を消す</button>
+          <a class="resident-diary-link desktop-diary-link" hidden target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▤</span> 日記 <span aria-hidden="true">↗</span></a><button id="clear-conversation" type="button">会話を消す</button>
         </header>
         <p class="vn-scene-label immersive-only"><span>ふたりの時間</span><span>WADDY GUESTHOUSE</span></p>
         <div id="chat-panel-toolbar" class="mobile-chat-only"><div><span id="mobile-chat-heading">おしゃべり</span><span id="mobile-chat-activity" aria-hidden="true" hidden></span></div><button id="chat-space-toggle" type="button" aria-pressed="false">会話を広く <span aria-hidden="true">↕</span></button></div>
@@ -98,7 +98,7 @@
         <p id="chat-error" role="alert" hidden></p>
         <button id="retry" type="button" hidden>もう一度送る</button>
         </div>
-        <div id="demo-notice" hidden><span>おためし <small>· 定型の返事</small></span><button id="demo-connect" type="button">APIキーでもっと話す <span aria-hidden="true">›</span></button></div>
+        <div id="demo-notice" hidden><span>キーなし · 用意したセリフのみ</span><button id="demo-connect" type="button">APIキーで自由に話す <span aria-hidden="true">›</span></button></div>
         <form id="message-form">
           <label for="message" class="visually-hidden">メッセージ</label>
           <textarea id="message" rows="3" maxlength="6000" placeholder="話しかけてみてね" disabled></textarea>
@@ -165,13 +165,13 @@
           <button id="vn-choose" type="button">住人を選ぶ <small>CHARACTERS</small></button>
           <button id="vn-config" type="button">環境設定 <small>CONFIGURATION</small></button>
         </nav>
-        <p class="vn-title-note">キーなしで、短いおしゃべりをおためし。<br>APIキーがあれば、もっと自由に話せるよ。</p>
+        <p class="vn-title-note">キーなしでも全員とおためしできるよ。<br>用意したセリフでの返事だよ。自由な会話にはAPIキーを入れてね。</p>
         <a href="./index.html" class="vn-title-home">ゲストハウスのホームへ ↗</a>
       </div>
       <span class="vn-title-caption" aria-hidden="true">灯りのついている場所で、待っている。</span>
     </dialog>
     <noscript><p>おしゃべりにはJavaScriptを有効にしてね。</p></noscript>
   </main>
-  <script type="module" src="./src/chat/app.mjs?v=20261030-cute1"></script>
+  <script type="module" src="./src/chat/app.mjs?v=20261030-diary2"></script>
 </body>
 </html>

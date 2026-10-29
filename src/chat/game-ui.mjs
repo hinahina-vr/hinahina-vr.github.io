@@ -1,9 +1,30 @@
+import { RESIDENT_GROUPS, residentGroup, filterResidentOptions } from './resident-groups.mjs?v=20261030-groups1';
 import { portraitUrl } from './portraits.mjs?v=20261030-cute1';
 /** Visual-novel navigation; character prompts and credentials never enter this module. */
 export function createGameUI() {
   const $ = id => document.getElementById(id);
   const title = $('vn-title'), select = $('persona-select'), gallery = $('vn-residents');
   let titleReturnFocus;
+  let activeGroup = 'all';
+  const groupButtons = new Map();
+  const groups = [{id:'all',label:'すべて'}, ...RESIDENT_GROUPS];
+  for (const group of groups) {
+    const button = document.createElement('button'); button.type = 'button';
+    button.className = 'vn-group-filter'; button.dataset.group = group.id;
+    button.setAttribute('aria-pressed', String(group.id === activeGroup));
+    button.append(document.createTextNode(group.label));
+    const count = document.createElement('span'); count.className = 'vn-group-count';
+    button.append(count); groupButtons.set(group.id,{button,count});
+    button.addEventListener('click', () => {
+      activeGroup = group.id; renderGallery(); gallery.scrollTop = 0;
+    });
+    $('vn-group-filters').append(button);
+  }
+  $('vn-clear-filters').addEventListener('click', () => {
+    activeGroup = 'all'; $('persona-search').value = '';
+    $('persona-search').dispatchEvent(new Event('input',{bubbles:true}));
+    renderGallery(); $('persona-search').focus();
+  });
   const portraitPath = portraitUrl;
   function openTitle() {
     if (title.open) return;
@@ -25,22 +46,32 @@ export function createGameUI() {
   let gallerySignature;
   function showPreview(id, name) {
     $('vn-preview-name').textContent = name || '住人を選んでね';
+    $('vn-preview-group').textContent = residentGroup(id)?.label || '';
     $('vn-preview-art').hidden = !id;
     if (id) $('vn-preview-art').src = portraitPath(id);
     $('vn-preview-state').textContent = id === (document.body.dataset.soulCharacter || select.value) ? 'いま、いっしょにいる' : 'タップして、おしゃべり';
   }
   function renderGallery() {
-    const options = Array.from(select.options);
+    const matching = Array.from(select.options);
+    const options = filterResidentOptions(matching,activeGroup);
     const current = document.body.dataset.soulCharacter || select.value;
-    const signature = String(select.disabled) + current + options.map(option => option.value).join('|');
+    const signature = String(select.disabled) + current + activeGroup + matching.map(option => option.value).join('|');
     if (signature === gallerySignature) return;
     gallerySignature = signature;
+    const selectedGroup = RESIDENT_GROUPS.find(group => group.id === activeGroup);
+    for (const group of groups) {
+      const {button,count} = groupButtons.get(group.id);
+      button.disabled = select.disabled;
+      button.setAttribute('aria-pressed',String(group.id === activeGroup));
+      count.textContent = String(filterResidentOptions(matching,group.id).length);
+    }
+    $('vn-group-description').textContent = selectedGroup?.description || 'シミュラークルAI・大奥AI・神AIから、話したい相手を選んでね。';
     const fragment = document.createDocumentFragment();
     const focusId = options.some(option => option.value === current) ? current : options[0]?.value;
     for (const option of options) {
       const name = option.textContent.replace(/^\S+\s/, '');
       const card = document.createElement('button');
-      card.type = 'button'; card.className = 'vn-resident'; card.dataset.persona = option.value;
+      card.type = 'button'; card.className = 'vn-resident'; card.dataset.persona = option.value; card.dataset.group = residentGroup(option.value)?.id || '';
       card.setAttribute('aria-pressed', String(option.value === current));
       card.setAttribute('aria-label', name + 'と話す');
       card.tabIndex = option.value === focusId ? 0 : -1;
@@ -48,7 +79,7 @@ export function createGameUI() {
       const image = document.createElement('img'); image.src = portraitPath(option.value);
       image.alt = ''; image.loading = 'lazy'; image.decoding = 'async';
       const label = document.createElement('strong'); label.textContent = name;
-      const caption = document.createElement('small'); caption.textContent = option.value === current ? 'いま話している' : 'おしゃべりする';
+      const caption = document.createElement('small'); caption.textContent = (residentGroup(option.value)?.label || '') + (option.value === current ? ' · いま話している' : '');
       card.append(image,label,caption);
       card.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') showPreview(option.value,name); });
       card.addEventListener('focus', () => showPreview(option.value,name));
@@ -64,7 +95,7 @@ export function createGameUI() {
     }
     gallery.replaceChildren(fragment);
     $('vn-no-residents').hidden = options.length > 0;
-    $('vn-resident-count').textContent = options.length + '人';
+    $('vn-resident-count').textContent = options.length + '人' + (selectedGroup && options.length !== selectedGroup.members.length ? ' / ' + selectedGroup.members.length + '人' : '');
     const selected = options.find(option => option.value === current) || options[0];
     showPreview(selected?.value,selected?.textContent.replace(/^\S+\s/, ''));
     select.classList.add('vn-native-select');
@@ -90,6 +121,7 @@ export function createGameUI() {
   const observer = new MutationObserver(renderGallery);
   observer.observe(select,{childList:true,attributes:true,attributeFilter:['disabled']});
   select.addEventListener('change',renderGallery);
+  new MutationObserver(renderGallery).observe(document.body,{attributes:true,attributeFilter:['data-soul-character']});
   document.addEventListener('chat:panel-open', event => {
     if (event.detail !== 'residents') return;
     requestAnimationFrame(() => {

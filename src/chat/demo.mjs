@@ -1,5 +1,6 @@
+import { DEMO_REACTIONS } from './demo-reactions.mjs?v=20261030-demo3';
 // Short, authored demo dialogue. No model, prompt, API key or network access.
-export const DEMO_CHOICES = ['ただいま', 'ちょっと疲れた', '好きなものは？'];
+export const DEMO_CHOICES = ['ただいま', 'ちょっと疲れた', '好きなものは？', 'そばにいて'];
 // Order: greeting, home, tired, favourite, thanks/praise, goodbye, invitation.
 const lines = {
   hina: [
@@ -310,18 +311,26 @@ export function demoGreeting(id) {
 export function demoReply(id, text, history = []) {
   const p = lines[id];
   if (!p) throw new Error('Missing demo dialogue: ' + id);
-  const input = String(text).normalize('NFKC').toLowerCase();
+  const input = String(text).normalize('NFKC').toLowerCase().trim();
+  const reactions = DEMO_REACTIONS[id];
   let index = 6;
-  if (/api|キー|もっと|続き|設定|プロンプト|指示/.test(input)) index = 6;
+  let reply;
+  if (/api|キー|設定|プロンプト|指示|^(もっと|続き)[。！？!?…\s]*$/.test(input)) index = 6;
   else if (/おやすみ|またね|さよなら|ばいばい|バイバイ|寝る|眠い/.test(input)) index = 5;
-  else if (/疲|つかれ|しんど|つら|辛い|休みたい/.test(input)) index = 2;
-  else if (/好きな|すきな|趣味|好物|何が好き|なにがすき/.test(input)) index = 3;
+  else if (/疲|つかれ|しんど|つら|辛い|休みたい|落ち込|元気がない/.test(input)) index = 2;
+  else if (/好きな|すきな|趣味|好物|何が好き|なにがすき|自己紹介/.test(input)) index = 3;
+  else if (/好きじゃない|すきじゃない|かわいくない|可愛くない/.test(input)) index = 6;
   else if (/ありがとう|ありがと|可愛い|かわいい|カワイイ|すき|好き|助か/.test(input)) index = 4;
   else if (/ただいま|帰った|帰宅/.test(input)) index = 1;
-  else if (/こんにちは|こんばんは|おはよう|はじめまして|やっほ|おー|hello|hi\b/.test(input)) index = 0;
-  const turns = history.filter(m => m.role === 'assistant').length;
-  // A single reminder after a few exchanges, not an invitation on every reply.
-  return p[index] + (index !== 6 && turns === 2 ? '\n' + p[6] : '');
+  else if (/そばにいて|側にいて|一緒にいて|いっしょにいて|寂し|さみし|さびし|ひとり|一人|暇|ひま|遊ぼ|あそぼ|かまって|構って|話そ|話して|おしゃべりし|退屈/.test(input)) reply = reactions[0];
+  else if (/^(うん+|そうだね|そうなんだ|なるほど|わかった|はい|うれしい|嬉しい|えへへ|へへ|ふふ|あはは|笑|w+)[。！？!?〜～…、\s]*$/.test(input)) reply = reactions[1];
+  else if (/こんにちは|こんばんは|おはよう|はじめまして|やっほ|^おー[。！？!?\s]*$|\bhello\b|^hi[!\s]*$/.test(input)) index = 0;
+  reply ||= p[index];
+  const previous = history.filter(m => m.role === 'assistant').at(-1)?.content;
+  // Repeated recognised prompts get a second authored reaction, rather than
+  // repeating the exact same line. Unsupported topics always keep the API guide.
+  if (index !== 5 && reply !== p[6] && previous === reply) reply = reply === reactions[1] ? reactions[0] : reactions[1];
+  return reply;
 }
 export async function streamDemo({ id, text, history, signal, onText }) {
   const reply = demoReply(id, text, history);

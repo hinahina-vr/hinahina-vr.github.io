@@ -2,9 +2,9 @@ import {
   API_KEY_STORAGE_KEY, STORAGE_KEY, MAX_MESSAGE, MAX_HISTORY, ChatError,
   readState, saveState, readRememberedKey, persistKey, sendCompletion, listModels, exportConversation,
 } from './core.mjs';
-import { createGameUI } from './game-ui.mjs?v=20261030-cute1';
+import { createGameUI } from './game-ui.mjs?v=20261030-groups1';
 import { createChatView } from './immersive.mjs?v=20261030-cute1';
-import { DEMO_CHOICES, demoGreeting, streamDemo } from './demo.mjs?v=20261029-r2';
+import { DEMO_CHOICES, demoGreeting, streamDemo } from './demo.mjs?v=20261030-demo3';
 
 const $ = id => document.getElementById(id);
 let storage;
@@ -46,7 +46,7 @@ function updateReady() {
   $('persona-search').disabled = busy;
   for (const id of ['clear-conversation', 'save-personality', 'reset-personality']) $(id).disabled = busy || !persona;
   $('connection-state').textContent = demo ? 'おためし' : state.model ? '設定済み' : '未設定';
-  $('active-model').textContent = demo ? 'おためし · 定型の返事' : state.model || 'モデル未設定';
+  $('active-model').textContent = demo ? 'キーなし · 用意したセリフでおためし' : state.model || 'モデル未設定';
   $('demo-notice').hidden = !demo;
   $('clear-conversation').textContent = demo ? 'おためしの会話を消す' : '会話を消す';
   $('export-conversation').textContent = demo ? 'おためしの会話を書き出す' : '会話を書き出す';
@@ -114,6 +114,7 @@ async function selectPersona(id) {
   drafts.set(state.selected, currentDraft());
   const sequence = ++loadSequence;
   persona = null; state.selected = id; retryAvailable = false;
+  for (const link of document.querySelectorAll('.resident-diary-link')) { link.hidden = true; link.removeAttribute('href'); }
   $('conversation-title').textContent = '読み込み中…';
   $('transcript').replaceChildren(); setError(); updateReady();
   try {
@@ -123,12 +124,17 @@ async function selectPersona(id) {
     if (sequence !== loadSequence) return;
     if (data.id !== id || typeof data.base !== 'string') throw new Error('profile');
     persona = data;
+    for (const link of document.querySelectorAll('.resident-diary-link')) {
+      link.href = './diary-' + data.id + '.html';
+      link.setAttribute('aria-label', data.name + 'の日記を開く（別タブ）');
+      link.hidden = false;
+    }
     $('conversation-title').textContent = `${data.emoji} ${data.name}`;
     view.setPersona(id);
     $('personality').value = state.additions[id] || '';
     $('personality-status').textContent = '保存した設定は、次の送信から使うよ。';
     $('message').value = drafts.get(id) || '';
-    $('chat-status').textContent = isDemo() ? 'キーなしでおためし中。用意したセリフで返すよ。' : '話しかけてみてね。';
+    $('chat-status').textContent = isDemo() ? 'キーなしでは用意したセリフで返すよ。自由な会話にはAPIキーが必要だよ。' : '話しかけてみてね。';
     renderConversation(); save();
     const url = new URL(location.href); url.searchParams.set('persona', id); history.replaceState(null, '', url);
   } catch {
@@ -251,7 +257,7 @@ async function send(retry = false) {
     if (activeRequest !== request) return;
     messages().push({ role: 'assistant', content: answer });
     replaceMessages(messages().slice(-MAX_HISTORY)); save(); pending.node.classList.remove('incomplete');
-    $('chat-status').textContent = demo ? 'おためしの返事だよ。APIキーを入れると、もっと自由に話せるよ。' : '返事が届いたよ。';
+    $('chat-status').textContent = demo ? '用意したセリフでの返事だよ。自由な会話にはAPIキーを入れてね。' : '返事が届いたよ。';
   } catch (error) {
     if (activeRequest !== request) return;
     // Partial replies remain visibly marked, but never enter the next request or saved history.
