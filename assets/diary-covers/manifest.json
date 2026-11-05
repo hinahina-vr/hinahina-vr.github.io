@@ -1757,6 +1757,18 @@
       "promptProvenance": "exact generation instruction; generated image exec-b8db9eb5-9862-4ece-8a01-dd26e1614fe3.png",
       "summary": "出島経由の通信という冗談から描いた創作の挿絵。実際の渡航や施設の記録ではない。",
       "updatedAt": "2026-11-05T04:43:13.853857+00:00"
+    },
+    "2026-10-22_アルファーから始める": {
+      "slug": "2026-10-22_アルファーから始める",
+      "date": "2026-10-22",
+      "title": "アルファーから始める",
+      "coverSrc": "./assets/diary-covers/2026-10-22_アルファーから始める.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Create an original editorial illustration for a Japanese personal diary and a gentle dream-game backdrop. Landscape 3:2. A quiet imaginary small attic amateur-radio room at dusk: an old friendly rounded dark teal tabletop radio transceiver with a simple hand microphone on a curly cord, a small green-lit gauge without text, warm wooden desk, open window showing fading peach-blue sky and a little rooftop antenna outside. On the right of the desk, an old cream CRT monitor showing only tiny softly colored abstract pixel squares, no readable characters. Composition has strong clear shapes, lots of calm negative space at upper center for a game scene. Hand-painted storybook gouache mixed with colored pencil, subtly imperfect outlines and paper grain, muted teal, apricot and butter yellow, cozy and playful rather than photorealistic. No people, no faces, no eyes on objects, no ghosts, no logos, no typography, no readable words, no labels, no watermark, no glossy 3d lighting. This is a conceptual illustration, not documentary.",
+      "promptProvenance": "exact generation instruction; exec-c25cc0cd-c703-4478-8280-365accdef7dd.png",
+      "summary": "無線や昔のホームページへの空想から描いた挿絵。実際の機材所有や開局の記録ではない。",
+      "updatedAt": "2026-11-05T10:32:58.274851+00:00"
     }
   }
 }

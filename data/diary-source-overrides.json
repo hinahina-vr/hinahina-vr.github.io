@@ -2781,5 +2781,76 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）。活動日の判定には使わない。"
     }
+  },
+  "2026-10-22": {
+    "provenance": "ログイン済みChromeの最新検索のDOMを読み取り。投稿時刻を日本時間へ換算。添付4画像は写真ビューで拡大して確認。ブラウザ操作はCUAを使用。 ログイン済みChromeで履歴を実見。10月末の空港訪問の次が10月4日で、22日の行なし。移動なしとは断定しない。",
+    "x": [
+      {
+        "recordedAt": "01:11 JST",
+        "kind": "post",
+        "text": "もはやソブリンクラウド使うのは夢のまた夢やな\nCLOUD法以前に漏らしてダークウェブで大売出しされたら苦労ないわ\n中華クラウドガチ勢なります",
+        "url": "https://x.com/hinahina_vr/status/2112939751510872070",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "01:22 JST",
+        "kind": "post",
+        "text": "労もデジタル元寇って感じなのでこれ聴いてねり\n\nhttps://\nyoutube.com/watch?v=C36pDA\n8u-EE\n…",
+        "url": "https://x.com/hinahina_vr/status/2112942527573844404",
+        "observedImageIds": [
+          "HVKuBj6aYAALz6x"
+        ],
+        "imageObservation": "黒い背景に白い筆文字で元寇。音楽リンクと一緒に提示された画像。"
+      },
+      {
+        "recordedAt": "08:13 JST",
+        "kind": "post",
+        "text": "モーニングルーチン失敗したので会社休みます",
+        "url": "https://x.com/hinahina_vr/status/2113046008934649959",
+        "observedImageIds": [
+          "HVMMJUxaEAA6o8L"
+        ],
+        "imageObservation": "ゲームのメンテナンス画面。白いヘルメットの桃色髪ちびキャラがお辞儀。モーニングルーチン失敗と会社を休むという本人の冗談。欠勤の実績ではない。"
+      },
+      {
+        "recordedAt": "09:02 JST",
+        "kind": "post",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2113058433591308714",
+        "observedImageIds": [
+          "HVMXcaEaIAAqGt3"
+        ],
+        "imageObservation": "白髪・桃色帽子の小さな人物が握り寿司を食べる絵。丸い台に寿司皿、赤い警告灯、全回転・キュインの文字。実際の飲食や遊技の記録ではない。"
+      },
+      {
+        "recordedAt": "12:51 JST",
+        "kind": "post",
+        "text": "脆弱性対策として今こそ和塩を復活させるべき",
+        "url": "https://x.com/hinahina_vr/status/2113116065203147220",
+        "observedImageIds": [
+          "HVNL2jna8AAW_jB"
+        ],
+        "imageObservation": "古いブラウザ風画面にYahoo!ジオシティーズ閉鎖案内。水色背景、緑の数字カウンター、紫のタイトルバー。和塩は個人ホームページサービスの愛称を指す。"
+      },
+      {
+        "recordedAt": "12:54 JST",
+        "kind": "post",
+        "text": "インターネットは危険なのでアマチュア無線局を開設",
+        "url": "https://x.com/hinahina_vr/status/2113116769191952556",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "12:56 JST",
+        "kind": "post",
+        "text": "NATOフォネティックコード\nアルファー　ブラボー　チャーリー\n本当に試験官の前で読むんだよ",
+        "url": "https://x.com/hinahina_vr/status/2113117183786262614",
+        "observedImageIds": []
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得。端末接続や書き出しを行っていない。活動日判定に使わない。"
+    }
   }
 }
