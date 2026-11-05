@@ -2749,5 +2749,37 @@
       "status": "skipped",
       "note": "未取得（健康データの書き出し・端末接続は実施していない）。活動日の判定には使わない。"
     }
+  },
+  "2026-10-21": {
+    "provenance": "2026-11-05 ログイン済みChromeで本人の最新検索とSwarm履歴を実確認。検索結果の時刻をJSTで判定。10月20日は本人投稿・チェックインなし。21日00:51の画像は写真ビューを開いて実見し、実際の勤務記録とは区別。22:49の本人追記と10月7日の引用元を分離。Swarmは対象日前後の履歴に20・21日の行なし。",
+    "x": [
+      {
+        "recordedAt": "00:51 JST",
+        "kind": "post",
+        "text": "",
+        "url": "https://x.com/hinahina_vr/status/2112572321571762583",
+        "observedImageIds": [
+          "HVFdUrKaUAIu_yH"
+        ],
+        "imageObservation": "バイトの文字。小舟でロープを引く白髪の人物、網かごの赤いカニ、困り顔と汗。創作絵であり本人の勤務実績とは扱わない。"
+      },
+      {
+        "recordedAt": "22:49 JST",
+        "kind": "quote",
+        "text": "もうすぐこれ",
+        "url": "https://x.com/hinahina_vr/status/2112904160345817414",
+        "observedImageIds": [],
+        "quoted": {
+          "author": "hinahina_vr",
+          "date": "2026-10-07",
+          "text": "インターネットは危険なのでデジタル鎖国しよう\n国外通信は出島リージョンからのクラウド間閉域接続のみ許可"
+        }
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得（健康データの書き出し・端末接続は実施していない）。活動日の判定には使わない。"
+    }
   }
 }

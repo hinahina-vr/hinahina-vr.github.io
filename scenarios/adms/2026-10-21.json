@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-21",
+  "title": "橋の向こうで鈴が鳴る A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "橋の向こうで鈴が鳴る",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-21_橋の向こうで鈴が鳴る",
+      "entry": "standalone_start",
+      "summary": "小さな島へ向かう橋のたもとに、フェイリスとマルチが立っていた。島の倉庫には明かりがついている。風はないのに、入口の鈴が鳴った。"
+    },
+    {
+      "id": "turn",
+      "title": "音を返してみる",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-21_橋の向こうで鈴が鳴る",
+      "entry": "turn",
+      "summary": "島の入口に人影はない。けれど、鈴はマルチの手に応えるように鳴った。"
+    },
+    {
+      "id": "choose",
+      "title": "ここから選ぶ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-21_橋の向こうで鈴が鳴る",
+      "entry": "choose",
+      "summary": "橋を渡って鈴を鳴らす、または岸から手をたたいて返す"
+    },
+    {
+      "id": "END_A",
+      "title": "島でお茶を",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-21_橋の向こうで鈴が鳴る",
+      "entry": "END_A",
+      "summary": "島でお茶を"
+    },
+    {
+      "id": "END_B",
+      "title": "向こう岸と遊ぶ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-21_橋の向こうで鈴が鳴る",
+      "entry": "END_B",
+      "summary": "向こう岸と遊ぶ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "橋を渡って、鈴を鳴らす",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "岸から手をたたいて返す",
+      "style": "kenkai"
+    }
+  ]
+}

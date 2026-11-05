@@ -1745,6 +1745,18 @@
       "promptProvenance": "exact generation instruction; cover-generation-review-B.json",
       "summary": "本人の本文を題材にした創作の挿絵。実写記録ではない。",
       "updatedAt": "2026-10-28T05:40:14.756Z"
+    },
+    "2026-10-21_出島だけは開けておく": {
+      "slug": "2026-10-21_出島だけは開けておく",
+      "date": "2026-10-21",
+      "title": "出島だけは開けておく",
+      "coverSrc": "./assets/diary-covers/2026-10-21_出島だけは開けておく.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Use case: illustration-story. Create one landscape diary cover illustration, aspect ratio 3:2. An original quietly humorous hand-painted imagined Dejima island in a nighttime sea, seen from an elevated shore: a tiny fan-shaped island with a few simple Japanese tiled-roof storehouses, warm yellow window light, ONE narrow bridge connecting the little island to the foreground shore. A single thick blue cable runs along the side of the bridge into one warehouse, gently suggesting a modern computer-network Dejima without any diagram or literal computer screen. Clear readable composition, plenty of calm ink-blue water around the small island, warm cream paper edges, charming miniature scale, loose expressive ink line and matte gouache/colored-pencil texture, restrained muted blue, brick red and warm ochre. This is an imaginative illustration for a Japanese personal diary about jokingly isolating the internet and keeping one connection through Dejima, not a historical reconstruction. No people, no lettering, no numbers, no text, no logo, no watermark, no futuristic neon, no glowing magic, no repeated decorative sparkles, no glossy 3D, no photorealism. Make it feel like a small tender book illustration with intentional hand-drawn irregularities rather than polished generative-AI fantasy art.",
+      "promptProvenance": "exact generation instruction; generated image exec-b8db9eb5-9862-4ece-8a01-dd26e1614fe3.png",
+      "summary": "出島経由の通信という冗談から描いた創作の挿絵。実際の渡航や施設の記録ではない。",
+      "updatedAt": "2026-11-05T04:43:13.853857+00:00"
     }
   }
 }
