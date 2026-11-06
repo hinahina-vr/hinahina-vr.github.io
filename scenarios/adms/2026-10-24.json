@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-24",
+  "title": "湯気のむこうの食堂 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "湯気のむこうの食堂",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-24_湯気のむこうの食堂",
+      "entry": "standalone_start",
+      "summary": "障子を開けると、湯気がゆっくり流れてきた。木の卓に重箱と小さな椀が置かれている。あゆは椅子へ座り、マルチは窓辺の席をのぞいていた。"
+    },
+    {
+      "id": "turn",
+      "title": "窓の下の鈴",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-24_湯気のむこうの食堂",
+      "entry": "turn",
+      "summary": "窓の下の猫と、食堂の空いた席を見つける。"
+    },
+    {
+      "id": "choose",
+      "title": "温かいものをどこへ",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-24_湯気のむこうの食堂",
+      "entry": "choose",
+      "summary": "窓辺へ椀を運ぶ、または外へ湯気を届ける。"
+    },
+    {
+      "id": "END_A",
+      "title": "窓辺の席は予約済み",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-24_湯気のむこうの食堂",
+      "entry": "END_A",
+      "summary": "窓辺の席は予約済み"
+    },
+    {
+      "id": "END_B",
+      "title": "小さな家へ届いた湯気",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-24_湯気のむこうの食堂",
+      "entry": "END_B",
+      "summary": "小さな家へ届いた湯気"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "窓辺の席へ椀を運ぶ",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "窓を開けて湯気を届ける",
+      "style": "kenkai"
+    }
+  ]
+}

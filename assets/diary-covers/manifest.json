@@ -1769,6 +1769,18 @@
       "promptProvenance": "exact generation instruction; exec-c25cc0cd-c703-4478-8280-365accdef7dd.png",
       "summary": "無線や昔のホームページへの空想から描いた挿絵。実際の機材所有や開局の記録ではない。",
       "updatedAt": "2026-11-05T10:32:58.274851+00:00"
+    },
+    "2026-10-24_ウネイグで十分": {
+      "slug": "2026-10-24_ウネイグで十分",
+      "date": "2026-10-24",
+      "title": "ウネイグで十分",
+      "coverSrc": "./assets/diary-covers/2026-10-24_ウネイグで十分.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Create a landscape 3:2 hand-painted Japanese diary cover illustration. A quiet warm wooden dining table, viewed at a gentle diagonal instead of directly overhead: a modest black lacquer rectangular unaju box with reddish interior containing glazed grilled eel over white rice, a small red-brown soup bowl with two small white round garnishes and a little green herb, a tiny pale ceramic dish of pink and green pickles, a clear water glass, a pair of plain wooden chopsticks. Soft light from a shoji window at the back, a quiet empty dining room with plenty of air around the meal, a pale rose placemat. The meal is the clear foreground focus, not enormous nor overflowing. Charming Japanese picture-book gouache and colored pencil with visible warm paper texture, soft irregular drawn outlines, restrained amber, cream and muted blush colors. Simplified believable shapes, gentle and cute, not photorealistic, not hyper-detailed food advertising, no glossy 3D rendering, no lens bloom. No people, faces, mascots, written text, glyphs, logos, watermarks, signs, labels, lantern writing, or invented extra decorative symbols. A new composed illustration, not a copy of a photograph. Suitable as both diary cover and a calm visual-novel dream dining-room background.",
+      "promptProvenance": "exact generation instruction; exec-ef9ab81d-cd61-4cfd-9e66-892878a45513.png",
+      "summary": "うな重の写真の具体物から構成し直した創作の食卓。店内の実景を示すものではない。",
+      "updatedAt": "2026-11-06T11:05:25.623392+00:00"
     }
   }
 }
