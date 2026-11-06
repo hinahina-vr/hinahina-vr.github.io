@@ -1781,6 +1781,18 @@
       "promptProvenance": "exact generation instruction; exec-ef9ab81d-cd61-4cfd-9e66-892878a45513.png",
       "summary": "うな重の写真の具体物から構成し直した創作の食卓。店内の実景を示すものではない。",
       "updatedAt": "2026-11-06T11:05:25.623392+00:00"
+    },
+    "2026-10-25_オケイムの顔": {
+      "slug": "2026-10-25_オケイムの顔",
+      "date": "2026-10-25",
+      "title": "オケイムの顔",
+      "coverSrc": "./assets/diary-covers/2026-10-25_オケイムの顔.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Codex built-in imagegen",
+      "prompt": "Create a landscape 3:2 Japanese picture-book diary cover and visual-novel dream background. A tiny cozy wooden lemonade stall beside a quiet lane at blue hour, seen obliquely from the lane rather than frontally. One round unlettered red paper lantern hangs from its eaves, its amber glow reflected in a large clear glass mug of pale sparkling lemon soda with ice and two lemon slices on the wooden counter. Behind the counter is a small tasteful framed smiling white okame folk mask, a decorative object rather than a person, gentle and friendly. An empty round wooden stool is beside the stall. Dark indigo evening sky, cobblestone lane, a few potted leaves, warm lit shop window. Hand-painted gouache and colored-pencil illustration, charming simple shapes, visible warm paper grain, irregular delicate drawn edges, muted red, honey, cream and deep blue. Cozy and slightly whimsical, well composed with generous breathing room, not photorealistic, no glossy 3D, no dramatic bloom. No people, no characters, no alcohol bottles, no letters, no logos, no captions, no watermarks or writing anywhere. An original invented street scene, not a recreation of any real shop. The lemon drink and red lantern should be clear focal points with a believable small stall environment.",
+      "promptProvenance": "exact generation instruction; exec-ce86849c-7051-4b77-aa42-1c7523d05b20.png",
+      "summary": "赤い提灯とレモネードのある創作の屋台。元画像の複写や実店舗の再現ではない。",
+      "updatedAt": "2026-11-06T14:38:45.678532+00:00"
     }
   }
 }

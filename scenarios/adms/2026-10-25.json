@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-25",
+  "title": "提灯が道を選ぶ夜 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "提灯が道を選ぶ夜",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-25_提灯が道を選ぶ夜",
+      "entry": "standalone_start",
+      "summary": "青い夕空の下に、レモネードの屋台があった。カウンターのジョッキに小さな泡が昇っている。みぃは丸椅子の隣で、軒下の赤い提灯を見上げていた。"
+    },
+    {
+      "id": "turn",
+      "title": "手のひらへ下りた明かり",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-25_提灯が道を選ぶ夜",
+      "entry": "turn",
+      "summary": "提灯を手に持つと、道の石を丸く照らす。"
+    },
+    {
+      "id": "choose",
+      "title": "提灯をどこへ連れていく",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-25_提灯が道を選ぶ夜",
+      "entry": "choose",
+      "summary": "木へ吊るすか、橋まで持って歩くかを選ぶ。"
+    },
+    {
+      "id": "END_A",
+      "title": "枝の下の小さな広場",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-25_提灯が道を選ぶ夜",
+      "entry": "END_A",
+      "summary": "枝の下の小さな広場"
+    },
+    {
+      "id": "END_B",
+      "title": "お散歩を終えた提灯",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-25_提灯が道を選ぶ夜",
+      "entry": "END_B",
+      "summary": "お散歩を終えた提灯"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "木の枝に吊るして通りを照らす",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "手に持って橋まで散歩する",
+      "style": "kenkai"
+    }
+  ]
+}
