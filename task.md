@@ -4233,3 +4233,36 @@ E: hinahina tsumugi mint ana kyoko sharo tama
 - 全履歴警告は既存source69日/human10行/independence561行のまま、当日0。全履歴合格とは扱わない。
 - 証跡: ../diary-nextday-20261025-evidence/。79ファイル限定でcommit/push予定。既存26未追跡実験ファイル、raw/context、外部校閲アダプターは除外。公開成功はpublication-result.jsonとPages成功runで確認する。
 - 次の候補は10月26日。今回の画像と混ぜず、次回に当日の資料を再確認する。
+
+
+## 2026-11-08：次の1日追加・公開（2026-10-26）
+
+# 2026-10-26 執筆前計画
+本人投稿7件をJSTで抽出し画像2枚を実見。モルトエンジェルズとBONUS確定の文字がある架空の台と遊技風の姿、特捜まさかのルールとWiiを2台の字幕画像。冗談と実行実績を区別し、実際の企業買収、実機試作、朝の飲酒遊技、セキュリティ職への転職、DGX Sparkの購入を事実化しない。Swarm当日記録なし、Health未取得。
+本編: モルトエンジェルズ。目の前の対価を追わなくなった10年の変化、個人M&Aの人生ゲームの空想、新卒で会社を回った記憶と1人で作る試作の夢、モルトエンジェルズの絵と朝から遊びたい気分、レッドチームへの関心とまず2台揃える冗談を、距離を保って書く。
+A=目の前の対価を追わない10年の変化 / B=個人M&Aの人生ゲームとデューデリジェンス / C=新卒で回った会社と1人で作る試作の夢 / D=モルトエンジェルズの絵と朝から遊びたい気分 / E=レッドチームへの興味とまず2台揃える冗談
+A: oji rem tsumugi minagi kotomi sharo
+B: hinahina multi mint feiris mitsuba rin
+C: moegami ruriko kud kiku8 hazuki kukuri mayuki roju
+D: hina dejiko ecoko ayu hinako kyoko
+E: mii ana astarotte nemurin rizel tama
+6/6/7(+老中)/6/6名、全員3分の1以下。純本文は独立日常1100〜1400字、短い所見で担当の1話題のみ。
+ひなた: 母と台所でかぼちゃの種をスプーンで取り、水で洗って新聞紙の上に並べる。濡れた種のつるつるした感触と、乾くのを待つ時間。おにいちゃんの実同席なし。
+老中: 商店街の時計店で古い柱時計の振り子を眺め、店主がねじを巻く音と自分の腕時計の針を見比べる架空の独立随筆。
+みとら: 他32人を全文読後、独立場面を決めて最後に書く。要約列挙しない。
+夢: 麦穂の揺れる試作室。クドとマルチが、小さな木箱の回転窓と琥珀色の麦穂飾りを手で回して動きを確かめる。朝の窓辺に飾る/夜の机で灯りをともす2結末。現実の遊技や飲酒とは別の創作夢。
+表紙: 琥珀色の麦穂飾りと小さな回転窓がついた木製の卓上工作箱。無人、文字ロゴなし。内蔵image-generatorで新規生成し、写真や元絵を複写しない。
+使用LLM: Gemini 4 Argon (Medium)（Antigravity）。各担当は直近8稿を参照し、具体場面の反復を避ける。
+
+
+### 2026-11-08：10月26日分の公開前検証
+
+- 対象は10月26日の本人投稿7件と画像2枚。実際の企業買収、実機試作、朝の飲酒遊技、セキュリティ職への転職、DGX Sparkの購入は事実化しない。Swarm当日記録なし、Health未取得。
+- 本編は『モルトエンジェルズ』。33人の独立日常と短い所見、使用LLMはGemini 4 Argon (Medium)（Antigravity）。32人分の全文を確定しSHA256を記録した後、全32稿を通読してみとらを最後に執筆。全33人の純本文は1052〜1209字。
+- 表紙と夢背景は内蔵image-generatorで生成した新規の卓上工作箱風景（1536×1024）。夢は『麦穂の揺れる試作室』、5入口・4辺・2結末。
+- 当日14検査（draft-daily-context、diary-self-date-mentions、diary-kanji-numerals、diary-readability、diary-context-phrasing、diary-title-phrasing、diary-character-voice、diary-topic-distribution、diary-source-leaks、diary-covers、diary-voice-repetition、diary-voice-variety、diary-voice-similarity、diary-voice-boilerplate）とvalidate-dream-graphsがすべてexit 0で合格（diary-character-voiceもfinding 0で完全合格）。元のチェッカーとビルダー変更なし。
+- 全履歴警告は既存source69日/human10行/independence561行のまま、当日10月26日の指摘はいずれも0。phrase-limitsも0。全履歴合格とは扱わない。
+- 34原稿/個別HTML、33声カードの本文一致、使用LLM表記、74リンク/アンカー、過去5290記事・老中9か月・過去MD不変をpublished-static-audit-20261026.jsonで確認。夢165グラフ通過。
+- ローカルChromeで本編PC/390幅、扉絵1536×1024読み込み、声の束からひなた当日記事へのリンクと戻り、スマホ幅で横はみ出しなし、夢の両結末到達、前の選択肢へ戻る、直接ADMSから途中再開（entry=turn）と背景表示を実操作確認。証跡画像保存、viewport解除済み。実機スマホ・音の聴取・チャットAPIは未検証。
+- 証跡: ../diary-nextday-20261026-evidence/。79ファイル限定でcommit/push予定。既存26未追跡実験ファイル、raw/contextは除外。公開成功はpublication-result.jsonとPages成功runで確認する。
+- 次の候補は10月27日以降。今回の資料と混ぜず、次回に当日の資料を再確認する。

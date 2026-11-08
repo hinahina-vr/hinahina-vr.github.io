@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-26",
+  "title": "麦穂の揺れる試作室 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "麦穂の揺れる試作室",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-26_麦穂の揺れる試作室",
+      "entry": "standalone_start",
+      "summary": "夕暮れの工作机の上に、小さな木の箱が置かれていた。正面の3つの窓には麦穂や星や月の絵が描かれ、横には真鍮のつまみがついている。"
+    },
+    {
+      "id": "turn",
+      "title": "噛み合う2つの歯車",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-26_麦穂の揺れる試作室",
+      "entry": "turn",
+      "summary": "机の端に並んだ2つの歯車をはめ込むと、箱の中の絵が軽やかに回り始める。"
+    },
+    {
+      "id": "choose",
+      "title": "試作箱をどこに飾る",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-26_麦穂の揺れる試作室",
+      "entry": "choose",
+      "summary": "朝の光が差す窓辺へ置くか、夜の机でランプと並べるかを選ぶ。"
+    },
+    {
+      "id": "END_A",
+      "title": "朝の窓辺の黄金色",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-26_麦穂の揺れる試作室",
+      "entry": "END_A",
+      "summary": "朝の窓辺の黄金色"
+    },
+    {
+      "id": "END_B",
+      "title": "夜の机の小さな灯り",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-26_麦穂の揺れる試作室",
+      "entry": "END_B",
+      "summary": "夜の机の小さな灯り"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "朝の光が入る窓辺に飾る",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "夜の机でランプの隣に置く",
+      "style": "kenkai"
+    }
+  ]
+}

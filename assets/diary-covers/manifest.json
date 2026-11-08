@@ -1793,6 +1793,18 @@
       "promptProvenance": "exact generation instruction; exec-ce86849c-7051-4b77-aa42-1c7523d05b20.png",
       "summary": "赤い提灯とレモネードのある創作の屋台。元画像の複写や実店舗の再現ではない。",
       "updatedAt": "2026-11-06T14:38:45.678532+00:00"
+    },
+    "2026-10-26_モルトエンジェルズ": {
+      "slug": "2026-10-26_モルトエンジェルズ",
+      "date": "2026-10-26",
+      "title": "モルトエンジェルズ",
+      "coverSrc": "./assets/diary-covers/2026-10-26_モルトエンジェルズ.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Antigravity image-generator",
+      "prompt": "Create a landscape 3:2 hand-painted Japanese picture-book diary cover and visual-novel dream background. A cozy quiet wooden workbench inside a small hobby craft room at dusk, seen at a gentle angle: in the center rests a charming handmade wooden tabletop mechanical toy box with three small rotating picture drums showing simple painted motifs of golden barley ears, a crescent moon, and a tiny star, flanked by two small carved wooden angel wings on the upper frame and a brass hand crank on the side. Next to the box on the desk are two small identical brass gears and a warm amber desk lamp casting a soft honey-gold glow. Through a window behind the desk, a calm deep indigo evening sky is visible. Hand-painted gouache and colored-pencil illustration, visible warm paper grain, soft irregular hand-drawn outlines, muted amber, honey gold, warm walnut brown, cream and deep evening blue. Cozy, tactile and whimsical with generous breathing room, not photorealistic, no glossy 3D rendering, no neon, no casino or gambling parlor machines. Strictly no text, no letters, no numbers, no logos, no watermarks, and no people or characters anywhere.",
+      "promptProvenance": "exact generation instruction; generated-cover-2026-10-26.png",
+      "summary": "麦穂と月と星の回転窓がついた木製の卓上工作箱。元画像の複写や実機の再現ではない。",
+      "updatedAt": "2026-11-08T09:03:00Z"
     }
   }
 }

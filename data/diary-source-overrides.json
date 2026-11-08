@@ -2893,5 +2893,70 @@
       "status": "skipped",
       "note": "未取得。端末接続や書き出しなし。"
     }
+  },
+  "2026-10-26": {
+    "provenance": "ログイン済みChrome検索のDOMからJST当日分7件を抽出。添付2画像は実ファイルを保存して実見。冗談・構想・回想と実行実績を区別する。 ログイン済みChrome履歴を確認。10月末の空港記録の次が10月4日で、10月26日の行なし。移動の不在とは断定しない。",
+    "x": [
+      {
+        "recordedAt": "02:13 JST",
+        "kind": "post",
+        "text": "コスパだの目の前にぶら下がってる対価だのを追う\nタイミー脳的な価値観から脱却できたのは\nここ10年で最も大きい進化かもしれん",
+        "url": "https://x.com/hinahina_vr/status/2114405007605010436",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "02:25 JST",
+        "kind": "post",
+        "text": "個人M&Aする人生ゲームの芽がワンチャンでてきた\nデューデリジェンスなんもわからん",
+        "url": "https://x.com/hinahina_vr/status/2114407899124601254",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:43 JST",
+        "kind": "post",
+        "text": "mood:\n【公式】「スマスロ 快盗天使ツインエンジェル2」プロモーションムービー＜2026年12月7日全国導入予定＞ https://youtu.be/kXz-bwrE78U?si=f3bM0iarxQID2JGt… @YouTubeより",
+        "url": "https://x.com/hinahina_vr/status/2114714638445408305",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "22:59 JST",
+        "kind": "post",
+        "text": "ツインエンジェルリメイクで新卒でスロ会社回ってたの思い出した\nコンテンツは一人でも作れる時代だよな\nZ80だってAIコーディングできるだろうし\n試作ならステッピングモーター制御まで多分やれちゃうよね\nパチスロには夢も絶望も技術も全部詰まってる",
+        "url": "https://x.com/hinahina_vr/status/2114718557519102115",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:11 JST",
+        "kind": "post",
+        "text": "(本文なし・画像1枚)",
+        "url": "https://x.com/hinahina_vr/status/2114721554647109983",
+        "observedImageIds": [
+          "HVkACt7aMAAY5uT"
+        ],
+        "imageObservation": "左右2分割の合成・生成風の画像。左はMALT ANGELS（モルトエンジェルズ）と書かれたパチスロ筐体。画面には金髪と銀髪の2人のちびキャラとBONUS確定！の文字、リールには青7・瓶・樽・麦穂・赤7、下パネルにはビールジョッキで乾杯する2人の絵。右はホール内で紺色パーカーと灰色のスウェット姿の男性が台に向かい、膝の上に小さな透明ケースと小箱を置き、足元にペットボトルのお茶が2本置かれている場面。実際の遊技や店舗訪問、実在機種の導入事実とは断定しない。23:11は投稿時刻。"
+      },
+      {
+        "recordedAt": "23:21 JST",
+        "kind": "post",
+        "text": "朝っぱらから酒飲んでパチスロ打ちたい以外の感情を失った",
+        "url": "https://x.com/hinahina_vr/status/2114724051528929347",
+        "observedImageIds": []
+      },
+      {
+        "recordedAt": "23:29 JST",
+        "kind": "post",
+        "text": "セキュリティエンジニア\nレッドチームなら興味ある\nまず DGX Sparkを2台買います",
+        "url": "https://x.com/hinahina_vr/status/2114726089637679161",
+        "observedImageIds": [
+          "HVkEIUbboAA8SFD"
+        ],
+        "imageObservation": "テレビ番組のキャプチャ画像。左上に特捜！まさかのルール、上部に青い文字でお金持ちのルール、右上にワイプの笑顔の女性、中央に黒い服で頬杖をつく男性、背後に株や数値が並ぶ複数のモニター、下部に大きくピンクと緑の文字でWiiを2台という字幕。本人のレッドチームなら興味ある、まずDGX Sparkを2台買いますという冗談に添えられた画像であり、実際の購入や転職の事実ではない。"
+      }
+    ],
+    "swarm": [],
+    "health": {
+      "status": "skipped",
+      "note": "未取得。端末接続や書き出しなし。"
+    }
   }
 }
