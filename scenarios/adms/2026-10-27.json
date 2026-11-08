@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-27",
+  "title": "看板を掛け替える廊下 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "看板を掛け替える廊下",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-27_看板を掛け替える廊下",
+      "entry": "standalone_start",
+      "summary": "秋の光が差す静かな木の回廊に、重々しい金色の枠がついた案内札が掛かっていた。ことみとシャロはその前で足を止める。"
+    },
+    {
+      "id": "turn",
+      "title": "木札の裏の手触り",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-27_看板を掛け替える廊下",
+      "entry": "turn",
+      "summary": "重い飾り枠を外して木札を裏返すと、なめらかな白木の面が現れる。"
+    },
+    {
+      "id": "choose",
+      "title": "廊下の案内をどう整える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-27_看板を掛け替える廊下",
+      "entry": "choose",
+      "summary": "裏返した木札をそのまま掛けるか、木札を外して窓を大きく開けるかを選ぶ。"
+    },
+    {
+      "id": "END_A",
+      "title": "素朴な木目の案内板",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-27_看板を掛け替える廊下",
+      "entry": "END_A",
+      "summary": "素朴な木目の案内板"
+    },
+    {
+      "id": "END_B",
+      "title": "風の通る窓辺のベンチ",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-27_看板を掛け替える廊下",
+      "entry": "END_B",
+      "summary": "風の通る窓辺のベンチ"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "裏返した白木の札をそのまま掛ける",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "札を外して窓を大きく開け放つ",
+      "style": "kenkai"
+    }
+  ]
+}

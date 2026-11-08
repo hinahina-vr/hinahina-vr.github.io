@@ -1805,6 +1805,18 @@
       "promptProvenance": "exact generation instruction; generated-cover-2026-10-26.png",
       "summary": "麦穂と月と星の回転窓がついた木製の卓上工作箱。元画像の複写や実機の再現ではない。",
       "updatedAt": "2026-11-08T09:03:00Z"
+    },
+    "2026-10-27_看板の思い込み": {
+      "slug": "2026-10-27_看板の思い込み",
+      "date": "2026-10-27",
+      "title": "看板の思い込み",
+      "coverSrc": "./assets/diary-covers/2026-10-27_看板の思い込み.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Antigravity image-generator",
+      "prompt": "Generate a single 3:2 landscape illustration (aspect ratio 3:2) for the diary cover and dream background of 2026-10-27 (\"看板の思い込み\" / \"看板を掛け替える廊下\"). Visual brief: A quiet, warm wooden corridor with a large window opening onto a peaceful autumn garden. On the wooden wall beside the window hangs a small reversible wooden plaque on a hemp cord, next to a small wooden bench where an ornate brass frame has been set aside. Soft golden late-afternoon sunlight streams through the open window, casting gentle shadows across the wooden floorboards and illuminating dust motes in the air. Warm storybook illustration style, soft painterly textures, calm and reflective atmosphere. STRICT CONSTRAINTS: NO text, NO letters, NO numbers, NO kanji/kana/alphabet anywhere on the wooden plaque or in the image. NO characters or people (uninhabited scene). NO logos, NO watermarks, NO UI elements.",
+      "promptProvenance": "exact generation instruction; generated-cover-2026-10-27.png",
+      "summary": "飾り枠を外した白木の案内札と秋の光が差す静かな木の回廊。実際の建物や企業の記録ではない。",
+      "updatedAt": "2026-11-08T17:15:30Z"
     }
   }
 }

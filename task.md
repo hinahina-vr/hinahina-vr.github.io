@@ -4266,3 +4266,37 @@ E: mii ana astarotte nemurin rizel tama
 - ローカルChromeで本編PC/390幅、扉絵1536×1024読み込み、声の束からひなた当日記事へのリンクと戻り、スマホ幅で横はみ出しなし、夢の両結末到達、前の選択肢へ戻る、直接ADMSから途中再開（entry=turn）と背景表示を実操作確認。証跡画像保存、viewport解除済み。実機スマホ・音の聴取・チャットAPIは未検証。
 - 証跡: ../diary-nextday-20261026-evidence/。79ファイル限定でcommit/push予定。既存26未追跡実験ファイル、raw/contextは除外。公開成功はpublication-result.jsonとPages成功runで確認する。
 - 次の候補は10月27日以降。今回の資料と混ぜず、次回に当日の資料を再確認する。
+
+
+## 2026-11-09：次の1日追加・公開（2026-10-27）
+
+# 2026-10-27 執筆前計画
+本人投稿1件をJSTで抽出し実ページで本文を確認。あるAI開発企業について、自分たちが醸している生理的気持ち悪さそのものを本気でコアバリューだとかビジョナリーだと思い込んでいそうだという短い所感1件。具体的な製品利用、業務上の取引、他社の優劣の断定は補わない。Swarm当日記録なし、Health未取得。
+本編: 看板の思い込み。他者から見える居心地の悪さやぎこちなさを、そのまま自分たちの核心的な価値や先見性だと信じ込んでしまう危うさと、自分の掲げる看板を疑う視線を、太宰治（知層塾）の自意識を引き受ける語り口で書く。
+同じ1件の所感を5つの観点に分けて配分（5件の出来事があったという意味ではない）。
+A=居心地の悪さや違和感をそのまま立派な看板にしてしまう危うさ / B=自分たちの信じる正しさと外から見える姿のずれ / C=大きな理念や美辞麗句よりも手元の自然な感覚を信じること / D=押しつけがましい言葉に出会ったときに一歩引いて眺める距離感 / E=自分の癖や短所を長所と取り違えないための控えめな点検
+A: oji rem tsumugi minagi kotomi sharo
+B: hinahina multi mint feiris mitsuba rin
+C: moegami ruriko kud kiku8 hazuki kukuri mayuki roju
+D: hina dejiko ecoko ayu hinako kyoko
+E: mii ana astarotte nemurin rizel tama
+6/6/7(+老中)/6/6名、全員3分の1以下。純本文は独立日常1100〜1400字、短い所見で担当の1観点のみ。
+ひなた: 放課後に紗季と体育館の用具室で、空気の抜けたバスケットボールを1つずつ手で押して確かめ、空気入れの針を差して弾む音を整える独立日常。おにいちゃんの実同席なし。
+老中: 古書店の店頭にある均一棚で、立派な箱入り全集の端本よりも手擦れた薄い随筆集を手に取って目次を眺める架空の独立随筆。
+みとら: 他32人を全文読後、独立場面を決めて最後に書く。要約列挙しない。
+夢: 看板を掛け替える廊下。ことみとシャロが、古い木札の掛かった静かな回廊で、大仰な標語の裏に書かれた素朴な案内書きを見つけて向きを選び直す。裏返して素朴な案内を表に出す/木札を外して窓の風を入れる2結末。現実の企業批判とは別の創作夢。
+表紙: 静かな木の回廊の壁に掛かった、裏表のある小さな木札と朝の光が差す窓辺。無人、文字ロゴなし。内蔵image-generatorで新規生成し、写真や元絵を複写しない。
+使用LLM: Gemini 4 Argon (Medium)（Antigravity）。各担当は直近8稿を参照し、具体場面の反復を避ける。
+
+
+### 2026-11-09：10月27日分の公開前検証
+
+- 対象は10月27日の本人投稿1件。具体的な製品利用、業務上の取引、他社の優劣の断定は事実化しない。Swarm当日記録なし、Health未取得。
+- 本編は『看板の思い込み』（文豪AIラウンドロビン：太宰治／知層塾）。33人の独立日常と短い所見、使用LLMはGemini 4 Argon (Medium)（Antigravity）。32人分の全文を確定しSHA256を記録した後、全32稿を通読してみとらを最後に執筆。全33人の純本文は1005〜1123字。
+- 表紙と夢背景は内蔵image-generatorで生成した新規の木の回廊と木札の風景（1536×1024）。夢は『看板を掛け替える廊下』、5入口・4辺・2結末。
+- 当日14検査（draft-daily-context、diary-self-date-mentions、diary-kanji-numerals、diary-readability、diary-context-phrasing、diary-title-phrasing、diary-character-voice、diary-topic-distribution、diary-source-leaks、diary-covers、diary-voice-repetition、diary-voice-variety、diary-voice-similarity、diary-voice-boilerplate）とvalidate-dream-graphsがすべてexit 0で合格（diary-character-voiceもfinding 0で完全合格）。元のチェッカーとビルダー変更なし。
+- 全履歴警告は既存source69日/human10行/independence561行/phrase-limits既存過去分のみのまま、当日10月27日の指摘はいずれも0。全履歴合格とは扱わない。
+- 34原稿/個別HTML、33声カードの本文一致、使用LLM表記、74リンク/アンカー、過去5324記事・老中9か月・過去MD不変をpublished-static-audit-20261027.jsonで確認。夢166グラフ通過。
+- ローカルChromeで本編PC/390幅、扉絵1536×1024読み込み、声の束からひなた当日記事へのリンクと戻り、スマホ幅で横はみ出しなし、夢の両結末到達、前の選択肢へ戻る、直接ADMSから途中再開（entry=turn）と背景表示を実操作確認。証跡画像保存、viewport解除済み。実機スマホ・音の聴取・チャットAPIは未検証。
+- 証跡: ../diary-nextday-20261027-evidence/。79ファイル限定でcommit/push予定。既存26未追跡実験ファイル、raw/contextは除外。公開成功はpublication-result.jsonとPages成功runで確認する。
+- 次の候補は10月28日以降。今回の資料と混ぜず、次回に当日の資料を再確認する。
