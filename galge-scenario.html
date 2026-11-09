@@ -252,20 +252,29 @@
       #title-screen .start-btn,
       .utility-btn,
       .settings-btn,
-      #settings-close {
+      #settings-close,
+      #title-wake-link {
         cursor: pointer;
         transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
       }
       #title-screen .start-btn,
       .utility-btn,
       .settings-btn,
-      #settings-close {
+      #settings-close,
+      #title-wake-link {
         padding: 12px 18px;
         border-radius: 14px;
         border: 1px solid rgba(196, 163, 255, 0.24);
         background: linear-gradient(180deg, rgba(26, 17, 46, 0.88), rgba(11, 8, 22, 0.9));
         color: #efe7ff;
         letter-spacing: 0.12em;
+        text-decoration: none;
+      }
+      #title-wake-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(12px, 0.95vw, 15px);
       }
       .utility-btn .btn-icon { display: inline-block; margin-right: 4px; }
       .utility-btn .btn-text { display: inline-block; }
@@ -283,7 +292,8 @@
       #title-screen .start-btn:hover,
       .utility-btn:hover,
       .settings-btn:hover,
-      #settings-close:hover {
+      #settings-close:hover,
+      #title-wake-link:hover {
         opacity: 1;
         transform: translateY(-1px);
         border-color: rgba(220, 194, 255, 0.42);
@@ -309,14 +319,16 @@
       body.realm-kenkai #title-screen .start-btn,
       body.realm-kenkai .utility-btn,
       body.realm-kenkai .settings-btn,
-      body.realm-kenkai #settings-close {
+      body.realm-kenkai #settings-close,
+      body.realm-kenkai #title-wake-link {
         border-color: rgba(220, 180, 80, 0.3);
         background: linear-gradient(180deg, rgba(50, 38, 12, 0.88), rgba(25, 18, 6, 0.9));
         color: #f0d888;
       }
       body.realm-kenkai #title-screen .start-btn:hover,
       body.realm-kenkai .utility-btn:hover,
-      body.realm-kenkai .settings-btn:hover {
+      body.realm-kenkai .settings-btn:hover,
+      body.realm-kenkai #title-wake-link:hover {
         border-color: rgba(220, 180, 80, 0.5);
       }
       body.realm-kenkai .title-chip {
@@ -345,14 +357,16 @@
       body.realm-genkai #title-screen .start-btn,
       body.realm-genkai .utility-btn,
       body.realm-genkai .settings-btn,
-      body.realm-genkai #settings-close {
+      body.realm-genkai #settings-close,
+      body.realm-genkai #title-wake-link {
         border-color: rgba(40, 100, 180, 0.3);
         background: linear-gradient(180deg, rgba(10, 18, 40, 0.88), rgba(5, 10, 22, 0.9));
         color: #a0d0f0;
       }
       body.realm-genkai #title-screen .start-btn:hover,
       body.realm-genkai .utility-btn:hover,
-      body.realm-genkai .settings-btn:hover {
+      body.realm-genkai .settings-btn:hover,
+      body.realm-genkai #title-wake-link:hover {
         border-color: rgba(40, 100, 180, 0.5);
       }
       body.realm-genkai .title-chip {
@@ -371,7 +385,8 @@
       body.mode-classic .title-chip,
       body.mode-classic .utility-btn,
       body.mode-classic .settings-btn,
-      body.mode-classic #title-screen .start-btn {
+      body.mode-classic #title-screen .start-btn,
+      body.mode-classic #title-wake-link {
         font-family: 'PixelMplus12', 'DotGothic16', 'ＭＳ ゴシック', 'MS Gothic', monospace;
       }
       body.mode-classic #title-screen h1 {
@@ -380,7 +395,8 @@
       body.mode-classic .title-chip,
       body.mode-classic .utility-btn,
       body.mode-classic .settings-btn,
-      body.mode-classic #title-screen .start-btn {
+      body.mode-classic #title-screen .start-btn,
+      body.mode-classic #title-wake-link {
         border-radius: 0;
         border: 1px solid #aaa;
         background: #000;
@@ -801,7 +817,8 @@
         position: fixed;
         z-index: 20;
       }
-      #back-btn {
+      #back-btn,
+      #wake-btn {
         position: fixed;
         z-index: 55;
       }
@@ -862,7 +879,8 @@
         padding: 10px 14px;
         font-size: clamp(11px, 0.9vw, 14px);
       }
-      #back-btn {
+      #back-btn,
+      #wake-btn {
         top: clamp(12px, 1.8vw, 24px);
         left: clamp(18px, 2vw, 36px);
         display: inline-flex;
@@ -880,7 +898,11 @@
         transition: all 0.2s;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
-      #back-btn:hover {
+      body.runtime-started #wake-btn {
+        top: calc(clamp(12px, 1.8vw, 24px) + 46px);
+      }
+      #back-btn:hover,
+      #wake-btn:hover {
         background: rgba(80, 40, 120, 0.45);
         color: #ffffff;
         border-color: rgba(220, 194, 255, 0.42);
@@ -1383,6 +1405,7 @@
       .mode-classic #chapter-display,
       .mode-classic #expression-tag,
       .mode-classic #back-btn,
+      .mode-classic #wake-btn,
       .mode-classic .title-chip,
       .mode-classic .choice-btn,
       .mode-classic #settings-dialog,
@@ -1413,7 +1436,9 @@
       .mode-classic .utility-btn,
       .mode-classic #title-screen .start-btn,
       .mode-classic .settings-btn,
-      .mode-classic #settings-close {
+      .mode-classic #settings-close,
+      .mode-classic #back-btn,
+      .mode-classic #wake-btn {
         border-radius: 0;
         background: #000;
         border: 2px solid #9a9a9a;
@@ -1431,6 +1456,7 @@
       }
       .mode-classic #mode-toggle,
       .mode-classic #back-btn,
+      .mode-classic #wake-btn,
       .mode-classic #chapter-display,
       .mode-classic #expression-tag {
         color: #d0d0d0;
@@ -1459,7 +1485,8 @@
         }
         .utility-btn .btn-text { display: none; }
         .utility-btn .btn-icon { margin-right: 0; font-size: 20px; }
-        #back-btn { top: 16px; left: 18px; }
+        #back-btn, #wake-btn { top: 16px; left: 18px; }
+        body.runtime-started #wake-btn { top: 62px; }
         #settings-btn { top: 16px; right: 18px; left: auto; bottom: auto; }
         #sound-settings-btn { top: 72px; right: 18px; left: auto; bottom: auto; }
         #auto-advance-toggle { top: 128px; right: 18px; left: auto; bottom: auto; }
@@ -1544,9 +1571,13 @@
         #settings-list {
           padding: 16px;
         }
-        #back-btn {
+        #back-btn,
+        #wake-btn {
           top: 12px;
           left: 12px;
+        }
+        body.runtime-started #wake-btn {
+          top: 56px;
         }
         #adms-overlay {
           padding: 3px;
@@ -1678,6 +1709,7 @@
             <button class="utility-btn" id="title-bgm-toggle" type="button" title="BGM ON"><span class="btn-icon">🎵</span><span class="btn-text">BGM ON</span></button>
             <button class="utility-btn" id="title-sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
           </div>
+          <a href="./diary.html" id="title-wake-link">◁ 夢から醒める</a>
         </div>
 
         <p id="runtime-warning" hidden></p>
@@ -1693,6 +1725,7 @@
       <div id="end-actions">
         <button class="choice-btn" id="end-retry-choice-btn" type="button" hidden>◁ 前の選択肢に戻る</button>
         <a class="back-link" href="./dream-select.html" id="end-adms-link">◁ A.D.M.S. を開く</a>
+        <a class="back-link" href="./diary.html" id="end-wake-link">◁ 夢から醒める</a>
       </div>
     </div>
 
@@ -1725,6 +1758,7 @@
 
     <button class="utility-btn" id="mode-toggle" title="表示モード切替" type="button"><span class="btn-icon">🌙</span><span class="btn-text">表示切替</span></button>
     <a id="back-btn" href="./dream-select.html">◁ A.D.M.S.</a>
+    <a id="wake-btn" href="./diary.html">◁ 夢から醒める</a>
     <button class="utility-btn" id="settings-btn" type="button" title="モデル設定"><span class="btn-icon">🎭</span><span class="btn-text">モデル設定</span></button>
     <button class="utility-btn" id="sound-settings-btn" type="button" title="音量設定"><span class="btn-icon">🔊</span><span class="btn-text">音量設定</span></button>
     <button class="utility-btn" id="auto-advance-toggle" type="button" title="自動送り OFF"><span class="btn-icon">▶</span><span class="btn-text">自動</span></button>

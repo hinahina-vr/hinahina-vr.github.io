@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-28",
+  "title": "値札のない模型の街 A.D.M.S.",
+  "rootNodeId": "standalone_start",
+  "nodes": [
+    {
+      "id": "standalone_start",
+      "title": "値札のない模型の街",
+      "realm": "kenkai",
+      "kind": "root",
+      "layer": 0,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-28_値札のない模型の街",
+      "entry": "standalone_start",
+      "summary": "夕暮れの光が差す静かな部屋の机の上に、小さな白木の家の模型が置かれていた。レムとつむぎはその横に落ちている白い紙札に気づく。"
+    },
+    {
+      "id": "turn",
+      "title": "剥がした紙札のあと",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 1,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-28_値札のない模型の街",
+      "entry": "turn",
+      "summary": "模型から外れた白紙の札を脇へ片付けると、塗装のない素朴な木の壁と屋根が夕日を受けて温かく浮かび上がる。"
+    },
+    {
+      "id": "choose",
+      "title": "小さな家に何を添える",
+      "realm": "kenkai",
+      "kind": "branch",
+      "layer": 2,
+      "lane": 2,
+      "icon": "◇",
+      "scenario": "2026-10-28_値札のない模型の街",
+      "entry": "choose",
+      "summary": "小さな家の内側に暖かい豆電球を灯すか、窓を開けて夕方の風を通すかを選ぶ。"
+    },
+    {
+      "id": "END_A",
+      "title": "窓に灯るオレンジ色の明かり",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 2,
+      "icon": "●",
+      "scenario": "2026-10-28_値札のない模型の街",
+      "entry": "END_A",
+      "summary": "窓に灯るオレンジ色の明かり"
+    },
+    {
+      "id": "END_B",
+      "title": "木目の屋根を撫でる夜風",
+      "realm": "kenkai",
+      "kind": "ending",
+      "layer": 3,
+      "lane": 6,
+      "icon": "●",
+      "scenario": "2026-10-28_値札のない模型の街",
+      "entry": "END_B",
+      "summary": "木目の屋根を撫でる夜風"
+    }
+  ],
+  "edges": [
+    {
+      "from": "standalone_start",
+      "to": "turn",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "turn",
+      "to": "choose",
+      "choiceText": "進む",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_A",
+      "choiceText": "小さな家のなかに温かい灯りを入れる",
+      "style": "kenkai"
+    },
+    {
+      "from": "choose",
+      "to": "END_B",
+      "choiceText": "窓を少し開けて木目の屋根に夜風を通す",
+      "style": "kenkai"
+    }
+  ]
+}

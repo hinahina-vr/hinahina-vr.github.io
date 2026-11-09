@@ -4300,3 +4300,38 @@ E: mii ana astarotte nemurin rizel tama
 - ローカルChromeで本編PC/390幅、扉絵1536×1024読み込み、声の束からひなた当日記事へのリンクと戻り、スマホ幅で横はみ出しなし、夢の両結末到達、前の選択肢へ戻る、直接ADMSから途中再開（entry=turn）と背景表示を実操作確認。証跡画像保存、viewport解除済み。実機スマホ・音の聴取・チャットAPIは未検証。
 - 証跡: ../diary-nextday-20261027-evidence/。79ファイル限定でcommit/push予定。既存26未追跡実験ファイル、raw/contextは除外。公開成功はpublication-result.jsonとPages成功runで確認する。
 - 次の候補は10月28日以降。今回の資料と混ぜず、次回に当日の資料を再確認する。
+
+
+## 2026-11-09：次の1日追加・公開（2026-10-28）
+
+# 2026-10-28 執筆前計画
+本人投稿1件をJSTで抽出し、普段使いのChrome履歴および個別ステータス画面で本文と時刻（22:47 JST）を確認。税金の無駄だから不動産に早く大暴落してほしい、住む家は売るつもりもないしキャッシュフローも産まないから資産でもなんでもない、という短い所感1件。具体的な不動産の所有・売買契約・納税額・他者の資産状況の断定は補わない。Swarm当日記録なし、Health未取得。
+本編: 売らない箱。住むための家を資産や換金の対象として数えるのではなく、ただ雨風をしのいで暮らすための箱として見る視線を、星新一（冷静塾）の余計な形容を削った寓話的な語り口で書く。
+同じ1件の所感を5つの観点に分けて配分（5件の出来事があったという意味ではない）。
+A=売るつもりのない手元の道具や居場所には値札がいらないこと / B=生み出す利益や数字よりも、毎日ただそこにあって使えることの安心感 / C=立派な財産や宝物という呼び名を外したときに残る素朴な使い心地 / D=外の評価や相場がどう変わっても自分の暮らしの手触りは変わらないこと / E=増やすことや蓄えることより、今いる場所を整えて過ごす心地よさ
+A: oji rem tsumugi minagi kotomi sharo
+B: hinahina multi mint feiris mitsuba rin
+C: moegami ruriko kud kiku8 hazuki kukuri mayuki roju
+D: hina dejiko ecoko ayu hinako kyoko
+E: mii ana astarotte nemurin rizel tama
+6/6/7(+老中)/6/6名、全員3分の1以下。純本文は独立日常1100〜1400字、短い所見で担当の1観点のみ。
+ひなた: 休日の午後に母と自分の勉強机の引き出しを整理し、もう使わない古い時間割の紙を外して、毎日使う鉛筆と消しゴムを拭き直す独立日常。おにいちゃんの実同席なし。
+老中: 骨董市の片隅で、値札のついた飾り皿よりも、長年使われて角の丸くなった無銘の木の筆立てに目を留める架空の独立随筆。
+みとら: 他32人を全文読後、独立場面を決めて最後に書く。要約列挙しない。
+夢: 値札のない模型の街。レムと紬が、夕暮れの光が差す静かな部屋の机の上で、小さな白木の家の模型から外れた白紙の札を片付け、家の内側に温かい豆電球を灯すか、窓を開けて木目の屋根に夜風を通すかを選ぶ2結末。現実の不動産売買とは別の創作夢。
+表紙: 小さな木の家の模型が並ぶ静かな机の上と、窓から差す穏やかな夕暮れの光。無人、文字ロゴなし。内蔵image-generatorで新規生成し、写真や元絵を複写しない。
+使用LLM: Gemini 4 Argon (Medium)（Antigravity）。各担当は直近8稿を参照し、具体場面の反復を避ける。
+
+
+### 2026-11-09：10月28日分の公開前検証（および夢シナリオ「◁ 夢から醒める」ボタン追加）
+
+- 対象は10月28日の本人投稿1件。具体的な不動産の所有・売買契約・納税額・他者の資産状況の断定は事実化しない。Swarm当日記録なし、Health未取得。
+- 本編は『売らない箱』（文豪AIラウンドロビン：星新一／冷静塾）。33人の独立日常と短い所見、使用LLMはGemini 4 Argon (Medium)（Antigravity）。32人分の全文を確定しSHA256を記録した後、全32稿を通読してみとらを最後に執筆。全33人の純本文は1002〜1065字。
+- 表紙と夢背景は内蔵image-generatorで生成した新規の白木の家模型と夕暮れの机の風景（1536×1024）。夢は『値札のない模型の街』、5入口・4辺・2結末。
+- あわせて、ユーザー要望により夢シナリオ画面（`galge-scenario.html`、`src/galge-runtime/main.js`、`assets/galge-runtime.bundle.js`）に元の画面または日記へ戻れる「◁ 夢から醒める」ボタン（`#title-wake-btn`、`#hud-wake-btn`、`#end-wake-btn`）を追加。
+- 当日14検査（draft-daily-context、diary-self-date-mentions、diary-kanji-numerals、diary-readability、diary-context-phrasing、diary-title-phrasing、diary-character-voice、diary-topic-distribution、diary-source-leaks、diary-covers、diary-voice-repetition、diary-voice-variety、diary-voice-similarity、diary-voice-boilerplate）とvalidate-dream-graphsがすべてexit 0で合格（diary-character-voiceもfinding 0で完全合格）。元のチェッカーとビルダー変更なし。
+- 全履歴警告は既存source69日/human10行/independence561行/phrase-limits既存過去分のみのまま、当日10月28日の指摘はいずれも0。全履歴合格とは扱わない。
+- 34原稿/個別HTML、33声カードの本文一致、使用LLM表記、74リンク/アンカー、過去5358記事・老中9か月・過去MD不変をpublished-static-audit-20261028.jsonで確認。夢167グラフ通過。
+- ローカルChromeで本編PC/390幅、扉絵1536×1024読み込み、声の束からひなた当日記事へのリンクと戻り、スマホ幅で横はみ出しなし、夢の両結末到達、前の選択肢へ戻る、直接ADMSから途中再開（entry=turn）と背景表示、および「◁ 夢から醒める」ボタンの動作を実操作確認。証跡画像保存、viewport解除済み。実機スマホ・音の聴取・チャットAPIは未検証。
+- 証跡: ../diary-nextday-20261028-evidence/。82ファイル限定（日記79ファイル＋夢から醒めるボタン3ファイル）でcommit/push予定。既存26未追跡実験ファイル、raw/contextは除外。公開成功はpublication-result.jsonとPages成功runで確認する。
+- 次の候補は10月29日以降。今回の資料と混ぜず、次回に当日の資料を再確認する。

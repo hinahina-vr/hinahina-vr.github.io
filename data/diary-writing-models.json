@@ -444,6 +444,12 @@
       "label": "Gemini 4 Argon (Medium)（Antigravity）",
       "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
       "revisedOn": "2026-11-09"
+    },
+    "2026-10-28": {
+      "model": "gemini-4-argon-medium",
+      "label": "Gemini 4 Argon (Medium)（Antigravity）",
+      "scope": "本日記・33人のキャラクター日記・夢シナリオの執筆",
+      "revisedOn": "2026-11-09"
     }
   }
 }

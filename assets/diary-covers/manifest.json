@@ -1817,6 +1817,18 @@
       "promptProvenance": "exact generation instruction; generated-cover-2026-10-27.png",
       "summary": "飾り枠を外した白木の案内札と秋の光が差す静かな木の回廊。実際の建物や企業の記録ではない。",
       "updatedAt": "2026-11-08T17:15:30Z"
+    },
+    "2026-10-28_売らない箱": {
+      "slug": "2026-10-28_売らない箱",
+      "date": "2026-10-28",
+      "title": "売らない箱",
+      "coverSrc": "./assets/diary-covers/2026-10-28_売らない箱.png",
+      "renderMode": "codex-native-image-gen",
+      "modelUsed": "Antigravity image-generator",
+      "prompt": "Aspect Ratio: 3:2 landscape (will be resized to 1536x1024). Subject: A quiet evening room by a window where warm twilight sunlight falls across a wooden desk. On the desk sits a small, unpainted wooden architectural model of a simple house (a \"box for living, not for selling\") alongside a peeled-off blank paper tag and a warm ceramic mug. Calm, atmospheric anime background art style (Makoto Shinkai / Kyoto Animation inspired interior still life). Strict constraints: NO characters/people (無人), NO text, NO numbers, NO logos, NO signage (文字・ロゴ・看板なし).",
+      "promptProvenance": "exact generation instruction; cover_raw_2026_10_28_1794196326732.jpg",
+      "summary": "白紙の札を外した小さな白木の家の模型と夕暮れの机。実際の物件や取引の記録ではない。",
+      "updatedAt": "2026-11-09T03:54:00Z"
     }
   }
 }

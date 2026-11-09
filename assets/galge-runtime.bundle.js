@@ -33044,7 +33044,8 @@ void main() {
       this.$chapterTitle = this.$("chapter-title");
       this.$endScreen = this.$("end-screen");
       this.$endRetryChoiceBtn = this.$("end-retry-choice-btn");
-      this.$endBackLink = document.querySelector("#end-screen .back-link");
+      this.$endBackLink = this.$("end-adms-link") || document.querySelector("#end-screen .back-link");
+      this.$endWakeLink = this.$("end-wake-link");
       this.$admsOverlay = this.$("adms-overlay");
       this.$admsOverlayBackdrop = this.$("adms-overlay-backdrop");
       this.$admsOverlayClose = this.$("adms-overlay-close");
@@ -33052,6 +33053,8 @@ void main() {
       this.$choiceContainer = this.$("choice-container");
       this.$textWindow = this.$("text-window");
       this.$backBtn = this.$("back-btn");
+      this.$wakeBtn = this.$("wake-btn");
+      this.$titleWakeLink = this.$("title-wake-link");
       this.$titlePrimarySubtitle = document.querySelector("#title-screen .subtitle");
       this.$titleSecondarySubtitle = document.querySelector("#title-screen .subtitle:nth-of-type(2)");
       this.$titleModelSummary = this.$("title-model-summary");
@@ -33383,6 +33386,31 @@ void main() {
       }
       return `./dream-select.html?${params.toString()}`;
     }
+    resolveWakeUrl() {
+      if (document.referrer) {
+        try {
+          const refUrl = new URL(document.referrer, window.location.origin);
+          if (refUrl.origin === window.location.origin && /\/(diary(?:-[\w-]+)?|index|galge-mode|galge-guide)\.html$/i.test(refUrl.pathname)) {
+            return `${refUrl.pathname}${refUrl.search}${refUrl.hash}`;
+          }
+        } catch (error) {
+        }
+      }
+      return "./diary.html";
+    }
+    wakeFromDream() {
+      if (document.referrer && window.history.length > 1) {
+        try {
+          const refUrl = new URL(document.referrer, window.location.origin);
+          if (refUrl.origin === window.location.origin && /\/(diary(?:-[\w-]+)?|index|galge-mode|galge-guide)\.html$/i.test(refUrl.pathname)) {
+            window.history.back();
+            return;
+          }
+        } catch (error) {
+        }
+      }
+      window.location.href = this.resolveWakeUrl();
+    }
     syncBackNavigation() {
       const backUrl = this.resolveBackUrl();
       if (this.$backBtn) {
@@ -33390,6 +33418,16 @@ void main() {
       }
       if (this.$endBackLink) {
         this.$endBackLink.href = backUrl;
+      }
+      const wakeUrl = this.resolveWakeUrl();
+      if (this.$wakeBtn) {
+        this.$wakeBtn.href = wakeUrl;
+      }
+      if (this.$titleWakeLink) {
+        this.$titleWakeLink.href = wakeUrl;
+      }
+      if (this.$endWakeLink) {
+        this.$endWakeLink.href = wakeUrl;
       }
     }
     markScenarioVisit(entryLabel = null) {
@@ -33685,6 +33723,19 @@ void main() {
           this.openAdmsOverlay();
         });
       }
+      for (const wakeEl of [this.$wakeBtn, this.$titleWakeLink, this.$endWakeLink]) {
+        if (wakeEl) {
+          wakeEl.addEventListener("click", (event) => {
+            if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+              event.stopPropagation();
+              return;
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            this.wakeFromDream();
+          });
+        }
+      }
       if (this.$admsOverlayBackdrop) {
         this.$admsOverlayBackdrop.addEventListener("click", (event) => {
           event.preventDefault();
@@ -33700,7 +33751,7 @@ void main() {
         });
       }
       document.addEventListener("click", (event) => {
-        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target === this.$autoAdvanceToggle || event.target.closest("#auto-advance-toggle") || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-overlay") || event.target.closest("#back-btn") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
+        if (event.target === this.$modeToggle || event.target === this.$titleModeToggleBtn || event.target.closest("#title-mode-toggle-btn") || event.target === this.$startBtn || event.target === this.$titleBgmToggle || event.target === this.$settingsBtn || event.target === this.$titleSettingsBtn || event.target === this.$soundSettingsBtn || event.target === this.$titleSoundSettingsBtn || event.target === this.$autoAdvanceToggle || event.target.closest("#auto-advance-toggle") || event.target.closest("#volume-popup") || event.target.closest("#settings-modal") || event.target.closest("#adms-overlay") || event.target.closest("#back-btn") || event.target.closest("#wake-btn") || event.target.closest("#title-wake-link") || event.target.closest("#end-screen a") || event.target.closest("#end-screen button")) {
           return;
         }
         if (this.$volumePopup.classList.contains("visible")) {
