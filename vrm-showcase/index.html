@@ -40,22 +40,30 @@
       display: grid;
       grid-template-rows: 52px 1fr;
       grid-template-columns: 1fr 352px;
-      width: 100vw; height: 100vh; height: 100dvh;
+      width: 100%; max-width: 100vw; height: 100vh; height: 100dvh;
     }
 
     /* Clean Top Header */
     header {
+      position: relative; z-index: 46;
       grid-column: 1 / -1;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 14px; background: #0c101b;
+      padding: 0 max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left));
+      background: #0c101b;
       border-bottom: 1px solid var(--border); gap: 8px;
+      min-width: 0; max-width: 100%; overflow: hidden;
     }
-    .hdr-left, .hdr-right {
+    .hdr-left {
       display: flex; align-items: center; gap: 7px; flex-wrap: nowrap;
+      min-width: 0; flex: 1 1 auto; overflow: hidden;
+    }
+    .hdr-right {
+      display: flex; align-items: center; gap: 7px; flex-wrap: nowrap;
+      flex: 0 0 auto;
     }
     .hdr-title {
       font-weight: 700; font-size: 13.5px; display: flex; align-items: center; gap: 7px;
-      white-space: nowrap; color: #f8fafc;
+      white-space: nowrap; color: #f8fafc; min-width: 0; overflow: hidden; text-overflow: ellipsis;
     }
     .res-badge {
       font-size: 11px; padding: 3px 8px; border-radius: 6px;
@@ -392,21 +400,37 @@
     .stage-area, #studioCanvas, .slot-hit { touch-action: none; }
     .mobile-only { display: none !important; }
 
+    @media (min-width: 861px) and (max-width: 1140px) {
+      header { padding: 0 10px; gap: 5px; }
+      .hdr-left, .hdr-right { gap: 4px; }
+      .hdr-title { font-size: 12.5px; gap: 5px; }
+      .res-badge { font-size: 10px; padding: 2px 6px; }
+      #selHeaderAspect { width: 146px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
+      #selRecDur { width: 82px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
+      header .btn { padding: 5px 7px; font-size: 11px; }
+    }
+
     @media (max-width: 860px) {
       .desktop-only { display: none !important; }
       .mobile-only { display: inline-flex !important; }
+      .mob-brand-short { display: none !important; }
       div.mobile-only, section.mobile-only { display: flex !important; }
 
-      .app { grid-template-columns: 1fr; grid-template-rows: 48px 1fr; }
-      header { padding: 0 9px; gap: 5px; }
-      .hdr-left, .hdr-right { gap: 5px; }
-      .hdr-title { font-size: 13px; gap: 5px; }
-      .res-badge { font-size: 10px; padding: 3px 6px; }
-      #btnSnapPng { padding: 6px 8px; font-size: 11px; }
-      .btn.rec-btn { padding: 6px 10px; font-size: 11.5px; }
+      .app { grid-template-columns: 1fr; grid-template-rows: 46px 1fr; }
+      header {
+        padding: 0 max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left));
+        gap: 4px;
+      }
+      .hdr-left { gap: 5px; }
+      .hdr-right { gap: 4px; }
+      .hdr-title { font-size: 12.5px; gap: 4px; }
+      .res-badge { font-size: 10px; padding: 2px 6px; flex-shrink: 0; }
+      header .btn { min-height: 32px; height: 32px; }
+      #btnFullscreen, #btnSnapPng { padding: 0 7px; min-width: 30px; font-size: 12px; }
+      .btn.rec-btn { padding: 0 9px; font-size: 11px; font-variant-numeric: tabular-nums; }
       #btnMobileMenu {
         background: var(--primary); border-color: #fbcfe8; color: #ffffff;
-        font-weight: 700; padding: 6px 10px; font-size: 11.5px;
+        font-weight: 700; padding: 0 8px; font-size: 11px; gap: 3px;
       }
       body.mobile-menu-open #btnMobileMenu { background: var(--surface-hover); border-color: var(--border-strong); }
 
@@ -451,8 +475,29 @@
       }
       .mobile-sheet-title { font-size: 12px; font-weight: 700; color: #f8fafc; }
       .preset-scroll { max-height: none; min-height: 0; overflow: visible; }
-      .btn, select.inp { min-height: 36px; }
+      aside .btn, aside select.inp { min-height: 36px; }
       .toast-bar { width: calc(100vw - 20px); bottom: 12px; justify-content: space-between; font-size: 11px; }
+    }
+
+    @media (max-width: 410px) {
+      .mob-brand-full { display: none !important; }
+      .mob-brand-short { display: inline-flex !important; }
+      header {
+        padding: 0 max(6px, env(safe-area-inset-right)) 0 max(6px, env(safe-area-inset-left));
+        gap: 3px;
+      }
+      .hdr-left { gap: 4px; }
+      .hdr-right { gap: 3px; }
+      .hdr-title { font-size: 12px; }
+      .res-badge { font-size: 9.5px; padding: 2px 5px; }
+      #btnFullscreen, #btnSnapPng { padding: 0 6px; min-width: 28px; }
+      .btn.rec-btn { padding: 0 8px; font-size: 10.5px; }
+      #btnMobileMenu { padding: 0 7px; font-size: 10.5px; }
+    }
+
+    @media (max-width: 348px) {
+      #btnMobileMenu .mob-menu-txt { display: none !important; }
+      #btnMobileMenu { padding: 0 7px; min-width: 28px; }
     }
 
     /* Immersive Edge-to-Edge Fullscreen Mode (上下左右目いっぱい 100vw × 100dvh) */
@@ -497,35 +542,53 @@
       <div class="hdr-left">
         <div class="hdr-title">
           <span class="desktop-only">🎬 VRM スタジオ</span>
-          <span class="mobile-only">🎬 VRMスタジオ</span>
+          <span class="mobile-only mob-brand-full">🎬 VRMスタジオ</span>
+          <span class="mobile-only mob-brand-short">🎬 VRM</span>
         </div>
-        <span class="res-badge" id="resReadout">横 1920×1080</span>
+        <span class="res-badge is-vert" id="resReadout">9:16 ショート 1080×1920</span>
         <button class="btn desktop-only" id="btnLoadVrm" title="別のVRMファイルを読み込む">📂 VRM読込</button>
         <input type="file" id="fileVrm" accept=".vrm" hidden>
         <span id="modelBadge" role="status" hidden></span>
       </div>
 
       <div class="hdr-right">
-        <div class="seg-group desktop-only" id="resBtns" title="出力動画の解像度">
+        <select class="inp desktop-only" id="selHeaderAspect" style="width:194px;" title="SNS・動画サイト別の出力比率">
+          <optgroup label="📱 縦動画・SNSショート">
+            <option value="9:16" selected>📱 9:16 TikTok / YTショート / リール</option>
+            <option value="4:5">📸 4:5 Instaフィード縦 / X縦最大</option>
+            <option value="3:4">🖼️ 3:4 Insta新グリッド / RED</option>
+            <option value="2:3">🎴 2:3 ブロマイド縦 / Xポスト</option>
+          </optgroup>
+          <optgroup label="🟦 スクエア正方形">
+            <option value="1:1">🟦 1:1 Insta / X / サムネ正方形</option>
+          </optgroup>
+          <optgroup label="🎬 横動画・ワイドMV">
+            <option value="16:9">🎬 16:9 YouTube / X横 / PV標準</option>
+            <option value="4:3">📺 4:3 iPad / レトロMV横</option>
+            <option value="3:2">📷 3:2 フォトワイド / カバー横</option>
+            <option value="21:9">🎞️ 21:9 シネマ映画風ワイド</option>
+          </optgroup>
+        </select>
+        <div class="seg-group desktop-only" id="resBtns" title="出力動画の解像度グレード">
           <button class="btn active" data-res="fhd">FHD</button>
           <button class="btn" data-res="4k">4K</button>
         </div>
-        <select class="inp desktop-only" id="selRecDur" style="width:108px;" title="録画時間の自動停止設定">
-          <option value="0">手動で停止</option>
-          <option value="8">8秒で停止</option>
-          <option value="12" selected>12秒で停止</option>
-          <option value="15">15秒で停止</option>
+        <select class="inp desktop-only" id="selRecDur" style="width:98px;" title="録画時間の自動停止設定">
+          <option value="0">手動停止</option>
+          <option value="8">8秒停止</option>
+          <option value="12" selected>12秒停止</option>
+          <option value="15">15秒停止</option>
         </select>
-        <button class="btn" id="btnFullscreen" type="button" title="上下左右目いっぱいのフルスクリーン表示 (Fキー / Escで終了)"><span class="desktop-only">⛶ フルスクリーン</span><span class="mobile-only">⛶</span></button>
+        <button class="btn" id="btnFullscreen" type="button" title="上下左右目いっぱいのフルスクリーン表示 (Fキー / Escで終了)"><span class="desktop-only">⛶ 全画面</span><span class="mobile-only">⛶</span></button>
         <button class="btn" id="btnSnapPng" title="静止画PNG保存"><span class="desktop-only">📸 静止画</span><span class="mobile-only">📸</span></button>
         <button class="btn rec-btn" id="btnRecord"><span class="desktop-only">🔴 録画スタート</span><span class="mobile-only">🔴 録画</span></button>
-        <button class="btn mobile-only" id="btnMobileMenu" type="button">⚙️ メニュー</button>
+        <button class="btn mobile-only" id="btnMobileMenu" type="button" aria-label="メニューを開く"><span class="mob-menu-ico">⚙️</span><span class="mob-menu-txt">メニュー</span></button>
       </div>
     </header>
 
     <div class="stage-area" id="stageArea">
       <div class="canvas-frame" id="canvasFrame">
-        <canvas id="studioCanvas" width="1920" height="1080"></canvas>
+        <canvas id="studioCanvas" width="1080" height="1920"></canvas>
         <div class="hit-overlay" id="hitOverlay">
           <div class="slot-hit selected" data-slot="0"><div class="slot-tag" id="tag0">① 左上</div></div>
           <div class="slot-hit" data-slot="1"><div class="slot-tag" id="tag1">② 右上</div></div>
@@ -556,7 +619,7 @@
 
     <aside id="studioAside">
       <div class="mobile-sheet-hdr mobile-only" id="mobileSheetHdr">
-        <span class="mobile-sheet-title">📱 スタジオ設定（縦型 9:16）</span>
+        <span class="mobile-sheet-title" id="mobileSheetTitle">📱 スタジオ設定（SNS動画比率）</span>
         <button class="btn ghost-sm" id="btnCloseMobileMenu" type="button">✕ たたむ</button>
       </div>
 
@@ -567,25 +630,45 @@
         <button class="studio-tab" type="button" data-stab="stage">🌌 背景・光</button>
       </div>
 
-      <!-- TAB 1: Presets & Screen Orientation -->
+      <!-- TAB 1: Presets & SNS Output Aspect Ratios -->
       <div class="tab-pane active" id="pane-presets">
-        <div class="sec-group desktop-only">
-          <div class="row-lbl"><span>画面の向き</span></div>
-          <div class="orient-switch" id="orientSwitch">
-            <button class="orient-btn active" type="button" data-omode="horiz">
+        <div class="sec-group">
+          <div class="row-lbl">
+            <span>動画の出力比率（SNS・用途別サイズ）</span>
+          </div>
+          <div class="orient-switch desktop-only" id="orientSwitch">
+            <button class="orient-btn" type="button" data-omode="horiz">
               <svg width="18" height="11" viewBox="0 0 18 11"><rect x="1" y="1" width="16" height="9" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-              <span>横画面 16:9</span>
+              <span id="lblOrientHoriz">横画面 16:9</span>
             </button>
-            <button class="orient-btn" type="button" data-omode="vert">
+            <button class="orient-btn active" type="button" data-omode="vert">
               <svg width="10" height="16" viewBox="0 0 10 16"><rect x="1" y="1" width="8" height="14" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-              <span>縦ショート 9:16</span>
+              <span id="lblOrientVert">縦ショート 9:16</span>
             </button>
           </div>
 
-          <div class="horiz-split-bar" id="layoutBtns">
+          <select class="inp" id="selOutputAspect" title="出力動画・静止画のアスペクト比を選択">
+            <optgroup label="📱 縦型ショート・SNS縦（TikTok / YouTubeショート / Insta）">
+              <option value="9:16" selected>📱 9:16 縦フル（TikTok / YouTubeショート / Instaリール）</option>
+              <option value="4:5">📸 4:5 Instaフィード縦（Instagram投稿 / X縦最大）</option>
+              <option value="3:4">🖼️ 3:4 ポートレート縦（Insta新グリッド / RED）</option>
+              <option value="2:3">🎴 2:3 ブロマイド縦（Xポスト / BOOTH縦紹介）</option>
+            </optgroup>
+            <optgroup label="🟦 スクエア正方形（Instagram / X / サムネ）">
+              <option value="1:1">🟦 1:1 スクエア正方形（Instagram / X / アイコンMV）</option>
+            </optgroup>
+            <optgroup label="🎬 横型ワイド・MV（YouTube / X横動画 / BOOTH PV）">
+              <option value="16:9">🎬 16:9 横ワイド標準（YouTube / X横動画 / BOOTH PV）</option>
+              <option value="4:3">📺 4:3 スタンダード横（iPad / レトロMV）</option>
+              <option value="3:2">📷 3:2 フォトワイド横（カメラ比率 / カバー動画）</option>
+              <option value="21:9">🎞️ 21:9 シネマワイド（映画風MV / ウルトラワイド）</option>
+            </optgroup>
+          </select>
+
+          <div class="horiz-split-bar desktop-only" id="layoutBtns">
             <button class="btn active" type="button" data-layout="grid2x2">⊞ 2×2 分割</button>
             <button class="btn" type="button" data-layout="cols4">▤ 4列 OP</button>
-            <button class="btn" type="button" data-layout="single16x9">▭ 1枚ワイド</button>
+            <button class="btn" type="button" data-layout="single16x9">▭ 1枚フル</button>
           </div>
         </div>
 
@@ -640,11 +723,25 @@
 
         <div class="sec-group">
           <div class="row-lbl">
-            <span>モーション（全24種）</span>
+            <span>モーション（全34種）</span>
             <button class="btn ghost-sm" id="btnSlotLoadVrma" type="button">📂 .vrma読込</button>
             <input type="file" id="fileSlotVrma" accept=".vrma" hidden>
           </div>
           <select class="inp" id="selSlotMotion">
+            <optgroup label="🐾 けもの・四つん這いモーション">
+              <option value="moe:quad_ferret_walk">🐾 てちてち四つ足おさんぽ＆しっぽフリフリ</option>
+              <option value="moe:quad_pounce_wiggle">🐾 獲物ロックオン！おしりふりふり＆ぴょん飛びつき</option>
+              <option value="moe:quad_cat_stretch">🐾 んーっ♡ けもの伸びーっ＆おめめぱちぱち</option>
+              <option value="moe:quad_paw_groom">🐾 片手ぺろぺろ毛づくろい＆小首かしげ</option>
+              <option value="moe:quad_happy_tap">🐾 うれしい！前足ふみふみ＆見上げおねだり</option>
+            </optgroup>
+            <optgroup label="😈 小悪魔・魅惑モーション">
+              <option value="moe:koakuma_beckon">😈 小悪魔「おいでおいで」＆流し目</option>
+              <option value="moe:bewitch_secret">🤫 内緒だよ♡ リップしーっ＆悪戯ウインク</option>
+              <option value="moe:gothic_cheek_gaze">🥀 ほっぺ添え＆アンニュイ見下ろし視線</option>
+              <option value="moe:midnight_spell">🔮 魅惑の魔法タクト＆不敵スマイル</option>
+              <option value="moe:whisper_lean">🌙 ゼロ距離ささやき＆焦らし視線</option>
+            </optgroup>
             <optgroup label="💘 ガチ恋・あざとモーション">
               <option value="moe:gachikoi_peek">💕 ゼロ距離のぞき込み＆照れ笑い</option>
               <option value="moe:azato_cheek">🫶 ダブルほっぺぷに＆ウインク</option>
@@ -1566,8 +1663,8 @@
       return mesh;
     }
 
-    // Studio State
-    let currentLayout = 'grid2x2';
+    // Studio State (Default: Lightweight 1-Avatar Vertical Short 9:16 Mode!)
+    let currentLayout = 'vertical9x16';
     let currentResTier = 'fhd';
     let currentFps = 60;
     let currentThemeKey = 'cosmic_crystal';
@@ -1582,6 +1679,23 @@
     let cols4OpClock = 0.0;
     let showParticles = true;
     let showFloorRing = true;
+    const OUTPUT_ASPECT_SPECS = {
+      '9:16': {id: '9:16', orient: 'vert',   shortTag: '9:16 ショート', btnTag: '縦ショート 9:16', fhd: [1080, 1920], uhd: [2160, 3840]},
+      '4:5':  {id: '4:5',  orient: 'vert',   shortTag: '4:5 Insta縦',   btnTag: 'Insta縦 4:5',     fhd: [1080, 1350], uhd: [2160, 2700]},
+      '3:4':  {id: '3:4',  orient: 'vert',   shortTag: '3:4 縦グリッド', btnTag: '縦グリッド 3:4',  fhd: [1080, 1440], uhd: [2160, 2880]},
+      '2:3':  {id: '2:3',  orient: 'vert',   shortTag: '2:3 縦カード',   btnTag: '縦カード 2:3',    fhd: [1080, 1620], uhd: [2160, 3240]},
+      '1:1':  {id: '1:1',  orient: 'square', shortTag: '1:1 正方形',     btnTag: '正方形 1:1',      fhd: [1080, 1080], uhd: [2160, 2160]},
+      '16:9': {id: '16:9', orient: 'horiz',  shortTag: '16:9 横',        btnTag: '横画面 16:9',     fhd: [1920, 1080], uhd: [3840, 2160]},
+      '4:3':  {id: '4:3',  orient: 'horiz',  shortTag: '4:3 横',         btnTag: '横 4:3',          fhd: [1440, 1080], uhd: [2880, 2160]},
+      '3:2':  {id: '3:2',  orient: 'horiz',  shortTag: '3:2 フォト横',   btnTag: 'フォト横 3:2',    fhd: [1620, 1080], uhd: [3240, 2160]},
+      '21:9': {id: '21:9', orient: 'horiz',  shortTag: '21:9 シネマ',    btnTag: 'シネマ 21:9',     fhd: [2560, 1080], uhd: [3840, 1620]},
+    };
+    const isPortraitAspectKey = k => OUTPUT_ASPECT_SPECS[k]?.orient === 'vert';
+
+    let currentAspectKey = '9:16';
+    let lastHorizAspectKey = '16:9';
+    let lastVertAspectKey = '9:16';
+    let lastVertPresetId = 'p13_short_gachikoi';
     let activeSlotIdx = 0;
     let modelFrontZSign = 1;
     let mediaRecorder = null;
@@ -1850,10 +1964,10 @@
         rigCalib: null,
         mtoonMap: new Map(),
         unlitMap: new Map(),
-        motionId: 'moe:gachikoi_peek',
+        motionId: ['moe:gachikoi_peek', 'moe:azato_cheek', 'moe:double_peace', 'moe:idol_turn_wink'][index] || 'moe:gachikoi_peek',
         motionRequest: 0,
         speed: 1.0,
-        camPreset: 'gachikoi',
+        camPreset: ['gachikoi', 'bust', 'bust', 'full'][index] || 'bust',
         camAnim: 'none',
         zoomScale: 1.0,
         exprMode: 'choreo_sync',
@@ -1861,7 +1975,7 @@
         autoBlink: true,
         autoTalk: false,
         lookAtCam: true,
-        choreoState: {emo: 'neutral', emoW: 0, vowel: null, vowelW: 0},
+        choreoState: {emo: 'neutral', emoW: 0, emo2: null, emo2W: 0, vowel: null, vowelW: 0, vowel2: null, vowel2W: 0},
         emoState: {
           ready: false,
           raw: {
@@ -2053,11 +2167,11 @@
     }
 
     function applyDaintyFingers(nb, baseCurlL, baseCurlR, gesture = false) {
-      // gesture: false | true ('point') | 'peace' | 'peaceR' | 'heart'
+      // gesture: false | true ('point') | 'pointR' | 'peace' | 'peaceR' | 'heart'
       const fList = ['Index', 'Middle', 'Ring', 'Little'];
       fList.forEach((f, idx) => {
         let mulL = (gesture === true && idx === 0) ? 0.16 : (0.78 + idx * 0.14);
-        let mulR = (gesture === true && idx === 0) ? 0.16 : (0.78 + idx * 0.14);
+        let mulR = ((gesture === true || gesture === 'pointR') && idx === 0) ? 0.14 : (0.78 + idx * 0.14);
         if (gesture === 'peace') {
           mulL = (idx <= 1) ? 0.08 : 1.18;
           mulR = (idx <= 1) ? 0.08 : 1.18;
@@ -2106,8 +2220,12 @@
       // Reset synchronized choreography cue
       sl.choreoState.emo = 'neutral';
       sl.choreoState.emoW = 0;
+      sl.choreoState.emo2 = null;
+      sl.choreoState.emo2W = 0;
       sl.choreoState.vowel = null;
       sl.choreoState.vowelW = 0;
+      sl.choreoState.vowel2 = null;
+      sl.choreoState.vowel2W = 0;
 
       // Cute pigeon-toed (uchimata) & gentle knee bounce helper (preserves rest hips Y height!)
       const setCuteLegs = (uchimataDeg, kneeL, kneeR, hipDropY, hipSwayX = 0, hipYaw = 0) => {
@@ -2837,6 +2955,531 @@
         return;
       }
 
+      if (mode === 'moe:koakuma_beckon') {
+        // 😈 小悪魔「おいでおいで」＆流し目ウインク (5.2s enchanting loop!)
+        const cyc = (t % 5.2) / 5.2;
+        const sway = Math.sin(t * 1.45);
+        const beckonWave = 0.5 - 0.5 * Math.cos(t * 5.2);
+        setCuteLegs(9, 13 + sway * 3.5, 9 - sway * 3.5, 0.012, sway * 0.026, -0.14 + sway * 0.08);
+
+        // Oblique torso + counter-turned head creates a captivating side-glance (流し目)!
+        if (nb('spine')) { nb('spine').rotation.y = -11 * DEG; nb('spine').rotation.z = sway * 4.8 * DEG; }
+        if (nb('chest')) { nb('chest').rotation.y = -7 * DEG; nb('chest').rotation.x = -zS * 4.5 * DEG; }
+        const hTilt = (8.5 + sway * 4.0) * DEG;
+        if (nb('neck')) { nb('neck').rotation.y = 8 * DEG; nb('neck').rotation.z = hTilt * 0.35; }
+        if (nb('head')) { nb('head').rotation.y = 11 * DEG; nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = zS * 4.0 * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right hand extended forward, beckoning rhythmically toward her; left hand poised gracefully at side
+        const pullIn = beckonWave * 0.026;
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.215 - pullIn).addScaledVector(_rightDir, -0.085).addScaledVector(_upDir, -0.072 + beckonWave * 0.012);
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, +0.145).add(new THREE.Vector3(0, -0.145, 0));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.18).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.20).add(new THREE.Vector3(0, -0.14, -0.02 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) {
+          nb('rightHand').rotation.y = 26 * DEG;
+          nb('rightHand').rotation.z = (16 + beckonWave * 14) * DEG;
+        }
+        applyDaintyFingers(nb, 44 * DEG, 56 * DEG, 'pointR');
+        // Rhythmic index-finger "come here" curl!
+        const idxCurl = (10 + beckonWave * 46) * DEG;
+        if (nb('rightIndexProximal'))     nb('rightIndexProximal').rotation.z     = +idxCurl * 0.45;
+        if (nb('rightIndexIntermediate')) nb('rightIndexIntermediate').rotation.z = +idxCurl * 0.85;
+        if (nb('rightIndexDistal'))       nb('rightIndexDistal').rotation.z       = +idxCurl * 0.75;
+
+        if (cyc < 0.46) {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.64;
+          sl.choreoState.emo2 = 'sad';   sl.choreoState.emo2W = 0.34;
+          sl.choreoState.vowel = 'ou';   sl.choreoState.vowelW = 0.44;
+          sl.choreoState.vowel2 = 'oh';  sl.choreoState.vowel2W = 0.34;
+        } else if (cyc < 0.68) {
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'ee';  sl.choreoState.vowelW = 0.42;
+          sl.choreoState.vowel2 = 'oh'; sl.choreoState.vowel2W = 0.50;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.84;
+          sl.choreoState.emo2 = 'angry';  sl.choreoState.emo2W = 0.28;
+          sl.choreoState.vowel = 'ee';    sl.choreoState.vowelW = 0.38;
+          sl.choreoState.vowel2 = 'oh';   sl.choreoState.vowel2W = 0.54;
+        }
+        return;
+      }
+
+      if (mode === 'moe:bewitch_secret') {
+        // 🤫 内緒だよ♡ リップしーっ＆悪戯ウインク (5.0s story loop!)
+        const cyc = (t % 5.0) / 5.0;
+        const sway = Math.sin(t * 1.6);
+        const reveal = THREE.MathUtils.smoothstep(cyc, 0.52, 0.66) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.88, 0.99));
+        setCuteLegs(11, 12 + sway * 3, 12 - sway * 3, 0.014, sway * 0.020, sway * 0.08);
+
+        const pitch = -zS * (7.5 - reveal * 2.5) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.45; nb('spine').rotation.z = sway * 4.2 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+        const hTilt = (6.5 + reveal * 6.5 + sway * 3.0) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = zS * (6.8 - reveal * 2.5) * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right index finger delicately poised at lips ("shh..."), then gracefully parting to cheek!
+        const shhPos  = _headPos.clone().addScaledVector(_fwdDir, 0.138).addScaledVector(_rightDir, -0.016).addScaledVector(_upDir, -0.052);
+        const sidePos = _headPos.clone().addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, -0.105).addScaledVector(_upDir, -0.036);
+        _tgtR.lerpVectors(shhPos, sidePos, reveal);
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.135).addScaledVector(_rightDir, +0.075).add(new THREE.Vector3(0, -0.065, 0));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.19, 0.05 * zS));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) nb('rightHand').rotation.z = +18 * DEG;
+        applyDaintyFingers(nb, 46 * DEG, 56 * DEG, 'pointR');
+
+        if (cyc < 0.48) {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.58;
+          sl.choreoState.emo2 = 'sad';   sl.choreoState.emo2W = 0.36;
+          sl.choreoState.vowel = 'ou';   sl.choreoState.vowelW = 0.78;
+        } else if (cyc < 0.70) {
+          sl.choreoState.emo = 'blinkLeft'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'oh';      sl.choreoState.vowelW = 0.76;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.88;
+          sl.choreoState.emo2 = 'sad';     sl.choreoState.emo2W = 0.22;
+          sl.choreoState.vowel = 'ee';     sl.choreoState.vowelW = 0.38;
+          sl.choreoState.vowel2 = 'oh';    sl.choreoState.vowel2W = 0.52;
+        }
+        return;
+      }
+
+      if (mode === 'moe:gothic_cheek_gaze') {
+        // 🥀 ほっぺ添え＆アンニュイ見下ろし視線 (5.6s cool bewitching loop!)
+        const cyc = (t % 5.6) / 5.6;
+        const sway = Math.sin(t * 1.25);
+        const breath = 0.5 - 0.5 * Math.cos(t * 2.5);
+        setCuteLegs(8, 15, 8 + breath * 4, 0.012, 0.022 + sway * 0.014, 0.12);
+
+        if (nb('spine')) { nb('spine').rotation.z = (-4.5 + sway * 3.0) * DEG; nb('spine').rotation.y = 7 * DEG; }
+        // Chin gently raised so she gazes calmly down through half-lidded lashes!
+        const hTilt = (-9.5 + sway * 3.5) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) {
+          nb('head').rotation.z = hTilt * 0.65;
+          nb('head').rotation.x = -zS * (4.8 - breath * 2.0) * DEG;
+          nb('head').rotation.y = -7 * DEG;
+        }
+
+        updateTorsoAndReadFrames();
+        // Left hand cradles left cheek languidly; right hand rests gracefully near waist
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.112).addScaledVector(_rightDir, +0.104).addScaledVector(_upDir, -0.030);
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.08).addScaledVector(_rightDir, -0.140).add(new THREE.Vector3(0, -0.135 + breath * 0.010, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.17).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.20).add(new THREE.Vector3(0, -0.14, -0.02 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand')) nb('leftHand').rotation.z = +24 * DEG;
+        applyDaintyFingers(nb, 38 * DEG, 42 * DEG, false);
+
+        if (cyc < 0.52) {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.68;
+          sl.choreoState.emo2 = 'angry'; sl.choreoState.emo2W = 0.24;
+          sl.choreoState.vowel = 'oh';   sl.choreoState.vowelW = 0.42;
+          sl.choreoState.vowel2 = 'ee';  sl.choreoState.vowel2W = 0.30;
+        } else if (cyc < 0.78) {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.86;
+          sl.choreoState.emo2 = 'sad';     sl.choreoState.emo2W = 0.28;
+          sl.choreoState.vowel = 'oh';     sl.choreoState.vowelW = 0.66;
+          sl.choreoState.vowel2 = 'ee';    sl.choreoState.vowel2W = 0.34;
+        } else if (cyc < 0.94) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'oh';  sl.choreoState.vowelW = 0.56;
+        } else {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.64;
+          sl.choreoState.vowel = 'oh';   sl.choreoState.vowelW = 0.42;
+        }
+        return;
+      }
+
+      if (mode === 'moe:midnight_spell') {
+        // 🔮 魅惑の魔法タクト＆不敵スマイル (4.8s loop!)
+        const cyc = (t % 4.8) / 4.8;
+        const ph = cyc * Math.PI * 2;
+        const sway = Math.sin(ph);
+        setCuteLegs(10, 12 + Math.max(0, sway) * 7, 12 + Math.max(0, -sway) * 7, 0.012 + 0.006 * Math.abs(sway), sway * 0.025, sway * 0.11);
+
+        if (nb('spine')) nb('spine').rotation.z = sway * 5.2 * DEG;
+        const hTilt = (sway * 8.5) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.y = -sway * 6.5 * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right hand traces a smooth infinity/figure-8 spell arc in midair; left hand frames near cheek
+        const figX = Math.sin(ph) * 0.085;
+        const figY = Math.sin(ph * 2.0) * 0.042;
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.215).addScaledVector(_rightDir, -0.055 + figX).add(new THREE.Vector3(0, 0.065 + figY, 0));
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.120).addScaledVector(_rightDir, +0.122).addScaledVector(_upDir, -0.032);
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.19).add(new THREE.Vector3(0, -0.16, 0.05 * zS));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.18).add(new THREE.Vector3(0, -0.18, 0.05 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) nb('rightHand').rotation.z = (14 + Math.cos(ph) * 18) * DEG;
+        applyDaintyFingers(nb, 40 * DEG, 52 * DEG, 'pointR');
+
+        if (cyc < 0.42) {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.76;
+          sl.choreoState.emo2 = 'angry';  sl.choreoState.emo2W = 0.36;
+          sl.choreoState.vowel = 'ee';    sl.choreoState.vowelW = 0.44;
+          sl.choreoState.vowel2 = 'oh';   sl.choreoState.vowel2W = 0.48;
+        } else if (cyc < 0.64) {
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'oh';       sl.choreoState.vowelW = 0.84;
+        } else {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.58;
+          sl.choreoState.emo2 = 'sad';   sl.choreoState.emo2W = 0.28;
+          sl.choreoState.vowel = 'ou';   sl.choreoState.vowelW = 0.48;
+          sl.choreoState.vowel2 = 'oh';  sl.choreoState.vowel2W = 0.40;
+        }
+        return;
+      }
+
+      if (mode === 'moe:whisper_lean') {
+        // 🌙 ゼロ距離ささやき＆焦らし視線 (5.8s close-approach story loop!)
+        const cyc = (t % 5.8) / 5.8;
+        const lean = THREE.MathUtils.smoothstep(cyc, 0.08, 0.34) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.74, 0.96));
+        const sway = Math.sin(t * 1.5);
+        setCuteLegs(11, 11 + lean * 6, 11 + lean * 4, 0.012 + lean * 0.012, sway * 0.018, sway * 0.07);
+        if (sl.avatar.model) sl.avatar.model.position.z = zS * (0.15 * lean);
+
+        const pitch = -zS * (5.0 + 8.5 * lean) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.45; nb('spine').rotation.z = sway * 3.8 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+        const hTilt = (10.5 * lean + sway * 3.5) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) {
+          nb('head').rotation.z = hTilt * 0.65;
+          nb('head').rotation.x = zS * (4.0 + 5.5 * lean) * DEG;
+          nb('head').rotation.y = (lean * 6.5) * DEG;
+        }
+
+        updateTorsoAndReadFrames();
+        // Right hand gently cupped beside mouth as if sharing a secret whisper!
+        const restR    = _chestPos.clone().addScaledVector(_fwdDir, 0.12).addScaledVector(_rightDir, -0.105).add(new THREE.Vector3(0, -0.05, 0));
+        const whisperR = _headPos.clone().addScaledVector(_fwdDir, 0.132).addScaledVector(_rightDir, -0.072).addScaledVector(_upDir, -0.044);
+        _tgtR.lerpVectors(restR, whisperR, lean);
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, +0.135).add(new THREE.Vector3(0, -0.135, 0));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.17).add(new THREE.Vector3(0, -0.18, 0.05 * zS));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.19).add(new THREE.Vector3(0, -0.16, -0.02 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) nb('rightHand').rotation.y = +24 * DEG;
+        applyDaintyFingers(nb, 40 * DEG, 34 * DEG, false);
+
+        const whisperPulse = 0.5 + 0.5 * Math.sin(t * 7.2);
+        if (cyc < 0.30) {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.60;
+          sl.choreoState.emo2 = 'sad';   sl.choreoState.emo2W = 0.30;
+          sl.choreoState.vowel = 'ou';   sl.choreoState.vowelW = 0.62;
+        } else if (cyc < 0.64) {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.80;
+          sl.choreoState.emo2 = 'sad';    sl.choreoState.emo2W = 0.32;
+          sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.44 + 0.32 * whisperPulse;
+          sl.choreoState.vowel2 = 'ou';   sl.choreoState.vowel2W = 0.30 * (1.0 - whisperPulse);
+        } else if (cyc < 0.84) {
+          sl.choreoState.emo = 'blinkLeft'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'ee';      sl.choreoState.vowelW = 0.42;
+          sl.choreoState.vowel2 = 'oh';     sl.choreoState.vowel2W = 0.48;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.86;
+          sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.52;
+        }
+        return;
+      }
+
+      // =======================================================================
+      // 🐾 Cute Snow-Ferret Quadruped (All-Fours / 四つん這い) Animal Motions!
+      // Exact FK-calibrated floor grounding: knees y≈0.045, boots y≈0.045, paws y≈0.062,
+      // upright forward-looking head, and proud high-arched fluffy ferret tail!
+      // =======================================================================
+      if (mode.startsWith('moe:quad_')) {
+        const setQuadBody = ({
+          hipDrop = 0.371, hipZ = -0.165, hipX = 0,
+          hipPitchDeg = 76, hipYawDeg = 0, hipRollDeg = 0,
+          spineArchDeg = 8, chestArchDeg = 6,
+          neckLiftDeg = -51, headLiftDeg = -55, headYawDeg = 0, headTiltDeg = 0,
+          thighLDeg = -90, thighRDeg = -90, kneeLDeg = 104, kneeRDeg = 104,
+          spreadDeg = 9,
+        }) => {
+          if (nb('hips')) {
+            nb('hips').position.y -= hipDrop;
+            nb('hips').position.z += zS * hipZ;
+            nb('hips').position.x += hipX;
+            nb('hips').rotation.set(zS * hipPitchDeg * DEG, hipYawDeg * DEG, hipRollDeg * DEG);
+          }
+          if (nb('spine')) nb('spine').rotation.set(zS * spineArchDeg * DEG, 0, -hipRollDeg * 0.35 * DEG);
+          if (nb('chest')) nb('chest').rotation.set(zS * chestArchDeg * DEG, 0, 0);
+          if (nb('upperChest')) nb('upperChest').rotation.set(zS * 2 * DEG, 0, 0);
+          if (nb('neck')) {
+            nb('neck').rotation.set(zS * neckLiftDeg * DEG, headYawDeg * 0.38 * DEG, headTiltDeg * 0.38 * DEG);
+          }
+          if (nb('head')) {
+            nb('head').rotation.set(zS * headLiftDeg * DEG, headYawDeg * 0.62 * DEG, headTiltDeg * 0.62 * DEG);
+          }
+          if (nb('leftUpperLeg')) {
+            nb('leftUpperLeg').rotation.set(zS * thighLDeg * DEG, 0, -spreadDeg * DEG);
+          }
+          if (nb('rightUpperLeg')) {
+            nb('rightUpperLeg').rotation.set(zS * thighRDeg * DEG, 0, +spreadDeg * DEG);
+          }
+          if (nb('leftLowerLeg'))  nb('leftLowerLeg').rotation.x  = zS * kneeLDeg * DEG;
+          if (nb('rightLowerLeg')) nb('rightLowerLeg').rotation.x = zS * kneeRDeg * DEG;
+          if (nb('leftFoot'))      nb('leftFoot').rotation.x      = zS * 54 * DEG;
+          if (nb('rightFoot'))     nb('rightFoot').rotation.x     = zS * 54 * DEG;
+          updateTorsoAndReadFrames();
+        };
+
+        if (mode === 'moe:quad_ferret_walk') {
+          // 🐾 てちてち四つ足おさんぽ＆しっぽフリフリ
+          const ph = t * 4.6;
+          const sA = Math.sin(ph);
+          const cA = Math.cos(ph);
+          const liftR = Math.max(0, sA);
+          const liftL = Math.max(0, -sA);
+          const bob = Math.abs(cA) * 0.014;
+
+          setQuadBody({
+            hipDrop: 0.371 - bob,
+            hipZ: -0.165,
+            hipX: sA * 0.024,
+            hipPitchDeg: 76,
+            hipYawDeg: sA * 7.5,
+            hipRollDeg: sA * 4.5,
+            spineArchDeg: 8 - bob * 120,
+            chestArchDeg: 6,
+            neckLiftDeg: -51,
+            headLiftDeg: -55 + Math.sin(ph * 2) * 3.0,
+            headYawDeg: -sA * 5.5,
+            headTiltDeg: sA * 8.0,
+            // Diagonal quadruped trot: rightHand pairs with leftLeg, leftHand pairs with rightLeg!
+            thighLDeg: -90 - cA * 10,
+            thighRDeg: -90 + cA * 10,
+            kneeLDeg: 104 + liftR * 12,
+            kneeRDeg: 104 + liftL * 12,
+          });
+
+          const basePawZ = _chestPos.z + zS * 0.115;
+          _tgtL.set(+0.112 * zS, 0.062 + liftL * 0.048, basePawZ - zS * cA * 0.048);
+          _tgtR.set(-0.112 * zS, 0.062 + liftR * 0.048, basePawZ + zS * cA * 0.048);
+          _poleL.set(+0.18 * zS, 0.19, _chestPos.z - zS * 0.12);
+          _poleR.set(-0.18 * zS, 0.19, _chestPos.z - zS * 0.12);
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = +(52 - liftL * 24) * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = -(52 - liftR * 24) * DEG;
+          applyDaintyFingers(nb, 38 * DEG, 38 * DEG, false);
+
+          const cyc = (t % 3.8) / 3.8;
+          sl.choreoState.emo = (cyc > 0.64 && cyc < 0.88) ? 'happy' : 'relaxed';
+          sl.choreoState.emoW = (cyc > 0.64 && cyc < 0.88) ? 1.0 : 0.92;
+          sl.choreoState.vowel = 'oh';
+          sl.choreoState.vowelW = 0.58 + 0.28 * Math.abs(sA);
+          return;
+        }
+
+        if (mode === 'moe:quad_pounce_wiggle') {
+          // 🐾 獲物ロックオン！おしりふりふり＆ぴょん飛びつき (4.8s ferret story loop!)
+          const cyc = (t % 4.8) / 4.8;
+          const crouch = THREE.MathUtils.smoothstep(cyc, 0.06, 0.20) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.50, 0.56));
+          const hopU = THREE.MathUtils.clamp((cyc - 0.52) / 0.26, 0, 1);
+          const hopArc = Math.sin(hopU * Math.PI);
+          const fwdGlide = Math.sin(THREE.MathUtils.clamp((cyc - 0.50) / 0.44, 0, 1) * Math.PI);
+          const wiggle = crouch * Math.sin(t * 16.5);
+
+          setQuadBody({
+            hipDrop: 0.371 - crouch * 0.018 - hopArc * 0.115,
+            hipZ: -0.165 - crouch * 0.035 + fwdGlide * 0.105,
+            hipX: wiggle * 0.026,
+            hipPitchDeg: 76 + crouch * 8 - hopArc * 18,
+            hipYawDeg: wiggle * 9.5,
+            hipRollDeg: wiggle * 5.5,
+            spineArchDeg: 8 + crouch * 5 - hopArc * 8,
+            chestArchDeg: 6 + crouch * 4,
+            neckLiftDeg: -51 - crouch * 5 + hopArc * 8,
+            headLiftDeg: -55 - crouch * 6 + hopArc * 10,
+            headTiltDeg: wiggle * 4.5,
+            thighLDeg: -90 + hopArc * 22,
+            thighRDeg: -90 + hopArc * 22,
+            kneeLDeg: 104 - hopArc * 18,
+            kneeRDeg: 104 - hopArc * 18,
+          });
+
+          const basePawZ = _chestPos.z + zS * (0.115 + crouch * 0.035);
+          const floorL = new THREE.Vector3(+0.118 * zS, 0.062, basePawZ);
+          const floorR = new THREE.Vector3(-0.118 * zS, 0.062, basePawZ);
+          // During midair pounce hop, front paws tuck up adorably like a leaping snow-ferret!
+          const airPawL = _headPos.clone().addScaledVector(_fwdDir, 0.135).addScaledVector(_rightDir, +0.105).addScaledVector(_upDir, -0.085);
+          const airPawR = _headPos.clone().addScaledVector(_fwdDir, 0.135).addScaledVector(_rightDir, -0.105).addScaledVector(_upDir, -0.085);
+          _tgtL.lerpVectors(floorL, airPawL, hopArc);
+          _tgtR.lerpVectors(floorR, airPawR, hopArc);
+          _poleL.set(+0.18 * zS, 0.19 + hopArc * 0.08, _chestPos.z - zS * 0.11);
+          _poleR.set(-0.18 * zS, 0.19 + hopArc * 0.08, _chestPos.z - zS * 0.11);
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = +(52 - hopArc * 78) * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = -(52 - hopArc * 78) * DEG;
+          applyDaintyFingers(nb, (38 + hopArc * 18) * DEG, (38 + hopArc * 18) * DEG, false);
+
+          if (cyc < 0.52) {
+            sl.choreoState.emo = 'surprised'; sl.choreoState.emoW = 0.46;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.54;
+          } else if (cyc < 0.80) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.94;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.92;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.66;
+          }
+          return;
+        }
+
+        if (mode === 'moe:quad_cat_stretch') {
+          // 🐾 んーっ♡ けもの伸びーっ＆おめめぱちぱち (5.6s big stretch loop!)
+          const cyc = (t % 5.6) / 5.6;
+          const stretch = THREE.MathUtils.smoothstep(cyc, 0.10, 0.34) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.68, 0.90));
+          const sway = Math.sin(t * 2.0);
+
+          // Hips stay high while chest dips low and front paws slide far forward ("cat/puppy bow stretch"!)
+          setQuadBody({
+            hipDrop: 0.371 - stretch * 0.028,
+            hipZ: -0.165 - stretch * 0.045,
+            hipX: sway * 0.015,
+            hipPitchDeg: 76 + stretch * 14,
+            hipYawDeg: sway * 5.0,
+            spineArchDeg: 8 + stretch * 5,
+            chestArchDeg: 6 - stretch * 8,
+            neckLiftDeg: -51 - stretch * 5,
+            headLiftDeg: -55 - stretch * 6,
+            headTiltDeg: (1.0 - stretch) * 8.5 + sway * 3.0,
+            thighLDeg: -90 - stretch * 12,
+            thighRDeg: -90 - stretch * 12,
+            kneeLDeg: 104 + stretch * 8,
+            kneeRDeg: 104 + stretch * 8,
+          });
+
+          const pawZ = _chestPos.z + zS * (0.115 + stretch * 0.135);
+          _tgtL.set(+0.108 * zS, 0.060, pawZ);
+          _tgtR.set(-0.108 * zS, 0.060, pawZ);
+          _poleL.set(+0.17 * zS, 0.17, _chestPos.z - zS * 0.10);
+          _poleR.set(-0.17 * zS, 0.17, _chestPos.z - zS * 0.10);
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = +(50 - stretch * 22) * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = -(50 - stretch * 22) * DEG;
+          applyDaintyFingers(nb, (38 - stretch * 18) * DEG, (38 - stretch * 18) * DEG, false);
+
+          if (stretch > 0.35) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.94;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.90;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.56;
+          }
+          return;
+        }
+
+        if (mode === 'moe:quad_paw_groom') {
+          // 🐾 片手ぺろぺろ毛づくろい＆小首かしげ (5.0s snow-ferret face-washing loop!)
+          const cyc = (t % 5.0) / 5.0;
+          const rub = Math.sin(t * 5.8);
+          const sway = Math.sin(t * 1.9);
+
+          // Shift weight gently onto planted left front paw while right paw grooms cheek & mouth!
+          setQuadBody({
+            hipDrop: 0.371,
+            hipZ: -0.165,
+            hipX: +0.022 * zS + sway * 0.012,
+            hipPitchDeg: 74,
+            hipYawDeg: sway * 4.5,
+            hipRollDeg: -3.5,
+            spineArchDeg: 7,
+            chestArchDeg: 5,
+            neckLiftDeg: -50,
+            headLiftDeg: -53 + rub * 3.5,
+            headYawDeg: -6.0,
+            headTiltDeg: 11.5 + rub * 4.0,
+          });
+
+          const basePawZ = _chestPos.z + zS * 0.115;
+          _tgtL.set(+0.098 * zS, 0.062, basePawZ);
+          _tgtR.copy(_headPos)
+            .addScaledVector(_fwdDir, 0.132)
+            .addScaledVector(_rightDir, -0.088)
+            .addScaledVector(_upDir, -0.036 + rub * 0.022);
+          _poleL.set(+0.18 * zS, 0.19, _chestPos.z - zS * 0.12);
+          _poleR.set(-0.20 * zS, 0.19, _chestPos.z - zS * 0.04);
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = +52 * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = +32 * DEG;
+          applyDaintyFingers(nb, 38 * DEG, 52 * DEG, false);
+
+          if (cyc > 0.30 && cyc < 0.56) {
+            sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.76;
+          } else if (cyc > 0.76 && cyc < 0.92) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.62;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.90;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.58 + 0.20 * Math.abs(rub);
+          }
+          return;
+        }
+
+        if (mode === 'moe:quad_happy_tap') {
+          // 🐾 うれしい！前足ふみふみ＆見上げおねだり (4.2s excited tail-wag & paw-knead loop!)
+          const cyc = (t % 4.2) / 4.2;
+          const tapPh = t * 7.4;
+          const tapL = Math.max(0, Math.sin(tapPh));
+          const tapR = Math.max(0, -Math.sin(tapPh));
+          const wag = Math.sin(tapPh * 0.5);
+
+          setQuadBody({
+            hipDrop: 0.371 - (tapL + tapR) * 0.008,
+            hipZ: -0.165,
+            hipX: wag * 0.026,
+            hipPitchDeg: 74,
+            hipYawDeg: wag * 9.0,
+            hipRollDeg: wag * 5.0,
+            spineArchDeg: 7,
+            chestArchDeg: 5,
+            // Eagerly looking slightly UPWARD at the viewer (見上げ上目遣い)!
+            neckLiftDeg: -53,
+            headLiftDeg: -57,
+            headYawDeg: -wag * 5.0,
+            headTiltDeg: wag * 9.5,
+          });
+
+          const basePawZ = _chestPos.z + zS * 0.120;
+          _tgtL.set(+0.106 * zS, 0.062 + tapL * 0.044, basePawZ + zS * tapL * 0.018);
+          _tgtR.set(-0.106 * zS, 0.062 + tapR * 0.044, basePawZ + zS * tapR * 0.018);
+          _poleL.set(+0.18 * zS, 0.19, _chestPos.z - zS * 0.11);
+          _poleR.set(-0.18 * zS, 0.19, _chestPos.z - zS * 0.11);
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = +(52 - tapL * 26) * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = -(52 - tapR * 26) * DEG;
+          applyDaintyFingers(nb, 40 * DEG, 40 * DEG, false);
+
+          if (cyc > 0.62 && cyc < 0.88) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.88;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.88;
+            sl.choreoState.emo2 = 'sad';    sl.choreoState.emo2W = 0.28;
+            sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.64 + 0.22 * (tapL + tapR);
+          }
+          return;
+        }
+      }
+
       // Standard Procedural Motions (greet_wave / showcase_turn / idol_sway)
       let armL = 38 * DEG, armR = 38 * DEG;
       let elbL = 16 * DEG, elbR = 16 * DEG;
@@ -3134,7 +3777,17 @@
     function setMobileMenuOpen(open) {
       document.body.classList.toggle('mobile-menu-open', !!open);
       const btn = document.getElementById('btnMobileMenu');
-      if (btn) btn.textContent = open ? '✕ 閉じる' : '⚙️ メニュー';
+      if (btn) {
+        const ico = btn.querySelector('.mob-menu-ico');
+        const txt = btn.querySelector('.mob-menu-txt');
+        if (ico && txt) {
+          ico.textContent = open ? '✕' : '⚙️';
+          txt.textContent = open ? '閉じる' : 'メニュー';
+        } else {
+          btn.textContent = open ? '✕ 閉じる' : '⚙️ メニュー';
+        }
+        btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      }
     }
 
     function updateFsSoloButtonUI() {
@@ -3183,6 +3836,13 @@
       fitStagePreview();
     }
 
+    function syncAspectSelects() {
+      const s1 = document.getElementById('selOutputAspect');
+      const s2 = document.getElementById('selHeaderAspect');
+      if (s1 && s1.value !== currentAspectKey) s1.value = currentAspectKey;
+      if (s2 && s2.value !== currentAspectKey) s2.value = currentAspectKey;
+    }
+
     function getTargetResolution() {
       if (mediaRecorder && mediaRecorder.state === 'recording') {
         const curLabel = document.getElementById('resReadout')?.textContent || `${canvas.width}×${canvas.height}`;
@@ -3197,29 +3857,47 @@
         const h = Math.max(240, Math.round((vpH * dpr) / 2) * 2);
         return {w, h, label: `全画面 ${w}×${h}`};
       }
-      const isVert = currentLayout === 'vertical9x16';
+      const spec = OUTPUT_ASPECT_SPECS[currentAspectKey] || OUTPUT_ASPECT_SPECS['16:9'];
+      const [w, h] = currentResTier === '4k' ? spec.uhd : spec.fhd;
       const mob = isMobileViewport();
-      if (currentResTier === '4k') {
-        return isVert
-          ? {w: 2160, h: 3840, label: mob ? '縦 9:16 (4K)' : '縦 2160×3840 (4K)'}
-          : {w: 3840, h: 2160, label: '横 3840×2160 (4K)'};
+      const label = mob
+        ? spec.id
+        : `${spec.shortTag} ${w}×${h}${currentResTier === '4k' ? ' (4K)' : ''}`;
+      return {w, h, label};
+    }
+
+    function getPanelAspectMultipliers() {
+      const {w: W, h: H} = getTargetResolution();
+      let pAspect = W / Math.max(1, H);
+      if (!(isFullscreenMode && fsSoloActive) && currentLayout === 'cols4') {
+        pAspect = (W * 0.25) / Math.max(1, H);
       }
-      return isVert
-        ? {w: 1080, h: 1920, label: mob ? '縦 9:16' : '縦 1080×1920'}
-        : {w: 1920, h: 1080, label: '横 1920×1080'};
+      if (pAspect >= 0.95) {
+        return {choreoMul: 1.0, staticMul: 1.0};
+      }
+      if (pAspect >= 0.5625) {
+        const t = (0.95 - pAspect) / (0.95 - 0.5625);
+        return {choreoMul: 1.0 + 0.28 * t, staticMul: 1.0 + 0.12 * t};
+      }
+      const t2 = Math.min(1.75, (0.5625 - pAspect) / (0.5625 - 0.4444));
+      return {choreoMul: 1.28 + 0.34 * t2, staticMul: 1.12 + 0.26 * t2};
     }
 
     function fitStagePreview() {
       if (isMobileViewport() && currentLayout !== 'vertical9x16') {
         currentLayout = 'vertical9x16';
       }
+      syncAspectSelects();
       const {w, h, label} = getTargetResolution();
       if (canvas.width !== w || canvas.height !== h) {
         renderer.setSize(w, h, false);
       }
       const resEl = document.getElementById('resReadout');
       resEl.textContent = label;
-      resEl.classList.toggle('is-vert', !isFullscreenMode && currentLayout === 'vertical9x16');
+      resEl.title = `${currentAspectKey} (${w}×${h})`;
+      resEl.classList.toggle('is-vert', !isFullscreenMode && isPortraitAspectKey(currentAspectKey));
+      const mobTitle = document.getElementById('mobileSheetTitle');
+      if (mobTitle) mobTitle.textContent = `📱 スタジオ設定（${currentAspectKey} · ${w}×${h}）`;
 
       if (isFullscreenMode) {
         canvasFrame.style.width = '100%';
@@ -3277,11 +3955,12 @@
           };
         });
       }
+      const spec = OUTPUT_ASPECT_SPECS[currentAspectKey] || OUTPUT_ASPECT_SPECS['16:9'];
       return [
         {
           slot: 0, vx: 0, vy: 0, vw: W, vh: H,
           css: {left: '0%', top: '0%', width: '100%', height: '100%'},
-          tag: currentLayout === 'vertical9x16' ? '📱 単品 縦型ショート (9:16)' : '🖥️ 単品 ワイド (16:9)',
+          tag: isPortraitAspectKey(currentAspectKey) ? `📱 縦型 (${spec.shortTag})` : `🖥️ 1画面 (${spec.shortTag})`,
         },
       ];
     }
@@ -3308,9 +3987,10 @@
 
     function setSlotCameraPreset(sl, presetName) {
       const zS = modelFrontZSign;
-      const distMul = currentLayout === 'cols4' ? 2.08 : (currentLayout === 'vertical9x16' ? 1.58 : 1.0);
+      const distMul = getPanelAspectMultipliers().staticMul;
+      const isQuad = (sl.motionId || '').startsWith('moe:quad_');
 
-      const map = {
+      const standMap = {
         gachikoi: {pos: [0.0, 1.03, 0.88 * zS * distMul],  tgt: [0.0, 1.01, 0.0]},
         face:     {pos: [0.0, 1.08, 0.76 * zS * distMul],  tgt: [0.0, 1.06, 0.0]},
         bust:     {pos: [0.07, 0.99, 1.16 * zS * distMul], tgt: [0.0, 0.95, 0.0]},
@@ -3318,6 +3998,15 @@
         '3q':     {pos: [0.92 * distMul, 0.78, 2.46 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
         back:     {pos: [-0.55 * distMul, 0.76, -2.55 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
       };
+      const quadMap = {
+        gachikoi: {pos: [0.0, 0.18, (0.44 + 0.74 * distMul) * zS],            tgt: [0.0, 0.39, 0.34 * zS]},
+        face:     {pos: [0.0, 0.18, (0.44 + 0.64 * distMul) * zS],            tgt: [0.0, 0.41, 0.36 * zS]},
+        bust:     {pos: [0.22 * distMul, 0.18, (0.36 + 1.20 * distMul) * zS], tgt: [0.0, 0.34, 0.22 * zS]},
+        full:     {pos: [0.48 * distMul, 0.20, 2.14 * zS * distMul],          tgt: [0.0, 0.31, 0.08 * zS]},
+        '3q':     {pos: [0.86 * distMul, 0.20, 1.96 * zS * distMul],          tgt: [0.0, 0.31, 0.06 * zS]},
+        back:     {pos: [-0.76 * distMul, 0.60, -1.76 * zS * distMul],        tgt: [0.0, 0.32, 0.02 * zS]},
+      };
+      const map = isQuad ? quadMap : standMap;
       const p = map[presetName] || map.full;
       sl.camPreset = presetName;
       sl.zoomScale = 1.0;
@@ -3438,11 +4127,17 @@
       const t = sl.time;
       let activeEmo = sl.exprMode;
       let emoWeight = 1.0;
+      let accentEmo = null;
+      let accentWeight = 0.0;
 
       if (sl.exprMode === 'choreo_sync') {
         if (sl.motionId.startsWith('moe:') || sl.motionId.startsWith('proc:')) {
           activeEmo = sl.choreoState.emo || 'neutral';
           emoWeight = sl.choreoState.emoW ?? 0;
+          if (sl.choreoState.emo2 && !CLOSED_LID_KEYS.has(sl.choreoState.emo2) && sl.choreoState.emo2 !== activeEmo) {
+            accentEmo = sl.choreoState.emo2;
+            accentWeight = THREE.MathUtils.clamp(sl.choreoState.emo2W ?? 0, 0, 1);
+          }
         } else {
           const step = pickSeqStep(LIVELY_VRMA_SEQ, t + sl.index * 1.37);
           activeEmo = step.emo;
@@ -3478,6 +4173,8 @@
         let tgtW = 0.0;
         if (k === activeEmo && activeEmo !== 'neutral' && emoWeight > 0.005) {
           tgtW = emoWeight;
+        } else if (k === accentEmo && accentWeight > 0.005) {
+          tgtW = accentWeight;
         }
         if (k === 'blink' && wantAutoBlink) {
           tgtW = 1.0;
@@ -3549,9 +4246,12 @@
       } else if (sl.mouthMode === 'closed') {
         // Leave all vowels at 0
       } else {
-        // 'oh_main' (Default): use choreographed 'oh' on moe/proc motions, and cute breathing 'oh' on VRMA dances!
+        // 'oh_main' (Default): use choreographed vowel blend on moe/proc motions, and cute breathing 'oh' on VRMA!
         if ((sl.motionId.startsWith('moe:') || sl.motionId.startsWith('proc:')) && sl.choreoState.vowel && sl.choreoState.vowelW > 0.01) {
           tgtMouth[sl.choreoState.vowel] = THREE.MathUtils.clamp(sl.choreoState.vowelW, 0, 1);
+          if (sl.choreoState.vowel2 && sl.choreoState.vowel2 !== sl.choreoState.vowel && sl.choreoState.vowel2W > 0.01) {
+            tgtMouth[sl.choreoState.vowel2] = THREE.MathUtils.clamp(sl.choreoState.vowel2W, 0, 1);
+          }
         } else {
           tgtMouth.oh = 0.58 + 0.28 * (0.5 + 0.5 * Math.sin(t * 3.2 + sl.index * 1.3));
         }
@@ -3901,8 +4601,7 @@
 
       const t = sl.time;
       const zS = modelFrontZSign;
-      const isSoloWide = isFullscreenMode && fsSoloActive && (canvas.width >= canvas.height * 0.85);
-      const aspectMul = isSoloWide ? 1.0 : (currentLayout === 'cols4' ? 1.62 : (currentLayout === 'vertical9x16' ? 1.28 : 1.0));
+      const aspectMul = getPanelAspectMultipliers().choreoMul;
       const pathScale = aspectMul * (sl.zoomScale || 1.0);
       const lm = sl.landmarks;
 
@@ -4078,11 +4777,25 @@
 
     function ensureDesktopSlotsHydrated() {
       if (desktopSlotsHydrated || !cachedVrmBuffer) return desktopHydration;
-      desktopHydration ??= installModelSlots(cachedVrmBuffer, slots.slice(1)).then(() => {
-        desktopSlotsHydrated = true;
-      }).finally(() => {
-        desktopHydration = null;
-      });
+      if (!desktopHydration) {
+        const mask = document.getElementById('loadingMask');
+        const showMask = mask.classList.contains('hidden');
+        if (showMask) {
+          document.getElementById('loadingText').textContent = '分割パネル用モデルを準備中…';
+          mask.classList.remove('hidden');
+        }
+        const rest = slots.slice(1);
+        desktopHydration = installModelSlots(cachedVrmBuffer, rest).then(() => {
+          for (const sl of rest) {
+            setSlotCameraPreset(sl, sl.camPreset || 'bust');
+            applySlotMotion(sl, sl.motionId);
+          }
+          desktopSlotsHydrated = true;
+        }).finally(() => {
+          desktopHydration = null;
+          if (showMask) mask.classList.add('hidden');
+        });
+      }
       return desktopHydration;
     }
 
@@ -4106,7 +4819,8 @@
       try {
         if (desktopHydration) await desktopHydration;
         const bytes = await readBytes();
-        const targetSlots = isMobileViewport() ? slots.slice(0, 1) : slots;
+        const multiPanel = !isMobileViewport() && (currentLayout === 'grid2x2' || currentLayout === 'cols4');
+        const targetSlots = multiPanel ? slots : slots.slice(0, 1);
         await installModelSlots(bytes, targetSlots);
         desktopSlotsHydrated = targetSlots.length === slots.length;
         if (!desktopSlotsHydrated) slots.slice(1).forEach(clearStudioSlot);
@@ -4116,7 +4830,7 @@
         const preset = isMobileViewport() && active?.layout !== 'vertical9x16'
           ? 'p13_short_gachikoi'
           : activePresetId;
-        if (!isMobileViewport()) await ensureDesktopSlotsHydrated();
+
         await applyPresetById(preset);
         const status = document.getElementById('modelBadge');
         status.textContent = name;
@@ -4524,11 +5238,49 @@
           {cam: 'full', motion: 'moe:ferret_paws',   camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
+      {
+        id: 'p41_koakuma_quartet', num: '41', cat: 'gachikoi', moe: true,
+        label: '😈 小悪魔・魅惑4連PV', desc: 'おいでおいで流し目・リップしーっ・アンニュイ視線・ささやき接近の魅惑4分割 (2×2)',
+        layout: 'grid2x2', theme: 'cosmic_blossom', border: 'gold',
+        slots: [
+          {cam: 'gachikoi', motion: 'moe:koakuma_beckon',    camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'face',     motion: 'moe:bewitch_secret',    camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'bust',     motion: 'moe:gothic_cheek_gaze', camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'gachikoi', motion: 'moe:whisper_lean',      camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p42_vshort_koakuma', num: '42', cat: 'gachikoi', moe: true,
+        label: '😈 小悪魔おいでおいで', desc: '縦型・SNS用：流し目おいでおいで＆全身スイング→ゼロ距離ダイブカメラ',
+        layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
+        slots: [
+          {cam: 'full', motion: 'moe:koakuma_beckon', camAnim: 'vshort_pendulum_dive', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p43_quad_ferret_pack', num: '43', cat: 'kemomimi_mv', moe: true,
+        label: '🐾 四つ足けもの4連PV', desc: 'てちてちおさんぽ・ぴょん飛びつき・けもの伸びーっ・毛づくろいの四つん這い4分割 (2×2)',
+        layout: 'grid2x2', theme: 'cosmic_crystal', border: 'gold',
+        slots: [
+          {cam: '3q',   motion: 'moe:quad_ferret_walk',   camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:quad_pounce_wiggle', camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: '3q',   motion: 'moe:quad_cat_stretch',   camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'bust', motion: 'moe:quad_paw_groom',     camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p44_vshort_quad_ferret', num: '44', cat: 'kemomimi_mv', moe: true,
+        label: '🐾 四つ足ふみふみ見上げ', desc: '縦型・SNS用：四つん這いで前足ふみふみ＆見上げ上目遣いおねだり',
+        layout: 'vertical9x16', theme: 'cosmic_crystal', border: 'none',
+        slots: [
+          {cam: 'bust', motion: 'moe:quad_happy_tap', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
     ];
 
-    let activePresetId = 'p01_moe_royal';
+    let activePresetId = 'p13_short_gachikoi';
     let activePresetCat = 'all';
-    let activeOrientMode = 'horiz'; // 'horiz' | 'vert'
+    let activeOrientMode = 'vert'; // 'horiz' | 'vert'
     let lastHorizPresetId = 'p01_moe_royal';
 
     function setStudioTab(tabName) {
@@ -4580,7 +5332,7 @@
 
     function updateDisabledControlStates() {
       const isRec = !!(mediaRecorder && mediaRecorder.state === 'recording');
-      const isVert = isMobileViewport() || currentLayout === 'vertical9x16';
+      const isVert = isMobileViewport() || isPortraitAspectKey(currentAspectKey);
       const isSinglePanel = (currentLayout === 'vertical9x16' || currentLayout === 'single16x9');
       const sl = slots[activeSlotIdx] || slots[0];
       const th = THEMES[currentThemeKey] || THEMES.cosmic_crystal;
@@ -4609,6 +5361,13 @@
         selDur.disabled = isRec;
         selDur.title = isRec ? '録画中は変更できません' : '録画時間の自動停止設定';
       }
+      for (const id of ['selHeaderAspect', 'selOutputAspect']) {
+        const selA = document.getElementById(id);
+        if (selA) {
+          selA.disabled = isRec;
+          selA.title = isRec ? '録画中は出力比率を変更できません' : 'SNS・動画サイト別の出力比率';
+        }
+      }
       const btnFs = document.getElementById('btnFullscreen');
       if (btnFs) {
         btnFs.disabled = isRec;
@@ -4633,7 +5392,7 @@
         b.disabled = layoutDisabled;
         b.title = isRec
           ? '録画中は変更できません'
-          : (isVert ? '縦ショート 9:16 モード中は1画面固定のため無効' : '');
+          : (isVert ? '縦型比率モード中は1画面固定のため無効（横比率・1:1正方形で分割可能）' : '');
       });
 
       // 3) 4-Column Anime OP sub-controls when OP mode === 'off'
@@ -4729,11 +5488,18 @@
     }
 
     function syncOrientationUI() {
-      const isVert = isMobileViewport() || currentLayout === 'vertical9x16';
+      const isVert = isMobileViewport() || isPortraitAspectKey(currentAspectKey);
       activeOrientMode = isVert ? 'vert' : 'horiz';
       document.querySelectorAll('#orientSwitch .orient-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.omode === activeOrientMode);
       });
+      const hKey = (!isPortraitAspectKey(currentAspectKey)) ? currentAspectKey : lastHorizAspectKey;
+      const vKey = isPortraitAspectKey(currentAspectKey) ? currentAspectKey : lastVertAspectKey;
+      const lblH = document.getElementById('lblOrientHoriz');
+      const lblV = document.getElementById('lblOrientVert');
+      if (lblH) lblH.textContent = OUTPUT_ASPECT_SPECS[hKey]?.btnTag || '横画面 16:9';
+      if (lblV) lblV.textContent = OUTPUT_ASPECT_SPECS[vKey]?.btnTag || '縦ショート 9:16';
+      syncAspectSelects();
 
       const isSinglePanel = (currentLayout === 'vertical9x16' || currentLayout === 'single16x9');
       const labels = isSinglePanel
@@ -4752,14 +5518,14 @@
       container.innerHTML = '';
 
       const titleEl = document.getElementById('presetListTitle');
-      const showVert = isMobileViewport() || activeOrientMode === 'vert';
+      const showVert = isMobileViewport() || activeOrientMode === 'vert' || (currentAspectKey === '1:1' && currentLayout === 'single16x9');
 
       if (showVert) {
         const vertAll = SHOWCASE_PRESETS.filter(p => p.layout === 'vertical9x16');
         const list = activePresetCat === 'all'
           ? vertAll
           : vertAll.filter(p => p.cat === activePresetCat);
-        if (titleEl) titleEl.textContent = `縦ショート プリセット（${list.length}種）`;
+        if (titleEl) titleEl.textContent = `縦・1画面プリセット（${list.length}種）`;
         list.forEach(p => container.appendChild(createPresetButtonEl(p)));
         updateDisabledControlStates();
         return;
@@ -4769,7 +5535,7 @@
       const list = activePresetCat === 'all'
         ? horizAll
         : horizAll.filter(p => p.cat === activePresetCat);
-      if (titleEl) titleEl.textContent = `横画面 プリセット（${list.length}種）`;
+      if (titleEl) titleEl.textContent = `横・分割プリセット（${list.length}種）`;
       list.forEach(p => container.appendChild(createPresetButtonEl(p)));
       updateDisabledControlStates();
     }
@@ -4777,16 +5543,99 @@
     function markActivePreset(id) {
       activePresetId = id;
       const p = SHOWCASE_PRESETS.find(item => item.id === id);
-      if (p && p.layout !== 'vertical9x16') lastHorizPresetId = id;
+      if (p) {
+        if (p.layout === 'vertical9x16') lastVertPresetId = id;
+        else lastHorizPresetId = id;
+      }
       document.querySelectorAll('#presetBtns .preset-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.pid === id);
       });
     }
 
+    function reframeStaticCamerasForAspect() {
+      slots.forEach(sl => {
+        sl.camRig.ready = false;
+        if (!FULL_PATH_CAM_ANIMS.has(sl.camAnim) && sl.camPreset) {
+          setSlotCameraPreset(sl, sl.camPreset);
+        }
+      });
+    }
+
+    async function applyOutputAspect(aspectKey) {
+      if (mediaRecorder && mediaRecorder.state === 'recording') return;
+      const spec = OUTPUT_ASPECT_SPECS[aspectKey] || OUTPUT_ASPECT_SPECS['16:9'];
+      const prevWasVert = isPortraitAspectKey(currentAspectKey);
+      const nextIsVert = isPortraitAspectKey(spec.id);
+
+      currentAspectKey = spec.id;
+      if (nextIsVert) lastVertAspectKey = spec.id;
+      else if (spec.id !== '1:1') lastHorizAspectKey = spec.id;
+      syncAspectSelects();
+
+      if (isMobileViewport()) {
+        setLayout('vertical9x16');
+        renderPresetButtons();
+        reframeStaticCamerasForAspect();
+        return;
+      }
+
+      if (nextIsVert) {
+        const curP = SHOWCASE_PRESETS.find(p => p.id === activePresetId);
+        if (currentLayout !== 'vertical9x16' && (!curP || curP.layout !== 'vertical9x16')) {
+          await applyPresetById(lastVertPresetId || 'p13_short_gachikoi');
+          return;
+        }
+        setLayout('vertical9x16');
+        renderPresetButtons();
+        reframeStaticCamerasForAspect();
+        return;
+      }
+
+      if (spec.id === '1:1') {
+        if (currentLayout === 'vertical9x16') {
+          setLayout('single16x9');
+        } else {
+          syncOrientationUI();
+          fitStagePreview();
+        }
+        renderPresetButtons();
+        reframeStaticCamerasForAspect();
+        return;
+      }
+
+      if (prevWasVert || currentLayout === 'vertical9x16') {
+        await applyPresetById(lastHorizPresetId || 'p01_moe_royal');
+        return;
+      }
+      syncOrientationUI();
+      renderPresetButtons();
+      fitStagePreview();
+      reframeStaticCamerasForAspect();
+    }
+
     async function applyPresetById(id) {
       const preset = SHOWCASE_PRESETS.find(p => p.id === id) || SHOWCASE_PRESETS[0];
       markActivePreset(preset.id);
-      const effectiveLayout = isMobileViewport() ? 'vertical9x16' : preset.layout;
+
+      let effectiveLayout = preset.layout;
+      if (isMobileViewport()) {
+        effectiveLayout = 'vertical9x16';
+        if (!isPortraitAspectKey(currentAspectKey) && currentAspectKey !== '1:1') {
+          currentAspectKey = lastVertAspectKey || '9:16';
+        }
+      } else if (preset.layout === 'vertical9x16') {
+        if (currentAspectKey === '1:1') {
+          effectiveLayout = 'single16x9';
+        } else if (!isPortraitAspectKey(currentAspectKey)) {
+          currentAspectKey = lastVertAspectKey || '9:16';
+        }
+      } else {
+        if (isPortraitAspectKey(currentAspectKey)) {
+          currentAspectKey = lastHorizAspectKey || '16:9';
+        }
+      }
+      syncAspectSelects();
+
       if (effectiveLayout === 'cols4') {
         cols4OpMode = preset.opMode || (cols4OpMode === 'off' ? 'op_loop' : cols4OpMode);
         const selOp = document.getElementById('selCols4OpMode');
@@ -4837,6 +5686,8 @@
           sl.autoTalk = c.talk ?? false;
           sl.lookAtCam = c.look ?? true;
           sl.camAnim = c.camAnim || 'none';
+          sl.motionId = c.motion;
+          sl.landmarks.ready = false;
           setSlotCameraPreset(sl, c.cam || 'bust');
           await applySlotMotion(sl, c.motion);
         }));
@@ -4882,6 +5733,7 @@
 
 
 
+
       document.getElementById('slSlotSpeed').value = String(Math.round(sl.speed * 100));
       document.getElementById('outSlotSpeed').textContent = sl.speed.toFixed(2) + 'x';
       document.getElementById('selSlotCamAnim').value = sl.camAnim;
@@ -4919,23 +5771,21 @@
         if (mediaRecorder && mediaRecorder.state === 'recording') return;
         const mode = btn.dataset.omode;
         if (mode === 'vert') {
-          const curP = SHOWCASE_PRESETS.find(p => p.id === activePresetId);
-          if (!curP || curP.layout !== 'vertical9x16') {
-            await applyPresetById('p13_short_gachikoi');
-          } else {
-            setLayout('vertical9x16');
-            renderPresetButtons();
-          }
+          await applyOutputAspect(lastVertAspectKey || '9:16');
         } else {
-          await applyPresetById(lastHorizPresetId || 'p01_moe_royal');
+          await applyOutputAspect(lastHorizAspectKey || '16:9');
         }
       });
     });
+    document.getElementById('selOutputAspect')?.addEventListener('change', e => applyOutputAspect(e.target.value));
+    document.getElementById('selHeaderAspect')?.addEventListener('change', e => applyOutputAspect(e.target.value));
     document.querySelectorAll('#layoutBtns .btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         if (mediaRecorder && mediaRecorder.state === 'recording') return;
-        await ensureDesktopSlotsHydrated();
+        if (btn.dataset.layout !== 'single16x9') await ensureDesktopSlotsHydrated();
         setLayout(btn.dataset.layout);
+        renderPresetButtons();
+        reframeStaticCamerasForAspect();
         if (btn.dataset.layout === 'cols4') syncRestartAllSlots();
       });
     });
@@ -4974,7 +5824,15 @@
       btn.addEventListener('click', () => selectSlot(Number(btn.dataset.slot)));
     });
     document.getElementById('selSlotMotion').addEventListener('change', async e => {
-      await applySlotMotion(slots[activeSlotIdx], e.target.value);
+      const sl = slots[activeSlotIdx];
+      const wasQuad = (sl.motionId || '').startsWith('moe:quad_');
+      const nowQuad = e.target.value.startsWith('moe:quad_');
+      sl.landmarks.ready = false;
+      sl.camRig.ready = false;
+      await applySlotMotion(sl, e.target.value);
+      if (wasQuad !== nowQuad) {
+        setSlotCameraPreset(sl, sl.camPreset || 'bust');
+      }
     });
     document.getElementById('btnSlotLoadVrma').addEventListener('click', () => document.getElementById('fileSlotVrma').click());
     document.getElementById('fileSlotVrma').addEventListener('change', async e => {
@@ -4990,9 +5848,13 @@
       try {
         const animation = await sl.avatar.readAnimation(file);
         if (sl.motionRequest !== stamp || sl.avatar.vrm !== vrm) return;
+        const wasQuad = sl.motionId.startsWith('moe:quad_');
         sl.avatar.useAnimation(animation);
+        sl.landmarks.ready = false;
+        sl.camRig.ready = false;
         sl.motionId = 'custom_vrma';
         sl.time = 0;
+        if (wasQuad) setSlotCameraPreset(sl, sl.camPreset || 'full');
         startVrmaSmoothly(sl);
         if (sl.index === activeSlotIdx) syncSidebarFromSlot(sl);
       } catch (err) {
@@ -5125,20 +5987,20 @@
     document.getElementById('mobileBackdrop')?.addEventListener('click', () => setMobileMenuOpen(false));
 
     mobileMedia.addEventListener('change', async e => {
-      setMobileMenuOpen(false);
-      try {
-        if (e.matches) {
-          setLayout('vertical9x16');
-          selectSlot(0);
-          const preset = SHOWCASE_PRESETS.find(p => p.id === activePresetId);
-          if (!changingModel && preset?.layout !== 'vertical9x16') {
-            await applyPresetById('p13_short_gachikoi');
-          }
-        } else if (!changingModel) {
-          await ensureDesktopSlotsHydrated();
+      if (e.matches) {
+        setMobileMenuOpen(false);
+        if (!isPortraitAspectKey(currentAspectKey) && currentAspectKey !== '1:1') {
+          currentAspectKey = lastVertAspectKey || '9:16';
         }
-      } catch (error) {
-        showModelError(error);
+        setLayout('vertical9x16');
+        selectSlot(0);
+        const curP = SHOWCASE_PRESETS.find(p => p.id === activePresetId);
+        if (!changingModel && (!curP || curP.layout !== 'vertical9x16')) {
+          await applyPresetById('p13_short_gachikoi');
+        }
+      } else {
+        setMobileMenuOpen(false);
+        if (!changingModel && (currentLayout === 'grid2x2' || currentLayout === 'cols4')) await ensureDesktopSlotsHydrated();
       }
       renderPresetButtons();
       fitStagePreview();
@@ -5439,7 +6301,8 @@
       renderCompositeFrame();
       blitToRecordingCanvas();
 
-      const bps = currentResTier === '4k' ? 54_000_000 : 24_000_000;
+      const pxScale = (canvas.width * canvas.height) / (1920 * 1080);
+      const bps = Math.round(THREE.MathUtils.clamp(24_000_000 * pxScale, 16_000_000, 62_000_000));
       const srcCanvas = (recGl && recBlitter) ? recCanvas : canvas;
       const stream = srcCanvas.captureStream(currentFps);
       const opts = mime ? {mimeType: mime, videoBitsPerSecond: bps} : {videoBitsPerSecond: bps};
@@ -5458,7 +6321,8 @@
         }
         if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
         lastBlobUrl = URL.createObjectURL(blob);
-        const modeTag = currentLayout === 'vertical9x16' ? 'vertical_short' : currentLayout;
+        const ratioSlug = currentAspectKey.replace(':', 'x');
+        const modeTag = isFullscreenMode ? 'fullscreen' : `${ratioSlug}_${currentLayout === 'vertical9x16' ? 'short' : currentLayout}`;
         const fname = `vrm_showcase_${modeTag}_${canvas.width}x${canvas.height}_${currentFps}fps.${ext}`;
 
         const dl = document.getElementById('recDlLink');
@@ -5481,7 +6345,7 @@
       updateDisabledControlStates();
       const btn = document.getElementById('btnRecord');
       btn.classList.add('recording');
-      btn.textContent = '⏹ 録画停止 (0.0s)';
+      btn.textContent = isMobileViewport() ? '⏹ 0.0s' : '⏹ 録画停止 (0.0s)';
       document.getElementById('recToast').classList.remove('show');
     }
 
