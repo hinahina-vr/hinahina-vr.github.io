@@ -454,6 +454,41 @@
       .btn, select.inp { min-height: 36px; }
       .toast-bar { width: calc(100vw - 20px); bottom: 12px; justify-content: space-between; font-size: 11px; }
     }
+
+    /* Immersive Edge-to-Edge Fullscreen Mode (上下左右目いっぱい 100vw × 100dvh) */
+    .fs-hud-bar {
+      position: fixed; top: 12px; right: 12px; z-index: 95;
+      display: none; align-items: center; gap: 6px;
+      padding: 6px 8px; border-radius: 10px;
+      background: rgba(8, 12, 22, 0.72); border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+      opacity: 0; pointer-events: none; transition: opacity 0.24s ease;
+    }
+    body.is-fullscreen .fs-hud-bar { display: flex; }
+    body.is-fullscreen .fs-hud-bar.visible,
+    body.is-fullscreen .fs-hud-bar:hover { opacity: 1; pointer-events: auto; }
+
+    body.is-fullscreen header,
+    body.is-fullscreen aside,
+    body.is-fullscreen .fab-mobile-menu,
+    body.is-fullscreen .mobile-backdrop {
+      display: none !important;
+    }
+    body.is-fullscreen .app {
+      display: block; width: 100vw; height: 100vh; height: 100dvh;
+    }
+    body.is-fullscreen .stage-area {
+      position: fixed; inset: 0; z-index: 80;
+      width: 100vw; height: 100vh; height: 100dvh;
+      padding: 0 !important; margin: 0 !important;
+      background: #000;
+    }
+    body.is-fullscreen .canvas-frame {
+      width: 100% !important; height: 100% !important;
+      border-radius: 0 !important; box-shadow: none !important;
+    }
+    body.is-fullscreen .slot-tag { opacity: 0 !important; }
+    body.is-fullscreen .slot-hit.selected { box-shadow: none !important; }
   </style>
 </head>
 <body>
@@ -481,6 +516,7 @@
           <option value="12" selected>12秒で停止</option>
           <option value="15">15秒で停止</option>
         </select>
+        <button class="btn" id="btnFullscreen" type="button" title="上下左右目いっぱいのフルスクリーン表示 (Fキー / Escで終了)"><span class="desktop-only">⛶ フルスクリーン</span><span class="mobile-only">⛶</span></button>
         <button class="btn" id="btnSnapPng" title="静止画PNG保存"><span class="desktop-only">📸 静止画</span><span class="mobile-only">📸</span></button>
         <button class="btn rec-btn" id="btnRecord"><span class="desktop-only">🔴 録画スタート</span><span class="mobile-only">🔴 録画</span></button>
         <button class="btn mobile-only" id="btnMobileMenu" type="button">⚙️ メニュー</button>
@@ -499,6 +535,12 @@
         <div class="loading-mask" id="loadingMask">
           <div id="loadingText" role="status">ステージとVRMを準備中...</div>
         </div>
+      </div>
+
+      <div class="fs-hud-bar" id="fsHudBar">
+        <button class="btn" id="btnFsSolo" type="button" title="1体のみ全画面拡大 ⇔ 分割レイアウト全画面">👤 1体フル表示</button>
+        <button class="btn" id="btnFsSnap" type="button" title="フルスクリーン静止画PNG保存">📸</button>
+        <button class="btn" id="btnFsExit" type="button" title="フルスクリーン終了 (Esc / Fキー)">✕ 終了 (Esc)</button>
       </div>
 
       <button class="fab-mobile-menu mobile-only" id="fabMobileMenu" type="button">⚙️ メニューを開く</button>
@@ -598,7 +640,7 @@
 
         <div class="sec-group">
           <div class="row-lbl">
-            <span>モーション</span>
+            <span>モーション（全24種）</span>
             <button class="btn ghost-sm" id="btnSlotLoadVrma" type="button">📂 .vrma読込</button>
             <input type="file" id="fileSlotVrma" accept=".vrma" hidden>
           </div>
@@ -629,19 +671,12 @@
               <option value="moe:excited_tiptoe">🌟 きらきら万歳ジャンプ</option>
               <option value="moe:happy_welcome">🙌 両手ぶんぶんお出迎え</option>
             </optgroup>
-            <optgroup label="🎵 オリジナルダンス・歩行">
-              <option value="motion:dance_cute">🎵 キュートダンス</option>
-              <option value="motion:dance_pop">✨ ポップダンス</option>
-              <option value="motion:dance_twist">💃 ツイストダンス</option>
-              <option value="motion:dance_step">🕺 ステップダンス</option>
-              <option value="motion:walk">🚶 ウォーキング</option>
-              <option value="motion:natural_standing">🧍 ナチュラル立ち待機</option>
-            </optgroup>
             <option value="custom_vrma" id="customMotionOption" hidden disabled>読み込んだVRMA</option>
-            <optgroup label="🌟 スタンダード紹介">
+            <optgroup label="🌟 スタンダード紹介・待機">
               <option value="proc:greet_wave">👋 手振り挨拶＆小首かしげ</option>
               <option value="proc:showcase_turn">🔄 360°ターンテーブル回転</option>
               <option value="proc:idol_sway">🎀 ふわふわ揺れものアピール</option>
+              <option value="motion:natural_standing">🧍 ナチュラル立ち待機</option>
             </optgroup>
           </select>
 
@@ -1549,6 +1584,11 @@
     let showFloorRing = true;
     let activeSlotIdx = 0;
     let modelFrontZSign = 1;
+    let mediaRecorder = null;
+    let isFullscreenMode = false;
+    let fsSoloActive = true;
+    let fsEnteredBrowserApi = false;
+    let fsHudTimer = 0;
 
     function easeOutQuint(u) {
       const x = Math.max(0, Math.min(1, u));
@@ -3085,7 +3125,6 @@
 
     const mobileMedia = window.matchMedia('(max-width: 860px)');
     const isMobileViewport = () => mobileMedia.matches;
-    let mediaRecorder = null;
     let cachedVrmBuffer = null;
     let changingModel = false;
     let desktopHydration = null;
@@ -3098,7 +3137,66 @@
       if (btn) btn.textContent = open ? '✕ 閉じる' : '⚙️ メニュー';
     }
 
+    function updateFsSoloButtonUI() {
+      const btn = document.getElementById('btnFsSolo');
+      if (!btn) return;
+      const isMultiLayout = !isMobileViewport() && (currentLayout === 'grid2x2' || currentLayout === 'cols4');
+      btn.style.display = isMultiLayout ? 'inline-flex' : 'none';
+      btn.classList.toggle('active', fsSoloActive);
+      btn.textContent = fsSoloActive ? '👤 1体フル表示' : '⊞ 分割フル表示';
+    }
+
+    function wakeFsHud() {
+      if (!isFullscreenMode) return;
+      const bar = document.getElementById('fsHudBar');
+      if (!bar) return;
+      bar.classList.add('visible');
+      clearTimeout(fsHudTimer);
+      fsHudTimer = setTimeout(() => {
+        bar.classList.remove('visible');
+      }, 2400);
+    }
+
+    function setFullscreenMode(enable, useBrowserFs = true) {
+      if (mediaRecorder && mediaRecorder.state === 'recording') return;
+      isFullscreenMode = !!enable;
+      document.body.classList.toggle('is-fullscreen', isFullscreenMode);
+      slots.forEach(sl => { sl.camRig.ready = false; });
+
+      if (isFullscreenMode) {
+        setMobileMenuOpen(false);
+        updateFsSoloButtonUI();
+        wakeFsHud();
+        if (useBrowserFs && !document.fullscreenElement && document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen()
+            .then(() => { fsEnteredBrowserApi = true; })
+            .catch(() => { fsEnteredBrowserApi = false; });
+        }
+      } else {
+        clearTimeout(fsHudTimer);
+        document.getElementById('fsHudBar')?.classList.remove('visible');
+        fsEnteredBrowserApi = false;
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+      fitStagePreview();
+    }
+
     function getTargetResolution() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        const curLabel = document.getElementById('resReadout')?.textContent || `${canvas.width}×${canvas.height}`;
+        return {w: canvas.width, h: canvas.height, label: curLabel};
+      }
+      if (isFullscreenMode) {
+        const vpW = Math.max(320, window.innerWidth || document.documentElement.clientWidth || 1920);
+        const vpH = Math.max(240, window.innerHeight || document.documentElement.clientHeight || 1080);
+        const maxDpr = currentResTier === '4k' ? 2.5 : 2.0;
+        const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+        const w = Math.max(320, Math.round((vpW * dpr) / 2) * 2);
+        const h = Math.max(240, Math.round((vpH * dpr) / 2) * 2);
+        return {w, h, label: `全画面 ${w}×${h}`};
+      }
       const isVert = currentLayout === 'vertical9x16';
       const mob = isMobileViewport();
       if (currentResTier === '4k') {
@@ -3121,7 +3219,15 @@
       }
       const resEl = document.getElementById('resReadout');
       resEl.textContent = label;
-      resEl.classList.toggle('is-vert', currentLayout === 'vertical9x16');
+      resEl.classList.toggle('is-vert', !isFullscreenMode && currentLayout === 'vertical9x16');
+
+      if (isFullscreenMode) {
+        canvasFrame.style.width = '100%';
+        canvasFrame.style.height = '100%';
+        updateFsSoloButtonUI();
+        updateHitOverlayLayout();
+        return;
+      }
 
       const pad = isMobileViewport() ? 8 : 26;
       const availW = Math.max(160, stageArea.clientWidth - pad);
@@ -3134,6 +3240,16 @@
     window.addEventListener('resize', fitStagePreview);
 
     function getActivePanels(W, H) {
+      if (isFullscreenMode && fsSoloActive) {
+        const sIdx = isMobileViewport() ? 0 : (activeSlotIdx || 0);
+        return [
+          {
+            slot: sIdx, vx: 0, vy: 0, vw: W, vh: H,
+            css: {left: '0%', top: '0%', width: '100%', height: '100%'},
+            tag: '⛶ フルスクリーン',
+          },
+        ];
+      }
       const hasBorder = BORDER_COLORS[currentBorderKey] !== null && (currentLayout === 'grid2x2' || currentLayout === 'cols4');
       const g = hasBorder ? Math.max(2, Math.round(Math.min(W, H) * 0.0022)) : 0;
 
@@ -3785,7 +3901,8 @@
 
       const t = sl.time;
       const zS = modelFrontZSign;
-      const aspectMul = currentLayout === 'cols4' ? 1.62 : (currentLayout === 'vertical9x16' ? 1.28 : 1.0);
+      const isSoloWide = isFullscreenMode && fsSoloActive && (canvas.width >= canvas.height * 0.85);
+      const aspectMul = isSoloWide ? 1.0 : (currentLayout === 'cols4' ? 1.62 : (currentLayout === 'vertical9x16' ? 1.28 : 1.0));
       const pathScale = aspectMul * (sl.zoomScale || 1.0);
       const lm = sl.landmarks;
 
@@ -4110,24 +4227,24 @@
       },
       {
         id: 'p09_idol_magic', num: '09', cat: 'kemomimi_mv', moe: true,
-        label: '🪄 キラッ☆魔法アイドル', desc: '魔法少女決めポーズ・ダブルピース・キュートダンス・ターン (2×2)',
+        label: '🪄 キラッ☆魔法アイドル', desc: '魔法少女決めポーズ・ダブルピース・万歳ジャンプ・ターン (2×2)',
         layout: 'grid2x2', theme: 'cosmic_aurora', border: 'gold',
         slots: [
           {cam: 'bust', motion: 'moe:magical_wink_star', camAnim: 'dolly_in',        expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'face', motion: 'moe:double_peace',      camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:dance_cute',       camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:excited_tiptoe',    camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'full', motion: 'moe:idol_turn_wink',    camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
       {
-        id: 'p10_dance4_mv', num: '10', cat: 'kemomimi_mv', moe: false,
-        label: '💃 4種ダンス比較MV', desc: 'キュート・ポップ・ツイスト・ステップの4種ダンス一斉比較 (4列)',
+        id: 'p10_dance4_mv', num: '10', cat: 'kemomimi_mv', moe: true,
+        label: '✨ アイドル4種比較MV', desc: 'ターンウインク・万歳ジャンプ・お出迎え・揺れアピールの4列一斉比較 (4列)',
         layout: 'cols4', theme: 'cosmic_crystal', border: 'gold',
         slots: [
-          {cam: 'full', motion: 'motion:dance_cute',  camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:dance_pop',   camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: true,  look: true},
-          {cam: 'full', motion: 'motion:dance_twist', camAnim: 'none', expr: 'relaxed',     mouth: 'oh_fixed', blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:dance_step',  camAnim: 'none', expr: 'jitome',      mouth: 'oh_main',  blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:idol_turn_wink', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:excited_tiptoe', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: true,  look: true},
+          {cam: 'full', motion: 'moe:happy_welcome',  camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_fixed', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'proc:idol_sway',     camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
         ],
       },
       {
@@ -4142,14 +4259,14 @@
         ],
       },
       {
-        id: 'p12_multicam_dance', num: '12', cat: 'kemomimi_mv', moe: false,
-        label: '🎥 同ダンス4カメ中継', desc: '同じキュートダンスをガチ恋・バスト・斜め全身・背面で時間差アニメOP登場 (4列)',
+        id: 'p12_multicam_dance', num: '12', cat: 'kemomimi_mv', moe: true,
+        label: '🎥 同ポーズ4カメ中継', desc: '同じ肉球ポーズをガチ恋・バスト・斜め全身・背面で時間差アニメOP登場 (4列)',
         layout: 'cols4', theme: 'cosmic_aurora', border: 'gold', opMode: 'op_loop',
         slots: [
-          {cam: 'gachikoi', motion: 'motion:dance_cute', camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
-          {cam: 'bust',     motion: 'motion:dance_cute', camAnim: 'none',            expr: 'relaxed',     mouth: 'oh_fixed', blink: true, talk: false, look: true},
-          {cam: '3q',       motion: 'motion:dance_cute', camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
-          {cam: 'back',     motion: 'motion:dance_cute', camAnim: 'none',            expr: 'relaxed',     mouth: 'oh_main',  blink: true, talk: false, look: false},
+          {cam: 'gachikoi', motion: 'moe:ferret_paws', camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
+          {cam: 'bust',     motion: 'moe:ferret_paws', camAnim: 'none',            expr: 'relaxed',     mouth: 'oh_fixed', blink: true, talk: false, look: true},
+          {cam: '3q',       motion: 'moe:ferret_paws', camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
+          {cam: 'back',     motion: 'moe:ferret_paws', camAnim: 'none',            expr: 'relaxed',     mouth: 'oh_main',  blink: true, talk: false, look: false},
         ],
       },
       {
@@ -4170,8 +4287,8 @@
         slots: [
           {cam: 'face', motion: 'moe:double_peace',    camAnim: 'none',       expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'bust', motion: 'moe:cat_nyan_beckon', camAnim: 'none',       expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
-          {cam: '3q',   motion: 'motion:dance_cute',     camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:dance_pop',      camAnim: 'none',       expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: true,  look: true},
+          {cam: '3q',   motion: 'moe:idol_turn_wink',  camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:happy_welcome',   camAnim: 'none',       expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: true,  look: true},
         ],
       },
       {
@@ -4203,7 +4320,7 @@
         slots: [
           {cam: 'full', motion: 'moe:magical_wink_star', camAnim: 'magic_step_cutin',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'full', motion: 'moe:cat_nyan_beckon',   camAnim: 'magic_sudden_gachikoi', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:dance_cute',       camAnim: 'magic_ribbon_slalom',   expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:idol_turn_wink',    camAnim: 'magic_ribbon_slalom',   expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'full', motion: 'moe:cheek_heart',       camAnim: 'magic_heart_dolly',     expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
@@ -4243,10 +4360,10 @@
       },
       {
         id: 'p17_short_dance_pan', num: '17', cat: 'catalog', moe: false,
-        label: '💃 チルトアップダンスMV', desc: '9:16 縦型ショート用：足元ブーツからお顔へチルトアップ＆ダンス',
+        label: '⬆ チルトアップ全身紹介', desc: '9:16 縦型ショート用：足元ブーツからお顔へチルトアップ＆揺れアピール',
         layout: 'vertical9x16', theme: 'cosmic_crystal', border: 'none',
         slots: [
-          {cam: 'full', motion: 'motion:dance_cute', camAnim: 'pan_up', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'proc:idol_sway', camAnim: 'pan_up', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
       {
@@ -4290,11 +4407,11 @@
         ],
       },
       {
-        id: 'p33_vshort_gachikoi_to_full', num: '33', cat: 'gachikoi', moe: false,
-        label: '💘 掴みガチ恋→全身ダンス', desc: '9:16 縦型ショート用：開始0秒ガチ恋アップで掴んで→全身キュートダンス→もう一度至近距離',
+        id: 'p33_vshort_gachikoi_to_full', num: '33', cat: 'gachikoi', moe: true,
+        label: '💘 掴みガチ恋→全身アピール', desc: '9:16 縦型ショート用：開始0秒ガチ恋アップで掴んで→全身ターンウインク→もう一度至近距離',
         layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
         slots: [
-          {cam: 'full', motion: 'motion:dance_cute', camAnim: 'vshort_gachikoi_to_full', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:idol_turn_wink', camAnim: 'vshort_gachikoi_to_full', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
       {
@@ -4322,11 +4439,11 @@
         ],
       },
       {
-        id: 'p37_vshort_idol_mv', num: '37', cat: 'kemomimi_mv', moe: false,
-        label: '🎤 縦ダンスMVクレーン', desc: '9:16 縦型ショート用：斜め全身クレーンからゼロ距離歌口パクへ迫る3DライブMVカメラ',
+        id: 'p37_vshort_idol_mv', num: '37', cat: 'kemomimi_mv', moe: true,
+        label: '🎤 縦ライブMVクレーン', desc: '9:16 縦型ショート用：斜め全身クレーンからゼロ距離歌口パクへ迫る3DライブMVカメラ',
         layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
         slots: [
-          {cam: 'full', motion: 'motion:dance_pop', camAnim: 'vshort_idol_mv_crane', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: true, look: true},
+          {cam: 'full', motion: 'moe:happy_welcome', camAnim: 'vshort_idol_mv_crane', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: true, look: true},
         ],
       },
       {
@@ -4368,12 +4485,12 @@
       },
       {
         id: 'p19_booth_hero', num: '19', cat: 'catalog', moe: false,
-        label: '✨ BOOTH王道紹介PV', desc: '肉球ポーズ・ダンス・ウォーキング・360°回転の万能商品PV (2×2)',
+        label: '✨ BOOTH王道紹介PV', desc: '肉球ポーズ・ターンウインク・揺れアピール・360°回転の万能商品PV (2×2)',
         layout: 'grid2x2', theme: 'cosmic_crystal', border: 'gold',
         slots: [
           {cam: 'bust', motion: 'moe:ferret_paws',    camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
-          {cam: '3q',   motion: 'motion:dance_cute',    camAnim: 'none',       expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:walk',          camAnim: 'orbit_soft', expr: 'relaxed',     mouth: 'oh_fixed', blink: true, talk: false, look: true},
+          {cam: '3q',   motion: 'moe:idol_turn_wink', camAnim: 'none',       expr: 'choreo_sync', mouth: 'oh_main',  blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'proc:idol_sway',     camAnim: 'orbit_soft', expr: 'relaxed',     mouth: 'oh_fixed', blink: true, talk: false, look: true},
           {cam: 'full', motion: 'proc:showcase_turn', camAnim: 'none',       expr: 'relaxed',     mouth: 'oh_main',  blink: true, talk: false, look: false},
         ],
       },
@@ -4390,21 +4507,21 @@
       },
       {
         id: 'p21_wide_solo_mv', num: '21', cat: 'catalog', moe: false,
-        label: '🖥️ 16:9 星花ソロMV', desc: '16:9 横型フル画面：Starlight Blossom 宇宙でポップダンス＆歌口パク',
+        label: '🖥️ 16:9 星花ソロMV', desc: '16:9 横型フル画面：星花の宙ステージでターンウインク＆歌口パク',
         layout: 'single16x9', theme: 'cosmic_blossom', border: 'none',
         slots: [
-          {cam: '3q', motion: 'motion:dance_pop', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: true, look: true},
+          {cam: '3q', motion: 'moe:idol_turn_wink', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: true, look: true},
         ],
       },
       {
         id: 'p22_chroma_pack', num: '22', cat: 'catalog', moe: false,
-        label: '🟩 クロマキー4素材出力', desc: 'GB背景・枠なしで挨拶・ピース・お出迎え・ダンスを一度に収録 (2×2)',
+        label: '🟩 クロマキー4素材出力', desc: 'GB背景・枠なしで挨拶・ピース・お出迎え・肉球ポーズを一度に収録 (2×2)',
         layout: 'grid2x2', theme: 'chroma', border: 'none',
         slots: [
           {cam: 'bust', motion: 'proc:greet_wave',   camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'bust', motion: 'moe:double_peace',  camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
           {cam: 'bust', motion: 'moe:happy_welcome', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
-          {cam: 'full', motion: 'motion:dance_cute',   camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:ferret_paws',   camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
     ];
@@ -4491,6 +4608,11 @@
       if (selDur) {
         selDur.disabled = isRec;
         selDur.title = isRec ? '録画中は変更できません' : '録画時間の自動停止設定';
+      }
+      const btnFs = document.getElementById('btnFullscreen');
+      if (btnFs) {
+        btnFs.disabled = isRec;
+        btnFs.title = isRec ? '録画中はフルスクリーン切替できません' : '上下左右目いっぱいのフルスクリーン表示 (Fキー / Escで終了)';
       }
       const selFmt = document.getElementById('selRecFmt');
       if (selFmt) {
@@ -4757,6 +4879,7 @@
       const customOption = document.getElementById('customMotionOption');
       customOption.hidden = sl.motionId !== 'custom_vrma';
       selM.value = sl.motionId;
+
 
 
       document.getElementById('slSlotSpeed').value = String(Math.round(sl.speed * 100));
@@ -5028,7 +5151,7 @@
       await loadStudioModel(() => file.arrayBuffer(), file.name);
     });
 
-    document.getElementById('btnSnapPng').addEventListener('click', () => {
+    function snapCurrentPng() {
       if (changingModel || !slots[0].avatar.vrm) return;
       renderCompositeFrame();
       canvas.toBlob(blob => {
@@ -5040,6 +5163,40 @@
         a.click();
         setTimeout(() => URL.revokeObjectURL(url), 10000);
       }, 'image/png');
+    }
+
+    document.getElementById('btnSnapPng').addEventListener('click', snapCurrentPng);
+    document.getElementById('btnFsSnap')?.addEventListener('click', snapCurrentPng);
+    document.getElementById('btnFullscreen')?.addEventListener('click', () => setFullscreenMode(true, true));
+    document.getElementById('btnFsExit')?.addEventListener('click', () => setFullscreenMode(false, true));
+    document.getElementById('btnFsSolo')?.addEventListener('click', () => {
+      fsSoloActive = !fsSoloActive;
+      slots.forEach(sl => { sl.camRig.ready = false; });
+      updateFsSoloButtonUI();
+      updateHitOverlayLayout();
+      wakeFsHud();
+    });
+    window.addEventListener('pointermove', () => { if (isFullscreenMode) wakeFsHud(); }, {passive: true});
+    window.addEventListener('touchstart', () => { if (isFullscreenMode) wakeFsHud(); }, {passive: true});
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement && isFullscreenMode && fsEnteredBrowserApi) {
+        fsEnteredBrowserApi = false;
+        setFullscreenMode(false, false);
+      } else if (isFullscreenMode) {
+        fitStagePreview();
+      }
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && isFullscreenMode) {
+        setFullscreenMode(false, true);
+        return;
+      }
+      const tag = (document.activeElement?.tagName || '').toUpperCase();
+      if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+      if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        setFullscreenMode(!isFullscreenMode, true);
+      }
     });
 
     // =========================================================================
@@ -5354,7 +5511,7 @@
       const H = canvas.height;
       const th = THEMES[currentThemeKey] || THEMES.cosmic_crystal;
       const bdrHex = BORDER_COLORS[currentBorderKey];
-      const isCols4Op = (currentLayout === 'cols4' && cols4OpMode !== 'off');
+      const isCols4Op = (currentLayout === 'cols4' && cols4OpMode !== 'off' && !(isFullscreenMode && fsSoloActive));
 
       renderer.setScissorTest(false);
       renderer.setViewport(0, 0, W, H);
@@ -5453,7 +5610,7 @@
       const dt = Math.min(0.05, Math.max(0.0001, (now - lastNow) / 1000));
       lastNow = now;
 
-      const isCols4Op = (currentLayout === 'cols4' && cols4OpMode !== 'off');
+      const isCols4Op = (currentLayout === 'cols4' && cols4OpMode !== 'off' && !(isFullscreenMode && fsSoloActive));
       if (isCols4Op) {
         cols4OpClock += dt;
       }
