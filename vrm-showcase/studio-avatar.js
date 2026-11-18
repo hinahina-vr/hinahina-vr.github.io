@@ -71,9 +71,14 @@ export class StudioAvatar {
     return this.vrm?.springBoneManager;
   }
 
-  use(vrm) {
+  release() {
     this.clearAnimation();
     if (this.vrm) disposeAvatar(this.vrm);
+    this.vrm = null;
+  }
+
+  use(vrm) {
+    this.release();
     this.vrm = vrm;
     this.stageRoot.rotation.set(0, 0, 0);
     this.stageRoot.position.set(0, 0, 0);
