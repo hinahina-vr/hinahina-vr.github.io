@@ -1,0 +1,3371 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>VRM ショーケース録画スタジオ</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.js"
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #121726;
+      --panel-2: #1a2236;
+      --panel-3: #24304c;
+      --border: #2d3b5c;
+      --text: #eef3fc;
+      --muted: #98a9ca;
+      --accent: #73acff;
+      --pink: #ff7eb6;
+      --gold: #ebc88d;
+      --rec: #ff4f6d;
+      --ok: #4ce3b0;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      background: var(--bg); color: var(--text);
+      font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif;
+      overflow: hidden; user-select: none;
+    }
+    .app {
+      display: grid;
+      grid-template-rows: 58px 1fr;
+      grid-template-columns: 1fr 386px;
+      width: 100vw; height: 100vh;
+    }
+    header {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 14px; background: #0d1220;
+      border-bottom: 1px solid var(--border); gap: 8px;
+    }
+    .hdr-left, .hdr-right {
+      display: flex; align-items: center; gap: 7px; flex-wrap: nowrap;
+    }
+    .hdr-title {
+      font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+    }
+    .pill {
+      font-size: 11px; padding: 3px 8px; border-radius: 999px;
+      background: rgba(255, 126, 182, 0.14); border: 1px solid rgba(255, 126, 182, 0.45);
+      color: #ffb3d5; font-weight: 600; white-space: nowrap;
+    }
+    .res-badge {
+      font-size: 11.5px; padding: 4px 8px; border-radius: 6px;
+      background: rgba(115, 172, 255, 0.14); border: 1px solid rgba(115, 172, 255, 0.45);
+      color: #bdd7ff; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap;
+    }
+    .btn, a.btn, select.inp {
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 6px 10px; border-radius: 7px; font-size: 11.5px; font-weight: 600;
+      border: 1px solid #273452; background: #131929; color: #9eb1d4;
+      cursor: pointer; text-decoration: none; transition: 0.14s ease;
+      font-family: inherit;
+    }
+    select.inp {
+      width: 100%; justify-content: flex-start; padding: 6px 28px 6px 10px; outline: none;
+      background-color: #1b2642;
+      border: 1.5px solid #4868a8;
+      border-left: 4px solid #00e5b8;
+      color: #ffffff;
+      font-weight: 700;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300e5b8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 9px center;
+    }
+    select.inp:focus, select.inp:hover {
+      background-color: #233256;
+      border-color: #6ce5ff;
+      box-shadow: 0 0 12px rgba(0, 229, 184, 0.32);
+    }
+    select.inp option {
+      background: #121a2e;
+      color: #f0f5ff;
+      font-weight: 600;
+      padding: 6px;
+    }
+    select.inp optgroup {
+      background: #0a0f1d;
+      color: #ff94cc;
+      font-weight: 800;
+    }
+    .btn:hover, a.btn:hover { background: #1f2b46; border-color: #5b78b4; color: #ffffff; }
+    .btn.active, .seg-group .btn.active {
+      background: linear-gradient(135deg, #00b4ff 0%, #00e5b8 100%) !important;
+      border: 2px solid #d4fff7 !important;
+      color: #031521 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 15px rgba(0, 224, 192, 0.58), 0 2px 6px rgba(0, 0, 0, 0.45) !important;
+    }
+    .btn.active::before, .seg-group .btn.active::before {
+      content: "✓";
+      font-weight: 900;
+      margin-right: 2px;
+    }
+    .btn.preset-btn.active, #slotCamPresets .btn.active {
+      background: linear-gradient(135deg, #ff3d9a 0%, #ffb042 100%) !important;
+      border: 2px solid #fff0f7 !important;
+      color: #1f0410 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 15px rgba(255, 74, 162, 0.65), 0 2px 6px rgba(0, 0, 0, 0.45) !important;
+    }
+    .btn.moe-btn {
+      background: linear-gradient(135deg, rgba(255, 92, 168, 0.20), rgba(138, 98, 255, 0.20));
+      border-color: rgba(255, 138, 192, 0.52); color: #ffd9ea;
+    }
+    .btn.moe-btn:hover { filter: brightness(1.15); color: #fff; }
+    .btn.gold { border-color: rgba(235, 200, 141, 0.65); color: var(--gold); background: rgba(235, 200, 141, 0.08); }
+    .btn.rec-btn {
+      background: linear-gradient(135deg, #e53958, #ff5d79);
+      border-color: #ff9eb0; color: #fff; padding: 7px 13px; font-size: 12.5px; font-weight: 800;
+      box-shadow: 0 2px 14px rgba(255, 79, 109, 0.45); white-space: nowrap;
+    }
+    .btn.rec-btn:hover { filter: brightness(1.08); }
+    .btn.rec-btn.recording {
+      background: #b81d3a; animation: pulseRec 1.1s infinite;
+    }
+    @keyframes pulseRec {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 79, 109, 0.65); }
+      50% { box-shadow: 0 0 0 8px rgba(255, 79, 109, 0); }
+    }
+    .seg-group {
+      display: inline-flex; background: #0c101c; border: 1px solid #2b3a5c;
+      border-radius: 8px; padding: 2px; gap: 3px;
+    }
+    .seg-group .btn {
+      border: 1px solid transparent; background: transparent; padding: 5px 9px; border-radius: 6px; font-size: 11px;
+    }
+
+    .stage-area {
+      position: relative; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      padding: 14px; background: radial-gradient(circle at center, #11182b 0%, #060810 100%);
+      overflow: hidden;
+    }
+    .canvas-frame {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(255, 255, 255, 0.09);
+      border-radius: 8px; overflow: hidden;
+      background: #060913;
+    }
+    #studioCanvas { display: block; width: 100%; height: 100%; }
+
+    .hit-overlay { position: absolute; inset: 0; pointer-events: none; }
+    .slot-hit {
+      position: absolute; pointer-events: auto; cursor: grab;
+      transition: box-shadow 0.15s ease;
+    }
+    .slot-hit:active { cursor: grabbing; }
+    body:not(.hide-hud) .slot-hit.selected {
+      box-shadow: inset 0 0 0 3px #ff42a1, inset 0 0 20px rgba(255, 66, 161, 0.42);
+    }
+    .slot-tag {
+      position: absolute; top: 8px; left: 8px;
+      padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 700;
+      background: rgba(10, 14, 26, 0.78); border: 1px solid rgba(255, 255, 255, 0.20);
+      color: #c5d5f2; backdrop-filter: blur(6px); pointer-events: none;
+      transition: opacity 0.18s;
+    }
+    .slot-hit.selected .slot-tag {
+      background: linear-gradient(135deg, #ff2e93, #ff8547);
+      border: 1.5px solid #fff0f7;
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 2px 10px rgba(255, 46, 147, 0.65);
+    }
+    .slot-hit.selected .slot-tag::before {
+      content: "● 編集中 ";
+    }
+    body.hide-hud .slot-tag { opacity: 0; }
+
+    .toast-bar {
+      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+      display: none; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 9px;
+      background: rgba(14, 22, 38, 0.94); border: 1px solid var(--ok);
+      color: var(--text); font-size: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+      z-index: 20; backdrop-filter: blur(8px);
+    }
+    .toast-bar.show { display: flex; }
+
+    .loading-mask {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      background: rgba(8, 11, 20, 0.86); backdrop-filter: blur(6px);
+      z-index: 30; font-size: 13px; font-weight: 600; color: #e2ecff;
+    }
+    .loading-mask.hidden { display: none; }
+
+    aside {
+      background: var(--panel); border-left: 1px solid var(--border);
+      padding: 11px; overflow-y: auto; display: flex; flex-direction: column; gap: 9px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.022); border: 1px solid var(--border);
+      border-radius: 9px; padding: 10px; display: flex; flex-direction: column; gap: 7px;
+    }
+    .card h2 {
+      margin: 0; font-size: 12px; font-weight: 700; color: #c6d7f8;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .slot-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .slot-tab {
+      padding: 7px 4px; border-radius: 7px; font-size: 11.5px; font-weight: 700;
+      border: 1px solid #263350; background: #121828; color: #7f92b8;
+      cursor: pointer; text-align: center; transition: 0.14s ease;
+    }
+    .slot-tab:hover { background: #1d2842; color: #dbe7ff; }
+    .slot-tab.active {
+      background: linear-gradient(135deg, #ff2e93 0%, #ff7b47 100%);
+      border: 2px solid #ffe6f2; color: #ffffff; font-weight: 800;
+      box-shadow: 0 0 15px rgba(255, 56, 148, 0.68);
+    }
+    .slot-tab.active::before {
+      content: "● ";
+      font-size: 9px;
+    }
+    .slot-tab.disabled-slot { opacity: 0.30; pointer-events: none; }
+    .row-lbl {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: #b4c5e4; font-weight: 600;
+    }
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11.5px; cursor: pointer; padding: 4px 8px;
+      border-radius: 6px; background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08); color: #8fa2c6;
+      transition: 0.14s ease;
+    }
+    .toggle-row input[type="checkbox"] {
+      width: 15px; height: 15px; accent-color: #00e5b8; cursor: pointer; margin: 0;
+    }
+    .toggle-row:has(input:checked) {
+      background: rgba(0, 229, 184, 0.15);
+      border-color: rgba(0, 229, 184, 0.62);
+      color: #ecfffb;
+      font-weight: 700;
+    }
+    .slider-row {
+      display: grid; grid-template-columns: 74px 1fr 42px; align-items: center;
+      gap: 8px; font-size: 11.5px;
+    }
+    .slider-row input[type="range"] { width: 100%; accent-color: #ff4ca8; cursor: pointer; }
+    .slider-row output { text-align: right; color: #ffd4eb; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .sub-hint {
+      font-size: 11px; color: #ffe2f2; line-height: 1.35; font-weight: 700;
+      background: rgba(255, 58, 150, 0.15); border: 1px solid rgba(255, 115, 184, 0.55);
+      padding: 5px 8px; border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="hdr-left">
+        <div class="hdr-title">
+          <span>🎬 VRM ショーケース録画スタジオ</span>
+          <span class="pill" id="modelBadge" role="status">VRM 準備中</span>
+        </div>
+        <span class="res-badge" id="resReadout">1920 × 1080 (FHD)</span>
+        <button class="btn" id="btnLoadVrm" title="手元のVRMファイルを読み込む">📂 VRMを開く</button>
+        <input type="file" id="fileVrm" accept=".vrm" hidden>
+        <a class="btn gold" href="./models/snow_ferret_tripo_rig.vrm" download="snow_ferret_tripo_rig.vrm" title="雪貂モデル · 制作 ひなひな">⬇ 雪貂VRM保存</a>
+      </div>
+
+      <div class="hdr-right">
+        <div class="seg-group" id="resBtns" title="出力動画の解像度">
+          <button class="btn active" data-res="fhd">FHD (1080p)</button>
+          <button class="btn" data-res="4k">4K (2160p)</button>
+        </div>
+        <div class="seg-group" id="fpsBtns" title="フレームレート">
+          <button class="btn active" data-fps="60">60fps</button>
+          <button class="btn" data-fps="30">30fps</button>
+        </div>
+        <select class="inp" id="selRecFmt" style="width:92px;" title="録画コンテナ形式">
+          <option value="mp4" selected>MP4 (H.264)</option>
+          <option value="webm">WebM (VP9)</option>
+        </select>
+        <select class="inp" id="selRecDur" style="width:104px;" title="録画時間の自動停止設定">
+          <option value="0">手動で停止</option>
+          <option value="8">8秒で自動停止</option>
+          <option value="12" selected>12秒で自動停止</option>
+          <option value="15">15秒で自動停止</option>
+        </select>
+        <button class="btn" id="btnSnapPng" title="現在の高解像度キャンバスをPNG保存">📸 静止画</button>
+        <button class="btn rec-btn" id="btnRecord">🔴 録画スタート</button>
+      </div>
+    </header>
+
+    <div class="stage-area" id="stageArea">
+      <div class="canvas-frame" id="canvasFrame">
+        <canvas id="studioCanvas" width="1920" height="1080"></canvas>
+        <div class="hit-overlay" id="hitOverlay">
+          <div class="slot-hit selected" data-slot="0"><div class="slot-tag" id="tag0">① 左上</div></div>
+          <div class="slot-hit" data-slot="1"><div class="slot-tag" id="tag1">② 右上</div></div>
+          <div class="slot-hit" data-slot="2"><div class="slot-tag" id="tag2">③ 左下</div></div>
+          <div class="slot-hit" data-slot="3"><div class="slot-tag" id="tag3">④ 右下</div></div>
+        </div>
+        <div class="loading-mask" id="loadingMask">
+          <div id="loadingText" role="status">雪貂VRMを読み込み中…</div>
+        </div>
+      </div>
+
+      <div class="toast-bar" id="recToast">
+        <span id="recToastText">✅ 録画完了！</span>
+        <a class="btn gold" id="recDlLink" href="#" download="avatar_showcase.mp4">⬇ もう一度保存</a>
+        <button class="btn" id="btnCloseToast" style="padding:4px 8px;">✕</button>
+      </div>
+    </div>
+
+    <aside>
+      <!-- 1. Layout & Moe/Gachikoi One-Click Showcase Templates -->
+      <div class="card">
+        <h2>
+          <span>① 画面レイアウト・映えプリセット</span>
+          <label style="font-weight:500;font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer;">
+            <input type="checkbox" id="chkShowTags" checked> 枠ガイド表示
+          </label>
+        </h2>
+        <div class="grid-2" id="layoutBtns">
+          <button class="btn active" data-layout="grid2x2">田 4分割 (2×2 横)</button>
+          <button class="btn" data-layout="cols4">|||| 4分割 (4列並び)</button>
+          <button class="btn" data-layout="vertical9x16">📱 単品 縦型 (9:16)</button>
+          <button class="btn" data-layout="single16x9">🖥️ 単品 横型 (16:9)</button>
+        </div>
+        <div class="row-lbl" style="margin-top:2px;">
+          <span>ワンクリック構成プリセット</span>
+          <button class="btn" id="btnSyncRestart" style="padding:2px 7px;font-size:10.5px;">⏮ 全モーション頭出し</button>
+        </div>
+        <div class="grid-2" id="presetBtns">
+          <button class="btn moe-btn preset-btn active" id="presetMoePv">💘 あざと＆ガチ恋PV (4分割)</button>
+          <button class="btn moe-btn preset-btn" id="presetHeartPv">🫶 ハート＆きゅんPV (4分割)</button>
+          <button class="btn moe-btn preset-btn" id="presetKemomimiPv">🐾 萌え袖＆けもみみPV (4分割)</button>
+          <button class="btn moe-btn preset-btn" id="presetShortGachikoi">📱 縦型・ガチ恋ゼロ距離</button>
+          <button class="btn preset-btn" id="presetHeroPv">✨ 王道紹介PV (4分割)</button>
+          <button class="btn preset-btn" id="presetDanceMv">💃 4種ダンスMV (4列)</button>
+          <button class="btn preset-btn" id="presetShortAzato">📱 縦型・あざとほっぺ</button>
+          <button class="btn preset-btn" id="presetShortDance">📱 縦型・ダンスショート</button>
+        </div>
+      </div>
+
+      <!-- 2. Per-Slot Independent Settings -->
+      <div class="card">
+        <h2><span>② パネル別 個別設定（モーション・表情・カメラ）</span></h2>
+        <div class="slot-tabs" id="slotTabs">
+          <button class="slot-tab active" data-slot="0">パネル ①</button>
+          <button class="slot-tab" data-slot="1">パネル ②</button>
+          <button class="slot-tab" data-slot="2">パネル ③</button>
+          <button class="slot-tab" data-slot="3">パネル ④</button>
+        </div>
+        <div class="sub-hint" id="activeSlotHint">現在編集中：パネル ①（画面上の直接ドラッグで個別アングル調整OK）</div>
+
+        <div class="row-lbl">
+          <span>モーション選択（このパネルのみ）</span>
+          <button class="btn" id="btnSlotLoadVrma" style="padding:2px 7px;font-size:10.5px;">📂 個別.vrma読込</button>
+          <input type="file" id="fileSlotVrma" accept=".vrma" hidden>
+        </div>
+        <select class="inp" id="selSlotMotion">
+          <optgroup label="💘 ガチ恋・あざと王道モーション (IK精密追従)">
+            <option value="moe:gachikoi_peek">💕 ガチ恋・ゼロ距離のぞき込み＆照れ笑い</option>
+            <option value="moe:azato_cheek">🫶 あざと小悪魔・ダブルほっぺぷに＆ウインク</option>
+            <option value="moe:cheek_heart">💖 ルダハート（ほっぺハート）＆ガチ恋スマイル</option>
+            <option value="moe:blow_kiss">😘 ガチ恋・投げキッス＆えへへ照れ隠し</option>
+            <option value="moe:kyun_chest_squeeze">💓 胸きゅん…ぎゅっ＆ゼロ距離みつめ</option>
+            <option value="moe:shy_fidget">👉👈 もじもじ指ツンツン＆上目遣いチラ見</option>
+            <option value="moe:plead_clasp">🙏 ぎゅっ♡ おねだり上目遣い（内股もじもじ）</option>
+          </optgroup>
+          <optgroup label="🐾 萌え袖・けもみみ・感情リアクション">
+            <option value="moe:peekaboo_cuffs">🙈 萌え袖いないいない…ばぁっ♡</option>
+            <option value="moe:cat_nyan_beckon">🐱 にゃんにゃん招き手＆耳ぴょこリズム</option>
+            <option value="moe:ferret_paws">🐾 雪フェレット・ぴょこぴょこ肉球ポーズ（がおー♡）</option>
+            <option value="moe:tail_wag_lookback">🐿️ 振り返り「しっぽ見て見て♡」見返りウインク</option>
+            <option value="moe:sleepy_rub">😪 ねむねむ…おめめこすこす＆あくび「お」</option>
+            <option value="moe:pout_puff">😤 むーっ！ぷんぷん腰手＆照れデレ</option>
+            <option value="moe:tsundere_dere">💞 ツンデレジト目 → パッと満面デレ笑顔</option>
+          </optgroup>
+          <optgroup label="✨ アイドル・ハート・決めポーズ">
+            <option value="moe:double_peace">✌️ あざとダブルピース＆ぴょんウインク</option>
+            <option value="moe:big_overhead_heart">🙆‍♀️ 頭の上で大きなだいすきハート♡</option>
+            <option value="moe:magical_wink_star">🪄 キラッ☆ 魔法少女決めポーズ＆ウインク</option>
+            <option value="moe:idol_turn_wink">✨ 華麗くるっとターン＆あざと決めウインク</option>
+            <option value="moe:excited_tiptoe">🌟 わーい！きらきらジャンプ＆万歳バンザイ</option>
+            <option value="moe:happy_welcome">🙌 ぴょんぴょん両手ぶんぶんお出迎え</option>
+          </optgroup>
+          <optgroup label="🎵 オリジナルダンス・歩行">
+            <option value="motion:dance_cute">🎵 キュートダンス</option>
+            <option value="motion:dance_pop">✨ ポップダンス</option>
+            <option value="motion:dance_twist">💃 ツイストダンス</option>
+            <option value="motion:dance_step">🕺 ステップダンス</option>
+            <option value="motion:walk">🚶 ウォーキング</option>
+            <option value="motion:natural_standing">🧍 ナチュラル立ち待機</option>
+          </optgroup>
+          <option value="custom_vrma" id="customMotionOption" hidden disabled>読み込んだVRMA</option>
+          <optgroup label="🌟 スタンダード紹介モーション">
+            <option value="proc:greet_wave">👋 手振り挨拶＆小首かしげ</option>
+            <option value="proc:showcase_turn">🔄 360°ターンテーブル回転（全方位紹介）</option>
+            <option value="proc:idol_sway">🎀 ふわふわ揺れものアピール</option>
+          </optgroup>
+        </select>
+
+        <div class="slider-row">
+          <label for="slSlotSpeed">再生スピード</label>
+          <input type="range" id="slSlotSpeed" min="40" max="160" value="100">
+          <output id="outSlotSpeed">1.00x</output>
+        </div>
+
+        <div class="row-lbl"><span>カメラアングル一発切替（このパネルのみ）</span></div>
+        <div class="grid-3" id="slotCamPresets">
+          <button class="btn" data-scam="gachikoi">💘 ガチ恋距離</button>
+          <button class="btn" data-scam="face">顔アップ</button>
+          <button class="btn" data-scam="bust">バストアップ</button>
+          <button class="btn" data-scam="full">全身正面</button>
+          <button class="btn" data-scam="3q">全身斜め</button>
+          <button class="btn" data-scam="back">背面・マント&尾</button>
+        </div>
+
+        <div class="row-lbl"><span>シネマティック自動カメラワーク</span></div>
+        <select class="inp" id="selSlotCamAnim">
+          <option value="none">固定（マウスで自由アングル）</option>
+          <option value="gachikoi_breath">💓 ガチ恋ゼロ距離・呼吸ゆらぎ＆寄り引き</option>
+          <option value="orbit_soft">↔ ゆっくり左右回り込みスイング</option>
+          <option value="orbit_360">🔄 360°ぐるっとカメラ周回</option>
+          <option value="dolly_in">🔍 ゆっくりズームイン＆アウト</option>
+          <option value="pan_up">⬆ 足元→お顔へチルトアップ（縦型映え！）</option>
+        </select>
+
+        <div class="row-lbl"><span>表情プリセット（このパネルのみ）</span></div>
+        <select class="inp" id="selSlotExpr">
+          <option value="choreo_sync">💖 モーション完全連動あざと表情（おすすめ！）</option>
+          <option value="auto_cycle">🎭 オート表情リレー（初期→楽しい→喜び→ジト目→驚き）</option>
+          <option value="neutral">初期（ノーマル）</option>
+          <option value="relaxed">楽しい（にっこり閉じ目）</option>
+          <option value="happy">喜び（スマイル）</option>
+          <option value="jitome">ジト目</option>
+          <option value="surprised">驚き</option>
+          <option value="angry">怒り</option>
+          <option value="sad">悲しい</option>
+          <option value="blinkRight">右ウインク</option>
+          <option value="blinkLeft">左ウインク</option>
+        </select>
+
+        <div class="row-lbl"><span>👄 口のかたち（このパネルのみ）</span></div>
+        <select class="inp" id="selSlotMouth">
+          <option value="oh_main" selected>💖 「お」メイン連動（あざと可愛い♡）</option>
+          <option value="oh_fixed">😮 ずっと「お」キープ (85%)</option>
+          <option value="oh_max">😮 ぱっちり「お」キープ (100%)</option>
+          <option value="closed">🙂 口閉じ（にっこりノーマル）</option>
+          <option value="ou_fixed">😗 「う」キープ（ちゅっ♡）</option>
+          <option value="aa_fixed">😄 「あ」キープ</option>
+        </select>
+
+        <div class="grid-2" style="padding-top:1px;">
+          <label class="toggle-row">
+            <span>✨ 自動まばたき</span>
+            <input type="checkbox" id="chkSlotBlink" checked>
+          </label>
+          <label class="toggle-row">
+            <span>🗣️ 口パクトーク</span>
+            <input type="checkbox" id="chkSlotTalk">
+          </label>
+        </div>
+        <label class="toggle-row">
+          <span>👁️ カメラ目線追従 (LookAt)</span>
+          <input type="checkbox" id="chkSlotLookAt" checked>
+        </label>
+      </div>
+
+      <div class="card">
+        <h2><span>③ 宇宙ステージ・演出設定</span></h2>
+        <div class="row-lbl"><span>ステージ背景テーマ（WebGL 高精細リアルタイムシェーダ）</span></div>
+        <select class="inp" id="selTheme">
+          <option value="cosmic_crystal" selected>💎 クリスタル宇宙 [WebGL 3D光結晶]</option>
+          <option value="cosmic_aurora">🌌 星空オーロラ [WebGL オーロラ天の川]</option>
+          <option value="cosmic_blossom">🌸 星花 [WebGL ガチ恋星花]</option>
+          <option value="snow">❄️ スノーパステル（淡ラベンダー白＋舞う雪結晶）</option>
+          <option value="studio">🤍 ピュアホワイトスタジオ（カタログ・VRoid風）</option>
+          <option value="chroma">🟩 クロマキー・グリーンバック（動画合成用）</option>
+        </select>
+
+        <div class="row-lbl"><span>4分割の境界フレーム色</span></div>
+        <div class="grid-4" id="borderBtns">
+          <button class="btn active" data-bdr="gold">金枠</button>
+          <button class="btn" data-bdr="white">白枠</button>
+          <button class="btn" data-bdr="dark">黒枠</button>
+          <button class="btn" data-bdr="none">枠なし</button>
+        </div>
+
+        <div class="grid-2">
+          <label class="toggle-row">
+            <span>✨ 3Dクリスタル光柱</span>
+            <input type="checkbox" id="chkParticles" checked>
+          </label>
+          <label class="toggle-row">
+            <span>💧 水面波紋ミラー床</span>
+            <input type="checkbox" id="chkFloorRing" checked>
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <button class="btn active" id="btnShaderUnlit">☀ Unlit (無影)</button>
+          <button class="btn" id="btnShaderMtoon">🎨 MToon表示</button>
+        </div>
+
+        <div class="slider-row" title="白髪や肌がまぶしすぎる・白飛びする時の明るさ微調整">
+          <label for="slExposure">☀ キャラ露出</label>
+          <input type="range" id="slExposure" min="70" max="110" value="94">
+          <output id="outExposure">94%</output>
+        </div>
+
+        <label class="toggle-row" title="白髪・ファー・太ももの明部ラベンダー階調を滑らかに保護">
+          <span>🛡 ハイライト白飛び保護 (Soft Knee)</span>
+          <input type="checkbox" id="chkSoftKnee" checked>
+        </label>
+
+        <div class="row-lbl"><span>🎞️ MP4 録画色域補正（Windows白飛び対策）</span></div>
+        <select class="inp" id="selRecRange" title="Windows GPUエンコーダのFull/TVレンジ不一致による白飛びを自動補正">
+          <option value="auto" selected>自動補正（推奨・Full/TVレンジ自動一致）</option>
+          <option value="force_tv">常にStudio色域へ圧縮補正 (16-235)</option>
+          <option value="passthrough">無補正（生キャンバスそのまま）</option>
+        </select>
+
+        <label class="toggle-row">
+          <span>🎬 録画開始時に全モーションを頭出し</span>
+          <input type="checkbox" id="chkSyncOnRec" checked>
+        </label>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import {OrbitControls} from './vendor/OrbitControls.js';
+    import {StudioAvatar, disposeAvatar, parseAvatar} from './studio-avatar.js';
+    import {applyStudioMotion} from './studio-motion.js';
+
+    const DEG = Math.PI / 180;
+    const DEFAULT_VRM_URL = new URL('./models/snow_ferret_tripo_rig.vrm', document.baseURI);
+    const MODEL_NAME = '雪貂 · ひなひな';
+
+    const THEMES = {
+      cosmic_crystal: {
+        clear: 0x050918,
+        paletteMode: 0.0,
+        floorTint: [0.18, 0.52, 0.96],
+        goldTint: [0.96, 0.78, 0.46],
+        chroma: false,
+      },
+      cosmic_aurora: {
+        clear: 0x040b1a,
+        paletteMode: 1.0,
+        floorTint: [0.14, 0.78, 0.88],
+        goldTint: [0.95, 0.72, 0.38],
+        chroma: false,
+      },
+      cosmic_blossom: {
+        clear: 0x110720,
+        paletteMode: 2.0,
+        floorTint: [0.92, 0.45, 0.78],
+        goldTint: [0.98, 0.80, 0.52],
+        chroma: false,
+      },
+      snow: {
+        clear: 0xeeeaf8,
+        paletteMode: 3.0,
+        floorTint: [0.62, 0.72, 0.94],
+        goldTint: [0.72, 0.78, 0.96],
+        chroma: false,
+      },
+      studio: {
+        clear: 0xf7f8fc,
+        paletteMode: 4.0,
+        floorTint: [0.75, 0.80, 0.90],
+        goldTint: [0.80, 0.84, 0.92],
+        chroma: false,
+        hideParticles: true,
+      },
+      chroma: {
+        clear: 0x00d846,
+        paletteMode: 0.0,
+        floorTint: [0, 0, 0],
+        goldTint: [0, 0, 0],
+        chroma: true,
+      },
+    };
+
+    const BORDER_COLORS = {
+      gold: 0xd9be8b,
+      white: 0xf5f7fc,
+      dark: 0x070a14,
+      none: null,
+    };
+
+    const canvas = document.getElementById('studioCanvas');
+    const canvasFrame = document.getElementById('canvasFrame');
+    const stageArea = document.getElementById('stageArea');
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: false,
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: true,
+    });
+    renderer.setPixelRatio(1);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.autoClear = false;
+    const MAX_ANISO = renderer.capabilities.getMaxAnisotropy() || 8;
+
+    // =========================================================================
+    // 1. Native Per-Pixel highp WebGL2 Cosmic, Aurora & Nebula Sky Dome Shader
+    //    (Infinite angular resolution at 4K & 28° zoom — ZERO video/JPEG blocks!)
+    // =========================================================================
+    function makeSkyDome() {
+      const geo = new THREE.SphereGeometry(26, 64, 48);
+      const mat = new THREE.ShaderMaterial({
+        side: THREE.BackSide,
+        depthWrite: false,
+        depthTest: false,
+        uniforms: {
+          uTime: {value: 0},
+          uPaletteMode: {value: 0.0},
+        },
+        vertexShader: `
+          varying vec3 vWorldDir;
+          void main() {
+            vWorldDir = position;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          precision highp float;
+          uniform float uTime;
+          uniform float uPaletteMode;
+          varying vec3 vWorldDir;
+
+          float hash31(vec3 p) {
+            p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+            p += dot(p, p.yxz + 33.33);
+            return fract((p.x + p.y) * p.z);
+          }
+
+          vec3 hash33(vec3 p) {
+            p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+            p += dot(p, p.yxz + 33.33);
+            return fract((p.xxy + p.yxx) * p.zyx);
+          }
+
+          // Quintic C2-continuous 3D noise (zero grid creases at extreme telephoto zoom!)
+          float noise3(vec3 x) {
+            vec3 i = floor(x);
+            vec3 f = fract(x);
+            vec3 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+            float n000 = hash31(i + vec3(0.0, 0.0, 0.0));
+            float n100 = hash31(i + vec3(1.0, 0.0, 0.0));
+            float n010 = hash31(i + vec3(0.0, 1.0, 0.0));
+            float n110 = hash31(i + vec3(1.0, 1.0, 0.0));
+            float n001 = hash31(i + vec3(0.0, 0.0, 1.0));
+            float n101 = hash31(i + vec3(1.0, 0.0, 1.0));
+            float n011 = hash31(i + vec3(0.0, 1.0, 1.0));
+            float n111 = hash31(i + vec3(1.0, 1.0, 1.0));
+            float nx00 = mix(n000, n100, u.x);
+            float nx10 = mix(n010, n110, u.x);
+            float nx01 = mix(n001, n101, u.x);
+            float nx11 = mix(n011, n111, u.x);
+            return mix(mix(nx00, nx10, u.y), mix(nx01, nx11, u.y), u.z);
+          }
+
+          const mat3 ROT3 = mat3(
+             0.80,  0.00,  0.60,
+             0.00,  1.00,  0.00,
+            -0.60,  0.00,  0.80
+          );
+
+          float fbm3(vec3 p) {
+            float v = 0.0;
+            float a = 0.52;
+            for (int i = 0; i < 4; i++) {
+              v += a * noise3(p);
+              p = ROT3 * p * 2.03 + vec3(11.7, 7.3, 5.1);
+              a *= 0.50;
+            }
+            return v;
+          }
+
+          // Analytical sub-pixel spherical pinpoint starfield (strictly interior to 3D cell — zero cell-wall seams!)
+          vec3 evalStarLayer(vec3 rd, float gridScale, float t) {
+            vec3 sp = rd * gridScale;
+            vec3 cell = floor(sp);
+            vec3 rnd = hash33(cell);
+            if (rnd.z < 0.70) return vec3(0.0);
+            vec3 localStar = 0.32 + 0.36 * rnd;
+            vec3 dVec = fract(sp) - localStar;
+            float d2 = dot(dVec, dVec);
+            float wallSafe = smoothstep(0.088, 0.015, d2);
+            float core = exp(-d2 * 135.0) * wallSafe;
+            float tw = 0.55 + 0.45 * sin(t * (1.6 + rnd.x * 2.4) + rnd.y * 18.0);
+            vec3 tint = mix(vec3(0.78, 0.90, 1.0), vec3(1.0, 0.86, 0.68), smoothstep(0.3, 0.9, rnd.x));
+            return tint * (core * tw * smoothstep(0.70, 0.99, rnd.z));
+          }
+
+          void main() {
+            vec3 rd = normalize(vWorldDir);
+            float t = uTime;
+
+            // Pastel Snow & Pure White Studio per-pixel smooth gradients
+            if (uPaletteMode > 2.5) {
+              vec3 cTop = (uPaletteMode < 3.5) ? vec3(0.859, 0.902, 1.000) : vec3(0.945, 0.957, 0.988);
+              vec3 cMid = (uPaletteMode < 3.5) ? vec3(0.945, 0.929, 0.984) : vec3(0.980, 0.986, 0.998);
+              vec3 cBot = (uPaletteMode < 3.5) ? vec3(1.000, 1.000, 1.000) : vec3(0.914, 0.929, 0.965);
+              float ny = clamp(rd.y, -1.0, 1.0);
+              vec3 skyCol = (ny >= 0.0)
+                ? mix(cMid, cTop, pow(ny, 0.75))
+                : mix(cMid, cBot, pow(-ny, 0.75));
+              gl_FragColor = vec4(skyCol, 1.0);
+              return;
+            }
+
+            // Slowly drifting 3D ray coordinates for seamless eternal flow
+            float ca = cos(t * 0.022), sa = sin(t * 0.022);
+            vec3 rRot = vec3(ca * rd.x + sa * rd.z, rd.y, -sa * rd.x + ca * rd.z);
+            float elev = clamp(rd.y, -1.0, 1.0);
+            float horiz = exp(-elev * elev * 5.2);
+
+            vec3 warp = vec3(
+              fbm3(rRot * 2.2 + vec3(0.0, t * 0.04, 0.0)),
+              fbm3(rRot * 2.2 + vec3(4.2, -t * 0.03, 2.7)),
+              fbm3(rRot * 2.2 + vec3(1.8, t * 0.03, 6.1))
+            );
+            float neb1 = fbm3(rRot * 3.0 + warp * 1.35);
+            float neb2 = fbm3(rRot * 5.2 - warp * 1.10 + vec3(3.1, 1.4, 0.0));
+            float silk = smoothstep(0.36, 0.84, neb1 * 0.65 + neb2 * 0.45);
+
+            vec3 col = vec3(0.0);
+            if (uPaletteMode < 0.5) {
+              // Mode 0: Cosmic Crystal Universe — Deep Midnight Sapphire & Celestial Cyan/Indigo Mist
+              vec3 voidTop = vec3(0.016, 0.030, 0.095);
+              vec3 voidMid = vec3(0.035, 0.078, 0.215);
+              col = mix(voidTop, voidMid, horiz);
+              col += vec3(0.055, 0.195, 0.460) * silk * (0.45 + 0.55 * horiz);
+              col += vec3(0.160, 0.100, 0.360) * smoothstep(0.46, 0.88, neb2) * 0.52;
+              col += vec3(0.240, 0.180, 0.090) * pow(smoothstep(0.55, 0.92, neb1 * neb2 * 1.8), 2.0);
+            } else if (uPaletteMode < 1.5) {
+              // Mode 1: Cosmic Astral Aurora — Flowing Silk Aurora Curtains & Milky Way
+              vec3 voidTop = vec3(0.012, 0.032, 0.088);
+              vec3 voidMid = vec3(0.026, 0.085, 0.185);
+              col = mix(voidTop, voidMid, horiz);
+
+              // Analytical multi-fold silk aurora ribbons!
+              float az = atan(rRot.z, rRot.x);
+              float fold1 = sin(az * 4.0 + neb1 * 4.5 + t * 0.28);
+              float fold2 = sin(az * 7.0 - neb2 * 3.8 - t * 0.21);
+              float curtain = exp(-pow((elev - 0.18 - fold1 * 0.14 - fold2 * 0.07) * 4.2, 2.0));
+              float striations = 0.55 + 0.45 * sin(az * 26.0 + warp.x * 10.0 - t * 0.7);
+              vec3 aurCol = mix(vec3(0.06, 0.58, 0.62), vec3(0.36, 0.18, 0.68), smoothstep(-0.1, 0.48, elev));
+              aurCol = mix(aurCol, vec3(0.75, 0.58, 0.24), smoothstep(0.68, 0.95, striations * curtain));
+              col += aurCol * curtain * striations * 0.68;
+              col += vec3(0.05, 0.22, 0.36) * silk * 0.45;
+            } else {
+              // Mode 2: Cosmic Starlight Blossom — Royal Plum-Amethyst & Silky Sakura/Gold Veils
+              vec3 voidTop = vec3(0.048, 0.020, 0.105);
+              vec3 voidMid = vec3(0.125, 0.052, 0.225);
+              col = mix(voidTop, voidMid, horiz);
+              col += vec3(0.340, 0.115, 0.285) * silk * (0.48 + 0.52 * horiz);
+              col += vec3(0.200, 0.125, 0.400) * smoothstep(0.42, 0.86, neb2) * 0.52;
+              col += vec3(0.320, 0.205, 0.115) * pow(smoothstep(0.52, 0.90, neb1 * 1.15), 2.2) * 0.55;
+            }
+
+            // Crisp native-resolution pinpoint stars
+            col += evalStarLayer(rRot, 28.0, t) * 0.95;
+            col += evalStarLayer(rRot, 56.0, t * 1.2) * 0.65;
+
+            // Analytical Interleaved Gradient Noise dithering to eliminate 8-bit dark banding!
+            float ign = fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715)))) - 0.5;
+            col = max(vec3(0.0), col + ign * (1.2 / 255.0));
+
+            gl_FragColor = vec4(col, 1.0);
+          }
+        `,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.renderOrder = -100;
+      mesh.frustumCulled = false;
+      return mesh;
+    }
+
+    // =========================================================================
+    // 2. Real-Time WebGL2 Instanced 3D Optical Lens Bokeh Orbs & 4-Ray Starbursts
+    //    (Evaluated analytically per screen pixel on 3D view-aligned quads —
+    //     100% butter-smooth glass edges & true 3D parallax at FHD & 4K!)
+    // =========================================================================
+    function createSmoothWebGLBokehAndStars() {
+      const count = 210;
+      const baseQuad = new THREE.PlaneGeometry(2, 2);
+      const geo = new THREE.InstancedBufferGeometry();
+      geo.index = baseQuad.index;
+      geo.attributes.position = baseQuad.attributes.position;
+
+      const anchors = new Float32Array(count * 3);
+      const params = new Float32Array(count * 4); // (radius, kind, colorSeed, phaseSeed)
+      const golden = 2.399963229728653;
+
+      for (let i = 0; i < count; i++) {
+        const u = (i + 0.5) / count;
+        const r1 = Math.abs((Math.sin(i * 12.9898 + 3.1) * 43758.5453) % 1);
+        const r2 = Math.abs((Math.sin(i * 78.2330 + 9.7) * 29432.1234) % 1);
+        const r3 = Math.abs((Math.sin(i * 39.4251 + 17.3) * 19283.7465) % 1);
+
+        const dist = 2.2 + Math.pow(r1, 0.72) * 9.6;
+        const ang = i * golden;
+        // Concentrate rich optical bokeh & hero stars around the camera horizon band (-0.4m .. +3.2m)
+        const y = -0.35 + u * 3.55 + (r2 - 0.5) * 0.45;
+        anchors[i * 3 + 0] = Math.cos(ang) * dist;
+        anchors[i * 3 + 1] = y;
+        anchors[i * 3 + 2] = Math.sin(ang) * dist;
+
+        // kind < 0.42: creamy cinema f/1.2 optical bokeh orb; kind >= 0.42: 4-ray diamond diffraction star!
+        const isBokeh = r3 < 0.42;
+        const worldRad = isBokeh
+          ? (0.10 + r2 * 0.23) * (dist / 6.0)
+          : (0.075 + r2 * 0.16) * (dist / 5.5);
+
+        params[i * 4 + 0] = worldRad;
+        params[i * 4 + 1] = r3;
+        params[i * 4 + 2] = r1;
+        params[i * 4 + 3] = r2;
+      }
+
+      geo.setAttribute('aAnchor', new THREE.InstancedBufferAttribute(anchors, 3));
+      geo.setAttribute('aParams', new THREE.InstancedBufferAttribute(params, 4));
+
+      const mat = new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        depthTest: false,
+        blending: THREE.AdditiveBlending,
+        uniforms: {
+          uTime: {value: 0},
+          uPaletteMode: {value: 0.0},
+        },
+        vertexShader: `
+          attribute vec3 aAnchor;
+          attribute vec4 aParams;
+          uniform float uTime;
+          uniform float uPaletteMode;
+          varying vec2 vUvQuad;
+          varying vec3 vTint;
+          varying float vKind;
+          varying float vAlpha;
+          varying float vRot;
+
+          void main() {
+            vec3 pos = aAnchor;
+            float rad = aParams.x;
+            float kind = aParams.y;
+            float cSeed = aParams.z;
+            float pSeed = aParams.w;
+
+            if (uPaletteMode > 2.5) {
+              // Gentle dreamy snow bokeh drift
+              pos.y = mod(pos.y - uTime * 0.18 + pSeed * 3.6 + 0.5, 3.8) - 0.4;
+              pos.x += sin(uTime * 0.7 + pSeed * 6.28) * 0.10;
+            } else {
+              pos.y += sin(uTime * 0.38 + pSeed * 6.283) * 0.08;
+              pos.x += cos(uTime * 0.28 + cSeed * 6.283) * 0.06;
+            }
+
+            vec4 mvCenter = modelViewMatrix * vec4(pos, 1.0);
+            mvCenter.xy += position.xy * rad;
+            vUvQuad = position.xy;
+            vKind = kind;
+            vRot = pSeed * 3.14159 + uTime * 0.08;
+
+            float twinkle = 0.52 + 0.48 * sin(uTime * (1.1 + cSeed * 1.6) + pSeed * 15.0);
+            if (uPaletteMode < 0.5) {
+              vTint = (cSeed > 0.70) ? vec3(1.0, 0.82, 0.48)
+                    : ((cSeed > 0.32) ? vec3(0.42, 0.78, 1.0) : vec3(0.68, 0.56, 1.0));
+            } else if (uPaletteMode < 1.5) {
+              vTint = (cSeed > 0.68) ? vec3(1.0, 0.80, 0.44)
+                    : ((cSeed > 0.28) ? vec3(0.32, 0.92, 0.96) : vec3(0.76, 0.52, 1.0));
+            } else if (uPaletteMode < 2.5) {
+              vTint = (cSeed > 0.66) ? vec3(1.0, 0.82, 0.52)
+                    : ((cSeed > 0.26) ? vec3(1.0, 0.56, 0.86) : vec3(0.78, 0.68, 1.0));
+            } else {
+              vTint = vec3(0.92, 0.96, 1.0);
+            }
+
+            vAlpha = twinkle * ((kind < 0.42) ? 0.19 : 0.78);
+            gl_Position = projectionMatrix * mvCenter;
+          }
+        `,
+        fragmentShader: `
+          precision highp float;
+          varying vec2 vUvQuad;
+          varying vec3 vTint;
+          varying float vKind;
+          varying float vAlpha;
+          varying float vRot;
+
+          void main() {
+            float r2 = dot(vUvQuad, vUvQuad);
+            if (r2 >= 1.0) discard;
+            float r = sqrt(r2);
+            float fw = max(fwidth(r), 0.003);
+
+            if (vKind < 0.42) {
+              // Luscious filled cinema f/1.2 optical lens bokeh disc!
+              // Creamy illuminated interior + wide Gaussian-feathered edge — ZERO pixel blocks or hollow rings!
+              float disc = 1.0 - smoothstep(0.62 - fw, 0.98, r);
+              float gentleRim = exp(-pow((r - 0.68) / 0.18, 2.0)) * 0.26 * (1.0 - smoothstep(0.78, 0.99, r));
+              float warmCore = exp(-r2 * 2.4) * 0.34;
+              vec3 irid = vTint * (0.94 + 0.10 * vec3(vUvQuad.x, vUvQuad.y * 0.5, -vUvQuad.x));
+              float intensity = (disc * 0.56 + gentleRim + warmCore) * vAlpha;
+              gl_FragColor = vec4(irid * intensity, intensity);
+            } else {
+              // Crisp analytical 4-ray + diagonal diamond diffraction starburst!
+              float c = cos(vRot * 0.25), s = sin(vRot * 0.25);
+              vec2 ru = mat2(c, -s, s, c) * vUvQuad;
+              float edgeFade = (1.0 - r2) * (1.0 - r2);
+              float core = exp(-r2 * 36.0) * 1.35;
+              float rayMain = (exp(-abs(ru.x) * 34.0) * exp(-abs(ru.y) * 3.4)
+                             + exp(-abs(ru.y) * 34.0) * exp(-abs(ru.x) * 3.4)) * 0.72;
+              vec2 diag = (ru.xy + vec2(-ru.y, ru.x)) * 0.70710678;
+              float raySub = (exp(-abs(diag.x) * 48.0) * exp(-abs(diag.y) * 6.0)
+                            + exp(-abs(diag.y) * 48.0) * exp(-abs(diag.x) * 6.0)) * 0.28;
+              float halo = exp(-r2 * 6.2) * 0.24;
+              float val = (core + rayMain + raySub + halo) * edgeFade * vAlpha;
+              gl_FragColor = vec4(mix(vTint, vec3(1.0), clamp(core * 0.55, 0.0, 1.0)) * val, clamp(val, 0.0, 1.0));
+            }
+          }
+        `,
+      });
+
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.renderOrder = -80;
+      mesh.frustumCulled = false;
+      return mesh;
+    }
+
+    // =========================================================================
+    // 3. Cosmic "Crystal Universe" Instanced Silk Light Chords & Sub-Pixel Jewels
+    //    (100% Instanced View-Aligned Quads — Zero GL_POINTS aliasing or clipping!)
+    // =========================================================================
+    function createCosmicCrystalField() {
+      const group = new THREE.Group();
+      const sharedUniforms = {
+        uTime: {value: 0},
+        uScaleY: {value: 1080},
+        uPaletteMode: {value: 0.0},
+      };
+
+      const nChords = 72;
+      const nBeads = 36;
+      const golden = 2.399963229728653;
+
+      // 3A: Delicate Vertical Silk Optical-Fiber Light Threads
+      const chordQuad = new THREE.PlaneGeometry(2, 2);
+      const chordGeo = new THREE.InstancedBufferGeometry();
+      chordGeo.index = chordQuad.index;
+      chordGeo.attributes.position = chordQuad.attributes.position;
+      const chordPos = new Float32Array(nChords * 4); // (x, z, seed1, seed2)
+
+      // 3B: Sub-Pixel Anti-Aliased Crystal Diode Billboards
+      const totalBeads = nChords * nBeads;
+      const beadQuad = new THREE.PlaneGeometry(2, 2);
+      const beadGeo = new THREE.InstancedBufferGeometry();
+      beadGeo.index = beadQuad.index;
+      beadGeo.attributes.position = beadQuad.attributes.position;
+      const beadPos = new Float32Array(totalBeads * 3);
+      const beadSeed = new Float32Array(totalBeads * 3);
+
+      let ptr = 0;
+      for (let c = 0; c < nChords; c++) {
+        const u = (c + 0.5) / nChords;
+        const r = 0.92 + Math.pow(u, 0.82) * 3.88;
+        const ang = c * golden;
+        const x = Math.cos(ang) * r;
+        const z = Math.sin(ang) * r;
+        const s1 = Math.abs((Math.sin(c * 12.9898) * 43758.5453) % 1);
+        const s2 = Math.abs((Math.sin(c * 78.2330) * 29432.1234) % 1);
+
+        chordPos[c * 4 + 0] = x;
+        chordPos[c * 4 + 1] = z;
+        chordPos[c * 4 + 2] = s1;
+        chordPos[c * 4 + 3] = s2;
+
+        for (let b = 0; b < nBeads; b++) {
+          const y = -0.04 + (b / (nBeads - 1)) * 2.86;
+          beadPos[ptr * 3 + 0] = x;
+          beadPos[ptr * 3 + 1] = y;
+          beadPos[ptr * 3 + 2] = z;
+          beadSeed[ptr * 3 + 0] = s1;
+          beadSeed[ptr * 3 + 1] = s2;
+          beadSeed[ptr * 3 + 2] = b / nBeads;
+          ptr++;
+        }
+      }
+
+      chordGeo.setAttribute('aChord', new THREE.InstancedBufferAttribute(chordPos, 4));
+      const chordMat = new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        uniforms: sharedUniforms,
+        vertexShader: `
+          attribute vec4 aChord;
+          uniform float uTime;
+          uniform float uPaletteMode;
+          varying vec2 vUv;
+          varying vec3 vCol;
+          varying float vVis;
+
+          void main() {
+            vVis = (uPaletteMode > 2.5) ? 0.0 : 1.0;
+            vec3 base = vec3(
+              aChord.x + sin(uTime * 0.65 + aChord.z * 6.283) * 0.016,
+              1.38 + position.y * 1.46,
+              aChord.y + cos(uTime * 0.65 + aChord.w * 6.283) * 0.016
+            );
+            vec4 mv = modelViewMatrix * vec4(base, 1.0);
+            float halfW = 0.0085 * clamp(-mv.z * 0.45, 0.7, 2.2);
+            mv.x += position.x * halfW;
+            vUv = position.xy;
+
+            float r2d = length(aChord.xy);
+            if (uPaletteMode < 0.5) vCol = mix(vec3(0.32, 0.66, 1.0), vec3(0.68, 0.54, 1.0), aChord.w);
+            else if (uPaletteMode < 1.5) vCol = mix(vec3(0.24, 0.86, 0.94), vec3(0.62, 0.46, 1.0), aChord.w);
+            else vCol = mix(vec3(1.0, 0.54, 0.84), vec3(0.96, 0.78, 0.48), aChord.w);
+
+            vVis *= smoothstep(5.2, 1.3, r2d);
+            gl_Position = projectionMatrix * mv;
+          }
+        `,
+        fragmentShader: `
+          precision highp float;
+          uniform float uTime;
+          varying vec2 vUv;
+          varying vec3 vCol;
+          varying float vVis;
+          void main() {
+            if (vVis <= 0.001) discard;
+            float beam = exp(-vUv.x * vUv.x * 9.5);
+            float vFade = smoothstep(1.0, 0.72, abs(vUv.y));
+            float cascade = 0.45 + 0.55 * sin(vUv.y * 9.0 + uTime * 3.4);
+            float a = beam * vFade * cascade * vVis * 0.13;
+            gl_FragColor = vec4(vCol * a, a);
+          }
+        `,
+      });
+      const chordMesh = new THREE.Mesh(chordGeo, chordMat);
+      chordMesh.renderOrder = -65;
+      chordMesh.frustumCulled = false;
+
+      beadGeo.setAttribute('aBeadPos', new THREE.InstancedBufferAttribute(beadPos, 3));
+      beadGeo.setAttribute('aSeed', new THREE.InstancedBufferAttribute(beadSeed, 3));
+      const beadMat = new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        uniforms: sharedUniforms,
+        vertexShader: `
+          attribute vec3 aBeadPos;
+          attribute vec3 aSeed;
+          uniform float uTime;
+          uniform float uPaletteMode;
+          varying vec2 vUv;
+          varying vec3 vColor;
+          varying float vAlpha;
+
+          vec3 pal(float t, vec3 a, vec3 b, vec3 d) {
+            return a + b * cos(6.2831853 * (t + d));
+          }
+
+          void main() {
+            vec3 pos = aBeadPos;
+            if (uPaletteMode > 2.5) {
+              pos.y = mod(pos.y - uTime * 0.24 + aSeed.x * 2.8, 2.86) - 0.04;
+              pos.x += sin(uTime * 1.2 + aSeed.y * 6.283) * 0.06;
+            } else {
+              pos.x += sin(uTime * 0.65 + aSeed.x * 6.283) * 0.016;
+              pos.z += cos(uTime * 0.65 + aSeed.y * 6.283) * 0.016;
+            }
+
+            float r3d = length(pos - vec3(0.0, 0.9, 0.0));
+            float wave = 0.5 + 0.5 * sin(r3d * 2.1 - uTime * 2.4 + aSeed.z * 5.0 + aSeed.x * 3.5);
+            float cascade = 0.5 + 0.5 * sin(pos.y * 5.5 + uTime * 3.8 + aSeed.x * 12.0);
+            float pulse = 0.18 + 0.82 * pow(wave * 0.7 + cascade * 0.3, 2.8);
+
+            if (uPaletteMode < 0.5) {
+              vColor = (aSeed.x > 0.78)
+                ? vec3(1.0, 0.82, 0.48)
+                : pal(r3d * 0.18 + aSeed.y * 0.35 - uTime * 0.08, vec3(0.45, 0.72, 1.0), vec3(0.35, 0.28, 0.22), vec3(0.0, 0.14, 0.36));
+            } else if (uPaletteMode < 1.5) {
+              vColor = (aSeed.x > 0.72)
+                ? vec3(1.0, 0.78, 0.42)
+                : pal(r3d * 0.20 - uTime * 0.10, vec3(0.35, 0.85, 0.95), vec3(0.38, 0.25, 0.35), vec3(0.08, 0.25, 0.52));
+            } else if (uPaletteMode < 2.5) {
+              vColor = (aSeed.x > 0.68)
+                ? vec3(1.0, 0.84, 0.54)
+                : vec3(1.0, 0.58 + 0.28 * aSeed.y, 0.88);
+            } else {
+              vColor = vec3(0.95, 0.97, 1.0);
+              pulse = 0.72;
+            }
+
+            vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+            float worldR = (aSeed.x > 0.82) ? 0.028 : 0.018;
+            mv.xy += position.xy * worldR;
+            vUv = position.xy;
+            vAlpha = pulse * smoothstep(5.4, 1.25, r3d);
+            gl_Position = projectionMatrix * mv;
+          }
+        `,
+        fragmentShader: `
+          precision highp float;
+          varying vec2 vUv;
+          varying vec3 vColor;
+          varying float vAlpha;
+          void main() {
+            float r2 = dot(vUv, vUv);
+            if (r2 >= 1.0) discard;
+            float edge = (1.0 - r2) * (1.0 - r2);
+            float core = exp(-r2 * 14.0);
+            float flare = (exp(-vUv.x * vUv.x * 85.0) * exp(-vUv.y * vUv.y * 4.0)
+                         + exp(-vUv.y * vUv.y * 85.0) * exp(-vUv.x * vUv.x * 4.0)) * 0.52;
+            float halo = exp(-r2 * 3.5) * 0.28;
+            float val = (core + flare + halo) * edge * vAlpha;
+            gl_FragColor = vec4(vColor * (1.12 + core * 0.55) * val, clamp(val, 0.0, 1.0));
+          }
+        `,
+      });
+      const beadMesh = new THREE.Mesh(beadGeo, beadMat);
+      beadMesh.renderOrder = -60;
+      beadMesh.frustumCulled = false;
+
+      group.add(chordMesh, beadMesh);
+      group.userData.uniforms = sharedUniforms;
+      return group;
+    }
+
+    // =========================================================================
+    // 4. fwidth()-Anti-Aliased Water-Ripple & Constellation Magic-Circle Floor
+    // =========================================================================
+    function createCosmicWaterFloor() {
+      const geo = new THREE.CircleGeometry(3.8, 128);
+      const mat = new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        uniforms: {
+          uTime: {value: 0},
+          uTint: {value: new THREE.Vector3(0.18, 0.52, 0.96)},
+          uGold: {value: new THREE.Vector3(0.96, 0.78, 0.46)},
+        },
+        vertexShader: `
+          varying vec2 vPos;
+          void main() {
+            vPos = position.xy;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          precision highp float;
+          uniform float uTime;
+          uniform vec3 uTint;
+          uniform vec3 uGold;
+          varying vec2 vPos;
+          void main() {
+            float r = length(vPos);
+            float fw = max(fwidth(r), 0.0025);
+            float ang = atan(vPos.y, vPos.x);
+
+            // Screen-space derivative anti-aliased rings (zero jaggedness at oblique tilt!)
+            float wRing1 = max(0.008, fw * 1.35);
+            float wRing2 = max(0.007, fw * 1.35);
+            float ringInner = exp(-pow((r - 0.46) / wRing1, 2.0));
+            float ringOuter = exp(-pow((r - 0.64) / wRing2, 2.0)) * (0.68 + 0.32 * sin(ang * 12.0 - uTime * 1.6));
+
+            float rip1 = exp(-abs(r - mod(uTime * 0.38, 2.2)) * 22.0) * max(0.0, 1.0 - r / 2.2);
+            float rip2 = exp(-abs(r - mod(uTime * 0.38 + 1.1, 2.2)) * 22.0) * max(0.0, 1.0 - r / 2.2);
+            float caustics = pow(0.5 + 0.5 * sin(r * 13.0 - uTime * 2.1 + sin(ang * 6.0 + uTime)), 4.0) * exp(-r * 1.45) * 0.15;
+
+            float env = smoothstep(3.7, 0.65, r);
+            vec3 col = (uTint * (rip1 * 0.42 + rip2 * 0.42 + caustics)
+                      + uGold * (ringInner * 0.58 + ringOuter * 0.45)) * env;
+            float alpha = clamp((ringInner * 0.60 + ringOuter * 0.46 + (rip1 + rip2) * 0.32 + caustics) * env, 0.0, 0.82);
+            gl_FragColor = vec4(col, alpha);
+          }
+        `,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.rotation.x = -Math.PI / 2;
+      mesh.position.y = 0.002;
+      mesh.renderOrder = -70;
+      return mesh;
+    }
+
+    // Studio State
+    let currentLayout = 'grid2x2';
+    let currentResTier = 'fhd';
+    let currentFps = 60;
+    let currentThemeKey = 'cosmic_crystal';
+    let currentBorderKey = 'gold';
+    let shaderMode = 'unlit';
+    let showParticles = true;
+    let showFloorRing = true;
+    let activeSlotIdx = 0;
+    let modelFrontZSign = 1;
+
+    const avatarGradeUniforms = {
+      uExposure: {value: 0.94},
+      uSoftKnee: {value: 1.0},
+    };
+
+    const hitDivs = Array.from(document.querySelectorAll('.slot-hit'));
+
+    function createSlot(index) {
+      // Separate background stage scene from avatar scene so additive 3D crystals & floor glow
+      // NEVER bleed on top of the character's face, eyes, white hair, or boots!
+      const bgScene = new THREE.Scene();
+      const sky = makeSkyDome();
+      const bokehStars = createSmoothWebGLBokehAndStars();
+      const waterFloor = createCosmicWaterFloor();
+      const crystalField = createCosmicCrystalField();
+      bgScene.add(sky, bokehStars, waterFloor, crystalField);
+
+      const scene = new THREE.Scene();
+      const hemi = new THREE.HemisphereLight(0xffffff, 0xd8e0f5, 0.72);
+      scene.add(hemi);
+      const dir = new THREE.DirectionalLight(0xffffff, 0.52);
+      dir.position.set(1.2, 2.2, 2.4);
+      scene.add(dir);
+
+      const camera = new THREE.PerspectiveCamera(28, 16 / 9, 0.03, 65);
+      camera.position.set(0, 0.98, 1.05);
+
+      const controls = new OrbitControls(camera, hitDivs[index]);
+      controls.target.set(0, 0.96, 0);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.09;
+      controls.minDistance = 0.20;
+      controls.maxDistance = 7.5;
+      controls.update();
+
+      const avatar = new StudioAvatar(scene);
+
+      return {
+        index,
+        bgScene,
+        scene,
+        sky,
+        bokehStars,
+        crystalField,
+        waterFloor,
+        camera,
+        controls,
+        avatar,
+        rigCalib: null,
+        mtoonMap: new Map(),
+        unlitMap: new Map(),
+        motionId: 'moe:gachikoi_peek',
+        motionRequest: 0,
+        speed: 1.0,
+        camPreset: 'gachikoi',
+        camAnim: 'none',
+        exprMode: 'choreo_sync',
+        mouthMode: 'oh_main',
+        autoBlink: true,
+        autoTalk: false,
+        lookAtCam: true,
+        choreoState: {emo: 'neutral', emoW: 0, vowel: null, vowelW: 0},
+        time: 0,
+        baseCamPos: new THREE.Vector3(0, 0.98, 1.05),
+        baseCamTgt: new THREE.Vector3(0, 0.96, 0),
+        userDragging: false,
+      };
+    }
+
+    const slots = [0, 1, 2, 3].map(createSlot);
+
+    slots.forEach(sl => {
+      const hd = hitDivs[sl.index];
+      hd.addEventListener('pointerdown', () => {
+        sl.userDragging = true;
+        sl.camPreset = '';
+        selectSlot(sl.index);
+      });
+      window.addEventListener('pointerup', () => {
+        if (sl.userDragging) {
+          sl.userDragging = false;
+          sl.baseCamPos.copy(sl.camera.position);
+          sl.baseCamTgt.copy(sl.controls.target);
+        }
+      });
+      hd.addEventListener('wheel', () => {
+        selectSlot(sl.index);
+        setTimeout(() => {
+          sl.baseCamPos.copy(sl.camera.position);
+          sl.baseCamTgt.copy(sl.controls.target);
+        }, 40);
+      }, {passive: true});
+    });
+
+    // =========================================================================
+    // Exact Two-Bone Analytic Soft IK on VRM 1.0 Normalized Humanoid Arm Bones!
+    // =========================================================================
+    function calibrateNormalizedRig(sl) {
+      const vrm = sl.avatar.vrm;
+      if (!vrm?.humanoid) return;
+      vrm.humanoid.resetNormalizedPose();
+      vrm.scene.updateMatrixWorld(true);
+      const nb = n => vrm.humanoid.getNormalizedBoneNode(n);
+      nb('hips')?.parent?.updateMatrixWorld(true);
+
+      const calib = {};
+      for (const side of ['left', 'right']) {
+        const upper = nb(side + 'UpperArm');
+        const lower = nb(side + 'LowerArm');
+        const hand = nb(side + 'Hand');
+        if (!upper || !lower || !hand) continue;
+        const pU = new THREE.Vector3(), pL = new THREE.Vector3(), pH = new THREE.Vector3();
+        upper.getWorldPosition(pU);
+        lower.getWorldPosition(pL);
+        hand.getWorldPosition(pH);
+        const L1 = Math.max(0.03, pU.distanceTo(pL));
+        const L2 = Math.max(0.03, pL.distanceTo(pH));
+        const restDirU = upper.worldToLocal(pL.clone()).normalize();
+        const restDirL = lower.worldToLocal(pH.clone()).normalize();
+        calib[side] = {L1, L2, restDirU, restDirL};
+      }
+      sl.rigCalib = calib;
+    }
+
+    const _vS = new THREE.Vector3(), _vD = new THREE.Vector3(), _vU = new THREE.Vector3();
+    const _vP = new THREE.Vector3(), _vW = new THREE.Vector3(), _vElbow = new THREE.Vector3();
+    const _vWrist = new THREE.Vector3(), _vLocal = new THREE.Vector3();
+    const _qPar = new THREE.Quaternion(), _qParInv = new THREE.Quaternion();
+
+    function solveArmSoftIK(sl, side, targetWorld, poleWorld) {
+      const vrm = sl.avatar.vrm;
+      const cal = sl.rigCalib?.[side];
+      if (!vrm?.humanoid || !cal) return;
+      const nb = n => vrm.humanoid.getNormalizedBoneNode(n);
+      const upper = nb(side + 'UpperArm');
+      const lower = nb(side + 'LowerArm');
+      if (!upper || !lower) return;
+
+      upper.quaternion.identity();
+      lower.quaternion.identity();
+      upper.parent?.updateMatrixWorld(true);
+      upper.getWorldPosition(_vS);
+
+      _vD.subVectors(targetWorld, _vS);
+      const rawDist = Math.max(1e-5, _vD.length());
+      const {L1, L2, restDirU, restDirL} = cal;
+      const clampedDist = THREE.MathUtils.clamp(rawDist, Math.abs(L1 - L2) + 0.012, (L1 + L2) * 0.96);
+
+      const cosAlpha = THREE.MathUtils.clamp((L1 * L1 + clampedDist * clampedDist - L2 * L2) / (2 * L1 * clampedDist), -1, 1);
+      const sinAlpha = Math.sqrt(Math.max(0, 1 - cosAlpha * cosAlpha));
+
+      _vU.copy(_vD).divideScalar(rawDist);
+      _vP.subVectors(poleWorld, _vS);
+      _vW.copy(_vP).addScaledVector(_vU, -_vP.dot(_vU));
+      if (_vW.lengthSq() < 1e-6) _vW.set(0, -1, 0);
+      else _vW.normalize();
+
+      _vElbow.copy(_vS).addScaledVector(_vU, L1 * cosAlpha).addScaledVector(_vW, L1 * sinAlpha);
+      _vWrist.copy(_vS).addScaledVector(_vU, clampedDist);
+
+      // Rotate UpperArm from T-pose restDirU toward (_vElbow - _vS)
+      upper.parent.getWorldQuaternion(_qPar);
+      _qParInv.copy(_qPar).invert();
+      _vLocal.subVectors(_vElbow, _vS).normalize().applyQuaternion(_qParInv);
+      upper.quaternion.setFromUnitVectors(restDirU, _vLocal);
+      upper.updateMatrixWorld(true);
+
+      // Rotate LowerArm from T-pose restDirL toward (_vWrist - _vElbow)
+      lower.parent.getWorldQuaternion(_qPar);
+      _qParInv.copy(_qPar).invert();
+      _vLocal.subVectors(_vWrist, _vElbow).normalize().applyQuaternion(_qParInv);
+      lower.quaternion.setFromUnitVectors(restDirL, _vLocal);
+      lower.updateMatrixWorld(true);
+    }
+
+    function applyDaintyFingers(nb, baseCurlL, baseCurlR, gesture = false) {
+      // gesture: false | true ('point') | 'peace' | 'peaceR' | 'heart'
+      const fList = ['Index', 'Middle', 'Ring', 'Little'];
+      fList.forEach((f, idx) => {
+        let mulL = (gesture === true && idx === 0) ? 0.16 : (0.78 + idx * 0.14);
+        let mulR = (gesture === true && idx === 0) ? 0.16 : (0.78 + idx * 0.14);
+        if (gesture === 'peace') {
+          mulL = (idx <= 1) ? 0.08 : 1.18;
+          mulR = (idx <= 1) ? 0.08 : 1.18;
+        } else if (gesture === 'peaceR') {
+          mulR = (idx <= 1) ? 0.08 : 1.18;
+        } else if (gesture === 'heart') {
+          mulL = 0.62 + idx * 0.06;
+          mulR = 0.62 + idx * 0.06;
+        }
+        for (const seg of ['Proximal', 'Intermediate', 'Distal']) {
+          if (nb('left' + f + seg))  nb('left' + f + seg).rotation.z  = -baseCurlL * mulL;
+          if (nb('right' + f + seg)) nb('right' + f + seg).rotation.z = +baseCurlR * mulR;
+        }
+        // Slight V-spread between index & middle in peace sign!
+        if ((gesture === 'peace' || gesture === 'peaceR') && idx <= 1) {
+          const sp = (idx === 0 ? 1 : -1) * 9 * DEG;
+          if (gesture === 'peace' && nb('left' + f + 'Proximal')) nb('left' + f + 'Proximal').rotation.y = sp;
+          if (nb('right' + f + 'Proximal')) nb('right' + f + 'Proximal').rotation.y = -sp;
+        } else {
+          if (nb('left' + f + 'Proximal')) nb('left' + f + 'Proximal').rotation.y = 0;
+          if (nb('right' + f + 'Proximal')) nb('right' + f + 'Proximal').rotation.y = 0;
+        }
+      });
+      const thMul = (gesture === 'heart') ? 0.15 : 0.45;
+      for (const seg of ['Proximal', 'Intermediate']) {
+        if (nb('leftThumb' + seg))  nb('leftThumb' + seg).rotation.y  = -baseCurlL * thMul;
+        if (nb('rightThumb' + seg)) nb('rightThumb' + seg).rotation.y = +baseCurlR * thMul;
+      }
+    }
+
+    // =========================================================================
+    // Rich Moe, Azato, & Gachikoi Full-Body + Synchronized Facial Choreography!
+    // =========================================================================
+    const _headPos = new THREE.Vector3(), _chestPos = new THREE.Vector3();
+    const _headQuat = new THREE.Quaternion(), _fwdDir = new THREE.Vector3(), _rightDir = new THREE.Vector3(), _upDir = new THREE.Vector3();
+    const _tgtL = new THREE.Vector3(), _tgtR = new THREE.Vector3(), _poleL = new THREE.Vector3(), _poleR = new THREE.Vector3();
+
+    function applyProceduralOrMoePose(sl, t) {
+      const vrm = sl.avatar.vrm;
+      if (!vrm?.humanoid) return;
+      vrm.humanoid.resetNormalizedPose();
+      const nb = name => vrm.humanoid.getNormalizedBoneNode(name);
+      const mode = sl.motionId;
+      const zS = modelFrontZSign;
+
+      // Reset synchronized choreography cue
+      sl.choreoState.emo = 'neutral';
+      sl.choreoState.emoW = 0;
+      sl.choreoState.vowel = null;
+      sl.choreoState.vowelW = 0;
+
+      // Cute pigeon-toed (uchimata) & gentle knee bounce helper (preserves rest hips Y height!)
+      const setCuteLegs = (uchimataDeg, kneeL, kneeR, hipDropY, hipSwayX = 0, hipYaw = 0) => {
+        if (nb('hips')) {
+          nb('hips').position.y -= hipDropY;
+          nb('hips').position.x += hipSwayX;
+          nb('hips').rotation.y = hipYaw;
+        }
+        if (nb('leftUpperLeg')) {
+          nb('leftUpperLeg').rotation.y = -uchimataDeg * DEG;
+          nb('leftUpperLeg').rotation.x = zS * kneeL * 0.52 * DEG;
+        }
+        if (nb('rightUpperLeg')) {
+          nb('rightUpperLeg').rotation.y = +uchimataDeg * DEG;
+          nb('rightUpperLeg').rotation.x = zS * kneeR * 0.52 * DEG;
+        }
+        if (nb('leftLowerLeg'))  nb('leftLowerLeg').rotation.x  = -zS * kneeL * DEG;
+        if (nb('rightLowerLeg')) nb('rightLowerLeg').rotation.x = -zS * kneeR * DEG;
+        if (nb('leftFoot'))      nb('leftFoot').rotation.x      = zS * kneeL * 0.45 * DEG;
+        if (nb('rightFoot'))     nb('rightFoot').rotation.x     = zS * kneeR * 0.45 * DEG;
+      };
+
+      const updateTorsoAndReadFrames = () => {
+        nb('hips')?.parent?.updateMatrixWorld(true);
+        vrm.scene.updateMatrixWorld(true);
+        nb('head').getWorldPosition(_headPos);
+        nb('head').getWorldQuaternion(_headQuat);
+        nb('upperChest')?.getWorldPosition(_chestPos) || nb('chest')?.getWorldPosition(_chestPos);
+        _fwdDir.set(0, 0, zS).applyQuaternion(_headQuat).normalize();
+        // Character's anatomical left (+X when facing +Z, -X when facing -Z -> cross(up, fwd))
+        _upDir.set(0, 1, 0).applyQuaternion(_headQuat).normalize();
+        _rightDir.crossVectors(_upDir, _fwdDir).normalize(); // Points toward character's LEFT side!
+      };
+
+      if (mode === 'moe:gachikoi_peek') {
+        // 💕 ガチ恋・ゼロ距離のぞき込み＆照れ笑い (6.4s story loop!)
+        const cyc = (t % 6.4) / 6.4;
+        // Lean warmly forward toward camera during 0.15..0.78, with cute head tilt & shy giggle at 0.55..0.85!
+        const lean = Math.sin(THREE.MathUtils.clamp((cyc - 0.08) / 0.84, 0, 1) * Math.PI);
+        const leanSmooth = lean * lean * (3 - 2 * lean);
+        const bounce = Math.abs(Math.sin(t * 2.6)) * 0.008;
+
+        setCuteLegs(9, 10 + leanSmooth * 6, 10 + leanSmooth * 6, 0.012 + bounce, Math.sin(t * 1.6) * 0.018);
+        if (sl.avatar.model) sl.avatar.model.position.z = zS * leanSmooth * 0.14;
+
+        const pitchFwd = -zS * (13 * leanSmooth) * DEG;
+        if (nb('spine')) nb('spine').rotation.x = pitchFwd * 0.45;
+        if (nb('chest')) nb('chest').rotation.x = pitchFwd * 0.55;
+
+        const tilt = (Math.sin(cyc * Math.PI * 2) * 9.5 + 4.0 * leanSmooth) * DEG;
+        const yaw = Math.sin(cyc * Math.PI * 4) * 5.5 * DEG;
+        // Lift chin slightly relative to forward torso so she gazes up (uwamezukai!) into the lens!
+        const headUp = zS * (10.5 * leanSmooth) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = tilt * 0.35; nb('neck').rotation.y = yaw * 0.35; nb('neck').rotation.x = headUp * 0.4; }
+        if (nb('head')) { nb('head').rotation.z = tilt * 0.65; nb('head').rotation.y = yaw * 0.65; nb('head').rotation.x = headUp * 0.6; }
+
+        updateTorsoAndReadFrames();
+        // Hands clasped daintily behind back during lean, then brought shyly to chest during smile!
+        const shyFront = THREE.MathUtils.smoothstep(cyc, 0.46, 0.60) * (1 - THREE.MathUtils.smoothstep(cyc, 0.84, 0.96));
+        const chestFwd = new THREE.Vector3(0, 0, zS);
+        _tgtL.copy(_chestPos).addScaledVector(chestFwd, THREE.MathUtils.lerp(-0.11, 0.155, shyFront)).add(new THREE.Vector3( 0.055 * zS, THREE.MathUtils.lerp(-0.12, 0.02, shyFront), 0));
+        _tgtR.copy(_chestPos).addScaledVector(chestFwd, THREE.MathUtils.lerp(-0.11, 0.155, shyFront)).add(new THREE.Vector3(-0.055 * zS, THREE.MathUtils.lerp(-0.12, 0.02, shyFront), 0));
+        _poleL.copy(_chestPos).add(new THREE.Vector3( 0.18 * zS, -0.22, -0.10 * zS));
+        _poleR.copy(_chestPos).add(new THREE.Vector3(-0.18 * zS, -0.22, -0.10 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 34 * DEG, 34 * DEG, false);
+
+        if (cyc < 0.42) {
+          sl.choreoState.emo = 'surprised'; sl.choreoState.emoW = 0.26 * leanSmooth;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.56 + 0.30 * leanSmooth;
+        } else if (cyc < 0.70) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = THREE.MathUtils.smoothstep(cyc, 0.42, 0.52);
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.84;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 1.0 - THREE.MathUtils.smoothstep(cyc, 0.86, 0.98);
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.52;
+        }
+        return;
+      }
+
+      // Ensure model z offset is clean for non-advancing motions
+      if (sl.avatar.model) sl.avatar.model.position.set(0, 0, 0);
+
+      if (mode === 'moe:azato_cheek') {
+        // 🫶 あざと小悪魔・ダブルほっぺぷに＆ウインク
+        const beat = t * 3.2;
+        const sway = Math.sin(beat * 0.5);
+        const pop = Math.abs(Math.sin(beat));
+        setCuteLegs(10, 8 + pop * 10, 8 + (1 - pop) * 10, 0.010 + pop * 0.012, sway * 0.025, sway * 0.10);
+
+        if (nb('spine')) nb('spine').rotation.z = sway * 5.5 * DEG;
+        const hTilt = sway * 11.5 * DEG;
+        const hYaw = Math.cos(beat * 0.5) * 6 * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.y = hYaw * 0.35; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.y = hYaw * 0.65; }
+
+        updateTorsoAndReadFrames();
+        // Both fluffy cuffs Cup/Poke right beside cheeks, following every head tilt!
+        const poke = Math.sin(beat * 2.0) * 0.008;
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.115).addScaledVector(_rightDir, +(0.112 + poke)).addScaledVector(_upDir, -0.028);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.115).addScaledVector(_rightDir, -(0.112 + poke)).addScaledVector(_upDir, -0.028);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.13).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.13).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.z  = +18 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.z = -18 * DEG;
+        applyDaintyFingers(nb, 42 * DEG, 42 * DEG, true);
+
+        const cyc = (t % 4.0) / 4.0;
+        if (cyc > 0.32 && cyc < 0.56) {
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = Math.sin(((cyc - 0.32) / 0.24) * Math.PI);
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.68 + 0.24 * sl.choreoState.emoW;
+        } else {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 0.85;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.58 + 0.22 * pop;
+        }
+        return;
+      }
+
+      if (mode === 'moe:blow_kiss') {
+        // 😘 ガチ恋・投げキッス＆えへへ照れ隠し (5.2s story loop!)
+        const cyc = (t % 5.2) / 5.2;
+        const leanK = Math.sin(THREE.MathUtils.clamp(cyc / 0.65, 0, 1) * Math.PI);
+        setCuteLegs(9, 10 + leanK * 8, 8, 0.012 + leanK * 0.008, Math.sin(t * 2.2) * 0.018);
+
+        const pitch = -zS * (9.0 * leanK) * DEG;
+        if (nb('spine')) nb('spine').rotation.x = pitch * 0.5;
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.5;
+
+        // Shy head wiggle after blowing the kiss (cyc > 0.62)
+        const shyPhase = THREE.MathUtils.smoothstep(cyc, 0.58, 0.68) * (1 - THREE.MathUtils.smoothstep(cyc, 0.90, 1.0));
+        const hTilt = (leanK * 7.5 + shyPhase * Math.sin(t * 9.0) * 6.5) * DEG;
+        const hYaw = shyPhase * Math.sin(t * 7.0) * 8.0 * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.y = hYaw * 0.35; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.y = hYaw * 0.65; nb('head').rotation.x = zS * 6.5 * leanK * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right hand: 0..0.32 touches lips -> 0.32..0.58 arcs forward blowing kiss -> 0.60..1.0 clasps shyly at chest!
+        const blowT = THREE.MathUtils.smoothstep(cyc, 0.30, 0.55);
+        const lipPt = _headPos.clone().addScaledVector(_fwdDir, 0.135).addScaledVector(_upDir, -0.042);
+        const extendPt = _headPos.clone().addScaledVector(_fwdDir, 0.295).addScaledVector(_rightDir, -0.105).addScaledVector(_upDir, -0.010);
+        const shyChestR = _chestPos.clone().addScaledVector(_fwdDir, 0.150).addScaledVector(_rightDir, -0.045);
+        const shyChestL = _chestPos.clone().addScaledVector(_fwdDir, 0.150).addScaledVector(_rightDir, +0.045);
+        const restHipL  = _chestPos.clone().addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, +0.145).add(new THREE.Vector3(0, -0.16, 0));
+
+        if (cyc < 0.60) {
+          _tgtR.lerpVectors(lipPt, extendPt, blowT);
+          _tgtL.lerpVectors(restHipL, shyChestL, THREE.MathUtils.smoothstep(cyc, 0.45, 0.60));
+        } else {
+          const backT = THREE.MathUtils.smoothstep(cyc, 0.60, 0.74);
+          _tgtR.lerpVectors(extendPt, shyChestR, backT);
+          _tgtL.lerpVectors(shyChestL, restHipL, THREE.MathUtils.smoothstep(cyc, 0.86, 0.99));
+        }
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 36 * DEG, (cyc < 0.58 && cyc > 0.32) ? 12 * DEG : 32 * DEG, true);
+
+        if (cyc < 0.34) {
+          sl.choreoState.emo = 'blinkLeft'; sl.choreoState.emoW = THREE.MathUtils.smoothstep(cyc, 0.10, 0.26);
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.78;
+        } else if (cyc < 0.58) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 0.90;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.86;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.95;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.54;
+        }
+        return;
+      }
+
+      if (mode === 'moe:plead_clasp') {
+        // 🙏 ぎゅっ♡ おねだり上目遣い（内股もじもじ）
+        const w = Math.sin(t * 2.8);
+        const w2 = Math.sin(t * 5.6);
+        setCuteLegs(12, 14 + w2 * 3, 14 - w2 * 3, 0.018 + Math.abs(w2) * 0.005, w * 0.022, w * 0.12);
+
+        const pitch = -zS * 8.5 * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.5; nb('spine').rotation.z = w * 4.5 * DEG; }
+        if (nb('chest')) { nb('chest').rotation.x = pitch * 0.5; }
+        // Chin tucked slightly + upward pleading eyes!
+        const hTilt = w * 8.5 * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.4;
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.6; nb('head').rotation.x = zS * 8.0 * DEG; }
+
+        updateTorsoAndReadFrames();
+        const claspLift = 0.015 + Math.sin(t * 5.6) * 0.012;
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.155).addScaledVector(_rightDir, +0.042).add(new THREE.Vector3(0, claspLift, 0));
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.155).addScaledVector(_rightDir, -0.042).add(new THREE.Vector3(0, claspLift, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.14).add(new THREE.Vector3(0, -0.22, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.14).add(new THREE.Vector3(0, -0.22, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 48 * DEG, 48 * DEG, false);
+
+        const cyc = (t % 4.8) / 4.8;
+        sl.choreoState.emo = cyc < 0.55 ? 'sad' : 'happy';
+        sl.choreoState.emoW = cyc < 0.55 ? 0.52 : 0.85;
+        sl.choreoState.vowel = 'oh';
+        sl.choreoState.vowelW = 0.58 + 0.28 * Math.abs(Math.sin(t * 4.6));
+        return;
+      }
+
+      if (mode === 'moe:ferret_paws') {
+        // 🐾 雪フェレット・ぴょこぴょこ肉球ポーズ（がおー♡）
+        const hop = Math.abs(Math.sin(t * 4.2));
+        const sway = Math.sin(t * 2.1);
+        setCuteLegs(10, 18 - hop * 12, 18 - hop * 12, (1 - hop) * 0.022, sway * 0.024, sway * 0.15);
+
+        if (nb('spine')) nb('spine').rotation.z = sway * 6.0 * DEG;
+        const hTilt = sway * 10.0 * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) nb('head').rotation.z = hTilt * 0.65;
+
+        updateTorsoAndReadFrames();
+        const pawBobL = Math.sin(t * 4.2) * 0.024;
+        const pawBobR = -Math.sin(t * 4.2) * 0.024;
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.155).addScaledVector(_rightDir, +0.125).addScaledVector(_upDir, -0.055 + pawBobL);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.155).addScaledVector(_rightDir, -0.125).addScaledVector(_upDir, -0.055 + pawBobR);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.15).add(new THREE.Vector3(0, -0.20, 0.05 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.15).add(new THREE.Vector3(0, -0.20, 0.05 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        // Cute bent animal paws!
+        if (nb('leftHand'))  nb('leftHand').rotation.z  = -38 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.z = +38 * DEG;
+        applyDaintyFingers(nb, 52 * DEG, 52 * DEG, false);
+
+        sl.choreoState.emo = (Math.floor(t / 2.2) % 2 === 0) ? 'happy' : 'relaxed';
+        sl.choreoState.emoW = 0.90;
+        sl.choreoState.vowel = 'oh';
+        sl.choreoState.vowelW = 0.52 + 0.40 * hop;
+        return;
+      }
+
+      if (mode === 'moe:tsundere_dere') {
+        // 💞 ツンデレジト目 → パッと満面デレ笑顔 (5.6s story loop!)
+        const cyc = (t % 5.6) / 5.6;
+        const dere = THREE.MathUtils.smoothstep(cyc, 0.46, 0.56) * (1 - THREE.MathUtils.smoothstep(cyc, 0.90, 0.99));
+        const hop = dere * Math.abs(Math.sin(t * 5.0));
+        setCuteLegs(11, 10 + hop * 8, 10 + (1 - hop) * 6, 0.012 + (1 - dere) * 0.006, Math.sin(t * 2.4) * 0.02);
+
+        // First half: look slightly away sulkily with jitome; second half: face front & beam happily!
+        const turnAway = (1 - dere) * 22 * DEG;
+        const hTilt = (dere ? Math.sin(t * 4.5) * 8.5 : -6.5) * DEG;
+        if (nb('spine')) nb('spine').rotation.y = turnAway * 0.35;
+        if (nb('neck')) { nb('neck').rotation.y = turnAway * 0.30; nb('neck').rotation.z = hTilt * 0.35; }
+        if (nb('head')) { nb('head').rotation.y = turnAway * 0.35; nb('head').rotation.z = hTilt * 0.65; }
+
+        updateTorsoAndReadFrames();
+        const waveY = dere * Math.sin(t * 8.0) * 0.032;
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, THREE.MathUtils.lerp(0.055, 0.145, dere)).add(new THREE.Vector3(0, THREE.MathUtils.lerp(-0.02, 0.09 + waveY, dere), 0));
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, THREE.MathUtils.lerp(-0.055, -0.145, dere)).add(new THREE.Vector3(0, THREE.MathUtils.lerp(-0.02, 0.09 - waveY, dere), 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, (44 - dere * 20) * DEG, (44 - dere * 20) * DEG, false);
+
+        if (dere < 0.35) {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.92;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.44;
+        } else if (cyc < 0.76) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = dere;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.85 * dere;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = dere;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.56 * dere;
+        }
+        return;
+      }
+
+      if (mode === 'moe:happy_welcome') {
+        // 🙌 ぴょんぴょん両手ぶんぶんお出迎え
+        const bounce = Math.abs(Math.sin(t * 4.6));
+        const sway = Math.sin(t * 2.3);
+        setCuteLegs(9, 16 - bounce * 11, 16 - bounce * 11, (1 - bounce) * 0.020, sway * 0.022);
+        if (nb('spine')) nb('spine').rotation.z = sway * 5.0 * DEG;
+        if (nb('head')) nb('head').rotation.z = sway * 8.5 * DEG;
+
+        updateTorsoAndReadFrames();
+        const flap = Math.sin(t * 9.2) * 0.040;
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, +0.165 + flap * 0.5).add(new THREE.Vector3(0, 0.11 + flap, 0));
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, -0.165 + flap * 0.5).add(new THREE.Vector3(0, 0.11 - flap, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.17).add(new THREE.Vector3(0, -0.19, 0.02 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.17).add(new THREE.Vector3(0, -0.19, 0.02 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 16 * DEG, 16 * DEG, false);
+
+        sl.choreoState.emo = (Math.floor(t / 2.0) % 2 === 0) ? 'happy' : 'relaxed';
+        sl.choreoState.emoW = 0.95;
+        sl.choreoState.vowel = 'oh';
+        sl.choreoState.vowelW = 0.54 + 0.38 * bounce;
+        return;
+      }
+
+      if (mode === 'moe:idol_turn_wink') {
+        // ✨ 華麗くるっとターン＆あざと決めウインク (5.4s showcase loop!)
+        const cyc = (t % 5.4) / 5.4;
+        // Smooth 360 spin during 0.05..0.52, then cute idol cheek pose + wink during 0.52..1.0!
+        const spinU = THREE.MathUtils.clamp((cyc - 0.04) / 0.48, 0, 1);
+        const spinEase = spinU * spinU * (3 - 2 * spinU);
+        if (sl.avatar.model) sl.avatar.model.rotation.y = spinEase * Math.PI * 2;
+
+        const poseHold = THREE.MathUtils.smoothstep(cyc, 0.48, 0.60) * (1 - THREE.MathUtils.smoothstep(cyc, 0.90, 0.99));
+        setCuteLegs(9, 10 + poseHold * 8, 8, 0.012 + poseHold * 0.008, poseHold * 0.022);
+        const hTilt = poseHold * 10.5 * DEG;
+        if (nb('spine')) nb('spine').rotation.z = poseHold * 4.5 * DEG;
+        if (nb('head')) nb('head').rotation.z = hTilt;
+
+        updateTorsoAndReadFrames();
+        const openFlare = Math.sin(spinU * Math.PI);
+        const spinL = _chestPos.clone().addScaledVector(_fwdDir, 0.08).addScaledVector(_rightDir, +(0.18 + openFlare * 0.08)).add(new THREE.Vector3(0, -0.08, 0));
+        const spinR = _chestPos.clone().addScaledVector(_fwdDir, 0.08).addScaledVector(_rightDir, -(0.18 + openFlare * 0.08)).add(new THREE.Vector3(0, -0.08, 0));
+        const cheekR = _headPos.clone().addScaledVector(_fwdDir, 0.115).addScaledVector(_rightDir, -0.108).addScaledVector(_upDir, -0.024);
+        const hipL   = _chestPos.clone().addScaledVector(_fwdDir, 0.10).addScaledVector(_rightDir, +0.135).add(new THREE.Vector3(0, -0.13, 0));
+
+        _tgtR.lerpVectors(spinR, cheekR, poseHold);
+        _tgtL.lerpVectors(spinL, hipL, poseHold);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.20, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 34 * DEG, 30 * DEG, true);
+
+        if (cyc > 0.56 && cyc < 0.84) {
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = Math.sin(((cyc - 0.56) / 0.28) * Math.PI);
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.88;
+        } else {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 0.85;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.56;
+        }
+        return;
+      }
+
+      if (mode === 'moe:double_peace') {
+        // ✌️ あざとダブルピース＆ぴょんウインク
+        const beat = t * 3.5;
+        const pop = Math.abs(Math.sin(beat));
+        const sway = Math.sin(beat * 0.5);
+        setCuteLegs(11, 9 + pop * 11, 9 + (1 - pop) * 11, 0.010 + pop * 0.014, sway * 0.026, sway * 0.12);
+        if (nb('spine')) nb('spine').rotation.z = sway * 6.0 * DEG;
+        const hTilt = sway * 11.0 * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) nb('head').rotation.z = hTilt * 0.65;
+
+        updateTorsoAndReadFrames();
+        const vBob = pop * 0.018;
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.125).addScaledVector(_rightDir, +0.148).addScaledVector(_upDir, 0.018 + vBob);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.125).addScaledVector(_rightDir, -0.148).addScaledVector(_upDir, 0.018 + vBob);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.18).add(new THREE.Vector3(0, -0.16, 0.05 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.18).add(new THREE.Vector3(0, -0.16, 0.05 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.z  = +12 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.z = -12 * DEG;
+        applyDaintyFingers(nb, 54 * DEG, 54 * DEG, 'peace');
+
+        const cyc = (t % 3.6) / 3.6;
+        if (cyc < 0.28) {
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = Math.sin((cyc / 0.28) * Math.PI);
+        } else if (cyc > 0.52 && cyc < 0.80) {
+          sl.choreoState.emo = 'blinkLeft'; sl.choreoState.emoW = Math.sin(((cyc - 0.52) / 0.28) * Math.PI);
+        } else {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 0.90;
+        }
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.64 + 0.26 * pop;
+        return;
+      }
+
+      if (mode === 'moe:cheek_heart') {
+        // 💖 ルダハート（ほっぺハート）＆ガチ恋スマイル
+        const sway = Math.sin(t * 2.2);
+        const pulse = 0.5 + 0.5 * Math.sin(t * 4.4);
+        setCuteLegs(10, 11 + pulse * 5, 11 + (1 - pulse) * 5, 0.012 + pulse * 0.008, sway * 0.022, sway * 0.09);
+        const pitch = -zS * 6.5 * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.45; nb('spine').rotation.z = sway * 5.0 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+        const hTilt = (8.0 + sway * 6.5) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = zS * 5.5 * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Both hands cradle rosy cheeks in rounded half-hearts!
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.118).addScaledVector(_rightDir, +0.104).addScaledVector(_upDir, -0.044 + pulse * 0.006);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.118).addScaledVector(_rightDir, -0.104).addScaledVector(_upDir, -0.044 + pulse * 0.006);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.19).add(new THREE.Vector3(0, -0.12, 0.08 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.19).add(new THREE.Vector3(0, -0.12, 0.08 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.z  = +32 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.z = -32 * DEG;
+        applyDaintyFingers(nb, 46 * DEG, 46 * DEG, 'heart');
+
+        const cyc = (t % 4.4) / 4.4;
+        sl.choreoState.emo = cyc < 0.62 ? 'happy' : 'relaxed';
+        sl.choreoState.emoW = 0.92;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.68 + 0.22 * pulse;
+        return;
+      }
+
+      if (mode === 'moe:big_overhead_heart') {
+        // 🙆‍♀️ 頭の上で大きなだいすきハート♡
+        const bounce = Math.abs(Math.sin(t * 3.6));
+        const sway = Math.sin(t * 1.8);
+        setCuteLegs(10, 14 - bounce * 9, 14 - bounce * 9, (1 - bounce) * 0.018, sway * 0.024, sway * 0.10);
+        if (nb('spine')) nb('spine').rotation.z = sway * 5.5 * DEG;
+        if (nb('head')) nb('head').rotation.z = sway * 7.5 * DEG;
+
+        updateTorsoAndReadFrames();
+        const hLift = 0.225 + bounce * 0.014;
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.04).addScaledVector(_rightDir, +0.068).addScaledVector(_upDir, hLift);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.04).addScaledVector(_rightDir, -0.068).addScaledVector(_upDir, hLift);
+        // Wide outward-high elbow poles create a big round overhead heart arch around her ears!
+        _poleL.copy(_headPos).addScaledVector(_rightDir, +0.32).addScaledVector(_upDir, 0.12);
+        _poleR.copy(_headPos).addScaledVector(_rightDir, -0.32).addScaledVector(_upDir, 0.12);
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.z  = -34 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.z = +34 * DEG;
+        applyDaintyFingers(nb, 42 * DEG, 42 * DEG, 'heart');
+
+        sl.choreoState.emo = (Math.floor(t / 2.2) % 2 === 0) ? 'happy' : 'relaxed';
+        sl.choreoState.emoW = 0.95;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.66 + 0.26 * bounce;
+        return;
+      }
+
+      if (mode === 'moe:peekaboo_cuffs') {
+        // 🙈 萌え袖いないいない…ばぁっ♡ (4.8s story loop!)
+        const cyc = (t % 4.8) / 4.8;
+        const openBaa = THREE.MathUtils.smoothstep(cyc, 0.40, 0.50) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.86, 0.97));
+        const pop = openBaa * Math.abs(Math.sin(t * 6.0));
+        setCuteLegs(11, 16 - openBaa * 8 + pop * 5, 16 - openBaa * 8, 0.022 * (1 - openBaa) + pop * 0.008, Math.sin(t * 2.4) * 0.018);
+
+        const crouchPitch = -zS * (10.0 * (1 - openBaa)) * DEG;
+        if (nb('spine')) nb('spine').rotation.x = crouchPitch * 0.5;
+        if (nb('chest')) nb('chest').rotation.x = crouchPitch * 0.5;
+        const hTilt = (openBaa ? 9.5 : Math.sin(t * 5.0) * 4.0) * DEG;
+        if (nb('head')) { nb('head').rotation.z = hTilt; nb('head').rotation.x = zS * (openBaa ? 4 : -6) * DEG; }
+
+        updateTorsoAndReadFrames();
+        const hideL = _headPos.clone().addScaledVector(_fwdDir, 0.132).addScaledVector(_rightDir, +0.056).addScaledVector(_upDir, 0.008);
+        const hideR = _headPos.clone().addScaledVector(_fwdDir, 0.132).addScaledVector(_rightDir, -0.056).addScaledVector(_upDir, 0.008);
+        const baaL  = _headPos.clone().addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, +0.185).addScaledVector(_upDir, 0.035 + pop * 0.018);
+        const baaR  = _headPos.clone().addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, -0.185).addScaledVector(_upDir, 0.035 + pop * 0.018);
+        _tgtL.lerpVectors(hideL, baaL, openBaa);
+        _tgtR.lerpVectors(hideR, baaR, openBaa);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.17).add(new THREE.Vector3(0, -0.18, 0.05 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.17).add(new THREE.Vector3(0, -0.18, 0.05 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, (48 - openBaa * 32) * DEG, (48 - openBaa * 32) * DEG, false);
+
+        if (openBaa < 0.35) {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.98;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.36;
+        } else {
+          sl.choreoState.emo = (cyc < 0.64) ? 'surprised' : 'happy';
+          sl.choreoState.emoW = (cyc < 0.64) ? 0.45 : 0.95;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.92;
+        }
+        return;
+      }
+
+      if (mode === 'moe:shy_fidget') {
+        // 👉👈 もじもじ指ツンツン＆上目遣いチラ見
+        const fidget = Math.sin(t * 2.4);
+        const tap = Math.abs(Math.sin(t * 6.8));
+        setCuteLegs(14, 15 + fidget * 3, 15 - fidget * 3, 0.018, fidget * 0.020, fidget * 0.14);
+
+        const pitch = -zS * 9.5 * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.5; nb('spine').rotation.z = fidget * 4.5 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.5;
+        // Shyly tucked chin + upward glance!
+        if (nb('neck')) nb('neck').rotation.z = fidget * 3.5 * DEG;
+        if (nb('head')) { nb('head').rotation.z = fidget * 6.5 * DEG; nb('head').rotation.x = zS * 9.5 * DEG; nb('head').rotation.y = Math.sin(t * 1.5) * 7 * DEG; }
+
+        updateTorsoAndReadFrames();
+        const sep = 0.036 + tap * 0.016; // Index fingers tap-tapping shyly in front of chest!
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.165).addScaledVector(_rightDir, +sep).add(new THREE.Vector3(0, -0.025, 0));
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.165).addScaledVector(_rightDir, -sep).add(new THREE.Vector3(0, -0.025, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.22, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.22, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.y  = -24 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.y = +24 * DEG;
+        applyDaintyFingers(nb, 54 * DEG, 54 * DEG, true);
+
+        const cyc = (t % 5.0) / 5.0;
+        sl.choreoState.emo = cyc < 0.58 ? 'sad' : 'happy';
+        sl.choreoState.emoW = cyc < 0.58 ? 0.48 : 0.80;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.54 + 0.20 * tap;
+        return;
+      }
+
+      if (mode === 'moe:kyun_chest_squeeze') {
+        // 💓 胸きゅん…ぎゅっ＆ゼロ距離みつめ
+        const breath = 0.5 - 0.5 * Math.cos(t * 1.8);
+        const sway = Math.sin(t * 1.4);
+        setCuteLegs(11, 11 + breath * 5, 11 + breath * 5, 0.012 + breath * 0.008, sway * 0.016);
+        if (sl.avatar.model) sl.avatar.model.position.z = zS * (0.06 + breath * 0.06);
+
+        const pitch = -zS * (7.0 + breath * 4.5) * DEG;
+        if (nb('spine')) nb('spine').rotation.x = pitch * 0.45;
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+        const hTilt = (9.0 + sway * 4.5) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = zS * (6.5 + breath * 3.5) * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Both fluffy cuffs crossed tenderly over her heart!
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.148).addScaledVector(_rightDir, +0.026).add(new THREE.Vector3(0, 0.018 + breath * 0.008, 0));
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.156).addScaledVector(_rightDir, -0.026).add(new THREE.Vector3(0, 0.024 + breath * 0.008, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.15).add(new THREE.Vector3(0, -0.22, 0.03 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.15).add(new THREE.Vector3(0, -0.22, 0.03 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 46 * DEG, 46 * DEG, false);
+
+        const cyc = (t % 5.6) / 5.6;
+        sl.choreoState.emo = cyc < 0.68 ? 'happy' : 'relaxed';
+        sl.choreoState.emoW = cyc < 0.68 ? 0.78 : 0.95;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.62 + 0.22 * breath;
+        return;
+      }
+
+      if (mode === 'moe:cat_nyan_beckon') {
+        // 🐱 にゃんにゃん招き手＆耳ぴょこリズム
+        const beat = t * 3.8;
+        const alt = Math.sin(beat);
+        const hop = Math.abs(alt);
+        setCuteLegs(10, 12 + Math.max(0, alt) * 9, 12 + Math.max(0, -alt) * 9, 0.010 + (1 - hop) * 0.012, alt * 0.028, alt * 0.14);
+        if (nb('spine')) nb('spine').rotation.z = alt * 6.5 * DEG;
+        if (nb('head')) { nb('head').rotation.z = alt * 11.5 * DEG; nb('head').rotation.y = -alt * 5.5 * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Alternating high/low cat-paw beckon beside ear & cheek!
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, +0.135).addScaledVector(_upDir, -0.025 + alt * 0.048);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, -0.135).addScaledVector(_upDir, -0.025 - alt * 0.048);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.17).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.17).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        const beckonL = 28 + 18 * Math.sin(beat * 2.0);
+        const beckonR = 28 - 18 * Math.sin(beat * 2.0);
+        if (nb('leftHand'))  nb('leftHand').rotation.z  = -beckonL * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.z = +beckonR * DEG;
+        applyDaintyFingers(nb, 52 * DEG, 52 * DEG, false);
+
+        const cyc = (t % 3.8) / 3.8;
+        sl.choreoState.emo = (cyc > 0.68 && cyc < 0.92) ? 'blinkLeft' : 'happy';
+        sl.choreoState.emoW = 0.90;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.62 + 0.28 * hop;
+        return;
+      }
+
+      if (mode === 'moe:sleepy_rub') {
+        // 😪 ねむねむ…おめめこすこす＆あくび「お」 (5.6s story loop!)
+        const cyc = (t % 5.6) / 5.6;
+        const yawn = THREE.MathUtils.smoothstep(cyc, 0.56, 0.68) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.88, 0.98));
+        const sway = Math.sin(t * 1.4);
+        setCuteLegs(11, 10 + yawn * 4, 10, 0.012, sway * 0.015);
+
+        const nod = (1 - yawn) * Math.sin(t * 3.0) * 4.5 - yawn * 8.0;
+        if (nb('spine')) nb('spine').rotation.z = sway * 4.0 * DEG;
+        if (nb('head')) { nb('head').rotation.z = (7.5 + sway * 4.0) * DEG; nb('head').rotation.x = -zS * nod * DEG; }
+
+        updateTorsoAndReadFrames();
+        const rubCircle = Math.sin(t * 7.5) * 0.010;
+        const eyeRubR = _headPos.clone().addScaledVector(_fwdDir, 0.128).addScaledVector(_rightDir, -0.072).addScaledVector(_upDir, 0.006 + rubCircle);
+        const stretchR = _headPos.clone().addScaledVector(_fwdDir, 0.08).addScaledVector(_rightDir, -0.175).addScaledVector(_upDir, 0.105);
+        _tgtR.lerpVectors(eyeRubR, stretchR, yawn);
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.11).addScaledVector(_rightDir, +0.135).add(new THREE.Vector3(0, -0.10 + yawn * 0.16, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.17).add(new THREE.Vector3(0, -0.18, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.17).add(new THREE.Vector3(0, -0.18, 0.06 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 44 * DEG, 54 * DEG, false);
+
+        if (yawn > 0.25) {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.98;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.98;
+        } else {
+          sl.choreoState.emo = 'jitome'; sl.choreoState.emoW = 0.92;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.46 + 0.16 * Math.abs(Math.sin(t * 2.5));
+        }
+        return;
+      }
+
+      if (mode === 'moe:pout_puff') {
+        // 😤 むーっ！ぷんぷん腰手＆照れデレ (5.2s story loop!)
+        const cyc = (t % 5.2) / 5.2;
+        const dere = THREE.MathUtils.smoothstep(cyc, 0.54, 0.64) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.90, 0.99));
+        const stomp = (1 - dere) * Math.sin(t * 6.8);
+        setCuteLegs(9, 12 + Math.max(0, stomp) * 14, 12 + Math.max(0, -stomp) * 14, 0.012, Math.sin(t * 3.4) * 0.020);
+
+        const hYaw = (1 - dere) * Math.sin(t * 3.4) * 9.0 * DEG;
+        const hTilt = (dere ? 9.5 : -5.5) * DEG;
+        if (nb('spine')) nb('spine').rotation.z = Math.sin(t * 3.4) * 4.5 * DEG;
+        if (nb('head')) { nb('head').rotation.y = hYaw; nb('head').rotation.z = hTilt; }
+
+        updateTorsoAndReadFrames();
+        const hipHandL = _chestPos.clone().addScaledVector(_fwdDir, 0.05).addScaledVector(_rightDir, +0.135).add(new THREE.Vector3(0, -0.145, 0));
+        const hipHandR = _chestPos.clone().addScaledVector(_fwdDir, 0.05).addScaledVector(_rightDir, -0.135).add(new THREE.Vector3(0, -0.145, 0));
+        const cheekL   = _headPos.clone().addScaledVector(_fwdDir, 0.122).addScaledVector(_rightDir, +0.108).addScaledVector(_upDir, -0.032);
+        const cheekR   = _headPos.clone().addScaledVector(_fwdDir, 0.122).addScaledVector(_rightDir, -0.108).addScaledVector(_upDir, -0.032);
+        _tgtL.lerpVectors(hipHandL, cheekL, dere);
+        _tgtR.lerpVectors(hipHandR, cheekR, dere);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.22).add(new THREE.Vector3(0, -0.12, -0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.22).add(new THREE.Vector3(0, -0.12, -0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 48 * DEG, 48 * DEG, false);
+
+        if (dere < 0.35) {
+          sl.choreoState.emo = 'angry'; sl.choreoState.emoW = 0.88;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.56;
+        } else {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 0.95;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.86;
+        }
+        return;
+      }
+
+      if (mode === 'moe:magical_wink_star') {
+        // 🪄 キラッ☆ 魔法少女決めポーズ＆ウインク
+        const pulse = 0.5 + 0.5 * Math.sin(t * 3.4);
+        const sway = Math.sin(t * 1.7);
+        setCuteLegs(10, 18, 7 + pulse * 5, 0.014 + pulse * 0.006, 0.022 + sway * 0.012, -0.12);
+        if (nb('spine')) nb('spine').rotation.z = (6.5 + sway * 2.5) * DEG;
+        if (nb('head')) { nb('head').rotation.z = (11.5 + sway * 3.5) * DEG; nb('head').rotation.y = 6.0 * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right hand frames right eye with a sparkling V-star; left arm sweeps gracefully outward!
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.132).addScaledVector(_rightDir, -0.118).addScaledVector(_upDir, 0.014 + pulse * 0.010);
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.09).addScaledVector(_rightDir, +0.235).add(new THREE.Vector3(0, -0.05 + pulse * 0.02, 0));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.20).add(new THREE.Vector3(0, -0.12, 0.06 * zS));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.20).add(new THREE.Vector3(0, -0.18, -0.02 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) nb('rightHand').rotation.z = +22 * DEG;
+        applyDaintyFingers(nb, 22 * DEG, 54 * DEG, 'peaceR');
+
+        const cyc = (t % 3.6) / 3.6;
+        sl.choreoState.emo = (cyc > 0.22 && cyc < 0.68) ? 'blinkLeft' : 'happy';
+        sl.choreoState.emoW = 0.92;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.72 + 0.20 * pulse;
+        return;
+      }
+
+      if (mode === 'moe:tail_wag_lookback') {
+        // 🐿️ 振り返り「しっぽ見て見て♡」見返りウインク
+        const wag = Math.sin(t * 3.6);
+        const gentleTurn = 138 * DEG + Math.sin(t * 1.2) * 10 * DEG;
+        if (sl.avatar.model) sl.avatar.model.rotation.y = gentleTurn;
+        setCuteLegs(9, 11 + Math.max(0, wag) * 6, 11 + Math.max(0, -wag) * 6, 0.012, wag * 0.032, wag * 0.18);
+
+        // Turn upper torso, neck, & head back over left shoulder so she gazes cutely at camera while tail wags!
+        if (nb('spine')) nb('spine').rotation.y = -22 * DEG;
+        if (nb('chest')) nb('chest').rotation.y = -24 * DEG;
+        if (nb('neck')) { nb('neck').rotation.y = -32 * DEG; nb('neck').rotation.z = 5 * DEG; }
+        if (nb('head')) { nb('head').rotation.y = -38 * DEG; nb('head').rotation.z = (8 + wag * 4) * DEG; }
+
+        updateTorsoAndReadFrames();
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.125).addScaledVector(_rightDir, +0.105).addScaledVector(_upDir, -0.035);
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.08).addScaledVector(_rightDir, -0.145).add(new THREE.Vector3(0, -0.12, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.18, 0));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.18, 0));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 38 * DEG, 34 * DEG, true);
+
+        const cyc = (t % 4.2) / 4.2;
+        sl.choreoState.emo = (cyc > 0.45 && cyc < 0.72) ? 'blinkRight' : 'happy';
+        sl.choreoState.emoW = 0.90;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.68 + 0.20 * Math.abs(wag);
+        return;
+      }
+
+      if (mode === 'moe:excited_tiptoe') {
+        // 🌟 わーい！きらきらジャンプ＆万歳バンザイ
+        const hop = Math.abs(Math.sin(t * 5.0));
+        const sway = Math.sin(t * 2.5);
+        setCuteLegs(8, 18 - hop * 14, 18 - hop * 14, (1 - hop) * 0.024, sway * 0.025, sway * 0.12);
+        if (nb('spine')) nb('spine').rotation.z = sway * 6.0 * DEG;
+        if (nb('head')) { nb('head').rotation.z = sway * 9.5 * DEG; nb('head').rotation.x = zS * 5.0 * hop * DEG; }
+
+        updateTorsoAndReadFrames();
+        const reachY = 0.165 + hop * 0.055;
+        _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.10).addScaledVector(_rightDir, +0.165).addScaledVector(_upDir, reachY);
+        _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.10).addScaledVector(_rightDir, -0.165).addScaledVector(_upDir, reachY);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.24).add(new THREE.Vector3(0, 0.02, 0.04 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.24).add(new THREE.Vector3(0, 0.02, 0.04 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 14 * DEG, 14 * DEG, false);
+
+        sl.choreoState.emo = (Math.floor(t / 1.8) % 2 === 0) ? 'happy' : 'relaxed';
+        sl.choreoState.emoW = 0.96;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.60 + 0.36 * hop;
+        return;
+      }
+
+      // Standard Procedural Motions (greet_wave / showcase_turn / idol_sway)
+      let armL = 38 * DEG, armR = 38 * DEG;
+      let elbL = 16 * DEG, elbR = 16 * DEG;
+      let headYaw = 0, headTilt = 0, spineTilt = 0, spinY = 0;
+
+      if (mode === 'proc:greet_wave') {
+        setCuteLegs(7, 8, 8, 0.008, Math.sin(t * 2.0) * 0.014);
+        headTilt = (6.5 + Math.sin(t * 2.1) * 3.5) * DEG;
+        headYaw = Math.sin(t * 1.4) * 7 * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = headTilt * 0.35; nb('neck').rotation.y = headYaw * 0.35; }
+        if (nb('head')) { nb('head').rotation.z = headTilt * 0.65; nb('head').rotation.y = headYaw * 0.65; }
+        updateTorsoAndReadFrames();
+        const waveX = Math.sin(t * 6.0) * 0.038;
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, -(0.145 + waveX)).add(new THREE.Vector3(0, 0.10, 0));
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.08).addScaledVector(_rightDir, +0.145).add(new THREE.Vector3(0, -0.15, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(new THREE.Vector3(0, -0.20, 0));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(new THREE.Vector3(0, -0.20, 0));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 30 * DEG, 14 * DEG, false);
+        sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 0.85;
+        sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.62 + 0.22 * Math.abs(Math.sin(t * 3.0));
+        return;
+      }
+
+      if (mode === 'proc:showcase_turn') {
+        spinY = t * 0.72;
+        armL = (37 + Math.sin(t * 2.4) * 2.5) * DEG;
+        armR = (37 + Math.cos(t * 2.4) * 2.5) * DEG;
+        headTilt = Math.sin(t * 1.8) * 5 * DEG;
+      } else if (mode === 'proc:idol_sway') {
+        spinY = Math.sin(t * 2.2) * 0.48;
+        spineTilt = Math.sin(t * 2.2) * 5.5 * DEG;
+        headTilt = Math.sin(t * 2.2 + 0.5) * 8 * DEG;
+        headYaw = Math.cos(t * 1.6) * 10 * DEG;
+        armL = (34 + Math.sin(t * 4.4) * 5) * DEG;
+        armR = (34 - Math.sin(t * 4.4) * 5) * DEG;
+        elbL = 26 * DEG; elbR = 26 * DEG;
+      }
+
+      sl.choreoState.vowel = 'oh';
+      sl.choreoState.vowelW = 0.64 + 0.20 * (0.5 + 0.5 * Math.sin(t * 3.0));
+      if (sl.avatar.model) sl.avatar.model.rotation.y = spinY;
+      if (nb('leftUpperArm'))  nb('leftUpperArm').rotation.z  = -armL;
+      if (nb('rightUpperArm')) nb('rightUpperArm').rotation.z = +armR;
+      if (nb('leftLowerArm'))  nb('leftLowerArm').rotation.y  = -elbL;
+      if (nb('rightLowerArm')) nb('rightLowerArm').rotation.y = +elbR;
+      if (nb('spine')) nb('spine').rotation.z = spineTilt;
+      if (nb('head')) { nb('head').rotation.y = headYaw; nb('head').rotation.z = headTilt; }
+      applyDaintyFingers(nb, 26 * DEG, 26 * DEG, false);
+    }
+
+    function upgradeTextureFiltering(tex, forceSrgb = false) {
+      if (!tex || !tex.isTexture) return;
+      if (forceSrgb && tex.colorSpace !== THREE.SRGBColorSpace) {
+        tex.colorSpace = THREE.SRGBColorSpace;
+      }
+      tex.anisotropy = MAX_ANISO;
+      if (tex.image) {
+        tex.generateMipmaps = true;
+        tex.minFilter = THREE.LinearMipmapLinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+      }
+      tex.needsUpdate = true;
+    }
+
+    function buildUnlitMaterials(sl) {
+      sl.mtoonMap.clear();
+      sl.unlitMap.clear();
+      sl.avatar.model?.traverse(o => {
+        if (!o.isMesh) return;
+        const orig = o.material;
+        sl.mtoonMap.set(o, orig);
+        const toBasic = m => {
+          if (!m) return m;
+          const map = m.map || m.uniforms?.map?.value || null;
+          upgradeTextureFiltering(map, true);
+          upgradeTextureFiltering(m.shadeMultiplyTexture || m.uniforms?.shadeMultiplyTexture?.value, true);
+          upgradeTextureFiltering(m.normalMap || m.uniforms?.normalMap?.value, false);
+          upgradeTextureFiltering(m.emissiveMap || m.uniforms?.emissiveMap?.value, true);
+          const mat = new THREE.MeshBasicMaterial({
+            name: m.name || 'UnlitMat',
+            map,
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+            transparent: false,
+            opacity: 1.0,
+            depthWrite: true,
+          });
+          mat.onBeforeCompile = shader => {
+            shader.uniforms.uExposure = avatarGradeUniforms.uExposure;
+            shader.uniforms.uSoftKnee = avatarGradeUniforms.uSoftKnee;
+            shader.fragmentShader =
+              'uniform float uExposure;\nuniform float uSoftKnee;\n' +
+              shader.fragmentShader.replace(
+                '#include <colorspace_fragment>',
+                `#include <colorspace_fragment>
+                {
+                  vec3 c = gl_FragColor.rgb * uExposure;
+                  float peak = max(c.r, max(c.g, c.b));
+                  if (peak > 0.78 && uSoftKnee > 0.0) {
+                    float x = peak - 0.78;
+                    float compressed = 0.78 + (0.185 * x) / (0.185 + x * 0.72);
+                    float targetPeak = mix(peak, compressed, uSoftKnee);
+                    c *= targetPeak / max(1e-5, peak);
+                  }
+                  gl_FragColor.rgb = clamp(c, 0.0, 1.0);
+                }`
+              );
+          };
+          mat.customProgramCacheKey = () => 'showcase-unlit-softknee-v1';
+          return mat;
+        };
+        sl.unlitMap.set(o, Array.isArray(orig) ? orig.map(toBasic) : toBasic(orig));
+      });
+    }
+
+    function applyShaderMode() {
+      for (const sl of slots) {
+        sl.avatar.model?.traverse(o => {
+          if (!o.isMesh) return;
+          const mat = shaderMode === 'unlit' ? sl.unlitMap.get(o) : sl.mtoonMap.get(o);
+          if (mat) o.material = mat;
+        });
+      }
+    }
+
+    function applyStageTheme() {
+      const th = THEMES[currentThemeKey] || THEMES.cosmic_crystal;
+      for (const sl of slots) {
+        sl.sky.visible = !th.chroma;
+        sl.sky.material.uniforms.uPaletteMode.value = th.paletteMode;
+
+        sl.bokehStars.visible = !th.chroma && !th.hideParticles;
+        sl.bokehStars.material.uniforms.uPaletteMode.value = th.paletteMode;
+
+        sl.crystalField.visible = showParticles && !th.chroma && !th.hideParticles;
+        sl.crystalField.userData.uniforms.uPaletteMode.value = th.paletteMode;
+
+        sl.waterFloor.visible = showFloorRing && !th.chroma;
+        sl.waterFloor.material.uniforms.uTint.value.set(...th.floorTint);
+        sl.waterFloor.material.uniforms.uGold.value.set(...th.goldTint);
+      }
+    }
+
+    function getTargetResolution() {
+      const isVert = currentLayout === 'vertical9x16';
+      if (currentResTier === '4k') {
+        return isVert ? {w: 2160, h: 3840, label: '2160 × 3840 (4K 縦型ショート)'} : {w: 3840, h: 2160, label: '3840 × 2160 (4K UHD)'};
+      }
+      return isVert ? {w: 1080, h: 1920, label: '1080 × 1920 (FHD 縦型ショート)'} : {w: 1920, h: 1080, label: '1920 × 1080 (FHD)'};
+    }
+
+    function fitStagePreview() {
+      const {w, h, label} = getTargetResolution();
+      if (canvas.width !== w || canvas.height !== h) {
+        renderer.setSize(w, h, false);
+      }
+      document.getElementById('resReadout').textContent = label;
+
+      const pad = 26;
+      const availW = Math.max(200, stageArea.clientWidth - pad);
+      const availH = Math.max(200, stageArea.clientHeight - pad);
+      const scale = Math.min(availW / w, availH / h);
+      canvasFrame.style.width = Math.round(w * scale) + 'px';
+      canvasFrame.style.height = Math.round(h * scale) + 'px';
+      updateHitOverlayLayout();
+    }
+    window.addEventListener('resize', fitStagePreview);
+
+    function getActivePanels(W, H) {
+      const hasBorder = BORDER_COLORS[currentBorderKey] !== null && (currentLayout === 'grid2x2' || currentLayout === 'cols4');
+      const g = hasBorder ? Math.max(2, Math.round(Math.min(W, H) * 0.0022)) : 0;
+
+      if (currentLayout === 'grid2x2') {
+        const hw = Math.floor((W - g) / 2);
+        const rw = W - g - hw;
+        const hh = Math.floor((H - g) / 2);
+        const th = H - g - hh;
+        return [
+          {slot: 0, vx: 0,      vy: hh + g, vw: hw, vh: th, css: {left: '0%',  top: '0%',  width: '50%', height: '50%'}, tag: '① 左上'},
+          {slot: 1, vx: hw + g, vy: hh + g, vw: rw, vh: th, css: {left: '50%', top: '0%',  width: '50%', height: '50%'}, tag: '② 右上'},
+          {slot: 2, vx: 0,      vy: 0,      vw: hw, vh: hh, css: {left: '0%',  top: '50%', width: '50%', height: '50%'}, tag: '③ 左下'},
+          {slot: 3, vx: hw + g, vy: 0,      vw: rw, vh: hh, css: {left: '50%', top: '50%', width: '50%', height: '50%'}, tag: '④ 右下'},
+        ];
+      }
+      if (currentLayout === 'cols4') {
+        const cw = Math.floor((W - g * 3) / 4);
+        return [0, 1, 2, 3].map(i => {
+          const x = i * (cw + g);
+          const w = (i === 3) ? (W - x) : cw;
+          return {
+            slot: i, vx: x, vy: 0, vw: w, vh: H,
+            css: {left: (i * 25) + '%', top: '0%', width: '25%', height: '100%'},
+            tag: `${['①','②','③','④'][i]} 列${i + 1}`,
+          };
+        });
+      }
+      return [
+        {
+          slot: 0, vx: 0, vy: 0, vw: W, vh: H,
+          css: {left: '0%', top: '0%', width: '100%', height: '100%'},
+          tag: currentLayout === 'vertical9x16' ? '📱 単品 縦型ショート (9:16)' : '🖥️ 単品 ワイド (16:9)',
+        },
+      ];
+    }
+
+    function updateHitOverlayLayout() {
+      const panels = getActivePanels(canvas.width, canvas.height);
+      const activeSet = new Set(panels.map(p => p.slot));
+      hitDivs.forEach((hd, idx) => {
+        const p = panels.find(item => item.slot === idx);
+        if (!p) {
+          hd.style.display = 'none';
+        } else {
+          hd.style.display = 'block';
+          hd.style.left = p.css.left;
+          hd.style.top = p.css.top;
+          hd.style.width = p.css.width;
+          hd.style.height = p.css.height;
+          document.getElementById('tag' + idx).textContent = p.tag;
+        }
+      });
+      document.querySelectorAll('.slot-tab').forEach(btn => {
+        const idx = Number(btn.dataset.slot);
+        btn.classList.toggle('disabled-slot', !activeSet.has(idx));
+      });
+      if (!activeSet.has(activeSlotIdx)) selectSlot(0);
+    }
+
+    function setSlotCameraPreset(sl, presetName) {
+      const zS = modelFrontZSign;
+      const distMul = currentLayout === 'cols4' ? 2.08 : (currentLayout === 'vertical9x16' ? 1.58 : 1.0);
+
+      const map = {
+        gachikoi: {pos: [0.0, 1.03, 0.88 * zS * distMul],  tgt: [0.0, 1.01, 0.0]},
+        face:     {pos: [0.0, 1.08, 0.76 * zS * distMul],  tgt: [0.0, 1.06, 0.0]},
+        bust:     {pos: [0.07, 0.99, 1.16 * zS * distMul], tgt: [0.0, 0.95, 0.0]},
+        full:     {pos: [0.0, 0.72, 2.72 * zS * distMul],  tgt: [0.0, 0.68, 0.0]},
+        '3q':     {pos: [0.92 * distMul, 0.78, 2.46 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
+        back:     {pos: [-0.55 * distMul, 0.76, -2.55 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
+      };
+      const p = map[presetName] || map.full;
+      sl.camPreset = presetName;
+      sl.camera.position.set(...p.pos).multiplyScalar(modelCameraScale);
+      sl.controls.target.set(...p.tgt).multiplyScalar(modelCameraScale);
+      sl.controls.update();
+      sl.baseCamPos.copy(sl.camera.position);
+      sl.baseCamTgt.copy(sl.controls.target);
+      if (sl.index === activeSlotIdx) {
+        document.querySelectorAll('#slotCamPresets .btn').forEach(b => b.classList.toggle('active', b.dataset.scam === sl.camPreset));
+      }
+    }
+
+    function applyBuiltInPose(sl, time) {
+      if (sl.motionId.startsWith('motion:')) {
+        sl.choreoState = {emo: 'neutral', emoW: 0, vowel: null, vowelW: 0};
+        applyStudioMotion(sl, time);
+      } else {
+        applyProceduralOrMoePose(sl, time);
+      }
+    }
+
+    function applySlotMotion(sl, motionId) {
+      sl.motionRequest += 1;
+      sl.motionId = motionId;
+      sl.time = 0;
+      const vrm = sl.avatar.vrm;
+      if (!vrm) return;
+
+      sl.avatar.model.rotation.set(0, 0, 0);
+      sl.avatar.model.position.set(0, 0, 0);
+      sl.avatar.playing = false;
+      sl.avatar.mixer?.stopAllAction();
+      applyBuiltInPose(sl, 0);
+      vrm.update(0);
+      sl.avatar.springManager?.reset();
+      for (let i = 0; i < 22; i++) {
+        applyBuiltInPose(sl, i / 60);
+        sl.avatar.tick(1 / 60);
+      }
+    }
+
+    function startVrmaSmoothly(sl) {
+      if (!sl.avatar.action || !sl.avatar.vrm) return;
+      sl.avatar.vrm.humanoid.resetNormalizedPose();
+      sl.avatar.vrm.update(0);
+      sl.avatar.springManager?.reset();
+      if (sl.avatar.model) {
+        sl.avatar.model.rotation.set(0, 0, 0);
+        sl.avatar.model.position.set(0, 0, 0);
+      }
+      sl.avatar.action.reset();
+      sl.avatar.action.timeScale = sl.speed;
+      sl.avatar.action.play();
+      sl.avatar.playing = true;
+      for (let i = 0; i < 24; i++) sl.avatar.tick(1 / 60);
+    }
+
+    const ALL_EMOTIONS = ['happy', 'relaxed', 'angry', 'sad', 'surprised', 'jitome', 'blink', 'blinkLeft', 'blinkRight'];
+    const ALL_VOWELS = ['aa', 'ih', 'ou', 'ee', 'oh'];
+    const OH_TALK_SEQ = ['oh', 'oh', 'oh', 'ou', 'oh', 'oh', 'aa', 'oh'];
+    const RELAY_SEQ = ['neutral', 'relaxed', 'happy', 'jitome', 'surprised'];
+
+    function updateSlotExpressions(sl) {
+      const vrm = sl.avatar.vrm;
+      const mgr = vrm?.expressionManager;
+      if (!mgr) return;
+
+      for (const k of ALL_EMOTIONS) mgr.setValue(k, 0);
+      for (const k of ALL_VOWELS) mgr.setValue(k, 0);
+
+      const t = sl.time;
+      let activeEmo = sl.exprMode;
+      let emoWeight = 1.0;
+
+      if (sl.exprMode === 'choreo_sync') {
+        if (sl.motionId !== 'custom_vrma') {
+          activeEmo = sl.choreoState.emo || 'neutral';
+          emoWeight = sl.choreoState.emoW ?? 0;
+        } else {
+          const period = 2.8;
+          const idx = Math.floor(t / period) % RELAY_SEQ.length;
+          const phase = (t % period) / period;
+          activeEmo = RELAY_SEQ[idx];
+          if (phase < 0.14) emoWeight = phase / 0.14;
+          else if (phase > 0.86) emoWeight = (1.0 - phase) / 0.14;
+        }
+      } else if (sl.exprMode === 'auto_cycle') {
+        const period = 2.6;
+        const idx = Math.floor(t / period) % RELAY_SEQ.length;
+        const phase = (t % period) / period;
+        activeEmo = RELAY_SEQ[idx];
+        if (phase < 0.14) emoWeight = phase / 0.14;
+        else if (phase > 0.86) emoWeight = (1.0 - phase) / 0.14;
+      }
+
+      const closedEyeEmo = (activeEmo === 'relaxed' || activeEmo === 'blink' || activeEmo === 'blinkLeft' || activeEmo === 'blinkRight');
+      if (activeEmo !== 'neutral' && emoWeight > 0.005) {
+        mgr.setValue(activeEmo, THREE.MathUtils.clamp(emoWeight, 0, 1));
+      }
+
+      if (sl.autoBlink && !closedEyeEmo && activeEmo !== 'jitome') {
+        const blinkCycle = (t + sl.index * 1.1) % 3.6;
+        if (blinkCycle > 3.42) {
+          const bt = (blinkCycle - 3.42) / 0.18;
+          mgr.setValue('blink', THREE.MathUtils.clamp(Math.sin(bt * Math.PI), 0, 1));
+        }
+      }
+
+      // Mouth Choreography ('oh' / 「お」 as signature main mouth!)
+      if (sl.autoTalk) {
+        const talkGate = 0.5 + 0.5 * Math.sin(t * 1.7 + sl.index);
+        if (talkGate > 0.16) {
+          const vKey = OH_TALK_SEQ[Math.floor(t * 4.8) % OH_TALK_SEQ.length];
+          const vPulse = 0.48 + 0.44 * Math.abs(Math.sin(t * 7.8));
+          mgr.setValue(vKey, vPulse);
+        } else {
+          mgr.setValue('oh', 0.36);
+        }
+      } else if (sl.mouthMode === 'oh_fixed') {
+        mgr.setValue('oh', 0.85);
+      } else if (sl.mouthMode === 'oh_max') {
+        mgr.setValue('oh', 1.0);
+      } else if (sl.mouthMode === 'ou_fixed') {
+        mgr.setValue('ou', 0.80);
+      } else if (sl.mouthMode === 'aa_fixed') {
+        mgr.setValue('aa', 0.72);
+      } else if (sl.mouthMode === 'closed') {
+        // Leave all vowels at 0
+      } else {
+        // 'oh_main' (Default): use choreographed 'oh' on moe/proc motions, and cute breathing 'oh' on VRMA dances!
+        if (sl.motionId !== 'custom_vrma' && sl.choreoState.vowel && sl.choreoState.vowelW > 0.01) {
+          mgr.setValue(sl.choreoState.vowel, THREE.MathUtils.clamp(sl.choreoState.vowelW, 0, 1));
+        } else {
+          const ohBreath = 0.58 + 0.28 * (0.5 + 0.5 * Math.sin(t * 3.2 + sl.index * 1.3));
+          mgr.setValue('oh', ohBreath);
+        }
+      }
+
+      if (vrm.lookAt) {
+        vrm.lookAt.target = sl.lookAtCam ? sl.camera : null;
+        vrm.lookAt.autoUpdate = sl.lookAtCam;
+        if (!sl.lookAtCam) {
+          for (const k of ['lookLeft', 'lookRight', 'lookUp', 'lookDown']) mgr.setValue(k, 0);
+        }
+      }
+    }
+
+    function updateSlotCameraMotion(sl) {
+      if (sl.userDragging || sl.camAnim === 'none') {
+        sl.controls.update();
+        return;
+      }
+      const t = sl.time;
+      const offset = sl.baseCamPos.clone().sub(sl.baseCamTgt);
+      const baseYaw = Math.atan2(offset.x, offset.z);
+      const rH = Math.hypot(offset.x, offset.z);
+
+      if (sl.camAnim === 'gachikoi_breath') {
+        // Intimate handheld girlfriend-POV breathing sway + gentle closeness pulse!
+        const dolly = 1.0 - 0.12 * (0.5 - 0.5 * Math.cos(t * 0.85));
+        const yaw = baseYaw + Math.sin(t * 0.65) * 0.14;
+        sl.camera.position.set(
+          sl.baseCamTgt.x + Math.sin(yaw) * rH * dolly,
+          sl.baseCamPos.y + Math.sin(t * 1.1) * 0.015,
+          sl.baseCamTgt.z + Math.cos(yaw) * rH * dolly
+        );
+        sl.controls.target.copy(sl.baseCamTgt);
+      } else if (sl.camAnim === 'orbit_soft') {
+        const yaw = baseYaw + Math.sin(t * 0.55) * 0.36;
+        sl.camera.position.set(
+          sl.baseCamTgt.x + Math.sin(yaw) * rH,
+          sl.baseCamPos.y + Math.sin(t * 0.8) * 0.025,
+          sl.baseCamTgt.z + Math.cos(yaw) * rH
+        );
+        sl.controls.target.copy(sl.baseCamTgt);
+      } else if (sl.camAnim === 'orbit_360') {
+        const yaw = baseYaw + t * 0.65;
+        sl.camera.position.set(
+          sl.baseCamTgt.x + Math.sin(yaw) * rH,
+          sl.baseCamPos.y,
+          sl.baseCamTgt.z + Math.cos(yaw) * rH
+        );
+        sl.controls.target.copy(sl.baseCamTgt);
+      } else if (sl.camAnim === 'dolly_in') {
+        const s = 1.0 - 0.22 * (0.5 - 0.5 * Math.cos(t * 0.65));
+        sl.camera.position.copy(sl.baseCamTgt).addScaledVector(offset, s);
+        sl.controls.target.copy(sl.baseCamTgt);
+      } else if (sl.camAnim === 'pan_up') {
+        const cyc = (t % 8.0) / 8.0;
+        const u = cyc < 0.80 ? (cyc / 0.80) : (1.0 - (cyc - 0.80) / 0.20);
+        const smoothU = u * u * (3 - 2 * u);
+        const narrowBonus = currentLayout === 'vertical9x16' ? 1.38 : 1.0;
+        const yTgt = THREE.MathUtils.lerp(0.45, 0.94, smoothU);
+        const zDist = THREE.MathUtils.lerp(2.20, 1.52, smoothU) * narrowBonus * modelFrontZSign;
+        sl.controls.target.set(0, yTgt, 0).multiplyScalar(modelCameraScale);
+        sl.camera.position.set(Math.sin(t * 0.45) * 0.18, yTgt + 0.04, zDist).multiplyScalar(modelCameraScale);
+      }
+      sl.camera.lookAt(sl.controls.target);
+    }
+
+    let changingModel = false;
+    let modelCameraScale = 1;
+
+    async function loadVrmAcrossAllSlots(readBytes, name) {
+      if (changingModel) return;
+      changingModel = true;
+      const mask = document.getElementById('loadingMask');
+      const txt = document.getElementById('loadingText');
+      const badge = document.getElementById('modelBadge');
+      const loadButton = document.getElementById('btnLoadVrm');
+      loadButton.disabled = true;
+      mask.classList.remove('hidden');
+      txt.textContent = 'VRMを読み込み中…';
+
+      try {
+        const bytes = await readBytes();
+        const results = await Promise.allSettled(slots.map(() => parseAvatar(bytes)));
+        const failure = results.find(result => result.status === 'rejected');
+        if (failure) {
+          for (const result of results) {
+            if (result.status === 'fulfilled') disposeAvatar(result.value);
+          }
+          throw failure.reason;
+        }
+
+        for (const [i, sl] of slots.entries()) {
+          sl.motionRequest += 1;
+          for (const [mesh, material] of sl.mtoonMap) mesh.material = material;
+          for (const material of sl.unlitMap.values()) {
+            for (const generated of [].concat(material)) generated?.dispose();
+          }
+          sl.avatar.use(results[i].value);
+        }
+
+        const humanoid = slots[0].avatar.vrm.humanoid;
+        const head = humanoid.getRawBoneNode('head').getWorldPosition(new THREE.Vector3());
+        const eye = humanoid.getRawBoneNode('leftEye')?.getWorldPosition(new THREE.Vector3());
+        modelFrontZSign = eye?.z < head.z ? -1 : 1;
+        modelCameraScale = THREE.MathUtils.clamp(head.y / 0.98, 0.35, 4);
+
+        for (const sl of slots) {
+          calibrateNormalizedRig(sl);
+          buildUnlitMaterials(sl);
+        }
+        applyShaderMode();
+        applyStageTheme();
+        await applyMoeGachikoiPvTemplate();
+        badge.textContent = name;
+      } catch (err) {
+        console.warn('VRM load failed:', err);
+        badge.textContent = '読込エラー · ' + err.message;
+      } finally {
+        mask.classList.add('hidden');
+        loadButton.disabled = false;
+        changingModel = false;
+      }
+    }
+
+    // =========================================================================
+    // Curated One-Click Moe / Gachikoi / Dance Showcase Presets
+    // =========================================================================
+    function markActivePreset(id) {
+      document.querySelectorAll('#presetBtns .preset-btn').forEach(b => b.classList.toggle('active', b.id === id));
+    }
+
+    async function applyMoeGachikoiPvTemplate() {
+      markActivePreset('presetMoePv');
+      setLayout('grid2x2');
+      const cfg = [
+        {cam: 'gachikoi', motion: 'moe:gachikoi_peek',  camAnim: 'gachikoi_breath', expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'bust',     motion: 'moe:azato_cheek',    camAnim: 'orbit_soft',      expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'bust',     motion: 'moe:double_peace',   camAnim: 'none',            expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'full',     motion: 'moe:idol_turn_wink', camAnim: 'none',            expr: 'choreo_sync', blink: true, talk: false, look: true},
+      ];
+      await applyTemplateConfigs(cfg);
+    }
+
+    async function applyHeartKyunPvTemplate() {
+      markActivePreset('presetHeartPv');
+      setLayout('grid2x2');
+      const cfg = [
+        {cam: 'gachikoi', motion: 'moe:cheek_heart',        camAnim: 'gachikoi_breath', expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'bust',     motion: 'moe:kyun_chest_squeeze', camAnim: 'orbit_soft',      expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'bust',     motion: 'moe:shy_fidget',         camAnim: 'none',            expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'full',     motion: 'moe:big_overhead_heart', camAnim: 'none',            expr: 'choreo_sync', blink: true, talk: false, look: true},
+      ];
+      await applyTemplateConfigs(cfg);
+    }
+
+    async function applyKemomimiMoePvTemplate() {
+      markActivePreset('presetKemomimiPv');
+      setLayout('grid2x2');
+      const cfg = [
+        {cam: 'face', motion: 'moe:peekaboo_cuffs',    camAnim: 'none',       expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'bust', motion: 'moe:cat_nyan_beckon',   camAnim: 'orbit_soft', expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'bust', motion: 'moe:sleepy_rub',        camAnim: 'none',       expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: 'full', motion: 'moe:tail_wag_lookback', camAnim: 'none',       expr: 'choreo_sync', blink: true, talk: false, look: true},
+      ];
+      await applyTemplateConfigs(cfg);
+    }
+
+    async function applyHeroPvTemplate() {
+      markActivePreset('presetHeroPv');
+      setLayout('grid2x2');
+      const cfg = [
+        {cam: 'bust', motion: 'moe:ferret_paws',    camAnim: 'orbit_soft', expr: 'choreo_sync', blink: true, talk: false, look: true},
+        {cam: '3q',   motion: 'motion:dance_cute',    camAnim: 'none',       expr: 'happy',       blink: true, talk: false, look: true},
+        {cam: 'full', motion: 'motion:walk',          camAnim: 'orbit_soft', expr: 'neutral',     blink: true, talk: false, look: true},
+        {cam: 'full', motion: 'proc:showcase_turn', camAnim: 'none',       expr: 'relaxed',     blink: true, talk: false, look: false},
+      ];
+      await applyTemplateConfigs(cfg);
+    }
+
+    async function applyDanceMvTemplate() {
+      markActivePreset('presetDanceMv');
+      setLayout('cols4');
+      const cfg = [
+        {cam: 'full', motion: 'motion:dance_cute',  camAnim: 'none', expr: 'happy',       blink: true, talk: false, look: true},
+        {cam: 'full', motion: 'motion:dance_pop',   camAnim: 'none', expr: 'choreo_sync', blink: true, talk: true,  look: true},
+        {cam: 'full', motion: 'motion:dance_twist', camAnim: 'none', expr: 'relaxed',     blink: true, talk: false, look: true},
+        {cam: 'full', motion: 'motion:dance_step',  camAnim: 'none', expr: 'jitome',      blink: true, talk: false, look: true},
+      ];
+      await applyTemplateConfigs(cfg);
+    }
+
+    async function applyShortGachikoiTemplate() {
+      markActivePreset('presetShortGachikoi');
+      setLayout('vertical9x16');
+      selectSlot(0);
+      const s = slots[0];
+      s.exprMode = 'choreo_sync';
+      s.autoBlink = true;
+      s.autoTalk = false;
+      s.lookAtCam = true;
+      s.camAnim = 'gachikoi_breath';
+      setSlotCameraPreset(s, 'gachikoi');
+      await applySlotMotion(s, 'moe:gachikoi_peek');
+      syncSidebarFromSlot(s);
+    }
+
+    async function applyShortAzatoTemplate() {
+      markActivePreset('presetShortAzato');
+      setLayout('vertical9x16');
+      selectSlot(0);
+      const s = slots[0];
+      s.exprMode = 'choreo_sync';
+      s.autoBlink = true;
+      s.autoTalk = false;
+      s.lookAtCam = true;
+      s.camAnim = 'orbit_soft';
+      setSlotCameraPreset(s, 'bust');
+      await applySlotMotion(s, 'moe:cheek_heart');
+      syncSidebarFromSlot(s);
+    }
+
+    async function applyShortDanceTemplate() {
+      markActivePreset('presetShortDance');
+      setLayout('vertical9x16');
+      selectSlot(0);
+      const s = slots[0];
+      s.exprMode = 'choreo_sync';
+      s.autoBlink = true;
+      s.autoTalk = false;
+      s.lookAtCam = true;
+      s.camAnim = 'orbit_soft';
+      setSlotCameraPreset(s, 'full');
+      await applySlotMotion(s, 'motion:dance_cute');
+      syncSidebarFromSlot(s);
+    }
+
+    async function applyTemplateConfigs(cfgList) {
+      const mask = document.getElementById('loadingMask');
+      document.getElementById('loadingText').textContent = 'モーションとステージ演出を同期中...';
+      mask.classList.remove('hidden');
+      try {
+        await Promise.all(cfgList.map(async (c, i) => {
+          const sl = slots[i];
+          sl.exprMode = c.expr;
+          sl.autoBlink = c.blink;
+          sl.autoTalk = c.talk;
+          sl.lookAtCam = c.look;
+          sl.camAnim = c.camAnim;
+          setSlotCameraPreset(sl, c.cam);
+          await applySlotMotion(sl, c.motion);
+        }));
+      } finally {
+        mask.classList.add('hidden');
+      }
+      syncSidebarFromSlot(slots[activeSlotIdx]);
+    }
+
+    function syncRestartAllSlots() {
+      slots.forEach(sl => {
+        sl.time = 0;
+        if (sl.motionId === 'custom_vrma') {
+          startVrmaSmoothly(sl);
+        } else if (sl.avatar.vrm) {
+          applyBuiltInPose(sl, 0);
+          sl.avatar.vrm.update(0);
+          sl.avatar.springManager?.reset();
+          for (let i = 0; i < 18; i++) {
+            applyBuiltInPose(sl, i / 60);
+            sl.avatar.tick(1 / 60);
+          }
+        }
+      });
+    }
+
+    function selectSlot(idx) {
+      activeSlotIdx = idx;
+      hitDivs.forEach((hd, i) => hd.classList.toggle('selected', i === idx));
+      document.querySelectorAll('.slot-tab').forEach(b => b.classList.toggle('active', Number(b.dataset.slot) === idx));
+      document.getElementById('activeSlotHint').textContent =
+        `現在編集中：パネル ${['①','②','③','④'][idx]}（画面上の直接ドラッグで個別アングル調整OK）`;
+      syncSidebarFromSlot(slots[idx]);
+    }
+
+    function syncSidebarFromSlot(sl) {
+      const selM = document.getElementById('selSlotMotion');
+      const customOption = document.getElementById('customMotionOption');
+      customOption.hidden = sl.motionId !== 'custom_vrma';
+      selM.value = sl.motionId;
+      document.getElementById('slSlotSpeed').value = String(Math.round(sl.speed * 100));
+      document.getElementById('outSlotSpeed').textContent = sl.speed.toFixed(2) + 'x';
+      document.getElementById('selSlotCamAnim').value = sl.camAnim;
+      document.getElementById('selSlotExpr').value = sl.exprMode;
+      document.getElementById('selSlotMouth').value = sl.mouthMode;
+      document.getElementById('chkSlotBlink').checked = sl.autoBlink;
+      document.getElementById('chkSlotTalk').checked = sl.autoTalk;
+      document.getElementById('chkSlotLookAt').checked = sl.lookAtCam;
+      document.querySelectorAll('#slotCamPresets .btn').forEach(b => b.classList.toggle('active', b.dataset.scam === sl.camPreset));
+    }
+
+    function setLayout(layout) {
+      currentLayout = layout;
+      document.querySelectorAll('#layoutBtns .btn').forEach(b => b.classList.toggle('active', b.dataset.layout === layout));
+      fitStagePreview();
+    }
+
+    // Event Bindings
+    document.querySelectorAll('#layoutBtns .btn').forEach(btn => {
+      btn.addEventListener('click', () => setLayout(btn.dataset.layout));
+    });
+    document.querySelectorAll('#resBtns .btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (mediaRecorder && mediaRecorder.state === 'recording') return;
+        currentResTier = btn.dataset.res;
+        document.querySelectorAll('#resBtns .btn').forEach(b => b.classList.toggle('active', b === btn));
+        fitStagePreview();
+      });
+    });
+    document.querySelectorAll('#fpsBtns .btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (mediaRecorder && mediaRecorder.state === 'recording') return;
+        currentFps = Number(btn.dataset.fps);
+        document.querySelectorAll('#fpsBtns .btn').forEach(b => b.classList.toggle('active', b === btn));
+      });
+    });
+    document.querySelectorAll('.slot-tab').forEach(btn => {
+      btn.addEventListener('click', () => selectSlot(Number(btn.dataset.slot)));
+    });
+    document.getElementById('selSlotMotion').addEventListener('change', async e => {
+      await applySlotMotion(slots[activeSlotIdx], e.target.value);
+    });
+    document.getElementById('btnSlotLoadVrma').addEventListener('click', () => document.getElementById('fileSlotVrma').click());
+    document.getElementById('fileSlotVrma').addEventListener('change', async e => {
+      const file = e.target.files?.[0];
+      e.target.value = '';
+      if (!file) return;
+
+      const sl = slots[activeSlotIdx];
+      const stamp = ++sl.motionRequest;
+      const vrm = sl.avatar.vrm;
+      if (!vrm || changingModel) return;
+
+      try {
+        const animation = await sl.avatar.readAnimation(file);
+        if (sl.motionRequest !== stamp || sl.avatar.vrm !== vrm) return;
+        sl.avatar.useAnimation(animation);
+        sl.motionId = 'custom_vrma';
+        sl.time = 0;
+        startVrmaSmoothly(sl);
+        if (sl.index === activeSlotIdx) syncSidebarFromSlot(sl);
+      } catch (err) {
+        alert('VRMAを読み込めませんでした。' + err.message);
+      }
+    });
+    document.getElementById('slSlotSpeed').addEventListener('input', e => {
+      const sl = slots[activeSlotIdx];
+      sl.speed = Number(e.target.value) / 100;
+      document.getElementById('outSlotSpeed').textContent = sl.speed.toFixed(2) + 'x';
+      if (sl.avatar.action) sl.avatar.action.timeScale = sl.speed;
+    });
+    document.querySelectorAll('#slotCamPresets .btn').forEach(btn => {
+      btn.addEventListener('click', () => setSlotCameraPreset(slots[activeSlotIdx], btn.dataset.scam));
+    });
+    document.getElementById('selSlotCamAnim').addEventListener('change', e => {
+      const sl = slots[activeSlotIdx];
+      sl.camAnim = e.target.value;
+      sl.baseCamPos.copy(sl.camera.position);
+      sl.baseCamTgt.copy(sl.controls.target);
+    });
+    document.getElementById('selSlotExpr').addEventListener('change', e => { slots[activeSlotIdx].exprMode = e.target.value; });
+    document.getElementById('selSlotMouth').addEventListener('change', e => { slots[activeSlotIdx].mouthMode = e.target.value; });
+    document.getElementById('chkSlotBlink').addEventListener('change', e => { slots[activeSlotIdx].autoBlink = e.target.checked; });
+    document.getElementById('chkSlotTalk').addEventListener('change', e => { slots[activeSlotIdx].autoTalk = e.target.checked; });
+    document.getElementById('chkSlotLookAt').addEventListener('change', e => { slots[activeSlotIdx].lookAtCam = e.target.checked; });
+
+    document.getElementById('selTheme').addEventListener('change', e => {
+      currentThemeKey = e.target.value;
+      applyStageTheme();
+    });
+    document.querySelectorAll('#borderBtns .btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentBorderKey = btn.dataset.bdr;
+        document.querySelectorAll('#borderBtns .btn').forEach(b => b.classList.toggle('active', b === btn));
+        updateHitOverlayLayout();
+      });
+    });
+    document.getElementById('chkParticles').addEventListener('change', e => { showParticles = e.target.checked; applyStageTheme(); });
+    document.getElementById('chkFloorRing').addEventListener('change', e => { showFloorRing = e.target.checked; applyStageTheme(); });
+    document.getElementById('chkShowTags').addEventListener('change', e => { document.body.classList.toggle('hide-hud', !e.target.checked); });
+
+    document.getElementById('btnShaderUnlit').addEventListener('click', () => {
+      shaderMode = 'unlit';
+      document.getElementById('btnShaderUnlit').classList.add('active');
+      document.getElementById('btnShaderMtoon').classList.remove('active');
+      applyShaderMode();
+    });
+    document.getElementById('btnShaderMtoon').addEventListener('click', () => {
+      shaderMode = 'mtoon';
+      document.getElementById('btnShaderMtoon').classList.add('active');
+      document.getElementById('btnShaderUnlit').classList.remove('active');
+      applyShaderMode();
+    });
+
+    document.getElementById('slExposure').addEventListener('input', e => {
+      const v = Number(e.target.value);
+      avatarGradeUniforms.uExposure.value = v / 100;
+      document.getElementById('outExposure').textContent = v + '%';
+    });
+    document.getElementById('chkSoftKnee').addEventListener('change', e => {
+      avatarGradeUniforms.uSoftKnee.value = e.target.checked ? 1.0 : 0.0;
+    });
+
+    document.getElementById('btnSyncRestart').addEventListener('click', syncRestartAllSlots);
+    document.getElementById('presetMoePv').addEventListener('click', applyMoeGachikoiPvTemplate);
+    document.getElementById('presetHeartPv').addEventListener('click', applyHeartKyunPvTemplate);
+    document.getElementById('presetKemomimiPv').addEventListener('click', applyKemomimiMoePvTemplate);
+    document.getElementById('presetHeroPv').addEventListener('click', applyHeroPvTemplate);
+    document.getElementById('presetDanceMv').addEventListener('click', applyDanceMvTemplate);
+    document.getElementById('presetShortGachikoi').addEventListener('click', applyShortGachikoiTemplate);
+    document.getElementById('presetShortAzato').addEventListener('click', applyShortAzatoTemplate);
+    document.getElementById('presetShortDance').addEventListener('click', applyShortDanceTemplate);
+
+    document.getElementById('btnLoadVrm').addEventListener('click', () => {
+      if (mediaRecorder?.state !== 'recording') document.getElementById('fileVrm').click();
+    });
+    document.getElementById('fileVrm').addEventListener('change', async e => {
+      const file = e.target.files?.[0];
+      e.target.value = '';
+      if (!file || mediaRecorder?.state === 'recording') return;
+      await loadVrmAcrossAllSlots(() => file.arrayBuffer(), file.name);
+    });
+
+    document.getElementById('btnSnapPng').addEventListener('click', () => {
+      if (changingModel || !slots[0].avatar.vrm) return;
+      renderCompositeFrame();
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `vrm_showcase_${canvas.width}x${canvas.height}.png`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      }, 'image/png');
+    });
+
+    // =========================================================================
+    // Zero-Blowout Video Recording Engine (Rec.709 Studio-Range 16..235 + colr Fix)
+    // =========================================================================
+    let mediaRecorder = null;
+    let recChunks = [];
+    let recStartTime = 0;
+    let recAutoStopSec = 0;
+    let lastBlobUrl = null;
+    let mp4EncoderFullRange = false;
+    let recUseStudioComp = false;
+
+    const recCanvas = document.createElement('canvas');
+    const recGl = recCanvas.getContext('webgl2', {
+      alpha: false,
+      antialias: false,
+      depth: false,
+      stencil: false,
+      preserveDrawingBuffer: true,
+      powerPreference: 'high-performance',
+    });
+
+    const recBlitter = (() => {
+      if (!recGl) return null;
+      const compile = (type, src) => {
+        const sh = recGl.createShader(type);
+        recGl.shaderSource(sh, src);
+        recGl.compileShader(sh);
+        return sh;
+      };
+      const vs = compile(recGl.VERTEX_SHADER, `#version 300 es
+        out vec2 vUv;
+        void main() {
+          vec2 p = vec2((gl_VertexID == 1) ? 3.0 : -1.0, (gl_VertexID == 2) ? 3.0 : -1.0);
+          vUv = p * 0.5 + 0.5;
+          gl_Position = vec4(p, 0.0, 1.0);
+        }
+      `);
+      const fs = compile(recGl.FRAGMENT_SHADER, `#version 300 es
+        precision highp float;
+        uniform sampler2D uTex;
+        uniform int uStudioRange;
+        in vec2 vUv;
+        out vec4 fragColor;
+        void main() {
+          vec3 rgb = texture(uTex, vUv).rgb;
+          if (uStudioRange == 1) {
+            float y = dot(rgb, vec3(0.2126, 0.7152, 0.0722));
+            float yTv = (16.0 / 255.0) + (219.0 / 255.0) * y;
+            vec3 outRgb = yTv + (224.0 / 255.0) * (rgb - y);
+            fragColor = vec4(clamp(outRgb, 0.0, 1.0), 1.0);
+          } else {
+            fragColor = vec4(rgb, 1.0);
+          }
+        }
+      `);
+      const prog = recGl.createProgram();
+      recGl.attachShader(prog, vs);
+      recGl.attachShader(prog, fs);
+      recGl.linkProgram(prog);
+
+      const vao = recGl.createVertexArray();
+      const tex = recGl.createTexture();
+      recGl.bindTexture(recGl.TEXTURE_2D, tex);
+      recGl.texParameteri(recGl.TEXTURE_2D, recGl.TEXTURE_MIN_FILTER, recGl.LINEAR);
+      recGl.texParameteri(recGl.TEXTURE_2D, recGl.TEXTURE_MAG_FILTER, recGl.LINEAR);
+      recGl.texParameteri(recGl.TEXTURE_2D, recGl.TEXTURE_WRAP_S, recGl.CLAMP_TO_EDGE);
+      recGl.texParameteri(recGl.TEXTURE_2D, recGl.TEXTURE_WRAP_T, recGl.CLAMP_TO_EDGE);
+
+      return {
+        prog,
+        vao,
+        tex,
+        uTex: recGl.getUniformLocation(prog, 'uTex'),
+        uStudioRange: recGl.getUniformLocation(prog, 'uStudioRange'),
+      };
+    })();
+
+    function blitToRecordingCanvas() {
+      const W = canvas.width;
+      const H = canvas.height;
+      if (recCanvas.width !== W || recCanvas.height !== H) {
+        recCanvas.width = W;
+        recCanvas.height = H;
+      }
+      if (!recGl || !recBlitter) return;
+      recGl.viewport(0, 0, W, H);
+      recGl.useProgram(recBlitter.prog);
+      recGl.bindVertexArray(recBlitter.vao);
+      recGl.activeTexture(recGl.TEXTURE0);
+      recGl.bindTexture(recGl.TEXTURE_2D, recBlitter.tex);
+      recGl.pixelStorei(recGl.UNPACK_FLIP_Y_WEBGL, true);
+      recGl.texImage2D(recGl.TEXTURE_2D, 0, recGl.RGBA8, recGl.RGBA, recGl.UNSIGNED_BYTE, canvas);
+      recGl.uniform1i(recBlitter.uTex, 0);
+      recGl.uniform1i(recBlitter.uStudioRange, recUseStudioComp ? 1 : 0);
+      recGl.drawArrays(recGl.TRIANGLES, 0, 3);
+    }
+
+    function inspectMp4NclxColrBox(u8) {
+      // Locate 19-byte ISO-BMFF colr('nclx') box inside moov header:
+      // [00 00 00 13] ['c' 'o' 'l' 'r'] ['n' 'c' 'l' 'x'] [prim:u16] [trc:u16] [mat:u16] [full:u8]
+      const limit = Math.min(u8.length - 19, 262144);
+      for (let i = 0; i <= limit; i++) {
+        if (
+          u8[i] === 0x00 && u8[i + 1] === 0x00 && u8[i + 2] === 0x00 && u8[i + 3] === 0x13 &&
+          u8[i + 4] === 0x63 && u8[i + 5] === 0x6f && u8[i + 6] === 0x6c && u8[i + 7] === 0x72 &&
+          u8[i + 8] === 0x6e && u8[i + 9] === 0x63 && u8[i + 10] === 0x6c && u8[i + 11] === 0x78
+        ) {
+          const dv = new DataView(u8.buffer, u8.byteOffset + i, 19);
+          return {
+            offset: i,
+            primaries: dv.getUint16(12, false),
+            transfer: dv.getUint16(14, false),
+            matrix: dv.getUint16(16, false),
+            fullRange: (dv.getUint8(18) >> 7) & 1,
+          };
+        }
+      }
+      return null;
+    }
+
+    async function normalizeMp4ColrToTvBt709(rawBlob) {
+      const buf = await rawBlob.arrayBuffer();
+      const u8 = new Uint8Array(buf);
+      const info = inspectMp4NclxColrBox(u8);
+      if (info) {
+        const dv = new DataView(buf, info.offset, 19);
+        // Set ITU-R BT.709 (1 / 1 / 1) + Limited Studio TV Range (full_range_flag = 0)
+        // so Windows D3D11/MediaPlayer, FFmpeg, Chrome, QuickTime, Premiere, X, & YouTube decode identically!
+        dv.setUint16(12, 1, false);
+        dv.setUint16(14, 1, false);
+        dv.setUint16(16, 1, false);
+        dv.setUint8(18, 0x00);
+      }
+      return new Blob([buf], {type: 'video/mp4'});
+    }
+
+    function pickBestVideoMime(preferFmt = 'mp4') {
+      const mp4List = [
+        {mime: 'video/mp4;codecs=avc1.640034', ext: 'mp4'},
+        {mime: 'video/mp4;codecs=avc1.42E01E', ext: 'mp4'},
+        {mime: 'video/mp4', ext: 'mp4'},
+      ];
+      const webmList = [
+        {mime: 'video/webm;codecs=vp9', ext: 'webm'},
+        {mime: 'video/webm;codecs=vp8', ext: 'webm'},
+        {mime: 'video/webm', ext: 'webm'},
+      ];
+      const candidates = preferFmt === 'webm' ? [...webmList, ...mp4List] : [...mp4List, ...webmList];
+      for (const c of candidates) {
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported(c.mime)) return c;
+      }
+      return {mime: '', ext: 'webm'};
+    }
+
+    async function calibrateMp4EncoderRange() {
+      const best = pickBestVideoMime('mp4');
+      if (best.ext !== 'mp4') {
+        mp4EncoderFullRange = false;
+        document.body.dataset.mp4EncoderRange = 'unsupported';
+        return;
+      }
+      return new Promise(resolve => {
+        try {
+          const pc = document.createElement('canvas');
+          pc.width = 640;
+          pc.height = 360;
+          const pgl = pc.getContext('webgl2', {
+            alpha: false, antialias: false, depth: false, stencil: false,
+            preserveDrawingBuffer: true, powerPreference: 'high-performance',
+          });
+          if (!pgl) {
+            mp4EncoderFullRange = false;
+            document.body.dataset.mp4EncoderRange = 'no_webgl2';
+            resolve();
+            return;
+          }
+          pgl.clearColor(0.92, 0.92, 0.94, 1.0);
+          pgl.clear(pgl.COLOR_BUFFER_BIT);
+
+          const pStream = pc.captureStream(30);
+          const pChunks = [];
+          const mr = new MediaRecorder(pStream, {mimeType: best.mime, videoBitsPerSecond: 4_000_000});
+          let settled = false;
+          const finish = async () => {
+            if (settled) return;
+            settled = true;
+            clearInterval(drawTimer);
+            pStream.getTracks().forEach(t => t.stop());
+            try {
+              const b = new Blob(pChunks, {type: 'video/mp4'});
+              const u8 = new Uint8Array(await b.arrayBuffer());
+              const info = inspectMp4NclxColrBox(u8);
+              mp4EncoderFullRange = info ? (info.fullRange === 1) : false;
+              document.body.dataset.mp4EncoderRange = info
+                ? `${info.fullRange === 1 ? 'full_pc' : 'limited_tv'}_p${info.primaries}_t${info.transfer}_m${info.matrix}`
+                : 'no_colr';
+            } catch {
+              mp4EncoderFullRange = false;
+              document.body.dataset.mp4EncoderRange = 'probe_err';
+            }
+            resolve();
+          };
+          const drawTimer = setInterval(() => {
+            pgl.clearColor(0.92, 0.92, 0.94, 1.0);
+            pgl.clear(pgl.COLOR_BUFFER_BIT);
+          }, 25);
+          mr.ondataavailable = e => { if (e.data && e.data.size > 0) pChunks.push(e.data); };
+          mr.onstop = finish;
+          mr.start(80);
+          setTimeout(() => { if (mr.state === 'recording') mr.stop(); }, 200);
+          setTimeout(finish, 650);
+        } catch {
+          mp4EncoderFullRange = false;
+          document.body.dataset.mp4EncoderRange = 'exception';
+          resolve();
+        }
+      });
+    }
+
+    function startRecording() {
+      if (changingModel || !slots[0].avatar.vrm) return;
+      fitStagePreview();
+      if (document.getElementById('chkSyncOnRec').checked) syncRestartAllSlots();
+
+      const preferFmt = document.getElementById('selRecFmt').value || 'mp4';
+      const {mime, ext} = pickBestVideoMime(preferFmt);
+      const rangeMode = document.getElementById('selRecRange').value || 'auto';
+
+      if (ext === 'mp4') {
+        if (rangeMode === 'auto') recUseStudioComp = mp4EncoderFullRange;
+        else if (rangeMode === 'force_tv') recUseStudioComp = true;
+        else recUseStudioComp = false;
+      } else {
+        recUseStudioComp = false;
+      }
+
+      renderCompositeFrame();
+      blitToRecordingCanvas();
+
+      const bps = currentResTier === '4k' ? 54_000_000 : 24_000_000;
+      const srcCanvas = (recGl && recBlitter) ? recCanvas : canvas;
+      const stream = srcCanvas.captureStream(currentFps);
+      const opts = mime ? {mimeType: mime, videoBitsPerSecond: bps} : {videoBitsPerSecond: bps};
+
+      recChunks = [];
+      mediaRecorder = new MediaRecorder(stream, opts);
+      recStartTime = performance.now();
+      recAutoStopSec = Number(document.getElementById('selRecDur').value) || 0;
+
+      mediaRecorder.ondataavailable = e => { if (e.data && e.data.size > 0) recChunks.push(e.data); };
+      mediaRecorder.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop());
+        let blob = new Blob(recChunks, {type: mediaRecorder.mimeType || (ext === 'mp4' ? 'video/mp4' : 'video/webm')});
+        if (ext === 'mp4' && rangeMode !== 'passthrough') {
+          blob = await normalizeMp4ColrToTvBt709(blob);
+        }
+        if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+        lastBlobUrl = URL.createObjectURL(blob);
+        const modeTag = currentLayout === 'vertical9x16' ? 'vertical_short' : currentLayout;
+        const fname = `vrm_showcase_${modeTag}_${canvas.width}x${canvas.height}_${currentFps}fps.${ext}`;
+
+        const dl = document.getElementById('recDlLink');
+        dl.href = lastBlobUrl;
+        dl.download = fname;
+        dl.click();
+
+        const mb = (blob.size / (1024 * 1024)).toFixed(1);
+        document.getElementById('recToastText').textContent = `✅ 録画完了: ${fname} (${mb} MB · 白飛び補正済)`;
+        document.getElementById('recToast').classList.add('show');
+
+        const btn = document.getElementById('btnRecord');
+        btn.classList.remove('recording');
+        btn.textContent = '🔴 録画スタート';
+      };
+
+      mediaRecorder.start(250);
+      const btn = document.getElementById('btnRecord');
+      btn.classList.add('recording');
+      btn.textContent = '⏹ 録画停止 (0.0s)';
+      document.getElementById('recToast').classList.remove('show');
+    }
+
+    function stopRecording() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+    }
+
+    document.getElementById('btnRecord').addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') stopRecording();
+      else startRecording();
+    });
+    document.getElementById('btnCloseToast').addEventListener('click', () => {
+      document.getElementById('recToast').classList.remove('show');
+    });
+
+    function renderCompositeFrame() {
+      const W = canvas.width;
+      const H = canvas.height;
+      const th = THEMES[currentThemeKey] || THEMES.cosmic_crystal;
+      const bdrHex = BORDER_COLORS[currentBorderKey];
+
+      renderer.setScissorTest(false);
+      renderer.setViewport(0, 0, W, H);
+      renderer.setClearColor(bdrHex !== null ? bdrHex : th.clear, 1.0);
+      renderer.clear(true, true, true);
+
+      const panels = getActivePanels(W, H);
+      renderer.setScissorTest(true);
+      for (const p of panels) {
+        const sl = slots[p.slot];
+        sl.camera.aspect = Math.max(0.05, p.vw / Math.max(1, p.vh));
+        sl.camera.updateProjectionMatrix();
+        sl.crystalField.userData.uniforms.uScaleY.value = p.vh;
+
+        renderer.setViewport(p.vx, p.vy, p.vw, p.vh);
+        renderer.setScissor(p.vx, p.vy, p.vw, p.vh);
+        renderer.setClearColor(th.clear, 1.0);
+        renderer.clear(true, true, false);
+        // 1) Render Real-Time highp WebGL Cosmic Sky + Optical Bokeh/Starbursts + 3D Crystal Chords + Water Floor
+        renderer.render(sl.bgScene, sl.camera);
+        // 2) Clear depth so avatar renders crisply in front with ZERO additive bokeh bleed on face/hair!
+        renderer.clearDepth();
+        renderer.render(sl.scene, sl.camera);
+      }
+      renderer.setScissorTest(false);
+
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        blitToRecordingCanvas();
+      }
+    }
+
+    let lastNow = performance.now();
+    function animate(now) {
+      requestAnimationFrame(animate);
+      const dt = Math.min(0.05, Math.max(0.0001, (now - lastNow) / 1000));
+      lastNow = now;
+
+      const panels = getActivePanels(canvas.width, canvas.height);
+      for (const p of panels) {
+        const sl = slots[p.slot];
+        sl.time += dt * sl.speed;
+        sl.sky.material.uniforms.uTime.value = sl.time;
+        sl.bokehStars.material.uniforms.uTime.value = sl.time;
+        sl.crystalField.userData.uniforms.uTime.value = sl.time;
+        sl.waterFloor.material.uniforms.uTime.value = sl.time;
+
+        if (sl.avatar.vrm) {
+          if (sl.motionId !== 'custom_vrma') {
+            applyBuiltInPose(sl, sl.time);
+          }
+          updateSlotCameraMotion(sl);
+          updateSlotExpressions(sl);
+        }
+        sl.avatar.tick(dt);
+      }
+
+      renderCompositeFrame();
+
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        const elapsed = (now - recStartTime) / 1000;
+        const btn = document.getElementById('btnRecord');
+        if (recAutoStopSec > 0) {
+          btn.textContent = `⏹ 停止 (${elapsed.toFixed(1)}s / ${recAutoStopSec}s)`;
+          if (elapsed >= recAutoStopSec) stopRecording();
+        } else {
+          btn.textContent = `⏹ 録画停止 (${elapsed.toFixed(1)}s)`;
+        }
+      }
+    }
+
+    fitStagePreview();
+    void calibrateMp4EncoderRange();
+    void loadVrmAcrossAllSlots(async () => {
+      const response = await fetch(DEFAULT_VRM_URL);
+      if (!response.ok) throw new Error('雪貂VRMを取得できませんでした。手元のVRMを開けます。');
+      return response.arrayBuffer();
+    }, MODEL_NAME);
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>
