@@ -4757,11 +4757,15 @@
         clearStudioSlot(sl);
         sl.avatar.use(results[i].value);
       }
-      const humanoid = slots[0].avatar.vrm.humanoid;
-      const head = humanoid.getRawBoneNode('head').getWorldPosition(new THREE.Vector3());
-      const eye = humanoid.getRawBoneNode('leftEye')?.getWorldPosition(new THREE.Vector3());
-      modelFrontZSign = eye?.z < head.z ? -1 : 1;
-      modelCameraScale = THREE.MathUtils.clamp(head.y / 0.98, 0.35, 4);
+      const primarySlot = slots[0];
+      // Extra panels load while the primary avatar may already be in a motion pose.
+      if (targetSlots.includes(primarySlot)) {
+        const humanoid = primarySlot.avatar.vrm.humanoid;
+        const head = humanoid.getRawBoneNode('head').getWorldPosition(new THREE.Vector3());
+        const eye = humanoid.getRawBoneNode('leftEye')?.getWorldPosition(new THREE.Vector3());
+        modelFrontZSign = eye?.z < head.z ? -1 : 1;
+        modelCameraScale = THREE.MathUtils.clamp(head.y / 0.98, 0.35, 4);
+      }
 
       for (const sl of targetSlots) {
         sl.landmarks.ready = false;
@@ -5273,7 +5277,7 @@
         label: '🐾 四つ足ふみふみ見上げ', desc: '縦型・SNS用：四つん這いで前足ふみふみ＆見上げ上目遣いおねだり',
         layout: 'vertical9x16', theme: 'cosmic_crystal', border: 'none',
         slots: [
-          {cam: 'bust', motion: 'moe:quad_happy_tap', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:quad_happy_tap', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
     ];
