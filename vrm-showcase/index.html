@@ -397,7 +397,12 @@
     .adv-body { display: flex; flex-direction: column; gap: 7px; }
 
     /* Touch & Smartphone Responsive UI (<= 860px: Menu Folded + Single Vertical 9:16 Mode) */
-    .stage-area, #studioCanvas, .slot-hit { touch-action: none; }
+    .stage-area, #studioCanvas, .slot-hit {
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
     .mobile-only { display: none !important; }
 
     @media (min-width: 861px) and (max-width: 1140px) {
@@ -2094,8 +2099,8 @@
       controls.target.set(0, 0.96, 0);
       controls.enableDamping = true;
       controls.dampingFactor = 0.09;
-      controls.enableZoom = false; // Handled via pure view-ray wheel zoom so animated cameras never spin on wheel scroll!
-      controls.minDistance = 0.20;
+      controls.enableZoom = false; // Handled via pure view-ray wheel & multi-touch pinch zoom!
+      controls.minDistance = 0.28;
       controls.maxDistance = 7.5;
       controls.update();
 
@@ -2183,40 +2188,12 @@
     const slots = [0, 1, 2, 3].map(createSlot);
     const _wheelVec = new THREE.Vector3();
 
-    slots.forEach(sl => {
-      const hd = hitDivs[sl.index];
-      hd.addEventListener('pointerdown', () => {
-        if (sl.camera.fov !== 28) {
-          sl.camera.fov = 28;
-          sl.camera.updateProjectionMatrix();
-        }
-        sl.camera.up.set(0, 1, 0);
-        sl.controls._sphericalDelta?.set(0, 0, 0);
-        sl.userDragging = true;
-        sl.camPreset = '';
-        selectSlot(sl.index);
-      });
-      window.addEventListener('pointerup', () => {
+    function applySlotZoomFactor(sl, zoomFactor) {
+      if (!sl || !Number.isFinite(zoomFactor) || Math.abs(zoomFactor - 1.0) < 1e-5) return;
+
+      if (FULL_PATH_CAM_ANIMS.has(sl.camAnim)) {
+        sl.zoomScale = THREE.MathUtils.clamp((sl.zoomScale || 1.0) * zoomFactor, 0.35, 2.80);
         if (sl.userDragging) {
-          sl.userDragging = false;
-          sl.baseCamPos.copy(sl.camera.position);
-          sl.baseCamTgt.copy(sl.controls.target);
-        }
-      });
-      hd.addEventListener('wheel', e => {
-        e.preventDefault();
-        if (activeSlotIdx !== sl.index) selectSlot(sl.index);
-        const rawDy = e.deltaMode === 1 ? e.deltaY * 32 : (e.deltaMode === 2 ? e.deltaY * 320 : e.deltaY);
-        const clampedDy = THREE.MathUtils.clamp(rawDy, -260, 260);
-        const zoomFactor = Math.pow(1.0012, clampedDy);
-
-        if (FULL_PATH_CAM_ANIMS.has(sl.camAnim) && !sl.userDragging) {
-          sl.zoomScale = THREE.MathUtils.clamp(sl.zoomScale * zoomFactor, 0.45, 2.40);
-          return;
-        }
-
-        // Pure radial zoom along the exact view ray — zero azimuth or polar rotation!
-        if (sl.camAnim === 'none' || sl.userDragging) {
           _wheelVec.subVectors(sl.camera.position, sl.controls.target);
           const curDist = Math.max(1e-4, _wheelVec.length());
           const nextDist = THREE.MathUtils.clamp(curDist * zoomFactor, sl.controls.minDistance, sl.controls.maxDistance);
@@ -2224,15 +2201,185 @@
           sl.camera.position.copy(sl.controls.target).add(_wheelVec);
           sl.baseCamPos.copy(sl.camera.position);
           sl.baseCamTgt.copy(sl.controls.target);
-        } else {
-          _wheelVec.subVectors(sl.baseCamPos, sl.baseCamTgt);
-          const curDist = Math.max(1e-4, _wheelVec.length());
-          const nextDist = THREE.MathUtils.clamp(curDist * zoomFactor, sl.controls.minDistance, sl.controls.maxDistance);
-          _wheelVec.multiplyScalar(nextDist / curDist);
-          sl.baseCamPos.copy(sl.baseCamTgt).add(_wheelVec);
+        }
+        document.body.dataset.camDist = sl.camera.position.distanceTo(sl.controls.target).toFixed(3);
+        document.body.dataset.baseCamDist = sl.baseCamPos.distanceTo(sl.baseCamTgt).toFixed(3);
+        document.body.dataset.zoomScale = (sl.zoomScale || 1.0).toFixed(3);
+        return;
+      }
+
+      // Pure radial zoom along the exact view ray — zero azimuth or polar jump!
+      if (sl.camAnim === 'none' || sl.userDragging) {
+        _wheelVec.subVectors(sl.camera.position, sl.controls.target);
+        const curDist = Math.max(1e-4, _wheelVec.length());
+        const nextDist = THREE.MathUtils.clamp(curDist * zoomFactor, sl.controls.minDistance, sl.controls.maxDistance);
+        _wheelVec.multiplyScalar(nextDist / curDist);
+        sl.camera.position.copy(sl.controls.target).add(_wheelVec);
+        sl.baseCamPos.copy(sl.camera.position);
+        sl.baseCamTgt.copy(sl.controls.target);
+      } else {
+        _wheelVec.subVectors(sl.baseCamPos, sl.baseCamTgt);
+        const curDist = Math.max(1e-4, _wheelVec.length());
+        const nextDist = THREE.MathUtils.clamp(curDist * zoomFactor, sl.controls.minDistance, sl.controls.maxDistance);
+        _wheelVec.multiplyScalar(nextDist / curDist);
+        sl.baseCamPos.copy(sl.baseCamTgt).add(_wheelVec);
+      }
+      document.body.dataset.camDist = sl.camera.position.distanceTo(sl.controls.target).toFixed(3);
+      document.body.dataset.baseCamDist = sl.baseCamPos.distanceTo(sl.baseCamTgt).toFixed(3);
+      document.body.dataset.zoomScale = (sl.zoomScale || 1.0).toFixed(3);
+    }
+
+    // Keep Safari pinch gestures on the stage in the camera controls.
+    stageArea.addEventListener('gesturestart', e => e.preventDefault(), {passive: false});
+    stageArea.addEventListener('gesturechange', e => e.preventDefault(), {passive: false});
+
+    slots.forEach(sl => {
+      const hd = hitDivs[sl.index];
+      const activePtrs = new Map();
+      let lastPtrPinchDist = 0;
+      let lastTouchPinchDist = 0;
+      let lastTouchEventAt = 0;
+
+      const measurePtrPairDist = () => {
+        const it = activePtrs.values();
+        const a = it.next().value;
+        const b = it.next().value;
+        return (a && b) ? Math.hypot(a.x - b.x, a.y - b.y) : 0;
+      };
+
+      hd.addEventListener('pointerdown', e => {
+        activePtrs.set(e.pointerId, {x: e.clientX, y: e.clientY});
+        if (activePtrs.size === 1) {
+          if (!FULL_PATH_CAM_ANIMS.has(sl.camAnim) && sl.camera.fov !== 28) {
+            sl.camera.fov = 28;
+            sl.camera.updateProjectionMatrix();
+          }
+          sl.camera.up.set(0, 1, 0);
+          sl.controls._sphericalDelta?.set(0, 0, 0);
+          sl.userDragging = true;
+          sl.camPreset = '';
+          selectSlot(sl.index);
+        } else if (activePtrs.size >= 2) {
+          lastPtrPinchDist = measurePtrPairDist();
+        }
+      });
+
+      window.addEventListener('pointermove', e => {
+        if (!activePtrs.has(e.pointerId)) return;
+        activePtrs.set(e.pointerId, {x: e.clientX, y: e.clientY});
+        // Multi-pointer pinch fallback (when native TouchEvent did not already handle this pinch frame)
+        if (activePtrs.size >= 2 && (performance.now() - lastTouchEventAt > 100)) {
+          const dist = measurePtrPairDist();
+          if (lastPtrPinchDist > 8 && dist > 8) {
+            const clampedRatio = THREE.MathUtils.clamp(lastPtrPinchDist / dist, 0.75, 1.35);
+            applySlotZoomFactor(sl, Math.pow(clampedRatio, 1.12));
+          }
+          lastPtrPinchDist = dist;
+        }
+      });
+
+      const finishPointer = e => {
+        if (!activePtrs.has(e.pointerId)) return;
+        activePtrs.delete(e.pointerId);
+        if (activePtrs.size < 2) {
+          lastPtrPinchDist = 0;
+        }
+        if (activePtrs.size === 0 && sl.userDragging) {
+          sl.userDragging = false;
+          sl.baseCamPos.copy(sl.camera.position);
+          sl.baseCamTgt.copy(sl.controls.target);
+        }
+      };
+      window.addEventListener('pointerup', finishPointer);
+      window.addEventListener('pointercancel', finishPointer);
+
+      // Primary atomic 2-finger touch pinch-in / pinch-out zoom for iOS Safari & Android Chrome!
+      hd.addEventListener('touchstart', e => {
+        lastTouchEventAt = performance.now();
+        if (e.touches.length >= 2) {
+          e.preventDefault();
+          if (activeSlotIdx !== sl.index) selectSlot(sl.index);
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          lastTouchPinchDist = Math.hypot(dx, dy);
         }
       }, {passive: false});
+
+      hd.addEventListener('touchmove', e => {
+        lastTouchEventAt = performance.now();
+        if (e.touches.length >= 2) {
+          e.preventDefault();
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const dist = Math.hypot(dx, dy);
+          if (lastTouchPinchDist > 8 && dist > 8) {
+            const clampedRatio = THREE.MathUtils.clamp(lastTouchPinchDist / dist, 0.75, 1.35);
+            applySlotZoomFactor(sl, Math.pow(clampedRatio, 1.12));
+          }
+          lastTouchPinchDist = dist;
+        }
+      }, {passive: false});
+
+      const resetTouchPinch = e => {
+        lastTouchEventAt = performance.now();
+        if (e.touches.length < 2) lastTouchPinchDist = 0;
+      };
+      hd.addEventListener('touchend', resetTouchPinch, {passive: true});
+      hd.addEventListener('touchcancel', resetTouchPinch, {passive: true});
+
+      hd.addEventListener('wheel', e => {
+        e.preventDefault();
+        if (activeSlotIdx !== sl.index) selectSlot(sl.index);
+        const rawDy = e.deltaMode === 1 ? e.deltaY * 32 : (e.deltaMode === 2 ? e.deltaY * 320 : e.deltaY);
+        const clampedDy = THREE.MathUtils.clamp(rawDy, -260, 260);
+        const zoomFactor = Math.pow(1.0012, clampedDy);
+        applySlotZoomFactor(sl, zoomFactor);
+      }, {passive: false});
     });
+
+    // Also allow 2-finger pinch & wheel zoom when starting a gesture in letterbox margins of #stageArea!
+    (() => {
+      let stagePinchDist = 0;
+      const isStageMarginGesture = target =>
+        !target.closest('.slot-hit, .fs-hud-bar, .fab-mobile-menu, .toast-bar');
+
+      stageArea.addEventListener('touchstart', e => {
+        if (e.touches.length >= 2 && isStageMarginGesture(e.target)) {
+          e.preventDefault();
+          stagePinchDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+      }, {passive: false});
+
+      stageArea.addEventListener('touchmove', e => {
+        if (e.touches.length >= 2 && stagePinchDist > 8) {
+          e.preventDefault();
+          const dist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          if (dist > 8) {
+            const clampedRatio = THREE.MathUtils.clamp(stagePinchDist / dist, 0.75, 1.35);
+            applySlotZoomFactor(slots[activeSlotIdx] || slots[0], Math.pow(clampedRatio, 1.12));
+          }
+          stagePinchDist = dist;
+        }
+      }, {passive: false});
+
+      const endStagePinch = e => { if (e.touches.length < 2) stagePinchDist = 0; };
+      stageArea.addEventListener('touchend', endStagePinch, {passive: true});
+      stageArea.addEventListener('touchcancel', endStagePinch, {passive: true});
+
+      stageArea.addEventListener('wheel', e => {
+        if (!isStageMarginGesture(e.target)) return;
+        e.preventDefault();
+        const rawDy = e.deltaMode === 1 ? e.deltaY * 32 : (e.deltaMode === 2 ? e.deltaY * 320 : e.deltaY);
+        const clampedDy = THREE.MathUtils.clamp(rawDy, -260, 260);
+        applySlotZoomFactor(slots[activeSlotIdx] || slots[0], Math.pow(1.0012, clampedDy));
+      }, {passive: false});
+    })();
 
     // =========================================================================
     // Exact Two-Bone Analytic Soft IK on VRM 1.0 Normalized Humanoid Arm Bones!
@@ -4785,7 +4932,9 @@
       updateSlotLandmarks(sl, dt);
 
       if (sl.userDragging || sl.camAnim === 'none') {
-        sl.camera.fov = 28;
+        if (!FULL_PATH_CAM_ANIMS.has(sl.camAnim)) {
+          sl.camera.fov = 28;
+        }
         sl.camera.up.set(0, 1, 0);
         sl.camRig.ready = false;
         sl.controls.update();
