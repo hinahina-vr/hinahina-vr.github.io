@@ -179,9 +179,32 @@
     }
     #studioCanvas { display: block; width: 100%; height: 100%; }
 
-    .hit-overlay { position: absolute; inset: 0; pointer-events: none; }
+    .fx-overlay-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 6;
+    }
+    .touch-mood-badge {
+      position: absolute; top: 10px; right: 10px; z-index: 8;
+      padding: 4px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
+      background: rgba(18, 14, 30, 0.78); border: 1px solid rgba(253, 164, 200, 0.55);
+      color: #ffe4f1; backdrop-filter: blur(8px); pointer-events: none;
+      box-shadow: 0 4px 16px rgba(244, 63, 133, 0.28);
+      opacity: 0; transform: translateY(-4px) scale(0.96);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .touch-mood-badge.show {
+      opacity: 1; transform: translateY(0) scale(1);
+    }
+    body.hide-hud .touch-mood-badge,
+    body.is-recording .touch-mood-badge {
+      opacity: 0 !important;
+    }
+
+    .hit-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
     .slot-hit { position: absolute; pointer-events: auto; cursor: grab; transition: box-shadow 0.15s ease; }
     .slot-hit:active { cursor: grabbing; }
+    .slot-hit.hover-pet { cursor: pointer; }
+    .slot-hit.is-petting { cursor: pointer; }
     body:not(.hide-hud) .slot-hit.selected {
       box-shadow: inset 0 0 0 2px rgba(244, 63, 133, 0.85);
     }
@@ -421,15 +444,27 @@
       .hdr-right { margin-inline-start: auto; }
     }
 
-    @media (min-width: 861px) and (max-width: 1140px) {
+    .btn.sweet-ask {
+      border-color: rgba(249, 168, 212, 0.45);
+      background: linear-gradient(135deg, rgba(244, 63, 133, 0.16), rgba(168, 85, 247, 0.16));
+      color: #fce7f3;
+    }
+    .btn.sweet-ask:not(:disabled):hover {
+      border-color: #fbcfe8;
+      background: linear-gradient(135deg, rgba(244, 63, 133, 0.30), rgba(168, 85, 247, 0.28));
+      color: #ffffff;
+    }
+
+    @media (min-width: 861px) and (max-width: 1180px) {
       header { padding: 0 10px; gap: 5px; }
       .hdr-left, .hdr-right { gap: 4px; }
       .hdr-title { font-size: 12.5px; gap: 5px; }
       .res-badge { font-size: 10px; padding: 2px 6px; }
-      #selHeaderShader { width: 136px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
-      #selHeaderAspect { width: 146px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
-      #selRecDur { width: 82px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
+      #selHeaderShader { width: 132px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
+      #selHeaderAspect { width: 142px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
+      #selRecDur { width: 80px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
       header .btn { padding: 5px 7px; font-size: 11px; }
+      .hdr-wide-only { display: none !important; }
     }
 
     @media (max-width: 860px) {
@@ -531,6 +566,16 @@
       backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
       opacity: 0; pointer-events: none; transition: opacity 0.24s ease;
     }
+    @media (max-width: 640px) {
+      .fs-hud-bar {
+        inset-inline: max(8px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-right));
+        top: max(8px, env(safe-area-inset-top));
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 4px;
+      }
+      .fs-hud-bar .btn { padding: 5px 8px; font-size: 11px; }
+    }
     body.is-fullscreen .fs-hud-bar { display: flex; }
     body.is-fullscreen .fs-hud-bar.visible,
     body.is-fullscreen .fs-hud-bar:hover { opacity: 1; pointer-events: auto; }
@@ -580,6 +625,9 @@
           <option value="clay">🗿 クレイ造形（白マケット）</option>
           <option value="split_compare">🔀 4種シェーダ同時比較</option>
         </select>
+        <button class="btn active desktop-only" id="btnHeaderTouch" type="button" title="キャラの上をなでなで（頭の上・顎）＆つんつん！（背景ドラッグでカメラ回転）">🤚 なでなで</button>
+        <button class="btn sweet-ask desktop-only hdr-wide-only" id="btnHeaderAskNade" type="button" title="アバターにゼロ距離で『よしよし♡』頭なでなでしてもらう">🥰 なでてもらう</button>
+        <button class="btn sweet-ask desktop-only hdr-wide-only" id="btnHeaderAskTsun" type="button" title="アバターに画面越しに『つんつんっ♡』つついてもらう">👉 つんしてもらう</button>
       </div>
 
       <div class="hdr-right">
@@ -620,6 +668,8 @@
     <div class="stage-area" id="stageArea">
       <div class="canvas-frame" id="canvasFrame">
         <canvas id="studioCanvas" width="1080" height="1920"></canvas>
+        <canvas class="fx-overlay-canvas" id="fxOverlayCanvas"></canvas>
+        <div class="touch-mood-badge" id="touchMoodBadge"></div>
         <div class="hit-overlay" id="hitOverlay">
           <div class="slot-hit selected" data-slot="0"><div class="slot-tag" id="tag0">① 左上</div></div>
           <div class="slot-hit" data-slot="1"><div class="slot-tag" id="tag1">② 右上</div></div>
@@ -633,6 +683,9 @@
 
       <div class="fs-hud-bar" id="fsHudBar">
         <button class="btn" id="btnFsSolo" type="button" title="1体のみ全画面拡大 ⇔ 分割レイアウト全画面">👤 1体フル表示</button>
+        <button class="btn active" id="btnFsTouch" type="button" title="ふれあい（なでなで・つんつん）モード切替">🤚 なでなで</button>
+        <button class="btn sweet-ask" id="btnFsAskNade" type="button" title="アバターによしよしなでなでしてもらう♡">🥰 なでてもらう</button>
+        <button class="btn sweet-ask" id="btnFsAskTsun" type="button" title="アバターにつんつんしてもらう♡">👉 つんしてもらう</button>
         <button class="btn" id="btnFsShader" type="button" title="シェーダーを順送り切替 (Sキー)">☀ Unlit</button>
         <button class="btn" id="btnFsSnap" type="button" title="フルスクリーン静止画PNG保存">📸</button>
         <button class="btn" id="btnFsExit" type="button" title="フルスクリーン終了 (Esc / Fキー)">✕ 終了 (Esc)</button>
@@ -755,11 +808,17 @@
 
         <div class="sec-group">
           <div class="row-lbl">
-            <span>モーション（全44種）</span>
+            <span>モーション（全48種）</span>
             <button class="btn ghost-sm" id="btnSlotLoadVrma" type="button">📂 .vrma読込</button>
             <input type="file" id="fileSlotVrma" accept=".vrma" hidden>
           </div>
           <select class="inp" id="selSlotMotion">
+            <optgroup label="🥰 アバターから・逆なでなで＆つんつん">
+              <option value="moe:pov_headpat_yoshi">🥰 ゼロ距離「よしよし♡」ゆっくり頭なでなで</option>
+              <option value="moe:pov_cheek_wrap">💞 両手でほっぺ包み＆とろっと「いい子いい子♡」</option>
+              <option value="moe:pov_poke_tsuntsun">👉 画面越し「つんつんっ♡」いたずら指ツン＆ウインク</option>
+              <option value="moe:pov_tsun_to_yoshi">💝 よくばり「つんつん→よしよしなでなで♡」コンボ</option>
+            </optgroup>
             <optgroup label="💋 ガチ恋・キスモーション">
               <option value="moe:kiss_face">💋 ゼロ距離・うるうるキス顔（目を閉じてんーっ♡）</option>
               <option value="moe:kiss_turn_around">🐿️💋 後ろ姿から振り返りチュッ♡</option>
@@ -924,6 +983,35 @@
             </label>
           </div>
         </div>
+
+        <div class="sec-divider"></div>
+
+        <div class="sec-group">
+          <div class="row-lbl"><span>🤚 画面ふれあい（頭・顎なでなで ＆ つんつん）</span></div>
+          <select class="inp" id="selTouchMode" title="画面タップ・なでなで操作とカメラ回転の切り替え">
+            <option value="auto" selected>🤚 自動（キャラ上でなでなで＆つんつん・背景でカメラ）</option>
+            <option value="pet_lock">🥰 なでなで専念（画面どこでもカメラ固定でなでなで）</option>
+            <option value="off">🎥 オフ（画面ドラッグはすべてカメラ回転）</option>
+          </select>
+          <div class="grid-3">
+            <button class="btn" type="button" id="btnDemoPetHead" title="頭の上・お耳をゆっくりなでなで（とろっと顔・にこっ顔パターン順送り）">🤚 頭なで</button>
+            <button class="btn" type="button" id="btnDemoPetChin" title="顎・あご下をゆっくりごろごろなでなで（とろっと顔・にこっ顔パターン順送り）">🐾 顎なで</button>
+            <button class="btn" type="button" id="btnDemoPoke" title="画面つんつんリアクション＆タップ波紋テスト">👉 つんつん</button>
+          </div>
+          <div class="row-lbl" style="margin-top:2px;"><span>💝 アバターにしてもらう♡（逆なでなで・逆つんつん）</span></div>
+          <div class="grid-2">
+            <button class="btn sweet-ask" type="button" id="btnAskAvatarNade" title="雪フェレットちゃんがゼロ距離に近づいてゆっくり頭よしよし・ほっぺ包みをしてくれる♡">🥰 なでなでしてもらう</button>
+            <button class="btn sweet-ask" type="button" id="btnAskAvatarTsun" title="雪フェレットちゃんが画面越しにぷにっ・つんつんしてくれる♡">👉 つんつんしてもらう</button>
+          </div>
+          <label class="toggle-row">
+            <span>💞 お返しモード（撫でた後・突いた後にやり返す♡）</span>
+            <input type="checkbox" id="chkAutoReturnTouch" checked>
+          </label>
+          <label class="toggle-row">
+            <span>✨ タップ波紋・なでなでハートエフェクト</span>
+            <input type="checkbox" id="chkTouchFx" checked>
+          </label>
+        </div>
       </div>
 
       <!-- TAB 3: Character Shaders, Stage Background & Advanced Settings -->
@@ -1060,7 +1148,7 @@
     import {VRMSpringBoneCollider, VRMSpringBoneColliderShape} from './vendor/three-vrm.module.js';
 
     const DEG = Math.PI / 180;
-    const DEFAULT_VRM_URL = new URL('./models/snow_ferret_tripo_rig.vrm?v=0833061ed7b8', document.baseURI);
+    const DEFAULT_VRM_URL = new URL('./models/snow_ferret_tripo_rig.vrm?v=5841c7ee6db1', document.baseURI);
     const MODEL_NAME = '雪貂 · ひなひな';
 
     const THEMES = {
@@ -2227,14 +2315,20 @@
         if (qSq >= 1.0) {
           bestDist = (Math.sqrt(qSq) - 1.0) * Math.min(erx, ery, erz);
         } else {
+          const zS = this.zS;
           let hx = dx, hz = dz;
           if (hx * hx + hz * hz < 1e-4) {
             hx = objectPosition.x - this.hipsX;
             hz = objectPosition.z - this.hipsZ;
-            if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = 1; }
+            if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = zS; }
           }
-          // Gentle tangential normal (no stiff upward umbrella kick on lower skirt!)
-          const clampedDy = Math.max(0.0, dy);
+          // In the front center modesty strip (`|x - hipsX| < 0.115` & front side), push FORWARD (+zS) onto the front of the ball
+          // instead of kicking UPWARD (+Y) above her crotch or letting pleats fall behind her panties!
+          const isFrontModesty = Math.abs(objectPosition.x - this.hipsX) < 0.115 && zS * (objectPosition.z - this.hipsZ) > -0.02;
+          if (isFrontModesty) {
+            hz = zS * Math.max(0.14, zS * hz);
+          }
+          const clampedDy = isFrontModesty ? 0.0 : Math.max(0.0, dy);
           bestNx = hx / (erx * erx);
           bestNy = clampedDy / (ery * ery);
           bestNz = hz / (erz * erz);
@@ -2249,50 +2343,61 @@
           bestDist = -((-B + Math.sqrt(disc)) / Math.max(1e-6, A));
         }
 
-        // Supple bridged lap-slab collision for front garments during Verlet step (no hitRadius inflation!)
+        // Top-down XZ dual-thigh canopy + front pelvis/panty shield during Verlet step!
         if (this.hasLap) {
           const zS = this.zS;
+          const hipMidX = 0.5 * (this.hipL.x + this.hipR.x);
+          const hipMidY = 0.5 * (this.hipL.y + this.hipR.y);
           const hipMidZ = 0.5 * (this.hipL.z + this.hipR.z);
-          if (zS * (objectPosition.z - hipMidZ) > 0.03) {
-            const lx = this.kneeL.x - this.kneeR.x;
-            const ly = this.kneeL.y - this.kneeR.y;
-            const lz = this.kneeL.z - this.kneeR.z;
-            const lSpan = Math.max(0.08, Math.hypot(lx, ly, lz));
-            const invSpan = 1.0 / lSpan;
-            const proj = (objectPosition.x - this.kneeR.x) * lx * invSpan +
-                         (objectPosition.y - this.kneeR.y) * ly * invSpan +
-                         (objectPosition.z - this.kneeR.z) * lz * invSpan;
-            const u = THREE.MathUtils.clamp(proj * invSpan, 0, 1);
-            const outD = proj < 0 ? -proj : (proj > lSpan ? proj - lSpan : 0);
-            if (outD < 0.155) {
-              const hxU = this.hipR.x + (this.hipL.x - this.hipR.x) * u;
-              const hyU = this.hipR.y + (this.hipL.y - this.hipR.y) * u;
-              const hzU = this.hipR.z + (this.hipL.z - this.hipR.z) * u;
-              const kxU = this.kneeR.x + lx * u;
-              const kyU = this.kneeR.y + ly * u;
-              const kzU = this.kneeR.z + lz * u;
-              const sx = kxU - hxU, sy = kyU - hyU, sz = kzU - hzU;
-              const sLenSq = Math.max(1e-5, sx * sx + sy * sy + sz * sz);
-              const st = THREE.MathUtils.clamp(((objectPosition.x - hxU) * sx + (objectPosition.y - hyU) * sy + (objectPosition.z - hzU) * sz) / sLenSq, 0, 1);
-              const cx = hxU + sx * st, cy = hyU + sy * st, cz = hzU + sz * st;
-              const taperedR = THREE.MathUtils.lerp(0.090, 0.074, st);
-              // Carve a natural U-valley in the empty gap between Left & Right thighs (u ≈ 0.5)
-              // so the center front skirt pleat (`skirt_270`) drapes modestly down between her legs!
-              const centerValley = Math.exp(-Math.pow((u - 0.5) / 0.22, 2)) * (0.45 + 0.45 * st);
-              const lapR = taperedR * (1.0 - centerValley) * (1.0 - THREE.MathUtils.smoothstep(outD, 0.088, 0.150));
-              let ox = objectPosition.x - cx;
-              let oy = objectPosition.y - cy;
-              let oz = objectPosition.z - cz;
-              const d = Math.hypot(ox, oy, oz);
-              const lapDist = d - lapR;
-              if (lapDist < bestDist) {
-                bestDist = lapDist;
-                ox *= 0.20;
-                oy = Math.max(lapR * 0.82, oy);
-                oz = zS * Math.max(0.02, zS * oz);
-                const oLen = Math.hypot(ox, oy, oz);
-                if (oLen > 1e-6) { bestNx = ox / oLen; bestNy = oy / oLen; bestNz = oz / oLen; }
-                else { bestNx = 0; bestNy = 1; bestNz = 0; }
+
+          // 1) Solid front pelvis/panty shield: prevents front skirt (`240/270/300`) from swinging backward THROUGH her panties!
+          const latOff = Math.abs(objectPosition.x - hipMidX);
+          const fwdFromHip = zS * (objectPosition.z - hipMidZ);
+          if (latOff < 0.130 && fwdFromHip > -0.02 && objectPosition.y < hipMidY + 0.08 && objectPosition.y > hipMidY - 0.18) {
+            const drop01 = THREE.MathUtils.clamp((hipMidY + 0.06 - objectPosition.y) / 0.18, 0, 1);
+            const latMask = 1.0 - THREE.MathUtils.smoothstep(latOff, 0.085, 0.130);
+            const reqFwd = THREE.MathUtils.lerp(0.115, 0.170, drop01) * latMask;
+            const penFwd = fwdFromHip - reqFwd;
+            if (penFwd < bestDist) {
+              bestDist = penFwd;
+              bestNx = 0; bestNy = 0; bestNz = zS;
+            }
+          }
+
+          // 2) Dual-thigh canopy with front-center modesty carve (`absPhiDeg < 28°`) so `skirt_270` hangs down instead of tenting up!
+          const absPhiDeg = Math.abs(Math.atan2(objectPosition.x - hipMidX, zS * (objectPosition.z - hipMidZ))) / DEG;
+          const thighMask = THREE.MathUtils.smoothstep(absPhiDeg, 14.0, 30.0);
+          if (thighMask > 0.02) {
+            const spanXZ = 0.168;
+            for (let leg = 0; leg < 2; leg++) {
+              const H = leg === 0 ? this.hipL : this.hipR;
+              const K = leg === 0 ? this.kneeL : this.kneeR;
+              const tx = K.x - H.x;
+              const tz = K.z - H.z;
+              const tLenSq = Math.max(1e-5, tx * tx + tz * tz);
+              const rawS = ((objectPosition.x - H.x) * tx + (objectPosition.z - H.z) * tz) / tLenSq;
+              if (rawS < -0.10 || rawS > 1.15) continue;
+              const st = THREE.MathUtils.clamp(rawS, 0, 1);
+              const cpX = H.x + tx * st;
+              const cpZ = H.z + tz * st;
+              const dXZ = Math.hypot(objectPosition.x - cpX, objectPosition.z - cpZ);
+              if (dXZ >= spanXZ) continue;
+              const u = dXZ / spanXZ;
+              const endTaper = rawS > 1.0 ? (1.0 - THREE.MathUtils.smoothstep(rawS, 1.0, 1.15)) : 1.0;
+              const dome = Math.sqrt(Math.max(0, 1.0 - u * u)) * endTaper * thighMask;
+              const axisY = H.y + (K.y - H.y) * st;
+              const reqY = axisY + THREE.MathUtils.lerp(0.094, 0.080, st) * dome;
+              const penY = objectPosition.y - reqY;
+              if (penY < bestDist) {
+                bestDist = penY;
+                const rx = objectPosition.x - this.hipsX;
+                const rz = objectPosition.z - this.hipsZ;
+                const rLen = Math.max(1e-4, Math.hypot(rx, rz));
+                bestNx = (rx / rLen) * 0.28;
+                bestNy = 0.92;
+                bestNz = (rz / rLen) * 0.28;
+                const nL = Math.hypot(bestNx, bestNy, bestNz);
+                bestNx /= nL; bestNy /= nL; bestNz /= nL;
               }
             }
           }
@@ -2312,6 +2417,9 @@
       const ballMat = new THREE.MeshPhysicalMaterial({
         map: sharedBalanceBallAssets.ballTex,
         color: 0xffffff,
+        emissive: new THREE.Color(0xf2dcff),
+        emissiveMap: sharedBalanceBallAssets.ballTex,
+        emissiveIntensity: 0.20,
         roughness: 0.14,
         metalness: 0.00,
         clearcoat: 0.94,
@@ -2320,7 +2428,7 @@
         sheenColor: new THREE.Color(0xffe6fa),
         side: THREE.FrontSide,
         transparent: true,
-        opacity: 0.25,
+        opacity: 0.66,
         depthWrite: false,
       });
       const ballMesh = new THREE.Mesh(sharedBalanceBallAssets.sphereGeo, ballMat);
@@ -2433,6 +2541,63 @@
         baseCamPos: new THREE.Vector3(0, 0.98, 1.05),
         baseCamTgt: new THREE.Vector3(0, 0.96, 0),
         userDragging: false,
+        touchReact: {
+          isPetting: false,
+          demoTimer: 0,
+          petZone: 'head_top',
+          petComfort: 0,
+          petStrokeDist: 0,
+          petPhase: 0,
+          handSide: 0,
+          targetHandSide: 0,
+          zoneW: {head_top: 1, chin: 0, cheek: 0},
+          afterTimer: 0,
+          afterDur: 4.2,
+          afterPattern: 'torotto_melt',
+          afterZone: 'head_top',
+          patternSeq: 0,
+          pokeTimer: 0,
+          pokeDur: 1.9,
+          pokeZone: 'cheek',
+          pokeSide: 1,
+          pokeStreak: 0,
+          lastPokeAt: -99,
+          curHeadPitch: 0,
+          curHeadYaw: 0,
+          curHeadTilt: 0,
+          curChestPitch: 0,
+          curChestSide: 0,
+          curHipsRoll: 0,
+          timeScaleMul: 1.0,
+          exprBlend: 0,
+          isSlowPet: false,
+          emo: 'relaxed',
+          emoW: 0,
+          emo2: null,
+          emo2W: 0,
+          mouth: {aa: 0, ih: 0, ou: 0, ee: 0, oh: 0},
+          savedVrmaQuats: new Map(),
+          returnQueued: null, // 'nade' | 'tsun' | null
+        },
+        avatarGive: {
+          active: false,
+          kind: 'nade_head', // 'nade_head' | 'nade_cheeks' | 'poke_double' | 'poke_forehead'
+          timer: 0,
+          dur: 5.4,
+          env: 0,
+          nadeSeq: 0,
+          tsunSeq: 0,
+          phase: 0,
+          camRoll: 0,
+          camNodY: 0,
+          camBoopZ: 0,
+          lastTapKey: '',
+          emo: 'relaxed',
+          emoW: 0,
+          emo2: null,
+          emo2W: 0,
+          mouth: {aa: 0, ih: 0, ou: 0, ee: 0, oh: 0},
+        },
       };
     }
 
@@ -2500,6 +2665,608 @@
       document.body.dataset.zoomScale = (sl.zoomScale || 1.0).toFixed(3);
     }
 
+    // =========================================================================
+    // Interactive Screen Petting ("なでなで": Head-Top / Chin / Cheek, Ultra-Slow)
+    // & Screen Poke ("つんつん") + 60fps Canvas 2D Tap Ripple & Heart/Star FX!
+    // =========================================================================
+    const fxOverlayCanvas = document.getElementById('fxOverlayCanvas');
+    const fxCtx = fxOverlayCanvas ? fxOverlayCanvas.getContext('2d') : null;
+    const touchMoodBadge = document.getElementById('touchMoodBadge');
+    let touchInteractMode = 'auto'; // 'auto' | 'pet_lock' | 'off'
+    let showTouchFx = true;
+    let autoReturnTouch = true;
+    let _moodHideTimer = null;
+
+    const AFTERGLOW_PATTERNS = [
+      'torotto_melt',        // 1: とろ〜っ♡ 蕩けスマイル
+      'niko_happy',          // 2: にこっ♡ 満面にっこり笑顔
+      'torotto_linger_open', // 3: うっとり閉じ目余韻 → ゆっくり半目とろっとデレ顔
+      'niko_to_soft_smile',  // 4: にこっ♡ → やわらか開眼みつめスマイル
+      'torotto_shy_wink',    // 5: とろっと照れ顔 → ウインクにこっ♡
+    ];
+    const AFTERGLOW_LABELS = {
+      torotto_melt: '🥰 とろ〜っ♡（蕩けスマイル）',
+      niko_happy: '😊 にこっ♡（満面にっこり）',
+      torotto_linger_open: '💞 うっとり余韻 → とろっと顔♡',
+      niko_to_soft_smile: '🌸 にこっ♡ → やわらかスマイル',
+      torotto_shy_wink: '😉 とろっと照れデレ＆ウインク♡',
+    };
+
+    const touchRipples = [];
+    const touchParticles = [];
+    const touchTrails = [];
+    let activePetCursor = null; // {x, y, zone, comfort, lastHeartAt}
+
+    function showTouchMoodText(text, holdMs = 1800) {
+      if (!touchMoodBadge) return;
+      touchMoodBadge.textContent = text;
+      touchMoodBadge.classList.add('show');
+      clearTimeout(_moodHideTimer);
+      _moodHideTimer = setTimeout(() => {
+        touchMoodBadge.classList.remove('show');
+      }, holdMs);
+    }
+
+    function syncTouchModeUI() {
+      const sel = document.getElementById('selTouchMode');
+      if (sel && sel.value !== touchInteractMode) sel.value = touchInteractMode;
+      const isOn = touchInteractMode !== 'off';
+      const label = touchInteractMode === 'pet_lock' ? '🥰 なでなで固定' : (isOn ? '🤚 なでなで' : '🎥 カメラ専念');
+      const btnHdr = document.getElementById('btnHeaderTouch');
+      if (btnHdr) {
+        btnHdr.classList.toggle('active', isOn);
+        btnHdr.textContent = label;
+      }
+      const btnFs = document.getElementById('btnFsTouch');
+      if (btnFs) {
+        btnFs.classList.toggle('active', isOn);
+        btnFs.textContent = label;
+      }
+      slots.forEach(sl => {
+        sl.controls.enabled = (touchInteractMode !== 'pet_lock');
+      });
+      document.body.dataset.touchMode = touchInteractMode;
+    }
+
+    function resizeFxOverlayCanvas() {
+      if (!fxOverlayCanvas) return;
+      const rect = canvasFrame.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (fxOverlayCanvas.width !== w || fxOverlayCanvas.height !== h) {
+        fxOverlayCanvas.width = w;
+        fxOverlayCanvas.height = h;
+      }
+    }
+
+    function clientToFrameCoords(clientX, clientY) {
+      const r = canvasFrame.getBoundingClientRect();
+      return {x: clientX - r.left, y: clientY - r.top, w: Math.max(1, r.width), h: Math.max(1, r.height)};
+    }
+
+    function spawnTapRippleFx(fxX, fxY, isAvatarHit = true, isPout = false) {
+      if (!showTouchFx) return;
+      const mainColor = isPout ? '#ff6b8b' : (isAvatarHit ? '#ff7eb9' : '#7dd3fc');
+      const subColor  = isAvatarHit ? '#ffe59e' : '#e0f2fe';
+      touchRipples.push({x: fxX, y: fxY, age: 0, dur: 0.62, r0: 5, r1: isAvatarHit ? 58 : 44, color: mainColor, width: 3.0, star: true});
+      touchRipples.push({x: fxX, y: fxY, age: -0.08, dur: 0.56, r0: 4, r1: isAvatarHit ? 38 : 28, color: subColor, width: 2.0, star: false});
+      const count = isAvatarHit ? 8 : 5;
+      for (let i = 0; i < count; i++) {
+        const ang = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.45;
+        const spd = (isAvatarHit ? 54 : 36) + Math.random() * 44;
+        touchParticles.push({
+          x: fxX,
+          y: fxY,
+          vx: Math.cos(ang) * spd,
+          vy: Math.sin(ang) * spd - (isAvatarHit ? 22 : 8),
+          age: 0,
+          dur: 0.65 + Math.random() * 0.28,
+          size: (isAvatarHit ? 6.5 : 4.8) + Math.random() * 3.5,
+          kind: (isAvatarHit && i % 2 === 0) ? 'heart' : 'star',
+          color: (i % 3 === 0) ? '#ffe49e' : mainColor,
+          rot: (Math.random() - 0.5) * 0.6,
+        });
+      }
+    }
+
+    function spawnPetStrokeFx(fxX, fxY, zone, nowMs) {
+      if (!showTouchFx) return;
+      touchTrails.push({x: fxX, y: fxY, age: 0, dur: 0.42, r: zone === 'chin' ? 13 : 16});
+      if (touchTrails.length > 36) touchTrails.shift();
+      if (!activePetCursor || (nowMs - activePetCursor.lastHeartAt > 155)) {
+        if (activePetCursor) activePetCursor.lastHeartAt = nowMs;
+        const ox = (Math.random() - 0.5) * 34;
+        const oy = (Math.random() - 0.5) * 18 - (zone === 'head_top' ? 12 : 4);
+        touchParticles.push({
+          x: fxX + ox,
+          y: fxY + oy,
+          vx: (Math.random() - 0.5) * 18,
+          vy: -(28 + Math.random() * 24),
+          age: 0,
+          dur: 1.15 + Math.random() * 0.35,
+          size: 7.5 + Math.random() * 4.5,
+          kind: Math.random() < 0.68 ? 'heart' : 'star',
+          color: zone === 'chin' ? (Math.random() < 0.5 ? '#ffb3d9' : '#ffe29a') : (Math.random() < 0.6 ? '#ff85c0' : '#ffd6ec'),
+          rot: (Math.random() - 0.5) * 0.45,
+        });
+      }
+    }
+
+    function spawnAfterglowBloomFx(fxX, fxY) {
+      if (!showTouchFx) return;
+      touchRipples.push({x: fxX, y: fxY, age: 0, dur: 0.85, r0: 10, r1: 68, color: '#ffa6d2', width: 2.4, star: false});
+      for (let i = 0; i < 6; i++) {
+        const ang = -Math.PI * 0.5 + (i - 2.5) * 0.42;
+        touchParticles.push({
+          x: fxX + Math.cos(ang) * 16,
+          y: fxY + Math.sin(ang) * 10,
+          vx: Math.cos(ang) * 26,
+          vy: -36 - Math.random() * 22,
+          age: i * -0.04,
+          dur: 1.35,
+          size: 8.5 + (i % 2) * 3.0,
+          kind: i % 3 === 2 ? 'star' : 'heart',
+          color: i % 2 === 0 ? '#ff7eb9' : '#ffe59e',
+          rot: (Math.random() - 0.5) * 0.4,
+        });
+      }
+    }
+
+    function drawMiniHeart(ctx, x, y, size, rot) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rot);
+      const s = size;
+      ctx.beginPath();
+      ctx.moveTo(0, s * 0.36);
+      ctx.bezierCurveTo(-s * 0.95, -s * 0.25, -s * 0.55, -s * 0.98, 0, -s * 0.42);
+      ctx.bezierCurveTo(s * 0.55, -s * 0.98, s * 0.95, -s * 0.25, 0, s * 0.36);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawMiniStar4(ctx, x, y, size, rot) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rot);
+      const rOuter = size;
+      const rInner = size * 0.26;
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const r = (i % 2 === 0) ? rOuter : rInner;
+        const a = (i * Math.PI) / 4;
+        if (i === 0) ctx.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+        else ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function renderTouchFxOverlay(dt) {
+      if (!fxCtx || !fxOverlayCanvas) return;
+      resizeFxOverlayCanvas();
+      const dpr = fxOverlayCanvas.width / Math.max(1, canvasFrame.clientWidth || 1);
+      fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      fxCtx.clearRect(0, 0, fxOverlayCanvas.width / dpr, fxOverlayCanvas.height / dpr);
+      if (!showTouchFx) {
+        touchRipples.length = 0;
+        touchParticles.length = 0;
+        touchTrails.length = 0;
+        return;
+      }
+
+      // 0) Warm POV Screen-Edge Aura when Snow Ferret is petting YOU ("なでなでしてもらう♡")!
+      const fw = fxOverlayCanvas.width / dpr;
+      const fh = fxOverlayCanvas.height / dpr;
+      const leadSl = slots[activeSlotIdx] || slots[0];
+      const ag = leadSl?.avatarGive;
+      const isPovNadeLoop = (leadSl?.motionId === 'moe:pov_headpat_yoshi' || leadSl?.motionId === 'moe:pov_cheek_wrap');
+      const povWarmth = (ag && ag.active && ag.kind.startsWith('nade_'))
+        ? smootherstep01(ag.env)
+        : (isPovNadeLoop ? 0.55 : 0.0);
+      if (povWarmth > 0.02) {
+        const isCheekWrap = (ag && ag.active && ag.kind === 'nade_cheeks') || (leadSl?.motionId === 'moe:pov_cheek_wrap');
+        const swayX = Math.sin((ag?.phase || leadSl.time * 1.7)) * fw * 0.22;
+        fxCtx.save();
+        if (isCheekWrap) {
+          const gL = fxCtx.createRadialGradient(0, fh * 0.52, 4, 0, fh * 0.52, fw * 0.34);
+          gL.addColorStop(0, `rgba(255, 168, 214, ${(0.30 * povWarmth).toFixed(3)})`);
+          gL.addColorStop(1, 'rgba(255, 168, 214, 0)');
+          fxCtx.fillStyle = gL;
+          fxCtx.fillRect(0, 0, fw * 0.4, fh);
+
+          const gR = fxCtx.createRadialGradient(fw, fh * 0.52, 4, fw, fh * 0.52, fw * 0.34);
+          gR.addColorStop(0, `rgba(255, 168, 214, ${(0.30 * povWarmth).toFixed(3)})`);
+          gR.addColorStop(1, 'rgba(255, 168, 214, 0)');
+          fxCtx.fillStyle = gR;
+          fxCtx.fillRect(fw * 0.6, 0, fw * 0.4, fh);
+        } else {
+          const cx = fw * 0.5 + swayX;
+          const gTop = fxCtx.createRadialGradient(cx, 0, 8, cx, 0, Math.max(fw * 0.55, fh * 0.26));
+          gTop.addColorStop(0, `rgba(255, 182, 222, ${(0.36 * povWarmth).toFixed(3)})`);
+          gTop.addColorStop(0.6, `rgba(255, 224, 180, ${(0.14 * povWarmth).toFixed(3)})`);
+          gTop.addColorStop(1, 'rgba(255, 182, 222, 0)');
+          fxCtx.fillStyle = gTop;
+          fxCtx.fillRect(0, 0, fw, fh * 0.38);
+        }
+        fxCtx.restore();
+      }
+
+      // 1) Soft warm petting trail & palm halo
+      for (let i = touchTrails.length - 1; i >= 0; i--) {
+        const tr = touchTrails[i];
+        tr.age += dt;
+        if (tr.age >= tr.dur) { touchTrails.splice(i, 1); continue; }
+        const u = 1.0 - tr.age / tr.dur;
+        const rad = tr.r * (0.65 + 0.55 * u);
+        const g = fxCtx.createRadialGradient(tr.x, tr.y, 0, tr.x, tr.y, rad);
+        g.addColorStop(0, `rgba(255, 220, 240, ${(0.34 * u * u).toFixed(3)})`);
+        g.addColorStop(1, 'rgba(255, 130, 196, 0)');
+        fxCtx.fillStyle = g;
+        fxCtx.beginPath();
+        fxCtx.arc(tr.x, tr.y, rad, 0, Math.PI * 2);
+        fxCtx.fill();
+      }
+
+      if (activePetCursor) {
+        const {x, y, comfort} = activePetCursor;
+        const haloR = 24 + comfort * 10;
+        const g = fxCtx.createRadialGradient(x, y, 2, x, y, haloR);
+        g.addColorStop(0, 'rgba(255, 245, 250, 0.52)');
+        g.addColorStop(0.55, 'rgba(255, 146, 202, 0.28)');
+        g.addColorStop(1, 'rgba(255, 146, 202, 0)');
+        fxCtx.fillStyle = g;
+        fxCtx.beginPath();
+        fxCtx.arc(x, y, haloR, 0, Math.PI * 2);
+        fxCtx.fill();
+
+        fxCtx.strokeStyle = 'rgba(255, 224, 242, 0.72)';
+        fxCtx.lineWidth = 1.6;
+        fxCtx.beginPath();
+        fxCtx.arc(x, y, 13 + Math.sin(performance.now() * 0.004) * 2.0, 0, Math.PI * 2);
+        fxCtx.stroke();
+      }
+
+      // 2) Expanding Tap Ripples & 4-Ray Center Flash ("タップしたのが分かるエフェクト")
+      for (let i = touchRipples.length - 1; i >= 0; i--) {
+        const rp = touchRipples[i];
+        rp.age += dt;
+        if (rp.age < 0) continue;
+        if (rp.age >= rp.dur) { touchRipples.splice(i, 1); continue; }
+        const p = rp.age / rp.dur;
+        const ease = 1.0 - Math.pow(1.0 - p, 2.6);
+        const alpha = Math.pow(1.0 - p, 1.55);
+        const rad = rp.r0 + (rp.r1 - rp.r0) * ease;
+
+        fxCtx.save();
+        fxCtx.globalAlpha = alpha * 0.92;
+        fxCtx.strokeStyle = rp.color;
+        fxCtx.shadowColor = rp.color;
+        fxCtx.shadowBlur = 10;
+        fxCtx.lineWidth = rp.width * (1.0 - 0.55 * p);
+        fxCtx.beginPath();
+        fxCtx.arc(rp.x, rp.y, rad, 0, Math.PI * 2);
+        fxCtx.stroke();
+
+        if (rp.star && p < 0.48) {
+          const sp = p / 0.48;
+          fxCtx.globalAlpha = (1.0 - sp) * 0.95;
+          fxCtx.fillStyle = '#ffffff';
+          drawMiniStar4(fxCtx, rp.x, rp.y, 13 * (1.0 - 0.35 * sp), sp * 0.4);
+        }
+        fxCtx.restore();
+      }
+
+      // 3) Floating Hearts & Starlight Particles
+      for (let i = touchParticles.length - 1; i >= 0; i--) {
+        const pt = touchParticles[i];
+        pt.age += dt;
+        if (pt.age < 0) continue;
+        if (pt.age >= pt.dur) { touchParticles.splice(i, 1); continue; }
+        const p = pt.age / pt.dur;
+        pt.x += pt.vx * dt + Math.sin(pt.age * 5.0 + i) * 8.0 * dt;
+        pt.y += pt.vy * dt;
+        pt.vx *= Math.pow(0.22, dt);
+        const scale = p < 0.18 ? (p / 0.18) : (1.0 - 0.25 * p);
+        const alpha = p < 0.65 ? 0.95 : (0.95 * (1.0 - (p - 0.65) / 0.35));
+
+        fxCtx.save();
+        fxCtx.globalAlpha = Math.max(0, alpha);
+        fxCtx.fillStyle = pt.color;
+        fxCtx.shadowColor = pt.color;
+        fxCtx.shadowBlur = 8;
+        if (pt.kind === 'heart') drawMiniHeart(fxCtx, pt.x, pt.y, pt.size * scale, pt.rot + Math.sin(pt.age * 3.2) * 0.14);
+        else drawMiniStar4(fxCtx, pt.x, pt.y, pt.size * scale, pt.rot + pt.age * 1.8);
+        fxCtx.restore();
+      }
+    }
+
+    const _htHead = new THREE.Vector3(), _htNeck = new THREE.Vector3(), _htChest = new THREE.Vector3();
+    const _htHips = new THREE.Vector3(), _htEyeL = new THREE.Vector3(), _htEyeR = new THREE.Vector3();
+    const _htEyeMid = new THREE.Vector3(), _htUp = new THREE.Vector3(), _htCrown = new THREE.Vector3();
+    const _htChin = new THREE.Vector3(), _htSidePt = new THREE.Vector3(), _htProj = new THREE.Vector3();
+
+    function projectWorldToPanelPx(ptWorld, cam, panelW, panelH) {
+      _htProj.copy(ptWorld).project(cam);
+      return {
+        x: (_htProj.x * 0.5 + 0.5) * panelW,
+        y: (-_htProj.y * 0.5 + 0.5) * panelH,
+        behind: _htProj.z > 1.0,
+      };
+    }
+
+    function distPointToSeg2D(px, py, ax, ay, bx, by) {
+      const vx = bx - ax, vy = by - ay;
+      const lenSq = vx * vx + vy * vy;
+      if (lenSq < 1e-4) return {dist: Math.hypot(px - ax, py - ay), t: 0.5, cross: 0};
+      const rawT = ((px - ax) * vx + (py - ay) * vy) / lenSq;
+      const t = THREE.MathUtils.clamp(rawT, 0, 1);
+      const cx = ax + vx * t, cy = ay + vy * t;
+      const cross = ((px - ax) * (-vy) + (py - ay) * vx) / Math.sqrt(lenSq);
+      return {dist: Math.hypot(px - cx, py - cy), t, rawT, cross};
+    }
+
+    function hitTestAvatarZone(sl, panelRect, clientX, clientY) {
+      const frm = clientToFrameCoords(clientX, clientY);
+      const pw = Math.max(1, panelRect.width);
+      const ph = Math.max(1, panelRect.height);
+      const px = clientX - panelRect.left;
+      const py = clientY - panelRect.top;
+      const hum = sl.avatar?.vrm?.humanoid;
+      if (!hum) {
+        return {isHit: false, zone: 'head_top', side: 0, fxX: frm.x, fxY: frm.y, headFxX: frm.x, headFxY: frm.y};
+      }
+
+      const rb = n => hum.getRawBoneNode(n);
+      const nHead = rb('head');
+      const nNeck = rb('neck');
+      const nChest = rb('upperChest') || rb('chest') || rb('spine');
+      const nHips = rb('hips');
+      const nEyeL = rb('leftEye');
+      const nEyeR = rb('rightEye');
+      if (!nHead || !nHips) {
+        return {isHit: false, zone: 'head_top', side: 0, fxX: frm.x, fxY: frm.y, headFxX: frm.x, headFxY: frm.y};
+      }
+
+      nHead.getWorldPosition(_htHead);
+      if (nNeck) nNeck.getWorldPosition(_htNeck); else _htNeck.copy(_htHead).y -= 0.065;
+      if (nChest) nChest.getWorldPosition(_htChest); else _htChest.lerpVectors(_htHips, _htHead, 0.62);
+      nHips.getWorldPosition(_htHips);
+
+      _htUp.subVectors(_htHead, _htNeck);
+      if (_htUp.lengthSq() > 1e-5) _htUp.normalize();
+      else _htUp.set(0, 1, 0);
+
+      const zS = modelFrontZSign;
+      if (nEyeL && nEyeR) {
+        nEyeL.getWorldPosition(_htEyeL);
+        nEyeR.getWorldPosition(_htEyeR);
+        _htEyeMid.addVectors(_htEyeL, _htEyeR).multiplyScalar(0.5);
+        _htSidePt.copy(_htEyeMid).addScaledVector(_htEyeL.clone().sub(_htEyeR).normalize(), 0.08);
+      } else {
+        _htEyeMid.copy(_htHead).addScaledVector(_htUp, 0.042);
+        _htEyeMid.z += 0.068 * zS;
+        _htSidePt.copy(_htEyeMid).x += 0.08 * zS;
+      }
+
+      // Anatomical anchors: Chin / Under-Chin (`_htChin`) -> Eyes (`_htEyeMid`) -> Crown & Ferret Ears (`_htCrown`)
+      _htCrown.copy(_htEyeMid).addScaledVector(_htUp, 0.125);
+      _htChin.copy(_htEyeMid).addScaledVector(_htUp, -0.076);
+
+      const sCrown = projectWorldToPanelPx(_htCrown, sl.camera, pw, ph);
+      const sEye   = projectWorldToPanelPx(_htEyeMid, sl.camera, pw, ph);
+      const sChin  = projectWorldToPanelPx(_htChin, sl.camera, pw, ph);
+      const sSide  = projectWorldToPanelPx(_htSidePt, sl.camera, pw, ph);
+      const sChest = projectWorldToPanelPx(_htChest, sl.camera, pw, ph);
+      const sHips  = projectWorldToPanelPx(_htHips, sl.camera, pw, ph);
+
+      const camDist = Math.max(0.18, sl.camera.position.distanceTo(_htEyeMid));
+      const pxPerM = (ph * 0.5) / Math.tan((sl.camera.fov * 0.5) * DEG) / camDist;
+      const headR = Math.max(18, 0.162 * pxPerM);
+      const bodyR = Math.max(16, 0.152 * pxPerM);
+
+      const segHead = distPointToSeg2D(px, py, sChin.x, sChin.y, sCrown.x, sCrown.y);
+      const segNeck = distPointToSeg2D(px, py, sChest.x, sChest.y, sChin.x, sChin.y);
+      const segBody = distPointToSeg2D(px, py, sHips.x, sHips.y, sChest.x, sChest.y);
+
+      const lrSign = (sSide.x - sEye.x) >= 0 ? 1 : -1;
+      const sideNorm = THREE.MathUtils.clamp(((px - sEye.x) / Math.max(12, headR * 0.72)) * lrSign, -1, 1);
+
+      const frameLeft = panelRect.left - canvasFrame.getBoundingClientRect().left;
+      const frameTop  = panelRect.top  - canvasFrame.getBoundingClientRect().top;
+      const headFxX = frameLeft + sEye.x;
+      const headFxY = frameTop  + sEye.y;
+
+      const hParam = segHead.rawT ?? segHead.t;
+      if (!sEye.behind && segHead.dist <= headR * 1.08) {
+        let zone = 'cheek';
+        if (hParam >= 0.52) zone = 'head_top';
+        else if (hParam <= 0.30 || (hParam <= 0.37 && Math.abs(px - sChin.x) < headR * 0.46)) zone = 'chin';
+        return {isHit: true, zone, side: sideNorm, fxX: frm.x, fxY: frm.y, headFxX, headFxY};
+      }
+      if (!sChin.behind && segNeck.dist <= headR * 0.78 && segNeck.t >= 0.35) {
+        return {isHit: true, zone: 'chin', side: sideNorm, fxX: frm.x, fxY: frm.y, headFxX, headFxY};
+      }
+      if (!sChest.behind && (segNeck.dist <= bodyR * 0.92 || segBody.dist <= bodyR)) {
+        return {isHit: true, zone: 'body', side: sideNorm, fxX: frm.x, fxY: frm.y, headFxX, headFxY};
+      }
+      const fallbackZone = hParam >= 0.45 ? 'head_top' : (hParam <= 0.25 ? 'chin' : 'cheek');
+      return {isHit: false, zone: fallbackZone, side: sideNorm, fxX: frm.x, fxY: frm.y, headFxX, headFxY};
+    }
+
+    function updatePettingStrokeOnSlot(sl, hit, stepPx, nowMs) {
+      const tr = sl.touchReact;
+      const zone = hit.zone === 'body' ? 'chin' : hit.zone;
+      tr.isPetting = true;
+      tr.demoTimer = 0;
+      tr.pokeTimer = 0;
+      tr.afterTimer = 0;
+      tr.petZone = zone;
+      tr.petStrokeDist += stepPx;
+      tr.petComfort = Math.min(1.0, tr.petComfort + stepPx / 210);
+      tr.targetHandSide = hit.side;
+
+      activePetCursor = activePetCursor || {x: hit.fxX, y: hit.fxY, zone, comfort: tr.petComfort, lastHeartAt: 0};
+      activePetCursor.x = hit.fxX;
+      activePetCursor.y = hit.fxY;
+      activePetCursor.zone = zone;
+      activePetCursor.comfort = tr.petComfort;
+      spawnPetStrokeFx(hit.fxX, hit.fxY, zone, nowMs);
+
+      const zoneMsg = zone === 'chin'
+        ? '🐾 顎なでなで中…（ごろごろ〜♡）'
+        : (zone === 'cheek' ? '🤚 ほっぺなでなで中…（すりすり♡）' : '🤚 頭なでなで中…（なでなで♡）');
+      showTouchMoodText(zoneMsg, 900);
+      document.body.dataset.touchZone = zone;
+    }
+
+    function finishPettingIntoAfterglow(sl, anchorFxX = null, anchorFxY = null) {
+      const tr = sl.touchReact;
+      if (!tr.isPetting) return;
+      tr.isPetting = false;
+      tr.demoTimer = 0;
+      activePetCursor = null;
+
+      // Pick the next afterglow expression pattern so 'とろっとした顔' and 'にこっ♡' alternate richly!
+      const pat = AFTERGLOW_PATTERNS[tr.patternSeq % AFTERGLOW_PATTERNS.length];
+      tr.patternSeq++;
+      tr.afterPattern = pat;
+      tr.afterZone = tr.petZone;
+      tr.afterDur = 4.2;
+      tr.afterTimer = tr.afterDur;
+      tr.petComfort = 0;
+      tr.petStrokeDist = 0;
+      tr.returnQueued = autoReturnTouch ? 'nade' : null;
+
+      if (anchorFxX !== null && anchorFxY !== null) {
+        spawnAfterglowBloomFx(anchorFxX, anchorFxY);
+      }
+      showTouchMoodText(AFTERGLOW_LABELS[pat] || '🥰 えへへ…♡', 2800);
+      document.body.dataset.afterPattern = pat;
+    }
+
+    function triggerAvatarPoke(sl, hit) {
+      const tr = sl.touchReact;
+      const nowSec = performance.now() * 0.001;
+      tr.pokeStreak = (nowSec - tr.lastPokeAt < 2.2) ? (tr.pokeStreak + 1) : 1;
+      tr.lastPokeAt = nowSec;
+      tr.isPetting = false;
+      tr.demoTimer = 0;
+      tr.afterTimer = 0;
+      tr.pokeZone = hit.zone || 'cheek';
+      tr.pokeSide = Math.abs(hit.side) > 0.12 ? Math.sign(hit.side) : (tr.pokeStreak % 2 === 0 ? 1 : -1);
+      tr.pokeDur = tr.pokeStreak >= 3 ? 2.3 : 1.9;
+      tr.pokeTimer = tr.pokeDur;
+      tr.returnQueued = autoReturnTouch ? 'tsun' : null;
+      if (sl.avatarGive) sl.avatarGive.active = false;
+
+      const isPout = tr.pokeStreak >= 3;
+      spawnTapRippleFx(hit.fxX, hit.fxY, true, isPout);
+
+      const pokeMsg = isPout
+        ? '💢 もうっ、つんつんしすぎ〜！♡'
+        : (tr.pokeZone === 'head_top'
+          ? '👉 頭・お耳つんつん！（ぴくっ♡）'
+          : (tr.pokeZone === 'chin'
+            ? '👉 顎つんつん！（くすぐったいっ♡）'
+            : (tr.pokeZone === 'body' ? '👉 つんつん！（くすぐったい〜♡）' : '👉 ほっぺぷにっ♡')));
+      showTouchMoodText(pokeMsg, 1900);
+      document.body.dataset.touchZone = 'poke_' + tr.pokeZone;
+    }
+
+    function startDemoInteraction(sl, kind) {
+      const hd = hitDivs[sl.index];
+      const rect = hd.getBoundingClientRect();
+      const probe = hitTestAvatarZone(sl, rect, rect.left + rect.width * 0.5, rect.top + rect.height * 0.42);
+      if (kind === 'poke') {
+        const py = rect.top + rect.height * 0.44;
+        const hit = hitTestAvatarZone(sl, rect, rect.left + rect.width * 0.52, py);
+        hit.isHit = true;
+        if (!hit.zone || hit.zone === 'body') hit.zone = 'cheek';
+        triggerAvatarPoke(sl, hit);
+        return;
+      }
+      const tr = sl.touchReact;
+      tr.isPetting = true;
+      tr.petZone = kind === 'chin' ? 'chin' : 'head_top';
+      tr.demoTimer = 2.4; // Slow 2.4s stroke -> automatically melts into 4.2s afterglow!
+      tr.afterTimer = 0;
+      tr.pokeTimer = 0;
+      tr.petComfort = 0.25;
+      tr.targetHandSide = 0.35;
+      const fy = probe.headFxY + (kind === 'chin' ? 28 : -26);
+      spawnAfterglowBloomFx(probe.headFxX, fy);
+      showTouchMoodText(
+        kind === 'chin' ? '🐾 顎なでなで中…（ごろごろ〜♡）' : '🤚 頭なでなで中…（ゆっくりなでなで♡）',
+        2300
+      );
+      document.body.dataset.touchZone = tr.petZone;
+    }
+
+    const _agTipWorld = new THREE.Vector3();
+    function emitAvatarFingerGlassTap(sl, side, phaseKey, customWorldPt = null) {
+      const ag = sl.avatarGive;
+      if (!ag || ag.lastTapKey === phaseKey) return;
+      ag.lastTapKey = phaseKey;
+      const hd = hitDivs[sl.index];
+      if (!hd || hd.style.display === 'none') return;
+      const rect = hd.getBoundingClientRect();
+      const frameRect = canvasFrame.getBoundingClientRect();
+      if (customWorldPt) {
+        _agTipWorld.copy(customWorldPt);
+      } else {
+        _agTipWorld.copy(side === 'left' ? _tgtL : _tgtR).addScaledVector(_fwdDir, 0.075);
+      }
+      const proj = projectWorldToPanelPx(_agTipWorld, sl.camera, Math.max(1, rect.width), Math.max(1, rect.height));
+      const fxX = (rect.left - frameRect.left) + THREE.MathUtils.clamp(proj.x, rect.width * 0.18, rect.width * 0.82);
+      const fxY = (rect.top - frameRect.top) + THREE.MathUtils.clamp(proj.y, rect.height * 0.20, rect.height * 0.78);
+      spawnTapRippleFx(fxX, fxY, true, false);
+    }
+
+    function startAvatarGiveInteraction(sl, modeType = 'nade', isAutoReturn = false) {
+      if (!sl?.avatarGive) return;
+      const tr = sl.touchReact;
+      tr.isPetting = false;
+      tr.demoTimer = 0;
+      tr.afterTimer = 0;
+      tr.pokeTimer = 0;
+      tr.returnQueued = null;
+      activePetCursor = null;
+
+      const ag = sl.avatarGive;
+      ag.active = true;
+      ag.lastTapKey = '';
+      ag.phase = 0;
+
+      if (modeType === 'nade') {
+        const variants = ['nade_head', 'nade_cheeks'];
+        ag.kind = variants[ag.nadeSeq % variants.length];
+        ag.nadeSeq++;
+        ag.dur = 5.4;
+        ag.timer = ag.dur;
+        const prefix = isAutoReturn ? '💞 お返し♡ ' : '';
+        const msg = ag.kind === 'nade_cheeks'
+          ? `${prefix}両手でほっぺ包み「いい子いい子〜♡」`
+          : `${prefix}ゼロ距離で頭「よしよしなでなで〜♡」`;
+        showTouchMoodText(msg, 3600);
+      } else {
+        const variants = ['poke_double', 'poke_forehead'];
+        ag.kind = variants[ag.tsunSeq % variants.length];
+        ag.tsunSeq++;
+        ag.dur = 3.6;
+        ag.timer = ag.dur;
+        const prefix = isAutoReturn ? '👉 お返し♡ ' : '👉 ';
+        const msg = ag.kind === 'poke_forehead'
+          ? `${prefix}おでこ「ぷにっ・つんつん♡」`
+          : `${prefix}ほっぺ「つんつんっ♡」`;
+        showTouchMoodText(msg, 2800);
+      }
+      document.body.dataset.avatarGiveKind = ag.kind;
+    }
+
     // Keep Safari pinch gestures on the stage in the camera controls.
     stageArea.addEventListener('gesturestart', e => e.preventDefault(), {passive: false});
     stageArea.addEventListener('gesturechange', e => e.preventDefault(), {passive: false});
@@ -2510,6 +3277,7 @@
       let lastPtrPinchDist = 0;
       let lastTouchPinchDist = 0;
       let lastTouchEventAt = 0;
+      let touchGesture = null;
 
       const measurePtrPairDist = () => {
         const it = activePtrs.values();
@@ -2518,9 +3286,71 @@
         return (a && b) ? Math.hypot(a.x - b.x, a.y - b.y) : 0;
       };
 
+      // Hover cursor feedback: hand cursor (`pointer`) over Snow Ferret when touch interaction is enabled, `grab` on background!
+      hd.addEventListener('pointermove', e => {
+        if (activePtrs.size > 0 || e.pointerType === 'touch') return;
+        if (touchInteractMode === 'off') {
+          hd.classList.remove('hover-pet');
+          return;
+        }
+        if (touchInteractMode === 'pet_lock') {
+          hd.classList.add('hover-pet');
+          return;
+        }
+        const hit = hitTestAvatarZone(sl, hd.getBoundingClientRect(), e.clientX, e.clientY);
+        hd.classList.toggle('hover-pet', hit.isHit);
+      }, {passive: true});
+
+      hd.addEventListener('pointerleave', () => {
+        hd.classList.remove('hover-pet');
+      }, {passive: true});
+
+      // Capture-phase pointerdown runs BEFORE OrbitControls so petting Snow Ferret keeps the camera rock-steady!
       hd.addEventListener('pointerdown', e => {
         activePtrs.set(e.pointerId, {x: e.clientX, y: e.clientY});
-        if (activePtrs.size === 1) {
+
+        if (activePtrs.size >= 2) {
+          // 2-finger pinch zoom takes over cleanly; cancel any tentative single-finger pet/tap without poking
+          if (touchGesture) {
+            if (sl.touchReact.isPetting) {
+              sl.touchReact.isPetting = false;
+              activePetCursor = null;
+            }
+            touchGesture = null;
+            hd.classList.remove('is-petting');
+          }
+          sl.controls.enabled = false;
+          lastPtrPinchDist = measurePtrPairDist();
+          return;
+        }
+
+        selectSlot(sl.index);
+        const isPrimaryBtn = (e.pointerType !== 'mouse' || e.button === 0);
+        const rect = hd.getBoundingClientRect();
+        const hit = hitTestAvatarZone(sl, rect, e.clientX, e.clientY);
+        const interceptForAvatar = isPrimaryBtn && touchInteractMode !== 'off' && (touchInteractMode === 'pet_lock' || hit.isHit);
+
+        touchGesture = {
+          pointerId: e.pointerId,
+          intercepted: interceptForAvatar,
+          startX: e.clientX,
+          startY: e.clientY,
+          lastX: e.clientX,
+          lastY: e.clientY,
+          startAt: performance.now(),
+          totalMove: 0,
+          startedPet: false,
+          firstHit: hit,
+          lastHit: hit,
+        };
+
+        if (interceptForAvatar) {
+          // Pause OrbitControls for this stroke so rubbing head/chin doesn't spin the camera!
+          sl.controls.enabled = false;
+          sl.userDragging = false;
+          hd.classList.add('is-petting');
+        } else {
+          sl.controls.enabled = true;
           if (!FULL_PATH_CAM_ANIMS.has(sl.camAnim) && sl.camera.fov !== 28) {
             sl.camera.fov = 28;
             sl.camera.updateProjectionMatrix();
@@ -2529,16 +3359,13 @@
           sl.controls._sphericalDelta?.set(0, 0, 0);
           sl.userDragging = true;
           sl.camPreset = '';
-          selectSlot(sl.index);
-        } else if (activePtrs.size >= 2) {
-          lastPtrPinchDist = measurePtrPairDist();
         }
-      });
+      }, {capture: true});
 
       window.addEventListener('pointermove', e => {
         if (!activePtrs.has(e.pointerId)) return;
         activePtrs.set(e.pointerId, {x: e.clientX, y: e.clientY});
-        // Multi-pointer pinch fallback (when native TouchEvent did not already handle this pinch frame)
+
         if (activePtrs.size >= 2 && (performance.now() - lastTouchEventAt > 100)) {
           const dist = measurePtrPairDist();
           if (lastPtrPinchDist > 8 && dist > 8) {
@@ -2546,6 +3373,21 @@
             applySlotZoomFactor(sl, Math.pow(clampedRatio, 1.12));
           }
           lastPtrPinchDist = dist;
+          return;
+        }
+
+        if (touchGesture && touchGesture.pointerId === e.pointerId) {
+          const stepPx = Math.hypot(e.clientX - touchGesture.lastX, e.clientY - touchGesture.lastY);
+          touchGesture.lastX = e.clientX;
+          touchGesture.lastY = e.clientY;
+          touchGesture.totalMove += stepPx;
+
+          if (touchGesture.intercepted && touchGesture.totalMove >= 9) {
+            touchGesture.startedPet = true;
+            const curHit = hitTestAvatarZone(sl, hd.getBoundingClientRect(), e.clientX, e.clientY);
+            touchGesture.lastHit = curHit;
+            updatePettingStrokeOnSlot(sl, curHit, stepPx, performance.now());
+          }
         }
       });
 
@@ -2555,10 +3397,39 @@
         if (activePtrs.size < 2) {
           lastPtrPinchDist = 0;
         }
-        if (activePtrs.size === 0 && sl.userDragging) {
-          sl.userDragging = false;
-          sl.baseCamPos.copy(sl.camera.position);
-          sl.baseCamTgt.copy(sl.controls.target);
+
+        if (touchGesture && touchGesture.pointerId === e.pointerId) {
+          const g = touchGesture;
+          touchGesture = null;
+          hd.classList.remove('is-petting');
+
+          if (e.type !== 'pointercancel') {
+            const elapsedMs = performance.now() - g.startAt;
+            if (g.startedPet) {
+              finishPettingIntoAfterglow(sl, g.lastHit.headFxX, g.lastHit.headFxY);
+            } else if (g.totalMove < 9 && elapsedMs < 420) {
+              // Quick clean tap! Trigger poke reaction if on Snow Ferret, or crisp stage tap ripple if on background!
+              const tapHit = hitTestAvatarZone(sl, hd.getBoundingClientRect(), e.clientX, e.clientY);
+              if (touchInteractMode !== 'off' && (tapHit.isHit || touchInteractMode === 'pet_lock')) {
+                if (!tapHit.isHit) tapHit.zone = 'cheek';
+                triggerAvatarPoke(sl, tapHit);
+              } else {
+                spawnTapRippleFx(tapHit.fxX, tapHit.fxY, false, false);
+              }
+            }
+          } else if (sl.touchReact.isPetting) {
+            sl.touchReact.isPetting = false;
+            activePetCursor = null;
+          }
+        }
+
+        if (activePtrs.size === 0) {
+          sl.controls.enabled = (touchInteractMode !== 'pet_lock');
+          if (sl.userDragging) {
+            sl.userDragging = false;
+            sl.baseCamPos.copy(sl.camera.position);
+            sl.baseCamTgt.copy(sl.controls.target);
+          }
         }
       };
       window.addEventListener('pointerup', finishPointer);
@@ -2718,9 +3589,43 @@
       const sm = sl.avatar.springManager || vrm.springBoneManager;
       if (sm?.joints) {
         const ballCg = {colliders: [ballCollider], name: 'StudioBalanceBallColliderGroup'};
+        const capeFrontTaper = [
+          {stiff: 0.08, grav: 0.38, drag: 0.58, rad: 0.024},
+          {stiff: 0.05, grav: 0.46, drag: 0.54, rad: 0.024},
+          {stiff: 0.03, grav: 0.54, drag: 0.50, rad: 0.026},
+        ];
+        const capeCloakTaper = [
+          {stiff: 0.14, grav: 0.32, drag: 0.48, rad: 0.036},
+          {stiff: 0.09, grav: 0.40, drag: 0.44, rad: 0.036},
+          {stiff: 0.05, grav: 0.48, drag: 0.40, rad: 0.038},
+        ];
         for (const joint of sm.joints) {
           const bName = joint.bone?.name || '';
-          if (/^(skirt_|cape_|brooch_|tail_)/.test(bName)) {
+          // Calibrate supple, critically-damped side ribbons (`cape_front_*`) & cloak so they NEVER snap/whip (`ビヨン！`)!
+          if (/^cape_front_[LR]_[123]/.test(bName) && joint.settings) {
+            const idx = Math.min(2, Math.max(0, (parseInt(bName.match(/_(\d)/)?.[1] || '1', 10) - 1)));
+            const tp = capeFrontTaper[idx];
+            joint.settings.stiffness = tp.stiff;
+            joint.settings.gravityPower = tp.grav;
+            joint.settings.dragForce = tp.drag;
+            joint.settings.hitRadius = tp.rad;
+            // Filter out forearm/hand colliders from `cape_front_*` so moving cuffs never snag & catapult side ribbons upward!
+            if (Array.isArray(joint.colliderGroups)) {
+              joint.colliderGroups = joint.colliderGroups.map(cg => ({
+                ...cg,
+                colliders: (cg.colliders || []).filter(col => !/(lower_arm|upper_arm|hand)/i.test(col?.parent?.name || col?.name || '')),
+              }));
+            }
+          } else if (/^cape_(side|mid|back)_[LR]_[123]/.test(bName) && joint.settings) {
+            const idx = Math.min(2, Math.max(0, (parseInt(bName.match(/_(\d)/)?.[1] || '1', 10) - 1)));
+            const tp = capeCloakTaper[idx];
+            joint.settings.stiffness = tp.stiff;
+            joint.settings.gravityPower = tp.grav;
+            joint.settings.dragForce = tp.drag;
+            joint.settings.hitRadius = tp.rad;
+          }
+          // Never attach StudioBalanceBallCollider to `tail_` (tail_1 sits inside the upper-rear ball pocket & would be ejected forward through her chest!)
+          if (/^(skirt_|cape_|brooch_)/.test(bName)) {
             if (Array.isArray(joint.colliderGroups)) {
               joint.colliderGroups.push(ballCg);
             }
@@ -2735,30 +3640,23 @@
         if (obj.name && !nodeByName.has(obj.name)) nodeByName.set(obj.name, obj);
       });
       const chainSpecs = [
-        {prefix: 'skirt_270', count: 3, pad: 0.018, mode: 'centerCurtain'},
-        ...['240', '300'].map(a => ({
-          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'frontApron', lapRoot: 0.114, lapKnee: 0.100, shinPad: 0.090,
-        })),
-        ...['210', '330'].map(a => ({
-          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'frontApron', lapRoot: 0.103, lapKnee: 0.091, shinPad: 0.088,
-        })),
-        ...['000', '180'].map(a => ({
-          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'sideSkirt',
+        ...['180', '210', '240', '270', '300', '330', '000'].map(a => ({
+          prefix: 'skirt_' + a, tag: a, count: 3, pad: 0.026, mode: 'polarSkirt', lapRoot: 0.114, lapKnee: 0.098, shinPad: 0.094,
         })),
         ...['030', '060', '090', '120', '150'].map(a => ({
-          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'ballOnly',
+          prefix: 'skirt_' + a, tag: a, count: 3, pad: 0.028, mode: 'ballOnly',
         })),
         ...['cape_front_L', 'cape_front_R'].map(p => ({
-          prefix: p, count: 3, pad: 0.046, mode: 'frontApron', lapRoot: 0.110, lapKnee: 0.094, shinPad: 0.096,
+          prefix: p, tag: p, count: 3, pad: 0.036, mode: 'sideCape', lapRoot: 0.132, lapKnee: 0.114, shinPad: 0.106,
         })),
         ...['cape_side_L', 'cape_side_R', 'cape_mid_L', 'cape_mid_R', 'cape_back_L', 'cape_back_R'].map(p => ({
-          prefix: p, count: 3, pad: 0.044, mode: 'ballOnly',
+          prefix: p, tag: p, count: 3, pad: 0.044, mode: 'ballOnly',
         })),
         ...['brooch_L', 'brooch_R'].map(p => ({
-          prefix: p, count: 3, pad: 0.036, mode: 'frontApron', lapRoot: 0.108, lapKnee: 0.092, shinPad: 0.094,
+          prefix: p, tag: p, count: 3, pad: 0.034, mode: 'frontApron', lapRoot: 0.122, lapKnee: 0.104, shinPad: 0.100,
         })),
-        {prefix: 'brooch_C', count: 3, pad: 0.032, mode: 'frontApron', lapRoot: 0.072, lapKnee: 0.048, shinPad: 0.084},
-        {prefix: 'tail', count: 4, pad: 0.048, mode: 'ballOnly'},
+        {prefix: 'brooch_C', tag: 'brooch_C', count: 3, pad: 0.032, mode: 'frontApron', lapRoot: 0.102, lapKnee: 0.082, shinPad: 0.090},
+        {prefix: 'tail', tag: 'tail', count: 4, pad: 0.068, mode: 'rearTail'},
       ];
       const garmentChains = [];
       for (const spec of chainSpecs) {
@@ -2780,6 +3678,7 @@
         if (segs.length > 0) {
           garmentChains.push({
             segs,
+            tag: spec.tag || '',
             pad: spec.pad,
             mode: spec.mode,
             lapRoot: spec.lapRoot || 0.090,
@@ -4014,9 +4913,8 @@
       if (mode.startsWith('moe:ball_')) {
         const restHipsY = sl.rigCalib?.restHipsY || 0.666;
         const baseHipsZ = sl.rigCalib?.restHipsZ ?? (0.189 * zS);
-        const ankleBaseY = sl.rigCalib?.leftLeg?.ankleH || 0.0865;
-        const ballRv = 0.222; // 44.4cm tall pastel gym ball so thighs slope gently downward from hips to knees
-        const ballRh = 0.218; // 43.6cm wide round ball so knees & skirt drape cleanly around it
+        const ballRv = 0.302; // 1.2x bigger (~60.4cm tall) pastel rubber gym ball so her boots barely dangle above the floor!
+        const ballRh = 0.308; // 1.2x bigger (~61.6cm wide -> ~66-70cm on bounce!) straddled wide at ±49°
 
         const setBalanceBallBody = ({
           squash = 0.14,       // 0.0 (uncompressed/stretched) .. 0.30 (deep squishy bottom impact)
@@ -4031,27 +4929,26 @@
           headPitchDeg = 2,    // + nods chin down, - lifts chin up (uwamezukai!)
           headYawDeg = 0,
           headTiltDeg = 0,
-          stanceX = 0.136,     // Half-width of seated ankle stance (m)
-          footLiftL = 0.0,     // Vertical lift of left boot sole above floor (m)
-          footLiftR = 0.0,     // Vertical lift of right boot sole above floor (m)
-          footFwdL = 0.0,      // Extra forward kick of left boot (m)
-          footFwdR = 0.0,      // Extra forward kick of right boot (m)
-          footOutL = 0.0,      // Extra lateral spread of left boot (m)
-          footOutR = 0.0,      // Extra lateral spread of right boot (m)
-          kneeSpread = 0.146,  // Half-width of forward knee pole (m)
-          toePitchLDeg = null, // null = auto (flat on floor, cute pointed toes in air)
+          legSpreadDeg = 49,   // +15° wider on each side (~49° left & -49° right straddling the big ball!)
+          footLiftL = 0.0,     // Extra dangling vertical kick of left boot (m)
+          footLiftR = 0.0,     // Extra dangling vertical kick of right boot (m)
+          footFwdL = 0.0,      // Extra radial reach of left boot (m)
+          footFwdR = 0.0,      // Extra radial reach of right boot (m)
+          footOutL = 0.0,      // Extra outward angle swing of left leg (m -> deg)
+          footOutR = 0.0,      // Extra outward angle swing of right leg (m -> deg)
+          toePitchLDeg = null, // null = auto cute dangling pointed toes
           toePitchRDeg = null,
-          toeYawLDeg = 6,      // Gentle natural outward turn of seated boots
-          toeYawRDeg = -6,
+          toeYawLDeg = 36,     // Natural outward turn aligned with ±49° wide-straddle thighs
+          toeYawRDeg = -36,
         }) => {
-          // 1) Deform & position the 3D Balance Ball locked cleanly on floor y=0!
-          const sy = Math.max(0.66, 1.0 - squash);
-          const sxz = 1.0 + squash * 0.50; // Volume-preserving rubber bulge!
+          // 1) Deform & position the 1.2x 3D Balance Ball locked cleanly on floor y=0!
+          const sy = Math.max(0.68, 1.0 - squash);
+          const sxz = 1.0 + squash * 0.48; // Volume-preserving rubber bulge!
           const rHoriz = ballRh * sxz;
           const rVert = ballRv * sy;
           const ballTopY = 2.0 * rVert;
-          const ballX = swayX * 0.74;
-          const ballZ = baseHipsZ - zS * 0.036 + rockZ * 0.68;
+          const ballX = swayX * 0.72;
+          const ballZ = baseHipsZ - zS * 0.016 + rockZ * 0.68;
 
           if (sl.ballGroup) {
             const {ballMesh, shadowMesh} = sl.ballGroup.userData;
@@ -4059,7 +4956,7 @@
             ballMesh.position.set(ballX, rVert, ballZ);
             ballMesh.rotation.set((rockZ / ballRh) * 0.85, 0, -(swayX / ballRh) * 0.85);
 
-            const shSize = (rHoriz * 2.28) * (1.0 - Math.min(0.24, airHop * 2.2));
+            const shSize = (rHoriz * 2.24) * (1.0 - Math.min(0.24, airHop * 2.2));
             shadowMesh.scale.set(shSize, 1.0, shSize);
             shadowMesh.position.set(ballX, 0.003, ballZ);
           }
@@ -4079,8 +4976,8 @@
             sl.ballCollider.updateWorldMatrix(false, false);
           }
 
-          // 2) Seat glutes right on the ball crown (pelvis seat base is 0.101m below hips bone!)
-          const targetHipsY = ballTopY + 0.098 + airHop;
+          // 2) Seat glutes atop the big 1.2x ball so her boots barely dangle just above y=0 ("ギリギリ足つかない")!
+          const targetHipsY = ballTopY + 0.086 + airHop;
           const hipDrop = restHipsY - targetHipsY;
 
           if (nb('hips')) {
@@ -4104,30 +5001,32 @@
 
           updateTorsoAndReadFrames();
 
-          // 3) True anatomical 2-bone Leg IK: knees point cleanly forward-outward in front of the ball,
-          //    shins drop naturally to the floor, and boot heels strictly clear the ball front surface!
-          const sideSignL = +zS; // Character's left in world X (+X when facing +Z)
+          // 3) Wide ±49° side-straddling 2-bone Leg IK with dangling pointed-toe boots barely off the floor!
+          const sideSignL = +zS;
           const sideSignR = -zS;
-          const ankXL = swayX * 0.42 + sideSignL * (stanceX + footOutL);
-          const ankXR = swayX * 0.42 + sideSignR * (stanceX + footOutR);
+          const azL = (legSpreadDeg + squash * 2.5 + footOutL * 115) * DEG;
+          const azR = (legSpreadDeg + squash * 2.5 + footOutR * 115) * DEG;
+          const rAnkL = rHoriz + 0.088 + footFwdL * 0.65;
+          const rAnkR = rHoriz + 0.088 + footFwdR * 0.65;
 
-          const dxBallL = Math.abs(ankXL - ballX);
-          const dxBallR = Math.abs(ankXR - ballX);
-          const ballFrontL = dxBallL < rHoriz ? Math.sqrt(rHoriz * rHoriz - dxBallL * dxBallL) : rHoriz * 0.55;
-          const ballFrontR = dxBallR < rHoriz ? Math.sqrt(rHoriz * rHoriz - dxBallR * dxBallR) : rHoriz * 0.55;
+          const ankXL = ballX + sideSignL * Math.sin(azL) * rAnkL;
+          const ankZL = ballZ + zS * Math.cos(azL) * rAnkL;
+          const ankXR = ballX + sideSignR * Math.sin(azR) * rAnkR;
+          const ankZR = ballZ + zS * Math.cos(azR) * rAnkR;
 
-          const ankZL = ballZ + zS * (Math.max(rHoriz * 0.76, ballFrontL) + 0.105 + footFwdL);
-          const ankZR = ballZ + zS * (Math.max(rHoriz * 0.76, ballFrontR) + 0.105 + footFwdR);
-          const ankYL = ankleBaseY + 0.003 + Math.max(0, footLiftL);
-          const ankYR = ankleBaseY + 0.003 + Math.max(0, footLiftR);
+          // At deepest squash (~0.533m hips), ankY = 0.154m -> pointed boot tip hovers ~1.4cm above y=0 ("ギリギリ足つかない")!
+          const dangleBaseY = Math.max(0.154, targetHipsY - 0.380);
+          const ankYL = dangleBaseY + Math.max(0, footLiftL);
+          const ankYR = dangleBaseY + Math.max(0, footLiftR);
 
-          const autoPitchL = toePitchLDeg !== null ? toePitchLDeg : Math.min(28, Math.max(0, footLiftL) * 260);
-          const autoPitchR = toePitchRDeg !== null ? toePitchRDeg : Math.min(28, Math.max(0, footLiftR) * 260);
+          const autoPitchL = toePitchLDeg !== null ? toePitchLDeg : (21 + Math.min(13, Math.max(0, ankYL - 0.154) * 65));
+          const autoPitchR = toePitchRDeg !== null ? toePitchRDeg : (21 + Math.min(13, Math.max(0, ankYR - 0.154) * 65));
 
           _tgtL.set(ankXL, ankYL, ankZL);
           _tgtR.set(ankXR, ankYR, ankZR);
-          _poleL.set(swayX + sideSignL * (kneeSpread + footOutL * 0.7), targetHipsY + 0.14, ballZ + zS * 0.56);
-          _poleR.set(swayX + sideSignR * (kneeSpread + footOutR * 0.7), targetHipsY + 0.14, ballZ + zS * 0.56);
+          const poleR = rHoriz + 0.145;
+          _poleL.set(ballX + sideSignL * Math.sin(azL) * poleR, targetHipsY + 0.14, ballZ + zS * Math.cos(azL) * poleR);
+          _poleR.set(ballX + sideSignR * Math.sin(azR) * poleR, targetHipsY + 0.14, ballZ + zS * Math.cos(azR) * poleR);
 
           solveLegSoftIK(sl, 'left', _tgtL, _poleL, autoPitchL, toeYawLDeg);
           solveLegSoftIK(sl, 'right', _tgtR, _poleR, autoPitchR, toeYawRDeg);
@@ -4161,8 +5060,8 @@
           const sway = Math.sin(cyc * Math.PI * 4) * 0.022;
 
           setBalanceBallBody({
-            squash: 0.05 + impact * 0.23,
-            airHop: upPeak * (0.024 + peacePop * 0.016),
+            squash: 0.05 + impact * 0.22,
+            airHop: upPeak * (0.020 + peacePop * 0.014),
             swayX: sway,
             rockZ: zS * Math.sin(ph) * 0.012,
             hipRollDeg: Math.sin(cyc * Math.PI * 4) * 3.5,
@@ -4171,22 +5070,24 @@
             headPitchDeg: 2 + impact * 4 - upPeak * 3,
             headTiltDeg: Math.sin(cyc * Math.PI * 2) * 7.5 + peacePop * 6.0,
             headYawDeg: Math.sin(cyc * Math.PI * 4) * 5.0,
-            stanceX: 0.136,
-            kneeSpread: 0.148 + impact * 0.012,
-            footLiftL: upPeak * (0.032 + peacePop * 0.020),
-            footLiftR: upPeak * (0.032 + peacePop * 0.020),
-            footFwdL: upPeak * 0.022,
-            footFwdR: upPeak * 0.022,
+            legSpreadDeg: 49,
+            footLiftL: upPeak * (0.022 + peacePop * 0.016),
+            footLiftR: upPeak * (0.022 + peacePop * 0.016),
+            footOutL: upPeak * 0.026,
+            footOutR: upPeak * 0.026,
+            footFwdL: upPeak * 0.010,
+            footFwdR: upPeak * 0.010,
           });
 
-          const lapL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, +0.168).add(tv3(0, -0.18 - impact * 0.025, 0));
-          const lapR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, -0.168).add(tv3(0, -0.18 - impact * 0.025, 0));
-          const vPeaceL = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.13).addScaledVector(_rightDir, +0.145).add(tv3(0, -0.02 + upPeak * 0.025, 0));
-          const vPeaceR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.13).addScaledVector(_rightDir, -0.145).add(tv3(0, -0.02 + upPeak * 0.025, 0));
+          // Cute bouncy paws held lightly forward & clear of side ribbons (`cape_front_L/R`) so hands NEVER poke through ribbons!
+          const lapL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.185).addScaledVector(_rightDir, +0.205).add(tv3(0, -0.075 - impact * 0.022, 0));
+          const lapR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.185).addScaledVector(_rightDir, -0.205).add(tv3(0, -0.075 - impact * 0.022, 0));
+          const vPeaceL = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.135).addScaledVector(_rightDir, +0.148).add(tv3(0, -0.02 + upPeak * 0.025, 0));
+          const vPeaceR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.135).addScaledVector(_rightDir, -0.148).add(tv3(0, -0.02 + upPeak * 0.025, 0));
           _tgtL.lerpVectors(lapL, vPeaceL, peacePop);
           _tgtR.lerpVectors(lapR, vPeaceR, peacePop);
-          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.22).add(tv3(0, -0.18, -0.06 * zS));
-          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.22).add(tv3(0, -0.18, -0.06 * zS));
+          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.24).add(tv3(0, -0.16, -0.05 * zS));
+          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.24).add(tv3(0, -0.16, -0.05 * zS));
           solveArmSoftIK(sl, 'left', _tgtL, _poleL);
           solveArmSoftIK(sl, 'right', _tgtR, _poleR);
           applyDaintyFingers(nb, 34 * DEG, 34 * DEG, peacePop > 0.5 ? 'peace' : false);
@@ -4216,8 +5117,8 @@
           const kickR = Math.max(0, +sideWave) * upPeak;
 
           setBalanceBallBody({
-            squash: 0.06 + impact * 0.22,
-            airHop: upPeak * 0.018,
+            squash: 0.06 + impact * 0.21,
+            airHop: upPeak * 0.015,
             swayX: sideWave * 0.058 * zS,
             rockZ: zS * Math.cos(cyc * Math.PI * 4) * 0.014,
             hipYawDeg: sideWave * 8.5,
@@ -4227,14 +5128,13 @@
             headPitchDeg: 2 + impact * 3,
             headTiltDeg: sideWave * 11.5,
             headYawDeg: -sideWave * 6.5,
-            stanceX: 0.136,
-            kneeSpread: 0.145,
-            footLiftL: upPeak * 0.014 + kickL * 0.072,
-            footLiftR: upPeak * 0.014 + kickR * 0.072,
-            footFwdL: kickL * 0.068,
-            footFwdR: kickR * 0.068,
-            footOutL: kickL * 0.022,
-            footOutR: kickR * 0.022,
+            legSpreadDeg: 49,
+            footLiftL: upPeak * 0.012 + kickL * 0.056,
+            footLiftR: upPeak * 0.012 + kickR * 0.056,
+            footFwdL: kickL * 0.020,
+            footFwdR: kickR * 0.020,
+            footOutL: kickL * 0.052,
+            footOutR: kickR * 0.052,
           });
 
           const pulse = 0.008 * impact;
@@ -4267,22 +5167,22 @@
             const d = 0.5 + 0.5 * Math.cos(subPh);
             squash = 0.06 + Math.pow(d, 1.4) * 0.20;
             subUp = 1.0 - d;
-            airHop = subUp * 0.018;
+            airHop = subUp * 0.015;
           } else if (cyc < 0.64) {
             const u = (cyc - 0.52) / 0.12;
             const c = Math.sin(u * Math.PI * 0.5);
-            squash = 0.07 + c * 0.24;
+            squash = 0.07 + c * 0.23;
           } else if (cyc < 0.90) {
             const u = (cyc - 0.64) / 0.26;
             const arc = Math.sin(u * Math.PI);
             squash = 0.04 + (1.0 - arc) * 0.07 - arc * 0.03;
-            airHop = arc * 0.065;
+            airHop = arc * 0.052;
             banzai = arc;
             legV = arc;
           } else {
             const u = (cyc - 0.90) / 0.10;
             const land = Math.sin(u * Math.PI);
-            squash = 0.06 + land * 0.22;
+            squash = 0.06 + land * 0.21;
           }
 
           setBalanceBallBody({
@@ -4294,18 +5194,17 @@
             torsoLeanDeg: 5 + squash * 18 - banzai * 9,
             headPitchDeg: 3 + squash * 8 - banzai * 9,
             headTiltDeg: Math.sin(cyc * Math.PI * 2) * 6.0,
-            stanceX: 0.138,
-            kneeSpread: 0.150 + legV * 0.042,
-            footLiftL: subUp * 0.022 + legV * 0.105,
-            footLiftR: subUp * 0.022 + legV * 0.105,
-            footFwdL: legV * 0.085,
-            footFwdR: legV * 0.085,
-            footOutL: legV * 0.045,
-            footOutR: legV * 0.045,
+            legSpreadDeg: 49,
+            footLiftL: subUp * 0.018 + legV * 0.075,
+            footLiftR: subUp * 0.018 + legV * 0.075,
+            footFwdL: legV * 0.026,
+            footFwdR: legV * 0.026,
+            footOutL: legV * 0.068,
+            footOutR: legV * 0.068,
           });
 
-          const pushL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, +0.175).add(tv3(0, -0.20, 0));
-          const pushR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, -0.175).add(tv3(0, -0.20, 0));
+          const pushL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.180).addScaledVector(_rightDir, +0.210).add(tv3(0, -0.085, 0));
+          const pushR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.180).addScaledVector(_rightDir, -0.210).add(tv3(0, -0.085, 0));
           const highL = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, +0.165).add(tv3(0, +0.135, 0));
           const highR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, -0.165).add(tv3(0, +0.135, 0));
           _tgtL.lerpVectors(pushL, highL, banzai);
@@ -4349,12 +5248,11 @@
             headPitchDeg: -(13 + leanWave * 7) + impact * 2.5,
             headTiltDeg: 7.5 * Math.sin(cyc * Math.PI * 2) + 3.0,
             headYawDeg: 4.5 * Math.cos(cyc * Math.PI * 2),
-            stanceX: 0.128,
-            kneeSpread: 0.124,
+            legSpreadDeg: 48,
             footLiftL: upPeak * 0.016,
             footLiftR: upPeak * 0.016,
-            toeYawLDeg: 2,
-            toeYawRDeg: -2,
+            toeYawLDeg: 35,
+            toeYawRDeg: -35,
           });
 
           const pawBob = upPeak * 0.018;
@@ -4397,7 +5295,7 @@
 
           setBalanceBallBody({
             squash: 0.07 + impact * 0.20 + Math.abs(wobble) * 0.06,
-            airHop: upPeak * 0.016,
+            airHop: upPeak * 0.015,
             swayX: (bigTilt * 0.072 + wobble * 0.016) * zS,
             rockZ: zS * wobble * 0.014,
             hipYawDeg: bigTilt * 7.5 + wobble * 4.5,
@@ -4407,16 +5305,15 @@
             headPitchDeg: 2 - panicEnv * 5 + reliefEnv * 4,
             headTiltDeg: bigTilt * 12.0 - reliefEnv * 10.0 + wobble * 4.0,
             headYawDeg: wobble * 6.5,
-            stanceX: 0.136,
-            kneeSpread: 0.148 + panicEnv * 0.025,
-            footLiftL: upPeak * 0.018 + panicEnv * (0.085 + Math.max(0, wobble) * 0.030),
-            footLiftR: upPeak * 0.018,
-            footFwdL: panicEnv * 0.065,
-            footOutL: panicEnv * 0.048,
+            legSpreadDeg: 49,
+            footLiftL: upPeak * 0.016 + panicEnv * (0.068 + Math.max(0, wobble) * 0.024),
+            footLiftR: upPeak * 0.016,
+            footFwdL: panicEnv * 0.024,
+            footOutL: panicEnv * 0.062,
           });
 
-          const lapL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, +0.168).add(tv3(0, -0.18, 0));
-          const lapR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, -0.168).add(tv3(0, -0.18, 0));
+          const lapL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.185).addScaledVector(_rightDir, +0.205).add(tv3(0, -0.075, 0));
+          const lapR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.185).addScaledVector(_rightDir, -0.205).add(tv3(0, -0.075, 0));
           const flapY = Math.sin(t * 18.0) * 0.055;
           const panL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.09).addScaledVector(_rightDir, +0.28).add(tv3(0, 0.07 + flapY, 0));
           const panR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.09).addScaledVector(_rightDir, -0.28).add(tv3(0, 0.07 - flapY, 0));
@@ -4445,6 +5342,258 @@
           }
           return;
         }
+      }
+
+      // =======================================================================
+      // 🥰 4 Dedicated Reverse-POV Affection Motions ("アバターになでなで＆つんつんしてもらう♡")
+      // =======================================================================
+      if (mode === 'moe:pov_headpat_yoshi') {
+        // 🥰 1. ゼロ距離「よしよし♡」ゆっくり頭なでなで (7.4s ultra-slow tender POV headpat loop!)
+        const cyc = (t % 7.4) / 7.4;
+        const reachEnv = smootherstep01((cyc - 0.06) / 0.16) * (1.0 - smootherstep01((cyc - 0.84) / 0.14));
+        // Very slow, soothing left-right headpat sweep (~3.4s per stroke!)
+        const strokePh = cyc * Math.PI * 4.0;
+        const strokeX = Math.sin(strokePh) * 0.056 * reachEnv;
+        const patDipY = Math.cos(strokePh * 2.0) * 0.008 * reachEnv;
+        const sway = Math.sin(cyc * Math.PI * 2.0);
+
+        setCuteLegs(11, 11 + reachEnv * 4, 11 + reachEnv * 4, 0.011 + reachEnv * 0.006, sway * 0.014, sway * 0.05);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * reachEnv * 0.075);
+        }
+
+        const torsoPitch = -zS * (8.5 * reachEnv) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = torsoPitch * 0.45; nb('spine').rotation.z = sway * 3.0 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = torsoPitch * 0.55;
+
+        const hTilt = (6.5 * reachEnv + Math.sin(strokePh * 0.5) * 4.2) * DEG;
+        const hPitch = zS * (5.0 * reachEnv) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = hPitch * 0.38; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = hPitch * 0.62; nb('head').rotation.y = (-strokeX * 48) * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right elbow swings wide-outward & high so her fluffy sleeve cuff frames outside her hair, keeping both eyes & mouth 100% clear!
+        const restR  = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.135).addScaledVector(_rightDir, -0.105).add(tv3(0, -0.06, 0));
+        const patR   = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.225).addScaledVector(_rightDir, -0.082 + strokeX).addScaledVector(_upDir, 0.134 + patDipY);
+        const heartL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.148).addScaledVector(_rightDir, +0.056).add(tv3(0, 0.012, 0));
+        const restPoleR = cloneTmp(_chestPos).addScaledVector(_rightDir, -0.20).add(tv3(0, -0.17, 0.05 * zS));
+        const highPoleR = cloneTmp(_headPos).addScaledVector(_rightDir, -0.31).addScaledVector(_upDir, 0.06).addScaledVector(_fwdDir, 0.04);
+        _tgtR.lerpVectors(restR, patR, reachEnv).addScaledVector(_rightDir, -0.058 * Math.sin(reachEnv * Math.PI));
+        _tgtL.copy(heartL);
+        _poleR.lerpVectors(restPoleR, highPoleR, reachEnv);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.18).add(tv3(0, -0.19, 0.03 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) {
+          nb('rightHand').rotation.z = (-12 * reachEnv) * DEG;
+          nb('rightHand').rotation.x = (-zS * 18 * reachEnv) * DEG;
+        }
+        applyDaintyFingers(nb, 44 * DEG, (36 - 16 * reachEnv) * DEG, false);
+
+        if (cyc >= 0.16 && cyc < 0.56) {
+          // Ultra-sweet melting 'とろ〜っ♡' affectionate gaze
+          sl.choreoState.emo = 'jitome';   sl.choreoState.emoW = 0.54;
+          sl.choreoState.emo2 = 'relaxed'; sl.choreoState.emo2W = 0.98;
+          sl.choreoState.vowel = 'oh';     sl.choreoState.vowelW = 0.44;
+          sl.choreoState.vowel2 = 'aa';    sl.choreoState.vowel2W = 0.28;
+        } else if (cyc >= 0.56 && cyc < 0.84) {
+          // Beaming 'にこっ♡' closed-eye smile
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'aa';  sl.choreoState.vowelW = 0.58;
+          sl.choreoState.vowel2 = 'oh'; sl.choreoState.vowel2W = 0.24;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.94;
+          sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.48;
+        }
+        return;
+      }
+
+      if (mode === 'moe:pov_cheek_wrap') {
+        // 💞 2. 両手でほっぺ包み＆とろっと「いい子いい子♡」 (7.6s ultra-slow two-hand cheek caress loop!)
+        const cyc = (t % 7.6) / 7.6;
+        const wrapEnv = smootherstep01((cyc - 0.07) / 0.17) * (1.0 - smootherstep01((cyc - 0.84) / 0.14));
+        const rubWave = Math.sin(cyc * Math.PI * 4.0) * wrapEnv;
+        const sway = Math.sin(cyc * Math.PI * 2.0);
+
+        setCuteLegs(12, 12 + wrapEnv * 4, 12 + wrapEnv * 4, 0.012 + wrapEnv * 0.006, sway * 0.016, sway * 0.05);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * wrapEnv * 0.075);
+        }
+
+        const torsoPitch = -zS * (9.0 * wrapEnv) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = torsoPitch * 0.45; nb('spine').rotation.z = sway * 3.5 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = torsoPitch * 0.55;
+
+        const hTilt = (sway * 8.0) * DEG;
+        const hUp = zS * (6.5 * wrapEnv) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = hUp * 0.38; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = hUp * 0.62; }
+
+        updateTorsoAndReadFrames();
+        // Both hands frame the wide left & right edges of the lens (cupping viewer's cheeks while keeping her face 100% open!)
+        const restL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.13).addScaledVector(_rightDir, +0.105).add(tv3(0, -0.06, 0));
+        const restR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.13).addScaledVector(_rightDir, -0.105).add(tv3(0, -0.06, 0));
+        const cupL  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.215).addScaledVector(_rightDir, +0.148).addScaledVector(_upDir, -0.048 + rubWave * 0.018);
+        const cupR  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.215).addScaledVector(_rightDir, -0.148).addScaledVector(_upDir, -0.048 - rubWave * 0.018);
+        _tgtL.lerpVectors(restL, cupL, wrapEnv);
+        _tgtR.lerpVectors(restR, cupR, wrapEnv);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.27).add(tv3(0, -0.15, 0.06 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.27).add(tv3(0, -0.15, 0.06 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.y  = -28 * wrapEnv * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.y = +28 * wrapEnv * DEG;
+        applyDaintyFingers(nb, (38 - 14 * wrapEnv) * DEG, (38 - 14 * wrapEnv) * DEG, false);
+
+        if (cyc >= 0.18 && cyc < 0.58) {
+          sl.choreoState.emo = 'jitome';   sl.choreoState.emoW = 0.58;
+          sl.choreoState.emo2 = 'relaxed'; sl.choreoState.emo2W = 1.0;
+          sl.choreoState.vowel = 'ou';     sl.choreoState.vowelW = 0.36;
+          sl.choreoState.vowel2 = 'oh';    sl.choreoState.vowel2W = 0.38;
+        } else if (cyc >= 0.58 && cyc < 0.84) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'aa';  sl.choreoState.vowelW = 0.54;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.92;
+          sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.45;
+        }
+        return;
+      }
+
+      if (mode === 'moe:pov_poke_tsuntsun') {
+        // 👉 3. 画面越し「つんつんっ♡」いたずら指ツン＆ウインク (5.2s playful double screen-poke loop!)
+        const cyc = (t % 5.2) / 5.2;
+        const approach = smootherstep01((cyc - 0.06) / 0.14) * (1.0 - smootherstep01((cyc - 0.80) / 0.16));
+        const poke1 = Math.exp(-Math.pow((cyc - 0.34) / 0.052, 2));
+        const poke2 = Math.exp(-Math.pow((cyc - 0.54) / 0.052, 2));
+        const pokePush = Math.max(poke1, poke2);
+        const giggle = THREE.MathUtils.smoothstep(cyc, 0.60, 0.68) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.86, 0.96));
+        const sway = Math.sin(cyc * Math.PI * 2.0);
+
+        setCuteLegs(11, 11 + approach * 4, 10 + (1 - approach) * 4, 0.011 + pokePush * 0.005, sway * 0.018, -0.05 * approach);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * (approach * 0.065 + pokePush * 0.020));
+        }
+
+        const torsoPitch = -zS * (8.0 * approach + 1.8 * pokePush) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = torsoPitch * 0.45; nb('spine').rotation.z = sway * 3.8 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = torsoPitch * 0.55;
+
+        const hTilt = (8.0 * approach - 11.5 * giggle) * DEG;
+        const hUp = zS * (5.5 * approach) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = hUp * 0.38; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = hUp * 0.62; nb('head').rotation.y = (4.5 * poke2) * DEG; }
+
+        updateTorsoAndReadFrames();
+        const restR  = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.12).addScaledVector(_rightDir, -0.115).add(tv3(0, -0.08, 0));
+        const readyR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.195 + pokePush * 0.065).addScaledVector(_rightDir, -0.092 + poke2 * 0.018).addScaledVector(_upDir, -0.078 + poke2 * 0.014);
+        const cheekL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, +0.068).add(tv3(0, 0.005 + giggle * 0.035, 0));
+        _tgtR.lerpVectors(restR, readyR, approach);
+        _tgtL.copy(cheekL);
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.25).add(tv3(0, -0.18, 0.05 * zS));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.18).add(tv3(0, -0.19, 0.03 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) {
+          nb('rightHand').rotation.z = 10 * DEG;
+          nb('rightHand').rotation.y = (14 * approach) * DEG;
+        }
+        applyDaintyFingers(nb, 44 * DEG, 54 * DEG, 'pointR');
+
+        if (pokePush > 0.86) {
+          emitAvatarFingerGlassTap(sl, 'right', cyc < 0.44 ? 'p1' : 'p2');
+        } else if (cyc < 0.20 || cyc > 0.70) {
+          sl.avatarGive.lastTapKey = '';
+        }
+
+        if (giggle > 0.35) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'aa';  sl.choreoState.vowelW = 0.56;
+          sl.choreoState.vowel2 = 'ee'; sl.choreoState.vowel2W = 0.30;
+        } else if (cyc >= 0.26 && cyc < 0.62) {
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.emo2 = 'relaxed';   sl.choreoState.emo2W = 0.85;
+          sl.choreoState.vowel = pokePush > 0.4 ? 'ou' : 'oh';
+          sl.choreoState.vowelW = 0.68;
+        } else {
+          sl.choreoState.emo = 'jitome';   sl.choreoState.emoW = 0.46;
+          sl.choreoState.emo2 = 'relaxed'; sl.choreoState.emo2W = 0.90;
+          sl.choreoState.vowel = 'oh';     sl.choreoState.vowelW = 0.48;
+        }
+        return;
+      }
+
+      if (mode === 'moe:pov_tsun_to_yoshi') {
+        // 💝 4. よくばり「つんつん→よしよしなでなで♡」コンボ (8.4s playful poke -> slow melting headpat story!)
+        const cyc = (t % 8.4) / 8.4;
+        const approach = smootherstep01((cyc - 0.04) / 0.10) * (1.0 - smootherstep01((cyc - 0.89) / 0.09));
+        const inPokePhase = cyc < 0.40;
+        const poke1 = Math.exp(-Math.pow((cyc - 0.18) / 0.036, 2));
+        const poke2 = Math.exp(-Math.pow((cyc - 0.30) / 0.036, 2));
+        const pokePush = Math.max(poke1, poke2);
+        const yoshiBlend = smootherstep01((cyc - 0.38) / 0.12) * (1.0 - smootherstep01((cyc - 0.88) / 0.10));
+        const slowStroke = Math.sin((cyc - 0.40) * Math.PI * 4.2) * 0.056 * yoshiBlend;
+        const sway = Math.sin(cyc * Math.PI * 2.0);
+
+        setCuteLegs(11, 11 + approach * 4, 11 + approach * 4, 0.011 + yoshiBlend * 0.006, sway * 0.016, sway * 0.05);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * (approach * 0.065 + yoshiBlend * 0.015 + pokePush * 0.018));
+        }
+
+        const torsoPitch = -zS * (8.0 * approach + 1.5 * yoshiBlend) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = torsoPitch * 0.45; nb('spine').rotation.z = sway * 3.2 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = torsoPitch * 0.55;
+        const hTilt = (inPokePhase ? -8.0 * approach : 7.0 * yoshiBlend + slowStroke * 38) * DEG;
+        const hUp = zS * (5.5 * approach) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = hUp * 0.38; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = hUp * 0.62; }
+
+        updateTorsoAndReadFrames();
+        const restR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.12).addScaledVector(_rightDir, -0.11).add(tv3(0, -0.07, 0));
+        const pokeR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.195 + pokePush * 0.065).addScaledVector(_rightDir, -0.092).addScaledVector(_upDir, -0.078);
+        const patR  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.225).addScaledVector(_rightDir, -0.082 + slowStroke).addScaledVector(_upDir, 0.134);
+        const curR  = cloneTmp(pokeR).lerp(patR, yoshiBlend).addScaledVector(_rightDir, -0.058 * Math.sin(yoshiBlend * Math.PI));
+        const pokePoleR = cloneTmp(_chestPos).addScaledVector(_rightDir, -0.25).add(tv3(0, -0.18, 0.05 * zS));
+        const patPoleR  = cloneTmp(_headPos).addScaledVector(_rightDir, -0.31).addScaledVector(_upDir, 0.06).addScaledVector(_fwdDir, 0.04);
+        _tgtR.lerpVectors(restR, curR, approach);
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.146).addScaledVector(_rightDir, +0.056).add(tv3(0, 0.012, 0));
+        _poleR.lerpVectors(pokePoleR, patPoleR, yoshiBlend * approach);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.18).add(tv3(0, -0.19, 0.03 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) {
+          nb('rightHand').rotation.z = THREE.MathUtils.lerp(10, -12, yoshiBlend) * approach * DEG;
+          nb('rightHand').rotation.y = THREE.MathUtils.lerp(14, 0, yoshiBlend) * approach * DEG;
+          nb('rightHand').rotation.x = (-zS * 18 * yoshiBlend) * DEG;
+        }
+        applyDaintyFingers(nb, 44 * DEG, THREE.MathUtils.lerp(54, 20, yoshiBlend) * DEG, yoshiBlend < 0.45 ? 'pointR' : false);
+
+        if (pokePush > 0.86) {
+          emitAvatarFingerGlassTap(sl, 'right', cyc < 0.24 ? 'c1' : 'c2');
+        } else if (cyc > 0.36 || cyc < 0.10) {
+          sl.avatarGive.lastTapKey = '';
+        }
+
+        if (inPokePhase) {
+          sl.choreoState.emo = poke2 > 0.25 ? 'blinkRight' : 'jitome';
+          sl.choreoState.emoW = poke2 > 0.25 ? 1.0 : 0.52;
+          sl.choreoState.emo2 = 'relaxed'; sl.choreoState.emo2W = 0.88;
+          sl.choreoState.vowel = pokePush > 0.35 ? 'ou' : 'oh';
+          sl.choreoState.vowelW = 0.65;
+        } else if (cyc < 0.68) {
+          sl.choreoState.emo = 'jitome';   sl.choreoState.emoW = 0.56;
+          sl.choreoState.emo2 = 'relaxed'; sl.choreoState.emo2W = 1.0;
+          sl.choreoState.vowel = 'oh';     sl.choreoState.vowelW = 0.45;
+          sl.choreoState.vowel2 = 'aa';    sl.choreoState.vowel2W = 0.28;
+        } else {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'aa';  sl.choreoState.vowelW = 0.58;
+        }
+        return;
       }
 
       // =======================================================================
@@ -5293,138 +6442,184 @@
     const _dOldDir = new THREE.Vector3(), _dNewDir = new THREE.Vector3();
     const _dHipL = new THREE.Vector3(), _dKneeL = new THREE.Vector3(), _dAnkL = new THREE.Vector3();
     const _dHipR = new THREE.Vector3(), _dKneeR = new THREE.Vector3(), _dAnkR = new THREE.Vector3();
-    const _dLatDir = new THREE.Vector3(), _dHu = new THREE.Vector3(), _dKu = new THREE.Vector3(), _dAu = new THREE.Vector3();
-    const _dSegVec = new THREE.Vector3(), _dDiff = new THREE.Vector3(), _dCp = new THREE.Vector3();
+    const _dHandL = new THREE.Vector3(), _dHandR = new THREE.Vector3();
+    const _dCuffArmL = new THREE.Vector3(), _dCuffArmR = new THREE.Vector3();
     const _DRAPE_FRACS = [0.30, 0.56, 0.80, 1.00];
 
-    function pushPointOutsideSideThighCapsule(pt, hipPos, kneePos, radius) {
-      _dSegVec.subVectors(kneePos, hipPos);
-      const lenSq = _dSegVec.lengthSq();
-      if (lenSq < 1e-6) return false;
-      _dDiff.subVectors(pt, hipPos);
-      const s = THREE.MathUtils.clamp(_dDiff.dot(_dSegVec) / lenSq, 0, 1);
-      _dCp.copy(hipPos).addScaledVector(_dSegVec, s);
-      _dDiff.subVectors(pt, _dCp);
-      const d = _dDiff.length();
-      if (d >= radius) return false;
-      // Tangential side clearance without kicking sideways upward into an umbrella cone
-      _dDiff.y = Math.max(0.0, _dDiff.y);
-      const nLen = _dDiff.length();
-      if (nLen > 1e-6) _dDiff.divideScalar(nLen);
-      else _dDiff.set(0, 1, 0);
-      pt.copy(_dCp).addScaledVector(_dDiff, radius);
-      return true;
+    function evalStraddleThighCanopyY(px, pz, lapRoot, lapKnee, zS) {
+      const hipMidX = 0.5 * (_dHipL.x + _dHipR.x);
+      const hipMidZ = 0.5 * (_dHipL.z + _dHipR.z);
+      // Carve a deep center modesty valley (`absPhiDeg < 28°`) right between her ±49° thighs so `skirt_270` & inner `240/300`
+      // hang down over her panties instead of tenting up at hip height!
+      const absPhiDeg = Math.abs(Math.atan2(px - hipMidX, zS * (pz - hipMidZ))) / DEG;
+      const thighMask = THREE.MathUtils.smoothstep(absPhiDeg, 15.0, 31.0);
+      if (thighMask <= 0.01) return -Infinity;
+
+      let bestY = -Infinity;
+      const spanXZ = 0.186; // Wide C2 lateral canopy so adjacent 30° skirt pleats bridge cleanly OVER both ±49° thighs!
+      for (let leg = 0; leg < 2; leg++) {
+        const H = leg === 0 ? _dHipL : _dHipR;
+        const K = leg === 0 ? _dKneeL : _dKneeR;
+        const tx = K.x - H.x;
+        const tz = K.z - H.z;
+        const tLenSq = Math.max(1e-5, tx * tx + tz * tz);
+        const rawS = ((px - H.x) * tx + (pz - H.z) * tz) / tLenSq;
+        if (rawS < -0.12 || rawS > 1.18) continue;
+        const s = THREE.MathUtils.clamp(rawS, 0, 1);
+        const cpX = H.x + tx * s;
+        const cpZ = H.z + tz * s;
+        const dXZ = Math.hypot(px - cpX, pz - cpZ);
+        if (dXZ >= spanXZ) continue;
+        const endTaper = rawS > 1.0 ? (1.0 - THREE.MathUtils.smoothstep(rawS, 1.0, 1.18)) : 1.0;
+        const u = dXZ / spanXZ;
+        const dome = Math.sqrt(Math.max(0, 1.0 - u * u)) * (1.0 - 0.10 * u * u) * endTaper * thighMask;
+        const pad = THREE.MathUtils.lerp(lapRoot, lapKnee, s);
+        const yTop = THREE.MathUtils.lerp(H.y, K.y, s) + pad * dome;
+        if (yTop > bestY) bestY = yTop;
+      }
+      return bestY;
     }
 
-    function pushFrontApronOverLapAndShin(tailPt, headPt, segLen, segIdx, latSpan, lapRoot, lapKnee, shinPad, zS) {
-      // Interpolate virtual leg (H_u -> K_u -> A_u) across the continuous bridge between Right & Left legs!
-      _dDiff.subVectors(tailPt, _dKneeR);
-      const projLat = _dDiff.dot(_dLatDir);
-      const u01 = THREE.MathUtils.clamp(projLat / latSpan, 0, 1);
+    function pushFrontPelvisModestyShield(pt, hipMidX, hipMidY, hipMidZ, tag, zS) {
+      // Prevents all 3 front modesty pleats (`240`, `270`, `300`) & `brooch_*` from EVER swinging backward (`-zS`) behind her panties!
+      const isFrontChain = (tag === '270' || tag === '240' || tag === '300' || tag.startsWith('brooch_'));
+      if (!isFrontChain) return false;
+      const latOff = Math.abs(pt.x - hipMidX);
+      if (latOff >= 0.155) return false;
+      const drop01 = THREE.MathUtils.clamp((hipMidY + 0.065 - pt.y) / 0.19, 0, 1);
+      const extraBrooch = tag.startsWith('brooch_') ? 0.018 : 0.0;
+      const minFwd = THREE.MathUtils.lerp(0.122, 0.194, drop01) + extraBrooch;
+      const curFwd = zS * (pt.z - hipMidZ);
+      if (curFwd < minFwd) {
+        pt.z = hipMidZ + zS * minFwd;
+        return true;
+      }
+      return false;
+    }
 
-      let outDist = 0;
-      if (projLat < 0) outDist = -projLat;
-      else if (projLat > latSpan) outDist = projLat - latSpan;
-      // Keep 100% full thigh/knee clearance across the entire outer thigh/knee width (up to 92mm outside knee bone axis!)
-      // so outer pleats (`skirt_210` & `skirt_330`) NEVER dip into the outer thighs/kneecaps!
-      const sideWeight = 1.0 - THREE.MathUtils.smoothstep(outDist, 0.092, 0.165);
-      if (sideWeight <= 0.02) return false;
-
-      _dHu.lerpVectors(_dHipR, _dHipL, u01);
-      _dKu.lerpVectors(_dKneeR, _dKneeL, u01);
-      _dAu.lerpVectors(_dAnkR, _dAnkL, u01);
-
-      const fH = zS * _dHu.z;
-      const fK = zS * _dKu.z;
-      const fA = zS * _dAu.z;
-      const fTail = zS * tailPt.z;
-      const fHead = zS * headPt.z;
-
-      const kneeCapF = fK + 0.042;
-      const evalLapY = f => {
-        const s = THREE.MathUtils.clamp((f - fH) / Math.max(0.05, kneeCapF - fH), 0, 1);
-        const pad = THREE.MathUtils.lerp(lapRoot, lapKnee, s) * sideWeight;
-        return THREE.MathUtils.lerp(_dHu.y, _dKu.y, s) + pad;
-      };
-      const evalShinF = y => {
-        const s = THREE.MathUtils.clamp((_dKu.y - y) / Math.max(0.05, _dKu.y - _dAu.y), 0, 1);
-        return THREE.MathUtils.lerp(fK, fA, s) + shinPad * sideWeight;
-      };
-
-      const minLapY = evalLapY(fTail);
-      const minShinF = evalShinF(tailPt.y);
-
-      // Also check segment midpoint (`0.5 * (head + tail)`) so curved thigh belly never grazes mid-pleat!
-      const fMid = 0.5 * (fHead + fTail);
-      const yMid = 0.5 * (headPt.y + tailPt.y);
-      const minMidY = evalLapY(fMid) - 0.003;
-      const midPen = (fMid < evalShinF(yMid) && yMid < minMidY) ? (minMidY - yMid) : 0;
-
-      // If SpringBone lifted the skirt above the thigh during downward bounce -> let it float & wave freely!
-      if ((tailPt.y >= minLapY || fTail >= minShinF) && midPen <= 0) return false;
-
-      const r = Math.max(0.025, segLen);
-      if (fHead < kneeCapF - 0.005) {
-        let estF = Math.max(fTail, fHead + r * 0.80);
-        for (let it = 0; it < 2; it++) {
-          // Strictly honor non-penetration `evalLapY + midPen*1.5` (never shortcut across the kneecap corner!)
-          const rawY = evalLapY(estF) + midPen * 1.5;
-          const clampedY = Math.min(headPt.y - r * 0.14, rawY);
-          const dy = Math.max(0, headPt.y - clampedY);
-          const horiz = dy < r ? Math.sqrt(Math.max(0, r * r - dy * dy)) : 0;
-          estF = Math.max(fTail, fHead + horiz);
+    function pushPointOutsideKneecapAndShin(pt, hipMidX, hipMidZ, capR, shinPad) {
+      let changed = false;
+      for (let leg = 0; leg < 2; leg++) {
+        const K = leg === 0 ? _dKneeL : _dKneeR;
+        const A = leg === 0 ? _dAnkL : _dAnkR;
+        // 1) Rounded 3D kneecap sphere guard (strictly outward/upward, never behind knee!)
+        const dxK = pt.x - K.x;
+        const dyK = pt.y - K.y;
+        const dzK = pt.z - K.z;
+        const dK = Math.hypot(dxK, dyK, dzK);
+        if (dK < capR && dyK > -0.055) {
+          let ox = pt.x - hipMidX;
+          let oz = pt.z - hipMidZ;
+          const oL = Math.max(1e-4, Math.hypot(ox, oz));
+          ox /= oL; oz /= oL;
+          const liftY = Math.max(0.15, (dyK + 0.04) / capR);
+          const nL = Math.hypot(ox, liftY, oz);
+          const push = capR - dK;
+          pt.x += (ox / nL) * push;
+          pt.y += (liftY / nL) * push;
+          pt.z += (oz / nL) * push;
+          changed = true;
         }
-        const finalY = Math.min(headPt.y - r * 0.14, evalLapY(estF) + midPen * 1.5);
-        tailPt.y = finalY;
-        if (zS * tailPt.z < estF) tailPt.z = zS * estF;
-      } else {
-        // Past the kneecap: hang softly straight down right in front of the shin (supple vertical drop, zero umbrella flare!)
-        const targetF = minShinF;
-        const df = Math.max(0, targetF - fHead);
-        const dropDown = df < r ? Math.sqrt(Math.max(0, r * r - df * df)) : r * 0.60;
-        tailPt.z = zS * targetF;
-        tailPt.y = Math.min(tailPt.y, headPt.y - dropDown * 0.94);
+        // 2) Shin XZ cylinder guard below knee
+        if (pt.y <= K.y + 0.025 && pt.y >= A.y - 0.03) {
+          const sShin = THREE.MathUtils.clamp((K.y - pt.y) / Math.max(0.05, K.y - A.y), 0, 1);
+          const sx = THREE.MathUtils.lerp(K.x, A.x, sShin);
+          const sz = THREE.MathUtils.lerp(K.z, A.z, sShin);
+          let ox = pt.x - sx;
+          let oz = pt.z - sz;
+          const dS = Math.hypot(ox, oz);
+          if (dS < shinPad) {
+            const radX = sx - hipMidX;
+            const radZ = sz - hipMidZ;
+            if (ox * radX + oz * radZ < 0 || dS < 1e-4) {
+              ox = radX; oz = radZ;
+            }
+            const oL = Math.max(1e-4, Math.hypot(ox, oz));
+            pt.x = sx + (ox / oL) * shinPad;
+            pt.z = sz + (oz / oL) * shinPad;
+            changed = true;
+          }
+        }
       }
-      return true;
+      return changed;
     }
 
-    function drapeCenterCurtainIntoValley(tailPt, headPt, segLen, sIdx, zS) {
-      // Guide the center-front skirt pleat (`skirt_270`) softly DOWNWARD into the open valley
-      // between Left & Right thighs so the skirt fabric naturally curtains off the panties from the front!
-      _dHu.lerpVectors(_dHipR, _dHipL, 0.5);
-      _dKu.lerpVectors(_dKneeR, _dKneeL, 0.5);
+    function solvePolarSkirtAndApronDrape(tailPt, headPt, segLen, sIdx, tag, mode, lapRoot, lapKnee, shinPad, zS) {
+      const hipMidX = 0.5 * (_dHipL.x + _dHipR.x);
+      const hipMidY = 0.5 * (_dHipL.y + _dHipR.y);
+      const hipMidZ = 0.5 * (_dHipL.z + _dHipR.z);
+      let rx = 0.5 * (headPt.x + tailPt.x) - hipMidX;
+      let rz = 0.5 * (headPt.z + tailPt.z) - hipMidZ;
+      const rLen = Math.hypot(rx, rz);
+      const ux = rLen > 1e-4 ? (rx / rLen) : 0;
+      const uz = rLen > 1e-4 ? (rz / rLen) : zS;
       const r = Math.max(0.025, segLen);
-      const fHead = zS * headPt.z;
-      const fHip = zS * _dHu.z;
-      const fKnee = zS * _dKu.z;
 
-      if (sIdx === 0) {
-        // Upper groin curtain: clear pelvis front (+134mm ahead of hip midpoint) while sloping steeply downward
-        const wantF = Math.max(fHip + 0.134, fHead + r * 0.46);
-        const df = THREE.MathUtils.clamp(wantF - fHead, 0.012, r * 0.72);
-        const drop = Math.sqrt(Math.max(0, r * r - df * df));
-        tailPt.x = THREE.MathUtils.lerp(tailPt.x, THREE.MathUtils.lerp(_dHu.x, _dKu.x, 0.38), 0.78);
-        tailPt.z = zS * Math.max(zS * tailPt.z, fHead + df);
-        tailPt.y = Math.min(tailPt.y, headPt.y - drop * 0.92);
-        return true;
+      let changed = false;
+      if (pushFrontPelvisModestyShield(tailPt, hipMidX, hipMidY, hipMidZ, tag, zS)) {
+        changed = true;
       }
-      if (sIdx === 1) {
-        // Mid-valley fold: sink cleanly between the inner thighs below groin/panty sightline
-        const wantF = Math.max(fHead + r * 0.48, THREE.MathUtils.lerp(fHip, fKnee, 0.68));
-        const df = THREE.MathUtils.clamp(wantF - fHead, 0.010, r * 0.74);
-        const drop = Math.sqrt(Math.max(0, r * r - df * df));
-        tailPt.x = THREE.MathUtils.lerp(tailPt.x, THREE.MathUtils.lerp(_dHu.x, _dKu.x, 0.72), 0.82);
-        tailPt.z = zS * Math.max(zS * tailPt.z, fHead + df);
-        tailPt.y = Math.min(tailPt.y, headPt.y - drop * 0.95);
-        return true;
+
+      const isModestyApron = (tag === '240' || tag === '270' || tag === '300');
+      if (isModestyApron) {
+        // Cohesive 3-column front modesty apron (`240 — 270 — 300` spanning ~20cm across her front pelvis):
+        // Keeps all 3 front box-pleats side-by-side & hanging downward over the front of the ball so panties stay 0% visible!
+        const colSpan = sIdx === 0 ? 0.066 : (sIdx === 1 ? 0.084 : 0.098);
+        const colSign = tag === '270' ? 0 : (tag === '300' ? +zS : -zS);
+        const targetColX = hipMidX + colSign * colSpan;
+        tailPt.x = THREE.MathUtils.lerp(targetColX, tailPt.x, 0.14);
+
+        const dropFrac = tag === '270'
+          ? (sIdx === 0 ? 0.76 : (sIdx === 1 ? 0.84 : 0.90))
+          : (sIdx === 0 ? 0.68 : (sIdx === 1 ? 0.76 : 0.84));
+        const maxCeilY = headPt.y - r * dropFrac;
+        if (tailPt.y > maxCeilY) {
+          tailPt.y = maxCeilY;
+        }
+        const dy = Math.max(0, headPt.y - tailPt.y);
+        const horiz = dy < r ? Math.sqrt(Math.max(0, r * r - dy * dy)) : 0;
+        const wantZ = headPt.z + zS * horiz * 0.88;
+        if (zS * tailPt.z < zS * wantZ) tailPt.z = wantZ;
+        pushFrontPelvisModestyShield(tailPt, hipMidX, hipMidY, hipMidZ, tag, zS);
+        changed = true;
+      } else {
+        const minTailY = evalStraddleThighCanopyY(tailPt.x, tailPt.z, lapRoot, lapKnee, zS);
+        const midX = 0.5 * (headPt.x + tailPt.x);
+        const midY = 0.5 * (headPt.y + tailPt.y);
+        const midZ = 0.5 * (headPt.z + tailPt.z);
+        const minMidY = evalStraddleThighCanopyY(midX, midZ, lapRoot, lapKnee, zS);
+        const midPen = minMidY > -900 ? Math.max(0, (minMidY - 0.002) - midY) : 0;
+
+        if ((minTailY > -900 && tailPt.y < minTailY) || midPen > 0) {
+          const curRadHead = (headPt.x - hipMidX) * ux + (headPt.z - hipMidZ) * uz;
+          const curRadTail = (tailPt.x - hipMidX) * ux + (tailPt.z - hipMidZ) * uz;
+          let estHoriz = Math.max(curRadTail - curRadHead, r * 0.78);
+          let finalY = tailPt.y;
+          for (let it = 0; it < 2; it++) {
+            const cx = headPt.x + ux * estHoriz;
+            const cz = headPt.z + uz * estHoriz;
+            const reqY = Math.max(minTailY, evalStraddleThighCanopyY(cx, cz, lapRoot, lapKnee, zS)) + midPen * 1.45;
+            finalY = Math.min(headPt.y - r * 0.10, reqY);
+            const dy = Math.max(0, headPt.y - finalY);
+            estHoriz = Math.max(curRadTail - curRadHead, dy < r ? Math.sqrt(Math.max(0, r * r - dy * dy)) : r * 0.94);
+          }
+          tailPt.y = finalY;
+          if (curRadTail < curRadHead + estHoriz) {
+            const addR = (curRadHead + estHoriz) - curRadTail;
+            tailPt.x += ux * addR;
+            tailPt.z += uz * addR;
+          }
+          changed = true;
+        }
       }
-      // Lower modesty hem (sIdx >= 2): hang gracefully straight down between the knees/shins
-      const df = r * 0.24;
-      const drop = Math.sqrt(Math.max(0, r * r - df * df));
-      tailPt.x = THREE.MathUtils.lerp(tailPt.x, _dKu.x, 0.75);
-      if (zS * tailPt.z < fHead + df) tailPt.z = zS * (fHead + df);
-      tailPt.y = Math.min(tailPt.y, headPt.y - drop * 0.96);
-      return true;
+
+      if (sIdx >= 1) {
+        const capR = mode === 'sideCape' ? 0.104 : 0.090;
+        if (pushPointOutsideKneecapAndShin(tailPt, hipMidX, hipMidZ, capR, shinPad)) {
+          changed = true;
+        }
+      }
+      return changed;
     }
 
     function resolveBallGarmentDrape(sl, springStepped = true) {
@@ -5457,8 +6652,12 @@
       const rawUR = vrm.humanoid.getRawBoneNode('rightUpperLeg');
       const rawKR = vrm.humanoid.getRawBoneNode('rightLowerLeg');
       const rawFR = vrm.humanoid.getRawBoneNode('rightFoot');
+      const rawHL = vrm.humanoid.getRawBoneNode('leftHand');
+      const rawHR = vrm.humanoid.getRawBoneNode('rightHand');
+      const rawLL = vrm.humanoid.getRawBoneNode('leftLowerArm');
+      const rawLR = vrm.humanoid.getRawBoneNode('rightLowerArm');
+
       const hasLegs = !!(rawUL && rawKL && rawFL && rawUR && rawKR && rawFR);
-      let latSpan = 0.22;
       if (hasLegs) {
         rawUL.updateWorldMatrix(true, false);
         rawKL.updateWorldMatrix(true, false);
@@ -5472,16 +6671,24 @@
         _dHipR.setFromMatrixPosition(rawUR.matrixWorld);
         _dKneeR.setFromMatrixPosition(rawKR.matrixWorld);
         _dAnkR.setFromMatrixPosition(rawFR.matrixWorld);
-        _dLatDir.subVectors(_dKneeL, _dKneeR);
-        latSpan = Math.max(0.08, _dLatDir.length());
-        _dLatDir.divideScalar(latSpan);
       }
-
-      const SIDE_THIGH_R = 0.084;
+      const hasHands = !!(rawHL && rawHR && rawLL && rawLR);
+      if (hasHands) {
+        rawHL.updateWorldMatrix(true, false);
+        rawHR.updateWorldMatrix(true, false);
+        rawLL.updateWorldMatrix(true, false);
+        rawLR.updateWorldMatrix(true, false);
+        _dHandL.setFromMatrixPosition(rawHL.matrixWorld);
+        _dHandR.setFromMatrixPosition(rawHR.matrixWorld);
+        _dCuffArmL.setFromMatrixPosition(rawLL.matrixWorld).lerp(_dHandL, 0.72);
+        _dCuffArmR.setFromMatrixPosition(rawLR.matrixWorld).lerp(_dHandR, 0.72);
+      }
+      const hipMidX = hasLegs ? 0.5 * (_dHipL.x + _dHipR.x) : shape.hipsX;
+      const hipMidZ = hasLegs ? 0.5 * (_dHipL.z + _dHipR.z) : shape.hipsZ;
 
       for (let pass = 0; pass < 2; pass++) {
         for (let c = 0; c < chains.length; c++) {
-          const {segs, pad, mode, lapRoot, lapKnee, shinPad} = chains[c];
+          const {segs, tag, pad, mode, lapRoot, lapKnee, shinPad} = chains[c];
           const erx = shape.rx + pad;
           const ery = shape.ry + pad;
           const erz = shape.rz + pad;
@@ -5497,13 +6704,10 @@
             _dTail.setFromMatrixPosition(child.matrixWorld);
             const segLen = Math.max(0.03, _dHead.distanceTo(_dTail));
 
-            // 1) Solve clean single-step tapered lap-slope drape on segment tail (or modest center valley curtain on skirt_270!)
-            if (hasLegs && (mode === 'frontApron' || mode === 'centerCurtain')) {
+            // 1) Polar wide-straddle thigh/kneecap canopy + front center modesty drape
+            if (hasLegs && (mode === 'polarSkirt' || mode === 'frontApron' || mode === 'sideCape')) {
               _dOut.copy(_dTail);
-              const draped = mode === 'centerCurtain'
-                ? drapeCenterCurtainIntoValley(_dOut, _dHead, segLen, sIdx, zS)
-                : pushFrontApronOverLapAndShin(_dOut, _dHead, segLen, sIdx, latSpan, lapRoot, lapKnee, shinPad, zS);
-              if (draped) {
+              if (solvePolarSkirtAndApronDrape(_dOut, _dHead, segLen, sIdx, tag, mode, lapRoot, lapKnee, shinPad, zS)) {
                 _dOldDir.subVectors(_dTail, _dHead);
                 _dNewDir.subVectors(_dOut, _dHead);
                 if (_dOldDir.lengthSq() > 1e-5 && _dNewDir.lengthSq() > 1e-5) {
@@ -5520,54 +6724,128 @@
               }
             }
 
-            // 2) Multi-point chord non-penetration against side thighs, balance ball ellipsoid & floor
+            // 2) Multi-point chord non-penetration along [0.30, 0.56, 0.80, 1.00]
             for (let f = 0; f < _DRAPE_FRACS.length; f++) {
               const frac = _DRAPE_FRACS[f];
               _dPt.lerpVectors(_dHead, _dTail, frac);
               _dOut.copy(_dPt);
               let pushed = false;
 
-              if (hasLegs && mode === 'sideSkirt') {
-                if (pushPointOutsideSideThighCapsule(_dOut, _dHipL, _dKneeL, SIDE_THIGH_R)) pushed = true;
-                if (pushPointOutsideSideThighCapsule(_dOut, _dHipR, _dKneeR, SIDE_THIGH_R)) pushed = true;
-              }
-
-              const dx = _dOut.x - shape.center.x;
-              const dy = _dOut.y - shape.center.y;
-              const dz = _dOut.z - shape.center.z;
-              const nx = dx / erx;
-              const ny = dy / ery;
-              const nz = dz / erz;
-              const qSq = nx * nx + ny * ny + nz * nz;
-              if (qSq < 1.0) {
-                let hx = dx, hz = dz;
-                if (hx * hx + hz * hz < 1e-4) {
-                  hx = _dOut.x - shape.hipsX;
-                  hz = _dOut.z - shape.hipsZ;
-                  if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = 1; }
+              if (mode === 'rearTail') {
+                // Strictly lock the fluffy white ferret tail to the REAR hemisphere so it NEVER pokes through her spine/chest!
+                const maxRearZ = zS * shape.hipsZ - 0.115;
+                if (zS * _dOut.z > maxRearZ) {
+                  _dOut.z = zS * maxRearZ;
+                  _dOut.x = Math.max(_dOut.x, shape.hipsX + 0.065);
+                  pushed = true;
                 }
-                // Root glides over top (except centerCurtain which glides forward-down along the ball front!), hem hangs straight down
-                const clampedDy = mode === 'centerCurtain'
-                  ? Math.min(0.0, dy * 0.25)
-                  : (sIdx === 0 ? Math.max(ery * 0.10, dy) : (sIdx === 1 ? Math.max(0.0, dy) : 0.0));
-                _dNorm.set(hx / (erx * erx), clampedDy / (ery * ery), hz / (erz * erz));
-                const nLen = _dNorm.length();
-                if (nLen > 1e-6) _dNorm.divideScalar(nLen);
-                else _dNorm.set(0, 1, 0);
+                const dx = _dOut.x - shape.center.x;
+                const dy = _dOut.y - shape.center.y;
+                const dz = _dOut.z - shape.center.z;
+                const nx = dx / erx, ny = dy / ery, nz = dz / erz;
+                const qSq = nx * nx + ny * ny + nz * nz;
+                if (qSq < 1.0) {
+                  // Sweep tail smoothly out around the BACK-SIDE of the 1.2x ball (never forward +zS!)
+                  const hx = Math.max(0.15, dx);
+                  const hy = Math.max(0.08, dy);
+                  const hz = -zS * Math.max(0.16, -zS * dz);
+                  _dNorm.set(hx / (erx * erx), hy / (ery * ery), hz / (erz * erz));
+                  const nLen = _dNorm.length();
+                  if (nLen > 1e-6) _dNorm.divideScalar(nLen);
+                  else _dNorm.set(0.6, 0.3, -0.7 * zS).normalize();
+                  const ux = _dNorm.x / erx, uy = _dNorm.y / ery, uz = _dNorm.z / erz;
+                  const A = ux * ux + uy * uy + uz * uz;
+                  const B = nx * ux + ny * uy + nz * uz;
+                  const disc = Math.max(0, B * B - A * (qSq - 1.0));
+                  const penDist = (-B + Math.sqrt(disc)) / Math.max(1e-6, A);
+                  _dOut.addScaledVector(_dNorm, penDist);
+                  pushed = true;
+                }
+                if (_dOut.y < 0.060) {
+                  _dOut.y = 0.060;
+                  pushed = true;
+                }
+              } else {
+                // Chord-interior front pelvis shield + thigh & kneecap canopy guard!
+                if (hasLegs && (mode === 'polarSkirt' || mode === 'frontApron' || mode === 'sideCape')) {
+                  const hipMidY = 0.5 * (_dHipL.y + _dHipR.y);
+                  const isModestyApron = (tag === '240' || tag === '270' || tag === '300');
+                  if (pushFrontPelvisModestyShield(_dOut, hipMidX, hipMidY, hipMidZ, tag, zS)) {
+                    pushed = true;
+                  }
+                  if (!isModestyApron) {
+                    const minChordY = evalStraddleThighCanopyY(_dOut.x, _dOut.z, lapRoot - 0.004, lapKnee - 0.004, zS);
+                    if (minChordY > -900 && _dOut.y < minChordY) {
+                      _dOut.y = minChordY;
+                      pushed = true;
+                    }
+                  }
+                  if (sIdx >= 1 && pushPointOutsideKneecapAndShin(_dOut, hipMidX, hipMidZ, mode === 'sideCape' ? 0.100 : 0.086, shinPad)) {
+                    pushed = true;
+                  }
+                }
 
-                const ux = _dNorm.x / erx, uy = _dNorm.y / ery, uz = _dNorm.z / erz;
-                const A = ux * ux + uy * uy + uz * uz;
-                const B = nx * ux + ny * uy + nz * uz;
-                const disc = Math.max(0, B * B - A * (qSq - 1.0));
-                const penDist = (-B + Math.sqrt(disc)) / Math.max(1e-6, A);
-                _dOut.addScaledVector(_dNorm, penDist);
-                pushed = true;
-              }
+                // Hand & cuff sphere repulsion for `cape_front_L/R` so fingers/thumbs never poke through side ribbons!
+                if (hasHands && mode === 'sideCape') {
+                  const handPts = tag.endsWith('_L') ? [_dHandL, _dCuffArmL] : [_dHandR, _dCuffArmR];
+                  for (let hp = 0; hp < handPts.length; hp++) {
+                    const hCenter = handPts[hp];
+                    const hR = hp === 0 ? 0.078 : 0.092;
+                    const hdx = _dOut.x - hCenter.x;
+                    const hdy = _dOut.y - hCenter.y;
+                    const hdz = _dOut.z - hCenter.z;
+                    const hd = Math.hypot(hdx, hdy, hdz);
+                    if (hd < hR) {
+                      let px = hdx, py = Math.min(-0.02, hdy), pz = hdz - zS * 0.03;
+                      const pL = Math.max(1e-4, Math.hypot(px, py, pz));
+                      _dOut.x = hCenter.x + (px / pL) * hR;
+                      _dOut.y = hCenter.y + (py / pL) * hR;
+                      _dOut.z = hCenter.z + (pz / pL) * hR;
+                      pushed = true;
+                    }
+                  }
+                }
 
-              // Keep long cape tassels & pom-poms cleanly above the floor y=0
-              if (_dOut.y < 0.026) {
-                _dOut.y = 0.026;
-                pushed = true;
+                const dx = _dOut.x - shape.center.x;
+                const dy = _dOut.y - shape.center.y;
+                const dz = _dOut.z - shape.center.z;
+                const nx = dx / erx;
+                const ny = dy / ery;
+                const nz = dz / erz;
+                const qSq = nx * nx + ny * ny + nz * nz;
+                if (qSq < 1.0) {
+                  let hx = dx, hz = dz;
+                  if (hx * hx + hz * hz < 1e-4) {
+                    hx = _dOut.x - shape.hipsX;
+                    hz = _dOut.z - shape.hipsZ;
+                    if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = zS; }
+                  }
+                  const inCenterValley = (tag === '270' || tag === 'brooch_C' || ((tag === '240' || tag === '300') && Math.abs(_dOut.x - hipMidX) < 0.115));
+                  if (inCenterValley) {
+                    hz = zS * Math.max(0.15, zS * hz);
+                  }
+                  const clampedDy = (mode === 'sideCape' || inCenterValley)
+                    ? Math.min(0.0, dy * 0.10)
+                    : (sIdx === 0 ? Math.max(ery * 0.10, dy) : (sIdx === 1 ? Math.max(0.0, dy) : 0.0));
+                  _dNorm.set(hx / (erx * erx), clampedDy / (ery * ery), hz / (erz * erz));
+                  const nLen = _dNorm.length();
+                  if (nLen > 1e-6) _dNorm.divideScalar(nLen);
+                  else _dNorm.set(0, 1, 0);
+
+                  const ux = _dNorm.x / erx, uy = _dNorm.y / ery, uz = _dNorm.z / erz;
+                  const A = ux * ux + uy * uy + uz * uz;
+                  const B = nx * ux + ny * uy + nz * uz;
+                  const disc = Math.max(0, B * B - A * (qSq - 1.0));
+                  const penDist = (-B + Math.sqrt(disc)) / Math.max(1e-6, A);
+                  _dOut.addScaledVector(_dNorm, penDist);
+                  pushed = true;
+                }
+
+                // Keep long cape tassels & pom-poms cleanly above the floor y=0
+                if (_dOut.y < 0.026) {
+                  _dOut.y = 0.026;
+                  pushed = true;
+                }
               }
 
               if (pushed) {
@@ -6260,6 +7538,7 @@
         canvasFrame.style.height = '100%';
         updateFsSoloButtonUI();
         updateHitOverlayLayout();
+        resizeFxOverlayCanvas();
         return;
       }
 
@@ -6270,6 +7549,7 @@
       canvasFrame.style.width = Math.round(w * scale) + 'px';
       canvasFrame.style.height = Math.round(h * scale) + 'px';
       updateHitOverlayLayout();
+      resizeFxOverlayCanvas();
     }
     window.addEventListener('resize', fitStagePreview);
 
@@ -6358,12 +7638,21 @@
       const distMul = getPanelAspectMultipliers().staticMul;
       const isQuad = (sl.motionId || '').startsWith('moe:quad_');
       const isBall = (sl.motionId || '').startsWith('moe:ball_');
+      const isPov  = (sl.motionId || '').startsWith('moe:pov_');
 
       const standMap = {
         gachikoi: {pos: [0.0, 1.03, 0.88 * zS * distMul],  tgt: [0.0, 1.01, 0.0]},
         face:     {pos: [0.0, 1.08, 0.76 * zS * distMul],  tgt: [0.0, 1.06, 0.0]},
         bust:     {pos: [0.07, 0.99, 1.16 * zS * distMul], tgt: [0.0, 0.95, 0.0]},
         full:     {pos: [0.0, 0.72, 2.72 * zS * distMul],  tgt: [0.0, 0.68, 0.0]},
+        '3q':     {pos: [0.92 * distMul, 0.78, 2.46 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
+        back:     {pos: [-0.55 * distMul, 0.76, -2.55 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
+      };
+      const povMap = {
+        gachikoi: {pos: [0.0, 1.02, 1.16 * zS * distMul],          tgt: [0.0, 0.99, 0.05 * zS]},
+        face:     {pos: [0.0, 1.04, 1.06 * zS * distMul],          tgt: [0.0, 1.01, 0.05 * zS]},
+        bust:     {pos: [0.0, 1.00, 1.28 * zS * distMul],          tgt: [0.0, 0.96, 0.04 * zS]},
+        full:     {pos: [0.0, 0.72, 2.72 * zS * distMul],          tgt: [0.0, 0.68, 0.0]},
         '3q':     {pos: [0.92 * distMul, 0.78, 2.46 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
         back:     {pos: [-0.55 * distMul, 0.76, -2.55 * zS * distMul], tgt: [0.0, 0.68, 0.0]},
       };
@@ -6376,14 +7665,14 @@
         back:     {pos: [-0.76 * distMul, 0.60, -1.76 * zS * distMul],        tgt: [0.0, 0.32, 0.02 * zS]},
       };
       const ballMap = {
-        gachikoi: {pos: [0.0, 0.94, (0.22 + 0.86 * distMul) * zS],            tgt: [0.0, 0.88, 0.14 * zS]},
-        face:     {pos: [0.0, 0.98, (0.22 + 0.74 * distMul) * zS],            tgt: [0.0, 0.94, 0.14 * zS]},
-        bust:     {pos: [0.14 * distMul, 0.88, (0.18 + 1.30 * distMul) * zS], tgt: [0.0, 0.76, 0.14 * zS]},
-        full:     {pos: [0.26 * distMul, 0.68, 2.74 * zS * distMul],          tgt: [0.0, 0.58, 0.12 * zS]},
-        '3q':     {pos: [1.06 * distMul, 0.72, 2.42 * zS * distMul],          tgt: [0.0, 0.58, 0.12 * zS]},
-        back:     {pos: [-0.72 * distMul, 0.72, -2.46 * zS * distMul],        tgt: [0.0, 0.58, 0.10 * zS]},
+        gachikoi: {pos: [0.0, 1.05, (0.24 + 0.88 * distMul) * zS],            tgt: [0.0, 0.99, 0.14 * zS]},
+        face:     {pos: [0.0, 1.09, (0.24 + 0.76 * distMul) * zS],            tgt: [0.0, 1.05, 0.14 * zS]},
+        bust:     {pos: [0.14 * distMul, 0.98, (0.20 + 1.36 * distMul) * zS], tgt: [0.0, 0.87, 0.14 * zS]},
+        full:     {pos: [0.22 * distMul, 0.75, 3.06 * zS * distMul],          tgt: [0.0, 0.67, 0.14 * zS]},
+        '3q':     {pos: [1.14 * distMul, 0.79, 2.72 * zS * distMul],          tgt: [0.0, 0.67, 0.14 * zS]},
+        back:     {pos: [-0.78 * distMul, 0.79, -2.76 * zS * distMul],        tgt: [0.0, 0.67, 0.12 * zS]},
       };
-      const map = isQuad ? quadMap : (isBall ? ballMap : standMap);
+      const map = isQuad ? quadMap : (isBall ? ballMap : (isPov ? povMap : standMap));
       const p = map[presetName] || map.full;
       sl.camPreset = presetName;
       sl.zoomScale = 1.0;
@@ -6502,6 +7791,544 @@
       }
     }
 
+    const _qTouchDelta = new THREE.Quaternion();
+    const _eTouchDelta = new THREE.Euler(0, 0, 0, 'XYZ');
+
+    function updateSlotTouchReaction(sl, dt) {
+      const tr = sl.touchReact;
+      if (!tr) return;
+
+      // Advance demo petting timer if triggered via Tab 2 quick-preview button
+      if (tr.isPetting && tr.demoTimer > 0) {
+        tr.demoTimer -= dt;
+        tr.petComfort = Math.min(1.0, tr.petComfort + dt * 0.55);
+        tr.targetHandSide = Math.sin(tr.petPhase * 1.1) * 0.55;
+        const hd = hitDivs[sl.index];
+        if (hd && Math.random() < dt * 6.5) {
+          const rect = hd.getBoundingClientRect();
+          const probe = hitTestAvatarZone(sl, rect, rect.left + rect.width * 0.5, rect.top + rect.height * 0.42);
+          spawnPetStrokeFx(
+            probe.headFxX + tr.targetHandSide * 26,
+            probe.headFxY + (tr.petZone === 'chin' ? 28 : -26),
+            tr.petZone,
+            performance.now()
+          );
+        }
+        if (tr.demoTimer <= 0) {
+          const hd2 = hitDivs[sl.index];
+          const rect2 = hd2.getBoundingClientRect();
+          const p2 = hitTestAvatarZone(sl, rect2, rect2.left + rect2.width * 0.5, rect2.top + rect2.height * 0.42);
+          finishPettingIntoAfterglow(sl, p2.headFxX, p2.headFxY);
+        }
+      }
+
+      // Ultra-slow internal breathing/purring phase (~0.26 Hz = 3.85s per slow gentle wave!)
+      tr.petPhase += dt * 1.63;
+      const kZone = 1.0 - Math.exp(-dt * 2.4);
+      tr.handSide += (tr.targetHandSide - tr.handSide) * (1.0 - Math.exp(-dt * 1.9));
+      for (const zk of ['head_top', 'chin', 'cheek']) {
+        const want = (tr.petZone === zk) ? 1.0 : 0.0;
+        tr.zoneW[zk] += (want - tr.zoneW[zk]) * kZone;
+      }
+
+      let tgtPitch = 0, tgtYaw = 0, tgtTilt = 0, tgtChestP = 0, tgtChestS = 0, tgtHipsR = 0;
+      let tgtTimeMul = 1.0;
+      tr.exprBlend = 0;
+      tr.isSlowPet = false;
+      tr.emo = 'relaxed';
+      tr.emoW = 0;
+      tr.emo2 = null;
+      tr.emo2W = 0;
+      tr.mouth.aa = 0; tr.mouth.ih = 0; tr.mouth.ou = 0; tr.mouth.ee = 0; tr.mouth.oh = 0;
+
+      if (tr.isPetting) {
+        // === ACTIVE ULTRA-SLOW PETTING ("なでなで": Head-Top vs Chin vs Cheek) ===
+        tr.isSlowPet = true;
+        tr.exprBlend = 1.0;
+        tgtTimeMul = 0.20; // Slow base motion by 80% so she calms right down and melts into your hand!
+
+        const wTop = tr.zoneW.head_top;
+        const wChin = tr.zoneW.chin;
+        const wCheek = tr.zoneW.cheek;
+        const slowSin = Math.sin(tr.petPhase);
+        const slowCos = Math.cos(tr.petPhase * 0.82);
+        const side = tr.handSide;
+        const cheekSign = Math.abs(side) > 0.08 ? Math.sign(side) : 1;
+
+        // 1) Head-Top ('頭の上の方'): softly lowers head (+pitch) into palm & sways slowly
+        // 2) Chin ('顎・あご下'): slowly tilts chin HIGH UPWARD (-pitch = -15.5°) for under-chin rub!
+        // 3) Cheek ('ほっぺ'): leans warm cheek into palm
+        tgtPitch = wTop * (6.2 + 1.8 * slowSin)
+                 + wChin * (-15.5 - 2.2 * slowSin)
+                 + wCheek * (1.5 + 1.2 * slowSin);
+        tgtTilt  = wTop * (side * 8.5 + 5.0 * slowSin)
+                 + wChin * (-side * 10.5 + 6.2 * slowCos)
+                 + wCheek * (cheekSign * 12.0 + 3.2 * slowSin);
+        tgtYaw   = wTop * (side * 5.5)
+                 + wChin * (side * 7.2 + 2.5 * slowSin)
+                 + wCheek * (cheekSign * 8.2);
+        tgtChestP = wTop * 2.2 + wChin * 3.8 + wCheek * 2.0;
+        tgtChestS = (wTop * side * 2.0) + (wChin * -side * 2.4) + (wCheek * cheekSign * 3.0);
+        tgtHipsR  = 1.6 * slowSin; // Gently sways fluffy ferret tail via SpringBones!
+
+        if (wChin >= 0.48) {
+          // Under-chin purring: starts in dreamy melted half-lidded eyes ('とろ〜ん'), then melts shut at deep comfort
+          if (tr.petComfort < 0.65) {
+            tr.emo = 'jitome';  tr.emoW = 0.66;
+            tr.emo2 = 'relaxed'; tr.emo2W = 0.96;
+            tr.mouth.ou = 0.44; tr.mouth.oh = 0.34;
+          } else {
+            tr.emo = 'happy';   tr.emoW = 1.0;
+            tr.mouth.ou = 0.36; tr.mouth.aa = 0.24;
+          }
+        } else if (wTop >= 0.45) {
+          // Head-top patting: cozy soft smile melting gently into blissful arch-closed '^^' eyes
+          if (tr.petComfort < 0.35) {
+            tr.emo = 'jitome';  tr.emoW = 0.48;
+            tr.emo2 = 'relaxed'; tr.emo2W = 0.96;
+            tr.mouth.oh = 0.38;
+          } else {
+            tr.emo = 'happy';   tr.emoW = 1.0;
+            tr.mouth.oh = 0.28; tr.mouth.aa = 0.26;
+          }
+        } else {
+          // Cheek nuzzle: blissful closed eyes
+          tr.emo = 'happy'; tr.emoW = 1.0;
+          tr.mouth.oh = 0.32; tr.mouth.ou = 0.28;
+        }
+      } else if (tr.afterTimer > 0) {
+        // === SLOW LINGERING POST-PETTING AFTERGLOW ("撫でた後のとろっと顔 / にこっ♡ パターン") ===
+        tr.afterTimer = Math.max(0, tr.afterTimer - dt);
+        const elapsed = tr.afterDur - tr.afterTimer;
+        const fadeOut = THREE.MathUtils.smoothstep(tr.afterTimer, 0.0, 1.05);
+        tr.isSlowPet = true;
+        tr.exprBlend = fadeOut;
+        tgtTimeMul = THREE.MathUtils.lerp(1.0, 0.28, fadeOut);
+
+        const slowWave = Math.sin(tr.petPhase * 0.75);
+        const wasChin = (tr.afterZone === 'chin');
+        const pat = tr.afterPattern;
+
+        if (pat === 'torotto_melt') {
+          // Pattern 1: とろ〜っ♡ 蕩けにこっ顔 (half-lidded dreamy gaze + sweet smile)
+          tgtPitch = (wasChin ? -5.5 : -3.5) * fadeOut;
+          tgtTilt  = (7.8 + 2.2 * slowWave) * fadeOut;
+          tgtChestP = 2.4 * fadeOut;
+          tr.emo = 'jitome';   tr.emoW = 0.60;
+          tr.emo2 = 'relaxed'; tr.emo2W = 0.98;
+          tr.mouth.oh = 0.44;  tr.mouth.aa = 0.28;
+        } else if (pat === 'niko_happy') {
+          // Pattern 2: にこっ♡ 満面にっこり笑顔 (beaming arch-closed eyes ^^)
+          tgtPitch = (-2.2 + Math.sin(Math.min(1, elapsed / 1.4) * Math.PI) * 3.5) * fadeOut;
+          tgtTilt  = (-8.5 + 2.0 * slowWave) * fadeOut;
+          tgtChestP = 2.0 * fadeOut;
+          tgtHipsR  = 1.8 * slowWave * fadeOut;
+          tr.emo = 'happy';   tr.emoW = 1.0;
+          tr.mouth.aa = 0.64; tr.mouth.oh = 0.22;
+        } else if (pat === 'torotto_linger_open') {
+          // Pattern 3: うっとり閉じ目余韻 → ゆっくり半目とろっとデレ顔
+          tgtPitch = (wasChin ? -6.0 : -4.2) * fadeOut;
+          tgtTilt  = (-7.2 + 2.4 * slowWave) * fadeOut;
+          tgtChestP = 2.6 * fadeOut;
+          if (elapsed < 1.35) {
+            tr.emo = 'happy'; tr.emoW = 1.0;
+            tr.mouth.ou = 0.38; tr.mouth.oh = 0.26;
+          } else {
+            tr.emo = 'jitome';   tr.emoW = 0.56;
+            tr.emo2 = 'relaxed'; tr.emo2W = 1.0;
+            tr.mouth.oh = 0.46;  tr.mouth.aa = 0.22;
+          }
+        } else if (pat === 'niko_to_soft_smile') {
+          // Pattern 4: にこっ♡ → やわらか開眼みつめスマイル
+          tgtPitch = (-3.0 + 1.5 * slowWave) * fadeOut;
+          tgtTilt  = (8.0 + 2.0 * slowWave) * fadeOut;
+          tgtChestP = 2.0 * fadeOut;
+          if (elapsed < 1.45) {
+            tr.emo = 'happy';   tr.emoW = 1.0;
+            tr.mouth.aa = 0.54; tr.mouth.oh = 0.24;
+          } else {
+            tr.emo = 'relaxed'; tr.emoW = 1.0;
+            tr.mouth.oh = 0.38; tr.mouth.aa = 0.36;
+          }
+        } else {
+          // Pattern 5: とろっと照れ顔 → ウインクにこっ♡
+          tgtPitch = (-3.8) * fadeOut;
+          tgtTilt  = (7.2 + 2.0 * slowWave) * fadeOut;
+          tgtChestP = 2.2 * fadeOut;
+          if (elapsed < 1.65) {
+            tr.emo = 'jitome';   tr.emoW = 0.64;
+            tr.emo2 = 'relaxed'; tr.emo2W = 0.96;
+            tr.mouth.ou = 0.42;  tr.mouth.oh = 0.30;
+          } else if (elapsed < 2.85) {
+            tr.emo = 'blinkRight'; tr.emoW = 1.0;
+            tr.emo2 = 'relaxed';   tr.emo2W = 0.92;
+            tr.mouth.aa = 0.46;    tr.mouth.oh = 0.22;
+          } else {
+            tr.emo = 'relaxed'; tr.emoW = 0.98;
+            tr.mouth.oh = 0.36; tr.mouth.aa = 0.28;
+          }
+        }
+      } else if (tr.pokeTimer > 0) {
+        // === POKE / TAP REACTION ("画面つんつん") ===
+        tr.pokeTimer = Math.max(0, tr.pokeTimer - dt);
+        const elapsed = tr.pokeDur - tr.pokeTimer;
+        const env = THREE.MathUtils.smoothstep(tr.pokeTimer, 0.0, 0.45);
+        const impulse = Math.sin(Math.min(1.0, elapsed / 0.34) * Math.PI) * Math.exp(-elapsed * 2.2);
+        const settle  = THREE.MathUtils.smoothstep(elapsed, 0.28, 0.65) * env;
+        const ps = tr.pokeSide;
+
+        tr.exprBlend = env;
+        tgtTimeMul = THREE.MathUtils.lerp(1.0, 0.55, env);
+
+        if (tr.pokeStreak >= 3) {
+          // 3+ rapid pokes: adorable pouty-tease -> bashful dere smile!
+          const wiggle = Math.sin(elapsed * 11.0) * Math.exp(-elapsed * 2.4);
+          tgtPitch = -2.5 * env;
+          tgtTilt  = (ps * 8.5) * settle + wiggle * 5.0;
+          tgtYaw   = (-ps * 7.0) * settle;
+          tgtChestS = wiggle * 3.2;
+          if (elapsed < 1.05) {
+            tr.emo = 'angry';   tr.emoW = 0.75;
+            tr.mouth.ou = 0.78;
+          } else {
+            tr.emo = 'jitome';   tr.emoW = 0.54;
+            tr.emo2 = 'relaxed'; tr.emo2W = 0.96;
+            tr.mouth.oh = 0.42;  tr.mouth.aa = 0.22;
+          }
+        } else if (tr.pokeZone === 'head_top') {
+          tgtPitch = 9.5 * impulse - 2.5 * settle;
+          tgtTilt  = ps * 7.0 * settle;
+          if (elapsed < 0.52) {
+            tr.emo = 'surprised'; tr.emoW = 0.68;
+            tr.mouth.oh = 0.86;
+          } else {
+            tr.emo = 'jitome';   tr.emoW = 0.48;
+            tr.emo2 = 'relaxed'; tr.emo2W = 0.95;
+            tr.mouth.oh = 0.44;  tr.mouth.aa = 0.26;
+          }
+        } else if (tr.pokeZone === 'chin') {
+          tgtPitch = -11.0 * impulse - 5.0 * settle;
+          tgtTilt  = -ps * 8.5 * settle;
+          tgtChestP = 2.5 * settle;
+          tr.emo = 'happy';   tr.emoW = 1.0;
+          tr.mouth.aa = 0.56; tr.mouth.oh = 0.30;
+        } else if (tr.pokeZone === 'body') {
+          tgtChestP = -4.5 * impulse + 2.0 * settle;
+          tgtChestS = ps * 6.5 * impulse;
+          tgtTilt   = ps * 8.0 * settle;
+          if (elapsed < 0.46) {
+            tr.emo = 'surprised'; tr.emoW = 0.58;
+            tr.mouth.oh = 0.80;
+          } else {
+            tr.emo = 'happy';   tr.emoW = 1.0;
+            tr.mouth.aa = 0.48; tr.mouth.oh = 0.28;
+          }
+        } else {
+          // Cheek poke ('ほっぺぷにっ♡')
+          tgtTilt = -ps * (11.5 * impulse + 6.5 * settle);
+          tgtYaw  = -ps * (8.0 * impulse + 4.0 * settle);
+          if (elapsed < 0.55) {
+            tr.emo = ps >= 0 ? 'blinkLeft' : 'blinkRight';
+            tr.emoW = 1.0;
+            tr.emo2 = 'relaxed'; tr.emo2W = 0.80;
+            tr.mouth.ou = 0.72;
+          } else {
+            tr.emo = 'happy';   tr.emoW = 1.0;
+            tr.mouth.aa = 0.50; tr.mouth.oh = 0.26;
+          }
+        }
+      }
+
+      // Automatic sweet counter-affection ("お返しモード♡"): after she finishes savoring your pet/poke, she pets or pokes YOU back!
+      if (autoReturnTouch && tr.returnQueued && !tr.isPetting && !(sl.avatarGive && sl.avatarGive.active)) {
+        if (tr.returnQueued === 'nade' && tr.afterTimer > 0 && tr.afterTimer <= 0.72) {
+          tr.returnQueued = null;
+          startAvatarGiveInteraction(sl, 'nade', true);
+        } else if (tr.returnQueued === 'tsun' && tr.pokeTimer > 0 && tr.pokeTimer <= 0.36) {
+          tr.returnQueued = null;
+          startAvatarGiveInteraction(sl, 'tsun', true);
+        }
+      }
+
+      if (sl.avatarGive?.active) {
+        tgtTimeMul = Math.min(tgtTimeMul, sl.avatarGive.kind.startsWith('nade_') ? 0.24 : 0.42);
+      }
+
+      // Silky-slow exponential bone slew (~0.54s time constant during petting, slightly brisker on initial poke reflex)
+      const rate = (tr.pokeTimer > 0 && !tr.isSlowPet) ? 7.5 : 1.85;
+      const k = 1.0 - Math.exp(-dt * rate);
+      tr.curHeadPitch  += (tgtPitch  - tr.curHeadPitch)  * k;
+      tr.curHeadYaw    += (tgtYaw    - tr.curHeadYaw)    * k;
+      tr.curHeadTilt   += (tgtTilt   - tr.curHeadTilt)   * k;
+      tr.curChestPitch += (tgtChestP - tr.curChestPitch) * k;
+      tr.curChestSide  += (tgtChestS - tr.curChestSide)  * k;
+      tr.curHipsRoll   += (tgtHipsR  - tr.curHipsRoll)   * k;
+      tr.timeScaleMul  += (tgtTimeMul - tr.timeScaleMul) * (1.0 - Math.exp(-dt * 2.4));
+    }
+
+    function restoreTouchVrmaBonesIfNeeded(sl) {
+      const tr = sl.touchReact;
+      if (!tr || tr.savedVrmaQuats.size === 0) return;
+      for (const [node, quat] of tr.savedVrmaQuats.entries()) {
+        node.quaternion.copy(quat);
+      }
+      tr.savedVrmaQuats.clear();
+    }
+
+    function applyTouchInteractionPose(sl) {
+      const tr = sl.touchReact;
+      const hum = sl.avatar?.vrm?.humanoid;
+      if (!tr || !hum) return;
+      const mag = Math.abs(tr.curHeadPitch) + Math.abs(tr.curHeadYaw) + Math.abs(tr.curHeadTilt)
+                + Math.abs(tr.curChestPitch) + Math.abs(tr.curChestSide) + Math.abs(tr.curHipsRoll);
+      if (mag < 0.015) return;
+
+      const isVrma = !(sl.motionId.startsWith('moe:') || sl.motionId.startsWith('proc:'));
+      const zS = modelFrontZSign;
+      const mulBone = (bName, rx, ry, rz) => {
+        const node = hum.getNormalizedBoneNode(bName);
+        if (!node) return;
+        if (isVrma && !tr.savedVrmaQuats.has(node)) {
+          tr.savedVrmaQuats.set(node, node.quaternion.clone());
+        }
+        _eTouchDelta.set(rx, ry, rz, 'XYZ');
+        _qTouchDelta.setFromEuler(_eTouchDelta);
+        node.quaternion.multiply(_qTouchDelta);
+      };
+
+      // In VRM 1.0 normalized bone space: -zS leans chest/head forward-down ('頭なでなで'), +zS lifts chin upward ('顎なでなで' = curHeadPitch < 0)!
+      mulBone('hips',  0, 0, tr.curHipsRoll * DEG);
+      mulBone('spine', -zS * tr.curChestPitch * 0.42 * DEG, 0, tr.curChestSide * 0.42 * DEG);
+      mulBone('chest', -zS * tr.curChestPitch * 0.58 * DEG, 0, tr.curChestSide * 0.58 * DEG);
+      mulBone('neck',  -zS * tr.curHeadPitch  * 0.40 * DEG, tr.curHeadYaw * 0.38 * DEG, tr.curHeadTilt * 0.38 * DEG);
+      mulBone('head',  -zS * tr.curHeadPitch  * 0.60 * DEG, tr.curHeadYaw * 0.62 * DEG, tr.curHeadTilt * 0.62 * DEG);
+    }
+
+    const _agSavedQuats = new Map();
+    const _agHeadPos = new THREE.Vector3(), _agChestPos = new THREE.Vector3();
+    const _agHeadQ = new THREE.Quaternion(), _agFwd = new THREE.Vector3(), _agUp = new THREE.Vector3(), _agRight = new THREE.Vector3();
+    const _agTgtL = new THREE.Vector3(), _agTgtR = new THREE.Vector3(), _agPoleL = new THREE.Vector3(), _agPoleR = new THREE.Vector3();
+
+    function updateSlotAvatarGive(sl, dt) {
+      const ag = sl.avatarGive;
+      if (!ag) return;
+      if (!ag.active) {
+        ag.env = Math.max(0, ag.env - dt * 2.0);
+        ag.camRoll *= Math.exp(-dt * 6.0);
+        ag.camNodY *= Math.exp(-dt * 6.0);
+        ag.camBoopZ *= Math.exp(-dt * 8.0);
+        return;
+      }
+
+      ag.timer = Math.max(0, ag.timer - dt);
+      const elapsed = ag.dur - ag.timer;
+      const inW  = smootherstep01(elapsed / 0.68);
+      const outW = smootherstep01(ag.timer / 0.78);
+      ag.env = Math.min(inW, outW);
+      ag.phase += dt * (ag.kind.startsWith('nade_') ? 1.75 : 3.2);
+
+      ag.emo = 'relaxed'; ag.emoW = 0.95; ag.emo2 = null; ag.emo2W = 0;
+      ag.mouth.aa = 0; ag.mouth.ih = 0; ag.mouth.ou = 0; ag.mouth.ee = 0; ag.mouth.oh = 0;
+
+      if (ag.kind === 'nade_head') {
+        // Ultra-slow POV headpat: viewer's camera gently sways with her slow hand stroke!
+        ag.camRoll  = Math.sin(ag.phase) * 1.45 * ag.env;
+        ag.camNodY  = -Math.abs(Math.cos(ag.phase)) * 0.005 * ag.env;
+        ag.camBoopZ = 0;
+        if (elapsed < ag.dur * 0.56) {
+          ag.emo = 'jitome';   ag.emoW = 0.54;
+          ag.emo2 = 'relaxed'; ag.emo2W = 1.0;
+          ag.mouth.oh = 0.42;  ag.mouth.aa = 0.28;
+        } else {
+          ag.emo = 'happy';   ag.emoW = 1.0;
+          ag.mouth.aa = 0.58; ag.mouth.oh = 0.22;
+        }
+        // Softly spawn falling warm hearts along top of screen while stroking
+        if (showTouchFx && ag.env > 0.55 && Math.random() < dt * 5.2) {
+          const hd = hitDivs[sl.index];
+          if (hd && hd.style.display !== 'none') {
+            const r = hd.getBoundingClientRect();
+            const fr = canvasFrame.getBoundingClientRect();
+            const fxX = (r.left - fr.left) + r.width * (0.5 + Math.sin(ag.phase) * 0.24 + (Math.random() - 0.5) * 0.12);
+            const fxY = (r.top - fr.top) + r.height * (0.12 + Math.random() * 0.08);
+            touchParticles.push({
+              x: fxX, y: fxY, vx: (Math.random() - 0.5) * 16, vy: 18 + Math.random() * 16,
+              age: 0, dur: 1.25, size: 8.5 + Math.random() * 3.5,
+              kind: Math.random() < 0.72 ? 'heart' : 'star',
+              color: Math.random() < 0.6 ? '#ff85c0' : '#ffe59e', rot: (Math.random() - 0.5) * 0.4,
+            });
+          }
+        }
+      } else if (ag.kind === 'nade_cheeks') {
+        ag.camRoll  = Math.sin(ag.phase * 0.9) * 1.8 * ag.env;
+        ag.camNodY  = Math.sin(ag.phase * 1.8) * 0.004 * ag.env;
+        ag.camBoopZ = 0;
+        if (elapsed < ag.dur * 0.58) {
+          ag.emo = 'jitome';   ag.emoW = 0.58;
+          ag.emo2 = 'relaxed'; ag.emo2W = 1.0;
+          ag.mouth.ou = 0.36;  ag.mouth.oh = 0.36;
+        } else {
+          ag.emo = 'happy';   ag.emoW = 1.0;
+          ag.mouth.aa = 0.56; ag.mouth.oh = 0.24;
+        }
+        if (showTouchFx && ag.env > 0.55 && Math.random() < dt * 5.5) {
+          const hd = hitDivs[sl.index];
+          if (hd && hd.style.display !== 'none') {
+            const r = hd.getBoundingClientRect();
+            const fr = canvasFrame.getBoundingClientRect();
+            const side = Math.random() < 0.5 ? 0.14 : 0.86;
+            touchParticles.push({
+              x: (r.left - fr.left) + r.width * side,
+              y: (r.top - fr.top) + r.height * (0.44 + (Math.random() - 0.5) * 0.16),
+              vx: (0.5 - side) * 26, vy: -22 - Math.random() * 16,
+              age: 0, dur: 1.2, size: 8.0 + Math.random() * 3.5,
+              kind: 'heart', color: '#ff8bc4', rot: (Math.random() - 0.5) * 0.4,
+            });
+          }
+        }
+      } else {
+        // 'poke_double' or 'poke_forehead' ("つんつんしてもらう♡")
+        const u = elapsed / ag.dur;
+        const p1 = Math.exp(-Math.pow((u - 0.36) / 0.065, 2));
+        const p2 = Math.exp(-Math.pow((u - 0.60) / 0.065, 2));
+        const push = Math.max(p1, p2);
+        ag.camBoopZ = push * 0.012 * ag.env;
+        ag.camRoll  = (p1 - p2) * 1.3 * ag.env;
+        ag.camNodY  = (ag.kind === 'poke_forehead' ? push * 0.005 : 0) * ag.env;
+
+        if (u > 0.68) {
+          ag.emo = 'happy';   ag.emoW = 1.0;
+          ag.mouth.aa = 0.56; ag.mouth.ee = 0.26;
+        } else if (u > 0.26) {
+          ag.emo = 'blinkRight'; ag.emoW = 1.0;
+          ag.emo2 = 'relaxed';   ag.emo2W = 0.88;
+          ag.mouth.ou = push > 0.4 ? 0.68 : 0.25;
+          ag.mouth.oh = push > 0.4 ? 0.20 : 0.56;
+        } else {
+          ag.emo = 'jitome';   ag.emoW = 0.48;
+          ag.emo2 = 'relaxed'; ag.emo2W = 0.92;
+          ag.mouth.oh = 0.48;
+        }
+      }
+
+      if (ag.timer <= 0) {
+        ag.active = false;
+      }
+    }
+
+    function applyAvatarGivePose(sl) {
+      const ag = sl.avatarGive;
+      const hum = sl.avatar?.vrm?.humanoid;
+      if (!ag || ag.env <= 0.005 || !hum) return;
+
+      const w = smootherstep01(ag.env);
+      const nb = n => hum.getNormalizedBoneNode(n);
+      const isVrma = !(sl.motionId.startsWith('moe:') || sl.motionId.startsWith('proc:'));
+      const tr = sl.touchReact;
+      const zS = modelFrontZSign;
+
+      const boneNames = [
+        'spine', 'chest', 'neck', 'head',
+        'leftUpperArm', 'leftLowerArm', 'leftHand',
+        'rightUpperArm', 'rightLowerArm', 'rightHand',
+      ];
+      _agSavedQuats.clear();
+      for (const bName of boneNames) {
+        const node = nb(bName);
+        if (node) {
+          if (isVrma && tr && !tr.savedVrmaQuats.has(node)) {
+            tr.savedVrmaQuats.set(node, node.quaternion.clone());
+          }
+          _agSavedQuats.set(node, node.quaternion.clone());
+        }
+      }
+
+      // Gently lean upper body forward & tilt head affectionately toward the viewer
+      const leanRad = -zS * 8.5 * w * DEG;
+      const chinRad = zS * 6.0 * w * DEG;
+      const tiltRad = (ag.kind === 'nade_cheeks' ? Math.sin(ag.phase * 0.5) * 7.5 : 6.5) * w * DEG;
+      if (nb('spine')) { _eTouchDelta.set(leanRad * 0.45, 0, 0, 'XYZ'); nb('spine').quaternion.multiply(_qTouchDelta.setFromEuler(_eTouchDelta)); }
+      if (nb('chest')) { _eTouchDelta.set(leanRad * 0.55, 0, 0, 'XYZ'); nb('chest').quaternion.multiply(_qTouchDelta.setFromEuler(_eTouchDelta)); }
+      if (nb('neck'))  { _eTouchDelta.set(chinRad * 0.38, 0, tiltRad * 0.38, 'XYZ'); nb('neck').quaternion.multiply(_qTouchDelta.setFromEuler(_eTouchDelta)); }
+      if (nb('head'))  { _eTouchDelta.set(chinRad * 0.62, 0, tiltRad * 0.62, 'XYZ'); nb('head').quaternion.multiply(_qTouchDelta.setFromEuler(_eTouchDelta)); }
+
+      nb('hips')?.updateWorldMatrix(true, true);
+      const hNode = nb('head');
+      const cNode = nb('upperChest') || nb('chest');
+      if (!hNode || !cNode) return;
+      _agHeadPos.setFromMatrixPosition(hNode.matrixWorld);
+      _agHeadQ.setFromRotationMatrix(hNode.matrixWorld);
+      _agChestPos.setFromMatrixPosition(cNode.matrixWorld);
+      _agFwd.set(0, 0, zS).applyQuaternion(_agHeadQ).normalize();
+      _agUp.set(0, 1, 0).applyQuaternion(_agHeadQ).normalize();
+      _agRight.crossVectors(_agUp, _agFwd).normalize();
+
+      _agPoleL.copy(_agChestPos).addScaledVector(_agRight, +0.27).add(tv3(0, -0.15, 0.06 * zS));
+      _agPoleR.copy(_agChestPos).addScaledVector(_agRight, -0.25).add(tv3(0, -0.18, 0.05 * zS));
+
+      let useLeftArm = false;
+      let wantPointR = false;
+      if (ag.kind === 'nade_head') {
+        const strokeX = Math.sin(ag.phase) * 0.056;
+        const dipY = Math.cos(ag.phase * 2.0) * 0.008;
+        // Swing elbow wide-outward & high so her fluffy sleeve cuff stays outside her hair while her hand strokes high above eye-line!
+        _agPoleR.copy(_agHeadPos).addScaledVector(_agRight, -0.31).addScaledVector(_agUp, 0.06).addScaledVector(_agFwd, 0.04);
+        _agTgtR.copy(_agHeadPos).addScaledVector(_agFwd, 0.225).addScaledVector(_agRight, -0.082 + strokeX).addScaledVector(_agUp, 0.134 + dipY);
+        solveArmSoftIK(sl, 'right', _agTgtR, _agPoleR);
+        if (nb('rightHand')) {
+          nb('rightHand').rotation.z = -12 * DEG;
+          nb('rightHand').rotation.x = -zS * 18 * DEG;
+        }
+      } else if (ag.kind === 'nade_cheeks') {
+        useLeftArm = true;
+        const rubY = Math.sin(ag.phase * 1.4) * 0.018;
+        _agTgtL.copy(_agHeadPos).addScaledVector(_agFwd, 0.215).addScaledVector(_agRight, +0.148).addScaledVector(_agUp, -0.048 + rubY);
+        _agTgtR.copy(_agHeadPos).addScaledVector(_agFwd, 0.215).addScaledVector(_agRight, -0.148).addScaledVector(_agUp, -0.048 - rubY);
+        solveArmSoftIK(sl, 'left', _agTgtL, _agPoleL);
+        solveArmSoftIK(sl, 'right', _agTgtR, _agPoleR);
+        if (nb('leftHand'))  nb('leftHand').rotation.y  = -28 * DEG;
+        if (nb('rightHand')) nb('rightHand').rotation.y = +28 * DEG;
+      } else {
+        wantPointR = true;
+        const u = (ag.dur - ag.timer) / Math.max(0.1, ag.dur);
+        const p1 = Math.exp(-Math.pow((u - 0.36) / 0.065, 2));
+        const p2 = Math.exp(-Math.pow((u - 0.60) / 0.065, 2));
+        const push = Math.max(p1, p2);
+        const isForehead = (ag.kind === 'poke_forehead');
+        if (isForehead) {
+          _agPoleR.copy(_agHeadPos).addScaledVector(_agRight, -0.30).addScaledVector(_agUp, 0.05).addScaledVector(_agFwd, 0.04);
+        }
+        const upOff = isForehead ? 0.108 : (-0.078 + p2 * 0.014);
+        const sideOff = isForehead ? -0.088 : (-0.092 + p2 * 0.018);
+        _agTgtR.copy(_agHeadPos).addScaledVector(_agFwd, 0.195 + push * 0.065).addScaledVector(_agRight, sideOff).addScaledVector(_agUp, upOff);
+        solveArmSoftIK(sl, 'right', _agTgtR, _agPoleR);
+        if (nb('rightHand')) {
+          nb('rightHand').rotation.z = 10 * DEG;
+          nb('rightHand').rotation.y = 14 * DEG;
+        }
+
+        if (push > 0.86 && ag.active) {
+          _agTipWorld.copy(_agTgtR).addScaledVector(_agFwd, 0.075);
+          emitAvatarFingerGlassTap(sl, 'right', u < 0.48 ? 'ag1' : 'ag2', _agTipWorld);
+        }
+      }
+
+      // Smoothly slerp upper-body & arm quaternions from base motion into POV affection pose!
+      for (const [node, savedQ] of _agSavedQuats.entries()) {
+        if (!useLeftArm && (node === nb('leftUpperArm') || node === nb('leftLowerArm') || node === nb('leftHand'))) {
+          node.quaternion.copy(savedQ);
+          continue;
+        }
+        node.quaternion.copy(savedQ).slerp(node.quaternion, w);
+      }
+
+      if (wantPointR && w > 0.35) {
+        applyDaintyFingers(nb, 44 * DEG, 54 * DEG, 'pointR');
+      } else if (!wantPointR && w > 0.35) {
+        applyDaintyFingers(nb, useLeftArm ? 22 * DEG : 42 * DEG, 20 * DEG, false);
+      }
+    }
+
     function updateSlotExpressions(sl, dt = 1 / 60) {
       const vrm = sl.avatar.vrm;
       const mgr = vrm?.expressionManager;
@@ -6509,12 +8336,32 @@
 
       const stepDt = THREE.MathUtils.clamp(dt, 0, 0.05);
       const t = sl.time;
+      const tr = sl.touchReact;
+      const ag = sl.avatarGive;
+      const hasGiveExpr = !!(ag && ag.env > 0.25);
+      const hasTouchExpr = !hasGiveExpr && !!(tr && tr.exprBlend > 0.22);
+      const slowPetSlew = !!(hasGiveExpr ? ag.kind.startsWith('nade_') : (tr && tr.isSlowPet && tr.exprBlend > 0.10));
+
       let activeEmo = sl.exprMode;
       let emoWeight = 1.0;
       let accentEmo = null;
       let accentWeight = 0.0;
 
-      if (sl.exprMode === 'choreo_sync') {
+      if (hasGiveExpr) {
+        activeEmo = ag.emo || 'relaxed';
+        emoWeight = ag.emoW ?? 1.0;
+        if (ag.emo2 && !CLOSED_LID_KEYS.has(ag.emo2) && ag.emo2 !== activeEmo) {
+          accentEmo = ag.emo2;
+          accentWeight = THREE.MathUtils.clamp(ag.emo2W ?? 0, 0, 1);
+        }
+      } else if (hasTouchExpr) {
+        activeEmo = tr.emo || 'relaxed';
+        emoWeight = tr.emoW ?? 1.0;
+        if (tr.emo2 && !CLOSED_LID_KEYS.has(tr.emo2) && tr.emo2 !== activeEmo) {
+          accentEmo = tr.emo2;
+          accentWeight = THREE.MathUtils.clamp(tr.emo2W ?? 0, 0, 1);
+        }
+      } else if (sl.exprMode === 'choreo_sync') {
         if (sl.motionId.startsWith('moe:') || sl.motionId.startsWith('proc:')) {
           activeEmo = sl.choreoState.emo || 'neutral';
           emoWeight = sl.choreoState.emoW ?? 0;
@@ -6547,7 +8394,7 @@
 
       // Natural periodic auto-blink when eyes are open (smooth ~0.085s close + ~0.045s shut dwell + ~0.115s open)
       let wantAutoBlink = false;
-      if (sl.autoBlink && !CLOSED_LID_KEYS.has(activeEmo) && activeEmo !== 'jitome'
+      if (sl.autoBlink && !slowPetSlew && !CLOSED_LID_KEYS.has(activeEmo) && activeEmo !== 'jitome'
           && raw.happy < 0.02 && raw.blinkLeft < 0.02 && raw.blinkRight < 0.02) {
         const blinkCycle = (t + sl.index * 1.13) % 3.8;
         wantAutoBlink = (blinkCycle >= 3.52 && blinkCycle < 3.65);
@@ -6566,20 +8413,23 @@
 
         const isActive = tgtW > 0.005;
         const tgtRaw = isActive ? 1.0 : 0.0;
+        const peakRate = slowPetSlew ? 0.42 : 0.16;
         if (CLOSED_LID_KEYS.has(k)) {
           peak[k] = 1.0;
         } else if (isActive) {
-          peak[k] = (!st.ready || raw[k] < 0.02) ? tgtW : slewLinear(peak[k], tgtW, stepDt, 0.16, 0.16);
+          peak[k] = (!st.ready || raw[k] < 0.02) ? tgtW : slewLinear(peak[k], tgtW, stepDt, peakRate, peakRate);
         }
 
         if (!st.ready) {
           raw[k] = tgtRaw;
         } else {
-          let upDur = 0.16, downDur = 0.18;
-          if (k === 'blink') {
+          let upDur = slowPetSlew ? 0.42 : 0.16;
+          let downDur = slowPetSlew ? 0.50 : 0.18;
+          if (k === 'blink' && !slowPetSlew) {
             upDur = 0.085; downDur = 0.115;
           } else if (CLOSED_LID_KEYS.has(k)) {
-            upDur = 0.11; downDur = 0.14;
+            upDur = slowPetSlew ? 0.38 : 0.11;
+            downDur = slowPetSlew ? 0.46 : 0.14;
           }
           raw[k] = slewLinear(raw[k], tgtRaw, stepDt, upDur, downDur);
         }
@@ -6611,7 +8461,11 @@
 
       // Mouth Choreography ('oh' / 「お」 as signature main mouth, smoothly slewed across frames!)
       const tgtMouth = {aa: 0, ih: 0, ou: 0, ee: 0, oh: 0};
-      if (sl.autoTalk) {
+      if (hasGiveExpr) {
+        for (const v of ALL_VOWELS) tgtMouth[v] = THREE.MathUtils.clamp(ag.mouth[v] || 0, 0, 1);
+      } else if (hasTouchExpr) {
+        for (const v of ALL_VOWELS) tgtMouth[v] = THREE.MathUtils.clamp(tr.mouth[v] || 0, 0, 1);
+      } else if (sl.autoTalk) {
         const talkGate = 0.5 + 0.5 * Math.sin(t * 1.7 + sl.index);
         if (talkGate > 0.16) {
           const vKey = OH_TALK_SEQ[Math.floor(t * 4.8) % OH_TALK_SEQ.length];
@@ -6641,8 +8495,10 @@
         }
       }
 
+      const mUp = slowPetSlew ? 0.28 : 0.065;
+      const mDown = slowPetSlew ? 0.34 : 0.085;
       for (const v of ALL_VOWELS) {
-        st.mouth[v] = !st.ready ? tgtMouth[v] : slewLinear(st.mouth[v], tgtMouth[v], stepDt, 0.065, 0.085);
+        st.mouth[v] = !st.ready ? tgtMouth[v] : slewLinear(st.mouth[v], tgtMouth[v], stepDt, mUp, mDown);
         mgr.setValue(v, st.mouth[v]);
       }
 
@@ -6972,6 +8828,26 @@
       return lub + dub;
     }
 
+    const _agPovPos = new THREE.Vector3(), _agPovTgt = new THREE.Vector3();
+    function applyAvatarGiveCameraEffect(sl) {
+      const ag = sl.avatarGive;
+      if (!ag || ag.env <= 0.001 || sl.userDragging) return;
+      const w = smootherstep01(ag.env);
+      const lm = sl.landmarks;
+      const zS = modelFrontZSign;
+      const distMul = getPanelAspectMultipliers().staticMul;
+      const povDist = (ag.kind.startsWith('nade_') ? 0.96 : 1.00) * distMul + ag.camBoopZ;
+      _agPovTgt.set(lm.eyeX, lm.eyeY - 0.018 + ag.camNodY, lm.eyeZ - 0.04 * zS);
+      _agPovPos.set(lm.eyeX, lm.eyeY + 0.016 + ag.camNodY, lm.eyeZ + povDist * zS);
+
+      sl.camera.position.lerp(_agPovPos, w);
+      sl.controls.target.lerp(_agPovTgt, w);
+      sl.camera.lookAt(sl.controls.target);
+      if (Math.abs(ag.camRoll) > 1e-4) {
+        sl.camera.rotateZ(ag.camRoll * DEG);
+      }
+    }
+
     function updateSlotCameraMotion(sl, dt = 1 / 60) {
       updateSlotLandmarks(sl, dt);
 
@@ -6981,7 +8857,12 @@
         }
         sl.camera.up.set(0, 1, 0);
         sl.camRig.ready = false;
+        if (!sl.userDragging && sl.avatarGive) {
+          sl.camera.position.copy(sl.baseCamPos);
+          sl.controls.target.copy(sl.baseCamTgt);
+        }
         sl.controls.update();
+        applyAvatarGiveCameraEffect(sl);
         return;
       }
 
@@ -7050,6 +8931,7 @@
         sl.camera.fov = rig.fov;
         sl.camera.lookAt(sl.controls.target);
         if (Math.abs(rig.roll) > 1e-4) sl.camera.rotateZ(rig.roll);
+        applyAvatarGiveCameraEffect(sl);
         return;
       }
 
@@ -7110,6 +8992,7 @@
       if (Math.abs(desiredRoll) > 1e-4) {
         sl.camera.rotateZ(desiredRoll);
       }
+      applyAvatarGiveCameraEffect(sl);
     }
 
     function clearStudioSlot(sl) {
@@ -7708,6 +9591,25 @@
           {cam: 'bust', motion: 'moe:kiss_turn_around', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
+      {
+        id: 'p49_pov_nade_tsun_pack', num: '49', cat: 'gachikoi', moe: true,
+        label: '🥰 逆なでなで＆つんつん4連♡', desc: 'アバターが頭よしよし・両手ほっぺ包み・画面つんつん・つん→よしよしコンボをしてくれる至福の4分割 (2×2)',
+        layout: 'grid2x2', theme: 'cosmic_blossom', border: 'gold',
+        slots: [
+          {cam: 'gachikoi', motion: 'moe:pov_headpat_yoshi', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'gachikoi', motion: 'moe:pov_cheek_wrap',    camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'gachikoi', motion: 'moe:pov_poke_tsuntsun', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'gachikoi', motion: 'moe:pov_tsun_to_yoshi', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p50_vshort_pov_yoshi_tsun', num: '50', cat: 'gachikoi', moe: true,
+        label: '🥰 よしよし＆つんつん♡', desc: '縦型・SNS用：アバターが画面越しにつんつん→ゼロ距離でゆっくり頭よしよしなでなでしてくれるガチ恋構成',
+        layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
+        slots: [
+          {cam: 'gachikoi', motion: 'moe:pov_tsun_to_yoshi', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
     ];
 
     let activePresetId = 'p13_short_gachikoi';
@@ -8256,10 +10158,42 @@
     document.querySelectorAll('.slot-tab').forEach(btn => {
       btn.addEventListener('click', () => selectSlot(Number(btn.dataset.slot)));
     });
+    const cycleHeaderTouchMode = () => {
+      touchInteractMode = (touchInteractMode === 'off') ? 'auto' : 'off';
+      syncTouchModeUI();
+      showTouchMoodText(touchInteractMode === 'off' ? '🎥 カメラ操作専念モード' : '🤚 なでなで＆つんつんON♡', 1400);
+    };
+    document.getElementById('btnHeaderTouch')?.addEventListener('click', cycleHeaderTouchMode);
+    document.getElementById('btnFsTouch')?.addEventListener('click', () => {
+      cycleHeaderTouchMode();
+      wakeFsHud();
+    });
+    document.getElementById('selTouchMode')?.addEventListener('change', e => {
+      touchInteractMode = e.target.value;
+      syncTouchModeUI();
+    });
+    document.getElementById('chkTouchFx')?.addEventListener('change', e => {
+      showTouchFx = e.target.checked;
+    });
+    document.getElementById('chkAutoReturnTouch')?.addEventListener('change', e => {
+      autoReturnTouch = e.target.checked;
+    });
+    document.getElementById('btnDemoPetHead')?.addEventListener('click', () => startDemoInteraction(slots[activeSlotIdx] || slots[0], 'head_top'));
+    document.getElementById('btnDemoPetChin')?.addEventListener('click', () => startDemoInteraction(slots[activeSlotIdx] || slots[0], 'chin'));
+    document.getElementById('btnDemoPoke')?.addEventListener('click', () => startDemoInteraction(slots[activeSlotIdx] || slots[0], 'poke'));
+    const askActiveSlotGive = modeType => startAvatarGiveInteraction(slots[activeSlotIdx] || slots[0], modeType, false);
+    document.getElementById('btnAskAvatarNade')?.addEventListener('click', () => askActiveSlotGive('nade'));
+    document.getElementById('btnAskAvatarTsun')?.addEventListener('click', () => askActiveSlotGive('tsun'));
+    document.getElementById('btnHeaderAskNade')?.addEventListener('click', () => askActiveSlotGive('nade'));
+    document.getElementById('btnHeaderAskTsun')?.addEventListener('click', () => askActiveSlotGive('tsun'));
+    document.getElementById('btnFsAskNade')?.addEventListener('click', () => { askActiveSlotGive('nade'); wakeFsHud(); });
+    document.getElementById('btnFsAskTsun')?.addEventListener('click', () => { askActiveSlotGive('tsun'); wakeFsHud(); });
+    syncTouchModeUI();
     const motionPostureGroup = id => {
       const s = id || '';
       if (s.startsWith('moe:quad_')) return 'quad';
       if (s.startsWith('moe:ball_')) return 'ball';
+      if (s.startsWith('moe:pov_')) return 'pov';
       return 'stand';
     };
     document.getElementById('selSlotMotion').addEventListener('change', async e => {
@@ -8270,7 +10204,7 @@
       sl.camRig.ready = false;
       await applySlotMotion(sl, e.target.value);
       if (prevGrp !== nextGrp) {
-        setSlotCameraPreset(sl, nextGrp === 'ball' ? 'full' : (sl.camPreset || 'bust'));
+        setSlotCameraPreset(sl, nextGrp === 'ball' ? 'full' : (nextGrp === 'pov' ? 'gachikoi' : (sl.camPreset || 'bust')));
       }
     });
     document.getElementById('btnSlotLoadVrma').addEventListener('click', () => document.getElementById('fileSlotVrma').click());
@@ -8981,15 +10915,23 @@
           }
         }
 
-        sl.time += dt * sl.speed;
+        updateSlotTouchReaction(sl, dt);
+        updateSlotAvatarGive(sl, dt);
+        const touchTimeMul = sl.touchReact?.timeScaleMul ?? 1.0;
+        sl.time += dt * sl.speed * touchTimeMul;
 
         if (sl.avatar.vrm) {
           const vrm = sl.avatar.vrm;
           if (sl.motionId !== 'custom_vrma') {
             applyBuiltInPose(sl, sl.time);
-          } else if (sl.avatar.playing && sl.avatar.mixer) {
-            sl.avatar.mixer.update(dt);
+          } else {
+            restoreTouchVrmaBonesIfNeeded(sl);
+            if (sl.avatar.playing && sl.avatar.mixer) {
+              sl.avatar.mixer.update(dt * touchTimeMul);
+            }
           }
+          applyTouchInteractionPose(sl);
+          applyAvatarGivePose(sl);
           resolveBootSolidCollision(sl);
           // Always transfer normalized bones on EVERY display frame so 60Hz/120Hz/144Hz monitors never skip a pose frame!
           vrm.humanoid?.update();
@@ -9022,6 +10964,7 @@
       }
 
       renderCompositeFrame();
+      renderTouchFxOverlay(dt);
 
       _perfFrames++;
       _perfCpuSum += (performance.now() - frameT0);
