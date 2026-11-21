@@ -755,11 +755,18 @@
 
         <div class="sec-group">
           <div class="row-lbl">
-            <span>モーション（全39種）</span>
+            <span>モーション（全44種）</span>
             <button class="btn ghost-sm" id="btnSlotLoadVrma" type="button">📂 .vrma読込</button>
             <input type="file" id="fileSlotVrma" accept=".vrma" hidden>
           </div>
           <select class="inp" id="selSlotMotion">
+            <optgroup label="💋 ガチ恋・キスモーション">
+              <option value="moe:kiss_face">💋 ゼロ距離・うるうるキス顔（目を閉じてんーっ♡）</option>
+              <option value="moe:kiss_turn_around">🐿️💋 後ろ姿から振り返りチュッ♡</option>
+              <option value="moe:kiss_wink_blow">😉💋 ウインクしながら投げキッス♡</option>
+              <option value="moe:kiss_surprise_peck">💘💋 不意打ち急接近チュッ＆照れ隠し</option>
+              <option value="moe:kiss_double_chu">💞💋 両手ちゅっちゅっ♡連続ウインク投げキッス</option>
+            </optgroup>
             <optgroup label="🟣 バランスボール・バインバイン">
               <option value="moe:ball_boing_peace">🟣 ぽよんぽよん王道バインバイン＆ダブルピース</option>
               <option value="moe:ball_side_hip_boing">🟣 左右おしりぷるんバインバイン＆ほっぺハート</option>
@@ -1053,7 +1060,7 @@
     import {VRMSpringBoneCollider, VRMSpringBoneColliderShape} from './vendor/three-vrm.module.js';
 
     const DEG = Math.PI / 180;
-    const DEFAULT_VRM_URL = new URL('./models/snow_ferret_tripo_rig.vrm?v=6f1a99786302', document.baseURI);
+    const DEFAULT_VRM_URL = new URL('./models/snow_ferret_tripo_rig.vrm?v=0833061ed7b8', document.baseURI);
     const MODEL_NAME = '雪貂 · ひなひな';
 
     const THEMES = {
@@ -2269,7 +2276,10 @@
               const st = THREE.MathUtils.clamp(((objectPosition.x - hxU) * sx + (objectPosition.y - hyU) * sy + (objectPosition.z - hzU) * sz) / sLenSq, 0, 1);
               const cx = hxU + sx * st, cy = hyU + sy * st, cz = hzU + sz * st;
               const taperedR = THREE.MathUtils.lerp(0.090, 0.074, st);
-              const lapR = taperedR * (1.0 - THREE.MathUtils.smoothstep(outD, 0.088, 0.150));
+              // Carve a natural U-valley in the empty gap between Left & Right thighs (u ≈ 0.5)
+              // so the center front skirt pleat (`skirt_270`) drapes modestly down between her legs!
+              const centerValley = Math.exp(-Math.pow((u - 0.5) / 0.22, 2)) * (0.45 + 0.45 * st);
+              const lapR = taperedR * (1.0 - centerValley) * (1.0 - THREE.MathUtils.smoothstep(outD, 0.088, 0.150));
               let ox = objectPosition.x - cx;
               let oy = objectPosition.y - cy;
               let oz = objectPosition.z - cz;
@@ -2302,22 +2312,25 @@
       const ballMat = new THREE.MeshPhysicalMaterial({
         map: sharedBalanceBallAssets.ballTex,
         color: 0xffffff,
-        roughness: 0.20,
-        metalness: 0.02,
-        clearcoat: 0.88,
-        clearcoatRoughness: 0.12,
-        sheen: 0.45,
+        roughness: 0.14,
+        metalness: 0.00,
+        clearcoat: 0.94,
+        clearcoatRoughness: 0.08,
+        sheen: 0.35,
         sheenColor: new THREE.Color(0xffe6fa),
-        transparent: false,
-        opacity: 1.0,
-        depthWrite: true,
+        side: THREE.FrontSide,
+        transparent: true,
+        opacity: 0.25,
+        depthWrite: false,
       });
       const ballMesh = new THREE.Mesh(sharedBalanceBallAssets.sphereGeo, ballMat);
+      ballMesh.renderOrder = 2;
       group.add(ballMesh);
 
       const shadowMat = new THREE.MeshBasicMaterial({
         map: sharedBalanceBallAssets.shadowTex,
         transparent: true,
+        opacity: 0.48,
         depthWrite: false,
       });
       const shadowMesh = new THREE.Mesh(sharedBalanceBallAssets.shadowGeo, shadowMat);
@@ -2722,8 +2735,12 @@
         if (obj.name && !nodeByName.has(obj.name)) nodeByName.set(obj.name, obj);
       });
       const chainSpecs = [
-        ...['210', '240', '270', '300', '330'].map(a => ({
-          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'frontApron', lapRoot: 0.102, lapKnee: 0.090, shinPad: 0.088,
+        {prefix: 'skirt_270', count: 3, pad: 0.018, mode: 'centerCurtain'},
+        ...['240', '300'].map(a => ({
+          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'frontApron', lapRoot: 0.114, lapKnee: 0.100, shinPad: 0.090,
+        })),
+        ...['210', '330'].map(a => ({
+          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'frontApron', lapRoot: 0.103, lapKnee: 0.091, shinPad: 0.088,
         })),
         ...['000', '180'].map(a => ({
           prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'sideSkirt',
@@ -2737,9 +2754,10 @@
         ...['cape_side_L', 'cape_side_R', 'cape_mid_L', 'cape_mid_R', 'cape_back_L', 'cape_back_R'].map(p => ({
           prefix: p, count: 3, pad: 0.044, mode: 'ballOnly',
         })),
-        ...['brooch_L', 'brooch_R', 'brooch_C'].map(p => ({
+        ...['brooch_L', 'brooch_R'].map(p => ({
           prefix: p, count: 3, pad: 0.036, mode: 'frontApron', lapRoot: 0.108, lapKnee: 0.092, shinPad: 0.094,
         })),
+        {prefix: 'brooch_C', count: 3, pad: 0.032, mode: 'frontApron', lapRoot: 0.072, lapKnee: 0.048, shinPad: 0.084},
         {prefix: 'tail', count: 4, pad: 0.048, mode: 'ballOnly'},
       ];
       const garmentChains = [];
@@ -4430,6 +4448,327 @@
       }
 
       // =======================================================================
+      // 💋 5 Dedicated Gachikoi Kiss Motions (Kissy Face, Turn-Around Kiss, Wink Blow Kiss, Surprise Peck, Double Chu!)
+      // =======================================================================
+      if (mode === 'moe:kiss_face') {
+        // 💋 1. ゼロ距離・うるうるキス顔（目を閉じて顎を少し上げた「んーっ…ちゅっ♡」待ち顔） (6.0s loop)
+        const cyc = (t % 6.0) / 6.0;
+        const kissHold = THREE.MathUtils.smoothstep(cyc, 0.16, 0.30) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.76, 0.88));
+        // Gentle extra micro-press right at the climax of the kiss ("ちゅっ♡" at cyc ≈ 0.54)
+        const chuPress = Math.exp(-Math.pow((cyc - 0.54) / 0.085, 2));
+        const shyAfter = THREE.MathUtils.smoothstep(cyc, 0.78, 0.86) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.94, 1.00));
+        const breath = 0.5 - 0.5 * Math.cos(t * 2.1);
+        const sway = Math.sin(t * 1.35);
+
+        setCuteLegs(12, 11 + kissHold * 4, 11 + kissHold * 4, 0.012 - chuPress * 0.008, sway * 0.014, sway * 0.06);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * (kissHold * 0.145 + chuPress * 0.028));
+        }
+
+        // Lean chest tenderly forward while tilting chin UPWARD (+zS) to offer her lips!
+        const torsoPitch = -zS * (10.5 * kissHold + 2.5 * chuPress) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = torsoPitch * 0.45; nb('spine').rotation.z = sway * 3.2 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = torsoPitch * 0.55;
+
+        const hTilt = (7.5 * kissHold - 6.0 * shyAfter + sway * 2.8) * DEG;
+        const chinUp = zS * (4.5 + 9.5 * kissHold + 3.0 * chuPress - 4.0 * shyAfter) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = chinUp * 0.38; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = chinUp * 0.62; nb('head').rotation.y = sway * 2.5 * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Hands clasped daintily over her collarbone/heart with tiny nervous heartbeat lift
+        const claspLift = 0.015 + kissHold * 0.022 + breath * 0.008;
+        _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.152).addScaledVector(_rightDir, +0.036).add(tv3(0, claspLift, 0));
+        _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.156).addScaledVector(_rightDir, -0.036).add(tv3(0, claspLift + 0.004, 0));
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.16).add(tv3(0, -0.21, 0.03 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.16).add(tv3(0, -0.21, 0.03 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 46 * DEG, 46 * DEG, false);
+
+        if (kissHold > 0.35) {
+          // Serene downward-curved closed kissing eyelashes ('blink') + pursed 'ou' kiss lips!
+          sl.choreoState.emo = 'blink'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'ou';  sl.choreoState.vowelW = 0.88 + 0.12 * chuPress;
+        } else if (shyAfter > 0.25) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'oh';  sl.choreoState.vowelW = 0.62;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.88;
+          sl.choreoState.vowel = 'ou';    sl.choreoState.vowelW = 0.52 + 0.20 * breath;
+        }
+        return;
+      }
+
+      if (mode === 'moe:kiss_turn_around') {
+        // 🐿️💋 2. 後ろ姿からこっち振り返ってキスする (6.4s C2-seamless rear -> turn -> step-in kiss loop!)
+        const cyc = (t % 6.4) / 6.4;
+        // Turn angle: starts at 180° (facing away showing tail & cape), smoothly spins to 0° (front) during 0.20..0.44,
+        // stays front for the close-up kiss during 0.44..0.82, then gracefully turns back 0° -> 180° during 0.84..1.00!
+        const turnToFront = smootherstep01((cyc - 0.20) / 0.24);
+        const turnBackRear = smootherstep01((cyc - 0.84) / 0.16);
+        const bodyRotY = Math.PI * (1.0 - turnToFront + turnBackRear);
+
+        const peekShoulder = THREE.MathUtils.smoothstep(cyc, 0.08, 0.18) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.30, 0.42));
+        const kissLean = THREE.MathUtils.smoothstep(cyc, 0.44, 0.55) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.74, 0.83));
+        const chuMoment = Math.exp(-Math.pow((cyc - 0.63) / 0.075, 2));
+        const postSmile = THREE.MathUtils.smoothstep(cyc, 0.74, 0.80) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.86, 0.94));
+        const wag = Math.sin(t * 3.4) * (1.0 - kissLean * 0.65);
+
+        setCuteLegs(
+          10 + kissLean * 2,
+          11 + Math.max(0, wag) * 5 + kissLean * 4,
+          11 + Math.max(0, -wag) * 5 + kissLean * 4,
+          0.012 - chuMoment * 0.008,
+          wag * 0.024,
+          wag * 0.12
+        );
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, bodyRotY, 0);
+          sl.avatar.model.position.set(0, 0, zS * (kissLean * 0.160 + chuMoment * 0.026));
+        }
+
+        // Over-the-left-shoulder glance before spinning around, then forward kiss lean + lifted chin!
+        const lookBackYaw = -peekShoulder * 68.0 * DEG;
+        const fwdPitch = -zS * (11.5 * kissLean + 2.5 * chuMoment) * DEG;
+        const chinLift = zS * (13.0 * kissLean + 3.0 * chuMoment) * DEG;
+        const hTilt = (peekShoulder * 7.5 + kissLean * 8.5 + postSmile * 6.0) * DEG;
+
+        if (nb('spine')) { nb('spine').rotation.y = lookBackYaw * 0.24; nb('spine').rotation.x = fwdPitch * 0.45; }
+        if (nb('chest')) { nb('chest').rotation.y = lookBackYaw * 0.28; nb('chest').rotation.x = fwdPitch * 0.55; }
+        if (nb('neck'))  { nb('neck').rotation.y  = lookBackYaw * 0.45; nb('neck').rotation.x  = chinLift * 0.38; nb('neck').rotation.z = hTilt * 0.35; }
+        if (nb('head'))  { nb('head').rotation.y  = lookBackYaw * 0.55; nb('head').rotation.x  = chinLift * 0.62; nb('head').rotation.z = hTilt * 0.65; }
+
+        updateTorsoAndReadFrames();
+        const turnFlare = Math.sin(turnToFront * Math.PI) * (cyc < 0.46 ? 1 : 0);
+        const sideL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, +(0.155 + turnFlare * 0.075)).add(tv3(0, -0.11, 0));
+        const sideR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, -(0.155 + turnFlare * 0.075)).add(tv3(0, -0.11, 0));
+        const kissHandsL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.150).addScaledVector(_rightDir, +0.044).add(tv3(0, 0.018, 0));
+        const kissHandsR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.150).addScaledVector(_rightDir, -0.044).add(tv3(0, 0.018, 0));
+        const handBlend = Math.max(kissLean, postSmile * 0.8);
+        _tgtL.lerpVectors(sideL, kissHandsL, handBlend);
+        _tgtR.lerpVectors(sideR, kissHandsR, handBlend);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.18).add(tv3(0, -0.19, 0.03 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.18).add(tv3(0, -0.19, 0.03 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 38 * DEG, 38 * DEG, false);
+
+        if (cyc >= 0.47 && cyc < 0.74) {
+          sl.choreoState.emo = 'blink'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'ou';  sl.choreoState.vowelW = 0.92 + 0.08 * chuMoment;
+        } else if (postSmile > 0.25) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'oh';  sl.choreoState.vowelW = 0.72;
+        } else if (peekShoulder > 0.35) {
+          sl.choreoState.emo = 'surprised'; sl.choreoState.emoW = 0.32;
+          sl.choreoState.emo2 = 'relaxed';  sl.choreoState.emo2W = 0.65;
+          sl.choreoState.vowel = 'oh';      sl.choreoState.vowelW = 0.58;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.90;
+          sl.choreoState.vowel = 'ou';    sl.choreoState.vowelW = 0.45;
+        }
+        return;
+      }
+
+      if (mode === 'moe:kiss_wink_blow') {
+        // 😉💋 3. ウインクしながら投げキッス♡（ウインクをキープしたまま指先チュッ→前へちゅーっ飛ばし！） (5.0s loop)
+        const cyc = (t % 5.0) / 5.0;
+        const winkActive = (cyc >= 0.10 && cyc < 0.80);
+        const touchLips = THREE.MathUtils.smoothstep(cyc, 0.10, 0.22) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.76, 0.90));
+        const blowArc = smootherstep01((cyc - 0.38) / 0.24) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.80, 0.94));
+        const sway = Math.sin(cyc * Math.PI * 2);
+
+        setCuteLegs(10, 10 + touchLips * 7, 9 + (1 - touchLips) * 4, 0.012 + blowArc * 0.008, sway * 0.020, -0.08 * touchLips);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * (0.05 * touchLips + 0.06 * blowArc));
+        }
+
+        const pitch = -zS * (8.5 * touchLips + 3.0 * blowArc) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.45; nb('spine').rotation.z = (5.0 * touchLips + sway * 2.5) * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+
+        const hTilt = (10.5 * touchLips + 2.5 * blowArc) * DEG;
+        const hUp = zS * (6.5 * touchLips) * DEG;
+        if (nb('neck')) { nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = hUp * 0.35; }
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = hUp * 0.65; nb('head').rotation.y = -4.0 * blowArc * DEG; }
+
+        updateTorsoAndReadFrames();
+        // Right fingertips kiss cleanly in front of pursed lips (15.4cm forward -> zero cuff/chin clip!), then arc out toward camera!
+        const restR  = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.10).addScaledVector(_rightDir, -0.145).add(tv3(0, -0.12, 0));
+        const lipsR  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.154).addScaledVector(_rightDir, -0.026).addScaledVector(_upDir, -0.044);
+        const flyR   = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.315).addScaledVector(_rightDir, -0.118).addScaledVector(_upDir, -0.006);
+        const hipL   = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.07).addScaledVector(_rightDir, +0.138).add(tv3(0, -0.135, 0));
+
+        if (cyc < 0.38) {
+          _tgtR.lerpVectors(restR, lipsR, THREE.MathUtils.smoothstep(cyc, 0.08, 0.22));
+        } else if (cyc < 0.80) {
+          _tgtR.lerpVectors(lipsR, flyR, smootherstep01((cyc - 0.38) / 0.22));
+        } else {
+          _tgtR.lerpVectors(flyR, restR, smootherstep01((cyc - 0.80) / 0.18));
+        }
+        _tgtL.copy(hipL);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.20).add(tv3(0, -0.15, -0.03 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.18).add(tv3(0, -0.18, 0.05 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        if (nb('rightHand')) nb('rightHand').rotation.z = (20 - 28 * blowArc) * DEG;
+        applyDaintyFingers(nb, 42 * DEG, (34 - 18 * blowArc) * DEG, true);
+
+        if (winkActive) {
+          // Hold crisp Right Wink ('blinkRight'=1.0) + rosy smile contour ALL THE WAY from lip-touch through flying kiss!
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.emo2 = 'relaxed';   sl.choreoState.emo2W = 0.80;
+          if (cyc < 0.50) {
+            sl.choreoState.vowel = 'ou'; sl.choreoState.vowelW = 0.96;
+          } else {
+            sl.choreoState.vowel = 'ou';  sl.choreoState.vowelW = 0.45;
+            sl.choreoState.vowel2 = 'oh'; sl.choreoState.vowel2W = 0.50;
+          }
+        } else {
+          sl.choreoState.emo = (cyc >= 0.80 && cyc < 0.94) ? 'happy' : 'relaxed';
+          sl.choreoState.emoW = (cyc >= 0.80 && cyc < 0.94) ? 1.0 : 0.90;
+          sl.choreoState.vowel = 'oh'; sl.choreoState.vowelW = 0.68;
+        }
+        return;
+      }
+
+      if (mode === 'moe:kiss_surprise_peck') {
+        // 💘💋 4. 不意打ち急接近チュッ＆両手ほっぺ照れ隠し (5.6s story loop!)
+        const cyc = (t % 5.6) / 5.6;
+        // 0.00..0.28: shyly looks left & right ("誰も見てないかな…？")
+        // 0.28..0.54: sudden tiptoe dash-in peck ("ちゅっ！")
+        // 0.54..1.00: pulls back covering both cheeks flustered ("えへへ…♡")
+        const lookAround = (1.0 - THREE.MathUtils.smoothstep(cyc, 0.22, 0.30)) * THREE.MathUtils.smoothstep(cyc, 0.02, 0.08);
+        const dashKiss = easeFastCushion((cyc - 0.28) / 0.12) * (1.0 - smootherstep01((cyc - 0.50) / 0.10));
+        const blushHide = THREE.MathUtils.smoothstep(cyc, 0.54, 0.64) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.90, 0.99));
+        const shyWiggle = blushHide * Math.sin(t * 9.5);
+
+        setCuteLegs(13, 14 - dashKiss * 9 + blushHide * 4, 14 - dashKiss * 9 - blushHide * 2, 0.016 - dashKiss * 0.022, shyWiggle * 0.018);
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, dashKiss * 0.014, zS * (dashKiss * 0.185 - blushHide * 0.025));
+        }
+
+        const pitch = -zS * (13.5 * dashKiss + 4.0 * blushHide) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.45; nb('spine').rotation.z = shyWiggle * 5.0 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+
+        const checkYaw = lookAround * Math.sin(cyc * Math.PI * 7.0) * 16.0 * DEG + shyWiggle * 6.5 * DEG;
+        const hTilt = (dashKiss * 9.0 + shyWiggle * 7.0) * DEG;
+        const hUp = zS * (14.5 * dashKiss - 4.5 * blushHide) * DEG;
+        if (nb('neck')) { nb('neck').rotation.y = checkYaw * 0.4; nb('neck').rotation.z = hTilt * 0.35; nb('neck').rotation.x = hUp * 0.4; }
+        if (nb('head')) { nb('head').rotation.y = checkYaw * 0.6; nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = hUp * 0.6; }
+
+        updateTorsoAndReadFrames();
+        const fidgetL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.155).addScaledVector(_rightDir, +0.048).add(tv3(0, -0.02, 0));
+        const fidgetR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.155).addScaledVector(_rightDir, -0.048).add(tv3(0, -0.02, 0));
+        const backWingL = cloneTmp(_chestPos).addScaledVector(_fwdDir, -0.04).addScaledVector(_rightDir, +0.185).add(tv3(0, -0.11, 0));
+        const backWingR = cloneTmp(_chestPos).addScaledVector(_fwdDir, -0.04).addScaledVector(_rightDir, -0.185).add(tv3(0, -0.11, 0));
+        const cheekL = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.136).addScaledVector(_rightDir, +0.118).addScaledVector(_upDir, -0.068);
+        const cheekR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.136).addScaledVector(_rightDir, -0.118).addScaledVector(_upDir, -0.068);
+
+        _tgtL.copy(fidgetL).lerp(backWingL, dashKiss).lerp(cheekL, blushHide);
+        _tgtR.copy(fidgetR).lerp(backWingR, dashKiss).lerp(cheekR, blushHide);
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.19).add(tv3(0, -0.18, 0.02 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.19).add(tv3(0, -0.18, 0.02 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 46 * DEG, 46 * DEG, false);
+
+        if (cyc >= 0.30 && cyc < 0.53) {
+          sl.choreoState.emo = 'blink'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'ou';  sl.choreoState.vowelW = 0.98;
+        } else if (blushHide > 0.25) {
+          sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.vowel = 'oh';  sl.choreoState.vowelW = 0.70;
+        } else {
+          sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.85;
+          sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.45;
+        }
+        return;
+      }
+
+      if (mode === 'moe:kiss_double_chu') {
+        // 💞💋 5. 両手ちゅっちゅっ♡連続ウインク投げキッス（左ウインク投げ→右ウインク投げ→両手W投げキッス！） (5.4s idol loop)
+        const cyc = (t % 5.4) / 5.4;
+        const sway = Math.sin(cyc * Math.PI * 4);
+        const hop = Math.abs(Math.sin(cyc * Math.PI * 6));
+        setCuteLegs(10, 10 + hop * 8, 10 + (1 - hop) * 8, 0.010 + (1 - hop) * 0.010, sway * 0.024, sway * 0.10);
+
+        const finale = THREE.MathUtils.smoothstep(cyc, 0.66, 0.74) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.92, 0.99));
+        if (sl.avatar.model) {
+          sl.avatar.model.rotation.set(0, 0, 0);
+          sl.avatar.model.position.set(0, 0, zS * finale * 0.10);
+        }
+
+        const pitch = -zS * (5.5 + finale * 6.5) * DEG;
+        if (nb('spine')) { nb('spine').rotation.x = pitch * 0.45; nb('spine').rotation.z = sway * 5.5 * DEG; }
+        if (nb('chest')) nb('chest').rotation.x = pitch * 0.55;
+        const hTilt = (cyc < 0.33 ? -9.5 : (cyc < 0.66 ? +9.5 : Math.sin(t * 6.0) * 6.0)) * DEG;
+        if (nb('neck')) nb('neck').rotation.z = hTilt * 0.35;
+        if (nb('head')) { nb('head').rotation.z = hTilt * 0.65; nb('head').rotation.x = zS * (5.0 + finale * 5.0) * DEG; }
+
+        updateTorsoAndReadFrames();
+        const hipL  = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.07).addScaledVector(_rightDir, +0.140).add(tv3(0, -0.13, 0));
+        const hipR  = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.07).addScaledVector(_rightDir, -0.140).add(tv3(0, -0.13, 0));
+        const lipL  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.154).addScaledVector(_rightDir, +0.042).addScaledVector(_upDir, -0.044);
+        const lipR  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.154).addScaledVector(_rightDir, -0.042).addScaledVector(_upDir, -0.044);
+        const flyL  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.305).addScaledVector(_rightDir, +0.145).addScaledVector(_upDir, 0.005);
+        const flyR  = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.305).addScaledVector(_rightDir, -0.145).addScaledVector(_upDir, 0.005);
+
+        if (cyc < 0.33) {
+          // Beat 1: Left hand kiss + Left wink
+          const u = cyc / 0.33;
+          _tgtL.copy(u < 0.45 ? hipL : lipL).lerp(u < 0.45 ? lipL : flyL, u < 0.45 ? smootherstep01(u / 0.45) : smootherstep01((u - 0.45) / 0.45));
+          _tgtR.copy(hipR);
+          sl.choreoState.emo = 'blinkLeft'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.emo2 = 'relaxed';  sl.choreoState.emo2W = 0.78;
+          sl.choreoState.vowel = u < 0.55 ? 'ou' : 'oh';
+          sl.choreoState.vowelW = u < 0.55 ? 0.95 : 0.80;
+        } else if (cyc < 0.66) {
+          // Beat 2: Right hand kiss + Right wink
+          const u = (cyc - 0.33) / 0.33;
+          _tgtL.lerpVectors(flyL, hipL, smootherstep01(u / 0.40));
+          _tgtR.copy(u < 0.45 ? hipR : lipR).lerp(u < 0.45 ? lipR : flyR, u < 0.45 ? smootherstep01(u / 0.45) : smootherstep01((u - 0.45) / 0.45));
+          sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+          sl.choreoState.emo2 = 'relaxed';   sl.choreoState.emo2W = 0.78;
+          sl.choreoState.vowel = u < 0.55 ? 'ou' : 'oh';
+          sl.choreoState.vowelW = u < 0.55 ? 0.95 : 0.80;
+        } else {
+          // Finale: Double hand kiss -> Big W flying kiss!
+          const u = (cyc - 0.66) / 0.34;
+          if (u < 0.38) {
+            const k = smootherstep01(u / 0.38);
+            _tgtL.lerpVectors(hipL, lipL, k);
+            _tgtR.lerpVectors(flyR, lipR, k);
+            sl.choreoState.emo = 'blink'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'ou';  sl.choreoState.vowelW = 0.98;
+          } else if (u < 0.82) {
+            const k = smootherstep01((u - 0.38) / 0.34);
+            _tgtL.lerpVectors(lipL, flyL, k);
+            _tgtR.lerpVectors(lipR, flyR, k);
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh';  sl.choreoState.vowelW = 0.88;
+          } else {
+            const k = smootherstep01((u - 0.82) / 0.18);
+            _tgtL.lerpVectors(flyL, hipL, k);
+            _tgtR.lerpVectors(flyR, hipR, k);
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.92;
+            sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.65;
+          }
+        }
+        _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.19).add(tv3(0, -0.18, 0.05 * zS));
+        _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.19).add(tv3(0, -0.18, 0.05 * zS));
+        solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+        solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+        applyDaintyFingers(nb, 28 * DEG, 28 * DEG, true);
+        return;
+      }
+
+      // =======================================================================
       // 🐾 Cute Snow-Ferret Quadruped (All-Fours / 四つん這い) Animal Motions!
       // Exact FK-calibrated floor grounding: knees y≈0.045, boots y≈0.045, paws y≈0.062,
       // upright forward-looking head, and proud high-arched fluffy ferret tail!
@@ -5049,6 +5388,45 @@
       return true;
     }
 
+    function drapeCenterCurtainIntoValley(tailPt, headPt, segLen, sIdx, zS) {
+      // Guide the center-front skirt pleat (`skirt_270`) softly DOWNWARD into the open valley
+      // between Left & Right thighs so the skirt fabric naturally curtains off the panties from the front!
+      _dHu.lerpVectors(_dHipR, _dHipL, 0.5);
+      _dKu.lerpVectors(_dKneeR, _dKneeL, 0.5);
+      const r = Math.max(0.025, segLen);
+      const fHead = zS * headPt.z;
+      const fHip = zS * _dHu.z;
+      const fKnee = zS * _dKu.z;
+
+      if (sIdx === 0) {
+        // Upper groin curtain: clear pelvis front (+134mm ahead of hip midpoint) while sloping steeply downward
+        const wantF = Math.max(fHip + 0.134, fHead + r * 0.46);
+        const df = THREE.MathUtils.clamp(wantF - fHead, 0.012, r * 0.72);
+        const drop = Math.sqrt(Math.max(0, r * r - df * df));
+        tailPt.x = THREE.MathUtils.lerp(tailPt.x, THREE.MathUtils.lerp(_dHu.x, _dKu.x, 0.38), 0.78);
+        tailPt.z = zS * Math.max(zS * tailPt.z, fHead + df);
+        tailPt.y = Math.min(tailPt.y, headPt.y - drop * 0.92);
+        return true;
+      }
+      if (sIdx === 1) {
+        // Mid-valley fold: sink cleanly between the inner thighs below groin/panty sightline
+        const wantF = Math.max(fHead + r * 0.48, THREE.MathUtils.lerp(fHip, fKnee, 0.68));
+        const df = THREE.MathUtils.clamp(wantF - fHead, 0.010, r * 0.74);
+        const drop = Math.sqrt(Math.max(0, r * r - df * df));
+        tailPt.x = THREE.MathUtils.lerp(tailPt.x, THREE.MathUtils.lerp(_dHu.x, _dKu.x, 0.72), 0.82);
+        tailPt.z = zS * Math.max(zS * tailPt.z, fHead + df);
+        tailPt.y = Math.min(tailPt.y, headPt.y - drop * 0.95);
+        return true;
+      }
+      // Lower modesty hem (sIdx >= 2): hang gracefully straight down between the knees/shins
+      const df = r * 0.24;
+      const drop = Math.sqrt(Math.max(0, r * r - df * df));
+      tailPt.x = THREE.MathUtils.lerp(tailPt.x, _dKu.x, 0.75);
+      if (zS * tailPt.z < fHead + df) tailPt.z = zS * (fHead + df);
+      tailPt.y = Math.min(tailPt.y, headPt.y - drop * 0.96);
+      return true;
+    }
+
     function resolveBallGarmentDrape(sl, springStepped = true) {
       if (!sl.ballGroup?.visible || !sl.ballColliderShape?.active || !sl.garmentChains?.length) return;
       const vrm = sl.avatar?.vrm;
@@ -5119,10 +5497,13 @@
             _dTail.setFromMatrixPosition(child.matrixWorld);
             const segLen = Math.max(0.03, _dHead.distanceTo(_dTail));
 
-            // 1) Solve clean single-step tapered lap-slope drape on segment tail (with supple downward hem drop on sIdx=2!)
-            if (hasLegs && mode === 'frontApron') {
+            // 1) Solve clean single-step tapered lap-slope drape on segment tail (or modest center valley curtain on skirt_270!)
+            if (hasLegs && (mode === 'frontApron' || mode === 'centerCurtain')) {
               _dOut.copy(_dTail);
-              if (pushFrontApronOverLapAndShin(_dOut, _dHead, segLen, sIdx, latSpan, lapRoot, lapKnee, shinPad, zS)) {
+              const draped = mode === 'centerCurtain'
+                ? drapeCenterCurtainIntoValley(_dOut, _dHead, segLen, sIdx, zS)
+                : pushFrontApronOverLapAndShin(_dOut, _dHead, segLen, sIdx, latSpan, lapRoot, lapKnee, shinPad, zS);
+              if (draped) {
                 _dOldDir.subVectors(_dTail, _dHead);
                 _dNewDir.subVectors(_dOut, _dHead);
                 if (_dOldDir.lengthSq() > 1e-5 && _dNewDir.lengthSq() > 1e-5) {
@@ -5165,8 +5546,10 @@
                   hz = _dOut.z - shape.hipsZ;
                   if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = 1; }
                 }
-                // Root glides over top, mid glides tangentially, hem (sIdx===2) hangs straight down hugging ball sides (zero upward umbrella kick!)
-                const clampedDy = sIdx === 0 ? Math.max(ery * 0.10, dy) : (sIdx === 1 ? Math.max(0.0, dy) : 0.0);
+                // Root glides over top (except centerCurtain which glides forward-down along the ball front!), hem hangs straight down
+                const clampedDy = mode === 'centerCurtain'
+                  ? Math.min(0.0, dy * 0.25)
+                  : (sIdx === 0 ? Math.max(ery * 0.10, dy) : (sIdx === 1 ? Math.max(0.0, dy) : 0.0));
                 _dNorm.set(hx / (erx * erx), clampedDy / (ery * ery), hz / (erz * erz));
                 const nLen = _dNorm.length();
                 if (nLen > 1e-6) _dNorm.divideScalar(nLen);
@@ -7304,6 +7687,25 @@
         layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
         slots: [
           {cam: 'full', motion: 'moe:ball_boing_peace', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p47_kiss_quartet', num: '47', cat: 'gachikoi', moe: true,
+        label: '💋 ガチ恋キス4連発♡', desc: 'うるうるキス顔・後ろ姿から振り返りキス・ウインク投げキッス・不意打ち急接近チュッの4分割 (2×2)',
+        layout: 'grid2x2', theme: 'cosmic_blossom', border: 'gold',
+        slots: [
+          {cam: 'gachikoi', motion: 'moe:kiss_face',          camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'bust',     motion: 'moe:kiss_turn_around',   camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'bust',     motion: 'moe:kiss_wink_blow',     camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'gachikoi', motion: 'moe:kiss_surprise_peck', camAnim: 'gachikoi_breath', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p48_vshort_turn_kiss', num: '48', cat: 'gachikoi', moe: true,
+        label: '💋 振り返りゼロ距離キス♡', desc: '縦型・SNS用：しっぽゆらゆら後ろ姿からこっちへ振り返ってゼロ距離チュッ♡',
+        layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
+        slots: [
+          {cam: 'bust', motion: 'moe:kiss_turn_around', camAnim: 'none', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
     ];
