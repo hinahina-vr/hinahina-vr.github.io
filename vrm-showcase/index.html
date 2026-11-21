@@ -405,11 +405,28 @@
     }
     .mobile-only { display: none !important; }
 
+    #selHeaderShader {
+      border-color: rgba(244, 63, 133, 0.48);
+      background-color: #191d32;
+    }
+    #selHeaderShader:not(:disabled):hover, #selHeaderShader:not(:disabled):focus {
+      border-color: #fda4c8;
+      background-color: #222845;
+    }
+
+    @media (min-width: 861px) {
+      .app { grid-template-rows: auto minmax(0, 1fr); }
+      header { min-height: 52px; padding-block: 6px; flex-wrap: wrap; }
+      .hdr-left { flex: 1 0 auto; }
+      .hdr-right { margin-inline-start: auto; }
+    }
+
     @media (min-width: 861px) and (max-width: 1140px) {
       header { padding: 0 10px; gap: 5px; }
       .hdr-left, .hdr-right { gap: 4px; }
       .hdr-title { font-size: 12.5px; gap: 5px; }
       .res-badge { font-size: 10px; padding: 2px 6px; }
+      #selHeaderShader { width: 136px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
       #selHeaderAspect { width: 146px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
       #selRecDur { width: 82px !important; padding: 5px 22px 5px 7px; font-size: 11px; }
       header .btn { padding: 5px 7px; font-size: 11px; }
@@ -554,6 +571,15 @@
         <button class="btn desktop-only" id="btnLoadVrm" title="別のVRMファイルを読み込む">📂 VRM読込</button>
         <input type="file" id="fileVrm" accept=".vrm" hidden>
         <span id="modelBadge" role="status" hidden></span>
+        <select class="inp desktop-only" id="selHeaderShader" style="width:176px;" title="キャラクターのシェーダーを切替 (Sキーでも順送り)">
+          <option value="unlit" selected>☀ Unlit（無陰影・原画）</option>
+          <option value="liltoon">🌸 lilToon風（桜肌ソフト）</option>
+          <option value="mtoon">🎨 MToon（アニメセル影）</option>
+          <option value="pbr_figure">💎 フィギュアPBR（立体ツヤ）</option>
+          <option value="mv_rim">🌙 逆光MV（ネオン縁取り）</option>
+          <option value="clay">🗿 クレイ造形（白マケット）</option>
+          <option value="split_compare">🔀 4種シェーダ同時比較</option>
+        </select>
       </div>
 
       <div class="hdr-right">
@@ -607,6 +633,7 @@
 
       <div class="fs-hud-bar" id="fsHudBar">
         <button class="btn" id="btnFsSolo" type="button" title="1体のみ全画面拡大 ⇔ 分割レイアウト全画面">👤 1体フル表示</button>
+        <button class="btn" id="btnFsShader" type="button" title="シェーダーを順送り切替 (Sキー)">☀ Unlit</button>
         <button class="btn" id="btnFsSnap" type="button" title="フルスクリーン静止画PNG保存">📸</button>
         <button class="btn" id="btnFsExit" type="button" title="フルスクリーン終了 (Esc / Fキー)">✕ 終了 (Esc)</button>
       </div>
@@ -632,7 +659,7 @@
       <div class="studio-tabs" id="studioTabs">
         <button class="studio-tab active" type="button" data-stab="presets">✨ プリセット</button>
         <button class="studio-tab" type="button" data-stab="motion">🎭 モーション</button>
-        <button class="studio-tab" type="button" data-stab="stage">🌌 背景・光</button>
+        <button class="studio-tab" type="button" data-stab="stage">🎨 シェーダ</button>
       </div>
 
       <!-- TAB 1: Presets & SNS Output Aspect Ratios -->
@@ -728,11 +755,18 @@
 
         <div class="sec-group">
           <div class="row-lbl">
-            <span>モーション（全34種）</span>
+            <span>モーション（全39種）</span>
             <button class="btn ghost-sm" id="btnSlotLoadVrma" type="button">📂 .vrma読込</button>
             <input type="file" id="fileSlotVrma" accept=".vrma" hidden>
           </div>
           <select class="inp" id="selSlotMotion">
+            <optgroup label="🟣 バランスボール・バインバイン">
+              <option value="moe:ball_boing_peace">🟣 ぽよんぽよん王道バインバイン＆ダブルピース</option>
+              <option value="moe:ball_side_hip_boing">🟣 左右おしりぷるんバインバイン＆ほっぺハート</option>
+              <option value="moe:ball_hyper_jump_banzai">🟣 大ジャンプびよーん！全力万歳バインバイン</option>
+              <option value="moe:ball_hug_lean_gachikoi">🟣 前傾ぎゅむっ♡ ゼロ距離上目遣いバインバイン</option>
+              <option value="moe:ball_wobble_panic">🟣 おっとっと！？ぷるぷるバランス崩し＆照れ笑い</option>
+            </optgroup>
             <optgroup label="🐾 けもの・四つん這いモーション">
               <option value="moe:quad_ferret_walk">🐾 てちてち四つ足おさんぽ＆しっぽフリフリ</option>
               <option value="moe:quad_pounce_wiggle">🐾 獲物ロックオン！おしりふりふり＆ぴょん飛びつき</option>
@@ -885,8 +919,54 @@
         </div>
       </div>
 
-      <!-- TAB 3: Stage Background, MToon Shader & Advanced Settings -->
+      <!-- TAB 3: Character Shaders, Stage Background & Advanced Settings -->
       <div class="tab-pane" id="pane-stage">
+        <div class="sec-group">
+          <div class="row-lbl"><span>キャラクター質感（シェーダー切替 · Sキー順送り）</span></div>
+          <div class="grid-2" id="shaderModeBtns">
+            <button class="btn shader-mode-btn active" type="button" data-shd="unlit" id="btnShaderUnlit" title="影なし・原画イラスト100%発色">☀ Unlit（無陰影）</button>
+            <button class="btn shader-mode-btn" type="button" data-shd="liltoon" id="btnShaderLiltoon" title="VRChat lilToon風のやわらか桜肌グラデ影">🌸 lilToon風（桜肌）</button>
+            <button class="btn shader-mode-btn" type="button" data-shd="mtoon" id="btnShaderMtoon" title="王道アニメ2階調セル影＋天使の輪">🎨 MToon（セル影）</button>
+            <button class="btn shader-mode-btn" type="button" data-shd="pbr_figure" id="btnShaderPbr" title="クリアコート＆サテン質感の立体スケールフィギュア風">💎 フィギュアPBR</button>
+            <button class="btn shader-mode-btn" type="button" data-shd="mv_rim" id="btnShaderMvRim" title="ライブMV風のドラマチック逆光＆ネオン輪郭光">🌙 逆光MVリム</button>
+            <button class="btn shader-mode-btn" type="button" data-shd="clay" id="btnShaderClay" title="テクスチャなしの白マケットで造形・ドレープを確認">🗿 クレイ造形</button>
+          </div>
+          <button class="btn shader-mode-btn desktop-only" type="button" data-shd="split_compare" id="btnShaderSplitCompare" style="width:100%;" title="2×2 / 4列パネルで Unlit・lilToon風・MToon・フィギュアPBR を同時に見比べ">🔀 4パネルでシェーダー4種を同時見比べ</button>
+
+          <label class="toggle-row">
+            <span>🕸️ ワイヤーフレーム表示（ポリゴン確認）</span>
+            <input type="checkbox" id="chkShaderWire">
+          </label>
+
+          <div class="sub-panel" id="mtoonBox">
+            <div class="row-lbl"><span>シェーダー光・影・リム調整</span></div>
+            <select class="inp" id="selMtoonStyle">
+              <option value="stage_sync" selected>✨ ステージ連動アニメ光</option>
+              <option value="idol_rim">💖 アイドル逆光リム＆さくら影</option>
+              <option value="anime_cel">🎬 王道パキッと2階調セル影</option>
+              <option value="sunset_gold">🌇 夕凪ドラマチック金縁リム</option>
+              <option value="neon_dual">🔮 ネオン2色光（シアン×ピンク）</option>
+            </select>
+            <div class="slider-row">
+              <label for="slMtoonShade">影の濃さ</label>
+              <input type="range" id="slMtoonShade" min="0" max="160" value="115">
+              <output id="outMtoonShade">115%</output>
+            </div>
+            <div class="slider-row">
+              <label for="slMtoonRim">リム＆艶</label>
+              <input type="range" id="slMtoonRim" min="0" max="200" value="100">
+              <output id="outMtoonRim">100%</output>
+            </div>
+            <div class="slider-row">
+              <label for="slMtoonYaw">光の向き</label>
+              <input type="range" id="slMtoonYaw" min="-85" max="85" value="36">
+              <output id="outMtoonYaw">+36°</output>
+            </div>
+          </div>
+        </div>
+
+        <div class="sec-divider"></div>
+
         <div class="sec-group">
           <div class="row-lbl"><span>ステージ背景</span></div>
           <select class="inp" id="selTheme">
@@ -907,42 +987,6 @@
               <span>💧 水面ミラー床</span>
               <input type="checkbox" id="chkFloorRing" checked>
             </label>
-          </div>
-        </div>
-
-        <div class="sec-divider"></div>
-
-        <div class="sec-group">
-          <div class="row-lbl"><span>キャラクター質感（シェーダ）</span></div>
-          <div class="grid-2">
-            <button class="btn active" type="button" id="btnShaderUnlit">☀ Unlit（無影）</button>
-            <button class="btn" type="button" id="btnShaderMtoon">🎨 MToon（アニメ影）</button>
-          </div>
-
-          <div class="sub-panel" id="mtoonBox">
-            <div class="row-lbl"><span>MToon ライティング演出</span></div>
-            <select class="inp" id="selMtoonStyle">
-              <option value="stage_sync" selected>✨ ステージ連動アニメ光</option>
-              <option value="idol_rim">💖 アイドル逆光リム＆さくら影</option>
-              <option value="anime_cel">🎬 王道パキッと2階調セル影</option>
-              <option value="sunset_gold">🌇 夕凪ドラマチック金縁リム</option>
-              <option value="neon_dual">🔮 ネオン2色光（シアン×ピンク）</option>
-            </select>
-            <div class="slider-row">
-              <label for="slMtoonShade">アニメ影</label>
-              <input type="range" id="slMtoonShade" min="0" max="160" value="115">
-              <output id="outMtoonShade">115%</output>
-            </div>
-            <div class="slider-row">
-              <label for="slMtoonRim">リム＆艶</label>
-              <input type="range" id="slMtoonRim" min="0" max="200" value="100">
-              <output id="outMtoonRim">100%</output>
-            </div>
-            <div class="slider-row">
-              <label for="slMtoonYaw">光の向き</label>
-              <input type="range" id="slMtoonYaw" min="-85" max="85" value="36">
-              <output id="outMtoonYaw">+36°</output>
-            </div>
           </div>
         </div>
 
@@ -1006,6 +1050,7 @@
     import {OrbitControls} from './vendor/OrbitControls.js';
     import {StudioAvatar, disposeAvatar, parseAvatar} from './studio-avatar.js?v=3f7dd3ab2eab';
     import {applyStudioMotion} from './studio-motion.js';
+    import {VRMSpringBoneCollider, VRMSpringBoneColliderShape} from './vendor/three-vrm.module.js';
 
     const DEG = Math.PI / 180;
     const DEFAULT_VRM_URL = new URL('./models/snow_ferret_tripo_rig.vrm?v=6f1a99786302', document.baseURI);
@@ -1811,6 +1856,18 @@
     let currentThemeKey = 'cosmic_crystal';
     let currentBorderKey = 'gold';
     let shaderMode = 'unlit';
+    let wireframeOverlay = false;
+    const SHADER_SPECS = {
+      unlit:         {id: 'unlit',         short: '☀ Unlit',      panelTag: '☀ Unlit'},
+      liltoon:       {id: 'liltoon',       short: '🌸 lilToon風',  panelTag: '🌸 lilToon風'},
+      mtoon:         {id: 'mtoon',         short: '🎨 MToonセル',  panelTag: '🎨 MToonセル'},
+      pbr_figure:    {id: 'pbr_figure',    short: '💎 フィギュア', panelTag: '💎 フィギュアPBR'},
+      mv_rim:        {id: 'mv_rim',        short: '🌙 逆光MV',     panelTag: '🌙 逆光MV'},
+      clay:          {id: 'clay',          short: '🗿 クレイ造形', panelTag: '🗿 クレイ造形'},
+      split_compare: {id: 'split_compare', short: '🔀 4種比較',    panelTag: '🔀 4種比較'},
+    };
+    const SINGLE_SHADER_CYCLE = ['unlit', 'liltoon', 'mtoon', 'pbr_figure', 'mv_rim', 'clay'];
+    const SPLIT_COMPARE_SHADERS = ['unlit', 'liltoon', 'mtoon', 'pbr_figure'];
     let mtoonStyleKey = 'stage_sync';
     let mtoonShadeStrength = 1.15;
     let mtoonRimStrength = 1.00;
@@ -2081,6 +2138,196 @@
       };
     })();
 
+    // Shared glossy pastel ribbed Balance Ball textures & geometries (allocated once for all 4 slots!)
+    const sharedBalanceBallAssets = (() => {
+      const cw = 256, ch = 256;
+      const cv = document.createElement('canvas');
+      cv.width = cw; cv.height = ch;
+      const ctx = cv.getContext('2d');
+      const grad = ctx.createLinearGradient(0, 0, 0, ch);
+      grad.addColorStop(0.00, '#ffdff4');
+      grad.addColorStop(0.32, '#eabfff');
+      grad.addColorStop(0.68, '#c5beff');
+      grad.addColorStop(1.00, '#9fa8f5');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, cw, ch);
+      // Subtle gym-ball anti-slip concentric satin ribs
+      for (let i = 1; i < 18; i++) {
+        const y = (i / 18) * ch;
+        ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.22)' : 'rgba(130,110,210,0.12)';
+        ctx.fillRect(0, y - 1.5, cw, 3);
+      }
+      const ballTex = new THREE.CanvasTexture(cv);
+      ballTex.colorSpace = THREE.SRGBColorSpace;
+      ballTex.wrapS = THREE.RepeatWrapping;
+      ballTex.wrapT = THREE.ClampToEdgeWrapping;
+
+      // Soft radial floor contact shadow texture
+      const scv = document.createElement('canvas');
+      scv.width = 128; scv.height = 128;
+      const sctx = scv.getContext('2d');
+      const sgrad = sctx.createRadialGradient(64, 64, 6, 64, 64, 62);
+      sgrad.addColorStop(0.0, 'rgba(32, 18, 68, 0.52)');
+      sgrad.addColorStop(0.55, 'rgba(42, 26, 88, 0.24)');
+      sgrad.addColorStop(1.0, 'rgba(42, 26, 88, 0.0)');
+      sctx.fillStyle = sgrad;
+      sctx.fillRect(0, 0, 128, 128);
+      const shadowTex = new THREE.CanvasTexture(scv);
+
+      const sphereGeo = new THREE.SphereGeometry(1.0, 48, 36);
+      const shadowGeo = new THREE.PlaneGeometry(1.0, 1.0);
+      shadowGeo.rotateX(-Math.PI * 0.5);
+      return {ballTex, shadowTex, sphereGeo, shadowGeo};
+    })();
+
+    class BalanceBallEllipsoidShape extends VRMSpringBoneColliderShape {
+      get type() { return 'balanceBallEllipsoid'; }
+      constructor() {
+        super();
+        this.offset = new THREE.Vector3();
+        this.active = false;
+        this.center = new THREE.Vector3(0, 0.222, 0.15);
+        this.rx = 0.218;
+        this.ry = 0.222;
+        this.rz = 0.218;
+        this.hipsX = 0;
+        this.hipsZ = 0.189;
+        this.zS = 1;
+        this.hasLap = false;
+        this.hipL = new THREE.Vector3();
+        this.kneeL = new THREE.Vector3();
+        this.hipR = new THREE.Vector3();
+        this.kneeR = new THREE.Vector3();
+      }
+      calculateCollision(colliderMatrix, objectPosition, objectRadius, target) {
+        if (!this.active) return Infinity;
+        // Snug 22mm cloth-to-ball clearance (do NOT add hitRadius on top, which previously inflated an invisible +92mm umbrella dome!)
+        const pad = 0.022;
+        const erx = this.rx + pad;
+        const ery = this.ry + pad;
+        const erz = this.rz + pad;
+        const dx = objectPosition.x - this.center.x;
+        const dy = objectPosition.y - this.center.y;
+        const dz = objectPosition.z - this.center.z;
+        const nx = dx / erx;
+        const ny = dy / ery;
+        const nz = dz / erz;
+        const qSq = nx * nx + ny * ny + nz * nz;
+
+        let bestDist = Infinity;
+        let bestNx = 0, bestNy = 1, bestNz = 0;
+
+        if (qSq >= 1.0) {
+          bestDist = (Math.sqrt(qSq) - 1.0) * Math.min(erx, ery, erz);
+        } else {
+          let hx = dx, hz = dz;
+          if (hx * hx + hz * hz < 1e-4) {
+            hx = objectPosition.x - this.hipsX;
+            hz = objectPosition.z - this.hipsZ;
+            if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = 1; }
+          }
+          // Gentle tangential normal (no stiff upward umbrella kick on lower skirt!)
+          const clampedDy = Math.max(0.0, dy);
+          bestNx = hx / (erx * erx);
+          bestNy = clampedDy / (ery * ery);
+          bestNz = hz / (erz * erz);
+          const tLen = Math.hypot(bestNx, bestNy, bestNz);
+          if (tLen > 1e-6) { bestNx /= tLen; bestNy /= tLen; bestNz /= tLen; }
+          else { bestNx = 0; bestNy = 1; bestNz = 0; }
+
+          const ux = bestNx / erx, uy = bestNy / ery, uz = bestNz / erz;
+          const A = ux * ux + uy * uy + uz * uz;
+          const B = nx * ux + ny * uy + nz * uz;
+          const disc = Math.max(0, B * B - A * (qSq - 1.0));
+          bestDist = -((-B + Math.sqrt(disc)) / Math.max(1e-6, A));
+        }
+
+        // Supple bridged lap-slab collision for front garments during Verlet step (no hitRadius inflation!)
+        if (this.hasLap) {
+          const zS = this.zS;
+          const hipMidZ = 0.5 * (this.hipL.z + this.hipR.z);
+          if (zS * (objectPosition.z - hipMidZ) > 0.03) {
+            const lx = this.kneeL.x - this.kneeR.x;
+            const ly = this.kneeL.y - this.kneeR.y;
+            const lz = this.kneeL.z - this.kneeR.z;
+            const lSpan = Math.max(0.08, Math.hypot(lx, ly, lz));
+            const invSpan = 1.0 / lSpan;
+            const proj = (objectPosition.x - this.kneeR.x) * lx * invSpan +
+                         (objectPosition.y - this.kneeR.y) * ly * invSpan +
+                         (objectPosition.z - this.kneeR.z) * lz * invSpan;
+            const u = THREE.MathUtils.clamp(proj * invSpan, 0, 1);
+            const outD = proj < 0 ? -proj : (proj > lSpan ? proj - lSpan : 0);
+            if (outD < 0.155) {
+              const hxU = this.hipR.x + (this.hipL.x - this.hipR.x) * u;
+              const hyU = this.hipR.y + (this.hipL.y - this.hipR.y) * u;
+              const hzU = this.hipR.z + (this.hipL.z - this.hipR.z) * u;
+              const kxU = this.kneeR.x + lx * u;
+              const kyU = this.kneeR.y + ly * u;
+              const kzU = this.kneeR.z + lz * u;
+              const sx = kxU - hxU, sy = kyU - hyU, sz = kzU - hzU;
+              const sLenSq = Math.max(1e-5, sx * sx + sy * sy + sz * sz);
+              const st = THREE.MathUtils.clamp(((objectPosition.x - hxU) * sx + (objectPosition.y - hyU) * sy + (objectPosition.z - hzU) * sz) / sLenSq, 0, 1);
+              const cx = hxU + sx * st, cy = hyU + sy * st, cz = hzU + sz * st;
+              const taperedR = THREE.MathUtils.lerp(0.090, 0.074, st);
+              const lapR = taperedR * (1.0 - THREE.MathUtils.smoothstep(outD, 0.088, 0.150));
+              let ox = objectPosition.x - cx;
+              let oy = objectPosition.y - cy;
+              let oz = objectPosition.z - cz;
+              const d = Math.hypot(ox, oy, oz);
+              const lapDist = d - lapR;
+              if (lapDist < bestDist) {
+                bestDist = lapDist;
+                ox *= 0.20;
+                oy = Math.max(lapR * 0.82, oy);
+                oz = zS * Math.max(0.02, zS * oz);
+                const oLen = Math.hypot(ox, oy, oz);
+                if (oLen > 1e-6) { bestNx = ox / oLen; bestNy = oy / oLen; bestNz = oz / oLen; }
+                else { bestNx = 0; bestNy = 1; bestNz = 0; }
+              }
+            }
+          }
+        }
+
+        if (bestDist < 0) {
+          target.set(bestNx, bestNy, bestNz);
+        }
+        return bestDist;
+      }
+    }
+
+    function createBalanceBallGroup() {
+      const group = new THREE.Group();
+      group.visible = false;
+
+      const ballMat = new THREE.MeshPhysicalMaterial({
+        map: sharedBalanceBallAssets.ballTex,
+        color: 0xffffff,
+        roughness: 0.20,
+        metalness: 0.02,
+        clearcoat: 0.88,
+        clearcoatRoughness: 0.12,
+        sheen: 0.45,
+        sheenColor: new THREE.Color(0xffe6fa),
+        transparent: false,
+        opacity: 1.0,
+        depthWrite: true,
+      });
+      const ballMesh = new THREE.Mesh(sharedBalanceBallAssets.sphereGeo, ballMat);
+      group.add(ballMesh);
+
+      const shadowMat = new THREE.MeshBasicMaterial({
+        map: sharedBalanceBallAssets.shadowTex,
+        transparent: true,
+        depthWrite: false,
+      });
+      const shadowMesh = new THREE.Mesh(sharedBalanceBallAssets.shadowGeo, shadowMat);
+      shadowMesh.position.y = 0.003;
+      group.add(shadowMesh);
+
+      group.userData = {ballMesh, shadowMesh};
+      return group;
+    }
+
     function createSlot(index) {
       // Separate avatar scene from sharedBgStage so additive 3D crystals & floor glow
       // NEVER bleed on top of the character's face, eyes, white hair, or boots!
@@ -2091,6 +2338,12 @@
       const keyLight = new THREE.DirectionalLight(0xfffaf6, 2.48);
       keyLight.position.set(1.6, 2.1, 2.2);
       scene.add(keyLight);
+      const rimLight = new THREE.DirectionalLight(0x8be4ff, 0.0);
+      rimLight.position.set(-1.8, 1.5, -2.4);
+      scene.add(rimLight);
+
+      const ballGroup = createBalanceBallGroup();
+      scene.add(ballGroup);
 
       const camera = new THREE.PerspectiveCamera(28, 16 / 9, 0.03, 65);
       camera.position.set(0, 0.98, 1.05);
@@ -2111,6 +2364,8 @@
         scene,
         hemiLight,
         keyLight,
+        rimLight,
+        ballGroup,
         camera,
         controls,
         avatar,
@@ -2118,6 +2373,9 @@
         _lastProjFov: 28,
         mtoonMap: new Map(),
         unlitMap: new Map(),
+        pbrMap: new Map(),
+        clayMap: new Map(),
+        toonFallbackMap: new Map(),
         motionId: ['moe:gachikoi_peek', 'moe:azato_cheek', 'moe:double_peace', 'moe:idol_turn_wink'][index] || 'moe:gachikoi_peek',
         motionRequest: 0,
         speed: 1.0,
@@ -2382,7 +2640,8 @@
     })();
 
     // =========================================================================
-    // Exact Two-Bone Analytic Soft IK on VRM 1.0 Normalized Humanoid Arm Bones!
+    // Exact Two-Bone Analytic Soft IK on VRM 1.0 Normalized Arm & Leg Bones
+    // + Dynamic Ellipsoid Garment Collider Registration!
     // =========================================================================
     function calibrateNormalizedRig(sl) {
       const vrm = sl.avatar.vrm;
@@ -2392,29 +2651,234 @@
       const nb = n => vrm.humanoid.getNormalizedBoneNode(n);
       nb('hips')?.parent?.updateMatrixWorld(true);
 
-      const calib = {};
+      const hipsNode = nb('hips');
+      const restHipsPos = new THREE.Vector3();
+      if (hipsNode) hipsNode.getWorldPosition(restHipsPos);
+      const calib = {
+        restHipsY: restHipsPos.y > 0.2 ? restHipsPos.y : 0.666,
+        restHipsZ: restHipsPos.z,
+      };
       for (const side of ['left', 'right']) {
         const upper = nb(side + 'UpperArm');
         const lower = nb(side + 'LowerArm');
         const hand = nb(side + 'Hand');
-        if (!upper || !lower || !hand) continue;
-        const pU = new THREE.Vector3(), pL = new THREE.Vector3(), pH = new THREE.Vector3();
-        upper.getWorldPosition(pU);
-        lower.getWorldPosition(pL);
-        hand.getWorldPosition(pH);
-        const L1 = Math.max(0.03, pU.distanceTo(pL));
-        const L2 = Math.max(0.03, pL.distanceTo(pH));
-        const restDirU = upper.worldToLocal(pL.clone()).normalize();
-        const restDirL = lower.worldToLocal(pH.clone()).normalize();
-        calib[side] = {L1, L2, restDirU, restDirL};
+        if (upper && lower && hand) {
+          const pU = new THREE.Vector3(), pL = new THREE.Vector3(), pH = new THREE.Vector3();
+          upper.getWorldPosition(pU);
+          lower.getWorldPosition(pL);
+          hand.getWorldPosition(pH);
+          const L1 = Math.max(0.03, pU.distanceTo(pL));
+          const L2 = Math.max(0.03, pL.distanceTo(pH));
+          const restDirU = upper.worldToLocal(pL.clone()).normalize();
+          const restDirL = lower.worldToLocal(pH.clone()).normalize();
+          calib[side] = {L1, L2, restDirU, restDirL};
+        }
+
+        const uLeg = nb(side + 'UpperLeg');
+        const lLeg = nb(side + 'LowerLeg');
+        const foot = nb(side + 'Foot');
+        if (uLeg && lLeg && foot) {
+          const pUL = new THREE.Vector3(), pLL = new THREE.Vector3(), pF = new THREE.Vector3();
+          uLeg.getWorldPosition(pUL);
+          lLeg.getWorldPosition(pLL);
+          foot.getWorldPosition(pF);
+          const L1 = Math.max(0.05, pUL.distanceTo(pLL));
+          const L2 = Math.max(0.05, pLL.distanceTo(pF));
+          const restDirU = uLeg.worldToLocal(pLL.clone()).normalize();
+          const restDirL = lLeg.worldToLocal(pF.clone()).normalize();
+          calib[side + 'Leg'] = {
+            L1, L2, restDirU, restDirL,
+            ankleH: Math.max(0.065, pF.y),
+          };
+        }
       }
       sl.rigCalib = calib;
+
+      // Attach live deforming Balance Ball ellipsoid collider to skirt, cape, brooch & tail SpringBones
+      const ballShape = new BalanceBallEllipsoidShape();
+      const ballCollider = new VRMSpringBoneCollider(ballShape);
+      ballCollider.name = 'StudioBalanceBallCollider';
+      vrm.scene.add(ballCollider);
+      sl.ballColliderShape = ballShape;
+      sl.ballCollider = ballCollider;
+
+      const sm = sl.avatar.springManager || vrm.springBoneManager;
+      if (sm?.joints) {
+        const ballCg = {colliders: [ballCollider], name: 'StudioBalanceBallColliderGroup'};
+        for (const joint of sm.joints) {
+          const bName = joint.bone?.name || '';
+          if (/^(skirt_|cape_|brooch_|tail_)/.test(bName)) {
+            if (Array.isArray(joint.colliderGroups)) {
+              joint.colliderGroups.push(ballCg);
+            }
+          }
+        }
+        sm._isSortedJointsDirty = true;
+      }
+
+      // Cache raw scene garment bone chains for post-SpringBone zero-penetration surface drape
+      const nodeByName = new Map();
+      vrm.scene.traverse(obj => {
+        if (obj.name && !nodeByName.has(obj.name)) nodeByName.set(obj.name, obj);
+      });
+      const chainSpecs = [
+        ...['210', '240', '270', '300', '330'].map(a => ({
+          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'frontApron', lapRoot: 0.102, lapKnee: 0.090, shinPad: 0.088,
+        })),
+        ...['000', '180'].map(a => ({
+          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'sideSkirt',
+        })),
+        ...['030', '060', '090', '120', '150'].map(a => ({
+          prefix: 'skirt_' + a, count: 3, pad: 0.028, mode: 'ballOnly',
+        })),
+        ...['cape_front_L', 'cape_front_R'].map(p => ({
+          prefix: p, count: 3, pad: 0.046, mode: 'frontApron', lapRoot: 0.110, lapKnee: 0.094, shinPad: 0.096,
+        })),
+        ...['cape_side_L', 'cape_side_R', 'cape_mid_L', 'cape_mid_R', 'cape_back_L', 'cape_back_R'].map(p => ({
+          prefix: p, count: 3, pad: 0.044, mode: 'ballOnly',
+        })),
+        ...['brooch_L', 'brooch_R', 'brooch_C'].map(p => ({
+          prefix: p, count: 3, pad: 0.036, mode: 'frontApron', lapRoot: 0.108, lapKnee: 0.092, shinPad: 0.094,
+        })),
+        {prefix: 'tail', count: 4, pad: 0.048, mode: 'ballOnly'},
+      ];
+      const garmentChains = [];
+      for (const spec of chainSpecs) {
+        const segs = [];
+        for (let idx = 1; idx <= spec.count; idx++) {
+          const bone = nodeByName.get(`${spec.prefix}_${idx}`);
+          const child = nodeByName.get(`${spec.prefix}_${idx + 1}`) ||
+                        nodeByName.get(`${spec.prefix}_${idx}_CharakitEnd`) ||
+                        bone?.children?.[0] || null;
+          if (bone && child) {
+            segs.push({
+              bone,
+              child,
+              restQuat: bone.quaternion.clone(),
+              springQuat: bone.quaternion.clone(),
+            });
+          }
+        }
+        if (segs.length > 0) {
+          garmentChains.push({
+            segs,
+            pad: spec.pad,
+            mode: spec.mode,
+            lapRoot: spec.lapRoot || 0.090,
+            lapKnee: spec.lapKnee || 0.066,
+            shinPad: spec.shinPad || 0.072,
+          });
+        }
+      }
+      sl.garmentChains = garmentChains;
     }
 
     const _vS = new THREE.Vector3(), _vD = new THREE.Vector3(), _vU = new THREE.Vector3();
     const _vP = new THREE.Vector3(), _vW = new THREE.Vector3(), _vElbow = new THREE.Vector3();
     const _vWrist = new THREE.Vector3(), _vLocal = new THREE.Vector3();
     const _qPar = new THREE.Quaternion(), _qParInv = new THREE.Quaternion();
+    const _vHinge = new THREE.Vector3(), _vBoneDir = new THREE.Vector3(), _vCurHinge = new THREE.Vector3();
+    const _vFootX = new THREE.Vector3(), _vFootY = new THREE.Vector3(), _vFootZ = new THREE.Vector3();
+    const _mFootBasis = new THREE.Matrix4(), _qSwing = new THREE.Quaternion();
+    const _qTwistW = new THREE.Quaternion(), _qTargetW = new THREE.Quaternion(), _qFootPitch = new THREE.Quaternion();
+    const _UNIT_X = new THREE.Vector3(1, 0, 0);
+
+    function solveLegSoftIK(sl, side, ankleTargetWorld, kneePoleWorld, toePitchDeg = 0, toeYawOffsetDeg = 0) {
+      const vrm = sl.avatar.vrm;
+      const cal = sl.rigCalib?.[side + 'Leg'];
+      if (!vrm?.humanoid || !cal) return;
+      const nb = n => vrm.humanoid.getNormalizedBoneNode(n);
+      const upper = nb(side + 'UpperLeg');
+      const lower = nb(side + 'LowerLeg');
+      const foot = nb(side + 'Foot');
+      if (!upper || !lower) return;
+
+      const zS = modelFrontZSign;
+      upper.quaternion.identity();
+      lower.quaternion.identity();
+      if (foot) foot.quaternion.identity();
+      upper.updateWorldMatrix(true, false);
+      _vS.setFromMatrixPosition(upper.matrixWorld);
+
+      _vD.subVectors(ankleTargetWorld, _vS);
+      const rawDist = Math.max(1e-5, _vD.length());
+      const {L1, L2, restDirU, restDirL} = cal;
+      const clampedDist = THREE.MathUtils.clamp(rawDist, Math.abs(L1 - L2) + 0.018, (L1 + L2) * 0.965);
+
+      const cosAlpha = THREE.MathUtils.clamp((L1 * L1 + clampedDist * clampedDist - L2 * L2) / (2 * L1 * clampedDist), -1, 1);
+      const sinAlpha = Math.sqrt(Math.max(0, 1 - cosAlpha * cosAlpha));
+
+      _vU.copy(_vD).divideScalar(rawDist);
+      _vP.subVectors(kneePoleWorld, _vS);
+      _vW.copy(_vP).addScaledVector(_vU, -_vP.dot(_vU));
+      if (_vW.lengthSq() < 1e-6) _vW.set(0, 0, zS);
+      else _vW.normalize();
+
+      // Singularity-free anatomical knee hinge axis (+X in VRM normalized bone space)
+      _vHinge.crossVectors(_vW, _vU).multiplyScalar(zS);
+      if (_vHinge.lengthSq() < 1e-6) _vHinge.set(1, 0, 0);
+      else _vHinge.normalize();
+
+      _vElbow.copy(_vS).addScaledVector(_vU, L1 * cosAlpha).addScaledVector(_vW, L1 * sinAlpha);
+      _vWrist.copy(_vS).addScaledVector(_vU, clampedDist);
+
+      // 1) UpperLeg: align bone axis to (Knee - Hip) AND lock local +X hinge axis to _vHinge (zero femur twist!)
+      _qPar.setFromRotationMatrix(upper.parent.matrixWorld);
+      _qParInv.copy(_qPar).invert();
+      _vBoneDir.subVectors(_vElbow, _vS).normalize();
+      _vLocal.copy(_vBoneDir).applyQuaternion(_qParInv);
+      _qSwing.setFromUnitVectors(restDirU, _vLocal);
+      _qTargetW.multiplyQuaternions(_qPar, _qSwing);
+      _vCurHinge.set(1, 0, 0).applyQuaternion(_qTargetW);
+      _vCurHinge.addScaledVector(_vBoneDir, -_vCurHinge.dot(_vBoneDir));
+      if (_vCurHinge.lengthSq() > 1e-6) {
+        _vCurHinge.normalize();
+        _qTwistW.setFromUnitVectors(_vCurHinge, _vHinge);
+        _qTargetW.premultiply(_qTwistW);
+      }
+      upper.quaternion.multiplyQuaternions(_qParInv, _qTargetW);
+      upper.updateWorldMatrix(false, false);
+
+      // 2) LowerLeg: align bone axis to (Ankle - Knee) AND lock local +X hinge axis to _vHinge (zero shin twist!)
+      _qPar.setFromRotationMatrix(upper.matrixWorld);
+      _qParInv.copy(_qPar).invert();
+      _vBoneDir.subVectors(_vWrist, _vElbow).normalize();
+      _vLocal.copy(_vBoneDir).applyQuaternion(_qParInv);
+      _qSwing.setFromUnitVectors(restDirL, _vLocal);
+      _qTargetW.multiplyQuaternions(_qPar, _qSwing);
+      _vCurHinge.set(1, 0, 0).applyQuaternion(_qTargetW);
+      _vCurHinge.addScaledVector(_vBoneDir, -_vCurHinge.dot(_vBoneDir));
+      if (_vCurHinge.lengthSq() > 1e-6) {
+        _vCurHinge.normalize();
+        _qTwistW.setFromUnitVectors(_vCurHinge, _vHinge);
+        _qTargetW.premultiply(_qTwistW);
+      }
+      lower.quaternion.multiplyQuaternions(_qParInv, _qTargetW);
+      lower.updateWorldMatrix(false, false);
+
+      // 3) Foot: level sole in world space aligned with knee sagittal plane + clean plantarflexion pitch
+      if (foot) {
+        _qPar.setFromRotationMatrix(lower.matrixWorld);
+        _qParInv.copy(_qPar).invert();
+        _vFootX.set(_vHinge.x, 0, _vHinge.z);
+        if (_vFootX.lengthSq() < 1e-5) _vFootX.set(1, 0, 0);
+        else _vFootX.normalize();
+        if (Math.abs(toeYawOffsetDeg) > 1e-3) {
+          _vFootY.set(0, 1, 0);
+          _vFootX.applyAxisAngle(_vFootY, toeYawOffsetDeg * DEG);
+        }
+        _vFootY.set(0, 1, 0);
+        _vFootZ.crossVectors(_vFootX, _vFootY).normalize();
+        _mFootBasis.makeBasis(_vFootX, _vFootY, _vFootZ);
+        _qTargetW.setFromRotationMatrix(_mFootBasis);
+        if (Math.abs(toePitchDeg) > 1e-3) {
+          _qFootPitch.setFromAxisAngle(_UNIT_X, zS * toePitchDeg * DEG);
+          _qTargetW.multiply(_qFootPitch);
+        }
+        foot.quaternion.multiplyQuaternions(_qParInv, _qTargetW);
+        foot.updateWorldMatrix(false, false);
+      }
+    }
 
     function solveArmSoftIK(sl, side, targetWorld, poleWorld) {
       const vrm = sl.avatar.vrm;
@@ -2529,6 +2993,9 @@
       const nb = name => vrm.humanoid.getNormalizedBoneNode(name);
       const mode = sl.motionId;
       const zS = modelFrontZSign;
+      const isBallMode = mode.startsWith('moe:ball_');
+      if (sl.ballGroup) sl.ballGroup.visible = isBallMode;
+      if (sl.ballColliderShape) sl.ballColliderShape.active = isBallMode;
 
       // Reset synchronized choreography cue
       sl.choreoState.emo = 'neutral';
@@ -2540,8 +3007,9 @@
       sl.choreoState.vowel2 = null;
       sl.choreoState.vowel2W = 0;
 
-      // Cute pigeon-toed (uchimata) & gentle knee bounce helper (preserves rest hips Y height!)
+      // Cute pigeon-toed (uchimata) & gentle knee bounce helper with natural A-stance so chunky boots touch cleanly without overlapping!
       const setCuteLegs = (uchimataDeg, kneeL, kneeR, hipDropY, hipSwayX = 0, hipYaw = 0) => {
+        const stanceRad = (1.4 + Math.max(0, uchimataDeg) * 0.34) * DEG;
         if (nb('hips')) {
           nb('hips').position.y -= hipDropY;
           nb('hips').position.x += hipSwayX;
@@ -2550,15 +3018,23 @@
         if (nb('leftUpperLeg')) {
           nb('leftUpperLeg').rotation.y = -uchimataDeg * DEG;
           nb('leftUpperLeg').rotation.x = zS * kneeL * 0.52 * DEG;
+          nb('leftUpperLeg').rotation.z = +stanceRad;
         }
         if (nb('rightUpperLeg')) {
           nb('rightUpperLeg').rotation.y = +uchimataDeg * DEG;
           nb('rightUpperLeg').rotation.x = zS * kneeR * 0.52 * DEG;
+          nb('rightUpperLeg').rotation.z = -stanceRad;
         }
         if (nb('leftLowerLeg'))  nb('leftLowerLeg').rotation.x  = -zS * kneeL * DEG;
         if (nb('rightLowerLeg')) nb('rightLowerLeg').rotation.x = -zS * kneeR * DEG;
-        if (nb('leftFoot'))      nb('leftFoot').rotation.x      = zS * kneeL * 0.45 * DEG;
-        if (nb('rightFoot'))     nb('rightFoot').rotation.x     = zS * kneeR * 0.45 * DEG;
+        if (nb('leftFoot')) {
+          nb('leftFoot').rotation.x = zS * kneeL * 0.45 * DEG;
+          nb('leftFoot').rotation.z = -stanceRad * 0.65;
+        }
+        if (nb('rightFoot')) {
+          nb('rightFoot').rotation.x = zS * kneeR * 0.45 * DEG;
+          nb('rightFoot').rotation.z = +stanceRad * 0.65;
+        }
       };
 
       const updateTorsoAndReadFrames = () => {
@@ -3513,6 +3989,447 @@
       }
 
       // =======================================================================
+      // 🟣 Elastic Squishy Balance-Ball "バインバイン" Bouncing Motions (5種)!
+      // True anatomical zero-twist 2-bone Leg IK, sit-bone crown calibration,
+      // and live ellipsoid collider + garment surface drape (zero skirt/cape clipping)!
+      // =======================================================================
+      if (mode.startsWith('moe:ball_')) {
+        const restHipsY = sl.rigCalib?.restHipsY || 0.666;
+        const baseHipsZ = sl.rigCalib?.restHipsZ ?? (0.189 * zS);
+        const ankleBaseY = sl.rigCalib?.leftLeg?.ankleH || 0.0865;
+        const ballRv = 0.222; // 44.4cm tall pastel gym ball so thighs slope gently downward from hips to knees
+        const ballRh = 0.218; // 43.6cm wide round ball so knees & skirt drape cleanly around it
+
+        const setBalanceBallBody = ({
+          squash = 0.14,       // 0.0 (uncompressed/stretched) .. 0.30 (deep squishy bottom impact)
+          airHop = 0.0,        // Extra upward airborne hop at peak rebound (m)
+          swayX = 0.0,         // Lateral bounce shift (m)
+          rockZ = 0.0,         // World Z bounce shift (m)
+          hipYawDeg = 0,
+          hipRollDeg = 0,
+          hipPitchDeg = 0,     // + leans pelvis forward toward camera
+          torsoLeanDeg = 6,    // + leans spine/chest forward toward camera
+          torsoSideDeg = 0,
+          headPitchDeg = 2,    // + nods chin down, - lifts chin up (uwamezukai!)
+          headYawDeg = 0,
+          headTiltDeg = 0,
+          stanceX = 0.136,     // Half-width of seated ankle stance (m)
+          footLiftL = 0.0,     // Vertical lift of left boot sole above floor (m)
+          footLiftR = 0.0,     // Vertical lift of right boot sole above floor (m)
+          footFwdL = 0.0,      // Extra forward kick of left boot (m)
+          footFwdR = 0.0,      // Extra forward kick of right boot (m)
+          footOutL = 0.0,      // Extra lateral spread of left boot (m)
+          footOutR = 0.0,      // Extra lateral spread of right boot (m)
+          kneeSpread = 0.146,  // Half-width of forward knee pole (m)
+          toePitchLDeg = null, // null = auto (flat on floor, cute pointed toes in air)
+          toePitchRDeg = null,
+          toeYawLDeg = 6,      // Gentle natural outward turn of seated boots
+          toeYawRDeg = -6,
+        }) => {
+          // 1) Deform & position the 3D Balance Ball locked cleanly on floor y=0!
+          const sy = Math.max(0.66, 1.0 - squash);
+          const sxz = 1.0 + squash * 0.50; // Volume-preserving rubber bulge!
+          const rHoriz = ballRh * sxz;
+          const rVert = ballRv * sy;
+          const ballTopY = 2.0 * rVert;
+          const ballX = swayX * 0.74;
+          const ballZ = baseHipsZ - zS * 0.036 + rockZ * 0.68;
+
+          if (sl.ballGroup) {
+            const {ballMesh, shadowMesh} = sl.ballGroup.userData;
+            ballMesh.scale.set(rHoriz, rVert, rHoriz);
+            ballMesh.position.set(ballX, rVert, ballZ);
+            ballMesh.rotation.set((rockZ / ballRh) * 0.85, 0, -(swayX / ballRh) * 0.85);
+
+            const shSize = (rHoriz * 2.28) * (1.0 - Math.min(0.24, airHop * 2.2));
+            shadowMesh.scale.set(shSize, 1.0, shSize);
+            shadowMesh.position.set(ballX, 0.003, ballZ);
+          }
+
+          // Sync live ellipsoid parameters for SpringBone collider & post-SpringBone garment drape!
+          if (sl.ballColliderShape) {
+            sl.ballColliderShape.active = true;
+            sl.ballColliderShape.center.set(ballX, rVert, ballZ);
+            sl.ballColliderShape.rx = rHoriz;
+            sl.ballColliderShape.ry = rVert;
+            sl.ballColliderShape.rz = rHoriz;
+            sl.ballColliderShape.hipsX = swayX;
+            sl.ballColliderShape.hipsZ = baseHipsZ + rockZ;
+          }
+          if (sl.ballCollider) {
+            sl.ballCollider.position.set(ballX, rVert, ballZ);
+            sl.ballCollider.updateWorldMatrix(false, false);
+          }
+
+          // 2) Seat glutes right on the ball crown (pelvis seat base is 0.101m below hips bone!)
+          const targetHipsY = ballTopY + 0.098 + airHop;
+          const hipDrop = restHipsY - targetHipsY;
+
+          if (nb('hips')) {
+            nb('hips').position.y -= hipDrop;
+            nb('hips').position.x += swayX;
+            nb('hips').position.z += rockZ;
+            nb('hips').rotation.set(zS * hipPitchDeg * DEG, hipYawDeg * DEG, hipRollDeg * DEG);
+          }
+          if (nb('spine')) {
+            nb('spine').rotation.set(zS * torsoLeanDeg * 0.45 * DEG, hipYawDeg * 0.18 * DEG, torsoSideDeg * 0.45 * DEG);
+          }
+          if (nb('chest')) {
+            nb('chest').rotation.set(zS * torsoLeanDeg * 0.55 * DEG, hipYawDeg * 0.15 * DEG, torsoSideDeg * 0.55 * DEG);
+          }
+          if (nb('neck')) {
+            nb('neck').rotation.set(zS * headPitchDeg * 0.38 * DEG, headYawDeg * 0.38 * DEG, headTiltDeg * 0.38 * DEG);
+          }
+          if (nb('head')) {
+            nb('head').rotation.set(zS * headPitchDeg * 0.62 * DEG, headYawDeg * 0.62 * DEG, headTiltDeg * 0.62 * DEG);
+          }
+
+          updateTorsoAndReadFrames();
+
+          // 3) True anatomical 2-bone Leg IK: knees point cleanly forward-outward in front of the ball,
+          //    shins drop naturally to the floor, and boot heels strictly clear the ball front surface!
+          const sideSignL = +zS; // Character's left in world X (+X when facing +Z)
+          const sideSignR = -zS;
+          const ankXL = swayX * 0.42 + sideSignL * (stanceX + footOutL);
+          const ankXR = swayX * 0.42 + sideSignR * (stanceX + footOutR);
+
+          const dxBallL = Math.abs(ankXL - ballX);
+          const dxBallR = Math.abs(ankXR - ballX);
+          const ballFrontL = dxBallL < rHoriz ? Math.sqrt(rHoriz * rHoriz - dxBallL * dxBallL) : rHoriz * 0.55;
+          const ballFrontR = dxBallR < rHoriz ? Math.sqrt(rHoriz * rHoriz - dxBallR * dxBallR) : rHoriz * 0.55;
+
+          const ankZL = ballZ + zS * (Math.max(rHoriz * 0.76, ballFrontL) + 0.105 + footFwdL);
+          const ankZR = ballZ + zS * (Math.max(rHoriz * 0.76, ballFrontR) + 0.105 + footFwdR);
+          const ankYL = ankleBaseY + 0.003 + Math.max(0, footLiftL);
+          const ankYR = ankleBaseY + 0.003 + Math.max(0, footLiftR);
+
+          const autoPitchL = toePitchLDeg !== null ? toePitchLDeg : Math.min(28, Math.max(0, footLiftL) * 260);
+          const autoPitchR = toePitchRDeg !== null ? toePitchRDeg : Math.min(28, Math.max(0, footLiftR) * 260);
+
+          _tgtL.set(ankXL, ankYL, ankZL);
+          _tgtR.set(ankXR, ankYR, ankZR);
+          _poleL.set(swayX + sideSignL * (kneeSpread + footOutL * 0.7), targetHipsY + 0.14, ballZ + zS * 0.56);
+          _poleR.set(swayX + sideSignR * (kneeSpread + footOutR * 0.7), targetHipsY + 0.14, ballZ + zS * 0.56);
+
+          solveLegSoftIK(sl, 'left', _tgtL, _poleL, autoPitchL, toeYawLDeg);
+          solveLegSoftIK(sl, 'right', _tgtR, _poleR, autoPitchR, toeYawRDeg);
+
+          if (sl.ballColliderShape) {
+            const uL = nb('leftUpperLeg'), kL = nb('leftLowerLeg');
+            const uR = nb('rightUpperLeg'), kR = nb('rightLowerLeg');
+            if (uL && kL && uR && kR) {
+              uL.updateWorldMatrix(true, false);
+              kL.updateWorldMatrix(true, false);
+              uR.updateWorldMatrix(true, false);
+              kR.updateWorldMatrix(true, false);
+              sl.ballColliderShape.zS = zS;
+              sl.ballColliderShape.hasLap = true;
+              sl.ballColliderShape.hipL.setFromMatrixPosition(uL.matrixWorld);
+              sl.ballColliderShape.kneeL.setFromMatrixPosition(kL.matrixWorld);
+              sl.ballColliderShape.hipR.setFromMatrixPosition(uR.matrixWorld);
+              sl.ballColliderShape.kneeR.setFromMatrixPosition(kR.matrixWorld);
+            }
+          }
+        };
+
+        if (mode === 'moe:ball_boing_peace') {
+          // 🟣 1. ぽよんぽよん王道バインバイン＆ダブルピース (4.4s energetic boing loop!)
+          const cyc = (t % 4.4) / 4.4;
+          const ph = cyc * Math.PI * 8;
+          const rawDown = 0.5 + 0.5 * Math.cos(ph);
+          const impact = Math.pow(rawDown, 1.45);
+          const upPeak = Math.pow(1.0 - rawDown, 1.25);
+          const peacePop = THREE.MathUtils.smoothstep(cyc, 0.44, 0.54) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.86, 0.96));
+          const sway = Math.sin(cyc * Math.PI * 4) * 0.022;
+
+          setBalanceBallBody({
+            squash: 0.05 + impact * 0.23,
+            airHop: upPeak * (0.024 + peacePop * 0.016),
+            swayX: sway,
+            rockZ: zS * Math.sin(ph) * 0.012,
+            hipRollDeg: Math.sin(cyc * Math.PI * 4) * 3.5,
+            torsoLeanDeg: 5 + impact * 5 - upPeak * 2.5,
+            torsoSideDeg: Math.sin(cyc * Math.PI * 4) * 4.0,
+            headPitchDeg: 2 + impact * 4 - upPeak * 3,
+            headTiltDeg: Math.sin(cyc * Math.PI * 2) * 7.5 + peacePop * 6.0,
+            headYawDeg: Math.sin(cyc * Math.PI * 4) * 5.0,
+            stanceX: 0.136,
+            kneeSpread: 0.148 + impact * 0.012,
+            footLiftL: upPeak * (0.032 + peacePop * 0.020),
+            footLiftR: upPeak * (0.032 + peacePop * 0.020),
+            footFwdL: upPeak * 0.022,
+            footFwdR: upPeak * 0.022,
+          });
+
+          const lapL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, +0.168).add(tv3(0, -0.18 - impact * 0.025, 0));
+          const lapR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, -0.168).add(tv3(0, -0.18 - impact * 0.025, 0));
+          const vPeaceL = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.13).addScaledVector(_rightDir, +0.145).add(tv3(0, -0.02 + upPeak * 0.025, 0));
+          const vPeaceR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.13).addScaledVector(_rightDir, -0.145).add(tv3(0, -0.02 + upPeak * 0.025, 0));
+          _tgtL.lerpVectors(lapL, vPeaceL, peacePop);
+          _tgtR.lerpVectors(lapR, vPeaceR, peacePop);
+          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.22).add(tv3(0, -0.18, -0.06 * zS));
+          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.22).add(tv3(0, -0.18, -0.06 * zS));
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          applyDaintyFingers(nb, 34 * DEG, 34 * DEG, peacePop > 0.5 ? 'peace' : false);
+
+          if (peacePop > 0.55) {
+            sl.choreoState.emo = 'blinkRight'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.emo2 = 'relaxed';   sl.choreoState.emo2W = 0.55;
+            sl.choreoState.vowel = 'aa';       sl.choreoState.vowelW = 0.55 + 0.30 * upPeak;
+          } else {
+            sl.choreoState.emo = upPeak > 0.72 ? 'happy' : 'relaxed';
+            sl.choreoState.emoW = upPeak > 0.72 ? 0.95 : 0.88;
+            sl.choreoState.vowel = 'oh';
+            sl.choreoState.vowelW = 0.54 + 0.36 * upPeak;
+          }
+          return;
+        }
+
+        if (mode === 'moe:ball_side_hip_boing') {
+          // 🟣 2. 左右おしりぷるんバインバイン＆ほっぺハート (4.0s alternating L/R hip-roll bounce!)
+          const cyc = (t % 4.0) / 4.0;
+          const ph = cyc * Math.PI * 8;
+          const rawDown = 0.5 + 0.5 * Math.cos(ph);
+          const impact = Math.pow(rawDown, 1.4);
+          const upPeak = 1.0 - rawDown;
+          const sideWave = Math.sin(cyc * Math.PI * 4);
+          const kickL = Math.max(0, -sideWave) * upPeak;
+          const kickR = Math.max(0, +sideWave) * upPeak;
+
+          setBalanceBallBody({
+            squash: 0.06 + impact * 0.22,
+            airHop: upPeak * 0.018,
+            swayX: sideWave * 0.058 * zS,
+            rockZ: zS * Math.cos(cyc * Math.PI * 4) * 0.014,
+            hipYawDeg: sideWave * 8.5,
+            hipRollDeg: -sideWave * 7.5,
+            torsoLeanDeg: 5 + impact * 4,
+            torsoSideDeg: sideWave * 8.5,
+            headPitchDeg: 2 + impact * 3,
+            headTiltDeg: sideWave * 11.5,
+            headYawDeg: -sideWave * 6.5,
+            stanceX: 0.136,
+            kneeSpread: 0.145,
+            footLiftL: upPeak * 0.014 + kickL * 0.072,
+            footLiftR: upPeak * 0.014 + kickR * 0.072,
+            footFwdL: kickL * 0.068,
+            footFwdR: kickR * 0.068,
+            footOutL: kickL * 0.022,
+            footOutR: kickR * 0.022,
+          });
+
+          const pulse = 0.008 * impact;
+          _tgtL.copy(_headPos).addScaledVector(_fwdDir, 0.095).addScaledVector(_rightDir, +(0.082 + pulse)).addScaledVector(_upDir, -0.042);
+          _tgtR.copy(_headPos).addScaledVector(_fwdDir, 0.095).addScaledVector(_rightDir, -(0.082 + pulse)).addScaledVector(_upDir, -0.042);
+          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.22).add(tv3(0, -0.14, 0.05 * zS));
+          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.22).add(tv3(0, -0.14, 0.05 * zS));
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = -24 * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = +24 * DEG;
+          applyDaintyFingers(nb, 42 * DEG, 42 * DEG, 'heart');
+
+          if (cyc > 0.68 && cyc < 0.92) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh';  sl.choreoState.vowelW = 0.85;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.92;
+            sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.56 + 0.28 * upPeak;
+          }
+          return;
+        }
+
+        if (mode === 'moe:ball_hyper_jump_banzai') {
+          // 🟣 3. 大ジャンプびよーん！全力万歳バインバイン (4.2s 1-2-SUPER BOING! loop!)
+          const cyc = (t % 4.2) / 4.2;
+          let squash = 0.12, airHop = 0.0, banzai = 0.0, legV = 0.0, subUp = 0.0;
+          if (cyc < 0.52) {
+            const subPh = (cyc / 0.52) * Math.PI * 4;
+            const d = 0.5 + 0.5 * Math.cos(subPh);
+            squash = 0.06 + Math.pow(d, 1.4) * 0.20;
+            subUp = 1.0 - d;
+            airHop = subUp * 0.018;
+          } else if (cyc < 0.64) {
+            const u = (cyc - 0.52) / 0.12;
+            const c = Math.sin(u * Math.PI * 0.5);
+            squash = 0.07 + c * 0.24;
+          } else if (cyc < 0.90) {
+            const u = (cyc - 0.64) / 0.26;
+            const arc = Math.sin(u * Math.PI);
+            squash = 0.04 + (1.0 - arc) * 0.07 - arc * 0.03;
+            airHop = arc * 0.065;
+            banzai = arc;
+            legV = arc;
+          } else {
+            const u = (cyc - 0.90) / 0.10;
+            const land = Math.sin(u * Math.PI);
+            squash = 0.06 + land * 0.22;
+          }
+
+          setBalanceBallBody({
+            squash,
+            airHop,
+            swayX: Math.sin(cyc * Math.PI * 2) * 0.015,
+            rockZ: -zS * banzai * 0.015,
+            hipPitchDeg: 2 - banzai * 5,
+            torsoLeanDeg: 5 + squash * 18 - banzai * 9,
+            headPitchDeg: 3 + squash * 8 - banzai * 9,
+            headTiltDeg: Math.sin(cyc * Math.PI * 2) * 6.0,
+            stanceX: 0.138,
+            kneeSpread: 0.150 + legV * 0.042,
+            footLiftL: subUp * 0.022 + legV * 0.105,
+            footLiftR: subUp * 0.022 + legV * 0.105,
+            footFwdL: legV * 0.085,
+            footFwdR: legV * 0.085,
+            footOutL: legV * 0.045,
+            footOutR: legV * 0.045,
+          });
+
+          const pushL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, +0.175).add(tv3(0, -0.20, 0));
+          const pushR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, -0.175).add(tv3(0, -0.20, 0));
+          const highL = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, +0.165).add(tv3(0, +0.135, 0));
+          const highR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.06).addScaledVector(_rightDir, -0.165).add(tv3(0, +0.135, 0));
+          _tgtL.lerpVectors(pushL, highL, banzai);
+          _tgtR.lerpVectors(pushR, highR, banzai);
+          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.24).add(tv3(0, -0.10, -0.08 * zS));
+          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.24).add(tv3(0, -0.10, -0.08 * zS));
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          applyDaintyFingers(nb, (36 - banzai * 24) * DEG, (36 - banzai * 24) * DEG, false);
+
+          if (banzai > 0.25) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'aa';  sl.choreoState.vowelW = 0.88;
+          } else if (cyc >= 0.52 && cyc < 0.64) {
+            sl.choreoState.emo = 'surprised'; sl.choreoState.emoW = 0.42;
+            sl.choreoState.vowel = 'ou';      sl.choreoState.vowelW = 0.65;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.90;
+            sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.62;
+          }
+          return;
+        }
+
+        if (mode === 'moe:ball_hug_lean_gachikoi') {
+          // 🟣 4. 前傾ぎゅむっ♡ ゼロ距離上目遣いバインバイン (5.2s warm forward-lean uwamezukai bounce!)
+          const cyc = (t % 5.2) / 5.2;
+          const ph = cyc * Math.PI * 8;
+          const rawDown = 0.5 + 0.5 * Math.cos(ph);
+          const impact = Math.pow(rawDown, 1.35);
+          const upPeak = 1.0 - rawDown;
+          const leanWave = 0.55 + 0.45 * Math.sin(cyc * Math.PI * 2);
+
+          setBalanceBallBody({
+            squash: 0.06 + impact * 0.19,
+            airHop: upPeak * 0.014,
+            swayX: Math.sin(cyc * Math.PI * 2) * 0.022,
+            rockZ: zS * (0.024 * leanWave + impact * 0.010),
+            hipPitchDeg: 1.0 + leanWave * 1.5,
+            torsoLeanDeg: 16 + leanWave * 9 + impact * 3,
+            torsoSideDeg: Math.sin(cyc * Math.PI * 2) * 3.5,
+            headPitchDeg: -(13 + leanWave * 7) + impact * 2.5,
+            headTiltDeg: 7.5 * Math.sin(cyc * Math.PI * 2) + 3.0,
+            headYawDeg: 4.5 * Math.cos(cyc * Math.PI * 2),
+            stanceX: 0.128,
+            kneeSpread: 0.124,
+            footLiftL: upPeak * 0.016,
+            footLiftR: upPeak * 0.016,
+            toeYawLDeg: 2,
+            toeYawRDeg: -2,
+          });
+
+          const pawBob = upPeak * 0.018;
+          _tgtL.copy(_chestPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, +0.058).add(tv3(0, 0.015 + pawBob, 0));
+          _tgtR.copy(_chestPos).addScaledVector(_fwdDir, 0.145).addScaledVector(_rightDir, -0.058).add(tv3(0, 0.015 + pawBob, 0));
+          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.19).add(tv3(0, -0.18, -0.05 * zS));
+          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.19).add(tv3(0, -0.18, -0.05 * zS));
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          if (nb('leftHand'))  nb('leftHand').rotation.z  = +36 * DEG;
+          if (nb('rightHand')) nb('rightHand').rotation.z = -36 * DEG;
+          applyDaintyFingers(nb, 48 * DEG, 48 * DEG, false);
+
+          if (cyc > 0.66 && cyc < 0.84) {
+            sl.choreoState.emo = 'blinkLeft'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'oh';      sl.choreoState.vowelW = 0.78;
+          } else if (cyc > 0.30 && cyc < 0.52) {
+            sl.choreoState.emo = 'jitome';   sl.choreoState.emoW = 0.42;
+            sl.choreoState.emo2 = 'relaxed'; sl.choreoState.emo2W = 0.68;
+            sl.choreoState.vowel = 'oh';     sl.choreoState.vowelW = 0.62 + 0.22 * upPeak;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.92;
+            sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.58 + 0.25 * upPeak;
+          }
+          return;
+        }
+
+        if (mode === 'moe:ball_wobble_panic') {
+          // 🟣 5. おっとっと！？ぷるぷるバランス崩し＆照れ笑い (5.6s slapstick cute story loop!)
+          const cyc = (t % 5.6) / 5.6;
+          const panicEnv = THREE.MathUtils.smoothstep(cyc, 0.36, 0.45) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.70, 0.78));
+          const reliefEnv = THREE.MathUtils.smoothstep(cyc, 0.74, 0.82) * (1.0 - THREE.MathUtils.smoothstep(cyc, 0.93, 1.00));
+
+          const ph = cyc * Math.PI * 10;
+          const rawDown = 0.5 + 0.5 * Math.cos(ph);
+          const impact = Math.pow(rawDown, 1.35) * (1.0 - panicEnv * 0.45);
+          const upPeak = (1.0 - rawDown) * (1.0 - panicEnv * 0.45);
+          const wobble = Math.sin(t * 15.5) * panicEnv;
+          const bigTilt = (Math.sin((cyc - 0.36) * Math.PI * 3.2) * 0.75 + 0.35) * panicEnv;
+
+          setBalanceBallBody({
+            squash: 0.07 + impact * 0.20 + Math.abs(wobble) * 0.06,
+            airHop: upPeak * 0.016,
+            swayX: (bigTilt * 0.072 + wobble * 0.016) * zS,
+            rockZ: zS * wobble * 0.014,
+            hipYawDeg: bigTilt * 7.5 + wobble * 4.5,
+            hipRollDeg: -bigTilt * 9.5 - wobble * 3.5,
+            torsoLeanDeg: 6 + impact * 4 - panicEnv * 2,
+            torsoSideDeg: bigTilt * 11.5 + wobble * 5.0,
+            headPitchDeg: 2 - panicEnv * 5 + reliefEnv * 4,
+            headTiltDeg: bigTilt * 12.0 - reliefEnv * 10.0 + wobble * 4.0,
+            headYawDeg: wobble * 6.5,
+            stanceX: 0.136,
+            kneeSpread: 0.148 + panicEnv * 0.025,
+            footLiftL: upPeak * 0.018 + panicEnv * (0.085 + Math.max(0, wobble) * 0.030),
+            footLiftR: upPeak * 0.018,
+            footFwdL: panicEnv * 0.065,
+            footOutL: panicEnv * 0.048,
+          });
+
+          const lapL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, +0.168).add(tv3(0, -0.18, 0));
+          const lapR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.15).addScaledVector(_rightDir, -0.168).add(tv3(0, -0.18, 0));
+          const flapY = Math.sin(t * 18.0) * 0.055;
+          const panL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.09).addScaledVector(_rightDir, +0.28).add(tv3(0, 0.07 + flapY, 0));
+          const panR = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.09).addScaledVector(_rightDir, -0.28).add(tv3(0, 0.07 - flapY, 0));
+          const shyR = cloneTmp(_headPos).addScaledVector(_fwdDir, 0.10).addScaledVector(_rightDir, -0.088).add(tv3(0, -0.045, 0));
+          const shyL = cloneTmp(_chestPos).addScaledVector(_fwdDir, 0.14).addScaledVector(_rightDir, +0.08).add(tv3(0, -0.06, 0));
+
+          _tgtL.copy(lapL).lerp(panL, panicEnv).lerp(shyL, reliefEnv);
+          _tgtR.copy(lapR).lerp(panR, panicEnv).lerp(shyR, reliefEnv);
+          _poleL.copy(_chestPos).addScaledVector(_rightDir, +0.24).add(tv3(0, -0.16, -0.06 * zS));
+          _poleR.copy(_chestPos).addScaledVector(_rightDir, -0.24).add(tv3(0, -0.16, -0.06 * zS));
+          solveArmSoftIK(sl, 'left', _tgtL, _poleL);
+          solveArmSoftIK(sl, 'right', _tgtR, _poleR);
+          applyDaintyFingers(nb, (34 - panicEnv * 22) * DEG, (34 - panicEnv * 22) * DEG, false);
+
+          if (panicEnv > 0.35) {
+            sl.choreoState.emo = 'surprised'; sl.choreoState.emoW = 0.85;
+            sl.choreoState.emo2 = 'sad';      sl.choreoState.emo2W = 0.35;
+            sl.choreoState.vowel = 'aa';      sl.choreoState.vowelW = 0.72 + 0.20 * Math.abs(wobble);
+          } else if (reliefEnv > 0.30) {
+            sl.choreoState.emo = 'happy'; sl.choreoState.emoW = 1.0;
+            sl.choreoState.vowel = 'ee';  sl.choreoState.vowelW = 0.55;
+            sl.choreoState.vowel2 = 'oh'; sl.choreoState.vowel2W = 0.35;
+          } else {
+            sl.choreoState.emo = 'relaxed'; sl.choreoState.emoW = 0.90;
+            sl.choreoState.vowel = 'oh';    sl.choreoState.vowelW = 0.58 + 0.25 * upPeak;
+          }
+          return;
+        }
+      }
+
+      // =======================================================================
       // 🐾 Cute Snow-Ferret Quadruped (All-Fours / 四つん這い) Animal Motions!
       // Exact FK-calibrated floor grounding: knees y≈0.045, boots y≈0.045, paws y≈0.062,
       // upright forward-looking head, and proud high-arched fluffy ferret tail!
@@ -3524,7 +4441,7 @@
           spineArchDeg = 8, chestArchDeg = 6,
           neckLiftDeg = -51, headLiftDeg = -55, headYawDeg = 0, headTiltDeg = 0,
           thighLDeg = -90, thighRDeg = -90, kneeLDeg = 104, kneeRDeg = 104,
-          spreadDeg = 9,
+          spreadDeg = 4.5,
         }) => {
           if (nb('hips')) {
             nb('hips').position.y -= hipDrop;
@@ -3542,10 +4459,10 @@
             nb('head').rotation.set(zS * headLiftDeg * DEG, headYawDeg * 0.62 * DEG, headTiltDeg * 0.62 * DEG);
           }
           if (nb('leftUpperLeg')) {
-            nb('leftUpperLeg').rotation.set(zS * thighLDeg * DEG, 0, -spreadDeg * DEG);
+            nb('leftUpperLeg').rotation.set(zS * thighLDeg * DEG, 0, +spreadDeg * DEG);
           }
           if (nb('rightUpperLeg')) {
-            nb('rightUpperLeg').rotation.set(zS * thighRDeg * DEG, 0, +spreadDeg * DEG);
+            nb('rightUpperLeg').rotation.set(zS * thighRDeg * DEG, 0, -spreadDeg * DEG);
           }
           if (nb('leftLowerLeg'))  nb('leftLowerLeg').rotation.x  = zS * kneeLDeg * DEG;
           if (nb('rightLowerLeg')) nb('rightLowerLeg').rotation.x = zS * kneeRDeg * DEG;
@@ -3858,6 +4775,439 @@
       applyDaintyFingers(nb, 26 * DEG, 26 * DEG, false);
     }
 
+    // =========================================================================
+    // Real-Time 3D Solid-Boot Capsule Non-Penetration Physics Constraint!
+    // Allows left & right boots to touch ("くっつく") while strictly preventing
+    // mesh interpenetration across ALL standing, quadruped, ball & VRMA motions.
+    // =========================================================================
+    const _bHipL = new THREE.Vector3(), _bHipR = new THREE.Vector3();
+    const _bKneeL = new THREE.Vector3(), _bKneeR = new THREE.Vector3();
+    const _bAnkL = new THREE.Vector3(), _bAnkR = new THREE.Vector3();
+    const _bToeL = new THREE.Vector3(), _bToeR = new THREE.Vector3();
+    const _bFwdL = new THREE.Vector3(), _bFwdR = new THREE.Vector3();
+    const _bHeelL = new THREE.Vector3(), _bHeelR = new THREE.Vector3();
+    const _bForeL = new THREE.Vector3(), _bForeR = new THREE.Vector3();
+    const _bCuffL = new THREE.Vector3(), _bCuffR = new THREE.Vector3();
+    const _segD1 = new THREE.Vector3(), _segD2 = new THREE.Vector3(), _segR = new THREE.Vector3();
+    const _cpL = new THREE.Vector3(), _cpR = new THREE.Vector3();
+    const _bestPL = new THREE.Vector3(), _bestPR = new THREE.Vector3();
+    const _sepDir = new THREE.Vector3(), _armOld = new THREE.Vector3(), _armNew = new THREE.Vector3();
+    const _qBootPar = new THREE.Quaternion(), _qBootParInv = new THREE.Quaternion();
+    const _qBootDelta = new THREE.Quaternion(), _qBootLocal = new THREE.Quaternion();
+
+    function closestPointsSegSeg3D(p1, q1, p2, q2, out1, out2) {
+      _segD1.subVectors(q1, p1);
+      _segD2.subVectors(q2, p2);
+      _segR.subVectors(p1, p2);
+      const a = _segD1.dot(_segD1);
+      const e = _segD2.dot(_segD2);
+      const f = _segD2.dot(_segR);
+      let s = 0, t = 0;
+      if (a <= 1e-8 && e <= 1e-8) {
+        out1.copy(p1); out2.copy(p2);
+        return out1.distanceTo(out2);
+      }
+      if (a <= 1e-8) {
+        t = THREE.MathUtils.clamp(f / e, 0, 1);
+      } else {
+        const c = _segD1.dot(_segR);
+        if (e <= 1e-8) {
+          s = THREE.MathUtils.clamp(-c / a, 0, 1);
+        } else {
+          const b = _segD1.dot(_segD2);
+          const denom = a * e - b * b;
+          if (denom > 1e-8) {
+            s = THREE.MathUtils.clamp((b * f - c * e) / denom, 0, 1);
+          }
+          t = (b * s + f) / e;
+          if (t < 0) {
+            t = 0;
+            s = THREE.MathUtils.clamp(-c / a, 0, 1);
+          } else if (t > 1) {
+            t = 1;
+            s = THREE.MathUtils.clamp((b - c) / a, 0, 1);
+          }
+        }
+      }
+      out1.copy(p1).addScaledVector(_segD1, s);
+      out2.copy(p2).addScaledVector(_segD2, t);
+      return out1.distanceTo(out2);
+    }
+
+    function applyWorldQuatAroundBoneOrigin(bone, worldDeltaQuat) {
+      if (!bone || !bone.parent) return;
+      _qBootPar.setFromRotationMatrix(bone.parent.matrixWorld);
+      _qBootParInv.copy(_qBootPar).invert();
+      _qBootLocal.copy(_qBootParInv).multiply(worldDeltaQuat).multiply(_qBootPar);
+      bone.quaternion.premultiply(_qBootLocal);
+    }
+
+    function resolveBootSolidCollision(sl) {
+      const vrm = sl.avatar?.vrm;
+      if (!vrm?.humanoid) return;
+      const nb = n => vrm.humanoid.getNormalizedBoneNode(n);
+      const uL = nb('leftUpperLeg'), uR = nb('rightUpperLeg');
+      const kL = nb('leftLowerLeg'), kR = nb('rightLowerLeg');
+      const fL = nb('leftFoot'),     fR = nb('rightFoot');
+      if (!uL || !uR || !kL || !kR || !fL || !fR) return;
+      const tL = nb('leftToes'),     tR = nb('rightToes');
+
+      // Calibrated directly from Blender mesh bounds:
+      // Boot sole medial half-width = 0.0687m -> 2 * R_boot = 0.1374m (+3mm solid contact margin = 0.1405m)
+      // Fluffy upper boot cuff half-width = 0.0735m -> 2 * R_cuff = 0.147m
+      const MIN_SOLE_DIST = 0.141;
+      const MIN_CUFF_DIST = 0.148;
+      const isStanding = !((sl.motionId || '').startsWith('moe:quad_') || (sl.motionId || '').startsWith('moe:ball_'));
+
+      for (let iter = 0; iter < 2; iter++) {
+        nb('hips')?.updateWorldMatrix(true, true);
+        uL.getWorldPosition(_bHipL);
+        uR.getWorldPosition(_bHipR);
+        kL.getWorldPosition(_bKneeL);
+        kR.getWorldPosition(_bKneeR);
+        fL.getWorldPosition(_bAnkL);
+        fR.getWorldPosition(_bAnkR);
+
+        if (tL) tL.getWorldPosition(_bToeL);
+        else _bToeL.set(0, -0.04, 0.09 * modelFrontZSign).applyMatrix4(fL.matrixWorld);
+        if (tR) tR.getWorldPosition(_bToeR);
+        else _bToeR.set(0, -0.04, 0.09 * modelFrontZSign).applyMatrix4(fR.matrixWorld);
+
+        _bFwdL.subVectors(_bToeL, _bAnkL);
+        if (_bFwdL.lengthSq() > 1e-6) _bFwdL.normalize(); else _bFwdL.set(0, 0, modelFrontZSign);
+        _bFwdR.subVectors(_bToeR, _bAnkR);
+        if (_bFwdR.lengthSq() > 1e-6) _bFwdR.normalize(); else _bFwdR.set(0, 0, modelFrontZSign);
+
+        // Heel-to-toe capsule axis along each boot
+        _bHeelL.copy(_bAnkL).addScaledVector(_bFwdL, -0.055);
+        _bForeL.copy(_bAnkL).addScaledVector(_bFwdL, +0.135);
+        _bHeelR.copy(_bAnkR).addScaledVector(_bFwdR, -0.055);
+        _bForeR.copy(_bAnkR).addScaledVector(_bFwdR, +0.135);
+
+        let maxPen = 0;
+        const dSole = closestPointsSegSeg3D(_bHeelL, _bForeL, _bHeelR, _bForeR, _cpL, _cpR);
+        if (MIN_SOLE_DIST - dSole > maxPen) {
+          maxPen = MIN_SOLE_DIST - dSole;
+          _bestPL.copy(_cpL);
+          _bestPR.copy(_cpR);
+        }
+
+        // Upper fluffy cuff spheres (32% up the shin from ankle toward knee)
+        _bCuffL.lerpVectors(_bAnkL, _bKneeL, 0.32);
+        _bCuffR.lerpVectors(_bAnkR, _bKneeR, 0.32);
+        const dCuff = _bCuffL.distanceTo(_bCuffR);
+        if (MIN_CUFF_DIST - dCuff > maxPen) {
+          maxPen = MIN_CUFF_DIST - dCuff;
+          _bestPL.copy(_bCuffL);
+          _bestPR.copy(_bCuffR);
+        }
+
+        if (maxPen <= 0.0003) break;
+
+        _sepDir.subVectors(_bestPL, _bestPR);
+        if (_sepDir.lengthSq() < 1e-6) _sepDir.subVectors(_bHipL, _bHipR);
+        _sepDir.normalize();
+
+        const pushHalf = maxPen * 0.53;
+
+        // Abduct Left Leg outward by exact minimal world rotation
+        _armOld.subVectors(_bestPL, _bHipL);
+        _armNew.copy(_armOld).addScaledVector(_sepDir, +pushHalf);
+        if (_armOld.lengthSq() > 1e-4 && _armNew.lengthSq() > 1e-4) {
+          _armOld.normalize(); _armNew.normalize();
+          _qBootDelta.setFromUnitVectors(_armOld, _armNew);
+          applyWorldQuatAroundBoneOrigin(uL, _qBootDelta);
+          if (isStanding) {
+            uL.updateWorldMatrix(true, true);
+            _qBootDelta.invert();
+            applyWorldQuatAroundBoneOrigin(fL, _qBootDelta);
+          }
+        }
+
+        // Abduct Right Leg outward by exact minimal world rotation
+        _armOld.subVectors(_bestPR, _bHipR);
+        _armNew.copy(_armOld).addScaledVector(_sepDir, -pushHalf);
+        if (_armOld.lengthSq() > 1e-4 && _armNew.lengthSq() > 1e-4) {
+          _armOld.normalize(); _armNew.normalize();
+          _qBootDelta.setFromUnitVectors(_armOld, _armNew);
+          applyWorldQuatAroundBoneOrigin(uR, _qBootDelta);
+          if (isStanding) {
+            uR.updateWorldMatrix(true, true);
+            _qBootDelta.invert();
+            applyWorldQuatAroundBoneOrigin(fR, _qBootDelta);
+          }
+        }
+      }
+    }
+
+    // =========================================================================
+    // Post-SpringBone Multi-Segment Garment Drape Solver for Balance Ball!
+    // Combines:
+    //  1) Continuous Ruled Lap-Apron Canopy + Shin Front Wall (guarantees 0.0mm
+    //     bare-thigh / knee / shin poke-through across all front skirt pleats & ribbons,
+    //     even across wide L/R knee gaps where center pleats would otherwise dip!)
+    //  2) Side-thigh capsule flare for lateral skirt chains
+    //  3) Live volume-preserving Ellipsoid surface drape for all 360° skirt/cape/tail chains!
+    // =========================================================================
+    const _dHead = new THREE.Vector3(), _dTail = new THREE.Vector3(), _dPt = new THREE.Vector3();
+    const _dOut = new THREE.Vector3(), _dNorm = new THREE.Vector3();
+    const _dOldDir = new THREE.Vector3(), _dNewDir = new THREE.Vector3();
+    const _dHipL = new THREE.Vector3(), _dKneeL = new THREE.Vector3(), _dAnkL = new THREE.Vector3();
+    const _dHipR = new THREE.Vector3(), _dKneeR = new THREE.Vector3(), _dAnkR = new THREE.Vector3();
+    const _dLatDir = new THREE.Vector3(), _dHu = new THREE.Vector3(), _dKu = new THREE.Vector3(), _dAu = new THREE.Vector3();
+    const _dSegVec = new THREE.Vector3(), _dDiff = new THREE.Vector3(), _dCp = new THREE.Vector3();
+    const _DRAPE_FRACS = [0.30, 0.56, 0.80, 1.00];
+
+    function pushPointOutsideSideThighCapsule(pt, hipPos, kneePos, radius) {
+      _dSegVec.subVectors(kneePos, hipPos);
+      const lenSq = _dSegVec.lengthSq();
+      if (lenSq < 1e-6) return false;
+      _dDiff.subVectors(pt, hipPos);
+      const s = THREE.MathUtils.clamp(_dDiff.dot(_dSegVec) / lenSq, 0, 1);
+      _dCp.copy(hipPos).addScaledVector(_dSegVec, s);
+      _dDiff.subVectors(pt, _dCp);
+      const d = _dDiff.length();
+      if (d >= radius) return false;
+      // Tangential side clearance without kicking sideways upward into an umbrella cone
+      _dDiff.y = Math.max(0.0, _dDiff.y);
+      const nLen = _dDiff.length();
+      if (nLen > 1e-6) _dDiff.divideScalar(nLen);
+      else _dDiff.set(0, 1, 0);
+      pt.copy(_dCp).addScaledVector(_dDiff, radius);
+      return true;
+    }
+
+    function pushFrontApronOverLapAndShin(tailPt, headPt, segLen, segIdx, latSpan, lapRoot, lapKnee, shinPad, zS) {
+      // Interpolate virtual leg (H_u -> K_u -> A_u) across the continuous bridge between Right & Left legs!
+      _dDiff.subVectors(tailPt, _dKneeR);
+      const projLat = _dDiff.dot(_dLatDir);
+      const u01 = THREE.MathUtils.clamp(projLat / latSpan, 0, 1);
+
+      let outDist = 0;
+      if (projLat < 0) outDist = -projLat;
+      else if (projLat > latSpan) outDist = projLat - latSpan;
+      // Keep 100% full thigh/knee clearance across the entire outer thigh/knee width (up to 92mm outside knee bone axis!)
+      // so outer pleats (`skirt_210` & `skirt_330`) NEVER dip into the outer thighs/kneecaps!
+      const sideWeight = 1.0 - THREE.MathUtils.smoothstep(outDist, 0.092, 0.165);
+      if (sideWeight <= 0.02) return false;
+
+      _dHu.lerpVectors(_dHipR, _dHipL, u01);
+      _dKu.lerpVectors(_dKneeR, _dKneeL, u01);
+      _dAu.lerpVectors(_dAnkR, _dAnkL, u01);
+
+      const fH = zS * _dHu.z;
+      const fK = zS * _dKu.z;
+      const fA = zS * _dAu.z;
+      const fTail = zS * tailPt.z;
+      const fHead = zS * headPt.z;
+
+      const kneeCapF = fK + 0.042;
+      const evalLapY = f => {
+        const s = THREE.MathUtils.clamp((f - fH) / Math.max(0.05, kneeCapF - fH), 0, 1);
+        const pad = THREE.MathUtils.lerp(lapRoot, lapKnee, s) * sideWeight;
+        return THREE.MathUtils.lerp(_dHu.y, _dKu.y, s) + pad;
+      };
+      const evalShinF = y => {
+        const s = THREE.MathUtils.clamp((_dKu.y - y) / Math.max(0.05, _dKu.y - _dAu.y), 0, 1);
+        return THREE.MathUtils.lerp(fK, fA, s) + shinPad * sideWeight;
+      };
+
+      const minLapY = evalLapY(fTail);
+      const minShinF = evalShinF(tailPt.y);
+
+      // Also check segment midpoint (`0.5 * (head + tail)`) so curved thigh belly never grazes mid-pleat!
+      const fMid = 0.5 * (fHead + fTail);
+      const yMid = 0.5 * (headPt.y + tailPt.y);
+      const minMidY = evalLapY(fMid) - 0.003;
+      const midPen = (fMid < evalShinF(yMid) && yMid < minMidY) ? (minMidY - yMid) : 0;
+
+      // If SpringBone lifted the skirt above the thigh during downward bounce -> let it float & wave freely!
+      if ((tailPt.y >= minLapY || fTail >= minShinF) && midPen <= 0) return false;
+
+      const r = Math.max(0.025, segLen);
+      if (fHead < kneeCapF - 0.005) {
+        let estF = Math.max(fTail, fHead + r * 0.80);
+        for (let it = 0; it < 2; it++) {
+          // Strictly honor non-penetration `evalLapY + midPen*1.5` (never shortcut across the kneecap corner!)
+          const rawY = evalLapY(estF) + midPen * 1.5;
+          const clampedY = Math.min(headPt.y - r * 0.14, rawY);
+          const dy = Math.max(0, headPt.y - clampedY);
+          const horiz = dy < r ? Math.sqrt(Math.max(0, r * r - dy * dy)) : 0;
+          estF = Math.max(fTail, fHead + horiz);
+        }
+        const finalY = Math.min(headPt.y - r * 0.14, evalLapY(estF) + midPen * 1.5);
+        tailPt.y = finalY;
+        if (zS * tailPt.z < estF) tailPt.z = zS * estF;
+      } else {
+        // Past the kneecap: hang softly straight down right in front of the shin (supple vertical drop, zero umbrella flare!)
+        const targetF = minShinF;
+        const df = Math.max(0, targetF - fHead);
+        const dropDown = df < r ? Math.sqrt(Math.max(0, r * r - df * df)) : r * 0.60;
+        tailPt.z = zS * targetF;
+        tailPt.y = Math.min(tailPt.y, headPt.y - dropDown * 0.94);
+      }
+      return true;
+    }
+
+    function resolveBallGarmentDrape(sl, springStepped = true) {
+      if (!sl.ballGroup?.visible || !sl.ballColliderShape?.active || !sl.garmentChains?.length) return;
+      const vrm = sl.avatar?.vrm;
+      if (!vrm?.humanoid) return;
+
+      const shape = sl.ballColliderShape;
+      const chains = sl.garmentChains;
+      const physOn = !!sl.avatar.springManager;
+      const zS = modelFrontZSign;
+
+      for (let c = 0; c < chains.length; c++) {
+        const segs = chains[c].segs;
+        for (let i = 0; i < segs.length; i++) {
+          const seg = segs[i];
+          if (!physOn) {
+            seg.bone.quaternion.copy(seg.restQuat);
+          } else if (springStepped) {
+            seg.springQuat.copy(seg.bone.quaternion);
+          } else {
+            seg.bone.quaternion.copy(seg.springQuat);
+          }
+        }
+      }
+
+      const rawUL = vrm.humanoid.getRawBoneNode('leftUpperLeg');
+      const rawKL = vrm.humanoid.getRawBoneNode('leftLowerLeg');
+      const rawFL = vrm.humanoid.getRawBoneNode('leftFoot');
+      const rawUR = vrm.humanoid.getRawBoneNode('rightUpperLeg');
+      const rawKR = vrm.humanoid.getRawBoneNode('rightLowerLeg');
+      const rawFR = vrm.humanoid.getRawBoneNode('rightFoot');
+      const hasLegs = !!(rawUL && rawKL && rawFL && rawUR && rawKR && rawFR);
+      let latSpan = 0.22;
+      if (hasLegs) {
+        rawUL.updateWorldMatrix(true, false);
+        rawKL.updateWorldMatrix(true, false);
+        rawFL.updateWorldMatrix(true, false);
+        rawUR.updateWorldMatrix(true, false);
+        rawKR.updateWorldMatrix(true, false);
+        rawFR.updateWorldMatrix(true, false);
+        _dHipL.setFromMatrixPosition(rawUL.matrixWorld);
+        _dKneeL.setFromMatrixPosition(rawKL.matrixWorld);
+        _dAnkL.setFromMatrixPosition(rawFL.matrixWorld);
+        _dHipR.setFromMatrixPosition(rawUR.matrixWorld);
+        _dKneeR.setFromMatrixPosition(rawKR.matrixWorld);
+        _dAnkR.setFromMatrixPosition(rawFR.matrixWorld);
+        _dLatDir.subVectors(_dKneeL, _dKneeR);
+        latSpan = Math.max(0.08, _dLatDir.length());
+        _dLatDir.divideScalar(latSpan);
+      }
+
+      const SIDE_THIGH_R = 0.084;
+
+      for (let pass = 0; pass < 2; pass++) {
+        for (let c = 0; c < chains.length; c++) {
+          const {segs, pad, mode, lapRoot, lapKnee, shinPad} = chains[c];
+          const erx = shape.rx + pad;
+          const ery = shape.ry + pad;
+          const erz = shape.rz + pad;
+          segs[0].bone.parent?.updateWorldMatrix(true, false);
+
+          for (let sIdx = 0; sIdx < segs.length; sIdx++) {
+            const {bone, child} = segs[sIdx];
+            bone.updateMatrix();
+            bone.matrixWorld.multiplyMatrices(bone.parent.matrixWorld, bone.matrix);
+            child.updateMatrix();
+            child.matrixWorld.multiplyMatrices(bone.matrixWorld, child.matrix);
+            _dHead.setFromMatrixPosition(bone.matrixWorld);
+            _dTail.setFromMatrixPosition(child.matrixWorld);
+            const segLen = Math.max(0.03, _dHead.distanceTo(_dTail));
+
+            // 1) Solve clean single-step tapered lap-slope drape on segment tail (with supple downward hem drop on sIdx=2!)
+            if (hasLegs && mode === 'frontApron') {
+              _dOut.copy(_dTail);
+              if (pushFrontApronOverLapAndShin(_dOut, _dHead, segLen, sIdx, latSpan, lapRoot, lapKnee, shinPad, zS)) {
+                _dOldDir.subVectors(_dTail, _dHead);
+                _dNewDir.subVectors(_dOut, _dHead);
+                if (_dOldDir.lengthSq() > 1e-5 && _dNewDir.lengthSq() > 1e-5) {
+                  _dOldDir.normalize();
+                  _dNewDir.normalize();
+                  _qBootDelta.setFromUnitVectors(_dOldDir, _dNewDir);
+                  applyWorldQuatAroundBoneOrigin(bone, _qBootDelta);
+                  bone.updateMatrix();
+                  bone.matrixWorld.multiplyMatrices(bone.parent.matrixWorld, bone.matrix);
+                  child.updateMatrix();
+                  child.matrixWorld.multiplyMatrices(bone.matrixWorld, child.matrix);
+                  _dTail.setFromMatrixPosition(child.matrixWorld);
+                }
+              }
+            }
+
+            // 2) Multi-point chord non-penetration against side thighs, balance ball ellipsoid & floor
+            for (let f = 0; f < _DRAPE_FRACS.length; f++) {
+              const frac = _DRAPE_FRACS[f];
+              _dPt.lerpVectors(_dHead, _dTail, frac);
+              _dOut.copy(_dPt);
+              let pushed = false;
+
+              if (hasLegs && mode === 'sideSkirt') {
+                if (pushPointOutsideSideThighCapsule(_dOut, _dHipL, _dKneeL, SIDE_THIGH_R)) pushed = true;
+                if (pushPointOutsideSideThighCapsule(_dOut, _dHipR, _dKneeR, SIDE_THIGH_R)) pushed = true;
+              }
+
+              const dx = _dOut.x - shape.center.x;
+              const dy = _dOut.y - shape.center.y;
+              const dz = _dOut.z - shape.center.z;
+              const nx = dx / erx;
+              const ny = dy / ery;
+              const nz = dz / erz;
+              const qSq = nx * nx + ny * ny + nz * nz;
+              if (qSq < 1.0) {
+                let hx = dx, hz = dz;
+                if (hx * hx + hz * hz < 1e-4) {
+                  hx = _dOut.x - shape.hipsX;
+                  hz = _dOut.z - shape.hipsZ;
+                  if (hx * hx + hz * hz < 1e-5) { hx = 0; hz = 1; }
+                }
+                // Root glides over top, mid glides tangentially, hem (sIdx===2) hangs straight down hugging ball sides (zero upward umbrella kick!)
+                const clampedDy = sIdx === 0 ? Math.max(ery * 0.10, dy) : (sIdx === 1 ? Math.max(0.0, dy) : 0.0);
+                _dNorm.set(hx / (erx * erx), clampedDy / (ery * ery), hz / (erz * erz));
+                const nLen = _dNorm.length();
+                if (nLen > 1e-6) _dNorm.divideScalar(nLen);
+                else _dNorm.set(0, 1, 0);
+
+                const ux = _dNorm.x / erx, uy = _dNorm.y / ery, uz = _dNorm.z / erz;
+                const A = ux * ux + uy * uy + uz * uz;
+                const B = nx * ux + ny * uy + nz * uz;
+                const disc = Math.max(0, B * B - A * (qSq - 1.0));
+                const penDist = (-B + Math.sqrt(disc)) / Math.max(1e-6, A);
+                _dOut.addScaledVector(_dNorm, penDist);
+                pushed = true;
+              }
+
+              // Keep long cape tassels & pom-poms cleanly above the floor y=0
+              if (_dOut.y < 0.026) {
+                _dOut.y = 0.026;
+                pushed = true;
+              }
+
+              if (pushed) {
+                _dOldDir.subVectors(_dPt, _dHead);
+                _dNewDir.subVectors(_dOut, _dHead);
+                if (_dOldDir.lengthSq() > 1e-5 && _dNewDir.lengthSq() > 1e-5) {
+                  _dOldDir.normalize();
+                  _dNewDir.normalize();
+                  _qBootDelta.setFromUnitVectors(_dOldDir, _dNewDir);
+                  applyWorldQuatAroundBoneOrigin(bone, _qBootDelta);
+                  bone.updateMatrix();
+                  bone.matrixWorld.multiplyMatrices(bone.parent.matrixWorld, bone.matrix);
+                  child.updateMatrix();
+                  child.matrixWorld.multiplyMatrices(bone.matrixWorld, child.matrix);
+                  _dTail.setFromMatrixPosition(child.matrixWorld);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     function upgradeTextureFiltering(tex, forceSrgb = false) {
       if (!tex || !tex.isTexture) return;
       if (forceSrgb && tex.colorSpace !== THREE.SRGBColorSpace) {
@@ -3913,9 +5263,50 @@
       m.needsUpdate = true;
     }
 
+    const TOON_FALLBACK_RAMP = (() => {
+      const c = document.createElement('canvas');
+      c.width = 4; c.height = 1;
+      const ctx = c.getContext('2d');
+      ['#b5b9e0', '#d5d8f0', '#f6f7fc', '#ffffff'].forEach((hex, i) => {
+        ctx.fillStyle = hex;
+        ctx.fillRect(i, 0, 1, 1);
+      });
+      const t = new THREE.CanvasTexture(c);
+      t.minFilter = THREE.NearestFilter;
+      t.magFilter = THREE.NearestFilter;
+      t.generateMipmaps = false;
+      t.needsUpdate = true;
+      return t;
+    })();
+
+    function injectSoftKneeShader(mat, cacheTag) {
+      mat.onBeforeCompile = shader => {
+        shader.uniforms.uExposure = avatarGradeUniforms.uExposure;
+        shader.uniforms.uSoftKnee = avatarGradeUniforms.uSoftKnee;
+        shader.fragmentShader =
+          'uniform float uExposure;\nuniform float uSoftKnee;\n' +
+          shader.fragmentShader.replace('#include <colorspace_fragment>', SOFT_KNEE_GLSL_INJECT);
+      };
+      mat.customProgramCacheKey = () => cacheTag;
+      return mat;
+    }
+
+    function disposeGeneratedMaterialMap(mapObj, originalMaterials) {
+      if (!mapObj) return;
+      const seen = new Set();
+      for (const matOrArr of mapObj.values()) {
+        const arr = Array.isArray(matOrArr) ? matOrArr : [matOrArr];
+        for (const m of arr) {
+          if (m && !seen.has(m) && !originalMaterials?.has(m)) {
+            seen.add(m);
+            m.dispose?.();
+          }
+        }
+      }
+      mapObj.clear();
+    }
+
     function buildUnlitMaterials(sl) {
-      sl.mtoonMap.clear();
-      sl.unlitMap.clear();
       sl.avatar.model?.traverse(o => {
         if (!o.isMesh) return;
         const orig = o.material;
@@ -3930,7 +5321,7 @@
           upgradeTextureFiltering(m.shadeMultiplyTexture || m.uniforms?.shadeMultiplyTexture?.value, true);
           upgradeTextureFiltering(m.normalMap || m.uniforms?.normalMap?.value, false);
           upgradeTextureFiltering(m.emissiveMap || m.uniforms?.emissiveMap?.value, true);
-          const mat = new THREE.MeshBasicMaterial({
+          return injectSoftKneeShader(new THREE.MeshBasicMaterial({
             name: m.name || 'UnlitMat',
             map,
             color: 0xffffff,
@@ -3938,26 +5329,101 @@
             transparent: false,
             opacity: 1.0,
             depthWrite: true,
-          });
-          mat.onBeforeCompile = shader => {
-            shader.uniforms.uExposure = avatarGradeUniforms.uExposure;
-            shader.uniforms.uSoftKnee = avatarGradeUniforms.uSoftKnee;
-            shader.fragmentShader =
-              'uniform float uExposure;\nuniform float uSoftKnee;\n' +
-              shader.fragmentShader.replace('#include <colorspace_fragment>', SOFT_KNEE_GLSL_INJECT);
-          };
-          mat.customProgramCacheKey = () => 'showcase-unlit-softknee-v1';
-          return mat;
+          }), 'showcase-unlit-softknee-v1');
         };
+
+        const toPbrFigure = m => {
+          if (!m) return m;
+          const map = m.map || m.uniforms?.map?.value || null;
+          const normalMap = m.normalMap || m.uniforms?.normalMap?.value || null;
+          const lname = (m.name || '').toLowerCase();
+          const isSkin = lname.includes('head') || lname.includes('sotai') || lname.includes('face') || lname.includes('skin');
+          const isHair = lname.includes('hair');
+          const isAcc  = lname.includes('acc');
+          const mat = new THREE.MeshPhysicalMaterial({
+            name: (m.name || 'Mat') + '_PBR',
+            map,
+            normalMap,
+            emissive: new THREE.Color(isSkin ? 0xffeef4 : 0xf4f6ff),
+            emissiveMap: map,
+            emissiveIntensity: isSkin ? 0.34 : 0.14,
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+            roughness: isSkin ? 0.58 : (isHair ? 0.32 : (isAcc ? 0.24 : 0.44)),
+            metalness: isSkin ? 0.00 : (isAcc ? 0.22 : 0.02),
+            clearcoat: isSkin ? 0.12 : (isHair ? 0.62 : (isAcc ? 0.78 : 0.28)),
+            clearcoatRoughness: isSkin ? 0.42 : (isHair ? 0.20 : 0.15),
+            sheen: isSkin ? 0.42 : (isHair ? 0.52 : 0.46),
+            sheenRoughness: isSkin ? 0.52 : 0.36,
+            sheenColor: new THREE.Color(isSkin ? 0xffdae8 : 0xdceeff),
+          });
+          mat.userData.baseClearcoat = mat.clearcoat;
+          mat.userData.baseSheen = mat.sheen;
+          mat.userData.baseEmissive = mat.emissiveIntensity;
+          return injectSoftKneeShader(mat, 'showcase-pbr-softknee-v1');
+        };
+
+        const toClay = m => {
+          if (!m) return m;
+          const lname = (m.name || '').toLowerCase();
+          const isHair = lname.includes('hair');
+          const mat = new THREE.MeshPhysicalMaterial({
+            name: (m.name || 'Mat') + '_Clay',
+            map: null,
+            emissive: new THREE.Color(0xf6f1ec),
+            emissiveIntensity: 0.18,
+            color: isHair ? 0xf7f5f1 : 0xf1ece5,
+            side: THREE.DoubleSide,
+            roughness: 0.48,
+            metalness: 0.02,
+            clearcoat: 0.18,
+            clearcoatRoughness: 0.30,
+            sheen: 0.30,
+            sheenRoughness: 0.48,
+            sheenColor: new THREE.Color(0xe4ecff),
+          });
+          mat.userData.baseClearcoat = 0.18;
+          mat.userData.baseSheen = 0.30;
+          mat.userData.baseEmissive = 0.18;
+          return injectSoftKneeShader(mat, 'showcase-clay-softknee-v1');
+        };
+
+        const toToonFallback = m => {
+          if (!m) return m;
+          if (m.isMToonMaterial) return m;
+          const map = m.map || m.uniforms?.map?.value || null;
+          return injectSoftKneeShader(new THREE.MeshToonMaterial({
+            name: (m.name || 'Mat') + '_ToonFallback',
+            map,
+            gradientMap: TOON_FALLBACK_RAMP,
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+          }), 'showcase-toonfb-softknee-v1');
+        };
+
         sl.unlitMap.set(o, Array.isArray(orig) ? orig.map(toBasic) : toBasic(orig));
+        sl.pbrMap.set(o, Array.isArray(orig) ? orig.map(toPbrFigure) : toPbrFigure(orig));
+        sl.clayMap.set(o, Array.isArray(orig) ? orig.map(toClay) : toClay(orig));
+        sl.toonFallbackMap.set(o, Array.isArray(orig) ? orig.map(toToonFallback) : toToonFallback(orig));
       });
     }
 
     const _cWhite = new THREE.Color(1, 1, 1);
     const _cTargetShade = new THREE.Color();
     const _cTargetSkinShade = new THREE.Color();
+    const _cSoftSkin = new THREE.Color('#f7c6d6');
+    const _cMvShadow = new THREE.Color('#5a50a8');
+    const _cMvSkinShadow = new THREE.Color('#dc96b8');
     const _cRim = new THREE.Color();
     const _cLuster = new THREE.Color();
+
+    function getEffectiveSlotShader(sl) {
+      if (shaderMode === 'split_compare') {
+        const isMulti = !isMobileViewport() && (currentLayout === 'grid2x2' || currentLayout === 'cols4');
+        return isMulti ? SPLIT_COMPARE_SHADERS[sl.index % 4] : SPLIT_COMPARE_SHADERS[activeSlotIdx % 4];
+      }
+      return SHADER_SPECS[shaderMode] ? shaderMode : 'unlit';
+    }
 
     function getActiveMtoonPalette() {
       if (mtoonStyleKey === 'stage_sync') {
@@ -3977,6 +5443,14 @@
         Math.sin(pitch) * 3.0 + 0.85,
         Math.cos(lightYaw) * Math.cos(pitch) * 3.0
       );
+      if (sl.rimLight) {
+        const rimYaw = camYaw - (mtoonLightYawDeg >= 0 ? 152 : -152) * DEG;
+        sl.rimLight.position.set(
+          Math.sin(rimYaw) * 2.8,
+          1.65,
+          Math.cos(rimYaw) * 2.8
+        );
+      }
     }
 
     function updateMtoonLightingAndMaterials() {
@@ -3990,12 +5464,46 @@
       const rimAmt = mtoonRimStrength;
 
       for (const sl of slots) {
+        const effShd = getEffectiveSlotShader(sl);
         sl.keyLight.color.set(pal.keyColor);
-        sl.keyLight.intensity = pal.keyInt;
         sl.hemiLight.color.set(pal.hemiSky);
         sl.hemiLight.groundColor.set(pal.hemiGround);
-        sl.hemiLight.intensity = pal.hemiInt;
+
+        if (effShd === 'pbr_figure' || effShd === 'clay') {
+          // 3-point PVC anime scale-figure studio lighting (warm bounce fill so chin/cheeks stay soft & rosy + physical rim)
+          sl.keyLight.intensity = pal.keyInt * (0.82 + 0.28 * shadeAmt);
+          sl.hemiLight.groundColor.set('#d8b4cc');
+          sl.hemiLight.intensity = pal.hemiInt * Math.max(0.75, 1.48 - 0.24 * shadeAmt);
+          if (sl.rimLight) {
+            sl.rimLight.color.set(pal.rimHex);
+            sl.rimLight.intensity = 1.95 * rimAmt;
+          }
+          const targetMap = effShd === 'clay' ? sl.clayMap : sl.pbrMap;
+          const seenPbr = new Set();
+          for (const matOrArr of targetMap.values()) {
+            const arr = Array.isArray(matOrArr) ? matOrArr : [matOrArr];
+            for (const pm of arr) {
+              if (!pm || seenPbr.has(pm)) continue;
+              seenPbr.add(pm);
+              pm.clearcoat = THREE.MathUtils.clamp((pm.userData.baseClearcoat ?? 0.25) * rimAmt, 0, 1);
+              pm.sheen = THREE.MathUtils.clamp((pm.userData.baseSheen ?? 0.35) * (0.5 + 0.5 * rimAmt), 0, 1);
+              pm.wireframe = wireframeOverlay;
+            }
+          }
+          updateSlotMtoonLightDirection(sl);
+          continue;
+        }
+
+        // Unlit / MToon / lilToon / MV-Rim light baseline (keeps BalanceBall & MToon perfectly calibrated!)
+        sl.keyLight.intensity = effShd === 'mv_rim' ? pal.keyInt * 0.92 : pal.keyInt;
+        sl.hemiLight.intensity = effShd === 'mv_rim' ? pal.hemiInt * 0.72 : pal.hemiInt;
+        if (sl.rimLight) sl.rimLight.intensity = 0.0;
         updateSlotMtoonLightDirection(sl);
+
+        if (effShd === 'unlit') continue;
+
+        const isSoftLil = (effShd === 'liltoon');
+        const isMvRim   = (effShd === 'mv_rim');
 
         const seen = new Set();
         for (const matOrArr of sl.mtoonMap.values()) {
@@ -4003,47 +5511,111 @@
           for (const m of arr) {
             if (!m || !m.isMToonMaterial || seen.has(m)) continue;
             seen.add(m);
+            m.wireframe = wireframeOverlay;
             const lname = (m.name || '').toLowerCase();
             const isSkinOrFace = lname.includes('head') || lname.includes('sotai') || lname.includes('face') || lname.includes('skin');
             const isHair = lname.includes('hair');
 
-            if (isSkinOrFace) {
-              // Soft rosy anime contour on face & skin so center of cute face stays bright and clear!
-              const tSkin = Math.min(1.45, shadeAmt * 0.85);
-              m.shadeColorFactor.copy(_cWhite).lerp(_cTargetSkinShade, Math.min(1.0, tSkin));
-              if (tSkin > 1.0) m.shadeColorFactor.multiplyScalar(1.0 - (tSkin - 1.0) * 0.22);
-              m.shadingShiftFactor = 0.05 - 0.04 * Math.max(0, shadeAmt - 1.0);
-              m.shadingToonyFactor = Math.min(0.92, pal.toony - 0.13);
-              m.giEqualizationFactor = 0.72;
-              m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 0.52);
-              m.parametricRimFresnelPowerFactor = 3.5;
-              m.parametricRimLiftFactor = 0.04;
-              m.rimLightingMixFactor = 0.22;
-              m.matcapFactor.copy(_cLuster).multiplyScalar(0.025 * rimAmt);
-            } else if (isHair) {
-              // Crisp 2-tone anime hair cel-shading + pure white front locks + razor silhouette Fresnel rim + angel-ring!
-              m.shadeColorFactor.copy(_cWhite).lerp(_cTargetShade, Math.min(1.0, shadeAmt));
-              if (shadeAmt > 1.0) m.shadeColorFactor.multiplyScalar(Math.max(0.45, 1.0 - (shadeAmt - 1.0) * 0.42));
-              m.shadingShiftFactor = pal.shift - 0.05 * (shadeAmt - 1.0);
-              m.shadingToonyFactor = pal.toony;
-              m.giEqualizationFactor = 0.62;
-              m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 1.12);
-              m.parametricRimFresnelPowerFactor = 3.25;
-              m.parametricRimLiftFactor = 0.01;
-              m.rimLightingMixFactor = 0.16;
-              m.matcapFactor.copy(_cLuster).multiplyScalar(0.20 * rimAmt);
+            if (isSoftLil) {
+              // 🌸 VRChat lilToon-inspired ultra-soft sakura skin & airy pastel cloth/hair gradient
+              if (isSkinOrFace) {
+                const tSkin = Math.min(1.25, shadeAmt * 0.68);
+                m.shadeColorFactor.copy(_cWhite).lerp(_cSoftSkin, Math.min(1.0, tSkin));
+                m.shadingShiftFactor = 0.12 - 0.05 * Math.max(0, shadeAmt - 1.0);
+                m.shadingToonyFactor = 0.22;
+                m.giEqualizationFactor = 0.85;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 0.42);
+                m.parametricRimFresnelPowerFactor = 2.4;
+                m.parametricRimLiftFactor = 0.06;
+                m.rimLightingMixFactor = 0.28;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.03 * rimAmt);
+              } else if (isHair) {
+                const tHair = Math.min(1.30, shadeAmt * 0.78);
+                m.shadeColorFactor.copy(_cWhite).lerp(_cTargetShade, Math.min(1.0, tHair * 0.82));
+                m.shadingShiftFactor = -0.04 - 0.05 * (shadeAmt - 1.0);
+                m.shadingToonyFactor = 0.34;
+                m.giEqualizationFactor = 0.76;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 0.92);
+                m.parametricRimFresnelPowerFactor = 2.55;
+                m.parametricRimLiftFactor = 0.04;
+                m.rimLightingMixFactor = 0.24;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.24 * rimAmt);
+              } else {
+                const tCloth = Math.min(1.30, shadeAmt * 0.80);
+                m.shadeColorFactor.copy(_cWhite).lerp(_cTargetShade, Math.min(1.0, tCloth * 0.85));
+                m.shadingShiftFactor = -0.06 - 0.05 * (shadeAmt - 1.0);
+                m.shadingToonyFactor = 0.36;
+                m.giEqualizationFactor = 0.74;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 0.88);
+                m.parametricRimFresnelPowerFactor = 2.60;
+                m.parametricRimLiftFactor = 0.04;
+                m.rimLightingMixFactor = 0.24;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.16 * rimAmt);
+              }
+            } else if (isMvRim) {
+              // 🌙 Live MV Dramatic Backlight & Vivid Silhouette Neon Rim
+              const mvClothShade = _cMvShadow.clone().lerp(_cTargetShade, 0.35);
+              const mvSkinShade  = _cMvSkinShadow.clone().lerp(_cTargetSkinShade, 0.35);
+              if (isSkinOrFace) {
+                const tSkin = Math.min(1.45, shadeAmt * 0.95);
+                m.shadeColorFactor.copy(_cWhite).lerp(mvSkinShade, Math.min(1.0, tSkin));
+                m.shadingShiftFactor = -0.22 - 0.08 * (shadeAmt - 1.0);
+                m.shadingToonyFactor = 0.72;
+                m.giEqualizationFactor = 0.54;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 1.15);
+                m.parametricRimFresnelPowerFactor = 2.65;
+                m.parametricRimLiftFactor = 0.07;
+                m.rimLightingMixFactor = 0.12;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.05 * rimAmt);
+              } else {
+                m.shadeColorFactor.copy(_cWhite).lerp(mvClothShade, Math.min(1.0, shadeAmt * 1.05));
+                if (shadeAmt > 1.0) m.shadeColorFactor.multiplyScalar(Math.max(0.38, 1.0 - (shadeAmt - 1.0) * 0.42));
+                m.shadingShiftFactor = -0.32 - 0.09 * (shadeAmt - 1.0);
+                m.shadingToonyFactor = 0.82;
+                m.giEqualizationFactor = 0.42;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * (isHair ? 1.95 : 1.75));
+                m.parametricRimFresnelPowerFactor = 2.45;
+                m.parametricRimLiftFactor = 0.08;
+                m.rimLightingMixFactor = 0.08;
+                m.matcapFactor.copy(_cLuster).multiplyScalar((isHair ? 0.32 : 0.20) * rimAmt);
+              }
             } else {
-              // Outfit, constellation cape, fluffy cuffs, boots & big snow-ferret tail: rich 3D cel volume + rim halo!
-              m.shadeColorFactor.copy(_cWhite).lerp(_cTargetShade, Math.min(1.0, shadeAmt));
-              if (shadeAmt > 1.0) m.shadeColorFactor.multiplyScalar(Math.max(0.42, 1.0 - (shadeAmt - 1.0) * 0.45));
-              m.shadingShiftFactor = (pal.shift - 0.03) - 0.06 * (shadeAmt - 1.0);
-              m.shadingToonyFactor = pal.toony;
-              m.giEqualizationFactor = 0.58;
-              m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 1.05);
-              m.parametricRimFresnelPowerFactor = 3.30;
-              m.parametricRimLiftFactor = 0.01;
-              m.rimLightingMixFactor = 0.18;
-              m.matcapFactor.copy(_cLuster).multiplyScalar(0.14 * rimAmt);
+              // 🎨 Standard Crisp 2-Tone Anime Cel MToon
+              if (isSkinOrFace) {
+                const tSkin = Math.min(1.45, shadeAmt * 0.85);
+                m.shadeColorFactor.copy(_cWhite).lerp(_cTargetSkinShade, Math.min(1.0, tSkin));
+                if (tSkin > 1.0) m.shadeColorFactor.multiplyScalar(1.0 - (tSkin - 1.0) * 0.22);
+                m.shadingShiftFactor = 0.05 - 0.04 * Math.max(0, shadeAmt - 1.0);
+                m.shadingToonyFactor = Math.min(0.92, pal.toony - 0.13);
+                m.giEqualizationFactor = 0.72;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 0.52);
+                m.parametricRimFresnelPowerFactor = 3.5;
+                m.parametricRimLiftFactor = 0.04;
+                m.rimLightingMixFactor = 0.22;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.025 * rimAmt);
+              } else if (isHair) {
+                m.shadeColorFactor.copy(_cWhite).lerp(_cTargetShade, Math.min(1.0, shadeAmt));
+                if (shadeAmt > 1.0) m.shadeColorFactor.multiplyScalar(Math.max(0.45, 1.0 - (shadeAmt - 1.0) * 0.42));
+                m.shadingShiftFactor = pal.shift - 0.05 * (shadeAmt - 1.0);
+                m.shadingToonyFactor = pal.toony;
+                m.giEqualizationFactor = 0.62;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 1.12);
+                m.parametricRimFresnelPowerFactor = 3.25;
+                m.parametricRimLiftFactor = 0.01;
+                m.rimLightingMixFactor = 0.16;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.20 * rimAmt);
+              } else {
+                m.shadeColorFactor.copy(_cWhite).lerp(_cTargetShade, Math.min(1.0, shadeAmt));
+                if (shadeAmt > 1.0) m.shadeColorFactor.multiplyScalar(Math.max(0.42, 1.0 - (shadeAmt - 1.0) * 0.45));
+                m.shadingShiftFactor = (pal.shift - 0.03) - 0.06 * (shadeAmt - 1.0);
+                m.shadingToonyFactor = pal.toony;
+                m.giEqualizationFactor = 0.58;
+                m.parametricRimColorFactor.copy(_cRim).multiplyScalar(pal.rimMul * rimAmt * 1.05);
+                m.parametricRimFresnelPowerFactor = 3.30;
+                m.parametricRimLiftFactor = 0.01;
+                m.rimLightingMixFactor = 0.18;
+                m.matcapFactor.copy(_cLuster).multiplyScalar(0.14 * rimAmt);
+              }
             }
             m.update(0);
           }
@@ -4051,18 +5623,87 @@
       }
     }
 
+    function syncShaderUI() {
+      const spec = SHADER_SPECS[shaderMode] || SHADER_SPECS.unlit;
+      const selHdr = document.getElementById('selHeaderShader');
+      if (selHdr && selHdr.value !== shaderMode) selHdr.value = shaderMode;
+      document.querySelectorAll('#shaderModeBtns .shader-mode-btn, #btnShaderSplitCompare').forEach(b => {
+        b.classList.toggle('active', b.dataset.shd === shaderMode);
+      });
+      const btnFsShd = document.getElementById('btnFsShader');
+      if (btnFsShd) btnFsShd.textContent = spec.short;
+      const chkWire = document.getElementById('chkShaderWire');
+      if (chkWire && chkWire.checked !== wireframeOverlay) chkWire.checked = wireframeOverlay;
+      document.getElementById('mtoonBox')?.classList.toggle('open', shaderMode !== 'unlit');
+      document.body.dataset.shaderMode = shaderMode;
+    }
+
     function applyShaderMode() {
-      document.getElementById('mtoonBox')?.classList.toggle('open', shaderMode === 'mtoon');
-      if (shaderMode === 'mtoon') {
-        updateMtoonLightingAndMaterials();
-      }
+      syncShaderUI();
+      updateMtoonLightingAndMaterials();
       for (const sl of slots) {
+        const effShd = getEffectiveSlotShader(sl);
         sl.avatar.model?.traverse(o => {
           if (!o.isMesh) return;
-          const mat = shaderMode === 'unlit' ? sl.unlitMap.get(o) : sl.mtoonMap.get(o);
-          if (mat) o.material = mat;
+          let mat = null;
+          if (effShd === 'unlit') mat = sl.unlitMap.get(o);
+          else if (effShd === 'pbr_figure') mat = sl.pbrMap.get(o);
+          else if (effShd === 'clay') mat = sl.clayMap.get(o);
+          else mat = sl.toonFallbackMap.get(o) || sl.mtoonMap.get(o);
+          if (mat) {
+            const arr = Array.isArray(mat) ? mat : [mat];
+            arr.forEach(m => { if (m) m.wireframe = wireframeOverlay; });
+            o.material = mat;
+          }
         });
       }
+      _panelsCacheKey = '';
+      updateHitOverlayLayout();
+    }
+
+    async function setShaderMode(nextMode) {
+      if (!SHADER_SPECS[nextMode]) nextMode = 'unlit';
+      if (nextMode === 'split_compare' && !isMobileViewport()) {
+        // Ensure a 4-panel layout so all 4 shaders (Unlit / lilToon / MToon / PBR) can be compared side-by-side!
+        await ensureDesktopSlotsHydrated();
+        if (currentLayout !== 'grid2x2' && currentLayout !== 'cols4') {
+          if (isPortraitAspectKey(currentAspectKey)) {
+            currentAspectKey = lastHorizAspectKey || '16:9';
+            syncAspectSelects();
+          }
+          setLayout('grid2x2');
+          renderPresetButtons();
+          // Sync Slots 1..3 motion & camera to Slot 0 so all 4 shaders compare the exact same pose & angle!
+          const ref = slots[0];
+          await Promise.all(slots.slice(1).map(async sl => {
+            sl.speed = ref.speed;
+            sl.exprMode = ref.exprMode;
+            sl.mouthMode = ref.mouthMode;
+            sl.autoBlink = ref.autoBlink;
+            sl.autoTalk = ref.autoTalk;
+            sl.lookAtCam = ref.lookAtCam;
+            sl.camAnim = ref.camAnim;
+            await applySlotMotion(sl, ref.motionId);
+            sl.camPreset = ref.camPreset;
+            sl.zoomScale = ref.zoomScale;
+            sl.baseCamPos.copy(ref.baseCamPos);
+            sl.baseCamTgt.copy(ref.baseCamTgt);
+            sl.camera.position.copy(ref.camera.position);
+            sl.camera.quaternion.copy(ref.camera.quaternion);
+            sl.camera.fov = ref.camera.fov;
+            sl.controls.target.copy(ref.controls.target);
+            sl.camRig.ready = false;
+            sl.landmarks.ready = false;
+            sl.time = ref.time;
+          }));
+        }
+        if (isFullscreenMode && fsSoloActive) {
+          fsSoloActive = false;
+          updateFsSoloButtonUI();
+        }
+      }
+      shaderMode = nextMode;
+      applyShaderMode();
     }
 
     function applyStageTheme() {
@@ -4251,8 +5892,11 @@
 
     function getActivePanels(W, H) {
       const soloIdx = isMobileViewport() ? 0 : (activeSlotIdx || 0);
-      const cacheKey = `${W}|${H}|${currentLayout}|${currentBorderKey}|${currentAspectKey}|${isFullscreenMode ? (fsSoloActive ? 's' + soloIdx : 'm') : 'n'}`;
+      const cacheKey = `${W}|${H}|${currentLayout}|${currentBorderKey}|${currentAspectKey}|${shaderMode}|${isFullscreenMode ? (fsSoloActive ? 's' + soloIdx : 'm') : 'n'}`;
       if (cacheKey === _panelsCacheKey) return _panelsCacheVal;
+
+      const isSplitShd = (shaderMode === 'split_compare');
+      const cmpTag = i => `${['①','②','③','④'][i]} ${SHADER_SPECS[SPLIT_COMPARE_SHADERS[i]].panelTag}`;
 
       let res;
       if (isFullscreenMode && fsSoloActive) {
@@ -4260,7 +5904,7 @@
           {
             slot: soloIdx, vx: 0, vy: 0, vw: W, vh: H,
             css: {left: '0%', top: '0%', width: '100%', height: '100%'},
-            tag: '⛶ フルスクリーン',
+            tag: `⛶ フルスクリーン · ${(SHADER_SPECS[shaderMode] || SHADER_SPECS.unlit).short}`,
           },
         ];
       } else {
@@ -4273,10 +5917,10 @@
           const hh = Math.floor((H - g) / 2);
           const th = H - g - hh;
           res = [
-            {slot: 0, vx: 0,      vy: hh + g, vw: hw, vh: th, css: {left: '0%',  top: '0%',  width: '50%', height: '50%'}, tag: '① 左上'},
-            {slot: 1, vx: hw + g, vy: hh + g, vw: rw, vh: th, css: {left: '50%', top: '0%',  width: '50%', height: '50%'}, tag: '② 右上'},
-            {slot: 2, vx: 0,      vy: 0,      vw: hw, vh: hh, css: {left: '0%',  top: '50%', width: '50%', height: '50%'}, tag: '③ 左下'},
-            {slot: 3, vx: hw + g, vy: 0,      vw: rw, vh: hh, css: {left: '50%', top: '50%', width: '50%', height: '50%'}, tag: '④ 右下'},
+            {slot: 0, vx: 0,      vy: hh + g, vw: hw, vh: th, css: {left: '0%',  top: '0%',  width: '50%', height: '50%'}, tag: isSplitShd ? cmpTag(0) : '① 左上'},
+            {slot: 1, vx: hw + g, vy: hh + g, vw: rw, vh: th, css: {left: '50%', top: '0%',  width: '50%', height: '50%'}, tag: isSplitShd ? cmpTag(1) : '② 右上'},
+            {slot: 2, vx: 0,      vy: 0,      vw: hw, vh: hh, css: {left: '0%',  top: '50%', width: '50%', height: '50%'}, tag: isSplitShd ? cmpTag(2) : '③ 左下'},
+            {slot: 3, vx: hw + g, vy: 0,      vw: rw, vh: hh, css: {left: '50%', top: '50%', width: '50%', height: '50%'}, tag: isSplitShd ? cmpTag(3) : '④ 右下'},
           ];
         } else if (currentLayout === 'cols4') {
           const cw = Math.floor((W - g * 3) / 4);
@@ -4286,16 +5930,17 @@
             return {
               slot: i, vx: x, vy: 0, vw: w, vh: H,
               css: {left: (i * 25) + '%', top: '0%', width: '25%', height: '100%'},
-              tag: `${['①','②','③','④'][i]} 列${i + 1}`,
+              tag: isSplitShd ? cmpTag(i) : `${['①','②','③','④'][i]} 列${i + 1}`,
             };
           });
         } else {
           const spec = OUTPUT_ASPECT_SPECS[currentAspectKey] || OUTPUT_ASPECT_SPECS['16:9'];
+          const shdLabel = (SHADER_SPECS[shaderMode] || SHADER_SPECS.unlit).short;
           res = [
             {
               slot: 0, vx: 0, vy: 0, vw: W, vh: H,
               css: {left: '0%', top: '0%', width: '100%', height: '100%'},
-              tag: isPortraitAspectKey(currentAspectKey) ? `📱 縦型 (${spec.shortTag})` : `🖥️ 1画面 (${spec.shortTag})`,
+              tag: isPortraitAspectKey(currentAspectKey) ? `📱 ${spec.shortTag} · ${shdLabel}` : `🖥️ ${spec.shortTag} · ${shdLabel}`,
             },
           ];
         }
@@ -4329,6 +5974,7 @@
       const zS = modelFrontZSign;
       const distMul = getPanelAspectMultipliers().staticMul;
       const isQuad = (sl.motionId || '').startsWith('moe:quad_');
+      const isBall = (sl.motionId || '').startsWith('moe:ball_');
 
       const standMap = {
         gachikoi: {pos: [0.0, 1.03, 0.88 * zS * distMul],  tgt: [0.0, 1.01, 0.0]},
@@ -4346,7 +5992,15 @@
         '3q':     {pos: [0.86 * distMul, 0.20, 1.96 * zS * distMul],          tgt: [0.0, 0.31, 0.06 * zS]},
         back:     {pos: [-0.76 * distMul, 0.60, -1.76 * zS * distMul],        tgt: [0.0, 0.32, 0.02 * zS]},
       };
-      const map = isQuad ? quadMap : standMap;
+      const ballMap = {
+        gachikoi: {pos: [0.0, 0.94, (0.22 + 0.86 * distMul) * zS],            tgt: [0.0, 0.88, 0.14 * zS]},
+        face:     {pos: [0.0, 0.98, (0.22 + 0.74 * distMul) * zS],            tgt: [0.0, 0.94, 0.14 * zS]},
+        bust:     {pos: [0.14 * distMul, 0.88, (0.18 + 1.30 * distMul) * zS], tgt: [0.0, 0.76, 0.14 * zS]},
+        full:     {pos: [0.26 * distMul, 0.68, 2.74 * zS * distMul],          tgt: [0.0, 0.58, 0.12 * zS]},
+        '3q':     {pos: [1.06 * distMul, 0.72, 2.42 * zS * distMul],          tgt: [0.0, 0.58, 0.12 * zS]},
+        back:     {pos: [-0.72 * distMul, 0.72, -2.46 * zS * distMul],        tgt: [0.0, 0.58, 0.10 * zS]},
+      };
+      const map = isQuad ? quadMap : (isBall ? ballMap : standMap);
       const p = map[presetName] || map.full;
       sl.camPreset = presetName;
       sl.zoomScale = 1.0;
@@ -4366,6 +6020,8 @@
 
     function applyBuiltInPose(sl, time) {
       if (sl.motionId.startsWith('motion:')) {
+        sl.ballGroup.visible = false;
+        if (sl.ballColliderShape) sl.ballColliderShape.active = false;
         sl.choreoState = {emo: 'neutral', emoW: 0, vowel: null, vowelW: 0};
         applyStudioMotion(sl, time);
       } else {
@@ -4385,15 +6041,20 @@
       sl.avatar.playing = false;
       sl.avatar.mixer?.stopAllAction();
       applyBuiltInPose(sl, 0);
+      resolveBootSolidCollision(sl);
       vrm.update(0);
       sl.avatar.springManager?.reset();
       for (let i = 0; i < 22; i++) {
         applyBuiltInPose(sl, i / 60);
+        resolveBootSolidCollision(sl);
         sl.avatar.tick(1 / 60);
+        resolveBallGarmentDrape(sl, true);
       }
     }
 
     function startVrmaSmoothly(sl) {
+      if (sl.ballGroup) sl.ballGroup.visible = false;
+      if (sl.ballColliderShape) sl.ballColliderShape.active = false;
       if (!sl.avatar.action || !sl.avatar.vrm) return;
       sl.avatar.vrm.humanoid.resetNormalizedPose();
       sl.avatar.vrm.update(0);
@@ -5071,17 +6732,21 @@
     function clearStudioSlot(sl) {
       sl.motionRequest += 1;
       sl.springRem = 0;
+      const originalMaterials = new Set();
       for (const [mesh, material] of sl.mtoonMap) {
         mesh.material = material;
         for (const item of [].concat(material)) {
           if (item?.matcapTexture === ANIME_LUSTER_MATCAP) item.matcapTexture = null;
+          originalMaterials.add(item);
         }
       }
-      for (const material of sl.unlitMap.values()) {
-        for (const generated of [].concat(material)) generated?.dispose();
-      }
+      disposeGeneratedMaterialMap(sl.unlitMap);
+      disposeGeneratedMaterialMap(sl.pbrMap);
+      disposeGeneratedMaterialMap(sl.clayMap);
+      disposeGeneratedMaterialMap(sl.toonFallbackMap, originalMaterials);
       sl.mtoonMap.clear();
-      sl.unlitMap.clear();
+      sl.ballGroup.visible = false;
+      if (sl.ballColliderShape) sl.ballColliderShape.active = false;
       sl.avatar.release();
     }
 
@@ -5622,6 +7287,25 @@
           {cam: 'full', motion: 'moe:quad_happy_tap', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
         ],
       },
+      {
+        id: 'p45_balance_ball_pack', num: '45', cat: 'kemomimi_mv', moe: true,
+        label: '🟣 バランスボール4連バイン', desc: '王道バイン・おしりぷるん・大ジャンプ万歳・おっとっとバランス崩しの4分割 (2×2)',
+        layout: 'grid2x2', theme: 'cosmic_blossom', border: 'gold',
+        slots: [
+          {cam: 'full', motion: 'moe:ball_boing_peace',       camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: '3q',   motion: 'moe:ball_side_hip_boing',    camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:ball_hyper_jump_banzai', camAnim: 'none',            expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+          {cam: 'full', motion: 'moe:ball_wobble_panic',      camAnim: 'orbit_soft',      expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
+      {
+        id: 'p46_vshort_balance_ball', num: '46', cat: 'kemomimi_mv', moe: true,
+        label: '🟣 バランスボールバイン♡', desc: '縦型・SNS用：バランスボールに乗ってぽよんぽよんバインバイン＆ダブルピース',
+        layout: 'vertical9x16', theme: 'cosmic_blossom', border: 'none',
+        slots: [
+          {cam: 'full', motion: 'moe:ball_boing_peace', camAnim: 'orbit_soft', expr: 'choreo_sync', mouth: 'oh_main', blink: true, talk: false, look: true},
+        ],
+      },
     ];
 
     let activePresetId = 'p13_short_gachikoi';
@@ -5800,18 +7484,16 @@
       setToggleDisabled('chkParticles', particlesDisabled, '白スタジオ・グリーンバック中は光柱を表示しないため無効');
       setToggleDisabled('chkFloorRing', floorDisabled, 'グリーンバック中は水面床を表示しないため無効');
 
-      // 10) Tab 3: MToon button if loaded VRM contains zero MToon materials
-      let hasAnyMtoon = !vrmLoaded;
-      if (vrmLoaded) {
-        for (const matOrArr of sl.mtoonMap.values()) {
-          const arr = Array.isArray(matOrArr) ? matOrArr : [matOrArr];
-          if (arr.some(m => m && m.isMToonMaterial)) { hasAnyMtoon = true; break; }
-        }
+      // 10) Tab 3 & Header: Split-compare shader option during recording
+      const btnSplitShd = document.getElementById('btnShaderSplitCompare');
+      if (btnSplitShd) {
+        btnSplitShd.disabled = isRec;
+        btnSplitShd.title = isRec ? '録画中はレイアウト変更を伴う4種比較へ切替できません' : '2×2 / 4列パネルで Unlit・lilToon風・MToon・フィギュアPBR を同時に見比べ';
       }
-      const btnMtoon = document.getElementById('btnShaderMtoon');
-      if (btnMtoon) {
-        btnMtoon.disabled = !hasAnyMtoon;
-        btnMtoon.title = !hasAnyMtoon ? 'このVRMはMToonマテリアルを含まないため無効' : '';
+      const selHdrShd = document.getElementById('selHeaderShader');
+      if (selHdrShd) {
+        const cmpOpt = selHdrShd.querySelector('option[value="split_compare"]');
+        if (cmpOpt) cmpOpt.disabled = isRec && isSinglePanel;
       }
 
       // 11) Tab 3: Split Border Color buttons (#borderBtns) in 1-panel mode
@@ -6054,11 +7736,14 @@
           startVrmaSmoothly(sl);
         } else if (sl.avatar.vrm) {
           applyBuiltInPose(sl, 0);
+          resolveBootSolidCollision(sl);
           sl.avatar.vrm.update(0);
           sl.avatar.springManager?.reset();
           for (let i = 0; i < 18; i++) {
             applyBuiltInPose(sl, i / 60);
+            resolveBootSolidCollision(sl);
             sl.avatar.tick(1 / 60);
+            resolveBallGarmentDrape(sl, true);
           }
         }
       });
@@ -6169,15 +7854,21 @@
     document.querySelectorAll('.slot-tab').forEach(btn => {
       btn.addEventListener('click', () => selectSlot(Number(btn.dataset.slot)));
     });
+    const motionPostureGroup = id => {
+      const s = id || '';
+      if (s.startsWith('moe:quad_')) return 'quad';
+      if (s.startsWith('moe:ball_')) return 'ball';
+      return 'stand';
+    };
     document.getElementById('selSlotMotion').addEventListener('change', async e => {
       const sl = slots[activeSlotIdx];
-      const wasQuad = (sl.motionId || '').startsWith('moe:quad_');
-      const nowQuad = e.target.value.startsWith('moe:quad_');
+      const prevGrp = motionPostureGroup(sl.motionId);
+      const nextGrp = motionPostureGroup(e.target.value);
       sl.landmarks.ready = false;
       sl.camRig.ready = false;
       await applySlotMotion(sl, e.target.value);
-      if (wasQuad !== nowQuad) {
-        setSlotCameraPreset(sl, sl.camPreset || 'bust');
+      if (prevGrp !== nextGrp) {
+        setSlotCameraPreset(sl, nextGrp === 'ball' ? 'full' : (sl.camPreset || 'bust'));
       }
     });
     document.getElementById('btnSlotLoadVrma').addEventListener('click', () => document.getElementById('fileSlotVrma').click());
@@ -6194,13 +7885,13 @@
       try {
         const animation = await sl.avatar.readAnimation(file);
         if (sl.motionRequest !== stamp || sl.avatar.vrm !== vrm) return;
-        const wasQuad = sl.motionId.startsWith('moe:quad_');
+        const prevGrp = motionPostureGroup(sl.motionId);
         sl.avatar.useAnimation(animation);
         sl.landmarks.ready = false;
         sl.camRig.ready = false;
         sl.motionId = 'custom_vrma';
         sl.time = 0;
-        if (wasQuad) setSlotCameraPreset(sl, sl.camPreset || 'full');
+        if (prevGrp !== 'stand') setSlotCameraPreset(sl, sl.camPreset || 'full');
         startVrmaSmoothly(sl);
         if (sl.index === activeSlotIdx) syncSidebarFromSlot(sl);
       } catch (err) {
@@ -6261,16 +7952,22 @@
     document.getElementById('chkFloorRing').addEventListener('change', e => { showFloorRing = e.target.checked; applyStageTheme(); });
     document.getElementById('chkShowTags').addEventListener('change', e => { document.body.classList.toggle('hide-hud', !e.target.checked); });
 
-    document.getElementById('btnShaderUnlit').addEventListener('click', () => {
-      shaderMode = 'unlit';
-      document.getElementById('btnShaderUnlit').classList.add('active');
-      document.getElementById('btnShaderMtoon').classList.remove('active');
-      applyShaderMode();
+    function cycleSingleShaderMode() {
+      const curIdx = SINGLE_SHADER_CYCLE.indexOf(shaderMode);
+      const nextMode = SINGLE_SHADER_CYCLE[(curIdx + 1) % SINGLE_SHADER_CYCLE.length];
+      setShaderMode(nextMode);
+    }
+
+    document.querySelectorAll('#shaderModeBtns .shader-mode-btn, #btnShaderSplitCompare').forEach(btn => {
+      btn.addEventListener('click', () => setShaderMode(btn.dataset.shd));
     });
-    document.getElementById('btnShaderMtoon').addEventListener('click', () => {
-      shaderMode = 'mtoon';
-      document.getElementById('btnShaderMtoon').classList.add('active');
-      document.getElementById('btnShaderUnlit').classList.remove('active');
+    document.getElementById('selHeaderShader')?.addEventListener('change', e => setShaderMode(e.target.value));
+    document.getElementById('btnFsShader')?.addEventListener('click', () => {
+      cycleSingleShaderMode();
+      wakeFsHud();
+    });
+    document.getElementById('chkShaderWire')?.addEventListener('change', e => {
+      wireframeOverlay = e.target.checked;
       applyShaderMode();
     });
     document.getElementById('selMtoonStyle').addEventListener('change', e => {
@@ -6404,6 +8101,10 @@
       if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         setFullscreenMode(!isFullscreenMode, true);
+      } else if ((e.key === 's' || e.key === 'S') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        cycleSingleShaderMode();
+        if (isFullscreenMode) wakeFsHud();
       }
     });
 
@@ -6887,19 +8588,24 @@
           } else if (sl.avatar.playing && sl.avatar.mixer) {
             sl.avatar.mixer.update(dt);
           }
+          resolveBootSolidCollision(sl);
           // Always transfer normalized bones on EVERY display frame so 60Hz/120Hz/144Hz monitors never skip a pose frame!
           vrm.humanoid?.update();
           vrm.nodeConstraintManager?.update();
+          let springStepped = false;
           if (sl.avatar.springManager) {
             sl.springRem = (sl.springRem || 0) + Math.min(dt, 0.05);
             const step = 1 / 60;
             while (sl.springRem >= step) {
               sl.avatar.springManager.update(step);
               sl.springRem -= step;
+              springStepped = true;
             }
           }
+          resolveBallGarmentDrape(sl, springStepped);
           updateSlotCameraMotion(sl, dt);
-          if (shaderMode === 'mtoon') updateSlotMtoonLightDirection(sl);
+          const effShd = getEffectiveSlotShader(sl);
+          if (effShd !== 'unlit') updateSlotMtoonLightDirection(sl);
           if (vrm.lookAt) {
             vrm.lookAt.target = sl.lookAtCam ? sl.camera : null;
             vrm.lookAt.autoUpdate = sl.lookAtCam;
@@ -6907,7 +8613,7 @@
           }
           updateSlotExpressions(sl, dt);
           vrm.expressionManager?.update();
-          if (shaderMode === 'mtoon' && vrm.materials) {
+          if ((effShd === 'mtoon' || effShd === 'liltoon' || effShd === 'mv_rim') && vrm.materials) {
             for (const m of vrm.materials) m.update?.(dt);
           }
         }
